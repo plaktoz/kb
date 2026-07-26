@@ -10,3 +10,7 @@
 | 2026-07-26 | 2026-07-01-url-1.md | delete |
 | 2026-07-26 | andrej-karpathy-llm-wiki-obsidian-codeex.md | ingest |
 | 2026-07-26 | creating-links-in-markdown-anvil-portal.md | ingest |
+| 2026-07-26 | 2026-07-26-news-aggregation.md | news-fetch |
+| 2026-07-26 | reuters.com (all 11 URLs) | scrape-failed |
+| 2026-07-26 | 2026-07-26-news-aggregation.md | delete |
+| 2026-07-26 | 2026-07-26-3.md | newsletter |

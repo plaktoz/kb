@@ -11,10 +11,10 @@
             "id": "cdbb12cb54ca33f7",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -181,6 +181,20 @@
   },
   "active": "cdbb12cb54ca33f7",
   "lastOpenFiles": [
+    "daily-update/2026-07/2026-07-26-3.md",
+    "Skills/Daily-workflow-prompt.md",
+    "Skills/News-agent-prompt.md",
+    "Skills/News-agent.md",
+    "raw/processed/2026-07-26-creating-links-in-markdown-anvil-portal.md",
+    "raw/processed/2026-05-08-andrej-karpathy-llm-wiki-obsidian-codeex.md",
+    "wiki/technology/creating-links-in-markdown-anvil-portal.md",
+    "wiki/productivity/andrej-karpathy-llm-wiki-obsidian-codeex.md",
+    "raw/url/2026-07-26-news-aggregation.md",
+    "raw/2026-05-08-andrej-karpathy-llm-wiki-obsidian-codeex.md",
+    "raw/2026-07-26-creating-links-in-markdown-anvil-portal.md",
+    "raw/url/2026-07-01-url-1.md",
+    "raw/url",
+    "skills-lock.json",
     "raw/2026-07-26-news-aggregation.md",
     "Skills/news-agent.md",
     "Skills/research",
@@ -197,21 +211,11 @@
     "daily-update/2026-07/2026-07-26.md",
     "daily-update/2026-07",
     "raw/processed/2026-07-26-best-practices-for-prompt-engineering-with-the-openai-api.md",
-    "wiki/productivity/llm-wiki-knowledge-base-obsidian-claude-code.md",
-    "wiki/productivity/obsidian-pkm-principles-para-workflow.md",
-    "Skills/Copy-raw-prompt.md",
-    "wiki/llm-wiki-knowledge-base-obsidian-claude-code.md",
     "wiki/technology",
     "wiki/learning",
     "wiki/finance",
     "wiki/productivity",
     "wiki/others",
-    "Welcome.md",
-    "wiki/obsidian-pkm-principles-para-workflow.md",
-    "wiki",
-    "Skills",
-    "raw/processed/how-to-build-llm-wiki-knowledge-base-with-obsidian-and-claude-code.md",
-    "raw/processed/Obsidian PKM Principles.md",
-    "raw/processed"
+    "wiki"
   ]
 }
