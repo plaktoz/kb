@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "4c2c1e3d8fda801d",
+        "id": "bc12391179806914",
         "type": "tabs",
         "children": [
           {
-            "id": "cdbb12cb54ca33f7",
+            "id": "be0569ccb50cbc97",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "icon": "lucide-file",
+              "title": "New tab"
             }
           }
         ]
@@ -179,8 +179,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "cdbb12cb54ca33f7",
+  "active": "be0569ccb50cbc97",
   "lastOpenFiles": [
+    "glossary.md",
+    "kbm.log.md",
+    "kb-wiki-base.base",
+    "weekly-update/2026-07/2026-W30-weekly.md",
+    "weekly-update/2026-07",
     "Skills/Weekly-compound-prompt.md",
     "weekly-update",
     "data/investments.md",
@@ -207,15 +212,10 @@
     "wiki/finance/trump-strait-of-hormuz-sp500-geopolitical-volatility.md",
     "wiki/finance/4-big-tech-earnings-fed-meeting-100-oil-july-2026.md",
     "wiki/technology/prentis-ai-lab-computer-use-models-hoffman-pincus.md",
-    "wiki/technology/monday-com-ai-layoffs-20-major-tech-companies-2026.md",
-    "wiki/technology/the-new-rules-of-context-engineering-for-claude-5.md",
-    "raw/2026-01-21-how-to-use-ai-for-close-reading.md",
     "raw/url",
     "skills-lock.json",
     "Skills/research",
     "daily-update/2026-07",
-    "wiki/technology",
-    "wiki/learning",
-    "wiki/finance"
+    "wiki/technology"
   ]
 }

@@ -37,6 +37,7 @@ Fallback sources (use if Tavily unavailable):
 - https://machinelearningmastery.com/blog/ — most recent articles
 - https://aws.amazon.com/blogs/machine-learning/
 - https://newsletter.pragmaticengineer.com/
+- https://www.byhand.ai/
 
 ### 📊 Finance
 Fallback sources (use if Tavily unavailable):

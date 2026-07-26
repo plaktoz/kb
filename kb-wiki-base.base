@@ -1,0 +1,13 @@
+views:
+  - type: table
+    name: Table
+    order:
+      - file.name
+      - author
+      - file.folder
+      - source_url
+      - file.ctime
+      - tags
+    sort:
+      - property: file.ctime
+        direction: DESC

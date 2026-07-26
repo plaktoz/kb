@@ -40,3 +40,4 @@
 | 2026-07-26 | breaking-the-spell-of-vibe-coding.md | ingest |
 | 2026-07-26 | how-to-use-ai-for-close-reading.md | ingest |
 | 2026-07-26 | 2026-07-26-4.md | newsletter |
+| 2026-07-27 | 2026-W30-weekly.md | compound |
