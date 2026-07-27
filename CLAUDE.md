@@ -11,7 +11,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
   - `processed/` — post-ingest archive; articles moved here by Karpathy after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-reorg
-- `Skills/` — prompt templates for recurring workflows (see Skills section below)
+- `skills/` — prompt templates for recurring workflows (see Skills section below)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
 - `data/` — supporting reference data
@@ -23,18 +23,18 @@ Read the matching skill file before executing any recurring task.
 
 | Skill file | Purpose |
 |-----------|---------|
-| `Skills/Daily-workflow-prompt.md` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
-| `Skills/News-agent-prompt.md` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
-| `Skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/processed/` |
-| `Skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
-| `Skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
-| `Skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
+| `sills/Daily-workflow-prompt.md` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
+| `skills/News-agent-prompt.md` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
+| `skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/processed/` |
+| `skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
+| `skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
+| `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
 
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
 2. Transform it into structured notes that are concise, atomic, and link-rich.
 3. Connect new notes to existing concepts using Obsidian-style wiki links.
-4. Use the matching skill from `Skills/` for each recurring task.
+4. Use the matching skill from `skills/` for each recurring task.
 
 ## Conventions
 
