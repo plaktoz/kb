@@ -117,3 +117,23 @@
 | 2026-07-27 | hbr.org/frontline-workers-know-how-to-solve-your-organizations-biggest-problems (paywalled) | scrape-failed |
 | 2026-07-27 | hbr.org/model-the-transformation-you-expect-employees-to-deliver (paywalled) | scrape-failed |
 | 2026-07-27 | hbr.org/research-why-some-junior-employees-work-well-with-ai-and-others-dont (paywalled) | scrape-failed |
+| 2026-07-27 | 2026-07-27-news-aggregation.md | delete |
+| 2026-07-27 | uber-kalanick-atoms-tesla-robotaxi-slowdown.md | ingest |
+| 2026-07-27 | london-founder-house-londonmaxxing-ai-startups.md | ingest |
+| 2026-07-27 | ai-response-correctness-evaluation-frameworks.md | ingest |
+| 2026-07-27 | stock-market-week-ahead-earnings-fed-meeting-july-2026.md | ingest |
+| 2026-07-27 | analyst-ai-stock-moves-q2-earnings-2026.md | ingest |
+| 2026-07-27 | momentum-trade-unwind-sp500-broadening.md | ingest |
+| 2026-07-27 | ibm-quantum-foundry-trump-grant.md | ingest |
+| 2026-07-27 | microsoft-earnings-preview-july-29-2026.md | ingest |
+| 2026-07-27 | momentum-etf-drawdown-recovery-history-spmo.md | ingest |
+| 2026-07-27 | grit-ai-coaching-duckworth-learning-curve.md | ingest |
+| 2026-07-27 | ceo-microhabits-decision-fatigue.md | ingest |
+| 2026-07-27 | deep-work-planning-with-claude.md | ingest |
+| 2026-07-27 | lifelong-learning-older-adults-rachel-wu.md | ingest |
+| 2026-07-27 | effort-recalibration-digital-media-cognition.md | ingest |
+| 2026-07-27 | science-of-learning-cognitive-load-gradual-release.md | ingest |
+| 2026-07-27 | protein-intake-longevity-guidelines-update.md | ingest |
+| 2026-07-27 | long-sleep-alzheimers-biomarker-study.md | ingest |
+| 2026-07-27 | genetic-background-cancer-evolution-study.md | ingest |
+| 2026-07-27 | 2026-07-27-2.md | newsletter |
