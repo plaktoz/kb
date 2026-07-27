@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "bc12391179806914",
+        "id": "48d737a16b3ad636",
         "type": "tabs",
         "children": [
           {
-            "id": "be0569ccb50cbc97",
+            "id": "2d3350e05ac2feb3",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -179,11 +179,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "be0569ccb50cbc97",
+  "active": "2d3350e05ac2feb3",
   "lastOpenFiles": [
+    "kb-wiki-base.base",
     "glossary.md",
     "kbm.log.md",
-    "kb-wiki-base.base",
     "weekly-update/2026-07/2026-W30-weekly.md",
     "weekly-update/2026-07",
     "Skills/Weekly-compound-prompt.md",
@@ -211,7 +211,6 @@
     "wiki/productivity/managers-struggling-keep-up-ai-productivity-boom.md",
     "wiki/finance/trump-strait-of-hormuz-sp500-geopolitical-volatility.md",
     "wiki/finance/4-big-tech-earnings-fed-meeting-100-oil-july-2026.md",
-    "wiki/technology/prentis-ai-lab-computer-use-models-hoffman-pincus.md",
     "raw/url",
     "skills-lock.json",
     "Skills/research",
