@@ -24,6 +24,7 @@ From the confirmed scope, generate a structured outline of 3–5 sections. Each 
 Present the outline to the user:
 
 > Here's the research outline:
+>
 > 1. [Section 1 — focused sub-question]
 > 2. [Section 2 — focused sub-question]
 > ...
@@ -35,6 +36,7 @@ Do not proceed to Phase 3 until the user confirms the outline.
 ## Phase 3: Search
 
 For each section in the confirmed outline:
+
 1. Generate 2–3 targeted search queries specific to that section.
 2. Use the Tavily MCP tool (`mcp_tavily_tavily-search` or `tavily-search`) if available; otherwise use WebSearch.
 3. Collect 3–5 high-quality, relevant articles per section.
@@ -52,12 +54,12 @@ Save to `research/<context-slug>/report.md`. Create the directory if it does not
 
 Use this exact structure — no conversational preamble, start directly with the `#` header:
 
----
-
+```markdown
 # Research: [Topic]
 *Generated: YYYY-MM-DD | Scope: [one-line from Phase 1 confirmation]*
 
 ## Research Outline
+
 1. [Section 1]
 2. [Section 2]
 ...
@@ -65,6 +67,7 @@ Use this exact structure — no conversational preamble, start directly with the
 ## [Section 1 title]
 
 ### [Article title]
+
 - **Source**: https://...
 - **Summary**: 2–3 sentences summarizing the article content based on what was fetched
 - **Relevance**: one sentence on why this article supports this section
@@ -76,13 +79,15 @@ Use this exact structure — no conversational preamble, start directly with the
 ...
 
 ## Articles to Ingest
-URLs ready for `/kb-scrapecontent` → `/kb-ingest`:
-- https://...
-- https://...
 
----
+URLs ready for `/kb-scrapecontent` → `/kb-ingest`:
+
+- https://...
+- https://...
+```
 
 Rules:
+
 - Summaries must be based on fetched article content only — do not invent facts.
 - If a section returned no results, write: `*No articles found for this section.*`
 - List every unique URL from the report under "Articles to Ingest".
@@ -91,6 +96,6 @@ Rules:
 
 Append a row to `kbm.log.md` using today's date and the actual output path:
 
-```
+```text
 | YYYY-MM-DD | research/<context-slug>/report.md | research |
 ```
