@@ -27,16 +27,7 @@ Save to `daily-update/YYYY-MM/YYYY-MM-DD.md`.
 
 ## Category mapping
 
-Map each note's wiki category to a newsletter section:
-
-| Wiki category | Newsletter section |
-|---|---|
-| technology | 🚀 Technology |
-| finance | 📊 Finance |
-| productivity | ⚡ Productivity |
-| learning | 🧠 Learning |
-| health | 🗂️ Other |
-| others | 🗂️ Other |
+Read `data/wiki-categories.md` for the category → newsletter section mapping (the "Newsletter section" column). If a category has no entry there, map it to 🗂️ Other.
 
 Only include sections that have at least one note today.
 

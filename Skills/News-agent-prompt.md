@@ -14,6 +14,8 @@ Open `kbm.log.md` and collect all filenames that have ever been logged (any acti
 
 ## Search strategy
 
+Wiki categories are defined in `data/wiki-categories.md`. The search categories below align with those, plus Health (fetched as news but filed under `others/` in the wiki).
+
 **If the Tavily MCP tool (`tavily-search` or `mcp_tavily_tavily-search`) is available, use it as the primary method** to find articles for each category. Use targeted search queries like:
 - Technology: `"AI OR software OR startup site:techcrunch.com OR site:news.ycombinator.com"`
 - Finance: `"stock market OR investing OR economy news today"`
@@ -26,43 +28,7 @@ If Tavily is not available, fall back to fetching the source URLs listed below.
 
 ## Categories, sources, and article count
 
-Find exactly 3 high-quality, distinct, breaking or trending articles from the last 24–48 hours for each category.
-
-### 🚀 Technology
-Fallback sources (use if Tavily unavailable):
-- https://news.ycombinator.com/ — top stories on the front page
-- https://techcrunch.com/ — most recent articles
-- https://hackernoon.com/ — most recent articles
-- https://blog.bytebytego.com/ — most recent articles
-- https://machinelearningmastery.com/blog/ — most recent articles
-- https://aws.amazon.com/blogs/machine-learning/
-- https://newsletter.pragmaticengineer.com/
-- https://www.byhand.ai/
-
-### 📊 Finance
-Fallback sources (use if Tavily unavailable):
-- https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US — S&P 500 headlines RSS
-- https://www.fool.com/investing/ — recent investing articles
-
-### ⚡ Productivity
-Fallback sources (use if Tavily unavailable):
-- https://hbr.org/topic/productivity — most recent HBR productivity articles
-- https://news.ycombinator.com/ — any Show HN or productivity-tagged items on the front page
-- https://calnewport.com/blog/
-
-### 🧠 Learning
-Fallback sources (use if Tavily unavailable):
-- https://hbr.org/topic/learning-strategies — most recent HBR learning articles
-- https://www.fast.ai/ — most recent blog posts
-- https://fs.blog/blog/
-
-### 🩺 Health
-Fallback sources (use if Tavily unavailable):
-- https://www.healthline.com/health-news — most recent health news
-- https://www.medicalnewstoday.com/ — most recent articles
-- https://www.health.harvard.edu/blog — Harvard Health blog posts
-- https://www.nih.gov/news-events — NIH news and events
-- https://www.webmd.com/news/health-news — WebMD health news
+Read `data/wiki-categories.md` for the full category list, article count per category, and fallback sources (the "Fallback sources" section). Find exactly the specified number of high-quality, distinct, breaking or trending articles from the last 24–48 hours for each category.
 
 ## Blacklisted sources
 

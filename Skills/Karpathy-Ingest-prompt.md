@@ -10,14 +10,7 @@ Read all `.md` files in `/raw/` that contain a `source_url:` header. Skip everyt
 
 ### 1. Categorize
 
-Place the file into exactly one category. You are strictly FORBIDDEN from creating new categories. Choose from this exact list:
-
-- `productivity`
-- `learning`
-- `finance`
-- `technology`
-- `health`
-- `others`
+Place the file into exactly one category. Read `data/wiki-categories.md` for the current list of valid categories. Use exactly the category slugs listed there. Do not create new categories — if nothing fits, use `others`.
 
 ### 2. Create output directory if missing
 
