@@ -35,6 +35,13 @@ Read the matching skill file before executing any recurring task.
 | `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
 | `skills/Wiki-reorg-prompt.md` | Reconciles wiki/ structure against wiki-categories.md, reclassifies notes, refreshes glossary |
 
+### Parallel skills (opt-in)
+
+| Workflow script | Slash command | Purpose |
+|----------------|---------------|---------|
+| `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out up to 8 concurrent scrape agents; log written by coordinator |
+| `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
+
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
 2. Transform it into structured notes that are concise, atomic, and link-rich.
