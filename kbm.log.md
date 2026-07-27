@@ -213,3 +213,4 @@
 | 2026-07-27 | agentic-design-patterns-planning.md | ingest |
 | 2026-07-27 | human-in-the-loop-autonomy-spectrum.md | ingest |
 | 2026-07-27 | ooda-loop-decision-cycle.md | ingest |
+| 2026-07-27 | 2026-07-27-3.md | newsletter |
