@@ -7,8 +7,8 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `glossary.md` — canonical vocabulary (personal reference only, do not read or rely on during tasks)
 - `kbm.log.md` — activity log; append a row after every pipeline action
 - `raw/` — source material at different pipeline stages
-  - `url/` — URL lists waiting to be scraped
-  - `processed/` — scraped articles waiting to be ingested into `wiki/`
+  - `url/` — URL lists waiting to be scraped (consumed and deleted by the scrape step)
+  - `processed/` — post-ingest archive; articles moved here by Karpathy after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-reorg
 - `Skills/` — prompt templates for recurring workflows (see Skills section below)
