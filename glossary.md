@@ -6,6 +6,10 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## A
 
+**A2A** — Google's agent-to-agent communication protocol; handles task delegation between AI agents from different vendors; absorbed [[ACP]] in 2026 to become the standard for inter-agent interoperability alongside Anthropic's [[MCP]].
+
+**ACP** — Agent Communication Protocol; initially a separate specification for agent-to-agent messaging; merged into [[A2A]] (Google) in 2026.
+
 **Andrej Karpathy** — AI researcher and educator; publicly described using an LLM wiki knowledge base as a core part of his learning system.
 
 **Anki** — Spaced repetition flashcard application; used in the LLM-assisted reading workflow to generate and review flashcards from reading sessions via [[fastanki]].
@@ -16,15 +20,29 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## B
 
+**Barbara Oakley** — Engineering professor and author of *A Mind for Numbers*; popularized the focused/diffuse mode framework showing the brain requires both deliberate analysis and relaxed mind-wandering to consolidate learning.
+
 **Beth Hammack** — Federal Reserve official; cited in July 2026 vault notes as warning of broad-based inflation ahead of an expected September 2026 rate hike.
 
 **Body, Heart and Mind in Business Research Group** — Research group at the University of Sydney Business School led by [[Stefan Volk]]; studies chronobiology and its application to management and organizational performance.
+
+**Botsitting** — [[Cal Newport]]'s term for the low-value overhead of attending to AI outputs — correcting errors, rerunning prompts, managing tool failures — that consumes the time AI was supposed to free up; a key driver of the AI productivity gap.
+
+**Buffett Indicator** — The ratio of total stock market capitalization to GDP; popularized by [[Warren Buffett]] as a long-run valuation signal; hit an all-time high of 236% in mid-2026, exceeding dot-com era peaks.
+
+**ByteByteGo** — System design newsletter and YouTube channel by Alex Xu; publishes distilled technical reference guides on distributed systems, APIs, and AI engineering; primary source for vault notes on multi-tenancy and AI agent best practices.
 
 ---
 
 ## C
 
-**Capture** — The first step in the PKM workflow; dumping raw ideas, snippets, or links into an [[Inbox Capture]] buffer with minimal friction before any organization occurs.
+**Cal Newport** — Georgetown professor and author of *Deep Work* and *Slow Productivity*; vault's primary voice on the AI productivity gap, [[Botsitting]], and the structural mismatch between AI capabilities and broken organizational workflows.
+
+**Capture** — The first step in the PKM workflow; dumping raw ideas, snippets, or links into an [[Inbox Capture]] buffer with minimal friction before any organization occurs. ⚠️ *No vault WikiLinks as of 2026-07-27.*
+
+**Chesterton's Fence** — The principle that one should not remove or modify something until understanding why it was put there; named after [[G.K. Chesterton]]'s parable about a gate on a road; not a defense of the status quo but a prerequisite for effective reform.
+
+**Clem Delangue** — Co-founder and CEO of [[Hugging Face]]; responded to the 2026 OpenAI-on-Hugging Face security breach with a $100M open-source compute pledge and a call for radical AI industry transparency.
 
 **Claude 5** — Generation of Anthropic's Claude models with significantly improved contextual judgment; includes [[Opus 5]], [[Fable 5]], and related variants. Characterized by a shift from rule-following to context-reading behavior.
 

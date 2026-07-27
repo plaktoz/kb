@@ -28,6 +28,7 @@ Read the matching skill file before executing any recurring task.
 | `skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/processed/` |
 | `skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
 | `skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
+| `skills/Weekly-workflow-prompt.md` | Runs the full weekly pipeline in sequence: compound → weekly digest |
 | `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
 | `skills/Wiki-reorg-prompt.md` | Reconciles wiki/ structure against wiki-categories.md, reclassifies notes, refreshes glossary |
 

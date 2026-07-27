@@ -41,3 +41,53 @@
 | 2026-07-26 | how-to-use-ai-for-close-reading.md | ingest |
 | 2026-07-26 | 2026-07-26-4.md | newsletter |
 | 2026-07-27 | 2026-W30-weekly.md | compound |
+| 2026-07-27 | 2026-07-27-news-aggregation.md | news-fetch |
+| 2026-07-27 | 2026-07-26-making-sense-of-the-panic-over-chinese-ai.md | scrape |
+| 2026-07-27 | 2026-07-26-hugging-face-ceo-calls-for-radical-transparency-after-unprecedented-openai-hack.md | scrape |
+| 2026-07-27 | 2026-07-26-are-brain-waves-the-next-unlock-for-physical-ai.md | scrape |
+| 2026-07-27 | 2026-07-27-warren-buffetts-favorite-stock-market-indicator-is-sounding-the-alarm.md | scrape |
+| 2026-07-27 | 2026-07-26-alphabet-amazon-and-meta-will-spend-over-500-billion-on-ai-in-2026.md | scrape |
+| 2026-07-27 | 2026-07-26-meta-slipped-back-below-600-before-wednesdays-earnings-report.md | scrape |
+| 2026-07-27 | 2026-06-29-beware-of-productivity-paradoxes.md | scrape |
+| 2026-07-27 | 2026-06-15-ai-isnt-breaking-work-its-already-broken.md | scrape |
+| 2026-07-27 | 2026-06-08-why-isnt-ai-taking-our-jobs.md | scrape |
+| 2026-07-27 | 2026-07-27-let-go-of-the-learning-baggage.md | scrape |
+| 2026-07-27 | 2026-07-27-learning-through-play.md | scrape |
+| 2026-07-27 | 2026-07-27-chestertons-fence-a-lesson-in-thinking.md | scrape |
+| 2026-07-27 | 2026-07-26-viral-menopause-cocktail-allergy-meds-antacids-risks.md | scrape |
+| 2026-07-27 | 2026-07-25-semaglutide-sustains-lower-calorie-intake-over-one-year.md | scrape |
+| 2026-07-27 | 2026-07-24-viagra-may-stop-cancer-from-spreading-study.md | scrape |
+| 2026-07-27 | 2026-07-22-after-shocking-quarter-ibm-insists-that-ai-isnt-killing-the-mainframe.md | scrape |
+| 2026-07-27 | 2026-03-04-humans-and-agents-in-software-engineering-loops.md | scrape |
+| 2026-07-27 | 2026-07-22-best-practices-for-building-ai-agents.md | scrape |
+| 2026-07-27 | 2026-07-18-mcp-vs-a2a-vs-acp-how-ai-agents-actually-talk.md | scrape |
+| 2026-07-27 | 2026-07-16-a-guide-to-multi-tenancy-benefits-and-challenges.md | scrape |
+| 2026-07-27 | hackernoon.com (5 URLs) | scrape-failed |
+| 2026-07-27 | channelnewsasia.com (2 URLs) | scrape-failed |
+| 2026-07-27 | 2026-06-26-url | delete |
+| 2026-07-27 | 2026-07-27-news-aggregation.md | delete |
+| 2026-07-27 | chinese-ai-moonshot-kimi-protectionism.md | ingest |
+| 2026-07-27 | hugging-face-openai-hack-radical-transparency.md | ingest |
+| 2026-07-27 | brain-waves-eeg-physical-ai-robot-training.md | ingest |
+| 2026-07-27 | ibm-mainframe-revenue-decline-ai-budget-shift.md | ingest |
+| 2026-07-27 | humans-agents-software-engineering-loops.md | ingest |
+| 2026-07-27 | best-practices-building-ai-agents.md | ingest |
+| 2026-07-27 | mcp-vs-a2a-vs-acp-agent-communication-protocols.md | ingest |
+| 2026-07-27 | multi-tenancy-guide-benefits-challenges.md | ingest |
+| 2026-07-27 | buffett-indicator-market-overvaluation-2026.md | ingest |
+| 2026-07-27 | big-tech-ai-capex-500-billion-2026.md | ingest |
+| 2026-07-27 | meta-stock-600-earnings-capex-anxiety.md | ingest |
+| 2026-07-27 | ai-productivity-paradox-pc-revolution-parallel.md | ingest |
+| 2026-07-27 | ai-magnifies-broken-work-not-breaks-it.md | ingest |
+| 2026-07-27 | ai-job-displacement-measured-reality-2026.md | ingest |
+| 2026-07-27 | focused-diffuse-thinking-learning-baggage.md | ingest |
+| 2026-07-27 | learning-through-play-lockhart-arithmetic.md | ingest |
+| 2026-07-27 | chestertons-fence-understand-before-removing.md | ingest |
+| 2026-07-27 | menopause-cocktail-antihistamine-antacid-risks.md | ingest |
+| 2026-07-27 | semaglutide-calorie-reduction-60-weeks.md | ingest |
+| 2026-07-27 | sildenafil-viagra-cancer-metastasis-inhibition.md | ingest |
+| 2026-07-27 | 2026-07-27.md | newsletter |
+| 2026-07-27 | wiki/health/ → wiki/others/menopause-cocktail-antihistamine-antacid-risks.md | reorg |
+| 2026-07-27 | wiki/health/ → wiki/others/semaglutide-calorie-reduction-60-weeks.md | reorg |
+| 2026-07-27 | wiki/health/ → wiki/others/sildenafil-viagra-cancer-metastasis-inhibition.md | reorg |
+| 2026-07-27 | wiki/health/ | delete |
