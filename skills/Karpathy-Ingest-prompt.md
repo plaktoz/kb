@@ -53,7 +53,25 @@ Example:
 - **Architectural Shifts**: The transition from centralized databases to [[Decentralized Systems]].
 - **Performance Metrics**: A 40% reduction in token consumption using active semantic filtering.
 
-### 8. Compilation rules
+### 8. First Principles & Mental Models section (conditional)
+
+**Only include this section if** a named mental model maps cleanly enough that a thoughtful reader would independently reach the same connection. If the link requires stretching, omit the section entirely — an absent section is better than a forced one.
+
+When the bar is met, add this section after `## Key Takeaways`:
+
+```markdown
+## 🧠 First Principles & Mental Models
+
+- **[[Mental Model Name]]**: [1 sentence — why this model applies and what it explains about the article's core claim]
+```
+
+Use WikiLinks for every model name so they connect across the vault. Include 1–3 entries maximum. Each entry must cover both a named model AND the first-principles reasoning it illuminates — not just a label.
+
+Example (from an article on AI productivity claims):
+- **[[Goodhart's Law]]**: When productivity becomes the target metric, workers optimize for its proxies rather than actual output — exactly the dynamic Newport documents with AI tool adoption.
+- **[[Availability Bias]]**: The vividness of individual AI wins makes the aggregate productivity stagnation invisible — people generalize from memorable examples, not base rates.
+
+### 9. Compilation rules
 
 - Rely exclusively on the text provided. Do not use pre-trained memory to add unsubstantiated facts.
 - Do not output any chat meta-text. Start directly with the YAML frontmatter.
