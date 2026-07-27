@@ -9,6 +9,7 @@ Canonical subdirectories for notes in `wiki/`. Claude reads this before filing a
 | `finance/` | Markets, investing, economics | 📊 Finance | 3 |
 | `productivity/` | Workflows, management, personal effectiveness | ⚡ Productivity | 3 |
 | `health/` | Health, wellness, medical research | ❤️ Health | 3 |
+| `strategy/` | Decision frameworks, mental models, competitive strategy, first-principles thinking | 🎯 Strategy | 2 |
 | `others/` | Staging area for uncategorized notes — revisit with /kb-reorg | 🗂️ Other | — |
 
 > **Note:** The 🩺 Health category is fetched as news and filed under `others/` in the wiki — it has no dedicated wiki subdirectory.
@@ -47,3 +48,8 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://www.health.harvard.edu/blog
 - https://www.nih.gov/news-events
 - https://www.webmd.com/news/health-news
+
+### 🎯 Strategy
+- https://fs.blog/blog/
+- https://stratechery.com/
+- https://hbr.org/topic/strategy
