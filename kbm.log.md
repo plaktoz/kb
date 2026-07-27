@@ -93,3 +93,27 @@
 | 2026-07-27 | wiki/health/ | delete |
 | 2026-07-27 | glossary.md | reorg |
 | 2026-07-27 | research/java-development-best-practices/report.md | research |
+| 2026-07-27 | 2026-07-27-news-aggregation.md | news-fetch |
+| 2026-07-26 | 2026-07-26-techcrunch-mobility-uber-bets-on-its-former-ceo.md | scrape |
+| 2026-07-26 | 2026-07-26-inside-one-london-founder-house-rewriting-the-founder-house-rules.md | scrape |
+| 2026-07-26 | 2026-07-26-how-do-you-know-when-ai-is-telling-the-truth.md | scrape |
+| 2026-07-26 | 2026-07-26-here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.md | scrape |
+| 2026-07-26 | 2026-07-26-5-big-analyst-ai-moves-several-top-picks-named-into-q2-earnings.md | scrape |
+| 2026-07-20 | 2026-07-20-the-sell-off-in-trendy-stocks-looks-bad-but-could-it-help-push-the-sp-500-to-new-highs.md | scrape |
+| 2026-07-23 | 2026-07-23-leadership-summit-2026-inspiring-grit-and-growth-amid-unprecedented-change.md | scrape |
+| 2026-07-21 | 2026-07-21-5-microhabits-of-ceos.md | scrape |
+| 2026-07-24 | 2026-07-24-how-to-plan-deep-work-sessions-with-claude.md | scrape |
+| 2026-07-24 | 2026-07-24-learning-never-retires.md | scrape |
+| 2026-07-25 | 2026-07-25-digital-media-alters-cognitive-willingness.md | scrape |
+| 2026-07-24 | 2026-07-24-summer-reading-for-teaching-and-school-improvement-harnessing-the-science-of-learning.md | scrape |
+| 2026-07-26 | 2026-07-26-are-we-eating-enough-protein-to-age-well-why-experts-think-no.md | scrape |
+| 2026-07-23 | 2026-07-23-sleeping-longer-than-8-5-hours-a-night-may-be-a-sign-of-alzheimers.md | scrape |
+| 2026-07-22 | 2026-07-22-study-reveals-why-dna-damage-from-smoking-uv-rays-and-other-factors-may-cause-cancer-in-some-people-but-not-others.md | scrape |
+| 2026-07-23 | 2026-07-23-ibm-stock-rallies-on-trump-administrations-1b-grant.md | scrape |
+| 2026-07-26 | 2026-07-26-microsofts-next-earnings-report-on-july-29-could-send-the-stock-soaring-heres-why.md | scrape |
+| 2026-07-21 | 2026-07-21-time-to-buy-the-dip-in-momentum-stocks-after-a-punishing-july-drawdown-heres-what-history-tells-us.md | scrape |
+| 2026-07-27 | wsj.com/the-unsettled-vibe-thats-creeping-through-the-markets (paywalled) | scrape-failed |
+| 2026-07-27 | cnbc.com/video/ai-driven-job-losses-could-spur-fed-cuts-next-year-robin-brooks (video, no article body) | scrape-failed |
+| 2026-07-27 | hbr.org/frontline-workers-know-how-to-solve-your-organizations-biggest-problems (paywalled) | scrape-failed |
+| 2026-07-27 | hbr.org/model-the-transformation-you-expect-employees-to-deliver (paywalled) | scrape-failed |
+| 2026-07-27 | hbr.org/research-why-some-junior-employees-work-well-with-ai-and-others-dont (paywalled) | scrape-failed |
