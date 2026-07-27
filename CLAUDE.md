@@ -8,12 +8,14 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `kbm.log.md` — activity log; append a row after every pipeline action
 - `raw/` — source material at different pipeline stages
   - `url/` — URL lists waiting to be scraped (consumed and deleted by the scrape step)
-  - `processed/` — post-ingest archive; articles moved here by Karpathy after wiki notes are created
+  - `*.md` — scraped articles awaiting ingest
+  - `processed/` — post-ingest archive; articles moved here after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-reorg
 - `skills/` — prompt templates for recurring workflows (see Skills section below)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
+- `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`)
 - `data/` — supporting reference data
   - `investments.md` — investment holdings (do not modify unless explicitly asked)
   - `wiki-categories.md` — canonical list of wiki subdirectory categories
@@ -23,9 +25,9 @@ Read the matching skill file before executing any recurring task.
 
 | Skill file | Purpose |
 |-----------|---------|
-| `sills/Daily-workflow-prompt.md` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
+| `skills/Daily-workflow-prompt.md` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
 | `skills/News-agent-prompt.md` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
-| `skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/processed/` |
+| `skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/` |
 | `skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
 | `skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
 | `skills/Weekly-workflow-prompt.md` | Runs the full weekly pipeline in sequence: compound → weekly digest |
