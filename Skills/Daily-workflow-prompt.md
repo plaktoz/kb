@@ -4,25 +4,25 @@ Run the full daily knowledge pipeline in this exact sequence. After each step, c
 
 ## Step 1: News Agent
 
-Read `Skills/News-agent-prompt.md` and execute the instructions exactly as written.
+Read `skills/News-agent-prompt.md` and execute the instructions exactly as written.
 
 If this step fails, note the error and continue to Step 2.
 
 ## Step 2: Scrape Content
 
-Read `Skills/Scrape-content-prompt.md` and execute the instructions exactly as written.
+Read `skills/Scrape-content-prompt.md` and execute the instructions exactly as written.
 
 If this step fails, note the error and continue to Step 3.
 
 ## Step 3: Ingest
 
-Read `Skills/Karpathy-Ingest-prompt.md` and execute the instructions exactly as written.
+Read `skills/Karpathy-Ingest-prompt.md` and execute the instructions exactly as written.
 
 If this step fails, note the error and continue to Step 4.
 
 ## Step 4: Newsletter
 
-Read `Skills/Daily-newsletter-prompt.md` and execute the instructions exactly as written.
+Read `skills/Daily-newsletter-prompt.md` and execute the instructions exactly as written.
 
 If this step fails, note the error.
 
