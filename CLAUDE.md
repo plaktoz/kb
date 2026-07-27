@@ -29,6 +29,7 @@ Read the matching skill file before executing any recurring task.
 | `skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
 | `skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
 | `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
+| `skills/Wiki-reorg-prompt.md` | Reconciles wiki/ structure against wiki-categories.md, reclassifies notes, refreshes glossary |
 
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
@@ -58,7 +59,7 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `delete`
+Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `delete`, `reorg`
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.
