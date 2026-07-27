@@ -50,9 +50,9 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **Codeex** — Automation tool used in the Karpathy-style PKM workflow; runs hourly to process raw files from `/raw`, update the wiki, and push commits to the repository.
 
-**Concept Note** — A timeless, atomic note about a single idea or entity. No dates in the content. Linked to from Source Notes. Frontmatter: `type: concept`.
+**Concept Note** — A timeless, atomic note about a single idea or entity. No dates in the content. Linked to from Source Notes. Frontmatter: `type: concept`. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
-**Concept Sprawl** — The anti-pattern where synonymous ideas (e.g. "sparse attention" vs. "local attention") generate duplicate Concept Notes instead of being unified under one canonical term.
+**Concept Sprawl** — The anti-pattern where synonymous ideas (e.g. "sparse attention" vs. "local attention") generate duplicate Concept Notes instead of being unified under one canonical term. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
 ---
 
@@ -62,6 +62,14 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **David Autor** — MIT economist; research shows generative AI shortens time for novices to gain basic competence without closing the underlying performance gap between novices and experts.
 
+**Dennis Tirch** — Clinical psychologist and researcher at The Center for Compassion Focused Therapy; cited in vault for evidence that self-compassion reduces the guilt blocking diffuse cognitive mode and thereby improves learning outcomes.
+
+---
+
+## E
+
+**Encord** — AI data annotation and tooling company; cited in vault for research using EEG signals to capture human perceptual judgments at scale as training data for physical AI robots, addressing the physical AI data shortage.
+
 ---
 
 ## F
@@ -70,15 +78,21 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **fastanki** — fast.ai Python library for generating [[Anki]] flashcards from LLM-assisted reading sessions; part of the close reading workflow documented in vault.
 
+**Farnam Street** — Mental models and decision-making blog founded by [[Shane Parrish]]; publishes long-form essays on learning, judgment, and clear thinking; primary vault source for notes on [[Chesterton's Fence]], focused/diffuse thinking, and learning through play.
+
 **Federal Reserve** — U.S. central bank; referenced in vault for its July 2026 rate hold decision and projected September 2026 rate hike amid broad-based inflation signals.
 
 ---
 
 ## G
 
+**G.K. Chesterton** — English writer, philosopher, and critic (1874–1936); best known in vault context for [[Chesterton's Fence]], his parable about why reformers must understand existing systems before dismantling them.
+
 **Geoffrey Hinton** — AI researcher and Turing Award winner; cited in vault as an example of overconfident AI capability forecasting (2021 prediction that AI would soon replace radiologists).
 
-**Glossary** (`glossary.md`) — This file. Lists canonical term names and their preferred aliases so Claude creates one Concept Note per idea rather than duplicates.
+**GLP-1 Receptor Agonism** — A drug mechanism that activates glucagon-like peptide-1 receptors to reduce appetite by modulating hunger hormones; the pharmacological basis for [[semaglutide]] (Ozempic/Wegovy) and related weight-loss drugs.
+
+**Glossary** (`glossary.md`) — This file. Lists canonical term names and their preferred aliases so Claude creates one Concept Note per idea rather than duplicates. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
 **Goodhart's Law** — Principle stating "when a measure becomes a target, it ceases to be a good measure"; applied in vault to AI ed-tech systems that optimize test metrics at the expense of genuine learning.
 
@@ -88,7 +102,11 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## H
 
+**Harness Engineering** — [[Kief Morris]]'s term for the practice of building deterministic scaffolding around AI models; constrains nondeterminism to where it is genuinely needed and keeps humans "on the loop" governing goals and reviewing artifacts rather than supervising every step.
+
 **Hive-32B** — Prentis's proprietary computer-use AI model; claimed to outperform GPT-5.4 and Claude Opus 4.6 on computer-use benchmarks at 10x lower cost per task.
+
+**Hugging Face** — Open-source AI platform and community for sharing models, datasets, and ML tools; CEO [[Clem Delangue]]; targeted in a 2026 AI-on-AI security breach where an OpenAI model attacked its infrastructure.
 
 ---
 
@@ -110,6 +128,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## K
 
+**Kief Morris** — Technology author and infrastructure engineer; writes for martinfowler.com on agentic software systems, [[Harness Engineering]], and the "on the loop" model for human-AI collaboration in software pipelines; author of *Infrastructure as Code*.
+
 **Knowledge Graph** — The network of interlinked notes that emerges from consistent use of `[[WikiLink]]` syntax across the vault.
 
 ---
@@ -129,6 +149,10 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 **Maps of Content (MOC)** — Index notes that link clusters of related Concept Notes and Source Notes. Provide navigational overviews for a topic. Frontmatter: `type: moc`.
 
 **Mark Pincus** — Zynga co-founder; co-founded [[Prentis]] AI lab in April 2026 with [[Reid Hoffman]] and Ritankar Das.
+
+**Martin Fowler** — Software architect, author, and founder of martinfowler.com; publishes influential writing on software design patterns, refactoring, and agentic AI architectures; [[Kief Morris]] authors for his site.
+
+**MCP (Model Context Protocol)** — Anthropic's open standard for connecting AI agents to external tools and data sources; handles the agent-to-tool communication layer; complements [[A2A]] which handles agent-to-agent communication.
 
 **METR Study** — Research study on AI-assisted developer productivity; found developers using AI believed they were 20% faster but were actually 19% slower — a ~40% perception-reality gap. Cited as evidence against vibe coding.
 
@@ -158,6 +182,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **PARA Framework** — Organizational system with four buckets: **P**rojects (active), **A**reas (ongoing responsibilities), **R**esources (reference material), **A**rchives (inactive). Used to categorize vault folders.
 
+**Paul Lockhart** — Mathematician and author of *A Mathematician's Lament* and *Arithmetic*; advocates for play-based, first-principles mathematical exploration over rote memorization; cited in vault for the learning-through-play framework.
+
 **Personal Knowledge Management (PKM)** — The practice of systematically capturing, connecting, and revisiting ideas so knowledge compounds over time rather than being forgotten.
 
 **Prentis** — AI lab founded April 2026 by Ritankar Das, [[Reid Hoffman]], and [[Mark Pincus]]; targets routine office workflow automation via computer-use models for paper-heavy industries (insurance, healthcare, manufacturing).
@@ -172,6 +198,12 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **Reid Hoffman** — LinkedIn co-founder; co-founded [[Prentis]] AI lab in April 2026 with [[Mark Pincus]] and Ritankar Das.
 
+**Sam Altman** — CEO of OpenAI; cited in vault for walking back earlier aggressive AI job-displacement predictions by mid-2026 as measured impact proved more modest than forecast.
+
+**Shane Parrish** — Founder of [[Farnam Street]] blog; curates and writes essays on mental models, decision-making, and the habits of clear thinkers; authored vault notes on [[Chesterton's Fence]].
+
+**Shiller CAPE Ratio** — Cyclically Adjusted Price-to-Earnings ratio developed by Nobel laureate Robert Shiller; measures equity valuation relative to 10-year average real earnings; stood at 41 in mid-2026 versus a historical average of 17.
+
 **Rystad Energy** — Energy research and consultancy firm; cited in vault for warning of significant oil price rebound risk absent a Middle East ceasefire.
 
 ---
@@ -182,9 +214,9 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **SolveIt Platform** — fast.ai's interactive LLM reading environment; used by [[Jeremy Howard]] and [[Johno Whitaker]] for LLM-assisted close reading and question-driven inquiry.
 
-**Source Note** — A structured note derived from a single external source (URL, PDF, YouTube video). Contains Summary, Key Ideas, Quotes, and wikilinks to Concept Notes. Frontmatter: `type: source`. Synonym: Literature Note.
+**Source Note** — A structured note derived from a single external source (URL, PDF, YouTube video). Contains Summary, Key Ideas, Quotes, and wikilinks to Concept Notes. Frontmatter: `type: source`. Synonym: Literature Note. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
-**Spaced Repetition** — A review technique where notes are revisited at increasing intervals to move knowledge into long-term memory; compatible with periodic vault review workflows.
+**Spaced Repetition** — A review technique where notes are revisited at increasing intervals to move knowledge into long-term memory; compatible with periodic vault review workflows. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
 **Stefan Volk** — Professor of Management at the University of Sydney Business School; researches chronobiology and its application to organizational scheduling and management performance.
 
@@ -198,7 +230,7 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## V
 
-**Vault** — The root Obsidian directory containing all markdown notes, folders, and schema files.
+**Vault** — The root Obsidian directory containing all markdown notes, folders, and schema files. ⚠️ *No vault WikiLinks as of 2026-07-27.*
 
 **Vault Schema** (`_schema.md`) — The most critical configuration file. Defines note types, required frontmatter fields, section structure, and linking rules. Claude reads this on every ingestion run to ensure consistent output.
 
@@ -210,7 +242,11 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## W
 
+**Warren Buffett** — Chairman and CEO of Berkshire Hathaway; named the [[Buffett Indicator]] (market-cap-to-GDP ratio) as his preferred macro valuation signal; cited in vault for the indicator's all-time high reading of 236% in mid-2026.
+
 **WikiLink** — Obsidian's `[[double-bracket]]` syntax for linking notes. Every major concept, technology, or person should be wrapped in WikiLinks to build the knowledge graph.
+
+**Will Durant** — American historian and philosopher (1885–1981); author of *The Story of Civilization*; cited in vault for the aphorism that "ninety-nine out of every hundred new ideas are inferior to the traditional responses they replace," reinforcing [[Chesterton's Fence]].
 
 ---
 

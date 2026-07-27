@@ -91,3 +91,4 @@
 | 2026-07-27 | wiki/health/ → wiki/others/semaglutide-calorie-reduction-60-weeks.md | reorg |
 | 2026-07-27 | wiki/health/ → wiki/others/sildenafil-viagra-cancer-metastasis-inhibition.md | reorg |
 | 2026-07-27 | wiki/health/ | delete |
+| 2026-07-27 | glossary.md | reorg |

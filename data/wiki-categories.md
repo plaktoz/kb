@@ -8,8 +8,8 @@ Canonical subdirectories for notes in `wiki/`. Claude reads this before filing a
 | `learning/` | Education, cognition, skill development | 🧠 Learning | 3 |
 | `finance/` | Markets, investing, economics | 📊 Finance | 3 |
 | `productivity/` | Workflows, management, personal effectiveness | ⚡ Productivity | 3 |
+| `health/` | Health, wellness, medical research | ❤️ Health | 3 |
 | `others/` | Staging area for uncategorized notes — revisit with /kb-reorg | 🗂️ Other | — |
-| *(news only)* | Health, wellness, medical research | 🩺 Health | 3 |
 
 > **Note:** The 🩺 Health category is fetched as news and filed under `others/` in the wiki — it has no dedicated wiki subdirectory.
 
@@ -41,7 +41,7 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://www.fast.ai/
 - https://fs.blog/blog/
 
-### 🩺 Health
+### ❤️ Health
 - https://www.healthline.com/health-news
 - https://www.medicalnewstoday.com/
 - https://www.health.harvard.edu/blog
