@@ -4,13 +4,18 @@ source_url: https://calnewport.com/ai-isnt-breaking-work-its-already-broken/
 
 ---
 
-Newport highlights a paradox from a 6,000-person survey: workers claimed AI saved them 11 hours weekly, yet only 13% saw any improvement in company performance.
+Author: Cal Newport
+Published: June 15, 2026
 
-Survey author Rebecca Hinds attributed this to three factors:
-- Unaccounted time spent "botsitting" — waiting on AI agents
-- Productivity lost toggling across multiple AI tools (60% queried several)
-- "Workplace theater" — performing visible busyness over actual output
+Newport references a survey of 6,000 digital workers showing AI reportedly saves 11 hours/week, yet only 13% saw improved company performance.
 
-Newport's core argument: these aren't new AI-specific problems. His 2024 book Slow Productivity documented the same dysfunctions with earlier tools — email, Slack, mobile devices. He called the performance-over-appearance problem "pseudo-productivity" long before AI entered the conversation.
+Rebecca Hinds offers three explanations for this gap:
+- Workers undercount time spent "botsitting" — waiting on AI agents
+- Toggling across multiple AI tools (60% do this) adds hidden costs
+- "Workplace theater" — visibly performing work rather than actually doing it
 
-His takeaway carries a cautious optimism: because AI is novel and exciting, leaders are scrutinizing its impacts more carefully than they ever did with prior tools. That attention might finally surface what Newport argues "has long been broken" in how knowledge work is structured.
+Newport's key argument: these aren't new AI-caused problems. His 2024 book Slow Productivity diagnosed the same dysfunctions from earlier tools like email and Slack. He called the performance-signaling phenomenon "pseudo-productivity" years before AI entered the conversation.
+
+His silver lining: AI's novelty is drawing executive attention to workflow problems that have long existed but gone unaddressed. The real opportunity isn't fixing AI — it's finally fixing work itself.
+
+"AI isn't so much creating new problems as it is magnifying the types of problems that have long existed."

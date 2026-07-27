@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "bc12391179806914",
+        "id": "48d737a16b3ad636",
         "type": "tabs",
         "children": [
           {
-            "id": "be0569ccb50cbc97",
+            "id": "2d3350e05ac2feb3",
             "type": "leaf",
             "state": {
-              "type": "empty",
+              "type": "graph",
               "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
+              "icon": "lucide-git-fork",
+              "title": "Graph view"
             }
           }
         ]
@@ -179,43 +179,43 @@
       "bases:Create new base": false
     }
   },
-  "active": "be0569ccb50cbc97",
+  "active": "2d3350e05ac2feb3",
   "lastOpenFiles": [
-    "glossary.md",
-    "kbm.log.md",
+    "daily-update/2026-07/2026-07-27-2.md",
+    "raw/processed/2026-07-21-time-to-buy-the-dip-in-momentum-stocks-after-a-punishing-july-drawdown-heres-what-history-tells-us.md",
+    "raw/processed/2026-07-26-microsofts-next-earnings-report-on-july-29-could-send-the-stock-soaring-heres-why.md",
+    "raw/processed/2026-07-23-ibm-stock-rallies-on-trump-administrations-1b-grant.md",
+    "raw/processed/2026-07-22-study-reveals-why-dna-damage-from-smoking-uv-rays-and-other-factors-may-cause-cancer-in-some-people-but-not-others.md",
+    "raw/processed/2026-07-23-sleeping-longer-than-8-5-hours-a-night-may-be-a-sign-of-alzheimers.md",
+    "raw/processed/2026-07-26-are-we-eating-enough-protein-to-age-well-why-experts-think-no.md",
+    "raw/processed/2026-07-24-summer-reading-for-teaching-and-school-improvement-harnessing-the-science-of-learning.md",
+    "raw/processed/2026-07-25-digital-media-alters-cognitive-willingness.md",
+    "raw/processed/2026-07-24-learning-never-retires.md",
+    "raw/processed/2026-07-24-how-to-plan-deep-work-sessions-with-claude.md",
+    "raw/processed/2026-07-21-5-microhabits-of-ceos.md",
+    "raw/processed/2026-07-23-leadership-summit-2026-inspiring-grit-and-growth-amid-unprecedented-change.md",
+    "raw/processed/2026-07-20-the-sell-off-in-trendy-stocks-looks-bad-but-could-it-help-push-the-sp-500-to-new-highs.md",
+    "raw/processed/2026-07-26-5-big-analyst-ai-moves-several-top-picks-named-into-q2-earnings.md",
+    "raw/processed/2026-07-26-here-are-the-3-big-things-were-watching-in-the-stock-market-in-the-week-ahead.md",
+    "raw/processed/2026-07-26-how-do-you-know-when-ai-is-telling-the-truth.md",
+    "raw/processed/2026-07-26-inside-one-london-founder-house-rewriting-the-founder-house-rules.md",
+    "raw/processed/2026-07-26-techcrunch-mobility-uber-bets-on-its-former-ceo.md",
+    "wiki/others/genetic-background-cancer-evolution-study.md",
+    "wiki/others/long-sleep-alzheimers-biomarker-study.md",
+    "wiki/others/protein-intake-longevity-guidelines-update.md",
+    "wiki/learning/science-of-learning-cognitive-load-gradual-release.md",
+    "wiki/learning/effort-recalibration-digital-media-cognition.md",
+    "wiki/learning/lifelong-learning-older-adults-rachel-wu.md",
+    "wiki/productivity/deep-work-planning-with-claude.md",
+    "research/java-development-best-practices",
     "kb-wiki-base.base",
-    "weekly-update/2026-07/2026-W30-weekly.md",
     "weekly-update/2026-07",
-    "Skills/Weekly-compound-prompt.md",
     "weekly-update",
-    "data/investments.md",
     "data",
-    "daily-update/2026-07/2026-07-26-4.md",
-    "raw/processed/2026-07-26-trump-strait-of-hormuz-sp500-down.md",
-    "raw/processed/2026-07-26-4-big-tech-earnings-fed-meeting-100-oil-busiest-week.md",
-    "raw/processed/2026-07-25-monday-com-ai-layoffs-20-major-tech-companies.md",
-    "raw/processed/2026-07-24-the-new-rules-of-context-engineering-for-claude-5.md",
-    "raw/processed/2026-07-24-prentis-new-ai-lab-reid-hoffman-mark-pincus-100m.md",
-    "raw/processed/2026-05-25-managers-struggling-keep-up-ai-productivity-boom.md",
-    "raw/processed/2026-05-01-tapping-into-your-teams-circadian-rhythms.md",
-    "raw/processed/2026-03-01-gen-ai-wont-make-your-employees-experts.md",
-    "raw/processed/2026-02-17-i-dont-want-a-learning-dashboard-for-my-child.md",
-    "raw/processed/2026-01-28-breaking-the-spell-of-vibe-coding.md",
-    "raw/processed/2026-01-21-how-to-use-ai-for-close-reading.md",
     "raw/url/2026-06-26-url",
-    "wiki/learning/how-to-use-ai-for-close-reading.md",
-    "wiki/learning/breaking-the-spell-of-vibe-coding.md",
-    "wiki/learning/i-dont-want-a-learning-dashboard-for-my-child.md",
-    "wiki/productivity/gen-ai-wont-make-your-employees-experts.md",
-    "wiki/productivity/tapping-into-your-teams-circadian-rhythms.md",
-    "wiki/productivity/managers-struggling-keep-up-ai-productivity-boom.md",
-    "wiki/finance/trump-strait-of-hormuz-sp500-geopolitical-volatility.md",
-    "wiki/finance/4-big-tech-earnings-fed-meeting-100-oil-july-2026.md",
-    "wiki/technology/prentis-ai-lab-computer-use-models-hoffman-pincus.md",
     "raw/url",
     "skills-lock.json",
     "Skills/research",
-    "daily-update/2026-07",
-    "wiki/technology"
+    "daily-update/2026-07"
   ]
 }

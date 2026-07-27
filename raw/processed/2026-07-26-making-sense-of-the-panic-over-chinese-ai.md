@@ -4,12 +4,15 @@ source_url: https://techcrunch.com/2026/07/26/making-sense-of-the-panic-over-chi
 
 ---
 
-The release of Moonshot AI's Kimi model reignited US anxieties about Chinese AI competitiveness, echoing earlier reactions to DeepSeek. TechCrunch's Equity podcast hosts unpacked the recurring cycle of alarm in Silicon Valley whenever a capable Chinese model emerges.
+Author: Anthony Ha
+Published: July 26, 2026
 
-Sean O'Kane observed it "feels like we're seeing repeats of prior freakouts," pointing to viral but misleading demos — like Kimi appearing to replicate macOS — as fueling disproportionate alarm.
+The release of Moonshot AI's Kimi chatbot reignited US anxieties about Chinese AI competitiveness, echoing earlier reactions to DeepSeek. TechCrunch's Equity podcast hosts unpacked the hysteria.
 
-Kirsten Korosec highlighted a deeper driver: protectionism. She framed the key question as whether proposed restrictions are about national competitiveness or whether they primarily serve a handful of frontier labs like OpenAI.
+Sean O'Kane observed the industry's pattern of overreaction, noting that demos like Kimi replicating macOS visuals impressed people, but "it's not an OS." He suggested critics should "touch grass" rather than trading barbs online all weekend.
 
-Anthony Ha drew parallels to the TikTok debate, noting that appending "China" to any discussion dramatically amplifies anxiety. He suggested some voices were leveraging the fear to advance pre-existing policy preferences.
+Kirsten Korosec pointed to reporter Tim Fernholz's analysis, highlighting that beyond legitimate security concerns, protectionism is a core driver — questioning whether proposed bans on Chinese open-weight models would benefit America broadly or mainly boost frontier labs like OpenAI.
 
-A focal point was OpenAI's Dean Ball, who publicly argued the US should create regulatory uncertainty around open-weight Chinese models — a position he later walked back after widespread criticism that he had "said the quiet part out loud."
+Anthony Ha drew parallels to TikTok panic, arguing that adding "China" to any discussion dramatically amplifies alarm, and that advocates use the threat to advance pre-existing policy positions.
+
+A key flashpoint was OpenAI's Dean Ball publicly suggesting the US create regulatory "FUD" against open-weight models — language Sean noted amounted to saying the quiet part loud. Ball later walked back the argument.
