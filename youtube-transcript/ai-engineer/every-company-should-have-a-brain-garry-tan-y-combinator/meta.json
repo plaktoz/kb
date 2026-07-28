@@ -1,0 +1,79 @@
+{
+  "videoId": "eBUyTS7SzV4",
+  "title": "Every company should have a Brain — Garry Tan, Y Combinator",
+  "channel": "AI Engineer",
+  "channelId": "UCLKPca3kwwd-B59HNr-_lvA",
+  "description": "Garry Tan, President of Y Combinator, discusses how the rise of AI-native companies is revolutionizing organizational productivity, allowing lean teams to operate at a scale previously requiring hundreds or thousands of employees (0:52-1:07).\n\nKey Takeaways:\n\nThe 400x Leverage: Tan reports a massive increase in output (approximately 400x) by shifting from writing individual lines of code to managing AI agents (2:32-2:35).\nWiring the Work: He emphasizes that founders should treat AI not as a simple autocomplete tool, but as a workforce (3:58). He explains that core organizational components—like roles, processes, and performance reviews—can now be encoded as markdown-based skill files (4:31-5:32).\nThe AI-Native Organization: Successful startups at Y Combinator are building \"company brains\" (like his own project, GBrain), which act as a library and librarian, ensuring that agents have access to the right context at the right time (12:54-13:30).\nDiscipline of Execution: He advises never to perform \"one-off\" work. Instead, every task should be refined into a reusable skill file to prevent the company from \"waking up with amnesia\" each day (15:30-16:40).\nThe New Physics of Business: Tan argues that modern companies can achieve unprecedented revenue-per-head ratios by building on this new infrastructure, effectively \"boiling the ocean\" by automating formerly impossible tasks (6:40-7:15; 19:55-20:00).\n\nTimestamps:\n\n0:00 Introduction: The AI revolution and YC's transformation\n1:25 The 400x productivity jump: Coding in 2013 vs. today\n3:38 Wiring the work: Treating AI as a workforce\n4:11 The anatomy of an AI-native organization\n6:12 Real-world impact: Companies scaling with lean teams\n8:38 Latent space vs. deterministic space\n10:53 Overcoming human memory limits: AI as a library\n12:53 Context engineering: The importance of the 'librarian'\n13:28 Building GBrain: Managing institutional knowledge\n15:13 The discipline of 'skillifying' your work\n16:40 The call to build AI-native companies\n18:25 The power of abundance through shipped software\n\n\n\"The 2x people and the 100x people are using the exact same Claude... the leverage is not in the weights, it's in how you wire the work.\" (3:06)\n\"When you sit down with Claude Code or Cursor, you're not writing software. You're hiring, training, and managing a workforce made of markdown.\" (5:58)\n\"The organization that captures what it learns like this gets smarter every single day. The one that doesn't wakes up every morning with amnesia.\" (16:26)\n\"Abundance is not a policy paper. It is shipped software.\" (18:56)\n\"Every archive too big to read, every data set too gnarly to clean, every ocean you were told not to boil. We can boil the ocean now.\" (19:55)",
+  "duration": 1268,
+  "publishDate": "2026-07-17",
+  "url": "https://www.youtube.com/watch?v=eBUyTS7SzV4",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/eBUyTS7SzV4/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "Introduction: The AI revolution and YC's transformation",
+      "start": 0,
+      "end": 85
+    },
+    {
+      "title": "The 400x productivity jump: Coding in 2013 vs. today",
+      "start": 85,
+      "end": 218
+    },
+    {
+      "title": "Wiring the work: Treating AI as a workforce",
+      "start": 218,
+      "end": 251
+    },
+    {
+      "title": "The anatomy of an AI-native organization",
+      "start": 251,
+      "end": 372
+    },
+    {
+      "title": "Real-world impact: Companies scaling with lean teams",
+      "start": 372,
+      "end": 518
+    },
+    {
+      "title": "Latent space vs. deterministic space",
+      "start": 518,
+      "end": 653
+    },
+    {
+      "title": "Overcoming human memory limits: AI as a library",
+      "start": 653,
+      "end": 773
+    },
+    {
+      "title": "Context engineering: The importance of the 'librarian'",
+      "start": 773,
+      "end": 808
+    },
+    {
+      "title": "Building GBrain: Managing institutional knowledge",
+      "start": 808,
+      "end": 913
+    },
+    {
+      "title": "The discipline of 'skillifying' your work",
+      "start": 913,
+      "end": 1000
+    },
+    {
+      "title": "The call to build AI-native companies",
+      "start": 1000,
+      "end": 1105
+    },
+    {
+      "title": "The power of abundance through shipped software",
+      "start": 1105,
+      "end": 1268
+    }
+  ]
+}
