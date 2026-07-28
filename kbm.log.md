@@ -303,3 +303,4 @@
 | 2026-07-28 | 2021-07-07-video-8-email-etiquette-tips-how-to-write-better-emails-at-work.md | ingest |
 | 2026-07-28 | 2022-02-23-video-what-is-strategy-its-a-lot-simpler-than-you-think.md | ingest |
 | 2026-07-28 | youtube-watchlater-1.md | delete |
+| 2026-07-28 | 2026-07-28-2.md | newsletter |
