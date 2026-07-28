@@ -6,6 +6,7 @@ export const meta = {
     { title: 'Stage', detail: 'Convert transcripts to ingest-ready raw/ files' },
     { title: 'Ingest', detail: 'Parallel wiki note creation (up to 8 agents)' },
     { title: 'Archive', detail: 'Delete processed folders and source URL files' },
+  { title: 'Newsletter', detail: 'Compile today\'s ingested notes into a daily digest' },
   ],
 }
 
@@ -235,4 +236,25 @@ const tasks = [
 await agent(tasks, { label: 'archive' })
 
 log(`Done. ${ingested} transcript(s) ingested into wiki.`)
+
+// ── Phase 5: Newsletter ────────────────────────────────────────────────────
+if (ingested > 0) {
+  phase('Newsletter')
+
+  const newsletterPromptLoad = await agent(
+    'Read Skills/Daily-newsletter-prompt.md and return its complete text content.',
+    {
+      label: 'load-newsletter-prompt',
+      schema: { type: 'object', properties: { content: { type: 'string' } }, required: ['content'] },
+    }
+  )
+
+  if (newsletterPromptLoad && newsletterPromptLoad.content) {
+    await agent(
+      newsletterPromptLoad.content,
+      { label: 'newsletter', phase: 'Newsletter' }
+    )
+  }
+}
+
 return { ingested }
