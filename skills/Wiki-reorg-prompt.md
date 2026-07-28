@@ -86,6 +86,54 @@ Identify any bolded glossary terms that have **zero** `[[WikiLink]]` references 
 
 ---
 
+---
+
+## Phase 4: Duplicate Detection & Conflict Flagging
+
+Do not move or delete any files in this phase. Flag only — the user decides what to do.
+
+### 1. Slug-similarity scan
+
+For every `.md` file under `wiki/`, tokenize the filename slug by splitting on `-`. Build a reverse index: token → list of files. Extract tokens with 3+ characters (skip stop-words: `the`, `a`, `an`, `of`, `in`, `to`, `and`, `for`, `on`, `at`, `is`, `are`, `was`, `with`).
+
+A pair of notes is a **slug candidate** when they share 3 or more significant tokens. Collect all slug candidates.
+
+### 2. WikiLink-overlap scan
+
+For every `.md` file under `wiki/`, extract all `[[WikiLink]]` references. Build a per-file set of links.
+
+A pair of notes is a **link candidate** when they share 3 or more WikiLink terms.
+
+### 3. Union candidate pairs
+
+Merge slug candidates and link candidates into a single deduplicated set of pairs to inspect. Skip pairs where both files are already flagged from a prior pair in the same run.
+
+### 4. Content comparison
+
+For each candidate pair, read both files. Assess:
+
+- **Near-duplicate**: The two notes cover the same event, entity, or concept at the same level of detail with >60% content overlap. One is likely redundant.
+- **Conflict**: The two notes cover the same subject but assert contradictory facts (different figures, opposing conclusions, conflicting dates). List the specific conflicting claims verbatim.
+- **Complementary**: The notes overlap in topic but each contains distinct, non-redundant information. Do not flag.
+
+Only record **near-duplicate** and **conflict** pairs in the report. Complementary pairs are ignored.
+
+### 5. Severity labels
+
+Assign one label per flagged pair:
+
+| Label | Meaning |
+|-------|---------|
+| `MERGE` | Near-duplicate; one should absorb the other |
+| `DELETE-CANDIDATE` | Near-duplicate; one appears to be a stale or less-complete version |
+| `CONFLICT` | Same topic, contradictory facts — human review required |
+
+### 6. Do not act — report only
+
+Do not rename, move, merge, or delete any file. Append the findings to the summary report below.
+
+---
+
 ## Summary output
 
 After all file operations are complete, print this structured summary:
@@ -107,4 +155,13 @@ After all file operations are complete, print this structured summary:
 ### Phase 3: Glossary Refresh
 - New glossary entries added: [count] — [term names]
 - Stale glossary terms (no wiki references): [list or "none"]
+
+### Phase 4: Duplicate & Conflict Flags
+- Candidate pairs inspected: [count]
+- MERGE flags: [count]
+  - [file-a.md ↔ file-b.md]: [one-sentence reason]
+- DELETE-CANDIDATE flags: [count]
+  - [file-a.md → delete in favor of file-b.md]: [one-sentence reason]
+- CONFLICT flags: [count]
+  - [file-a.md ↔ file-b.md]: [claim in A] vs [claim in B]
 ```
