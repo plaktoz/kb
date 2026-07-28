@@ -304,3 +304,6 @@
 | 2026-07-28 | 2022-02-23-video-what-is-strategy-its-a-lot-simpler-than-you-think.md | ingest |
 | 2026-07-28 | youtube-watchlater-1.md | delete |
 | 2026-07-28 | 2026-07-28-2.md | newsletter |
+| 2026-07-29 | research/pattern-recognition-obsidian-pkm/report.md | research |
+| 2026-07-29 | research/uiux-product-management-learning-roadmap/report.md | research |
+| 2026-07-29 | research/how-to-build-adversarial-agent/report.md | research |
