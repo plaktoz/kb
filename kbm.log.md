@@ -296,3 +296,10 @@
 | 2026-07-28 | stock-market-today-chip-stocks-fall-nasdaq-july-27.md | ingest |
 | 2026-07-28 | tech-stocks-big-tech-earnings-ai-trade-pivotal-week.md | ingest |
 | 2026-07-28 | why-tortoise-doesnt-win-speed-to-skill.md | ingest |
+| 2026-07-28 | 2021-10-05-video-6-tips-for-productive-1-1-meetings-with-your-manager.md | ingest |
+| 2026-07-28 | 2026-07-17-video-every-company-should-have-a-brain-garry-tan-y-combinator.md | ingest |
+| 2026-07-28 | 2022-06-29-video-a-plan-is-not-a-strategy.md | ingest |
+| 2026-07-28 | 2019-10-30-video-telling-stories-with-data-in-3-steps-quick-study.md | ingest |
+| 2026-07-28 | 2021-07-07-video-8-email-etiquette-tips-how-to-write-better-emails-at-work.md | ingest |
+| 2026-07-28 | 2022-02-23-video-what-is-strategy-its-a-lot-simpler-than-you-think.md | ingest |
+| 2026-07-28 | youtube-watchlater-1.md | delete |

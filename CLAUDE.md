@@ -41,6 +41,7 @@ Read the matching skill file before executing any recurring task.
 |----------------|---------------|---------|
 | `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out up to 8 concurrent scrape agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
+| `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
 
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
