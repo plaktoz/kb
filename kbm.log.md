@@ -364,3 +364,4 @@
 | 2026-07-29 | staff-work-part-3-everyones-problem.md | ingest |
 | 2026-07-29 | rewriting-bun-in-rust.md | ingest |
 | 2026-07-29 | 2026-07-29.md | newsletter |
+| 2026-07-29 | 2026-07-29-2.md | newsletter |

@@ -1,0 +1,882 @@
+[
+  {
+    "text": "Saying you know how to use AI nowadays is kind of like putting proficient at Microsoft Word on your resume.",
+    "start": "00:00:00",
+    "end": "00:00:06"
+  },
+  {
+    "text": "It's no longer a differentiator, right?",
+    "start": "00:00:06",
+    "end": "00:00:08"
+  },
+  {
+    "text": "It's a baseline expectation, just like adding AI to your dating I mean um LinkedIn profile.",
+    "start": "00:00:08",
+    "end": "00:00:12"
+  },
+  {
+    "text": "And that means being good at chatbt is now the bare minimum.",
+    "start": "00:00:12",
+    "end": "00:00:17"
+  },
+  {
+    "text": "So in this video, we'll cover four skills you need to build on top of that to actually get ahead.",
+    "start": "00:00:17",
+    "end": "00:00:21"
+  },
+  {
+    "text": "Let's get started.",
+    "start": "00:00:21",
+    "end": "00:00:22"
+  },
+  {
+    "text": "Beginning with the most important skill to develop, the cockpit rule.",
+    "start": "00:00:22",
+    "end": "00:00:26"
+  },
+  {
+    "text": "Put simply, this is a mental model for deciding when to delegate to AI, when to collaborate with it, and when to avoid it entirely.",
+    "start": "00:00:26",
+    "end": "00:00:34"
+  },
+  {
+    "text": "Think of it like a pilot in the cockpit.",
+    "start": "00:00:32",
+    "end": "00:00:36"
+  },
+  {
+    "text": "At cruising altitude, on a clear day, you engage autopilot and let the plane fly itself.",
+    "start": "00:00:34",
+    "end": "00:00:38"
+  },
+  {
+    "text": "During takeoff and landing, you and the systems work together because there are more variables.",
+    "start": "00:00:38",
+    "end": "00:00:45"
+  },
+  {
+    "text": "And in an emergency, where sensors fail, you take over full manual control.",
+    "start": "00:00:45",
+    "end": "00:00:49"
+  },
+  {
+    "text": "The exact same logic applies to AI.",
+    "start": "00:00:49",
+    "end": "00:00:50"
+  },
+  {
+    "text": "Autopilot mode is when you hand the task to AI with clear instructions and trust the output with minimal review.",
+    "start": "00:00:50",
+    "end": "00:00:56"
+  },
+  {
+    "text": "The AI handles everything on its own.",
+    "start": "00:00:56",
+    "end": "00:00:58"
+  },
+  {
+    "text": "Collaboration mode is where you and AI iterate together through multiple rounds until the output meets your standard.",
+    "start": "00:00:58",
+    "end": "00:01:04"
+  },
+  {
+    "text": "Neither you nor AI could have produced the result alone.",
+    "start": "00:01:04",
+    "end": "00:01:06"
+  },
+  {
+    "text": "Manual mode is when you do the work yourself because AI either can't do it well or the risk of getting it wrong is too high.",
+    "start": "00:01:06",
+    "end": "00:01:13"
+  },
+  {
+    "text": "Now, the real skill is knowing which mode to pick for any given task.",
+    "start": "00:01:13",
+    "end": "00:01:16"
+  },
+  {
+    "text": "And professor Ethan Mllik of Wharton has a useful framework for this called the agentic costbenefit framework.",
+    "start": "00:01:16",
+    "end": "00:01:22"
+  },
+  {
+    "text": "And it comes down to three factors.",
+    "start": "00:01:22",
+    "end": "00:01:23"
+  },
+  {
+    "text": "First, human baseline time.",
+    "start": "00:01:23",
+    "end": "00:01:27"
+  },
+  {
+    "text": "How long would this take you to do manually?",
+    "start": "00:01:27",
+    "end": "00:01:29"
+  },
+  {
+    "text": "Second, probability of success.",
+    "start": "00:01:27",
+    "end": "00:01:31"
+  },
+  {
+    "text": "How likely is AI to get it right?",
+    "start": "00:01:31",
+    "end": "00:01:32"
+  },
+  {
+    "text": "And third, AI process time.",
+    "start": "00:01:32",
+    "end": "00:01:33"
+  },
+  {
+    "text": "How long does it take to prompt, wait, and check the output?",
+    "start": "00:01:33",
+    "end": "00:01:38"
+  },
+  {
+    "text": "Diving right into an example.",
+    "start": "00:01:36",
+    "end": "00:01:38"
+  },
+  {
+    "text": "You have a messy spreadsheet that needs to be restructured and formatted for a presentation.",
+    "start": "00:01:38",
+    "end": "00:01:42"
+  },
+  {
+    "text": "Human baseline.",
+    "start": "00:01:42",
+    "end": "00:01:44"
+  },
+  {
+    "text": "2 hours of tedious spreadsheet work.",
+    "start": "00:01:44",
+    "end": "00:01:46"
+  },
+  {
+    "text": "Probability of success high because AI is great at structured data manipulation.",
+    "start": "00:01:46",
+    "end": "00:01:51"
+  },
+  {
+    "text": "AI process time maybe 15 minutes to upload the data, write the prompt and spot check.",
+    "start": "00:01:51",
+    "end": "00:01:57"
+  },
+  {
+    "text": "Result autopilot mode 15 minutes is much shorter than 2 hours and you know this domain well enough to catch any major errors at a glance.",
+    "start": "00:01:54",
+    "end": "00:02:02"
+  },
+  {
+    "text": "Example two, when I was at Google preparing a client pitch tech, AI could handle the research and draft talking points, but it didn't know my client's risk tolerance or Google's priorities for that quarter.",
+    "start": "00:02:02",
+    "end": "00:02:13"
+  },
+  {
+    "text": "Human baseline about 10 hours to build the presentation.",
+    "start": "00:02:13",
+    "end": "00:02:16"
+  },
+  {
+    "text": "AI's probability of success on any single attempt medium because the AI needs my direction and domain expertise.",
+    "start": "00:02:16",
+    "end": "00:02:22"
+  },
+  {
+    "text": "AI process time per round maybe 45 minutes of prompting, checking sources, and fixing hallucinations.",
+    "start": "00:02:22",
+    "end": "00:02:28"
+  },
+  {
+    "text": "Result: collaboration mode.",
+    "start": "00:02:28",
+    "end": "00:02:29"
+  },
+  {
+    "text": "Even if I iterated five times and spent 4 hours total managing the AI, that's still less than half the manual baseline.",
+    "start": "00:02:29",
+    "end": "00:02:36"
+  },
+  {
+    "text": "Example three, your VP sends an angry Slack message questioning your team's approach on a project.",
+    "start": "00:02:36",
+    "end": "00:02:42"
+  },
+  {
+    "text": "Human baseline.",
+    "start": "00:02:42",
+    "end": "00:02:41"
+  },
+  {
+    "text": "3 minutes since you already know the backstory and the politics.",
+    "start": "00:02:41",
+    "end": "00:02:46"
+  },
+  {
+    "text": "Probability of success low because AI doesn't know your boss's personality.",
+    "start": "00:02:44",
+    "end": "00:02:51"
+  },
+  {
+    "text": "AI process time 20 to 30 minutes since you'd have to explain all the context you already have in your head.",
+    "start": "00:02:51",
+    "end": "00:02:57"
+  },
+  {
+    "text": "Result manual.",
+    "start": "00:02:57",
+    "end": "00:02:56"
+  },
+  {
+    "text": "So, as a rule of thumb, the best tasks to delegate to AI are those that take you a long time to do.",
+    "start": "00:02:56",
+    "end": "00:03:03"
+  },
+  {
+    "text": "The AI tool itself is very capable in that domain to increase probability of success and you can easily evaluate the output to decrease AI process time.",
+    "start": "00:03:03",
+    "end": "00:03:10"
+  },
+  {
+    "text": "Now, regular viewers know I've taken quite a few AI courses on Corsera before.",
+    "start": "00:03:10",
+    "end": "00:03:14"
+  },
+  {
+    "text": "So, when I received early access to their latest Google AI professional certificate, I honestly expected more of the same, but I was pleasantly surprised by the labs feature.",
+    "start": "00:03:14",
+    "end": "00:03:21"
+  },
+  {
+    "text": "Basically, throughout the course, instead of just watching videos, there are these standalone lessons where you open up Gemini, follow along with a step-by-step video, and work with downloadable documents.",
+    "start": "00:03:21",
+    "end": "00:03:31"
+  },
+  {
+    "text": "So, sort of like a self-contained mini project.",
+    "start": "00:03:31",
+    "end": "00:03:34"
+  },
+  {
+    "text": "For example, this lab walked me through a product ideation process with Gemini.",
+    "start": "00:03:34",
+    "end": "00:03:39"
+  },
+  {
+    "text": "The video and written instructions stay within this page and we'll actually go through an end-to-end brainstorming exercise in another tab like running a costbenefit analysis and scheduling recurring reports.",
+    "start": "00:03:37",
+    "end": "00:03:48"
+  },
+  {
+    "text": "The certificate covers seven courses including brainstorming, research, writing for content creation, data analysis, and more.",
+    "start": "00:03:48",
+    "end": "00:03:54"
+  },
+  {
+    "text": "So, it pairs well with the skills we're talking about today.",
+    "start": "00:03:54",
+    "end": "00:03:58"
+  },
+  {
+    "text": "You can get 40% off 3 months of Corsera Plus right now.",
+    "start": "00:03:58",
+    "end": "00:03:59"
+  },
+  {
+    "text": "So, I'll leave a link to the description.",
+    "start": "00:03:59",
+    "end": "00:04:01"
+  },
+  {
+    "text": "Thank you Corsera for sponsoring this portion of the video.",
+    "start": "00:04:01",
+    "end": "00:04:05"
+  },
+  {
+    "text": "Next up, build the rails.",
+    "start": "00:04:03",
+    "end": "00:04:06"
+  },
+  {
+    "text": "Put simply, now that AI has become so capable, your competitive advantage is no longer doing the work.",
+    "start": "00:04:06",
+    "end": "00:04:10"
+  },
+  {
+    "text": "It's designing the process so AI can do it for you.",
+    "start": "00:04:10",
+    "end": "00:04:13"
+  },
+  {
+    "text": "Think of it like this.",
+    "start": "00:04:13",
+    "end": "00:04:13"
+  },
+  {
+    "text": "A bullet train needs a lot of heavy lifting up front to lay the tracks, right?",
+    "start": "00:04:13",
+    "end": "00:04:18"
+  },
+  {
+    "text": "But once those rails are in place, the train glides over them at over 300 km/h with almost no friction.",
+    "start": "00:04:18",
+    "end": "00:04:26"
+  },
+  {
+    "text": "For our American friends, that's around 200 hamburgers per unit of freedom.",
+    "start": "00:04:24",
+    "end": "00:04:29"
+  },
+  {
+    "text": "It's the same thing with AI.",
+    "start": "00:04:29",
+    "end": "00:04:30"
+  },
+  {
+    "text": "Designing a workflow is like laying the tracks.",
+    "start": "00:04:30",
+    "end": "00:04:33"
+  },
+  {
+    "text": "It's tedious at first, but once the system is in place, AI can just do its thing.",
+    "start": "00:04:33",
+    "end": "00:04:38"
+  },
+  {
+    "text": "Here's a simple example.",
+    "start": "00:04:36",
+    "end": "00:04:38"
+  },
+  {
+    "text": "I used to have a single prompt to polish the subject line and body content for my newsletters, and the output was fine.",
+    "start": "00:04:38",
+    "end": "00:04:45"
+  },
+  {
+    "text": "But when I created a separate prompt optimized just for the subject lines, my click-through rates went up.",
+    "start": "00:04:43",
+    "end": "00:04:50"
+  },
+  {
+    "text": "Andrew had a famous example where he found that using a single prompt to write code gave him a 48% success rate.",
+    "start": "00:04:50",
+    "end": "00:04:55"
+  },
+  {
+    "text": "But when he designed a workflow to write, run, and troubleshoot the code using the same AI model, that jumped to 95%.",
+    "start": "00:04:55",
+    "end": "00:05:03"
+  },
+  {
+    "text": "And in a study from Harvard and BCG, they tested 758 consultants and found the top performers fell into two groups.",
+    "start": "00:05:03",
+    "end": "00:05:11"
+  },
+  {
+    "text": "Centaurs, who divided tasks between themselves and AI with clear handoff points, and cyborgs who integrated AI into every step of their workflow.",
+    "start": "00:05:08",
+    "end": "00:05:20"
+  },
+  {
+    "text": "The third group, let's call them peons, used AI with no structured process and they performed 19 percentage points worse.",
+    "start": "00:05:20",
+    "end": "00:05:27"
+  },
+  {
+    "text": "Again, the variable wasn't the AI model, it was the process.",
+    "start": "00:05:25",
+    "end": "00:05:30"
+  },
+  {
+    "text": "So, how do we actually redesign our workflows to be AI first?",
+    "start": "00:05:30",
+    "end": "00:05:32"
+  },
+  {
+    "text": "I've talked about this in other videos, so I won't waste your time here, but in a nutshell, you want to first take a recurring deliverable you produce, like a weekly report, and break it into its component steps.",
+    "start": "00:05:32",
+    "end": "00:05:43"
+  },
+  {
+    "text": "Second, apply the costbenefit framework I mentioned earlier to each step.",
+    "start": "00:05:43",
+    "end": "00:05:47"
+  },
+  {
+    "text": "which steps are autopilot, which are collaboration, and which should stay manual.",
+    "start": "00:05:47",
+    "end": "00:05:50"
+  },
+  {
+    "text": "Third, prioritize redesigning the autopilot steps first since that's where you get the biggest return for the least amount of effort.",
+    "start": "00:05:50",
+    "end": "00:05:57"
+  },
+  {
+    "text": "Obviously, this is a very dense topic.",
+    "start": "00:05:57",
+    "end": "00:05:59"
+  },
+  {
+    "text": "I'm probably going to have to dedicate an entire lesson to it in my upcoming AI course.",
+    "start": "00:05:59",
+    "end": "00:06:03"
+  },
+  {
+    "text": "I'll leave a link to that weight list down below.",
+    "start": "00:06:02",
+    "end": "00:06:04"
+  },
+  {
+    "text": "Go number three, the storytelling mode.",
+    "start": "00:06:04",
+    "end": "00:06:06"
+  },
+  {
+    "text": "So, first, let's check out this ad from Anthropic.",
+    "start": "00:06:06",
+    "end": "00:06:11"
+  },
+  {
+    "text": ">> How do I communicate better with my mom?",
+    "start": "00:06:08",
+    "end": "00:06:13"
+  },
+  {
+    "text": "Find emotional connection with other older women on Golden Encounters, the mature dating site that connects sensitive cubs with roaring cougars.",
+    "start": "00:06:11",
+    "end": "00:06:22"
+  },
+  {
+    "text": "Would you like me to create your profile?",
+    "start": "00:06:21",
+    "end": "00:06:25"
+  },
+  {
+    "text": "I'm not surprised that ad went semi viral because AI companies have been aggressively hiring head of content and storytellers because even they understand that AI as powerful as they are cannot generate meaning.",
+    "start": "00:06:29",
+    "end": "00:06:41"
+  },
+  {
+    "text": "I still remember this crazy meeting when I was still at Google where all the managers were asking for more budget and on paper our team had the weakest case by far, right?",
+    "start": "00:06:41",
+    "end": "00:06:49"
+  },
+  {
+    "text": "But my manager, instead of focusing on the data, she talked about how her project would benefit other countries and would become an Asia-wide case study, thereby making our big boss look good.",
+    "start": "00:06:49",
+    "end": "00:07:01"
+  },
+  {
+    "text": "And she ended up getting most of a budget.",
+    "start": "00:07:01",
+    "end": "00:07:03"
+  },
+  {
+    "text": "Now, am I saying I learned all my bullshiting skills from her?",
+    "start": "00:07:03",
+    "end": "00:07:07"
+  },
+  {
+    "text": "No, I'm naturally gifted.",
+    "start": "00:07:07",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Uh, but that's not the point here.",
+    "start": "00:07:07",
+    "end": "00:07:09"
+  },
+  {
+    "text": "The point is, in the world of AI, information is a commodity.",
+    "start": "00:07:09",
+    "end": "00:07:13"
+  },
+  {
+    "text": "And so, the real skill is turning that information into something people actually care about.",
+    "start": "00:07:11",
+    "end": "00:07:16"
+  },
+  {
+    "text": "Put simply, if you can turn data into a story that moves people, you're safe.",
+    "start": "00:07:16",
+    "end": "00:07:21"
+  },
+  {
+    "text": "If you just pass along the data, you're replaceable.",
+    "start": "00:07:21",
+    "end": "00:07:24"
+  },
+  {
+    "text": "So, how do we actually get better at this?",
+    "start": "00:07:24",
+    "end": "00:07:26"
+  },
+  {
+    "text": "I'm still working on this myself, so I recommend checking out Philip Hum storytelling video and Vin Jang's content.",
+    "start": "00:07:24",
+    "end": "00:07:30"
+  },
+  {
+    "text": "He's an absolute monster at storytelling.",
+    "start": "00:07:30",
+    "end": "00:07:33"
+  },
+  {
+    "text": "That said, I've been practicing two frameworks since my management consulting days.",
+    "start": "00:07:33",
+    "end": "00:07:38"
+  },
+  {
+    "text": "First, the but therefore ABT framework developed by Randy Olsen.",
+    "start": "00:07:38",
+    "end": "00:07:41"
+  },
+  {
+    "text": "Here's how it works.",
+    "start": "00:07:41",
+    "end": "00:07:43"
+  },
+  {
+    "text": "Your manager asks, \"Hey, how's the launch going?",
+    "start": "00:07:43",
+    "end": "00:07:44"
+  },
+  {
+    "text": "\" Instead of listing facts, you answer, \"We're on track and adoption is rising, but one client paused spending due to technical issues.",
+    "start": "00:07:44",
+    "end": "00:07:53"
+  },
+  {
+    "text": "Therefore, I'm preparing a follow-up call to troubleshoot his account.",
+    "start": "00:07:53",
+    "end": "00:07:57"
+  },
+  {
+    "text": "\" And sets the stage.",
+    "start": "00:07:57",
+    "end": "00:07:57"
+  },
+  {
+    "text": "Here's where we are.",
+    "start": "00:07:57",
+    "end": "00:08:00"
+  },
+  {
+    "text": "But introduces the conflict and makes people lean in because something's wrong.",
+    "start": "00:08:00",
+    "end": "00:08:04"
+  },
+  {
+    "text": "Something didn't go according to plan >> because it's all part of the plan.",
+    "start": "00:08:02",
+    "end": "00:08:09"
+  },
+  {
+    "text": ">> Therefore, delivers the resolution and a clear next step.",
+    "start": "00:08:07",
+    "end": "00:08:11"
+  },
+  {
+    "text": "Second, the triedand-true SCQA framework from Mackenzie, Bane, and BCG.",
+    "start": "00:08:11",
+    "end": "00:08:15"
+  },
+  {
+    "text": "Situation, here's where we are.",
+    "start": "00:08:15",
+    "end": "00:08:17"
+  },
+  {
+    "text": "Complication, here's the obstacle, aka conflict.",
+    "start": "00:08:17",
+    "end": "00:08:20"
+  },
+  {
+    "text": "Question, what do we need to answer to move forward?",
+    "start": "00:08:19",
+    "end": "00:08:22"
+  },
+  {
+    "text": "Answer: Here's a resolution.",
+    "start": "00:08:22",
+    "end": "00:08:23"
+  },
+  {
+    "text": "You've probably already noticed a common denominator across both frameworks.",
+    "start": "00:08:23",
+    "end": "00:08:27"
+  },
+  {
+    "text": "They introduce conflict, then resolve it.",
+    "start": "00:08:27",
+    "end": "00:08:29"
+  },
+  {
+    "text": "That's what makes people care.",
+    "start": "00:08:29",
+    "end": "00:08:30"
+  },
+  {
+    "text": "And to show you how big a difference this makes, here's the same story told both ways.",
+    "start": "00:08:30",
+    "end": "00:08:35"
+  },
+  {
+    "text": "Version one, Frodo volunteered to take the ring to Mordor, and he was joined by a fellowship.",
+    "start": "00:08:35",
+    "end": "00:08:40"
+  },
+  {
+    "text": "And after a long journey, he destroyed the ring.",
+    "start": "00:08:40",
+    "end": "00:08:41"
+  },
+  {
+    "text": "The end.",
+    "start": "00:08:41",
+    "end": "00:08:42"
+  },
+  {
+    "text": "Version two.",
+    "start": "00:08:42",
+    "end": "00:08:44"
+  },
+  {
+    "text": "Frodo was entrusted with a one ring, and he was the only one who could resist its corruption.",
+    "start": "00:08:44",
+    "end": "00:08:48"
+  },
+  {
+    "text": "But the journey nearly broke him.",
+    "start": "00:08:48",
+    "end": "00:08:49"
+  },
+  {
+    "text": "By the time he reached Mount Doom, the ring had won.",
+    "start": "00:08:49",
+    "end": "00:08:53"
+  },
+  {
+    "text": "Therefore, it was only through Gollum's obsession, not Frodo's strength, that the ring was accidentally destroyed.",
+    "start": "00:08:53",
+    "end": "00:08:59"
+  },
+  {
+    "text": "The hero failed at the finish line, and the quest was saved by the villain.",
+    "start": "00:08:59",
+    "end": "00:09:03"
+  },
+  {
+    "text": "Same story, completely different impact.",
+    "start": "00:09:03",
+    "end": "00:09:06"
+  },
+  {
+    "text": "And that's a perfect segue into skill number four, manual override.",
+    "start": "00:09:06",
+    "end": "00:09:08"
+  },
+  {
+    "text": "This is about intentionally choosing not to use AI for certain tasks so that your critical thinking doesn't atrophy.",
+    "start": "00:09:08",
+    "end": "00:09:14"
+  },
+  {
+    "text": "Put simply, if you let AI write every email, outline every strategy, and summarize every meeting, you gradually lose the ability to synthesize information yourself.",
+    "start": "00:09:14",
+    "end": "00:09:23"
+  },
+  {
+    "text": "Think of it like this, a weightlifting belt helps you lift heavier, right?",
+    "start": "00:09:23",
+    "end": "00:09:26"
+  },
+  {
+    "text": "But if you wear it for every single rep, your stabilizer muscles, like your abs, weaken.",
+    "start": "00:09:26",
+    "end": "00:09:31"
+  },
+  {
+    "text": "After a year, you're only strong with a belt on.",
+    "start": "00:09:31",
+    "end": "00:09:34"
+  },
+  {
+    "text": "And the science backs this up.",
+    "start": "00:09:32",
+    "end": "00:09:36"
+  },
+  {
+    "text": "Researchers at McGill found physical changes in the brains of drivers who relied heavily on GPS that decreased their ability to navigate on their own.",
+    "start": "00:09:34",
+    "end": "00:09:44"
+  },
+  {
+    "text": "A Microsoft and Carnegie Melon study found that knowledge workers who over relied on AI gradually stopped doing key cognitive steps themselves like questioning assumptions, checking sources, and weighing trade-offs.",
+    "start": "00:09:43",
+    "end": "00:09:56"
+  },
+  {
+    "text": "As a result, they became less prepared for unexpected edge cases.",
+    "start": "00:09:56",
+    "end": "00:09:59"
+  },
+  {
+    "text": "And a study of 2760 decisions from radiologists found that those who used AI as a first opinion often anchored themselves onto the AI's answer and stopped looking for other signs.",
+    "start": "00:09:59",
+    "end": "00:10:09"
+  },
+  {
+    "text": "By contrast, those who formed their own opinion first and used AI as a second check maintain their accuracy.",
+    "start": "00:10:09",
+    "end": "00:10:15"
+  },
+  {
+    "text": "So, how do we protect our thinking while still benefiting from AI?",
+    "start": "00:10:15",
+    "end": "00:10:20"
+  },
+  {
+    "text": "There are two habits we can develop.",
+    "start": "00:10:18",
+    "end": "00:10:21"
+  },
+  {
+    "text": "Number one, and this is very simple, Professor Malik recommends think first, prompt second.",
+    "start": "00:10:20",
+    "end": "00:10:24"
+  },
+  {
+    "text": "For example, I'll still use AI to summarize reports.",
+    "start": "00:10:24",
+    "end": "00:10:28"
+  },
+  {
+    "text": "I'll leave a link to my essential prompts below, but I always write my own so what analysis first before asking AI for its take.",
+    "start": "00:10:28",
+    "end": "00:10:35"
+  },
+  {
+    "text": "Basically, for analytical tasks, spend a few minutes forming your own position before engaging AI.",
+    "start": "00:10:35",
+    "end": "00:10:42"
+  },
+  {
+    "text": "Second, interrogate the output.",
+    "start": "00:10:42",
+    "end": "00:10:43"
+  },
+  {
+    "text": "When AI gives you an answer, don't accept it right away and instead ask yourself, how would I verify this?",
+    "start": "00:10:43",
+    "end": "00:10:48"
+  },
+  {
+    "text": "What's the counterargument?",
+    "start": "00:10:48",
+    "end": "00:10:49"
+  },
+  {
+    "text": "For instance, I recently asked AI about refinancing my mortgage, and I challenged it with a series of whatifs since this kind of active debate forces my brain to engage rather than passively consume.",
+    "start": "00:10:49",
+    "end": "00:11:00"
+  },
+  {
+    "text": "Now, at this point, it's easy for skeptics to say, \"See, I told you so.",
+    "start": "00:11:00",
+    "end": "00:11:03"
+  },
+  {
+    "text": "AI is making us all dumber, but that's just simply not true.",
+    "start": "00:11:03",
+    "end": "00:11:06"
+  },
+  {
+    "text": "Yes, an MIT study found students who use chatbt were less engaged, but those findings are about habits, not neurological brain damage.",
+    "start": "00:11:06",
+    "end": "00:11:16"
+  },
+  {
+    "text": "\" And for context, Plato worried that writing would erode wisdom, and people worried that cell phones would kill our ability to remember phone numbers.",
+    "start": "00:11:16",
+    "end": "00:11:23"
+  },
+  {
+    "text": "So, here's a nuance those clickbay articles will never tell you.",
+    "start": "00:11:23",
+    "end": "00:11:26"
+  },
+  {
+    "text": "AI will only hurt us if we allow it to change our habits.",
+    "start": "00:11:26",
+    "end": "00:11:29"
+  },
+  {
+    "text": "It's just like giving toler unlimited access to TV.",
+    "start": "00:11:29",
+    "end": "00:11:33"
+  },
+  {
+    "text": "The TV isn't the problem.",
+    "start": "00:11:33",
+    "end": "00:11:34"
+  },
+  {
+    "text": "It's the behavior.",
+    "start": "00:11:34",
+    "end": "00:11:36"
+  },
+  {
+    "text": "Back to the learning example, students using ChBT without guidance scored 17% worse on exams.",
+    "start": "00:11:36",
+    "end": "00:11:40"
+  },
+  {
+    "text": "Yes, but with structured guidance, a World Bank study found that 6 weeks of AI tutoring produced learning gains equivalent to 2 years of traditional schooling.",
+    "start": "00:11:40",
+    "end": "00:11:51"
+  },
+  {
+    "text": "Ethan Malik sums it up perfectly.",
+    "start": "00:11:51",
+    "end": "00:11:52"
+  },
+  {
+    "text": "There's plenty of work worth handing off to AI.",
+    "start": "00:11:52",
+    "end": "00:11:55"
+  },
+  {
+    "text": "We rarely mourn the math we do with calculators, but there's also a lot of work where our thinking is important.",
+    "start": "00:11:55",
+    "end": "00:12:01"
+  },
+  {
+    "text": "Your brain is safe.",
+    "start": "00:12:01",
+    "end": "00:12:01"
+  },
+  {
+    "text": "Your thinking, however, is up to you.",
+    "start": "00:12:01",
+    "end": "00:12:03"
+  },
+  {
+    "text": "If you enjoyed this, you might want to check out this video where I share my favorite AI tools.",
+    "start": "00:12:03",
+    "end": "00:12:09"
+  },
+  {
+    "text": "See you there.",
+    "start": "00:12:09",
+    "end": "00:12:11"
+  },
+  {
+    "text": "And in the meantime, have a great one.",
+    "start": "00:12:11",
+    "end": "00:12:12"
+  }
+]

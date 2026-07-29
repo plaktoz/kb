@@ -1,0 +1,247 @@
+[
+  {
+    "text": "So we all know what retrieval augmented generation is.",
+    "start": "00:00:00",
+    "end": "00:00:04"
+  },
+  {
+    "text": "But let's just do a quick refresher.",
+    "start": "00:00:04",
+    "end": "00:00:06"
+  },
+  {
+    "text": "Retrieval augmented generation is a powerful and popular pipeline that enhances responses from a large language model.",
+    "start": "00:00:06",
+    "end": "00:00:13"
+  },
+  {
+    "text": "It does this by incorporating relevant data retrieved from a vector database, adding it as context to the prompt, and sending it to the LLM for generation.",
+    "start": "00:00:14",
+    "end": "00:00:22"
+  },
+  {
+    "text": "What this does is it allows the LLM to ground its response in concrete and accurate information, and that improves the quality and reliability of the response.",
+    "start": "00:00:22",
+    "end": "00:00:31"
+  },
+  {
+    "text": "Let me quickly sketch it out.",
+    "start": "00:00:31",
+    "end": "00:00:34"
+  },
+  {
+    "text": "So let's say we have a user or an application, even.",
+    "start": "00:00:34",
+    "end": "00:00:40"
+  },
+  {
+    "text": "And they send a query.",
+    "start": "00:00:41",
+    "end": "00:00:44"
+  },
+  {
+    "text": "Now without retrieval augment the generation.",
+    "start": "00:00:44",
+    "end": "00:00:47"
+  },
+  {
+    "text": "This query is going to go and get itself interpolated into a prompt.",
+    "start": "00:00:47",
+    "end": "00:00:53"
+  },
+  {
+    "text": "And from there that's going to hit the LLM.",
+    "start": "00:00:55",
+    "end": "00:01:00"
+  },
+  {
+    "text": "And that's going to generate an output.",
+    "start": "00:01:01",
+    "end": "00:01:04"
+  },
+  {
+    "text": "To make this rag.",
+    "start": "00:01:07",
+    "end": "00:01:09"
+  },
+  {
+    "text": "We can add a vector database.",
+    "start": "00:01:09",
+    "end": "00:01:12"
+  },
+  {
+    "text": "So instead of just going directly and getting itself interpolated into the prompt, it's going to hit this vector db.",
+    "start": "00:01:12",
+    "end": "00:01:17"
+  },
+  {
+    "text": "And the response from that vector db is going to be used as context for the prompt.",
+    "start": "00:01:17",
+    "end": "00:01:23"
+  },
+  {
+    "text": "Now in this typical pipeline we call the LLM only once, and we use it solely to generate a response.",
+    "start": "00:01:23",
+    "end": "00:01:30"
+  },
+  {
+    "text": "But what if we could leverage the LLM not just for responses, but also for additional tasks like deciding which vector database to query If we have multiple databases, or even determining the type of response to give?",
+    "start": "00:01:30",
+    "end": "00:01:43"
+  },
+  {
+    "text": "Should an answer with text generate a chart or even provide a code snippet?",
+    "start": "00:01:43",
+    "end": "00:01:47"
+  },
+  {
+    "text": "And that would all be dependent on the context of that query.",
+    "start": "00:01:48",
+    "end": "00:01:51"
+  },
+  {
+    "text": "So this is where the agenetic RAG pipeline comes into play.",
+    "start": "00:01:52",
+    "end": "00:01:58"
+  },
+  {
+    "text": "In agenetic RAG, we use the LLM as an agent and the LLM goes beyond just generating a response.",
+    "start": "00:01:58",
+    "end": "00:02:05"
+  },
+  {
+    "text": "It takes on an active role and can make decisions that will improve both the relevance and accuracy of the retrieved data.",
+    "start": "00:02:05",
+    "end": "00:02:12"
+  },
+  {
+    "text": "Now, let's explore how we can augment the initial process with an agent and a couple of different sources of data.",
+    "start": "00:02:13",
+    "end": "00:02:19"
+  },
+  {
+    "text": "So instead of just one single source, let's add a second.",
+    "start": "00:02:20",
+    "end": "00:02:25"
+  },
+  {
+    "text": "And the first one can be, you know, internal documentation, Right?",
+    "start": "00:02:25",
+    "end": "00:02:31"
+  },
+  {
+    "text": "And the second one can be general industry knowledge.",
+    "start": "00:02:31",
+    "end": "00:02:37"
+  },
+  {
+    "text": "Now in the internal documentation we're going to have things like policies procedures and guidelines.",
+    "start": "00:02:39",
+    "end": "00:02:44"
+  },
+  {
+    "text": "And the general knowledge base will have things like industry standards, best practices and public resources.",
+    "start": "00:02:44",
+    "end": "00:02:50"
+  },
+  {
+    "text": "So how can we get the LLM to use the vector database that contains the data that would be most relevant to the query?",
+    "start": "00:02:51",
+    "end": "00:02:57"
+  },
+  {
+    "text": "Let's add that agent into this pipeline.",
+    "start": "00:02:58",
+    "end": "00:03:01"
+  },
+  {
+    "text": "Now, this agent can intelligently decide which database to query based on the user's question, and the agent isn't making a random guess.",
+    "start": "00:03:05",
+    "end": "00:03:12"
+  },
+  {
+    "text": "It's leveraging the LLMs language, understanding capabilities to interpret the query and determine its context.",
+    "start": "00:03:12",
+    "end": "00:03:20"
+  },
+  {
+    "text": "So if an employee asks what's the company's policy on remote work during the holidays, it would route that to the internal documentation, and that response will be used as context for the prompt.",
+    "start": "00:03:21",
+    "end": "00:03:31"
+  },
+  {
+    "text": "But if the question is more general, like what are the industries standards for remote work in tech companies, the agent's going to route that to the general knowledge database, and that context is going to be used within that prompt powered by an LLM and properly trained, the agent analyzes the query and based on the understanding of the content and the context, decides which database to use.",
+    "start": "00:03:31",
+    "end": "00:03:53"
+  },
+  {
+    "text": "But they're not always going to ask questions that are generally or genuinely relevant to any of this, any of the stuff that we have in our vector DB.",
+    "start": "00:03:54",
+    "end": "00:04:01"
+  },
+  {
+    "text": "So what if someone asks a question that is just totally out of left field?",
+    "start": "00:04:01",
+    "end": "00:04:05"
+  },
+  {
+    "text": "Like who won the World Series in 2015?",
+    "start": "00:04:05",
+    "end": "00:04:08"
+  },
+  {
+    "text": "What the agent can do at that point is it could route it to a failsafe.",
+    "start": "00:04:08",
+    "end": "00:04:13"
+  },
+  {
+    "text": "So because the agent is able to recognize the context of the query, it could recognize that it's not a part of the two databases that we have, could route it to the failsafe and return back.",
+    "start": "00:04:15",
+    "end": "00:04:28"
+  },
+  {
+    "text": "Sorry, I don't have the information in looking for.",
+    "start": "00:04:29",
+    "end": "00:04:32"
+  },
+  {
+    "text": "This agentic RAG pipeline can be used in customer support systems and legal tech.",
+    "start": "00:04:32",
+    "end": "00:04:36"
+  },
+  {
+    "text": "For example, a lawyer can source answers to their questions from like their internal briefs and then in another query, just get stuff from public caseload databases.",
+    "start": "00:04:37",
+    "end": "00:04:46"
+  },
+  {
+    "text": "The agent can be utilized in a ton of ways.",
+    "start": "00:04:46",
+    "end": "00:04:49"
+  },
+  {
+    "text": "Agentic RAG is an evolution in how we enhance the RAG pipeline by moving beyond simple response generation to more intelligent decision making.",
+    "start": "00:04:49",
+    "end": "00:04:57"
+  },
+  {
+    "text": "By allowing an agent to choose the best data sources and potentially even incorporate external information like real timedata or third party services.",
+    "start": "00:04:58",
+    "end": "00:05:07"
+  },
+  {
+    "text": "We can create a pipeline that's more responsive, more accurate, and more adaptable.",
+    "start": "00:05:07",
+    "end": "00:05:13"
+  },
+  {
+    "text": "This approach opens up so many possibilities for applications in customer service, legal, tech, health care, virtually any field as IT technology continues to evolve.",
+    "start": "00:05:13",
+    "end": "00:05:23"
+  },
+  {
+    "text": "We will see AI systems that truly understand context and can deliver amazing values to the end user.",
+    "start": "00:05:23",
+    "end": "00:05:29"
+  }
+]

@@ -1,0 +1,512 @@
+[
+  {
+    "text": "What's one of the biggest inhibitors in getting  an AI model to do what you want it to do?",
+    "start": "00:00:00",
+    "end": "00:00:05"
+  },
+  {
+    "text": "Well, it may not be the model itself.",
+    "start": "00:00:05",
+    "end": "00:00:08"
+  },
+  {
+    "text": "It might actually  be something else.",
+    "start": "00:00:08",
+    "end": "00:00:11"
+  },
+  {
+    "text": "And that something else is context.",
+    "start": "00:00:11",
+    "end": "00:00:14"
+  },
+  {
+    "text": "Now, the frontier AI models that we  have today, I think you could argue that, well, they're they're pretty great.",
+    "start": "00:00:14",
+    "end": "00:00:22"
+  },
+  {
+    "text": "I've spent this  week vibe coding all sorts of applications that I've had on my to-do list but didn't really have  the time or the skills to create up until now.",
+    "start": "00:00:22",
+    "end": "00:00:31"
+  },
+  {
+    "text": "And these frontier coding AI models have been  nailing these tasks.",
+    "start": "00:00:31",
+    "end": "00:00:36"
+  },
+  {
+    "text": "If you if you ever need an app that indexes B-roll footage for coffee videos,  give me a shout.",
+    "start": "00:00:36",
+    "end": "00:00:43"
+  },
+  {
+    "text": "I've vibe coded just the thing.",
+    "start": "00:00:43",
+    "end": "00:00:45"
+  },
+  {
+    "text": "But while the raw intelligence of AI models is  clearly there, they can still get things wrong, confidently wrong.",
+    "start": "00:00:45",
+    "end": "00:00:55"
+  },
+  {
+    "text": "And that's often not so much  a failure of basic model reasoning.",
+    "start": "00:00:55",
+    "end": "00:01:01"
+  },
+  {
+    "text": "In fact, I would say that model reasoning  these days, it's pretty good.",
+    "start": "00:01:01",
+    "end": "00:01:06"
+  },
+  {
+    "text": "So, it's more a failure of knowing specifically what  is relevant.",
+    "start": "00:01:06",
+    "end": "00:01:13"
+  },
+  {
+    "text": "the relevancy of information and that well that comes down to context.",
+    "start": "00:01:13",
+    "end": "00:01:20"
+  },
+  {
+    "text": "Now the term  for this is context engineering which is the ability of an AI system to discover the right  data, understand what it means and apply it correctly in real time within the constraints and  governance of the environment's operating system.",
+    "start": "00:01:20",
+    "end": "00:01:39"
+  },
+  {
+    "text": "So let's say I'm an analyst and I ask an  AI assistant to give me everything I need to prepare for the big important client meeting  that I have got tomorrow.",
+    "start": "00:01:39",
+    "end": "00:01:52"
+  },
+  {
+    "text": "So I basically want it to create a document for me with all the scoop.",
+    "start": "00:01:52",
+    "end": "00:01:57"
+  },
+  {
+    "text": "Now, a model with no context is going to give me a beautifully structured meeting template  with just lovely formatting, but it's going to be totally generic.",
+    "start": "00:01:57",
+    "end": "00:02:11"
+  },
+  {
+    "text": "But an AI system with good  context engineering that would know which client I'm meeting and it would pull in things like  well recent support tickets would be pulled in because well there happens to be an ongoing  issue with that client.",
+    "start": "00:02:11",
+    "end": "00:02:30"
+  },
+  {
+    "text": "It might also check the deal history and discover that the renewal  is coming up.",
+    "start": "00:02:30",
+    "end": "00:02:36"
+  },
+  {
+    "text": "So that's contextually relevant.",
+    "start": "00:02:36",
+    "end": "00:02:39"
+  },
+  {
+    "text": "And then just as importantly, it does not pull in  the internal pricing discussion.",
+    "start": "00:02:39",
+    "end": "00:02:46"
+  },
+  {
+    "text": "It found no thank you because my role doesn't have access to that.",
+    "start": "00:02:46",
+    "end": "00:02:51"
+  },
+  {
+    "text": "It's taken governance into account.",
+    "start": "00:02:51",
+    "end": "00:02:54"
+  },
+  {
+    "text": "And and now we've got a pretty decent meeting prep dock that  is actually of some use.",
+    "start": "00:02:54",
+    "end": "00:03:00"
+  },
+  {
+    "text": "And that's not because the model that made it had superior reasoning.",
+    "start": "00:03:00",
+    "end": "00:03:05"
+  },
+  {
+    "text": "It's because context engineering has given the model relevant contextual intelligence whereby  the model has access to appropriate context.",
+    "start": "00:03:05",
+    "end": "00:03:16"
+  },
+  {
+    "text": "Now, you might be thinking that adding context  to a model, well, that sounds a lot like rag, retrieval, augmented generation.",
+    "start": "00:03:16",
+    "end": "00:03:29"
+  },
+  {
+    "text": "Or maybe it  sounds like just some some really good prompt engineering thrown into the model as well.",
+    "start": "00:03:29",
+    "end": "00:03:38"
+  },
+  {
+    "text": "And and  yeah, I mean, that is part of it.",
+    "start": "00:03:38",
+    "end": "00:03:42"
+  },
+  {
+    "text": "In fact, context engineering is indeed stuff like this.",
+    "start": "00:03:42",
+    "end": "00:03:47"
+  },
+  {
+    "text": "It's the  practice of designing and building systems that deliver the right context to AI models at runtime.",
+    "start": "00:03:47",
+    "end": "00:03:56"
+  },
+  {
+    "text": "But context engineering also has to consider where all of this contextual data comes from.",
+    "start": "00:03:56",
+    "end": "00:04:02"
+  },
+  {
+    "text": "And this  is where things can get a little bit tricky.",
+    "start": "00:04:02",
+    "end": "00:04:06"
+  },
+  {
+    "text": "And that's because that the data that an AI  model needs doesn't sit in one place.",
+    "start": "00:04:06",
+    "end": "00:04:15"
+  },
+  {
+    "text": "I mean, some of that data is probably in databases.",
+    "start": "00:04:15",
+    "end": "00:04:20"
+  },
+  {
+    "text": "Some  of it is in document stores.",
+    "start": "00:04:20",
+    "end": "00:04:23"
+  },
+  {
+    "text": "You might need APIs to access some of it.",
+    "start": "00:04:23",
+    "end": "00:04:25"
+  },
+  {
+    "text": "Some of it might be on  SAS platforms.",
+    "start": "00:04:25",
+    "end": "00:04:28"
+  },
+  {
+    "text": "Some of it's in the cloud.",
+    "start": "00:04:28",
+    "end": "00:04:29"
+  },
+  {
+    "text": "Some of it is on premise.",
+    "start": "00:04:29",
+    "end": "00:04:31"
+  },
+  {
+    "text": "And some of this data  is nicely structured.",
+    "start": "00:04:31",
+    "end": "00:04:35"
+  },
+  {
+    "text": "Some of it's a mess, some of it changes hourly, and depending on who  you are and what role you have, you might not even be allowed to access certain parts of it.",
+    "start": "00:04:35",
+    "end": "00:04:45"
+  },
+  {
+    "text": "So getting the right context to the AI model at the right time with the right permissions is an  infrastructure problem.",
+    "start": "00:04:45",
+    "end": "00:04:53"
+  },
+  {
+    "text": "It's context that's the bottleneck here.",
+    "start": "00:04:53",
+    "end": "00:04:56"
+  },
+  {
+    "text": "So if context is the bottleneck,  what does it actually look like to fix that?",
+    "start": "00:04:56",
+    "end": "00:05:00"
+  },
+  {
+    "text": "Well, I think there are four things that a  system needs to get right for a good context engineering solution.",
+    "start": "00:05:00",
+    "end": "00:05:09"
+  },
+  {
+    "text": "And the first one  is connected access.",
+    "start": "00:05:09",
+    "end": "00:05:13"
+  },
+  {
+    "text": "AI needs to be able to see across the data estate.",
+    "start": "00:05:13",
+    "end": "00:05:17"
+  },
+  {
+    "text": "And I say data estate  because in many large organizations the data is everywhere.",
+    "start": "00:05:17",
+    "end": "00:05:24"
+  },
+  {
+    "text": "So rather than copying the data all  to one place, zero copy federation is where the AI queries data where it lives, which means it's  always fresh and the original access controls, they will stay intact.",
+    "start": "00:05:24",
+    "end": "00:05:41"
+  },
+  {
+    "text": "That's number one.",
+    "start": "00:05:41",
+    "end": "00:05:43"
+  },
+  {
+    "text": "Now  second is the knowledge layer because raw data on its own isn't necessarily useful context.",
+    "start": "00:05:43",
+    "end": "00:05:52"
+  },
+  {
+    "text": "So  the knowledge layer can apply things like entity resolution across systems and then it can map out  relationships and hierarchies to give that raw data some meaning.",
+    "start": "00:05:52",
+    "end": "00:06:02"
+  },
+  {
+    "text": "And beyond just semantics, a  knowledge layer can also add things like decision traces and institutional knowledge.",
+    "start": "00:06:02",
+    "end": "00:06:10"
+  },
+  {
+    "text": "Number three,  I'm going to say is precision retrieval.",
+    "start": "00:06:10",
+    "end": "00:06:15"
+  },
+  {
+    "text": "Because as my English teacher used to tell me, making your  essays longer doesn't necessarily make it better, Martin.",
+    "start": "00:06:15",
+    "end": "00:06:23"
+  },
+  {
+    "text": "Right on, Mrs.",
+    "start": "00:06:23",
+    "end": "00:06:24"
+  },
+  {
+    "text": "Potter.",
+    "start": "00:06:24",
+    "end": "00:06:24"
+  },
+  {
+    "text": "I still remember  that.",
+    "start": "00:06:24",
+    "end": "00:06:26"
+  },
+  {
+    "text": "So, so better context is not more context, it's more precise context.",
+    "start": "00:06:26",
+    "end": "00:06:32"
+  },
+  {
+    "text": "And that  means documents filtered by intent.",
+    "start": "00:06:32",
+    "end": "00:06:36"
+  },
+  {
+    "text": "It means documents filtered by role and time and  policy.",
+    "start": "00:06:36",
+    "end": "00:06:41"
+  },
+  {
+    "text": "And not bothering the AI model with stuff.",
+    "start": "00:06:41",
+    "end": "00:06:44"
+  },
+  {
+    "text": "it actually doesn't need.",
+    "start": "00:06:44",
+    "end": "00:06:46"
+  },
+  {
+    "text": "And then finally is  number four, runtime governance.",
+    "start": "00:06:46",
+    "end": "00:06:51"
+  },
+  {
+    "text": "Now governance has to be enforced live at retrieval time and also  at response time.",
+    "start": "00:06:51",
+    "end": "00:06:59"
+  },
+  {
+    "text": "Can this agent query this data source and should this result be included given  who is asking that sort of thing.",
+    "start": "00:06:59",
+    "end": "00:07:07"
+  },
+  {
+    "text": "So those are the four pillars.",
+    "start": "00:07:07",
+    "end": "00:07:09"
+  },
+  {
+    "text": "connected access the knowledge layer  precision retrieval and then runtime governance and well connected access that is really giving  the AI visibility across the data the knowledge layer that's giving the data some meaning the  precision retrieval delivers only what's relevant and then governance makes this whole thing  defensible Now I want to focus on one of those pillars in particular, precision retrieval.",
+    "start": "00:07:09",
+    "end": "00:07:44"
+  },
+  {
+    "text": "Most  people's first experience with giving an AI model external context is basic rag retrieval augmented  generation.",
+    "start": "00:07:44",
+    "end": "00:07:53"
+  },
+  {
+    "text": "We talk about rag all the time on this channel for many good reasons.",
+    "start": "00:07:53",
+    "end": "00:07:58"
+  },
+  {
+    "text": "One of which, I'm  not going to lie, is that when we do, people tend to watch those videos.",
+    "start": "00:07:58",
+    "end": "00:08:04"
+  },
+  {
+    "text": "So I think that tells us  that rag is pretty popular.",
+    "start": "00:08:04",
+    "end": "00:08:07"
+  },
+  {
+    "text": "It's where you take your documents and then you kind of chunk them  up and you embed them into vectors and then at query time you do a similarity search to find the  closest matches.",
+    "start": "00:08:07",
+    "end": "00:08:18"
+  },
+  {
+    "text": "And rag works great for simple lookups.",
+    "start": "00:08:18",
+    "end": "00:08:20"
+  },
+  {
+    "text": "But what else is there?",
+    "start": "00:08:20",
+    "end": "00:08:21"
+  },
+  {
+    "text": "Well, there's  another type of rag.",
+    "start": "00:08:21",
+    "end": "00:08:23"
+  },
+  {
+    "text": "There's several in fact and one of those is called aentic rag.",
+    "start": "00:08:23",
+    "end": "00:08:28"
+  },
+  {
+    "text": "Now in agentic  rag, the AI agent makes a first pass request for data.",
+    "start": "00:08:28",
+    "end": "00:08:35"
+  },
+  {
+    "text": "It looks at what it got back and then maybe  decides it doesn't have enough to work with.",
+    "start": "00:08:35",
+    "end": "00:08:41"
+  },
+  {
+    "text": "So, it goes back for more.",
+    "start": "00:08:41",
+    "end": "00:08:43"
+  },
+  {
+    "text": "It's iterative.",
+    "start": "00:08:43",
+    "end": "00:08:44"
+  },
+  {
+    "text": "And that's  a bit of a a step up from oneot rag retrieval.",
+    "start": "00:08:44",
+    "end": "00:08:48"
+  },
+  {
+    "text": "Another type of rag is called graph rag.",
+    "start": "00:08:48",
+    "end": "00:08:52"
+  },
+  {
+    "text": "Now,  graph rag uses a graph structure to navigate context.",
+    "start": "00:08:52",
+    "end": "00:08:58"
+  },
+  {
+    "text": "So, instead of just asking what documents  are semantically similar to my query, that's that's what standard rag does.",
+    "start": "00:08:58",
+    "end": "00:09:06"
+  },
+  {
+    "text": "Graph rag asks  what entities are connected to this client and what documents relate to those entities.",
+    "start": "00:09:06",
+    "end": "00:09:13"
+  },
+  {
+    "text": "So the  graph gives you a bit more in the way of precision and structure and then vector search fills in the  detail within that scope.",
+    "start": "00:09:13",
+    "end": "00:09:22"
+  },
+  {
+    "text": "And then there is also something called context compression.",
+    "start": "00:09:22",
+    "end": "00:09:27"
+  },
+  {
+    "text": "There's a  limit basically to how much a model can process at inference time.",
+    "start": "00:09:27",
+    "end": "00:09:33"
+  },
+  {
+    "text": "And even when a context window  is large, which most Frontier models have really large context windows, it's still the case that  more noise means worse results.",
+    "start": "00:09:33",
+    "end": "00:09:45"
+  },
+  {
+    "text": "So systems can compress and prioritize.",
+    "start": "00:09:45",
+    "end": "00:09:47"
+  },
+  {
+    "text": "That means they summarize  long documents or they rank what's most relevant to the specific task.",
+    "start": "00:09:47",
+    "end": "00:09:54"
+  },
+  {
+    "text": "all to maximize the signal  and minimize the noise for a given context.",
+    "start": "00:09:54",
+    "end": "00:10:00"
+  },
+  {
+    "text": "So we've got aentic rag deciding what context to  go after.",
+    "start": "00:10:00",
+    "end": "00:10:04"
+  },
+  {
+    "text": "We've got graph rag that's working through relationships to find it.",
+    "start": "00:10:04",
+    "end": "00:10:08"
+  },
+  {
+    "text": "And we've got  compression that is making sure that what arrives at the model is lean and useful.",
+    "start": "00:10:08",
+    "end": "00:10:14"
+  },
+  {
+    "text": "That is a system  with contextual intelligence.",
+    "start": "00:10:14",
+    "end": "00:10:17"
+  },
+  {
+    "text": "I think it's fair to say that model intelligence and reasoning  are not the bottlenecks anymore in many cases.",
+    "start": "00:10:17",
+    "end": "00:10:25"
+  },
+  {
+    "text": "Getting good context to the model is a model is  only as good as the context it can access.",
+    "start": "00:10:25",
+    "end": "00:10:32"
+  },
+  {
+    "text": "And a contextually intelligent system means better  decisions and better outcomes with agentic AI.",
+    "start": "00:10:32",
+    "end": "00:10:43"
+  }
+]

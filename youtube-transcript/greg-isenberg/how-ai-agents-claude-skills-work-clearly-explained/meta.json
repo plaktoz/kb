@@ -1,0 +1,69 @@
+{
+  "videoId": "S_oN3vlzpMw",
+  "title": "How AI agents & Claude skills work (Clearly Explained)",
+  "channel": "Greg Isenberg",
+  "channelId": "UCPjNBjflYl0-HQtUvOx0Ibw",
+  "description": "I sit down with Ras Mic to break down how AI agents actually work and why most people are using them wrong. Ras Mic explains the mechanics of context windows, makes the case that agent md files are largely unnecessary, and shares his step-by-step methodology for building custom skills that make agents dramatically more productive. Whether you're coding with Claude Code or automating workflows with OpenClaw, this episode gives you the foundational knowledge to stop wasting tokens and start getting real results from your AI tools.\n\nTimestamps\n00:00 – Intro\n00:42 – The Models Are Good Now\n01:20 – How Context Windows Actually Work\n04:55 – The Power of Skills\n09:17 – How to create Skills\n16:35 – Skill Maxxing\n19:05 – What you need too build a project\n20:40 – Recursively Building and Improving Skills\n29:23 – Context Window Management and Token Efficiency\n33:02 – Closing Thoughts\n\nKey Points\n\n* The models (Opus 4.6, GPT 5.4) are exceptionally good now — the differentiator is the context and harness you build around them.\n* Agent md and claude md files get loaded into context on every single turn, burning tokens and degrading performance as the context window fills up. 95% of users can skip them entirely.\n* Skills use progressive disclosure: only the name and description sit in context until the agent determines it needs the full file, saving thousands of tokens per conversation.\n* The best way to create a skill is to walk through the workflow with the agent step by step, achieve a successful run, and then have the agent write the skill based on that real context.\n* Recursively refine skills by feeding failures back into the agent and having it update the skill file so the same mistake is avoided going forward.\n* Scale for productivity by starting with one agent and building up workflows before adding sub-agents — start simple, then expand.\n\nNumbered Section Summaries\n\n1. The Models Are Good — Context Is What Matters\n\nRas Mic opens by declaring that the current generation of models, Opus 4.6 and GPT 5.4, are exceptionally capable. The conversation is no longer about which model is \"better\" in a general sense. What matters now is the quality of context you feed them — that is what separates quality output from slop.\n\n2. How Context Windows Work\n\nRas Mic walks through the anatomy of a context window: system prompt, agent.md files, skills, tools, the codebase, and the user conversation. All of these stack up as tokens, and the window has a hard limit (around 250,000 tokens). When you hit that limit, agents compact — and performance drops. Understanding this structure is the foundation for everything else in the episode.\n\n3. Skills and Progressive Disclosure\n\nSkills solve the token-bloat problem. A skill file contains a name, description, and the detailed instructions — but only the name and description are loaded into context. The agent reads the full file only when it determines the skill is relevant. This means a skill costs roughly 53 tokens per turn versus 944+ for an equivalent agent.md file.\n\n4. Building Skills the Right Way\n\nRas Mic shares his methodology: identify a workflow, walk through it with the agent step by step, correct mistakes in real time, and only create the skill after you have completed a successful run. He illustrates this with his sponsor email screening agent — the first attempt returned all-positive results because the agent had no criteria for rejection.\n\n5. Recursively Improving Skills\n\nEven after a skill is created, the agent will still hit edge cases and fail. Ras Mic treats each failure as an opportunity: identify the error, have the agent fix it, then tell the agent to update the skill so the failure is documented. After five iterations of this loop on his YouTube analytics report generator, the agent now executes flawlessly across eight data sources in about ten minutes.\n\n6. Scaling for Productivity Over Flash\n\nRas Mic started with a single agent handling everything — email, spreadsheets, research. Only after building reliable skills did he add sub-agents for marketing, business, and personal tasks. He argues that jumping straight to multi-agent architectures (or adopting tools like Paperclip without building foundational workflows first) optimizes for what looks cool rather than what is productive.\n\nThe #1 tool to find startup ideas/trends - https://www.ideabrowser.com/\n\nLCA helps Fortune 500s and fast-growing startups build their future - from Warner Music to Fortnite to Dropbox. We turn 'what if' into reality with AI, apps, and next-gen products https://latecheckout.agency/\n\nThe Vibe Marketer - Resources for people into vibe marketing/marketing with AI: https://www.thevibemarketer.com/\n\nFIND ME ON SOCIAL\nX/Twitter: https://twitter.com/gregisenberg\nInstagram: https://instagram.com/gregisenberg/\nLinkedIn: https://www.linkedin.com/in/gisenberg/\n\nFIND MIC ON SOCIAL\nX/Twitter: https://x.com/Rasmic\nYoutube: https://www.youtube.com/@rasmic",
+  "duration": 2125,
+  "publishDate": "2026-04-08",
+  "url": "https://www.youtube.com/watch?v=S_oN3vlzpMw",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/S_oN3vlzpMw/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "– Intro",
+      "start": 0,
+      "end": 42
+    },
+    {
+      "title": "– The Models Are Good Now",
+      "start": 42,
+      "end": 80
+    },
+    {
+      "title": "– How Context Windows Actually Work",
+      "start": 80,
+      "end": 295
+    },
+    {
+      "title": "– The Power of Skills",
+      "start": 295,
+      "end": 557
+    },
+    {
+      "title": "– How to create Skills",
+      "start": 557,
+      "end": 995
+    },
+    {
+      "title": "– Skill Maxxing",
+      "start": 995,
+      "end": 1145
+    },
+    {
+      "title": "– What you need too build a project",
+      "start": 1145,
+      "end": 1240
+    },
+    {
+      "title": "– Recursively Building and Improving Skills",
+      "start": 1240,
+      "end": 1763
+    },
+    {
+      "title": "– Context Window Management and Token Efficiency",
+      "start": 1763,
+      "end": 1982
+    },
+    {
+      "title": "– Closing Thoughts",
+      "start": 1982,
+      "end": 2125
+    }
+  ]
+}

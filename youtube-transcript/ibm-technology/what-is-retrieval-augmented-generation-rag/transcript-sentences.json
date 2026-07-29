@@ -1,0 +1,402 @@
+[
+  {
+    "text": "Large language models.",
+    "start": "00:00:00",
+    "end": "00:00:01"
+  },
+  {
+    "text": "They are everywhere.",
+    "start": "00:00:01",
+    "end": "00:00:02"
+  },
+  {
+    "text": "They get some things amazingly right and other things very interestingly wrong.",
+    "start": "00:00:02",
+    "end": "00:00:07"
+  },
+  {
+    "text": "My name is Marina Danilevsky.",
+    "start": "00:00:07",
+    "end": "00:00:09"
+  },
+  {
+    "text": "I am a Senior Research Scientist here at IBM Research.",
+    "start": "00:00:09",
+    "end": "00:00:12"
+  },
+  {
+    "text": "And I want to tell you about a framework to help large language models be more accurate and more up to date: Retrieval-Augmented Generation, or RAG.",
+    "start": "00:00:12",
+    "end": "00:00:21"
+  },
+  {
+    "text": "Let's just talk about the \"Generation\" part for a minute.",
+    "start": "00:00:22",
+    "end": "00:00:24"
+  },
+  {
+    "text": "So forget the \"Retrieval-Augmented\".",
+    "start": "00:00:24",
+    "end": "00:00:26"
+  },
+  {
+    "text": "So the generation, this refers to large language models, or LLMs, that generate text in response to a user query, referred to as a prompt.",
+    "start": "00:00:26",
+    "end": "00:00:35"
+  },
+  {
+    "text": "These models can have some undesirable behavior.",
+    "start": "00:00:36",
+    "end": "00:00:38"
+  },
+  {
+    "text": "I want to tell you an anecdote to illustrate this.",
+    "start": "00:00:38",
+    "end": "00:00:41"
+  },
+  {
+    "text": "So my kids, they recently asked me this question: \"In our solar system, what planet has the most moons?",
+    "start": "00:00:41",
+    "end": "00:00:48"
+  },
+  {
+    "text": "\" And my response was, “Oh, that's really great that you're asking this question.",
+    "start": "00:00:48",
+    "end": "00:00:53"
+  },
+  {
+    "text": "I loved space when I was your age.",
+    "start": "00:00:53",
+    "end": "00:00:55"
+  },
+  {
+    "text": "” Of course, that was like 30 years ago.",
+    "start": "00:00:55",
+    "end": "00:00:58"
+  },
+  {
+    "text": "But I know this!",
+    "start": "00:00:58",
+    "end": "00:00:59"
+  },
+  {
+    "text": "I read an article and the article said that it was Jupiter and 88 moons.",
+    "start": "00:00:59",
+    "end": "00:01:04"
+  },
+  {
+    "text": "So that's the answer.",
+    "start": "00:01:04",
+    "end": "00:01:06"
+  },
+  {
+    "text": "Now, actually, there's a couple of things wrong with my answer.",
+    "start": "00:01:06",
+    "end": "00:01:09"
+  },
+  {
+    "text": "First of all, I have no source to support what I'm saying.",
+    "start": "00:01:10",
+    "end": "00:01:14"
+  },
+  {
+    "text": "So even though I confidently said “I read an article, I know the answer!",
+    "start": "00:01:14",
+    "end": "00:01:17"
+  },
+  {
+    "text": "”, I'm not sourcing it.",
+    "start": "00:01:17",
+    "end": "00:01:18"
+  },
+  {
+    "text": "I'm giving the answer off the top of my head.",
+    "start": "00:01:18",
+    "end": "00:01:20"
+  },
+  {
+    "text": "And also, I actually haven't kept up with this for awhile, and my answer is out of date.",
+    "start": "00:01:20",
+    "end": "00:01:25"
+  },
+  {
+    "text": "So we have two problems here.",
+    "start": "00:01:26",
+    "end": "00:01:28"
+  },
+  {
+    "text": "One is no source.",
+    "start": "00:01:28",
+    "end": "00:01:29"
+  },
+  {
+    "text": "And the second problem is that I am out of date.",
+    "start": "00:01:29",
+    "end": "00:01:33"
+  },
+  {
+    "text": "And these, in fact, are two behaviors that are often observed as problematic when interacting with large language models.",
+    "start": "00:01:35",
+    "end": "00:01:44"
+  },
+  {
+    "text": "They’re LLM challenges.",
+    "start": "00:01:44",
+    "end": "00:01:46"
+  },
+  {
+    "text": "Now, what would have happened if I'd taken a beat and first gone and looked up the answer on a reputable source like NASA?",
+    "start": "00:01:46",
+    "end": "00:01:54"
+  },
+  {
+    "text": "Well, then I would have been able to say, “Ah, okay!",
+    "start": "00:01:55",
+    "end": "00:01:59"
+  },
+  {
+    "text": "So the answer is Saturn with 146 moons.",
+    "start": "00:01:59",
+    "end": "00:02:03"
+  },
+  {
+    "text": "” And in fact, this keeps changing because scientists keep on discovering more and more moons.",
+    "start": "00:02:03",
+    "end": "00:02:08"
+  },
+  {
+    "text": "So I have now grounded my answer in something more  believable.",
+    "start": "00:02:08",
+    "end": "00:02:11"
+  },
+  {
+    "text": "I have not hallucinated or made up an answer.",
+    "start": "00:02:11",
+    "end": "00:02:13"
+  },
+  {
+    "text": "Oh, by the way, I didn't leak personal information about how long ago it's been since I was obsessed with space.",
+    "start": "00:02:13",
+    "end": "00:02:18"
+  },
+  {
+    "text": "All right, so what does this have to do with large language models?",
+    "start": "00:02:18",
+    "end": "00:02:22"
+  },
+  {
+    "text": "Well, how would a large language model have answered this question?",
+    "start": "00:02:22",
+    "end": "00:02:26"
+  },
+  {
+    "text": "So let's say that I have a user asking this question about moons.",
+    "start": "00:02:26",
+    "end": "00:02:31"
+  },
+  {
+    "text": "A large language model would confidently say, OK, I have been trained and from what I know in my parameters during my training, the answer is Jupiter.",
+    "start": "00:02:31",
+    "end": "00:02:45"
+  },
+  {
+    "text": "The answer is wrong.",
+    "start": "00:02:46",
+    "end": "00:02:48"
+  },
+  {
+    "text": "But, you know, we don't know.",
+    "start": "00:02:48",
+    "end": "00:02:50"
+  },
+  {
+    "text": "The large language model is very confident in what it answered.",
+    "start": "00:02:50",
+    "end": "00:02:52"
+  },
+  {
+    "text": "Now, what happens when you add this retrieval augmented part here?",
+    "start": "00:02:52",
+    "end": "00:02:57"
+  },
+  {
+    "text": "What does that mean?",
+    "start": "00:02:57",
+    "end": "00:02:59"
+  },
+  {
+    "text": "That means that now, instead of just relying on what the LLM knows, we are adding a content store.",
+    "start": "00:02:59",
+    "end": "00:03:05"
+  },
+  {
+    "text": "This could be open like the internet.",
+    "start": "00:03:05",
+    "end": "00:03:07"
+  },
+  {
+    "text": "This can be closed like some collection of documents, collection of policies, whatever.",
+    "start": "00:03:07",
+    "end": "00:03:14"
+  },
+  {
+    "text": "The point, though, now is that the LLM first goes and talks to the content store and says, “Hey, can you retrieve for me information that is relevant to what the user's query was?",
+    "start": "00:03:14",
+    "end": "00:03:25"
+  },
+  {
+    "text": "” And now, with this retrieval-augmented answer, it's not Jupiter anymore.",
+    "start": "00:03:25",
+    "end": "00:03:31"
+  },
+  {
+    "text": "We know that it is Saturn.",
+    "start": "00:03:31",
+    "end": "00:03:33"
+  },
+  {
+    "text": "What does this look like?",
+    "start": "00:03:33",
+    "end": "00:03:35"
+  },
+  {
+    "text": "Well, first user prompts the LLM with their question.",
+    "start": "00:03:35",
+    "end": "00:03:46"
+  },
+  {
+    "text": "They say, this is what my question was.",
+    "start": "00:03:46",
+    "end": "00:03:48"
+  },
+  {
+    "text": "And originally, if we're just talking to a generative model, the generative model says, “Oh, okay, I know the response.",
+    "start": "00:03:48",
+    "end": "00:03:55"
+  },
+  {
+    "text": "Here it is.",
+    "start": "00:03:55",
+    "end": "00:03:56"
+  },
+  {
+    "text": "Here's my response.",
+    "start": "00:03:56",
+    "end": "00:03:57"
+  },
+  {
+    "text": "” But now in the RAG framework, the generative model actually has an instruction that says, \"No, no, no.",
+    "start": "00:03:57",
+    "end": "00:04:04"
+  },
+  {
+    "text": "\" \"First, go and retrieve relevant content.",
+    "start": "00:04:04",
+    "end": "00:04:08"
+  },
+  {
+    "text": "\" \"Combine that with the user's question and only then generate the answer.",
+    "start": "00:04:08",
+    "end": "00:04:13"
+  },
+  {
+    "text": "\" So the prompt now has three parts: the instruction to pay attention to, the retrieved content, together with the user's question.",
+    "start": "00:04:13",
+    "end": "00:04:23"
+  },
+  {
+    "text": "Now give a response.",
+    "start": "00:04:23",
+    "end": "00:04:24"
+  },
+  {
+    "text": "And in fact, now you can give evidence for why your response was what it was.",
+    "start": "00:04:24",
+    "end": "00:04:29"
+  },
+  {
+    "text": "So now hopefully you can see, how does RAG help the two LLM challenges that I had mentioned before?",
+    "start": "00:04:30",
+    "end": "00:04:35"
+  },
+  {
+    "text": "So first of all, I'll start with the out of date part.",
+    "start": "00:04:35",
+    "end": "00:04:38"
+  },
+  {
+    "text": "Now, instead of having to retrain your model, if new information comes up, like, hey, we found some more moons-- now to Jupiter again, maybe it'll be Saturn again in the future.",
+    "start": "00:04:38",
+    "end": "00:04:48"
+  },
+  {
+    "text": "All you have to do is you augment your data store with new information, update information.",
+    "start": "00:04:48",
+    "end": "00:04:53"
+  },
+  {
+    "text": "So now the next time that a user comes and asks the question, we're ready.",
+    "start": "00:04:53",
+    "end": "00:04:57"
+  },
+  {
+    "text": "We just go ahead and retrieve the most up to date information.",
+    "start": "00:04:57",
+    "end": "00:05:00"
+  },
+  {
+    "text": "The second problem, source.",
+    "start": "00:05:00",
+    "end": "00:05:02"
+  },
+  {
+    "text": "Well, the large language model is now being instructed to pay attention to primary source data before giving its response.",
+    "start": "00:05:02",
+    "end": "00:05:10"
+  },
+  {
+    "text": "And in fact, now being able to give evidence.",
+    "start": "00:05:10",
+    "end": "00:05:13"
+  },
+  {
+    "text": "This makes it less likely to hallucinate or to leak data because it is less likely to rely only on information that it learned during training.",
+    "start": "00:05:13",
+    "end": "00:05:21"
+  },
+  {
+    "text": "It also allows us to get the model to have a behavior that can be very positive, which is knowing when to say, “I don't know.",
+    "start": "00:05:21",
+    "end": "00:05:29"
+  },
+  {
+    "text": "” If the user's question cannot be reliably answered based on your data store, the model should say, \"I don't know,\" instead of making up something that is believable and may mislead the user.",
+    "start": "00:05:29",
+    "end": "00:05:41"
+  },
+  {
+    "text": "This can have a negative effect as well though, because if the retriever is not sufficiently good to give the large language model the best, most high-quality grounding information, then maybe the user's query that is answerable doesn't get an answer.",
+    "start": "00:05:41",
+    "end": "00:05:57"
+  },
+  {
+    "text": "So this is actually why lots of folks, including many of us here at IBM, are working the problem on both sides.",
+    "start": "00:05:57",
+    "end": "00:06:03"
+  },
+  {
+    "text": "We are both working to improve the retriever to give the large language model the best quality data on which to ground its response, and also the generative part so that the LLM can give the richest, best response finally to the user when it generates the answer.",
+    "start": "00:06:03",
+    "end": "00:06:20"
+  },
+  {
+    "text": "Thank you for learning more about RAG and like and subscribe to the channel.",
+    "start": "00:06:21",
+    "end": "00:06:25"
+  },
+  {
+    "text": "Thank you.",
+    "start": "00:06:25",
+    "end": "00:06:26"
+  }
+]
