@@ -158,4 +158,4 @@ You have to know your death to truly live your life.
 - grpc and protocol buffer
 - modulith with sub pom https://www.baeldung.com/spring-modulith
 - archunit
-- 
+- consume into wiki https://www.shortform.com/best-books/genre/best-software-architecture-books-of-all-time
