@@ -27,6 +27,9 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://aws.amazon.com/blogs/machine-learning/
 - https://newsletter.pragmaticengineer.com/
 - https://www.byhand.ai/
+- https://aiweekly.co/
+- https://every.to/
+- https://techscoop.substack.com/
 
 ### 📊 Finance
 - https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US
@@ -41,6 +44,7 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://hbr.org/topic/learning-strategies
 - https://www.fast.ai/
 - https://fs.blog/blog/
+- https://www.scotthyoung.com/blog/
 
 ### ❤️ Health
 - https://www.healthline.com/health-news
@@ -48,8 +52,17 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://www.health.harvard.edu/blog
 - https://www.nih.gov/news-events
 - https://www.webmd.com/news/health-news
+- https://www.menshealth.com/health/
+- https://www.muscleandfitness.com/feed/
+- https://www.mensfitness.com/
+- https://www.self.com/
+- https://experiencelife.lifetime.life/
 
 ### 🎯 Strategy
 - https://fs.blog/blog/
 - https://stratechery.com/
 - https://hbr.org/topic/strategy
+- https://www.sahilbloom.com/newsletter
+
+### 👪 Parenting
+- https://www.parents.com/lifestyle-5282764
