@@ -27,6 +27,8 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://aws.amazon.com/blogs/machine-learning/
 - https://newsletter.pragmaticengineer.com/
 - https://www.byhand.ai/
+- https://aiweekly.co/
+- https://every.to/
 
 ### 📊 Finance
 - https://feeds.finance.yahoo.com/rss/2.0/headline?s=^GSPC&region=US&lang=en-US
