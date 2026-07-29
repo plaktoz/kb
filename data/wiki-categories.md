@@ -52,9 +52,17 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://www.health.harvard.edu/blog
 - https://www.nih.gov/news-events
 - https://www.webmd.com/news/health-news
+- https://www.menshealth.com/health/
+- https://www.muscleandfitness.com/feed/
+- https://www.mensfitness.com/
+- https://www.self.com/
+- https://experiencelife.lifetime.life/
 
 ### 🎯 Strategy
 - https://fs.blog/blog/
 - https://stratechery.com/
 - https://hbr.org/topic/strategy
 - https://www.sahilbloom.com/newsletter
+
+### 👪 Parenting
+- https://www.parents.com/lifestyle-5282764
