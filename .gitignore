@@ -1,6 +1,7 @@
 # Ignore volatile UI-related state
 .obsidian/workspace.json
 .obsidian/app.json
+.obsidian/graph.json
 
 # Ignore local deleted items and OS cache
 .trash/
