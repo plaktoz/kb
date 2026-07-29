@@ -7,7 +7,24 @@ Run the following steps in order. Stop only if a git operation fails — pipelin
 
 ## Step 1: Prepare branch
 
-Run these git commands:
+### Pre-flight: check for untracked files
+
+Run:
+
+```bash
+git status --porcelain wiki/ daily-update/ raw/processed/ kbm.log.md
+```
+
+Filter the output for lines beginning with `??`. If any exist, **stop immediately** and print:
+
+```
+Aborted: untracked files found in pipeline output paths. Resolve before running autocommit:
+  <list each ?? file>
+```
+
+Do not proceed until the working tree is clean in those paths.
+
+### Branch setup
 
 ```bash
 git checkout main
