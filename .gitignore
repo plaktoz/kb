@@ -1,1 +1,8 @@
-.obsidian/
+# Ignore volatile UI-related state
+.obsidian/workspace.json
+.obsidian/app.json
+
+# Ignore local deleted items and OS cache
+.trash/
+.DS_Store
+Thumbs.db
