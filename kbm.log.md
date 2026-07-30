@@ -365,3 +365,83 @@
 | 2026-07-29 | rewriting-bun-in-rust.md | ingest |
 | 2026-07-29 | 2026-07-29.md | newsletter |
 | 2026-07-29 | 2026-07-29-2.md | newsletter |
+| 2026-07-29 | 2026-07-29-news-aggregation.md | news-fetch |
+| 2026-07-29 | 2026-03-25-how-anthropics-claude-thinks.md | scrape |
+| 2026-07-29 | 2026-07-27-how-nvidia-builds-open-models-for-the-age-of-ai.md | scrape |
+| 2026-07-29 | 2026-04-06-a-guide-to-context-engineering-for-llms.md | scrape |
+| 2026-07-29 | 2026-04-04-ep209-12-claude-code-features-every-engineer-should-know.md | scrape |
+| 2026-07-29 | 2026-05-11-how-pinterest-built-a-production-mcp-ecosystem.md | scrape |
+| 2026-07-29 | 2026-06-02-a-practical-guide-to-becoming-an-ai-native-engineer.md | scrape |
+| 2026-07-29 | blog.bytebytego.com/p/how-to-implement-api-security (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/stateless-architecture-benefits-and (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/a-guide-to-event-driven-architectural (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/must-know-cross-cutting-concerns (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/container-design-patterns-for-distributed (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/multi-region-architecture-going-global (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/must-know-failure-modes-in-distributed (fetch blocked, concurrent scrape by other batch) | scrape-failed
+| 2026-06-20 | 2026-06-20-why-model-context-protocol-could-become-your-next-attack-surface.md | scrape |
+| 2026-06-18 | 2026-06-18-how-amex-designs-for-low-latency-failure-isolation.md | scrape |
+| 2026-06-08 | 2026-06-08-token-spend-out-of-control-the-case-for-smarter-routing.md | scrape |
+| 2026-05-16 | 2026-05-16-ep215-the-anatomy-of-an-ai-agent.md | scrape |
+| 2026-07-28 | 2026-07-28-why-doordash-instacart-and-uber-eats-integrated-llms-into-search-three-different-ways.md | scrape |
+| 2026-03-14 | 2026-03-14-ep206-git-workflow-essential-commands.md | scrape |
+| 2026-06-22 | 2026-06-22-ai-native-leaders-the-organizational-playbook-for-engineering-transformation-at-scale.md | scrape |
+| 2026-06-06 | 2026-06-06-ep217-latency-vs-throughput-vs-bandwidth.md | scrape |
+| 2026-07-29 | techscoop.substack.com/p/how-the-internet-works-network-edge (JS-only shell, no content returned) | scrape-failed |
+| 2026-07-29 | techscoop.substack.com/p/stop-treating-domain-driven-design (JS-only shell, no content returned) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/top-anti-patterns-to-avoid-in-service (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/a-guide-to-relational-database-design (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/streaming-vs-batch-two-philosophies (paywalled) | scrape-failed |
+| 2026-07-29 | blog.bytebytego.com/p/a-beginners-guide-to-clocks-causality (paywalled) | scrape-failed |
+| 2026-07-29 | 2026-07-29-encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls.md | scrape |
+| 2026-07-29 | 2026-07-29-seattle-lands-another-1b-startup.md | scrape |
+| 2026-07-29 | 2026-07-29-centralize-enterprise-sales-gtm-startup-funding.md | scrape |
+| 2026-07-29 | 2026-07-29-stock-market-today-dow-plunges-1100-points.md | scrape |
+| 2026-07-29 | 2026-07-29-dow-jones-futures-oil-prices-trump-iran-threats-microsoft-meta-fortinet-earnings.md | scrape |
+| 2026-07-29 | 2026-07-29-markets-news-dow-closes-down-1150-points.md | scrape |
+| 2026-07-29 | 2026-07-29-75-of-workers-now-ask-ai-instead-of-colleagues.md | scrape |
+| 2026-07-29 | 2026-07-29-more-jobs-higher-bar-2026-ai-employer-report.md | scrape |
+| 2026-07-23 | 2026-07-23-deep-work-techniques-how-to-do-your-best-work-every-single-day.md | scrape |
+| 2026-07-27 | 2026-07-27-msu-research-uncovers-processes-that-lead-to-learning-outcomes.md | scrape |
+| 2026-07-29 | 2026-07-29-what-is-the-science-of-learning-in-education.md | scrape |
+| 2026-07-28 | 2026-07-28-ai-opens-new-era-cognitive-studies-wild-primates.md | scrape |
+| 2026-07-29 | 2026-07-29-drug-behind-ozempic-wegovy-pills-may-also-treat-alcohol-use-disorder.md | scrape |
+| 2026-07-28 | 2026-07-28-restricted-eating-hours-brain-health-study.md | scrape |
+| 2026-07-29 | 2026-07-29-experts-highlight-the-power-of-food-to-improve-metabolic-and-mental-health.md | scrape |
+| 2026-07-29 | https://www.wsj.com/articles/microsoft-earnings-q4-fy26-msft-stock-dfd3843e | scrape-failed |
+| 2026-07-29 | 2026-07-29-ibm-stock-recovery-forecast-post-earnings-50-ema.md | scrape |
+| 2026-07-29 | 2026-07-29-value-stocks-get-a-moment-in-the-sun-sell-semis-buy-ketchup.md | scrape |
+| 2026-07-29 | 2026-07-29-news-aggregation.md | delete-blocked (platform prevents deleting files under kb/; all 18 URLs processed, manual cleanup needed) |
+| 2026-07-29 | tech1.md | delete-blocked (platform prevents deleting files under kb/; all 29 URLs processed, manual cleanup needed) |
+| 2026-07-29 | 2026-06-08-token-spend-out-of-control-the-case-for-smarter-routing.md | ingest |
+| 2026-07-29 | 2026-06-18-how-amex-designs-for-low-latency-failure-isolation.md | ingest |
+| 2026-07-29 | 2026-06-20-why-model-context-protocol-could-become-your-next-attack-surface.md | ingest |
+| 2026-07-29 | 2026-07-27-how-nvidia-builds-open-models-for-the-age-of-ai.md | ingest |
+| 2026-07-29 | 2026-07-28-restricted-eating-hours-brain-health-study.md | ingest |
+| 2026-07-29 | 2026-07-28-why-doordash-instacart-and-uber-eats-integrated-llms-into-search-three-different-ways.md | ingest |
+| 2026-07-29 | 2026-07-29-75-of-workers-now-ask-ai-instead-of-colleagues.md | ingest |
+| 2026-07-29 | 2026-07-29-centralize-enterprise-sales-gtm-startup-funding.md | ingest |
+| 2026-07-29 | 2026-07-29-dow-jones-futures-oil-prices-trump-iran-threats-microsoft-meta-fortinet-earnings.md | ingest |
+| 2026-07-29 | 2026-07-29-drug-behind-ozempic-wegovy-pills-may-also-treat-alcohol-use-disorder.md | ingest |
+| 2026-07-29 | 2026-07-29-encore-ai-raises-30m-to-build-ai-agents-that-learn-from-customer-calls.md | ingest |
+| 2026-07-29 | 2026-06-22-ai-native-leaders-the-organizational-playbook-for-engineering-transformation-at-scale.md | ingest |
+| 2026-07-29 | 2026-07-29-experts-highlight-the-power-of-food-to-improve-metabolic-and-mental-health.md | ingest |
+| 2026-07-29 | 2026-03-14-ep206-git-workflow-essential-commands.md | ingest |
+| 2026-07-29 | 2026-03-25-how-anthropics-claude-thinks.md | ingest |
+| 2026-07-29 | 2026-07-23-deep-work-techniques-how-to-do-your-best-work-every-single-day.md | ingest |
+| 2026-07-29 | 2026-04-04-ep209-12-claude-code-features-every-engineer-should-know.md | ingest |
+| 2026-07-29 | 2026-04-06-a-guide-to-context-engineering-for-llms.md | ingest |
+| 2026-07-29 | 2026-07-27-msu-research-uncovers-processes-that-lead-to-learning-outcomes.md | ingest |
+| 2026-07-29 | 2026-05-11-how-pinterest-built-a-production-mcp-ecosystem.md | ingest |
+| 2026-07-29 | 2026-07-28-ai-opens-new-era-cognitive-studies-wild-primates.md | ingest |
+| 2026-07-29 | 2026-05-16-ep215-the-anatomy-of-an-ai-agent.md | ingest |
+| 2026-07-29 | 2026-06-02-a-practical-guide-to-becoming-an-ai-native-engineer.md | ingest |
+| 2026-07-29 | 2026-06-06-ep217-latency-vs-throughput-vs-bandwidth.md | ingest |
+| 2026-07-29 | 2026-07-29-ibm-stock-recovery-forecast-post-earnings-50-ema.md | ingest |
+| 2026-07-29 | 2026-07-29-markets-news-dow-closes-down-1150-points.md | ingest |
+| 2026-07-29 | 2026-07-29-more-jobs-higher-bar-2026-ai-employer-report.md | ingest |
+| 2026-07-29 | 2026-07-29-seattle-lands-another-1b-startup.md | ingest |
+| 2026-07-29 | 2026-07-29-stock-market-today-dow-plunges-1100-points.md | ingest |
+| 2026-07-29 | 2026-07-29-value-stocks-get-a-moment-in-the-sun-sell-semis-buy-ketchup.md | ingest |
+| 2026-07-29 | 2026-07-29-what-is-the-science-of-learning-in-education.md | ingest |
+| 2026-07-29 | 2026-07-29-3.md | newsletter |
