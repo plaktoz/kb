@@ -1,6 +1,7 @@
 ---
 type: literature-note
 source_url: https://www.usatoday.com/story/life/health-wellness/2026/07/28/restricted-eating-hours-brain-health-study/91076516007
+additional_sources: [https://www.foxnews.com/health/daily-eating-habit-linked-better-brain-health-older-adults-new-research-suggests]
 author: Anthony Thompson
 tags: [time-restricted-eating, brain-health, cognitive-decline, nutrition]
 date_consumed: 2026-07-29
@@ -25,3 +26,6 @@ A preliminary Rutgers study found that women aged 50-79 who restricted eating to
 - Restricted eating window ended about 4 hours before bedtime
 - Study was small (47 women) and not yet peer-reviewed
 - No significant group differences in reaction time or multitasking
+- Independent experts caution meal timing is "one piece of the puzzle," not a magic bullet — [[Physical Activity]], sleep, and a [[Mediterranean Diet]] pattern have stronger evidence for cognitive protection
+- Proposed mechanisms include improved insulin sensitivity, reduced [[Chronic Inflammation]], and more time for cellular repair during the longer overnight fast
+- Not recommended for children/teens, pregnant or breastfeeding women, those with a history of eating disorders, or people on insulin — should be medically supervised
