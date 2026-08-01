@@ -148,7 +148,6 @@ You have to know your death to truly live your life.
 ```
 
 # Upcoming Tasks
-- consume https://stripe.dev/blog/production-ready-dev-stack-from-terminal
 - onboarding with ai. install software etc
 - leverage wiki with lesson https://github.com/plaktoz/kb/blob/main/wiki/technology/ai-native-company-brain-garry-tan.md
 - implement ai tutor using https://thirdspacelearning.com/blog/ai-tutoring-evidence/
