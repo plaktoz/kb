@@ -153,7 +153,6 @@ You have to know your death to truly live your life.
 - implement ai tutor using https://thirdspacelearning.com/blog/ai-tutoring-evidence/
 - how to use openrouter
 - use of local llm for coding
-- sql troubleshooting https://learn.microsoft.com/en-us/troubleshoot/sql/database-engine/performance/troubleshoot-sql-io-performance and https://learn.microsoft.com/en-us/troubleshoot/sql/database-engine/performance/troubleshoot-slow-running-queries
 - grpc and protocol buffer
 - modulith with sub pom https://www.baeldung.com/spring-modulith
 - archunit
