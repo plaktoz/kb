@@ -1,0 +1,1352 @@
+[
+  {
+    "text": "Co-work is insanely powerful.",
+    "start": "00:00:00",
+    "end": "00:00:03"
+  },
+  {
+    "text": "But, there's a problem.",
+    "start": "00:00:03",
+    "end": "00:00:04"
+  },
+  {
+    "text": "Right now, there's no gold standard on how to set up your workspace.",
+    "start": "00:00:04",
+    "end": "00:00:06"
+  },
+  {
+    "text": "So, if you get the foundation wrong, you're going to keep running into avoidable issues down the line.",
+    "start": "00:00:06",
+    "end": "00:00:12"
+  },
+  {
+    "text": "[music] So, after 5 months of using Co-work daily to run my entire life and going to debt to pay for token usage, here are five essential things to get right from day one.",
+    "start": "00:00:12",
+    "end": "00:00:19"
+  },
+  {
+    "text": "Let's get started.",
+    "start": "00:00:19",
+    "end": "00:00:21"
+  },
+  {
+    "text": "Kicking things off with tip number one, the markdown translator.",
+    "start": "00:00:21",
+    "end": "00:00:24"
+  },
+  {
+    "text": "As you know by now, Co-work's instructions and memory live in these .",
+    "start": "00:00:24",
+    "end": "00:00:27"
+  },
+  {
+    "text": "md markdown files.",
+    "start": "00:00:27",
+    "end": "00:00:30"
+  },
+  {
+    "text": "And although [music] we can open them up and edit this directly, opening this just costs 20 tokens.",
+    "start": "00:00:30",
+    "end": "00:00:35"
+  },
+  {
+    "text": "Okay, that's a joke, but I kind of feel it's true.",
+    "start": "00:00:35",
+    "end": "00:00:38"
+  },
+  {
+    "text": "It's a pain to read like this, right?",
+    "start": "00:00:38",
+    "end": "00:00:40"
+  },
+  {
+    "text": "And annoying as hell to edit.",
+    "start": "00:00:40",
+    "end": "00:00:41"
+  },
+  {
+    "text": "So, first we want to do is to install a free app called Obsidian.",
+    "start": "00:00:41",
+    "end": "00:00:45"
+  },
+  {
+    "text": "Open folder as vault, open, point it to your Co-work workspace folder, open, and now every .",
+    "start": "00:00:45",
+    "end": "00:00:52"
+  },
+  {
+    "text": "md file instantly renders with proper headings, bold text, and bullet points.",
+    "start": "00:00:52",
+    "end": "00:00:57"
+  },
+  {
+    "text": "Basically, a much more readable format.",
+    "start": "00:00:57",
+    "end": "00:00:59"
+  },
+  {
+    "text": "And now, let's say I want to change something in this claw.",
+    "start": "00:00:59",
+    "end": "00:01:01"
+  },
+  {
+    "text": "md file.",
+    "start": "00:01:01",
+    "end": "00:01:02"
+  },
+  {
+    "text": "Instead of doing anything here, I can select the claw.",
+    "start": "00:01:02",
+    "end": "00:01:07"
+  },
+  {
+    "text": "md tab [music] in Obsidian and replace this first bullet point, for example, under preferences with always make [music] inappropriate jokes, and let's just remove that line from earlier, and I'm going to close this and reopen, and you will see that the changes are already there.",
+    "start": "00:01:07",
+    "end": "00:01:27"
+  },
+  {
+    "text": "To be clear, you don't need to learn Obsidian or use any of its other features.",
+    "start": "00:01:27",
+    "end": "00:01:32"
+  },
+  {
+    "text": "It's just a lens to read and edit .",
+    "start": "00:01:32",
+    "end": "00:01:34"
+  },
+  {
+    "text": "md files.",
+    "start": "00:01:34",
+    "end": "00:01:35"
+  },
+  {
+    "text": "Pro tip, you can click command or control plus to zoom in.",
+    "start": "00:01:35",
+    "end": "00:01:38"
+  },
+  {
+    "text": "You can click the reading mode icon to lock the Obsidian page, so you don't make edits by mistake, and you can even go to Obsidian settings, files and links, keep the show all file types toggle turned on, and this lets you see non-.",
+    "start": "00:01:38",
+    "end": "00:01:57"
+  },
+  {
+    "text": "md files like spreadsheets, PDFs, and even images in the sidebar.",
+    "start": "00:01:57",
+    "end": "00:02:00"
+  },
+  {
+    "text": "Moving on to tip number two, the 300-line rule.",
+    "start": "00:02:00",
+    "end": "00:02:03"
+  },
+  {
+    "text": "Because our root.",
+    "start": "00:02:03",
+    "end": "00:02:03"
+  },
+  {
+    "text": "claw.",
+    "start": "00:02:03",
+    "end": "00:02:03"
+  },
+  {
+    "text": "md loads every single session, a bloated file wastes a lot of tokens.",
+    "start": "00:02:03",
+    "end": "00:02:07"
+  },
+  {
+    "text": "And when I cut mine from over 600 lines to around 250, my token usage dropped by roughly 25%.",
+    "start": "00:02:07",
+    "end": "00:02:14"
+  },
+  {
+    "text": "And here are three tactics you can use right away.",
+    "start": "00:02:14",
+    "end": "00:02:19"
+  },
+  {
+    "text": "First, only include the bare essentials.",
+    "start": "00:02:16",
+    "end": "00:02:22"
+  },
+  {
+    "text": "My claw.",
+    "start": "00:02:19",
+    "end": "00:02:20"
+  },
+  {
+    "text": "md template has six sections.",
+    "start": "00:02:20",
+    "end": "00:02:24"
+  },
+  {
+    "text": "First, this memory system section tells co-work to always read memory.",
+    "start": "00:02:22",
+    "end": "00:02:27"
+  },
+  {
+    "text": "md at session start, so it knows what we did before.",
+    "start": "00:02:27",
+    "end": "00:02:29"
+  },
+  {
+    "text": "Next, preferences is how we want co-work to communicate: tone, length, format, etc.",
+    "start": "00:02:29",
+    "end": "00:02:35"
+  },
+  {
+    "text": "Next, rules represent behavioral guardrails.",
+    "start": "00:02:35",
+    "end": "00:02:39"
+  },
+  {
+    "text": "Basically, if you want co-work to always do something, like always ask clarifying questions before starting complex task, or never do something, like never edit files in my workspace without telling me what you changed and why, those belong here.",
+    "start": "00:02:39",
+    "end": "00:02:55"
+  },
+  {
+    "text": "Heading over to my actual claw.",
+    "start": "00:02:52",
+    "end": "00:02:56"
+  },
+  {
+    "text": "md, the routing map contains a table that co-work checks to figure out which workstation to load based on my task.",
+    "start": "00:02:56",
+    "end": "00:03:04"
+  },
+  {
+    "text": "So, if I'm writing an email, we load the email HQ workstation.",
+    "start": "00:03:02",
+    "end": "00:03:06"
+  },
+  {
+    "text": "If I'm working on Chinese projects, load China desk.",
+    "start": "00:03:06",
+    "end": "00:03:10"
+  },
+  {
+    "text": "If I'm brainstorming, use clarity partner, so on and so forth.",
+    "start": "00:03:10",
+    "end": "00:03:12"
+  },
+  {
+    "text": "Coming back to the lightweight template, since it's less dense, the fifth section, references, include one-line pointers to files co-work loads on demand.",
+    "start": "00:03:12",
+    "end": "00:03:22"
+  },
+  {
+    "text": "In other words, this voice.",
+    "start": "00:03:22",
+    "end": "00:03:23"
+  },
+  {
+    "text": "principles.",
+    "start": "00:03:23",
+    "end": "00:03:24"
+  },
+  {
+    "text": "md file does not load every session, right?",
+    "start": "00:03:24",
+    "end": "00:03:27"
+  },
+  {
+    "text": "Only when I'm writing content.",
+    "start": "00:03:27",
+    "end": "00:03:28"
+  },
+  {
+    "text": "And finally, creating new workstations basically tells co-work how to create new workstations in your workspace.",
+    "start": "00:03:28",
+    "end": "00:03:34"
+  },
+  {
+    "text": "Pro tip, the rule of thumb is to keep your claw.",
+    "start": "00:03:34",
+    "end": "00:03:38"
+  },
+  {
+    "text": "md file between 200 and 250 lines, with 300 being the absolute maximum.",
+    "start": "00:03:38",
+    "end": "00:03:42"
+  },
+  {
+    "text": "You can also grab these claw.",
+    "start": "00:03:42",
+    "end": "00:03:44"
+  },
+  {
+    "text": "md and memory.",
+    "start": "00:03:44",
+    "end": "00:03:45"
+  },
+  {
+    "text": "md templates from my free co-work toolkit, linked down below.",
+    "start": "00:03:45",
+    "end": "00:03:48"
+  },
+  {
+    "text": "But Jeff, I hear you say, \"There's no way I I keep everything within 300 lines if I keep using co-work.",
+    "start": "00:03:48",
+    "end": "00:03:54"
+  },
+  {
+    "text": "And that brings us to tactic number two.",
+    "start": "00:03:54",
+    "end": "00:03:56"
+  },
+  {
+    "text": "Ask co-work to relocate non-essential rules.",
+    "start": "00:03:56",
+    "end": "00:03:59"
+  },
+  {
+    "text": "Here's the test.",
+    "start": "00:03:59",
+    "end": "00:04:01"
+  },
+  {
+    "text": "Does co-work need this every session or only when a specific task comes up?",
+    "start": "00:03:59",
+    "end": "00:04:05"
+  },
+  {
+    "text": "Back in my actual claw.",
+    "start": "00:04:05",
+    "end": "00:04:06"
+  },
+  {
+    "text": "md, there's a section called governance missy principle that says all instructions and rules in this workspace must be mutually exclusive and collectively exhaustive.",
+    "start": "00:04:06",
+    "end": "00:04:16"
+  },
+  {
+    "text": "And since this governs how all rules are organized in my entire co-work workspace, this must be kept in my root claw.",
+    "start": "00:04:16",
+    "end": "00:04:23"
+  },
+  {
+    "text": "md.",
+    "start": "00:04:23",
+    "end": "00:04:23"
+  },
+  {
+    "text": "In contrast, there's a file creation rule bullet point down here that only apply when I'm creating a new file.",
+    "start": "00:04:23",
+    "end": "00:04:29"
+  },
+  {
+    "text": "And since I'm not creating files every session, instead of having all 22 rules live here, I have a pointer.",
+    "start": "00:04:29",
+    "end": "00:04:36"
+  },
+  {
+    "text": "Read this before creating any new file in the workspace.",
+    "start": "00:04:36",
+    "end": "00:04:41"
+  },
+  {
+    "text": "Now, let's apply this learning immediately.",
+    "start": "00:04:41",
+    "end": "00:04:44"
+  },
+  {
+    "text": "Going back to the creating new workstation section from before, we don't create new workstations every session, right?",
+    "start": "00:04:44",
+    "end": "00:04:51"
+  },
+  {
+    "text": "So, we can tell co-work, move the creating new workstation section out of my root claw.",
+    "start": "00:04:51",
+    "end": "00:04:54"
+  },
+  {
+    "text": "md into a new reference file and replace it with a one-line pointer in my references table.",
+    "start": "00:04:54",
+    "end": "00:04:59"
+  },
+  {
+    "text": "And we're just going to let this run.",
+    "start": "00:04:59",
+    "end": "00:05:02"
+  },
+  {
+    "text": "And after a few seconds, we can see what happened.",
+    "start": "00:05:00",
+    "end": "00:05:03"
+  },
+  {
+    "text": "First, even co-work tells us that doing this keeps the root claw.",
+    "start": "00:05:03",
+    "end": "00:05:08"
+  },
+  {
+    "text": "md leaner while preserving the template for on-demand loading, right?",
+    "start": "00:05:08",
+    "end": "00:05:12"
+  },
+  {
+    "text": "And opening the Obsidian view, we can see that the entire creating new workstation section has been removed.",
+    "start": "00:05:12",
+    "end": "00:05:18"
+  },
+  {
+    "text": "Instead, it's been replaced by a pointer.",
+    "start": "00:05:18",
+    "end": "00:05:21"
+  },
+  {
+    "text": "Hey, read this when creating a new workstation.",
+    "start": "00:05:21",
+    "end": "00:05:25"
+  },
+  {
+    "text": "And where does this workstation template .",
+    "start": "00:05:25",
+    "end": "00:05:29"
+  },
+  {
+    "text": "md live?",
+    "start": "00:05:29",
+    "end": "00:05:26"
+  },
+  {
+    "text": "Under the 00 resources folder.",
+    "start": "00:05:26",
+    "end": "00:05:29"
+  },
+  {
+    "text": ">> [music] >> And as you can see, everything has been moved over here and our claw.",
+    "start": "00:05:29",
+    "end": "00:05:34"
+  },
+  {
+    "text": "md just got shorter without losing anything.",
+    "start": "00:05:34",
+    "end": "00:05:37"
+  },
+  {
+    "text": "It's that simple when it comes to optimizing your claw.",
+    "start": "00:05:37",
+    "end": "00:05:38"
+  },
+  {
+    "text": "md.",
+    "start": "00:05:38",
+    "end": "00:05:39"
+  },
+  {
+    "text": "Find sections that serve specific tasks [music] and ask co-work to relocate them.",
+    "start": "00:05:39",
+    "end": "00:05:43"
+  },
+  {
+    "text": "Tactic number three, write files in the right place.",
+    "start": "00:05:43",
+    "end": "00:05:47"
+  },
+  {
+    "text": "In a nutshell, most co-work users put claw.",
+    "start": "00:05:47",
+    "end": "00:05:50"
+  },
+  {
+    "text": "md content in memory.",
+    "start": "00:05:50",
+    "end": "00:05:50"
+  },
+  {
+    "text": "md and vice versa.",
+    "start": "00:05:50",
+    "end": "00:05:53"
+  },
+  {
+    "text": "And this confusion tanks output quality.",
+    "start": "00:05:53",
+    "end": "00:05:56"
+  },
+  {
+    "text": "The solution is adding a rule under claw.",
+    "start": "00:05:56",
+    "end": "00:05:57"
+  },
+  {
+    "text": "md's memory system section.",
+    "start": "00:05:57",
+    "end": "00:05:59"
+  },
+  {
+    "text": "Test one.",
+    "start": "00:05:59",
+    "end": "00:06:02"
+  },
+  {
+    "text": "If the entry is prescriptive and contains words like always and never, then it belongs in claw.",
+    "start": "00:06:00",
+    "end": "00:06:08"
+  },
+  {
+    "text": "md.",
+    "start": "00:06:08",
+    "end": "00:06:08"
+  },
+  {
+    "text": "Test two.",
+    "start": "00:06:08",
+    "end": "00:06:10"
+  },
+  {
+    "text": "If it describes a fact that could change, then it goes into memory.",
+    "start": "00:06:10",
+    "end": "00:06:13"
+  },
+  {
+    "text": "md.",
+    "start": "00:06:13",
+    "end": "00:06:13"
+  },
+  {
+    "text": "Scrolling down to the rule section, here we have entries that says, \"Before drafting a new email, check if a related thread already exists with that recipient.",
+    "start": "00:06:13",
+    "end": "00:06:22"
+  },
+  {
+    "text": "\" This is a version of before doing X, do Y, which is prescriptive behavior as well, right?",
+    "start": "00:06:22",
+    "end": "00:06:26"
+  },
+  {
+    "text": "That's why it belongs in claw.",
+    "start": "00:06:26",
+    "end": "00:06:27"
+  },
+  {
+    "text": "md.",
+    "start": "00:06:27",
+    "end": "00:06:27"
+  },
+  {
+    "text": "Flipping over to the memory.",
+    "start": "00:06:27",
+    "end": "00:06:31"
+  },
+  {
+    "text": "md file and scrolling down, we see an entry here that says, \"My company uses Microsoft Copilot.",
+    "start": "00:06:31",
+    "end": "00:06:34"
+  },
+  {
+    "text": "\" Which is something that could change tomorrow, right?",
+    "start": "00:06:34",
+    "end": "00:06:38"
+  },
+  {
+    "text": "Probably something that should change.",
+    "start": "00:06:36",
+    "end": "00:06:40"
+  },
+  {
+    "text": "Just kidding.",
+    "start": "00:06:38",
+    "end": "00:06:39"
+  },
+  {
+    "text": "So, this is a temporary fact and not a rule, and that's why it belongs in memory.",
+    "start": "00:06:39",
+    "end": "00:06:44"
+  },
+  {
+    "text": "md.",
+    "start": "00:06:44",
+    "end": "00:06:44"
+  },
+  {
+    "text": "Here's something you can do right now.",
+    "start": "00:06:44",
+    "end": "00:06:47"
+  },
+  {
+    "text": "Tell co-work to review my root claw.",
+    "start": "00:06:47",
+    "end": "00:06:49"
+  },
+  {
+    "text": "md and memory.",
+    "start": "00:06:49",
+    "end": "00:06:51"
+  },
+  {
+    "text": "md.",
+    "start": "00:06:51",
+    "end": "00:06:51"
+  },
+  {
+    "text": "In the claw.",
+    "start": "00:06:51",
+    "end": "00:06:50"
+  },
+  {
+    "text": "md file, flag any entry whose primary purpose is recording a fact or status, rather than prescribing how you should behave, right?",
+    "start": "00:06:50",
+    "end": "00:06:58"
+  },
+  {
+    "text": "And in memory.",
+    "start": "00:06:58",
+    "end": "00:07:00"
+  },
+  {
+    "text": "md, flag any entry whose primary purpose is telling you how to behave rather than recording a fact.",
+    "start": "00:07:00",
+    "end": "00:07:04"
+  },
+  {
+    "text": "Recommend where each flagged entry should move.",
+    "start": "00:07:04",
+    "end": "00:07:09"
+  },
+  {
+    "text": "And after a minute or two, co-work will share a list of recommendations, and here you can actually see uh there are five issues in my memory.",
+    "start": "00:07:07",
+    "end": "00:07:15"
+  },
+  {
+    "text": "md file, which obviously I left them in there on purpose to show you what not to do.",
+    "start": "00:07:15",
+    "end": "00:07:21"
+  },
+  {
+    "text": "I don't make mistakes.",
+    "start": "00:07:21",
+    "end": "00:07:21"
+  },
+  {
+    "text": "And luckily, uh my claw.",
+    "start": "00:07:21",
+    "end": "00:07:22"
+  },
+  {
+    "text": "md is clean though.",
+    "start": "00:07:22",
+    "end": "00:07:24"
+  },
+  {
+    "text": "So, I can just literally say, \"Proceed with changes.",
+    "start": "00:07:24",
+    "end": "00:07:27"
+  },
+  {
+    "text": "\" And it's as easy as that.",
+    "start": "00:07:27",
+    "end": "00:07:29"
+  },
+  {
+    "text": "Speaking of optimizing our workspace, today's sponsor HubSpot put together a free resource called the Claude Co-work Stack that contains 12 co-work optimized prompts you can use right away.",
+    "start": "00:07:28",
+    "end": "00:07:38"
+  },
+  {
+    "text": "There are a couple I found pretty useful, like this batch document generator one and the research synthesis one, this one.",
+    "start": "00:07:38",
+    "end": "00:07:46"
+  },
+  {
+    "text": "Although I'd still probably use Claude Web for research, but my favorite by far, surprise surprise, is this file management prompt.",
+    "start": "00:07:44",
+    "end": "00:07:51"
+  },
+  {
+    "text": "The one change I'd make to this is instead of choosing a primary sort by date or by project, tell it to organize following Tiago Forte's PARA method, projects, areas, resources, and archive.",
+    "start": "00:07:51",
+    "end": "00:08:01"
+  },
+  {
+    "text": "That way, every file lands in a bucket based on how actionable it is, not just what it looks like.",
+    "start": "00:08:01",
+    "end": "00:08:07"
+  },
+  {
+    "text": "This actually inspired me to create a schedule task in Co-work that processes my iCloud folder every morning, meaning Co-work sorts through the receipts, PDFs, random downloads I capture, into the right folder automatically.",
+    "start": "00:08:07",
+    "end": "00:08:18"
+  },
+  {
+    "text": "You can grab the Claude Co-work stack for free, link down below.",
+    "start": "00:08:18",
+    "end": "00:08:20"
+  },
+  {
+    "text": "Thank you, HubSpot, for sponsoring this video.",
+    "start": "00:08:20",
+    "end": "00:08:23"
+  },
+  {
+    "text": "All right, tip number three, the memory diet.",
+    "start": "00:08:23",
+    "end": "00:08:26"
+  },
+  {
+    "text": "Just like your root claude.",
+    "start": "00:08:26",
+    "end": "00:08:26"
+  },
+  {
+    "text": "md, your root memory.",
+    "start": "00:08:26",
+    "end": "00:08:29"
+  },
+  {
+    "text": "md also loads every single session.",
+    "start": "00:08:29",
+    "end": "00:08:31"
+  },
+  {
+    "text": "So, a messy one wastes tokens and makes Co-work's output worse.",
+    "start": "00:08:31",
+    "end": "00:08:34"
+  },
+  {
+    "text": "So, here are three things you can do.",
+    "start": "00:08:34",
+    "end": "00:08:36"
+  },
+  {
+    "text": "First, give your memory.",
+    "start": "00:08:36",
+    "end": "00:08:37"
+  },
+  {
+    "text": "md a clear structure.",
+    "start": "00:08:37",
+    "end": "00:08:39"
+  },
+  {
+    "text": "My root memory.",
+    "start": "00:08:39",
+    "end": "00:08:39"
+  },
+  {
+    "text": "md has three sections, with the first being active projects and work, which is a list of everything I'm currently working on with a short status next to each one.",
+    "start": "00:08:39",
+    "end": "00:08:47"
+  },
+  {
+    "text": "So, Co-work immediately knows what's on my plate.",
+    "start": "00:08:47",
+    "end": "00:08:51"
+  },
+  {
+    "text": "Second, a scheduled task section that tracks all my automated recurring jobs, so Co-work doesn't accidentally create duplicates or miss a task that already exists.",
+    "start": "00:08:49",
+    "end": "00:08:59"
+  },
+  {
+    "text": "And third, the core memory section stores persistent facts about me, like my career before becoming a full-time YouTuber, my LinkedIn URL, and my business address, and how it's used.",
+    "start": "00:08:59",
+    "end": "00:09:11"
+  },
+  {
+    "text": "Basically, facts I need to reference all the time.",
+    "start": "00:09:09",
+    "end": "00:09:12"
+  },
+  {
+    "text": "Tactic number two, set a hard ceiling.",
+    "start": "00:09:12",
+    "end": "00:09:14"
+  },
+  {
+    "text": "So, remember how in my root claude.",
+    "start": "00:09:14",
+    "end": "00:09:16"
+  },
+  {
+    "text": "md, I have a memory system section?",
+    "start": "00:09:16",
+    "end": "00:09:18"
+  },
+  {
+    "text": "And at the bottom here, there's actually a pointer to the full set of memory system rules.",
+    "start": "00:09:18",
+    "end": "00:09:26"
+  },
+  {
+    "text": "And if I open up that file, there are two things you should know.",
+    "start": "00:09:26",
+    "end": "00:09:29"
+  },
+  {
+    "text": "First, under entry format, there's a rule that says, \"One to two sentences max for every memory entry.",
+    "start": "00:09:29",
+    "end": "00:09:37"
+  },
+  {
+    "text": "\" Meaning, Co-work writes concise entries from day one instead of long paragraphs that bloats your memory.",
+    "start": "00:09:37",
+    "end": "00:09:43"
+  },
+  {
+    "text": "md file and waste tokens.",
+    "start": "00:09:43",
+    "end": "00:09:43"
+  },
+  {
+    "text": "Next, under size ceiling section, there's a rule that reads root memory.",
+    "start": "00:09:43",
+    "end": "00:09:47"
+  },
+  {
+    "text": "md 150 line ceiling.",
+    "start": "00:09:47",
+    "end": "00:09:50"
+  },
+  {
+    "text": "When the ceiling is breached, the fix is always compression and archiving, never raising the ceiling.",
+    "start": "00:09:50",
+    "end": "00:09:56"
+  },
+  {
+    "text": "In plain English, this means when your memory.",
+    "start": "00:09:56",
+    "end": "00:10:01"
+  },
+  {
+    "text": "md file inevitably reaches 150 lines, co-work will automatically archive information that's no longer current, like things that happened two or three months ago.",
+    "start": "00:10:01",
+    "end": "00:10:10"
+  },
+  {
+    "text": "But, wait a minute, where does that archived information go?",
+    "start": "00:10:08",
+    "end": "00:10:13"
+  },
+  {
+    "text": "Tactic number three, create an archive.",
+    "start": "00:10:13",
+    "end": "00:10:17"
+  },
+  {
+    "text": "md.",
+    "start": "00:10:17",
+    "end": "00:10:17"
+  },
+  {
+    "text": "Here's a simple visualization.",
+    "start": "00:10:15",
+    "end": "00:10:19"
+  },
+  {
+    "text": "Your memory.",
+    "start": "00:10:19",
+    "end": "00:10:18"
+  },
+  {
+    "text": "md is a whiteboard that contains active projects and key facts you need to reference every day.",
+    "start": "00:10:18",
+    "end": "00:10:24"
+  },
+  {
+    "text": "Your archive.",
+    "start": "00:10:24",
+    "end": "00:10:26"
+  },
+  {
+    "text": "md is the filing cabinet with a complete record of everything you've done.",
+    "start": "00:10:26",
+    "end": "00:10:31"
+  },
+  {
+    "text": "And here's a key insight.",
+    "start": "00:10:31",
+    "end": "00:10:32"
+  },
+  {
+    "text": "Co-work does not read archive.",
+    "start": "00:10:32",
+    "end": "00:10:33"
+  },
+  {
+    "text": "md every session.",
+    "start": "00:10:33",
+    "end": "00:10:34"
+  },
+  {
+    "text": "It's only when you ask something like, \"What happened with the e-list three months ago?",
+    "start": "00:10:34",
+    "end": "00:10:38"
+  },
+  {
+    "text": "\" Does it then check the archive.",
+    "start": "00:10:38",
+    "end": "00:10:43"
+  },
+  {
+    "text": "md file to find the answer?",
+    "start": "00:10:43",
+    "end": "00:10:44"
+  },
+  {
+    "text": "And because archive.",
+    "start": "00:10:44",
+    "end": "00:10:45"
+  },
+  {
+    "text": "md isn't loaded at session start, it doesn't need to have a size ceiling, right?",
+    "start": "00:10:45",
+    "end": "00:10:49"
+  },
+  {
+    "text": "You can preserve everything you want without paying any token cost.",
+    "start": "00:10:49",
+    "end": "00:10:52"
+  },
+  {
+    "text": "To help you set this up, I have a prompt linked below that you can paste directly into co-work like so.",
+    "start": "00:10:52",
+    "end": "00:10:59"
+  },
+  {
+    "text": "In the interest of time, I won't read the whole thing, but basically, this prompt first creates your archive.",
+    "start": "00:10:59",
+    "end": "00:11:07"
+  },
+  {
+    "text": "md file, then adds the memory rules to your claw.",
+    "start": "00:11:07",
+    "end": "00:11:08"
+  },
+  {
+    "text": "md, and teaches co-work which entries to keep in memory.",
+    "start": "00:11:08",
+    "end": "00:11:13"
+  },
+  {
+    "text": "md and which to archive.",
+    "start": "00:11:13",
+    "end": "00:11:14"
+  },
+  {
+    "text": "Pro tip, you want to create a separate memory.",
+    "start": "00:11:14",
+    "end": "00:11:18"
+  },
+  {
+    "text": "md for each workstation and each project inside your workspace to reduce token usage.",
+    "start": "00:11:18",
+    "end": "00:11:23"
+  },
+  {
+    "text": "For example, when I ask co-work something like, \"What's going on with my latest email campaign?",
+    "start": "00:11:23",
+    "end": "00:11:27"
+  },
+  {
+    "text": "\" Co-work first checks root memory.",
+    "start": "00:11:27",
+    "end": "00:11:29"
+  },
+  {
+    "text": "md to see the project exists, then jumps to the project memory.",
+    "start": "00:11:29",
+    "end": "00:11:33"
+  },
+  {
+    "text": "md to read project specific information like notion pages, email subject lines, past decisions, and current [music] status.",
+    "start": "00:11:33",
+    "end": "00:11:42"
+  },
+  {
+    "text": "And this cascading setup is why my root memory.",
+    "start": "00:11:42",
+    "end": "00:11:45"
+  },
+  {
+    "text": "md has never gone above 100 lines even after months of aggressive daily use.",
+    "start": "00:11:45",
+    "end": "00:11:50"
+  },
+  {
+    "text": "Next up, tip number four, the project transplant.",
+    "start": "00:11:48",
+    "end": "00:11:51"
+  },
+  {
+    "text": "A lot of you asked about the relationship between Claude projects and co-work.",
+    "start": "00:11:51",
+    "end": "00:11:54"
+  },
+  {
+    "text": "And long story short, you want to migrate all your Claude projects into co-work because co-work doesn't face the same limitations as Claude projects.",
+    "start": "00:11:54",
+    "end": "00:12:04"
+  },
+  {
+    "text": "For instance, I used to rely on this Claude project to write my weekly newsletter.",
+    "start": "00:12:04",
+    "end": "00:12:08"
+  },
+  {
+    "text": "And within this project, we have project instructions over here, a project knowledge file, and auto-generated project memory.",
+    "start": "00:12:06",
+    "end": "00:12:14"
+  },
+  {
+    "text": "Compared to co-work, there are quite a few problems here.",
+    "start": "00:12:14",
+    "end": "00:12:18"
+  },
+  {
+    "text": "For example, if I wanted to make improvements to the project instructions, I would have to manually click in and type out something or paste in something, right?",
+    "start": "00:12:18",
+    "end": "00:12:26"
+  },
+  {
+    "text": "Second, clicking into the project memory, we see it's an AI-generated paragraph.",
+    "start": "00:12:26",
+    "end": "00:12:31"
+  },
+  {
+    "text": "I can't really structure or edit directly.",
+    "start": "00:12:31",
+    "end": "00:12:33"
+  },
+  {
+    "text": "This doesn't work really well.",
+    "start": "00:12:33",
+    "end": "00:12:34"
+  },
+  {
+    "text": "And third, even though I can link a Google Doc of past newsletter editions as a knowledge file, Claude can't write to this document directly, either.",
+    "start": "00:12:34",
+    "end": "00:12:43"
+  },
+  {
+    "text": "I'd have to like open the document and paste everything myself.",
+    "start": "00:12:43",
+    "end": "00:12:45"
+  },
+  {
+    "text": "All these issues can be addressed by migrating our Claude projects into co-work, and the process is simple.",
+    "start": "00:12:45",
+    "end": "00:12:51"
+  },
+  {
+    "text": "The project instructions essentially become the workstation Claude.",
+    "start": "00:12:51",
+    "end": "00:12:54"
+  },
+  {
+    "text": "md file, project memory becomes the memory.",
+    "start": "00:12:54",
+    "end": "00:12:57"
+  },
+  {
+    "text": "md file, and knowledge files get added to the project resources folder.",
+    "start": "00:12:57",
+    "end": "00:13:02"
+  },
+  {
+    "text": "Here's what to do in practice.",
+    "start": "00:13:02",
+    "end": "00:13:06"
+  },
+  {
+    "text": "Open up a blank text document, go in and select all, copy the project instructions, and paste it into this document.",
+    "start": "00:13:03",
+    "end": "00:13:11"
+  },
+  {
+    "text": "Press enter twice, go back, click into project memory, select all of this, add a header one, project memory, paste the project memory in, as well.",
+    "start": "00:13:11",
+    "end": "00:13:27"
+  },
+  {
+    "text": "Save this as a markdown document, project info.",
+    "start": "00:13:24",
+    "end": "00:13:31"
+  },
+  {
+    "text": "md, save.",
+    "start": "00:13:31",
+    "end": "00:13:30"
+  },
+  {
+    "text": "All right.",
+    "start": "00:13:30",
+    "end": "00:13:32"
+  },
+  {
+    "text": "And then, I can download my entire Google Doc as a markdown file as well.",
+    "start": "00:13:32",
+    "end": "00:13:38"
+  },
+  {
+    "text": "All tabs.",
+    "start": "00:13:38",
+    "end": "00:13:40"
+  },
+  {
+    "text": "This might take a few moments.",
+    "start": "00:13:40",
+    "end": "00:13:41"
+  },
+  {
+    "text": "I might fast forward this.",
+    "start": "00:13:41",
+    "end": "00:13:42"
+  },
+  {
+    "text": "[music] In the meantime though, let's head on over to my free template.",
+    "start": "00:13:42",
+    "end": "00:13:45"
+  },
+  {
+    "text": "Uh this is linked again, linked down below.",
+    "start": "00:13:45",
+    "end": "00:13:51"
+  },
+  {
+    "text": "Copy this simple migration prompt, paste it into Co-work.",
+    "start": "00:13:48",
+    "end": "00:13:55"
+  },
+  {
+    "text": "And then, back in my downloads, share both the project info.",
+    "start": "00:13:53",
+    "end": "00:13:59"
+  },
+  {
+    "text": "md and my Google Doc MD file into Co-work and just let this run in order for the claw project to be migrated into Co-work.",
+    "start": "00:13:59",
+    "end": "00:14:08"
+  },
+  {
+    "text": "All right, it's done.",
+    "start": "00:14:08",
+    "end": "00:14:08"
+  },
+  {
+    "text": "Let's go over what Co-work just did.",
+    "start": "00:14:08",
+    "end": "00:14:10"
+  },
+  {
+    "text": "First, it created a newsletter workstation folder.",
+    "start": "00:14:10",
+    "end": "00:14:13"
+  },
+  {
+    "text": "My newsletter's called Workspace Essentials, but this is a newsletter workstation folder.",
+    "start": "00:14:13",
+    "end": "00:14:19"
+  },
+  {
+    "text": "Second, it created a workstation claw.",
+    "start": "00:14:16",
+    "end": "00:14:22"
+  },
+  {
+    "text": "md file that contains the same workflow as the original project instructions.",
+    "start": "00:14:22",
+    "end": "00:14:28"
+  },
+  {
+    "text": "Third, it created a memory.",
+    "start": "00:14:25",
+    "end": "00:14:29"
+  },
+  {
+    "text": "md file with labeled instructions that I can actually edit like so.",
+    "start": "00:14:29",
+    "end": "00:14:35"
+  },
+  {
+    "text": "And fourth, it created a resources folder with three separate resource files.",
+    "start": "00:14:33",
+    "end": "00:14:41"
+  },
+  {
+    "text": "One for audience and positioning, one for uh my recent newsletters, and one that extracted uh style patterns from my existing newsletters.",
+    "start": "00:14:39",
+    "end": "00:14:49"
+  },
+  {
+    "text": "As a bonus, we can even go back to our root claw.",
+    "start": "00:14:49",
+    "end": "00:14:52"
+  },
+  {
+    "text": "md file and scrolling all the way down, you can see that under routing map, Co-work even added a new entry that maps to our newly created newsletter workstation.",
+    "start": "00:14:52",
+    "end": "00:15:02"
+  },
+  {
+    "text": "Now, whenever I want to make a change to any of those files, I can simply tell Co-work, \"Hey, add a rule to my newsletter workstation.",
+    "start": "00:15:02",
+    "end": "00:15:09"
+  },
+  {
+    "text": "Each edition should have a maximum of three emojis.",
+    "start": "00:15:09",
+    "end": "00:15:11"
+  },
+  {
+    "text": "\" And Co-work will make the change directly in the newsletter claw.",
+    "start": "00:15:11",
+    "end": "00:15:15"
+  },
+  {
+    "text": "md file, as you can see right here.",
+    "start": "00:15:15",
+    "end": "00:15:19"
+  },
+  {
+    "text": "And let's say I just published the latest issue.",
+    "start": "00:15:18",
+    "end": "00:15:21"
+  },
+  {
+    "text": "I can tell Co-work to add the latest edition to the newsletter examples file, pasting the copy, let it run, and after a minute I'm not going to wait, I'm too impatient.",
+    "start": "00:15:21",
+    "end": "00:15:33"
+  },
+  {
+    "text": "It will be added to the newsletter examples recent markdown file.",
+    "start": "00:15:33",
+    "end": "00:15:35"
+  },
+  {
+    "text": "I cannot stress how much of a game-changer this is compared to the regular chatbots.",
+    "start": "00:15:35",
+    "end": "00:15:40"
+  },
+  {
+    "text": "This is how our co-work workspace compounds.",
+    "start": "00:15:40",
+    "end": "00:15:44"
+  },
+  {
+    "text": "Every improvement, every change we make today makes tomorrow's output better.",
+    "start": "00:15:44",
+    "end": "00:15:48"
+  },
+  {
+    "text": "By the way, if you want my complete system with pre-built workstation templates and then step-by-step walk-through so you can skip the trial and error of building from scratch, I'm putting together a co-work academy course and can sign up for the waitlist down below.",
+    "start": "00:15:48",
+    "end": "00:16:00"
+  },
+  {
+    "text": "Moving on to tip number five, the skill check.",
+    "start": "00:16:00",
+    "end": "00:16:03"
+  },
+  {
+    "text": "A lot of you asked about skills versus workstations after my last video, so here's the difference in a nutshell.",
+    "start": "00:16:03",
+    "end": "00:16:08"
+  },
+  {
+    "text": "Back in my actual co-work workspace, I say, \"I want to work on my next Native Weekly newsletter.",
+    "start": "00:16:07",
+    "end": "00:16:13"
+  },
+  {
+    "text": "What do I need to do again?",
+    "start": "00:16:13",
+    "end": "00:16:13"
+  },
+  {
+    "text": "\" And let's see what it says.",
+    "start": "00:16:13",
+    "end": "00:16:16"
+  },
+  {
+    "text": "All right, as you can see, co-work first loaded my newsletter workstation for context, then laid out the workflow.",
+    "start": "00:16:16",
+    "end": "00:16:23"
+  },
+  {
+    "text": "But notice how a lot of these steps surfaces a decision I need to make.",
+    "start": "00:16:23",
+    "end": "00:16:26"
+  },
+  {
+    "text": "For example, step one, do I have a topic in mind?",
+    "start": "00:16:26",
+    "end": "00:16:28"
+  },
+  {
+    "text": "Which Google application am I covering this week?",
+    "start": "00:16:27",
+    "end": "00:16:29"
+  },
+  {
+    "text": "Right?",
+    "start": "00:16:29",
+    "end": "00:16:30"
+  },
+  {
+    "text": "This illustrates something important.",
+    "start": "00:16:30",
+    "end": "00:16:33"
+  },
+  {
+    "text": "This newsletter workflow cannot run on autopilot.",
+    "start": "00:16:33",
+    "end": "00:16:36"
+  },
+  {
+    "text": "I, the human, need to make decisions and judgment calls as part of the process.",
+    "start": "00:16:36",
+    "end": "00:16:43"
+  },
+  {
+    "text": "In contrast, once a newsletter draft is finalized, I can trigger my newsletter subject line skill, which takes the final draft, applies the instructions from the skill that can run on autopilot since it's just a checklist, and I'm going to fast forward a bit here, it'll give me five scored options.",
+    "start": "00:16:40",
+    "end": "00:17:03"
+  },
+  {
+    "text": "I know exactly what I'm getting back every time, and the only thing that changes is the content.",
+    "start": "00:17:01",
+    "end": "00:17:08"
+  },
+  {
+    "text": "Example number two, I have a workstation audit skill that checks for misplaced rules, bloat, and gaps within a specific workstation folder to keep my workstations optimized and lean.",
+    "start": "00:17:08",
+    "end": "00:17:17"
+  },
+  {
+    "text": "The output is a report with an executive summary up front followed by specific findings and recommendations.",
+    "start": "00:17:17",
+    "end": "00:17:24"
+  },
+  {
+    "text": "So, the test for when to create a workstation versus a skill is actually pretty simple.",
+    "start": "00:17:23",
+    "end": "00:17:28"
+  },
+  {
+    "text": "Is this a place I work or a thing I do?",
+    "start": "00:17:28",
+    "end": "00:17:31"
+  },
+  {
+    "text": "If it's an ongoing area of work with its own voice and accumulated context, that's a workstation.",
+    "start": "00:17:31",
+    "end": "00:17:37"
+  },
+  {
+    "text": "If it's a repeatable process you want done the same way every time, that's a skill.",
+    "start": "00:17:37",
+    "end": "00:17:43"
+  },
+  {
+    "text": "If you found this helpful, check out my full Co-work playlist next.",
+    "start": "00:17:43",
+    "end": "00:17:46"
+  },
+  {
+    "text": "See you there and in the meantime, have a great one.",
+    "start": "00:17:46",
+    "end": "00:17:49"
+  }
+]

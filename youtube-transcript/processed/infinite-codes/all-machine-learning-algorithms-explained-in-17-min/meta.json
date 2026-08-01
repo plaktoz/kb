@@ -1,0 +1,104 @@
+{
+  "videoId": "E0Hmnixke2g",
+  "title": "All Machine Learning algorithms explained in 17 min",
+  "channel": "Infinite Codes",
+  "channelId": "UCktMIWomeuj4pwvBb-OBwMw",
+  "description": "All Machine Learning algorithms intuitively explained in 17 min\n\n#########################################\nI just started my own Patreon, in case you want to support!\nPatreon Link: https://www.patreon.com/c/InfiniteCodes\n#########################################\n\nIn this video I will go through all machine learning algorithms in less than 17 minutes to get you an intuitive understanding of how they work and how they relate to each other as well as help you decide how to pick the right one for your problem. Going all the way from Linear Regression to Neural Networks / Deep Learning and Unsupervised Learning.\n\nAlso Watch: \nHow to Learn Machine Learning in 2024 (7 step roadmap) https://youtu.be/jwTaBztqTZ0\nThe Math Skills that make Machine Learning easy (and how you can learn it) https://youtu.be/wOTFGRSUQ6Q\n\n#########\nChapters:\n\n00:00 - Intro: What is Machine Learning?\n00:59 - Supervised Learning\n01:37 - Unsupervised Learning\n02:20 - Linear Regression\n04:04 - Logistic Regression\n04:53 - K Nearest Neighbors (KNN)\n06:10 - Support Vector Machine (SVM)\n07:51 - Naive Bayes Classifier\n08:37 - Decision Trees\n09:11 - Ensemble Algorithms\n09:24 - Bagging & Random Forests\n09:53 - Boosting & Strong Learners\n10:26 - Neural Networks / Deep Learning\n12:42 - Unsupervised Learning (again)\n12:57 - Clustering / K-means\n14:35 - Dimensionality Reduction\n15:15 - Principal Component Analysis (PCA)",
+  "duration": 989,
+  "publishDate": "2024-09-17",
+  "url": "https://www.youtube.com/watch?v=E0Hmnixke2g",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/E0Hmnixke2g/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "- Intro: What is Machine Learning?",
+      "start": 0,
+      "end": 59
+    },
+    {
+      "title": "- Supervised Learning",
+      "start": 59,
+      "end": 97
+    },
+    {
+      "title": "- Unsupervised Learning",
+      "start": 97,
+      "end": 140
+    },
+    {
+      "title": "- Linear Regression",
+      "start": 140,
+      "end": 244
+    },
+    {
+      "title": "- Logistic Regression",
+      "start": 244,
+      "end": 293
+    },
+    {
+      "title": "- K Nearest Neighbors (KNN)",
+      "start": 293,
+      "end": 370
+    },
+    {
+      "title": "- Support Vector Machine (SVM)",
+      "start": 370,
+      "end": 471
+    },
+    {
+      "title": "- Naive Bayes Classifier",
+      "start": 471,
+      "end": 517
+    },
+    {
+      "title": "- Decision Trees",
+      "start": 517,
+      "end": 551
+    },
+    {
+      "title": "- Ensemble Algorithms",
+      "start": 551,
+      "end": 564
+    },
+    {
+      "title": "- Bagging & Random Forests",
+      "start": 564,
+      "end": 593
+    },
+    {
+      "title": "- Boosting & Strong Learners",
+      "start": 593,
+      "end": 626
+    },
+    {
+      "title": "- Neural Networks / Deep Learning",
+      "start": 626,
+      "end": 762
+    },
+    {
+      "title": "- Unsupervised Learning (again)",
+      "start": 762,
+      "end": 777
+    },
+    {
+      "title": "- Clustering / K-means",
+      "start": 777,
+      "end": 875
+    },
+    {
+      "title": "- Dimensionality Reduction",
+      "start": 875,
+      "end": 915
+    },
+    {
+      "title": "- Principal Component Analysis (PCA)",
+      "start": 915,
+      "end": 989
+    }
+  ]
+}

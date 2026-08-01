@@ -1,0 +1,1162 @@
+[
+  {
+    "text": "Most people open Claude and use it like a fancy Google search.",
+    "start": "00:00:00",
+    "end": "00:00:04"
+  },
+  {
+    "text": "That's like buying a Ferrari and only driving it 10 km an hour.",
+    "start": "00:00:04",
+    "end": "00:00:07"
+  },
+  {
+    "text": "I build AI products every single day through my company Martel Ventures and I heavily use Claude in all my work.",
+    "start": "00:00:07",
+    "end": "00:00:14"
+  },
+  {
+    "text": "So, I'm going to walk you through 16 Claude hacks that will save you hours of time, grow your business, very important, and boost your productivity in ways that will blow your freaking mind.",
+    "start": "00:00:14",
+    "end": "00:00:24"
+  },
+  {
+    "text": "Let's get into it.",
+    "start": "00:00:24",
+    "end": "00:00:26"
+  },
+  {
+    "text": "Number one, the memory import.",
+    "start": "00:00:26",
+    "end": "00:00:27"
+  },
+  {
+    "text": "See, if you are still stuck on Chat GPT, so sorry to hear.",
+    "start": "00:00:27",
+    "end": "00:00:29"
+  },
+  {
+    "text": "Now, we got to migrate you over, but you don't want to lose your contacts.",
+    "start": "00:00:29",
+    "end": "00:00:33"
+  },
+  {
+    "text": "It'll bring over everything, your preferences, your history, and it'll transfer it over like that.",
+    "start": "00:00:33",
+    "end": "00:00:39"
+  },
+  {
+    "text": "It's a simple way to import everything you've done in Chat GPT and bring it over to Claude in less than 2 minutes.",
+    "start": "00:00:39",
+    "end": "00:00:45"
+  },
+  {
+    "text": "We go to our settings, we go to capabilities, and then start import.",
+    "start": "00:00:45",
+    "end": "00:00:48"
+  },
+  {
+    "text": "Claude then gives you a prompt and then you paste it into Chat GPT, then it gives you everything it knows about you.",
+    "start": "00:00:48",
+    "end": "00:00:53"
+  },
+  {
+    "text": "Got you.",
+    "start": "00:00:53",
+    "end": "00:00:54"
+  },
+  {
+    "text": "So, you take the output and paste it back into the Claude box, you click add to memory and voila, tout fini, you're done.",
+    "start": "00:00:54",
+    "end": "00:01:02"
+  },
+  {
+    "text": "Hack number two, model selector.",
+    "start": "00:01:02",
+    "end": "00:01:04"
+  },
+  {
+    "text": "Claude has three different power levels essentially and you got to pick the right one for the right job.",
+    "start": "00:01:04",
+    "end": "00:01:08"
+  },
+  {
+    "text": "So, you click the model selector at the bottom right and then you see we've got Haiku.",
+    "start": "00:01:08",
+    "end": "00:01:13"
+  },
+  {
+    "text": "This is your cheapest and fastest model.",
+    "start": "00:01:13",
+    "end": "00:01:16"
+  },
+  {
+    "text": "Then you've got Sonnet, best for everyday tasks.",
+    "start": "00:01:16",
+    "end": "00:01:19"
+  },
+  {
+    "text": "You've got Opus, that's best for complex tasks.",
+    "start": "00:01:17",
+    "end": "00:01:20"
+  },
+  {
+    "text": "Or you can select this little adaptive thinking thing so it picks automatically depending on the task so you don't have to think, but then you don't have as much control.",
+    "start": "00:01:20",
+    "end": "00:01:29"
+  },
+  {
+    "text": "I like to set my own control.",
+    "start": "00:01:29",
+    "end": "00:01:30"
+  },
+  {
+    "text": "So, for example, if you're looking for patterns and metrics, Opus crushes.",
+    "start": "00:01:30",
+    "end": "00:01:33"
+  },
+  {
+    "text": "It thinks way harder.",
+    "start": "00:01:33",
+    "end": "00:01:36"
+  },
+  {
+    "text": "If you're drafting an email response, Sonnet, it's awesome.",
+    "start": "00:01:36",
+    "end": "00:01:38"
+  },
+  {
+    "text": "And my favorite part, it's faster and it can give you different options.",
+    "start": "00:01:38",
+    "end": "00:01:42"
+  },
+  {
+    "text": "If you're trying to summarize 50 meeting notes, it's just a bunch of data, Haiku, instant, done in seconds.",
+    "start": "00:01:42",
+    "end": "00:01:47"
+  },
+  {
+    "text": "Next, hack number three, the Gmail connector.",
+    "start": "00:01:47",
+    "end": "00:01:51"
+  },
+  {
+    "text": "Dan, is it secure?",
+    "start": "00:01:51",
+    "end": "00:01:53"
+  },
+  {
+    "text": "Your security at home is a bazillion times less security than the team at Claude.",
+    "start": "00:01:53",
+    "end": "00:01:58"
+  },
+  {
+    "text": "I just want you to know that.",
+    "start": "00:01:58",
+    "end": "00:01:59"
+  },
+  {
+    "text": "So, stop asking me if it's secure and start using the tools to make yourself some money.",
+    "start": "00:01:59",
+    "end": "00:02:03"
+  },
+  {
+    "text": "You should just not be touching your inbox.",
+    "start": "00:02:01",
+    "end": "00:02:03"
+  },
+  {
+    "text": "You can literally do all your email through Claude.",
+    "start": "00:02:03",
+    "end": "00:02:07"
+  },
+  {
+    "text": "But first, we got to connect it.",
+    "start": "00:02:07",
+    "end": "00:02:09"
+  },
+  {
+    "text": "You go to customize in the sidebar, connectors, then choose Gmail, then log into it.",
+    "start": "00:02:09",
+    "end": "00:02:15"
+  },
+  {
+    "text": "Super easy.",
+    "start": "00:02:15",
+    "end": "00:02:16"
+  },
+  {
+    "text": "Click, log in, it's added.",
+    "start": "00:02:14",
+    "end": "00:02:17"
+  },
+  {
+    "text": "I ask Claude to find stuff, summarize it, draft replies for me, and for what it's worth, the Gmail inbox search sucks.",
+    "start": "00:02:17",
+    "end": "00:02:25"
+  },
+  {
+    "text": "So, how about we get the AI to search for us.",
+    "start": "00:02:25",
+    "end": "00:02:28"
+  },
+  {
+    "text": "If you want a cheat code and you have an assistant, what I do is I have a Claude account that is for my assistant and I.",
+    "start": "00:02:28",
+    "end": "00:02:35"
+  },
+  {
+    "text": "I've connected to my inbox and they can use that to search my inbox through our shared Claude account so that she can self-serve on any questions she would normally ask me, she can find it in my inbox.",
+    "start": "00:02:33",
+    "end": "00:02:44"
+  },
+  {
+    "text": "Power move.",
+    "start": "00:02:44",
+    "end": "00:02:46"
+  },
+  {
+    "text": "Hack number four, calendar connector.",
+    "start": "00:02:46",
+    "end": "00:02:48"
+  },
+  {
+    "text": "Similar, but different.",
+    "start": "00:02:48",
+    "end": "00:02:49"
+  },
+  {
+    "text": "Let me tell you why.",
+    "start": "00:02:49",
+    "end": "00:02:51"
+  },
+  {
+    "text": "Essentially, Claude connects your Google calendar and it can do a lot of cool stuff.",
+    "start": "00:02:49",
+    "end": "00:02:53"
+  },
+  {
+    "text": "Yes, it can schedule things.",
+    "start": "00:02:53",
+    "end": "00:02:56"
+  },
+  {
+    "text": "It can help you with meetings.",
+    "start": "00:02:56",
+    "end": "00:02:58"
+  },
+  {
+    "text": "It can find your free time.",
+    "start": "00:02:58",
+    "end": "00:02:58"
+  },
+  {
+    "text": "But even more important, it can help you analyze your time.",
+    "start": "00:02:58",
+    "end": "00:03:03"
+  },
+  {
+    "text": "So, same thing.",
+    "start": "00:03:03",
+    "end": "00:03:02"
+  },
+  {
+    "text": "We go to the same place on the sidebar, connectors, Google calendar, log in.",
+    "start": "00:03:02",
+    "end": "00:03:07"
+  },
+  {
+    "text": "Now, I can go into Claude and add something like, \"Add 1 hour time block sometime before Friday for me to review our next YouTube outline.",
+    "start": "00:03:07",
+    "end": "00:03:13"
+  },
+  {
+    "text": "\" It then creates the time block and let me know why it picked that time.",
+    "start": "00:03:13",
+    "end": "00:03:18"
+  },
+  {
+    "text": "An advanced move is to give it your goals for the quarter, maybe for the year, and then say, \"Analyze my calendar, now analyze my email cuz you got that, too, and see if I'm spending the right amount of time on the projects to achieve those goals.",
+    "start": "00:03:16",
+    "end": "00:03:30"
+  },
+  {
+    "text": "\" Now, it became a business coach.",
+    "start": "00:03:30",
+    "end": "00:03:32"
+  },
+  {
+    "text": "And these are only two connectors and there's connectors for Slack, Notion, GitHub, Google Drive, and a bunch of others.",
+    "start": "00:03:32",
+    "end": "00:03:38"
+  },
+  {
+    "text": "Now, before we move on, if you're an entrepreneur and you're trying to keep up on all of this AI chaos, but you're maxed out on time, I totally get it.",
+    "start": "00:03:38",
+    "end": "00:03:46"
+  },
+  {
+    "text": "That's why I built my AI company OS Playbook, the exact framework that I use to plug AI into every department within my business.",
+    "start": "00:03:46",
+    "end": "00:03:54"
+  },
+  {
+    "text": "If you want it, it's yours for free.",
+    "start": "00:03:54",
+    "end": "00:03:56"
+  },
+  {
+    "text": "Just DM me AI business on Instagram at Dan Martell and I'll send it right over to you.",
+    "start": "00:03:56",
+    "end": "00:04:00"
+  },
+  {
+    "text": "Hack number five, artifacts.",
+    "start": "00:04:00",
+    "end": "00:04:01"
+  },
+  {
+    "text": "So, essentially what it is is working apps right in the chat.",
+    "start": "00:04:01",
+    "end": "00:04:04"
+  },
+  {
+    "text": "It essentially creates like little mini apps within the chat that you can use and change things around and just kind of iterate.",
+    "start": "00:04:04",
+    "end": "00:04:11"
+  },
+  {
+    "text": "I get asked every day, \"Hey Dan, I got this idea.",
+    "start": "00:04:11",
+    "end": "00:04:14"
+  },
+  {
+    "text": "I want to hire a developer.",
+    "start": "00:04:14",
+    "end": "00:04:15"
+  },
+  {
+    "text": "How do I find the right person?",
+    "start": "00:04:15",
+    "end": "00:04:16"
+  },
+  {
+    "text": "\" I go, \"Look in the mirror.",
+    "start": "00:04:16",
+    "end": "00:04:21"
+  },
+  {
+    "text": "You are that person.",
+    "start": "00:04:18",
+    "end": "00:04:21"
+  },
+  {
+    "text": "\" Try it.",
+    "start": "00:04:21",
+    "end": "00:04:22"
+  },
+  {
+    "text": "Just say, \"Build me this thing.",
+    "start": "00:04:22",
+    "end": "00:04:23"
+  },
+  {
+    "text": "\" and watch Claude build it.",
+    "start": "00:04:23",
+    "end": "00:04:24"
+  },
+  {
+    "text": "So, for example, you could say, \"Build me a spreadsheet with sample data.",
+    "start": "00:04:24",
+    "end": "00:04:27"
+  },
+  {
+    "text": "\" and then make the columns editable, include the sales reps who's involved, the status of the sale, the product they sold, and any other information you think that would be relevant and then hit boom, enter, and then pow, it just creates these interactive apps in chat.",
+    "start": "00:04:27",
+    "end": "00:04:42"
+  },
+  {
+    "text": "So, it's not just like an information back and forth.",
+    "start": "00:04:42",
+    "end": "00:04:46"
+  },
+  {
+    "text": "Now, we're building things.",
+    "start": "00:04:44",
+    "end": "00:04:47"
+  },
+  {
+    "text": "Hack number six, interactive visuals.",
+    "start": "00:04:47",
+    "end": "00:04:49"
+  },
+  {
+    "text": "Now, this is my favorite because I used to take the data from Claude and then go visualize it in other tools.",
+    "start": "00:04:49",
+    "end": "00:04:55"
+  },
+  {
+    "text": "Now, I get to stay right inside the chat.",
+    "start": "00:04:55",
+    "end": "00:04:57"
+  },
+  {
+    "text": "Claude builds you live, clickable visuals that you can use explain anything.",
+    "start": "00:04:57",
+    "end": "00:05:02"
+  },
+  {
+    "text": "It's literally done what I call accelerated learning.",
+    "start": "00:05:02",
+    "end": "00:05:06"
+  },
+  {
+    "text": "So, for example, you can ask it to visualize the height framework, which is how we shoot our short-form videos.",
+    "start": "00:05:06",
+    "end": "00:05:10"
+  },
+  {
+    "text": "And if you want and need context on that, just check Slack.",
+    "start": "00:05:10",
+    "end": "00:05:12"
+  },
+  {
+    "text": "So, now it's going to use my Slack as a connector and it builds me this cool whole visual that I can click on and expand to learn more about what it is and it's all done by pulling the information and visualizing it.",
+    "start": "00:05:12",
+    "end": "00:05:23"
+  },
+  {
+    "text": "It's as simple as telling it, \"Visualize this.",
+    "start": "00:05:23",
+    "end": "00:05:26"
+  },
+  {
+    "text": "\" Hack number seven, projects.",
+    "start": "00:05:26",
+    "end": "00:05:27"
+  },
+  {
+    "text": "Think of it like this.",
+    "start": "00:05:27",
+    "end": "00:05:28"
+  },
+  {
+    "text": "It's essentially a folder that's preloaded with all the context you might have around a project.",
+    "start": "00:05:28",
+    "end": "00:05:33"
+  },
+  {
+    "text": "See why it's called a project?",
+    "start": "00:05:33",
+    "end": "00:05:34"
+  },
+  {
+    "text": "And then you can actually invite other people to collaborate with you on those projects so that your chats and their chats are all in one place and you can kind of riff off each other.",
+    "start": "00:05:34",
+    "end": "00:05:42"
+  },
+  {
+    "text": "If you're on a team account, highly recommend you do.",
+    "start": "00:05:42",
+    "end": "00:05:46"
+  },
+  {
+    "text": "So, here's how How it.",
+    "start": "00:05:46",
+    "end": "00:05:46"
+  },
+  {
+    "text": "We go to the sidebar, then you click projects, then new project.",
+    "start": "00:05:46",
+    "end": "00:05:49"
+  },
+  {
+    "text": "[music] Now, I drop contacts in there.",
+    "start": "00:05:49",
+    "end": "00:05:53"
+  },
+  {
+    "text": "So, everything from internal documents to PDFs to anything I've downloaded, any instructions, copy-paste other chats, you put all that in the knowledge section.",
+    "start": "00:05:53",
+    "end": "00:06:00"
+  },
+  {
+    "text": "When you start chatting with it, it has all that reference material to be able to give you good answers.",
+    "start": "00:06:00",
+    "end": "00:06:07"
+  },
+  {
+    "text": "I have every one of my coaching calls transcribed.",
+    "start": "00:06:07",
+    "end": "00:06:09"
+  },
+  {
+    "text": "So, if I'm looking for an example, a story, a client, I can go into the project that has already linked up to that Google Drive and tell it to search every transcript to find examples or stories around this pain or this challenge, and that feeds me ideas for me to talk about in my content.",
+    "start": "00:06:09",
+    "end": "00:06:25"
+  },
+  {
+    "text": "And a pro move is you can create a system prompt that you copy and paste into the instruction box, which then essentially acts like what used to be called a custom GPT, so that you can get the same result over and over every time you come into that project.",
+    "start": "00:06:25",
+    "end": "00:06:37"
+  },
+  {
+    "text": "Hack number eight, voice mode.",
+    "start": "00:06:37",
+    "end": "00:06:38"
+  },
+  {
+    "text": "Now, we get to talk to Claude, cuz guess what?",
+    "start": "00:06:38",
+    "end": "00:06:41"
+  },
+  {
+    "text": "I can talk three times faster than I can type.",
+    "start": "00:06:41",
+    "end": "00:06:44"
+  },
+  {
+    "text": "So, it's super easy.",
+    "start": "00:06:44",
+    "end": "00:06:44"
+  },
+  {
+    "text": "On a desktop, click that little waveform at the bottom of your prompt bar.",
+    "start": "00:06:44",
+    "end": "00:06:47"
+  },
+  {
+    "text": "On mobile, just click the mic button.",
+    "start": "00:06:47",
+    "end": "00:06:49"
+  },
+  {
+    "text": "I do this all time.",
+    "start": "00:06:49",
+    "end": "00:06:51"
+  },
+  {
+    "text": "Well, I'm driving, I'm having fun.",
+    "start": "00:06:51",
+    "end": "00:06:52"
+  },
+  {
+    "text": "It's easy.",
+    "start": "00:06:52",
+    "end": "00:06:53"
+  },
+  {
+    "text": "And the cool part is it transcribes the whole conversation, so if you ever want to use that in something else, it's all there to go.",
+    "start": "00:06:52",
+    "end": "00:06:57"
+  },
+  {
+    "text": "The best part is you can be super messy in whatever you're thinking about, and Claude is smart enough to go, \"Oh, you're probably talking about this.",
+    "start": "00:06:57",
+    "end": "00:07:04"
+  },
+  {
+    "text": "\" and give you a really great answer.",
+    "start": "00:07:04",
+    "end": "00:07:05"
+  },
+  {
+    "text": "Hack number nine, Chrome extension.",
+    "start": "00:07:05",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Non-negotiable for me.",
+    "start": "00:07:07",
+    "end": "00:07:10"
+  },
+  {
+    "text": "The Chrome extension is a go-to tool.",
+    "start": "00:07:10",
+    "end": "00:07:13"
+  },
+  {
+    "text": "If you're a Claude user, please install it.",
+    "start": "00:07:13",
+    "end": "00:07:15"
+  },
+  {
+    "text": "So, what it does is it allows you to use your browser through Claude to automate tasks.",
+    "start": "00:07:13",
+    "end": "00:07:19"
+  },
+  {
+    "text": "So, the first thing we got to do is go to the Chrome Web Store and find Claude for Chrome and install it.",
+    "start": "00:07:19",
+    "end": "00:07:26"
+  },
+  {
+    "text": "And what it is, pretty much everything you do in your browser, the Claude Chrome browser extension could do for you.",
+    "start": "00:07:26",
+    "end": "00:07:31"
+  },
+  {
+    "text": "So, for example, if you got like a spreadsheet and you got all these numbers and you're like, \"I wonder what the pattern is and what should I pay attention to?",
+    "start": "00:07:31",
+    "end": "00:07:37"
+  },
+  {
+    "text": "\" You can just ask it.",
+    "start": "00:07:37",
+    "end": "00:07:39"
+  },
+  {
+    "text": "Then Claude takes a snapshot of the site, starts scraping everything, clicks buttons, works inside your browser, and it finds the insights.",
+    "start": "00:07:39",
+    "end": "00:07:45"
+  },
+  {
+    "text": "It does everything that you would have to do that you might not even know how to do for you automagically.",
+    "start": "00:07:45",
+    "end": "00:07:50"
+  },
+  {
+    "text": "Hack number 10, Cowork.",
+    "start": "00:07:50",
+    "end": "00:07:51"
+  },
+  {
+    "text": "This is where it gets nerdy, like my kind of people are sticking around right to the end starting now.",
+    "start": "00:07:51",
+    "end": "00:07:58"
+  },
+  {
+    "text": "What it is is Claude will take over your computer and do work on your computer while you step away.",
+    "start": "00:07:56",
+    "end": "00:08:03"
+  },
+  {
+    "text": "On your Claude desktop, so it's a separate app you have to install on your desktop, open up and you'll see Cowork.",
+    "start": "00:08:03",
+    "end": "00:08:09"
+  },
+  {
+    "text": "Open Cowork, it's in the top left.",
+    "start": "00:08:09",
+    "end": "00:08:11"
+  },
+  {
+    "text": "And here's a tip, make sure you toggle on computer use in your settings cuz it needs that to be able to do things on your computer.",
+    "start": "00:08:11",
+    "end": "00:08:18"
+  },
+  {
+    "text": "Then you just describe any task you need to be done and the steps that it requires and Claude breaks it down and executes step by step.",
+    "start": "00:08:18",
+    "end": "00:08:23"
+  },
+  {
+    "text": "So for example, you can say, \"Pull last month's sales numbers from HubSpot, drop them in a Google Sheet, build a summary chart, and post on the team Slack channel before Monday 9:00 a.",
+    "start": "00:08:23",
+    "end": "00:08:32"
+  },
+  {
+    "text": "m.",
+    "start": "00:08:32",
+    "end": "00:08:32"
+  },
+  {
+    "text": "\" and it'll take over control of my computer to do it all.",
+    "start": "00:08:32",
+    "end": "00:08:36"
+  },
+  {
+    "text": "It's like Claude's hands doing the work for you.",
+    "start": "00:08:36",
+    "end": "00:08:40"
+  },
+  {
+    "text": "Hack number 11, Schedule Task.",
+    "start": "00:08:37",
+    "end": "00:08:41"
+  },
+  {
+    "text": "This is one I use every day because there's things that I do every day that I just want somebody else to do for me, and it's Claude.",
+    "start": "00:08:41",
+    "end": "00:08:46"
+  },
+  {
+    "text": "So it's within Cowork, just type {forward slash} schedule, and then it'll allow you to schedule whatever you just typed.",
+    "start": "00:08:46",
+    "end": "00:08:52"
+  },
+  {
+    "text": "Things that used to be done by my chief of staff that honestly she doesn't have to do, I'll just set it up, schedule it, and nobody has to worry about it.",
+    "start": "00:08:52",
+    "end": "00:08:59"
+  },
+  {
+    "text": "It does that at the same time every day as long as my computer's open.",
+    "start": "00:08:59",
+    "end": "00:09:03"
+  },
+  {
+    "text": "So every morning Claude can read your inbox, it can send you a summary, it can figure out what's urgent, it can tell you what's new in the world, it can essentially do everything that you're probably doing every time you sit down at your computer anyway.",
+    "start": "00:09:02",
+    "end": "00:09:14"
+  },
+  {
+    "text": "Hack number 12, Claude Dispatch.",
+    "start": "00:09:14",
+    "end": "00:09:15"
+  },
+  {
+    "text": "We can essentially talk to Claude through Dispatch.",
+    "start": "00:09:15",
+    "end": "00:09:19"
+  },
+  {
+    "text": "Claude's made this super simple.",
+    "start": "00:09:19",
+    "end": "00:09:20"
+  },
+  {
+    "text": "Just go into Cowork, then you'll see a menu item called Dispatch, click it, you'll see a QR code, pull out the camera app on your phone, scan it, and it'll actually redirect you to the App Store to install the app, and then it'll connect your app to your computer.",
+    "start": "00:09:20",
+    "end": "00:09:35"
+  },
+  {
+    "text": "So So you might be out at dinner and realize you forgot something and you want to send it to your team so you can actually use dispatch on your phone to say, \"Hey, go grab my Martel Ventures pitch deck and send it to Roddy and ask him to give feedback and then send an email to the team with all the updates.",
+    "start": "00:09:35",
+    "end": "00:09:50"
+  },
+  {
+    "text": "\" So now you can do all the co-work automations executing on your computer cuz you turned that little setting on on the go.",
+    "start": "00:09:50",
+    "end": "00:09:57"
+  },
+  {
+    "text": "Hack number 13, Claude Code.",
+    "start": "00:09:54",
+    "end": "00:09:58"
+  },
+  {
+    "text": "It's essentially an AI software developer that can code anything in plain English.",
+    "start": "00:09:58",
+    "end": "00:10:04"
+  },
+  {
+    "text": "A couple months ago I shut down my whole company for 2 days and taught everybody how to be a Claude Code engineer.",
+    "start": "00:10:02",
+    "end": "00:10:10"
+  },
+  {
+    "text": "If you want to do 10 times 100 times more work than anybody else, you have to learn how to build apps in Claude Code.",
+    "start": "00:10:10",
+    "end": "00:10:16"
+  },
+  {
+    "text": "And the cool part is is Anthropic has a full setup guide that'll teach everything to you and I'll link it up below.",
+    "start": "00:10:16",
+    "end": "00:10:21"
+  },
+  {
+    "text": "And look, there's two types of Claude Code.",
+    "start": "00:10:21",
+    "end": "00:10:24"
+  },
+  {
+    "text": "There's using it in the Claude app on your computer or you can actually do it in the terminal.",
+    "start": "00:10:22",
+    "end": "00:10:28"
+  },
+  {
+    "text": "Now if you don't know what a terminal is, that's fine.",
+    "start": "00:10:28",
+    "end": "00:10:31"
+  },
+  {
+    "text": "Just ask Claude and it'll tell you how to use it.",
+    "start": "00:10:31",
+    "end": "00:10:32"
+  },
+  {
+    "text": "I want you to know that AI is the only technology ever created that teaches you how to use it better.",
+    "start": "00:10:32",
+    "end": "00:10:40"
+  },
+  {
+    "text": "One of my CEOs, Todd, who's 60, he's not but I joke with him he is, literally used Claude Code to build a CEO dashboard.",
+    "start": "00:10:40",
+    "end": "00:10:47"
+  },
+  {
+    "text": "I'm telling you nobody heard from Todd for 3 days.",
+    "start": "00:10:45",
+    "end": "00:10:48"
+  },
+  {
+    "text": "Then he emerges out of his office and he brings us in there and he's got a TV on the wall and he's showing us this app he built.",
+    "start": "00:10:48",
+    "end": "00:10:56"
+  },
+  {
+    "text": "And essentially it's doing his job.",
+    "start": "00:10:56",
+    "end": "00:10:58"
+  },
+  {
+    "text": "Somebody that is not technical, not somebody learn how to code, he just knows how to talk.",
+    "start": "00:10:58",
+    "end": "00:11:01"
+  },
+  {
+    "text": "So this is cool but what if you want to do like coding stuff while you're on the go?",
+    "start": "00:11:01",
+    "end": "00:11:06"
+  },
+  {
+    "text": "Well, that's where hack number 14 comes in, Claude Channels.",
+    "start": "00:11:06",
+    "end": "00:11:09"
+  },
+  {
+    "text": "Essentially, you can use iMessage, Telegram, Discord to chat with Claude.",
+    "start": "00:11:09",
+    "end": "00:11:14"
+  },
+  {
+    "text": "So now you can code from anywhere as long as your computer's running.",
+    "start": "00:11:14",
+    "end": "00:11:18"
+  },
+  {
+    "text": "Anthropic put a full guide together help you set it up so I'll link it below again.",
+    "start": "00:11:18",
+    "end": "00:11:22"
+  },
+  {
+    "text": "But at a high level, here's what you want to do.",
+    "start": "00:11:22",
+    "end": "00:11:24"
+  },
+  {
+    "text": "First, you create your bot on Telegram, iMessage or Discord, pair it with Claude Code in your terminal, and then finally set up your API keys and skills.",
+    "start": "00:11:24",
+    "end": "00:11:32"
+  },
+  {
+    "text": "Now API keys is just something you're going to have to learn to do.",
+    "start": "00:11:32",
+    "end": "00:11:34"
+  },
+  {
+    "text": "It's like creating a spreadsheet if you've never created a spreadsheet.",
+    "start": "00:11:34",
+    "end": "00:11:36"
+  },
+  {
+    "text": "Once you learn how to do it once, you'll learn that it's just how all these computers talk to each other.",
+    "start": "00:11:36",
+    "end": "00:11:41"
+  },
+  {
+    "text": "Now, you can use Claude Code from anywhere and build stuff and iterate with it as long as your computer is running.",
+    "start": "00:11:40",
+    "end": "00:11:45"
+  },
+  {
+    "text": "So, just tell it what you needed to build.",
+    "start": "00:11:45",
+    "end": "00:11:47"
+  },
+  {
+    "text": "For example, my buddy Arturo was running late and he was about to miss a flight, so then he actually messaged Claude Code to check his email cuz he connected it and to look at his calendar cuz all the details were there and for it to check into his flight for him.",
+    "start": "00:11:47",
+    "end": "00:11:59"
+  },
+  {
+    "text": "A lot of people are using Claude Code like their own personal AI agent, but that's why I built my own platform called Apex.",
+    "start": "00:11:59",
+    "end": "00:12:05"
+  },
+  {
+    "text": "Essentially, it's like a digital twin.",
+    "start": "00:12:05",
+    "end": "00:12:07"
+  },
+  {
+    "text": "So, I have a guy named Kai, that's my guy, and he handles everything.",
+    "start": "00:12:07",
+    "end": "00:12:11"
+  },
+  {
+    "text": "But, it's way easier to set up, it's way more secure, and it gives you access and privacy to your own things and it can use all the language models and all the AI.",
+    "start": "00:12:11",
+    "end": "00:12:19"
+  },
+  {
+    "text": "So, if you're interested, just click the link in the description and check it out for yourself.",
+    "start": "00:12:19",
+    "end": "00:12:23"
+  },
+  {
+    "text": "Hack number 15, Claude skills.",
+    "start": "00:12:23",
+    "end": "00:12:27"
+  },
+  {
+    "text": "This is where you can train Claude to do a repeatable task for you exactly the same way every time.",
+    "start": "00:12:24",
+    "end": "00:12:31"
+  },
+  {
+    "text": "you turn anything into a skill is once you've got something going, you're working with something, you're asking to refine it, just say, \"Turn this into a skill.",
+    "start": "00:12:31",
+    "end": "00:12:39"
+  },
+  {
+    "text": "\" So, to do this, just go on the left side of your sidebar and click customize, skills, and browse, and install.",
+    "start": "00:12:39",
+    "end": "00:12:45"
+  },
+  {
+    "text": "Or, you can create your own.",
+    "start": "00:12:45",
+    "end": "00:12:47"
+  },
+  {
+    "text": "And the cool part is is you can install other people's skills.",
+    "start": "00:12:47",
+    "end": "00:12:49"
+  },
+  {
+    "text": "Ton of them that are created for like legal, financials, HR type skills.",
+    "start": "00:12:49",
+    "end": "00:12:54"
+  },
+  {
+    "text": "There's literally thousands of them shared on GitHub.",
+    "start": "00:12:52",
+    "end": "00:12:56"
+  },
+  {
+    "text": "So, one of the most popular skills is one called Humanizer where it targets the 20 specific AI writing patterns that we all know exist and then it rewrites whatever your AI did in a more human tone.",
+    "start": "00:12:56",
+    "end": "00:13:08"
+  },
+  {
+    "text": "And last, Claude design.",
+    "start": "00:13:08",
+    "end": "00:13:08"
+  },
+  {
+    "text": "This one's going to turn everybody into a world-class designer.",
+    "start": "00:13:08",
+    "end": "00:13:13"
+  },
+  {
+    "text": "I'm talking pitch decks, one-pagers, landing page mock-ups, full apps, even motion graphics.",
+    "start": "00:13:11",
+    "end": "00:13:17"
+  },
+  {
+    "text": "As of the filming of this video, it is the newest release from Claude.",
+    "start": "00:13:17",
+    "end": "00:13:21"
+  },
+  {
+    "text": "So, if you want to use it, real simple, go to claude.",
+    "start": "00:13:21",
+    "end": "00:13:24"
+  },
+  {
+    "text": "ai/design.",
+    "start": "00:13:24",
+    "end": "00:13:26"
+  },
+  {
+    "text": "Now, just describe what you want and Claude will build you a draft in minutes.",
+    "start": "00:13:24",
+    "end": "00:13:28"
+  },
+  {
+    "text": "And it can even match your styles, brand guides, whatever you got, you can give it as examples and it'll match that as it designs for you.",
+    "start": "00:13:28",
+    "end": "00:13:36"
+  },
+  {
+    "text": "So basically, I want to visualize the main points of my book, Buy Back Your Time.",
+    "start": "00:13:36",
+    "end": "00:13:39"
+  },
+  {
+    "text": "So maybe I was creating a workbook, which already exists, but if I didn't, I could use this to visualize the points, so it take those elements out of my book and then create visual examples so it help people learn it easier.",
+    "start": "00:13:38",
+    "end": "00:13:51"
+  },
+  {
+    "text": "And then bada bing, bada boom, done.",
+    "start": "00:13:51",
+    "end": "00:13:53"
+  },
+  {
+    "text": "Like look at it.",
+    "start": "00:13:53",
+    "end": "00:13:52"
+  },
+  {
+    "text": "Not visually what I would do, but it gets me there.",
+    "start": "00:13:52",
+    "end": "00:13:56"
+  },
+  {
+    "text": "For most people, it is a game-changer.",
+    "start": "00:13:56",
+    "end": "00:13:58"
+  },
+  {
+    "text": "And this is the worst it's ever going to be.",
+    "start": "00:13:58",
+    "end": "00:14:00"
+  },
+  {
+    "text": "You don't think in 6 months it's going to be better?",
+    "start": "00:14:00",
+    "end": "00:14:03"
+  },
+  {
+    "text": "12 months?",
+    "start": "00:14:03",
+    "end": "00:14:02"
+  },
+  {
+    "text": "2 years?",
+    "start": "00:14:02",
+    "end": "00:14:03"
+  },
+  {
+    "text": "I think designers need to start learning how to use this.",
+    "start": "00:14:03",
+    "end": "00:14:06"
+  },
+  {
+    "text": "And they recently partnered with Adobe, so the whole design world is going to get mixed up big time.",
+    "start": "00:14:06",
+    "end": "00:14:11"
+  },
+  {
+    "text": "So I just overloaded your mind with a bunch of hacks, but here's the cool part.",
+    "start": "00:14:11",
+    "end": "00:14:15"
+  },
+  {
+    "text": "You don't need to do them all.",
+    "start": "00:14:15",
+    "end": "00:14:16"
+  },
+  {
+    "text": "Now you just know that they exist.",
+    "start": "00:14:16",
+    "end": "00:14:17"
+  },
+  {
+    "text": "So all I need from you is to know which one are you going to use today?",
+    "start": "00:14:17",
+    "end": "00:14:22"
+  },
+  {
+    "text": "Just leave a comment below and let me know.",
+    "start": "00:14:20",
+    "end": "00:14:22"
+  },
+  {
+    "text": "And look, if it doesn't work for you, that's fine.",
+    "start": "00:14:22",
+    "end": "00:14:25"
+  },
+  {
+    "text": "Go to the next one.",
+    "start": "00:14:25",
+    "end": "00:14:27"
+  },
+  {
+    "text": "AI can be crazy, but I trust that you can do this.",
+    "start": "00:14:27",
+    "end": "00:14:28"
+  },
+  {
+    "text": "You know, people message me all the time and they're like, \"Dan, I feel like I'm behind.",
+    "start": "00:14:28",
+    "end": "00:14:32"
+  },
+  {
+    "text": "\" No, you're not.",
+    "start": "00:14:32",
+    "end": "00:14:34"
+  },
+  {
+    "text": "I have never felt ahead, and I just accepted I never will feel ahead.",
+    "start": "00:14:34",
+    "end": "00:14:37"
+  },
+  {
+    "text": "And the only question I got to ask myself is, am I doing the work that's going to keep me ahead?",
+    "start": "00:14:37",
+    "end": "00:14:40"
+  },
+  {
+    "text": "You're watching this, so that means you're part of this.",
+    "start": "00:14:40",
+    "end": "00:14:44"
+  },
+  {
+    "text": "And if you just do one thing from this video, you are more ahead than 99% of people.",
+    "start": "00:14:44",
+    "end": "00:14:49"
+  },
+  {
+    "text": "And remember, just DM me AI business and I'll send you over my AI company OS playbook.",
+    "start": "00:14:49",
+    "end": "00:14:52"
+  },
+  {
+    "text": "And if you want to go deeper on what AI tools to use, I ranked the best ones to make money in this video here.",
+    "start": "00:14:52",
+    "end": "00:14:58"
+  },
+  {
+    "text": "So click the link and I'll see you on the other side.",
+    "start": "00:14:58",
+    "end": "00:15:01"
+  },
+  {
+    "text": "Hey Clyde, tell me how cool I am.",
+    "start": "00:15:01",
+    "end": "00:15:02"
+  },
+  {
+    "text": "All right.",
+    "start": "00:15:02",
+    "end": "00:15:03"
+  },
+  {
+    "text": "You're running three entities from Cologne >> Whoa, whoa, whoa, Clyde, keep it secret.",
+    "start": "00:15:03",
+    "end": "00:15:08"
+  },
+  {
+    "text": "I'm in a room full of people, yo.",
+    "start": "00:15:07",
+    "end": "00:15:10"
+  },
+  {
+    "text": "I'm surprised, Dan.",
+    "start": "00:15:10",
+    "end": "00:15:10"
+  },
+  {
+    "text": "That's crazy.",
+    "start": "00:15:10",
+    "end": "00:15:12"
+  },
+  {
+    "text": "You're welcome.",
+    "start": "00:15:12",
+    "end": "00:15:12"
+  }
+]

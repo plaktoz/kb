@@ -1,0 +1,18 @@
+{
+  "videoId": "lmmgzIuWEbk",
+  "title": "I Replaced Hermes Agent And OpenClaw With This",
+  "channel": "Owain Lewis",
+  "channelId": "UC08YjBHjjPFu8T1KbHGomnQ",
+  "description": "💬 Community: https://aiengineer.co\nFREE agent skills: https://aiengineer.co/start/\n\nI spent the past few months using Hermes Agent as my personal AI assistant. I liked the idea, but its automatic memory and skill creation often added stale facts, unnecessary complexity, and unreliable instructions.\n\nIn this video I break down how Hermes Agent and OpenClaw work, then show the simpler personal assistant I built using the coding agents I already trust.\n\nPush is a small gateway that connects Telegram or iMessage to Codex, Claude Code, Codex, or Pi Agent. It lets me message my assistant from anywhere, run scheduled jobs, work with voice messages, and connect the agent to tools such as Todoist, Gmail, and GitHub. \n\nWhat you’ll learn:\n\n- How the Hermes Agent architecture works\n- Why automatic memory can confuse an assistant\n- The problem with agents creating skills on the fly\n- How Push routes messages to Codex or Claude Code\n- How Telegram polling works without exposing inbound ports\n- How I structure assistant context, scheduled jobs, and personality\n- How my assistant reviews email, creates tasks, drafts replies, and researches topics\n- Why I treat my task list as the control plane for delegated work\n\nThis is NOT an argument against Hermes Agent or OpenClaw. Both projects are incredible. I simply wanted a smaller, more opinionated system that works with my existing agents, connectors, and workspace.\n\n🔗 Links\nPush: https://github.com/owainlewis/push\nFree agent resources and skills: https://aiengineer.co/start/\nCommunity: https://aiengineer.co\n\n#AIAgents #PersonalAI #Codex #ClaudeCode #AIEngineering #OpenClaw #HermesAgent",
+  "duration": 1334,
+  "publishDate": "2026-07-17",
+  "url": "https://www.youtube.com/watch?v=lmmgzIuWEbk",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/lmmgzIuWEbk/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": []
+}

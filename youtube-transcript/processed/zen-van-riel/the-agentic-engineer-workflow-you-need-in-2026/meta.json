@@ -1,0 +1,74 @@
+{
+  "videoId": "ElYxdpYi4U0",
+  "title": "The Agentic Engineer Workflow You Need In 2026",
+  "channel": "Zen van Riel",
+  "channelId": "UC7TUInmEJ4NmYb-krFz-SuA",
+  "description": "🎁 Get my FREE Agentic Engineer config: https://zenvanriel.com/ai-coding\n⚡ Become a high-earning AI engineer: https://aiengineer.community/join\n\nI've shipped AI-generated code on real engineering teams at enterprises and startups, with full code reviews, production users, and accountability for every merge. Most agentic coding tutorials show toy demos that fall apart the moment you join a real team. This video walks through my actual workflow: four parallel Claude Code windows tuned to different effort levels, context window management, git worktrees, MCP versus Bash decisions, and the engineering patterns that keep AI code from breaking your team.\n\nWhat You'll Learn\n\n- How to run 4 parallel Claude Code windows with mixed high, medium, and low effort levels\n- When to use /compact versus /clear to stop context window drift from ruining your session\n- Why most spec-driven development, BMAD, and prompt engineering trends won't survive 6 months\n- The Smell command pattern that pushes Claude Code to follow Clean Code and design patterns\n- When to use MCP servers, Bash tools, or skills to connect Claude Code to external services\n- The honest difference between AI coding at freelance, startup, and enterprise scale\n- How to use git worktrees for parallel AI coding without merge conflicts\n- The realistic productivity gains from AI coding (30 to 60 percent, not 5x) and what they look like in production\n- How to think about agentic engineering as a mindset, not just a tool stack\n\nTimestamps\n0:00 The Agentic Engineer Mindset\n0:30 My 4 Parallel Claude Code Window Setup\n2:30 Managing Context Window Drift\n3:22 Why I Avoid Focusing On Spec-Driven Development and BMAD\n5:04 The Smell Command for Clean Code Quality\n7:28 Connecting Claude Code to GitHub CLI\n8:01 MCP Servers vs Bash Tools\n10:32 AI Coding at Freelance, Startup, and Enterprise Scale\n12:58 Git Worktrees for Parallel AI Coding Streams\n15:56 The Real AI Productivity Gains\n17:01 Becoming an AI Native Engineer\n\n#claudecode #agenticcoding #agenticengineer #aiengineering #aicoding #aiengineer #gitworktree #mcp #cleancode #claudecodeworkflow #aiproductivity #parallelagents #softwareengineering #ainativeengineer #vibecoding\n\nConnect\nLinkedIn: https://www.linkedin.com/in/zen-van-riel\nCommunity: https://www.skool.com/ai-engineer\n\nSponsorships & Business Inquiries: business@aiengineer.community",
+  "duration": 1030,
+  "publishDate": "2026-05-20",
+  "url": "https://www.youtube.com/watch?v=ElYxdpYi4U0",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/ElYxdpYi4U0/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "The Agentic Engineer Mindset",
+      "start": 0,
+      "end": 30
+    },
+    {
+      "title": "My 4 Parallel Claude Code Window Setup",
+      "start": 30,
+      "end": 150
+    },
+    {
+      "title": "Managing Context Window Drift",
+      "start": 150,
+      "end": 202
+    },
+    {
+      "title": "Why I Avoid Focusing On Spec-Driven Development and BMAD",
+      "start": 202,
+      "end": 304
+    },
+    {
+      "title": "The Smell Command for Clean Code Quality",
+      "start": 304,
+      "end": 448
+    },
+    {
+      "title": "Connecting Claude Code to GitHub CLI",
+      "start": 448,
+      "end": 481
+    },
+    {
+      "title": "MCP Servers vs Bash Tools",
+      "start": 481,
+      "end": 632
+    },
+    {
+      "title": "AI Coding at Freelance, Startup, and Enterprise Scale",
+      "start": 632,
+      "end": 778
+    },
+    {
+      "title": "Git Worktrees for Parallel AI Coding Streams",
+      "start": 778,
+      "end": 956
+    },
+    {
+      "title": "The Real AI Productivity Gains",
+      "start": 956,
+      "end": 1021
+    },
+    {
+      "title": "Becoming an AI Native Engineer",
+      "start": 1021,
+      "end": 1030
+    }
+  ]
+}

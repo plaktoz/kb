@@ -1,0 +1,3542 @@
+[
+  {
+    "text": "here a list of all basic machine",
+    "start": 0.16,
+    "duration": 4.199
+  },
+  {
+    "text": "learning terms in 22 minutes artificial",
+    "start": 1.959,
+    "duration": 4.121
+  },
+  {
+    "text": "intelligence refers to the capability of",
+    "start": 4.359,
+    "duration": 3.641
+  },
+  {
+    "text": "machines to perform tasks that typically",
+    "start": 6.08,
+    "duration": 3.96
+  },
+  {
+    "text": "require human intelligence this can",
+    "start": 8,
+    "duration": 3.559
+  },
+  {
+    "text": "include understanding language",
+    "start": 10.04,
+    "duration": 3.88
+  },
+  {
+    "text": "recognizing images solving problems or",
+    "start": 11.559,
+    "duration": 5.001
+  },
+  {
+    "text": "making decisions AI aims to mimic human",
+    "start": 13.92,
+    "duration": 4
+  },
+  {
+    "text": "cognitive functions through various",
+    "start": 16.56,
+    "duration": 3.4
+  },
+  {
+    "text": "techniques including machine learning",
+    "start": 17.92,
+    "duration": 4.4
+  },
+  {
+    "text": "but not all AI is machine learning for",
+    "start": 19.96,
+    "duration": 3.88
+  },
+  {
+    "text": "example rule-based systems can use",
+    "start": 22.32,
+    "duration": 3.16
+  },
+  {
+    "text": "predefined logical rules to analyze",
+    "start": 23.84,
+    "duration": 3.4
+  },
+  {
+    "text": "medical data and provide diagnostic",
+    "start": 25.48,
+    "duration": 3.639
+  },
+  {
+    "text": "recommendations without needing to learn",
+    "start": 27.24,
+    "duration": 3.879
+  },
+  {
+    "text": "from data patterns typical chess playing",
+    "start": 29.119,
+    "duration": 3.881
+  },
+  {
+    "text": "engines would be considered AI but not",
+    "start": 31.119,
+    "duration": 3.521
+  },
+  {
+    "text": "machine learning because they follow",
+    "start": 33,
+    "duration": 3.399
+  },
+  {
+    "text": "specific rules in search algorithms and",
+    "start": 34.64,
+    "duration": 3.4
+  },
+  {
+    "text": "don't always learn from data machine",
+    "start": 36.399,
+    "duration": 2.961
+  },
+  {
+    "text": "learning is a branch of artificial",
+    "start": 38.04,
+    "duration": 2.92
+  },
+  {
+    "text": "intelligence that enables computers to",
+    "start": 39.36,
+    "duration": 3.08
+  },
+  {
+    "text": "learn from data and improve their",
+    "start": 40.96,
+    "duration": 3.279
+  },
+  {
+    "text": "performance on tasks over time without",
+    "start": 42.44,
+    "duration": 3.36
+  },
+  {
+    "text": "being explicitly programmed for each",
+    "start": 44.239,
+    "duration": 3.881
+  },
+  {
+    "text": "task in machine learning algorithms",
+    "start": 45.8,
+    "duration": 3.96
+  },
+  {
+    "text": "identify patterns and relationships",
+    "start": 48.12,
+    "duration": 3.24
+  },
+  {
+    "text": "within data making predictions or",
+    "start": 49.76,
+    "duration": 3.479
+  },
+  {
+    "text": "decisions based on new unseen",
+    "start": 51.36,
+    "duration": 3.96
+  },
+  {
+    "text": "information for example a spam filter in",
+    "start": 53.239,
+    "duration": 3.84
+  },
+  {
+    "text": "an email system uses machine learning to",
+    "start": 55.32,
+    "duration": 3.759
+  },
+  {
+    "text": "identify and block spam emails it is",
+    "start": 57.079,
+    "duration": 3.96
+  },
+  {
+    "text": "trained on thousands of examples of both",
+    "start": 59.079,
+    "duration": 4.28
+  },
+  {
+    "text": "spam and non-spam emails learning which",
+    "start": 61.039,
+    "duration": 4.321
+  },
+  {
+    "text": "words phrases or patterns are typically",
+    "start": 63.359,
+    "duration": 4.681
+  },
+  {
+    "text": "found in spam messages over time it can",
+    "start": 65.36,
+    "duration": 4.439
+  },
+  {
+    "text": "accurately flag new emails of spam or",
+    "start": 68.04,
+    "duration": 3.079
+  },
+  {
+    "text": "legitimate based on these learned",
+    "start": 69.799,
+    "duration": 3.68
+  },
+  {
+    "text": "patterns even if the specific content of",
+    "start": 71.119,
+    "duration": 4.281
+  },
+  {
+    "text": "each new email varies in many ways this",
+    "start": 73.479,
+    "duration": 3.401
+  },
+  {
+    "text": "is similar to how animals and humans",
+    "start": 75.4,
+    "duration": 3.28
+  },
+  {
+    "text": "learn to recognize patterns over time",
+    "start": 76.88,
+    "duration": 3.68
+  },
+  {
+    "text": "after seeing many examples of something",
+    "start": 78.68,
+    "duration": 3.799
+  },
+  {
+    "text": "for example a human child might not be",
+    "start": 80.56,
+    "duration": 3.28
+  },
+  {
+    "text": "able to tell the difference between a",
+    "start": 82.479,
+    "duration": 3.521
+  },
+  {
+    "text": "cat and a dog but after years of having",
+    "start": 83.84,
+    "duration": 3.919
+  },
+  {
+    "text": "someone point out cats and dogs it will",
+    "start": 86,
+    "duration": 3.24
+  },
+  {
+    "text": "learn to recognize the features that",
+    "start": 87.759,
+    "duration": 3.481
+  },
+  {
+    "text": "determine what a cat cat and a dog is an",
+    "start": 89.24,
+    "duration": 3.6
+  },
+  {
+    "text": "algorithm is a set of well-defined",
+    "start": 91.24,
+    "duration": 3.12
+  },
+  {
+    "text": "instructions or rules that a computer",
+    "start": 92.84,
+    "duration": 3.4
+  },
+  {
+    "text": "follows to solve a problem or perform a",
+    "start": 94.36,
+    "duration": 4.2
+  },
+  {
+    "text": "task algorithms are used in almost every",
+    "start": 96.24,
+    "duration": 4.04
+  },
+  {
+    "text": "aspect of computing from sorting lists",
+    "start": 98.56,
+    "duration": 3.48
+  },
+  {
+    "text": "and searching data to more complex",
+    "start": 100.28,
+    "duration": 3.28
+  },
+  {
+    "text": "processes like encryption and data",
+    "start": 102.04,
+    "duration": 3.64
+  },
+  {
+    "text": "analysis they provide step-by-step",
+    "start": 103.56,
+    "duration": 3.879
+  },
+  {
+    "text": "procedures to achieve a specific goal",
+    "start": 105.68,
+    "duration": 3.759
+  },
+  {
+    "text": "efficiently think for example of a",
+    "start": 107.439,
+    "duration": 3.96
+  },
+  {
+    "text": "step-by-step recipe like this sandwich",
+    "start": 109.439,
+    "duration": 4.601
+  },
+  {
+    "text": "making algorithm an example is dy stress",
+    "start": 111.399,
+    "duration": 4.481
+  },
+  {
+    "text": "algorithm used in mapping applications",
+    "start": 114.04,
+    "duration": 3.48
+  },
+  {
+    "text": "to find the shortest path between two",
+    "start": 115.88,
+    "duration": 3.599
+  },
+  {
+    "text": "points by systematically evaluating",
+    "start": 117.52,
+    "duration": 3.879
+  },
+  {
+    "text": "possible paths backstress algorithm",
+    "start": 119.479,
+    "duration": 3.401
+  },
+  {
+    "text": "helps determine the quickest route for",
+    "start": 121.399,
+    "duration": 3.481
+  },
+  {
+    "text": "navigation which is at the base of most",
+    "start": 122.88,
+    "duration": 4.159
+  },
+  {
+    "text": "navigation apps like Google Maps data is",
+    "start": 124.88,
+    "duration": 3.64
+  },
+  {
+    "text": "information that can be collected",
+    "start": 127.039,
+    "duration": 3.521
+  },
+  {
+    "text": "analyzed and used to make decisions",
+    "start": 128.52,
+    "duration": 4.24
+  },
+  {
+    "text": "predictions or provide insights than",
+    "start": 130.56,
+    "duration": 4.2
+  },
+  {
+    "text": "spreadsheets in Computing and machine",
+    "start": 132.76,
+    "duration": 3.759
+  },
+  {
+    "text": "learning data typically consists of",
+    "start": 134.76,
+    "duration": 4.6
+  },
+  {
+    "text": "numbers text images or any form of input",
+    "start": 136.519,
+    "duration": 4.961
+  },
+  {
+    "text": "that can be processed by algorithms for",
+    "start": 139.36,
+    "duration": 3.8
+  },
+  {
+    "text": "example customer purchase histories are",
+    "start": 141.48,
+    "duration": 3.399
+  },
+  {
+    "text": "a type of data that e-commerce companies",
+    "start": 143.16,
+    "duration": 3.439
+  },
+  {
+    "text": "analyze to recommend products likely to",
+    "start": 144.879,
+    "duration": 3.801
+  },
+  {
+    "text": "interest each user another example is",
+    "start": 146.599,
+    "duration": 3.92
+  },
+  {
+    "text": "weather data which includes temperature",
+    "start": 148.68,
+    "duration": 3.919
+  },
+  {
+    "text": "humidity and wind speed measurements",
+    "start": 150.519,
+    "duration": 3.601
+  },
+  {
+    "text": "this data is used to predict future",
+    "start": 152.599,
+    "duration": 4.081
+  },
+  {
+    "text": "weather patterns in the case of images",
+    "start": 154.12,
+    "duration": 4.04
+  },
+  {
+    "text": "data refers to a list of pixel",
+    "start": 156.68,
+    "duration": 3.76
+  },
+  {
+    "text": "intensities and possibly colors used by",
+    "start": 158.16,
+    "duration": 4.68
+  },
+  {
+    "text": "image recognition algorithms in the case",
+    "start": 160.44,
+    "duration": 4.24
+  },
+  {
+    "text": "of text Data could simply be a list of",
+    "start": 162.84,
+    "duration": 3.8
+  },
+  {
+    "text": "words and a text in their frequencies",
+    "start": 164.68,
+    "duration": 4.4
+  },
+  {
+    "text": "data can come in many forms a model in",
+    "start": 166.64,
+    "duration": 3.959
+  },
+  {
+    "text": "machine learning is a mathematical",
+    "start": 169.08,
+    "duration": 3
+  },
+  {
+    "text": "representation that is trained to",
+    "start": 170.599,
+    "duration": 3.321
+  },
+  {
+    "text": "recognize patterns in data and make",
+    "start": 172.08,
+    "duration": 3.64
+  },
+  {
+    "text": "predictions or classifications based on",
+    "start": 173.92,
+    "duration": 4
+  },
+  {
+    "text": "those patterns the most common type of",
+    "start": 175.72,
+    "duration": 3.72
+  },
+  {
+    "text": "model is simply a mapping function",
+    "start": 177.92,
+    "duration": 3.679
+  },
+  {
+    "text": "between a an input and an output in",
+    "start": 179.44,
+    "duration": 3.92
+  },
+  {
+    "text": "linear regression for example the model",
+    "start": 181.599,
+    "duration": 3.28
+  },
+  {
+    "text": "is simply the equation of the final",
+    "start": 183.36,
+    "duration": 4
+  },
+  {
+    "text": "regression line in its simplest form we",
+    "start": 184.879,
+    "duration": 3.881
+  },
+  {
+    "text": "might have a model that predicts a",
+    "start": 187.36,
+    "duration": 3
+  },
+  {
+    "text": "linear relationship between square",
+    "start": 188.76,
+    "duration": 3.44
+  },
+  {
+    "text": "footage of the house and the price of",
+    "start": 190.36,
+    "duration": 4.64
+  },
+  {
+    "text": "the house for example if we plot all",
+    "start": 192.2,
+    "duration": 4.399
+  },
+  {
+    "text": "house prices and their square footage",
+    "start": 195,
+    "duration": 3.519
+  },
+  {
+    "text": "against each other we might find that on",
+    "start": 196.599,
+    "duration": 3.681
+  },
+  {
+    "text": "average each additional square foot adds",
+    "start": 198.519,
+    "duration": 4.841
+  },
+  {
+    "text": "$200 to the house price the number 200",
+    "start": 200.28,
+    "duration": 4.56
+  },
+  {
+    "text": "comes from the fitting of a line to the",
+    "start": 203.36,
+    "duration": 3.72
+  },
+  {
+    "text": "data which is now our train model the",
+    "start": 204.84,
+    "duration": 3.64
+  },
+  {
+    "text": "train model is the intersection and",
+    "start": 207.08,
+    "duration": 3.56
+  },
+  {
+    "text": "slope of the line the slope being 200",
+    "start": 208.48,
+    "duration": 3.959
+  },
+  {
+    "text": "model fitting also called training or",
+    "start": 210.64,
+    "duration": 3.92
+  },
+  {
+    "text": "learning is the process of adjusting a",
+    "start": 212.439,
+    "duration": 3.761
+  },
+  {
+    "text": "model's parameters to find the best",
+    "start": 214.56,
+    "duration": 3.239
+  },
+  {
+    "text": "match between the model's predictions",
+    "start": 216.2,
+    "duration": 3.28
+  },
+  {
+    "text": "and the actual data if you think of",
+    "start": 217.799,
+    "duration": 3.481
+  },
+  {
+    "text": "linear regression model fitting would be",
+    "start": 219.48,
+    "duration": 3.6
+  },
+  {
+    "text": "trying out different lines until you",
+    "start": 221.28,
+    "duration": 3.879
+  },
+  {
+    "text": "find the line with the best fit training",
+    "start": 223.08,
+    "duration": 3.92
+  },
+  {
+    "text": "data is a carefully selected subset of",
+    "start": 225.159,
+    "duration": 3.401
+  },
+  {
+    "text": "data used to teach machine learning",
+    "start": 227,
+    "duration": 3.68
+  },
+  {
+    "text": "models how to make predictions it",
+    "start": 228.56,
+    "duration": 3.84
+  },
+  {
+    "text": "consists of input examples paired with",
+    "start": 230.68,
+    "duration": 3.68
+  },
+  {
+    "text": "their correct outputs allowing the model",
+    "start": 232.4,
+    "duration": 4.32
+  },
+  {
+    "text": "to learn patterns and relationships for",
+    "start": 234.36,
+    "duration": 4
+  },
+  {
+    "text": "instance in an email spam filter the",
+    "start": 236.72,
+    "duration": 3.239
+  },
+  {
+    "text": "training data would include thousands of",
+    "start": 238.36,
+    "duration": 3.439
+  },
+  {
+    "text": "emails labeled as either spam or not",
+    "start": 239.959,
+    "duration": 4.041
+  },
+  {
+    "text": "spam teaching the system to recognize",
+    "start": 241.799,
+    "duration": 4.121
+  },
+  {
+    "text": "the characteristics of unwanted messages",
+    "start": 244,
+    "duration": 3.519
+  },
+  {
+    "text": "similarly for an image recognition",
+    "start": 245.92,
+    "duration": 3.92
+  },
+  {
+    "text": "system that identifies cats and dogs the",
+    "start": 247.519,
+    "duration": 3.92
+  },
+  {
+    "text": "training data would contain numerous",
+    "start": 249.84,
+    "duration": 4.36
+  },
+  {
+    "text": "images labeled as either cat or dog",
+    "start": 251.439,
+    "duration": 4.16
+  },
+  {
+    "text": "helping the model learn the visual",
+    "start": 254.2,
+    "duration": 3.039
+  },
+  {
+    "text": "patterns that Define what cats and dogs",
+    "start": 255.599,
+    "duration": 4.681
+  },
+  {
+    "text": "look like test data or test set is a",
+    "start": 257.239,
+    "duration": 4.52
+  },
+  {
+    "text": "separate collection of data used to",
+    "start": 260.28,
+    "duration": 2.96
+  },
+  {
+    "text": "evaluate how well a machine learning",
+    "start": 261.759,
+    "duration": 3.521
+  },
+  {
+    "text": "model performs on examples it hasn't",
+    "start": 263.24,
+    "duration": 4.32
+  },
+  {
+    "text": "seen during training like training data",
+    "start": 265.28,
+    "duration": 3.759
+  },
+  {
+    "text": "it includes both inputs and their",
+    "start": 267.56,
+    "duration": 2.76
+  },
+  {
+    "text": "correct answers",
+    "start": 269.039,
+    "duration": 2.761
+  },
+  {
+    "text": "but these examples are kept completely",
+    "start": 270.32,
+    "duration": 3.56
+  },
+  {
+    "text": "separate from the training process this",
+    "start": 271.8,
+    "duration": 3.959
+  },
+  {
+    "text": "testing process helps verify whether the",
+    "start": 273.88,
+    "duration": 3.44
+  },
+  {
+    "text": "model has truly learned to make good",
+    "start": 275.759,
+    "duration": 3.681
+  },
+  {
+    "text": "predictions rather than just memorizing",
+    "start": 277.32,
+    "duration": 3.96
+  },
+  {
+    "text": "its training examples importantly the",
+    "start": 279.44,
+    "duration": 3.36
+  },
+  {
+    "text": "test and training data are separated",
+    "start": 281.28,
+    "duration": 3.16
+  },
+  {
+    "text": "randomly before beginning the modeling",
+    "start": 282.8,
+    "duration": 3.76
+  },
+  {
+    "text": "process so that the model can never see",
+    "start": 284.44,
+    "duration": 3.88
+  },
+  {
+    "text": "the test data in any way before running",
+    "start": 286.56,
+    "duration": 4.4
+  },
+  {
+    "text": "the final test any inadvertent inclusion",
+    "start": 288.32,
+    "duration": 4.36
+  },
+  {
+    "text": "of even parts of the test data in model",
+    "start": 290.96,
+    "duration": 3.44
+  },
+  {
+    "text": "training is called Data leakage",
+    "start": 292.68,
+    "duration": 3.32
+  },
+  {
+    "text": "supervised learning is a foundational",
+    "start": 294.4,
+    "duration": 2.799
+  },
+  {
+    "text": "approach in machine learning where",
+    "start": 296,
+    "duration": 3
+  },
+  {
+    "text": "models learn from labeled examples",
+    "start": 297.199,
+    "duration": 3.801
+  },
+  {
+    "text": "meaning the true outcomes or targets are",
+    "start": 299,
+    "duration": 3.68
+  },
+  {
+    "text": "known and provided much like a student",
+    "start": 301,
+    "duration": 2.88
+  },
+  {
+    "text": "learning from problems with their",
+    "start": 302.68,
+    "duration": 3.4
+  },
+  {
+    "text": "answers provided each example in the",
+    "start": 303.88,
+    "duration": 4.159
+  },
+  {
+    "text": "training data includes both of the input",
+    "start": 306.08,
+    "duration": 3.6
+  },
+  {
+    "text": "and the correct output allowing the",
+    "start": 308.039,
+    "duration": 3.361
+  },
+  {
+    "text": "model to learn the relationship between",
+    "start": 309.68,
+    "duration": 4.04
+  },
+  {
+    "text": "them for instance an image recognition",
+    "start": 311.4,
+    "duration": 4.12
+  },
+  {
+    "text": "system would train on images that have",
+    "start": 313.72,
+    "duration": 3.759
+  },
+  {
+    "text": "been pre-labeled with their contents",
+    "start": 315.52,
+    "duration": 4.36
+  },
+  {
+    "text": "such as dog or cat this is arguably the",
+    "start": 317.479,
+    "duration": 3.961
+  },
+  {
+    "text": "most common type of machine learning",
+    "start": 319.88,
+    "duration": 3.72
+  },
+  {
+    "text": "probably making up around 70% of machine",
+    "start": 321.44,
+    "duration": 4.199
+  },
+  {
+    "text": "learning applications unsupervised",
+    "start": 323.6,
+    "duration": 3.56
+  },
+  {
+    "text": "learning is a type of machine learning",
+    "start": 325.639,
+    "duration": 3.081
+  },
+  {
+    "text": "where models learn to find patterns and",
+    "start": 327.16,
+    "duration": 3.44
+  },
+  {
+    "text": "structure in data without being given",
+    "start": 328.72,
+    "duration": 3.96
+  },
+  {
+    "text": "labeled examples or correct answers",
+    "start": 330.6,
+    "duration": 3.319
+  },
+  {
+    "text": "rather than being taught what to look",
+    "start": 332.68,
+    "duration": 3.4
+  },
+  {
+    "text": "for these algorithms discover natural",
+    "start": 333.919,
+    "duration": 3.761
+  },
+  {
+    "text": "groupings and relationships within the",
+    "start": 336.08,
+    "duration": 3.72
+  },
+  {
+    "text": "data on their own for example an",
+    "start": 337.68,
+    "duration": 3.76
+  },
+  {
+    "text": "unsupervised learning algorithm might",
+    "start": 339.8,
+    "duration": 3.36
+  },
+  {
+    "text": "analyze customer purchase data to",
+    "start": 341.44,
+    "duration": 3.56
+  },
+  {
+    "text": "identify groups of customers with",
+    "start": 343.16,
+    "duration": 4.08
+  },
+  {
+    "text": "similar buying habits or examine social",
+    "start": 345,
+    "duration": 4.479
+  },
+  {
+    "text": "media posts to discover trending topics",
+    "start": 347.24,
+    "duration": 4
+  },
+  {
+    "text": "all without being told in advance what",
+    "start": 349.479,
+    "duration": 3.56
+  },
+  {
+    "text": "patterns to look for this approach is",
+    "start": 351.24,
+    "duration": 3.12
+  },
+  {
+    "text": "particularly valuable when we want to",
+    "start": 353.039,
+    "duration": 3.6
+  },
+  {
+    "text": "explore data to uncover hidden patterns",
+    "start": 354.36,
+    "duration": 3.399
+  },
+  {
+    "text": "but don't know exactly what we're",
+    "start": 356.639,
+    "duration": 3.081
+  },
+  {
+    "text": "looking for No Labels or outcomes are",
+    "start": 357.759,
+    "duration": 3.56
+  },
+  {
+    "text": "provided to the model during training",
+    "start": 359.72,
+    "duration": 3.4
+  },
+  {
+    "text": "reinforcement learning is a newer branch",
+    "start": 361.319,
+    "duration": 3.401
+  },
+  {
+    "text": "of machine learning that has recently",
+    "start": 363.12,
+    "duration": 3.32
+  },
+  {
+    "text": "been accepted as a third main branch of",
+    "start": 364.72,
+    "duration": 3.479
+  },
+  {
+    "text": "machine learning and has gain momentum",
+    "start": 366.44,
+    "duration": 3.68
+  },
+  {
+    "text": "in the late 2010s particularly with the",
+    "start": 368.199,
+    "duration": 3.761
+  },
+  {
+    "text": "success of deep Minds chess engine",
+    "start": 370.12,
+    "duration": 4.919
+  },
+  {
+    "text": "alphago in 2016 it's distinct from both",
+    "start": 371.96,
+    "duration": 4.88
+  },
+  {
+    "text": "supervised and unsupervised learning",
+    "start": 375.039,
+    "duration": 3.241
+  },
+  {
+    "text": "because it operates on a fundamentally",
+    "start": 376.84,
+    "duration": 3.359
+  },
+  {
+    "text": "different principle instead of learning",
+    "start": 378.28,
+    "duration": 3.96
+  },
+  {
+    "text": "from pre-labeled examples supervised or",
+    "start": 380.199,
+    "duration": 3.881
+  },
+  {
+    "text": "finding patterns in unlabeled data",
+    "start": 382.24,
+    "duration": 3.959
+  },
+  {
+    "text": "unsupervised it learns from interaction",
+    "start": 384.08,
+    "duration": 4.679
+  },
+  {
+    "text": "and feedback unlike supervised learning",
+    "start": 386.199,
+    "duration": 4.481
+  },
+  {
+    "text": "where examples have clear right answers",
+    "start": 388.759,
+    "duration": 3.321
+  },
+  {
+    "text": "reinforcement learning is more like",
+    "start": 390.68,
+    "duration": 3.4
+  },
+  {
+    "text": "training a pet the agent learns through",
+    "start": 392.08,
+    "duration": 3.72
+  },
+  {
+    "text": "trial and error getting rewarded for",
+    "start": 394.08,
+    "duration": 3.36
+  },
+  {
+    "text": "good decisions and penalized for poor",
+    "start": 395.8,
+    "duration": 3.399
+  },
+  {
+    "text": "ones for example a reinforcement",
+    "start": 397.44,
+    "duration": 3.24
+  },
+  {
+    "text": "learning algorithm can learn to play",
+    "start": 399.199,
+    "duration": 3.201
+  },
+  {
+    "text": "chess by playing thousands of games",
+    "start": 400.68,
+    "duration": 3.639
+  },
+  {
+    "text": "against itself receiving positive",
+    "start": 402.4,
+    "duration": 3.48
+  },
+  {
+    "text": "rewards for winning moves and negative",
+    "start": 404.319,
+    "duration": 3.481
+  },
+  {
+    "text": "rewards for losing ones this approach is",
+    "start": 405.88,
+    "duration": 3.36
+  },
+  {
+    "text": "particularly powerful for tasks",
+    "start": 407.8,
+    "duration": 3.2
+  },
+  {
+    "text": "involving sequential decision-making",
+    "start": 409.24,
+    "duration": 3.679
+  },
+  {
+    "text": "like gam playing robotic control or",
+    "start": 411,
+    "duration": 3.4
+  },
+  {
+    "text": "optimizing business strategies when",
+    "start": 412.919,
+    "duration": 3.441
+  },
+  {
+    "text": "there are no clear labels but an idea of",
+    "start": 414.4,
+    "duration": 4.04
+  },
+  {
+    "text": "what is a good or bad outcome many basic",
+    "start": 416.36,
+    "duration": 3.679
+  },
+  {
+    "text": "machine learning courses don't cover",
+    "start": 418.44,
+    "duration": 3.159
+  },
+  {
+    "text": "reinforcement learning as a basic",
+    "start": 420.039,
+    "duration": 3.16
+  },
+  {
+    "text": "machine learning Branch but as an",
+    "start": 421.599,
+    "duration": 3.241
+  },
+  {
+    "text": "advanced topic since it is still fairly",
+    "start": 423.199,
+    "duration": 3.84
+  },
+  {
+    "text": "Niche a feature also called a predictive",
+    "start": 424.84,
+    "duration": 4.479
+  },
+  {
+    "text": "variable input variable independent",
+    "start": 427.039,
+    "duration": 4.6
+  },
+  {
+    "text": "variable or attribute is a specific",
+    "start": 429.319,
+    "duration": 3.88
+  },
+  {
+    "text": "piece of information or characteristic",
+    "start": 431.639,
+    "duration": 3
+  },
+  {
+    "text": "used as input for a machine learning",
+    "start": 433.199,
+    "duration": 3.28
+  },
+  {
+    "text": "model essentially it's any measurable",
+    "start": 434.639,
+    "duration": 3.321
+  },
+  {
+    "text": "property that helps the model make",
+    "start": 436.479,
+    "duration": 4.081
+  },
+  {
+    "text": "predictions for example in a house price",
+    "start": 437.96,
+    "duration": 4.079
+  },
+  {
+    "text": "prediction model features might include",
+    "start": 440.56,
+    "duration": 3.28
+  },
+  {
+    "text": "the square footage number of bedrooms",
+    "start": 442.039,
+    "duration": 3.761
+  },
+  {
+    "text": "location and age of the house for an",
+    "start": 443.84,
+    "duration": 3.68
+  },
+  {
+    "text": "email spam detector features could",
+    "start": 445.8,
+    "duration": 3.72
+  },
+  {
+    "text": "include the number of capitalized words",
+    "start": 447.52,
+    "duration": 4
+  },
+  {
+    "text": "the number of URLs in the text or",
+    "start": 449.52,
+    "duration": 3.959
+  },
+  {
+    "text": "whether the sender is in your contacts",
+    "start": 451.52,
+    "duration": 3.239
+  },
+  {
+    "text": "the selection and Engineering of",
+    "start": 453.479,
+    "duration": 3
+  },
+  {
+    "text": "relevant features sometimes called",
+    "start": 454.759,
+    "duration": 4.081
+  },
+  {
+    "text": "feature extraction or feature design is",
+    "start": 456.479,
+    "duration": 4.961
+  },
+  {
+    "text": "often crucial to a model success as they",
+    "start": 458.84,
+    "duration": 4.24
+  },
+  {
+    "text": "need to capture the important aspects of",
+    "start": 461.44,
+    "duration": 3.159
+  },
+  {
+    "text": "the data that relate to the prediction",
+    "start": 463.08,
+    "duration": 3.519
+  },
+  {
+    "text": "task feature engineering is the process",
+    "start": 464.599,
+    "duration": 3.521
+  },
+  {
+    "text": "of creating new more informative",
+    "start": 466.599,
+    "duration": 3.6
+  },
+  {
+    "text": "features from existing raw data to",
+    "start": 468.12,
+    "duration": 4.44
+  },
+  {
+    "text": "improve a model's performance feature",
+    "start": 470.199,
+    "duration": 3.881
+  },
+  {
+    "text": "engineering involves using domain",
+    "start": 472.56,
+    "duration": 3.8
+  },
+  {
+    "text": "knowledge and creativity to transform or",
+    "start": 474.08,
+    "duration": 3.92
+  },
+  {
+    "text": "combine original features into more",
+    "start": 476.36,
+    "duration": 3.799
+  },
+  {
+    "text": "meaningful ones for for example instead",
+    "start": 478,
+    "duration": 3.8
+  },
+  {
+    "text": "of just using raw date values you might",
+    "start": 480.159,
+    "duration": 3.72
+  },
+  {
+    "text": "create features like day of the week or",
+    "start": 481.8,
+    "duration": 3.839
+  },
+  {
+    "text": "is holiday which will probably explain",
+    "start": 483.879,
+    "duration": 3.681
+  },
+  {
+    "text": "fluctuations of sales much better good",
+    "start": 485.639,
+    "duration": 3.4
+  },
+  {
+    "text": "feature engineering often makes the",
+    "start": 487.56,
+    "duration": 3
+  },
+  {
+    "text": "difference between an average model and",
+    "start": 489.039,
+    "duration": 3.56
+  },
+  {
+    "text": "an excellent one as it helps the model",
+    "start": 490.56,
+    "duration": 3.72
+  },
+  {
+    "text": "focus on the most relevant patterns in",
+    "start": 492.599,
+    "duration": 3.88
+  },
+  {
+    "text": "the data feature scaling also called",
+    "start": 494.28,
+    "duration": 4.56
+  },
+  {
+    "text": "normalization or standardization is the",
+    "start": 496.479,
+    "duration": 4.241
+  },
+  {
+    "text": "process of transforming numeric features",
+    "start": 498.84,
+    "duration": 3.799
+  },
+  {
+    "text": "to a similar scale typically to prevent",
+    "start": 500.72,
+    "duration": 3.4
+  },
+  {
+    "text": "features with larger ranges from",
+    "start": 502.639,
+    "duration": 3.28
+  },
+  {
+    "text": "dominating the learning process for",
+    "start": 504.12,
+    "duration": 3.639
+  },
+  {
+    "text": "example here the numbers for salary are",
+    "start": 505.919,
+    "duration": 3.761
+  },
+  {
+    "text": "much larger than those for age and",
+    "start": 507.759,
+    "duration": 3.481
+  },
+  {
+    "text": "dominate the model fitting common",
+    "start": 509.68,
+    "duration": 3
+  },
+  {
+    "text": "scaling methods include minmax",
+    "start": 511.24,
+    "duration": 3.52
+  },
+  {
+    "text": "normalization thus scaling to a 0 to one",
+    "start": 512.68,
+    "duration": 4.279
+  },
+  {
+    "text": "range as seen here or standardization",
+    "start": 514.76,
+    "duration": 3.92
+  },
+  {
+    "text": "transforming to mean zero and standard",
+    "start": 516.959,
+    "duration": 3.64
+  },
+  {
+    "text": "deviation one proper scaling is",
+    "start": 518.68,
+    "duration": 3
+  },
+  {
+    "text": "particularly important for many",
+    "start": 520.599,
+    "duration": 2.721
+  },
+  {
+    "text": "algorithms like gradient descent and",
+    "start": 521.68,
+    "duration": 4.12
+  },
+  {
+    "text": "neural networks which can perform poorly",
+    "start": 523.32,
+    "duration": 4.079
+  },
+  {
+    "text": "or converge slowly when features are on",
+    "start": 525.8,
+    "duration": 3.96
+  },
+  {
+    "text": "vastly different scales dimensionality",
+    "start": 527.399,
+    "duration": 4.081
+  },
+  {
+    "text": "refers to the number of features also",
+    "start": 529.76,
+    "duration": 3.079
+  },
+  {
+    "text": "called Dimensions variables or",
+    "start": 531.48,
+    "duration": 3.479
+  },
+  {
+    "text": "attributes in a data set for example in",
+    "start": 532.839,
+    "duration": 3.721
+  },
+  {
+    "text": "a house price prediction model if each",
+    "start": 534.959,
+    "duration": 3.361
+  },
+  {
+    "text": "house is described by square footage",
+    "start": 536.56,
+    "duration": 4.959
+  },
+  {
+    "text": "number of bedrooms location age number",
+    "start": 538.32,
+    "duration": 4.759
+  },
+  {
+    "text": "of bathrooms and distance from the city",
+    "start": 541.519,
+    "duration": 4.161
+  },
+  {
+    "text": "center the data has six dimensions High",
+    "start": 543.079,
+    "duration": 4.961
+  },
+  {
+    "text": "dimensional data having many features",
+    "start": 545.68,
+    "duration": 4.48
+  },
+  {
+    "text": "can pose unique challenges often called",
+    "start": 548.04,
+    "duration": 4.4
+  },
+  {
+    "text": "The Curse of dimensionality as",
+    "start": 550.16,
+    "duration": 3.96
+  },
+  {
+    "text": "Dimensions increase data becomes more",
+    "start": 552.44,
+    "duration": 3.32
+  },
+  {
+    "text": "sparse and patterns become harder to",
+    "start": 554.12,
+    "duration": 3.56
+  },
+  {
+    "text": "find much like trying to find a needle",
+    "start": 555.76,
+    "duration": 4.24
+  },
+  {
+    "text": "in an increasingly large Hast stack this",
+    "start": 557.68,
+    "duration": 3.56
+  },
+  {
+    "text": "is why dimensionality reduction",
+    "start": 560,
+    "duration": 2.72
+  },
+  {
+    "text": "techniques are often crucial in machine",
+    "start": 561.24,
+    "duration": 3.2
+  },
+  {
+    "text": "learning helping to compress many",
+    "start": 562.72,
+    "duration": 3.28
+  },
+  {
+    "text": "features into a smaller set while",
+    "start": 564.44,
+    "duration": 3.76
+  },
+  {
+    "text": "preserving important information feature",
+    "start": 566,
+    "duration": 3.72
+  },
+  {
+    "text": "engineering feature scale and",
+    "start": 568.2,
+    "duration": 3.28
+  },
+  {
+    "text": "dimensionality reduction are all part of",
+    "start": 569.72,
+    "duration": 3.4
+  },
+  {
+    "text": "data pre-processing along with other",
+    "start": 571.48,
+    "duration": 3.68
+  },
+  {
+    "text": "techniques a Target also called the",
+    "start": 573.12,
+    "duration": 4.04
+  },
+  {
+    "text": "dependent variable output variable",
+    "start": 575.16,
+    "duration": 4.08
+  },
+  {
+    "text": "response variable or label is what a",
+    "start": 577.16,
+    "duration": 3.359
+  },
+  {
+    "text": "machine learning model is trying to",
+    "start": 579.24,
+    "duration": 3.32
+  },
+  {
+    "text": "predict based on the features for",
+    "start": 580.519,
+    "duration": 3.44
+  },
+  {
+    "text": "example in a house price prediction",
+    "start": 582.56,
+    "duration": 2.839
+  },
+  {
+    "text": "model the target would be the actual",
+    "start": 583.959,
+    "duration": 3.32
+  },
+  {
+    "text": "sale price of the house while in an",
+    "start": 585.399,
+    "duration": 3.68
+  },
+  {
+    "text": "email spam detector the target would be",
+    "start": 587.279,
+    "duration": 5.481
+  },
+  {
+    "text": "whether an email is Spam or not spam in",
+    "start": 589.079,
+    "duration": 5.241
+  },
+  {
+    "text": "supervised learning the training data",
+    "start": 592.76,
+    "duration": 3.12
+  },
+  {
+    "text": "must include both features and their",
+    "start": 594.32,
+    "duration": 3.199
+  },
+  {
+    "text": "corresponding Target values allowing the",
+    "start": 595.88,
+    "duration": 3.16
+  },
+  {
+    "text": "model to learn the relationship between",
+    "start": 597.519,
+    "duration": 4.721
+  },
+  {
+    "text": "them an instance also called a sample",
+    "start": 599.04,
+    "duration": 6.12
+  },
+  {
+    "text": "example record data point or observation",
+    "start": 602.24,
+    "duration": 4.599
+  },
+  {
+    "text": "is a single complete unit of data that",
+    "start": 605.16,
+    "duration": 3.88
+  },
+  {
+    "text": "includes all features and in supervised",
+    "start": 606.839,
+    "duration": 3.961
+  },
+  {
+    "text": "learning it's Target value in this",
+    "start": 609.04,
+    "duration": 3.32
+  },
+  {
+    "text": "example it's one person with their name",
+    "start": 610.8,
+    "duration": 3.92
+  },
+  {
+    "text": "age income and marital status for house",
+    "start": 612.36,
+    "duration": 3.96
+  },
+  {
+    "text": "prediction it might be a single house",
+    "start": 614.72,
+    "duration": 3.2
+  },
+  {
+    "text": "with all its characteristics like square",
+    "start": 616.32,
+    "duration": 3.84
+  },
+  {
+    "text": "footage and price a typical machine",
+    "start": 617.92,
+    "duration": 4.12
+  },
+  {
+    "text": "learning data set consists of many such",
+    "start": 620.16,
+    "duration": 3.52
+  },
+  {
+    "text": "instances which together form the",
+    "start": 622.04,
+    "duration": 3.68
+  },
+  {
+    "text": "training or test data think of an",
+    "start": 623.68,
+    "duration": 3.88
+  },
+  {
+    "text": "instance as one row in a data table or",
+    "start": 625.72,
+    "duration": 3.32
+  },
+  {
+    "text": "spreadsheet with the columns being the",
+    "start": 627.56,
+    "duration": 3.36
+  },
+  {
+    "text": "feature features and the target the",
+    "start": 629.04,
+    "duration": 3.52
+  },
+  {
+    "text": "entire table would be called your data",
+    "start": 630.92,
+    "duration": 5.12
+  },
+  {
+    "text": "set a label also called a class Target",
+    "start": 632.56,
+    "duration": 5.839
+  },
+  {
+    "text": "value ground truth or correct answer is",
+    "start": 636.04,
+    "duration": 4.16
+  },
+  {
+    "text": "the known correct output associated with",
+    "start": 638.399,
+    "duration": 4.161
+  },
+  {
+    "text": "an instance in supervised learning it is",
+    "start": 640.2,
+    "duration": 4.04
+  },
+  {
+    "text": "the value that the target variable takes",
+    "start": 642.56,
+    "duration": 4.079
+  },
+  {
+    "text": "for each instance in an image",
+    "start": 644.24,
+    "duration": 4.24
+  },
+  {
+    "text": "recognition system where the target",
+    "start": 646.639,
+    "duration": 3.281
+  },
+  {
+    "text": "variable is the type of animal in the",
+    "start": 648.48,
+    "duration": 3.599
+  },
+  {
+    "text": "picture the label is the actual animal's",
+    "start": 649.92,
+    "duration": 5.2
+  },
+  {
+    "text": "name like cat or dog for each image",
+    "start": 652.079,
+    "duration": 4.241
+  },
+  {
+    "text": "labels are crucial for training",
+    "start": 655.12,
+    "duration": 2.64
+  },
+  {
+    "text": "supervised learning models as they",
+    "start": 656.32,
+    "duration": 3.079
+  },
+  {
+    "text": "provide the right answers that the model",
+    "start": 657.76,
+    "duration": 3.879
+  },
+  {
+    "text": "learns from to obtaining accurate labels",
+    "start": 659.399,
+    "duration": 4.44
+  },
+  {
+    "text": "often require significant human effort",
+    "start": 661.639,
+    "duration": 4.041
+  },
+  {
+    "text": "such as experts manually categorizing",
+    "start": 663.839,
+    "duration": 4.081
+  },
+  {
+    "text": "thousands of examples this process is",
+    "start": 665.68,
+    "duration": 4
+  },
+  {
+    "text": "called labeling which often is a major",
+    "start": 667.92,
+    "duration": 3.599
+  },
+  {
+    "text": "bottleneck in supervised learning",
+    "start": 669.68,
+    "duration": 3.88
+  },
+  {
+    "text": "well-labeled data is a hot commodity and",
+    "start": 671.519,
+    "duration": 3.801
+  },
+  {
+    "text": "many creative ways exist to generate it",
+    "start": 673.56,
+    "duration": 3.8
+  },
+  {
+    "text": "including crowdsourcing model complexity",
+    "start": 675.32,
+    "duration": 3.72
+  },
+  {
+    "text": "refers to how sophisticated a machine",
+    "start": 677.36,
+    "duration": 3.159
+  },
+  {
+    "text": "learning model is in terms of its",
+    "start": 679.04,
+    "duration": 3.72
+  },
+  {
+    "text": "ability to capture patterns in the data",
+    "start": 680.519,
+    "duration": 4.481
+  },
+  {
+    "text": "a more complex model has more parameters",
+    "start": 682.76,
+    "duration": 3.56
+  },
+  {
+    "text": "and can learn more complicated",
+    "start": 685,
+    "duration": 3.399
+  },
+  {
+    "text": "relationships like a neural network with",
+    "start": 686.32,
+    "duration": 4.44
+  },
+  {
+    "text": "many layers conversely a simple model",
+    "start": 688.399,
+    "duration": 4.24
+  },
+  {
+    "text": "has fewer parameters and can only",
+    "start": 690.76,
+    "duration": 3.92
+  },
+  {
+    "text": "capture basic patterns like a linear",
+    "start": 692.639,
+    "duration": 4.121
+  },
+  {
+    "text": "regression finding the right level of",
+    "start": 694.68,
+    "duration": 4.64
+  },
+  {
+    "text": "complexity is crucial too simple and the",
+    "start": 696.76,
+    "duration": 3.92
+  },
+  {
+    "text": "model fails to capture important",
+    "start": 699.32,
+    "duration": 3.519
+  },
+  {
+    "text": "patterns which is called underfitting",
+    "start": 700.68,
+    "duration": 3.76
+  },
+  {
+    "text": "too complex and it learns to fit to",
+    "start": 702.839,
+    "duration": 3.641
+  },
+  {
+    "text": "noise in the training data rather than",
+    "start": 704.44,
+    "duration": 4.959
+  },
+  {
+    "text": "true patterns also called overfitting a",
+    "start": 706.48,
+    "duration": 4.159
+  },
+  {
+    "text": "simple way to think about model",
+    "start": 709.399,
+    "duration": 2.721
+  },
+  {
+    "text": "complexity is by thinking about the",
+    "start": 710.639,
+    "duration": 3.921
+  },
+  {
+    "text": "polinomial order of a regression line a",
+    "start": 712.12,
+    "duration": 4.08
+  },
+  {
+    "text": "simple linear regression only has to",
+    "start": 714.56,
+    "duration": 3.24
+  },
+  {
+    "text": "estimate the intercept and the slope of",
+    "start": 716.2,
+    "duration": 3.92
+  },
+  {
+    "text": "the line so two parameters a quadratic",
+    "start": 717.8,
+    "duration": 4.08
+  },
+  {
+    "text": "regression has to estimate the intercept",
+    "start": 720.12,
+    "duration": 3.959
+  },
+  {
+    "text": "and two parameters and so on each",
+    "start": 721.88,
+    "duration": 3.8
+  },
+  {
+    "text": "polinomial can potentially fit more",
+    "start": 724.079,
+    "duration": 3.56
+  },
+  {
+    "text": "complicated data this relationship",
+    "start": 725.68,
+    "duration": 3.959
+  },
+  {
+    "text": "between polinomial order and complexity",
+    "start": 727.639,
+    "duration": 3.44
+  },
+  {
+    "text": "provides a clear example of the",
+    "start": 729.639,
+    "duration": 3.121
+  },
+  {
+    "text": "trade-off between a model's ability to",
+    "start": 731.079,
+    "duration": 3.961
+  },
+  {
+    "text": "capture complex patterns and its risk of",
+    "start": 732.76,
+    "duration": 4.8
+  },
+  {
+    "text": "fitting to noise bias in terms of model",
+    "start": 735.04,
+    "duration": 4.28
+  },
+  {
+    "text": "complexity refers to how limited or",
+    "start": 737.56,
+    "duration": 3.719
+  },
+  {
+    "text": "inflexible a model's assumptions are",
+    "start": 739.32,
+    "duration": 3.48
+  },
+  {
+    "text": "about the underlying patterns in the",
+    "start": 741.279,
+    "duration": 4
+  },
+  {
+    "text": "data a model with high bias like a",
+    "start": 742.8,
+    "duration": 4.56
+  },
+  {
+    "text": "linear regression makes strong simple",
+    "start": 745.279,
+    "duration": 3.961
+  },
+  {
+    "text": "assumptions in this case that the",
+    "start": 747.36,
+    "duration": 4.12
+  },
+  {
+    "text": "relationship is purely linear as we",
+    "start": 749.24,
+    "duration": 4
+  },
+  {
+    "text": "increase the polinomial order the bias",
+    "start": 751.48,
+    "duration": 4.039
+  },
+  {
+    "text": "decreases a second order polinomial has",
+    "start": 753.24,
+    "duration": 4.839
+  },
+  {
+    "text": "more flexibility to fit curves low bias",
+    "start": 755.519,
+    "duration": 4.32
+  },
+  {
+    "text": "means fewer built-in assumptions about",
+    "start": 758.079,
+    "duration": 3.641
+  },
+  {
+    "text": "the data structure this doesn't mean",
+    "start": 759.839,
+    "duration": 4.041
+  },
+  {
+    "text": "lower bias is always better a very high",
+    "start": 761.72,
+    "duration": 3.96
+  },
+  {
+    "text": "order polinomial might have such low",
+    "start": 763.88,
+    "duration": 3.36
+  },
+  {
+    "text": "bias that it fits the training data",
+    "start": 765.68,
+    "duration": 4.04
+  },
+  {
+    "text": "perfectly but fails to generalize well",
+    "start": 767.24,
+    "duration": 3.64
+  },
+  {
+    "text": "leading to",
+    "start": 769.72,
+    "duration": 3.28
+  },
+  {
+    "text": "overfitting variance refers to how much",
+    "start": 770.88,
+    "duration": 3.759
+  },
+  {
+    "text": "a model's predictions would change if it",
+    "start": 773,
+    "duration": 3.079
+  },
+  {
+    "text": "were trained on different subsets of the",
+    "start": 774.639,
+    "duration": 3.64
+  },
+  {
+    "text": "training data a model with high variance",
+    "start": 776.079,
+    "duration": 3.76
+  },
+  {
+    "text": "is very sensitive to small changes in",
+    "start": 778.279,
+    "duration": 3.281
+  },
+  {
+    "text": "the training data producing",
+    "start": 779.839,
+    "duration": 3.24
+  },
+  {
+    "text": "significantly different predictions when",
+    "start": 781.56,
+    "duration": 3.76
+  },
+  {
+    "text": "trained on slightly different data sets",
+    "start": 783.079,
+    "duration": 4.601
+  },
+  {
+    "text": "models with low variance like linear",
+    "start": 785.32,
+    "duration": 4
+  },
+  {
+    "text": "regression produce more consistent",
+    "start": 787.68,
+    "duration": 2.959
+  },
+  {
+    "text": "predictions across different training",
+    "start": 789.32,
+    "duration": 3.48
+  },
+  {
+    "text": "sets High variance often indicates",
+    "start": 790.639,
+    "duration": 3.601
+  },
+  {
+    "text": "overfitting where the model is learning",
+    "start": 792.8,
+    "duration": 3.399
+  },
+  {
+    "text": "the random noise and the training data",
+    "start": 794.24,
+    "duration": 3.88
+  },
+  {
+    "text": "rather than the true underlying",
+    "start": 796.199,
+    "duration": 4
+  },
+  {
+    "text": "patterns there's typically a trade-off",
+    "start": 798.12,
+    "duration": 3.8
+  },
+  {
+    "text": "between bias and variance where reducing",
+    "start": 800.199,
+    "duration": 3.801
+  },
+  {
+    "text": "one tends to increase the other the bias",
+    "start": 801.92,
+    "duration": 3.919
+  },
+  {
+    "text": "variance trade-off is a fundamental",
+    "start": 804,
+    "duration": 3.199
+  },
+  {
+    "text": "Concept in machine learning that",
+    "start": 805.839,
+    "duration": 2.921
+  },
+  {
+    "text": "describes the tension between a model's",
+    "start": 807.199,
+    "duration": 3.721
+  },
+  {
+    "text": "ability to minimize bias and variance at",
+    "start": 808.76,
+    "duration": 4.12
+  },
+  {
+    "text": "the same time as model complexity",
+    "start": 810.92,
+    "duration": 4
+  },
+  {
+    "text": "increases bias typically decreases",
+    "start": 812.88,
+    "duration": 3.519
+  },
+  {
+    "text": "because the model can capture more",
+    "start": 814.92,
+    "duration": 4
+  },
+  {
+    "text": "complex patterns but variance increases",
+    "start": 816.399,
+    "duration": 4.041
+  },
+  {
+    "text": "because the model becomes more sensitive",
+    "start": 818.92,
+    "duration": 3.32
+  },
+  {
+    "text": "to changes in the training data",
+    "start": 820.44,
+    "duration": 4.639
+  },
+  {
+    "text": "conversely as model complexity decreases",
+    "start": 822.24,
+    "duration": 4.959
+  },
+  {
+    "text": "bias increases because the model makes",
+    "start": 825.079,
+    "duration": 4.2
+  },
+  {
+    "text": "more rigid assumptions but variance",
+    "start": 827.199,
+    "duration": 3.88
+  },
+  {
+    "text": "decreases because the model becomes more",
+    "start": 829.279,
+    "duration": 3.641
+  },
+  {
+    "text": "stable finding The Sweet Spot in this",
+    "start": 831.079,
+    "duration": 3.281
+  },
+  {
+    "text": "tradeoff is crucial the goal is to",
+    "start": 832.92,
+    "duration": 2.96
+  },
+  {
+    "text": "create a model that's complex enough to",
+    "start": 834.36,
+    "duration": 3.24
+  },
+  {
+    "text": "capture true patterns in the data but",
+    "start": 835.88,
+    "duration": 3.44
+  },
+  {
+    "text": "not so complex that it fits to noise",
+    "start": 837.6,
+    "duration": 3.4
+  },
+  {
+    "text": "this balance typically produces the best",
+    "start": 839.32,
+    "duration": 4
+  },
+  {
+    "text": "generalization to new data this concept",
+    "start": 841,
+    "duration": 3.88
+  },
+  {
+    "text": "is one of the most Central and important",
+    "start": 843.32,
+    "duration": 3.8
+  },
+  {
+    "text": "concepts of machine learning truly",
+    "start": 844.88,
+    "duration": 3.6
+  },
+  {
+    "text": "understanding this concept on all levels",
+    "start": 847.12,
+    "duration": 3.04
+  },
+  {
+    "text": "will make you a great data scientist and",
+    "start": 848.48,
+    "duration": 3.76
+  },
+  {
+    "text": "machine learning engineer noise refers",
+    "start": 850.16,
+    "duration": 3.96
+  },
+  {
+    "text": "to random variations or errors in data",
+    "start": 852.24,
+    "duration": 3.399
+  },
+  {
+    "text": "that don't represent true underlying",
+    "start": 854.12,
+    "duration": 3.48
+  },
+  {
+    "text": "patterns like random fluctuations in",
+    "start": 855.639,
+    "duration": 3.921
+  },
+  {
+    "text": "sensor readings or errors in data",
+    "start": 857.6,
+    "duration": 4.039
+  },
+  {
+    "text": "collection in machine learning we want",
+    "start": 859.56,
+    "duration": 3.839
+  },
+  {
+    "text": "to find the true patterns while ignoring",
+    "start": 861.639,
+    "duration": 4.041
+  },
+  {
+    "text": "this noise noise is what's left over",
+    "start": 863.399,
+    "duration": 4
+  },
+  {
+    "text": "after perfect fitting of the data with a",
+    "start": 865.68,
+    "duration": 3.719
+  },
+  {
+    "text": "perfect model capturing all the signal",
+    "start": 867.399,
+    "duration": 4.201
+  },
+  {
+    "text": "in the data overfitting occurs when a",
+    "start": 869.399,
+    "duration": 4
+  },
+  {
+    "text": "machine learning model learns the noise",
+    "start": 871.6,
+    "duration": 3.479
+  },
+  {
+    "text": "and random fluctuations in the training",
+    "start": 873.399,
+    "duration": 3.44
+  },
+  {
+    "text": "data rather than learning the true",
+    "start": 875.079,
+    "duration": 4.2
+  },
+  {
+    "text": "underlying patterns like a student who",
+    "start": 876.839,
+    "duration": 4.44
+  },
+  {
+    "text": "memorizes test answers without",
+    "start": 879.279,
+    "duration": 3.8
+  },
+  {
+    "text": "understanding the concepts an overfitted",
+    "start": 881.279,
+    "duration": 4.201
+  },
+  {
+    "text": "model performs well on training data but",
+    "start": 883.079,
+    "duration": 4.88
+  },
+  {
+    "text": "fails to generalize to new examples this",
+    "start": 885.48,
+    "duration": 4
+  },
+  {
+    "text": "typically happens when a model is too",
+    "start": 887.959,
+    "duration": 3.481
+  },
+  {
+    "text": "complex for the task or when it trains",
+    "start": 889.48,
+    "duration": 4.32
+  },
+  {
+    "text": "for too long on too little data causing",
+    "start": 891.44,
+    "duration": 3.639
+  },
+  {
+    "text": "it to mistake random noise for",
+    "start": 893.8,
+    "duration": 3.8
+  },
+  {
+    "text": "Meaningful patterns the model has high",
+    "start": 895.079,
+    "duration": 4.921
+  },
+  {
+    "text": "variance under fitting occurs when a",
+    "start": 897.6,
+    "duration": 4.2
+  },
+  {
+    "text": "machine learning model is too simple to",
+    "start": 900,
+    "duration": 3.24
+  },
+  {
+    "text": "capture the important patterns in the",
+    "start": 901.8,
+    "duration": 3.56
+  },
+  {
+    "text": "data resulting in poor performance on",
+    "start": 903.24,
+    "duration": 4.92
+  },
+  {
+    "text": "both training and test data like using a",
+    "start": 905.36,
+    "duration": 4.36
+  },
+  {
+    "text": "straight line to model clearly curved",
+    "start": 908.16,
+    "duration": 3.2
+  },
+  {
+    "text": "data an underfitted model makes",
+    "start": 909.72,
+    "duration": 3.2
+  },
+  {
+    "text": "oversimplified assumptions about the",
+    "start": 911.36,
+    "duration": 3.68
+  },
+  {
+    "text": "underlying patterns this typically",
+    "start": 912.92,
+    "duration": 4.24
+  },
+  {
+    "text": "happens when a model has high bias for",
+    "start": 915.04,
+    "duration": 3.88
+  },
+  {
+    "text": "example using a linear model to capture",
+    "start": 917.16,
+    "duration": 3.76
+  },
+  {
+    "text": "relationships that are clearly nonlinear",
+    "start": 918.92,
+    "duration": 3.64
+  },
+  {
+    "text": "one way to estimate bias and variance",
+    "start": 920.92,
+    "duration": 2.96
+  },
+  {
+    "text": "during training and thus avoid",
+    "start": 922.56,
+    "duration": 2.719
+  },
+  {
+    "text": "underfitting and overfitting before",
+    "start": 923.88,
+    "duration": 3.04
+  },
+  {
+    "text": "applying your model to real world data",
+    "start": 925.279,
+    "duration": 4.161
+  },
+  {
+    "text": "is validation validation is the practice",
+    "start": 926.92,
+    "duration": 4.159
+  },
+  {
+    "text": "of evaluating a model's performance on",
+    "start": 929.44,
+    "duration": 3.48
+  },
+  {
+    "text": "data it hasn't been trained on by",
+    "start": 931.079,
+    "duration": 3.44
+  },
+  {
+    "text": "setting aside a portion of the training",
+    "start": 932.92,
+    "duration": 3.96
+  },
+  {
+    "text": "data called the validation set to",
+    "start": 934.519,
+    "duration": 4.161
+  },
+  {
+    "text": "simulate how well the model will perform",
+    "start": 936.88,
+    "duration": 4.84
+  },
+  {
+    "text": "on new unseen data cross validation",
+    "start": 938.68,
+    "duration": 4.519
+  },
+  {
+    "text": "extends this concept by repeatedly",
+    "start": 941.72,
+    "duration": 3.239
+  },
+  {
+    "text": "training and validating the model on",
+    "start": 943.199,
+    "duration": 4.401
+  },
+  {
+    "text": "different splits of the data for example",
+    "start": 944.959,
+    "duration": 4.521
+  },
+  {
+    "text": "in five-fold Cross validation the data",
+    "start": 947.6,
+    "duration": 4.159
+  },
+  {
+    "text": "is divided into five parts and the model",
+    "start": 949.48,
+    "duration": 4.64
+  },
+  {
+    "text": "is trained five times each time using a",
+    "start": 951.759,
+    "duration": 4.481
+  },
+  {
+    "text": "different part as the validation set and",
+    "start": 954.12,
+    "duration": 4.44
+  },
+  {
+    "text": "the remaining parts for training this",
+    "start": 956.24,
+    "duration": 4.12
+  },
+  {
+    "text": "practice provides a more robust estimate",
+    "start": 958.56,
+    "duration": 3.16
+  },
+  {
+    "text": "of the model's True Performance and",
+    "start": 960.36,
+    "duration": 2.88
+  },
+  {
+    "text": "helps detect potential issues like",
+    "start": 961.72,
+    "duration": 3.919
+  },
+  {
+    "text": "overfitting or underfitting while",
+    "start": 963.24,
+    "duration": 4.079
+  },
+  {
+    "text": "validation sets are used during the",
+    "start": 965.639,
+    "duration": 3.081
+  },
+  {
+    "text": "model development process to make",
+    "start": 967.319,
+    "duration": 2.96
+  },
+  {
+    "text": "decisions about hyperparameters and",
+    "start": 968.72,
+    "duration": 3.64
+  },
+  {
+    "text": "model selection the test set is kept",
+    "start": 970.279,
+    "duration": 4.161
+  },
+  {
+    "text": "completely separate and used only once",
+    "start": 972.36,
+    "duration": 3.76
+  },
+  {
+    "text": "at the very end to evaluate the final",
+    "start": 974.44,
+    "duration": 4.079
+  },
+  {
+    "text": "model's performance using the test set",
+    "start": 976.12,
+    "duration": 4.6
+  },
+  {
+    "text": "repeatedly would risk overfitting to it",
+    "start": 978.519,
+    "duration": 4.401
+  },
+  {
+    "text": "regularization refers to techniques used",
+    "start": 980.72,
+    "duration": 3.64
+  },
+  {
+    "text": "to prevent overfitting by adding",
+    "start": 982.92,
+    "duration": 3.039
+  },
+  {
+    "text": "constraints or penalties that discourage",
+    "start": 984.36,
+    "duration": 3.36
+  },
+  {
+    "text": "a model from becoming too complex or",
+    "start": 985.959,
+    "duration": 2.961
+  },
+  {
+    "text": "fitting too closely to the train",
+    "start": 987.72,
+    "duration": 2.919
+  },
+  {
+    "text": "training data it keeps the model",
+    "start": 988.92,
+    "duration": 3.88
+  },
+  {
+    "text": "parameters small you can think of it as",
+    "start": 990.639,
+    "duration": 3.481
+  },
+  {
+    "text": "squeezing the regression lens so it",
+    "start": 992.8,
+    "duration": 3.36
+  },
+  {
+    "text": "doesn't become too wild the strength of",
+    "start": 994.12,
+    "duration": 4.36
+  },
+  {
+    "text": "the regularization is a hyperparameter",
+    "start": 996.16,
+    "duration": 3.919
+  },
+  {
+    "text": "too much regularization leads to",
+    "start": 998.48,
+    "duration": 4.12
+  },
+  {
+    "text": "underfitting a batch is a subset of",
+    "start": 1000.079,
+    "duration": 4.44
+  },
+  {
+    "text": "training data that is processed together",
+    "start": 1002.6,
+    "duration": 3.76
+  },
+  {
+    "text": "in a single step of model training",
+    "start": 1004.519,
+    "duration": 3.401
+  },
+  {
+    "text": "rather than processing the entire data",
+    "start": 1006.36,
+    "duration": 3.88
+  },
+  {
+    "text": "set at once for example instead of using",
+    "start": 1007.92,
+    "duration": 3.68
+  },
+  {
+    "text": "all 10,000 training images",
+    "start": 1010.24,
+    "duration": 2.959
+  },
+  {
+    "text": "simultaneously a model might process",
+    "start": 1011.6,
+    "duration": 3.64
+  },
+  {
+    "text": "batches of 32 images at a time updating",
+    "start": 1013.199,
+    "duration": 4.12
+  },
+  {
+    "text": "its parameters after each batch the",
+    "start": 1015.24,
+    "duration": 3.88
+  },
+  {
+    "text": "batch size is an important typer",
+    "start": 1017.319,
+    "duration": 3.88
+  },
+  {
+    "text": "parameter that affects training larger",
+    "start": 1019.12,
+    "duration": 4.079
+  },
+  {
+    "text": "batches provide more stable parameter",
+    "start": 1021.199,
+    "duration": 4
+  },
+  {
+    "text": "updates but require more memory while",
+    "start": 1023.199,
+    "duration": 3.801
+  },
+  {
+    "text": "smaller batches update more frequently",
+    "start": 1025.199,
+    "duration": 3.201
+  },
+  {
+    "text": "and can help the model Escape local",
+    "start": 1027,
+    "duration": 3.76
+  },
+  {
+    "text": "Optima an iteration is a single pass",
+    "start": 1028.4,
+    "duration": 3.88
+  },
+  {
+    "text": "through one batch of data leading to an",
+    "start": 1030.76,
+    "duration": 3.6
+  },
+  {
+    "text": "update of the parameters of the model an",
+    "start": 1032.28,
+    "duration": 3.639
+  },
+  {
+    "text": "Epoch is a complete pass through the",
+    "start": 1034.36,
+    "duration": 3.12
+  },
+  {
+    "text": "entire training data set during model",
+    "start": 1035.919,
+    "duration": 3.64
+  },
+  {
+    "text": "training this means each batch and thus",
+    "start": 1037.48,
+    "duration": 3.719
+  },
+  {
+    "text": "each training example has been seen and",
+    "start": 1039.559,
+    "duration": 3.76
+  },
+  {
+    "text": "learned from Once models typically need",
+    "start": 1041.199,
+    "duration": 4.161
+  },
+  {
+    "text": "multiple epochs to learn effectively",
+    "start": 1043.319,
+    "duration": 3.561
+  },
+  {
+    "text": "with each pass refining its",
+    "start": 1045.36,
+    "duration": 3.6
+  },
+  {
+    "text": "understanding however too many epochs",
+    "start": 1046.88,
+    "duration": 3.84
+  },
+  {
+    "text": "can lead to overfitting where the model",
+    "start": 1048.96,
+    "duration": 3.36
+  },
+  {
+    "text": "starts memorizing the training data",
+    "start": 1050.72,
+    "duration": 3.92
+  },
+  {
+    "text": "rather than learning General patterns",
+    "start": 1052.32,
+    "duration": 3.88
+  },
+  {
+    "text": "these things only come into play for",
+    "start": 1054.64,
+    "duration": 3.159
+  },
+  {
+    "text": "very large data sets that need to be",
+    "start": 1056.2,
+    "duration": 3.68
+  },
+  {
+    "text": "split into batches small data sets are",
+    "start": 1057.799,
+    "duration": 4.281
+  },
+  {
+    "text": "not split a parameter also called a",
+    "start": 1059.88,
+    "duration": 4.36
+  },
+  {
+    "text": "model parameter or weight is a value",
+    "start": 1062.08,
+    "duration": 3.44
+  },
+  {
+    "text": "that the model learns during training",
+    "start": 1064.24,
+    "duration": 3.28
+  },
+  {
+    "text": "from the data unlike hyperparameters",
+    "start": 1065.52,
+    "duration": 4.08
+  },
+  {
+    "text": "which are set before training begins",
+    "start": 1067.52,
+    "duration": 3.72
+  },
+  {
+    "text": "finding the parameters of a model is the",
+    "start": 1069.6,
+    "duration": 3.76
+  },
+  {
+    "text": "goal of the training process for example",
+    "start": 1071.24,
+    "duration": 3.919
+  },
+  {
+    "text": "in a linear regression model the slope M",
+    "start": 1073.36,
+    "duration": 4.16
+  },
+  {
+    "text": "and intercept B are parameters that the",
+    "start": 1075.159,
+    "duration": 4.361
+  },
+  {
+    "text": "model adjusts to fit the data",
+    "start": 1077.52,
+    "duration": 3.48
+  },
+  {
+    "text": "in more complex models like neural",
+    "start": 1079.52,
+    "duration": 3.48
+  },
+  {
+    "text": "networks parameters include all the",
+    "start": 1081,
+    "duration": 3.159
+  },
+  {
+    "text": "weights and biases that are",
+    "start": 1083,
+    "duration": 3
+  },
+  {
+    "text": "automatically adjusted during training",
+    "start": 1084.159,
+    "duration": 3.321
+  },
+  {
+    "text": "to minimize prediction",
+    "start": 1086,
+    "duration": 4.12
+  },
+  {
+    "text": "errors weights and biases correspond to",
+    "start": 1087.48,
+    "duration": 4.199
+  },
+  {
+    "text": "the slope and intercept of linear",
+    "start": 1090.12,
+    "duration": 3.48
+  },
+  {
+    "text": "regression while a typical linear",
+    "start": 1091.679,
+    "duration": 3.401
+  },
+  {
+    "text": "regression might have just a few",
+    "start": 1093.6,
+    "duration": 3.439
+  },
+  {
+    "text": "parameters modern deep learning models",
+    "start": 1095.08,
+    "duration": 3.52
+  },
+  {
+    "text": "can have millions or even billions of",
+    "start": 1097.039,
+    "duration": 3.281
+  },
+  {
+    "text": "parameters each being fine-tuned through",
+    "start": 1098.6,
+    "duration": 3.28
+  },
+  {
+    "text": "the training process to capture patterns",
+    "start": 1100.32,
+    "duration": 3.64
+  },
+  {
+    "text": "in the data a hyperparameter is a",
+    "start": 1101.88,
+    "duration": 3.6
+  },
+  {
+    "text": "configuration setting used to control",
+    "start": 1103.96,
+    "duration": 3.64
+  },
+  {
+    "text": "the learning process set before training",
+    "start": 1105.48,
+    "duration": 4.52
+  },
+  {
+    "text": "begins unlike model parameters which are",
+    "start": 1107.6,
+    "duration": 4.959
+  },
+  {
+    "text": "learned during training examples include",
+    "start": 1110,
+    "duration": 4.559
+  },
+  {
+    "text": "the learning rate batch size number of",
+    "start": 1112.559,
+    "duration": 4.041
+  },
+  {
+    "text": "epochs or the number of layers in a",
+    "start": 1114.559,
+    "duration": 4.281
+  },
+  {
+    "text": "neural network these are like the knobs",
+    "start": 1116.6,
+    "duration": 4.92
+  },
+  {
+    "text": "and dials that data scientists adjust to",
+    "start": 1118.84,
+    "duration": 5.44
+  },
+  {
+    "text": "optimize how a model learns finding the",
+    "start": 1121.52,
+    "duration": 4.44
+  },
+  {
+    "text": "right hyperparameter values often",
+    "start": 1124.28,
+    "duration": 3.36
+  },
+  {
+    "text": "requires experimentation as their",
+    "start": 1125.96,
+    "duration": 3.48
+  },
+  {
+    "text": "optimal settings can vary significantly",
+    "start": 1127.64,
+    "duration": 3.76
+  },
+  {
+    "text": "between different problems and data sets",
+    "start": 1129.44,
+    "duration": 3.96
+  },
+  {
+    "text": "a cost function also called a loss",
+    "start": 1131.4,
+    "duration": 3.84
+  },
+  {
+    "text": "function objective function or error",
+    "start": 1133.4,
+    "duration": 3.759
+  },
+  {
+    "text": "function is a measure of how wrong a",
+    "start": 1135.24,
+    "duration": 3.6
+  },
+  {
+    "text": "model's predictions are compared to the",
+    "start": 1137.159,
+    "duration": 4.201
+  },
+  {
+    "text": "True Values it quantifies the cost or",
+    "start": 1138.84,
+    "duration": 4.52
+  },
+  {
+    "text": "penalty of incorrect predictions for",
+    "start": 1141.36,
+    "duration": 3.36
+  },
+  {
+    "text": "example in a house price prediction",
+    "start": 1143.36,
+    "duration": 2.799
+  },
+  {
+    "text": "model the cost might be the average",
+    "start": 1144.72,
+    "duration": 3
+  },
+  {
+    "text": "difference between predicted and actual",
+    "start": 1146.159,
+    "duration": 4
+  },
+  {
+    "text": "prices so in a linear regression model",
+    "start": 1147.72,
+    "duration": 4.24
+  },
+  {
+    "text": "as seen here we often use the mean",
+    "start": 1150.159,
+    "duration": 3.481
+  },
+  {
+    "text": "squared error function that is the",
+    "start": 1151.96,
+    "duration": 3.64
+  },
+  {
+    "text": "squared vertical distances of the data",
+    "start": 1153.64,
+    "duration": 3.84
+  },
+  {
+    "text": "points from the regression line here",
+    "start": 1155.6,
+    "duration": 3.64
+  },
+  {
+    "text": "that is the sum of all the red square",
+    "start": 1157.48,
+    "duration": 3.6
+  },
+  {
+    "text": "areas the further the line from the",
+    "start": 1159.24,
+    "duration": 3.72
+  },
+  {
+    "text": "actual data points the larger the error",
+    "start": 1161.08,
+    "duration": 4.28
+  },
+  {
+    "text": "which we also call loss or cost the goal",
+    "start": 1162.96,
+    "duration": 3.959
+  },
+  {
+    "text": "of training is to minimize this cost",
+    "start": 1165.36,
+    "duration": 3
+  },
+  {
+    "text": "function like trying to achieve the",
+    "start": 1166.919,
+    "duration": 3.961
+  },
+  {
+    "text": "lowest possible error score the specific",
+    "start": 1168.36,
+    "duration": 4.319
+  },
+  {
+    "text": "choice of cost function significantly",
+    "start": 1170.88,
+    "duration": 4.08
+  },
+  {
+    "text": "influences how the model learns and what",
+    "start": 1172.679,
+    "duration": 4.24
+  },
+  {
+    "text": "kinds of Errors it prioritizes avoiding",
+    "start": 1174.96,
+    "duration": 3.079
+  },
+  {
+    "text": "and can be considered another",
+    "start": 1176.919,
+    "duration": 3.321
+  },
+  {
+    "text": "hyperparameter gradient descent is a",
+    "start": 1178.039,
+    "duration": 4.281
+  },
+  {
+    "text": "fundamental optimization algorithm used",
+    "start": 1180.24,
+    "duration": 4.04
+  },
+  {
+    "text": "to train machine learning models by",
+    "start": 1182.32,
+    "duration": 3.839
+  },
+  {
+    "text": "iteratively adjusting model parameters",
+    "start": 1184.28,
+    "duration": 4.44
+  },
+  {
+    "text": "to minimize errors it is one of the main",
+    "start": 1186.159,
+    "duration": 4.76
+  },
+  {
+    "text": "methods for minimizing the cost function",
+    "start": 1188.72,
+    "duration": 3.68
+  },
+  {
+    "text": "like a hiker trying to find the lowest",
+    "start": 1190.919,
+    "duration": 3.12
+  },
+  {
+    "text": "point in a valley by always stepping in",
+    "start": 1192.4,
+    "duration": 4.24
+  },
+  {
+    "text": "the steepest downhill Direction gradient",
+    "start": 1194.039,
+    "duration": 4.321
+  },
+  {
+    "text": "descent calculates the direction in",
+    "start": 1196.64,
+    "duration": 3.64
+  },
+  {
+    "text": "which the model's error decreases most",
+    "start": 1198.36,
+    "duration": 3.84
+  },
+  {
+    "text": "rapidly and updates the parameters",
+    "start": 1200.28,
+    "duration": 4.24
+  },
+  {
+    "text": "accordingly for each step it computes",
+    "start": 1202.2,
+    "duration": 4.479
+  },
+  {
+    "text": "the gradient essentially the slope of",
+    "start": 1204.52,
+    "duration": 3.8
+  },
+  {
+    "text": "the error with respect to each parameter",
+    "start": 1206.679,
+    "duration": 3.041
+  },
+  {
+    "text": "then adjust these parameters in the",
+    "start": 1208.32,
+    "duration": 3.28
+  },
+  {
+    "text": "opposite direction of the gradient using",
+    "start": 1209.72,
+    "duration": 4.199
+  },
+  {
+    "text": "the learning rate to determine step size",
+    "start": 1211.6,
+    "duration": 4.4
+  },
+  {
+    "text": "this process continues until the model",
+    "start": 1213.919,
+    "duration": 3.681
+  },
+  {
+    "text": "reaches a minimum error or stops",
+    "start": 1216,
+    "duration": 4.159
+  },
+  {
+    "text": "improving significantly interestingly a",
+    "start": 1217.6,
+    "duration": 4.24
+  },
+  {
+    "text": "ball rolling down a mountain will behave",
+    "start": 1220.159,
+    "duration": 3.721
+  },
+  {
+    "text": "the same way at each point only going in",
+    "start": 1221.84,
+    "duration": 4.04
+  },
+  {
+    "text": "the direction of the steepest Ascent",
+    "start": 1223.88,
+    "duration": 4.2
+  },
+  {
+    "text": "this is Nature's gradient descent but as",
+    "start": 1225.88,
+    "duration": 3.72
+  },
+  {
+    "text": "you can imagine the ball can also get",
+    "start": 1228.08,
+    "duration": 3.2
+  },
+  {
+    "text": "stuck in a local minimum like a",
+    "start": 1229.6,
+    "duration": 3.559
+  },
+  {
+    "text": "depression on the mountain side instead",
+    "start": 1231.28,
+    "duration": 3.279
+  },
+  {
+    "text": "of finding its way all the way down to",
+    "start": 1233.159,
+    "duration": 4
+  },
+  {
+    "text": "the valley however a real ball in",
+    "start": 1234.559,
+    "duration": 4.441
+  },
+  {
+    "text": "particular a heavy one has momentum",
+    "start": 1237.159,
+    "duration": 3.161
+  },
+  {
+    "text": "which allows it to shoot over local",
+    "start": 1239,
+    "duration": 3.24
+  },
+  {
+    "text": "depressions and keep going down the",
+    "start": 1240.32,
+    "duration": 4.04
+  },
+  {
+    "text": "valley this inspired a variant of",
+    "start": 1242.24,
+    "duration": 3.88
+  },
+  {
+    "text": "gradient descent called momentum based",
+    "start": 1244.36,
+    "duration": 3.76
+  },
+  {
+    "text": "gradient descent Which is less likely to",
+    "start": 1246.12,
+    "duration": 4.039
+  },
+  {
+    "text": "get stuck in local Minima the learning",
+    "start": 1248.12,
+    "duration": 3.84
+  },
+  {
+    "text": "rate is a crucial hyperparameter that",
+    "start": 1250.159,
+    "duration": 3.961
+  },
+  {
+    "text": "determines how much a model adjusts its",
+    "start": 1251.96,
+    "duration": 3.76
+  },
+  {
+    "text": "parameters in response to errors during",
+    "start": 1254.12,
+    "duration": 3.919
+  },
+  {
+    "text": "training like a student adjusting their",
+    "start": 1255.72,
+    "duration": 4.04
+  },
+  {
+    "text": "understanding based on on feedback a",
+    "start": 1258.039,
+    "duration": 3.241
+  },
+  {
+    "text": "model with a high learning rate makes",
+    "start": 1259.76,
+    "duration": 3.36
+  },
+  {
+    "text": "large adjustments to its parameters",
+    "start": 1261.28,
+    "duration": 3.8
+  },
+  {
+    "text": "after seeing each batch of data",
+    "start": 1263.12,
+    "duration": 4.039
+  },
+  {
+    "text": "potentially learning quickly but risking",
+    "start": 1265.08,
+    "duration": 5.76
+  },
+  {
+    "text": "overshooting optimal values conversely a",
+    "start": 1267.159,
+    "duration": 5.161
+  },
+  {
+    "text": "model with a low learning rate makes",
+    "start": 1270.84,
+    "duration": 3.839
+  },
+  {
+    "text": "smaller more cautious adjustments this",
+    "start": 1272.32,
+    "duration": 4.12
+  },
+  {
+    "text": "can be more stable but might take longer",
+    "start": 1274.679,
+    "duration": 4.521
+  },
+  {
+    "text": "to converge or get stuck in suboptimal",
+    "start": 1276.44,
+    "duration": 4.8
+  },
+  {
+    "text": "Solutions finding the right learning",
+    "start": 1279.2,
+    "duration": 3.76
+  },
+  {
+    "text": "rate is often critical for successful",
+    "start": 1281.24,
+    "duration": 3.799
+  },
+  {
+    "text": "training too high and the model might",
+    "start": 1282.96,
+    "duration": 4.079
+  },
+  {
+    "text": "never converge too low and training",
+    "start": 1285.039,
+    "duration": 4.081
+  },
+  {
+    "text": "might take unnecessarily long evaluation",
+    "start": 1287.039,
+    "duration": 3.601
+  },
+  {
+    "text": "is the process of measuring how well a",
+    "start": 1289.12,
+    "duration": 3.559
+  },
+  {
+    "text": "machine learning model performs on data",
+    "start": 1290.64,
+    "duration": 3.76
+  },
+  {
+    "text": "it hasn't seen during training using",
+    "start": 1292.679,
+    "duration": 4
+  },
+  {
+    "text": "various metrics appropriate to the task",
+    "start": 1294.4,
+    "duration": 4.04
+  },
+  {
+    "text": "for classification model evaluation",
+    "start": 1296.679,
+    "duration": 3.321
+  },
+  {
+    "text": "might involve measuring accuracy",
+    "start": 1298.44,
+    "duration": 4.119
+  },
+  {
+    "text": "precision recall or F1 score for",
+    "start": 1300,
+    "duration": 4.039
+  },
+  {
+    "text": "regression model it might use mean",
+    "start": 1302.559,
+    "duration": 4.201
+  },
+  {
+    "text": "squared error or R squar values this",
+    "start": 1304.039,
+    "duration": 4.12
+  },
+  {
+    "text": "process typically involves both",
+    "start": 1306.76,
+    "duration": 3.039
+  },
+  {
+    "text": "validation to tune the model during",
+    "start": 1308.159,
+    "duration": 3.88
+  },
+  {
+    "text": "development and testing using a",
+    "start": 1309.799,
+    "duration": 3.921
+  },
+  {
+    "text": "completely separate test set to get an",
+    "start": 1312.039,
+    "duration": 3.841
+  },
+  {
+    "text": "unbiased estimate of final performance",
+    "start": 1313.72,
+    "duration": 3.6
+  },
+  {
+    "text": "evaluation helps determine whether a",
+    "start": 1315.88,
+    "duration": 3.399
+  },
+  {
+    "text": "model has truly learned use patterns or",
+    "start": 1317.32,
+    "duration": 3.76
+  },
+  {
+    "text": "has just memorized the training data",
+    "start": 1319.279,
+    "duration": 3.161
+  },
+  {
+    "text": "those were all basic machine learning",
+    "start": 1321.08,
+    "duration": 3.52
+  },
+  {
+    "text": "terms in 22 minutes although I surely",
+    "start": 1322.44,
+    "duration": 4.4
+  },
+  {
+    "text": "missed a bunch if I did please complain",
+    "start": 1324.6,
+    "duration": 4.199
+  },
+  {
+    "text": "in the comments if you found this video",
+    "start": 1326.84,
+    "duration": 3.76
+  },
+  {
+    "text": "helpful share it with someone who you",
+    "start": 1328.799,
+    "duration": 3.76
+  },
+  {
+    "text": "think might also like it and get started",
+    "start": 1330.6,
+    "duration": 3.28
+  },
+  {
+    "text": "on one of the tutorials in the",
+    "start": 1332.559,
+    "duration": 4.041
+  },
+  {
+    "text": "description or on this very Channel also",
+    "start": 1333.88,
+    "duration": 3.919
+  },
+  {
+    "text": "consider liking the video and",
+    "start": 1336.6,
+    "duration": 2.88
+  },
+  {
+    "text": "subscribing to be notified about similar",
+    "start": 1337.799,
+    "duration": 3.521
+  },
+  {
+    "text": "content in the future thanks for",
+    "start": 1339.48,
+    "duration": 4.439
+  },
+  {
+    "text": "watching",
+    "start": 1341.32,
+    "duration": 2.599
+  }
+]

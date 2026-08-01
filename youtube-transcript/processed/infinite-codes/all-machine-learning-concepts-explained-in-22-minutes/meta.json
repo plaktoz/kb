@@ -1,0 +1,179 @@
+{
+  "videoId": "Fa_V9fP2tpU",
+  "title": "All Machine Learning Concepts Explained in 22 Minutes",
+  "channel": "Infinite Codes",
+  "channelId": "UCktMIWomeuj4pwvBb-OBwMw",
+  "description": "All Basic Machine Learning Terms Explained in 22 Minutes\n\n#########################################\nI just started my own Patreon, in case you want to support!\nPatreon Link: https://www.patreon.com/c/InfiniteCodes\n#########################################\n\nTo get you out of your confusion with all the Machine Learning Vocabulary, here an overview of all basic terms you will encounter as you start your Journey in Machine Learning and Data Science.\n\nAlso Watch: \nAll Machine Learning algorithms explained in 17 min https://youtu.be/E0Hmnixke2g \nLearn Machine Learning Like a GENIUS and Not Waste Time\nhttps://youtu.be/qNxrPri1V0I\nThe Math that make Machine Learning easy (and how you can learn it) https://youtu.be/wOTFGRSUQ6Q\n15 Machine Learning Lessons I Wish I Knew Earlier https://youtu.be/espQDESe07w \n\nMachine Learning Playlist: https://www.youtube.com/watch?v=wOTFGRSUQ6Q&list=PLbdTl8vSSyUDAvDPc1r3j9itciu_kb5vG&ab_channel=InfiniteCodes\n\n================== Timestamps ================\n00:04 - Artificial Intelligence (AI)\n00:37 - Machine Learning\n01:30 - Algorithm\n02:06 - Data\n02:48 - Model\n03:30 - Model fitting\n03:44 - Training Data\n04:17 - Test Data\n04:54 - Supervised Learning\n05:24 - Unsupervised Learning\n06:01 - Reinforcement Learning\n07:05 - Feature (Input, Independent Variable, Predictor)\n07:45 - Feature engineering\n08:15 - Feature Scaling (Normalization, Standardization)\n08:48 - Dimensionality\n09:34 - Target (Output, Label, Dependent Variable)\n09:59 - Instance (Example, Observation, Sample)\n10:32 - Label (class, target value)\n11:16 - Model complexity\n12:15 - Bias & Variance\n13:23 - Bias Variance Tradeoff\n14:11 - Noise\n14:30 - Overfitting & Underfitting\n15:20 - Validation & Cross Validation\n16:20 - Regularization\n16:40 - Batch, Epoch, Iteration\n17:40 - Parameter\n18:22 - Hyperparameter\n18:50 - Cost Function (Loss Function, Objective Function)\n19:39 - Gradient Descent\n20:49 - Learning Rate\n21:28 - Evaluation",
+  "duration": 1342,
+  "publishDate": "2024-11-27",
+  "url": "https://www.youtube.com/watch?v=Fa_V9fP2tpU",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/Fa_V9fP2tpU/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "- Artificial Intelligence (AI)",
+      "start": 4,
+      "end": 37
+    },
+    {
+      "title": "- Machine Learning",
+      "start": 37,
+      "end": 90
+    },
+    {
+      "title": "- Algorithm",
+      "start": 90,
+      "end": 126
+    },
+    {
+      "title": "- Data",
+      "start": 126,
+      "end": 168
+    },
+    {
+      "title": "- Model",
+      "start": 168,
+      "end": 210
+    },
+    {
+      "title": "- Model fitting",
+      "start": 210,
+      "end": 224
+    },
+    {
+      "title": "- Training Data",
+      "start": 224,
+      "end": 257
+    },
+    {
+      "title": "- Test Data",
+      "start": 257,
+      "end": 294
+    },
+    {
+      "title": "- Supervised Learning",
+      "start": 294,
+      "end": 324
+    },
+    {
+      "title": "- Unsupervised Learning",
+      "start": 324,
+      "end": 361
+    },
+    {
+      "title": "- Reinforcement Learning",
+      "start": 361,
+      "end": 425
+    },
+    {
+      "title": "- Feature (Input, Independent Variable, Predictor)",
+      "start": 425,
+      "end": 465
+    },
+    {
+      "title": "- Feature engineering",
+      "start": 465,
+      "end": 495
+    },
+    {
+      "title": "- Feature Scaling (Normalization, Standardization)",
+      "start": 495,
+      "end": 528
+    },
+    {
+      "title": "- Dimensionality",
+      "start": 528,
+      "end": 574
+    },
+    {
+      "title": "- Target (Output, Label, Dependent Variable)",
+      "start": 574,
+      "end": 599
+    },
+    {
+      "title": "- Instance (Example, Observation, Sample)",
+      "start": 599,
+      "end": 632
+    },
+    {
+      "title": "- Label (class, target value)",
+      "start": 632,
+      "end": 676
+    },
+    {
+      "title": "- Model complexity",
+      "start": 676,
+      "end": 735
+    },
+    {
+      "title": "- Bias & Variance",
+      "start": 735,
+      "end": 803
+    },
+    {
+      "title": "- Bias Variance Tradeoff",
+      "start": 803,
+      "end": 851
+    },
+    {
+      "title": "- Noise",
+      "start": 851,
+      "end": 870
+    },
+    {
+      "title": "- Overfitting & Underfitting",
+      "start": 870,
+      "end": 920
+    },
+    {
+      "title": "- Validation & Cross Validation",
+      "start": 920,
+      "end": 980
+    },
+    {
+      "title": "- Regularization",
+      "start": 980,
+      "end": 1000
+    },
+    {
+      "title": "- Batch, Epoch, Iteration",
+      "start": 1000,
+      "end": 1060
+    },
+    {
+      "title": "- Parameter",
+      "start": 1060,
+      "end": 1102
+    },
+    {
+      "title": "- Hyperparameter",
+      "start": 1102,
+      "end": 1130
+    },
+    {
+      "title": "- Cost Function (Loss Function, Objective Function)",
+      "start": 1130,
+      "end": 1179
+    },
+    {
+      "title": "- Gradient Descent",
+      "start": 1179,
+      "end": 1249
+    },
+    {
+      "title": "- Learning Rate",
+      "start": 1249,
+      "end": 1288
+    },
+    {
+      "title": "- Evaluation",
+      "start": 1288,
+      "end": 1342
+    }
+  ]
+}

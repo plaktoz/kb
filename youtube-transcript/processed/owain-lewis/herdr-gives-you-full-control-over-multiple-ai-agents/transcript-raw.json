@@ -1,0 +1,1797 @@
+[
+  {
+    "text": "Herder is a new terminal multiplexer",
+    "start": 0.08,
+    "duration": 3.12
+  },
+  {
+    "text": "that AI developers can use to stay",
+    "start": 1.68,
+    "duration": 3.2
+  },
+  {
+    "text": "organized when working with AI coding",
+    "start": 3.2,
+    "duration": 3.119
+  },
+  {
+    "text": "agents. If you're anything like me, you",
+    "start": 4.88,
+    "duration": 2.24
+  },
+  {
+    "text": "probably struggle [music] to stay",
+    "start": 6.319,
+    "duration": 2.24
+  },
+  {
+    "text": "organized when you have many different",
+    "start": 7.12,
+    "duration": 3.04
+  },
+  {
+    "text": "tasks and agents running on different",
+    "start": 8.559,
+    "duration": 3.2
+  },
+  {
+    "text": "things at the same time, potentially",
+    "start": 10.16,
+    "duration": 3.76
+  },
+  {
+    "text": "over longunning sessions. A terminal",
+    "start": 11.759,
+    "duration": 4
+  },
+  {
+    "text": "multiplexer is one solution to this",
+    "start": 13.92,
+    "duration": 3.52
+  },
+  {
+    "text": "problem. There are a bunch of different",
+    "start": 15.759,
+    "duration": 2.881
+  },
+  {
+    "text": "options available to you, [music] like",
+    "start": 17.44,
+    "duration": 2.8
+  },
+  {
+    "text": "T-Max, which has been around forever,",
+    "start": 18.64,
+    "duration": 3.92
+  },
+  {
+    "text": "and also CMUX. But Herder is the tool",
+    "start": 20.24,
+    "duration": 3.995
+  },
+  {
+    "text": "that I enjoy using most in my day-to-day",
+    "start": 22.56,
+    "duration": 3.36
+  },
+  {
+    "text": "[music] workflow. In this video, I'm",
+    "start": 24.235,
+    "duration": 3.124
+  },
+  {
+    "text": "going to show you how to get Herder",
+    "start": 25.92,
+    "duration": 2.8
+  },
+  {
+    "text": "installed and set up. But more",
+    "start": 27.359,
+    "duration": 2.641
+  },
+  {
+    "text": "importantly, I'm going to show you some",
+    "start": 28.72,
+    "duration": 2.719
+  },
+  {
+    "text": "advanced [music] techniques where you",
+    "start": 30,
+    "duration": 3.36
+  },
+  {
+    "text": "can use AI agents to control Herder",
+    "start": 31.439,
+    "duration": 4.001
+  },
+  {
+    "text": "itself. And these are really, really",
+    "start": 33.36,
+    "duration": 4.16
+  },
+  {
+    "text": "powerful ideas. I think you'll find this",
+    "start": 35.44,
+    "duration": 3.76
+  },
+  {
+    "text": "really valuable. All of the resources",
+    "start": 37.52,
+    "duration": 2.879
+  },
+  {
+    "text": "and the prompts that you need are going",
+    "start": 39.2,
+    "duration": 2.4
+  },
+  {
+    "text": "to be linked for free in the description",
+    "start": 40.399,
+    "duration": 3.441
+  },
+  {
+    "text": "below. So, let's get into it. Okay, so",
+    "start": 41.6,
+    "duration": 3.36
+  },
+  {
+    "text": "the first thing we're going to do is",
+    "start": 43.84,
+    "duration": 2.8
+  },
+  {
+    "text": "connect to Herder. So, you can type her",
+    "start": 44.96,
+    "duration": 3.2
+  },
+  {
+    "text": "and then you open up your previous",
+    "start": 46.64,
+    "duration": 3.04
+  },
+  {
+    "text": "session. If you want to escape back to",
+    "start": 48.16,
+    "duration": 3.84
+  },
+  {
+    "text": "the terminal, you can press the prefix",
+    "start": 49.68,
+    "duration": 4.879
+  },
+  {
+    "text": "key, which [music] is control and b. And",
+    "start": 52,
+    "duration": 4.559
+  },
+  {
+    "text": "then if you press Q, you can go back to",
+    "start": 54.559,
+    "duration": 3.68
+  },
+  {
+    "text": "the main menu. And then when you type",
+    "start": 56.559,
+    "duration": 4
+  },
+  {
+    "text": "that again, you'll start back in your",
+    "start": 58.239,
+    "duration": 4.241
+  },
+  {
+    "text": "session, which is really useful. What",
+    "start": 60.559,
+    "duration": 3.521
+  },
+  {
+    "text": "you'll see in terms of the UI, you have",
+    "start": 62.48,
+    "duration": 3.44
+  },
+  {
+    "text": "different sections. You have the spaces",
+    "start": 64.08,
+    "duration": 4.88
+  },
+  {
+    "text": "over here. You have agents down here.",
+    "start": 65.92,
+    "duration": 4.64
+  },
+  {
+    "text": "You have your terminals here. And then",
+    "start": 68.96,
+    "duration": 4.08
+  },
+  {
+    "text": "the tabs at the top. So the way I use",
+    "start": 70.56,
+    "duration": 4.559
+  },
+  {
+    "text": "workspaces is just like each workspace",
+    "start": 73.04,
+    "duration": 3.52
+  },
+  {
+    "text": "is a project. So you can see here this",
+    "start": 75.119,
+    "duration": 3.761
+  },
+  {
+    "text": "is my first project, second project,",
+    "start": 76.56,
+    "duration": 4.879
+  },
+  {
+    "text": "third project I'm working on. And what's",
+    "start": 78.88,
+    "duration": 4.48
+  },
+  {
+    "text": "really nice about this terminal",
+    "start": 81.439,
+    "duration": 3.521
+  },
+  {
+    "text": "multiplexer in particular is you can use",
+    "start": 83.36,
+    "duration": 3.2
+  },
+  {
+    "text": "your mouse. This is kind of very",
+    "start": 84.96,
+    "duration": 3.44
+  },
+  {
+    "text": "unusual. You can just literally click",
+    "start": 86.56,
+    "duration": 3.76
+  },
+  {
+    "text": "around. Obviously, you can use key",
+    "start": 88.4,
+    "duration": 3.359
+  },
+  {
+    "text": "bindings as well. So, if you type the",
+    "start": 90.32,
+    "duration": 4.32
+  },
+  {
+    "text": "prefix key and then question mark, you",
+    "start": 91.759,
+    "duration": 4.32
+  },
+  {
+    "text": "can bring up all of the different key",
+    "start": 94.64,
+    "duration": 3.439
+  },
+  {
+    "text": "bindings that you have available to you.",
+    "start": 96.079,
+    "duration": 3.281
+  },
+  {
+    "text": "So, I'll quickly go through a couple of",
+    "start": 98.079,
+    "duration": 2.881
+  },
+  {
+    "text": "the useful key bindings that are worth",
+    "start": 99.36,
+    "duration": 3.6
+  },
+  {
+    "text": "knowing. So, the first one is splitting",
+    "start": 100.96,
+    "duration": 3.92
+  },
+  {
+    "text": "the window. So, you might want to have a",
+    "start": 102.96,
+    "duration": 3.439
+  },
+  {
+    "text": "let's say we want to start a coding",
+    "start": 104.88,
+    "duration": 3.599
+  },
+  {
+    "text": "agent here. So, this is my own coding",
+    "start": 106.399,
+    "duration": 4.241
+  },
+  {
+    "text": "agent right now. And then I can split",
+    "start": 108.479,
+    "duration": 4.161
+  },
+  {
+    "text": "the window again. If I press prefix and",
+    "start": 110.64,
+    "duration": 4.159
+  },
+  {
+    "text": "v, we will split the window like this.",
+    "start": 112.64,
+    "duration": 3.759
+  },
+  {
+    "text": "And then if I want to split it again, I",
+    "start": 114.799,
+    "duration": 4.561
+  },
+  {
+    "text": "can type prefix and minus will split it",
+    "start": 116.399,
+    "duration": 5.121
+  },
+  {
+    "text": "this way. When you start up a different",
+    "start": 119.36,
+    "duration": 4.399
+  },
+  {
+    "text": "coding agent in one of these tabs, what",
+    "start": 121.52,
+    "duration": 3.919
+  },
+  {
+    "text": "you'll see here is that we get this",
+    "start": 123.759,
+    "duration": 4.801
+  },
+  {
+    "text": "agent registered here. You'll notice",
+    "start": 125.439,
+    "duration": 4.8
+  },
+  {
+    "text": "that this one didn't register cuz this",
+    "start": 128.56,
+    "duration": 3.039
+  },
+  {
+    "text": "is my own coding agent. It's not",
+    "start": 130.239,
+    "duration": 3.601
+  },
+  {
+    "text": "registered with her. But if you use",
+    "start": 131.599,
+    "duration": 5.121
+  },
+  {
+    "text": "something like claw code or even pi and",
+    "start": 133.84,
+    "duration": 4.399
+  },
+  {
+    "text": "you start those up, you'll see that it",
+    "start": 136.72,
+    "duration": 3.599
+  },
+  {
+    "text": "will be registered down here as an agent",
+    "start": 138.239,
+    "duration": 4.161
+  },
+  {
+    "text": "and then you can toggle between your",
+    "start": 140.319,
+    "duration": 4.081
+  },
+  {
+    "text": "agents. What's really nice about this is",
+    "start": 142.4,
+    "duration": 4.559
+  },
+  {
+    "text": "you can see when your agents are doing",
+    "start": 144.4,
+    "duration": 4.32
+  },
+  {
+    "text": "work and when they're stopped. So review",
+    "start": 146.959,
+    "duration": 4.241
+  },
+  {
+    "text": "the code. We can run a code review down",
+    "start": 148.72,
+    "duration": 3.68
+  },
+  {
+    "text": "here. And you can see here on the left",
+    "start": 151.2,
+    "duration": 2.64
+  },
+  {
+    "text": "we can see that the agent is now",
+    "start": 152.4,
+    "duration": 3.76
+  },
+  {
+    "text": "working. And once the agent has finished",
+    "start": 153.84,
+    "duration": 3.28
+  },
+  {
+    "text": "working, it should give you a",
+    "start": 156.16,
+    "duration": 2.4
+  },
+  {
+    "text": "notification. You'll hear like a bell",
+    "start": 157.12,
+    "duration": 3.199
+  },
+  {
+    "text": "sound in the terminal which tells you",
+    "start": 158.56,
+    "duration": 3.52
+  },
+  {
+    "text": "that the agent is done. And I can do the",
+    "start": 160.319,
+    "duration": 3.841
+  },
+  {
+    "text": "same thing over here. And I can do the",
+    "start": 162.08,
+    "duration": 3.439
+  },
+  {
+    "text": "same thing over here. So we've got three",
+    "start": 164.16,
+    "duration": 4.88
+  },
+  {
+    "text": "different agents reviewing the code.",
+    "start": 165.519,
+    "duration": 4.961
+  },
+  {
+    "text": "The other thing you can do is create a",
+    "start": 169.04,
+    "duration": 3.279
+  },
+  {
+    "text": "new tab. So the way you do that is press",
+    "start": 170.48,
+    "duration": 3.839
+  },
+  {
+    "text": "prefix and then C, which will create a",
+    "start": 172.319,
+    "duration": 3.521
+  },
+  {
+    "text": "new tab. And I'll show you how I'm using",
+    "start": 174.319,
+    "duration": 3.521
+  },
+  {
+    "text": "tabs in a second. In terms of",
+    "start": 175.84,
+    "duration": 3.52
+  },
+  {
+    "text": "navigation, you could obviously just",
+    "start": 177.84,
+    "duration": 2.8
+  },
+  {
+    "text": "click around like this. If you want to",
+    "start": 179.36,
+    "duration": 2.56
+  },
+  {
+    "text": "jump between the these different",
+    "start": 180.64,
+    "duration": 3.28
+  },
+  {
+    "text": "windows, you can click on them. You can",
+    "start": 181.92,
+    "duration": 3.92
+  },
+  {
+    "text": "also use keyboard shortcuts as well. So",
+    "start": 183.92,
+    "duration": 3.84
+  },
+  {
+    "text": "you can type prefix and then you've got",
+    "start": 185.84,
+    "duration": 4.319
+  },
+  {
+    "text": "the H and the L keys. So, I can switch",
+    "start": 187.76,
+    "duration": 5.36
+  },
+  {
+    "text": "between these two different uh panes if",
+    "start": 190.159,
+    "duration": 4.481
+  },
+  {
+    "text": "I want to. If I don't want to use the",
+    "start": 193.12,
+    "duration": 3.36
+  },
+  {
+    "text": "mouse, you can also reorder stuff as",
+    "start": 194.64,
+    "duration": 3.599
+  },
+  {
+    "text": "well, which is useful to know. If you",
+    "start": 196.48,
+    "duration": 3.92
+  },
+  {
+    "text": "type prefix, shift, and then L, you can",
+    "start": 198.239,
+    "duration": 4.161
+  },
+  {
+    "text": "swap these around. If you want to just",
+    "start": 200.4,
+    "duration": 4.16
+  },
+  {
+    "text": "reorganize your windows on the fly using",
+    "start": 202.4,
+    "duration": 4
+  },
+  {
+    "text": "the keyboard, you can do that. The",
+    "start": 204.56,
+    "duration": 3.2
+  },
+  {
+    "text": "documentation is really good here, so",
+    "start": 206.4,
+    "duration": 2.479
+  },
+  {
+    "text": "I'm not going to spend a huge amount of",
+    "start": 207.76,
+    "duration": 2.88
+  },
+  {
+    "text": "time on other key bindings, but anything",
+    "start": 208.879,
+    "duration": 3.121
+  },
+  {
+    "text": "you want to figure out, you can just",
+    "start": 210.64,
+    "duration": 3.12
+  },
+  {
+    "text": "check out the documentation. It's",
+    "start": 212,
+    "duration": 4.799
+  },
+  {
+    "text": "really, really good. And the other thing",
+    "start": 213.76,
+    "duration": 4.88
+  },
+  {
+    "text": "to know is that there's an agent skill",
+    "start": 216.799,
+    "duration": 3.201
+  },
+  {
+    "text": "file. So, I think this is something you",
+    "start": 218.64,
+    "duration": 3.2
+  },
+  {
+    "text": "might want to check out as well. So, one",
+    "start": 220,
+    "duration": 3.599
+  },
+  {
+    "text": "of the things I really love doing with",
+    "start": 221.84,
+    "duration": 3.679
+  },
+  {
+    "text": "this particular multiplexer is to use",
+    "start": 223.599,
+    "duration": 4.801
+  },
+  {
+    "text": "agents to control it. Either use this",
+    "start": 225.519,
+    "duration": 5.041
+  },
+  {
+    "text": "guide. So, you can give your agents this",
+    "start": 228.4,
+    "duration": 5.199
+  },
+  {
+    "text": "guide. So, if you open up this link, it",
+    "start": 230.56,
+    "duration": 5.039
+  },
+  {
+    "text": "will show you like this is a full guide",
+    "start": 233.599,
+    "duration": 3.681
+  },
+  {
+    "text": "that you could give to a coding agent on",
+    "start": 235.599,
+    "duration": 5.761
+  },
+  {
+    "text": "how to basically manage her itself. But",
+    "start": 237.28,
+    "duration": 5.679
+  },
+  {
+    "text": "you could also install this skill as",
+    "start": 241.36,
+    "duration": 2.64
+  },
+  {
+    "text": "well. So, let's go ahead and do that.",
+    "start": 242.959,
+    "duration": 2.801
+  },
+  {
+    "text": "Let's install this skill. and we're",
+    "start": 244,
+    "duration": 4.239
+  },
+  {
+    "text": "going to proceed and then get this",
+    "start": 245.76,
+    "duration": 4.88
+  },
+  {
+    "text": "installed.",
+    "start": 248.239,
+    "duration": 4
+  },
+  {
+    "text": "This is going to be useful especially",
+    "start": 250.64,
+    "duration": 3.12
+  },
+  {
+    "text": "for some of the advanced stuff we're",
+    "start": 252.239,
+    "duration": 3.28
+  },
+  {
+    "text": "going to show in a sec. So, one of the",
+    "start": 253.76,
+    "duration": 3.599
+  },
+  {
+    "text": "interesting things you can do with",
+    "start": 255.519,
+    "duration": 3.921
+  },
+  {
+    "text": "Herder, which I really enjoy doing, is",
+    "start": 257.359,
+    "duration": 4.72
+  },
+  {
+    "text": "to use AI to control it. So, as I",
+    "start": 259.44,
+    "duration": 4.4
+  },
+  {
+    "text": "mentioned, there's a guide on using",
+    "start": 262.079,
+    "duration": 3.761
+  },
+  {
+    "text": "Herder. So we can ask our agent to say",
+    "start": 263.84,
+    "duration": 4.72
+  },
+  {
+    "text": "we can say read this guide and then we",
+    "start": 265.84,
+    "duration": 6.72
+  },
+  {
+    "text": "can say update my her configuration to",
+    "start": 268.56,
+    "duration": 7.84
+  },
+  {
+    "text": "use the rose pine theme and reload it.",
+    "start": 272.56,
+    "duration": 6
+  },
+  {
+    "text": "So we can actually use our AI agents to",
+    "start": 276.4,
+    "duration": 4
+  },
+  {
+    "text": "manage our configuration because we like",
+    "start": 278.56,
+    "duration": 4.48
+  },
+  {
+    "text": "to use agents. We might as well get them",
+    "start": 280.4,
+    "duration": 4.239
+  },
+  {
+    "text": "to do everything right. So this is going",
+    "start": 283.04,
+    "duration": 4.24
+  },
+  {
+    "text": "to read the herder guidance. Then it's",
+    "start": 284.639,
+    "duration": 3.681
+  },
+  {
+    "text": "going to read and update my",
+    "start": 287.28,
+    "duration": 2.4
+  },
+  {
+    "text": "configuration. And then finally it's",
+    "start": 288.32,
+    "duration": 2.96
+  },
+  {
+    "text": "going to reload her. So what I'm going",
+    "start": 289.68,
+    "duration": 3.2
+  },
+  {
+    "text": "to show you now is my favorite use case",
+    "start": 291.28,
+    "duration": 3.919
+  },
+  {
+    "text": "for herder and my favorite pattern in",
+    "start": 292.88,
+    "duration": 4.24
+  },
+  {
+    "text": "general for working with coding agents.",
+    "start": 295.199,
+    "duration": 3.601
+  },
+  {
+    "text": "So we're going to start up claud code",
+    "start": 297.12,
+    "duration": 3.92
+  },
+  {
+    "text": "and I have a custom slash command called",
+    "start": 298.8,
+    "duration": 4.8
+  },
+  {
+    "text": "ticket. So if I type / I'm going to",
+    "start": 301.04,
+    "duration": 4.24
+  },
+  {
+    "text": "paste in a ticket number. This is a",
+    "start": 303.6,
+    "duration": 4
+  },
+  {
+    "text": "GitHub issue and then when I run this",
+    "start": 305.28,
+    "duration": 4.72
+  },
+  {
+    "text": "what's going to happen is claude code is",
+    "start": 307.6,
+    "duration": 4.08
+  },
+  {
+    "text": "going to orchestrate herder. We're going",
+    "start": 310,
+    "duration": 3.919
+  },
+  {
+    "text": "to create a new tab at the top for this",
+    "start": 311.68,
+    "duration": 4.239
+  },
+  {
+    "text": "ticket. We're going to create a new get",
+    "start": 313.919,
+    "duration": 3.84
+  },
+  {
+    "text": "branch, a new get work tree, and then",
+    "start": 315.919,
+    "duration": 3.361
+  },
+  {
+    "text": "this allows us to work on multiple",
+    "start": 317.759,
+    "duration": 3.601
+  },
+  {
+    "text": "different tasks at the same time in a",
+    "start": 319.28,
+    "duration": 4.32
+  },
+  {
+    "text": "really clean and organized way. So",
+    "start": 321.36,
+    "duration": 4.64
+  },
+  {
+    "text": "claude code is now going to basically",
+    "start": 323.6,
+    "duration": 6.159
+  },
+  {
+    "text": "use her. So it's creating a tab in her.",
+    "start": 326,
+    "duration": 5.44
+  },
+  {
+    "text": "And you can see here now we have this",
+    "start": 329.759,
+    "duration": 4.561
+  },
+  {
+    "text": "/166. So this is the issue number. And",
+    "start": 331.44,
+    "duration": 5.199
+  },
+  {
+    "text": "if we switch over into this tab, you",
+    "start": 334.32,
+    "duration": 3.92
+  },
+  {
+    "text": "should see that the now that the",
+    "start": 336.639,
+    "duration": 3.921
+  },
+  {
+    "text": "orchestrator is spinning up claude code.",
+    "start": 338.24,
+    "duration": 4
+  },
+  {
+    "text": "And what it should do is paste in the",
+    "start": 340.56,
+    "duration": 3.28
+  },
+  {
+    "text": "prompt that we need to run. So this is",
+    "start": 342.24,
+    "duration": 4.32
+  },
+  {
+    "text": "the orchestrator is creating all of",
+    "start": 343.84,
+    "duration": 4.48
+  },
+  {
+    "text": "this. And you can see here it's pasted",
+    "start": 346.56,
+    "duration": 3.68
+  },
+  {
+    "text": "in this text. So let's find another task",
+    "start": 348.32,
+    "duration": 3.52
+  },
+  {
+    "text": "to work on. We're going to work on this",
+    "start": 350.24,
+    "duration": 4.16
+  },
+  {
+    "text": "bug fix over here. So again, we're just",
+    "start": 351.84,
+    "duration": 5.12
+  },
+  {
+    "text": "going to jump back into the terminal.",
+    "start": 354.4,
+    "duration": 4.96
+  },
+  {
+    "text": "And what I'm going to do now, sorry,",
+    "start": 356.96,
+    "duration": 4.959
+  },
+  {
+    "text": "this is a bit difficult to do on camera.",
+    "start": 359.36,
+    "duration": 4.48
+  },
+  {
+    "text": "I'm going to go back to the coordinator.",
+    "start": 361.919,
+    "duration": 3.28
+  },
+  {
+    "text": "I'm going to run exactly the same",
+    "start": 363.84,
+    "duration": 4
+  },
+  {
+    "text": "workflow again. So just ticket number.",
+    "start": 365.199,
+    "duration": 4.241
+  },
+  {
+    "text": "What I love about this is it's really",
+    "start": 367.84,
+    "duration": 3.52
+  },
+  {
+    "text": "consistent. So you're basically",
+    "start": 369.44,
+    "duration": 4
+  },
+  {
+    "text": "systemizing your development process in",
+    "start": 371.36,
+    "duration": 4
+  },
+  {
+    "text": "a really repeatable way, which I think",
+    "start": 373.44,
+    "duration": 3.44
+  },
+  {
+    "text": "is a really powerful concept when you",
+    "start": 375.36,
+    "duration": 2.88
+  },
+  {
+    "text": "work with agents. You don't want to be",
+    "start": 376.88,
+    "duration": 4.159
+  },
+  {
+    "text": "prompting ad hoc or manually doing",
+    "start": 378.24,
+    "duration": 4.88
+  },
+  {
+    "text": "different things every time. You want to",
+    "start": 381.039,
+    "duration": 4.16
+  },
+  {
+    "text": "have a repeatable workflow wherever",
+    "start": 383.12,
+    "duration": 3.68
+  },
+  {
+    "text": "possible. So now we're going to be",
+    "start": 385.199,
+    "duration": 3.28
+  },
+  {
+    "text": "orchestrating another ticket. So what",
+    "start": 386.8,
+    "duration": 4
+  },
+  {
+    "text": "you should see is that 163 should be",
+    "start": 388.479,
+    "duration": 4.56
+  },
+  {
+    "text": "open as a new tab. So you can see here",
+    "start": 390.8,
+    "duration": 5.28
+  },
+  {
+    "text": "now we've created 163 and again it's",
+    "start": 393.039,
+    "duration": 4.88
+  },
+  {
+    "text": "started up claude code and it's pasted",
+    "start": 396.08,
+    "duration": 3.92
+  },
+  {
+    "text": "in the prompt. So now we can work on",
+    "start": 397.919,
+    "duration": 3.681
+  },
+  {
+    "text": "this second task at the same time. So",
+    "start": 400,
+    "duration": 2.72
+  },
+  {
+    "text": "you can see here we have different",
+    "start": 401.6,
+    "duration": 4.24
+  },
+  {
+    "text": "agents. We have an agent working on 166",
+    "start": 402.72,
+    "duration": 5.68
+  },
+  {
+    "text": "and we have an agent working on 163.",
+    "start": 405.84,
+    "duration": 4
+  },
+  {
+    "text": "Again, this is really powerful. This",
+    "start": 408.4,
+    "duration": 2.88
+  },
+  {
+    "text": "just keeps scaling. You could work on",
+    "start": 409.84,
+    "duration": 3.04
+  },
+  {
+    "text": "five or six different tasks at the same",
+    "start": 411.28,
+    "duration": 4.32
+  },
+  {
+    "text": "time if you really wanted to. So now you",
+    "start": 412.88,
+    "duration": 3.92
+  },
+  {
+    "text": "can see here we've opened a pull",
+    "start": 415.6,
+    "duration": 3.36
+  },
+  {
+    "text": "request. Again, all we did here was just",
+    "start": 416.8,
+    "duration": 3.839
+  },
+  {
+    "text": "paste in the ticket number. What I",
+    "start": 418.96,
+    "duration": 3.2
+  },
+  {
+    "text": "really love about this kind of approach",
+    "start": 420.639,
+    "duration": 3.68
+  },
+  {
+    "text": "to agentic coding is you're being really",
+    "start": 422.16,
+    "duration": 4.08
+  },
+  {
+    "text": "systematic. So, what you can see here",
+    "start": 424.319,
+    "duration": 3.761
+  },
+  {
+    "text": "now in the browser is that we just",
+    "start": 426.24,
+    "duration": 3.679
+  },
+  {
+    "text": "created this pull request to fix a bug",
+    "start": 428.08,
+    "duration": 3.76
+  },
+  {
+    "text": "in the documentation. You can see how",
+    "start": 429.919,
+    "duration": 4.081
+  },
+  {
+    "text": "easy and how clean and organized this",
+    "start": 431.84,
+    "duration": 4.24
+  },
+  {
+    "text": "all is. We have the pull requests. Now,",
+    "start": 434,
+    "duration": 4
+  },
+  {
+    "text": "we're running a bunch of checks. But",
+    "start": 436.08,
+    "duration": 3.839
+  },
+  {
+    "text": "again, all we're doing is orchestrating",
+    "start": 438,
+    "duration": 3.44
+  },
+  {
+    "text": "the work. We're just deciding what",
+    "start": 439.919,
+    "duration": 3.761
+  },
+  {
+    "text": "tickets and tasks to work on, handing",
+    "start": 441.44,
+    "duration": 3.759
+  },
+  {
+    "text": "them off to the coordinator, and then",
+    "start": 443.68,
+    "duration": 3.04
+  },
+  {
+    "text": "the coordinator is spinning up all of",
+    "start": 445.199,
+    "duration": 3.28
+  },
+  {
+    "text": "these different terminals, different",
+    "start": 446.72,
+    "duration": 3.44
+  },
+  {
+    "text": "tabs, managing the work, and it keeps",
+    "start": 448.479,
+    "duration": 3.681
+  },
+  {
+    "text": "you very clean and organized. I just",
+    "start": 450.16,
+    "duration": 3.52
+  },
+  {
+    "text": "want to try one more thing which I've",
+    "start": 452.16,
+    "duration": 2.879
+  },
+  {
+    "text": "never done before but I think this would",
+    "start": 453.68,
+    "duration": 3.04
+  },
+  {
+    "text": "be interesting to demo. So I've got a",
+    "start": 455.039,
+    "duration": 3.44
+  },
+  {
+    "text": "more complex task here which is to add",
+    "start": 456.72,
+    "duration": 3.68
+  },
+  {
+    "text": "Google Gemini support to my coding",
+    "start": 458.479,
+    "duration": 4
+  },
+  {
+    "text": "agent. So what I'm going to do or",
+    "start": 460.4,
+    "duration": 3.84
+  },
+  {
+    "text": "attempt to do which is going to be super",
+    "start": 462.479,
+    "duration": 3.28
+  },
+  {
+    "text": "interesting is see if we can use a",
+    "start": 464.24,
+    "duration": 3.359
+  },
+  {
+    "text": "different coding agent to implement this",
+    "start": 465.759,
+    "duration": 5.921
+  },
+  {
+    "text": "task. Use the Neo coding agent not",
+    "start": 467.599,
+    "duration": 6.961
+  },
+  {
+    "text": "claude code. Let's see if we can do",
+    "start": 471.68,
+    "duration": 4.32
+  },
+  {
+    "text": "this. I don't know if this will work. So",
+    "start": 474.56,
+    "duration": 3.28
+  },
+  {
+    "text": "we're going to say ticket paste in the",
+    "start": 476,
+    "duration": 3.36
+  },
+  {
+    "text": "ticket number and then we're saying to",
+    "start": 477.84,
+    "duration": 3.44
+  },
+  {
+    "text": "use the neocoding agent. What's really",
+    "start": 479.36,
+    "duration": 3.839
+  },
+  {
+    "text": "nice about Neo is it makes a plan. So",
+    "start": 481.28,
+    "duration": 2.96
+  },
+  {
+    "text": "you can see here this is a really",
+    "start": 483.199,
+    "duration": 2.641
+  },
+  {
+    "text": "complex task. So this is my coding",
+    "start": 484.24,
+    "duration": 3.519
+  },
+  {
+    "text": "agent. And what I like to do is",
+    "start": 485.84,
+    "duration": 3.6
+  },
+  {
+    "text": "basically break this work down. So this",
+    "start": 487.759,
+    "duration": 3.12
+  },
+  {
+    "text": "is a bigger task. So we're going to read",
+    "start": 489.44,
+    "duration": 3.599
+  },
+  {
+    "text": "the de developer docs, implement the",
+    "start": 490.879,
+    "duration": 5.121
+  },
+  {
+    "text": "provider, add tests, run the various",
+    "start": 493.039,
+    "duration": 5.521
+  },
+  {
+    "text": "check commands, self-re the diff, commit",
+    "start": 496,
+    "duration": 4.56
+  },
+  {
+    "text": "the changes, and then push a branch for",
+    "start": 498.56,
+    "duration": 4.479
+  },
+  {
+    "text": "review. So this is a very systematic",
+    "start": 500.56,
+    "duration": 4.16
+  },
+  {
+    "text": "organized workflow, which is why I",
+    "start": 503.039,
+    "duration": 3.28
+  },
+  {
+    "text": "really like this coding agent myself.",
+    "start": 504.72,
+    "duration": 3.28
+  },
+  {
+    "text": "One technique I use a lot which is worth",
+    "start": 506.319,
+    "duration": 3.761
+  },
+  {
+    "text": "mentioning is to take the idea we just",
+    "start": 508,
+    "duration": 4.479
+  },
+  {
+    "text": "saw to an extreme. So we have instead of",
+    "start": 510.08,
+    "duration": 4.8
+  },
+  {
+    "text": "working on one task at a time what I",
+    "start": 512.479,
+    "duration": 4.721
+  },
+  {
+    "text": "found myself doing more and more for",
+    "start": 514.88,
+    "duration": 4
+  },
+  {
+    "text": "personal projects at least to kind of",
+    "start": 517.2,
+    "duration": 3.279
+  },
+  {
+    "text": "experiment with how far we can push",
+    "start": 518.88,
+    "duration": 3.44
+  },
+  {
+    "text": "things is to use uh essentially",
+    "start": 520.479,
+    "duration": 4.48
+  },
+  {
+    "text": "milestones and a milestone is a bunch of",
+    "start": 522.32,
+    "duration": 4.48
+  },
+  {
+    "text": "tasks or tickets that are related. So",
+    "start": 524.959,
+    "duration": 5.44
+  },
+  {
+    "text": "for example maybe this phase 2 is a good",
+    "start": 526.8,
+    "duration": 5.76
+  },
+  {
+    "text": "example where we have a bunch of",
+    "start": 530.399,
+    "duration": 3.44
+  },
+  {
+    "text": "different features. So we have three",
+    "start": 532.56,
+    "duration": 3.52
+  },
+  {
+    "text": "separate tasks or tickets. And what we",
+    "start": 533.839,
+    "duration": 3.68
+  },
+  {
+    "text": "could do with a coordinator pattern is",
+    "start": 536.08,
+    "duration": 3.199
+  },
+  {
+    "text": "taking it even further. You can",
+    "start": 537.519,
+    "duration": 3.601
+  },
+  {
+    "text": "literally just give the entire milestone",
+    "start": 539.279,
+    "duration": 4
+  },
+  {
+    "text": "to the coordinator and ask the",
+    "start": 541.12,
+    "duration": 3.92
+  },
+  {
+    "text": "coordinator to implement all of the",
+    "start": 543.279,
+    "duration": 4.401
+  },
+  {
+    "text": "tasks in separate tabs. Once it's done,",
+    "start": 545.04,
+    "duration": 4.32
+  },
+  {
+    "text": "it will do a check. It will merge all of",
+    "start": 547.68,
+    "duration": 2.96
+  },
+  {
+    "text": "the work and it will basically implement",
+    "start": 549.36,
+    "duration": 3.44
+  },
+  {
+    "text": "the entire milestone. This is taking",
+    "start": 550.64,
+    "duration": 4.16
+  },
+  {
+    "text": "things to an extreme and I don't",
+    "start": 552.8,
+    "duration": 3.12
+  },
+  {
+    "text": "necessarily recommend this for",
+    "start": 554.8,
+    "duration": 2.56
+  },
+  {
+    "text": "everything, but it's kind of interesting",
+    "start": 555.92,
+    "duration": 3.919
+  },
+  {
+    "text": "to see how far you can push these",
+    "start": 557.36,
+    "duration": 4.24
+  },
+  {
+    "text": "workflows. So, if you do want to get",
+    "start": 559.839,
+    "duration": 4.401
+  },
+  {
+    "text": "access to the commands that I was using",
+    "start": 561.6,
+    "duration": 4.32
+  },
+  {
+    "text": "for the demo, it's over here and you can",
+    "start": 564.24,
+    "duration": 2.88
+  },
+  {
+    "text": "get it for free. I'll link it in the",
+    "start": 565.92,
+    "duration": 3.359
+  },
+  {
+    "text": "description. If you scroll down to the",
+    "start": 567.12,
+    "duration": 5.2
+  },
+  {
+    "text": "hurder agent workflow project, all of",
+    "start": 569.279,
+    "duration": 5.201
+  },
+  {
+    "text": "the resources are here. So, inside the",
+    "start": 572.32,
+    "duration": 3.68
+  },
+  {
+    "text": "resources section, you'll find this",
+    "start": 574.48,
+    "duration": 3.039
+  },
+  {
+    "text": "command. And essentially, this is really",
+    "start": 576,
+    "duration": 3.6
+  },
+  {
+    "text": "simple. All we're doing here is",
+    "start": 577.519,
+    "duration": 4
+  },
+  {
+    "text": "basically saying take a GitHub issue end",
+    "start": 579.6,
+    "duration": 4.72
+  },
+  {
+    "text": "to end, create a work tree, implement",
+    "start": 581.519,
+    "duration": 5.041
+  },
+  {
+    "text": "test, open a pull request using its own",
+    "start": 584.32,
+    "duration": 4.8
+  },
+  {
+    "text": "herder tab. And we're just explaining",
+    "start": 586.56,
+    "duration": 4.959
+  },
+  {
+    "text": "the workflow to the agent. We're just",
+    "start": 589.12,
+    "duration": 4.719
+  },
+  {
+    "text": "saying to create the work tree, use the",
+    "start": 591.519,
+    "duration": 3.681
+  },
+  {
+    "text": "herder pain create. So we're just",
+    "start": 593.839,
+    "duration": 3.12
+  },
+  {
+    "text": "telling it how to use the herder CLI",
+    "start": 595.2,
+    "duration": 3.68
+  },
+  {
+    "text": "basically to implement this. So you're",
+    "start": 596.959,
+    "duration": 3.44
+  },
+  {
+    "text": "welcome to borrow this. I really like",
+    "start": 598.88,
+    "duration": 3.6
+  },
+  {
+    "text": "this pattern. This is one thing that",
+    "start": 600.399,
+    "duration": 4.321
+  },
+  {
+    "text": "would taken me away from codeex is being",
+    "start": 602.48,
+    "duration": 4.64
+  },
+  {
+    "text": "able to do this in the terminal. So",
+    "start": 604.72,
+    "duration": 4.08
+  },
+  {
+    "text": "definitely something that's worth trying",
+    "start": 607.12,
+    "duration": 4.719
+  },
+  {
+    "text": "out. All right, looks like Neo is still",
+    "start": 608.8,
+    "duration": 5.52
+  },
+  {
+    "text": "going. This is a big task. This is",
+    "start": 611.839,
+    "duration": 4.401
+  },
+  {
+    "text": "implementing full Gemini provider",
+    "start": 614.32,
+    "duration": 3.199
+  },
+  {
+    "text": "support. So obviously this is a much",
+    "start": 616.24,
+    "duration": 3.36
+  },
+  {
+    "text": "bigger task than the previous ones which",
+    "start": 617.519,
+    "duration": 4.32
+  },
+  {
+    "text": "were just smaller bug fixes and uh",
+    "start": 619.6,
+    "duration": 3.6
+  },
+  {
+    "text": "documentation updates. So this is going",
+    "start": 621.839,
+    "duration": 3.12
+  },
+  {
+    "text": "to take a lot longer. All right. So Neo",
+    "start": 623.2,
+    "duration": 4.639
+  },
+  {
+    "text": "is now done. We've committed the change.",
+    "start": 624.959,
+    "duration": 4.401
+  },
+  {
+    "text": "We have the pull request. So we can go",
+    "start": 627.839,
+    "duration": 3.601
+  },
+  {
+    "text": "and check this one out as well. Okay. So",
+    "start": 629.36,
+    "duration": 4.159
+  },
+  {
+    "text": "the Gemini provider is now done. So in",
+    "start": 631.44,
+    "duration": 3.76
+  },
+  {
+    "text": "theory we have Google support with",
+    "start": 633.519,
+    "duration": 3.361
+  },
+  {
+    "text": "inside this coding agent. I would want",
+    "start": 635.2,
+    "duration": 3.28
+  },
+  {
+    "text": "to be testing this. I would do a lot",
+    "start": 636.88,
+    "duration": 2.959
+  },
+  {
+    "text": "more review because this is obviously a",
+    "start": 638.48,
+    "duration": 4
+  },
+  {
+    "text": "much bigger task. And so typically with",
+    "start": 639.839,
+    "duration": 4.081
+  },
+  {
+    "text": "tasks this big, I would probably want to",
+    "start": 642.48,
+    "duration": 2.799
+  },
+  {
+    "text": "stay more in the loop than I would with",
+    "start": 643.92,
+    "duration": 3.52
+  },
+  {
+    "text": "a bug fix or something like that. Herder",
+    "start": 645.279,
+    "duration": 3.761
+  },
+  {
+    "text": "is a really great tool. It's designed",
+    "start": 647.44,
+    "duration": 3.839
+  },
+  {
+    "text": "agent first. It looks incredible, very",
+    "start": 649.04,
+    "duration": 4.239
+  },
+  {
+    "text": "easy to use, very easy to set up, and it",
+    "start": 651.279,
+    "duration": 3.601
+  },
+  {
+    "text": "will just make you more productive as a",
+    "start": 653.279,
+    "duration": 3.201
+  },
+  {
+    "text": "developer. Most of my day-to-day",
+    "start": 654.88,
+    "duration": 3.6
+  },
+  {
+    "text": "workflow right now is using codec, the",
+    "start": 656.48,
+    "duration": 3.84
+  },
+  {
+    "text": "application, because I find that's just",
+    "start": 658.48,
+    "duration": 4.24
+  },
+  {
+    "text": "a better interface to working on more",
+    "start": 660.32,
+    "duration": 4.24
+  },
+  {
+    "text": "complex software projects. [music] I",
+    "start": 662.72,
+    "duration": 3.92
+  },
+  {
+    "text": "really moved away from using clawed code",
+    "start": 664.56,
+    "duration": 3.92
+  },
+  {
+    "text": "in the terminal because it was very",
+    "start": 666.64,
+    "duration": 3.84
+  },
+  {
+    "text": "difficult to stay organized. But with a",
+    "start": 668.48,
+    "duration": 3.599
+  },
+  {
+    "text": "tool like Herder, you can get a similar",
+    "start": 670.48,
+    "duration": 3.039
+  },
+  {
+    "text": "effect. If you want to use different",
+    "start": 672.079,
+    "duration": 3.361
+  },
+  {
+    "text": "coding agents, I definitely recommend",
+    "start": 673.519,
+    "duration": 3.921
+  },
+  {
+    "text": "trying out Herder. It was a really great",
+    "start": 675.44,
+    "duration": 3.44
+  },
+  {
+    "text": "tool and it's something I'm using all of",
+    "start": 677.44,
+    "duration": 3.04
+  },
+  {
+    "text": "the time in my own workflow. This has",
+    "start": 678.88,
+    "duration": 3.519
+  },
+  {
+    "text": "become my default way to work inside the",
+    "start": 680.48,
+    "duration": 4.16
+  },
+  {
+    "text": "terminal. Hope you enjoyed the video. If",
+    "start": 682.399,
+    "duration": 3.841
+  },
+  {
+    "text": "you did, please remember to like and",
+    "start": 684.64,
+    "duration": 3.12
+  },
+  {
+    "text": "subscribe. It massively helps out the",
+    "start": 686.24,
+    "duration": 3.36
+  },
+  {
+    "text": "channel. If you have any requests for",
+    "start": 687.76,
+    "duration": 3.6
+  },
+  {
+    "text": "content or video ideas, leave them in",
+    "start": 689.6,
+    "duration": 3.2
+  },
+  {
+    "text": "the comments below and I'd be happy to",
+    "start": 691.36,
+    "duration": 3.12
+  },
+  {
+    "text": "take a look. Thank you again for",
+    "start": 692.8,
+    "duration": 2.96
+  },
+  {
+    "text": "watching and I'll see you in the next",
+    "start": 694.48,
+    "duration": 4.16
+  },
+  {
+    "text": "one. Take care.",
+    "start": 695.76,
+    "duration": 2.88
+  }
+]

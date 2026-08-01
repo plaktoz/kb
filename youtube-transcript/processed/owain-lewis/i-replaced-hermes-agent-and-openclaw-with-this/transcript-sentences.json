@@ -1,0 +1,1652 @@
+[
+  {
+    "text": "Reviewed 120 [music] incoming emails from the past 24 hours.",
+    "start": "00:00:00",
+    "end": "00:00:06"
+  },
+  {
+    "text": "Created four Todoist [music] tasks in inbox.",
+    "start": "00:00:04",
+    "end": "00:00:09"
+  },
+  {
+    "text": ">> Can you list out the top three priorities I have to work on today?",
+    "start": "00:00:07",
+    "end": "00:00:13"
+  },
+  {
+    "text": ">> Based on where things stand, [music] here are your top three for today.",
+    "start": "00:00:11",
+    "end": "00:00:17"
+  },
+  {
+    "text": ">> There's a lot of hype online right now around personal AI assistants like Hermes Agent and [music] Open Claw, and it makes a lot of sense.",
+    "start": "00:00:15",
+    "end": "00:00:22"
+  },
+  {
+    "text": "You get an agent that you can message from your phone from anywhere that's able to do work [music] for you in the background and knows all about you and your personal projects.",
+    "start": "00:00:22",
+    "end": "00:00:29"
+  },
+  {
+    "text": "So, I've been running Hermes Agent for the [music] past few months as my personal AI assistant, and initially I loved it.",
+    "start": "00:00:29",
+    "end": "00:00:35"
+  },
+  {
+    "text": "I could message [music] it from my phone, ask it to do something, and let it work in the background without opening a terminal or sitting at my desk.",
+    "start": "00:00:35",
+    "end": "00:00:41"
+  },
+  {
+    "text": "[music] But, the longer I used it, I kept coming back to the same question.",
+    "start": "00:00:41",
+    "end": "00:00:44"
+  },
+  {
+    "text": "Why can't I just use my existing coding agents like Codex or Claude Code to act as an [music] assistant for me?",
+    "start": "00:00:44",
+    "end": "00:00:49"
+  },
+  {
+    "text": "In this video, I'm going to walk through the architecture of Hermes Agent, talk about what's good and what's bad, [music] and then show you why I ended up building something custom myself.",
+    "start": "00:00:49",
+    "end": "00:00:58"
+  },
+  {
+    "text": "All of the resources and everything you need for this video are going to be linked for free in the description below.",
+    "start": "00:00:58",
+    "end": "00:01:02"
+  },
+  {
+    "text": "So, let's get into it.",
+    "start": "00:01:02",
+    "end": "00:01:02"
+  },
+  {
+    "text": "So, the first thing to say is that I do actually like Hermes and Open Claw.",
+    "start": "00:01:02",
+    "end": "00:01:05"
+  },
+  {
+    "text": "I think they're incredible projects, and they've given us so many great ideas about how to build AI personal assistants.",
+    "start": "00:01:05",
+    "end": "00:01:11"
+  },
+  {
+    "text": "They've completely transformed the way we think about this category of AI assistant in general.",
+    "start": "00:01:11",
+    "end": "00:01:14"
+  },
+  {
+    "text": "But, what's happened over the last few months is that many of the features that made tools like Hermes and Open Claw attractive have largely been adopted by the bigger coding agents.",
+    "start": "00:01:14",
+    "end": "00:01:24"
+  },
+  {
+    "text": "So, for example, you can now message Claude Code from your phone, and the same thing with Codex.",
+    "start": "00:01:24",
+    "end": "00:01:27"
+  },
+  {
+    "text": "Hermes can remember things about you, but so can Claude Code, so can Codex, Claude Code, and Codex can do background cron tasks for you.",
+    "start": "00:01:27",
+    "end": "00:01:36"
+  },
+  {
+    "text": "So, the obvious question is really what is left that Hermes Agent and Open Claw give you that the existing coding agents don't.",
+    "start": "00:01:36",
+    "end": "00:01:44"
+  },
+  {
+    "text": "And the honest answer is not that much.",
+    "start": "00:01:42",
+    "end": "00:01:46"
+  },
+  {
+    "text": "So, you get a gateway, you get some self-improving ideas with inside.",
+    "start": "00:01:44",
+    "end": "00:01:50"
+  },
+  {
+    "text": "Hermes Agent in particular, it has a good memory system and the ability to self-learn, but I found those to be an overall negative thing generally, and I'll talk about why in a second.",
+    "start": "00:01:50",
+    "end": "00:02:00"
+  },
+  {
+    "text": "So, it's worth knowing how Hermes and Open Claw actually work.",
+    "start": "00:01:58",
+    "end": "00:02:03"
+  },
+  {
+    "text": "They're pretty simple under the covers.",
+    "start": "00:02:03",
+    "end": "00:02:05"
+  },
+  {
+    "text": "The main innovation with these products was the messaging gateway.",
+    "start": "00:02:05",
+    "end": "00:02:08"
+  },
+  {
+    "text": "So, a traditional coding agent can run on your computer, you send it a prompt, it will do some work and give you a response.",
+    "start": "00:02:08",
+    "end": "00:02:15"
+  },
+  {
+    "text": "But, what happened with Open Claw is they put a gateway in front.",
+    "start": "00:02:14",
+    "end": "00:02:18"
+  },
+  {
+    "text": "This allows you to have a messaging integration point.",
+    "start": "00:02:18",
+    "end": "00:02:20"
+  },
+  {
+    "text": "So, you can send messages to the gateway from Telegram, from email, SMS, whatever you want, you can send messages to your assistant.",
+    "start": "00:02:20",
+    "end": "00:02:29"
+  },
+  {
+    "text": "The gateway is always running, so it's running 24/7, which gives these these agents like the feeling of being always available.",
+    "start": "00:02:29",
+    "end": "00:02:37"
+  },
+  {
+    "text": "But, the gateway would then dispatch a request to an agent runtime, which would just do the work and then send a response back.",
+    "start": "00:02:36",
+    "end": "00:02:42"
+  },
+  {
+    "text": "There are some other really nice features of Open Claw and Hermes Agent, things like the ability to create scheduled tasks that can run in the background.",
+    "start": "00:02:42",
+    "end": "00:02:49"
+  },
+  {
+    "text": "These are essentially cron jobs, and again, you can now do these in Cloud Code and Code X as well.",
+    "start": "00:02:49",
+    "end": "00:02:54"
+  },
+  {
+    "text": "The other thing that's really interesting about Hermes Agent is the memory capability.",
+    "start": "00:02:53",
+    "end": "00:02:57"
+  },
+  {
+    "text": "I actually found this to be a negative, but one of the main features or promises of Hermes Agent is the ability to self-learn and improve over time, which is which is sensible if you're building an AI assistant, right?",
+    "start": "00:02:57",
+    "end": "00:03:09"
+  },
+  {
+    "text": "So, as you can see, this is the architecture of Hermes Agent.",
+    "start": "00:03:08",
+    "end": "00:03:11"
+  },
+  {
+    "text": "You have this gateway, so this is written in Python.",
+    "start": "00:03:11",
+    "end": "00:03:13"
+  },
+  {
+    "text": "You have this gateway server that accepts incoming message requests.",
+    "start": "00:03:13",
+    "end": "00:03:18"
+  },
+  {
+    "text": "It's worth saying that Hermes Agent can actually do polling as well.",
+    "start": "00:03:16",
+    "end": "00:03:21"
+  },
+  {
+    "text": "So, you don't have to expose any ports, which presents a security risk.",
+    "start": "00:03:21",
+    "end": "00:03:25"
+  },
+  {
+    "text": "You don't have to have in incoming traffic.",
+    "start": "00:03:25",
+    "end": "00:03:28"
+  },
+  {
+    "text": "The integrations, things like Telegram, can actually do long polling, which means the gateway can be polling Telegram for messages rather than allowing incoming connections, which is just a little bit more secure in general, in my opinion.",
+    "start": "00:03:28",
+    "end": "00:03:40"
+  },
+  {
+    "text": "And then, once the gateway gets a message, it will then send it to a coding agent, but generally, these are pretty much a commodity at this point in terms of what they can do.",
+    "start": "00:03:38",
+    "end": "00:03:48"
+  },
+  {
+    "text": "The other thing that's interesting about Hermes Agent is it has this session storage, which allows it to save all of the information.",
+    "start": "00:03:48",
+    "end": "00:03:53"
+  },
+  {
+    "text": "So, as you have a conversation with it, it will save that into an SQLite database, and you can do a full text search over your conversation history.",
+    "start": "00:03:53",
+    "end": "00:04:00"
+  },
+  {
+    "text": "Again, this is useful if you want to kind of search your past conversations, as you would expect for a personal assistant, basically.",
+    "start": "00:04:00",
+    "end": "00:04:08"
+  },
+  {
+    "text": "And then the other feature that really stands out for Hermes Agent is the persistent memory and the ability to self-learn.",
+    "start": "00:04:07",
+    "end": "00:04:13"
+  },
+  {
+    "text": "So, the memory system in Hermes Agent is relatively simple.",
+    "start": "00:04:13",
+    "end": "00:04:17"
+  },
+  {
+    "text": "You can extend it in multiple ways.",
+    "start": "00:04:17",
+    "end": "00:04:19"
+  },
+  {
+    "text": "There's lots of different integrations you can have.",
+    "start": "00:04:19",
+    "end": "00:04:20"
+  },
+  {
+    "text": "But, out of the box, it does something pretty simple.",
+    "start": "00:04:20",
+    "end": "00:04:24"
+  },
+  {
+    "text": "It will save facts about you to a memory.",
+    "start": "00:04:24",
+    "end": "00:04:27"
+  },
+  {
+    "text": "md file.",
+    "start": "00:04:27",
+    "end": "00:04:27"
+  },
+  {
+    "text": "There's nothing particularly complicated here.",
+    "start": "00:04:26",
+    "end": "00:04:28"
+  },
+  {
+    "text": "After the conversation or the turn is finished, the agent will then decide whether it's going to save anything useful into the memory.",
+    "start": "00:04:28",
+    "end": "00:04:36"
+  },
+  {
+    "text": "md file.",
+    "start": "00:04:36",
+    "end": "00:04:37"
+  },
+  {
+    "text": "Then, the memory.",
+    "start": "00:04:37",
+    "end": "00:04:37"
+  },
+  {
+    "text": "md file will get reloaded in the next conversation turn, and so the agent is able to then remember things about you.",
+    "start": "00:04:37",
+    "end": "00:04:43"
+  },
+  {
+    "text": "Because, if you think about it, LLMs and agents are stateless.",
+    "start": "00:04:43",
+    "end": "00:04:46"
+  },
+  {
+    "text": "They don't know anything about you.",
+    "start": "00:04:46",
+    "end": "00:04:48"
+  },
+  {
+    "text": "They don't remember things.",
+    "start": "00:04:48",
+    "end": "00:04:48"
+  },
+  {
+    "text": "And so, this allows your AI personal assistant to feel more personal, because it can remember stuff about you.",
+    "start": "00:04:48",
+    "end": "00:04:53"
+  },
+  {
+    "text": "So, this is a thing that people will often claim is really beneficial, but in reality, I found this incredibly annoying, and I'll show you why.",
+    "start": "00:04:53",
+    "end": "00:04:59"
+  },
+  {
+    "text": "So, what I'm going to do is go over into the terminal now, and I'm going to show you how this memory feature actually works.",
+    "start": "00:04:59",
+    "end": "00:05:05"
+  },
+  {
+    "text": "It's actually really simple.",
+    "start": "00:05:05",
+    "end": "00:05:06"
+  },
+  {
+    "text": "So, I'm going to go SSH root at Hermes.",
+    "start": "00:05:06",
+    "end": "00:05:08"
+  },
+  {
+    "text": "So, I have Hermes Agent running on a remote virtual machine.",
+    "start": "00:05:08",
+    "end": "00:05:14"
+  },
+  {
+    "text": "And if we go into the Hermes Agent directory, so if you go and look in this file, what you'll see is a bunch of facts.",
+    "start": "00:05:14",
+    "end": "00:05:18"
+  },
+  {
+    "text": "So, it's saved these facts about me into this memory.",
+    "start": "00:05:18",
+    "end": "00:05:22"
+  },
+  {
+    "text": "md file, and each of these facts is then separated by this delimiter character.",
+    "start": "00:05:22",
+    "end": "00:05:28"
+  },
+  {
+    "text": "So, in theory, this is great.",
+    "start": "00:05:26",
+    "end": "00:05:29"
+  },
+  {
+    "text": "So, the the agent is saving things about me.",
+    "start": "00:05:29",
+    "end": "00:05:31"
+  },
+  {
+    "text": "But, when you actually look at what it's saving, for example, \"Owen's current stack is Rails and PostgreSQL.",
+    "start": "00:05:30",
+    "end": "00:05:38"
+  },
+  {
+    "text": "\" This is not true.",
+    "start": "00:05:38",
+    "end": "00:05:38"
+  },
+  {
+    "text": "This is This is false.",
+    "start": "00:05:38",
+    "end": "00:05:41"
+  },
+  {
+    "text": "I said this once as an offhand comment, and now Hermes has decided to save that as a fact.",
+    "start": "00:05:41",
+    "end": "00:05:43"
+  },
+  {
+    "text": "But, the problem is I said this a while ago, and it's no longer true.",
+    "start": "00:05:43",
+    "end": "00:05:48"
+  },
+  {
+    "text": "I just said in an offhand comment, I like to use this stack.",
+    "start": "00:05:48",
+    "end": "00:05:50"
+  },
+  {
+    "text": "But it's not true that my current workspace stack is this at all.",
+    "start": "00:05:50",
+    "end": "00:05:53"
+  },
+  {
+    "text": "I use different technology stacks for my projects.",
+    "start": "00:05:53",
+    "end": "00:05:56"
+  },
+  {
+    "text": "And as you go through this, what you'll see is that a lot of the facts that Hermes is saving are just either false or misleading to the agent.",
+    "start": "00:05:56",
+    "end": "00:06:03"
+  },
+  {
+    "text": "So it's talking about a deprecated CLI tool.",
+    "start": "00:06:03",
+    "end": "00:06:05"
+  },
+  {
+    "text": "Again, this is kind of just not very useful.",
+    "start": "00:06:05",
+    "end": "00:06:08"
+  },
+  {
+    "text": "It's going to confuse the agent.",
+    "start": "00:06:08",
+    "end": "00:06:09"
+  },
+  {
+    "text": "I was using a different tool at one point.",
+    "start": "00:06:09",
+    "end": "00:06:12"
+  },
+  {
+    "text": "I'm not anymore.",
+    "start": "00:06:12",
+    "end": "00:06:11"
+  },
+  {
+    "text": "The other big feature that in Hermes is that it can create skills on the fly.",
+    "start": "00:06:11",
+    "end": "00:06:14"
+  },
+  {
+    "text": "What it what you're doing and then creates reusable skills for you.",
+    "start": "00:06:14",
+    "end": "00:06:18"
+  },
+  {
+    "text": "And it sounds really good in theory.",
+    "start": "00:06:17",
+    "end": "00:06:20"
+  },
+  {
+    "text": "If you go online, people on YouTube will rave about this feature, but I found it to be a real negative.",
+    "start": "00:06:20",
+    "end": "00:06:23"
+  },
+  {
+    "text": "What was happening is the agent would do something that's not quite correct, and then it would store that as a skill, and so it was basically generating loads and loads of these skills for very random things that weren't particularly accurate or useful.",
+    "start": "00:06:23",
+    "end": "00:06:34"
+  },
+  {
+    "text": "And I find that the more skills you have, the worse your agent will perform generally because every time it runs, it has to decide whether to load any of those skills.",
+    "start": "00:06:34",
+    "end": "00:06:43"
+  },
+  {
+    "text": "It starts to get confused.",
+    "start": "00:06:43",
+    "end": "00:06:43"
+  },
+  {
+    "text": "And so basically I found that Hermes was creating [clears throat] all of these little junk skills that weren't particularly useful.",
+    "start": "00:06:43",
+    "end": "00:06:50"
+  },
+  {
+    "text": "The agent writing markdown files isn't really learning.",
+    "start": "00:06:48",
+    "end": "00:06:52"
+  },
+  {
+    "text": "It's just automatic documentation.",
+    "start": "00:06:52",
+    "end": "00:06:53"
+  },
+  {
+    "text": "And so I would rather have more control over that process personally.",
+    "start": "00:06:53",
+    "end": "00:06:57"
+  },
+  {
+    "text": "All right.",
+    "start": "00:06:57",
+    "end": "00:06:57"
+  },
+  {
+    "text": "So what I built was a much simpler approach.",
+    "start": "00:06:57",
+    "end": "00:07:00"
+  },
+  {
+    "text": "It's a single Rust binary, which makes it really easy to install.",
+    "start": "00:07:00",
+    "end": "00:07:03"
+  },
+  {
+    "text": "You can literally just install this one thing on your host.",
+    "start": "00:07:03",
+    "end": "00:07:05"
+  },
+  {
+    "text": "It will then act as a gateway and then dispatch tasks to your existing coding agents.",
+    "start": "00:07:05",
+    "end": "00:07:09"
+  },
+  {
+    "text": "So essentially what we're doing with Push is taking the gateway element that exists in Hermes agent and open core, but we're not building our own back end.",
+    "start": "00:07:09",
+    "end": "00:07:19"
+  },
+  {
+    "text": "We're allowing the agent runtime to be configurable.",
+    "start": "00:07:17",
+    "end": "00:07:20"
+  },
+  {
+    "text": "One of the reasons, which might not be obvious why I much prefer this approach to using Hermes agent, is if you try and configure things like Gmail integration or any kind of OAuth integration, what you'll find is you have to go to Google Cloud, configure all of the OAuth credentials yourself, manage all of the security credentials on your host, and that's a real security risk.",
+    "start": "00:07:20",
+    "end": "00:07:38"
+  },
+  {
+    "text": "It's also a nightmare to kind of configure in general.",
+    "start": "00:07:38",
+    "end": "00:07:42"
+  },
+  {
+    "text": "It's really kind of annoying to set up in Humanness Agent, in my opinion.",
+    "start": "00:07:42",
+    "end": "00:07:45"
+  },
+  {
+    "text": "Whereas if you're using something like Codex, you get all of these features out of the box and the credential management, doing the things like refresh tokens for your OAuth credentials, all of it is handled by the OpenAI team.",
+    "start": "00:07:45",
+    "end": "00:07:57"
+  },
+  {
+    "text": "And so this makes it more secure and much more user-friendly, in my opinion.",
+    "start": "00:07:57",
+    "end": "00:08:01"
+  },
+  {
+    "text": "You can obviously have any kind of integration.",
+    "start": "00:08:01",
+    "end": "00:08:03"
+  },
+  {
+    "text": "You can have your agent automate your browser, integrate with Google Chrome.",
+    "start": "00:08:03",
+    "end": "00:08:07"
+  },
+  {
+    "text": "You can do things like Gmail configuration.",
+    "start": "00:08:07",
+    "end": "00:08:09"
+  },
+  {
+    "text": "This is literally just a one-click setup.",
+    "start": "00:08:09",
+    "end": "00:08:12"
+  },
+  {
+    "text": "Whereas if you're using Humanness Agent, you have to kind of jump through hoops to kind of get the OAuth credentials, you have to save them to your environment files.",
+    "start": "00:08:10",
+    "end": "00:08:18"
+  },
+  {
+    "text": "It's just really, really annoying to set these things up.",
+    "start": "00:08:18",
+    "end": "00:08:21"
+  },
+  {
+    "text": "And also it's less secure generally, in my opinion, because you're managing those credentials yourself.",
+    "start": "00:08:19",
+    "end": "00:08:26"
+  },
+  {
+    "text": "You have to remember to deal with refresh tokens and you have to know how to set those things up securely.",
+    "start": "00:08:26",
+    "end": "00:08:29"
+  },
+  {
+    "text": "Whereas if you're using something like Codex, out of the box it's going to be using best practices in terms of security, because obviously this is a public consumer product.",
+    "start": "00:08:29",
+    "end": "00:08:38"
+  },
+  {
+    "text": "They put a lot of time into how seamlessly you can integrate to all of your different external tools.",
+    "start": "00:08:38",
+    "end": "00:08:42"
+  },
+  {
+    "text": "Pretty much everything you're going to need is available within site Codex.",
+    "start": "00:08:42",
+    "end": "00:08:46"
+  },
+  {
+    "text": "You can connect to GitHub, your Google Drive, your Notion, your calendar, pretty much anything from Codex.",
+    "start": "00:08:46",
+    "end": "00:08:51"
+  },
+  {
+    "text": "So what we're going to do is go ahead and install this assistant.",
+    "start": "00:08:51",
+    "end": "00:08:54"
+  },
+  {
+    "text": "So if you want to install it, it's one click.",
+    "start": "00:08:54",
+    "end": "00:08:56"
+  },
+  {
+    "text": "You can just do this one click install and then it will run the agent.",
+    "start": "00:08:56",
+    "end": "00:08:59"
+  },
+  {
+    "text": "It will download the latest version and then run it.",
+    "start": "00:08:59",
+    "end": "00:09:02"
+  },
+  {
+    "text": "I'm going to actually just run it here in my directory, so I can see how it works.",
+    "start": "00:09:02",
+    "end": "00:09:06"
+  },
+  {
+    "text": "You can actually see the logs more easily.",
+    "start": "00:09:05",
+    "end": "00:09:08"
+  },
+  {
+    "text": "So we're just building the binary and now it's running and now it's polling Telegram for new messages.",
+    "start": "00:09:07",
+    "end": "00:09:13"
+  },
+  {
+    "text": "So every 3 seconds we'll check in on Telegram looking for new messages.",
+    "start": "00:09:13",
+    "end": "00:09:16"
+  },
+  {
+    "text": "And the important thing to say here is we're not exposing any ports.",
+    "start": "00:09:16",
+    "end": "00:09:19"
+  },
+  {
+    "text": "If you run this on a virtual machine or your own machine, there's no inbound connectivity.",
+    "start": "00:09:19",
+    "end": "00:09:24"
+  },
+  {
+    "text": "This is just reaching out to Telegram.",
+    "start": "00:09:24",
+    "end": "00:09:26"
+  },
+  {
+    "text": "The advantage of this strategy is we're polling Telegram, so we're not opening any ports on our machine, so there's no security vulnerability in terms of someone else can access your webhook endpoint, for example.",
+    "start": "00:09:26",
+    "end": "00:09:36"
+  },
+  {
+    "text": "We're not exposing a web dashboard or anything else to the public internet.",
+    "start": "00:09:36",
+    "end": "00:09:40"
+  },
+  {
+    "text": "This is just polling from our virtual machine.",
+    "start": "00:09:40",
+    "end": "00:09:42"
+  },
+  {
+    "text": "So you could run this in a private network with no internet connectivity inbound.",
+    "start": "00:09:41",
+    "end": "00:09:45"
+  },
+  {
+    "text": "All right, so what I'm going to do now is just send a hello world message to my assistant.",
+    "start": "00:09:45",
+    "end": "00:09:50"
+  },
+  {
+    "text": "And kind of just what you should see then is that the message comes in.",
+    "start": "00:09:50",
+    "end": "00:09:54"
+  },
+  {
+    "text": "So new message accepted routing to Codex.",
+    "start": "00:09:54",
+    "end": "00:09:57"
+  },
+  {
+    "text": "So we're basically taking the message I just sent on Telegram.",
+    "start": "00:09:57",
+    "end": "00:09:59"
+  },
+  {
+    "text": "It sent then a message back and I'll just quickly show you what that looks like.",
+    "start": "00:09:59",
+    "end": "00:10:03"
+  },
+  {
+    "text": "So what I can see here is my Telegram account.",
+    "start": "00:10:03",
+    "end": "00:10:05"
+  },
+  {
+    "text": "These are my two AI personal assistants running on different machines.",
+    "start": "00:10:05",
+    "end": "00:10:08"
+  },
+  {
+    "text": "So this first one David, I just sent a message saying hello world and then it responded back.",
+    "start": "00:10:08",
+    "end": "00:10:13"
+  },
+  {
+    "text": "You can also send a voice message as well.",
+    "start": "00:10:13",
+    "end": "00:10:15"
+  },
+  {
+    "text": "So what I'm going to do is just send a voice message.",
+    "start": "00:10:15",
+    "end": "00:10:17"
+  },
+  {
+    "text": "And then when you do that, you should get a voice message back.",
+    "start": "00:10:17",
+    "end": "00:10:21"
+  },
+  {
+    "text": "So we're going to say \"Hey, can you remind me of my priorities for this week?",
+    "start": "00:10:21",
+    "end": "00:10:25"
+  },
+  {
+    "text": "Tell me my goals.",
+    "start": "00:10:25",
+    "end": "00:10:26"
+  },
+  {
+    "text": "Don't reveal any sensitive information cuz I'm doing a demo.",
+    "start": "00:10:26",
+    "end": "00:10:28"
+  },
+  {
+    "text": "\" Okay, so what you can see here is the agent has now responded.",
+    "start": "00:10:28",
+    "end": "00:10:32"
+  },
+  {
+    "text": "Again, the agent has context about me, my goals, my to-do list, my emails, and everything that's going on.",
+    "start": "00:10:30",
+    "end": "00:10:38"
+  },
+  {
+    "text": "So priority one is to re-record a course by Friday.",
+    "start": "00:10:38",
+    "end": "00:10:41"
+  },
+  {
+    "text": "You can see here I'm actually currently re-recording this video which I failed to record yesterday.",
+    "start": "00:10:39",
+    "end": "00:10:46"
+  },
+  {
+    "text": "And there's some uh sponsorship emails I need to respond to.",
+    "start": "00:10:44",
+    "end": "00:10:48"
+  },
+  {
+    "text": "And I'm working on a side project over here.",
+    "start": "00:10:48",
+    "end": "00:10:53"
+  },
+  {
+    "text": "And my primary goals make AI engineer the best practical program for AI builders in general and grow YouTube to 100,000 subs.",
+    "start": "00:10:50",
+    "end": "00:10:58"
+  },
+  {
+    "text": "So these are my two goals for this year and then it's kind of giving me my focus.",
+    "start": "00:10:58",
+    "end": "00:11:03"
+  },
+  {
+    "text": "This is how I think about AI personal assistants in general.",
+    "start": "00:11:03",
+    "end": "00:11:06"
+  },
+  {
+    "text": "You want to make them just like useful useful assistants that can keep you focused, help you organize your week.",
+    "start": "00:11:05",
+    "end": "00:11:11"
+  },
+  {
+    "text": "Any kind of coding tasks I will just use a coding agent for.",
+    "start": "00:11:10",
+    "end": "00:11:13"
+  },
+  {
+    "text": "When I'm building a personal assistant, I want it to just help me stay organized basically.",
+    "start": "00:11:13",
+    "end": "00:11:19"
+  },
+  {
+    "text": ">> Your priorities for the rest of this week are: One, publish AI Architect V2 by Friday, 17 July.",
+    "start": "00:11:17",
+    "end": "00:11:24"
+  },
+  {
+    "text": "This is the highest priority task.",
+    "start": "00:11:24",
+    "end": "00:11:29"
+  },
+  {
+    "text": ">> So one of the tasks I like to use my AI assistant for is is read through my emails and then put things on my to-do list that I need to take action on.",
+    "start": "00:11:27",
+    "end": "00:11:36"
+  },
+  {
+    "text": "So, let's go ahead and do that.",
+    "start": "00:11:34",
+    "end": "00:11:37"
+  },
+  {
+    "text": "Can you go through my emails for the past 24 hours and then add anything to my to do list that I need to take action on?",
+    "start": "00:11:36",
+    "end": "00:11:43"
+  },
+  {
+    "text": "So, this is my current to do list.",
+    "start": "00:11:42",
+    "end": "00:11:44"
+  },
+  {
+    "text": "You can see here I don't have very much on it.",
+    "start": "00:11:44",
+    "end": "00:11:45"
+  },
+  {
+    "text": "I've got, you know, responding to emails, the course I need to update, onboarding video.",
+    "start": "00:11:45",
+    "end": "00:11:51"
+  },
+  {
+    "text": "And this is the task I'm currently working on now, which is recording this YouTube video itself.",
+    "start": "00:11:51",
+    "end": "00:11:56"
+  },
+  {
+    "text": "And what we should see now is that the agent should go through my emails and then add any kind of follow-up actions I need to take.",
+    "start": "00:11:55",
+    "end": "00:12:01"
+  },
+  {
+    "text": "And you can even delegate some of these tasks to the AI agent.",
+    "start": "00:12:01",
+    "end": "00:12:05"
+  },
+  {
+    "text": "So, for example, if I wanted to, I could go ahead and delegate this task to my agent.",
+    "start": "00:12:05",
+    "end": "00:12:08"
+  },
+  {
+    "text": "So, for example, this is drafting a reply.",
+    "start": "00:12:08",
+    "end": "00:12:10"
+  },
+  {
+    "text": "Pretty much my agent knows what I'm going to send here anyway, so I can pretty much delegate this task to my agent to take care of.",
+    "start": "00:12:10",
+    "end": "00:12:16"
+  },
+  {
+    "text": "So, in terms of how this works in terms of the architecture, we have a gateway.",
+    "start": "00:12:16",
+    "end": "00:12:21"
+  },
+  {
+    "text": "So, this is the the main component of your personal assistant.",
+    "start": "00:12:21",
+    "end": "00:12:23"
+  },
+  {
+    "text": "This is where we're sending messages to and this is what's scheduling all of the automated work.",
+    "start": "00:12:23",
+    "end": "00:12:29"
+  },
+  {
+    "text": "So, this gateway is responsible for accepting incoming messages and then dispatching them to an agent runtime.",
+    "start": "00:12:27",
+    "end": "00:12:35"
+  },
+  {
+    "text": "It's firing up an agent to handle the request.",
+    "start": "00:12:33",
+    "end": "00:12:37"
+  },
+  {
+    "text": "And then we also have scheduled jobs.",
+    "start": "00:12:36",
+    "end": "00:12:40"
+  },
+  {
+    "text": "This is running cron jobs, basically, that will run on in the background.",
+    "start": "00:12:37",
+    "end": "00:12:43"
+  },
+  {
+    "text": "So, for example, every Monday morning you might have a task to triage your email.",
+    "start": "00:12:43",
+    "end": "00:12:47"
+  },
+  {
+    "text": "It will delegate that to an agent to do the work and then it will send you a message to say that it's done.",
+    "start": "00:12:45",
+    "end": "00:12:51"
+  },
+  {
+    "text": "The nice thing about this personal assistant pattern is you get notified when the agent is doing work for you.",
+    "start": "00:12:51",
+    "end": "00:12:56"
+  },
+  {
+    "text": "You get a notification on your phone to say the agent has finished triaging your emails or it's reviewed your priorities for today.",
+    "start": "00:12:56",
+    "end": "00:13:01"
+  },
+  {
+    "text": "It will take action.",
+    "start": "00:13:01",
+    "end": "00:13:03"
+  },
+  {
+    "text": "It will be proactive.",
+    "start": "00:13:03",
+    "end": "00:13:05"
+  },
+  {
+    "text": "And then in terms of the agent runtime, all of the kind of heavy lifting is now done by Codex or cloud code.",
+    "start": "00:13:04",
+    "end": "00:13:10"
+  },
+  {
+    "text": "You can use your existing connectors, your existing skills.",
+    "start": "00:13:10",
+    "end": "00:13:12"
+  },
+  {
+    "text": "Really, you're not having to customize too much or change much about the way you work.",
+    "start": "00:13:12",
+    "end": "00:13:17"
+  },
+  {
+    "text": "The only thing we're kind of adding to this setup is this gateway.",
+    "start": "00:13:17",
+    "end": "00:13:20"
+  },
+  {
+    "text": "You can also define a soul.",
+    "start": "00:13:20",
+    "end": "00:13:23"
+  },
+  {
+    "text": "md, which defines the assistant and its personality as well.",
+    "start": "00:13:23",
+    "end": "00:13:28"
+  },
+  {
+    "text": "And the gateway will also persist any conversations you have in SQLite as a database, so it can also get access to your past conversations, your past conversational history as well.",
+    "start": "00:13:25",
+    "end": "00:13:36"
+  },
+  {
+    "text": "So, it saves the memory of everything you've discussed with your agent.",
+    "start": "00:13:36",
+    "end": "00:13:39"
+  },
+  {
+    "text": "Okay, so you can see here now that the agent has responded to us.",
+    "start": "00:13:39",
+    "end": "00:13:41"
+  },
+  {
+    "text": "We can see here that it's given us a message, so we can go ahead and listen to that one.",
+    "start": "00:13:41",
+    "end": "00:13:47"
+  },
+  {
+    "text": "Let's go ahead and see what the agent has said.",
+    "start": "00:13:45",
+    "end": "00:13:51"
+  },
+  {
+    "text": ">> Reviewed 120 incoming emails from the past 24 hours.",
+    "start": "00:13:48",
+    "end": "00:13:53"
+  },
+  {
+    "text": "Created four to-do list tasks in inbox.",
+    "start": "00:13:53",
+    "end": "00:13:57"
+  },
+  {
+    "text": ">> Okay, so now you can see in my to-do list, the agent has added these tasks.",
+    "start": "00:13:56",
+    "end": "00:14:01"
+  },
+  {
+    "text": "It's even added due dates as well.",
+    "start": "00:13:59",
+    "end": "00:14:02"
+  },
+  {
+    "text": "So, now that we have all of the tasks in our to-do list, this is great because now what we can do is we can actually delegate these tasks to our agent.",
+    "start": "00:14:02",
+    "end": "00:14:09"
+  },
+  {
+    "text": "So, for example, if I wanted the agent to handle some of these tasks, I could just ask it to pick up one of these tasks for me.",
+    "start": "00:14:09",
+    "end": "00:14:15"
+  },
+  {
+    "text": "And this is the way I like to think about agents.",
+    "start": "00:14:14",
+    "end": "00:14:16"
+  },
+  {
+    "text": "You've got a control plane, which is your task list, all the things you need to do.",
+    "start": "00:14:16",
+    "end": "00:14:20"
+  },
+  {
+    "text": "You can either pick them up yourself, so I could either pick up this and do it myself, or I could just delegate that one to my AI agent.",
+    "start": "00:14:20",
+    "end": "00:14:27"
+  },
+  {
+    "text": "So, let's for example try and draft a response to this one.",
+    "start": "00:14:27",
+    "end": "00:14:32"
+  },
+  {
+    "text": "So, again, what I'm going to do is go back to my agent and see if it can handle this task for me.",
+    "start": "00:14:31",
+    "end": "00:14:36"
+  },
+  {
+    "text": "Now, the agent has finished responding to our message.",
+    "start": "00:14:36",
+    "end": "00:14:38"
+  },
+  {
+    "text": "You can see here, uh thanks for reaching out.",
+    "start": "00:14:37",
+    "end": "00:14:41"
+  },
+  {
+    "text": "Looks relevant.",
+    "start": "00:14:41",
+    "end": "00:14:41"
+  },
+  {
+    "text": "I'd be open to testing the pro account.",
+    "start": "00:14:41",
+    "end": "00:14:43"
+  },
+  {
+    "text": "You can obviously configure this.",
+    "start": "00:14:43",
+    "end": "00:14:44"
+  },
+  {
+    "text": "So, if you have any preferences, so for example, I often don't handle sponsorship requests at the moment because I'm really kind of focused on content in general.",
+    "start": "00:14:44",
+    "end": "00:14:52"
+  },
+  {
+    "text": "But, obviously you can kind of have predefined responses that you want for a certain type of email.",
+    "start": "00:14:52",
+    "end": "00:14:56"
+  },
+  {
+    "text": "You can kind of customize your agent to handle these tasks and get better over time.",
+    "start": "00:14:56",
+    "end": "00:15:00"
+  },
+  {
+    "text": "In terms of configuring the agent, the other thing I wanted was to for this to be very, very simple.",
+    "start": "00:15:00",
+    "end": "00:15:04"
+  },
+  {
+    "text": "If you look at a tool like Hamish or Open Claw, the configuration is really complicated.",
+    "start": "00:15:04",
+    "end": "00:15:08"
+  },
+  {
+    "text": "There are so many different options, so many messaging platforms, so much to configure.",
+    "start": "00:15:08",
+    "end": "00:15:13"
+  },
+  {
+    "text": "I wanted to keep this as simple as possible.",
+    "start": "00:15:13",
+    "end": "00:15:14"
+  },
+  {
+    "text": "So, you can see here, the configuration is super, super minimal.",
+    "start": "00:15:14",
+    "end": "00:15:19"
+  },
+  {
+    "text": "We have a single channel, so you can have Telegram or iMessage.",
+    "start": "00:15:17",
+    "end": "00:15:22"
+  },
+  {
+    "text": "I'll probably add some more channels later.",
+    "start": "00:15:22",
+    "end": "00:15:23"
+  },
+  {
+    "text": "But then you can choose your agents.",
+    "start": "00:15:23",
+    "end": "00:15:25"
+  },
+  {
+    "text": "So, this will dispatch to Codex, but you could change this to Claude.",
+    "start": "00:15:25",
+    "end": "00:15:28"
+  },
+  {
+    "text": "You could also change it to something like Pi as well if you wanted to.",
+    "start": "00:15:28",
+    "end": "00:15:31"
+  },
+  {
+    "text": "So, the assistant route is where we store our context about us, our goals, our priorities, any information the assistant needs to know, and also all of our jobs.",
+    "start": "00:15:31",
+    "end": "00:15:41"
+  },
+  {
+    "text": "And then Telegram is just the basic configuration, the allowed user ID, the bot token, etc.",
+    "start": "00:15:39",
+    "end": "00:15:46"
+  },
+  {
+    "text": "Very, very simple and easy to set up.",
+    "start": "00:15:45",
+    "end": "00:15:47"
+  },
+  {
+    "text": "And then if you want voice replies, you'll need an OpenAI API key.",
+    "start": "00:15:46",
+    "end": "00:15:51"
+  },
+  {
+    "text": "And so, this is my actual personal assistant.",
+    "start": "00:15:51",
+    "end": "00:15:54"
+  },
+  {
+    "text": "And what I like about this approach is one of the things I found difficult with tools like open claw and Hermes agent is that they were so unopinionated about how to build an assistant.",
+    "start": "00:15:52",
+    "end": "00:16:02"
+  },
+  {
+    "text": "I wanted something that was much more opinionated.",
+    "start": "00:16:01",
+    "end": "00:16:03"
+  },
+  {
+    "text": "So, we only have two things to think about in my opinion with a personal assistant.",
+    "start": "00:16:03",
+    "end": "00:16:08"
+  },
+  {
+    "text": "Well, three actually.",
+    "start": "00:16:08",
+    "end": "00:16:08"
+  },
+  {
+    "text": "First one is context.",
+    "start": "00:16:08",
+    "end": "00:16:10"
+  },
+  {
+    "text": "So, what does the agent know about you?",
+    "start": "00:16:10",
+    "end": "00:16:12"
+  },
+  {
+    "text": "So, for example, here is some information about my current focus, my current goals.",
+    "start": "00:16:12",
+    "end": "00:16:17"
+  },
+  {
+    "text": "The agent can kind of read through this.",
+    "start": "00:16:17",
+    "end": "00:16:19"
+  },
+  {
+    "text": "So, you know, make AI engineer the best practical AI software program, grow YouTube to 100,000 subs.",
+    "start": "00:16:19",
+    "end": "00:16:24"
+  },
+  {
+    "text": "These are my goals.",
+    "start": "00:16:24",
+    "end": "00:16:26"
+  },
+  {
+    "text": "And then also it has information about me, how I like to handle sponsorships, etc.",
+    "start": "00:16:25",
+    "end": "00:16:32"
+  },
+  {
+    "text": "And then we also have jobs as well.",
+    "start": "00:16:30",
+    "end": "00:16:33"
+  },
+  {
+    "text": "So, these are the recurring jobs.",
+    "start": "00:16:33",
+    "end": "00:16:35"
+  },
+  {
+    "text": "So, I wanted the job system to be as simple as possible and reviewable.",
+    "start": "00:16:35",
+    "end": "00:16:38"
+  },
+  {
+    "text": "So, these are the cron jobs.",
+    "start": "00:16:38",
+    "end": "00:16:39"
+  },
+  {
+    "text": "So, for example, here's an example of a job to do a weekly review.",
+    "start": "00:16:39",
+    "end": "00:16:43"
+  },
+  {
+    "text": "It's literally just a prompt.",
+    "start": "00:16:43",
+    "end": "00:16:47"
+  },
+  {
+    "text": "We can schedule where the job runs, the working directory.",
+    "start": "00:16:45",
+    "end": "00:16:49"
+  },
+  {
+    "text": "We can also schedule how how often it runs.",
+    "start": "00:16:49",
+    "end": "00:16:52"
+  },
+  {
+    "text": "This could be every week, etc.",
+    "start": "00:16:52",
+    "end": "00:16:53"
+  },
+  {
+    "text": "But this is basically preparing my weekly review, go through my tasks, my emails, my calendar, figure out what I need to work on, use to do list to look through my, you know, completed tasks.",
+    "start": "00:16:53",
+    "end": "00:17:04"
+  },
+  {
+    "text": "Basically triage all of the stuff I need to do.",
+    "start": "00:17:04",
+    "end": "00:17:06"
+  },
+  {
+    "text": "And then return things that I need to focus on basically.",
+    "start": "00:17:06",
+    "end": "00:17:09"
+  },
+  {
+    "text": "So, you can just add jobs, anything that you like here.",
+    "start": "00:17:09",
+    "end": "00:17:12"
+  },
+  {
+    "text": "So, this could be your daily focus, an email triage, research jobs, anything you want that you to run on a schedule, basically, you can just define in here.",
+    "start": "00:17:12",
+    "end": "00:17:22"
+  },
+  {
+    "text": "The nice thing then is this is all reviewable.",
+    "start": "00:17:20",
+    "end": "00:17:23"
+  },
+  {
+    "text": "You can store it in GitHub.",
+    "start": "00:17:23",
+    "end": "00:17:26"
+  },
+  {
+    "text": "You can keep it all version controlled and nice and organized.",
+    "start": "00:17:24",
+    "end": "00:17:28"
+  },
+  {
+    "text": "And then the other thing we have is the soul.",
+    "start": "00:17:28",
+    "end": "00:17:31"
+  },
+  {
+    "text": "md.",
+    "start": "00:17:31",
+    "end": "00:17:32"
+  },
+  {
+    "text": "This describes how the agent should act.",
+    "start": "00:17:32",
+    "end": "00:17:34"
+  },
+  {
+    "text": "So, you are Owen's chief of staff for his work.",
+    "start": "00:17:34",
+    "end": "00:17:35"
+  },
+  {
+    "text": "Your job is to turn a noisy stream of tasks, messages, and meetings into clear decisions and useful action.",
+    "start": "00:17:35",
+    "end": "00:17:43"
+  },
+  {
+    "text": "Protect his attention.",
+    "start": "00:17:41",
+    "end": "00:17:43"
+  },
+  {
+    "text": "Keep the important work moving.",
+    "start": "00:17:43",
+    "end": "00:17:46"
+  },
+  {
+    "text": "Reduce operational drag without taking control.",
+    "start": "00:17:46",
+    "end": "00:17:49"
+  },
+  {
+    "text": "So, again, just be calm, lead with what matters now, make recommendations, challenge distractions and false urgency.",
+    "start": "00:17:47",
+    "end": "00:17:53"
+  },
+  {
+    "text": "We're just defining how you want the assistant to act, basically.",
+    "start": "00:17:53",
+    "end": "00:17:59"
+  },
+  {
+    "text": "And then in the agent.",
+    "start": "00:17:56",
+    "end": "00:17:59"
+  },
+  {
+    "text": "md file, this is going to be read by tools like Claude Code or Codex.",
+    "start": "00:17:59",
+    "end": "00:18:03"
+  },
+  {
+    "text": "You can basically define what the agent should know.",
+    "start": "00:18:03",
+    "end": "00:18:07"
+  },
+  {
+    "text": "So, for example, the priorities, the working rules, and then the tools that are available.",
+    "start": "00:18:07",
+    "end": "00:18:10"
+  },
+  {
+    "text": "So, you can see here, I'm using Todoist with the TD-CLI to get my to-do list tasks.",
+    "start": "00:18:10",
+    "end": "00:18:15"
+  },
+  {
+    "text": "Uh email and calendar are connected.",
+    "start": "00:18:15",
+    "end": "00:18:18"
+  },
+  {
+    "text": "We have passage, which is what I use for research, GitHub, and then also the push agent itself.",
+    "start": "00:18:18",
+    "end": "00:18:25"
+  },
+  {
+    "text": "So, it can call back into the runtime and and do things like query the jobs we have running, query the memory, and things like that.",
+    "start": "00:18:25",
+    "end": "00:18:31"
+  },
+  {
+    "text": "So, it's really, really simple setup.",
+    "start": "00:18:31",
+    "end": "00:18:33"
+  },
+  {
+    "text": "And this is kind of relatively opinionated and easy to get started with.",
+    "start": "00:18:33",
+    "end": "00:18:37"
+  },
+  {
+    "text": "When you first build the agent, you can run push in it and it will create this repository for you.",
+    "start": "00:18:37",
+    "end": "00:18:43"
+  },
+  {
+    "text": "So, another key idea I think that's really important when you build a personal assistant is to give the agents access to your workspace.",
+    "start": "00:18:43",
+    "end": "00:18:48"
+  },
+  {
+    "text": "What I mean by that is you don't want the agent running on a remote virtual machine or on a Mac Mini somewhere else.",
+    "start": "00:18:48",
+    "end": "00:18:53"
+  },
+  {
+    "text": "You often want to be able to read the documents or the research it produces.",
+    "start": "00:18:53",
+    "end": "00:18:57"
+  },
+  {
+    "text": "So, I have a writing application that I have connected to this.",
+    "start": "00:18:57",
+    "end": "00:19:01"
+  },
+  {
+    "text": "So, what I can do here is say something like, \"Can you research the latest AI news in the last 48 hours?",
+    "start": "00:19:00",
+    "end": "00:19:08"
+  },
+  {
+    "text": "Anything that's relevant to an AI engineer.",
+    "start": "00:19:08",
+    "end": "00:19:11"
+  },
+  {
+    "text": "\" And then save the information to a passage document that I can read on my phone.",
+    "start": "00:19:11",
+    "end": "00:19:15"
+  },
+  {
+    "text": "All right, so let's go into my writing application and then I should be able to find this document that it's created.",
+    "start": "00:19:13",
+    "end": "00:19:20"
+  },
+  {
+    "text": "So it should have created a document here.",
+    "start": "00:19:20",
+    "end": "00:19:23"
+  },
+  {
+    "text": "And so let's go ahead and share this.",
+    "start": "00:19:20",
+    "end": "00:19:25"
+  },
+  {
+    "text": "And let's go ahead and view.",
+    "start": "00:19:23",
+    "end": "00:19:26"
+  },
+  {
+    "text": "So this is AI engineer news in the last 48 hours.",
+    "start": "00:19:26",
+    "end": "00:19:29"
+  },
+  {
+    "text": "The general point here is that not only did it it do the research, but also pushed it into a document that I can go and read later.",
+    "start": "00:19:28",
+    "end": "00:19:34"
+  },
+  {
+    "text": "I found this pattern really useful where the agent is able to connect into your project management tools, your writing applications, push stuff into them so that you don't have this kind of disconnect between the agent and your actual workplace.",
+    "start": "00:19:34",
+    "end": "00:19:46"
+  },
+  {
+    "text": "So you can see here, GitHub Copilot at endpoints with local sandboxes.",
+    "start": "00:19:46",
+    "end": "00:19:51"
+  },
+  {
+    "text": "Basically just some interesting news that I can read any day.",
+    "start": "00:19:50",
+    "end": "00:19:53"
+  },
+  {
+    "text": "You could also schedule a job that would do something similar and kind of push the latest news into a document that you can check out on your phone.",
+    "start": "00:19:53",
+    "end": "00:20:00"
+  },
+  {
+    "text": "All right, just to give you one more example just to show how it's possible to switch out the runtime.",
+    "start": "00:19:59",
+    "end": "00:20:04"
+  },
+  {
+    "text": "So what we're going to do is run this application, but now what I've done is I've changed my configuration to use Claude.",
+    "start": "00:20:04",
+    "end": "00:20:09"
+  },
+  {
+    "text": "So previously I was sending all of our messages to Codex, but now I want to use Claude code.",
+    "start": "00:20:09",
+    "end": "00:20:13"
+  },
+  {
+    "text": "And I could do the same thing for like the Pi agent as well, but we're going to try and see if we can make sure that this is running correctly.",
+    "start": "00:20:13",
+    "end": "00:20:20"
+  },
+  {
+    "text": "So I'm going to go on ahead and ask the agent what model it's using.",
+    "start": "00:20:20",
+    "end": "00:20:27"
+  },
+  {
+    "text": ">> Model ID, Claude Fable 5.",
+    "start": "00:20:23",
+    "end": "00:20:27"
+  },
+  {
+    "text": "It's the first model in Anthropic's Claude 5 family.",
+    "start": "00:20:27",
+    "end": "00:20:31"
+  },
+  {
+    "text": ">> So overall, I really do think Hermes Agent and Open Claude are great projects.",
+    "start": "00:20:30",
+    "end": "00:20:34"
+  },
+  {
+    "text": "They've done an amazing job of changing [music] how we think about personal AI assistants in general.",
+    "start": "00:20:34",
+    "end": "00:20:40"
+  },
+  {
+    "text": "They invented this entire category, but the more time I spent with some of the deeper features of Hermes Agent, the more frustrated I got.",
+    "start": "00:20:40",
+    "end": "00:20:46"
+  },
+  {
+    "text": "I found that the memory was not actually useful.",
+    "start": "00:20:46",
+    "end": "00:20:49"
+  },
+  {
+    "text": "The agent was saving things which just didn't make sense.",
+    "start": "00:20:49",
+    "end": "00:20:51"
+  },
+  {
+    "text": "The agent was actually just getting confused [music] or picking up incorrect facts.",
+    "start": "00:20:51",
+    "end": "00:20:55"
+  },
+  {
+    "text": "And the self-improvement element which everyone hypes about, I found that to be actually really really not [music] useful at all.",
+    "start": "00:20:55",
+    "end": "00:21:02"
+  },
+  {
+    "text": "In fact, I had to disable the skill creation cuz I found that the agent was creating all of these [music] basically junk skills all of the time that were not useful, that were actually making the agent perform worse over time.",
+    "start": "00:21:01",
+    "end": "00:21:12"
+  },
+  {
+    "text": "So, I think while the ideas are very, very good, it's nice to think about an AI assistant that self-learns and improves over time, the reality is that doing this well [music] is exceptionally hard, and there are definitely some trade-offs if you want to have your agent learning from you dynamically on the fly.",
+    "start": "00:21:12",
+    "end": "00:21:29"
+  },
+  {
+    "text": "So, I would still recommend trying Hermez and Open Claw.",
+    "start": "00:21:28",
+    "end": "00:21:31"
+  },
+  {
+    "text": "I think they're great projects, but for me personally, I wanted something simpler, much easier to set up, that kind of integrated with my existing tools.",
+    "start": "00:21:31",
+    "end": "00:21:37"
+  },
+  {
+    "text": "And for me going forward, this is how I'm going to be building AI personal assistants.",
+    "start": "00:21:37",
+    "end": "00:21:42"
+  },
+  {
+    "text": "If you found the video useful, please remember to like and subscribe.",
+    "start": "00:21:42",
+    "end": "00:21:45"
+  },
+  {
+    "text": "It massively helps out the channel, and I really, really appreciate it.",
+    "start": "00:21:45",
+    "end": "00:21:48"
+  },
+  {
+    "text": "If you have any questions or comments about this video, let me know in the comments below.",
+    "start": "00:21:48",
+    "end": "00:21:52"
+  },
+  {
+    "text": "I know a lot of people really love these tools, and they get a lot of value out of them.",
+    "start": "00:21:52",
+    "end": "00:21:55"
+  },
+  {
+    "text": "So, I want to make sure that I'm not dismissing these tools in any way.",
+    "start": "00:21:55",
+    "end": "00:21:58"
+  },
+  {
+    "text": "I think Hermez is a amazing project, and the same for Open Claw.",
+    "start": "00:21:58",
+    "end": "00:22:03"
+  },
+  {
+    "text": "I think these tools are incredibly valuable.",
+    "start": "00:22:03",
+    "end": "00:22:04"
+  },
+  {
+    "text": "It's just that for me personally, most of the features that they offered weren't really particularly useful compared to just using my existing coding agents.",
+    "start": "00:22:04",
+    "end": "00:22:11"
+  },
+  {
+    "text": "Thanks again for watching, and I'll see you in the next video.",
+    "start": "00:22:11",
+    "end": "00:22:13"
+  },
+  {
+    "text": "Take care.",
+    "start": "00:22:13",
+    "end": "00:22:15"
+  }
+]

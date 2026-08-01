@@ -1,0 +1,1672 @@
+[
+  {
+    "text": "There's a lot of hype online around AI software factories, and people are skeptical for good reason.",
+    "start": "00:00:00",
+    "end": "00:00:05"
+  },
+  {
+    "text": "But, what I found is applying these ideas in my own workflow has completely changed the way I think about building software with AI agents.",
+    "start": "00:00:05",
+    "end": "00:00:10"
+  },
+  {
+    "text": "[music] So, this video is going to be a complete guide to building an AI software factory.",
+    "start": "00:00:10",
+    "end": "00:00:14"
+  },
+  {
+    "text": "We're going to look at what a software factory is, how to build one, and how to think about applying [music] this in your own workflow, whether you're a solo developer looking to be more productive or an engineering leader in a large enterprise organization looking to raise the quality bar.",
+    "start": "00:00:14",
+    "end": "00:00:28"
+  },
+  {
+    "text": "This is one [music] of the most exciting topics in AI and software engineering right now.",
+    "start": "00:00:27",
+    "end": "00:00:31"
+  },
+  {
+    "text": "In my opinion, software engineering has always been about systems thinking [music] and systems design, and that's exactly what this video is going to be all about.",
+    "start": "00:00:31",
+    "end": "00:00:39"
+  },
+  {
+    "text": "If [music] you stick around to the end of the video, I'll give away all of the code, the resources, the prompts, and everything you need to build your own software factory.",
+    "start": "00:00:39",
+    "end": "00:00:45"
+  },
+  {
+    "text": "So, let's get into it.",
+    "start": "00:00:45",
+    "end": "00:00:46"
+  },
+  {
+    "text": ">> [music] >> So, the first question is what is a software factory?",
+    "start": "00:00:46",
+    "end": "00:00:49"
+  },
+  {
+    "text": "And it's basically just an extension of everything we've already been doing as developers.",
+    "start": "00:00:49",
+    "end": "00:00:53"
+  },
+  {
+    "text": "We're just applying AI to the systems and the processes we're already following.",
+    "start": "00:00:53",
+    "end": "00:00:56"
+  },
+  {
+    "text": "So, if you think about the typical development process, it's pretty straightforward.",
+    "start": "00:00:56",
+    "end": "00:00:59"
+  },
+  {
+    "text": "And so, what happens in any software engineering team, whether you're working at Google, or Netflix, or Amazon, or just whether you're working on your own as a solo developer, it's pretty much the same thing, right?",
+    "start": "00:00:59",
+    "end": "00:01:08"
+  },
+  {
+    "text": "We have intent.",
+    "start": "00:01:08",
+    "end": "00:01:09"
+  },
+  {
+    "text": "So, we have customer issues.",
+    "start": "00:01:09",
+    "end": "00:01:12"
+  },
+  {
+    "text": "We have things from our PMs or stakeholders.",
+    "start": "00:01:12",
+    "end": "00:01:14"
+  },
+  {
+    "text": "We have, you know, things that we decide we want to build as developers.",
+    "start": "00:01:14",
+    "end": "00:01:18"
+  },
+  {
+    "text": "We put these into some kind of ticketing queue, and then they go into the backlog.",
+    "start": "00:01:18",
+    "end": "00:01:22"
+  },
+  {
+    "text": "We refine them a little bit, and then we do some kind of design phase where we'll take those ideas, we'll design them in some way, we'll figure out how we're going to build these things.",
+    "start": "00:01:22",
+    "end": "00:01:31"
+  },
+  {
+    "text": "What are we building?",
+    "start": "00:01:31",
+    "end": "00:01:31"
+  },
+  {
+    "text": "Why are we building it?",
+    "start": "00:01:31",
+    "end": "00:01:33"
+  },
+  {
+    "text": "How are we going to build it?",
+    "start": "00:01:33",
+    "end": "00:01:34"
+  },
+  {
+    "text": "Then we do some kind of planning where we break that work down into a number of smaller tasks or tickets.",
+    "start": "00:01:34",
+    "end": "00:01:39"
+  },
+  {
+    "text": "We give those tasks to developers who then do, obviously, the the typical development cycle, right?",
+    "start": "00:01:39",
+    "end": "00:01:45"
+  },
+  {
+    "text": "We write the code, we do some local and manual testing, we do some code review, then we open a pull request on something like GitHub, and then we'll have like a human review the code, or we'll have some kind of automated checks to look for problems, bugs.",
+    "start": "00:01:45",
+    "end": "00:01:58"
+  },
+  {
+    "text": "We'll run a bunch of other checks and tests as well.",
+    "start": "00:01:58",
+    "end": "00:02:01"
+  },
+  {
+    "text": "Then if there are any errors, we go back through the cycle.",
+    "start": "00:02:01",
+    "end": "00:02:03"
+  },
+  {
+    "text": "So we're doing a loop here.",
+    "start": "00:02:03",
+    "end": "00:02:06"
+  },
+  {
+    "text": "So this is our first development loop.",
+    "start": "00:02:04",
+    "end": "00:02:07"
+  },
+  {
+    "text": "We write the code.",
+    "start": "00:02:06",
+    "end": "00:02:10"
+  },
+  {
+    "text": "We iterate a couple of times until we get the quality high enough.",
+    "start": "00:02:07",
+    "end": "00:02:12"
+  },
+  {
+    "text": "Then finally, we merge that code in and then we deploy it.",
+    "start": "00:02:12",
+    "end": "00:02:15"
+  },
+  {
+    "text": "And if you think about CI/CD, it's a good analogy to a software factory, right?",
+    "start": "00:02:15",
+    "end": "00:02:19"
+  },
+  {
+    "text": "This is an automated process.",
+    "start": "00:02:19",
+    "end": "00:02:20"
+  },
+  {
+    "text": "You push your change in and then the system or the process will then take that into production.",
+    "start": "00:02:20",
+    "end": "00:02:26"
+  },
+  {
+    "text": "Typically in the best software engineering teams, you're not manually deploying.",
+    "start": "00:02:26",
+    "end": "00:02:30"
+  },
+  {
+    "text": "You have the system that will deploy for you.",
+    "start": "00:02:30",
+    "end": "00:02:32"
+  },
+  {
+    "text": "It will take care of, you know, checking that all of the code is working, it's well tested.",
+    "start": "00:02:32",
+    "end": "00:02:35"
+  },
+  {
+    "text": "It will deploy it to production.",
+    "start": "00:02:35",
+    "end": "00:02:37"
+  },
+  {
+    "text": "If If there are any errors, it will even roll back the code for you.",
+    "start": "00:02:37",
+    "end": "00:02:42"
+  },
+  {
+    "text": "So this is the CI/CD system.",
+    "start": "00:02:40",
+    "end": "00:02:43"
+  },
+  {
+    "text": "Deploy your code into production.",
+    "start": "00:02:43",
+    "end": "00:02:44"
+  },
+  {
+    "text": "Then we have a bunch of user feedback.",
+    "start": "00:02:44",
+    "end": "00:02:46"
+  },
+  {
+    "text": "We have customer feedback.",
+    "start": "00:02:46",
+    "end": "00:02:47"
+  },
+  {
+    "text": "We have, you know, monitoring agents that look for problems in our code and then we'll feed all of that information back into the the kind of starting point here.",
+    "start": "00:02:47",
+    "end": "00:02:56"
+  },
+  {
+    "text": "So this is really just a loop or a cycle.",
+    "start": "00:02:56",
+    "end": "00:03:00"
+  },
+  {
+    "text": "And when it comes to AI agents, we're basically following a similar process.",
+    "start": "00:02:59",
+    "end": "00:03:04"
+  },
+  {
+    "text": "We're just applying agents to different parts of the process.",
+    "start": "00:03:02",
+    "end": "00:03:05"
+  },
+  {
+    "text": "So this is the pipeline we're going to be building.",
+    "start": "00:03:05",
+    "end": "00:03:08"
+  },
+  {
+    "text": "It has a bunch of steps.",
+    "start": "00:03:08",
+    "end": "00:03:08"
+  },
+  {
+    "text": "So the first thing is we put work into the pipeline.",
+    "start": "00:03:08",
+    "end": "00:03:11"
+  },
+  {
+    "text": "So this is stuff we want to do.",
+    "start": "00:03:11",
+    "end": "00:03:12"
+  },
+  {
+    "text": "So I could add an item here like I could say improve the readme.",
+    "start": "00:03:12",
+    "end": "00:03:16"
+  },
+  {
+    "text": "So this is something I might want to do, right?",
+    "start": "00:03:16",
+    "end": "00:03:18"
+  },
+  {
+    "text": "Let's create a new issue.",
+    "start": "00:03:18",
+    "end": "00:03:22"
+  },
+  {
+    "text": "And let's just use a blank issue.",
+    "start": "00:03:20",
+    "end": "00:03:24"
+  },
+  {
+    "text": "So this is a really badly defined ticket.",
+    "start": "00:03:22",
+    "end": "00:03:24"
+  },
+  {
+    "text": "This is the example of something you might find in a typical engineering organization, sadly.",
+    "start": "00:03:24",
+    "end": "00:03:29"
+  },
+  {
+    "text": "You might have a ticket that looks like this, right?",
+    "start": "00:03:29",
+    "end": "00:03:32"
+  },
+  {
+    "text": "There's no way an agent can do anything with this ticket.",
+    "start": "00:03:30",
+    "end": "00:03:34"
+  },
+  {
+    "text": "It has no description, no acceptance criteria.",
+    "start": "00:03:34",
+    "end": "00:03:37"
+  },
+  {
+    "text": "If you give this to an agent, it's going to try and do the work, but it has no idea what it's actually meant to be doing.",
+    "start": "00:03:37",
+    "end": "00:03:43"
+  },
+  {
+    "text": "So what we want to do is refine these tickets using some kind of automated process.",
+    "start": "00:03:43",
+    "end": "00:03:48"
+  },
+  {
+    "text": "Once we give this to an agent, the agent will then improve the ticket.",
+    "start": "00:03:48",
+    "end": "00:03:51"
+  },
+  {
+    "text": "Then we have a ticket that is then ready to implement, and then we can kind of run it through the pipeline.",
+    "start": "00:03:51",
+    "end": "00:03:55"
+  },
+  {
+    "text": "The agent will then move it into implementing.",
+    "start": "00:03:55",
+    "end": "00:03:58"
+  },
+  {
+    "text": "The agent will be writing the code.",
+    "start": "00:03:58",
+    "end": "00:04:00"
+  },
+  {
+    "text": "We're going to spawn up an agent using a sandbox on a virtual machine or some remote location.",
+    "start": "00:04:00",
+    "end": "00:04:05"
+  },
+  {
+    "text": "The agent will write the code.",
+    "start": "00:04:05",
+    "end": "00:04:06"
+  },
+  {
+    "text": "It will run all of the tests.",
+    "start": "00:04:06",
+    "end": "00:04:08"
+  },
+  {
+    "text": "It'll run your pipeline.",
+    "start": "00:04:08",
+    "end": "00:04:08"
+  },
+  {
+    "text": "Then finally, you'll have a pull request that you can review, and then finally, we have a change that is done.",
+    "start": "00:04:08",
+    "end": "00:04:13"
+  },
+  {
+    "text": "So, essentially, what we're doing is just running all of our tickets or our tasks through this pipeline, and we're going to use agents every single step.",
+    "start": "00:04:13",
+    "end": "00:04:23"
+  },
+  {
+    "text": "All right.",
+    "start": "00:04:22",
+    "end": "00:04:23"
+  },
+  {
+    "text": "So, what we're going to do is go into the terminal, and this is the code base we're working on.",
+    "start": "00:04:23",
+    "end": "00:04:28"
+  },
+  {
+    "text": "So, this is the factory code base.",
+    "start": "00:04:28",
+    "end": "00:04:29"
+  },
+  {
+    "text": "And what I'm going to do is spin up a coding agent.",
+    "start": "00:04:29",
+    "end": "00:04:32"
+  },
+  {
+    "text": "You can use any coding agent here.",
+    "start": "00:04:31",
+    "end": "00:04:34"
+  },
+  {
+    "text": "I'm going to use Neo, which is my own coding agent.",
+    "start": "00:04:34",
+    "end": "00:04:35"
+  },
+  {
+    "text": "But honestly, it doesn't really matter.",
+    "start": "00:04:35",
+    "end": "00:04:37"
+  },
+  {
+    "text": "You could use any coding agent.",
+    "start": "00:04:37",
+    "end": "00:04:40"
+  },
+  {
+    "text": "So, what I'm going to say is something like um task to PR.",
+    "start": "00:04:38",
+    "end": "00:04:45"
+  },
+  {
+    "text": "So, this will basically take one task or ticket, and then it will open a pull request.",
+    "start": "00:04:43",
+    "end": "00:04:47"
+  },
+  {
+    "text": "This is going to run the entire pipeline.",
+    "start": "00:04:47",
+    "end": "00:04:50"
+  },
+  {
+    "text": "[music] I'm going to do nothing else other than pass the ticket in.",
+    "start": "00:04:50",
+    "end": "00:04:54"
+  },
+  {
+    "text": "So, within the Neo coding agent, you can see here that it's running what I call a workflow.",
+    "start": "00:04:53",
+    "end": "00:04:56"
+  },
+  {
+    "text": ">> [music] >> So, we're not just randomly prompting the agent.",
+    "start": "00:04:56",
+    "end": "00:04:59"
+  },
+  {
+    "text": "We're actually just defining the entire step-by-step process up front, and letting the agent work through this.",
+    "start": "00:04:59",
+    "end": "00:05:04"
+  },
+  {
+    "text": "This means we can be very, very consistent in our dev process.",
+    "start": "00:05:04",
+    "end": "00:05:08"
+  },
+  {
+    "text": "[music] You can see here we're resolving the ticket.",
+    "start": "00:05:07",
+    "end": "00:05:10"
+  },
+  {
+    "text": "We're now creating an isolated Git work tree.",
+    "start": "00:05:10",
+    "end": "00:05:13"
+  },
+  {
+    "text": "Then we're reading the ticket, and we're outlining the change.",
+    "start": "00:05:13",
+    "end": "00:05:15"
+  },
+  {
+    "text": "We're making [music] a little plan.",
+    "start": "00:05:15",
+    "end": "00:05:16"
+  },
+  {
+    "text": "We're doing the work.",
+    "start": "00:05:16",
+    "end": "00:05:18"
+  },
+  {
+    "text": "You can see here now the agent is doing the code change.",
+    "start": "00:05:18",
+    "end": "00:05:20"
+  },
+  {
+    "text": "Then we're going to do the tests, the reviews.",
+    "start": "00:05:20",
+    "end": "00:05:22"
+  },
+  {
+    "text": "We're going to wait for any feedback.",
+    "start": "00:05:22",
+    "end": "00:05:24"
+  },
+  {
+    "text": "We're going to address those findings, and then finally, we're going to kind of finish this off essentially.",
+    "start": "00:05:24",
+    "end": "00:05:29"
+  },
+  {
+    "text": ">> [music] >> So, this is why I really like the workflow approach to agentic coding.",
+    "start": "00:05:28",
+    "end": "00:05:34"
+  },
+  {
+    "text": "We're just giving the agent a task.",
+    "start": "00:05:33",
+    "end": "00:05:37"
+  },
+  {
+    "text": "We're defining the workflow or the steps the agent needs to run through, and then we're just letting it run.",
+    "start": "00:05:34",
+    "end": "00:05:40"
+  },
+  {
+    "text": "This is it.",
+    "start": "00:05:40",
+    "end": "00:05:41"
+  },
+  {
+    "text": "This is my entire development process right now.",
+    "start": "00:05:40",
+    "end": "00:05:42"
+  },
+  {
+    "text": "So, what you'll see here is this is the skill that we're using to transform our task into a pull request.",
+    "start": "00:05:42",
+    "end": "00:05:47"
+  },
+  {
+    "text": "This is really a workflow definition more than the skill.",
+    "start": "00:05:46",
+    "end": "00:05:49"
+  },
+  {
+    "text": "If you look at any company, if you go and work at Amazon or Google, or you look at any engineering team, >> [music] >> every developer is basically following the same series of steps, right?",
+    "start": "00:05:49",
+    "end": "00:05:58"
+  },
+  {
+    "text": "We read the task, we make a bit of a plan, we implement the code change, we run some tests, we review the code, maybe we even use some browser testing for any UI work, then we address any findings we get on GitHub, then we publish a change using a commercial commit, we wait for any other feedback or any testing to happen, we address the feedback and then we give the results over to a human to kind of review and make a decision about merging the change.",
+    "start": "00:05:58",
+    "end": "00:06:22"
+  },
+  {
+    "text": "This is a really simple skill, but it's what I use for 99% of all of my development work now.",
+    "start": "00:06:22",
+    "end": "00:06:28"
+  },
+  {
+    "text": "I spend the time planning and designing, then when it comes to actual implementation, it's just a case of handing off those tasks to an agent.",
+    "start": "00:06:28",
+    "end": "00:06:33"
+  },
+  {
+    "text": "When it comes to actually planning out my work, I use a really simple skill called plan.",
+    "start": "00:06:33",
+    "end": "00:06:38"
+  },
+  {
+    "text": "This will take a take a spec and it will turn it into a well-defined ticket.",
+    "start": "00:06:38",
+    "end": "00:06:41"
+  },
+  {
+    "text": "And you can see here that it's again really really simple.",
+    "start": "00:06:41",
+    "end": "00:06:43"
+  },
+  {
+    "text": "We're just defining the template we want for our tickets.",
+    "start": "00:06:43",
+    "end": "00:06:47"
+  },
+  {
+    "text": "We have an outcome, we have some context, we have some acceptance criteria to test, and any other information that the agent might need to complete the task.",
+    "start": "00:06:47",
+    "end": "00:06:56"
+  },
+  {
+    "text": "So, you can see here we take a spec.",
+    "start": "00:06:53",
+    "end": "00:06:58"
+  },
+  {
+    "text": "So, this takes a brief or a spec and breaks it into a number of tickets or optional milestones.",
+    "start": "00:06:58",
+    "end": "00:07:01"
+  },
+  {
+    "text": "We're basically just planning out our work into a number of tasks.",
+    "start": "00:07:01",
+    "end": "00:07:06"
+  },
+  {
+    "text": "So, this would be exactly the same process whether I was using Claude Code or Codex or Pi.",
+    "start": "00:07:05",
+    "end": "00:07:09"
+  },
+  {
+    "text": "The agents you're using don't matter as much as everyone thinks they do.",
+    "start": "00:07:09",
+    "end": "00:07:13"
+  },
+  {
+    "text": "Ultimately, the workflow is what matters.",
+    "start": "00:07:13",
+    "end": "00:07:15"
+  },
+  {
+    "text": "All of the agents are equally capable at this point.",
+    "start": "00:07:15",
+    "end": "00:07:17"
+  },
+  {
+    "text": "So, if you go back into our browser, you can see now that we've finished this task and it is fully ready.",
+    "start": "00:07:17",
+    "end": "00:07:22"
+  },
+  {
+    "text": "You can see here we've been given a thumbs up from Codex.",
+    "start": "00:07:22",
+    "end": "00:07:26"
+  },
+  {
+    "text": "So, everything is good to go and then we can just literally just kind of squash merge this and we're good to go.",
+    "start": "00:07:24",
+    "end": "00:07:32"
+  },
+  {
+    "text": "So, that was a change that we did following a manual factory process.",
+    "start": "00:07:32",
+    "end": "00:07:35"
+  },
+  {
+    "text": "What I mean by that is we didn't do a single thing.",
+    "start": "00:07:35",
+    "end": "00:07:38"
+  },
+  {
+    "text": "We just gave the agent a task.",
+    "start": "00:07:38",
+    "end": "00:07:39"
+  },
+  {
+    "text": "The agent did all of the work.",
+    "start": "00:07:39",
+    "end": "00:07:40"
+  },
+  {
+    "text": "We could have gone away, come back 20 minutes later and have the pull request ready to go.",
+    "start": "00:07:40",
+    "end": "00:07:45"
+  },
+  {
+    "text": "So, the next thing we want to do is take this manual process and then figure out a way to scale this to a more automated system.",
+    "start": "00:07:45",
+    "end": "00:07:52"
+  },
+  {
+    "text": "All right.",
+    "start": "00:07:51",
+    "end": "00:07:52"
+  },
+  {
+    "text": "So, what I want to show you now is Factory.",
+    "start": "00:07:52",
+    "end": "00:07:53"
+  },
+  {
+    "text": "This is a project that I've been building.",
+    "start": "00:07:53",
+    "end": "00:07:55"
+  },
+  {
+    "text": "It's an open-source project written in Rust, but it essentially [music] encodes all of the ideas behind building a software factory.",
+    "start": "00:07:55",
+    "end": "00:08:00"
+  },
+  {
+    "text": "So, we're going to use this to now build our automated software factory.",
+    "start": "00:08:00",
+    "end": "00:08:03"
+  },
+  {
+    "text": "This is the process we're going to be following.",
+    "start": "00:08:03",
+    "end": "00:08:05"
+  },
+  {
+    "text": "We're going to take an idea.",
+    "start": "00:08:05",
+    "end": "00:08:06"
+  },
+  {
+    "text": "This is the intake step.",
+    "start": "00:08:06",
+    "end": "00:08:09"
+  },
+  {
+    "text": "We're then going to run it through a an agent to write the specification and create [music] the task.",
+    "start": "00:08:09",
+    "end": "00:08:12"
+  },
+  {
+    "text": "We're then going to run it through a build step.",
+    "start": "00:08:12",
+    "end": "00:08:15"
+  },
+  {
+    "text": "We'll do some testing, review, and then finally we'll merge.",
+    "start": "00:08:15",
+    "end": "00:08:18"
+  },
+  {
+    "text": "We're just going to run this as a cycle.",
+    "start": "00:08:18",
+    "end": "00:08:22"
+  },
+  {
+    "text": "So, if we look at the workflow, there are two stages to [music] this.",
+    "start": "00:08:20",
+    "end": "00:08:24"
+  },
+  {
+    "text": "So, the first stage we're going to do is the task refinement step.",
+    "start": "00:08:24",
+    "end": "00:08:27"
+  },
+  {
+    "text": "And then the second step is the actual build pipeline.",
+    "start": "00:08:27",
+    "end": "00:08:29"
+  },
+  {
+    "text": "So, this [music] project is just running on your local machine, but you can also deploy it to a virtual machine as well.",
+    "start": "00:08:29",
+    "end": "00:08:35"
+  },
+  {
+    "text": "So, you could deploy this to the cloud.",
+    "start": "00:08:35",
+    "end": "00:08:37"
+  },
+  {
+    "text": "And [music] it's basically going to run on a loop looking for tickets or looking for work to do, uh updating all of your tasks, implementing all of your code for you.",
+    "start": "00:08:37",
+    "end": "00:08:45"
+  },
+  {
+    "text": "The only thing you need to do is kind of plan out the work and assign it to [music] Factory.",
+    "start": "00:08:43",
+    "end": "00:08:47"
+  },
+  {
+    "text": "All right.",
+    "start": "00:08:47",
+    "end": "00:08:48"
+  },
+  {
+    "text": "So, what we're going to do is just run the project so you can type factory to list all of the commands you can run.",
+    "start": "00:08:48",
+    "end": "00:08:54"
+  },
+  {
+    "text": "Let's clear this out and let's just run the agent.",
+    "start": "00:08:54",
+    "end": "00:08:55"
+  },
+  {
+    "text": "So, this is going to run on a loop basically monitoring your ticket queue and for any automated jobs you have, you can then run this on a virtual machine.",
+    "start": "00:08:55",
+    "end": "00:09:03"
+  },
+  {
+    "text": "You can run it on your local computer if you want to.",
+    "start": "00:09:03",
+    "end": "00:09:06"
+  },
+  {
+    "text": "I'm using work tree-based isolation, which means every time we run an agent, we're going to spawn a new get work tree and run it there to keep the code isolated.",
+    "start": "00:09:06",
+    "end": "00:09:14"
+  },
+  {
+    "text": "But, if you were running this in production, you could also use something like a Docker sandbox if you wanted to.",
+    "start": "00:09:14",
+    "end": "00:09:19"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:09:18",
+    "end": "00:09:19"
+  },
+  {
+    "text": "So, we're going to go ahead and create a new issue.",
+    "start": "00:09:19",
+    "end": "00:09:20"
+  },
+  {
+    "text": "What we're going to do is click up here to create a new issue.",
+    "start": "00:09:20",
+    "end": "00:09:23"
+  },
+  {
+    "text": "I'm just going to do a regular blank issue here.",
+    "start": "00:09:23",
+    "end": "00:09:27"
+  },
+  {
+    "text": "So, Factory demon dies overnight.",
+    "start": "00:09:27",
+    "end": "00:09:30"
+  },
+  {
+    "text": "So, we have a problem where I've noticed a behavior.",
+    "start": "00:09:30",
+    "end": "00:09:34"
+  },
+  {
+    "text": "And so, what I'm going to do is put in a rough description of what happens.",
+    "start": "00:09:34",
+    "end": "00:09:37"
+  },
+  {
+    "text": "Again, I'm not explaining to the agent how to solve this.",
+    "start": "00:09:37",
+    "end": "00:09:39"
+  },
+  {
+    "text": "I'm just describing the problem or the intent I've got.",
+    "start": "00:09:39",
+    "end": "00:09:43"
+  },
+  {
+    "text": "And then, we're going to go ahead and create this task.",
+    "start": "00:09:42",
+    "end": "00:09:46"
+  },
+  {
+    "text": "All right, so what we're going to do is add a label called factory ready for spec.",
+    "start": "00:09:45",
+    "end": "00:09:48"
+  },
+  {
+    "text": "And when we have this label, the agent should then pick this up.",
+    "start": "00:09:48",
+    "end": "00:09:53"
+  },
+  {
+    "text": "So, if we go and check this ticket now, it has the factory ready and factory ready for spec labels.",
+    "start": "00:09:53",
+    "end": "00:09:58"
+  },
+  {
+    "text": "And if we were to go back into the terminal, what you should see is that the agent will then actually pick up that task.",
+    "start": "00:09:58",
+    "end": "00:10:06"
+  },
+  {
+    "text": "Okay, so what you can see now is that factory has picked up this task.",
+    "start": "00:10:05",
+    "end": "00:10:08"
+  },
+  {
+    "text": "So, this demon has now found that we have a label ready for spec.",
+    "start": "00:10:08",
+    "end": "00:10:12"
+  },
+  {
+    "text": "It's found the task.",
+    "start": "00:10:12",
+    "end": "00:10:12"
+  },
+  {
+    "text": "And what it's going to do is spawn a new agent.",
+    "start": "00:10:12",
+    "end": "00:10:15"
+  },
+  {
+    "text": "So, you can see here that it's delegated it to codex.",
+    "start": "00:10:15",
+    "end": "00:10:20"
+  },
+  {
+    "text": "And it's spawned up a new git work tree.",
+    "start": "00:10:20",
+    "end": "00:10:21"
+  },
+  {
+    "text": "What I want to quickly show you is how this is configured.",
+    "start": "00:10:21",
+    "end": "00:10:23"
+  },
+  {
+    "text": "So, you can see here that we have a source, which is GitHub issues, and then we have a trigger.",
+    "start": "00:10:23",
+    "end": "00:10:29"
+  },
+  {
+    "text": "So, anytime we have a label factory ready for spec, we're basically going to run this particular workflow.",
+    "start": "00:10:29",
+    "end": "00:10:33"
+  },
+  {
+    "text": "And if you go through this triage workflow, this is essentially what the agent is now running.",
+    "start": "00:10:33",
+    "end": "00:10:37"
+  },
+  {
+    "text": "It says, \"Your goal is to turn the GitHub issue into a clear implementation ready task for a human or the agent.",
+    "start": "00:10:37",
+    "end": "00:10:43"
+  },
+  {
+    "text": "\" And then, firstly, we understand the work.",
+    "start": "00:10:43",
+    "end": "00:10:46"
+  },
+  {
+    "text": "We then create the ticket specification.",
+    "start": "00:10:46",
+    "end": "00:10:49"
+  },
+  {
+    "text": "We're basically following a template.",
+    "start": "00:10:49",
+    "end": "00:10:50"
+  },
+  {
+    "text": "And then, we kind of move the ticket into ready to implement.",
+    "start": "00:10:50",
+    "end": "00:10:53"
+  },
+  {
+    "text": "So, essentially, this is the triage workflow.",
+    "start": "00:10:53",
+    "end": "00:10:55"
+  },
+  {
+    "text": "This is just a simple prompt.",
+    "start": "00:10:55",
+    "end": "00:10:57"
+  },
+  {
+    "text": "You could have this do anything you like.",
+    "start": "00:10:57",
+    "end": "00:10:59"
+  },
+  {
+    "text": "It's absolutely fine.",
+    "start": "00:10:59",
+    "end": "00:11:02"
+  },
+  {
+    "text": "And then, the other implement workflow that we're running is this.",
+    "start": "00:11:00",
+    "end": "00:11:04"
+  },
+  {
+    "text": "So, this is what we do when we want to actually implement the task.",
+    "start": "00:11:04",
+    "end": "00:11:07"
+  },
+  {
+    "text": "So, \"Your goal is to implement the GitHub issue supplied to you.",
+    "start": "00:11:07",
+    "end": "00:11:09"
+  },
+  {
+    "text": "Do not merge or auto merge.",
+    "start": "00:11:09",
+    "end": "00:11:13"
+  },
+  {
+    "text": "Use the GitHub CLI to pull the issue.",
+    "start": "00:11:13",
+    "end": "00:11:16"
+  },
+  {
+    "text": "We're then going to implement the code.",
+    "start": "00:11:14",
+    "end": "00:11:17"
+  },
+  {
+    "text": "We're going to kind of just run through this massive prompt, essentially.",
+    "start": "00:11:16",
+    "end": "00:11:21"
+  },
+  {
+    "text": "Um but this could be a simple step-by-step workflow, anything you want, basically.",
+    "start": "00:11:21",
+    "end": "00:11:25"
+  },
+  {
+    "text": "This describes to the agent how to actually execute the work when it's given a task.",
+    "start": "00:11:24",
+    "end": "00:11:28"
+  },
+  {
+    "text": "So, factory will move stuff through the pipeline without us doing anything.",
+    "start": "00:11:28",
+    "end": "00:11:32"
+  },
+  {
+    "text": "It's working on the ticket.",
+    "start": "00:11:32",
+    "end": "00:11:33"
+  },
+  {
+    "text": "It's picked it up.",
+    "start": "00:11:33",
+    "end": "00:11:35"
+  },
+  {
+    "text": "It's moved it into this status.",
+    "start": "00:11:35",
+    "end": "00:11:36"
+  },
+  {
+    "text": "As it works on it, it should move it into the next status as well.",
+    "start": "00:11:36",
+    "end": "00:11:39"
+  },
+  {
+    "text": "So, you can see here that the agent has now updated our task.",
+    "start": "00:11:39",
+    "end": "00:11:44"
+  },
+  {
+    "text": "It was a very vague, ill-described problem, and the agent has now reviewed all of our code, has inspected everything, has actually found the bug, has reproduced the bug, and then it's updated our ticket with all of the information we need to hand this off to either a human or an agent to go and fix the problem.",
+    "start": "00:11:44",
+    "end": "00:11:59"
+  },
+  {
+    "text": "The The way this works is it's completely customizable.",
+    "start": "00:11:57",
+    "end": "00:12:02"
+  },
+  {
+    "text": "So, you could imagine if you are a public-facing team where users or customers are reporting bugs, you could run this automation workflow over the inputs, the customer requests, and take their vague ideas and turn them into actionable tickets that a developer could then pick up and work on.",
+    "start": "00:12:02",
+    "end": "00:12:16"
+  },
+  {
+    "text": "This is really useful cuz often when you get a ticket from a customer, there may be missing information, the problem may not be valid.",
+    "start": "00:12:16",
+    "end": "00:12:24"
+  },
+  {
+    "text": "So, you can use an agent to triage any of the work that comes into your queue.",
+    "start": "00:12:24",
+    "end": "00:12:28"
+  },
+  {
+    "text": "All right.",
+    "start": "00:12:28",
+    "end": "00:12:29"
+  },
+  {
+    "text": "So, this ticket is now ready to go.",
+    "start": "00:12:29",
+    "end": "00:12:31"
+  },
+  {
+    "text": "What I'm going to do is just add this factory ready to implement label.",
+    "start": "00:12:31",
+    "end": "00:12:34"
+  },
+  {
+    "text": "I'm happy with this ticket.",
+    "start": "00:12:34",
+    "end": "00:12:34"
+  },
+  {
+    "text": "I want the agent to work on it.",
+    "start": "00:12:34",
+    "end": "00:12:35"
+  },
+  {
+    "text": "Again, I could be working on maybe 10, 20 tickets at a time here.",
+    "start": "00:12:35",
+    "end": "00:12:40"
+  },
+  {
+    "text": "This is kind of just a single ticket, but the idea of the factory is that you can run lots and lots of things all at the same time.",
+    "start": "00:12:40",
+    "end": "00:12:47"
+  },
+  {
+    "text": "So, what you can see is that the agent has now picked this up.",
+    "start": "00:12:46",
+    "end": "00:12:49"
+  },
+  {
+    "text": "So, you can see it's detected we have this ready to implement label.",
+    "start": "00:12:49",
+    "end": "00:12:52"
+  },
+  {
+    "text": "And again, we're not doing anything.",
+    "start": "00:12:52",
+    "end": "00:12:53"
+  },
+  {
+    "text": "We're just moving the tasks through the task board.",
+    "start": "00:12:53",
+    "end": "00:12:57"
+  },
+  {
+    "text": "We're coordinating the work.",
+    "start": "00:12:57",
+    "end": "00:12:57"
+  },
+  {
+    "text": "But the factory system is running the entire pipeline for us.",
+    "start": "00:12:57",
+    "end": "00:13:00"
+  },
+  {
+    "text": "This could be running hundreds and hundreds of tickets at the same time.",
+    "start": "00:13:00",
+    "end": "00:13:03"
+  },
+  {
+    "text": "If you work in a team, obviously, this will be coordinating all of your team's work.",
+    "start": "00:13:03",
+    "end": "00:13:09"
+  },
+  {
+    "text": "And we just need to now wait for the agent to kind of run through and fix the issue for us.",
+    "start": "00:13:08",
+    "end": "00:13:12"
+  },
+  {
+    "text": "There's nothing else to it than this.",
+    "start": "00:13:12",
+    "end": "00:13:15"
+  },
+  {
+    "text": "Another really important concept to think about is sandboxing.",
+    "start": "00:13:14",
+    "end": "00:13:18"
+  },
+  {
+    "text": "So, when we run these kind of systems in production, you want to be a bit careful about sandboxing the workers to make sure they're not destroying anything.",
+    "start": "00:13:18",
+    "end": "00:13:25"
+  },
+  {
+    "text": "So, one A to this problem is using something like Docker sandboxes.",
+    "start": "00:13:25",
+    "end": "00:13:29"
+  },
+  {
+    "text": "So, Docker recently released a sandboxing feature which I've been experimenting with.",
+    "start": "00:13:29",
+    "end": "00:13:33"
+  },
+  {
+    "text": "I'll be honest, I'm still new to sandboxing and still figuring out the right approach myself, but this is the current implementation strategy I'm using at the moment.",
+    "start": "00:13:32",
+    "end": "00:13:42"
+  },
+  {
+    "text": "Locally, what I will typically do is use Git worktrees.",
+    "start": "00:13:41",
+    "end": "00:13:46"
+  },
+  {
+    "text": "But when working on a VM or like in a team environment, you definitely want some kind of good sandboxing solution.",
+    "start": "00:13:44",
+    "end": "00:13:53"
+  },
+  {
+    "text": "So, Docker sandboxes are one solution, regular Docker containers, there are a whole bunch of different solutions.",
+    "start": "00:13:51",
+    "end": "00:13:58"
+  },
+  {
+    "text": "And I'll probably do a video on this topic because it's quite an interesting and important one for for any developer right now.",
+    "start": "00:13:58",
+    "end": "00:14:03"
+  },
+  {
+    "text": "So, whenever we talk about automated systems or things like this, there are always the same objections that come up.",
+    "start": "00:14:03",
+    "end": "00:14:08"
+  },
+  {
+    "text": "The first one is cost.",
+    "start": "00:14:08",
+    "end": "00:14:11"
+  },
+  {
+    "text": "Yes, if you're automating your system or running agents, it will cost you money.",
+    "start": "00:14:09",
+    "end": "00:14:15"
+  },
+  {
+    "text": "I'm not using this to do work that I wouldn't do otherwise anyway, though.",
+    "start": "00:14:13",
+    "end": "00:14:18"
+  },
+  {
+    "text": "This is kind of the key point.",
+    "start": "00:14:17",
+    "end": "00:14:19"
+  },
+  {
+    "text": "This is not necessarily something that's aimed at like solo developers necessarily.",
+    "start": "00:14:19",
+    "end": "00:14:24"
+  },
+  {
+    "text": "This is more of a thing you would run at scale in an engineering organization.",
+    "start": "00:14:22",
+    "end": "00:14:28"
+  },
+  {
+    "text": "So, if you're if you're using any kind of automated flow, it will use tokens.",
+    "start": "00:14:26",
+    "end": "00:14:32"
+  },
+  {
+    "text": "But the way Factory is designed is to be largely deterministic.",
+    "start": "00:14:30",
+    "end": "00:14:35"
+  },
+  {
+    "text": "So, when we're polling GitHub looking for work to do, we're not wasting any tokens.",
+    "start": "00:14:35",
+    "end": "00:14:39"
+  },
+  {
+    "text": "We're only executing agents or using tokens when there's actually work to do.",
+    "start": "00:14:39",
+    "end": "00:14:43"
+  },
+  {
+    "text": "So, this is actually very very token efficient.",
+    "start": "00:14:43",
+    "end": "00:14:46"
+  },
+  {
+    "text": "You could run this running 24/7 every single day and it's only going to use tokens when there's actual work to do.",
+    "start": "00:14:46",
+    "end": "00:14:53"
+  },
+  {
+    "text": "So, if there's a genuine ticket to work on, it's going to use tokens.",
+    "start": "00:14:53",
+    "end": "00:14:56"
+  },
+  {
+    "text": "Otherwise, it's going to sit there polling using largely deterministic code.",
+    "start": "00:14:56",
+    "end": "00:15:00"
+  },
+  {
+    "text": "So, it's not going to burn a load of tokens.",
+    "start": "00:15:00",
+    "end": "00:15:02"
+  },
+  {
+    "text": "The other objection that comes up is that AI isn't smart enough and I definitely agree with this.",
+    "start": "00:15:02",
+    "end": "00:15:05"
+  },
+  {
+    "text": "There are some tasks you don't want to hand off fully to an agent.",
+    "start": "00:15:05",
+    "end": "00:15:08"
+  },
+  {
+    "text": "You sometimes want to be in the loop on certain tasks.",
+    "start": "00:15:08",
+    "end": "00:15:11"
+  },
+  {
+    "text": "And then the other objection is that sometimes you want to work interactively, right?",
+    "start": "00:15:11",
+    "end": "00:15:15"
+  },
+  {
+    "text": "So, sometimes you still want to be in the mix.",
+    "start": "00:15:15",
+    "end": "00:15:15"
+  },
+  {
+    "text": "You still want to be involved in the process, but you can still do that, right?",
+    "start": "00:15:15",
+    "end": "00:15:19"
+  },
+  {
+    "text": "You you can use this sometimes.",
+    "start": "00:15:19",
+    "end": "00:15:22"
+  },
+  {
+    "text": "Sometimes you'll want to be iterating with your agents, and that's totally fine.",
+    "start": "00:15:21",
+    "end": "00:15:24"
+  },
+  {
+    "text": "This pipeline isn't for every single situation.",
+    "start": "00:15:24",
+    "end": "00:15:27"
+  },
+  {
+    "text": "So, as agents get more capable, I think these pipelines become even more important because the typical task in my development workflow, an agent will run on it for maybe 20 minutes to even up to an hour.",
+    "start": "00:15:27",
+    "end": "00:15:39"
+  },
+  {
+    "text": "The agents are doing extensive code review.",
+    "start": "00:15:39",
+    "end": "00:15:41"
+  },
+  {
+    "text": "They're doing a lot of CI checks.",
+    "start": "00:15:39",
+    "end": "00:15:43"
+  },
+  {
+    "text": "They're doing a lot of work.",
+    "start": "00:15:41",
+    "end": "00:15:44"
+  },
+  {
+    "text": "And so, it's very painful to be sitting in the terminal watching hundreds of different tasks or working on many things at once.",
+    "start": "00:15:44",
+    "end": "00:15:51"
+  },
+  {
+    "text": "It's very very painful.",
+    "start": "00:15:49",
+    "end": "00:15:53"
+  },
+  {
+    "text": "So, by offloading this process to a virtual machine or a system like this, you can just basically hand off the work.",
+    "start": "00:15:51",
+    "end": "00:15:58"
+  },
+  {
+    "text": "You can go do something else.",
+    "start": "00:15:58",
+    "end": "00:16:00"
+  },
+  {
+    "text": "You can kind of come back 2 hours later and find that all of the work is done.",
+    "start": "00:16:00",
+    "end": "00:16:03"
+  },
+  {
+    "text": "You can then review the code changes, obviously, make any adjustments you want, but basically, you don't have to be tied to your keyboard anymore.",
+    "start": "00:16:03",
+    "end": "00:16:11"
+  },
+  {
+    "text": "So, this project is currently open source, and I don't think it's suitable for everyone right now.",
+    "start": "00:16:10",
+    "end": "00:16:15"
+  },
+  {
+    "text": "It's still very early stages, but the main thing to think about are the principles and the ideas.",
+    "start": "00:16:15",
+    "end": "00:16:18"
+  },
+  {
+    "text": "It's not all that difficult to build your own version of something like this.",
+    "start": "00:16:18",
+    "end": "00:16:23"
+  },
+  {
+    "text": "You could use GitHub actions, for example, which allows you to run an automation.",
+    "start": "00:16:23",
+    "end": "00:16:27"
+  },
+  {
+    "text": "So, for example, with GitHub actions, every time a customer raises a ticket, you could run an agent to triage the ticket.",
+    "start": "00:16:27",
+    "end": "00:16:33"
+  },
+  {
+    "text": "And every time we add a label to a ticket, you could have an agent that will run.",
+    "start": "00:16:33",
+    "end": "00:16:37"
+  },
+  {
+    "text": "So, GitHub actions is another great solution for this kind of problem as well.",
+    "start": "00:16:37",
+    "end": "00:16:42"
+  },
+  {
+    "text": "All right.",
+    "start": "00:16:41",
+    "end": "00:16:41"
+  },
+  {
+    "text": "So, the next concept we're going to look at is one of my favorites, which is this concept of a scheduled job.",
+    "start": "00:16:41",
+    "end": "00:16:45"
+  },
+  {
+    "text": "So, we have a bug finder job here.",
+    "start": "00:16:45",
+    "end": "00:16:50"
+  },
+  {
+    "text": "You could add any workflows you want.",
+    "start": "00:16:47",
+    "end": "00:16:52"
+  },
+  {
+    "text": "These are useful for a couple of reasons.",
+    "start": "00:16:50",
+    "end": "00:16:53"
+  },
+  {
+    "text": "So, if you go into our config.",
+    "start": "00:16:53",
+    "end": "00:16:54"
+  },
+  {
+    "text": "toml, what you can see here is I've got this scheduled bug finder.",
+    "start": "00:16:54",
+    "end": "00:16:58"
+  },
+  {
+    "text": "Obviously, you can do this with something like Claude routines or Codex automations, but what I like about this is keeping all of these automations version controlled.",
+    "start": "00:16:57",
+    "end": "00:17:06"
+  },
+  {
+    "text": "If you work in a team, you can keep these version controlled, and you can also run them manually as well very very easily.",
+    "start": "00:17:06",
+    "end": "00:17:13"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:17:13",
+    "end": "00:17:14"
+  },
+  {
+    "text": "So, we're going to go into the terminal.",
+    "start": "00:17:12",
+    "end": "00:17:15"
+  },
+  {
+    "text": "We're going to type factory.",
+    "start": "00:17:14",
+    "end": "00:17:16"
+  },
+  {
+    "text": "So, we're going to type factory workflows, which is going to list out the workflows we have.",
+    "start": "00:17:16",
+    "end": "00:17:21"
+  },
+  {
+    "text": "You can see here we have this bug finder workflow.",
+    "start": "00:17:21",
+    "end": "00:17:26"
+  },
+  {
+    "text": "So, let me go ahead and run that.",
+    "start": "00:17:24",
+    "end": "00:17:27"
+  },
+  {
+    "text": "Again, you can run this on a schedule, but you can also trigger them manually, and I find triggering things like this manually is very, very useful.",
+    "start": "00:17:27",
+    "end": "00:17:34"
+  },
+  {
+    "text": "So, say I want to find any bugs in my code, I can just run factory run bug finder.",
+    "start": "00:17:34",
+    "end": "00:17:40"
+  },
+  {
+    "text": "And then just kind of wait for that.",
+    "start": "00:17:39",
+    "end": "00:17:41"
+  },
+  {
+    "text": "So, you can see here it's running the workflow bug finder.",
+    "start": "00:17:41",
+    "end": "00:17:43"
+  },
+  {
+    "text": "It spawned a new get work tree.",
+    "start": "00:17:43",
+    "end": "00:17:45"
+  },
+  {
+    "text": "It's now going to go ahead and find bugs in our code base, find a bug, and then it's going to open a ticket that we can review later.",
+    "start": "00:17:45",
+    "end": "00:17:52"
+  },
+  {
+    "text": "So, this is a bug that the agent found.",
+    "start": "00:17:52",
+    "end": "00:17:54"
+  },
+  {
+    "text": "You could actually make this more automated and have the agent open the pull request at the end.",
+    "start": "00:17:54",
+    "end": "00:17:57"
+  },
+  {
+    "text": "It already clearly knows what the bug is, and it looks like it's well reasoned as well.",
+    "start": "00:17:57",
+    "end": "00:18:03"
+  },
+  {
+    "text": "So, as you begin to trust these agent systems more and more, you can let them run for longer.",
+    "start": "00:18:01",
+    "end": "00:18:06"
+  },
+  {
+    "text": "You can allow them to open pull requests.",
+    "start": "00:18:06",
+    "end": "00:18:08"
+  },
+  {
+    "text": "You could even allow this to merge if it is a, you know, personal project.",
+    "start": "00:18:08",
+    "end": "00:18:11"
+  },
+  {
+    "text": "If you're confident in your system, you can kind of delegate more and more trust to the system over time.",
+    "start": "00:18:11",
+    "end": "00:18:16"
+  },
+  {
+    "text": "So, there's nothing stopping you here having this as a fully automated system.",
+    "start": "00:18:16",
+    "end": "00:18:22"
+  },
+  {
+    "text": "Okay, so finally our implementation agent has finished.",
+    "start": "00:18:21",
+    "end": "00:18:25"
+  },
+  {
+    "text": "So, this task ran for, I think it was about 35 minutes.",
+    "start": "00:18:25",
+    "end": "00:18:28"
+  },
+  {
+    "text": "So, this is obviously quite a big change, and one of the reasons why this ran for so long is because we're actually running a long pipeline.",
+    "start": "00:18:27",
+    "end": "00:18:35"
+  },
+  {
+    "text": "So, we're not just changing the code, we're writing, you know, sub agent tests, we're doing code reviews, we're waiting for feedback on CI infrastructure as well.",
+    "start": "00:18:35",
+    "end": "00:18:43"
+  },
+  {
+    "text": "So, this is why using something like a factory pipeline is so valuable, because I don't want to be wasting in my terminal for 34 minutes.",
+    "start": "00:18:43",
+    "end": "00:18:51"
+  },
+  {
+    "text": "As these agents get way more capable and powerful, you're going to be delegating much longer running work to these agents.",
+    "start": "00:18:51",
+    "end": "00:18:56"
+  },
+  {
+    "text": "They're doing a better job of the code implementation, but they're also just running for much, much longer.",
+    "start": "00:18:55",
+    "end": "00:19:01"
+  },
+  {
+    "text": "And so, this is why I pretty much prefer this factory approach.",
+    "start": "00:19:01",
+    "end": "00:19:04"
+  },
+  {
+    "text": "Just delegate your tasks to the system, and let them run for like 30 minutes to an hour to work on your code base, do a really good job, and then review the changes at the end.",
+    "start": "00:19:04",
+    "end": "00:19:13"
+  },
+  {
+    "text": "If you're a senior engineer, you've probably got many objections to this topic and I think [music] those objections are somewhat founded.",
+    "start": "00:19:13",
+    "end": "00:19:19"
+  },
+  {
+    "text": "You do need to be very very careful.",
+    "start": "00:19:19",
+    "end": "00:19:21"
+  },
+  {
+    "text": "If you're introducing these concepts into a team, you need to have the culture [music] such that people don't abuse these pipelines and what I mean by that is you don't want to use [music] these kind of pipelines for every single task.",
+    "start": "00:19:21",
+    "end": "00:19:31"
+  },
+  {
+    "text": "You still need humans to think critically.",
+    "start": "00:19:31",
+    "end": "00:19:34"
+  },
+  {
+    "text": ">> [music] >> You still need human judgment.",
+    "start": "00:19:33",
+    "end": "00:19:36"
+  },
+  {
+    "text": "You still need engineering thinking at every single step of the process.",
+    "start": "00:19:36",
+    "end": "00:19:40"
+  },
+  {
+    "text": "[music] It's just there's a percentage of tickets that we can now just give to agents, mechanical things, security upgrades, [music] bug fixes, really trivial tedious work that developers don't like doing anyway.",
+    "start": "00:19:40",
+    "end": "00:19:50"
+  },
+  {
+    "text": "All of those can largely just be handed off to agents now.",
+    "start": "00:19:50",
+    "end": "00:19:52"
+  },
+  {
+    "text": "Run it [music] in a pipeline, build more consistency and a good analogy to this process is CICD.",
+    "start": "00:19:52",
+    "end": "00:19:58"
+  },
+  {
+    "text": "If you remember back in the day, >> [music] >> we used to manually deploy our software.",
+    "start": "00:19:58",
+    "end": "00:20:04"
+  },
+  {
+    "text": "It was very error-prone, inconsistent.",
+    "start": "00:20:01",
+    "end": "00:20:05"
+  },
+  {
+    "text": "Deployments were stressful.",
+    "start": "00:20:04",
+    "end": "00:20:06"
+  },
+  {
+    "text": "They would often break or go wrong.",
+    "start": "00:20:06",
+    "end": "00:20:07"
+  },
+  {
+    "text": ">> [music] >> And we would struggle to get software into production at a speed that was valuable [music] to our customers.",
+    "start": "00:20:07",
+    "end": "00:20:14"
+  },
+  {
+    "text": "And then when we introduced CICD, we built systems and automation and processes around [music] the release process and how we got software into production and what that led to was a massive increase in quality.",
+    "start": "00:20:14",
+    "end": "00:20:23"
+  },
+  {
+    "text": "We were able to essentially deploy software [music] almost daily without worrying about whether things were going to be breaking because the [music] system would be taking care of the deployment.",
+    "start": "00:20:23",
+    "end": "00:20:32"
+  },
+  {
+    "text": "It would be running all of the automated checks for us.",
+    "start": "00:20:32",
+    "end": "00:20:35"
+  },
+  {
+    "text": "And this means whether you're a junior developer or the most senior engineer, you're using the same pipeline to deploy software which just massively raises the quality bar within a team.",
+    "start": "00:20:35",
+    "end": "00:20:43"
+  },
+  {
+    "text": "Anyone can have >> [music] >> the perfect deployment process no matter where you are in the company or how experienced you are.",
+    "start": "00:20:43",
+    "end": "00:20:51"
+  }
+]

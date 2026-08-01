@@ -1,0 +1,827 @@
+[
+  {
+    "text": "I've shaped AI code on real engineering teams across enterprises and startups with code reviews, production users, and full accountability for everything that I merge.",
+    "start": "00:00:00",
+    "end": "00:00:09"
+  },
+  {
+    "text": "Today, I'm going to show you what my agentic engineering coding workflow looks like, which relies on real engineering practices.",
+    "start": "00:00:09",
+    "end": "00:00:18"
+  },
+  {
+    "text": "I will show you my parallel setup for any coding agents while sharing stories from our real engineering experience that will teach you how to speed up programming work while preventing AI code from hurting you in the future.",
+    "start": "00:00:18",
+    "end": "00:00:31"
+  },
+  {
+    "text": "First, I want to show you how I work with coding terminals.",
+    "start": "00:00:31",
+    "end": "00:00:34"
+  },
+  {
+    "text": "In my case, I'm going to show you a shortcut that I have here that launches four Claude code windows by just typing T.",
+    "start": "00:00:34",
+    "end": "00:00:43"
+  },
+  {
+    "text": "And the reason why I create four Claude code windows is because very often there's an opportunity to parallelize some work with AI code, but not too much.",
+    "start": "00:00:41",
+    "end": "00:00:50"
+  },
+  {
+    "text": "I'm not going to pretend like I'm running 50 agents at the same time.",
+    "start": "00:00:50",
+    "end": "00:00:56"
+  },
+  {
+    "text": "My mental capacity is pretty much at four parallel work streams.",
+    "start": "00:00:56",
+    "end": "00:00:59"
+  },
+  {
+    "text": "This is just what I've discovered after working on multiple bigger projects together with real teams.",
+    "start": "00:00:59",
+    "end": "00:01:05"
+  },
+  {
+    "text": "And in my case, to understand my workflow, let's imagine that we're working on this application together.",
+    "start": "00:01:05",
+    "end": "00:01:10"
+  },
+  {
+    "text": "This is a bit of an auctioning demo app that's developed in both Python as well as Java.",
+    "start": "00:01:10",
+    "end": "00:01:17"
+  },
+  {
+    "text": "Now, these four terminals are not the same.",
+    "start": "00:01:15",
+    "end": "00:01:18"
+  },
+  {
+    "text": "If you've got a keen eye, you can already see that here in the top left we have Claude code with high effort.",
+    "start": "00:01:18",
+    "end": "00:01:26"
+  },
+  {
+    "text": "Here on the top right is high effort as well, but on the bottom left and bottom right it's medium and low effort respectively.",
+    "start": "00:01:26",
+    "end": "00:01:34"
+  },
+  {
+    "text": "And I'm doing this for a good reason.",
+    "start": "00:01:31",
+    "end": "00:01:36"
+  },
+  {
+    "text": "Some work that you need to delegate to an AI agent will take a long time to complete because it's a big batch of work.",
+    "start": "00:01:34",
+    "end": "00:01:40"
+  },
+  {
+    "text": "For example, I can start a new plan session in here and say, \"Scope out five potential features we can work on.",
+    "start": "00:01:40",
+    "end": "00:01:52"
+  },
+  {
+    "text": "\" I'm just giving it the opportunity to explore, be creative.",
+    "start": "00:01:52",
+    "end": "00:01:55"
+  },
+  {
+    "text": "Now, on the bottom right, I can now ask a much simpler question.",
+    "start": "00:01:55",
+    "end": "00:02:02"
+  },
+  {
+    "text": "Explore the code base to tell me which languages are used.",
+    "start": "00:01:59",
+    "end": "00:02:08"
+  },
+  {
+    "text": "And because this one is using low effort, it will be done much faster with the agentic loop.",
+    "start": "00:02:06",
+    "end": "00:02:13"
+  },
+  {
+    "text": "So, now you can see that the top left is still going, whereas on the bottom right, we already have an answer to our question.",
+    "start": "00:02:13",
+    "end": "00:02:22"
+  },
+  {
+    "text": "It's using Java, Python, HTML, and a little bit of SQL.",
+    "start": "00:02:22",
+    "end": "00:02:24"
+  },
+  {
+    "text": "So, based on this, I know where certain tasks need to go in my work stream.",
+    "start": "00:02:24",
+    "end": "00:02:31"
+  },
+  {
+    "text": "As we work in a chat, you will see that eventually the current context window is printed here on the bottom right.",
+    "start": "00:02:29",
+    "end": "00:02:36"
+  },
+  {
+    "text": "And this is very important because as your context window fills up, not only will the AI take longer to respond, but also it will eventually start to drift away from the intended context of the conversation.",
+    "start": "00:02:36",
+    "end": "00:02:47"
+  },
+  {
+    "text": "So, you might be super familiar with this, but of course, you can just run something like compact or of course clear to start your conversation from a fresh context window.",
+    "start": "00:02:47",
+    "end": "00:02:55"
+  },
+  {
+    "text": "And here too, as you work with these AI tools, you'll get a feeling for when you need to reset the context window.",
+    "start": "00:02:55",
+    "end": "00:03:01"
+  },
+  {
+    "text": "There is not one magic answer to this.",
+    "start": "00:03:01",
+    "end": "00:03:03"
+  },
+  {
+    "text": "It depends on the complexity of your project, the complexity of your current piece of work.",
+    "start": "00:03:03",
+    "end": "00:03:08"
+  },
+  {
+    "text": "This is the whole point of being an agentic engineer.",
+    "start": "00:03:08",
+    "end": "00:03:12"
+  },
+  {
+    "text": "You need to just get a feeling for when to compress your context window.",
+    "start": "00:03:12",
+    "end": "00:03:16"
+  },
+  {
+    "text": "If you want to get access to my workflow, including all of the scripts to launch these windows, check out the link in the description down below.",
+    "start": "00:03:16",
+    "end": "00:03:23"
+  },
+  {
+    "text": "You might be wondering why I'm not talking about specific planning techniques like spectrum development or the B map method, or why I'm not talking about the difference between being a context engineer, a prompt engineer, and an agentic engineer.",
+    "start": "00:03:23",
+    "end": "00:03:35"
+  },
+  {
+    "text": "And to be honest, it's because I think that a lot of these things are just gimmicks that don't really stand the test of time.",
+    "start": "00:03:35",
+    "end": "00:03:43"
+  },
+  {
+    "text": "Just think about all of the different AI projects that have become so popular over the past 3 years.",
+    "start": "00:03:43",
+    "end": "00:03:48"
+  },
+  {
+    "text": "How many of those projects are still relevant today?",
+    "start": "00:03:48",
+    "end": "00:03:51"
+  },
+  {
+    "text": "I'm not saying that things like spectrum development are a fad, but I do think that anything that does work will just be rolled up into something like Claude code as time goes by.",
+    "start": "00:03:51",
+    "end": "00:04:02"
+  },
+  {
+    "text": "Like how Claude code now has a good way to just keep track of to-do's.",
+    "start": "00:04:02",
+    "end": "00:04:05"
+  },
+  {
+    "text": "You don't really have to screw around anymore and do that yourself with markdown files.",
+    "start": "00:04:05",
+    "end": "00:04:10"
+  },
+  {
+    "text": "And this is honestly just the thing that I've learned.",
+    "start": "00:04:10",
+    "end": "00:04:12"
+  },
+  {
+    "text": "I'm just awaiting the hype and anything that survives three to four months is probably really good patent to apply.",
+    "start": "00:04:12",
+    "end": "00:04:19"
+  },
+  {
+    "text": "And you're not going to see anything in this video that won't be relevant anymore in six months.",
+    "start": "00:04:19",
+    "end": "00:04:26"
+  },
+  {
+    "text": "I'm only going to show you principles that will stand the test of time.",
+    "start": "00:04:26",
+    "end": "00:04:29"
+  },
+  {
+    "text": "So, another aspect that's really important to understand is how do you get your code to a high quality?",
+    "start": "00:04:29",
+    "end": "00:04:35"
+  },
+  {
+    "text": "If you are an indie hacker or even in some cases a freelancer, code quality might not be the most important thing because you are not necessarily accountable for code quality.",
+    "start": "00:04:35",
+    "end": "00:04:44"
+  },
+  {
+    "text": "Of course, if you're creating your own business software, eventually your customers will get into trouble if you're the one creating the bugs.",
+    "start": "00:04:44",
+    "end": "00:04:51"
+  },
+  {
+    "text": "But at that point, you could just vibe code to fix, right?",
+    "start": "00:04:51",
+    "end": "00:04:53"
+  },
+  {
+    "text": "Well, in the professional world, this doesn't really work because you've got a team that you need to work together with.",
+    "start": "00:04:53",
+    "end": "00:04:59"
+  },
+  {
+    "text": "If you create 10,000 lines of code in an hour time, how you ever going to get that code into production?",
+    "start": "00:04:59",
+    "end": "00:05:04"
+  },
+  {
+    "text": "Are some commands that I use that really help me out.",
+    "start": "00:05:04",
+    "end": "00:05:08"
+  },
+  {
+    "text": "One example of this is this smell command.",
+    "start": "00:05:08",
+    "end": "00:05:11"
+  },
+  {
+    "text": "And this command is based on a couple of engineering patterns that I found super helpful from books that I read many, many years ago including clean code as well as architectural design patterns, specifically design patterns for good software development.",
+    "start": "00:05:11",
+    "end": "00:05:27"
+  },
+  {
+    "text": "So, the smell command, for example, refers to the clean code book.",
+    "start": "00:05:26",
+    "end": "00:05:31"
+  },
+  {
+    "text": "And clean code is a book that I'll definitely recommend you to buy, but of course, the concepts are already part of the language model, but it can help to kind of push it into that direction by reminding it of a couple of concepts like this.",
+    "start": "00:05:31",
+    "end": "00:05:44"
+  },
+  {
+    "text": "And this way, you can actually make sure that it follows the patterns from those engineering books.",
+    "start": "00:05:44",
+    "end": "00:05:51"
+  },
+  {
+    "text": "And to be completely honest, you can choose to ignore my advice and go out there and look at a prompt repository that has 60,000 stars on GitHub and just copy-paste all of that and use prompts that say, \"You are a senior engineer, code and do not make any mistakes.",
+    "start": "00:05:49",
+    "end": "00:06:07"
+  },
+  {
+    "text": "\" It's completely up to you.",
+    "start": "00:06:07",
+    "end": "00:06:08"
+  },
+  {
+    "text": "But if you want to get serious with indentic engineering, why don't you just apply the patterns from really good engineering books that have already been used to create some of the best software in the world.",
+    "start": "00:06:08",
+    "end": "00:06:19"
+  },
+  {
+    "text": "In any case, if you want to make a start with that, check out the link in the description below.",
+    "start": "00:06:19",
+    "end": "00:06:23"
+  },
+  {
+    "text": "Now, how about AI code reviews?",
+    "start": "00:06:23",
+    "end": "00:06:25"
+  },
+  {
+    "text": "What do I do there?",
+    "start": "00:06:25",
+    "end": "00:06:27"
+  },
+  {
+    "text": "Well, I actually do often connect GitHub to all kinds of AI code review platforms, whether it's a specific host of platform like the newer Cloud Code Reviews or just some self-created loop where I create some kind of pipeline that just automatically checks for my code using something like the headless mode of Codex.",
+    "start": "00:06:27",
+    "end": "00:06:42"
+  },
+  {
+    "text": "It doesn't really matter what you do here, but I do think it's important to have at least some kind of AI review in your pull requests.",
+    "start": "00:06:42",
+    "end": "00:06:51"
+  },
+  {
+    "text": "The most important thing though is that you don't just rely on that, but you still combine it with human review.",
+    "start": "00:06:51",
+    "end": "00:06:56"
+  },
+  {
+    "text": "And in fact, I also have a couple of commands that I often run to do some of the AI code reviews before I create a pull request out of it.",
+    "start": "00:06:56",
+    "end": "00:07:03"
+  },
+  {
+    "text": "Now, I'm not going to share those commands with you.",
+    "start": "00:07:03",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Why not?",
+    "start": "00:07:07",
+    "end": "00:07:08"
+  },
+  {
+    "text": "Well, because there is not one command that fits all.",
+    "start": "00:07:08",
+    "end": "00:07:10"
+  },
+  {
+    "text": "The right review command depends so much on what you're building.",
+    "start": "00:07:10",
+    "end": "00:07:15"
+  },
+  {
+    "text": "It depends on the programming language, the complexity of the work, how many human reviewers are even on your project and what their preferences are, what the code style is that your team agreed on.",
+    "start": "00:07:14",
+    "end": "00:07:25"
+  },
+  {
+    "text": "There is not one size fits all.",
+    "start": "00:07:23",
+    "end": "00:07:26"
+  },
+  {
+    "text": "Speaking of creating a pull request, how do I connect to external services using my coding agent?",
+    "start": "00:07:26",
+    "end": "00:07:31"
+  },
+  {
+    "text": "For example, it's super simple for me to just take this GitHub URL, go to Cloud Code, even the low-effort one, and say, \"Create a test issue in this URL.",
+    "start": "00:07:31",
+    "end": "00:07:43"
+  },
+  {
+    "text": "\" It just already knows how to call the GitHub CLI and I'm already authenticated to it.",
+    "start": "00:07:43",
+    "end": "00:07:47"
+  },
+  {
+    "text": "So, there's no authentication mechanism that Cloud Code is aware of directly.",
+    "start": "00:07:47",
+    "end": "00:07:51"
+  },
+  {
+    "text": "The credentials are already injected as part of my authentication workflow that I went through when I set up the GitHub CLI.",
+    "start": "00:07:51",
+    "end": "00:07:58"
+  },
+  {
+    "text": "And you can click on it to go to it directly and there you go.",
+    "start": "00:07:58",
+    "end": "00:08:00"
+  },
+  {
+    "text": "Nowadays, there's a big discussion on whether MCP servers are really useful for this, whether you should use a skill that defines how an API should be called, or whether you should just use a CLI as is.",
+    "start": "00:08:00",
+    "end": "00:08:14"
+  },
+  {
+    "text": "You can, of course, just use the bash tool.",
+    "start": "00:08:12",
+    "end": "00:08:15"
+  },
+  {
+    "text": "And with bash, you can basically execute any kind of arbitrary script.",
+    "start": "00:08:15",
+    "end": "00:08:22"
+  },
+  {
+    "text": "So, you can use bash to execute, say, a simple Python script that calls a web API.",
+    "start": "00:08:22",
+    "end": "00:08:28"
+  },
+  {
+    "text": "Maybe if the API is simple enough, you can, for example, use curl to make a direct web request.",
+    "start": "00:08:25",
+    "end": "00:08:35"
+  },
+  {
+    "text": "Or you could use some kind of special CLI.",
+    "start": "00:08:35",
+    "end": "00:08:38"
+  },
+  {
+    "text": "For example, GitHub has a CLI that you can use to create issues, create pull requests, etc.",
+    "start": "00:08:38",
+    "end": "00:08:42"
+  },
+  {
+    "text": "So, you can simply create and use a bash tool.",
+    "start": "00:08:42",
+    "end": "00:08:46"
+  },
+  {
+    "text": "What you can also do, of course, is you can rely on an MCP server.",
+    "start": "00:08:46",
+    "end": "00:08:50"
+  },
+  {
+    "text": "And MCP servers were really popular 1 1/2 years ago.",
+    "start": "00:08:50",
+    "end": "00:08:55"
+  },
+  {
+    "text": "I think they're still very relevant, but you need to understand when to use each service.",
+    "start": "00:08:55",
+    "end": "00:09:00"
+  },
+  {
+    "text": "Personally, if you're using a very common platform like GitHub or, let's say, Jira, then there already a lot of bash tools that you can use that even the LLMs might not already know about.",
+    "start": "00:08:59",
+    "end": "00:09:12"
+  },
+  {
+    "text": "When it comes to MCP servers, this is really where it can connect with unknown internal services much better.",
+    "start": "00:09:10",
+    "end": "00:09:20"
+  },
+  {
+    "text": "For example, you have a coding agent that you want to connect to some internal diagnostic system, then an MCP server can be quite useful.",
+    "start": "00:09:20",
+    "end": "00:09:28"
+  },
+  {
+    "text": "But even here, I think the nuance of using an MCP server or not really comes down to how simple of an operation you need.",
+    "start": "00:09:28",
+    "end": "00:09:35"
+  },
+  {
+    "text": "If you just need to execute a single command, then bash makes a lot of sense, but there are still MCB servers that I really like.",
+    "start": "00:09:35",
+    "end": "00:09:41"
+  },
+  {
+    "text": "I really like Coptic 7, for example, because with Coptic 7, you can pull in the latest documentation for your programming language or your framework of choice.",
+    "start": "00:09:41",
+    "end": "00:09:50"
+  },
+  {
+    "text": "And of course, you can do this with the web search skill as well in Cloud Code, but it's much less specialized.",
+    "start": "00:09:50",
+    "end": "00:09:56"
+  },
+  {
+    "text": "It will just do a generic web search, and then it might return something relevant, whereas with Coptic 7, there's a very specific back end that will search the web, but it will also cut up the documentation and present it to the language model in the most efficient format.",
+    "start": "00:09:56",
+    "end": "00:10:12"
+  },
+  {
+    "text": "Similarly, with Serena, you can connect any coding agent to a language server of choice, which will often make search operations much more efficient.",
+    "start": "00:10:12",
+    "end": "00:10:21"
+  },
+  {
+    "text": "So, here too, there is not a definitive answer whether you need bash or MCB servers.",
+    "start": "00:10:21",
+    "end": "00:10:26"
+  },
+  {
+    "text": "It just depends on intuition.",
+    "start": "00:10:26",
+    "end": "00:10:28"
+  },
+  {
+    "text": "Intuition you can only develop when you create interesting systems with these AI agents.",
+    "start": "00:10:28",
+    "end": "00:10:34"
+  },
+  {
+    "text": "Now, I wanted to talk a little bit about my experience using AI coding at a freelancing gig, at a smaller startup scale, and even at the enterprise level, because I've done AI coding at all three now, and I will say that my experience has been wildly different.",
+    "start": "00:10:34",
+    "end": "00:10:51"
+  },
+  {
+    "text": "Let me start by explaining how I felt when I was a freelancer at a couple of side gigs that I did next to my regular job.",
+    "start": "00:10:49",
+    "end": "00:10:55"
+  },
+  {
+    "text": "Well, these gigs were creating proof of concepts, MVPs, and when you're starting off on your project, well, that's when you can really feel like you are some kind of god developer, because you're able to just be so productive in the beginning and just push out so many lines of code.",
+    "start": "00:10:55",
+    "end": "00:11:12"
+  },
+  {
+    "text": "And when you're creating proof of concept, there's not really a lot of people that you need to give accountability to.",
+    "start": "00:11:12",
+    "end": "00:11:21"
+  },
+  {
+    "text": "You're not having to show your code to a development team every single day.",
+    "start": "00:11:19",
+    "end": "00:11:24"
+  },
+  {
+    "text": "Sure, at the end of the project period, you might need to improve the code base a bit, add tests, etc.",
+    "start": "00:11:24",
+    "end": "00:11:29"
+  },
+  {
+    "text": ", but it's really not the same as working inside of a software development team every single day.",
+    "start": "00:11:29",
+    "end": "00:11:36"
+  },
+  {
+    "text": "Regardless of whether you're working at a startup or an enterprise, when you're creating code with AI, the code needs to be reviewed.",
+    "start": "00:11:34",
+    "end": "00:11:41"
+  },
+  {
+    "text": "Now, depending on what kind of company you're working for, their reviewing process is partially manual, partially AI augmented, but in any case, if you come to other developers with 10,000 lines of code every single day, I can guarantee you that things aren't going to end very well.",
+    "start": "00:11:41",
+    "end": "00:12:01"
+  },
+  {
+    "text": "Either they're going to send you back to create smaller scale pull requests, or you're all going to suffer from longer-term bugs caused by AI code that was generated too quickly.",
+    "start": "00:12:00",
+    "end": "00:12:13"
+  },
+  {
+    "text": "Now, here's where I have to face the reality of things.",
+    "start": "00:12:11",
+    "end": "00:12:15"
+  },
+  {
+    "text": "I feel like the people who are doing the best with the agentic coding aren't screaming from the rooftops that they're five times more productive.",
+    "start": "00:12:15",
+    "end": "00:12:23"
+  },
+  {
+    "text": "They might see 30 to 60% performance gains, and to be fair, they might be really fast on certain cases, like creating one-off scripts to test something in production.",
+    "start": "00:12:23",
+    "end": "00:12:33"
+  },
+  {
+    "text": "But in general, these people are benefiting from real production gains without all of the hype that is unsustainable.",
+    "start": "00:12:33",
+    "end": "00:12:39"
+  },
+  {
+    "text": "Because again, if you're working on real projects, you will find that the coding portion of the engineering job is actually not that much anymore.",
+    "start": "00:12:39",
+    "end": "00:12:47"
+  },
+  {
+    "text": "This is not saying that you don't have a job anymore.",
+    "start": "00:12:47",
+    "end": "00:12:52"
+  },
+  {
+    "text": "Engineering is much more than just coding, but it is a shift in how you need to distribute your daily work time.",
+    "start": "00:12:50",
+    "end": "00:12:59"
+  },
+  {
+    "text": "Oh, now, one more thing about my Claude status line that I really want to share.",
+    "start": "00:12:57",
+    "end": "00:13:02"
+  },
+  {
+    "text": "I also have the name of the current working branch.",
+    "start": "00:13:01",
+    "end": "00:13:03"
+  },
+  {
+    "text": "You can see here that I'm on the main branch, and if I, for example, ask Claude Code to check out to a random branch, you will see that whatever Claude Code chooses will also show up here on the status line.",
+    "start": "00:13:03",
+    "end": "00:13:16"
+  },
+  {
+    "text": "So, it's going to do check out to a completely random branch name, totally fine by me.",
+    "start": "00:13:16",
+    "end": "00:13:22"
+  },
+  {
+    "text": "And once it runs this command, you can see that this branch shows up here.",
+    "start": "00:13:20",
+    "end": "00:13:26"
+  },
+  {
+    "text": "The only problem with this approach is that the Git context is shared between these four different Cloud Code windows.",
+    "start": "00:13:26",
+    "end": "00:13:33"
+  },
+  {
+    "text": "So, if I for example say hi here, you will see that my branch name will update to the current branch.",
+    "start": "00:13:33",
+    "end": "00:13:37"
+  },
+  {
+    "text": "There you go.",
+    "start": "00:13:37",
+    "end": "00:13:39"
+  },
+  {
+    "text": "This can work.",
+    "start": "00:13:39",
+    "end": "00:13:38"
+  },
+  {
+    "text": "You can still do parallel work in the same branch, but eventually it will get messy quickly.",
+    "start": "00:13:38",
+    "end": "00:13:44"
+  },
+  {
+    "text": "And this is where you can create a Git work tree.",
+    "start": "00:13:44",
+    "end": "00:13:48"
+  },
+  {
+    "text": "With a Git work tree, you basically create a temporary copy of your code of sorts that allows you to work in completely independent work streams.",
+    "start": "00:13:46",
+    "end": "00:13:58"
+  },
+  {
+    "text": "So, even if Cloud Code might be iterating on the same files, for example, if you ask Cloud Code to generate three different approaches to the same problem, you can still achieve that without any conflicts by using Git work trees.",
+    "start": "00:13:58",
+    "end": "00:14:11"
+  },
+  {
+    "text": "And you can of course ask Cloud Code to create a work tree for you.",
+    "start": "00:14:11",
+    "end": "00:14:15"
+  },
+  {
+    "text": "In this case, let's for example create a work tree called branch work tree test.",
+    "start": "00:14:15",
+    "end": "00:14:24"
+  },
+  {
+    "text": "You can see here that it switches the branch name to work tree branch work tree test.",
+    "start": "00:14:22",
+    "end": "00:14:27"
+  },
+  {
+    "text": "And I even have a bit of an indicator here that shows that this is a proper work tree.",
+    "start": "00:14:27",
+    "end": "00:14:32"
+  },
+  {
+    "text": "Oh, and now I'm actually lacking the room here to show my context, but this isn't a problem because these windows are actually resizable.",
+    "start": "00:14:32",
+    "end": "00:14:39"
+  },
+  {
+    "text": "So, I can resize the window like so to get the full context again.",
+    "start": "00:14:39",
+    "end": "00:14:44"
+  },
+  {
+    "text": "And just to show you what this work tree looks like in my file explorer, I'm going to open Visual Studio Code.",
+    "start": "00:14:42",
+    "end": "00:14:49"
+  },
+  {
+    "text": "And that what I can do is in my Cloud folder, you have this work trees folder.",
+    "start": "00:14:49",
+    "end": "00:14:53"
+  },
+  {
+    "text": "And you can see that branch work tree test is kind of just a copy of the entire repository.",
+    "start": "00:14:52",
+    "end": "00:14:57"
+  },
+  {
+    "text": "And of course, once you're done with this work tree, you can fully delete it because you don't want your disk to be full of copies of your code, right?",
+    "start": "00:14:57",
+    "end": "00:15:04"
+  },
+  {
+    "text": "So, for example, you can just say exit and delete the WT.",
+    "start": "00:15:04",
+    "end": "00:15:11"
+  },
+  {
+    "text": "It'll understand that I'm talking about a work tree just fine.",
+    "start": "00:15:09",
+    "end": "00:15:14"
+  },
+  {
+    "text": "So, now it's cleaning up the work tree.",
+    "start": "00:15:12",
+    "end": "00:15:16"
+  },
+  {
+    "text": "Go back to Visual Studio Code.",
+    "start": "00:15:14",
+    "end": "00:15:17"
+  },
+  {
+    "text": "And the work tree is gone.",
+    "start": "00:15:16",
+    "end": "00:15:19"
+  },
+  {
+    "text": "Just knowing how to use a work tree is a big power move.",
+    "start": "00:15:17",
+    "end": "00:15:21"
+  },
+  {
+    "text": "Just remember that when you create a new work tree, you might have to reinstall the project dependencies again, depending on what programming language you use.",
+    "start": "00:15:21",
+    "end": "00:15:29"
+  },
+  {
+    "text": "Here too, it all depends on your project.",
+    "start": "00:15:29",
+    "end": "00:15:32"
+  },
+  {
+    "text": "There's not one trick that will work.",
+    "start": "00:15:32",
+    "end": "00:15:33"
+  },
+  {
+    "text": "But if you do find yourself having to install dependencies every time a work tree is created, well, that's exactly when you should create a reusable skill or command that will be called every time a work tree gets created.",
+    "start": "00:15:33",
+    "end": "00:15:46"
+  },
+  {
+    "text": "Maybe you can even customize my scripts to create a work tree whenever you start Cloud Code.",
+    "start": "00:15:46",
+    "end": "00:15:51"
+  },
+  {
+    "text": "If that's your preferred workflow, you should really get creative and customize it to your own needs.",
+    "start": "00:15:49",
+    "end": "00:15:55"
+  },
+  {
+    "text": "I also remember working in a much more complex repository where I was able to create a brand new feature in just two days.",
+    "start": "00:15:55",
+    "end": "00:16:02"
+  },
+  {
+    "text": "So, I thought I'm going to create the pull request, get it merged in by the end of the week, and we'll be all set.",
+    "start": "00:16:02",
+    "end": "00:16:07"
+  },
+  {
+    "text": "The thing is though, I got quite a lot of pushback from more experienced engineer in the pull request because while my code was functional, it lacked a lot of long-term architectural thinking.",
+    "start": "00:16:07",
+    "end": "00:16:17"
+  },
+  {
+    "text": "And I have to admit, when I actually read the code because I only skimmed it because I wanted to create AI code faster, I realized that this engineer was totally right.",
+    "start": "00:16:17",
+    "end": "00:16:26"
+  },
+  {
+    "text": "It missed the bigger picture and it was going to cause a lot of bugs in longer term.",
+    "start": "00:16:26",
+    "end": "00:16:31"
+  },
+  {
+    "text": "So, when you're thinking about the agentic engineering, it's not so much just about the tools that you choose to use, it's also about mindset.",
+    "start": "00:16:31",
+    "end": "00:16:39"
+  },
+  {
+    "text": "What kind of engineer do you want to be?",
+    "start": "00:16:37",
+    "end": "00:16:40"
+  },
+  {
+    "text": "Do you want to be a vibe coder who pushes thousands of lines of AI code to production every single day?",
+    "start": "00:16:39",
+    "end": "00:16:45"
+  },
+  {
+    "text": "Or do you want to be an AI native engineer, someone who benefits from the productivity gains of AI, but also knows when to fix systems when they really go down, and can actually master the full stack?",
+    "start": "00:16:45",
+    "end": "00:16:54"
+  },
+  {
+    "text": "Of course, I'm a little bit biased.",
+    "start": "00:16:54",
+    "end": "00:16:55"
+  },
+  {
+    "text": "You probably know which type of engineer I prefer to be, but it's up to you, and it's definitely good to think about it.",
+    "start": "00:16:55",
+    "end": "00:17:01"
+  },
+  {
+    "text": "If you want to get started with agentic engineering, you can check out the resources in the description down below, or check out, of course, more of my videos where I cover many more topics like this.",
+    "start": "00:17:01",
+    "end": "00:17:12"
+  }
+]

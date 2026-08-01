@@ -2,6 +2,9 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-02 | research/how-to-build-adversarial-agent/lessons/0002-lm-as-red-teamer.html | lessons |
+| 2026-08-02 | research/pattern-recognition-obsidian-pkm/lessons/0014-daily-srs-loop.html | lessons |
+| 2026-08-01 | research/pattern-recognition-obsidian-pkm/lessons/0005-munger-model-library.html | lessons |
 | 2026-08-01 | research/learning-java-grpc-protocol-buffers/report.md | research |
 | 2026-08-01 | research/using-modulith/report.md | research |
 | 2026-08-01 | research/use-of-local-llm-for-coding/report.md | research |
@@ -18,6 +21,7 @@
 | 2026-08-01 | 2026-08-01-spring-grpc-reference.md | scrape |
 | 2026-08-01 | 2023-11-29-how-to-build-an-adaptive-ai-tutor-using-kg-rag.md | ingest |
 | 2026-08-01 | 2024-10-14-generative-ai-impact-on-personalized-intelligent-tutoring-systems.md | ingest |
+| 2026-08-02 | research/how-to-build-adversarial-agent/lessons/ | lessons |
 | 2026-08-01 | 2024-02-29-grpc-interceptors.md | ingest |
 | 2026-08-01 | 2023-09-10-implementing-learning-principles-with-a-personal-ai-tutor.md | ingest |
 | 2026-08-01 | 2025-02-18-one-size-doesnt-fit-all-pace-personalized-conversational-tutoring-agent.md | ingest |
@@ -563,3 +567,38 @@
 | 2026-08-01 | ai-capex-roi-bifurcation-2026.md | compound |
 | 2026-08-01 | manager-led-ai-adoption-conversion.md | compound |
 | 2026-08-01 | deep-work-cognitive-infrastructure.md | compound |
+| 2026-08-01 | research/loop-engineering/lessons/ | lessons |
+| 2026-08-02 | research/pattern-recognition-obsidian-pkm/lessons/ | lessons |
+| 2026-08-02 | 2026-03-10-video-agent-skills-or-mcp-in-the-era-of-claude-code.md | ingest |
+| 2026-08-02 | 2026-05-24-video-updated-essential-ai-skills-for-2026.md | ingest |
+| 2026-08-02 | 2026-05-19-video-claude-cowork-top-5-tips-for-productivity.md | ingest |
+| 2026-08-02 | 2026-05-21-video-learn-97-of-claude-in-under-16-minutes.md | ingest |
+| 2026-08-02 | 2026-05-20-video-the-agentic-engineer-workflow-you-need-in-2026.md | ingest |
+| 2026-08-02 | 2026-05-12-video-every-level-of-claude-explained-in-21-minutes.md | ingest |
+| 2026-08-02 | 2024-11-27-video-all-machine-learning-concepts-explained-in-22-minutes.md | ingest |
+| 2026-08-02 | 2024-09-17-video-all-machine-learning-algorithms-explained-in-17-min.md | ingest |
+| 2026-08-02 | 2011-01-11-video-the-best-way-to-play-office-politics.md | ingest |
+| 2026-08-02 | 2026-07-30-video-wayfinder-nothing-is-too-big-to-plan-anymore.md | ingest |
+| 2026-08-02 | 2026-03-01-video-ai-was-hard-until-i-learned-these-10-concepts.md | ingest |
+| 2026-08-02 | 2026-04-20-video-the-6-claude-features-to-get-you-ahead-of-99-of-people-using-ai.md | ingest |
+| 2026-08-02 | 2026-07-01-video-how-i-use-agent-loops-and-goals-claude-code-codex.md | ingest |
+| 2026-08-02 | 2026-07-09-video-herdr-gives-you-full-control-over-multiple-ai-agents.md | ingest |
+| 2026-08-02 | 2026-07-17-video-i-replaced-hermes-agent-and-openclaw-with-this.md | ingest |
+| 2026-08-02 | 2026-07-25-video-i-built-an-agentic-software-factory-with-codex-and-claude-code.md | ingest |
+| 2026-08-02 | agent-skills-or-mcp-in-the-era-of-claude-code | archive |
+| 2026-08-02 | updated-essential-ai-skills-for-2026 | archive |
+| 2026-08-02 | claude-cowork-top-5-tips-for-productivity | archive |
+| 2026-08-02 | learn-97-of-claude-in-under-16-minutes | archive |
+| 2026-08-02 | the-agentic-engineer-workflow-you-need-in-2026 | archive |
+| 2026-08-02 | every-level-of-claude-explained-in-21-minutes | archive |
+| 2026-08-02 | all-machine-learning-concepts-explained-in-22-minutes | archive |
+| 2026-08-02 | all-machine-learning-algorithms-explained-in-17-min | archive |
+| 2026-08-02 | the-best-way-to-play-office-politics | archive |
+| 2026-08-02 | wayfinder-nothing-is-too-big-to-plan-anymore | archive |
+| 2026-08-02 | ai-was-hard-until-i-learned-these-10-concepts | archive |
+| 2026-08-02 | the-6-claude-features-to-get-you-ahead-of-99-of-people-using-ai | archive |
+| 2026-08-02 | how-i-use-agent-loops-and-goals-claude-code-codex | archive |
+| 2026-08-02 | herdr-gives-you-full-control-over-multiple-ai-agents | archive |
+| 2026-08-02 | i-replaced-hermes-agent-and-openclaw-with-this | archive |
+| 2026-08-02 | i-built-an-agentic-software-factory-with-codex-and-claude-code | archive |
+| 2026-08-02 | vid-20260731.processed.md | archive |

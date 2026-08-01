@@ -1,0 +1,1657 @@
+[
+  {
+    "text": "Everyone is talking about AI. But, in",
+    "start": 0,
+    "duration": 4.04
+  },
+  {
+    "text": "order to actually build with it, use it",
+    "start": 2.2,
+    "duration": 4.2
+  },
+  {
+    "text": "at work, become an AI engineer, or even",
+    "start": 4.04,
+    "duration": 4
+  },
+  {
+    "text": "just have an intelligent conversation",
+    "start": 6.4,
+    "duration": 3.68
+  },
+  {
+    "text": "about AI in an interview, you need to",
+    "start": 8.04,
+    "duration": 4.16
+  },
+  {
+    "text": "understand the core fundamentals of AI,",
+    "start": 10.08,
+    "duration": 4.24
+  },
+  {
+    "text": "not just the buzzwords. Today, I'm going",
+    "start": 12.2,
+    "duration": 4.36
+  },
+  {
+    "text": "to talk through the 10 AI concepts every",
+    "start": 14.32,
+    "duration": 4.24
+  },
+  {
+    "text": "software and AI engineer should know in",
+    "start": 16.56,
+    "duration": 4.76
+  },
+  {
+    "text": "2026. Hi friends, I'm Maddie. I'm a",
+    "start": 18.56,
+    "duration": 4.36
+  },
+  {
+    "text": "senior software engineer who previously",
+    "start": 21.32,
+    "duration": 3.08
+  },
+  {
+    "text": "worked at Google and interned at other",
+    "start": 22.92,
+    "duration": 3.56
+  },
+  {
+    "text": "big tech companies like Amazon, IBM, and",
+    "start": 24.4,
+    "duration": 4.6
+  },
+  {
+    "text": "Microsoft. I work with AI systems a lot,",
+    "start": 26.48,
+    "duration": 4.2
+  },
+  {
+    "text": "and I spent hours breaking down the",
+    "start": 29,
+    "duration": 3.48
+  },
+  {
+    "text": "concepts that actually matter right now,",
+    "start": 30.68,
+    "duration": 3.76
+  },
+  {
+    "text": "so you don't have to. In this video, I'm",
+    "start": 32.48,
+    "duration": 3.44
+  },
+  {
+    "text": "going to walk you through 10 AI",
+    "start": 34.44,
+    "duration": 4.08
+  },
+  {
+    "text": "concepts, from LLMs and tokens, all the",
+    "start": 35.92,
+    "duration": 4.24
+  },
+  {
+    "text": "way to AI agents and context",
+    "start": 38.52,
+    "duration": 3.56
+  },
+  {
+    "text": "engineering. Whether you're building AI",
+    "start": 40.16,
+    "duration": 3.76
+  },
+  {
+    "text": "products, preparing for interviews, or",
+    "start": 42.08,
+    "duration": 3
+  },
+  {
+    "text": "just trying to keep up with the",
+    "start": 43.92,
+    "duration": 3.2
+  },
+  {
+    "text": "industry, this is the video to watch.",
+    "start": 45.08,
+    "duration": 4
+  },
+  {
+    "text": "Let's get into it. Thank you to HubSpot",
+    "start": 47.12,
+    "duration": 3.36
+  },
+  {
+    "text": "for sponsoring this video. We're",
+    "start": 49.08,
+    "duration": 3.24
+  },
+  {
+    "text": "starting with the foundations. Large",
+    "start": 50.48,
+    "duration": 4.56
+  },
+  {
+    "text": "language models, or LLMs. ChatGPT,",
+    "start": 52.32,
+    "duration": 5.2
+  },
+  {
+    "text": "Claude, Gemini, these are all powered by",
+    "start": 55.04,
+    "duration": 5.36
+  },
+  {
+    "text": "LLMs. At its core, an LLM is a neural",
+    "start": 57.52,
+    "duration": 4.6
+  },
+  {
+    "text": "network trained on massive amounts of",
+    "start": 60.4,
+    "duration": 3.88
+  },
+  {
+    "text": "text data to do one deceptively simple",
+    "start": 62.12,
+    "duration": 3.92
+  },
+  {
+    "text": "thing: predict the next word in a",
+    "start": 64.28,
+    "duration": 4.12
+  },
+  {
+    "text": "sequence. So, you type \"the capital of",
+    "start": 66.04,
+    "duration": 4.72
+  },
+  {
+    "text": "France is\" and the model predicts Paris.",
+    "start": 68.4,
+    "duration": 5.2
+  },
+  {
+    "text": "That may seem simple, but when you scale",
+    "start": 70.76,
+    "duration": 4.84
+  },
+  {
+    "text": "that idea up to billions of parameters",
+    "start": 73.6,
+    "duration": 3.16
+  },
+  {
+    "text": "trained on essentially the entire",
+    "start": 75.6,
+    "duration": 2.92
+  },
+  {
+    "text": "internet, it goes deeper than just",
+    "start": 76.76,
+    "duration": 3.68
+  },
+  {
+    "text": "auto-complete. The model at this point",
+    "start": 78.52,
+    "duration": 3.44
+  },
+  {
+    "text": "doesn't just predict words. It's",
+    "start": 80.44,
+    "duration": 3.56
+  },
+  {
+    "text": "developing the ability to reason, write",
+    "start": 81.96,
+    "duration": 4.04
+  },
+  {
+    "text": "code, summarize documents, and hold",
+    "start": 84,
+    "duration": 4.56
+  },
+  {
+    "text": "genuinely useful conversations. LLMs are",
+    "start": 86,
+    "duration": 4.6
+  },
+  {
+    "text": "the engine behind almost every AI",
+    "start": 88.56,
+    "duration": 3.36
+  },
+  {
+    "text": "product you'll interact with in your",
+    "start": 90.6,
+    "duration": 2.72
+  },
+  {
+    "text": "career. So, if you're a software",
+    "start": 91.92,
+    "duration": 3.24
+  },
+  {
+    "text": "engineer in 2026, and you don't",
+    "start": 93.32,
+    "duration": 3.8
+  },
+  {
+    "text": "understand what an LLM is, it's like",
+    "start": 95.16,
+    "duration": 4.04
+  },
+  {
+    "text": "being a web developer in 2010 who",
+    "start": 97.12,
+    "duration": 4.28
+  },
+  {
+    "text": "doesn't know what an API is. Let's dive",
+    "start": 99.2,
+    "duration": 4.36
+  },
+  {
+    "text": "deeper into tokens and context windows",
+    "start": 101.4,
+    "duration": 4.76
+  },
+  {
+    "text": "as our second concept. So, LLMs don't",
+    "start": 103.56,
+    "duration": 4.72
+  },
+  {
+    "text": "actually read words the way we do. They",
+    "start": 106.16,
+    "duration": 4.04
+  },
+  {
+    "text": "break text into smaller units called",
+    "start": 108.28,
+    "duration": 4.32
+  },
+  {
+    "text": "tokens. A token might be a whole word",
+    "start": 110.2,
+    "duration": 4.52
+  },
+  {
+    "text": "like hello, or maybe a piece of a word",
+    "start": 112.6,
+    "duration": 5.2
+  },
+  {
+    "text": "like un and believe and able being three",
+    "start": 114.72,
+    "duration": 5
+  },
+  {
+    "text": "separate tokens. Why this matters is",
+    "start": 117.8,
+    "duration": 4.28
+  },
+  {
+    "text": "because every LLM has a context window.",
+    "start": 119.72,
+    "duration": 4.16
+  },
+  {
+    "text": "That's the maximum number of tokens it",
+    "start": 122.08,
+    "duration": 3.72
+  },
+  {
+    "text": "can process at once. You can think of",
+    "start": 123.88,
+    "duration": 3.84
+  },
+  {
+    "text": "this like a model's short-term memory.",
+    "start": 125.8,
+    "duration": 5.04
+  },
+  {
+    "text": "Early GPT models had only a 4,000 token",
+    "start": 127.72,
+    "duration": 5.4
+  },
+  {
+    "text": "context window. Now, we're seeing models",
+    "start": 130.84,
+    "duration": 4.64
+  },
+  {
+    "text": "with over a million. A larger context",
+    "start": 133.12,
+    "duration": 4.04
+  },
+  {
+    "text": "window means the model can see more of",
+    "start": 135.48,
+    "duration": 3.68
+  },
+  {
+    "text": "your conversation, your code, or your",
+    "start": 137.16,
+    "duration": 4.2
+  },
+  {
+    "text": "documents all at once, which directly",
+    "start": 139.16,
+    "duration": 4.4
+  },
+  {
+    "text": "impacts how useful it is. If you've ever",
+    "start": 141.36,
+    "duration": 3.92
+  },
+  {
+    "text": "had an AI forget something you pulled up",
+    "start": 143.56,
+    "duration": 3.64
+  },
+  {
+    "text": "earlier in a conversation, that is the",
+    "start": 145.28,
+    "duration": 3.48
+  },
+  {
+    "text": "context window running out.",
+    "start": 147.2,
+    "duration": 3.08
+  },
+  {
+    "text": "Understanding this concept helps you",
+    "start": 148.76,
+    "duration": 3.4
+  },
+  {
+    "text": "design better prompts and build smarter",
+    "start": 150.28,
+    "duration": 4.44
+  },
+  {
+    "text": "AI applications. Now, speaking of AI",
+    "start": 152.16,
+    "duration": 4.32
+  },
+  {
+    "text": "concepts that actually translate into",
+    "start": 154.72,
+    "duration": 3.72
+  },
+  {
+    "text": "real-world impact, if you're wondering",
+    "start": 156.48,
+    "duration": 3.96
+  },
+  {
+    "text": "how people are actually using AI agents",
+    "start": 158.44,
+    "duration": 3.28
+  },
+  {
+    "text": "right now to supercharge their",
+    "start": 160.44,
+    "duration": 3.24
+  },
+  {
+    "text": "workflows, then this free resource from",
+    "start": 161.72,
+    "duration": 3.8
+  },
+  {
+    "text": "HubSpot, today's video sponsor, will",
+    "start": 163.68,
+    "duration": 4.36
+  },
+  {
+    "text": "help you do exactly this. HubSpot's new",
+    "start": 165.52,
+    "duration": 4.64
+  },
+  {
+    "text": "playbook, AI Agents Unleashed, is one of",
+    "start": 168.04,
+    "duration": 4.08
+  },
+  {
+    "text": "the most practical and comprehensive",
+    "start": 170.16,
+    "duration": 3.84
+  },
+  {
+    "text": "guides I've seen on this topic. It",
+    "start": 172.12,
+    "duration": 3.839
+  },
+  {
+    "text": "breaks down what AI agents can actually",
+    "start": 174,
+    "duration": 3.76
+  },
+  {
+    "text": "do today, where to start implementing",
+    "start": 175.959,
+    "duration": 3.521
+  },
+  {
+    "text": "them, and how to build an effective",
+    "start": 177.76,
+    "duration": 4.12
+  },
+  {
+    "text": "strategy for human-AI collaboration. It",
+    "start": 179.48,
+    "duration": 4.2
+  },
+  {
+    "text": "talks about how AI agents work in",
+    "start": 181.88,
+    "duration": 3.8
+  },
+  {
+    "text": "practice, the memory systems, the tool",
+    "start": 183.68,
+    "duration": 3.76
+  },
+  {
+    "text": "integrations, the multi-step reasoning",
+    "start": 185.68,
+    "duration": 3.48
+  },
+  {
+    "text": "that separates real agents from basic",
+    "start": 187.44,
+    "duration": 3.76
+  },
+  {
+    "text": "chatbots. One of my favorite parts is",
+    "start": 189.16,
+    "duration": 3.64
+  },
+  {
+    "text": "their framework for figuring out what",
+    "start": 191.2,
+    "duration": 3.48
+  },
+  {
+    "text": "tasks to hand off to an agent versus",
+    "start": 192.8,
+    "duration": 3.48
+  },
+  {
+    "text": "which one still need a human in the",
+    "start": 194.68,
+    "duration": 3.2
+  },
+  {
+    "text": "loop, because that's the question that",
+    "start": 196.28,
+    "duration": 3.48
+  },
+  {
+    "text": "everyone really needs to answer. It also",
+    "start": 197.88,
+    "duration": 3.639
+  },
+  {
+    "text": "covers the common pitfalls that people",
+    "start": 199.76,
+    "duration": 3.6
+  },
+  {
+    "text": "run into when deploying agents and how",
+    "start": 201.519,
+    "duration": 3.761
+  },
+  {
+    "text": "to avoid them, which honestly is the",
+    "start": 203.36,
+    "duration": 4.159
+  },
+  {
+    "text": "part that most guides skip entirely. The",
+    "start": 205.28,
+    "duration": 4.16
+  },
+  {
+    "text": "playbook is completely free. I'll put",
+    "start": 207.519,
+    "duration": 3.601
+  },
+  {
+    "text": "the link in the description below. Big",
+    "start": 209.44,
+    "duration": 2.96
+  },
+  {
+    "text": "thanks to HubSpot for creating this",
+    "start": 211.12,
+    "duration": 3.119
+  },
+  {
+    "text": "guide and sponsoring this video. And",
+    "start": 212.4,
+    "duration": 3.64
+  },
+  {
+    "text": "now, let's get back to the concepts. Our",
+    "start": 214.239,
+    "duration": 4.641
+  },
+  {
+    "text": "third one is AI agents. An AI agent",
+    "start": 216.04,
+    "duration": 4.36
+  },
+  {
+    "text": "isn't just a chatbot that answers your",
+    "start": 218.88,
+    "duration": 3.639
+  },
+  {
+    "text": "questions. It's an AI system that can",
+    "start": 220.4,
+    "duration": 3.92
+  },
+  {
+    "text": "reason, plan, and take actions",
+    "start": 222.519,
+    "duration": 3.921
+  },
+  {
+    "text": "autonomously to achieve a goal. So, a",
+    "start": 224.32,
+    "duration": 3.68
+  },
+  {
+    "text": "chatbot says, \"Here's how to book a",
+    "start": 226.44,
+    "duration": 3.6
+  },
+  {
+    "text": "flight.\" An agent actually will go and",
+    "start": 228,
+    "duration": 4
+  },
+  {
+    "text": "book the flight for you. It perceives",
+    "start": 230.04,
+    "duration": 3.84
+  },
+  {
+    "text": "the environment, reasons about the next",
+    "start": 232,
+    "duration": 3.92
+  },
+  {
+    "text": "best step, acts on that plan, and then",
+    "start": 233.88,
+    "duration": 3.68
+  },
+  {
+    "text": "observes the results. And it loops",
+    "start": 235.92,
+    "duration": 3.08
+  },
+  {
+    "text": "through that cycle until the task is",
+    "start": 237.56,
+    "duration": 3.28
+  },
+  {
+    "text": "done. So, for example, look at Open",
+    "start": 239,
+    "duration": 3.52
+  },
+  {
+    "text": "Claw. If you haven't heard of it yet,",
+    "start": 240.84,
+    "duration": 3.64
+  },
+  {
+    "text": "Open Claw is an open-source AI agent",
+    "start": 242.52,
+    "duration": 3.6
+  },
+  {
+    "text": "built by Peter Steinberger that went",
+    "start": 244.48,
+    "duration": 3.84
+  },
+  {
+    "text": "completely viral a few weeks ago. We're",
+    "start": 246.12,
+    "duration": 5.32
+  },
+  {
+    "text": "talking 60,000 GitHub stars in 72 hours.",
+    "start": 248.32,
+    "duration": 4.92
+  },
+  {
+    "text": "It runs locally on your machine and",
+    "start": 251.44,
+    "duration": 3.68
+  },
+  {
+    "text": "connects to the apps you already use.",
+    "start": 253.24,
+    "duration": 4.08
+  },
+  {
+    "text": "So, WhatsApp, Slack, Discord, your",
+    "start": 255.12,
+    "duration": 4.2
+  },
+  {
+    "text": "calendar, your email, and it actually",
+    "start": 257.32,
+    "duration": 4.08
+  },
+  {
+    "text": "does things on your behalf. People have",
+    "start": 259.32,
+    "duration": 4.04
+  },
+  {
+    "text": "used it to triage their inbox, debug",
+    "start": 261.4,
+    "duration": 3.519
+  },
+  {
+    "text": "code while they sleep, automate their",
+    "start": 263.36,
+    "duration": 3.88
+  },
+  {
+    "text": "smart home, even build entire apps from",
+    "start": 264.919,
+    "duration": 4.441
+  },
+  {
+    "text": "their phone. OpenAI actually ended up",
+    "start": 267.24,
+    "duration": 3.76
+  },
+  {
+    "text": "hiring Steinberger to build their next",
+    "start": 269.36,
+    "duration": 3.44
+  },
+  {
+    "text": "generation of personal agents, which",
+    "start": 271,
+    "duration": 4.04
+  },
+  {
+    "text": "tells you how big this space is getting.",
+    "start": 272.8,
+    "duration": 4.84
+  },
+  {
+    "text": "Concept four is MCP, Model Context",
+    "start": 275.04,
+    "duration": 4.92
+  },
+  {
+    "text": "Protocol. If AI agents are the workers,",
+    "start": 277.64,
+    "duration": 4.52
+  },
+  {
+    "text": "then MCP is a universal adapter that",
+    "start": 279.96,
+    "duration": 4.32
+  },
+  {
+    "text": "lets them plug into your tools. Before",
+    "start": 282.16,
+    "duration": 4.6
+  },
+  {
+    "text": "MCP, if you wanted an LLM to connect to",
+    "start": 284.28,
+    "duration": 4.96
+  },
+  {
+    "text": "your database, your email, and your CRM,",
+    "start": 286.76,
+    "duration": 4.32
+  },
+  {
+    "text": "you need to build three separate custom",
+    "start": 289.24,
+    "duration": 4.4
+  },
+  {
+    "text": "integrations. MCP standardizes that.",
+    "start": 291.08,
+    "duration": 4.52
+  },
+  {
+    "text": "It's an open protocol that defines how",
+    "start": 293.64,
+    "duration": 3.68
+  },
+  {
+    "text": "AI models connect to external data",
+    "start": 295.6,
+    "duration": 3.76
+  },
+  {
+    "text": "sources and services. Think of it like",
+    "start": 297.32,
+    "duration": 5.28
+  },
+  {
+    "text": "USB for AI. Before USB, every device had",
+    "start": 299.36,
+    "duration": 5.72
+  },
+  {
+    "text": "its own proprietary connector. MCP fixes",
+    "start": 302.6,
+    "duration": 4.48
+  },
+  {
+    "text": "the same thing for AI tools. It creates",
+    "start": 305.08,
+    "duration": 4
+  },
+  {
+    "text": "a common interface so that any model can",
+    "start": 307.08,
+    "duration": 4
+  },
+  {
+    "text": "connect to any compatible service. If",
+    "start": 309.08,
+    "duration": 3.72
+  },
+  {
+    "text": "you're building AI applications,",
+    "start": 311.08,
+    "duration": 3.36
+  },
+  {
+    "text": "understanding MCP is going to be",
+    "start": 312.8,
+    "duration": 3.76
+  },
+  {
+    "text": "essential because it's rapidly becoming",
+    "start": 314.44,
+    "duration": 3.8
+  },
+  {
+    "text": "the standard for how agents interact",
+    "start": 316.56,
+    "duration": 3.72
+  },
+  {
+    "text": "with the outside world. MCP is open",
+    "start": 318.24,
+    "duration": 4.16
+  },
+  {
+    "text": "source, and Anthropic donated it to the",
+    "start": 320.28,
+    "duration": 3.639
+  },
+  {
+    "text": "AI Agentic AI Foundation, which is",
+    "start": 322.4,
+    "duration": 3.36
+  },
+  {
+    "text": "managed by the Linux Foundation last",
+    "start": 323.919,
+    "duration": 3.681
+  },
+  {
+    "text": "year. And now, let's talk about concept",
+    "start": 325.76,
+    "duration": 3.92
+  },
+  {
+    "text": "five, RAG, Retrieval Augmented",
+    "start": 327.6,
+    "duration": 4.4
+  },
+  {
+    "text": "Generation. The problem that RAG solves",
+    "start": 329.68,
+    "duration": 4.6
+  },
+  {
+    "text": "is that LLMs are trained on data only up",
+    "start": 332,
+    "duration": 4.24
+  },
+  {
+    "text": "to a certain date. They don't know about",
+    "start": 334.28,
+    "duration": 3.8
+  },
+  {
+    "text": "your company's internal documents, your",
+    "start": 336.24,
+    "duration": 3.72
+  },
+  {
+    "text": "product specs, or last week's policy",
+    "start": 338.08,
+    "duration": 3.56
+  },
+  {
+    "text": "changes. So, when you ask them a",
+    "start": 339.96,
+    "duration": 3.24
+  },
+  {
+    "text": "question about something specific in",
+    "start": 341.64,
+    "duration": 3.24
+  },
+  {
+    "text": "your organization, they either make",
+    "start": 343.2,
+    "duration": 2.8
+  },
+  {
+    "text": "something up, which is called",
+    "start": 344.88,
+    "duration": 2.84
+  },
+  {
+    "text": "hallucination, or they just say that",
+    "start": 346,
+    "duration": 3.4
+  },
+  {
+    "text": "they don't know. RAG fixes this by",
+    "start": 347.72,
+    "duration": 3.56
+  },
+  {
+    "text": "adding a retrieval step before the model",
+    "start": 349.4,
+    "duration": 4
+  },
+  {
+    "text": "generates its response. When a user asks",
+    "start": 351.28,
+    "duration": 3.88
+  },
+  {
+    "text": "a question, the system first searches a",
+    "start": 353.4,
+    "duration": 3.68
+  },
+  {
+    "text": "database, usually a vector database, for",
+    "start": 355.16,
+    "duration": 3.96
+  },
+  {
+    "text": "relevant documents. It then feeds those",
+    "start": 357.08,
+    "duration": 4.12
+  },
+  {
+    "text": "documents into the LLM's prompt as",
+    "start": 359.12,
+    "duration": 3.92
+  },
+  {
+    "text": "additional context, so the model can",
+    "start": 361.2,
+    "duration": 3.72
+  },
+  {
+    "text": "give an accurate, grounded answer. I",
+    "start": 363.04,
+    "duration": 3.48
+  },
+  {
+    "text": "want to say a quick note on vector",
+    "start": 364.92,
+    "duration": 3.4
+  },
+  {
+    "text": "databases, since they're a key part of",
+    "start": 366.52,
+    "duration": 3.44
+  },
+  {
+    "text": "RAG. Instead of storing data as",
+    "start": 368.32,
+    "duration": 3.44
+  },
+  {
+    "text": "traditional rows and columns, a vector",
+    "start": 369.96,
+    "duration": 3.76
+  },
+  {
+    "text": "database stores data as mathematical",
+    "start": 371.76,
+    "duration": 4
+  },
+  {
+    "text": "representations called embeddings. These",
+    "start": 373.72,
+    "duration": 4.12
+  },
+  {
+    "text": "embeddings capture the meaning of text,",
+    "start": 375.76,
+    "duration": 3.88
+  },
+  {
+    "text": "so you can search by similarity rather",
+    "start": 377.84,
+    "duration": 3.96
+  },
+  {
+    "text": "than exact keywords. So, for example,",
+    "start": 379.64,
+    "duration": 4.12
+  },
+  {
+    "text": "you can ask, \"What's our refund policy?\"",
+    "start": 381.8,
+    "duration": 3.88
+  },
+  {
+    "text": "and the system finds relevant documents",
+    "start": 383.76,
+    "duration": 3.72
+  },
+  {
+    "text": "even if they use words like return or",
+    "start": 385.68,
+    "duration": 3.92
+  },
+  {
+    "text": "money back instead of refund. That",
+    "start": 387.48,
+    "duration": 4.04
+  },
+  {
+    "text": "semantic understanding is what makes RAG",
+    "start": 389.6,
+    "duration": 4.24
+  },
+  {
+    "text": "so powerful and so adaptable to many use",
+    "start": 391.52,
+    "duration": 4.76
+  },
+  {
+    "text": "cases. Concept six is fine-tuning, and",
+    "start": 393.84,
+    "duration": 4.24
+  },
+  {
+    "text": "this is one that people often confuse",
+    "start": 396.28,
+    "duration": 3.72
+  },
+  {
+    "text": "with RAG. They solve different problems.",
+    "start": 398.08,
+    "duration": 3.72
+  },
+  {
+    "text": "Fine-tuning is the process of taking a",
+    "start": 400,
+    "duration": 3.44
+  },
+  {
+    "text": "pre-trained model and training it",
+    "start": 401.8,
+    "duration": 4.28
+  },
+  {
+    "text": "further on a smaller, specialized so it",
+    "start": 403.44,
+    "duration": 4.479
+  },
+  {
+    "text": "behaves differently. You can think of it",
+    "start": 406.08,
+    "duration": 3.92
+  },
+  {
+    "text": "this way. The base model already knows",
+    "start": 407.919,
+    "duration": 4.161
+  },
+  {
+    "text": "how to speak and reason. Fine-tuning",
+    "start": 410,
+    "duration": 4.68
+  },
+  {
+    "text": "trains it to speak in a specific way,",
+    "start": 412.08,
+    "duration": 4.76
+  },
+  {
+    "text": "maybe in medical terminology or in your",
+    "start": 414.68,
+    "duration": 4.239
+  },
+  {
+    "text": "company's brand voice, or to format its",
+    "start": 416.84,
+    "duration": 3.92
+  },
+  {
+    "text": "outputs in a particular structure. A",
+    "start": 418.919,
+    "duration": 3.321
+  },
+  {
+    "text": "quick rule of thumb I recommend",
+    "start": 420.76,
+    "duration": 3.44
+  },
+  {
+    "text": "following is to use RAG when you need a",
+    "start": 422.24,
+    "duration": 4.32
+  },
+  {
+    "text": "model to access specific facts it wasn't",
+    "start": 424.2,
+    "duration": 4.12
+  },
+  {
+    "text": "trained on, and use fine-tuning when you",
+    "start": 426.56,
+    "duration": 3.44
+  },
+  {
+    "text": "need a model to behave differently, like",
+    "start": 428.32,
+    "duration": 3.68
+  },
+  {
+    "text": "changing its tone, style, or output",
+    "start": 430,
+    "duration": 4
+  },
+  {
+    "text": "format. And you can definitely combine",
+    "start": 432,
+    "duration": 4.2
+  },
+  {
+    "text": "both. Concept seven is context",
+    "start": 434,
+    "duration": 3.919
+  },
+  {
+    "text": "engineering. You've probably heard of",
+    "start": 436.2,
+    "duration": 3.44
+  },
+  {
+    "text": "prompt engineering, crafting the right",
+    "start": 437.919,
+    "duration": 3.281
+  },
+  {
+    "text": "instructions to get a good response from",
+    "start": 439.64,
+    "duration": 3.44
+  },
+  {
+    "text": "an AI. Context engineering goes way",
+    "start": 441.2,
+    "duration": 3.76
+  },
+  {
+    "text": "beyond that. It's about designing the",
+    "start": 443.08,
+    "duration": 3.64
+  },
+  {
+    "text": "entire information environment around",
+    "start": 444.96,
+    "duration": 3.36
+  },
+  {
+    "text": "the model, what documents you retrieve",
+    "start": 446.72,
+    "duration": 3.32
+  },
+  {
+    "text": "via RAG, what conversation history you",
+    "start": 448.32,
+    "duration": 3.24
+  },
+  {
+    "text": "include, what external tools are",
+    "start": 450.04,
+    "duration": 4.12
+  },
+  {
+    "text": "available via MCP, and how you summarize",
+    "start": 451.56,
+    "duration": 4.359
+  },
+  {
+    "text": "and prioritize all of that information",
+    "start": 454.16,
+    "duration": 3.52
+  },
+  {
+    "text": "within the model's context window. The",
+    "start": 455.919,
+    "duration": 3.441
+  },
+  {
+    "text": "reason why this is so critical is that",
+    "start": 457.68,
+    "duration": 3.6
+  },
+  {
+    "text": "the quality of an LLM's output is",
+    "start": 459.36,
+    "duration": 3.84
+  },
+  {
+    "text": "directly tied to the quality of the",
+    "start": 461.28,
+    "duration": 3.76
+  },
+  {
+    "text": "context you give it. Two people can use",
+    "start": 463.2,
+    "duration": 3.76
+  },
+  {
+    "text": "the same model and get wildly different",
+    "start": 465.04,
+    "duration": 3.48
+  },
+  {
+    "text": "results based on how well they're",
+    "start": 466.96,
+    "duration": 3.68
+  },
+  {
+    "text": "engineering the context. If you take one",
+    "start": 468.52,
+    "duration": 3.6
+  },
+  {
+    "text": "thing from this video for your career,",
+    "start": 470.64,
+    "duration": 3.52
+  },
+  {
+    "text": "let it be this. The engineers who master",
+    "start": 472.12,
+    "duration": 3.56
+  },
+  {
+    "text": "context engineering are the ones",
+    "start": 474.16,
+    "duration": 3.24
+  },
+  {
+    "text": "companies are really wanting to hire",
+    "start": 475.68,
+    "duration": 3.76
+  },
+  {
+    "text": "right now. Concept eight is reasoning",
+    "start": 477.4,
+    "duration": 4.28
+  },
+  {
+    "text": "models. These are a newer breed of LLMs",
+    "start": 479.44,
+    "duration": 3.76
+  },
+  {
+    "text": "that have been specifically trained to",
+    "start": 481.68,
+    "duration": 3.4
+  },
+  {
+    "text": "think step-by-step before generating an",
+    "start": 483.2,
+    "duration": 3.72
+  },
+  {
+    "text": "answer. Regular LLMs respond",
+    "start": 485.08,
+    "duration": 3.88
+  },
+  {
+    "text": "immediately. They generate tokens one",
+    "start": 486.92,
+    "duration": 4.08
+  },
+  {
+    "text": "after the other without pausing to plan.",
+    "start": 488.96,
+    "duration": 3.6
+  },
+  {
+    "text": "Reasoning models, on the other hand,",
+    "start": 491,
+    "duration": 3.52
+  },
+  {
+    "text": "generate an internal chain of thought.",
+    "start": 492.56,
+    "duration": 3.8
+  },
+  {
+    "text": "They break problems down, consider",
+    "start": 494.52,
+    "duration": 3.36
+  },
+  {
+    "text": "different approaches, and work through",
+    "start": 496.36,
+    "duration": 3.2
+  },
+  {
+    "text": "the logic before producing a final",
+    "start": 497.88,
+    "duration": 3.4
+  },
+  {
+    "text": "answer. This is why you'll sometimes see",
+    "start": 499.56,
+    "duration": 3.4
+  },
+  {
+    "text": "an LLM say \"thinking\" before it",
+    "start": 501.28,
+    "duration": 3.76
+  },
+  {
+    "text": "responds. That is the reasoning model at",
+    "start": 502.96,
+    "duration": 3.64
+  },
+  {
+    "text": "work. These models are trained on",
+    "start": 505.04,
+    "duration": 3.08
+  },
+  {
+    "text": "problems with verifiably correct",
+    "start": 506.6,
+    "duration": 3.56
+  },
+  {
+    "text": "answers, like math problems or code that",
+    "start": 508.12,
+    "duration": 3.84
+  },
+  {
+    "text": "can be tested by a compiler, and through",
+    "start": 510.16,
+    "duration": 3.24
+  },
+  {
+    "text": "reinforcement learning, they learn to",
+    "start": 511.96,
+    "duration": 3
+  },
+  {
+    "text": "generate reasoning steps that lead to",
+    "start": 513.4,
+    "duration": 4.16
+  },
+  {
+    "text": "correct solutions. OpenAI's O series and",
+    "start": 514.96,
+    "duration": 4.4
+  },
+  {
+    "text": "DeepSeek are prominent examples.",
+    "start": 517.56,
+    "duration": 3.28
+  },
+  {
+    "text": "Reasoning models are especially",
+    "start": 519.36,
+    "duration": 3.6
+  },
+  {
+    "text": "important for agents because complex",
+    "start": 520.84,
+    "duration": 4.28
+  },
+  {
+    "text": "multi-step tasks require planning, not",
+    "start": 522.96,
+    "duration": 4.44
+  },
+  {
+    "text": "just pattern matching. Concept nine is",
+    "start": 525.12,
+    "duration": 4.88
+  },
+  {
+    "text": "multimodal AI. Early LLMs could only",
+    "start": 527.4,
+    "duration": 4.6
+  },
+  {
+    "text": "process text. Multimodal models can",
+    "start": 530,
+    "duration": 4.64
+  },
+  {
+    "text": "handle text, images, audio, video, and",
+    "start": 532,
+    "duration": 4.88
+  },
+  {
+    "text": "more, both as inputs and outputs. This",
+    "start": 534.64,
+    "duration": 4.08
+  },
+  {
+    "text": "is a big deal because the real world",
+    "start": 536.88,
+    "duration": 3.76
+  },
+  {
+    "text": "obviously isn't just text. You might",
+    "start": 538.72,
+    "duration": 3.8
+  },
+  {
+    "text": "want an AI to analyze a photo of a",
+    "start": 540.64,
+    "duration": 3.6
+  },
+  {
+    "text": "whiteboard from a meeting, transcribe a",
+    "start": 542.52,
+    "duration": 3.56
+  },
+  {
+    "text": "voice memo, generate an image from a",
+    "start": 544.24,
+    "duration": 3.84
+  },
+  {
+    "text": "description, or understand a video.",
+    "start": 546.08,
+    "duration": 4.2
+  },
+  {
+    "text": "Multimodal models can do all of this.",
+    "start": 548.08,
+    "duration": 3.6
+  },
+  {
+    "text": "What's fascinating from a technical",
+    "start": 550.28,
+    "duration": 2.84
+  },
+  {
+    "text": "standpoint is that models trained on",
+    "start": 551.68,
+    "duration": 3.36
+  },
+  {
+    "text": "multiple data types actually develop a",
+    "start": 553.12,
+    "duration": 3.76
+  },
+  {
+    "text": "deeper understanding. A model that has",
+    "start": 555.04,
+    "duration": 4.2
+  },
+  {
+    "text": "seen both images of cats and text about",
+    "start": 556.88,
+    "duration": 4.48
+  },
+  {
+    "text": "cats understands the concept more richly",
+    "start": 559.24,
+    "duration": 4.28
+  },
+  {
+    "text": "than a text-only model. For engineers,",
+    "start": 561.36,
+    "duration": 4.08
+  },
+  {
+    "text": "this opens up enormous possibilities,",
+    "start": 563.52,
+    "duration": 3.88
+  },
+  {
+    "text": "from accessibility tools to medical",
+    "start": 565.44,
+    "duration": 4.2
+  },
+  {
+    "text": "systems that analyze scans alongside",
+    "start": 567.4,
+    "duration": 4.76
+  },
+  {
+    "text": "patient notes. And finally, last but not",
+    "start": 569.64,
+    "duration": 4.96
+  },
+  {
+    "text": "least, number 10 is mixture of experts",
+    "start": 572.16,
+    "duration": 5
+  },
+  {
+    "text": "or MoE. This one's more under the hood,",
+    "start": 574.6,
+    "duration": 4.64
+  },
+  {
+    "text": "but I would argue it's one of the most",
+    "start": 577.16,
+    "duration": 3.92
+  },
+  {
+    "text": "under-appreciated breakthroughs in LLM",
+    "start": 579.24,
+    "duration": 4.12
+  },
+  {
+    "text": "architecture. The idea has actually been",
+    "start": 581.08,
+    "duration": 4.8
+  },
+  {
+    "text": "around since 1991, but it's never been",
+    "start": 583.36,
+    "duration": 4.36
+  },
+  {
+    "text": "more relevant than now. Instead of",
+    "start": 585.88,
+    "duration": 4
+  },
+  {
+    "text": "having one massive neural network where",
+    "start": 587.72,
+    "duration": 4
+  },
+  {
+    "text": "every parameter activates for every",
+    "start": 589.88,
+    "duration": 3.96
+  },
+  {
+    "text": "input, MOE divides the model into",
+    "start": 591.72,
+    "duration": 4.6
+  },
+  {
+    "text": "specialized sub-networks, the experts. A",
+    "start": 593.84,
+    "duration": 4.44
+  },
+  {
+    "text": "routing mechanism then decides which",
+    "start": 596.32,
+    "duration": 4.4
+  },
+  {
+    "text": "experts to activate for which input. So,",
+    "start": 598.28,
+    "duration": 4.24
+  },
+  {
+    "text": "you might have a model with hundreds of",
+    "start": 600.72,
+    "duration": 3.68
+  },
+  {
+    "text": "billions of total parameters, but for",
+    "start": 602.52,
+    "duration": 4.28
+  },
+  {
+    "text": "any given query, it only uses a fraction",
+    "start": 604.4,
+    "duration": 4.6
+  },
+  {
+    "text": "of them, whichever experts are most",
+    "start": 606.8,
+    "duration": 4.24
+  },
+  {
+    "text": "relevant. The result is the intelligence",
+    "start": 609,
+    "duration": 4.12
+  },
+  {
+    "text": "of a huge model with the speed and cost",
+    "start": 611.04,
+    "duration": 4
+  },
+  {
+    "text": "efficiency of a much smaller one. This",
+    "start": 613.12,
+    "duration": 3.88
+  },
+  {
+    "text": "is how companies are scaling AI without",
+    "start": 615.04,
+    "duration": 3.84
+  },
+  {
+    "text": "cost spiraling out of control, and it's",
+    "start": 617,
+    "duration": 3.76
+  },
+  {
+    "text": "a big reason why AI models have gotten",
+    "start": 618.88,
+    "duration": 4.44
+  },
+  {
+    "text": "so much better so fast. To sum up, the",
+    "start": 620.76,
+    "duration": 4.52
+  },
+  {
+    "text": "10 AI concepts you need to know are",
+    "start": 623.32,
+    "duration": 5.04
+  },
+  {
+    "text": "LLMs, token and context windows, RAG,",
+    "start": 625.28,
+    "duration": 6
+  },
+  {
+    "text": "fine-tuning, AI agents, MCP, context",
+    "start": 628.36,
+    "duration": 4.56
+  },
+  {
+    "text": "engineering, reasoning models,",
+    "start": 631.28,
+    "duration": 4.44
+  },
+  {
+    "text": "multimodal AI, and mixture of experts.",
+    "start": 632.92,
+    "duration": 4.4
+  },
+  {
+    "text": "These are the fundamental building",
+    "start": 635.72,
+    "duration": 3.6
+  },
+  {
+    "text": "blocks of virtually every AI product",
+    "start": 637.32,
+    "duration": 3.64
+  },
+  {
+    "text": "shipping right now. And that's all I",
+    "start": 639.32,
+    "duration": 3.32
+  },
+  {
+    "text": "have for you in this video. If this",
+    "start": 640.96,
+    "duration": 3.52
+  },
+  {
+    "text": "helped you understand AI better, hit",
+    "start": 642.64,
+    "duration": 3.76
+  },
+  {
+    "text": "that like button, like the video, and",
+    "start": 644.48,
+    "duration": 4.16
+  },
+  {
+    "text": "subscribe. I make videos every week on",
+    "start": 646.4,
+    "duration": 4.2
+  },
+  {
+    "text": "software engineering, tech careers, and",
+    "start": 648.64,
+    "duration": 3.48
+  },
+  {
+    "text": "AI. Thanks for watching, and I'll see",
+    "start": 650.6,
+    "duration": 4.28
+  },
+  {
+    "text": "you in the next one.",
+    "start": 652.12,
+    "duration": 2.76
+  }
+]

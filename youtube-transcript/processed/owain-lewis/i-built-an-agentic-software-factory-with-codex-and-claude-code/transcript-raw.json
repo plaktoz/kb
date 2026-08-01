@@ -1,0 +1,3492 @@
+[
+  {
+    "text": "There's a lot of hype online around AI",
+    "start": 0,
+    "duration": 2.8
+  },
+  {
+    "text": "software factories, and people are",
+    "start": 1.52,
+    "duration": 3.12
+  },
+  {
+    "text": "skeptical for good reason. But, what I",
+    "start": 2.8,
+    "duration": 3.72
+  },
+  {
+    "text": "found is applying these ideas in my own",
+    "start": 4.64,
+    "duration": 3.84
+  },
+  {
+    "text": "workflow has completely changed the way",
+    "start": 6.52,
+    "duration": 3.52
+  },
+  {
+    "text": "I think about building software with AI",
+    "start": 8.48,
+    "duration": 3.04
+  },
+  {
+    "text": "agents. [music] So, this video is going",
+    "start": 10.04,
+    "duration": 3.2
+  },
+  {
+    "text": "to be a complete guide to building an AI",
+    "start": 11.52,
+    "duration": 3.4
+  },
+  {
+    "text": "software factory. We're going to look at",
+    "start": 13.24,
+    "duration": 3.84
+  },
+  {
+    "text": "what a software factory is, how to build",
+    "start": 14.92,
+    "duration": 3.42
+  },
+  {
+    "text": "one, and how to think about applying",
+    "start": 17.08,
+    "duration": 2.76
+  },
+  {
+    "text": "[music] this in your own workflow,",
+    "start": 18.34,
+    "duration": 2.86
+  },
+  {
+    "text": "whether you're a solo developer looking",
+    "start": 19.84,
+    "duration": 3.6
+  },
+  {
+    "text": "to be more productive or an engineering",
+    "start": 21.2,
+    "duration": 3.6
+  },
+  {
+    "text": "leader in a large enterprise",
+    "start": 23.44,
+    "duration": 3.04
+  },
+  {
+    "text": "organization looking to raise the",
+    "start": 24.8,
+    "duration": 3.04
+  },
+  {
+    "text": "quality bar.",
+    "start": 26.48,
+    "duration": 2.44
+  },
+  {
+    "text": "This is one [music] of the most exciting",
+    "start": 27.84,
+    "duration": 3
+  },
+  {
+    "text": "topics in AI and software engineering",
+    "start": 28.92,
+    "duration": 3.679
+  },
+  {
+    "text": "right now. In my opinion, software",
+    "start": 30.84,
+    "duration": 3.28
+  },
+  {
+    "text": "engineering has always been about",
+    "start": 32.599,
+    "duration": 2.881
+  },
+  {
+    "text": "systems thinking [music] and systems",
+    "start": 34.12,
+    "duration": 3.36
+  },
+  {
+    "text": "design, and that's exactly what this",
+    "start": 35.48,
+    "duration": 3.82
+  },
+  {
+    "text": "video is going to be all about. If",
+    "start": 37.48,
+    "duration": 2.56
+  },
+  {
+    "text": "[music] you stick around to the end of",
+    "start": 39.3,
+    "duration": 1.78
+  },
+  {
+    "text": "the video, I'll give away all of the",
+    "start": 40.04,
+    "duration": 2.76
+  },
+  {
+    "text": "code, the resources, the prompts, and",
+    "start": 41.08,
+    "duration": 3.24
+  },
+  {
+    "text": "everything you need to build your own",
+    "start": 42.8,
+    "duration": 3.705
+  },
+  {
+    "text": "software factory. So, let's get into it.",
+    "start": 44.32,
+    "duration": 2.48
+  },
+  {
+    "text": ">> [music]",
+    "start": 46.505,
+    "duration": 1.495
+  },
+  {
+    "text": ">> So, the first question is what is a",
+    "start": 46.8,
+    "duration": 2.44
+  },
+  {
+    "text": "software factory? And it's basically",
+    "start": 48,
+    "duration": 2.64
+  },
+  {
+    "text": "just an extension of everything we've",
+    "start": 49.24,
+    "duration": 2.8
+  },
+  {
+    "text": "already been doing as developers. We're",
+    "start": 50.64,
+    "duration": 3.6
+  },
+  {
+    "text": "just applying AI to the systems and the",
+    "start": 52.04,
+    "duration": 4
+  },
+  {
+    "text": "processes we're already following. So,",
+    "start": 54.24,
+    "duration": 2.6
+  },
+  {
+    "text": "if you think about the typical",
+    "start": 56.04,
+    "duration": 1.88
+  },
+  {
+    "text": "development process, it's pretty",
+    "start": 56.84,
+    "duration": 3
+  },
+  {
+    "text": "straightforward. And so, what happens in",
+    "start": 57.92,
+    "duration": 3.48
+  },
+  {
+    "text": "any software engineering team, whether",
+    "start": 59.84,
+    "duration": 3.32
+  },
+  {
+    "text": "you're working at Google, or Netflix, or",
+    "start": 61.4,
+    "duration": 3.36
+  },
+  {
+    "text": "Amazon, or just whether you're working",
+    "start": 63.16,
+    "duration": 3.08
+  },
+  {
+    "text": "on your own as a solo developer, it's",
+    "start": 64.76,
+    "duration": 3.2
+  },
+  {
+    "text": "pretty much the same thing, right? We",
+    "start": 66.24,
+    "duration": 2.68
+  },
+  {
+    "text": "have",
+    "start": 67.96,
+    "duration": 3.84
+  },
+  {
+    "text": "intent. So, we have customer issues. We",
+    "start": 68.92,
+    "duration": 4.4
+  },
+  {
+    "text": "have things from our PMs or",
+    "start": 71.8,
+    "duration": 4.16
+  },
+  {
+    "text": "stakeholders. We have, you know, things",
+    "start": 73.32,
+    "duration": 4
+  },
+  {
+    "text": "that we decide we want to build as",
+    "start": 75.96,
+    "duration": 3.36
+  },
+  {
+    "text": "developers. We put these into some kind",
+    "start": 77.32,
+    "duration": 4.2
+  },
+  {
+    "text": "of ticketing queue, and then they go",
+    "start": 79.32,
+    "duration": 3.72
+  },
+  {
+    "text": "into the backlog. We refine them a",
+    "start": 81.52,
+    "duration": 2.88
+  },
+  {
+    "text": "little bit, and then we do some kind of",
+    "start": 83.04,
+    "duration": 2.88
+  },
+  {
+    "text": "design phase where we'll take those",
+    "start": 84.4,
+    "duration": 3.96
+  },
+  {
+    "text": "ideas, we'll design them in some way,",
+    "start": 85.92,
+    "duration": 3.48
+  },
+  {
+    "text": "we'll figure out how we're going to",
+    "start": 88.36,
+    "duration": 2.08
+  },
+  {
+    "text": "build these things. What are we",
+    "start": 89.4,
+    "duration": 2.68
+  },
+  {
+    "text": "building? Why are we building it? How",
+    "start": 90.44,
+    "duration": 3.56
+  },
+  {
+    "text": "are we going to build it? Then we do",
+    "start": 92.08,
+    "duration": 3.84
+  },
+  {
+    "text": "some kind of planning where we break",
+    "start": 94,
+    "duration": 3.44
+  },
+  {
+    "text": "that work down into a number of smaller",
+    "start": 95.92,
+    "duration": 4.36
+  },
+  {
+    "text": "tasks or tickets. We give those tasks to",
+    "start": 97.44,
+    "duration": 4.8
+  },
+  {
+    "text": "developers who then do, obviously, the",
+    "start": 100.28,
+    "duration": 3.56
+  },
+  {
+    "text": "the typical development cycle, right? We",
+    "start": 102.24,
+    "duration": 3.64
+  },
+  {
+    "text": "write the code, we do some local and",
+    "start": 103.84,
+    "duration": 4.8
+  },
+  {
+    "text": "manual testing, we do some code review,",
+    "start": 105.88,
+    "duration": 5
+  },
+  {
+    "text": "then we open a pull request on something",
+    "start": 108.64,
+    "duration": 4.24
+  },
+  {
+    "text": "like GitHub, and then we'll have like a",
+    "start": 110.88,
+    "duration": 3.92
+  },
+  {
+    "text": "human review the code, or we'll have",
+    "start": 112.88,
+    "duration": 3.68
+  },
+  {
+    "text": "some kind of automated checks to look",
+    "start": 114.8,
+    "duration": 4.04
+  },
+  {
+    "text": "for problems, bugs. We'll run a bunch of",
+    "start": 116.56,
+    "duration": 4.56
+  },
+  {
+    "text": "other checks and tests as well. Then if",
+    "start": 118.84,
+    "duration": 3.88
+  },
+  {
+    "text": "there are any errors, we go back through",
+    "start": 121.12,
+    "duration": 3.12
+  },
+  {
+    "text": "the cycle. So we're doing a loop here.",
+    "start": 122.72,
+    "duration": 3.64
+  },
+  {
+    "text": "So this is our first development loop.",
+    "start": 124.24,
+    "duration": 3.72
+  },
+  {
+    "text": "We write the code.",
+    "start": 126.36,
+    "duration": 3.679
+  },
+  {
+    "text": "We iterate a couple of times until we",
+    "start": 127.96,
+    "duration": 3.8
+  },
+  {
+    "text": "get the quality high enough. Then",
+    "start": 130.039,
+    "duration": 3.401
+  },
+  {
+    "text": "finally, we merge that code in and then",
+    "start": 131.76,
+    "duration": 4
+  },
+  {
+    "text": "we deploy it. And if you think about",
+    "start": 133.44,
+    "duration": 4.44
+  },
+  {
+    "text": "CI/CD, it's a good analogy to a software",
+    "start": 135.76,
+    "duration": 3.84
+  },
+  {
+    "text": "factory, right? This is an automated",
+    "start": 137.88,
+    "duration": 4.12
+  },
+  {
+    "text": "process. You push your change in and",
+    "start": 139.6,
+    "duration": 4.12
+  },
+  {
+    "text": "then the system or the process will then",
+    "start": 142,
+    "duration": 3.959
+  },
+  {
+    "text": "take that into production. Typically in",
+    "start": 143.72,
+    "duration": 3.76
+  },
+  {
+    "text": "the best software engineering teams,",
+    "start": 145.959,
+    "duration": 2.921
+  },
+  {
+    "text": "you're not manually deploying. You have",
+    "start": 147.48,
+    "duration": 3.64
+  },
+  {
+    "text": "the system that will deploy for you. It",
+    "start": 148.88,
+    "duration": 3.92
+  },
+  {
+    "text": "will take care of, you know, checking",
+    "start": 151.12,
+    "duration": 3
+  },
+  {
+    "text": "that all of the code is working, it's",
+    "start": 152.8,
+    "duration": 3.24
+  },
+  {
+    "text": "well tested. It will deploy it to",
+    "start": 154.12,
+    "duration": 3.72
+  },
+  {
+    "text": "production. If If there are any errors,",
+    "start": 156.04,
+    "duration": 4.08
+  },
+  {
+    "text": "it will even roll back the code for you.",
+    "start": 157.84,
+    "duration": 4.44
+  },
+  {
+    "text": "So this is the CI/CD system. Deploy your",
+    "start": 160.12,
+    "duration": 4.12
+  },
+  {
+    "text": "code into production. Then we have a",
+    "start": 162.28,
+    "duration": 3.92
+  },
+  {
+    "text": "bunch of user feedback. We have customer",
+    "start": 164.24,
+    "duration": 4.16
+  },
+  {
+    "text": "feedback. We have, you know, monitoring",
+    "start": 166.2,
+    "duration": 3.759
+  },
+  {
+    "text": "agents that look for problems in our",
+    "start": 168.4,
+    "duration": 3.16
+  },
+  {
+    "text": "code and then we'll feed all of that",
+    "start": 169.959,
+    "duration": 4.281
+  },
+  {
+    "text": "information back into the the kind of",
+    "start": 171.56,
+    "duration": 4.8
+  },
+  {
+    "text": "starting point here. So this is really",
+    "start": 174.24,
+    "duration": 5.12
+  },
+  {
+    "text": "just a loop or a cycle.",
+    "start": 176.36,
+    "duration": 4.4
+  },
+  {
+    "text": "And when it comes to AI agents, we're",
+    "start": 179.36,
+    "duration": 3.08
+  },
+  {
+    "text": "basically following a similar process.",
+    "start": 180.76,
+    "duration": 3.32
+  },
+  {
+    "text": "We're just applying agents to different",
+    "start": 182.44,
+    "duration": 3.36
+  },
+  {
+    "text": "parts of the process. So this is the",
+    "start": 184.08,
+    "duration": 2.84
+  },
+  {
+    "text": "pipeline we're going to be building. It",
+    "start": 185.8,
+    "duration": 2.64
+  },
+  {
+    "text": "has a bunch of steps. So the first thing",
+    "start": 186.92,
+    "duration": 3.72
+  },
+  {
+    "text": "is we put work into the pipeline. So",
+    "start": 188.44,
+    "duration": 3.64
+  },
+  {
+    "text": "this is stuff we want to do. So I could",
+    "start": 190.64,
+    "duration": 3.08
+  },
+  {
+    "text": "add an item here like I could say",
+    "start": 192.08,
+    "duration": 3.2
+  },
+  {
+    "text": "improve",
+    "start": 193.72,
+    "duration": 3.44
+  },
+  {
+    "text": "the readme. So this is something I might",
+    "start": 195.28,
+    "duration": 3.2
+  },
+  {
+    "text": "want to do, right? Let's create a new",
+    "start": 197.16,
+    "duration": 3.24
+  },
+  {
+    "text": "issue.",
+    "start": 198.48,
+    "duration": 4.16
+  },
+  {
+    "text": "And let's just use a blank issue.",
+    "start": 200.4,
+    "duration": 3.6
+  },
+  {
+    "text": "So this is a really badly defined",
+    "start": 202.64,
+    "duration": 3.04
+  },
+  {
+    "text": "ticket. This is the example of something",
+    "start": 204,
+    "duration": 3.84
+  },
+  {
+    "text": "you might find in a typical engineering",
+    "start": 205.68,
+    "duration": 4.08
+  },
+  {
+    "text": "organization, sadly. You might have a",
+    "start": 207.84,
+    "duration": 3.08
+  },
+  {
+    "text": "ticket that looks like this, right?",
+    "start": 209.76,
+    "duration": 2.8
+  },
+  {
+    "text": "There's no way an agent can do anything",
+    "start": 210.92,
+    "duration": 4.039
+  },
+  {
+    "text": "with this ticket. It has no description,",
+    "start": 212.56,
+    "duration": 4.92
+  },
+  {
+    "text": "no acceptance criteria. If you give this",
+    "start": 214.959,
+    "duration": 3.841
+  },
+  {
+    "text": "to an agent, it's going to try and do",
+    "start": 217.48,
+    "duration": 3.12
+  },
+  {
+    "text": "the work, but it has no idea what it's",
+    "start": 218.8,
+    "duration": 3.719
+  },
+  {
+    "text": "actually meant to be doing. So what we",
+    "start": 220.6,
+    "duration": 4.6
+  },
+  {
+    "text": "want to do is refine these tickets using",
+    "start": 222.519,
+    "duration": 5.321
+  },
+  {
+    "text": "some kind of automated process. Once we",
+    "start": 225.2,
+    "duration": 4.039
+  },
+  {
+    "text": "give this to an agent, the agent will",
+    "start": 227.84,
+    "duration": 3.48
+  },
+  {
+    "text": "then improve the ticket. Then we have a",
+    "start": 229.239,
+    "duration": 4.121
+  },
+  {
+    "text": "ticket that is then ready to implement,",
+    "start": 231.32,
+    "duration": 3.12
+  },
+  {
+    "text": "and then we can kind of run it through",
+    "start": 233.36,
+    "duration": 3.12
+  },
+  {
+    "text": "the pipeline. The agent will then move",
+    "start": 234.44,
+    "duration": 4.2
+  },
+  {
+    "text": "it into implementing. The agent will be",
+    "start": 236.48,
+    "duration": 3.52
+  },
+  {
+    "text": "writing the code. We're going to spawn",
+    "start": 238.64,
+    "duration": 3.92
+  },
+  {
+    "text": "up an agent using a sandbox on a virtual",
+    "start": 240,
+    "duration": 4.84
+  },
+  {
+    "text": "machine or some remote location. The",
+    "start": 242.56,
+    "duration": 3.8
+  },
+  {
+    "text": "agent will write the code. It will run",
+    "start": 244.84,
+    "duration": 2.8
+  },
+  {
+    "text": "all of the tests. It'll run your",
+    "start": 246.36,
+    "duration": 3.52
+  },
+  {
+    "text": "pipeline. Then finally, you'll have a",
+    "start": 247.64,
+    "duration": 3.88
+  },
+  {
+    "text": "pull request that you can review, and",
+    "start": 249.88,
+    "duration": 3.28
+  },
+  {
+    "text": "then finally, we have a change that is",
+    "start": 251.52,
+    "duration": 3.52
+  },
+  {
+    "text": "done. So, essentially, what we're doing",
+    "start": 253.16,
+    "duration": 3.4
+  },
+  {
+    "text": "is just running all of our tickets or",
+    "start": 255.04,
+    "duration": 3.96
+  },
+  {
+    "text": "our tasks through this pipeline, and",
+    "start": 256.56,
+    "duration": 4.08
+  },
+  {
+    "text": "we're going to use agents every single",
+    "start": 259,
+    "duration": 3.2
+  },
+  {
+    "text": "step.",
+    "start": 260.64,
+    "duration": 2.8
+  },
+  {
+    "text": "All right. So, what we're going to do is",
+    "start": 262.2,
+    "duration": 3.52
+  },
+  {
+    "text": "go into the terminal, and this is the",
+    "start": 263.44,
+    "duration": 4
+  },
+  {
+    "text": "code base we're working on. So, this is",
+    "start": 265.72,
+    "duration": 3.76
+  },
+  {
+    "text": "the factory code base. And what I'm",
+    "start": 267.44,
+    "duration": 3.72
+  },
+  {
+    "text": "going to do is spin up a coding agent.",
+    "start": 269.48,
+    "duration": 3.32
+  },
+  {
+    "text": "You can use any coding agent here. I'm",
+    "start": 271.16,
+    "duration": 3.72
+  },
+  {
+    "text": "going to use Neo, which is my own coding",
+    "start": 272.8,
+    "duration": 3.92
+  },
+  {
+    "text": "agent. But honestly, it doesn't really",
+    "start": 274.88,
+    "duration": 3.88
+  },
+  {
+    "text": "matter. You could use any coding agent.",
+    "start": 276.72,
+    "duration": 3.4
+  },
+  {
+    "text": "So, what I'm going to say is something",
+    "start": 278.76,
+    "duration": 4.92
+  },
+  {
+    "text": "like um task to PR.",
+    "start": 280.12,
+    "duration": 5.32
+  },
+  {
+    "text": "So, this will basically take one task or",
+    "start": 283.68,
+    "duration": 3.28
+  },
+  {
+    "text": "ticket, and then it will open a pull",
+    "start": 285.44,
+    "duration": 3.2
+  },
+  {
+    "text": "request. This is going to run the entire",
+    "start": 286.96,
+    "duration": 2.68
+  },
+  {
+    "text": "pipeline. [music]",
+    "start": 288.64,
+    "duration": 2.64
+  },
+  {
+    "text": "I'm going to do nothing else other than",
+    "start": 289.64,
+    "duration": 3.4
+  },
+  {
+    "text": "pass the ticket in.",
+    "start": 291.28,
+    "duration": 3.24
+  },
+  {
+    "text": "So, within the Neo coding agent, you can",
+    "start": 293.04,
+    "duration": 2.92
+  },
+  {
+    "text": "see here that it's running what I call a",
+    "start": 294.52,
+    "duration": 2.198
+  },
+  {
+    "text": "workflow.",
+    "start": 295.96,
+    "duration": 1
+  },
+  {
+    "text": ">> [music]",
+    "start": 296.718,
+    "duration": 1.722
+  },
+  {
+    "text": ">> So, we're not just randomly prompting",
+    "start": 296.96,
+    "duration": 3.36
+  },
+  {
+    "text": "the agent. We're actually just defining",
+    "start": 298.44,
+    "duration": 3.72
+  },
+  {
+    "text": "the entire step-by-step process up",
+    "start": 300.32,
+    "duration": 3.599
+  },
+  {
+    "text": "front, and letting the agent work",
+    "start": 302.16,
+    "duration": 3.2
+  },
+  {
+    "text": "through this. This means we can be very,",
+    "start": 303.919,
+    "duration": 3.279
+  },
+  {
+    "text": "very consistent in our dev process.",
+    "start": 305.36,
+    "duration": 3.36
+  },
+  {
+    "text": "[music] You can see here we're resolving",
+    "start": 307.198,
+    "duration": 3.282
+  },
+  {
+    "text": "the ticket. We're now creating an",
+    "start": 308.72,
+    "duration": 4.16
+  },
+  {
+    "text": "isolated Git work tree. Then we're",
+    "start": 310.48,
+    "duration": 4.439
+  },
+  {
+    "text": "reading the ticket, and we're outlining",
+    "start": 312.88,
+    "duration": 2.96
+  },
+  {
+    "text": "the change. We're making [music] a",
+    "start": 314.919,
+    "duration": 2.801
+  },
+  {
+    "text": "little plan. We're doing the work. You",
+    "start": 315.84,
+    "duration": 3.4
+  },
+  {
+    "text": "can see here now the agent is doing the",
+    "start": 317.72,
+    "duration": 2.84
+  },
+  {
+    "text": "code change. Then we're going to do the",
+    "start": 319.24,
+    "duration": 3.48
+  },
+  {
+    "text": "tests, the reviews. We're going to wait",
+    "start": 320.56,
+    "duration": 3.6
+  },
+  {
+    "text": "for any feedback. We're going to address",
+    "start": 322.72,
+    "duration": 3.12
+  },
+  {
+    "text": "those findings, and then finally, we're",
+    "start": 324.16,
+    "duration": 3.56
+  },
+  {
+    "text": "going to kind of finish this off",
+    "start": 325.84,
+    "duration": 2.973
+  },
+  {
+    "text": "essentially.",
+    "start": 327.72,
+    "duration": 1.4
+  },
+  {
+    "text": ">> [music]",
+    "start": 328.813,
+    "duration": 1.547
+  },
+  {
+    "text": ">> So, this is why I really like the",
+    "start": 329.12,
+    "duration": 4.08
+  },
+  {
+    "text": "workflow approach to agentic coding.",
+    "start": 330.36,
+    "duration": 4.6
+  },
+  {
+    "text": "We're just giving the agent a task.",
+    "start": 333.2,
+    "duration": 3.88
+  },
+  {
+    "text": "We're defining the workflow or the steps",
+    "start": 334.96,
+    "duration": 3.959
+  },
+  {
+    "text": "the agent needs to run through, and then",
+    "start": 337.08,
+    "duration": 3.28
+  },
+  {
+    "text": "we're just letting it run. This is it.",
+    "start": 338.919,
+    "duration": 2.921
+  },
+  {
+    "text": "This is my entire development process",
+    "start": 340.36,
+    "duration": 2.84
+  },
+  {
+    "text": "right now. So, what you'll see here is",
+    "start": 341.84,
+    "duration": 2.8
+  },
+  {
+    "text": "this is the skill that we're using to",
+    "start": 343.2,
+    "duration": 3.16
+  },
+  {
+    "text": "transform our task into a pull request.",
+    "start": 344.64,
+    "duration": 3.32
+  },
+  {
+    "text": "This is really a workflow definition",
+    "start": 346.36,
+    "duration": 3.4
+  },
+  {
+    "text": "more than the skill. If you look at any",
+    "start": 347.96,
+    "duration": 3.48
+  },
+  {
+    "text": "company, if you go and work at Amazon or",
+    "start": 349.76,
+    "duration": 3.32
+  },
+  {
+    "text": "Google, or you look at any engineering",
+    "start": 351.44,
+    "duration": 2.264
+  },
+  {
+    "text": "team,",
+    "start": 353.08,
+    "duration": 0.8
+  },
+  {
+    "text": ">> [music]",
+    "start": 353.704,
+    "duration": 1.616
+  },
+  {
+    "text": ">> every developer is basically following",
+    "start": 353.88,
+    "duration": 3.08
+  },
+  {
+    "text": "the same series of steps, right? We read",
+    "start": 355.32,
+    "duration": 4.16
+  },
+  {
+    "text": "the task, we make a bit of a plan, we",
+    "start": 356.96,
+    "duration": 4
+  },
+  {
+    "text": "implement the code change, we run some",
+    "start": 359.48,
+    "duration": 4
+  },
+  {
+    "text": "tests, we review the code, maybe we even",
+    "start": 360.96,
+    "duration": 4.24
+  },
+  {
+    "text": "use some browser testing for any UI",
+    "start": 363.48,
+    "duration": 3.76
+  },
+  {
+    "text": "work, then we address any findings we",
+    "start": 365.2,
+    "duration": 4.96
+  },
+  {
+    "text": "get on GitHub, then we publish a change",
+    "start": 367.24,
+    "duration": 4.88
+  },
+  {
+    "text": "using a commercial commit, we wait for",
+    "start": 370.16,
+    "duration": 4.32
+  },
+  {
+    "text": "any other feedback or any testing to",
+    "start": 372.12,
+    "duration": 3.6
+  },
+  {
+    "text": "happen,",
+    "start": 374.48,
+    "duration": 2.64
+  },
+  {
+    "text": "we address the feedback and then we give",
+    "start": 375.72,
+    "duration": 3.56
+  },
+  {
+    "text": "the results over to a human to kind of",
+    "start": 377.12,
+    "duration": 3.56
+  },
+  {
+    "text": "review and make a decision about merging",
+    "start": 379.28,
+    "duration": 3.48
+  },
+  {
+    "text": "the change. This is a really simple",
+    "start": 380.68,
+    "duration": 4.68
+  },
+  {
+    "text": "skill, but it's what I use for 99% of",
+    "start": 382.76,
+    "duration": 4.28
+  },
+  {
+    "text": "all of my development work now. I spend",
+    "start": 385.36,
+    "duration": 3.68
+  },
+  {
+    "text": "the time planning and designing, then",
+    "start": 387.04,
+    "duration": 3.48
+  },
+  {
+    "text": "when it comes to actual implementation,",
+    "start": 389.04,
+    "duration": 2.64
+  },
+  {
+    "text": "it's just a case of handing off those",
+    "start": 390.52,
+    "duration": 3.24
+  },
+  {
+    "text": "tasks to an agent. When it comes to",
+    "start": 391.68,
+    "duration": 3.52
+  },
+  {
+    "text": "actually planning out my work, I use a",
+    "start": 393.76,
+    "duration": 2.96
+  },
+  {
+    "text": "really simple skill called plan. This",
+    "start": 395.2,
+    "duration": 3.36
+  },
+  {
+    "text": "will take a take a spec and it will turn",
+    "start": 396.72,
+    "duration": 3.68
+  },
+  {
+    "text": "it into a well-defined ticket. And you",
+    "start": 398.56,
+    "duration": 3.72
+  },
+  {
+    "text": "can see here that it's again really",
+    "start": 400.4,
+    "duration": 3.88
+  },
+  {
+    "text": "really simple. We're just defining the",
+    "start": 402.28,
+    "duration": 3.56
+  },
+  {
+    "text": "template we want for our tickets. We",
+    "start": 404.28,
+    "duration": 3.96
+  },
+  {
+    "text": "have an outcome, we have some context,",
+    "start": 405.84,
+    "duration": 4
+  },
+  {
+    "text": "we have some acceptance criteria to",
+    "start": 408.24,
+    "duration": 4.04
+  },
+  {
+    "text": "test, and any other information that the",
+    "start": 409.84,
+    "duration": 4.12
+  },
+  {
+    "text": "agent might need to complete the task.",
+    "start": 412.28,
+    "duration": 4.639
+  },
+  {
+    "text": "So, you can see here we take a spec. So,",
+    "start": 413.96,
+    "duration": 5.24
+  },
+  {
+    "text": "this takes a brief or a spec and breaks",
+    "start": 416.919,
+    "duration": 3.721
+  },
+  {
+    "text": "it into a number of tickets or optional",
+    "start": 419.2,
+    "duration": 3.24
+  },
+  {
+    "text": "milestones. We're basically just",
+    "start": 420.64,
+    "duration": 3.2
+  },
+  {
+    "text": "planning out our work into a number of",
+    "start": 422.44,
+    "duration": 2.72
+  },
+  {
+    "text": "tasks.",
+    "start": 423.84,
+    "duration": 2.48
+  },
+  {
+    "text": "So, this would be exactly the same",
+    "start": 425.16,
+    "duration": 3.12
+  },
+  {
+    "text": "process whether I was using Claude Code",
+    "start": 426.32,
+    "duration": 4.68
+  },
+  {
+    "text": "or Codex or Pi. The agents you're using",
+    "start": 428.28,
+    "duration": 4.2
+  },
+  {
+    "text": "don't matter as much as everyone thinks",
+    "start": 431,
+    "duration": 3.04
+  },
+  {
+    "text": "they do. Ultimately, the workflow is",
+    "start": 432.48,
+    "duration": 2.88
+  },
+  {
+    "text": "what matters. All of the agents are",
+    "start": 434.04,
+    "duration": 3.12
+  },
+  {
+    "text": "equally capable at this point. So, if",
+    "start": 435.36,
+    "duration": 2.88
+  },
+  {
+    "text": "you go back into our browser, you can",
+    "start": 437.16,
+    "duration": 2.96
+  },
+  {
+    "text": "see now that we've finished this task",
+    "start": 438.24,
+    "duration": 3.6
+  },
+  {
+    "text": "and it is fully ready. You can see here",
+    "start": 440.12,
+    "duration": 4.32
+  },
+  {
+    "text": "we've been given a thumbs up from Codex.",
+    "start": 441.84,
+    "duration": 4.36
+  },
+  {
+    "text": "So, everything is good to go and then we",
+    "start": 444.44,
+    "duration": 3.72
+  },
+  {
+    "text": "can just literally just kind of squash",
+    "start": 446.2,
+    "duration": 3.32
+  },
+  {
+    "text": "merge this",
+    "start": 448.16,
+    "duration": 3.52
+  },
+  {
+    "text": "and we're good to go. So, that was a",
+    "start": 449.52,
+    "duration": 4.72
+  },
+  {
+    "text": "change that we did following a manual",
+    "start": 451.68,
+    "duration": 4.239
+  },
+  {
+    "text": "factory process. What I mean by that is",
+    "start": 454.24,
+    "duration": 3.2
+  },
+  {
+    "text": "we didn't do a single thing. We just",
+    "start": 455.919,
+    "duration": 3.681
+  },
+  {
+    "text": "gave the agent a task. The agent did all",
+    "start": 457.44,
+    "duration": 4.04
+  },
+  {
+    "text": "of the work. We could have gone away,",
+    "start": 459.6,
+    "duration": 3.72
+  },
+  {
+    "text": "come back 20 minutes later and have the",
+    "start": 461.48,
+    "duration": 3.84
+  },
+  {
+    "text": "pull request ready to go. So, the next",
+    "start": 463.32,
+    "duration": 3.44
+  },
+  {
+    "text": "thing we want to do is take this manual",
+    "start": 465.32,
+    "duration": 3.12
+  },
+  {
+    "text": "process and then figure out a way to",
+    "start": 466.76,
+    "duration": 5.12
+  },
+  {
+    "text": "scale this to a more automated system.",
+    "start": 468.44,
+    "duration": 4.28
+  },
+  {
+    "text": "All right. So, what I want to show you",
+    "start": 471.88,
+    "duration": 2.6
+  },
+  {
+    "text": "now is Factory. This is a project that",
+    "start": 472.72,
+    "duration": 2.96
+  },
+  {
+    "text": "I've been building. It's an open-source",
+    "start": 474.48,
+    "duration": 2.36
+  },
+  {
+    "text": "project written in Rust, but it",
+    "start": 475.68,
+    "duration": 2.36
+  },
+  {
+    "text": "essentially [music] encodes all of the",
+    "start": 476.84,
+    "duration": 2.6
+  },
+  {
+    "text": "ideas behind building a software",
+    "start": 478.04,
+    "duration": 3.16
+  },
+  {
+    "text": "factory. So, we're going to use this to",
+    "start": 479.44,
+    "duration": 3.2
+  },
+  {
+    "text": "now build our automated software",
+    "start": 481.2,
+    "duration": 3.24
+  },
+  {
+    "text": "factory. This is the process we're going",
+    "start": 482.64,
+    "duration": 2.92
+  },
+  {
+    "text": "to be following. We're going to take an",
+    "start": 484.44,
+    "duration": 3.4
+  },
+  {
+    "text": "idea. This is the intake step. We're",
+    "start": 485.56,
+    "duration": 4.32
+  },
+  {
+    "text": "then going to run it through a an agent",
+    "start": 487.84,
+    "duration": 3.415
+  },
+  {
+    "text": "to write the specification and create",
+    "start": 489.88,
+    "duration": 2.96
+  },
+  {
+    "text": "[music] the task. We're then going to",
+    "start": 491.255,
+    "duration": 3.265
+  },
+  {
+    "text": "run it through a build step. We'll do",
+    "start": 492.84,
+    "duration": 4.16
+  },
+  {
+    "text": "some testing, review, and then finally",
+    "start": 494.52,
+    "duration": 3.52
+  },
+  {
+    "text": "we'll merge. We're just going to run",
+    "start": 497,
+    "duration": 3.6
+  },
+  {
+    "text": "this as a cycle.",
+    "start": 498.04,
+    "duration": 4.08
+  },
+  {
+    "text": "So, if we look at the workflow, there",
+    "start": 500.6,
+    "duration": 2.92
+  },
+  {
+    "text": "are two stages to [music] this. So, the",
+    "start": 502.12,
+    "duration": 2.72
+  },
+  {
+    "text": "first stage we're going to do is the",
+    "start": 503.52,
+    "duration": 3.28
+  },
+  {
+    "text": "task refinement step. And then the",
+    "start": 504.84,
+    "duration": 3.68
+  },
+  {
+    "text": "second step is the actual build",
+    "start": 506.8,
+    "duration": 4.68
+  },
+  {
+    "text": "pipeline. So, this [music] project is",
+    "start": 508.52,
+    "duration": 4.639
+  },
+  {
+    "text": "just running on your local machine, but",
+    "start": 511.48,
+    "duration": 2.96
+  },
+  {
+    "text": "you can also deploy it to a virtual",
+    "start": 513.159,
+    "duration": 2.44
+  },
+  {
+    "text": "machine as well. So, you could deploy",
+    "start": 514.44,
+    "duration": 2.56
+  },
+  {
+    "text": "this to the cloud. And [music] it's",
+    "start": 515.599,
+    "duration": 3.041
+  },
+  {
+    "text": "basically going to run on a loop looking",
+    "start": 517,
+    "duration": 4.159
+  },
+  {
+    "text": "for tickets or looking for work to do,",
+    "start": 518.64,
+    "duration": 3.88
+  },
+  {
+    "text": "uh updating all of your tasks,",
+    "start": 521.159,
+    "duration": 2.76
+  },
+  {
+    "text": "implementing all of your code for you.",
+    "start": 522.52,
+    "duration": 2.56
+  },
+  {
+    "text": "The only thing you need to do is kind of",
+    "start": 523.919,
+    "duration": 2.707
+  },
+  {
+    "text": "plan out the work and assign it to",
+    "start": 525.08,
+    "duration": 3.04
+  },
+  {
+    "text": "[music] Factory. All right. So, what",
+    "start": 526.626,
+    "duration": 2.534
+  },
+  {
+    "text": "we're going to do is just run the",
+    "start": 528.12,
+    "duration": 2.88
+  },
+  {
+    "text": "project so you can type factory to list",
+    "start": 529.16,
+    "duration": 3.679
+  },
+  {
+    "text": "all of the commands you can run. Let's",
+    "start": 531,
+    "duration": 3.72
+  },
+  {
+    "text": "clear this out and let's just run the",
+    "start": 532.839,
+    "duration": 3.881
+  },
+  {
+    "text": "agent. So, this is going to run on a",
+    "start": 534.72,
+    "duration": 3.6
+  },
+  {
+    "text": "loop basically monitoring your ticket",
+    "start": 536.72,
+    "duration": 3.4
+  },
+  {
+    "text": "queue and for any automated jobs you",
+    "start": 538.32,
+    "duration": 4.2
+  },
+  {
+    "text": "have, you can then run this on a virtual",
+    "start": 540.12,
+    "duration": 3.84
+  },
+  {
+    "text": "machine. You can run it on your local",
+    "start": 542.52,
+    "duration": 3.72
+  },
+  {
+    "text": "computer if you want to. I'm using work",
+    "start": 543.96,
+    "duration": 3.92
+  },
+  {
+    "text": "tree-based isolation, which means every",
+    "start": 546.24,
+    "duration": 2.8
+  },
+  {
+    "text": "time we run an agent, we're going to",
+    "start": 547.88,
+    "duration": 3.36
+  },
+  {
+    "text": "spawn a new get work tree and run it",
+    "start": 549.04,
+    "duration": 3.96
+  },
+  {
+    "text": "there to keep the code isolated. But, if",
+    "start": 551.24,
+    "duration": 4
+  },
+  {
+    "text": "you were running this in production, you",
+    "start": 553,
+    "duration": 3.36
+  },
+  {
+    "text": "could also use something like a Docker",
+    "start": 555.24,
+    "duration": 3.48
+  },
+  {
+    "text": "sandbox if you wanted to.",
+    "start": 556.36,
+    "duration": 3.2
+  },
+  {
+    "text": "Okay. So, we're going to go ahead and",
+    "start": 558.72,
+    "duration": 2.2
+  },
+  {
+    "text": "create a new issue. What we're going to",
+    "start": 559.56,
+    "duration": 2.76
+  },
+  {
+    "text": "do is click up here to create a new",
+    "start": 560.92,
+    "duration": 2.72
+  },
+  {
+    "text": "issue. I'm just going to do a regular",
+    "start": 562.32,
+    "duration": 6.36
+  },
+  {
+    "text": "blank issue here. So, Factory demon",
+    "start": 563.64,
+    "duration": 7.24
+  },
+  {
+    "text": "dies overnight. So, we have a problem",
+    "start": 568.68,
+    "duration": 4.8
+  },
+  {
+    "text": "where I've noticed a behavior. And so,",
+    "start": 570.88,
+    "duration": 4.32
+  },
+  {
+    "text": "what I'm going to do is put in a rough",
+    "start": 573.48,
+    "duration": 3.68
+  },
+  {
+    "text": "description of what happens. Again, I'm",
+    "start": 575.2,
+    "duration": 3.64
+  },
+  {
+    "text": "not explaining to the agent how to solve",
+    "start": 577.16,
+    "duration": 3.36
+  },
+  {
+    "text": "this. I'm just describing the problem or",
+    "start": 578.84,
+    "duration": 3.56
+  },
+  {
+    "text": "the intent I've got.",
+    "start": 580.52,
+    "duration": 3.32
+  },
+  {
+    "text": "And then, we're going to go ahead and",
+    "start": 582.4,
+    "duration": 3.56
+  },
+  {
+    "text": "create this task.",
+    "start": 583.84,
+    "duration": 2.84
+  },
+  {
+    "text": "All right, so what we're going to do is",
+    "start": 585.96,
+    "duration": 2.52
+  },
+  {
+    "text": "add a label called factory ready for",
+    "start": 586.68,
+    "duration": 3.56
+  },
+  {
+    "text": "spec. And when we have this label, the",
+    "start": 588.48,
+    "duration": 3.6
+  },
+  {
+    "text": "agent should then pick this up. So, if",
+    "start": 590.24,
+    "duration": 3.72
+  },
+  {
+    "text": "we go and check this ticket now,",
+    "start": 592.08,
+    "duration": 3.84
+  },
+  {
+    "text": "it has the factory ready and factory",
+    "start": 593.96,
+    "duration": 4.32
+  },
+  {
+    "text": "ready for spec labels. And if we were to",
+    "start": 595.92,
+    "duration": 4.68
+  },
+  {
+    "text": "go back into the terminal, what you",
+    "start": 598.28,
+    "duration": 4.28
+  },
+  {
+    "text": "should see is that the agent will then",
+    "start": 600.6,
+    "duration": 4.4
+  },
+  {
+    "text": "actually pick up that task.",
+    "start": 602.56,
+    "duration": 3.56
+  },
+  {
+    "text": "Okay, so what you can see now is that",
+    "start": 605,
+    "duration": 2.6
+  },
+  {
+    "text": "factory has picked up this task. So,",
+    "start": 606.12,
+    "duration": 3.2
+  },
+  {
+    "text": "this demon has now found that we have a",
+    "start": 607.6,
+    "duration": 3.92
+  },
+  {
+    "text": "label ready for spec. It's found the",
+    "start": 609.32,
+    "duration": 5.2
+  },
+  {
+    "text": "task. And what it's going to do is spawn",
+    "start": 611.52,
+    "duration": 4.52
+  },
+  {
+    "text": "a new agent. So, you can see here that",
+    "start": 614.52,
+    "duration": 4.12
+  },
+  {
+    "text": "it's delegated it to codex. And it's",
+    "start": 616.04,
+    "duration": 5.28
+  },
+  {
+    "text": "spawned up a new git work tree. What I",
+    "start": 618.64,
+    "duration": 4
+  },
+  {
+    "text": "want to quickly show you is how this is",
+    "start": 621.32,
+    "duration": 2.72
+  },
+  {
+    "text": "configured. So, you can see here that we",
+    "start": 622.64,
+    "duration": 3.76
+  },
+  {
+    "text": "have a source, which is GitHub issues,",
+    "start": 624.04,
+    "duration": 4
+  },
+  {
+    "text": "and then we have a trigger. So, anytime",
+    "start": 626.4,
+    "duration": 3.8
+  },
+  {
+    "text": "we have a label factory ready for spec,",
+    "start": 628.04,
+    "duration": 3.36
+  },
+  {
+    "text": "we're basically going to run this",
+    "start": 630.2,
+    "duration": 2.56
+  },
+  {
+    "text": "particular workflow. And if you go",
+    "start": 631.4,
+    "duration": 3.48
+  },
+  {
+    "text": "through this triage workflow, this is",
+    "start": 632.76,
+    "duration": 3.48
+  },
+  {
+    "text": "essentially what the agent is now",
+    "start": 634.88,
+    "duration": 3.44
+  },
+  {
+    "text": "running. It says, \"Your goal is to turn",
+    "start": 636.24,
+    "duration": 3.92
+  },
+  {
+    "text": "the GitHub issue into a clear",
+    "start": 638.32,
+    "duration": 4
+  },
+  {
+    "text": "implementation ready task for a human or",
+    "start": 640.16,
+    "duration": 4.52
+  },
+  {
+    "text": "the agent.\" And then, firstly, we",
+    "start": 642.32,
+    "duration": 4.4
+  },
+  {
+    "text": "understand the work. We then create the",
+    "start": 644.68,
+    "duration": 3.92
+  },
+  {
+    "text": "ticket specification. We're basically",
+    "start": 646.72,
+    "duration": 4.2
+  },
+  {
+    "text": "following a template. And then, we kind",
+    "start": 648.6,
+    "duration": 4.08
+  },
+  {
+    "text": "of move the ticket into ready to",
+    "start": 650.92,
+    "duration": 3.68
+  },
+  {
+    "text": "implement. So, essentially, this is the",
+    "start": 652.68,
+    "duration": 3.6
+  },
+  {
+    "text": "triage workflow. This is just a simple",
+    "start": 654.6,
+    "duration": 3.239
+  },
+  {
+    "text": "prompt. You could have this do anything",
+    "start": 656.28,
+    "duration": 4.4
+  },
+  {
+    "text": "you like. It's absolutely fine.",
+    "start": 657.839,
+    "duration": 4.761
+  },
+  {
+    "text": "And then, the other implement workflow",
+    "start": 660.68,
+    "duration": 3.76
+  },
+  {
+    "text": "that we're running is this. So, this is",
+    "start": 662.6,
+    "duration": 3
+  },
+  {
+    "text": "what we do when we want to actually",
+    "start": 664.44,
+    "duration": 3.28
+  },
+  {
+    "text": "implement the task. So, \"Your goal is to",
+    "start": 665.6,
+    "duration": 3.72
+  },
+  {
+    "text": "implement the GitHub issue supplied to",
+    "start": 667.72,
+    "duration": 4.8
+  },
+  {
+    "text": "you. Do not merge or auto merge. Use the",
+    "start": 669.32,
+    "duration": 5.64
+  },
+  {
+    "text": "GitHub CLI to pull the issue.",
+    "start": 672.52,
+    "duration": 4.08
+  },
+  {
+    "text": "We're then going to implement the code.",
+    "start": 674.96,
+    "duration": 3
+  },
+  {
+    "text": "We're going to kind of just run through",
+    "start": 676.6,
+    "duration": 4.04
+  },
+  {
+    "text": "this massive prompt, essentially. Um but",
+    "start": 677.96,
+    "duration": 4.16
+  },
+  {
+    "text": "this could be a simple step-by-step",
+    "start": 680.64,
+    "duration": 3.68
+  },
+  {
+    "text": "workflow, anything you want, basically.",
+    "start": 682.12,
+    "duration": 3.719
+  },
+  {
+    "text": "This describes to the agent how to",
+    "start": 684.32,
+    "duration": 3.12
+  },
+  {
+    "text": "actually execute the work when it's",
+    "start": 685.839,
+    "duration": 3.761
+  },
+  {
+    "text": "given a task. So, factory will move",
+    "start": 687.44,
+    "duration": 3.96
+  },
+  {
+    "text": "stuff through the pipeline without us",
+    "start": 689.6,
+    "duration": 3.6
+  },
+  {
+    "text": "doing anything. It's working on the",
+    "start": 691.4,
+    "duration": 3.32
+  },
+  {
+    "text": "ticket. It's picked it up. It's moved it",
+    "start": 693.2,
+    "duration": 3.96
+  },
+  {
+    "text": "into this status. As it works on it, it",
+    "start": 694.72,
+    "duration": 4.2
+  },
+  {
+    "text": "should move it into the next status as",
+    "start": 697.16,
+    "duration": 3.48
+  },
+  {
+    "text": "well. So, you can see here that the",
+    "start": 698.92,
+    "duration": 3.92
+  },
+  {
+    "text": "agent has now updated our task. It was a",
+    "start": 700.64,
+    "duration": 4.8
+  },
+  {
+    "text": "very vague, ill-described problem, and",
+    "start": 702.84,
+    "duration": 4.32
+  },
+  {
+    "text": "the agent has now reviewed all of our",
+    "start": 705.44,
+    "duration": 3.2
+  },
+  {
+    "text": "code, has inspected everything, has",
+    "start": 707.16,
+    "duration": 3.48
+  },
+  {
+    "text": "actually found the bug, has reproduced",
+    "start": 708.64,
+    "duration": 3.76
+  },
+  {
+    "text": "the bug, and then it's updated our",
+    "start": 710.64,
+    "duration": 3.28
+  },
+  {
+    "text": "ticket with all of the information we",
+    "start": 712.4,
+    "duration": 3.12
+  },
+  {
+    "text": "need to hand this off to either a human",
+    "start": 713.92,
+    "duration": 3.8
+  },
+  {
+    "text": "or an agent to go and fix the problem.",
+    "start": 715.52,
+    "duration": 4.12
+  },
+  {
+    "text": "The The way this works is it's",
+    "start": 717.72,
+    "duration": 4.24
+  },
+  {
+    "text": "completely customizable. So, you could",
+    "start": 719.64,
+    "duration": 4.64
+  },
+  {
+    "text": "imagine if you are a public-facing team",
+    "start": 721.96,
+    "duration": 4.04
+  },
+  {
+    "text": "where users or customers are reporting",
+    "start": 724.28,
+    "duration": 3.76
+  },
+  {
+    "text": "bugs, you could run this automation",
+    "start": 726,
+    "duration": 4.24
+  },
+  {
+    "text": "workflow over the inputs, the customer",
+    "start": 728.04,
+    "duration": 5.04
+  },
+  {
+    "text": "requests, and take their vague ideas and",
+    "start": 730.24,
+    "duration": 4.56
+  },
+  {
+    "text": "turn them into actionable tickets that a",
+    "start": 733.08,
+    "duration": 3.36
+  },
+  {
+    "text": "developer could then pick up and work",
+    "start": 734.8,
+    "duration": 3.88
+  },
+  {
+    "text": "on. This is really useful cuz often when",
+    "start": 736.44,
+    "duration": 4.08
+  },
+  {
+    "text": "you get a ticket from a customer, there",
+    "start": 738.68,
+    "duration": 4.28
+  },
+  {
+    "text": "may be missing information, the problem",
+    "start": 740.52,
+    "duration": 4.56
+  },
+  {
+    "text": "may not be valid. So, you can use an",
+    "start": 742.96,
+    "duration": 3.88
+  },
+  {
+    "text": "agent to triage any of the work that",
+    "start": 745.08,
+    "duration": 3.64
+  },
+  {
+    "text": "comes into your queue. All right. So,",
+    "start": 746.84,
+    "duration": 3.48
+  },
+  {
+    "text": "this ticket is now ready to go. What I'm",
+    "start": 748.72,
+    "duration": 3.2
+  },
+  {
+    "text": "going to do is just add this factory",
+    "start": 750.32,
+    "duration": 3.44
+  },
+  {
+    "text": "ready to implement label. I'm happy with",
+    "start": 751.92,
+    "duration": 3.48
+  },
+  {
+    "text": "this ticket. I want the agent to work on",
+    "start": 753.76,
+    "duration": 3.76
+  },
+  {
+    "text": "it. Again, I could be working on maybe",
+    "start": 755.4,
+    "duration": 4.68
+  },
+  {
+    "text": "10, 20 tickets at a time here. This is",
+    "start": 757.52,
+    "duration": 4.08
+  },
+  {
+    "text": "kind of just a single ticket, but the",
+    "start": 760.08,
+    "duration": 3.759
+  },
+  {
+    "text": "idea of the factory is that you can run",
+    "start": 761.6,
+    "duration": 4
+  },
+  {
+    "text": "lots and lots of things all at the same",
+    "start": 763.839,
+    "duration": 2.761
+  },
+  {
+    "text": "time.",
+    "start": 765.6,
+    "duration": 2.12
+  },
+  {
+    "text": "So, what you can see is that the agent",
+    "start": 766.6,
+    "duration": 2.72
+  },
+  {
+    "text": "has now picked this up. So, you can see",
+    "start": 767.72,
+    "duration": 3.119
+  },
+  {
+    "text": "it's detected we have this ready to",
+    "start": 769.32,
+    "duration": 3.08
+  },
+  {
+    "text": "implement label. And again, we're not",
+    "start": 770.839,
+    "duration": 2.921
+  },
+  {
+    "text": "doing anything. We're just moving the",
+    "start": 772.4,
+    "duration": 3.04
+  },
+  {
+    "text": "tasks through the task board. We're",
+    "start": 773.76,
+    "duration": 4.04
+  },
+  {
+    "text": "coordinating the work. But the factory",
+    "start": 775.44,
+    "duration": 4.399
+  },
+  {
+    "text": "system is running the entire pipeline",
+    "start": 777.8,
+    "duration": 3.72
+  },
+  {
+    "text": "for us. This could be running hundreds",
+    "start": 779.839,
+    "duration": 2.841
+  },
+  {
+    "text": "and hundreds of tickets at the same",
+    "start": 781.52,
+    "duration": 3.44
+  },
+  {
+    "text": "time. If you work in a team, obviously,",
+    "start": 782.68,
+    "duration": 3.6
+  },
+  {
+    "text": "this will be coordinating all of your",
+    "start": 784.96,
+    "duration": 3.32
+  },
+  {
+    "text": "team's work.",
+    "start": 786.28,
+    "duration": 3.68
+  },
+  {
+    "text": "And we just need to now wait for the",
+    "start": 788.28,
+    "duration": 3.48
+  },
+  {
+    "text": "agent to kind of run through and fix the",
+    "start": 789.96,
+    "duration": 3.52
+  },
+  {
+    "text": "issue for us. There's nothing else to it",
+    "start": 791.76,
+    "duration": 2.76
+  },
+  {
+    "text": "than this.",
+    "start": 793.48,
+    "duration": 2.28
+  },
+  {
+    "text": "Another really important concept to",
+    "start": 794.52,
+    "duration": 3.08
+  },
+  {
+    "text": "think about is sandboxing. So, when we",
+    "start": 795.76,
+    "duration": 4.04
+  },
+  {
+    "text": "run these kind of systems in production,",
+    "start": 797.6,
+    "duration": 3.68
+  },
+  {
+    "text": "you want to be a bit careful about",
+    "start": 799.8,
+    "duration": 2.92
+  },
+  {
+    "text": "sandboxing the workers to make sure",
+    "start": 801.28,
+    "duration": 3.72
+  },
+  {
+    "text": "they're not destroying anything. So, one",
+    "start": 802.72,
+    "duration": 4
+  },
+  {
+    "text": "A to this problem is using something",
+    "start": 805,
+    "duration": 3.8
+  },
+  {
+    "text": "like Docker sandboxes. So, Docker",
+    "start": 806.72,
+    "duration": 3.88
+  },
+  {
+    "text": "recently released a sandboxing feature",
+    "start": 808.8,
+    "duration": 3.64
+  },
+  {
+    "text": "which I've been experimenting with.",
+    "start": 810.6,
+    "duration": 3.12
+  },
+  {
+    "text": "I'll be honest, I'm still new to",
+    "start": 812.44,
+    "duration": 2.92
+  },
+  {
+    "text": "sandboxing and still figuring out the",
+    "start": 813.72,
+    "duration": 3.84
+  },
+  {
+    "text": "right approach myself, but this is the",
+    "start": 815.36,
+    "duration": 4.24
+  },
+  {
+    "text": "current implementation strategy I'm",
+    "start": 817.56,
+    "duration": 3.68
+  },
+  {
+    "text": "using at the moment.",
+    "start": 819.6,
+    "duration": 3.36
+  },
+  {
+    "text": "Locally, what I will typically do is use",
+    "start": 821.24,
+    "duration": 3.28
+  },
+  {
+    "text": "Git worktrees.",
+    "start": 822.96,
+    "duration": 3.92
+  },
+  {
+    "text": "But when working on a VM or like in a",
+    "start": 824.52,
+    "duration": 4.28
+  },
+  {
+    "text": "team environment, you definitely want",
+    "start": 826.88,
+    "duration": 4.44
+  },
+  {
+    "text": "some kind of good sandboxing solution.",
+    "start": 828.8,
+    "duration": 4.84
+  },
+  {
+    "text": "So, Docker sandboxes are one solution,",
+    "start": 831.32,
+    "duration": 3.92
+  },
+  {
+    "text": "regular Docker containers, there are a",
+    "start": 833.64,
+    "duration": 4.08
+  },
+  {
+    "text": "whole bunch of different solutions. And",
+    "start": 835.24,
+    "duration": 4
+  },
+  {
+    "text": "I'll probably do a video on this topic",
+    "start": 837.72,
+    "duration": 3.04
+  },
+  {
+    "text": "because it's quite an interesting and",
+    "start": 839.24,
+    "duration": 3.24
+  },
+  {
+    "text": "important one for for any developer",
+    "start": 840.76,
+    "duration": 3.2
+  },
+  {
+    "text": "right now. So, whenever we talk about",
+    "start": 842.48,
+    "duration": 3.36
+  },
+  {
+    "text": "automated systems or things like this,",
+    "start": 843.96,
+    "duration": 3.4
+  },
+  {
+    "text": "there are always the same objections",
+    "start": 845.84,
+    "duration": 3.72
+  },
+  {
+    "text": "that come up. The first one is cost.",
+    "start": 847.36,
+    "duration": 4.48
+  },
+  {
+    "text": "Yes, if you're automating your system or",
+    "start": 849.56,
+    "duration": 4.36
+  },
+  {
+    "text": "running agents, it will cost you money.",
+    "start": 851.84,
+    "duration": 3.6
+  },
+  {
+    "text": "I'm not using this to do work that I",
+    "start": 853.92,
+    "duration": 3.08
+  },
+  {
+    "text": "wouldn't do otherwise anyway, though.",
+    "start": 855.44,
+    "duration": 3.32
+  },
+  {
+    "text": "This is kind of the key point. This is",
+    "start": 857,
+    "duration": 3.48
+  },
+  {
+    "text": "not necessarily something that's aimed",
+    "start": 858.76,
+    "duration": 3.88
+  },
+  {
+    "text": "at like solo developers necessarily.",
+    "start": 860.48,
+    "duration": 3.64
+  },
+  {
+    "text": "This is more of a thing you would run at",
+    "start": 862.64,
+    "duration": 4.04
+  },
+  {
+    "text": "scale in an engineering organization.",
+    "start": 864.12,
+    "duration": 4.36
+  },
+  {
+    "text": "So, if you're if you're using any kind",
+    "start": 866.68,
+    "duration": 3.88
+  },
+  {
+    "text": "of automated flow, it will use tokens.",
+    "start": 868.48,
+    "duration": 4.04
+  },
+  {
+    "text": "But the way Factory is designed is to be",
+    "start": 870.56,
+    "duration": 3.279
+  },
+  {
+    "text": "largely deterministic. So, when we're",
+    "start": 872.52,
+    "duration": 4.2
+  },
+  {
+    "text": "polling GitHub looking for work to do,",
+    "start": 873.839,
+    "duration": 4.721
+  },
+  {
+    "text": "we're not wasting any tokens. We're only",
+    "start": 876.72,
+    "duration": 3.96
+  },
+  {
+    "text": "executing agents or using tokens when",
+    "start": 878.56,
+    "duration": 4.2
+  },
+  {
+    "text": "there's actually work to do. So, this is",
+    "start": 880.68,
+    "duration": 3.72
+  },
+  {
+    "text": "actually very very token efficient. You",
+    "start": 882.76,
+    "duration": 4.48
+  },
+  {
+    "text": "could run this running 24/7 every single",
+    "start": 884.4,
+    "duration": 4.08
+  },
+  {
+    "text": "day",
+    "start": 887.24,
+    "duration": 2.92
+  },
+  {
+    "text": "and it's only going to use tokens when",
+    "start": 888.48,
+    "duration": 3.24
+  },
+  {
+    "text": "there's actual work to do. So, if",
+    "start": 890.16,
+    "duration": 3.64
+  },
+  {
+    "text": "there's a genuine ticket to work on,",
+    "start": 891.72,
+    "duration": 3.76
+  },
+  {
+    "text": "it's going to use tokens. Otherwise,",
+    "start": 893.8,
+    "duration": 3.76
+  },
+  {
+    "text": "it's going to sit there polling using",
+    "start": 895.48,
+    "duration": 3.8
+  },
+  {
+    "text": "largely deterministic code. So, it's not",
+    "start": 897.56,
+    "duration": 3.64
+  },
+  {
+    "text": "going to burn a load of tokens. The",
+    "start": 899.28,
+    "duration": 3.559
+  },
+  {
+    "text": "other objection that comes up is that AI",
+    "start": 901.2,
+    "duration": 3.12
+  },
+  {
+    "text": "isn't smart enough and I definitely",
+    "start": 902.839,
+    "duration": 2.881
+  },
+  {
+    "text": "agree with this. There are some tasks",
+    "start": 904.32,
+    "duration": 3.36
+  },
+  {
+    "text": "you don't want to hand off fully to an",
+    "start": 905.72,
+    "duration": 3.48
+  },
+  {
+    "text": "agent. You sometimes want to be in the",
+    "start": 907.68,
+    "duration": 3.4
+  },
+  {
+    "text": "loop on certain tasks. And then the",
+    "start": 909.2,
+    "duration": 3.32
+  },
+  {
+    "text": "other objection is that sometimes you",
+    "start": 911.08,
+    "duration": 3.04
+  },
+  {
+    "text": "want to work interactively, right? So,",
+    "start": 912.52,
+    "duration": 2.8
+  },
+  {
+    "text": "sometimes you still want to be in the",
+    "start": 914.12,
+    "duration": 3.32
+  },
+  {
+    "text": "mix. You still want to be involved in",
+    "start": 915.32,
+    "duration": 3.88
+  },
+  {
+    "text": "the process, but you can still do that,",
+    "start": 917.44,
+    "duration": 3.92
+  },
+  {
+    "text": "right? You you can use this sometimes.",
+    "start": 919.2,
+    "duration": 3.56
+  },
+  {
+    "text": "Sometimes you'll want to be iterating",
+    "start": 921.36,
+    "duration": 2.64
+  },
+  {
+    "text": "with your agents, and that's totally",
+    "start": 922.76,
+    "duration": 2.96
+  },
+  {
+    "text": "fine. This pipeline isn't for every",
+    "start": 924,
+    "duration": 4.12
+  },
+  {
+    "text": "single situation. So, as agents get more",
+    "start": 925.72,
+    "duration": 4.12
+  },
+  {
+    "text": "capable, I think these pipelines become",
+    "start": 928.12,
+    "duration": 3.84
+  },
+  {
+    "text": "even more important because the typical",
+    "start": 929.84,
+    "duration": 3.88
+  },
+  {
+    "text": "task in my development workflow, an",
+    "start": 931.96,
+    "duration": 3.28
+  },
+  {
+    "text": "agent will run on it for maybe 20",
+    "start": 933.72,
+    "duration": 3.52
+  },
+  {
+    "text": "minutes to even up to an hour. The",
+    "start": 935.24,
+    "duration": 4.28
+  },
+  {
+    "text": "agents are doing extensive code review.",
+    "start": 937.24,
+    "duration": 3.8
+  },
+  {
+    "text": "They're doing a lot of CI checks.",
+    "start": 939.52,
+    "duration": 3.64
+  },
+  {
+    "text": "They're doing a lot of work. And so,",
+    "start": 941.04,
+    "duration": 3.92
+  },
+  {
+    "text": "it's very painful to be sitting in the",
+    "start": 943.16,
+    "duration": 4.2
+  },
+  {
+    "text": "terminal watching hundreds of different",
+    "start": 944.96,
+    "duration": 4.64
+  },
+  {
+    "text": "tasks or working on many things at once.",
+    "start": 947.36,
+    "duration": 3.92
+  },
+  {
+    "text": "It's very very painful.",
+    "start": 949.6,
+    "duration": 3.84
+  },
+  {
+    "text": "So, by offloading this process to a",
+    "start": 951.28,
+    "duration": 5
+  },
+  {
+    "text": "virtual machine or a system like this,",
+    "start": 953.44,
+    "duration": 4.16
+  },
+  {
+    "text": "you can just basically hand off the",
+    "start": 956.28,
+    "duration": 2.88
+  },
+  {
+    "text": "work. You can go do something else. You",
+    "start": 957.6,
+    "duration": 3.76
+  },
+  {
+    "text": "can kind of come back 2 hours later and",
+    "start": 959.16,
+    "duration": 3.76
+  },
+  {
+    "text": "find that all of the work is done. You",
+    "start": 961.36,
+    "duration": 2.88
+  },
+  {
+    "text": "can then review the code changes,",
+    "start": 962.92,
+    "duration": 3.44
+  },
+  {
+    "text": "obviously, make any adjustments you",
+    "start": 964.24,
+    "duration": 3.48
+  },
+  {
+    "text": "want, but basically, you don't have to",
+    "start": 966.36,
+    "duration": 3.84
+  },
+  {
+    "text": "be tied to your keyboard anymore.",
+    "start": 967.72,
+    "duration": 3.64
+  },
+  {
+    "text": "So, this project is currently open",
+    "start": 970.2,
+    "duration": 3.08
+  },
+  {
+    "text": "source, and I don't think it's suitable",
+    "start": 971.36,
+    "duration": 3.4
+  },
+  {
+    "text": "for everyone right now. It's still very",
+    "start": 973.28,
+    "duration": 3.16
+  },
+  {
+    "text": "early stages, but the main thing to",
+    "start": 974.76,
+    "duration": 3.12
+  },
+  {
+    "text": "think about are the principles and the",
+    "start": 976.44,
+    "duration": 3.64
+  },
+  {
+    "text": "ideas. It's not all that difficult to",
+    "start": 977.88,
+    "duration": 4.68
+  },
+  {
+    "text": "build your own version of something like",
+    "start": 980.08,
+    "duration": 4.28
+  },
+  {
+    "text": "this. You could use GitHub actions, for",
+    "start": 982.56,
+    "duration": 3.68
+  },
+  {
+    "text": "example, which allows you to run an",
+    "start": 984.36,
+    "duration": 3.44
+  },
+  {
+    "text": "automation. So, for example, with GitHub",
+    "start": 986.24,
+    "duration": 3.96
+  },
+  {
+    "text": "actions, every time a customer raises a",
+    "start": 987.8,
+    "duration": 4.4
+  },
+  {
+    "text": "ticket, you could run an agent to triage",
+    "start": 990.2,
+    "duration": 3.92
+  },
+  {
+    "text": "the ticket. And every time we add a",
+    "start": 992.2,
+    "duration": 3.28
+  },
+  {
+    "text": "label to a ticket, you could have an",
+    "start": 994.12,
+    "duration": 3.6
+  },
+  {
+    "text": "agent that will run. So, GitHub actions",
+    "start": 995.48,
+    "duration": 3.76
+  },
+  {
+    "text": "is another great solution for this kind",
+    "start": 997.72,
+    "duration": 3.56
+  },
+  {
+    "text": "of problem as well.",
+    "start": 999.24,
+    "duration": 2.92
+  },
+  {
+    "text": "All right. So, the next concept we're",
+    "start": 1001.28,
+    "duration": 2.36
+  },
+  {
+    "text": "going to look at is one of my favorites,",
+    "start": 1002.16,
+    "duration": 3.24
+  },
+  {
+    "text": "which is this concept of a scheduled",
+    "start": 1003.64,
+    "duration": 4.32
+  },
+  {
+    "text": "job. So, we have a bug finder job here.",
+    "start": 1005.4,
+    "duration": 4.8
+  },
+  {
+    "text": "You could add any workflows you want.",
+    "start": 1007.96,
+    "duration": 4.52
+  },
+  {
+    "text": "These are useful for a couple of",
+    "start": 1010.2,
+    "duration": 3.08
+  },
+  {
+    "text": "reasons. So, if you go into our",
+    "start": 1012.48,
+    "duration": 2.96
+  },
+  {
+    "text": "config.toml, what you can see here is",
+    "start": 1013.28,
+    "duration": 4.6
+  },
+  {
+    "text": "I've got this scheduled bug finder.",
+    "start": 1015.44,
+    "duration": 3.48
+  },
+  {
+    "text": "Obviously, you can do this with",
+    "start": 1017.88,
+    "duration": 3.4
+  },
+  {
+    "text": "something like Claude routines or Codex",
+    "start": 1018.92,
+    "duration": 4.44
+  },
+  {
+    "text": "automations, but what I like about this",
+    "start": 1021.28,
+    "duration": 3.72
+  },
+  {
+    "text": "is keeping all of these automations",
+    "start": 1023.36,
+    "duration": 3.04
+  },
+  {
+    "text": "version controlled. If you work in a",
+    "start": 1025,
+    "duration": 3.24
+  },
+  {
+    "text": "team, you can keep these version",
+    "start": 1026.4,
+    "duration": 4.28
+  },
+  {
+    "text": "controlled, and you can also run them",
+    "start": 1028.24,
+    "duration": 4.68
+  },
+  {
+    "text": "manually as well very very easily. Okay.",
+    "start": 1030.68,
+    "duration": 3.399
+  },
+  {
+    "text": "So, we're going to go into the terminal.",
+    "start": 1032.92,
+    "duration": 3
+  },
+  {
+    "text": "We're going to type factory. So, we're",
+    "start": 1034.079,
+    "duration": 3.801
+  },
+  {
+    "text": "going to type factory",
+    "start": 1035.92,
+    "duration": 3.48
+  },
+  {
+    "text": "workflows,",
+    "start": 1037.88,
+    "duration": 2.6
+  },
+  {
+    "text": "which is going to list out the workflows",
+    "start": 1039.4,
+    "duration": 3.12
+  },
+  {
+    "text": "we have. You can see here we have this",
+    "start": 1040.48,
+    "duration": 4.24
+  },
+  {
+    "text": "bug finder workflow.",
+    "start": 1042.52,
+    "duration": 3.559
+  },
+  {
+    "text": "So, let me go ahead and run that. Again,",
+    "start": 1044.72,
+    "duration": 3.76
+  },
+  {
+    "text": "you can run this on a schedule, but you",
+    "start": 1046.079,
+    "duration": 4.161
+  },
+  {
+    "text": "can also trigger them manually, and I",
+    "start": 1048.48,
+    "duration": 3.2
+  },
+  {
+    "text": "find triggering things like this",
+    "start": 1050.24,
+    "duration": 3.36
+  },
+  {
+    "text": "manually is very, very useful. So, say I",
+    "start": 1051.68,
+    "duration": 4.08
+  },
+  {
+    "text": "want to find any bugs in my code, I can",
+    "start": 1053.6,
+    "duration": 5.72
+  },
+  {
+    "text": "just run factory run bug finder.",
+    "start": 1055.76,
+    "duration": 5.08
+  },
+  {
+    "text": "And then just kind of wait for that. So,",
+    "start": 1059.32,
+    "duration": 2.48
+  },
+  {
+    "text": "you can see here it's running the",
+    "start": 1060.84,
+    "duration": 3.2
+  },
+  {
+    "text": "workflow bug finder. It spawned a new",
+    "start": 1061.8,
+    "duration": 3.68
+  },
+  {
+    "text": "get work tree. It's now going to go",
+    "start": 1064.04,
+    "duration": 3.8
+  },
+  {
+    "text": "ahead and find bugs in our code base,",
+    "start": 1065.48,
+    "duration": 4.2
+  },
+  {
+    "text": "find a bug, and then it's going to open",
+    "start": 1067.84,
+    "duration": 3.88
+  },
+  {
+    "text": "a ticket that we can review later. So,",
+    "start": 1069.68,
+    "duration": 3.48
+  },
+  {
+    "text": "this is a bug that the agent found. You",
+    "start": 1071.72,
+    "duration": 2.84
+  },
+  {
+    "text": "could actually make this more automated",
+    "start": 1073.16,
+    "duration": 2.92
+  },
+  {
+    "text": "and have the agent open the pull request",
+    "start": 1074.56,
+    "duration": 3
+  },
+  {
+    "text": "at the end. It already clearly knows",
+    "start": 1076.08,
+    "duration": 3.36
+  },
+  {
+    "text": "what the bug is, and it looks like it's",
+    "start": 1077.56,
+    "duration": 4.04
+  },
+  {
+    "text": "well reasoned as well.",
+    "start": 1079.44,
+    "duration": 3.76
+  },
+  {
+    "text": "So, as you begin to trust these agent",
+    "start": 1081.6,
+    "duration": 3.16
+  },
+  {
+    "text": "systems more and more, you can let them",
+    "start": 1083.2,
+    "duration": 3.08
+  },
+  {
+    "text": "run for longer. You can allow them to",
+    "start": 1084.76,
+    "duration": 3.76
+  },
+  {
+    "text": "open pull requests. You could even allow",
+    "start": 1086.28,
+    "duration": 3.84
+  },
+  {
+    "text": "this to merge if it is a, you know,",
+    "start": 1088.52,
+    "duration": 4
+  },
+  {
+    "text": "personal project. If you're confident in",
+    "start": 1090.12,
+    "duration": 4.32
+  },
+  {
+    "text": "your system, you can kind of delegate",
+    "start": 1092.52,
+    "duration": 3.56
+  },
+  {
+    "text": "more and more trust to the system over",
+    "start": 1094.44,
+    "duration": 3.68
+  },
+  {
+    "text": "time. So, there's nothing stopping you",
+    "start": 1096.08,
+    "duration": 3.92
+  },
+  {
+    "text": "here having this as a fully automated",
+    "start": 1098.12,
+    "duration": 3.2
+  },
+  {
+    "text": "system.",
+    "start": 1100,
+    "duration": 2.88
+  },
+  {
+    "text": "Okay, so finally our implementation",
+    "start": 1101.32,
+    "duration": 3.32
+  },
+  {
+    "text": "agent has finished. So, this task ran",
+    "start": 1102.88,
+    "duration": 4.76
+  },
+  {
+    "text": "for, I think it was about 35 minutes.",
+    "start": 1104.64,
+    "duration": 4.12
+  },
+  {
+    "text": "So, this is obviously quite a big",
+    "start": 1107.64,
+    "duration": 2.88
+  },
+  {
+    "text": "change, and one of the reasons why this",
+    "start": 1108.76,
+    "duration": 2.8
+  },
+  {
+    "text": "ran for so long is because we're",
+    "start": 1110.52,
+    "duration": 2.96
+  },
+  {
+    "text": "actually running a long pipeline. So,",
+    "start": 1111.56,
+    "duration": 4.16
+  },
+  {
+    "text": "we're not just changing the code, we're",
+    "start": 1113.48,
+    "duration": 4.4
+  },
+  {
+    "text": "writing, you know, sub agent tests,",
+    "start": 1115.72,
+    "duration": 4.72
+  },
+  {
+    "text": "we're doing code reviews, we're waiting",
+    "start": 1117.88,
+    "duration": 4.64
+  },
+  {
+    "text": "for feedback on CI infrastructure as",
+    "start": 1120.44,
+    "duration": 4.44
+  },
+  {
+    "text": "well. So, this is why using something",
+    "start": 1122.52,
+    "duration": 4.52
+  },
+  {
+    "text": "like a factory pipeline is so valuable,",
+    "start": 1124.88,
+    "duration": 3.56
+  },
+  {
+    "text": "because I don't want to be wasting in my",
+    "start": 1127.04,
+    "duration": 3.4
+  },
+  {
+    "text": "terminal for 34 minutes. As these agents",
+    "start": 1128.44,
+    "duration": 4.28
+  },
+  {
+    "text": "get way more capable and powerful,",
+    "start": 1130.44,
+    "duration": 3.32
+  },
+  {
+    "text": "you're going to be delegating much",
+    "start": 1132.72,
+    "duration": 2.56
+  },
+  {
+    "text": "longer running work to these agents.",
+    "start": 1133.76,
+    "duration": 3.08
+  },
+  {
+    "text": "They're doing a better job of the code",
+    "start": 1135.28,
+    "duration": 3.48
+  },
+  {
+    "text": "implementation, but they're also just",
+    "start": 1136.84,
+    "duration": 3.8
+  },
+  {
+    "text": "running for much, much longer. And so,",
+    "start": 1138.76,
+    "duration": 3.88
+  },
+  {
+    "text": "this is why I pretty much prefer this",
+    "start": 1140.64,
+    "duration": 4
+  },
+  {
+    "text": "factory approach. Just delegate your",
+    "start": 1142.64,
+    "duration": 3.92
+  },
+  {
+    "text": "tasks to the system,",
+    "start": 1144.64,
+    "duration": 3.64
+  },
+  {
+    "text": "and let them run for like 30 minutes to",
+    "start": 1146.56,
+    "duration": 3.84
+  },
+  {
+    "text": "an hour to work on your code base, do a",
+    "start": 1148.28,
+    "duration": 3.56
+  },
+  {
+    "text": "really good job, and then review the",
+    "start": 1150.4,
+    "duration": 3.48
+  },
+  {
+    "text": "changes at the end. If you're a senior",
+    "start": 1151.84,
+    "duration": 3.04
+  },
+  {
+    "text": "engineer, you've probably got many",
+    "start": 1153.88,
+    "duration": 3.518
+  },
+  {
+    "text": "objections to this topic and I think",
+    "start": 1154.88,
+    "duration": 3.96
+  },
+  {
+    "text": "[music] those objections are somewhat",
+    "start": 1157.398,
+    "duration": 3.002
+  },
+  {
+    "text": "founded. You do need to be very very",
+    "start": 1158.84,
+    "duration": 3.48
+  },
+  {
+    "text": "careful. If you're introducing these",
+    "start": 1160.4,
+    "duration": 4.08
+  },
+  {
+    "text": "concepts into a team, you need to have",
+    "start": 1162.32,
+    "duration": 3.4
+  },
+  {
+    "text": "the culture [music] such that people",
+    "start": 1164.48,
+    "duration": 2.8
+  },
+  {
+    "text": "don't abuse these pipelines and what I",
+    "start": 1165.72,
+    "duration": 3.468
+  },
+  {
+    "text": "mean by that is you don't want to use",
+    "start": 1167.28,
+    "duration": 3
+  },
+  {
+    "text": "[music] these kind of pipelines for",
+    "start": 1169.188,
+    "duration": 3.212
+  },
+  {
+    "text": "every single task. You still need humans",
+    "start": 1170.28,
+    "duration": 3.493
+  },
+  {
+    "text": "to think critically.",
+    "start": 1172.4,
+    "duration": 1.6
+  },
+  {
+    "text": ">> [music]",
+    "start": 1173.773,
+    "duration": 1.827
+  },
+  {
+    "text": ">> You still need human judgment. You still",
+    "start": 1174,
+    "duration": 3.36
+  },
+  {
+    "text": "need engineering thinking at every",
+    "start": 1175.6,
+    "duration": 3.36
+  },
+  {
+    "text": "single step of the process. [music]",
+    "start": 1177.36,
+    "duration": 3.52
+  },
+  {
+    "text": "It's just there's a percentage of",
+    "start": 1178.96,
+    "duration": 3.36
+  },
+  {
+    "text": "tickets that we can now just give to",
+    "start": 1180.88,
+    "duration": 3.24
+  },
+  {
+    "text": "agents, mechanical things, security",
+    "start": 1182.32,
+    "duration": 3.84
+  },
+  {
+    "text": "upgrades, [music] bug fixes, really",
+    "start": 1184.12,
+    "duration": 4
+  },
+  {
+    "text": "trivial tedious work that developers",
+    "start": 1186.16,
+    "duration": 4.36
+  },
+  {
+    "text": "don't like doing anyway. All of those",
+    "start": 1188.12,
+    "duration": 4.08
+  },
+  {
+    "text": "can largely just be handed off to agents",
+    "start": 1190.52,
+    "duration": 3.84
+  },
+  {
+    "text": "now. Run it [music] in a pipeline, build",
+    "start": 1192.2,
+    "duration": 4.08
+  },
+  {
+    "text": "more consistency and a good analogy to",
+    "start": 1194.36,
+    "duration": 4.68
+  },
+  {
+    "text": "this process is CICD. If you remember",
+    "start": 1196.28,
+    "duration": 3.693
+  },
+  {
+    "text": "back in the day,",
+    "start": 1199.04,
+    "duration": 1
+  },
+  {
+    "text": ">> [music]",
+    "start": 1199.973,
+    "duration": 1.667
+  },
+  {
+    "text": ">> we used to manually deploy our software.",
+    "start": 1200.04,
+    "duration": 4.16
+  },
+  {
+    "text": "It was very error-prone, inconsistent.",
+    "start": 1201.64,
+    "duration": 4.04
+  },
+  {
+    "text": "Deployments were stressful. They would",
+    "start": 1204.2,
+    "duration": 2.978
+  },
+  {
+    "text": "often break or go wrong.",
+    "start": 1205.68,
+    "duration": 1.92
+  },
+  {
+    "text": ">> [music]",
+    "start": 1207.178,
+    "duration": 1.862
+  },
+  {
+    "text": ">> And we would struggle to get software",
+    "start": 1207.6,
+    "duration": 3.8
+  },
+  {
+    "text": "into production at a speed that was",
+    "start": 1209.04,
+    "duration": 4.04
+  },
+  {
+    "text": "valuable [music] to our customers. And",
+    "start": 1211.4,
+    "duration": 3.4
+  },
+  {
+    "text": "then when we introduced CICD, we built",
+    "start": 1213.08,
+    "duration": 3.76
+  },
+  {
+    "text": "systems and automation and processes",
+    "start": 1214.8,
+    "duration": 4
+  },
+  {
+    "text": "around [music] the release process and",
+    "start": 1216.84,
+    "duration": 3.52
+  },
+  {
+    "text": "how we got software into production and",
+    "start": 1218.8,
+    "duration": 3.28
+  },
+  {
+    "text": "what that led to was a massive increase",
+    "start": 1220.36,
+    "duration": 4.48
+  },
+  {
+    "text": "in quality. We were able to essentially",
+    "start": 1222.08,
+    "duration": 4.8
+  },
+  {
+    "text": "deploy software [music] almost daily",
+    "start": 1224.84,
+    "duration": 3.64
+  },
+  {
+    "text": "without worrying about whether things",
+    "start": 1226.88,
+    "duration": 3.224
+  },
+  {
+    "text": "were going to be breaking because the",
+    "start": 1228.48,
+    "duration": 2.96
+  },
+  {
+    "text": "[music] system would be taking care of",
+    "start": 1230.104,
+    "duration": 2.616
+  },
+  {
+    "text": "the deployment. It would be running all",
+    "start": 1231.44,
+    "duration": 3.24
+  },
+  {
+    "text": "of the automated checks for us. And this",
+    "start": 1232.72,
+    "duration": 3.56
+  },
+  {
+    "text": "means whether you're a junior developer",
+    "start": 1234.68,
+    "duration": 3.04
+  },
+  {
+    "text": "or the most senior engineer, you're",
+    "start": 1236.28,
+    "duration": 3.76
+  },
+  {
+    "text": "using the same pipeline to deploy",
+    "start": 1237.72,
+    "duration": 4.08
+  },
+  {
+    "text": "software which just massively raises the",
+    "start": 1240.04,
+    "duration": 3.76
+  },
+  {
+    "text": "quality bar within a team. Anyone can",
+    "start": 1241.8,
+    "duration": 2.714
+  },
+  {
+    "text": "have",
+    "start": 1243.8,
+    "duration": 0.72
+  },
+  {
+    "text": ">> [music]",
+    "start": 1244.514,
+    "duration": 2.086
+  },
+  {
+    "text": ">> the perfect deployment process no matter",
+    "start": 1244.52,
+    "duration": 3.56
+  },
+  {
+    "text": "where you are in the company or how",
+    "start": 1246.6,
+    "duration": 4.48
+  },
+  {
+    "text": "experienced you are.",
+    "start": 1248.08,
+    "duration": 3
+  }
+]

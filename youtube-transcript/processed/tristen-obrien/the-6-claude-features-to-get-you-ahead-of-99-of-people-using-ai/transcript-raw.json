@@ -1,0 +1,1032 @@
+[
+  {
+    "text": "If you're only using Claude to ask",
+    "start": 0.44,
+    "duration": 3.52
+  },
+  {
+    "text": "questions, you're only using about 15%",
+    "start": 1.76,
+    "duration": 3.8
+  },
+  {
+    "text": "of what Claude can actually do. There",
+    "start": 3.96,
+    "duration": 2.8
+  },
+  {
+    "text": "are six things that you need to know",
+    "start": 5.56,
+    "duration": 2.84
+  },
+  {
+    "text": "about Claude, four of which are",
+    "start": 6.76,
+    "duration": 2.96
+  },
+  {
+    "text": "different ways that you can actually use",
+    "start": 8.4,
+    "duration": 3.52
+  },
+  {
+    "text": "it. The other two make all of them way",
+    "start": 9.72,
+    "duration": 4.24
+  },
+  {
+    "text": "more powerful. And what's interesting is",
+    "start": 11.92,
+    "duration": 4.32
+  },
+  {
+    "text": "99% of the people have never heard of",
+    "start": 13.96,
+    "duration": 3.76
+  },
+  {
+    "text": "most of these. And I'm going to walk you",
+    "start": 16.24,
+    "duration": 3
+  },
+  {
+    "text": "through all six. I'm going to tell you",
+    "start": 17.72,
+    "duration": 3.24
+  },
+  {
+    "text": "what they're used for. And by the end of",
+    "start": 19.24,
+    "duration": 3.28
+  },
+  {
+    "text": "this, you're going to know which one you",
+    "start": 20.96,
+    "duration": 3.52
+  },
+  {
+    "text": "should be using right now. Starting with",
+    "start": 22.52,
+    "duration": 4.32
+  },
+  {
+    "text": "number one, Claude chat. Now, this is",
+    "start": 24.48,
+    "duration": 3.92
+  },
+  {
+    "text": "the one that you probably have heard of.",
+    "start": 26.84,
+    "duration": 3.92
+  },
+  {
+    "text": "You go to claude.ai",
+    "start": 28.4,
+    "duration": 4.32
+  },
+  {
+    "text": "you type a question, you get an answer.",
+    "start": 30.76,
+    "duration": 3.48
+  },
+  {
+    "text": "And the good news is is it works",
+    "start": 32.72,
+    "duration": 3.16
+  },
+  {
+    "text": "everywhere. It works in your browser, it",
+    "start": 34.24,
+    "duration": 2.8
+  },
+  {
+    "text": "works on your phone, it works on your",
+    "start": 35.88,
+    "duration": 3.72
+  },
+  {
+    "text": "desktop. It's the same Claude, and it's",
+    "start": 37.04,
+    "duration": 4.72
+  },
+  {
+    "text": "the same conversation with everything",
+    "start": 39.6,
+    "duration": 4.04
+  },
+  {
+    "text": "synced in the cloud. Now, if you've only",
+    "start": 41.76,
+    "duration": 3.48
+  },
+  {
+    "text": "used this version before, you're still",
+    "start": 43.64,
+    "duration": 3.52
+  },
+  {
+    "text": "in a really good spot because this is",
+    "start": 45.24,
+    "duration": 4
+  },
+  {
+    "text": "the foundation. But this is the start of",
+    "start": 47.16,
+    "duration": 4.16
+  },
+  {
+    "text": "Claude, not the whole thing. Now, every",
+    "start": 49.24,
+    "duration": 3.96
+  },
+  {
+    "text": "product I'm about to show you builds on",
+    "start": 51.32,
+    "duration": 4.84
+  },
+  {
+    "text": "top of Claude chat. Claude chat is best",
+    "start": 53.2,
+    "duration": 5.52
+  },
+  {
+    "text": "for quick conversations or writing or",
+    "start": 56.16,
+    "duration": 4.08
+  },
+  {
+    "text": "research or just thinking something",
+    "start": 58.72,
+    "duration": 3.16
+  },
+  {
+    "text": "through. If you're brand new to Claude,",
+    "start": 60.24,
+    "duration": 3.16
+  },
+  {
+    "text": "this is where you start. If you've been",
+    "start": 61.88,
+    "duration": 3.52
+  },
+  {
+    "text": "using AI or Claude for a while, then",
+    "start": 63.4,
+    "duration": 3.92
+  },
+  {
+    "text": "keep watching because the next ones are",
+    "start": 65.4,
+    "duration": 3.4
+  },
+  {
+    "text": "for you. And that brings us to number",
+    "start": 67.32,
+    "duration": 3.4
+  },
+  {
+    "text": "two, which is Claude co-work. This is",
+    "start": 68.8,
+    "duration": 3.24
+  },
+  {
+    "text": "the one that most people haven't even",
+    "start": 70.72,
+    "duration": 3.28
+  },
+  {
+    "text": "heard of unless you've been diving in a",
+    "start": 72.04,
+    "duration": 4.36
+  },
+  {
+    "text": "bit deeper with Claude. Now, Claude",
+    "start": 74,
+    "duration": 5
+  },
+  {
+    "text": "co-work has fundamentally changed my",
+    "start": 76.4,
+    "duration": 4.68
+  },
+  {
+    "text": "week and it's one of the most used AI",
+    "start": 79,
+    "duration": 5.04
+  },
+  {
+    "text": "tools in my arsenal. And that's because",
+    "start": 81.08,
+    "duration": 5.52
+  },
+  {
+    "text": "co-work is a desktop app. It lives on",
+    "start": 84.04,
+    "duration": 4.08
+  },
+  {
+    "text": "your computer. And the important part",
+    "start": 86.6,
+    "duration": 3.2
+  },
+  {
+    "text": "here is that it can see all of your",
+    "start": 88.12,
+    "duration": 3.8
+  },
+  {
+    "text": "files. It can open your files, it can",
+    "start": 89.8,
+    "duration": 4
+  },
+  {
+    "text": "edit them, it can save new ones. With",
+    "start": 91.92,
+    "duration": 4.76
+  },
+  {
+    "text": "co-work, you give it a task and it goes",
+    "start": 93.8,
+    "duration": 4.84
+  },
+  {
+    "text": "and it does that task. This is different",
+    "start": 96.68,
+    "duration": 4.24
+  },
+  {
+    "text": "than chat because you're not just asking",
+    "start": 98.64,
+    "duration": 4.16
+  },
+  {
+    "text": "it questions, you're not just talking to",
+    "start": 100.92,
+    "duration": 4.36
+  },
+  {
+    "text": "a chat window anymore. Claude co-work is",
+    "start": 102.8,
+    "duration": 4.56
+  },
+  {
+    "text": "actually working on your computer with",
+    "start": 105.28,
+    "duration": 4.84
+  },
+  {
+    "text": "real files, which is only the beginning,",
+    "start": 107.36,
+    "duration": 5
+  },
+  {
+    "text": "by the way, because it has access to so",
+    "start": 110.12,
+    "duration": 4.32
+  },
+  {
+    "text": "much more. And this is built for people",
+    "start": 112.36,
+    "duration": 4.84
+  },
+  {
+    "text": "who don't code, which is most of us. If",
+    "start": 114.44,
+    "duration": 4.8
+  },
+  {
+    "text": "you ever thought, \"I wish AI could just",
+    "start": 117.2,
+    "duration": 3.68
+  },
+  {
+    "text": "do that for me instead of telling me how",
+    "start": 119.24,
+    "duration": 5
+  },
+  {
+    "text": "to do it,\" that's co-work. It's a 24/7",
+    "start": 120.88,
+    "duration": 5.16
+  },
+  {
+    "text": "personal employee that does tasks for",
+    "start": 124.24,
+    "duration": 3.84
+  },
+  {
+    "text": "you anytime that you want it to do a",
+    "start": 126.04,
+    "duration": 3.88
+  },
+  {
+    "text": "task. Now, co-work is best for anything",
+    "start": 128.08,
+    "duration": 4.68
+  },
+  {
+    "text": "involves actual files or real",
+    "start": 129.92,
+    "duration": 5.08
+  },
+  {
+    "text": "automations or tasks where Claude needs",
+    "start": 132.76,
+    "duration": 4.16
+  },
+  {
+    "text": "to touch your computer. An example of",
+    "start": 135,
+    "duration": 4.48
+  },
+  {
+    "text": "this would be giving Claude the access",
+    "start": 136.92,
+    "duration": 4.48
+  },
+  {
+    "text": "to read all of your emails. It can give",
+    "start": 139.48,
+    "duration": 3.44
+  },
+  {
+    "text": "you a brief summary, it can respond to",
+    "start": 141.4,
+    "duration": 3.4
+  },
+  {
+    "text": "the important ones in a draft, and then",
+    "start": 142.92,
+    "duration": 3.96
+  },
+  {
+    "text": "it can delete anything that it thinks is",
+    "start": 144.8,
+    "duration": 3.56
+  },
+  {
+    "text": "junk. Or you can tell it to look at all",
+    "start": 146.88,
+    "duration": 3.16
+  },
+  {
+    "text": "the files on your desktop and organize",
+    "start": 148.36,
+    "duration": 3.48
+  },
+  {
+    "text": "them. Or you can do what I did, which is",
+    "start": 150.04,
+    "duration": 2.96
+  },
+  {
+    "text": "tell it that I'm going to Paris in a",
+    "start": 151.84,
+    "duration": 2.88
+  },
+  {
+    "text": "week, have it look at the closest mall",
+    "start": 153,
+    "duration": 3.72
+  },
+  {
+    "text": "near me, have it find every single",
+    "start": 154.72,
+    "duration": 4.36
+  },
+  {
+    "text": "outfit that I need to purchase, put it",
+    "start": 156.72,
+    "duration": 4.48
+  },
+  {
+    "text": "in a nice PDF, and present in a way",
+    "start": 159.08,
+    "duration": 4.84
+  },
+  {
+    "text": "that's easy to follow and easy to buy",
+    "start": 161.2,
+    "duration": 4.8
+  },
+  {
+    "text": "these products because, man,",
+    "start": 163.92,
+    "duration": 4.32
+  },
+  {
+    "text": "I hate shopping. And number three,",
+    "start": 166,
+    "duration": 4
+  },
+  {
+    "text": "dispatch. Now, this one has been in the",
+    "start": 168.24,
+    "duration": 3.6
+  },
+  {
+    "text": "news lately. If you follow AI, you",
+    "start": 170,
+    "duration": 3.64
+  },
+  {
+    "text": "probably have heard of this. To me, this",
+    "start": 171.84,
+    "duration": 3.96
+  },
+  {
+    "text": "is a real game-changer. Now, dispatch",
+    "start": 173.64,
+    "duration": 4.04
+  },
+  {
+    "text": "allows you to assign a task to Claude",
+    "start": 175.8,
+    "duration": 3.64
+  },
+  {
+    "text": "from your phone. And then Claude does",
+    "start": 177.68,
+    "duration": 4.08
+  },
+  {
+    "text": "all the work at home on your desktop,",
+    "start": 179.44,
+    "duration": 3.52
+  },
+  {
+    "text": "and then sends you back a finished",
+    "start": 181.76,
+    "duration": 3.28
+  },
+  {
+    "text": "result to your phone. And this could be",
+    "start": 182.96,
+    "duration": 3.88
+  },
+  {
+    "text": "while you're on the go, at a coffee",
+    "start": 185.04,
+    "duration": 3.44
+  },
+  {
+    "text": "shop, at work. Doesn't matter where",
+    "start": 186.84,
+    "duration": 2.92
+  },
+  {
+    "text": "you're at because you're using your",
+    "start": 188.48,
+    "duration": 2.52
+  },
+  {
+    "text": "phone. Now, what's important to know",
+    "start": 189.76,
+    "duration": 3.6
+  },
+  {
+    "text": "here is that it's working on files on",
+    "start": 191,
+    "duration": 5.04
+  },
+  {
+    "text": "your computer at home or in your office,",
+    "start": 193.36,
+    "duration": 3.88
+  },
+  {
+    "text": "but you're controlling it from your",
+    "start": 196.04,
+    "duration": 2.52
+  },
+  {
+    "text": "phone. I think that's really cool",
+    "start": 197.24,
+    "duration": 3.2
+  },
+  {
+    "text": "because this is one continuous",
+    "start": 198.56,
+    "duration": 3.96
+  },
+  {
+    "text": "conversation. You can start a task from",
+    "start": 200.44,
+    "duration": 3.36
+  },
+  {
+    "text": "your phone, let's say on the way to",
+    "start": 202.52,
+    "duration": 2.92
+  },
+  {
+    "text": "work, and then follow up on your laptop",
+    "start": 203.8,
+    "duration": 3.4
+  },
+  {
+    "text": "when you sit down and get to work, and",
+    "start": 205.44,
+    "duration": 3.72
+  },
+  {
+    "text": "still the same thread, it's the same",
+    "start": 207.2,
+    "duration": 4.2
+  },
+  {
+    "text": "memory. You don't have to start over.",
+    "start": 209.16,
+    "duration": 3.4
+  },
+  {
+    "text": "But before we move on to the most",
+    "start": 211.4,
+    "duration": 3.28
+  },
+  {
+    "text": "powerful tool in Claude, take a second",
+    "start": 212.56,
+    "duration": 3.92
+  },
+  {
+    "text": "and subscribe. It would really help out",
+    "start": 214.68,
+    "duration": 3.44
+  },
+  {
+    "text": "my channel. But let's continue with",
+    "start": 216.48,
+    "duration": 4.44
+  },
+  {
+    "text": "number four, Claude code. Now, if the",
+    "start": 218.12,
+    "duration": 4.56
+  },
+  {
+    "text": "first three things were for thinking and",
+    "start": 220.92,
+    "duration": 4.36
+  },
+  {
+    "text": "helping, this one is for building, and I",
+    "start": 222.68,
+    "duration": 5.48
+  },
+  {
+    "text": "mean building real applications. Claude",
+    "start": 225.28,
+    "duration": 5.56
+  },
+  {
+    "text": "code is a tool for building software.",
+    "start": 228.16,
+    "duration": 4.4
+  },
+  {
+    "text": "Now, this can run in your terminal or",
+    "start": 230.84,
+    "duration": 2.96
+  },
+  {
+    "text": "you can have it on the Claude app on",
+    "start": 232.56,
+    "duration": 3.52
+  },
+  {
+    "text": "your desktop. But just like co-work, you",
+    "start": 233.8,
+    "duration": 3.6
+  },
+  {
+    "text": "can tell it what you want and it's going",
+    "start": 236.08,
+    "duration": 3.28
+  },
+  {
+    "text": "to handle everything for you. But the",
+    "start": 237.4,
+    "duration": 3.48
+  },
+  {
+    "text": "most important thing here to remember is",
+    "start": 239.36,
+    "duration": 3.84
+  },
+  {
+    "text": "this is building real applications.",
+    "start": 240.88,
+    "duration": 3.72
+  },
+  {
+    "text": "Where Claude co-work may be looking at",
+    "start": 243.2,
+    "duration": 4.2
+  },
+  {
+    "text": "your email files, this is writing code.",
+    "start": 244.6,
+    "duration": 5
+  },
+  {
+    "text": "This is writing, it's testing, it's",
+    "start": 247.4,
+    "duration": 4.16
+  },
+  {
+    "text": "looking for bugs, and it's giving you a",
+    "start": 249.6,
+    "duration": 4.88
+  },
+  {
+    "text": "real output of a working application.",
+    "start": 251.56,
+    "duration": 4.959
+  },
+  {
+    "text": "Now, if you're thinking, \"Well, I'll",
+    "start": 254.48,
+    "duration": 3.2
+  },
+  {
+    "text": "never use that because I'm not a",
+    "start": 256.519,
+    "duration": 3.361
+  },
+  {
+    "text": "developer,\" well, guess what? You are",
+    "start": 257.68,
+    "duration": 4.279
+  },
+  {
+    "text": "now. You are a developer. I thought the",
+    "start": 259.88,
+    "duration": 3.88
+  },
+  {
+    "text": "same thing, but when I started using",
+    "start": 261.959,
+    "duration": 4.721
+  },
+  {
+    "text": "Claude code, I built over 150 AI agents",
+    "start": 263.76,
+    "duration": 4.52
+  },
+  {
+    "text": "just by telling it what I wanted, and",
+    "start": 266.68,
+    "duration": 3
+  },
+  {
+    "text": "then it built it for me.",
+    "start": 268.28,
+    "duration": 3.56
+  },
+  {
+    "text": "So, yes, you are a developer. If you can",
+    "start": 269.68,
+    "duration": 4.04
+  },
+  {
+    "text": "think of something, Claude code can",
+    "start": 271.84,
+    "duration": 4.44
+  },
+  {
+    "text": "develop it for you. Okay, so those are",
+    "start": 273.72,
+    "duration": 3.68
+  },
+  {
+    "text": "the four different ways that you can",
+    "start": 276.28,
+    "duration": 3.28
+  },
+  {
+    "text": "actually use Claude. The last two aren't",
+    "start": 277.4,
+    "duration": 4.24
+  },
+  {
+    "text": "products, per se, but they are add-ons.",
+    "start": 279.56,
+    "duration": 4.52
+  },
+  {
+    "text": "They are upgrades, if you will. They",
+    "start": 281.64,
+    "duration": 5.44
+  },
+  {
+    "text": "make the first four way more powerful,",
+    "start": 284.08,
+    "duration": 5.68
+  },
+  {
+    "text": "which brings us to number five, plugins.",
+    "start": 287.08,
+    "duration": 4.52
+  },
+  {
+    "text": "Now, think of these as apps in the app",
+    "start": 289.76,
+    "duration": 4.56
+  },
+  {
+    "text": "store, except the app store is Claude. A",
+    "start": 291.6,
+    "duration": 5.72
+  },
+  {
+    "text": "plugin is a bundle of tools and",
+    "start": 294.32,
+    "duration": 5.68
+  },
+  {
+    "text": "connectors that are pre-built for you.",
+    "start": 297.32,
+    "duration": 4.36
+  },
+  {
+    "text": "You just install it into Claude and it",
+    "start": 300,
+    "duration": 3.68
+  },
+  {
+    "text": "gets a brand new ability. Now, plugins",
+    "start": 301.68,
+    "duration": 4.08
+  },
+  {
+    "text": "work inside of Claude co-work and Claude",
+    "start": 303.68,
+    "duration": 5.28
+  },
+  {
+    "text": "code. For example, install a Slack",
+    "start": 305.76,
+    "duration": 5.8
+  },
+  {
+    "text": "plugin and Claude can talk to Slack.",
+    "start": 308.96,
+    "duration": 4.76
+  },
+  {
+    "text": "Install a design plugin and it can",
+    "start": 311.56,
+    "duration": 3.32
+  },
+  {
+    "text": "create things that it couldn't create",
+    "start": 313.72,
+    "duration": 3.92
+  },
+  {
+    "text": "before. Plugins are best for extending",
+    "start": 314.88,
+    "duration": 5.2
+  },
+  {
+    "text": "what Claude can do without you having to",
+    "start": 317.64,
+    "duration": 4.28
+  },
+  {
+    "text": "build anything new yourself. It's just",
+    "start": 320.08,
+    "duration": 4
+  },
+  {
+    "text": "there for you. It's a catalog for you to",
+    "start": 321.92,
+    "duration": 4.24
+  },
+  {
+    "text": "choose from. Which brings us lastly to",
+    "start": 324.08,
+    "duration": 4.6
+  },
+  {
+    "text": "number six, and that is skills. This is",
+    "start": 326.16,
+    "duration": 4.52
+  },
+  {
+    "text": "one that most people will probably find",
+    "start": 328.68,
+    "duration": 4.48
+  },
+  {
+    "text": "most useful, but most people aren't",
+    "start": 330.68,
+    "duration": 5.32
+  },
+  {
+    "text": "using it. A skill is really simple. It's",
+    "start": 333.16,
+    "duration": 5.52
+  },
+  {
+    "text": "a folder with instructions in it. That's",
+    "start": 336,
+    "duration": 5.04
+  },
+  {
+    "text": "it. It's a little set of step-by-step",
+    "start": 338.68,
+    "duration": 5.04
+  },
+  {
+    "text": "directions that teaches Claude exactly",
+    "start": 341.04,
+    "duration": 5.04
+  },
+  {
+    "text": "how to do one specific job really well.",
+    "start": 343.72,
+    "duration": 3.84
+  },
+  {
+    "text": "And Claude reads those instructions",
+    "start": 346.08,
+    "duration": 3.56
+  },
+  {
+    "text": "every time that job comes up. You're",
+    "start": 347.56,
+    "duration": 3.8
+  },
+  {
+    "text": "basically giving it instructions on how",
+    "start": 349.64,
+    "duration": 3.6
+  },
+  {
+    "text": "to do something. Now, skills work",
+    "start": 351.36,
+    "duration": 3.64
+  },
+  {
+    "text": "everywhere Claude works. That's Claude",
+    "start": 353.24,
+    "duration": 3.68
+  },
+  {
+    "text": "chat and co-work and code. You can",
+    "start": 355,
+    "duration": 3.52
+  },
+  {
+    "text": "install it once and then it just works",
+    "start": 356.92,
+    "duration": 3.24
+  },
+  {
+    "text": "across all of them. And the good thing",
+    "start": 358.52,
+    "duration": 2.92
+  },
+  {
+    "text": "is is you can actually grab skills that",
+    "start": 360.16,
+    "duration": 3.12
+  },
+  {
+    "text": "other people created or you can just",
+    "start": 361.44,
+    "duration": 4.16
+  },
+  {
+    "text": "build one yourself. This is best for any",
+    "start": 363.28,
+    "duration": 3.72
+  },
+  {
+    "text": "task that you're going to ask Claude to",
+    "start": 365.6,
+    "duration": 2.8
+  },
+  {
+    "text": "do more than once. That way you don't",
+    "start": 367,
+    "duration": 2.76
+  },
+  {
+    "text": "have to type it out every time, it's",
+    "start": 368.4,
+    "duration": 2.96
+  },
+  {
+    "text": "just there. Okay, so remember this.",
+    "start": 369.76,
+    "duration": 3.96
+  },
+  {
+    "text": "Claude chat is for thinking, Claude",
+    "start": 371.36,
+    "duration": 3.92
+  },
+  {
+    "text": "co-work is for getting stuff done on",
+    "start": 373.72,
+    "duration": 3.76
+  },
+  {
+    "text": "your computer, uh dispatch is for",
+    "start": 375.28,
+    "duration": 4.24
+  },
+  {
+    "text": "handing off tasks from your phone, and",
+    "start": 377.48,
+    "duration": 4.24
+  },
+  {
+    "text": "then Claude code is for building real",
+    "start": 379.52,
+    "duration": 4.04
+  },
+  {
+    "text": "software. Then plugins extend what it",
+    "start": 381.72,
+    "duration": 4.56
+  },
+  {
+    "text": "can do and skills to teach it how you",
+    "start": 383.56,
+    "duration": 4.44
+  },
+  {
+    "text": "want things done. Now, the task for you",
+    "start": 386.28,
+    "duration": 3.16
+  },
+  {
+    "text": "is to pick the one that matches what",
+    "start": 388,
+    "duration": 3.04
+  },
+  {
+    "text": "you're trying to do. Now, you don't have",
+    "start": 389.44,
+    "duration": 3.6
+  },
+  {
+    "text": "to master all six of these in one day.",
+    "start": 391.04,
+    "duration": 4.24
+  },
+  {
+    "text": "You can if you want to, but now you know",
+    "start": 393.04,
+    "duration": 4.32
+  },
+  {
+    "text": "they exist, which already puts you ahead",
+    "start": 395.28,
+    "duration": 4.44
+  },
+  {
+    "text": "of 99% of people using Claude. If this",
+    "start": 397.36,
+    "duration": 4.56
+  },
+  {
+    "text": "was helpful, then subscribe because I'm",
+    "start": 399.72,
+    "duration": 3.96
+  },
+  {
+    "text": "making a full walk-through of every",
+    "start": 401.92,
+    "duration": 3.68
+  },
+  {
+    "text": "single one of these products one video",
+    "start": 403.68,
+    "duration": 3.4
+  },
+  {
+    "text": "at a time, and I'll show you how to use",
+    "start": 405.6,
+    "duration": 3.24
+  },
+  {
+    "text": "them because that is the whole point",
+    "start": 407.08,
+    "duration": 3.84
+  },
+  {
+    "text": "here. So, I will see you in the next",
+    "start": 408.84,
+    "duration": 4.4
+  },
+  {
+    "text": "one.",
+    "start": 410.92,
+    "duration": 2.32
+  }
+]

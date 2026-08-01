@@ -1,0 +1,74 @@
+{
+  "videoId": "5DtjQrROUzY",
+  "title": "AI was HARD until I Learned these 10 Concepts",
+  "channel": "Maddy Zhang",
+  "channelId": "UCJKzyA7mf4L6CtdNuRFExTw",
+  "description": "📘 AI Agent Playbook (free guide from Hubspot): https://clickhubspot.com/a1052e\n\nEveryone is talking about AI but to actually build with it, use it at work, or ace an AI interview, you need to understand the core fundamentals, not just the buzzwords.\n\nIn this video, I break down the 10 AI concepts every software and AI engineer needs to know in 2026 from LLMs and tokens all the way to AI agents, MCP, and context engineering. Whether you're building AI products, preparing for interviews, or just trying to keep up with the industry, this is the video to watch.\n\n💡 Here’s what you’ll learn:\n✅ Large Language Models (LLMs) — how modern AI actually generates responses\n✅ Tokens & Context Windows — how AI “reads” and remembers information\n✅ AI Agents — systems that plan, reason, and take action autonomously\n✅ Model Context Protocol (MCP) — how AI connects to real-world tools\n✅ RAG (Retrieval Augmented Generation) — how AI uses external knowledge\n✅ Fine-Tuning — how models adapt to specific tasks or behavior\n✅ Context Engineering — the skill companies are hiring for right now\n✅ Reasoning Models — AI that thinks step-by-step before answering\n✅ Multimodal AI — models that understand text, images, audio, and video\n✅ Mixture of Experts (MoE) — how modern AI scales efficiently\n\n👋 about me\nI’m Maddy, a senior software engineer (prev. at Google), with prior internships at Microsoft, Morgan Stanley, IBM, and Amazon. Sharing my journey here - thanks for watching 🤍\n\n🔗find me on other socials\nInstagram https://www.instagram.com/madeline.m.zhang/\nLinkedIn https://www.linkedin.com/in/madelinemzhang/\nTiktok https://www.tiktok.com/@madeline.m.zhang\n\n📖 Timestamp\n0:00 Intro\n0:52 Large Language Models (LLMs)\n1:43 Tokens & Context Windows\n3:36 AI Agents\n4:35 Model Context Protocol (MCP)\n5:26 Retrieval Augmented Generation (RAG)\n6:36 Fine-Tuning\n7:15 Context Engineering\n7:59 Reasoning Models\n8:46 Multimodal AI\n9:32 Mixture of Experts (MoE)\n\n🔔 Subscribe for more coding, DSA, and tech career videos!\n\n*disclaimer: views are all my own and do not represent any current / past employer(s)\n\nThank you to Hubspot for sponsoring this video\n\n#ai #llm #artificialintelligence #aiagents #promptengineering #rag #vectordatabases #mcp #contexengineering #reasoningmodels #multimodalai #mixtureofexperts #finetuning #chatgpt #claude #gemini #openai #anthropic #softwareengineering #techjobs #aiengineer #aiengineering #llmengineer #techcareers #ai2026 #google #machinelearning #deeplearning #aitools #aifundamentals",
+  "duration": 654,
+  "publishDate": "2026-03-01",
+  "url": "https://www.youtube.com/watch?v=5DtjQrROUzY",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/5DtjQrROUzY/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "Intro",
+      "start": 0,
+      "end": 52
+    },
+    {
+      "title": "Large Language Models (LLMs)",
+      "start": 52,
+      "end": 103
+    },
+    {
+      "title": "Tokens & Context Windows",
+      "start": 103,
+      "end": 216
+    },
+    {
+      "title": "AI Agents",
+      "start": 216,
+      "end": 275
+    },
+    {
+      "title": "Model Context Protocol (MCP)",
+      "start": 275,
+      "end": 326
+    },
+    {
+      "title": "Retrieval Augmented Generation (RAG)",
+      "start": 326,
+      "end": 396
+    },
+    {
+      "title": "Fine-Tuning",
+      "start": 396,
+      "end": 435
+    },
+    {
+      "title": "Context Engineering",
+      "start": 435,
+      "end": 479
+    },
+    {
+      "title": "Reasoning Models",
+      "start": 479,
+      "end": 526
+    },
+    {
+      "title": "Multimodal AI",
+      "start": 526,
+      "end": 572
+    },
+    {
+      "title": "Mixture of Experts (MoE)",
+      "start": 572,
+      "end": 654
+    }
+  ]
+}

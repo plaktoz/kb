@@ -1,0 +1,2347 @@
+[
+  {
+    "text": "Most people open Claude and use it like",
+    "start": 0,
+    "duration": 4.04
+  },
+  {
+    "text": "a fancy Google search. That's like",
+    "start": 2.04,
+    "duration": 4.48
+  },
+  {
+    "text": "buying a Ferrari and only driving it 10",
+    "start": 4.04,
+    "duration": 5.32
+  },
+  {
+    "text": "km an hour. I build AI products every",
+    "start": 6.52,
+    "duration": 4.32
+  },
+  {
+    "text": "single day through my company Martel",
+    "start": 9.36,
+    "duration": 4.48
+  },
+  {
+    "text": "Ventures and I heavily use Claude in all",
+    "start": 10.84,
+    "duration": 4.32
+  },
+  {
+    "text": "my work. So, I'm going to walk you",
+    "start": 13.84,
+    "duration": 3.32
+  },
+  {
+    "text": "through 16 Claude hacks that will save",
+    "start": 15.16,
+    "duration": 4
+  },
+  {
+    "text": "you hours of time, grow your business,",
+    "start": 17.16,
+    "duration": 3.52
+  },
+  {
+    "text": "very important, and boost your",
+    "start": 19.16,
+    "duration": 3.28
+  },
+  {
+    "text": "productivity in ways that will blow your",
+    "start": 20.68,
+    "duration": 3.92
+  },
+  {
+    "text": "freaking mind. Let's get into it. Number",
+    "start": 22.44,
+    "duration": 4.68
+  },
+  {
+    "text": "one, the memory import. See, if you are",
+    "start": 24.6,
+    "duration": 4.6
+  },
+  {
+    "text": "still stuck on Chat GPT, so sorry to",
+    "start": 27.12,
+    "duration": 4.12
+  },
+  {
+    "text": "hear. Now, we got to migrate you over,",
+    "start": 29.2,
+    "duration": 3
+  },
+  {
+    "text": "but you don't want to lose your",
+    "start": 31.24,
+    "duration": 3.32
+  },
+  {
+    "text": "contacts. It'll bring over everything,",
+    "start": 32.2,
+    "duration": 4.08
+  },
+  {
+    "text": "your preferences, your history, and",
+    "start": 34.56,
+    "duration": 3.92
+  },
+  {
+    "text": "it'll transfer it over like that. It's a",
+    "start": 36.28,
+    "duration": 3.6
+  },
+  {
+    "text": "simple way to import everything you've",
+    "start": 38.48,
+    "duration": 3.36
+  },
+  {
+    "text": "done in Chat GPT and bring it over to",
+    "start": 39.88,
+    "duration": 3.8
+  },
+  {
+    "text": "Claude in less than 2 minutes. We go to",
+    "start": 41.84,
+    "duration": 4.24
+  },
+  {
+    "text": "our settings, we go to capabilities, and",
+    "start": 43.68,
+    "duration": 4.76
+  },
+  {
+    "text": "then start import. Claude then gives you",
+    "start": 46.08,
+    "duration": 4.32
+  },
+  {
+    "text": "a prompt and then you paste it into Chat",
+    "start": 48.44,
+    "duration": 3.92
+  },
+  {
+    "text": "GPT, then it gives you everything it",
+    "start": 50.4,
+    "duration": 4.04
+  },
+  {
+    "text": "knows about you. Got you. So, you take",
+    "start": 52.36,
+    "duration": 3.72
+  },
+  {
+    "text": "the output and paste it back into the",
+    "start": 54.44,
+    "duration": 3.96
+  },
+  {
+    "text": "Claude box, you click add to memory and",
+    "start": 56.08,
+    "duration": 4.6
+  },
+  {
+    "text": "voila, tout fini, you're done. Hack",
+    "start": 58.4,
+    "duration": 5.04
+  },
+  {
+    "text": "number two, model selector. Claude has",
+    "start": 60.68,
+    "duration": 5.24
+  },
+  {
+    "text": "three different power levels essentially",
+    "start": 63.44,
+    "duration": 4.08
+  },
+  {
+    "text": "and you got to pick the right one for",
+    "start": 65.92,
+    "duration": 3.48
+  },
+  {
+    "text": "the right job. So, you click the model",
+    "start": 67.52,
+    "duration": 3.72
+  },
+  {
+    "text": "selector at the bottom right and then",
+    "start": 69.4,
+    "duration": 3.72
+  },
+  {
+    "text": "you see we've got Haiku. This is your",
+    "start": 71.24,
+    "duration": 3.68
+  },
+  {
+    "text": "cheapest and fastest model. Then you've",
+    "start": 73.12,
+    "duration": 4.24
+  },
+  {
+    "text": "got Sonnet, best for everyday tasks.",
+    "start": 74.92,
+    "duration": 4.68
+  },
+  {
+    "text": "You've got Opus, that's best for complex",
+    "start": 77.36,
+    "duration": 4.36
+  },
+  {
+    "text": "tasks. Or you can select this little",
+    "start": 79.6,
+    "duration": 4.48
+  },
+  {
+    "text": "adaptive thinking thing so it picks",
+    "start": 81.72,
+    "duration": 4.24
+  },
+  {
+    "text": "automatically depending on the task so",
+    "start": 84.08,
+    "duration": 3.12
+  },
+  {
+    "text": "you don't have to think, but then you",
+    "start": 85.96,
+    "duration": 2.6
+  },
+  {
+    "text": "don't have as much control. I like to",
+    "start": 87.2,
+    "duration": 3.08
+  },
+  {
+    "text": "set my own control. So, for example, if",
+    "start": 88.56,
+    "duration": 3.52
+  },
+  {
+    "text": "you're looking for patterns and metrics,",
+    "start": 90.28,
+    "duration": 4.76
+  },
+  {
+    "text": "Opus crushes. It thinks way harder. If",
+    "start": 92.08,
+    "duration": 4.76
+  },
+  {
+    "text": "you're drafting an email response,",
+    "start": 95.04,
+    "duration": 4.04
+  },
+  {
+    "text": "Sonnet, it's awesome. And my favorite",
+    "start": 96.84,
+    "duration": 3.56
+  },
+  {
+    "text": "part, it's faster and it can give you",
+    "start": 99.08,
+    "duration": 2.64
+  },
+  {
+    "text": "different options. If you're trying to",
+    "start": 100.4,
+    "duration": 3.4
+  },
+  {
+    "text": "summarize 50 meeting notes, it's just a",
+    "start": 101.72,
+    "duration": 4.8
+  },
+  {
+    "text": "bunch of data, Haiku, instant, done in",
+    "start": 103.8,
+    "duration": 5.04
+  },
+  {
+    "text": "seconds. Next, hack number three, the",
+    "start": 106.52,
+    "duration": 5.52
+  },
+  {
+    "text": "Gmail connector. Dan, is it secure? Your",
+    "start": 108.84,
+    "duration": 5.64
+  },
+  {
+    "text": "security at home is a bazillion times",
+    "start": 112.04,
+    "duration": 4.44
+  },
+  {
+    "text": "less security than the team at Claude. I",
+    "start": 114.48,
+    "duration": 3.72
+  },
+  {
+    "text": "just want you to know that. So, stop",
+    "start": 116.48,
+    "duration": 3.68
+  },
+  {
+    "text": "asking me if it's secure and start using",
+    "start": 118.2,
+    "duration": 3.4
+  },
+  {
+    "text": "the tools to make yourself some money.",
+    "start": 120.16,
+    "duration": 2.84
+  },
+  {
+    "text": "You should just not be touching your",
+    "start": 121.6,
+    "duration": 3.64
+  },
+  {
+    "text": "inbox. You can literally do all your",
+    "start": 123,
+    "duration": 4.52
+  },
+  {
+    "text": "email through Claude. But first, we got",
+    "start": 125.24,
+    "duration": 4.159
+  },
+  {
+    "text": "to connect it. You go to customize in",
+    "start": 127.52,
+    "duration": 4.08
+  },
+  {
+    "text": "the sidebar, connectors, then choose",
+    "start": 129.399,
+    "duration": 5.121
+  },
+  {
+    "text": "Gmail, then log into it. Super easy.",
+    "start": 131.6,
+    "duration": 5.359
+  },
+  {
+    "text": "Click, log in, it's added. I ask Claude",
+    "start": 134.52,
+    "duration": 4.92
+  },
+  {
+    "text": "to find stuff, summarize it, draft",
+    "start": 136.959,
+    "duration": 4.521
+  },
+  {
+    "text": "replies for me, and for what it's worth,",
+    "start": 139.44,
+    "duration": 5.12
+  },
+  {
+    "text": "the Gmail inbox search sucks. So, how",
+    "start": 141.48,
+    "duration": 5.68
+  },
+  {
+    "text": "about we get the AI to search for us. If",
+    "start": 144.56,
+    "duration": 3.92
+  },
+  {
+    "text": "you want a cheat code and you have an",
+    "start": 147.16,
+    "duration": 3.76
+  },
+  {
+    "text": "assistant, what I do is I have a Claude",
+    "start": 148.48,
+    "duration": 4.52
+  },
+  {
+    "text": "account that is for my assistant and I.",
+    "start": 150.92,
+    "duration": 4.52
+  },
+  {
+    "text": "I've connected to my inbox and they can",
+    "start": 153,
+    "duration": 4.84
+  },
+  {
+    "text": "use that to search my inbox through our",
+    "start": 155.44,
+    "duration": 4.12
+  },
+  {
+    "text": "shared Claude account so that she can",
+    "start": 157.84,
+    "duration": 3.64
+  },
+  {
+    "text": "self-serve on any questions she would",
+    "start": 159.56,
+    "duration": 3.92
+  },
+  {
+    "text": "normally ask me, she can find it in my",
+    "start": 161.48,
+    "duration": 4.84
+  },
+  {
+    "text": "inbox. Power move. Hack number four,",
+    "start": 163.48,
+    "duration": 5.04
+  },
+  {
+    "text": "calendar connector. Similar, but",
+    "start": 166.32,
+    "duration": 3.639
+  },
+  {
+    "text": "different. Let me tell you why.",
+    "start": 168.52,
+    "duration": 3.04
+  },
+  {
+    "text": "Essentially, Claude connects your Google",
+    "start": 169.959,
+    "duration": 3.281
+  },
+  {
+    "text": "calendar and it can do a lot of cool",
+    "start": 171.56,
+    "duration": 3.68
+  },
+  {
+    "text": "stuff. Yes, it can schedule things. It",
+    "start": 173.24,
+    "duration": 3.88
+  },
+  {
+    "text": "can help you with meetings. It can find",
+    "start": 175.24,
+    "duration": 4.44
+  },
+  {
+    "text": "your free time. But even more important,",
+    "start": 177.12,
+    "duration": 4.6
+  },
+  {
+    "text": "it can help you analyze your time. So,",
+    "start": 179.68,
+    "duration": 3.88
+  },
+  {
+    "text": "same thing. We go to the same place on",
+    "start": 181.72,
+    "duration": 3.44
+  },
+  {
+    "text": "the sidebar, connectors, Google",
+    "start": 183.56,
+    "duration": 3.84
+  },
+  {
+    "text": "calendar, log in. Now, I can go into",
+    "start": 185.16,
+    "duration": 4.079
+  },
+  {
+    "text": "Claude and add something like, \"Add 1",
+    "start": 187.4,
+    "duration": 4.04
+  },
+  {
+    "text": "hour time block sometime before Friday",
+    "start": 189.239,
+    "duration": 3.681
+  },
+  {
+    "text": "for me to review our next YouTube",
+    "start": 191.44,
+    "duration": 3.32
+  },
+  {
+    "text": "outline.\" It then creates the time block",
+    "start": 192.92,
+    "duration": 3.88
+  },
+  {
+    "text": "and let me know why it picked that time.",
+    "start": 194.76,
+    "duration": 3.759
+  },
+  {
+    "text": "An advanced move is to give it your",
+    "start": 196.8,
+    "duration": 3.32
+  },
+  {
+    "text": "goals for the quarter, maybe for the",
+    "start": 198.519,
+    "duration": 3.761
+  },
+  {
+    "text": "year, and then say, \"Analyze my",
+    "start": 200.12,
+    "duration": 4.08
+  },
+  {
+    "text": "calendar, now analyze my email cuz you",
+    "start": 202.28,
+    "duration": 3.88
+  },
+  {
+    "text": "got that, too, and see if I'm spending",
+    "start": 204.2,
+    "duration": 4.039
+  },
+  {
+    "text": "the right amount of time on the projects",
+    "start": 206.16,
+    "duration": 4.64
+  },
+  {
+    "text": "to achieve those goals.\" Now, it became",
+    "start": 208.239,
+    "duration": 4.441
+  },
+  {
+    "text": "a business coach. And these are only two",
+    "start": 210.8,
+    "duration": 3.439
+  },
+  {
+    "text": "connectors and there's connectors for",
+    "start": 212.68,
+    "duration": 4.24
+  },
+  {
+    "text": "Slack, Notion, GitHub, Google Drive, and",
+    "start": 214.239,
+    "duration": 4.961
+  },
+  {
+    "text": "a bunch of others. Now, before we move",
+    "start": 216.92,
+    "duration": 3.76
+  },
+  {
+    "text": "on, if you're an entrepreneur and you're",
+    "start": 219.2,
+    "duration": 3.319
+  },
+  {
+    "text": "trying to keep up on all of this AI",
+    "start": 220.68,
+    "duration": 3.8
+  },
+  {
+    "text": "chaos, but you're maxed out on time, I",
+    "start": 222.519,
+    "duration": 4.361
+  },
+  {
+    "text": "totally get it. That's why I built my AI",
+    "start": 224.48,
+    "duration": 4.8
+  },
+  {
+    "text": "company OS Playbook, the exact framework",
+    "start": 226.88,
+    "duration": 4.44
+  },
+  {
+    "text": "that I use to plug AI into every",
+    "start": 229.28,
+    "duration": 3.92
+  },
+  {
+    "text": "department within my business. If you",
+    "start": 231.32,
+    "duration": 3.84
+  },
+  {
+    "text": "want it, it's yours for free. Just DM me",
+    "start": 233.2,
+    "duration": 4.2
+  },
+  {
+    "text": "AI business on Instagram at Dan Martell",
+    "start": 235.16,
+    "duration": 3.8
+  },
+  {
+    "text": "and I'll send it right over to you. Hack",
+    "start": 237.4,
+    "duration": 3.88
+  },
+  {
+    "text": "number five, artifacts. So, essentially",
+    "start": 238.96,
+    "duration": 5.04
+  },
+  {
+    "text": "what it is is working apps right in the",
+    "start": 241.28,
+    "duration": 5.6
+  },
+  {
+    "text": "chat. It essentially creates like little",
+    "start": 244,
+    "duration": 5.04
+  },
+  {
+    "text": "mini apps within the chat that you can",
+    "start": 246.88,
+    "duration": 3.44
+  },
+  {
+    "text": "use and change things around and just",
+    "start": 249.04,
+    "duration": 3.4
+  },
+  {
+    "text": "kind of iterate. I get asked every day,",
+    "start": 250.32,
+    "duration": 3.52
+  },
+  {
+    "text": "\"Hey Dan, I got this idea. I want to",
+    "start": 252.44,
+    "duration": 3.2
+  },
+  {
+    "text": "hire a developer. How do I find the",
+    "start": 253.84,
+    "duration": 3.64
+  },
+  {
+    "text": "right person?\" I go, \"Look in the",
+    "start": 255.64,
+    "duration": 2.76
+  },
+  {
+    "text": "mirror.",
+    "start": 257.48,
+    "duration": 3.8
+  },
+  {
+    "text": "You are that person.\" Try it. Just say,",
+    "start": 258.4,
+    "duration": 5.4
+  },
+  {
+    "text": "\"Build me this thing.\" and watch Claude",
+    "start": 261.28,
+    "duration": 4.24
+  },
+  {
+    "text": "build it. So, for example, you could",
+    "start": 263.8,
+    "duration": 3.44
+  },
+  {
+    "text": "say, \"Build me a spreadsheet with sample",
+    "start": 265.52,
+    "duration": 3.12
+  },
+  {
+    "text": "data.\" and then make the columns",
+    "start": 267.24,
+    "duration": 3.24
+  },
+  {
+    "text": "editable, include the sales reps who's",
+    "start": 268.64,
+    "duration": 3.76
+  },
+  {
+    "text": "involved, the status of the sale, the",
+    "start": 270.48,
+    "duration": 3.36
+  },
+  {
+    "text": "product they sold, and any other",
+    "start": 272.4,
+    "duration": 2.72
+  },
+  {
+    "text": "information you think that would be",
+    "start": 273.84,
+    "duration": 3.92
+  },
+  {
+    "text": "relevant and then hit boom, enter, and",
+    "start": 275.12,
+    "duration": 4.4
+  },
+  {
+    "text": "then pow, it just creates these",
+    "start": 277.76,
+    "duration": 4.48
+  },
+  {
+    "text": "interactive apps in chat. So, it's not",
+    "start": 279.52,
+    "duration": 4.68
+  },
+  {
+    "text": "just like an information back and forth.",
+    "start": 282.24,
+    "duration": 4.12
+  },
+  {
+    "text": "Now, we're building things. Hack number",
+    "start": 284.2,
+    "duration": 5.04
+  },
+  {
+    "text": "six, interactive visuals. Now, this is",
+    "start": 286.36,
+    "duration": 4.84
+  },
+  {
+    "text": "my favorite because I used to take the",
+    "start": 289.24,
+    "duration": 3.92
+  },
+  {
+    "text": "data from Claude and then go visualize",
+    "start": 291.2,
+    "duration": 3.76
+  },
+  {
+    "text": "it in other tools. Now, I get to stay",
+    "start": 293.16,
+    "duration": 4.08
+  },
+  {
+    "text": "right inside the chat. Claude builds you",
+    "start": 294.96,
+    "duration": 4.959
+  },
+  {
+    "text": "live, clickable visuals that you can use",
+    "start": 297.24,
+    "duration": 5.24
+  },
+  {
+    "text": "explain anything. It's literally done",
+    "start": 299.919,
+    "duration": 4.721
+  },
+  {
+    "text": "what I call accelerated learning. So,",
+    "start": 302.48,
+    "duration": 4.28
+  },
+  {
+    "text": "for example, you can ask it to visualize",
+    "start": 304.64,
+    "duration": 3.6
+  },
+  {
+    "text": "the height framework, which is how we",
+    "start": 306.76,
+    "duration": 3
+  },
+  {
+    "text": "shoot our short-form videos. And if you",
+    "start": 308.24,
+    "duration": 2.92
+  },
+  {
+    "text": "want and need context on that, just",
+    "start": 309.76,
+    "duration": 2.72
+  },
+  {
+    "text": "check Slack. So, now it's going to use",
+    "start": 311.16,
+    "duration": 3.24
+  },
+  {
+    "text": "my Slack as a connector and it builds me",
+    "start": 312.48,
+    "duration": 3.76
+  },
+  {
+    "text": "this cool whole visual that I can click",
+    "start": 314.4,
+    "duration": 3.56
+  },
+  {
+    "text": "on and expand to learn more about what",
+    "start": 316.24,
+    "duration": 3.72
+  },
+  {
+    "text": "it is and it's all done by pulling the",
+    "start": 317.96,
+    "duration": 4
+  },
+  {
+    "text": "information and visualizing it. It's as",
+    "start": 319.96,
+    "duration": 4.48
+  },
+  {
+    "text": "simple as telling it, \"Visualize this.\"",
+    "start": 321.96,
+    "duration": 4.959
+  },
+  {
+    "text": "Hack number seven, projects. Think of it",
+    "start": 324.44,
+    "duration": 4.72
+  },
+  {
+    "text": "like this. It's essentially a folder",
+    "start": 326.919,
+    "duration": 4.121
+  },
+  {
+    "text": "that's preloaded with all the context",
+    "start": 329.16,
+    "duration": 3.8
+  },
+  {
+    "text": "you might have around a project. See why",
+    "start": 331.04,
+    "duration": 3.48
+  },
+  {
+    "text": "it's called a project? And then you can",
+    "start": 332.96,
+    "duration": 2.84
+  },
+  {
+    "text": "actually invite other people to",
+    "start": 334.52,
+    "duration": 3.48
+  },
+  {
+    "text": "collaborate with you on those projects",
+    "start": 335.8,
+    "duration": 3.88
+  },
+  {
+    "text": "so that your chats and their chats are",
+    "start": 338,
+    "duration": 3.08
+  },
+  {
+    "text": "all in one place and you can kind of",
+    "start": 339.68,
+    "duration": 3.04
+  },
+  {
+    "text": "riff off each other. If you're on a team",
+    "start": 341.08,
+    "duration": 3.56
+  },
+  {
+    "text": "account, highly recommend you do. So,",
+    "start": 342.72,
+    "duration": 4.04
+  },
+  {
+    "text": "here's how How it. We go to the sidebar,",
+    "start": 344.64,
+    "duration": 3.8
+  },
+  {
+    "text": "then you click projects, then new",
+    "start": 346.76,
+    "duration": 2.48
+  },
+  {
+    "text": "project. [music]",
+    "start": 348.44,
+    "duration": 2.92
+  },
+  {
+    "text": "Now, I drop contacts in there. So,",
+    "start": 349.24,
+    "duration": 4.32
+  },
+  {
+    "text": "everything from internal documents to",
+    "start": 351.36,
+    "duration": 4.84
+  },
+  {
+    "text": "PDFs to anything I've downloaded, any",
+    "start": 353.56,
+    "duration": 4.8
+  },
+  {
+    "text": "instructions, copy-paste other chats,",
+    "start": 356.2,
+    "duration": 3.68
+  },
+  {
+    "text": "you put all that in the knowledge",
+    "start": 358.36,
+    "duration": 3.24
+  },
+  {
+    "text": "section. When you start chatting with",
+    "start": 359.88,
+    "duration": 3.36
+  },
+  {
+    "text": "it, it has all that reference material",
+    "start": 361.6,
+    "duration": 3.64
+  },
+  {
+    "text": "to be able to give you good answers. I",
+    "start": 363.24,
+    "duration": 4.32
+  },
+  {
+    "text": "have every one of my coaching calls",
+    "start": 365.24,
+    "duration": 4.52
+  },
+  {
+    "text": "transcribed. So, if I'm looking for an",
+    "start": 367.56,
+    "duration": 4.6
+  },
+  {
+    "text": "example, a story, a client, I can go",
+    "start": 369.76,
+    "duration": 4.16
+  },
+  {
+    "text": "into the project that has already linked",
+    "start": 372.16,
+    "duration": 3.64
+  },
+  {
+    "text": "up to that Google Drive and tell it to",
+    "start": 373.92,
+    "duration": 4.2
+  },
+  {
+    "text": "search every transcript to find examples",
+    "start": 375.8,
+    "duration": 3.84
+  },
+  {
+    "text": "or stories around this pain or this",
+    "start": 378.12,
+    "duration": 3.72
+  },
+  {
+    "text": "challenge, and that feeds me ideas for",
+    "start": 379.64,
+    "duration": 3.96
+  },
+  {
+    "text": "me to talk about in my content. And a",
+    "start": 381.84,
+    "duration": 3.92
+  },
+  {
+    "text": "pro move is you can create a system",
+    "start": 383.6,
+    "duration": 3.88
+  },
+  {
+    "text": "prompt that you copy and paste into the",
+    "start": 385.76,
+    "duration": 3.96
+  },
+  {
+    "text": "instruction box, which then essentially",
+    "start": 387.48,
+    "duration": 3.92
+  },
+  {
+    "text": "acts like what used to be called a",
+    "start": 389.72,
+    "duration": 3.64
+  },
+  {
+    "text": "custom GPT, so that you can get the same",
+    "start": 391.4,
+    "duration": 3.8
+  },
+  {
+    "text": "result over and over every time you come",
+    "start": 393.36,
+    "duration": 4
+  },
+  {
+    "text": "into that project. Hack number eight,",
+    "start": 395.2,
+    "duration": 4.12
+  },
+  {
+    "text": "voice mode. Now, we get to talk to",
+    "start": 397.36,
+    "duration": 4.44
+  },
+  {
+    "text": "Claude, cuz guess what? I can talk three",
+    "start": 399.32,
+    "duration": 4.12
+  },
+  {
+    "text": "times faster than I can type. So, it's",
+    "start": 401.8,
+    "duration": 3.56
+  },
+  {
+    "text": "super easy. On a desktop, click that",
+    "start": 403.44,
+    "duration": 3.32
+  },
+  {
+    "text": "little waveform at the bottom of your",
+    "start": 405.36,
+    "duration": 3.44
+  },
+  {
+    "text": "prompt bar. On mobile, just click the",
+    "start": 406.76,
+    "duration": 3.68
+  },
+  {
+    "text": "mic button. I do this all time. Well,",
+    "start": 408.8,
+    "duration": 3.6
+  },
+  {
+    "text": "I'm driving, I'm having fun. It's easy.",
+    "start": 410.44,
+    "duration": 3.2
+  },
+  {
+    "text": "And the cool part is it transcribes the",
+    "start": 412.4,
+    "duration": 2.72
+  },
+  {
+    "text": "whole conversation, so if you ever want",
+    "start": 413.64,
+    "duration": 3.2
+  },
+  {
+    "text": "to use that in something else, it's all",
+    "start": 415.12,
+    "duration": 3.68
+  },
+  {
+    "text": "there to go. The best part is you can be",
+    "start": 416.84,
+    "duration": 3.72
+  },
+  {
+    "text": "super messy in whatever you're thinking",
+    "start": 418.8,
+    "duration": 3.56
+  },
+  {
+    "text": "about, and Claude is smart enough to go,",
+    "start": 420.56,
+    "duration": 3.12
+  },
+  {
+    "text": "\"Oh, you're probably talking about",
+    "start": 422.36,
+    "duration": 2.48
+  },
+  {
+    "text": "this.\" and give you a really great",
+    "start": 423.68,
+    "duration": 2.84
+  },
+  {
+    "text": "answer. Hack number nine, Chrome",
+    "start": 424.84,
+    "duration": 3.8
+  },
+  {
+    "text": "extension. Non-negotiable for me. The",
+    "start": 426.52,
+    "duration": 4.88
+  },
+  {
+    "text": "Chrome extension is a go-to tool. If",
+    "start": 428.64,
+    "duration": 5.08
+  },
+  {
+    "text": "you're a Claude user, please install it.",
+    "start": 431.4,
+    "duration": 4.519
+  },
+  {
+    "text": "So, what it does is it allows you to use",
+    "start": 433.72,
+    "duration": 4.76
+  },
+  {
+    "text": "your browser through Claude to automate",
+    "start": 435.919,
+    "duration": 4
+  },
+  {
+    "text": "tasks. So, the first thing we got to do",
+    "start": 438.48,
+    "duration": 3.8
+  },
+  {
+    "text": "is go to the Chrome Web Store and find",
+    "start": 439.919,
+    "duration": 4.561
+  },
+  {
+    "text": "Claude for Chrome and install it. And",
+    "start": 442.28,
+    "duration": 4.4
+  },
+  {
+    "text": "what it is, pretty much everything you",
+    "start": 444.48,
+    "duration": 4.56
+  },
+  {
+    "text": "do in your browser, the Claude Chrome",
+    "start": 446.68,
+    "duration": 4.2
+  },
+  {
+    "text": "browser extension could do for you. So,",
+    "start": 449.04,
+    "duration": 2.879
+  },
+  {
+    "text": "for example, if you got like a",
+    "start": 450.88,
+    "duration": 2.12
+  },
+  {
+    "text": "spreadsheet and you got all these",
+    "start": 451.919,
+    "duration": 2.521
+  },
+  {
+    "text": "numbers and you're like, \"I wonder what",
+    "start": 453,
+    "duration": 2.72
+  },
+  {
+    "text": "the pattern is and what should I pay",
+    "start": 454.44,
+    "duration": 3.479
+  },
+  {
+    "text": "attention to?\" You can just ask it. Then",
+    "start": 455.72,
+    "duration": 4.199
+  },
+  {
+    "text": "Claude takes a snapshot of the site,",
+    "start": 457.919,
+    "duration": 3.281
+  },
+  {
+    "text": "starts scraping everything, clicks",
+    "start": 459.919,
+    "duration": 3.201
+  },
+  {
+    "text": "buttons, works inside your browser, and",
+    "start": 461.2,
+    "duration": 3.72
+  },
+  {
+    "text": "it finds the insights. It does",
+    "start": 463.12,
+    "duration": 3.16
+  },
+  {
+    "text": "everything that you would have to do",
+    "start": 464.92,
+    "duration": 3.16
+  },
+  {
+    "text": "that you might not even know how to do",
+    "start": 466.28,
+    "duration": 4.56
+  },
+  {
+    "text": "for you automagically. Hack number 10,",
+    "start": 468.08,
+    "duration": 4.76
+  },
+  {
+    "text": "Cowork. This is where it gets nerdy,",
+    "start": 470.84,
+    "duration": 3.48
+  },
+  {
+    "text": "like my kind of people are sticking",
+    "start": 472.84,
+    "duration": 3.28
+  },
+  {
+    "text": "around right to the end starting now.",
+    "start": 474.32,
+    "duration": 3.92
+  },
+  {
+    "text": "What it is is Claude will take over your",
+    "start": 476.12,
+    "duration": 5.28
+  },
+  {
+    "text": "computer and do work on your computer",
+    "start": 478.24,
+    "duration": 5.04
+  },
+  {
+    "text": "while you step away. On your Claude",
+    "start": 481.4,
+    "duration": 3.56
+  },
+  {
+    "text": "desktop, so it's a separate app you have",
+    "start": 483.28,
+    "duration": 3.84
+  },
+  {
+    "text": "to install on your desktop, open up and",
+    "start": 484.96,
+    "duration": 4.72
+  },
+  {
+    "text": "you'll see Cowork. Open Cowork, it's in",
+    "start": 487.12,
+    "duration": 4.32
+  },
+  {
+    "text": "the top left. And here's a tip, make",
+    "start": 489.68,
+    "duration": 3.88
+  },
+  {
+    "text": "sure you toggle on computer use in your",
+    "start": 491.44,
+    "duration": 4.32
+  },
+  {
+    "text": "settings cuz it needs that to be able to",
+    "start": 493.56,
+    "duration": 4.12
+  },
+  {
+    "text": "do things on your computer. Then you",
+    "start": 495.76,
+    "duration": 3.48
+  },
+  {
+    "text": "just describe any task you need to be",
+    "start": 497.68,
+    "duration": 3.16
+  },
+  {
+    "text": "done and the steps that it requires and",
+    "start": 499.24,
+    "duration": 3.8
+  },
+  {
+    "text": "Claude breaks it down and executes step",
+    "start": 500.84,
+    "duration": 4.32
+  },
+  {
+    "text": "by step. So for example, you can say,",
+    "start": 503.04,
+    "duration": 3.8
+  },
+  {
+    "text": "\"Pull last month's sales numbers from",
+    "start": 505.16,
+    "duration": 3.56
+  },
+  {
+    "text": "HubSpot, drop them in a Google Sheet,",
+    "start": 506.84,
+    "duration": 3.48
+  },
+  {
+    "text": "build a summary chart, and post on the",
+    "start": 508.72,
+    "duration": 3.24
+  },
+  {
+    "text": "team Slack channel before Monday 9:00",
+    "start": 510.32,
+    "duration": 3.2
+  },
+  {
+    "text": "a.m.\" and it'll take over control of my",
+    "start": 511.96,
+    "duration": 3.48
+  },
+  {
+    "text": "computer to do it all. It's like",
+    "start": 513.52,
+    "duration": 4.28
+  },
+  {
+    "text": "Claude's hands doing the work for you.",
+    "start": 515.44,
+    "duration": 5.159
+  },
+  {
+    "text": "Hack number 11, Schedule Task. This is",
+    "start": 517.8,
+    "duration": 4.64
+  },
+  {
+    "text": "one I use every day because there's",
+    "start": 520.599,
+    "duration": 3.241
+  },
+  {
+    "text": "things that I do every day that I just",
+    "start": 522.44,
+    "duration": 3.08
+  },
+  {
+    "text": "want somebody else to do for me, and",
+    "start": 523.84,
+    "duration": 4.16
+  },
+  {
+    "text": "it's Claude. So it's within Cowork, just",
+    "start": 525.52,
+    "duration": 4.76
+  },
+  {
+    "text": "type {forward slash} schedule, and then",
+    "start": 528,
+    "duration": 3.72
+  },
+  {
+    "text": "it'll allow you to schedule whatever you",
+    "start": 530.28,
+    "duration": 3.28
+  },
+  {
+    "text": "just typed. Things that used to be done",
+    "start": 531.72,
+    "duration": 3.48
+  },
+  {
+    "text": "by my chief of staff that honestly she",
+    "start": 533.56,
+    "duration": 3.2
+  },
+  {
+    "text": "doesn't have to do, I'll just set it up,",
+    "start": 535.2,
+    "duration": 2.92
+  },
+  {
+    "text": "schedule it, and nobody has to worry",
+    "start": 536.76,
+    "duration": 3.2
+  },
+  {
+    "text": "about it. It does that at the same time",
+    "start": 538.12,
+    "duration": 4
+  },
+  {
+    "text": "every day as long as my computer's open.",
+    "start": 539.96,
+    "duration": 3.72
+  },
+  {
+    "text": "So every morning Claude can read your",
+    "start": 542.12,
+    "duration": 3.6
+  },
+  {
+    "text": "inbox, it can send you a summary, it can",
+    "start": 543.68,
+    "duration": 3.44
+  },
+  {
+    "text": "figure out what's urgent, it can tell",
+    "start": 545.72,
+    "duration": 2.76
+  },
+  {
+    "text": "you what's new in the world, it can",
+    "start": 547.12,
+    "duration": 2.56
+  },
+  {
+    "text": "essentially do everything that you're",
+    "start": 548.48,
+    "duration": 2.48
+  },
+  {
+    "text": "probably doing every time you sit down",
+    "start": 549.68,
+    "duration": 3.159
+  },
+  {
+    "text": "at your computer anyway. Hack number 12,",
+    "start": 550.96,
+    "duration": 5.08
+  },
+  {
+    "text": "Claude Dispatch. We can essentially talk",
+    "start": 552.839,
+    "duration": 5.841
+  },
+  {
+    "text": "to Claude through Dispatch. Claude's",
+    "start": 556.04,
+    "duration": 4.2
+  },
+  {
+    "text": "made this super simple. Just go into",
+    "start": 558.68,
+    "duration": 3.36
+  },
+  {
+    "text": "Cowork, then you'll see a menu item",
+    "start": 560.24,
+    "duration": 4.32
+  },
+  {
+    "text": "called Dispatch, click it, you'll see a",
+    "start": 562.04,
+    "duration": 5
+  },
+  {
+    "text": "QR code, pull out the camera app on your",
+    "start": 564.56,
+    "duration": 5.04
+  },
+  {
+    "text": "phone, scan it, and it'll actually",
+    "start": 567.04,
+    "duration": 4.6
+  },
+  {
+    "text": "redirect you to the App Store to install",
+    "start": 569.6,
+    "duration": 4.239
+  },
+  {
+    "text": "the app, and then it'll connect your app",
+    "start": 571.64,
+    "duration": 4.28
+  },
+  {
+    "text": "to your computer. So So you might be out",
+    "start": 573.839,
+    "duration": 3.761
+  },
+  {
+    "text": "at dinner and realize you forgot",
+    "start": 575.92,
+    "duration": 2.72
+  },
+  {
+    "text": "something and you want to send it to",
+    "start": 577.6,
+    "duration": 2.6
+  },
+  {
+    "text": "your team so you can actually use",
+    "start": 578.64,
+    "duration": 3.72
+  },
+  {
+    "text": "dispatch on your phone to say, \"Hey, go",
+    "start": 580.2,
+    "duration": 4.12
+  },
+  {
+    "text": "grab my Martel Ventures pitch deck and",
+    "start": 582.36,
+    "duration": 3.28
+  },
+  {
+    "text": "send it to Roddy and ask him to give",
+    "start": 584.32,
+    "duration": 2.84
+  },
+  {
+    "text": "feedback and then send an email to the",
+    "start": 585.64,
+    "duration": 3.4
+  },
+  {
+    "text": "team with all the updates.\" So now you",
+    "start": 587.16,
+    "duration": 4.24
+  },
+  {
+    "text": "can do all the co-work automations",
+    "start": 589.04,
+    "duration": 3.76
+  },
+  {
+    "text": "executing on your computer cuz you",
+    "start": 591.4,
+    "duration": 3.24
+  },
+  {
+    "text": "turned that little setting on on the go.",
+    "start": 592.8,
+    "duration": 4.24
+  },
+  {
+    "text": "Hack number 13, Claude Code. It's",
+    "start": 594.64,
+    "duration": 4.8
+  },
+  {
+    "text": "essentially an AI software developer",
+    "start": 597.04,
+    "duration": 5.28
+  },
+  {
+    "text": "that can code anything in plain English.",
+    "start": 599.44,
+    "duration": 4.64
+  },
+  {
+    "text": "A couple months ago I shut down my whole",
+    "start": 602.32,
+    "duration": 5.44
+  },
+  {
+    "text": "company for 2 days and taught everybody",
+    "start": 604.08,
+    "duration": 5.44
+  },
+  {
+    "text": "how to be a Claude Code engineer. If you",
+    "start": 607.76,
+    "duration": 3.84
+  },
+  {
+    "text": "want to do 10 times 100 times more work",
+    "start": 609.52,
+    "duration": 4.16
+  },
+  {
+    "text": "than anybody else, you have to learn how",
+    "start": 611.6,
+    "duration": 3.68
+  },
+  {
+    "text": "to build apps in Claude Code. And the",
+    "start": 613.68,
+    "duration": 3.2
+  },
+  {
+    "text": "cool part is is Anthropic has a full",
+    "start": 615.28,
+    "duration": 3.36
+  },
+  {
+    "text": "setup guide that'll teach everything to",
+    "start": 616.88,
+    "duration": 3.56
+  },
+  {
+    "text": "you and I'll link it up below. And look,",
+    "start": 618.64,
+    "duration": 3.4
+  },
+  {
+    "text": "there's two types of Claude Code.",
+    "start": 620.44,
+    "duration": 4
+  },
+  {
+    "text": "There's using it in the Claude app on",
+    "start": 622.04,
+    "duration": 4.72
+  },
+  {
+    "text": "your computer or you can actually do it",
+    "start": 624.44,
+    "duration": 3.68
+  },
+  {
+    "text": "in the terminal. Now if you don't know",
+    "start": 626.76,
+    "duration": 3.12
+  },
+  {
+    "text": "what a terminal is, that's fine. Just",
+    "start": 628.12,
+    "duration": 4.16
+  },
+  {
+    "text": "ask Claude and it'll tell you how to use",
+    "start": 629.88,
+    "duration": 4.48
+  },
+  {
+    "text": "it. I want you to know that AI is the",
+    "start": 632.28,
+    "duration": 4.08
+  },
+  {
+    "text": "only technology ever created that",
+    "start": 634.36,
+    "duration": 4.04
+  },
+  {
+    "text": "teaches you how to use it better. One of",
+    "start": 636.36,
+    "duration": 5.24
+  },
+  {
+    "text": "my CEOs, Todd, who's 60, he's not but I",
+    "start": 638.4,
+    "duration": 4.96
+  },
+  {
+    "text": "joke with him he is, literally used",
+    "start": 641.6,
+    "duration": 4.2
+  },
+  {
+    "text": "Claude Code to build a CEO dashboard.",
+    "start": 643.36,
+    "duration": 4.04
+  },
+  {
+    "text": "I'm telling you nobody heard from Todd",
+    "start": 645.8,
+    "duration": 3.72
+  },
+  {
+    "text": "for 3 days. Then he emerges out of his",
+    "start": 647.4,
+    "duration": 3.56
+  },
+  {
+    "text": "office and he brings us in there and",
+    "start": 649.52,
+    "duration": 3.12
+  },
+  {
+    "text": "he's got a TV on the wall and he's",
+    "start": 650.96,
+    "duration": 3.4
+  },
+  {
+    "text": "showing us this app he built. And",
+    "start": 652.64,
+    "duration": 4.16
+  },
+  {
+    "text": "essentially it's doing his job. Somebody",
+    "start": 654.36,
+    "duration": 4.8
+  },
+  {
+    "text": "that is not technical, not somebody",
+    "start": 656.8,
+    "duration": 4.36
+  },
+  {
+    "text": "learn how to code, he just knows how to",
+    "start": 659.16,
+    "duration": 4.2
+  },
+  {
+    "text": "talk. So this is cool but what if you",
+    "start": 661.16,
+    "duration": 3.84
+  },
+  {
+    "text": "want to do like coding stuff while",
+    "start": 663.36,
+    "duration": 3.04
+  },
+  {
+    "text": "you're on the go? Well, that's where",
+    "start": 665,
+    "duration": 3
+  },
+  {
+    "text": "hack number 14 comes in, Claude",
+    "start": 666.4,
+    "duration": 3.8
+  },
+  {
+    "text": "Channels. Essentially, you can use",
+    "start": 668,
+    "duration": 5.72
+  },
+  {
+    "text": "iMessage, Telegram, Discord to chat with",
+    "start": 670.2,
+    "duration": 6.08
+  },
+  {
+    "text": "Claude. So now you can code from",
+    "start": 673.72,
+    "duration": 4.16
+  },
+  {
+    "text": "anywhere as long as your computer's",
+    "start": 676.28,
+    "duration": 3.12
+  },
+  {
+    "text": "running. Anthropic put a full guide",
+    "start": 677.88,
+    "duration": 3.12
+  },
+  {
+    "text": "together help you set it up so I'll link",
+    "start": 679.4,
+    "duration": 3.28
+  },
+  {
+    "text": "it below again. But at a high level,",
+    "start": 681,
+    "duration": 2.88
+  },
+  {
+    "text": "here's what you want to do. First, you",
+    "start": 682.68,
+    "duration": 3.04
+  },
+  {
+    "text": "create your bot on Telegram, iMessage or",
+    "start": 683.88,
+    "duration": 3.92
+  },
+  {
+    "text": "Discord, pair it with Claude Code in",
+    "start": 685.72,
+    "duration": 4.119
+  },
+  {
+    "text": "your terminal, and then finally set up",
+    "start": 687.8,
+    "duration": 4.44
+  },
+  {
+    "text": "your API keys and skills. Now API keys",
+    "start": 689.839,
+    "duration": 3.321
+  },
+  {
+    "text": "is just something you're going to have",
+    "start": 692.24,
+    "duration": 2.2
+  },
+  {
+    "text": "to learn to do. It's like creating a",
+    "start": 693.16,
+    "duration": 2.2
+  },
+  {
+    "text": "spreadsheet if you've never created a",
+    "start": 694.44,
+    "duration": 2.2
+  },
+  {
+    "text": "spreadsheet. Once you learn how to do it",
+    "start": 695.36,
+    "duration": 3.16
+  },
+  {
+    "text": "once, you'll learn that it's just how",
+    "start": 696.64,
+    "duration": 3.36
+  },
+  {
+    "text": "all these computers talk to each other.",
+    "start": 698.52,
+    "duration": 2.96
+  },
+  {
+    "text": "Now, you can use Claude Code from",
+    "start": 700,
+    "duration": 3.4
+  },
+  {
+    "text": "anywhere and build stuff and iterate",
+    "start": 701.48,
+    "duration": 3.4
+  },
+  {
+    "text": "with it as long as your computer is",
+    "start": 703.4,
+    "duration": 2.72
+  },
+  {
+    "text": "running. So, just tell it what you",
+    "start": 704.88,
+    "duration": 3.12
+  },
+  {
+    "text": "needed to build. For example, my buddy",
+    "start": 706.12,
+    "duration": 4
+  },
+  {
+    "text": "Arturo was running late and he was about",
+    "start": 708,
+    "duration": 4.08
+  },
+  {
+    "text": "to miss a flight, so then he actually",
+    "start": 710.12,
+    "duration": 3.64
+  },
+  {
+    "text": "messaged Claude Code to check his email",
+    "start": 712.08,
+    "duration": 3.28
+  },
+  {
+    "text": "cuz he connected it and to look at his",
+    "start": 713.76,
+    "duration": 3.12
+  },
+  {
+    "text": "calendar cuz all the details were there",
+    "start": 715.36,
+    "duration": 3.96
+  },
+  {
+    "text": "and for it to check into his flight for",
+    "start": 716.88,
+    "duration": 3.96
+  },
+  {
+    "text": "him. A lot of people are using Claude",
+    "start": 719.32,
+    "duration": 3.6
+  },
+  {
+    "text": "Code like their own personal AI agent,",
+    "start": 720.84,
+    "duration": 3.6
+  },
+  {
+    "text": "but that's why I built my own platform",
+    "start": 722.92,
+    "duration": 3.56
+  },
+  {
+    "text": "called Apex. Essentially, it's like a",
+    "start": 724.44,
+    "duration": 3.68
+  },
+  {
+    "text": "digital twin. So, I have a guy named",
+    "start": 726.48,
+    "duration": 3.96
+  },
+  {
+    "text": "Kai, that's my guy, and he handles",
+    "start": 728.12,
+    "duration": 4.24
+  },
+  {
+    "text": "everything. But, it's way easier to set",
+    "start": 730.44,
+    "duration": 4.08
+  },
+  {
+    "text": "up, it's way more secure, and it gives",
+    "start": 732.36,
+    "duration": 4.04
+  },
+  {
+    "text": "you access and privacy to your own",
+    "start": 734.52,
+    "duration": 3.68
+  },
+  {
+    "text": "things and it can use all the language",
+    "start": 736.4,
+    "duration": 3.16
+  },
+  {
+    "text": "models and all the AI. So, if you're",
+    "start": 738.2,
+    "duration": 2.56
+  },
+  {
+    "text": "interested, just click the link in the",
+    "start": 739.56,
+    "duration": 2.44
+  },
+  {
+    "text": "description and check it out for",
+    "start": 740.76,
+    "duration": 4.08
+  },
+  {
+    "text": "yourself. Hack number 15, Claude skills.",
+    "start": 742,
+    "duration": 5.2
+  },
+  {
+    "text": "This is where you can train Claude to do",
+    "start": 744.84,
+    "duration": 4.84
+  },
+  {
+    "text": "a repeatable task for you exactly the",
+    "start": 747.2,
+    "duration": 4.96
+  },
+  {
+    "text": "same way every time. you turn anything",
+    "start": 749.68,
+    "duration": 4.16
+  },
+  {
+    "text": "into a skill is once you've got",
+    "start": 752.16,
+    "duration": 3
+  },
+  {
+    "text": "something going, you're working with",
+    "start": 753.84,
+    "duration": 2.6
+  },
+  {
+    "text": "something, you're asking to refine it,",
+    "start": 755.16,
+    "duration": 3.24
+  },
+  {
+    "text": "just say, \"Turn this into a skill.\" So,",
+    "start": 756.44,
+    "duration": 3.6
+  },
+  {
+    "text": "to do this, just go on the left side of",
+    "start": 758.4,
+    "duration": 3.68
+  },
+  {
+    "text": "your sidebar and click customize,",
+    "start": 760.04,
+    "duration": 5.32
+  },
+  {
+    "text": "skills, and browse, and install. Or, you",
+    "start": 762.08,
+    "duration": 4.64
+  },
+  {
+    "text": "can create your own. And the cool part",
+    "start": 765.36,
+    "duration": 3.24
+  },
+  {
+    "text": "is is you can install other people's",
+    "start": 766.72,
+    "duration": 3.28
+  },
+  {
+    "text": "skills. Ton of them that are created for",
+    "start": 768.6,
+    "duration": 4.16
+  },
+  {
+    "text": "like legal, financials, HR type skills.",
+    "start": 770,
+    "duration": 4.839
+  },
+  {
+    "text": "There's literally thousands of them",
+    "start": 772.76,
+    "duration": 3.76
+  },
+  {
+    "text": "shared on GitHub. So, one of the most",
+    "start": 774.839,
+    "duration": 3.881
+  },
+  {
+    "text": "popular skills is one called Humanizer",
+    "start": 776.52,
+    "duration": 4.4
+  },
+  {
+    "text": "where it targets the 20 specific AI",
+    "start": 778.72,
+    "duration": 4.24
+  },
+  {
+    "text": "writing patterns that we all know exist",
+    "start": 780.92,
+    "duration": 3.919
+  },
+  {
+    "text": "and then it rewrites whatever your AI",
+    "start": 782.96,
+    "duration": 4.52
+  },
+  {
+    "text": "did in a more human tone. And last,",
+    "start": 784.839,
+    "duration": 4.601
+  },
+  {
+    "text": "Claude design. This one's going to turn",
+    "start": 787.48,
+    "duration": 3.92
+  },
+  {
+    "text": "everybody into a world-class designer.",
+    "start": 789.44,
+    "duration": 4.2
+  },
+  {
+    "text": "I'm talking pitch decks, one-pagers,",
+    "start": 791.4,
+    "duration": 4.84
+  },
+  {
+    "text": "landing page mock-ups, full apps, even",
+    "start": 793.64,
+    "duration": 4.6
+  },
+  {
+    "text": "motion graphics. As of the filming of",
+    "start": 796.24,
+    "duration": 3.72
+  },
+  {
+    "text": "this video, it is the newest release",
+    "start": 798.24,
+    "duration": 3.2
+  },
+  {
+    "text": "from Claude. So, if you want to use it,",
+    "start": 799.96,
+    "duration": 4.56
+  },
+  {
+    "text": "real simple, go to claude.ai/design.",
+    "start": 801.44,
+    "duration": 4.8
+  },
+  {
+    "text": "Now, just describe what you want and",
+    "start": 804.52,
+    "duration": 3.2
+  },
+  {
+    "text": "Claude will build you a draft in",
+    "start": 806.24,
+    "duration": 3.16
+  },
+  {
+    "text": "minutes. And it can even match your",
+    "start": 807.72,
+    "duration": 3.52
+  },
+  {
+    "text": "styles, brand guides, whatever you got,",
+    "start": 809.4,
+    "duration": 3.56
+  },
+  {
+    "text": "you can give it as examples and it'll",
+    "start": 811.24,
+    "duration": 3.44
+  },
+  {
+    "text": "match that as it designs for you. So",
+    "start": 812.96,
+    "duration": 3.68
+  },
+  {
+    "text": "basically, I want to visualize the main",
+    "start": 814.68,
+    "duration": 3.68
+  },
+  {
+    "text": "points of my book, Buy Back Your Time.",
+    "start": 816.64,
+    "duration": 3.12
+  },
+  {
+    "text": "So maybe I was creating a workbook,",
+    "start": 818.36,
+    "duration": 3.28
+  },
+  {
+    "text": "which already exists, but if I didn't, I",
+    "start": 819.76,
+    "duration": 4.12
+  },
+  {
+    "text": "could use this to visualize the points,",
+    "start": 821.64,
+    "duration": 4.16
+  },
+  {
+    "text": "so it take those elements out of my book",
+    "start": 823.88,
+    "duration": 4.16
+  },
+  {
+    "text": "and then create visual examples so it",
+    "start": 825.8,
+    "duration": 3.72
+  },
+  {
+    "text": "help people learn it easier. And then",
+    "start": 828.04,
+    "duration": 4.36
+  },
+  {
+    "text": "bada bing, bada boom, done. Like look at",
+    "start": 829.52,
+    "duration": 5.36
+  },
+  {
+    "text": "it. Not visually what I would do, but it",
+    "start": 832.4,
+    "duration": 4.8
+  },
+  {
+    "text": "gets me there. For most people, it is a",
+    "start": 834.88,
+    "duration": 4.08
+  },
+  {
+    "text": "game-changer. And this is the worst it's",
+    "start": 837.2,
+    "duration": 3.2
+  },
+  {
+    "text": "ever going to be. You don't think in 6",
+    "start": 838.96,
+    "duration": 2.6
+  },
+  {
+    "text": "months it's going to be better? 12",
+    "start": 840.4,
+    "duration": 3.4
+  },
+  {
+    "text": "months? 2 years? I think designers need",
+    "start": 841.56,
+    "duration": 4
+  },
+  {
+    "text": "to start learning how to use this. And",
+    "start": 843.8,
+    "duration": 3.44
+  },
+  {
+    "text": "they recently partnered with Adobe, so",
+    "start": 845.56,
+    "duration": 3.52
+  },
+  {
+    "text": "the whole design world is going to get",
+    "start": 847.24,
+    "duration": 4.68
+  },
+  {
+    "text": "mixed up big time. So I just overloaded",
+    "start": 849.08,
+    "duration": 4.48
+  },
+  {
+    "text": "your mind with a bunch of hacks, but",
+    "start": 851.92,
+    "duration": 3.2
+  },
+  {
+    "text": "here's the cool part. You don't need to",
+    "start": 853.56,
+    "duration": 2.88
+  },
+  {
+    "text": "do them all. Now you just know that they",
+    "start": 855.12,
+    "duration": 3.4
+  },
+  {
+    "text": "exist. So all I need from you is to know",
+    "start": 856.44,
+    "duration": 4
+  },
+  {
+    "text": "which one are you going to use today?",
+    "start": 858.52,
+    "duration": 3.56
+  },
+  {
+    "text": "Just leave a comment below and let me",
+    "start": 860.44,
+    "duration": 3.12
+  },
+  {
+    "text": "know. And look, if it doesn't work for",
+    "start": 862.08,
+    "duration": 3.56
+  },
+  {
+    "text": "you, that's fine. Go to the next one. AI",
+    "start": 863.56,
+    "duration": 4.44
+  },
+  {
+    "text": "can be crazy, but I trust that you can",
+    "start": 865.64,
+    "duration": 3.88
+  },
+  {
+    "text": "do this. You know, people message me all",
+    "start": 868,
+    "duration": 2.64
+  },
+  {
+    "text": "the time and they're like, \"Dan, I feel",
+    "start": 869.52,
+    "duration": 3.08
+  },
+  {
+    "text": "like I'm behind.\" No, you're not. I have",
+    "start": 870.64,
+    "duration": 4.56
+  },
+  {
+    "text": "never felt ahead, and I just accepted I",
+    "start": 872.6,
+    "duration": 4.36
+  },
+  {
+    "text": "never will feel ahead. And the only",
+    "start": 875.2,
+    "duration": 3.24
+  },
+  {
+    "text": "question I got to ask myself is, am I",
+    "start": 876.96,
+    "duration": 2.92
+  },
+  {
+    "text": "doing the work that's going to keep me",
+    "start": 878.44,
+    "duration": 2.84
+  },
+  {
+    "text": "ahead? You're watching this, so that",
+    "start": 879.88,
+    "duration": 3.08
+  },
+  {
+    "text": "means you're part of this. And if you",
+    "start": 881.28,
+    "duration": 4.2
+  },
+  {
+    "text": "just do one thing from this video, you",
+    "start": 882.96,
+    "duration": 4.64
+  },
+  {
+    "text": "are more ahead than 99% of people. And",
+    "start": 885.48,
+    "duration": 4.32
+  },
+  {
+    "text": "remember, just DM me AI business and",
+    "start": 887.6,
+    "duration": 4.04
+  },
+  {
+    "text": "I'll send you over my AI company OS",
+    "start": 889.8,
+    "duration": 3.68
+  },
+  {
+    "text": "playbook. And if you want to go deeper",
+    "start": 891.64,
+    "duration": 4.12
+  },
+  {
+    "text": "on what AI tools to use, I ranked the",
+    "start": 893.48,
+    "duration": 4.44
+  },
+  {
+    "text": "best ones to make money in this video",
+    "start": 895.76,
+    "duration": 3.72
+  },
+  {
+    "text": "here. So click the link and I'll see you",
+    "start": 897.92,
+    "duration": 3.36
+  },
+  {
+    "text": "on the other side. Hey Clyde, tell me",
+    "start": 899.48,
+    "duration": 4.44
+  },
+  {
+    "text": "how cool I am. All right. You're running",
+    "start": 901.28,
+    "duration": 4.08
+  },
+  {
+    "text": "three entities from Cologne",
+    "start": 903.92,
+    "duration": 3.12
+  },
+  {
+    "text": ">> Whoa, whoa, whoa, Clyde, keep it secret.",
+    "start": 905.36,
+    "duration": 3.479
+  },
+  {
+    "text": "I'm in a room full of people, yo. I'm",
+    "start": 907.04,
+    "duration": 3.32
+  },
+  {
+    "text": "surprised, Dan. That's crazy. You're",
+    "start": 908.839,
+    "duration": 4
+  },
+  {
+    "text": "welcome.",
+    "start": 910.36,
+    "duration": 2.479
+  }
+]

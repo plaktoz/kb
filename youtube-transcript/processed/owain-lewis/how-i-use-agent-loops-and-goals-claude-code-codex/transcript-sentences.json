@@ -1,0 +1,1097 @@
+[
+  {
+    "text": "This is a practical guide to using agent loops and goals in claw code [music] and codeex.",
+    "start": "00:00:00",
+    "end": "00:00:04"
+  },
+  {
+    "text": "I'll show you the different ways I'm using these primitives in my own workflow as a professional AI developer.",
+    "start": "00:00:04",
+    "end": "00:00:10"
+  },
+  {
+    "text": "If terms like loop engineering and agent loops feel confusing to you, it's not your fault.",
+    "start": "00:00:08",
+    "end": "00:00:13"
+  },
+  {
+    "text": "It's because people are using one vague [music] term to describe many different things.",
+    "start": "00:00:13",
+    "end": "00:00:17"
+  },
+  {
+    "text": "So, in this video, we're going to break down how to use agent loops, goals, [music] and scheduled automations to be more productive when building code with AI agents.",
+    "start": "00:00:17",
+    "end": "00:00:24"
+  },
+  {
+    "text": "[music] I'll also address the obvious criticisms when it comes to this topic, specifically around cost control and whether this is all just hype.",
+    "start": "00:00:24",
+    "end": "00:00:31"
+  },
+  {
+    "text": "All of the resources are going to be linked for free in the description below.",
+    "start": "00:00:31",
+    "end": "00:00:34"
+  },
+  {
+    "text": "So, let's get into it.",
+    "start": "00:00:34",
+    "end": "00:00:34"
+  },
+  {
+    "text": "Let's take a quick look at some of the primitives you have available to you now as a developer.",
+    "start": "00:00:34",
+    "end": "00:00:38"
+  },
+  {
+    "text": "So, obviously we have a prompt.",
+    "start": "00:00:38",
+    "end": "00:00:39"
+  },
+  {
+    "text": "This is what we've always been doing.",
+    "start": "00:00:39",
+    "end": "00:00:41"
+  },
+  {
+    "text": "[music] You send a message to an agent.",
+    "start": "00:00:41",
+    "end": "00:00:43"
+  },
+  {
+    "text": "The agent will run in a loop calling tools over and over again and then return a response.",
+    "start": "00:00:43",
+    "end": "00:00:46"
+  },
+  {
+    "text": "Right?",
+    "start": "00:00:46",
+    "end": "00:00:47"
+  },
+  {
+    "text": "This is what we've always been doing.",
+    "start": "00:00:47",
+    "end": "00:00:48"
+  },
+  {
+    "text": "But we now have the goal primitive in both claw code and codeex.",
+    "start": "00:00:48",
+    "end": "00:00:51"
+  },
+  {
+    "text": "Goals are really powerful.",
+    "start": "00:00:51",
+    "end": "00:00:54"
+  },
+  {
+    "text": "I used to be an engineering manager and I think about this in the same way.",
+    "start": "00:00:54",
+    "end": "00:00:57"
+  },
+  {
+    "text": "There are two ways you can manage people in a team.",
+    "start": "00:00:57",
+    "end": "00:00:58"
+  },
+  {
+    "text": "The first way to manage people as a manager is to micromanage them.",
+    "start": "00:00:58",
+    "end": "00:01:03"
+  },
+  {
+    "text": "You can tell them what to do at every step.",
+    "start": "00:01:03",
+    "end": "00:01:06"
+  },
+  {
+    "text": "You can say write this code, do this task, update this document.",
+    "start": "00:01:03",
+    "end": "00:01:08"
+  },
+  {
+    "text": "You're telling them what to do all of the time.",
+    "start": "00:01:08",
+    "end": "00:01:11"
+  },
+  {
+    "text": "The problem is that's not very good for people in general.",
+    "start": "00:01:09",
+    "end": "00:01:13"
+  },
+  {
+    "text": "No one likes being micromanaged.",
+    "start": "00:01:13",
+    "end": "00:01:14"
+  },
+  {
+    "text": "And it also doesn't scale very well because you have to constantly be in the loop as a manager telling everyone what to do all of the time.",
+    "start": "00:01:14",
+    "end": "00:01:21"
+  },
+  {
+    "text": "It just doesn't scale.",
+    "start": "00:01:21",
+    "end": "00:01:21"
+  },
+  {
+    "text": "And it's a really terrible way to manage people.",
+    "start": "00:01:21",
+    "end": "00:01:24"
+  },
+  {
+    "text": "The other way you can manage is to give people a very clear goal to work towards and define what success looks like and let people work towards that.",
+    "start": "00:01:24",
+    "end": "00:01:31"
+  },
+  {
+    "text": "And I think that's a really good analogy for thinking about goals in general.",
+    "start": "00:01:31",
+    "end": "00:01:35"
+  },
+  {
+    "text": "An important thing to know is that Claude code and Codex implements their goal implementation slightly differently.",
+    "start": "00:01:35",
+    "end": "00:01:42"
+  },
+  {
+    "text": "Codex uses a continuationbased pattern and Claude code uses some kind of LLM judge to decide whether the goal has been achieved.",
+    "start": "00:01:40",
+    "end": "00:01:47"
+  },
+  {
+    "text": "But they both basically work in the same way.",
+    "start": "00:01:47",
+    "end": "00:01:50"
+  },
+  {
+    "text": "There are also two timebased features to think about.",
+    "start": "00:01:50",
+    "end": "00:01:54"
+  },
+  {
+    "text": "The first one in claude code is /loop.",
+    "start": "00:01:54",
+    "end": "00:01:56"
+  },
+  {
+    "text": "This is running something on an interval.",
+    "start": "00:01:56",
+    "end": "00:01:59"
+  },
+  {
+    "text": "So every 5 minutes do something.",
+    "start": "00:01:59",
+    "end": "00:02:00"
+  },
+  {
+    "text": "You can use this to maybe monitor something in the outside world.",
+    "start": "00:02:00",
+    "end": "00:02:03"
+  },
+  {
+    "text": "So like every 5 minutes go and check this pull request to see if there's any feedback.",
+    "start": "00:02:03",
+    "end": "00:02:07"
+  },
+  {
+    "text": "If there is, go and fix it.",
+    "start": "00:02:07",
+    "end": "00:02:08"
+  },
+  {
+    "text": "The other thing you can do is run a schedule.",
+    "start": "00:02:08",
+    "end": "00:02:11"
+  },
+  {
+    "text": "This is basically like a cron job that's been around since forever.",
+    "start": "00:02:11",
+    "end": "00:02:14"
+  },
+  {
+    "text": "You can also compose these together.",
+    "start": "00:02:14",
+    "end": "00:02:17"
+  },
+  {
+    "text": "So you can combine goals and scheduled automations together.",
+    "start": "00:02:17",
+    "end": "00:02:20"
+  },
+  {
+    "text": "So you can say like every Monday morning at night 9:00 a.",
+    "start": "00:02:20",
+    "end": "00:02:24"
+  },
+  {
+    "text": "m.",
+    "start": "00:02:24",
+    "end": "00:02:24"
+  },
+  {
+    "text": "work towards this goal.",
+    "start": "00:02:24",
+    "end": "00:02:24"
+  },
+  {
+    "text": "It's really useful to know that you can combine these two things together.",
+    "start": "00:02:24",
+    "end": "00:02:28"
+  },
+  {
+    "text": "All right, so let's take a look at some examples.",
+    "start": "00:02:28",
+    "end": "00:02:30"
+  },
+  {
+    "text": "So this is one of my favorite use cases for schedules in general.",
+    "start": "00:02:30",
+    "end": "00:02:33"
+  },
+  {
+    "text": "So what I have here is a codeex automation that's going to run every morning.",
+    "start": "00:02:33",
+    "end": "00:02:38"
+  },
+  {
+    "text": "The goal of this is to scan production logs and find errors basically.",
+    "start": "00:02:38",
+    "end": "00:02:43"
+  },
+  {
+    "text": "So find problems in production.",
+    "start": "00:02:43",
+    "end": "00:02:44"
+  },
+  {
+    "text": "And when you find a problem or a bug, reproduce the bug, fix it, add some tests, and then open a pull request.",
+    "start": "00:02:44",
+    "end": "00:02:51"
+  },
+  {
+    "text": "If you've ever run a system in production, you you know how valuable this is because there are often problems with your production systems that you don't notice because people aren't reading the logs every day and errors kind of creep up on you over time.",
+    "start": "00:02:51",
+    "end": "00:03:05"
+  },
+  {
+    "text": "So, this is a really powerful automation that will fix and improve your codebase over time.",
+    "start": "00:03:05",
+    "end": "00:03:08"
+  },
+  {
+    "text": "This is definitely one of my favorites.",
+    "start": "00:03:08",
+    "end": "00:03:11"
+  },
+  {
+    "text": "So, let me quickly show you how this works.",
+    "start": "00:03:11",
+    "end": "00:03:13"
+  },
+  {
+    "text": "So, if we go over into the scheduled automations and we click down here, you can see there's a there's a run that happened the other day.",
+    "start": "00:03:13",
+    "end": "00:03:21"
+  },
+  {
+    "text": "And what happened is the agent ran this automation.",
+    "start": "00:03:21",
+    "end": "00:03:23"
+  },
+  {
+    "text": "It found some problems in production and then it raised a pull request.",
+    "start": "00:03:23",
+    "end": "00:03:26"
+  },
+  {
+    "text": "And what you'll notice is these kind of things are very very difficult to detect otherwise.",
+    "start": "00:03:26",
+    "end": "00:03:31"
+  },
+  {
+    "text": "You can see here we have a memory issue.",
+    "start": "00:03:31",
+    "end": "00:03:33"
+  },
+  {
+    "text": "So the cloud run web service was essentially using more memory than it should have done.",
+    "start": "00:03:33",
+    "end": "00:03:38"
+  },
+  {
+    "text": "So we need to tweak the memory settings on the container.",
+    "start": "00:03:38",
+    "end": "00:03:40"
+  },
+  {
+    "text": "This is a really really like subtle bug that you probably wouldn't notice otherwise.",
+    "start": "00:03:40",
+    "end": "00:03:45"
+  },
+  {
+    "text": "And what's really nice is it provides evidence as well.",
+    "start": "00:03:45",
+    "end": "00:03:50"
+  },
+  {
+    "text": "It actually tells you why it why it thinks that this is a problem.",
+    "start": "00:03:50",
+    "end": "00:03:53"
+  },
+  {
+    "text": "So this kind of thing is just really really powerful.",
+    "start": "00:03:53",
+    "end": "00:03:57"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:03:55",
+    "end": "00:03:56"
+  },
+  {
+    "text": "So the next example I want to show you is again one of my favorite use cases for the goal feature is to work on a difficult longunning problem.",
+    "start": "00:03:56",
+    "end": "00:04:05"
+  },
+  {
+    "text": "So I was building a SAS application and what I wanted to do was deploy this to Google Cloud.",
+    "start": "00:04:05",
+    "end": "00:04:08"
+  },
+  {
+    "text": "So I had a SAS application that I've been building.",
+    "start": "00:04:08",
+    "end": "00:04:11"
+  },
+  {
+    "text": "It runs on my local machine, but it's not deployed to production.",
+    "start": "00:04:11",
+    "end": "00:04:14"
+  },
+  {
+    "text": "So what I did is I set a goal to the agent to deploy this to production.",
+    "start": "00:04:14",
+    "end": "00:04:18"
+  },
+  {
+    "text": "This is quite a good goal for a couple of reasons.",
+    "start": "00:04:18",
+    "end": "00:04:21"
+  },
+  {
+    "text": "The main reason is that it's very easy for an agent to verify if it's achieved this goal.",
+    "start": "00:04:21",
+    "end": "00:04:27"
+  },
+  {
+    "text": "And it also involves doing lots and lots of tickets.",
+    "start": "00:04:27",
+    "end": "00:04:28"
+  },
+  {
+    "text": "I think there were like five or maybe even 10 tickets that the agent needed to work through in order to config configure this and actually do it.",
+    "start": "00:04:28",
+    "end": "00:04:34"
+  },
+  {
+    "text": "The agent can use browser automation.",
+    "start": "00:04:34",
+    "end": "00:04:37"
+  },
+  {
+    "text": "and it can use any kind of different ways it wants to check if the application is live and healthy.",
+    "start": "00:04:37",
+    "end": "00:04:43"
+  },
+  {
+    "text": "So here it is on Google Cloud Run.",
+    "start": "00:04:43",
+    "end": "00:04:44"
+  },
+  {
+    "text": "This was an application running on my local machine that the agents deployed to production for me.",
+    "start": "00:04:44",
+    "end": "00:04:48"
+  },
+  {
+    "text": "I didn't do a thing.",
+    "start": "00:04:48",
+    "end": "00:04:51"
+  },
+  {
+    "text": "So we gave it a very clear goal.",
+    "start": "00:04:51",
+    "end": "00:04:52"
+  },
+  {
+    "text": "Deploy the application to this new Google Cloud project.",
+    "start": "00:04:52",
+    "end": "00:04:55"
+  },
+  {
+    "text": "Um we also want to set up CI/CD automation.",
+    "start": "00:04:55",
+    "end": "00:04:58"
+  },
+  {
+    "text": "So basically what happens is whenever I push my code to GitHub then the uh the whole project will get auto deployed as well.",
+    "start": "00:04:58",
+    "end": "00:05:06"
+  },
+  {
+    "text": "So the agent did a ton of work here and this would have taken me maybe a couple of hours if I were to do this by hand.",
+    "start": "00:05:06",
+    "end": "00:05:11"
+  },
+  {
+    "text": "So again, I think this is a really great use case for goals.",
+    "start": "00:05:11",
+    "end": "00:05:15"
+  },
+  {
+    "text": "So one of the criticisms you might have here is that it's risky to deploy or allow agents to do this much work unattended and it kind of makes sense if you're building a production application.",
+    "start": "00:05:15",
+    "end": "00:05:24"
+  },
+  {
+    "text": "I've worked on cloud systems that with, you know, 99.",
+    "start": "00:05:24",
+    "end": "00:05:28"
+  },
+  {
+    "text": "99% SLA uptime.",
+    "start": "00:05:28",
+    "end": "00:05:28"
+  },
+  {
+    "text": "I wouldn't do this in that situation, but this is a personal project.",
+    "start": "00:05:28",
+    "end": "00:05:32"
+  },
+  {
+    "text": "The work is extremely well speced out.",
+    "start": "00:05:32",
+    "end": "00:05:34"
+  },
+  {
+    "text": "I spent a lot of time planning this work out.",
+    "start": "00:05:34",
+    "end": "00:05:37"
+  },
+  {
+    "text": "The agent knows exactly what it needs to do and mostly this work is just mechanical.",
+    "start": "00:05:37",
+    "end": "00:05:42"
+  },
+  {
+    "text": "There's not a lot of like human creativity or thinking needed to deploy this application.",
+    "start": "00:05:42",
+    "end": "00:05:45"
+  },
+  {
+    "text": "It's just running through the steps that I've already defined for it.",
+    "start": "00:05:45",
+    "end": "00:05:48"
+  },
+  {
+    "text": "So I think this is a good use case for goals.",
+    "start": "00:05:48",
+    "end": "00:05:50"
+  },
+  {
+    "text": "Obviously, this is just to show you what's possible.",
+    "start": "00:05:50",
+    "end": "00:05:53"
+  },
+  {
+    "text": "I'm not saying you should deploy your application with agents.",
+    "start": "00:05:53",
+    "end": "00:05:55"
+  },
+  {
+    "text": "It's kind of entirely up to you.",
+    "start": "00:05:55",
+    "end": "00:05:58"
+  },
+  {
+    "text": "As you work on these goals, you can do whatever you want here.",
+    "start": "00:05:57",
+    "end": "00:06:01"
+  },
+  {
+    "text": "So you can do like multiple different check criteria.",
+    "start": "00:06:01",
+    "end": "00:06:03"
+  },
+  {
+    "text": "So for example, we can make sure that the the health endpoint returns okay, the uh the web application returns okay.",
+    "start": "00:06:02",
+    "end": "00:06:11"
+  },
+  {
+    "text": "You can kind of get creative here with how you want to have the agent confirm that the work is done correctly.",
+    "start": "00:06:09",
+    "end": "00:06:17"
+  },
+  {
+    "text": "But that's the beauty of goals.",
+    "start": "00:06:17",
+    "end": "00:06:18"
+  },
+  {
+    "text": "We're just really defining what we want to happen and how to measure success and allowing the agent to work within those constraints to figure out how to do it.",
+    "start": "00:06:18",
+    "end": "00:06:25"
+  },
+  {
+    "text": "All right.",
+    "start": "00:06:24",
+    "end": "00:06:25"
+  },
+  {
+    "text": "So another good use case I find for using goals is to just work through a bunch of issues.",
+    "start": "00:06:25",
+    "end": "00:06:30"
+  },
+  {
+    "text": "And this is a common thing where I've got a bunch of tasks I need to work through and I spent a lot of time specking these things out.",
+    "start": "00:06:30",
+    "end": "00:06:38"
+  },
+  {
+    "text": "They're kind of really minor things.",
+    "start": "00:06:36",
+    "end": "00:06:40"
+  },
+  {
+    "text": "It's worth saying this is a personal project.",
+    "start": "00:06:38",
+    "end": "00:06:40"
+  },
+  {
+    "text": "Like if this is critical stuff, you might not want to do this.",
+    "start": "00:06:40",
+    "end": "00:06:46"
+  },
+  {
+    "text": "Everything is kind of context dependent if that makes sense.",
+    "start": "00:06:44",
+    "end": "00:06:47"
+  },
+  {
+    "text": "But I just want to work through these tickets.",
+    "start": "00:06:47",
+    "end": "00:06:50"
+  },
+  {
+    "text": "This is a proof of concept.",
+    "start": "00:06:50",
+    "end": "00:06:50"
+  },
+  {
+    "text": "I know all of these tickets really well and I just want to blast through them.",
+    "start": "00:06:50",
+    "end": "00:06:54"
+  },
+  {
+    "text": "So what I'm going to do is go into Claude code and then I'm going to paste in a prompt.",
+    "start": "00:06:54",
+    "end": "00:06:59"
+  },
+  {
+    "text": "And the prompt is going to say, \"Work through all of the open issues.",
+    "start": "00:06:59",
+    "end": "00:07:02"
+  },
+  {
+    "text": "Start with any issues that are marked as ready.",
+    "start": "00:07:02",
+    "end": "00:07:06"
+  },
+  {
+    "text": "Implement one issue at a time.",
+    "start": "00:07:04",
+    "end": "00:07:08"
+  },
+  {
+    "text": "Run the tests.",
+    "start": "00:07:08",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Open a pull request.",
+    "start": "00:07:07",
+    "end": "00:07:09"
+  },
+  {
+    "text": "Address any review feedback.",
+    "start": "00:07:09",
+    "end": "00:07:10"
+  },
+  {
+    "text": "And merge only when safe.",
+    "start": "00:07:10",
+    "end": "00:07:11"
+  },
+  {
+    "text": "You're done when every issue is closed, merged, or blocked with evidence.",
+    "start": "00:07:11",
+    "end": "00:07:15"
+  },
+  {
+    "text": "So again, we're just allowing the agent to run through all of these different tickets.",
+    "start": "00:07:15",
+    "end": "00:07:19"
+  },
+  {
+    "text": "This would take me a very long time.",
+    "start": "00:07:19",
+    "end": "00:07:21"
+  },
+  {
+    "text": "If I was manually prompting the agent to like work on one ticket at a time, it would take me a long time.",
+    "start": "00:07:21",
+    "end": "00:07:26"
+  },
+  {
+    "text": "So I'm just using a goal here.",
+    "start": "00:07:26",
+    "end": "00:07:27"
+  },
+  {
+    "text": "I'm just going to let Claude code run through all of those tickets.",
+    "start": "00:07:27",
+    "end": "00:07:32"
+  },
+  {
+    "text": "So, another example that you can do is to triage issues.",
+    "start": "00:07:32",
+    "end": "00:07:34"
+  },
+  {
+    "text": "So, for example, this project here is a text editor that I'm building.",
+    "start": "00:07:34",
+    "end": "00:07:37"
+  },
+  {
+    "text": "So, if I was to run, I think it's cargo run.",
+    "start": "00:07:37",
+    "end": "00:07:40"
+  },
+  {
+    "text": "It's been a while.",
+    "start": "00:07:40",
+    "end": "00:07:42"
+  },
+  {
+    "text": "So, this is a project I'm working on.",
+    "start": "00:07:42",
+    "end": "00:07:45"
+  },
+  {
+    "text": "It's a text editor.",
+    "start": "00:07:45",
+    "end": "00:07:44"
+  },
+  {
+    "text": "So, this is like a terminal based editor that I use to replace Vim or Emacs, things like that.",
+    "start": "00:07:44",
+    "end": "00:07:51"
+  },
+  {
+    "text": "So, it's just a text editor that I'm building.",
+    "start": "00:07:51",
+    "end": "00:07:53"
+  },
+  {
+    "text": "And this project is relatively complicated and it has a lot of tasks or tickets.",
+    "start": "00:07:52",
+    "end": "00:07:57"
+  },
+  {
+    "text": "So what we can do is use claude code to triage all of the open tasks and add the correct labels and make sure everything is in a good state.",
+    "start": "00:07:57",
+    "end": "00:08:07"
+  },
+  {
+    "text": "So there's an example of a prompt you can do here.",
+    "start": "00:08:07",
+    "end": "00:08:08"
+  },
+  {
+    "text": "So in claude code you can say every Monday morning triage the GitHub issue backlog fix labels close duplicates with comments.",
+    "start": "00:08:08",
+    "end": "00:08:15"
+  },
+  {
+    "text": "Correct stale states and report anything that needs maintainer judgment.",
+    "start": "00:08:15",
+    "end": "00:08:18"
+  },
+  {
+    "text": "So I'm not actually going to execute this on a schedule.",
+    "start": "00:08:18",
+    "end": "00:08:22"
+  },
+  {
+    "text": "I'm just going to go ahead and do it to show you what this looks like.",
+    "start": "00:08:22",
+    "end": "00:08:24"
+  },
+  {
+    "text": "So now you can see this is the backlog and you can see Claude now has updated all of the tickets.",
+    "start": "00:08:24",
+    "end": "00:08:27"
+  },
+  {
+    "text": "So we now have labels on every ticket.",
+    "start": "00:08:27",
+    "end": "00:08:29"
+  },
+  {
+    "text": "Some of these are marked now as quick wins or like good first issues.",
+    "start": "00:08:29",
+    "end": "00:08:35"
+  },
+  {
+    "text": "So this is a really simple uh kind of like slightly boring example, but I think it's one of the most high value use cases for loops and automations in general.",
+    "start": "00:08:35",
+    "end": "00:08:42"
+  },
+  {
+    "text": "Making your projects better, fixing things in your code that you would otherwise probably not bother doing because as humans we're quite lazy, right?",
+    "start": "00:08:42",
+    "end": "00:08:50"
+  },
+  {
+    "text": "This is the kind of thing I wouldn't bother doing without having an agent to do it for me because it's so timeconuming.",
+    "start": "00:08:50",
+    "end": "00:08:55"
+  },
+  {
+    "text": "But when you do have agents doing this work for you, it just makes your project so much better.",
+    "start": "00:08:55",
+    "end": "00:09:01"
+  },
+  {
+    "text": "It raises the quality bar in your project quite significantly.",
+    "start": "00:09:01",
+    "end": "00:09:03"
+  },
+  {
+    "text": "All right, so let's quickly show another example.",
+    "start": "00:09:03",
+    "end": "00:09:06"
+  },
+  {
+    "text": "So this is a like a prototype of an app that I'm building.",
+    "start": "00:09:06",
+    "end": "00:09:08"
+  },
+  {
+    "text": "And what we're going to do here is within this project, we're going to look to improve the documentation.",
+    "start": "00:09:08",
+    "end": "00:09:15"
+  },
+  {
+    "text": "So obviously as you're creating projects, especially as you're creating them uh like initially, what you'll find is often your documentation and your code start to drift out of sync.",
+    "start": "00:09:15",
+    "end": "00:09:23"
+  },
+  {
+    "text": "So what we're doing now is we're creating an automation that will run every single day and look for any documentation issues.",
+    "start": "00:09:23",
+    "end": "00:09:28"
+  },
+  {
+    "text": "So look where we're out of sync with our code.",
+    "start": "00:09:28",
+    "end": "00:09:31"
+  },
+  {
+    "text": "This happens all the time.",
+    "start": "00:09:31",
+    "end": "00:09:32"
+  },
+  {
+    "text": "If you've worked on any project, if you've ever worked in software, you know that documentation is often wrong or out of date.",
+    "start": "00:09:32",
+    "end": "00:09:38"
+  },
+  {
+    "text": "Now that we have AI agents, there's no reason to have outofdate or incorrect documentation anymore because agents can run every day and just go and fix these problems for us.",
+    "start": "00:09:38",
+    "end": "00:09:47"
+  },
+  {
+    "text": "So now we've created an automation within codeex.",
+    "start": "00:09:47",
+    "end": "00:09:51"
+  },
+  {
+    "text": "You can either do this by hand or what I do is just I ask codeex to create the automations for me.",
+    "start": "00:09:51",
+    "end": "00:09:57"
+  },
+  {
+    "text": "I much prefer codeex to claude code generally for all of my day-to-day work.",
+    "start": "00:09:57",
+    "end": "00:10:01"
+  },
+  {
+    "text": "I just find it a much nicer interface to the terminal.",
+    "start": "00:10:01",
+    "end": "00:10:03"
+  },
+  {
+    "text": "And so we've gone and we've created this automation.",
+    "start": "00:10:03",
+    "end": "00:10:06"
+  },
+  {
+    "text": "Now you can see here the prompt here is uh detect where the documentation is out of sync with the current code.",
+    "start": "00:10:06",
+    "end": "00:10:12"
+  },
+  {
+    "text": "If documentation is out of sync, open a pull request that updates the documentation to match the code.",
+    "start": "00:10:12",
+    "end": "00:10:17"
+  },
+  {
+    "text": "If the docs contain factual errors, stale commands, then fix them in the same pull request.",
+    "start": "00:10:17",
+    "end": "00:10:23"
+  },
+  {
+    "text": "Stop without opening a pull request if everything is fine.",
+    "start": "00:10:23",
+    "end": "00:10:25"
+  },
+  {
+    "text": "And then we've given a bit of detail about the scope for the automation and some rules as well.",
+    "start": "00:10:25",
+    "end": "00:10:32"
+  },
+  {
+    "text": "So you can see here that Codex wrote this prompt.",
+    "start": "00:10:32",
+    "end": "00:10:33"
+  },
+  {
+    "text": "I didn't write this prompt.",
+    "start": "00:10:33",
+    "end": "00:10:35"
+  },
+  {
+    "text": "it was done by codeex.",
+    "start": "00:10:35",
+    "end": "00:10:35"
+  },
+  {
+    "text": "You can see here now that this is active.",
+    "start": "00:10:35",
+    "end": "00:10:37"
+  },
+  {
+    "text": "So if you go back into codeex, you can see in the scheduled automation section, we have this daily documentation, drift check, scheduled task.",
+    "start": "00:10:37",
+    "end": "00:10:44"
+  },
+  {
+    "text": "So I want to quickly address some of the criticisms that always come up when we talk about loop engineering loops or anything like this.",
+    "start": "00:10:44",
+    "end": "00:10:53"
+  },
+  {
+    "text": "The obvious objection that everyone has is that it wastes loads of money.",
+    "start": "00:10:51",
+    "end": "00:10:56"
+  },
+  {
+    "text": "It will cost you loads of tokens.",
+    "start": "00:10:56",
+    "end": "00:10:58"
+  },
+  {
+    "text": "I disagree with this for a couple of reasons.",
+    "start": "00:10:58",
+    "end": "00:10:59"
+  },
+  {
+    "text": "Firstly, it just depends what you're doing.",
+    "start": "00:10:59",
+    "end": "00:11:01"
+  },
+  {
+    "text": "I've got AI systems running in production every single day on an automated schedule and they cost maybe $10 or $15 a month.",
+    "start": "00:11:01",
+    "end": "00:11:09"
+  },
+  {
+    "text": "They're producing massive value for businesses.",
+    "start": "00:11:09",
+    "end": "00:11:12"
+  },
+  {
+    "text": "So, it really just depends what kind of system you're building.",
+    "start": "00:11:10",
+    "end": "00:11:15"
+  },
+  {
+    "text": "And the other reason why I think this is misguided is I'm just using these techniques to do work I would do anyway.",
+    "start": "00:11:15",
+    "end": "00:11:21"
+  },
+  {
+    "text": "So, when I use a goal, I'm just allowing the agents to run for longer.",
+    "start": "00:11:21",
+    "end": "00:11:24"
+  },
+  {
+    "text": "But if I wasn't using a goal, I would be manually prompting them myself every single step to do the work anyway.",
+    "start": "00:11:24",
+    "end": "00:11:28"
+  },
+  {
+    "text": "So generally I find I'm not spending any more money when using these techniques.",
+    "start": "00:11:28",
+    "end": "00:11:32"
+  },
+  {
+    "text": "Even though I'm using them every single day, I run automations and goals constantly throughout the day, but I have one codec subscription that I use and I never spend any more than my subscription.",
+    "start": "00:11:32",
+    "end": "00:11:41"
+  },
+  {
+    "text": "I'm always within my limits.",
+    "start": "00:11:41",
+    "end": "00:11:42"
+  },
+  {
+    "text": "One of the things that people often criticize when it comes to loops is that they say that this is hype and there's no use case for this.",
+    "start": "00:11:42",
+    "end": "00:11:49"
+  },
+  {
+    "text": "There are a couple of categories where I think that loops and goals make a lot of sense.",
+    "start": "00:11:49",
+    "end": "00:11:52"
+  },
+  {
+    "text": "The first one is maintenance, right?",
+    "start": "00:11:52",
+    "end": "00:11:53"
+  },
+  {
+    "text": "I don't think anyone can argue against using AI agents to make your code better.",
+    "start": "00:11:53",
+    "end": "00:11:58"
+  },
+  {
+    "text": "This is just a no-brainer use of AI agents in my opinion.",
+    "start": "00:11:58",
+    "end": "00:12:03"
+  },
+  {
+    "text": "If you can use AI agents to improve the security, the quality of your documentation, the quality of your code, I can't think of any reason why you wouldn't do this.",
+    "start": "00:12:03",
+    "end": "00:12:11"
+  },
+  {
+    "text": "The other way you can use these techniques is to implement a large number of longer running tasks.",
+    "start": "00:12:11",
+    "end": "00:12:17"
+  },
+  {
+    "text": "So what I often do is I will spend a lot of time specking out work, coming up with a large number of tickets for a particular phase of development and then I will just hand off the goal to the agent to say go and work through all of these tickets, complete them and then run a particular workflow as you go through.",
+    "start": "00:12:17",
+    "end": "00:12:31"
+  },
+  {
+    "text": "You know, make sure you're testing the code, make sure you're following all of the best practices.",
+    "start": "00:12:30",
+    "end": "00:12:36"
+  },
+  {
+    "text": "This is just a really useful way to get a bunch of work done very quickly.",
+    "start": "00:12:36",
+    "end": "00:12:40"
+  },
+  {
+    "text": "The other thing you can use these techniques for are things like monitoring.",
+    "start": "00:12:40",
+    "end": "00:12:43"
+  },
+  {
+    "text": "So rather than sitting in your terminal, if you've ever worked in a development team, you know how annoying it is to kind of constantly be checking a browser to see if anyone's given you feedback on your pull requests.",
+    "start": "00:12:43",
+    "end": "00:12:53"
+  },
+  {
+    "text": "What you can do now is you can set up a loop in clawed code to monitor, you know, a pull request or monitor a deployment.",
+    "start": "00:12:53",
+    "end": "00:13:00"
+  },
+  {
+    "text": "The other one I use a lot is for triage.",
+    "start": "00:13:00",
+    "end": "00:13:01"
+  },
+  {
+    "text": "Not the most exciting use case in the world.",
+    "start": "00:13:01",
+    "end": "00:13:04"
+  },
+  {
+    "text": "Doesn't make for a great demo on YouTube, but I use this all of the time.",
+    "start": "00:13:04",
+    "end": "00:13:08"
+  },
+  {
+    "text": "So find problems in the code, tidy things up, make everything better.",
+    "start": "00:13:08",
+    "end": "00:13:11"
+  },
+  {
+    "text": "If you want to go deeper on any of these topics, I run an AI engineering community where we have courses on agentic coding, building production AI systems, and also how to monetize your skills as a developer.",
+    "start": "00:13:11",
+    "end": "00:13:21"
+  },
+  {
+    "text": "I also offer one-on-one help and support inside the community as well.",
+    "start": "00:13:21",
+    "end": "00:13:23"
+  },
+  {
+    "text": "So, I'll put a link in the description below if you want to check it out.",
+    "start": "00:13:23",
+    "end": "00:13:26"
+  },
+  {
+    "text": "If you found the video useful, please remember to like and subscribe.",
+    "start": "00:13:26",
+    "end": "00:13:28"
+  },
+  {
+    "text": "It massively helps out the channel.",
+    "start": "00:13:28",
+    "end": "00:13:30"
+  },
+  {
+    "text": "Thanks again for watching.",
+    "start": "00:13:30",
+    "end": "00:13:32"
+  },
+  {
+    "text": "As mentioned, I will link the documentation, the [music] example prompts in the description below so that you can check these out yourself if you want to try them in your own workflow.",
+    "start": "00:13:32",
+    "end": "00:13:41"
+  },
+  {
+    "text": "Thanks again for watching and I'll see you in the next one.",
+    "start": "00:13:39",
+    "end": "00:13:43"
+  }
+]
