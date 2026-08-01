@@ -51,11 +51,13 @@ Save to `/raw/YYYY-MM-DD-slug.md` where:
 File format:
 
 ```md
-# {Article Title}
-
-source_url: {URL}
-
 ---
+source_url: {URL}
+author: {Author or "Unknown"}
+date: {YYYY-MM-DD}
+---
+
+# {Article Title}
 
 {Clean article body}
 ```
