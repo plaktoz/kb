@@ -19,6 +19,12 @@
       "skillPath": "skills/productivity/grilling/SKILL.md",
       "computedHash": "368d3dd7251247c69f3656d93dc83c8f1577792eacac2111f1e7981db2ece49b"
     },
+    "openspec": {
+      "source": "itechmeat/llm-code",
+      "sourceType": "github",
+      "skillPath": "skills/openspec/SKILL.md",
+      "computedHash": "7cdd2add2698a326eb5b04fa8b481b5a0f825e3652c956a3987bd94bf0ff05cd"
+    },
     "research": {
       "source": "mattpocock/skills",
       "sourceType": "github",
