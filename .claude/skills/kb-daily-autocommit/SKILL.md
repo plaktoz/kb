@@ -36,7 +36,7 @@ Note the branch name for use in later steps.
 
 ## Step 2: Run the daily pipeline
 
-Read `skills/Daily-workflow-prompt.md` and execute the instructions exactly as written.
+Invoke the `/kb-daily` skill and execute it.
 
 Collect the end-of-run summary produced by that pipeline. You will need these counts:
 - Number of wiki notes ingested
