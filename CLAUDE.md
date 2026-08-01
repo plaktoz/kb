@@ -38,6 +38,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
 | `/kb-note-deepen` | Enriches an existing wiki note with new insights and links found in newer vault notes |
 | `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
+| `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
 
 ### Parallel skills (opt-in)
 
@@ -75,7 +76,7 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`
+Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.
