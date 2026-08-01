@@ -30,7 +30,8 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
 | `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
-| `/kb-compound` | Compounds the week's daily digests into a high-signal weekly synthesis |
+| `/kb-compound` | Deepens existing wiki notes and creates synthesis notes from recurring cross-category themes — run before `/kb-weekly-newsletter` |
+| `/kb-weekly-newsletter` | Compiles this week's ingested notes into a weekly newsletter digest |
 | `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
 | `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
 | `/kb-quizme` | Quizzes you on recently ingested wiki articles using spaced repetition |
@@ -74,7 +75,7 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `delete`, `reorg`, `research`
+Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.

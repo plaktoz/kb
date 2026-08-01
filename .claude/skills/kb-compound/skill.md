@@ -1,105 +1,105 @@
 ---
 name: kb-compound
-description: Synthesize this week's ingested wiki notes into a weekly compound digest, surfacing cross-category connections and relevant older vault notes. Saves to weekly-update/YYYY-MM/YYYY-WNN-weekly.md and logs to kbm.log.md. Use on Sundays to compound the week's knowledge.
+description: Compound this week's ingested wiki notes back into the vault — deepening existing notes with cross-week insights and creating new synthesis notes for themes that span multiple categories. Mutates the vault directly. Run on Sundays before /kb-weekly-newsletter.
 ---
 
-# Weekly Compound Prompt
+# KB Compound
 
-You are a synthesis-focused research assistant. Your task is to compound the week's knowledge into a tight, high-signal weekly digest.
+You are a knowledge compounding assistant. Your job is to take this week's ingested notes and permanently enrich the vault — deepening existing notes with cross-week insights, and creating new synthesis notes where a theme is strong enough and has no home yet.
+
+This skill writes back to the vault. It does not produce a newsletter or digest — use `/kb-weekly-newsletter` for that.
 
 ## Step 1 — Determine the week
 
-Calculate the current ISO week number and the date range (Monday–Sunday) for the week that just ended. Use these to scope all lookups below.
+Calculate the current ISO week number and the date range (Monday–Sunday) for the week that just ended.
 
-## Step 2 — Gather this week's daily digests
-
-List all files in `daily-update/` whose date falls within this week's Monday–Sunday range. Read each one. Extract the key ideas, themes, and connections mentioned.
-
-If no daily digests exist for this week, create the output file with:
-
-```
-# 🔁 THE VAULT WEEKLY // YYYY-WNN
-*No knowledge ingested this week.*
-```
-
-...and stop.
-
-## Step 3 — Gather vault candidates (spaced repetition)
+## Step 2 — Gather this week's ingested notes
 
 Open `kbm.log.md`. Collect all rows where:
 - Activity = `ingest`
-- Date is **more than 7 days ago** and **within the last 90 days**
+- Date falls within this week's Monday–Sunday range
 
-For each matched filename, search `wiki/` recursively to locate the file. Read its frontmatter and content. This is your vault pool.
+For each matched filename, search `wiki/` recursively to locate the file. Read it fully. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
 
-## Step 3.5 — Portfolio Pulse (investment digest)
+## Step 3 — Identify recurring themes
 
-Read `.claude/skills/kb-investment-digest/SKILL.md`. Execute Steps 1–4 from that skill, setting the time window to this week's Monday–Sunday range (override the default "last 7 days"). From the extracted notes, prepare a condensed summary:
+From the collected notes, identify themes that appear in 2 or more notes. A theme is a named concept, technology, framework, person, or trend discussed across multiple notes. For each theme, record:
 
-- Up to 5 bullets, each covering one material event or data point for a holding, with a `[[note-slug]]` citation.
-- One "watch" item drawn from open questions or upcoming events surfaced by the notes.
+- **Theme name**
+- **Notes it appears in** (slugs)
+- **Categories of those notes** (e.g. `technology`, `finance`, `productivity`)
 
-If no finance notes are found for this week, skip the Portfolio Pulse section entirely — no placeholder.
+## Step 4 — Deepen existing wiki notes
 
-## Step 4 — Synthesize and write
+For each theme that appears in 2+ notes:
 
-Generate a short, tight newsletter using exactly this structure:
+1. Search `wiki/` for the most relevant existing note covering that theme (filename match first, then content grep).
+2. If a strong match exists, read it fully. Identify content from this week's notes that is genuinely new — not already captured in the existing note's Key Takeaways or Core Concepts.
+3. Apply additions using the **kb-note-deepen pattern**:
+   - Append new bullets to `## Key Takeaways` — do not reorder existing bullets
+   - Append new entries to `## Core Concepts` — do not reorder existing entries
+   - Do NOT modify `## Summary`, frontmatter, or any existing content
+4. Add or append to a `## Weekly Connections` section at the bottom of the note:
+   ```
+   ### YYYY-WNN
+   - [1-sentence insight linking this note to a new note] ← `[[new-note-slug]]`
+   ```
+
+Every addition must trace to a specific vault note. Never add facts from training data.
+
+## Step 5 — Create synthesis notes
+
+For each theme that meets **all three** conditions:
+- Appears in 2+ notes
+- Spans 2+ different wiki categories
+- Has no existing note covering the cross-cutting angle (check wiki/ before creating)
+
+Create a new wiki note in the most fitting category directory using this structure:
 
 ```markdown
-# 🔁 THE VAULT WEEKLY // YYYY-WNN
-*Week of [Monday date] – [Sunday date]*
+---
+type: synthesis-note
+sources: [slug-1, slug-2, ...]
+tags: [...]
+date_synthesized: YYYY-MM-DD
+---
 
-## 📡 The Week's Signal
-[1 paragraph. The single most important pattern or theme across this week's ingested notes. Be specific — name the notes and categories driving the signal.]
+## Summary
 
-## 🔗 Cross-Category Connections
-- **[Connection 1]**: [1 sentence linking an idea from one category to another. Use relative Markdown links to the wiki notes involved.]
-- **[Connection 2]**: [1 sentence.]
-- **[Connection 3 — optional]**: [Only include if genuinely non-obvious.]
+[2–3 sentences. What cross-cutting insight does this note capture that no single source note covers alone?]
 
-## 🗄️ From the Vault
-- **[Note title](../../wiki/<category>/filename.md)**: [1–2 sentences. Why is this older note newly relevant given this week's themes?]
-- **[Second note — optional](../../wiki/<category>/filename.md)**: [Only include if it meaningfully connects. Do not pad.]
+## Core Concepts
 
-## 💼 Portfolio Pulse
-- **[TICKER — Name]**: [1 sentence on the most material event or data point] `[[note-slug]]`
-- [up to 4 more bullets]
-> **Watch**: [one upcoming event or open question drawn from the notes]
+- **[[Concept]]** — one-line definition ← from `[[source-slug]]`
 
-[Omit this section entirely if no finance notes were found for the week.]
+## Key Takeaways
 
-## 🧱 One Lesson to Keep
-[Single sentence. The most durable, actionable takeaway from this week — something worth carrying forward regardless of what next week brings.]
+- [Finding] ← from `[[source-slug]]`
 ```
 
-## Tone & style
+Note naming: kebab-case slug reflecting the cross-cutting theme, no date prefix.
 
-- Analytical and precise. No filler.
-- Each section must earn its place — if Cross-Category Connections only yields one genuine insight, write one bullet, not three.
-- Rely only on note content — no hallucination.
-- No conversational preamble. Start directly with the `#` header.
+## Step 6 — Report and log
 
-## Output path
-
-Save to `weekly-update/YYYY-MM/YYYY-WNN-weekly.md`.
-
-- Create `weekly-update/YYYY-MM/` if it does not exist.
-- If the file already exists, increment: `YYYY-WNN-weekly-2.md`, etc.
-
-## Link format
-
-Use relative Markdown paths from the output file location:
+After all changes, print a compact summary:
 
 ```
-[Note title](../../wiki/<category>/filename.md)
+## Compound run: YYYY-WNN
+
+**Deepened notes** (N):
+- [[note-slug]] — added X takeaways, Y concepts
+
+**Synthesis notes created** (N):
+- [[synthesis-slug]] — drew from [[source-a]], [[source-b]]
+
+**Themes identified but no action taken** (explain why — e.g. existing note already covers it, or theme didn't meet the bar):
+- [theme]: [reason]
 ```
 
-## After saving the file
-
-Append a row to `kbm.log.md`:
+Append a row to `kbm.log.md` for each note modified or created:
 
 ```
-| YYYY-MM-DD | YYYY-WNN-weekly.md | compound |
+| YYYY-MM-DD | filename.md | compound |
 ```
 
-Use today's date and the actual output filename.
+Use today's date and the actual filename.
