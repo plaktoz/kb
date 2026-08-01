@@ -10,13 +10,13 @@ If this step fails, note the error and continue to Step 2.
 
 ## Step 2: Scrape Content
 
-Read `skills/Scrape-content-prompt.md` and execute the instructions exactly as written.
+Run the Workflow tool with `name: "kb-scrapecontent-parallel"`. Wait for the workflow to complete, then note how many articles were scraped and how many failed.
 
 If this step fails, note the error and continue to Step 3.
 
 ## Step 3: Ingest
 
-Read `skills/Karpathy-Ingest-prompt.md` and execute the instructions exactly as written.
+Run the Workflow tool with `name: "kb-ingest-parallel"`. Wait for the workflow to complete, then note how many files were ingested.
 
 If this step fails, note the error and continue to Step 4.
 
