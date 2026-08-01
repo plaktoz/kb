@@ -1,4 +1,9 @@
 # Focus
+
+## Enhancements
+- `/kb-research-to-lessons --with-references`: generate reference docs (`reference/*.html`) alongside lessons — cheatsheets, glossaries, architecture diagrams
+
+
 - Workflow: PDF → Markdown → chapter summaries → question-driven reading → Anki cards. See https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents
 
 # Upcoming Tasks
