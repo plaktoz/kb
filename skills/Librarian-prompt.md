@@ -107,9 +107,45 @@ Do not include any other activity types.
 
 ---
 
-## After completing both phases
+## Phase 3: Unmatched Raw Files
+
+Identify files in `raw/processed/` that have no corresponding wiki note.
+
+### Step 1: Build the straggler list
+
+For every `.md` file in `raw/processed/`:
+1. Strip the leading `YYYY-MM-DD-` date prefix from the filename to get the slug.
+2. Check whether any `.md` file under `wiki/` (excluding `wiki/archived/`) has that exact basename.
+3. If no match is found, it is a **straggler**.
+
+### Step 2: Append to `librarian-report.md`
+
+Add a Phase 3 section at the end of the report. Also add a `Straggler raw files: N` line to the **Summary** block.
+
+Use this format:
+
+```markdown
+---
+
+## Phase 3: Unmatched Raw Files
+
+- **Straggler files found**: N
+- **Action**: <!-- archive | skip -->
+
+### Files to archive
+
+- `raw/processed/YYYY-MM-DD-slug.md`
+- `raw/processed/...`
+```
+
+If no stragglers: write the section with count 0 and omit the file list.
+
+---
+
+## After completing all phases
 
 Print a brief summary to the user:
 - How many findings in `librarian-report.md`
+- How many straggler raw files found
 - How many log entries in the rebuilt `kbm.log.md` vs the archived version
 - Remind the user: fill in decisions in `librarian-report.md`, then run `/kb-librarian-apply`
