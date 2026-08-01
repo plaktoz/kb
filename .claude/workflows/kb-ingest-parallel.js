@@ -84,14 +84,14 @@ log(`Found ${discovery.files.length} file(s) to ingest from ${sourceDir}. Runnin
 const files = discovery.files
 const batches = files.map(f => [f])
 
-const skillContent = skillLoad ? skillLoad.content : 'Transform raw files into structured wiki notes with YAML frontmatter, Summary, Core Concepts, and Key Takeaways sections.'
+if (!skillLoad) throw new Error('Failed to load kb-ingest skill — aborting to avoid degraded output')
+const skillContent = skillLoad.content
 const catContent = catLoad ? catLoad.content : ''
 
 const moveInstruction = stragglerMode
   ? '- Files are already in raw/processed/ — do NOT move them. Just write the wiki note.'
   : '- Still move each source file from raw/ to raw/processed/ after processing it (this remains your responsibility).'
 
-// Phase 2: Ingest in parallel — up to 8 agents
 phase('Ingest')
 
 const results = await parallel(
