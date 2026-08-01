@@ -12,19 +12,19 @@
 - **A**: `wiki/health/sildenafil-may-inhibit-cancer-metastasis-cholesterol.md` (2026-07-27)
 - **B**: `wiki/health/sildenafil-viagra-cancer-metastasis-inhibition.md` (2026-07-27)
 - **Why**: Both notes derive from the identical Healthline source URL, same author (David Mills), same date, and cover the same mechanism (sildenafil blocking cholesterol access to inhibit cancer metastasis); B incorrectly characterises the large observational patient-database study as 'preclinical'.
-- **Action**: <!-- merge-into-A | merge-into-B | keep-both | skip -->
+- **Action**: merge-into-A
 
 ## Superseded #2
 - **Keep**: `wiki/health/glp1-semaglutide-sustained-calorie-reduction-one-year.md` (2026-07-27)
 - **Old**: `wiki/health/semaglutide-calorie-reduction-60-weeks.md` (2026-07-27)
 - **Why**: Both summarise the same 60-week semaglutide RCT; the Keep note is more comprehensive, citing the journal (AJCN), sample size (n=120), weight-loss figures (15.1% vs 3.4%), and the mechanism-shift finding after week 40–60, while the Old note adds only minor competitive context.
-- **Action**: <!-- archive-old | merge-into-Keep | keep-both | skip -->
+- **Action**: merge-into-Keep
 
 ## Superseded #3
 - **Keep**: `wiki/technology/every-level-of-claude-explained.md` (2026-07-29)
 - **Old**: `wiki/technology/claude-ai-full-tutorial-basics-to-agentic.md` (2026-07-29)
 - **Why**: Both YouTube tutorials cover Claude's capability tiers with 7 shared WikiLinks; Keep covers five progressive levels including advanced features (MCP, CLAUDE.md, worktrees, sub-agents, hooks, routines, agent teams, headless mode, A2A protocol), while Old only covers a shallower 3-tier model with pricing and is fully subsumed by the more comprehensive note.
-- **Action**: <!-- archive-old | merge-into-Keep | keep-both | skip -->
+- **Action**: merge-into-Keep
 
 ---
 
