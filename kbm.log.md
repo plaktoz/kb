@@ -2,6 +2,46 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-01 | research/learning-java-grpc-protocol-buffers/report.md | research |
+| 2026-08-01 | research/using-modulith/report.md | research |
+| 2026-08-01 | research/use-of-local-llm-for-coding/report.md | research |
+| 2026-08-01 | 2026-08-01-proto3-language-guide-protocol-buffers.md | scrape |
+| 2026-08-01 | 2026-08-01-protocol-buffer-basics-java.md | scrape |
+| 2026-08-01 | 2026-05-11-grpc-core-concepts-architecture-lifecycle.md | scrape |
+| 2026-08-01 | 2024-02-29-grpc-interceptors.md | scrape |
+| 2026-08-01 | 2026-05-11-grpc-java-quickstart.md | scrape |
+| 2026-08-01 | 2026-08-01-grpc-java-rpc-library-framework.md | scrape |
+| 2026-08-01 | 2024-11-25-grpc-java-basics-tutorial.md | scrape |
+| 2026-08-01 | 2025-09-22-grpc-error-handling.md | scrape |
+| 2026-08-01 | 2025-07-07-grpc-deadlines.md | scrape |
+| 2026-08-01 | 2026-08-01-grpc-spring-boot-starter-documentation.md | scrape |
+| 2026-08-01 | 2026-08-01-spring-grpc-reference.md | scrape |
+| 2026-08-01 | 2023-11-29-how-to-build-an-adaptive-ai-tutor-using-kg-rag.md | ingest |
+| 2026-08-01 | 2024-10-14-generative-ai-impact-on-personalized-intelligent-tutoring-systems.md | ingest |
+| 2026-08-01 | 2024-02-29-grpc-interceptors.md | ingest |
+| 2026-08-01 | 2023-09-10-implementing-learning-principles-with-a-personal-ai-tutor.md | ingest |
+| 2026-08-01 | 2025-02-18-one-size-doesnt-fit-all-pace-personalized-conversational-tutoring-agent.md | ingest |
+| 2026-08-01 | 2025-04-07-can-large-language-models-match-tutoring-system-adaptivity-benchmarking-study.md | ingest |
+| 2026-08-01 | 2025-03-12-advancing-education-through-tutoring-systems-systematic-literature-review.md | ingest |
+| 2026-08-01 | 2024-11-25-grpc-java-basics-tutorial.md | ingest |
+| 2026-08-01 | 2025-07-07-grpc-deadlines.md | ingest |
+| 2026-08-01 | 2025-08-16-rpkt-recursive-prerequisite-knowledge-tracing-in-conversational-ai-tutors.md | ingest |
+| 2026-08-01 | 2025-08-02-a-theory-of-adaptive-scaffolding-for-llm-based-pedagogical-agents.md | ingest |
+| 2026-08-01 | 2025-05-02-tutorgym-a-testbed-for-evaluating-ai-agents-as-tutors-and-students.md | ingest |
+| 2026-08-01 | 2025-11-14-graphmasal-graph-based-multi-agent-system-for-adaptive-learning.md | ingest |
+| 2026-08-01 | 2025-11-19-teaching-according-to-students-aptitude-personalized-tutoring-tasa.md | ingest |
+| 2026-08-01 | 2025-09-22-grpc-error-handling.md | ingest |
+| 2026-08-01 | 2026-01-22-alignagent-adaptive-learner-intelligence-gap-identification.md | ingest |
+| 2026-08-01 | 2026-02-06-beagle-behavior-enforced-agent-for-grounded-learner-emulation.md | ingest |
+| 2026-08-01 | 2026-05-06-building-ai-companions-that-prioritise-learning-over-performance.md | ingest |
+| 2026-08-01 | 2026-01-24-multi-agent-learning-path-planning-via-llms.md | ingest |
+| 2026-08-01 | 2026-05-11-grpc-core-concepts-architecture-lifecycle.md | ingest |
+| 2026-08-01 | 2026-05-11-grpc-java-quickstart.md | ingest |
+| 2026-08-01 | 2026-08-01-grpc-spring-boot-starter-documentation.md | ingest |
+| 2026-08-01 | 2026-08-01-protocol-buffer-basics-java.md | ingest |
+| 2026-08-01 | 2026-08-01-grpc-java-rpc-library-framework.md | ingest |
+| 2026-08-01 | 2026-08-01-proto3-language-guide-protocol-buffers.md | ingest |
+| 2026-08-01 | 2026-08-01-spring-grpc-reference.md | ingest |
 | 2026-07-25 | obsidian-pkm-principles-para-workflow.md | ingest |
 | 2026-07-25 | llm-wiki-knowledge-base-obsidian-claude-code.md | ingest |
 | 2026-07-26 | prentis-ai-lab-computer-use-models-hoffman-pincus.md | ingest |
@@ -283,6 +323,7 @@
 | 2026-08-01 | 2026-08-01.md | newsletter |
 | 2026-08-01 | merged sildenafil-viagra-cancer-metastasis-inhibition into sildenafil-may-inhibit-cancer-metastasis-cholesterol; archived sildenafil-viagra-cancer-metastasis-inhibition.md | librarian |
 | 2026-08-01 | merged semaglutide-calorie-reduction-60-weeks into glp1-semaglutide-sustained-calorie-reduction-one-year; archived semaglutide-calorie-reduction-60-weeks.md | librarian |
+| 2026-08-01 | research/software-architecture-best-practices/report.md | research |
 | 2026-08-01 | merged claude-ai-full-tutorial-basics-to-agentic into every-level-of-claude-explained; archived claude-ai-full-tutorial-basics-to-agentic.md | librarian |
 | 2026-08-01 | 2026-07-26-how-do-you-know-when-ai-is-telling-the-truth.md | ingest |
 | 2026-08-01 | 2026-07-27-uae-national-strategy-healthy-nutrition-2031.md | ingest |
@@ -500,3 +541,19 @@
 | 2026-08-01 | ai-workplace-adoption.md | compound |
 | 2026-08-01 | learning-science.md | compound |
 | 2026-08-01 | agentic-rag.md | compound |
+| 2026-08-01 | research/effective-learning-with-ai/report.md | research |
+| 2026-08-01 | 2023-09-10-implementing-learning-principles-with-a-personal-ai-tutor.md | scrape |
+| 2026-08-01 | 2025-08-02-a-theory-of-adaptive-scaffolding-for-llm-based-pedagogical-agents.md | scrape |
+| 2026-08-01 | 2026-05-06-building-ai-companions-that-prioritise-learning-over-performance.md | scrape |
+| 2026-08-01 | 2023-11-29-how-to-build-an-adaptive-ai-tutor-using-kg-rag.md | scrape |
+| 2026-08-01 | 2025-08-16-rpkt-recursive-prerequisite-knowledge-tracing-in-conversational-ai-tutors.md | scrape |
+| 2026-08-01 | 2026-01-24-multi-agent-learning-path-planning-via-llms.md | scrape |
+| 2026-08-01 | 2025-04-07-can-large-language-models-match-tutoring-system-adaptivity-benchmarking-study.md | scrape |
+| 2026-08-01 | 2025-05-02-tutorgym-a-testbed-for-evaluating-ai-agents-as-tutors-and-students.md | scrape |
+| 2026-08-01 | 2025-03-12-advancing-education-through-tutoring-systems-systematic-literature-review.md | scrape |
+| 2026-08-01 | 2025-11-19-teaching-according-to-students-aptitude-personalized-tutoring-tasa.md | scrape |
+| 2026-08-01 | 2026-01-22-alignagent-adaptive-learner-intelligence-gap-identification.md | scrape |
+| 2026-08-01 | 2025-02-18-one-size-doesnt-fit-all-pace-personalized-conversational-tutoring-agent.md | scrape |
+| 2026-08-01 | 2024-10-14-generative-ai-impact-on-personalized-intelligent-tutoring-systems.md | scrape |
+| 2026-08-01 | 2025-11-14-graphmasal-graph-based-multi-agent-system-for-adaptive-learning.md | scrape |
+| 2026-08-01 | 2026-02-06-beagle-behavior-enforced-agent-for-grounded-learner-emulation.md | scrape |
