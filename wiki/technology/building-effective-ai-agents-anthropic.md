@@ -29,8 +29,17 @@ Anthropic distinguishes workflows (predefined code paths) from agents (LLMs that
 - **Agentic loop agents**: best for open-ended, multi-step tasks in trusted, reversible environments
 - **Tool docs matter**: absolute paths, minimal formatting overhead, thorough edge-case documentation
 - **Transparency principle**: show planning steps explicitly; never hide reasoning from operators
+- **Failure mode taxonomy (Chip Huyen)**: planning failures (invalid tool calls, wrong params, wrong goal, false completion belief), tool failures (wrong output, NL→command translation errors, missing tools), efficiency failures (unnecessary sequential steps when parallel is possible) ← `[[agents-agentic-loops-chip-huyen]]`
+- **Per-action oversight principle**: set automation level per action type based on reversibility and consequence — not per system as a whole; write actions (email, DB writes, financial APIs) require stricter gates than read actions ← `[[agents-agentic-loops-chip-huyen]]`
+- **Planning-as-search discipline**: decouple plan generation → validation → execution; conflating them is the source of most agent planning failures ← `[[agents-agentic-loops-chip-huyen]]`
 
 ## 🧠 First Principles & Mental Models
 
 - **[[Occam's Razor]]**: Anthropic's "start simple, add complexity only when measurably beneficial" is exactly this — every added layer must earn its complexity cost, not just feel more sophisticated.
 - **[[Feedback Loops]]**: The eval-act cycle makes the feedback loop explicit — quality improves not from smarter generation but from grounded, iterated critique.
+
+## Weekly Connections
+
+### 2026-W31
+- Chip Huyen's per-action oversight extends Anthropic's human checkpoint model: oversight should be calibrated to reversibility of each action type rather than set system-wide — the same principle expressed at different granularities ← `[[agents-agentic-loops-chip-huyen]]`
+- The three-way failure taxonomy (planning/tool/efficiency) gives practitioners a diagnostic framework for the production agent failures Anthropic describes as motivating human checkpoints ← `[[agents-agentic-loops-chip-huyen]]`

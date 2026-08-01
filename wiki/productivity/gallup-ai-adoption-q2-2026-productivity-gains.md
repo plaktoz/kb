@@ -16,6 +16,7 @@ Gallup's Q2 2026 survey shows organizational AI adoption jumped from 41% to 47% 
 - [[Breadth of AI Use]] — variety of use cases is more predictive of productivity impact than frequency alone
 - [[Frequent AI Users]] — 30% use AI multiple times per week; 15% daily; use AI for 3x more task types than infrequent users
 - [[Gallup AI Indicator]] — quarterly tracking survey of US employee AI use
+- [[Manager Support (AI Adoption)]] — the single strongest predictor of frequent AI use; only 21% of employees report active manager support currently ← `[[gallup-manager-support-ai-adoption-2026]]`
 
 ## Key Takeaways
 
@@ -25,8 +26,16 @@ Gallup's Q2 2026 survey shows organizational AI adoption jumped from 41% to 47% 
 - **Breadth > frequency**: 7+ use cases → 90% positive impact; 1–2 use cases → only 45%
 - **1 in 5 employees** still unsure if their org has integrated AI — indicating real adoption, not just awareness growth
 - **Implication for organizations**: encourage employees to apply AI across multiple job-relevant tasks, not just as a writing tool
+- **Manager support gap**: only 21% of employees have active manager support for AI use — the strongest individual predictor of frequent use, above access or training ← `[[gallup-manager-support-ai-adoption-2026]]`
+- **8.7× transformation multiplier**: employees with active manager support are 8.7× more likely to say AI transformed how their work gets done ← `[[gallup-manager-support-ai-adoption-2026]]`
+- **Training alone underperforms**: 47% of AI users have had zero training; training without manager enablement doesn't predict regular use ← `[[gallup-manager-support-ai-adoption-2026]]`
 
 ## 🧠 First Principles & Mental Models
 
 - **[[80/20 Rule]]**: 16% of users doing coding and automation tasks get disproportionately large productivity gains — organizations focused only on broad AI rollout for writing/research are missing the high-leverage minority use cases.
 - **[[Diminishing Returns vs Breadth]]**: Productivity doesn't follow diminishing returns with more AI use cases — it accelerates. This suggests AI capabilities are complements, not substitutes, reinforcing a "learn many tools" strategy.
+
+## Weekly Connections
+
+### 2026-W31
+- The manager support gap (79% vs. 46% frequent use) is the organizational analog to Microsoft/Amazon's earnings outperformance — companies with infrastructure to convert AI access into output win at every scale ← `[[gallup-manager-support-ai-adoption-2026]]`, `[[big-tech-ai-earnings-three-lessons-chatbots-demand]]`

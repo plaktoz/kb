@@ -557,3 +557,9 @@
 | 2026-08-01 | 2024-10-14-generative-ai-impact-on-personalized-intelligent-tutoring-systems.md | scrape |
 | 2026-08-01 | 2025-11-14-graphmasal-graph-based-multi-agent-system-for-adaptive-learning.md | scrape |
 | 2026-08-01 | 2026-02-06-beagle-behavior-enforced-agent-for-grounded-learner-emulation.md | scrape |
+| 2026-08-01 | building-effective-ai-agents-anthropic.md | compound |
+| 2026-08-01 | a-guide-to-context-engineering-for-llms.md | compound |
+| 2026-08-01 | gallup-ai-adoption-q2-2026-productivity-gains.md | compound |
+| 2026-08-01 | ai-capex-roi-bifurcation-2026.md | compound |
+| 2026-08-01 | manager-led-ai-adoption-conversion.md | compound |
+| 2026-08-01 | deep-work-cognitive-infrastructure.md | compound |
