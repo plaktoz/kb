@@ -1,6 +1,6 @@
 ---
 type: literature-note
-source_url: https://www.youtube.com/watch?v=ZRb7D6R64hM
+source_url: [https://www.youtube.com/watch?v=ZRb7D6R64hM, https://www.youtube.com/watch?v=XTWb5oEfqdY]
 author: Nate Herk | AI Automation
 tags: [claude-ai, claude-code, agentic-workflows, ai-productivity]
 date_consumed: 2026-07-29
@@ -20,6 +20,10 @@ Nate Herk maps five progressive levels of [[Claude]] mastery—from casual chat 
 - **Boris Cherny** (Claude Code creator at [[Anthropic]]): runs 5 parallel sessions daily; credits the verification loop (Claude tests its own UI via Chrome extension) as 2-3x quality multiplier.
 - **[[A2A Protocol]]**: Agent-to-agent communication standard from Anthropic and Google for multi-agent coordination.
 - **[[Task Budgets]]**: Beta feature on Opus 4.7 (API-only) — token target for entire run; model self-regulates and wraps up gracefully near budget.
+- **Pricing tiers**: Free (basic features with usage limits) → Pro $20/mo (power-user + agentic) → Max $100–$200/mo (heavy/parallel workloads).
+- **[[Extended Thinking]]**: Step-by-step reasoning mode; noticeably better for strategic, financial, or multi-step reasoning tasks.
+- **[[Research Mode]]**: Autonomous multi-source web research (5–45 min per task) — not a single web search query.
+- **Connectors directory**: Full integration list at `claude.ai/directory`; highest ROI connects to where actual work lives (Gmail, Drive, Slack, Notion).
 
 ## Key Takeaways
 
@@ -33,6 +37,8 @@ Nate Herk maps five progressive levels of [[Claude]] mastery—from casual chat 
 - **Context management**: Run `/compact` proactively (not when warnings appear); prompt caching drops costs 60-90% on long sessions.
 - **Non-coders can ship**: Claude Design → Claude Code pipeline enables idea-to-production with zero code written.
 - **Agent teams**: Still experimental but multiple Claudes can debate, share findings, and coordinate via shared task lists.
+- **Memory import hack**: Paste memory from ChatGPT directly into Claude's memory system to transfer context cross-platform.
+- **Upgrade path**: Start free → hit limits → Pro ($20) → hit Pro limits → Max ($100+).
 
 ## 🧠 First Principles & Mental Models
 

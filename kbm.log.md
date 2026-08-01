@@ -281,3 +281,6 @@
 | 2026-08-01 | experts-vs-imitators.md | ingest |
 | 2026-08-01 | 2026-08-01-2.md | newsletter |
 | 2026-08-01 | 2026-08-01.md | newsletter |
+| 2026-08-01 | merged sildenafil-viagra-cancer-metastasis-inhibition into sildenafil-may-inhibit-cancer-metastasis-cholesterol; archived sildenafil-viagra-cancer-metastasis-inhibition.md | librarian |
+| 2026-08-01 | merged semaglutide-calorie-reduction-60-weeks into glp1-semaglutide-sustained-calorie-reduction-one-year; archived semaglutide-calorie-reduction-60-weeks.md | librarian |
+| 2026-08-01 | merged claude-ai-full-tutorial-basics-to-agentic into every-level-of-claude-explained; archived claude-ai-full-tutorial-basics-to-agentic.md | librarian |
