@@ -493,3 +493,4 @@
 | 2026-08-01 | 2026-07-26-microsoft-earnings-july-29-stock-soaring.md | ingest |
 | 2026-08-01 | 2026-07-26-5-big-analyst-ai-moves-several-top-picks-named-into-q2-earnings.md | ingest |
 | 2026-08-01 | 2026-07-27-5-modifiable-risk-factors-linked-to-dangerous-heart-plaque.md | ingest |
+| 2026-08-01 | 2026-W31-weekly.md | compound |
