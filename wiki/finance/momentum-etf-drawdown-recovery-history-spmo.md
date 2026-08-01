@@ -24,3 +24,9 @@ The [[S&P 500 Momentum Index]] fell 10.6% from its June 22 record close into cor
 - **Average max drawdown in past corrections was ~15%**, suggesting the current pullback may not be finished.
 - **Goldman's high-beta momentum basket fell over 30%** from its peak, more severe than SPMO itself.
 - **Rebalancing could reshape momentum indexes** as soon as next month, changing which stocks qualify as "momentum."
+
+**Update (additional source, 2026-07-31, ETF Trends/etfdb):** the predicted rebound materialized — momentum has been one of the strongest-performing equity factors of the year, with leadership broadening beyond AI into industrials, financials, and cyclicals. SPMO drew about $1.02B in net inflows over the past month and $3.59B over the past three months. Over the trailing 12 months, SPMO returned 26.89% versus 26.18% for **[[MTUM]]** and 17.43% for the S&P 500 Total Return Index — a gap the source attributes largely to SPMO's **semiannual** rebalancing (versus MTUM's broader large-/mid-cap universe and risk-adjusted approach), which lets it refresh exposure to current momentum leaders faster. SPMO's expense ratio is 0.13%.
+
+- **SPMO outperformed MTUM and the S&P 500** over the trailing year (26.89% vs. 26.18% vs. 17.43%)
+- **Inflows accelerating**: ~$1.02B in the past month, ~$3.59B over three months
+- **Semiannual rebalancing** (vs. MTUM's methodology) is the cited driver of SPMO's edge in capturing concentrated market leadership

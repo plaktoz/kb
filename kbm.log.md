@@ -483,3 +483,45 @@
 | 2026-07-31 | 2026-07-30-microsoft-stock-surges-on-strong-quarter-record-cloud-revenue.md | ingest |
 | 2026-07-31 | 2026-07-30-international-business-machines-nyseibm-stock-price-down-21-time-to-sell.md | ingest |
 | 2026-07-31 | 2026-07-31.md | newsletter |
+| 2026-08-01 | 2026-08-01-news-aggregation.md | news-fetch |
+| 2026-07-31 | 2026-07-31-dwindling-cash-soaring-memory-costs-tech-ai-buildout.md | scrape |
+| 2026-07-31 | 2026-07-31-amazon-apple-ai-plans-three-things-we-learned.md | scrape |
+| 2026-07-31 | 2026-07-31-seattle-tech-week-notebook-ai-startups.md | scrape |
+| 2026-07-31 | 2026-07-31-stock-market-today-dow-sp500-nasdaq-cap-volatile-july.md | scrape |
+| 2026-07-31 | 2026-07-31-stock-market-today-futures-advance-end-wild-week.md | scrape |
+| 2026-07-31 | 2026-07-31-stocks-rise-big-amazon-earnings-beat.md | scrape |
+| 2026-08-01 | 2026-08-01-todoist-deep-work-complete-guide.md | scrape |
+| 2026-08-01 | 2026-08-01-ai-tools-workplace-productivity-2026-guide.md | scrape |
+| 2026-08-01 | 2026-07-30-pro-worker-ai-automation-productivity-workers.md | scrape |
+| 2026-08-01 | 2026-07-28-how-to-learn-new-skill-effectively-guide.md | scrape |
+| 2026-08-01 | gabrielrealityofficial.substack.com/p/how-to-acquire-any-skill-or-hobby (paywalled) | scrape-failed |
+| 2026-08-01 | oecd.org/developing-minds-in-the-digital-age (content too large, full book text not a clean article) | scrape-failed |
+| 2026-08-01 | 2026-07-23-neuroscience-education-brain-science-reshaping-teaching.md | scrape |
+| 2026-08-01 | 2026-07-31-consuming-less-protein-health-benefits-lifespan.md | scrape |
+| 2026-08-01 | 2026-07-31-daily-multivitamin-healthy-aging-preliminary-study.md | scrape |
+| 2026-08-01 | hcplive.com/planetary-health-diet-cardiovascular-disease (content too large, mostly navigation) | scrape-failed |
+| 2026-08-01 | 2026-07-30-microsoft-eases-ai-spending-concerns-msft-rally.md | scrape |
+| 2026-08-01 | 2026-07-31-ibm-summer-contradictions-quantum-patent-dividend.md | scrape |
+| 2026-08-01 | 2026-07-31-why-spmo-stands-out-strong-momentum-year.md | scrape |
+| 2026-08-01 | 2024-11-12-antithesis-multiverse-debugger-distributed-systems.md | scrape |
+| 2026-08-01 | blog.bytebytego.com/p/a-detailed-guide-to-idempotency-delivery (paywalled) | scrape-failed |
+| 2026-08-01 | news-20260731.md | delete-blocked (platform prevents unlink under kb/; renamed to raw/url/.trash-news-20260731.md instead, both URLs processed) |
+| 2026-08-01 | 2026-08-01-news-aggregation.md | delete-blocked (platform prevents unlink under kb/; renamed to raw/url/.trash-2026-08-01-news-aggregation.md instead, all 18 URLs processed) |
+| 2026-08-01 | 2026-07-31-ibm-summer-contradictions-quantum-patent-dividend.md | ingest (merged into existing note ibm-quantum-advantage-circle-patent-deal-july-2026.md) |
+| 2026-08-01 | 2026-07-30-microsoft-eases-ai-spending-concerns-msft-rally.md | ingest (merged into existing note microsoft-earnings-rally-azure-100b-july-30-2026.md) |
+| 2026-08-01 | 2026-07-31-why-spmo-stands-out-strong-momentum-year.md | ingest (merged into existing note momentum-etf-drawdown-recovery-history-spmo.md) |
+| 2026-08-01 | 2026-08-01-todoist-deep-work-complete-guide.md | ingest (merged into existing note deep-work-techniques-daily-practice.md) |
+| 2026-08-01 | tech-ai-buildout-memory-crisis-cash-flow-squeeze.md | ingest |
+| 2026-08-01 | big-tech-ai-earnings-three-lessons-chatbots-demand.md | ingest |
+| 2026-08-01 | seattle-tech-week-2026-ai-startup-takeaways.md | ingest |
+| 2026-08-01 | antithesis-multiverse-debugger-distributed-systems.md | ingest |
+| 2026-08-01 | stock-market-july-31-2026-ai-capex-week-close.md | ingest |
+| 2026-08-01 | novo-nordisk-trial-failure-fed-warsh-microsoft-record.md | ingest |
+| 2026-08-01 | roblox-historic-crash-fed-dissent-july-2026.md | ingest |
+| 2026-08-01 | ai-tools-workplace-productivity-2026-landscape.md | ingest |
+| 2026-08-01 | pro-worker-ai-policy-agenda-acemoglu.md | ingest |
+| 2026-08-01 | skill-acquisition-frameworks-20-hour-rule-deliberate-practice.md | ingest |
+| 2026-08-01 | educational-neuroscience-attention-retrieval-practice.md | ingest |
+| 2026-08-01 | protein-restriction-fgf21-lifespan-extension.md | ingest |
+| 2026-08-01 | daily-multivitamin-functional-health-cosmos-trial.md | ingest |
+| 2026-08-01 | 2026-08-01.md | newsletter |
