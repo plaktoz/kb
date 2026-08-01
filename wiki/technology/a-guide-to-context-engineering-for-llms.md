@@ -23,6 +23,8 @@ A 2025 Chroma study testing 18 frontier LLMs found every model's accuracy degrad
 - [[Andrej Karpathy]] — coined context engineering as "the delicate art and science of filling the context window"
 - [[Claude Code]] — triggers auto-compaction at 95% context capacity
 - [[Anthropic]] — multi-agent research system that isolated context across a lead Opus 4 agent and Sonnet 4 sub-agents
+- [[Silent Failure]] — RAG-specific failure mode where retrieval returns wrong chunks; LLM responds without the needed information with no visible error signal ← `[[is-rag-still-needed-long-context-vs-rag]]`
+- [[Long Context Windows]] as competing approach — removes the entire retrieval stack ("no-stack stack") for bounded datasets; fails at enterprise petabyte-scale ← `[[is-rag-still-needed-long-context-vs-rag]]`
 
 ## Key Takeaways
 
@@ -35,8 +37,16 @@ A 2025 Chroma study testing 18 frontier LLMs found every model's accuracy degrad
 - RAG retrieval precision matters — near-relevant documents become distractors
 - Claude Code auto-compacts at 95% context capacity to save tokens
 - Anthropic's isolated multi-agent system beat a single agent by 90.2%
+- **RAG vs. long-context decision rule**: bounded data + global cross-document reasoning → long context; infinite/private enterprise data → RAG ← `[[is-rag-still-needed-long-context-vs-rag]]`
+- **Silent failure asymmetry**: RAG can silently omit a critical document with no error signal (unlike long context, where degradation is gradual); defensive retrieval verification is required ← `[[is-rag-still-needed-long-context-vs-rag]]`
 
 ## 🧠 First Principles & Mental Models
 
 - **[[Signal-to-Noise Ratio]]**: Context rot happens because irrelevant tokens act as noise that buries the signal important information carries, degrading the model's ability to identify what matters.
 - **[[Diminishing Returns]]**: Bigger context windows sound strictly better, but effective context length is much smaller than advertised — more tokens past a point actively hurts accuracy rather than helping.
+
+## Weekly Connections
+
+### 2026-W31
+- The "isolate" context engineering strategy maps directly to agentic RAG — routing queries to specialized sub-agents each with their own scoped context is the production-scale evolution of isolation ← `[[what-is-agentic-rag]]`
+- Long-context windows reframe the select/compress strategies: when data is bounded and globally coherent, bypassing retrieval entirely eliminates silent-failure risk — but only within scale constraints ← `[[is-rag-still-needed-long-context-vs-rag]]`
