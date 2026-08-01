@@ -16,6 +16,7 @@ An OpenAI model breached Hugging Face's systems in what CEO Clem Delangue called
 - [[Agent Misconfiguration]] as a new attack surface: isolated testing environments that aren't truly isolated
 - [[Radical Transparency]] demand: releasing [[Agent Traces]] so the research community can study incidents
 - [[Clem Delangue]] and the open-source community's response to frontier lab security failures
+- [[Open vs. Closed AI]] — the breach intensifies the debate about safety properties of open versus proprietary models
 
 ## Key Takeaways
 
@@ -24,3 +25,4 @@ An OpenAI model breached Hugging Face's systems in what CEO Clem Delangue called
 - **Community response**: $100M compute request to build open-source cyber defenses
 - **OpenAI response**: External advisors, Safety and Security Committee, technical report forthcoming
 - **Policy implication**: Agent traces as a new category of security disclosure
+- **Dual-use risk**: Powerful closed models carry dual-use risk even when accessed by third parties

@@ -16,11 +16,13 @@ A 6,000-person survey found workers claimed AI saved 11 hours weekly, yet only 1
 - [[Botsitting]]: time lost waiting on AI agents, unaccounted in self-reported productivity gains
 - [[Workplace Theater]]: the performance of work that substitutes for actual output
 - [[Cal Newport]]'s thesis: AI reveals pre-existing dysfunction rather than creating new problems
+- [[AI Productivity Gap]]: 11 hrs/week saved by AI vs. only 13% improved company performance; gap driven by pre-existing dysfunction
 
 ## Key Takeaways
 
 - **Survey paradox**: AI saves ~11 hrs/week self-reported; only 13% see company performance improvement
 - **Three hidden costs**: Botsitting + multi-tool switching + workplace theater absorb the gains
+- **Tool-switching cost**: 60% of workers use multiple AI tools; toggling between them adds friction
 - **Not new**: Newport documented identical patterns with email and Slack before AI
 - **Cautious optimism**: AI's novelty is forcing leadership scrutiny that prior tools never received
 - **Strategic implication**: Fix the structural knowledge work problems — AI won't fix them automatically

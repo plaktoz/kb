@@ -15,6 +15,7 @@ Microsoft reports FY2026 Q4 earnings on July 29 with the stock down ~20% YTD, we
 - [[Azure]] — Microsoft's cloud business growing ~40% annually; AI infrastructure is the primary driver
 - [[Microsoft Copilot]] — only 20M paid enterprise seats vs 450M+ Microsoft 365 subscribers; low penetration is the key bear case
 - [[AI Capex Concern]] — $190bn guided capex for 2026; investors questioning ROI
+- [[Software Armageddon]] — investor fear that AI will erode the moat of traditional office-software incumbents like Microsoft
 - [[Morgan Stanley]] — $795 bull case price target; current price ~$381
 
 ## Key Takeaways
@@ -23,6 +24,7 @@ Microsoft reports FY2026 Q4 earnings on July 29 with the stock down ~20% YTD, we
 - **Azure growth ~40% annually** — AI spending paying off on cloud revenue
 - **Copilot penetration gap**: 20M seats / 450M subscribers = only 4.4% — ceiling for upside is enormous
 - **Two paths for stock**: soar on strong Azure + Copilot adoption; sell off on high capex guidance or weak subscriber growth
+- **Earnings risk cuts both ways**: a strong print could send the stock sharply higher, but weak Copilot or capex commentary could trigger a sell-off
 - **Long-term thesis intact**: Microsoft best positioned to survive AI correction due to diversified enterprise moat
 
 ## 🧠 First Principles & Mental Models

@@ -2,7 +2,7 @@
 type: literature-note
 source_url: https://fs.blog/experts-vs-imitators/
 author: Shane Parrish
-tags: [expertise, mental-models, epistemics, charlie-munger]
+tags: [expertise, mental-models, epistemics, charlie-munger, learning, critical-thinking]
 date_consumed: 2026-08-01
 ---
 
@@ -13,6 +13,7 @@ Shane Parrish, adapting from *Clear Thinking*, identifies five key signals that 
 ## Core Concepts
 
 - **[[Circle of Competence]]**: Experts know their boundaries and signal when approaching the edge; imitators cannot.
+- **[[Popularizers]]** — skilled communicators who make subjects accessible but are not necessarily the deepest authorities; frequently mistaken for experts
 - **[[First Principles Thinking]]**: Genuine experts can reconstruct ideas from the ground up; imitators rely on memorized surface patterns.
 - **[[Charlie Munger]]** and the problem of pattern-matching expertise from presentation style
 - **[[Epistemic Humility]]**: Openness about mistakes and uncertainty as a marker of real knowledge
