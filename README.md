@@ -22,18 +22,18 @@ A personal knowledge management (PKM) system that captures raw information, tran
 | `raw/processed/` | Post-ingest archive; articles moved here after wiki notes are created |
 | `wiki/` | Canonical notes organized by category |
 | `research/` | Sourced research reports, organized by topic slug |
-| `skills/` | Prompt templates that power the automated workflows |
+| `.claude/skills/` | Self-contained skill files that power the automated workflows |
 | `daily-update/` | Daily newsletter digests |
 | `weekly-update/` | Weekly synthesis digests |
 | `data/` | Supporting reference data (investment holdings, wiki categories) |
 
 ## Automated workflows
 
-The `skills/` folder contains prompt templates for each recurring task:
+Each recurring task is a self-contained slash command in `.claude/skills/`:
 
-- **Daily pipeline** — news fetch → scrape → ingest → newsletter
-- **Weekly compound** — synthesizes the week's daily digests into a high-signal summary
-- **Research** — grills user to refine a topic, searches 10–20 sources, saves report to `research/`
-- **Wiki reorg** — reconciles `wiki/` structure against category definitions, reclassifies stale notes
+- **`/kb-daily`** — news fetch → scrape → ingest → newsletter
+- **`/kb-weekly`** — compounds the week's daily digests into a high-signal weekly summary
+- **`/kb-research-topic`** — grills user to refine a topic, searches 10–20 sources, saves report to `research/`
+- **`/kb-librarian`** — audits vault for duplicates, reclassifies stale notes, rebuilds the activity log
 
-See `CLAUDE.md` for full workflow conventions and prompt instructions.
+See `CLAUDE.md` for full workflow conventions and slash command reference.

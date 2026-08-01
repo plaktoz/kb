@@ -24,3 +24,8 @@ date_consumed: 2026-07-27
 - **Getting stuck is productive**: confusion forces engagement with first principles
 - **Play requires novelty**: if outcomes were predictable, it wouldn't be play — unpredictability drives engagement
 - **Self-imposed constraints**: many learning limits come from accepting conventions as fixed rather than questioning them
+
+## 🧠 First Principles & Mental Models
+
+- **[[First Principles Thinking]]**: Getting stuck strips away pattern-matching shortcuts and forces engagement with foundational assumptions — precisely why Lockhart uses arithmetic to demonstrate that base-10 is a choice, not a law.
+- **[[Beginner's Mind]]**: Treating a familiar system as if it were unfamiliar (as Lockhart does with number bases) breaks the familiarity that blocks deeper understanding and restores the curiosity that drives genuine insight.

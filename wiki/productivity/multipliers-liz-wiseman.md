@@ -1,9 +1,9 @@
 ---
 type: literature-note
 source_url: https://www.youtube.com/watch?v=qHhuFOF70CY
-author: Liz Wiseman
+author: Productivity Game
 tags: [leadership, management, talent-development, team-effectiveness]
-date_consumed: 2026-07-29
+date_consumed: 2026-08-01
 ---
 
 ## Summary

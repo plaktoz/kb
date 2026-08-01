@@ -12,7 +12,6 @@ This repository is a local-first personal knowledge management (PKM) system buil
   - `processed/` — post-ingest archive; articles moved here after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-librarian
-- `skills/` — prompt templates for recurring workflows (see Skills section below)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
 - `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`)
@@ -21,19 +20,23 @@ This repository is a local-first personal knowledge management (PKM) system buil
   - `wiki-categories.md` — canonical list of wiki subdirectory categories
 
 ## Skills
-Read the matching skill file before executing any recurring task.
+Invoke the matching slash command for each recurring task. Skills are self-contained in `.claude/skills/`.
 
-| Skill file | Purpose |
-|-----------|---------|
-| `skills/Daily-workflow-prompt.md` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
-| `skills/News-agent-prompt.md` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
-| `skills/Scrape-content-prompt.md` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/` |
-| `skills/Karpathy-Ingest-prompt.md` | Transforms `raw/processed/` files into structured wiki notes |
-| `skills/Daily-newsletter-prompt.md` | Compiles today's ingested notes into a daily newsletter digest |
-| `skills/Weekly-workflow-prompt.md` | Runs the full weekly pipeline in sequence: compound → weekly digest |
-| `skills/Research-topic-prompt.md` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
-| `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
-| `skills/Librarian-prompt.md` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
+| Slash command | Purpose |
+|--------------|---------|
+| `/kb-daily` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
+| `/kb-newsagent` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
+| `/kb-scrapecontent` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/` |
+| `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
+| `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
+| `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
+| `/kb-compound` | Compounds the week's daily digests into a high-signal weekly synthesis |
+| `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
+| `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
+| `/kb-quizme` | Quizzes you on recently ingested wiki articles using spaced repetition |
+| `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
+| `/kb-note-deepen` | Enriches an existing wiki note with new insights and links found in newer vault notes |
+| `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
 
 ### Parallel skills (opt-in)
 
@@ -47,7 +50,7 @@ Read the matching skill file before executing any recurring task.
 1. Capture raw content into the vault with minimal friction.
 2. Transform it into structured notes that are concise, atomic, and link-rich.
 3. Connect new notes to existing concepts using Obsidian-style wiki links.
-4. Use the matching skill from `skills/` for each recurring task.
+4. Use the matching slash command (see Skills section above) for each recurring task.
 
 ## Conventions
 
@@ -89,7 +92,7 @@ Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsl
 - Read relevant existing notes before creating new ones.
 - Update an existing note when a strong match already exists.
 - Keep the knowledge graph coherent by linking related notes thoughtfully.
-- When asked to create a new artifact, use the matching skill from `Skills/` and save output in the expected location.
+- When asked to create a new artifact, use the matching slash command and save output in the expected location.
 
 ## Do not
 - Modify `skills-lock.json` or anything in `.obsidian/`.

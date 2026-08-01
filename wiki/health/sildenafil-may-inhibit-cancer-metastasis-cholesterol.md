@@ -14,6 +14,7 @@ A Weizmann Institute study analyzing 20 years of records from ~5 million patient
 
 - [[Sildenafil]] (Viagra) as a candidate [[Drug Repurposing]] intervention for cancer metastasis
 - [[Cholesterol-Metastasis Link]]: cancer cells use cholesterol to spread to other organs — sildenafil may block this
+- [[PDE5 Inhibition]]: sildenafil's molecular mechanism; blocks cholesterol pathways in tumor cells as a secondary effect
 - [[Statin Synergy]]: combining sildenafil + statins may further impair cancer cells' cholesterol access
 - [[Observational Study Limitations]]: pre-diagnosis use studied; post-diagnosis effects unknown
 
@@ -24,4 +25,6 @@ A Weizmann Institute study analyzing 20 years of records from ~5 million patient
 - **Mechanism**: Sildenafil blocks cholesterol access → may inhibit metastasis
 - **Statin synergy**: Combined use showed stronger protective association
 - **Critical caveat**: Did not study sildenafil given *after* cancer diagnosis — unknown efficacy
+- **Multiple cancer types**: inhibitory association observed across several cancer types in the dataset
 - **Status**: Preliminary, observational — requires human clinical trial validation
+- **Not a recommendation**: patients should not self-administer sildenafil as cancer treatment based on this study
