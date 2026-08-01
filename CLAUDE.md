@@ -29,12 +29,14 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-scrapecontent` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/` |
 | `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
-| `/kb-weekly` | Runs the full weekly pipeline: compound → weekly digest |
 | `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
 | `/kb-compound` | Compounds the week's daily digests into a high-signal weekly synthesis |
 | `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
 | `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
 | `/kb-quizme` | Quizzes you on recently ingested wiki articles using spaced repetition |
+| `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
+| `/kb-note-deepen` | Enriches an existing wiki note with new insights and links found in newer vault notes |
+| `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
 
 ### Parallel skills (opt-in)
 

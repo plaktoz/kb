@@ -76,7 +76,31 @@ Example (from an article on AI productivity claims):
 - **[[Goodhart's Law]]**: When productivity becomes the target metric, workers optimize for its proxies rather than actual output — exactly the dynamic Newport documents with AI tool adoption.
 - **[[Availability Bias]]**: The vividness of individual AI wins makes the aggregate productivity stagnation invisible — people generalize from memorable examples, not base rates.
 
-### 9. Compilation rules
+### 9. Review Questions section
+
+Create a `## 🃏 Review Questions` section at the end of the note (after First Principles & Mental Models, or after Key Takeaways if that section was omitted).
+
+Generate exactly 3 Q&A pairs. Cover these angles in order:
+1. The article's **core claim** — what is the central argument or finding?
+2. A **key mechanism or data point** — how does it work, or what specific evidence supports it?
+3. An **application or implication** — so what? How would you use or apply this?
+
+Each answer should be 1–2 sentences, drawn only from the article.
+
+```markdown
+## 🃏 Review Questions
+
+**Q1**: [question about the core claim]
+**A**: [answer in 1–2 sentences]
+
+**Q2**: [question about a key mechanism or data point]
+**A**: [answer in 1–2 sentences]
+
+**Q3**: [question about an application or implication]
+**A**: [answer in 1–2 sentences]
+```
+
+### 10. Compilation rules
 
 - Rely exclusively on the text provided. Do not use pre-trained memory to add unsubstantiated facts.
 - Do not output any chat meta-text. Start directly with the YAML frontmatter.

@@ -32,6 +32,15 @@ Open `kbm.log.md`. Collect all rows where:
 
 For each matched filename, search `wiki/` recursively to locate the file. Read its frontmatter and content. This is your vault pool.
 
+## Step 3.5 — Portfolio Pulse (investment digest)
+
+Read `.claude/skills/kb-investment-digest/SKILL.md`. Execute Steps 1–4 from that skill, setting the time window to this week's Monday–Sunday range (override the default "last 7 days"). From the extracted notes, prepare a condensed summary:
+
+- Up to 5 bullets, each covering one material event or data point for a holding, with a `[[note-slug]]` citation.
+- One "watch" item drawn from open questions or upcoming events surfaced by the notes.
+
+If no finance notes are found for this week, skip the Portfolio Pulse section entirely — no placeholder.
+
 ## Step 4 — Synthesize and write
 
 Generate a short, tight newsletter using exactly this structure:
@@ -51,6 +60,13 @@ Generate a short, tight newsletter using exactly this structure:
 ## 🗄️ From the Vault
 - **[Note title](../../wiki/<category>/filename.md)**: [1–2 sentences. Why is this older note newly relevant given this week's themes?]
 - **[Second note — optional](../../wiki/<category>/filename.md)**: [Only include if it meaningfully connects. Do not pad.]
+
+## 💼 Portfolio Pulse
+- **[TICKER — Name]**: [1 sentence on the most material event or data point] `[[note-slug]]`
+- [up to 4 more bullets]
+> **Watch**: [one upcoming event or open question drawn from the notes]
+
+[Omit this section entirely if no finance notes were found for the week.]
 
 ## 🧱 One Lesson to Keep
 [Single sentence. The most durable, actionable takeaway from this week — something worth carrying forward regardless of what next week brings.]
