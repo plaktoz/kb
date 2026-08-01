@@ -26,6 +26,12 @@ Markets rebounded sharply on July 30 as [[Microsoft]] stock surged more than 16%
 - **Labor market signal**: only 1% employment effect from AI exposure so far, but a measurable 6.7-point wage-growth gap
 - **Macro backdrop**: 30-year Treasury yield near a multidecade high; GDP growth slowed to 1.5% in Q2, below the ~2% expected
 
+**Update (additional source, 2026-07-31, Barchart):** the rally added $450 billion to Microsoft's market cap in a single day — a record for any US company, surpassing Nvidia's $440B one-day gain from April 2026 — after fiscal 2026 revenue reached $331B (+18%) and [[Azure]] growth accelerated to 43% (from 40% the prior quarter). [[Microsoft Copilot]] paid seat additions more than doubled sequentially, pushing total paid seats above 30 million, while commercial remaining performance obligation (RPO) rose 84% YoY to $678B — with all the sequential increase coming from customers outside Frontier Model companies (RPO excluding OpenAI still up 25%), underscoring broad-based enterprise demand rather than reliance on a handful of AI labs. Management guided Q1 Intelligent Cloud revenue to $40.95–$41.25B (33–34% growth) and continued Azure acceleration into fiscal 2027, alongside another planned capex increase. Analyst consensus is "Strong Buy" with an average price target of $543.08, implying over 20% upside from the post-rally price.
+
+- **Record market-cap gain**: +$450B in one day, the largest single-day market-cap increase for any US company
+- **Copilot scale**: paid seats surpassed 30 million, more than doubling sequentially
+- **RPO up 84% YoY to $678B**, broad-based beyond the handful of frontier-model customers like OpenAI
+
 ## 🧠 First Principles & Mental Models
 
 - **[[Regression to the Mean]]**: A single earnings beat driving a 16% single-day move after a prior sell-off illustrates how far sentiment (not fundamentals) had drifted from a reasonable valuation — the "surprise" is partly the market correcting an overly pessimistic prior, not purely new information.
