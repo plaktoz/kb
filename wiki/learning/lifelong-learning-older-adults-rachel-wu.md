@@ -2,7 +2,7 @@
 type: literature-note
 source_url: https://www.eurekalert.org/news-releases/1137549
 author: University of California, Riverside
-tags: [lifelong-learning, cognitive-aging, deliberate-practice]
+tags: [lifelong-learning, cognitive-aging, deliberate-practice, growth-mindset]
 date_consumed: 2026-07-27
 ---
 
@@ -24,3 +24,11 @@ Psychologist [[Rachel Wu]] studies how lessons from child development can help o
 - **Fast learners make the most mistakes**: mistake tolerance correlates with faster skill acquisition (e.g., ice skating falls).
 - **Continued learning correlates with better mental health**: less loneliness and depression among older adults who keep learning.
 - **The core barrier is belief, not age**: many older learners discover they were more capable than they assumed.
+- **Wu's deliberate skill list**: drawing, painting, singing, piano, German, swimming, crochet, weightlifting, sourdough baking, ice skating — each chosen for a purpose.
+- **Recognition**: NSF CAREER Award, Presidential Early Career Award for Scientists and Engineers (PECASE), APA Fellow.
+
+## 🧠 First Principles & Mental Models
+
+- **[[Growth Mindset]]**: Wu's research provides empirical grounding for Dweck's theory — belief in one's capacity to learn, not age, is the binding constraint on adult skill acquisition.
+- **[[Beginner's Mind]]**: Deliberately re-entering novice status every few years operationalizes shoshin; Wu treats beginner status as a repeatable, intentional practice rather than a temporary deficit to escape.
+- **[[Attribution Error]]**: Observers consistently credited Wu's visible progress to innate talent rather than effort — illustrating how the fundamental attribution error suppresses social models of deliberate practice.
