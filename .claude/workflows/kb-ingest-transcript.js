@@ -5,7 +5,7 @@ export const meta = {
     { title: 'Fetch', detail: 'Download YouTube transcripts in parallel (up to 8)' },
     { title: 'Stage', detail: 'Convert transcripts to ingest-ready raw/ files' },
     { title: 'Ingest', detail: 'Parallel wiki note creation (up to 8 agents)' },
-    { title: 'Archive', detail: 'Delete processed folders and source URL files' },
+    { title: 'Archive', detail: 'Move transcript folders to processed/ and rename source URL files' },
   { title: 'Newsletter', detail: 'Compile today\'s ingested notes into a daily digest' },
   ],
 }
@@ -63,7 +63,7 @@ phase('Fetch')
 
 const [urlDiscovery, speakerPromptLoad] = await parallel([
   () => agent(
-    'Check if the directory raw/youtube/ exists. If it does, list all .md files inside and extract all YouTube URLs (one per line). Return: urls (array of YouTube URL strings, may be empty), sourceFiles (array of relative file paths e.g. ["raw/youtube/queue.md"]).',
+    'Check if the directory raw/youtube/ exists. If it does, list all .md files inside (excluding any file whose name ends in .processed.md) and extract all YouTube URLs (one per line). Return: urls (array of YouTube URL strings, may be empty), sourceFiles (array of relative file paths e.g. ["raw/youtube/queue.md"]).',
     {
       label: 'discover-urls',
       schema: {
@@ -131,7 +131,7 @@ Return success: true and transcriptFolder (the video folder path, parent directo
 phase('Stage')
 
 const stageResult = await agent(
-  `Find all transcript.md files anywhere inside the youtube-transcript/ directory tree. For each file:
+  `Find all transcript.md files anywhere inside the youtube-transcript/ directory tree, excluding anything inside youtube-transcript/processed/. For each file:
 
 1. Read the YAML frontmatter and extract: title, url (the YouTube URL), date (YYYY-MM-DD), channel
 2. Build the staged filename: {date}-video-{title in lowercase kebab-case}.md
@@ -164,7 +164,7 @@ if (stagedFiles.length === 0) {
   log('No transcripts found to stage — pipeline complete.')
   if (sourceFiles.length > 0) {
     await agent(
-      `Delete these source YouTube URL files: ${sourceFiles.join(', ')}\nThen append a delete row to kbm.log.md for each: | YYYY-MM-DD | <filename only, no path> | delete | (use today's date)`,
+      `Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\nThen append an archive row to kbm.log.md for each: | YYYY-MM-DD | <new-filename only, no path> | archive | (use today's date)`,
       { label: 'cleanup-source-files', phase: 'Archive' }
     )
   }
@@ -226,11 +226,11 @@ const tasks = [
     ? `1. Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}`
     : '1. No ingest log rows to write.',
   folderPaths.length > 0
-    ? `2. Delete these youtube-transcript video folders (entire directory tree for each):\n${folderPaths.join('\n')}`
-    : '2. No transcript folders to delete.',
+    ? `2. Move each of these video folders into youtube-transcript/processed/, preserving the channel subfolder (e.g. youtube-transcript/ai-engineer/video-title/ → youtube-transcript/processed/ai-engineer/video-title/). Create the channel subdirectory under youtube-transcript/processed/ if it does not exist. Then append an archive row to kbm.log.md for each moved folder: | YYYY-MM-DD | <video-folder-name> | archive | (use today's date, folder name only e.g. video-title). Folders to move:\n${folderPaths.join('\n')}`
+    : '2. No transcript folders to move.',
   sourceFiles.length > 0
-    ? `3. Delete these source YouTube URL files: ${sourceFiles.join(', ')}\n   Then append a delete row for each to kbm.log.md: | YYYY-MM-DD | <filename only> | delete | (use today's date)`
-    : '3. No source URL files to delete.',
+    ? `3. Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\n   Then append an archive row for each to kbm.log.md: | YYYY-MM-DD | <new-filename only> | archive | (use today's date)`
+    : '3. No source URL files to rename.',
 ].join('\n\n')
 
 await agent(tasks, { label: 'archive' })
