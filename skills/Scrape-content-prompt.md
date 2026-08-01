@@ -4,7 +4,7 @@ You are a web scraping agent with file access. Your job is to extract URL conten
 
 ## Input
 
-Read `.md` files from `/raw/url/`. Two supported formats:
+Read `.md` files from `/raw/url/`, **excluding any file whose name ends in `.processed.md`**. Two supported formats:
 
 - **Search result / aggregation file** — a structured file with many URLs embedded in the content (e.g. a news aggregation with titles, URLs, and descriptions)
 - **Simple URL list** — a plain `.md` file with one URL per line
@@ -65,11 +65,11 @@ Append a row to `kbm.log.md` for each successfully saved file:
 
 ## After all URLs in a file are processed
 
-1. Delete the source file from `/raw/url/`
-2. Append a deletion row to `kbm.log.md`:
+1. Rename the source file in `/raw/url/` by inserting `.processed` before `.md` — e.g. `news.md` → `news.processed.md`. Do not delete the file.
+2. Append a cleanup row to `kbm.log.md`:
 
 ```md
-| YYYY-MM-DD | source-filename.md | delete |
+| YYYY-MM-DD | source-filename.processed.md | archive |
 ```
 
 ## Expected outcome

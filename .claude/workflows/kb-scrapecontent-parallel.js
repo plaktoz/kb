@@ -32,7 +32,7 @@ phase('Discover')
 
 const [discovery, skillLoad] = await parallel([
   () => agent(
-    'Read all .md files in raw/url/. Extract every URL found across all files. Deduplicate. Return: urls (array of unique URLs), sourceFiles (array of file paths that were read, relative to repo root).',
+    'Read all .md files in raw/url/, skipping any file whose name ends in .processed.md. Extract every URL found across all files. Deduplicate. Return: urls (array of unique URLs), sourceFiles (array of file paths that were read, relative to repo root).',
     {
       label: 'discover-urls',
       schema: {
@@ -100,7 +100,7 @@ const logLines = allLogRows.map(r => `| ${r.date} | ${r.filename} | ${r.activity
 const deleteList = discovery.sourceFiles.join(', ')
 
 await agent(
-  `Perform these cleanup tasks in order:\n1. Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}\n2. Delete these source URL files: ${deleteList}\n3. For each deleted file, append a row to kbm.log.md: | YYYY-MM-DD | <filename> | delete | (use today's date)`,
+  `Perform these cleanup tasks in order:\n1. Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}\n2. Rename each of these source URL files by inserting .processed before .md (e.g. news.md → news.processed.md): ${deleteList}\n3. For each renamed file, append a row to kbm.log.md: | YYYY-MM-DD | <new-filename> | archive | (use today's date)`,
   { label: 'finalize' }
 )
 
