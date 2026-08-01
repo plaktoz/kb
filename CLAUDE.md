@@ -11,7 +11,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
   - `*.md` — scraped articles awaiting ingest
   - `processed/` — post-ingest archive; articles moved here after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
-  - `others/` — staging area for notes whose category is unclear; revisit with /kb-reorg
+  - `others/` — staging area for notes whose category is unclear; revisit with /kb-librarian
 - `skills/` — prompt templates for recurring workflows (see Skills section below)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
@@ -33,7 +33,7 @@ Read the matching skill file before executing any recurring task.
 | `skills/Weekly-workflow-prompt.md` | Runs the full weekly pipeline in sequence: compound → weekly digest |
 | `skills/Research-topic-prompt.md` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
 | `skills/Weekly-compound-prompt.md` | Compounds the week's daily digests into a high-signal weekly synthesis |
-| `skills/Wiki-reorg-prompt.md` | Reconciles wiki/ structure against wiki-categories.md, reclassifies notes, refreshes glossary |
+| `skills/Librarian-prompt.md` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
 
 ### Parallel skills (opt-in)
 
