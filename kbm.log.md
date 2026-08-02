@@ -491,3 +491,5 @@
 | unknown | wiki/productivity/managing-office-politics-three-networks.md | ingest |
 | unknown | wiki/productivity/manager-led-ai-adoption-conversion.md | ingest |
 | 2026-08-02 | canvases/investments/2026-08-02.canvas | canvas |
+| 2026-08-02 | daily-update/2026-08/2026-08-02-2.md | newsletter |
+| 2026-08-02 | topics/mental-models.md | compound |
