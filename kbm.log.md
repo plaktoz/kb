@@ -2,6 +2,21 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-02 | wiki/technology/software-engineering-practitioners-approach-cheat-sheet.md | ingest |
+| 2026-08-03 | wiki/technology/rag-architecture-implementation-and-evaluation.md | ingest |
+| 2026-08-03 | 2025-01-01-dd2-handout-6-effective-prompting-techniques.md | scrape |
+| 2026-08-03 | 2025-01-01-dd1-handout-overview-of-generative-ai.md | scrape |
+| 2026-08-03 | 2025-01-01-ai-fluency-vocabulary-cheat-sheet.md | scrape |
+| 2026-08-03 | 2025-01-01-1-2-ai-fluency-summary-one-pager.md | scrape |
+| 2026-08-03 | 2025-01-01-1-2-ai-fluency-summary-16x9.md | scrape |
+| 2026-08-03 | 2025-01-01-1-3-delegation-summary.md | scrape |
+| 2026-08-03 | 2025-01-01-1-3-delegation-summary-16x9.md | scrape |
+| 2026-08-03 | 2025-01-01-1-5-description-summary.md | scrape |
+| 2026-08-03 | 2025-01-01-1-5-description-summary-16x9.md | scrape |
+| 2026-08-03 | 2025-01-01-1-6-discernment-summary.md | scrape |
+| 2026-08-03 | 2025-01-01-1-6-discernment-summary-16x9.md | scrape |
+| 2026-08-03 | 2025-01-01-1-8-diligence-summary.md | scrape |
+| 2026-08-03 | 2025-01-01-1-8-diligence-summary-16x9.md | scrape |
 | 2026-07-17 | wiki/technology/personal-ai-assistant-gateway-pattern-push.md | ingest |
 | 2026-07-25 | wiki/technology/agentic-software-factory-ticket-to-pr-pipeline.md | ingest |
 | 2026-07-25 | wiki/productivity/obsidian-pkm-principles-para-workflow.md | ingest |
@@ -503,3 +518,14 @@
 | 2026-08-02 | https://www.ibm.com/thought-leadership/institute-business-value/en-us/report/ai-governance-trends | scrape-failed |
 | 2026-08-02 | 2025-10-10-agentic-ai-strategic-ascent-shifting-operations.md | scrape |
 | 2026-08-02 | raw/url/consume-1.processed.md | archive |
+| 2026-08-03 | 2024-10-15-introduction-to-rag.md | scrape |
+| 2026-08-03 | 2025-07-14-closing-the-confidence-gap-how-custom-metrics-turn-genai-reliability-into-a-competitive-edge.md | scrape |
+| 2026-08-03 | raw/url/ibm-ai-1.processed.md | archive |
+| 2026-08-03 | wiki/technology/ai-capability-stack-tools-mcp-skills-evolution.md | ingest |
+| 2026-08-03 | wiki/strategy/zeigarnik-effect.md | ingest |
+| 2026-08-03 | wiki/strategy/mindset-of-a-successful-practitioner.md | ingest |
+| 2026-08-03 | wiki/technology/rag-architecture-implementation-and-evaluation.md | ingest |
+| 2026-08-03 | wiki/technology/agentic-ai-strategic-operating-model-ibm-ibv.md | ingest |
+| 2026-08-02 | wiki/technology/software-engineering-practitioners-approach-cheat-sheet.md | ingest |
+| 2026-08-03 | wiki/technology/genai-custom-metrics-enterprise-reliability.md | ingest |
+| 2026-08-03 | wiki/productivity/adkar-model-change-management.md | ingest |
