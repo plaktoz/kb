@@ -493,3 +493,13 @@
 | 2026-08-02 | canvases/investments/2026-08-02.canvas | canvas |
 | 2026-08-02 | daily-update/2026-08/2026-08-02-2.md | newsletter |
 | 2026-08-02 | topics/mental-models.md | compound |
+| 2026-08-02 | 2026-08-02-zeigarnik-effect.md | scrape |
+| 2026-08-02 | 2026-03-27-adkar-model-for-change-management.md | scrape |
+| 2026-08-02 | https://openai.com/index/building-codex-windows-sandbox/ | scrape-failed |
+| 2026-08-02 | https://equilibriumsecurity.substack.com/ | scrape-failed |
+| 2026-08-02 | 2022-10-30-the-mindset-of-a-successful-practitioner.md | scrape |
+| 2026-08-02 | 2026-08-02-software-engineering-cheat-sheet.md | scrape |
+| 2026-08-02 | 2026-01-24-skills-tools-and-mcps-whats-the-difference.md | scrape |
+| 2026-08-02 | https://www.ibm.com/thought-leadership/institute-business-value/en-us/report/ai-governance-trends | scrape-failed |
+| 2026-08-02 | 2025-10-10-agentic-ai-strategic-ascent-shifting-operations.md | scrape |
+| 2026-08-02 | raw/url/consume-1.processed.md | archive |

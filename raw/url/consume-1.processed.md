@@ -10,3 +10,6 @@ https://equilibriumsecurity.substack.com/
 https://www.thewellnessbusinesshub.com/the-mindset-of-a-successful-practitioner/
 https://github.com/thunderrun/software-engineering-cheat-sheet
 https://www.ignorance.ai/p/skills-tools-and-mcps-whats-the-difference
+
+https://www.ibm.com/thought-leadership/institute-business-value/en-us/report/ai-governance-trends
+https://www.ibm.com/thought-leadership/institute-business-value/en-us/report/agentic-ai-operating-model
