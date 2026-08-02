@@ -54,6 +54,14 @@ For each candidate note, identify content that is:
 
 Ignore content that is already captured (same point, same stat, same concept).
 
+**Impact check:** Read the target note's `## Summary`. If it describes a real-world event, market shift, policy, or trend, the note qualifies for impact sections. If it is primarily a how-to, library reference, or technical spec, skip the impact sections entirely.
+
+For qualifying notes, synthesize from the note's own content:
+- **First order impacts** — direct, immediate consequences of the topic (what changes right away and for whom)
+- **Second order impacts** — downstream effects that flow from those first-order consequences (less obvious, often systemic)
+
+Only propose impact bullets that are genuinely non-obvious. If a vault note directly supports an impact claim, cite it; otherwise no citation is required for these sections.
+
 ## Step 4 — Propose additions
 
 Present the proposed additions to the user before touching the file. Use this format:
@@ -68,6 +76,14 @@ Present the proposed additions to the user before touching the file. Use this fo
 
 **New Core Concepts to add:**
 - **[[New Concept]]** — one-line definition ← from `[[source-note]]`
+- ...
+
+**First Order Impact:** *(only for qualifying notes — events, trends, policies)*
+- [direct, immediate consequence of the topic]
+- ...
+
+**Second Order Impact:** *(only for qualifying notes)*
+- [downstream effect flowing from the first-order consequences]
 - ...
 
 **Contradictions / updates:**
@@ -88,14 +104,18 @@ On confirmation, update the target note:
 
 1. Append new bullet points to `## Key Takeaways` — do not reorder existing bullets
 2. Append new entries to `## Core Concepts` — do not reorder existing entries
-3. If contradictions were found, add a `## Notes` section (or append to it if it exists) documenting the tension:
+3. For qualifying notes with impact bullets to add:
+   - If `## First Order Impact` / `## Second Order Impact` already exist, append new bullets — do not reorder existing content
+   - If they do not exist, insert both sections after `## Key Takeaways` and before `## Review Questions` (or at the end if no Review Questions section exists)
+4. If contradictions were found, add a `## Notes` section (or append to it if it exists) documenting the tension:
    > As of [date], `[[source-note]]` reports [newer finding] — may supersede the claim above.
-4. Do NOT modify `## Summary`, frontmatter, or any existing content — additions only
+5. Do NOT modify `## Summary`, frontmatter, or any existing content — additions only
 
 Do not log to `kbm.log.md` — this is a vault enrichment, not a new ingest.
 
 ## Notes
 
 - Every addition must trace to a specific vault note. Never add facts from your own training data.
+- Exception: `## First Order Impact` and `## Second Order Impact` bullets may be synthesized from the target note's own content — no vault citation required. If a vault note directly supports a claim, cite it anyway.
 - If the user asks to "edit first," show them the proposed text for each addition and let them revise before applying.
 - Keep additions concise — match the style and density of the existing note.
