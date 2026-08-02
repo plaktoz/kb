@@ -27,6 +27,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 |--------------|---------|
 | `/kb-daily` | Runs the full daily pipeline in sequence: news → scrape → ingest → newsletter |
 | `/kb-newsagent` | Fetches today's top news across investment holdings and topic categories; saves URL list to `raw/url/` |
+| `/kb-ingest-pdf` | Extracts content from PDFs in `raw/pdf/`, saves each as a clean markdown file in `raw/`, moves PDF to `raw/pdf/processed/` |
 | `/kb-scrapecontent` | Scrapes URLs from `raw/url/` and saves each as a clean markdown file in `raw/` |
 | `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
