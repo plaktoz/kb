@@ -490,3 +490,4 @@
 | unknown | wiki/finance/ai-capex-roi-bifurcation-2026.md | ingest |
 | unknown | wiki/productivity/managing-office-politics-three-networks.md | ingest |
 | unknown | wiki/productivity/manager-led-ai-adoption-conversion.md | ingest |
+| 2026-08-02 | canvases/investments/2026-08-02.canvas | canvas |
