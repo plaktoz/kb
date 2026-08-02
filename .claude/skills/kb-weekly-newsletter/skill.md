@@ -30,7 +30,7 @@ Open `kbm.log.md`. Collect all rows where:
 - Activity = `ingest`
 - Date is **more than 7 days ago** and **within the last 90 days**
 
-For each matched filename, search `wiki/` recursively to locate the file. Read its frontmatter and content. This is your vault pool.
+For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file. Read its frontmatter and content. This is your vault pool.
 
 ## Step 3.5 — Portfolio Pulse (investment digest)
 
@@ -99,7 +99,7 @@ Use relative Markdown paths from the output file location:
 Append a row to `kbm.log.md`:
 
 ```
-| YYYY-MM-DD | YYYY-WNN-weekly.md | newsletter |
+| YYYY-MM-DD | weekly-update/YYYY-MM/YYYY-WNN-weekly.md | newsletter |
 ```
 
-Use today's date and the actual output filename.
+Use today's date and the full relative path of the actual output file.

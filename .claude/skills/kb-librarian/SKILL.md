@@ -158,38 +158,7 @@ If no findings: write the summary block only with zeroes and a note "No duplicat
 
 ## Phase 5: Log Rebuild
 
-### Step 1: Archive the current log
-
-Copy `kbm.log.md` to `kbm.log.archive-YYYY-MM-DD.md` in the repo root before making any changes.
-
-### Step 2: Rebuild from filesystem
-
-Collect entries from two sources:
-
-**Ingest entries** — walk `wiki/` recursively, excluding `wiki/archived/`. For each `.md` file:
-- Date: read `date_consumed` from frontmatter. If missing or unparseable, use `unknown`.
-- Filename: the bare filename only (no path).
-- Activity: `ingest`
-
-**Newsletter entries** — walk `daily-update/` recursively. For each `.md` file:
-- Date: extract from filename prefix `YYYY-MM-DD`.
-- Filename: the bare filename only (no path).
-- Activity: `newsletter`
-
-### Step 3: Write the new `kbm.log.md`
-
-Sort all collected entries by date ascending (put `unknown` dates last). Write:
-
-```markdown
-# KBM Activity Log
-
-| Date | File | Activity |
-|------|------|----------|
-| YYYY-MM-DD | filename.md | ingest |
-| YYYY-MM-DD | filename.md | newsletter |
-```
-
-Do not include any other activity types.
+Run `/kb-log-rebuild`. Follow that skill exactly.
 
 ---
 

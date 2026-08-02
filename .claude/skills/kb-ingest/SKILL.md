@@ -115,8 +115,10 @@ Each answer should be 1–2 sentences, drawn only from the article.
 2. Append a row to `kbm.log.md`:
 
 ```
-| YYYY-MM-DD | filename.md | ingest |
+| YYYY-MM-DD | wiki/<category>/note-slug.md | ingest |
 ```
+
+Use the full relative path of the wiki note created (e.g. `wiki/science/entropy.md`), not the raw source filename.
 
 ## Expected outcome
 

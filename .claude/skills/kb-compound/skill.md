@@ -19,7 +19,7 @@ Open `kbm.log.md`. Collect all rows where:
 - Activity = `ingest`
 - Date falls within this week's Monday–Sunday range
 
-For each matched filename, search `wiki/` recursively to locate the file. Read it fully. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
+For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file. Read it fully. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
 
 ## Step 3 — Identify recurring themes
 
@@ -126,7 +126,7 @@ After all changes, print a compact summary:
 Append a row to `kbm.log.md` for each topic file modified or created:
 
 ```
-| YYYY-MM-DD | filename.md | compound |
+| YYYY-MM-DD | topics/filename.md | compound |
 ```
 
-Use today's date and the actual filename (e.g. `ai-agents.md`).
+Use today's date and the full relative path of the actual topic file (e.g. `topics/ai-agents.md`).

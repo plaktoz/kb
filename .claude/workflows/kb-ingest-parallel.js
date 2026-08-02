@@ -97,7 +97,7 @@ phase('Ingest')
 const results = await parallel(
   batches.map((batch, i) => () =>
     agent(
-      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the ${sourceDir} directory:\n${batch.join('\n')}\n\nFollow these per-file instructions exactly:\n${skillContent}\n\nWiki categories reference:\n${catContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n${moveInstruction}\n- Return one log_row per processed file: date (YYYY-MM-DD, today's date), filename (the raw source filename), activity ("ingest").`,
+      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the ${sourceDir} directory:\n${batch.join('\n')}\n\nFollow these per-file instructions exactly:\n${skillContent}\n\nWiki categories reference:\n${catContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n${moveInstruction}\n- Return one log_row per processed file: date (YYYY-MM-DD, today's date), filename (the full relative path of the wiki note created, e.g. "wiki/<category>/note-slug.md"), activity ("ingest").`,
       { label: `ingest-batch-${i + 1}`, schema: WORKER_SCHEMA }
     )
   )
