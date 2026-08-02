@@ -12,6 +12,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
   - `processed/` — post-ingest archive; articles moved here after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-librarian
+- `topics/` — cross-cutting synthesis notes maintained by `/kb-compound`; one file per recurring theme (e.g. `topics/ai-agents.md`)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
 - `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`)
@@ -38,6 +39,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
 | `/kb-note-deepen` | Enriches an existing wiki note with new insights and links found in newer vault notes |
 | `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
+| `/kb-canvas <topic>` | Builds an Obsidian canvas for the given topic — finds related wiki notes, reasons about relationships, and saves a versioned `.canvas` file to `canvases/<topic-slug>/` |
 | `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
 
 ### Parallel skills (opt-in)
@@ -76,7 +78,7 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`
+Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.

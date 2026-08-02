@@ -14,7 +14,7 @@ Open `kbm.log.md` and collect every row where:
 - Activity column = `ingest`
 - Date column = today's date (YYYY-MM-DD)
 
-For each matched filename, search `wiki/` recursively to locate the file (e.g. `find wiki/ -name "filename.md"`). Read its frontmatter and content.
+For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file (e.g. `find wiki/ -name "filename.md"`). Read its frontmatter and content.
 
 If no `ingest` rows exist for today, create the output file with this content and stop:
 
@@ -81,7 +81,7 @@ Generate the output using exactly this structure:
 Append a row to `kbm.log.md`:
 
 ```
-| YYYY-MM-DD | YYYY-MM-DD.md | newsletter |
+| YYYY-MM-DD | daily-update/YYYY-MM/YYYY-MM-DD.md | newsletter |
 ```
 
-Use the actual output filename (e.g. `2026-07-26-2.md` if that was the numbered variant created).
+Use the full relative path of the actual output file (e.g. `daily-update/2026-07/2026-07-26-2.md` if that was the numbered variant created).

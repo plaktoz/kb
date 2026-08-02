@@ -15,7 +15,7 @@ Open `kbm.log.md`. Scan every row and collect all rows where:
 
 Do NOT use `find -mtime` or directory listing to find articles — that catches edits to old notes, not genuine new ingests. `kbm.log.md` is the authoritative source.
 
-From each matching row, extract the filename from the **File** column. Resolve it to its full path inside `wiki/`.
+From each matching row, extract the filename from the **File** column. If it starts with `wiki/`, use it directly as the file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively: `find wiki/ -name "<filename>"`. Use the resolved path.
 
 Deduplicate: if the same filename appears more than once in the log, count it only once (keep the latest row).
 

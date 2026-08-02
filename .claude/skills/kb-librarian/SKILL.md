@@ -168,12 +168,12 @@ Collect entries from two sources:
 
 **Ingest entries** — walk `wiki/` recursively, excluding `wiki/archived/`. For each `.md` file:
 - Date: read `date_consumed` from frontmatter. If missing or unparseable, use `unknown`.
-- Filename: the bare filename only (no path).
+- Filename: the full relative path from the repo root (e.g. `wiki/science/entropy.md`), not the bare filename.
 - Activity: `ingest`
 
 **Newsletter entries** — walk `daily-update/` recursively. For each `.md` file:
 - Date: extract from filename prefix `YYYY-MM-DD`.
-- Filename: the bare filename only (no path).
+- Filename: the full relative path from the repo root (e.g. `daily-update/2026-08/2026-08-02.md`), not the bare filename.
 - Activity: `newsletter`
 
 ### Step 3: Write the new `kbm.log.md`
@@ -185,8 +185,8 @@ Sort all collected entries by date ascending (put `unknown` dates last). Write:
 
 | Date | File | Activity |
 |------|------|----------|
-| YYYY-MM-DD | filename.md | ingest |
-| YYYY-MM-DD | filename.md | newsletter |
+| YYYY-MM-DD | wiki/<category>/note-slug.md | ingest |
+| YYYY-MM-DD | daily-update/YYYY-MM/YYYY-MM-DD.md | newsletter |
 ```
 
 Do not include any other activity types.
