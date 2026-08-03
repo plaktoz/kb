@@ -2,74 +2,66 @@
 
 ## 🚀 Technology
 
-- **SpaceX's IPO fuels a new wave of space startups**: Fresh capital and public-market attention are pulling more founders and funding into commercial space ventures.
-  URL: https://fortune.com/2026/08/02/spacex-ipo-wave-space-startups-fund-raising-commercial-market
+- **The global memory shortage hits the MacBook Air**: RAM and NAND price spikes from the AI buildout are now bleeding into consumer hardware pricing, a tangible sign of the AI infrastructure squeeze reaching everyday buyers.
+  URL: https://techcrunch.com/2026/08/02/the-global-memory-shortage-hits-the-macbook-air
 
-- **New job titles emerging because of AI**: A breakdown of novel AI-era roles (Agent Orchestration Engineer, AI FinOps, Model Portfolio Manager) showing how companies are restructuring around AI as an operational function.
-  URL: https://douglevin.substack.com/p/new-titles-because-of-ai-and-beyond
+- **Sam Altman and AI's decel debate**: A look at the growing rift between AI accelerationists and "decel" critics as OpenAI faces mounting competitive pressure from Anthropic.
+  URL: https://techcrunch.com/2026/08/02/sam-altman-and-ais-decel-debate
 
-- **Startup eyes AI search boom as VC funding slows**: A Gurugram startup building AI-search-optimization tools illustrates the split between AI hype and a broader venture funding slowdown.
-  URL: https://yourstory.com/2026/08/startup-eyes-ai-search-boom-vc-slowdown-tests-startups
+- **Is paying artists enough to convince them to embrace AI?**: A new wave of "ethical" AI video startups like Pippa are testing whether artist royalties can defuse the backlash over generative AI training data.
+  URL: https://www.theverge.com/ai-artificial-intelligence/974018/pippa-seedance-artist-royalties
 
 ## 📊 Finance
 
-- **Weekly look at the global economy and markets**: El-Erian's rundown of equity dispersion, bond yield surges, and continued hyperscaler capex increases shaping market direction.
-  URL: https://mohamedelerian.substack.com/p/the-weekly-look-at-the-global-economy-b6c
+- **AstraZeneca in talks with Bristol Myers Squibb on $400 billion megadeal**: A potential merger would create one of the largest pharmaceutical companies in history, per an FT report.
+  URL: https://www.cnbc.com/2026/08/02/astrazeneca-and-bristol-myers-squibb-mull-400-billion-deal-report-.html
 
-- **Dow futures react as Trump calls off Iran strikes; big earnings week looms**: Geopolitical de-escalation and a heavy earnings slate (SpaceX, AMD, Eli Lilly) set up a pivotal trading week.
-  URL: https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-spacex-amd-sandisk-eli-lilly-earnings-loom
+- **US Stock Market Trading Outlook For August 3-7**: A week-ahead breakdown of earnings catalysts and seasonal patterns for the Dow, S&P 500, and Nasdaq heading into August.
+  URL: https://www.goodreturns.in/news/us-stock-market-trading-outlook-august-3-7-is-august-bearish-or-bullish-for-nasdaq-dow-jones-sp-500-1525733.html
 
-- **A rare stock market pattern last seen 5 times since 1871**: Historical analysis of a valuation/behavior pattern in the current market and what it has historically preceded.
-  URL: https://finance.yahoo.com/markets/stocks/articles/stock-market-doing-something-observed-105600955.html
+- **Fiverr stock today: AI is decimating the gig economy**: Fiverr's Q2 2026 collapse is being read as fresh evidence that generative AI is displacing freelance marketplace demand faster than expected.
+  URL: https://www.fastcompany.com/91581820/fiverr-stock-today-fvrr-freelance-marketplace-collapse-proves-ai-is-decimating-gig-economy-2026-q2-earnings
 
 ## ⚡ Productivity
 
-- **Deep work strategies for freelancers**: Practical breakdown of Cal Newport's Deep Work framework, including the "20 percent less rule" and ritualizing focus sessions.
-  URL: https://www.freelancermap.com/blog/freelance-productivity-management-tips
+- **15 management tools leaders rely on daily**: Executives share the simple prioritization habits and lightweight systems they actually use over complex software.
+  URL: https://www.fastcompany.com/91571024/15-management-tools-leaders-rely-on-daily
 
-- **15 research-based ways to improve work performance**: Covers prioritization frameworks (Eisenhower Matrix), time-blocking, and how to triage competing demands.
-  URL: https://www.confirm.com/blog/ways-to-improve-work-performance
+- **How AI is quietly exhausting you—and what to do about it**: BCG research cited shows productivity peaks at two AI tools and drops sharply after four, as tool-switching overhead outweighs the gains.
+  URL: https://www.fastcompany.com/91523806/how-ai-is-quietly-exhausting-you-and-what-to-do-about-it
 
-- **Time management tips for enhancing workplace productivity**: Time-blocking, realistic deadlines, and daily routine design for sustained focus.
-  URL: https://www.insidesalesexpert.com/blog/Time%20Management%20Tips%20for%20Work:%20Enhancing%20Productivity%20and%20Efficiency
+- **Workplace AI can damage productivity and trust, study finds**: Stanford and BetterUp Labs research finds 40% of US employees encountered low-quality AI-generated "workslop" in the past month, damaging trust between colleagues.
+  URL: https://www.computing.co.uk/news/2025/workplace-ai-damages-productivity-and-trust
 
 ## 🧠 Learning
 
-- **How to learn a new skill effectively, step by step**: A structured framework for skill acquisition citing NIH research on neuroplasticity and active recall.
-  URL: https://nibble-app.com/blog/how-to-learn-a-new-skill
+- **Expertise expert offers 8 tips for learning a new skill**: UNC professor Jeffrey Greene translates Anders Ericsson's deliberate practice research into concrete steps: find a guide, remove distractions, and practice deliberately in short, focused bursts.
+  URL: https://www.unc.edu/discover/expertise-expert-offers-8-tips-for-learning-a-new-skill
 
-- **Strategies to support self-directed learning in online courses**: Webinar recap on a research-backed instructional model (videos, reflective prompts, peer interaction) for self-directed learning.
-  URL: https://postseccollab.org/strategies-to-support-self-directed-learning-in-online-college-courses-webinar-recap
+- **New Research on the Link Between Learning and Innovation**: HBR research finds high-performing teams fail at innovation not from lack of effort but from blending incompatible learning activities at the wrong times.
+  URL: https://hbr.org/2025/07/new-research-on-the-link-between-learning-and-innovation
 
-- **15 best online learning platforms for professionals in 2026**: Comparison of Coursera, edX, LinkedIn Learning, and others by use case, pricing, and certification value.
-  URL: https://buddyboss.com/blog/best-online-learning-platforms-for-professionals-and-learners
+- **AI is killing student writing. Here's how Alpha is using AI to save it**: An adaptive, mastery-based AI writing tool gives students far more practice reps with immediate targeted feedback than traditional essay grading cycles.
+  URL: https://austinscholar.substack.com/p/austin-scholar-227-ai-is-killing
 
-## ❤️ Health
+## 🩺 Health
 
-- **Study tracks diets by peering into the "black box of nutrition"**: Wastewater-surveillance technology repurposed to track population-level dietary habits and food scarcity patterns.
-  URL: https://www.northcarolinahealthnews.org/2026/08/02/peering-into-the-black-box-of-nutrition-study-tracks-diets
+- **What Is 'Biblical Eating'? Inside TikTok's Latest Whole-Food Obsession**: A viral minimally-processed-food trend is drawing fresh scrutiny from dietitians over its actual nutritional claims.
+  URL: https://www.healthline.com/health-news/biblical-eating-inside-tiktok-whole-food-obsession
 
-- **Medical schools cautiously adapt nutrition training amid HHS push**: How medical schools are responding to federal pressure to add nutrition education while avoiding "wellness creep."
-  URL: https://www.statnews.com/2026/07/27/kennedy-medical-school-nutrition-training-cautious-adoption
+- **This once-a-week workout may help cut belly fat, study shows**: New research suggests a single weekly resistance session can meaningfully reduce visceral fat, challenging assumptions about required workout frequency.
+  URL: http://www.sciencedaily.com/releases/2026/08/260801042831.htm
 
-- **Scientists find why poor sleep may harm some brains more than others**: New research linking the AQP4 gene variant to faster grey-matter loss under short sleep, with Alzheimer's implications.
-  URL: https://www.sciencedaily.com/releases/2026/07/260729051529.htm
-
-## 🎯 Strategy
-
-- **How Elon Musk uses first-principles thinking to challenge industries**: Breakdown of first-principles reasoning as a strategic tool for questioning default assumptions.
-  URL: https://themindtools.com/business-mental-models/how-elon-musk-uses-first-principles-thinking-to-destroy-competition
-
-- **A curated library of mental models and critical-thinking frameworks**: An open-source collection of 39 decision-making and strategy frameworks (Munger, Meadows, Kahneman, Boyd/OODA) packaged for structured reasoning.
-  URL: https://github.com/tjboudreaux/cc-thinking-skills
+- **Scientists discover how obesity may fuel Alzheimer's disease**: Houston Methodist researchers identify a fat-molecule pathway (phosphatidylethanolamines) that travels from body fat to the brain and promotes amyloid buildup — and show correcting the imbalance improved memory in models.
+  URL: https://www.sciencedaily.com/releases/2026/07/260729051531.htm
 
 ## 📈 My Holdings
 
-- **Microsoft's cloud and AI strength fuels Q4 results (MSFT)**: Microsoft's official Q4 FY2026 earnings release highlighting cloud and AI-driven revenue growth.
-  URL: https://news.microsoft.com/source/2026/07/29/microsoft-cloud-and-ai-strength-fuels-fourth-quarter-results-4
+- **Microsoft's new AI playbook: Satya Nadella wants enterprises to stop outsourcing their intelligence** (MSFT): Fresh off fiscal 2026 results with Azure past $100B in annual revenue, Nadella lays out a vision where every company runs its own AI-powered "learning machine."
+  URL: https://www.storyboard18.com/brand-makers/microsofts-new-ai-playbook-satya-nadella-wants-enterprises-to-stop-outsourcing-their-intelligence-106176.htm
 
-- **IBM to acquire HRL Laboratories to power its quantum roadmap (IBM)**: IBM's acquisition of the Boeing/GM-owned research lab adds silicon-spin qubit expertise to its quantum hardware strategy.
-  URL: https://newsroom.ibm.com/2026-07-23-ibm-to-acquire-hrl-laboratories-to-power-the-future-of-quantum
+- **Why IBM (IBM) Stock Is Up Today** (IBM): Shares jumped 5.6% after IBM and HSBC announced the first successful trial of quantum-enabled algorithmic trading, improving bond trade outcome prediction by up to 34%.
+  URL: https://www.tradingview.com/news/stockstory:ee56a23ab094b:0-why-ibm-ibm-stock-is-up-today
 
-- **Financial stocks are crushing it — why the breakout rally may just be starting (S&P 500 / broad-market ETFs)**: Sector-level analysis of the financials rally within the broader S&P 500, relevant to S&P-500-tracking holdings.
-  URL: https://www.morningstar.com/news/marketwatch/202608025/financial-stocks-are-crushing-it-these-charts-show-why-the-breakout-rally-may-have-just-begun
+- **US Futures Advance Ahead of Fresh Earnings** (S&P 500 / momentum & world-index theme — relevant to CSPX, SPMO, IWMO, VWRA): A packed earnings week including Palantir, AMD, and SpaceX is set to test whether the AI trade can extend its record run.
+  URL: https://tradingeconomics.com/united-states/stock-market/news/571908
