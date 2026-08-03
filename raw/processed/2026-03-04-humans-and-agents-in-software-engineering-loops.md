@@ -1,32 +1,45 @@
-# Humans and Agents in Software Engineering Loops
-
-source_url: https://martinfowler.com/articles/exploring-gen-ai/human-agent-loops.html
-
+---
+source_url: https://martinfowler.com/articles/exploring-gen-ai/humans-and-agents.html
+author: Kief Morris
+date: 2026-03-04
 ---
 
-Author: Kief Morris
-Published: March 4, 2026
-Source: martinfowler.com
+# Humans and Agents in Software Engineering Loops
 
-This article introduces the concept of "harness engineering" — the practice of designing software systems where AI agents operate within loops that humans can monitor, correct, and guide without being in every individual step.
+Kief Morris argues against both extremes of AI-assisted development — pure vibe coding with no human oversight, and micromanaging every line of agent-generated code. Instead, he proposes a third position: humans working "on the loop."
 
-The core model: "on the loop" rather than "in the loop." Humans set goals, define guardrails, and review outputs periodically — rather than approving every AI action. This enables agentic systems to operate at speed while preserving human accountability.
+## The Two Core Loops
 
-Key concepts:
+Morris distinguishes between:
+- **The "why" loop** — iterating on ideas to produce working software (humans always own this)
+- **The "how" loop** — the mechanics of building software through code, tests, specs, and tooling
 
-**Agentic flywheel**: Iterative loops where agents execute tasks, evaluate results, self-correct, and request human input only at decision points or when confidence is low.
+The how loop contains nested sub-loops: outer loops handle features, middle loops handle stories, inner loops handle code generation.
 
-**Harness design principles:**
-- Define clear entry/exit criteria for human review
-- Instrument loops with observability (logging, artifact snapshots)
-- Grade confidence explicitly — agents should signal uncertainty rather than guess silently
-- Design for human interruption at any point
+## Three Stances
 
-**Role of the human in the loop:**
-- Not a bottleneck but a governor
-- Provides goal-level direction, not step-level supervision
-- Reviews artifacts (diffs, summaries, outputs) rather than watching execution
+| Stance | Description |
+|--------|-------------|
+| **Humans outside** | Vibe coding — agents run the how loop entirely |
+| **Humans in** | Humans inspect/gate every agent output; creates bottlenecks |
+| **Humans on** | Humans build and maintain the *harness* that guides agents |
 
-Morris argues that "on the loop" is the right mental model for complex engineering workflows — distinguishing it from fully automated pipelines and from the older "human in the loop" model that requires step-by-step approval.
+## The "On the Loop" Concept
 
-This framing has particular relevance for software delivery pipelines, CI/CD, infrastructure-as-code, and AI coding assistants.
+Rather than fixing individual artefacts agents produce, the "on the loop" approach means improving the **harness** — the collection of specs, quality checks, and workflow guidance controlling agent behavior. Morris references this as related to "Harness Engineering."
+
+The key distinction: when an agent produces unsatisfactory output, *in-the-loop* humans fix the artefact; *on-the-loop* humans fix the system that produced it.
+
+## The Agentic Flywheel
+
+Morris describes an escalating improvement cycle:
+1. Agents evaluate their own loop performance using tests and evaluations
+2. Agents recommend harness improvements
+3. Humans review, then progressively automate approval of low-risk changes
+4. Production data, user journeys, and metrics feed richer signals back into the loop
+
+The result, he argues, won't be a one-off solution but potentially "anti-fragile systems that continuously improve themselves."
+
+## On Internal vs. External Quality
+
+Morris acknowledges that internal code quality matters even with AI — not for developer experience per se, but because cleaner codebases let LLMs "work faster and spiral less," reducing time and cost.
