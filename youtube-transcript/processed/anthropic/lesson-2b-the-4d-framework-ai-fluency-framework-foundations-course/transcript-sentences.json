@@ -1,0 +1,232 @@
+[
+  {
+    "text": "Hi, my name is Rick Dacon from the Ringling College of Art and Design.",
+    "start": "00:00:11",
+    "end": "00:00:17"
+  },
+  {
+    "text": "Now that we've explored what AI fluency means and the different ways we interact with AI, let's dive into the core competencies that help us navigate AI collaboration effectively, efficiently, ethically, and safely.",
+    "start": "00:00:17",
+    "end": "00:00:30"
+  },
+  {
+    "text": "No matter how you're working with AI, whether through automation, augmentation, or agency, there are four essential competencies that make all the difference.",
+    "start": "00:00:29",
+    "end": "00:00:39"
+  },
+  {
+    "text": "We call them the four Ds: delegation, description, discernment, and diligence.",
+    "start": "00:00:39",
+    "end": "00:00:45"
+  },
+  {
+    "text": "First is delegation, which focuses on the big picture.",
+    "start": "00:00:45",
+    "end": "00:00:50"
+  },
+  {
+    "text": "What are you trying to accomplish?",
+    "start": "00:00:50",
+    "end": "00:00:52"
+  },
+  {
+    "text": "What kinds of work are involved?",
+    "start": "00:00:52",
+    "end": "00:00:54"
+  },
+  {
+    "text": "What work should you handle yourself?",
+    "start": "00:00:54",
+    "end": "00:00:56"
+  },
+  {
+    "text": "And where might AI be helpful?",
+    "start": "00:00:56",
+    "end": "00:01:00"
+  },
+  {
+    "text": "Think about a research project you're working on.",
+    "start": "00:00:58",
+    "end": "00:01:01"
+  },
+  {
+    "text": "You might decide to have your AI assistant review lengthy documents and data, then engage in a thoughtful discussion about the implications and findings, but reserve the critical analysis and final conclusions for yourself.",
+    "start": "00:01:01",
+    "end": "00:01:14"
+  },
+  {
+    "text": "To delegate effectively, you need to understand your goal and the problem you're solving.",
+    "start": "00:01:14",
+    "end": "00:01:22"
+  },
+  {
+    "text": "Recognize what AI can and can't do well.",
+    "start": "00:01:22",
+    "end": "00:01:25"
+  },
+  {
+    "text": "And lastly, thoughtfully divide the work between you and the AI.",
+    "start": "00:01:25",
+    "end": "00:01:28"
+  },
+  {
+    "text": "Delegation isn't just about offloading tasks.",
+    "start": "00:01:28",
+    "end": "00:01:32"
+  },
+  {
+    "text": "It's about having a clear vision and strategically choosing how AI fits into your process.",
+    "start": "00:01:32",
+    "end": "00:01:39"
+  },
+  {
+    "text": "This thoughtful approach is essential for both effective and efficient AI collaboration.",
+    "start": "00:01:39",
+    "end": "00:01:44"
+  },
+  {
+    "text": "Next comes description, which focuses on clear communication with AI.",
+    "start": "00:01:44",
+    "end": "00:01:48"
+  },
+  {
+    "text": "Consider the difference between vaguely stating, \"Make me a logo.",
+    "start": "00:01:48",
+    "end": "00:01:55"
+  },
+  {
+    "text": "\" versus describing your company's values, target audience, preferred colors, style references, and so on.",
+    "start": "00:01:55",
+    "end": "00:02:00"
+  },
+  {
+    "text": "Or if you're using an AI as a tutor, you might take the extra step to specify, \"Don't tell me the answer, just help me work through this problem step by step so I can better understand the concept.",
+    "start": "00:02:00",
+    "end": "00:02:12"
+  },
+  {
+    "text": "\" Description goes beyond just writing prompts.",
+    "start": "00:02:12",
+    "end": "00:02:13"
+  },
+  {
+    "text": "It's about having detailed, contextrich conversations that establish what you're hoping to achieve in the format of the output, how you want the AI to approach the task, the context and information that the AI might need to best work with you on this task, and the tone and style of interaction.",
+    "start": "00:02:13",
+    "end": "00:02:36"
+  },
+  {
+    "text": "Effective description means articulating your needs and vision in a way that sets up both you and the AI for greatest collaborative success.",
+    "start": "00:02:34",
+    "end": "00:02:44"
+  },
+  {
+    "text": "The third D is discernment, which involves thoughtfully evaluating what AI gives you.",
+    "start": "00:02:44",
+    "end": "00:02:51"
+  },
+  {
+    "text": "Let's say you've asked an AI assistant to suggest a marketing strategy.",
+    "start": "00:02:51",
+    "end": "00:02:56"
+  },
+  {
+    "text": "Your discernment comes into play as you assess, are the facts accurate?",
+    "start": "00:02:56",
+    "end": "00:03:00"
+  },
+  {
+    "text": "Does the reasoning make sense?",
+    "start": "00:03:00",
+    "end": "00:03:02"
+  },
+  {
+    "text": "Do the recommendations align with your brand values and audience?",
+    "start": "00:03:02",
+    "end": "00:03:08"
+  },
+  {
+    "text": "And most importantly, does this output actually help you move forward?",
+    "start": "00:03:08",
+    "end": "00:03:12"
+  },
+  {
+    "text": "Discernment draws upon your own expertise in a domain and requires developing the judgment and critical insight to separate what's useful from what's not and to recognize when AI outputs need refinement or should be set aside entirely.",
+    "start": "00:03:12",
+    "end": "00:03:26"
+  },
+  {
+    "text": "Most of our interactions with AI involve small loops of description and discernment, describing what we need, evaluating what we get, refining our request, and so on.",
+    "start": "00:03:26",
+    "end": "00:03:37"
+  },
+  {
+    "text": "We'll explore this more deeply later in the course.",
+    "start": "00:03:35",
+    "end": "00:03:38"
+  },
+  {
+    "text": "Finally, there's diligence, which focuses on responsible AI interactions.",
+    "start": "00:03:38",
+    "end": "00:03:46"
+  },
+  {
+    "text": "For example, if you are using AI to help write job descriptions or review applications, how are you ensuring fairness and controlling for potential biases?",
+    "start": "00:03:44",
+    "end": "00:03:53"
+  },
+  {
+    "text": "When making important decisions with AI assistance, how are you verifying the accuracy of the information presented to you?",
+    "start": "00:03:53",
+    "end": "00:04:02"
+  },
+  {
+    "text": "Are you protecting sensitive data?",
+    "start": "00:04:02",
+    "end": "00:04:04"
+  },
+  {
+    "text": "Have you considered how to be transparent about the involvement of AI?",
+    "start": "00:04:04",
+    "end": "00:04:08"
+  },
+  {
+    "text": "Are you willing to be accountable for the AI assisted work you have done?",
+    "start": "00:04:08",
+    "end": "00:04:15"
+  },
+  {
+    "text": "Diligence means taking ownership of your AI assisted work and being willing to stand behind final products created using AI.",
+    "start": "00:04:13",
+    "end": "00:04:21"
+  },
+  {
+    "text": "Diligence is critical for safe and ethical AI collaboration.",
+    "start": "00:04:21",
+    "end": "00:04:28"
+  },
+  {
+    "text": "To recap, AI fluency means developing practical skills, knowledge, insights, and values that help you use AI effectively, efficiently, ethically, and safely.",
+    "start": "00:04:28",
+    "end": "00:04:40"
+  },
+  {
+    "text": "AI fluency includes four key competencies.",
+    "start": "00:04:40",
+    "end": "00:04:42"
+  },
+  {
+    "text": "Delegation to decide when and how to use AI, description to communicate clearly with AI, discernment to evaluate AI outputs, and diligence to use AI responsibly.",
+    "start": "00:04:42",
+    "end": "00:04:54"
+  },
+  {
+    "text": "What makes these competencies so valuable is that they aren't tied to specific AI tools or techniques that might become outdated.",
+    "start": "00:04:54",
+    "end": "00:05:04"
+  },
+  {
+    "text": "Instead, they're fundamental skills that will help you adapt and grow alongside this rapidly evolving technology.",
+    "start": "00:05:01",
+    "end": "00:05:11"
+  }
+]

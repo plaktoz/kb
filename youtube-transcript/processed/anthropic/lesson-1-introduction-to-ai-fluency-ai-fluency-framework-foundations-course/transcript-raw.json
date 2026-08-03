@@ -1,0 +1,532 @@
+[
+  {
+    "text": "I'm Joe Feller. I'm a professor at the",
+    "start": 0,
+    "duration": 3.76
+  },
+  {
+    "text": "Cork University Business School. My name",
+    "start": 1.92,
+    "duration": 4.399
+  },
+  {
+    "text": "is Drew Bent and I'm a teacher,",
+    "start": 3.76,
+    "duration": 4.32
+  },
+  {
+    "text": "programmer, and a member of technical",
+    "start": 6.319,
+    "duration": 3.761
+  },
+  {
+    "text": "staff at Enthropic. My name is Rick",
+    "start": 8.08,
+    "duration": 3.76
+  },
+  {
+    "text": "Dacon from the Ringling College of Art",
+    "start": 10.08,
+    "duration": 3.92
+  },
+  {
+    "text": "and Design. I'm Maggie Vo and I work on",
+    "start": 11.84,
+    "duration": 3.679
+  },
+  {
+    "text": "the education research team at",
+    "start": 14,
+    "duration": 4.519
+  },
+  {
+    "text": "Enthropic.",
+    "start": 15.519,
+    "duration": 3
+  },
+  {
+    "text": "Let's begin our exploration of the AI",
+    "start": 22.4,
+    "duration": 5.48
+  },
+  {
+    "text": "fluency framework.",
+    "start": 24.4,
+    "duration": 3.48
+  },
+  {
+    "text": "The focus of this course is not really",
+    "start": 30.08,
+    "duration": 4.96
+  },
+  {
+    "text": "about AI as a technology. Instead, it's",
+    "start": 32.079,
+    "duration": 5.681
+  },
+  {
+    "text": "mostly about you and I, us humans, and",
+    "start": 35.04,
+    "duration": 5.24
+  },
+  {
+    "text": "how we interact and collaborate with AI",
+    "start": 37.76,
+    "duration": 4.639
+  },
+  {
+    "text": "systems. It's about imagining",
+    "start": 40.28,
+    "duration": 4.76
+  },
+  {
+    "text": "possibilities that don't treat AI as",
+    "start": 42.399,
+    "duration": 4.961
+  },
+  {
+    "text": "some sort of next level spellch checker,",
+    "start": 45.04,
+    "duration": 5.039
+  },
+  {
+    "text": "but instead as a trusted partner for",
+    "start": 47.36,
+    "duration": 4.719
+  },
+  {
+    "text": "doing creative and innovative problems",
+    "start": 50.079,
+    "duration": 4.8
+  },
+  {
+    "text": "solving work. And it's about approaching",
+    "start": 52.079,
+    "duration": 5.401
+  },
+  {
+    "text": "these possibilities confidently and",
+    "start": 54.879,
+    "duration": 5.921
+  },
+  {
+    "text": "capably. Let's face it, the AI world",
+    "start": 57.48,
+    "duration": 5.879
+  },
+  {
+    "text": "moves extremely quickly. And it's very",
+    "start": 60.8,
+    "duration": 4.639
+  },
+  {
+    "text": "hard to know where to start or how to",
+    "start": 63.359,
+    "duration": 4.401
+  },
+  {
+    "text": "keep up unless you have a grounding",
+    "start": 65.439,
+    "duration": 4.72
+  },
+  {
+    "text": "fundamental framework to guide you and",
+    "start": 67.76,
+    "duration": 4.08
+  },
+  {
+    "text": "get you past that next prompt",
+    "start": 70.159,
+    "duration": 3.761
+  },
+  {
+    "text": "engineering fad. That's why we're",
+    "start": 71.84,
+    "duration": 4.639
+  },
+  {
+    "text": "publishing this course. In this course,",
+    "start": 73.92,
+    "duration": 5.76
+  },
+  {
+    "text": "we explore AI fluency, our ability to",
+    "start": 76.479,
+    "duration": 5.721
+  },
+  {
+    "text": "engage with AI systems in ways that are",
+    "start": 79.68,
+    "duration": 6.4
+  },
+  {
+    "text": "effective, efficient, ethical, and safe.",
+    "start": 82.2,
+    "duration": 6.2
+  },
+  {
+    "text": "You'll learn plenty of practical skills,",
+    "start": 86.08,
+    "duration": 4.32
+  },
+  {
+    "text": "but it isn't just another collection of",
+    "start": 88.4,
+    "duration": 4.56
+  },
+  {
+    "text": "technical definitions or prompting tips",
+    "start": 90.4,
+    "duration": 5.359
+  },
+  {
+    "text": "that may be outdated next month. This",
+    "start": 92.96,
+    "duration": 5.68
+  },
+  {
+    "text": "course is about fundamentally shifting",
+    "start": 95.759,
+    "duration": 5.281
+  },
+  {
+    "text": "how we approach AI.",
+    "start": 98.64,
+    "duration": 5.6
+  },
+  {
+    "text": "We want to change how we think about AI",
+    "start": 101.04,
+    "duration": 5.96
+  },
+  {
+    "text": "so that we can learn how to think with",
+    "start": 104.24,
+    "duration": 6.159
+  },
+  {
+    "text": "AI. Over the last few years, AI has",
+    "start": 107,
+    "duration": 5.52
+  },
+  {
+    "text": "transformed from specialized",
+    "start": 110.399,
+    "duration": 4.641
+  },
+  {
+    "text": "technologies to interactive systems that",
+    "start": 112.52,
+    "duration": 5.4
+  },
+  {
+    "text": "millions use daily at school, at work,",
+    "start": 115.04,
+    "duration": 6.64
+  },
+  {
+    "text": "and at home. This transformation creates",
+    "start": 117.92,
+    "duration": 6.04
+  },
+  {
+    "text": "both opportunities and",
+    "start": 121.68,
+    "duration": 4.56
+  },
+  {
+    "text": "uncertainty. We see organizations",
+    "start": 123.96,
+    "duration": 5.639
+  },
+  {
+    "text": "adopting AI without clear strategies. We",
+    "start": 126.24,
+    "duration": 5.44
+  },
+  {
+    "text": "watch people growing frustrated with",
+    "start": 129.599,
+    "duration": 3.801
+  },
+  {
+    "text": "systems that they don't fully",
+    "start": 131.68,
+    "duration": 4.4
+  },
+  {
+    "text": "understand. And we're all experiencing a",
+    "start": 133.4,
+    "duration": 6.6
+  },
+  {
+    "text": "widening gap between what's possible and",
+    "start": 136.08,
+    "duration": 6.6
+  },
+  {
+    "text": "what feels comfortable and",
+    "start": 140,
+    "duration": 5.68
+  },
+  {
+    "text": "intuitive. This course exists to help us",
+    "start": 142.68,
+    "duration": 4.8
+  },
+  {
+    "text": "bridge this gap",
+    "start": 145.68,
+    "duration": 3.919
+  },
+  {
+    "text": "together. Here's the journey we'll take",
+    "start": 147.48,
+    "duration": 4.28
+  },
+  {
+    "text": "across this course. First, we'll give an",
+    "start": 149.599,
+    "duration": 4.561
+  },
+  {
+    "text": "overview of the AI fluency framework, a",
+    "start": 151.76,
+    "duration": 4.32
+  },
+  {
+    "text": "model for human AI interaction that we",
+    "start": 154.16,
+    "duration": 4.24
+  },
+  {
+    "text": "have found useful and powerful. We'll",
+    "start": 156.08,
+    "duration": 4.08
+  },
+  {
+    "text": "discuss the ways we interact with AI",
+    "start": 158.4,
+    "duration": 4.08
+  },
+  {
+    "text": "systems and four core competencies which",
+    "start": 160.16,
+    "duration": 4.719
+  },
+  {
+    "text": "we call the four Ds that transform those",
+    "start": 162.48,
+    "duration": 4.16
+  },
+  {
+    "text": "interactions into something richer and",
+    "start": 164.879,
+    "duration": 4.561
+  },
+  {
+    "text": "much more rewarding. Then we'll look at",
+    "start": 166.64,
+    "duration": 5.12
+  },
+  {
+    "text": "each competency more closely. In brief,",
+    "start": 169.44,
+    "duration": 4.24
+  },
+  {
+    "text": "these are delegation which asks when",
+    "start": 171.76,
+    "duration": 4.88
+  },
+  {
+    "text": "should humans do work and when should AI",
+    "start": 173.68,
+    "duration": 4.96
+  },
+  {
+    "text": "description which asks how do we",
+    "start": 176.64,
+    "duration": 4.4
+  },
+  {
+    "text": "communicate clearly with AI systems?",
+    "start": 178.64,
+    "duration": 4.4
+  },
+  {
+    "text": "Discernment which asks how do we",
+    "start": 181.04,
+    "duration": 4
+  },
+  {
+    "text": "evaluate what AI gives us? and",
+    "start": 183.04,
+    "duration": 3.919
+  },
+  {
+    "text": "diligence, which asks, \"How do we ensure",
+    "start": 185.04,
+    "duration": 4.08
+  },
+  {
+    "text": "our interaction with AI is responsible,",
+    "start": 186.959,
+    "duration": 4.081
+  },
+  {
+    "text": "transparent, and accountable?\" Each",
+    "start": 189.12,
+    "duration": 3.68
+  },
+  {
+    "text": "section includes focused videos paired",
+    "start": 191.04,
+    "duration": 3.44
+  },
+  {
+    "text": "with exercises and materials to build",
+    "start": 192.8,
+    "duration": 4.4
+  },
+  {
+    "text": "practical understanding. We hope you'll",
+    "start": 194.48,
+    "duration": 4.16
+  },
+  {
+    "text": "spend much of your time during this",
+    "start": 197.2,
+    "duration": 3.44
+  },
+  {
+    "text": "course trying what you're learning.",
+    "start": 198.64,
+    "duration": 3.599
+  },
+  {
+    "text": "You'll also hear directly from a few of",
+    "start": 200.64,
+    "duration": 3.84
+  },
+  {
+    "text": "us at Anthropic about what makes today's",
+    "start": 202.239,
+    "duration": 4.64
+  },
+  {
+    "text": "AI different from previous technologies,",
+    "start": 204.48,
+    "duration": 4.64
+  },
+  {
+    "text": "the real capabilities and limitations of",
+    "start": 206.879,
+    "duration": 4.881
+  },
+  {
+    "text": "these systems, and practical techniques",
+    "start": 209.12,
+    "duration": 5.52
+  },
+  {
+    "text": "that apply the 4Ds. Most AI training",
+    "start": 211.76,
+    "duration": 4.8
+  },
+  {
+    "text": "focuses solely on tactical skills like",
+    "start": 214.64,
+    "duration": 3.519
+  },
+  {
+    "text": "specific prompts, which settings to",
+    "start": 216.56,
+    "duration": 3.759
+  },
+  {
+    "text": "adjust or which systems to use. While",
+    "start": 218.159,
+    "duration": 4.08
+  },
+  {
+    "text": "useful, these skills can quickly become",
+    "start": 220.319,
+    "duration": 3.92
+  },
+  {
+    "text": "outdated. We're taking a different",
+    "start": 222.239,
+    "duration": 3.601
+  },
+  {
+    "text": "approach and focusing on core",
+    "start": 224.239,
+    "duration": 4.241
+  },
+  {
+    "text": "competencies and deep understanding so",
+    "start": 225.84,
+    "duration": 4.08
+  },
+  {
+    "text": "that you're prepared not just for",
+    "start": 228.48,
+    "duration": 4
+  },
+  {
+    "text": "today's AI, but for the changes to come.",
+    "start": 229.92,
+    "duration": 4.239
+  },
+  {
+    "text": "By the end of our time together, you'll",
+    "start": 232.48,
+    "duration": 3.28
+  },
+  {
+    "text": "have a framework to guide your own",
+    "start": 234.159,
+    "duration": 3.921
+  },
+  {
+    "text": "interactions with AI, confidence in",
+    "start": 235.76,
+    "duration": 4.119
+  },
+  {
+    "text": "deciding when and how to engage AI",
+    "start": 238.08,
+    "duration": 4.079
+  },
+  {
+    "text": "effectively, practical skills for more",
+    "start": 239.879,
+    "duration": 3.761
+  },
+  {
+    "text": "thoughtful and fluid human AI",
+    "start": 242.159,
+    "duration": 3.44
+  },
+  {
+    "text": "collaboration, and the ability to",
+    "start": 243.64,
+    "duration": 3.879
+  },
+  {
+    "text": "evaluate and take responsibility for the",
+    "start": 245.599,
+    "duration": 3.92
+  },
+  {
+    "text": "outcomes of these collaborations. Thank",
+    "start": 247.519,
+    "duration": 5.64
+  },
+  {
+    "text": "you for joining us.",
+    "start": 249.519,
+    "duration": 3.64
+  }
+]

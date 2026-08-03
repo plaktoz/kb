@@ -1,0 +1,642 @@
+[
+  {
+    "text": "In this video, we're going to take a",
+    "start": 11.2,
+    "duration": 4.6
+  },
+  {
+    "text": "closer look at the delegation",
+    "start": 13.28,
+    "duration": 5.44
+  },
+  {
+    "text": "competency. Remember that AI fluency is",
+    "start": 15.8,
+    "duration": 4.96
+  },
+  {
+    "text": "about working with AI in ways that are",
+    "start": 18.72,
+    "duration": 6.44
+  },
+  {
+    "text": "effective, efficient, ethical, and safe.",
+    "start": 20.76,
+    "duration": 7.08
+  },
+  {
+    "text": "Delegation is primarily focused on the",
+    "start": 25.16,
+    "duration": 4.92
+  },
+  {
+    "text": "first two of these. Helping you work",
+    "start": 27.84,
+    "duration": 5.48
+  },
+  {
+    "text": "effectively and efficiently with AI",
+    "start": 30.08,
+    "duration": 6.4
+  },
+  {
+    "text": "assistance. At its core, delegation is",
+    "start": 33.32,
+    "duration": 5.559
+  },
+  {
+    "text": "about deciding what work is to be done,",
+    "start": 36.48,
+    "duration": 4.56
+  },
+  {
+    "text": "what work you should do yourself, and",
+    "start": 38.879,
+    "duration": 4.801
+  },
+  {
+    "text": "what work might be better suited to AI.",
+    "start": 41.04,
+    "duration": 4.72
+  },
+  {
+    "text": "That might sound simple, but it's",
+    "start": 43.68,
+    "duration": 4.64
+  },
+  {
+    "text": "surprisingly nuanced. Effective",
+    "start": 45.76,
+    "duration": 5.279
+  },
+  {
+    "text": "delegation requires understanding both",
+    "start": 48.32,
+    "duration": 5.12
+  },
+  {
+    "text": "what you're trying to accomplish and",
+    "start": 51.039,
+    "duration": 4.721
+  },
+  {
+    "text": "what you and AI can each realistically",
+    "start": 53.44,
+    "duration": 5.2
+  },
+  {
+    "text": "do. It's about breaking down complex",
+    "start": 55.76,
+    "duration": 6
+  },
+  {
+    "text": "work into manageable pieces and making",
+    "start": 58.64,
+    "duration": 5.519
+  },
+  {
+    "text": "strategic decisions about who handles",
+    "start": 61.76,
+    "duration": 5.48
+  },
+  {
+    "text": "which part, whether through automation,",
+    "start": 64.159,
+    "duration": 4.921
+  },
+  {
+    "text": "augmentation, or",
+    "start": 67.24,
+    "duration": 3.879
+  },
+  {
+    "text": "agency. Here's something that might",
+    "start": 69.08,
+    "duration": 3.719
+  },
+  {
+    "text": "surprise you.",
+    "start": 71.119,
+    "duration": 4.241
+  },
+  {
+    "text": "The cornerstone of good delegation isn't",
+    "start": 72.799,
+    "duration": 5.281
+  },
+  {
+    "text": "actually about AI at all. It's about",
+    "start": 75.36,
+    "duration": 4.64
+  },
+  {
+    "text": "your own expertise and your own",
+    "start": 78.08,
+    "duration": 3.64
+  },
+  {
+    "text": "understanding of what you're trying to",
+    "start": 80,
+    "duration": 4.72
+  },
+  {
+    "text": "accomplish. Before involving AI in any",
+    "start": 81.72,
+    "duration": 5.399
+  },
+  {
+    "text": "project, take a moment to answer some",
+    "start": 84.72,
+    "duration": 3.48
+  },
+  {
+    "text": "important",
+    "start": 87.119,
+    "duration": 3.281
+  },
+  {
+    "text": "questions. What exactly are you trying",
+    "start": 88.2,
+    "duration": 4.44
+  },
+  {
+    "text": "to accomplish? What are you trying to",
+    "start": 90.4,
+    "duration": 5.84
+  },
+  {
+    "text": "create or solve? What is your vision or",
+    "start": 92.64,
+    "duration": 6.32
+  },
+  {
+    "text": "key project goals? What does success",
+    "start": 96.24,
+    "duration": 4.559
+  },
+  {
+    "text": "look like to you?",
+    "start": 98.96,
+    "duration": 3.68
+  },
+  {
+    "text": "and ask yourself what kind of thinking",
+    "start": 100.799,
+    "duration": 5.041
+  },
+  {
+    "text": "and work is needed to get there. Are",
+    "start": 102.64,
+    "duration": 5.159
+  },
+  {
+    "text": "there areas that are simple but",
+    "start": 105.84,
+    "duration": 4.72
+  },
+  {
+    "text": "timeconuming? Areas of uncertainty where",
+    "start": 107.799,
+    "duration": 4.401
+  },
+  {
+    "text": "you could use a trusted thinking",
+    "start": 110.56,
+    "duration": 4.08
+  },
+  {
+    "text": "partner? Areas of ignorance where what",
+    "start": 112.2,
+    "duration": 5.72
+  },
+  {
+    "text": "you need is more data or areas requiring",
+    "start": 114.64,
+    "duration": 6.32
+  },
+  {
+    "text": "critical judgment. Every project and",
+    "start": 117.92,
+    "duration": 5.92
+  },
+  {
+    "text": "every domain is different. We can't make",
+    "start": 120.96,
+    "duration": 5.519
+  },
+  {
+    "text": "you an expert in your problem space. But",
+    "start": 123.84,
+    "duration": 4.399
+  },
+  {
+    "text": "we can say that without a clear",
+    "start": 126.479,
+    "duration": 4.041
+  },
+  {
+    "text": "understanding of your goals and the work",
+    "start": 128.239,
+    "duration": 4.801
+  },
+  {
+    "text": "involved, even the most advanced AI",
+    "start": 130.52,
+    "duration": 4.28
+  },
+  {
+    "text": "won't get you where you need to go.",
+    "start": 133.04,
+    "duration": 3.52
+  },
+  {
+    "text": "You'll struggle to effectively work with",
+    "start": 134.8,
+    "duration": 5.2
+  },
+  {
+    "text": "AI assistants, evaluate their outputs,",
+    "start": 136.56,
+    "duration": 5.96
+  },
+  {
+    "text": "or know when human intervention is",
+    "start": 140,
+    "duration": 5.239
+  },
+  {
+    "text": "necessary. The most effective AI",
+    "start": 142.52,
+    "duration": 5.079
+  },
+  {
+    "text": "collaborators are experts in their",
+    "start": 145.239,
+    "duration": 6.36
+  },
+  {
+    "text": "fields first and AI delegators second.",
+    "start": 147.599,
+    "duration": 6.401
+  },
+  {
+    "text": "We call this first concept problem",
+    "start": 151.599,
+    "duration": 5.601
+  },
+  {
+    "text": "awareness. the ability to clearly define",
+    "start": 154,
+    "duration": 5.76
+  },
+  {
+    "text": "your goals and understand what work is",
+    "start": 157.2,
+    "duration": 5.72
+  },
+  {
+    "text": "needed before bringing AI into the",
+    "start": 159.76,
+    "duration": 5.52
+  },
+  {
+    "text": "picture. Beyond understanding your",
+    "start": 162.92,
+    "duration": 4.36
+  },
+  {
+    "text": "problem, you also need a working",
+    "start": 165.28,
+    "duration": 3.48
+  },
+  {
+    "text": "knowledge of the AI",
+    "start": 167.28,
+    "duration": 4.16
+  },
+  {
+    "text": "landscape. Different AI systems offer",
+    "start": 168.76,
+    "duration": 5.24
+  },
+  {
+    "text": "vastly different capabilities and this",
+    "start": 171.44,
+    "duration": 5.76
+  },
+  {
+    "text": "field evolves almost daily. Effective",
+    "start": 174,
+    "duration": 5.28
+  },
+  {
+    "text": "delegation isn't about finding one",
+    "start": 177.2,
+    "duration": 4.399
+  },
+  {
+    "text": "perfect system. It's about understanding",
+    "start": 179.28,
+    "duration": 4.8
+  },
+  {
+    "text": "the unique strengths and limitations of",
+    "start": 181.599,
+    "duration": 5.201
+  },
+  {
+    "text": "the various options available to you.",
+    "start": 184.08,
+    "duration": 4.72
+  },
+  {
+    "text": "Have you investigated which models",
+    "start": 186.8,
+    "duration": 4
+  },
+  {
+    "text": "perform best for the kind of work you",
+    "start": 188.8,
+    "duration": 4.4
+  },
+  {
+    "text": "have in mind? Do you know which AI",
+    "start": 190.8,
+    "duration": 5.519
+  },
+  {
+    "text": "systems prioritize speed over depth or",
+    "start": 193.2,
+    "duration": 4.679
+  },
+  {
+    "text": "accuracy over",
+    "start": 196.319,
+    "duration": 3.84
+  },
+  {
+    "text": "creativity? This course includes several",
+    "start": 197.879,
+    "duration": 4.201
+  },
+  {
+    "text": "technical sections that will help you",
+    "start": 200.159,
+    "duration": 4.08
+  },
+  {
+    "text": "build this knowledge, but the landscape",
+    "start": 202.08,
+    "duration": 5.04
+  },
+  {
+    "text": "moves quickly. The best approach is",
+    "start": 204.239,
+    "duration": 5.681
+  },
+  {
+    "text": "hands-on. Experiment with different AI",
+    "start": 207.12,
+    "duration": 5.44
+  },
+  {
+    "text": "systems as often as you can and develop",
+    "start": 209.92,
+    "duration": 5.239
+  },
+  {
+    "text": "your own insights based on personal",
+    "start": 212.56,
+    "duration": 5.52
+  },
+  {
+    "text": "experience. We call this second concept",
+    "start": 215.159,
+    "duration": 5.321
+  },
+  {
+    "text": "platform awareness. A working knowledge",
+    "start": 218.08,
+    "duration": 4.719
+  },
+  {
+    "text": "of available AI systems and their",
+    "start": 220.48,
+    "duration": 4.839
+  },
+  {
+    "text": "specific capabilities and",
+    "start": 222.799,
+    "duration": 5.281
+  },
+  {
+    "text": "limitations. Once you understand both",
+    "start": 225.319,
+    "duration": 5.601
+  },
+  {
+    "text": "your problem and the available AI",
+    "start": 228.08,
+    "duration": 5.28
+  },
+  {
+    "text": "assistance, the real art of delegation",
+    "start": 230.92,
+    "duration": 5.399
+  },
+  {
+    "text": "emerges. thoughtfully distributing work",
+    "start": 233.36,
+    "duration": 4.92
+  },
+  {
+    "text": "between human and artificial",
+    "start": 236.319,
+    "duration": 4.161
+  },
+  {
+    "text": "intelligence to leverage the unique",
+    "start": 238.28,
+    "duration": 5.039
+  },
+  {
+    "text": "strengths of each. Ask",
+    "start": 240.48,
+    "duration": 5.28
+  },
+  {
+    "text": "yourself which specific parts of your",
+    "start": 243.319,
+    "duration": 5.041
+  },
+  {
+    "text": "workflow would benefit from",
+    "start": 245.76,
+    "duration": 4.72
+  },
+  {
+    "text": "automation or where would an",
+    "start": 248.36,
+    "duration": 4.439
+  },
+  {
+    "text": "augmentation approach create more value",
+    "start": 250.48,
+    "duration": 5.319
+  },
+  {
+    "text": "than either working alone or fully",
+    "start": 252.799,
+    "duration": 5.201
+  },
+  {
+    "text": "automating? Are there critical judgment",
+    "start": 255.799,
+    "duration": 4.28
+  },
+  {
+    "text": "areas that should remain exclusively",
+    "start": 258,
+    "duration": 5.12
+  },
+  {
+    "text": "human and shouldn't be delegated at all?",
+    "start": 260.079,
+    "duration": 5.921
+  },
+  {
+    "text": "What routine interactions can AI agents",
+    "start": 263.12,
+    "duration": 5.68
+  },
+  {
+    "text": "handle on your behalf? With a clear",
+    "start": 266,
+    "duration": 5.44
+  },
+  {
+    "text": "understanding of both your problem and",
+    "start": 268.8,
+    "duration": 5.2
+  },
+  {
+    "text": "available AI systems, you can make",
+    "start": 271.44,
+    "duration": 5.12
+  },
+  {
+    "text": "informed decisions about which aspects",
+    "start": 274,
+    "duration": 6
+  },
+  {
+    "text": "of work should be automated by AI or",
+    "start": 276.56,
+    "duration": 5.32
+  },
+  {
+    "text": "completed through human AI",
+    "start": 280,
+    "duration": 4.56
+  },
+  {
+    "text": "collaboration or reserved exclusively",
+    "start": 281.88,
+    "duration": 5.879
+  },
+  {
+    "text": "for human execution or handled by AI",
+    "start": 284.56,
+    "duration": 6.32
+  },
+  {
+    "text": "agents acting on your behalf. We call",
+    "start": 287.759,
+    "duration": 5.921
+  },
+  {
+    "text": "this third concept task delegation. The",
+    "start": 290.88,
+    "duration": 5.12
+  },
+  {
+    "text": "strategic process of dividing work",
+    "start": 293.68,
+    "duration": 4.68
+  },
+  {
+    "text": "between humans and",
+    "start": 296,
+    "duration": 6.16
+  },
+  {
+    "text": "AI. To recap, delegation involves three",
+    "start": 298.36,
+    "duration": 6.839
+  },
+  {
+    "text": "key elements. Problem awareness,",
+    "start": 302.16,
+    "duration": 4.879
+  },
+  {
+    "text": "understanding your goals and the problem",
+    "start": 305.199,
+    "duration": 5.041
+  },
+  {
+    "text": "to be solved. Platform awareness,",
+    "start": 307.039,
+    "duration": 5.321
+  },
+  {
+    "text": "understanding AI capabilities and",
+    "start": 310.24,
+    "duration": 5.04
+  },
+  {
+    "text": "limitations. And task delegation,",
+    "start": 312.36,
+    "duration": 5.64
+  },
+  {
+    "text": "strategically dividing the work.",
+    "start": 315.28,
+    "duration": 5.72
+  },
+  {
+    "text": "This competency highlights something",
+    "start": 318,
+    "duration": 6
+  },
+  {
+    "text": "important. Effective AI collaboration",
+    "start": 321,
+    "duration": 5.4
+  },
+  {
+    "text": "isn't about handing over the wheel and",
+    "start": 324,
+    "duration": 5.199
+  },
+  {
+    "text": "calling it a day. It's about making",
+    "start": 326.4,
+    "duration": 5.76
+  },
+  {
+    "text": "thoughtful choices and delegating work",
+    "start": 329.199,
+    "duration": 5.361
+  },
+  {
+    "text": "that leverages the unique strengths of",
+    "start": 332.16,
+    "duration": 7.319
+  },
+  {
+    "text": "both human and artificial intelligence.",
+    "start": 334.56,
+    "duration": 4.919
+  }
+]

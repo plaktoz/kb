@@ -1,0 +1,797 @@
+[
+  {
+    "text": "[music]",
+    "start": 2.619,
+    "duration": 2.02
+  },
+  {
+    "text": "Hi, my name is Drew Bent and I'm a",
+    "start": 12.32,
+    "duration": 4.16
+  },
+  {
+    "text": "teacher, programmer, and member of",
+    "start": 14.48,
+    "duration": 4.4
+  },
+  {
+    "text": "technical staff at Enthropic. Welcome to",
+    "start": 16.48,
+    "duration": 5.04
+  },
+  {
+    "text": "our exploration of generative AI. In",
+    "start": 18.88,
+    "duration": 3.92
+  },
+  {
+    "text": "this video, we'll dive into what",
+    "start": 21.52,
+    "duration": 3.759
+  },
+  {
+    "text": "generative AI actually is, how it works",
+    "start": 22.8,
+    "duration": 4.639
+  },
+  {
+    "text": "under the hood, and the technological",
+    "start": 25.279,
+    "duration": 4
+  },
+  {
+    "text": "breakthroughs that made these systems",
+    "start": 27.439,
+    "duration": 3.68
+  },
+  {
+    "text": "possible. You might interact with",
+    "start": 29.279,
+    "duration": 4.001
+  },
+  {
+    "text": "generative AI daily without fully",
+    "start": 31.119,
+    "duration": 4.321
+  },
+  {
+    "text": "understanding what's happening behind",
+    "start": 33.28,
+    "duration": 4.64
+  },
+  {
+    "text": "the scenes. Let's change that.",
+    "start": 35.44,
+    "duration": 4.639
+  },
+  {
+    "text": "Generative AI refers to artificial",
+    "start": 37.92,
+    "duration": 4.159
+  },
+  {
+    "text": "intelligence systems that can create new",
+    "start": 40.079,
+    "duration": 4.401
+  },
+  {
+    "text": "content rather than just analyzing",
+    "start": 42.079,
+    "duration": 5.441
+  },
+  {
+    "text": "existing data. For example, while",
+    "start": 44.48,
+    "duration": 5.2
+  },
+  {
+    "text": "traditional AI might classify emails as",
+    "start": 47.52,
+    "duration": 4.719
+  },
+  {
+    "text": "spam or not spam based on patterns,",
+    "start": 49.68,
+    "duration": 4.48
+  },
+  {
+    "text": "generative AI can write a completely new",
+    "start": 52.239,
+    "duration": 4.48
+  },
+  {
+    "text": "email for you. The first approach",
+    "start": 54.16,
+    "duration": 5.12
+  },
+  {
+    "text": "analyzes and categorizes. The second",
+    "start": 56.719,
+    "duration": 4.48
+  },
+  {
+    "text": "creates something new that didn't exist",
+    "start": 59.28,
+    "duration": 5.12
+  },
+  {
+    "text": "before. This represents a fundamental",
+    "start": 61.199,
+    "duration": 5.6
+  },
+  {
+    "text": "shift in AI capabilities.",
+    "start": 64.4,
+    "duration": 4.96
+  },
+  {
+    "text": "Large language models or LLM like",
+    "start": 66.799,
+    "duration": 4.721
+  },
+  {
+    "text": "anthropics cloud models are a prominent",
+    "start": 69.36,
+    "duration": 4.72
+  },
+  {
+    "text": "type of generative AI. They're called",
+    "start": 71.52,
+    "duration": 4.8
+  },
+  {
+    "text": "language models because they're trained",
+    "start": 74.08,
+    "duration": 4.96
+  },
+  {
+    "text": "to predict and generate human language",
+    "start": 76.32,
+    "duration": 4.88
+  },
+  {
+    "text": "and large because they contain billions",
+    "start": 79.04,
+    "duration": 5.119
+  },
+  {
+    "text": "of parameters, mathematical values that",
+    "start": 81.2,
+    "duration": 5.12
+  },
+  {
+    "text": "determine how the model processes",
+    "start": 84.159,
+    "duration": 4.32
+  },
+  {
+    "text": "information, somewhat like synaptic",
+    "start": 86.32,
+    "duration": 4.96
+  },
+  {
+    "text": "connections in your brain. The path to",
+    "start": 88.479,
+    "duration": 5.921
+  },
+  {
+    "text": "today's generative AI wasn't sudden. It",
+    "start": 91.28,
+    "duration": 5.12
+  },
+  {
+    "text": "involved three crucial developments",
+    "start": 94.4,
+    "duration": 4.079
+  },
+  {
+    "text": "coming together at the right time.",
+    "start": 96.4,
+    "duration": 3.92
+  },
+  {
+    "text": "First, there were algorithmic and",
+    "start": 98.479,
+    "duration": 4
+  },
+  {
+    "text": "architectural breakthroughs that",
+    "start": 100.32,
+    "duration": 4.56
+  },
+  {
+    "text": "fundamentally changed how AI systems",
+    "start": 102.479,
+    "duration": 5.041
+  },
+  {
+    "text": "learn. While neural networks have been",
+    "start": 104.88,
+    "duration": 5.12
+  },
+  {
+    "text": "around conceptually for decades, the",
+    "start": 107.52,
+    "duration": 3.76
+  },
+  {
+    "text": "development of the transformer",
+    "start": 110,
+    "duration": 4.479
+  },
+  {
+    "text": "architecture in 2017 was a gamecher.",
+    "start": 111.28,
+    "duration": 5.36
+  },
+  {
+    "text": "This architecture excels at processing",
+    "start": 114.479,
+    "duration": 4.32
+  },
+  {
+    "text": "sequences of text while maintaining",
+    "start": 116.64,
+    "duration": 4.64
+  },
+  {
+    "text": "relationships between words across long",
+    "start": 118.799,
+    "duration": 4.64
+  },
+  {
+    "text": "passages, which is critical for",
+    "start": 121.28,
+    "duration": 4.56
+  },
+  {
+    "text": "understanding language in context.",
+    "start": 123.439,
+    "duration": 4.641
+  },
+  {
+    "text": "Second, the explosion of digital data",
+    "start": 125.84,
+    "duration": 4.32
+  },
+  {
+    "text": "provided the essential raw material for",
+    "start": 128.08,
+    "duration": 4.56
+  },
+  {
+    "text": "training. Modern LLMs like Claude learn",
+    "start": 130.16,
+    "duration": 4.88
+  },
+  {
+    "text": "from diverse sources such as websites,",
+    "start": 132.64,
+    "duration": 4.88
+  },
+  {
+    "text": "code repositories, and other text that",
+    "start": 135.04,
+    "duration": 3.919
+  },
+  {
+    "text": "represent human knowledge and",
+    "start": 137.52,
+    "duration": 3.12
+  },
+  {
+    "text": "communication.",
+    "start": 138.959,
+    "duration": 4
+  },
+  {
+    "text": "This vast tapestry of information helps",
+    "start": 140.64,
+    "duration": 4.319
+  },
+  {
+    "text": "models develop a broad and nuanced",
+    "start": 142.959,
+    "duration": 4.561
+  },
+  {
+    "text": "understanding of both language and",
+    "start": 144.959,
+    "duration": 6.161
+  },
+  {
+    "text": "concepts. And third, massive increases",
+    "start": 147.52,
+    "duration": 5.52
+  },
+  {
+    "text": "in computational power made it possible",
+    "start": 151.12,
+    "duration": 4.24
+  },
+  {
+    "text": "to train these complex models on all",
+    "start": 153.04,
+    "duration": 4.64
+  },
+  {
+    "text": "that data. Specialized hardware like",
+    "start": 155.36,
+    "duration": 5.2
+  },
+  {
+    "text": "GPUs or graphics processing units and",
+    "start": 157.68,
+    "duration": 6
+  },
+  {
+    "text": "TPUs or tensor processing units along",
+    "start": 160.56,
+    "duration": 4.88
+  },
+  {
+    "text": "with distributed computing networks",
+    "start": 163.68,
+    "duration": 4.48
+  },
+  {
+    "text": "often called clusters enable processing",
+    "start": 165.44,
+    "duration": 4.4
+  },
+  {
+    "text": "that would have been impossible just a",
+    "start": 168.16,
+    "duration": 4.24
+  },
+  {
+    "text": "few years earlier. The combination of",
+    "start": 169.84,
+    "duration": 4.64
+  },
+  {
+    "text": "these three factors led to an important",
+    "start": 172.4,
+    "duration": 4.88
+  },
+  {
+    "text": "discovery known as the scaling laws.",
+    "start": 174.48,
+    "duration": 4.72
+  },
+  {
+    "text": "These empirical findings showed that as",
+    "start": 177.28,
+    "duration": 4.08
+  },
+  {
+    "text": "models grew larger and trained on more",
+    "start": 179.2,
+    "duration": 4.8
+  },
+  {
+    "text": "data with more computing power, their",
+    "start": 181.36,
+    "duration": 4.56
+  },
+  {
+    "text": "performance improved in predictable",
+    "start": 184,
+    "duration": 4.4
+  },
+  {
+    "text": "ways. More surprisingly, researchers",
+    "start": 185.92,
+    "duration": 5.12
+  },
+  {
+    "text": "found that entirely new capabilities",
+    "start": 188.4,
+    "duration": 4.72
+  },
+  {
+    "text": "began to emerge as these models grew",
+    "start": 191.04,
+    "duration": 4.479
+  },
+  {
+    "text": "larger. Abilities no one explicitly",
+    "start": 193.12,
+    "duration": 4.8
+  },
+  {
+    "text": "program, like reasoning through problems",
+    "start": 195.519,
+    "duration": 5.121
+  },
+  {
+    "text": "stepby step or adapting to new tasks",
+    "start": 197.92,
+    "duration": 4.959
+  },
+  {
+    "text": "with minimal instruction. Let's peek",
+    "start": 200.64,
+    "duration": 4.16
+  },
+  {
+    "text": "under the hood at how these systems",
+    "start": 202.879,
+    "duration": 4.561
+  },
+  {
+    "text": "actually work. During initial training,",
+    "start": 204.8,
+    "duration": 5.12
+  },
+  {
+    "text": "also called pre-training, LLMs like",
+    "start": 207.44,
+    "duration": 4.56
+  },
+  {
+    "text": "Claude analyze patterns across billions",
+    "start": 209.92,
+    "duration": 4.56
+  },
+  {
+    "text": "of text examples. Imagine reading every",
+    "start": 212,
+    "duration": 4
+  },
+  {
+    "text": "website and piece of text you could",
+    "start": 214.48,
+    "duration": 3.759
+  },
+  {
+    "text": "find, not just to absorb information,",
+    "start": 216,
+    "duration": 4
+  },
+  {
+    "text": "but to understand the statistical",
+    "start": 218.239,
+    "duration": 4.08
+  },
+  {
+    "text": "relationships between words, phrases,",
+    "start": 220,
+    "duration": 4.56
+  },
+  {
+    "text": "and concepts. At this stage, the model",
+    "start": 222.319,
+    "duration": 3.601
+  },
+  {
+    "text": "essentially builds something like a",
+    "start": 224.56,
+    "duration": 3.759
+  },
+  {
+    "text": "complex map of language and knowledge.",
+    "start": 225.92,
+    "duration": 4.319
+  },
+  {
+    "text": "This pre-training process involves",
+    "start": 228.319,
+    "duration": 4.321
+  },
+  {
+    "text": "showing the model text and asking it to",
+    "start": 230.239,
+    "duration": 4.72
+  },
+  {
+    "text": "predict what comes next. Through many",
+    "start": 232.64,
+    "duration": 4.159
+  },
+  {
+    "text": "iterations, the model gradually",
+    "start": 234.959,
+    "duration": 4.241
+  },
+  {
+    "text": "refineses its predictions, learning the",
+    "start": 236.799,
+    "duration": 4.64
+  },
+  {
+    "text": "patterns that make language coherent and",
+    "start": 239.2,
+    "duration": 5.36
+  },
+  {
+    "text": "meaningful. After pre-training, models",
+    "start": 241.439,
+    "duration": 4.961
+  },
+  {
+    "text": "undergo additional training called",
+    "start": 244.56,
+    "duration": 3.679
+  },
+  {
+    "text": "fine-tuning, where they learn to follow",
+    "start": 246.4,
+    "duration": 4.32
+  },
+  {
+    "text": "instructions, provide helpful responses,",
+    "start": 248.239,
+    "duration": 4.64
+  },
+  {
+    "text": "and importantly, avoid generating",
+    "start": 250.72,
+    "duration": 4.799
+  },
+  {
+    "text": "harmful content. This often involves",
+    "start": 252.879,
+    "duration": 4.561
+  },
+  {
+    "text": "human feedback to improve the model's",
+    "start": 255.519,
+    "duration": 3.84
+  },
+  {
+    "text": "performance, as well as reinforcement",
+    "start": 257.44,
+    "duration": 4.16
+  },
+  {
+    "text": "learning, which uses rewards and",
+    "start": 259.359,
+    "duration": 4.801
+  },
+  {
+    "text": "penalties to shape the model's behavior",
+    "start": 261.6,
+    "duration": 5.44
+  },
+  {
+    "text": "toward being more helpful, honest, and",
+    "start": 264.16,
+    "duration": 4.64
+  },
+  {
+    "text": "harmless. In the case of enthropics",
+    "start": 267.04,
+    "duration": 3.92
+  },
+  {
+    "text": "models, once models are trained, they",
+    "start": 268.8,
+    "duration": 3.92
+  },
+  {
+    "text": "are then deployed for you to interact",
+    "start": 270.96,
+    "duration": 3.76
+  },
+  {
+    "text": "with. When you interact with Claude or",
+    "start": 272.72,
+    "duration": 4.56
+  },
+  {
+    "text": "another LLM, you're providing a prompt,",
+    "start": 274.72,
+    "duration": 4.479
+  },
+  {
+    "text": "which is text that the model reads and",
+    "start": 277.28,
+    "duration": 3.919
+  },
+  {
+    "text": "then continues from based on patterns it",
+    "start": 279.199,
+    "duration": 4
+  },
+  {
+    "text": "learned during training. The model isn't",
+    "start": 281.199,
+    "duration": 3.841
+  },
+  {
+    "text": "retrieving pre-written answers from a",
+    "start": 283.199,
+    "duration": 4.241
+  },
+  {
+    "text": "database. Instead, it's generating new",
+    "start": 285.04,
+    "duration": 4.32
+  },
+  {
+    "text": "text that statistically follows from",
+    "start": 287.44,
+    "duration": 3.92
+  },
+  {
+    "text": "what you've written. There's also a",
+    "start": 289.36,
+    "duration": 4.24
+  },
+  {
+    "text": "practical limit to how much information",
+    "start": 291.36,
+    "duration": 5.04
+  },
+  {
+    "text": "an LLM can consider at once, known as",
+    "start": 293.6,
+    "duration": 5.2
+  },
+  {
+    "text": "the context window. Think of this as the",
+    "start": 296.4,
+    "duration": 5.04
+  },
+  {
+    "text": "AI's working memory. The context window",
+    "start": 298.8,
+    "duration": 5.44
+  },
+  {
+    "text": "includes your prompts, the AI responses,",
+    "start": 301.44,
+    "duration": 4.72
+  },
+  {
+    "text": "and any other information you've shared",
+    "start": 304.24,
+    "duration": 4.72
+  },
+  {
+    "text": "in your conversation. While AI companies",
+    "start": 306.16,
+    "duration": 5.2
+  },
+  {
+    "text": "continue to grow the context window to",
+    "start": 308.96,
+    "duration": 4.72
+  },
+  {
+    "text": "allow for longer context documents and",
+    "start": 311.36,
+    "duration": 4.559
+  },
+  {
+    "text": "conversations, these limits remind us",
+    "start": 313.68,
+    "duration": 4.239
+  },
+  {
+    "text": "that these systems don't have unlimited",
+    "start": 315.919,
+    "duration": 4.321
+  },
+  {
+    "text": "access to information and cannot use",
+    "start": 317.919,
+    "duration": 4.321
+  },
+  {
+    "text": "content beyond its current context",
+    "start": 320.24,
+    "duration": 4.959
+  },
+  {
+    "text": "window without specialized tools like",
+    "start": 322.24,
+    "duration": 5.44
+  },
+  {
+    "text": "web search. Bringing this together, the",
+    "start": 325.199,
+    "duration": 4.481
+  },
+  {
+    "text": "three characteristics that make modern",
+    "start": 327.68,
+    "duration": 4.72
+  },
+  {
+    "text": "generative AI so powerful include,",
+    "start": 329.68,
+    "duration": 5.12
+  },
+  {
+    "text": "first, its ability to process vast",
+    "start": 332.4,
+    "duration": 4.88
+  },
+  {
+    "text": "amounts of information during training,",
+    "start": 334.8,
+    "duration": 4.72
+  },
+  {
+    "text": "allowing it to learn complex and nuanced",
+    "start": 337.28,
+    "duration": 4.56
+  },
+  {
+    "text": "patterns in language and knowledge.",
+    "start": 339.52,
+    "duration": 5.36
+  },
+  {
+    "text": "Second, its incontext learning ability.",
+    "start": 341.84,
+    "duration": 5.28
+  },
+  {
+    "text": "LLMs can adapt to new tasks based on",
+    "start": 344.88,
+    "duration": 4.159
+  },
+  {
+    "text": "instructions or examples in your prompt",
+    "start": 347.12,
+    "duration": 4
+  },
+  {
+    "text": "without requiring additional training.",
+    "start": 349.039,
+    "duration": 4.401
+  },
+  {
+    "text": "And third, emerging capabilities that",
+    "start": 351.12,
+    "duration": 4.88
+  },
+  {
+    "text": "arise from scale. As these models grow",
+    "start": 353.44,
+    "duration": 4.319
+  },
+  {
+    "text": "larger, they develop abilities that",
+    "start": 356,
+    "duration": 4.08
+  },
+  {
+    "text": "weren't explicitly designed into them,",
+    "start": 357.759,
+    "duration": 3.921
+  },
+  {
+    "text": "sometimes surprising even their",
+    "start": 360.08,
+    "duration": 3.6
+  },
+  {
+    "text": "creators. In the next video, we'll",
+    "start": 361.68,
+    "duration": 3.92
+  },
+  {
+    "text": "explore what these systems can and can't",
+    "start": 363.68,
+    "duration": 4.4
+  },
+  {
+    "text": "do well, along with their most common or",
+    "start": 365.6,
+    "duration": 5.789
+  },
+  {
+    "text": "valuable applications.",
+    "start": 368.08,
+    "duration": 5.329
+  },
+  {
+    "text": "[music]",
+    "start": 371.389,
+    "duration": 2.02
+  }
+]

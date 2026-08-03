@@ -1,0 +1,267 @@
+[
+  {
+    "text": "In this video, we're going to take a closer look at the delegation competency.",
+    "start": "00:00:11",
+    "end": "00:00:17"
+  },
+  {
+    "text": "Remember that AI fluency is about working with AI in ways that are effective, efficient, ethical, and safe.",
+    "start": "00:00:17",
+    "end": "00:00:27"
+  },
+  {
+    "text": "Delegation is primarily focused on the first two of these.",
+    "start": "00:00:25",
+    "end": "00:00:30"
+  },
+  {
+    "text": "Helping you work effectively and efficiently with AI assistance.",
+    "start": "00:00:30",
+    "end": "00:00:34"
+  },
+  {
+    "text": "At its core, delegation is about deciding what work is to be done, what work you should do yourself, and what work might be better suited to AI.",
+    "start": "00:00:34",
+    "end": "00:00:45"
+  },
+  {
+    "text": "That might sound simple, but it's surprisingly nuanced.",
+    "start": "00:00:43",
+    "end": "00:00:49"
+  },
+  {
+    "text": "Effective delegation requires understanding both what you're trying to accomplish and what you and AI can each realistically do.",
+    "start": "00:00:49",
+    "end": "00:00:56"
+  },
+  {
+    "text": "It's about breaking down complex work into manageable pieces and making strategic decisions about who handles which part, whether through automation, augmentation, or agency.",
+    "start": "00:00:56",
+    "end": "00:01:09"
+  },
+  {
+    "text": "Here's something that might surprise you.",
+    "start": "00:01:09",
+    "end": "00:01:15"
+  },
+  {
+    "text": "The cornerstone of good delegation isn't actually about AI at all.",
+    "start": "00:01:12",
+    "end": "00:01:18"
+  },
+  {
+    "text": "It's about your own expertise and your own understanding of what you're trying to accomplish.",
+    "start": "00:01:18",
+    "end": "00:01:23"
+  },
+  {
+    "text": "Before involving AI in any project, take a moment to answer some important questions.",
+    "start": "00:01:23",
+    "end": "00:01:29"
+  },
+  {
+    "text": "What exactly are you trying to accomplish?",
+    "start": "00:01:29",
+    "end": "00:01:32"
+  },
+  {
+    "text": "What are you trying to create or solve?",
+    "start": "00:01:32",
+    "end": "00:01:35"
+  },
+  {
+    "text": "What is your vision or key project goals?",
+    "start": "00:01:35",
+    "end": "00:01:38"
+  },
+  {
+    "text": "What does success look like to you?",
+    "start": "00:01:38",
+    "end": "00:01:42"
+  },
+  {
+    "text": "and ask yourself what kind of thinking and work is needed to get there.",
+    "start": "00:01:40",
+    "end": "00:01:47"
+  },
+  {
+    "text": "Are there areas that are simple but timeconuming?",
+    "start": "00:01:47",
+    "end": "00:01:49"
+  },
+  {
+    "text": "Areas of uncertainty where you could use a trusted thinking partner?",
+    "start": "00:01:49",
+    "end": "00:01:53"
+  },
+  {
+    "text": "Areas of ignorance where what you need is more data or areas requiring critical judgment.",
+    "start": "00:01:53",
+    "end": "00:02:00"
+  },
+  {
+    "text": "Every project and every domain is different.",
+    "start": "00:02:00",
+    "end": "00:02:04"
+  },
+  {
+    "text": "We can't make you an expert in your problem space.",
+    "start": "00:02:04",
+    "end": "00:02:07"
+  },
+  {
+    "text": "But we can say that without a clear understanding of your goals and the work involved, even the most advanced AI won't get you where you need to go.",
+    "start": "00:02:07",
+    "end": "00:02:16"
+  },
+  {
+    "text": "You'll struggle to effectively work with AI assistants, evaluate their outputs, or know when human intervention is necessary.",
+    "start": "00:02:14",
+    "end": "00:02:24"
+  },
+  {
+    "text": "The most effective AI collaborators are experts in their fields first and AI delegators second.",
+    "start": "00:02:24",
+    "end": "00:02:34"
+  },
+  {
+    "text": "We call this first concept problem awareness.",
+    "start": "00:02:31",
+    "end": "00:02:35"
+  },
+  {
+    "text": "the ability to clearly define your goals and understand what work is needed before bringing AI into the picture.",
+    "start": "00:02:35",
+    "end": "00:02:43"
+  },
+  {
+    "text": "Beyond understanding your problem, you also need a working knowledge of the AI landscape.",
+    "start": "00:02:43",
+    "end": "00:02:50"
+  },
+  {
+    "text": "Different AI systems offer vastly different capabilities and this field evolves almost daily.",
+    "start": "00:02:50",
+    "end": "00:02:57"
+  },
+  {
+    "text": "Effective delegation isn't about finding one perfect system.",
+    "start": "00:02:57",
+    "end": "00:03:01"
+  },
+  {
+    "text": "It's about understanding the unique strengths and limitations of the various options available to you.",
+    "start": "00:03:01",
+    "end": "00:03:08"
+  },
+  {
+    "text": "Have you investigated which models perform best for the kind of work you have in mind?",
+    "start": "00:03:06",
+    "end": "00:03:12"
+  },
+  {
+    "text": "Do you know which AI systems prioritize speed over depth or accuracy over creativity?",
+    "start": "00:03:12",
+    "end": "00:03:19"
+  },
+  {
+    "text": "This course includes several technical sections that will help you build this knowledge, but the landscape moves quickly.",
+    "start": "00:03:19",
+    "end": "00:03:26"
+  },
+  {
+    "text": "The best approach is hands-on.",
+    "start": "00:03:26",
+    "end": "00:03:28"
+  },
+  {
+    "text": "Experiment with different AI systems as often as you can and develop your own insights based on personal experience.",
+    "start": "00:03:28",
+    "end": "00:03:36"
+  },
+  {
+    "text": "We call this second concept platform awareness.",
+    "start": "00:03:36",
+    "end": "00:03:40"
+  },
+  {
+    "text": "A working knowledge of available AI systems and their specific capabilities and limitations.",
+    "start": "00:03:40",
+    "end": "00:03:47"
+  },
+  {
+    "text": "Once you understand both your problem and the available AI assistance, the real art of delegation emerges.",
+    "start": "00:03:47",
+    "end": "00:03:54"
+  },
+  {
+    "text": "thoughtfully distributing work between human and artificial intelligence to leverage the unique strengths of each.",
+    "start": "00:03:54",
+    "end": "00:04:04"
+  },
+  {
+    "text": "Ask yourself which specific parts of your workflow would benefit from automation or where would an augmentation approach create more value than either working alone or fully automating?",
+    "start": "00:04:04",
+    "end": "00:04:17"
+  },
+  {
+    "text": "Are there critical judgment areas that should remain exclusively human and shouldn't be delegated at all?",
+    "start": "00:04:17",
+    "end": "00:04:26"
+  },
+  {
+    "text": "What routine interactions can AI agents handle on your behalf?",
+    "start": "00:04:23",
+    "end": "00:04:29"
+  },
+  {
+    "text": "With a clear understanding of both your problem and available AI systems, you can make informed decisions about which aspects of work should be automated by AI or completed through human AI collaboration or reserved exclusively for human execution or handled by AI agents acting on your behalf.",
+    "start": "00:04:29",
+    "end": "00:04:52"
+  },
+  {
+    "text": "We call this third concept task delegation.",
+    "start": "00:04:52",
+    "end": "00:04:55"
+  },
+  {
+    "text": "The strategic process of dividing work between humans and AI.",
+    "start": "00:04:55",
+    "end": "00:04:58"
+  },
+  {
+    "text": "To recap, delegation involves three key elements.",
+    "start": "00:04:58",
+    "end": "00:05:04"
+  },
+  {
+    "text": "Problem awareness, understanding your goals and the problem to be solved.",
+    "start": "00:05:04",
+    "end": "00:05:09"
+  },
+  {
+    "text": "Platform awareness, understanding AI capabilities and limitations.",
+    "start": "00:05:09",
+    "end": "00:05:14"
+  },
+  {
+    "text": "And task delegation, strategically dividing the work.",
+    "start": "00:05:14",
+    "end": "00:05:21"
+  },
+  {
+    "text": "This competency highlights something important.",
+    "start": "00:05:18",
+    "end": "00:05:22"
+  },
+  {
+    "text": "Effective AI collaboration isn't about handing over the wheel and calling it a day.",
+    "start": "00:05:22",
+    "end": "00:05:29"
+  },
+  {
+    "text": "It's about making thoughtful choices and delegating work that leverages the unique strengths of both human and artificial intelligence.",
+    "start": "00:05:29",
+    "end": "00:05:39"
+  }
+]
