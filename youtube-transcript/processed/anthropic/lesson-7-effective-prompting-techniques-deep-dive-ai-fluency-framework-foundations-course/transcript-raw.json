@@ -1,0 +1,1692 @@
+[
+  {
+    "text": "[Music]",
+    "start": 9.3,
+    "duration": 4.78
+  },
+  {
+    "text": "Let's explore one of the most practical",
+    "start": 12.16,
+    "duration": 4.32
+  },
+  {
+    "text": "skills when working with AI. Crafting",
+    "start": 14.08,
+    "duration": 4.48
+  },
+  {
+    "text": "effective prompts. This might sound",
+    "start": 16.48,
+    "duration": 3.68
+  },
+  {
+    "text": "technical or complicated, and some",
+    "start": 18.56,
+    "duration": 3.6
+  },
+  {
+    "text": "guides certainly make it seem that way,",
+    "start": 20.16,
+    "duration": 4.119
+  },
+  {
+    "text": "but at its heart, it's surprisingly",
+    "start": 22.16,
+    "duration": 4.16
+  },
+  {
+    "text": "straightforward. Prompting is simply how",
+    "start": 24.279,
+    "duration": 3.561
+  },
+  {
+    "text": "we apply this course's description",
+    "start": 26.32,
+    "duration": 3.68
+  },
+  {
+    "text": "competency in practice. clearly",
+    "start": 27.84,
+    "duration": 4
+  },
+  {
+    "text": "communicating what we want, how we want",
+    "start": 30,
+    "duration": 3.44
+  },
+  {
+    "text": "it done, and how we want to interact",
+    "start": 31.84,
+    "duration": 3.28
+  },
+  {
+    "text": "with our AI assistant throughout the",
+    "start": 33.44,
+    "duration": 4.08
+  },
+  {
+    "text": "entire process. Think of prompting like",
+    "start": 35.12,
+    "duration": 4.24
+  },
+  {
+    "text": "explaining a task to a helpful new",
+    "start": 37.52,
+    "duration": 3.68
+  },
+  {
+    "text": "colleague who's eager to assist, but",
+    "start": 39.36,
+    "duration": 3.84
+  },
+  {
+    "text": "needs clear directions and expectation",
+    "start": 41.2,
+    "duration": 4.72
+  },
+  {
+    "text": "setting to do their best work. We'll be",
+    "start": 43.2,
+    "duration": 4.32
+  },
+  {
+    "text": "using Claude throughout this section,",
+    "start": 45.92,
+    "duration": 3.36
+  },
+  {
+    "text": "but these tips can be carried over to",
+    "start": 47.52,
+    "duration": 4.48
+  },
+  {
+    "text": "many other AI systems. You might have",
+    "start": 49.28,
+    "duration": 4.959
+  },
+  {
+    "text": "heard the term prompt engineering tossed",
+    "start": 52,
+    "duration": 4.48
+  },
+  {
+    "text": "around. Prompt engineering is simply the",
+    "start": 54.239,
+    "duration": 4.16
+  },
+  {
+    "text": "practice of designing effective",
+    "start": 56.48,
+    "duration": 4.64
+  },
+  {
+    "text": "instructions for AI systems like Claude.",
+    "start": 58.399,
+    "duration": 4.561
+  },
+  {
+    "text": "It's about crafting your questions and",
+    "start": 61.12,
+    "duration": 3.759
+  },
+  {
+    "text": "providing context in ways that help AI",
+    "start": 62.96,
+    "duration": 4.24
+  },
+  {
+    "text": "assistants understand exactly what you",
+    "start": 64.879,
+    "duration": 4.641
+  },
+  {
+    "text": "want. What's fascinating is that",
+    "start": 67.2,
+    "duration": 4.08
+  },
+  {
+    "text": "effective prompting blends familiar",
+    "start": 69.52,
+    "duration": 3.76
+  },
+  {
+    "text": "human communication skills with a few",
+    "start": 71.28,
+    "duration": 4.879
+  },
+  {
+    "text": "considerations specific to AI. Many",
+    "start": 73.28,
+    "duration": 4.479
+  },
+  {
+    "text": "principles that make for good human",
+    "start": 76.159,
+    "duration": 3.361
+  },
+  {
+    "text": "conversation, such as being clear,",
+    "start": 77.759,
+    "duration": 3.521
+  },
+  {
+    "text": "providing relevant context, and giving",
+    "start": 79.52,
+    "duration": 3.84
+  },
+  {
+    "text": "concrete examples, also apply when",
+    "start": 81.28,
+    "duration": 4.24
+  },
+  {
+    "text": "working with AI. Yet, there are",
+    "start": 83.36,
+    "duration": 4
+  },
+  {
+    "text": "differences, such as being more explicit",
+    "start": 85.52,
+    "duration": 3.279
+  },
+  {
+    "text": "about things humans could naturally",
+    "start": 87.36,
+    "duration": 3.68
+  },
+  {
+    "text": "infer, and accommodating the AI's",
+    "start": 88.799,
+    "duration": 4.32
+  },
+  {
+    "text": "limited context window, and sometimes,",
+    "start": 91.04,
+    "duration": 4.16
+  },
+  {
+    "text": "depending on the AI you're working with,",
+    "start": 93.119,
+    "duration": 4.481
+  },
+  {
+    "text": "using specific formatting that machines",
+    "start": 95.2,
+    "duration": 5.04
+  },
+  {
+    "text": "can easily process. As AI assistants",
+    "start": 97.6,
+    "duration": 4.72
+  },
+  {
+    "text": "continue to evolve, prompting best",
+    "start": 100.24,
+    "duration": 4.32
+  },
+  {
+    "text": "practices evolve, too. What works with",
+    "start": 102.32,
+    "duration": 4.079
+  },
+  {
+    "text": "today's AI systems may be different from",
+    "start": 104.56,
+    "duration": 3.68
+  },
+  {
+    "text": "what works with tomorrow's.",
+    "start": 106.399,
+    "duration": 3.76
+  },
+  {
+    "text": "Experimentation is key to discovering",
+    "start": 108.24,
+    "duration": 4.4
+  },
+  {
+    "text": "what works best for your specific needs.",
+    "start": 110.159,
+    "duration": 4.24
+  },
+  {
+    "text": "In this video, we'll mainly explore six",
+    "start": 112.64,
+    "duration": 3.36
+  },
+  {
+    "text": "foundational prompting tips that will go",
+    "start": 114.399,
+    "duration": 3.04
+  },
+  {
+    "text": "a long way toward helping you",
+    "start": 116,
+    "duration": 3.439
+  },
+  {
+    "text": "effectively communicate and collaborate",
+    "start": 117.439,
+    "duration": 4.241
+  },
+  {
+    "text": "with Claude and other AI systems. They",
+    "start": 119.439,
+    "duration": 4.96
+  },
+  {
+    "text": "are give Claude context, show examples",
+    "start": 121.68,
+    "duration": 5.96
+  },
+  {
+    "text": "of what good looks like, specify output",
+    "start": 124.399,
+    "duration": 6
+  },
+  {
+    "text": "constraints, break complex tasks into",
+    "start": 127.64,
+    "duration": 5.72
+  },
+  {
+    "text": "steps, ask Claude to think first, and",
+    "start": 130.399,
+    "duration": 5.361
+  },
+  {
+    "text": "define Claude's role, style, or tone.",
+    "start": 133.36,
+    "duration": 4.16
+  },
+  {
+    "text": "The first principle is simple but",
+    "start": 135.76,
+    "duration": 4
+  },
+  {
+    "text": "powerful. Be specific and clear about",
+    "start": 137.52,
+    "duration": 4.16
+  },
+  {
+    "text": "what you want, why you want it, and",
+    "start": 139.76,
+    "duration": 4.64
+  },
+  {
+    "text": "perhaps most surprisingly, who you are.",
+    "start": 141.68,
+    "duration": 4.96
+  },
+  {
+    "text": "Let's take a simple prompt. Tell me",
+    "start": 144.4,
+    "duration": 4.72
+  },
+  {
+    "text": "about climate change. How can we improve",
+    "start": 146.64,
+    "duration": 5.12
+  },
+  {
+    "text": "this by giving Cloud more context? A",
+    "start": 149.12,
+    "duration": 4.72
+  },
+  {
+    "text": "more specific contextrich version could",
+    "start": 151.76,
+    "duration": 4.479
+  },
+  {
+    "text": "look like, explain three major impacts",
+    "start": 153.84,
+    "duration": 4.16
+  },
+  {
+    "text": "of climate change on agriculture in",
+    "start": 156.239,
+    "duration": 3.921
+  },
+  {
+    "text": "tropical regions with examples from the",
+    "start": 158,
+    "duration": 5.12
+  },
+  {
+    "text": "past decade. Our baseline prompt was",
+    "start": 160.16,
+    "duration": 4.64
+  },
+  {
+    "text": "vague and leaves clawed guessing about",
+    "start": 163.12,
+    "duration": 3.6
+  },
+  {
+    "text": "our interests, level of knowledge, and",
+    "start": 164.8,
+    "duration": 3.519
+  },
+  {
+    "text": "the depth of detail we're looking for,",
+    "start": 166.72,
+    "duration": 3.84
+  },
+  {
+    "text": "such as geography and time span. We can",
+    "start": 168.319,
+    "duration": 3.92
+  },
+  {
+    "text": "even add more context by providing",
+    "start": 170.56,
+    "duration": 3.52
+  },
+  {
+    "text": "information not just about what we're",
+    "start": 172.239,
+    "duration": 4.08
+  },
+  {
+    "text": "looking for, but why we're asking and",
+    "start": 174.08,
+    "duration": 3.92
+  },
+  {
+    "text": "how we'll be using that information that",
+    "start": 176.319,
+    "duration": 4.081
+  },
+  {
+    "text": "Claude gives us. Now, our prompt looks",
+    "start": 178,
+    "duration": 4.959
+  },
+  {
+    "text": "like this. Explain three major impacts",
+    "start": 180.4,
+    "duration": 4.32
+  },
+  {
+    "text": "of climate change on agriculture in",
+    "start": 182.959,
+    "duration": 4
+  },
+  {
+    "text": "tropical regions with examples from the",
+    "start": 184.72,
+    "duration": 4.64
+  },
+  {
+    "text": "past decade. I'm preparing for a job",
+    "start": 186.959,
+    "duration": 4
+  },
+  {
+    "text": "interview at an agricultural research",
+    "start": 189.36,
+    "duration": 3.84
+  },
+  {
+    "text": "lab in Indonesia. I have a degree in",
+    "start": 190.959,
+    "duration": 4.161
+  },
+  {
+    "text": "ecology, but no specific knowledge on",
+    "start": 193.2,
+    "duration": 4.24
+  },
+  {
+    "text": "climate change. write a summary of key",
+    "start": 195.12,
+    "duration": 3.759
+  },
+  {
+    "text": "concepts that would help me speak",
+    "start": 197.44,
+    "duration": 3.76
+  },
+  {
+    "text": "intelligently in the interview. All this",
+    "start": 198.879,
+    "duration": 4.161
+  },
+  {
+    "text": "added context helps tailor Claude's",
+    "start": 201.2,
+    "duration": 3.92
+  },
+  {
+    "text": "response to your specific situation and",
+    "start": 203.04,
+    "duration": 3.76
+  },
+  {
+    "text": "knowledge level. This kind of background",
+    "start": 205.12,
+    "duration": 3.199
+  },
+  {
+    "text": "information is something we naturally",
+    "start": 206.8,
+    "duration": 3.28
+  },
+  {
+    "text": "provide in human conversations, but",
+    "start": 208.319,
+    "duration": 3.28
+  },
+  {
+    "text": "might forget to include when talking",
+    "start": 210.08,
+    "duration": 4.32
+  },
+  {
+    "text": "with Claude. Sometimes showing is better",
+    "start": 211.599,
+    "duration": 5.36
+  },
+  {
+    "text": "than telling. Providing examples of the",
+    "start": 214.4,
+    "duration": 4.16
+  },
+  {
+    "text": "kind of output you're looking for can be",
+    "start": 216.959,
+    "duration": 3.681
+  },
+  {
+    "text": "incredibly effective. This is sometimes",
+    "start": 218.56,
+    "duration": 4
+  },
+  {
+    "text": "called fshot prompting or nshot",
+    "start": 220.64,
+    "duration": 4.08
+  },
+  {
+    "text": "prompting in technical circles where n",
+    "start": 222.56,
+    "duration": 4.48
+  },
+  {
+    "text": "is the number of examples given but it's",
+    "start": 224.72,
+    "duration": 3.76
+  },
+  {
+    "text": "really just about showing the AI",
+    "start": 227.04,
+    "duration": 3.759
+  },
+  {
+    "text": "examples for it to emulate. For",
+    "start": 228.48,
+    "duration": 4.479
+  },
+  {
+    "text": "instance, take the following prompt.",
+    "start": 230.799,
+    "duration": 3.601
+  },
+  {
+    "text": "Please convert this technical statement",
+    "start": 232.959,
+    "duration": 3.36
+  },
+  {
+    "text": "to plain language. The platform",
+    "start": 234.4,
+    "duration": 3.52
+  },
+  {
+    "text": "implements end-to-end encryption",
+    "start": 236.319,
+    "duration": 4.401
+  },
+  {
+    "text": "protocols to safeguard data integrity.",
+    "start": 237.92,
+    "duration": 4.72
+  },
+  {
+    "text": "Clog may already be able to do this to",
+    "start": 240.72,
+    "duration": 3.92
+  },
+  {
+    "text": "your satisfaction. So we definitely",
+    "start": 242.64,
+    "duration": 3.679
+  },
+  {
+    "text": "recommend you just try first without",
+    "start": 244.64,
+    "duration": 4.319
+  },
+  {
+    "text": "examples and see where it leads you. But",
+    "start": 246.319,
+    "duration": 4.48
+  },
+  {
+    "text": "let's say you have a very specific style",
+    "start": 248.959,
+    "duration": 3.521
+  },
+  {
+    "text": "you want Claude to follow, and it's",
+    "start": 250.799,
+    "duration": 4.401
+  },
+  {
+    "text": "harder to explain than to give examples.",
+    "start": 252.48,
+    "duration": 4.24
+  },
+  {
+    "text": "Your refreshed prompt could look",
+    "start": 255.2,
+    "duration": 3.92
+  },
+  {
+    "text": "something like this. Here are two",
+    "start": 256.72,
+    "duration": 3.759
+  },
+  {
+    "text": "examples of how to convert technical",
+    "start": 259.12,
+    "duration": 4.24
+  },
+  {
+    "text": "jargon into plain language. Original,",
+    "start": 260.479,
+    "duration": 4.961
+  },
+  {
+    "text": "the quantum algorithm exhibits quadratic",
+    "start": 263.36,
+    "duration": 4.559
+  },
+  {
+    "text": "speed up. Plain, the new method solves",
+    "start": 265.44,
+    "duration": 4.16
+  },
+  {
+    "text": "problems roughly twice as fast as",
+    "start": 267.919,
+    "duration": 4.081
+  },
+  {
+    "text": "previous methods. Original, the",
+    "start": 269.6,
+    "duration": 4.2
+  },
+  {
+    "text": "interface leverages intuitive design",
+    "start": 272,
+    "duration": 4.639
+  },
+  {
+    "text": "paradigms. Plain, the design is easy to",
+    "start": 273.8,
+    "duration": 5.64
+  },
+  {
+    "text": "understand and use. Now, please convert",
+    "start": 276.639,
+    "duration": 4.881
+  },
+  {
+    "text": "this complex technical manual to plain",
+    "start": 279.44,
+    "duration": 4.479
+  },
+  {
+    "text": "language. When providing examples, aim",
+    "start": 281.52,
+    "duration": 4.239
+  },
+  {
+    "text": "to cover the full diversity of possible",
+    "start": 283.919,
+    "duration": 3.601
+  },
+  {
+    "text": "prompts, such as examples that cover",
+    "start": 285.759,
+    "duration": 4.241
+  },
+  {
+    "text": "different cases or styles. This helps",
+    "start": 287.52,
+    "duration": 4.32
+  },
+  {
+    "text": "Claude better understand the broad range",
+    "start": 290,
+    "duration": 3.759
+  },
+  {
+    "text": "of the pattern you want it to follow.",
+    "start": 291.84,
+    "duration": 3.44
+  },
+  {
+    "text": "Being clear about output constraints,",
+    "start": 293.759,
+    "duration": 3.281
+  },
+  {
+    "text": "such as the desired format and length of",
+    "start": 295.28,
+    "duration": 3.76
+  },
+  {
+    "text": "Claude's response, or the language you",
+    "start": 297.04,
+    "duration": 4.64
+  },
+  {
+    "text": "want Claude to code in, or the color of",
+    "start": 299.04,
+    "duration": 4.24
+  },
+  {
+    "text": "the buttons on the web page you want",
+    "start": 301.68,
+    "duration": 4.16
+  },
+  {
+    "text": "Claude to design, also helps ensure you",
+    "start": 303.28,
+    "duration": 4.72
+  },
+  {
+    "text": "get exactly what you need. Here's an",
+    "start": 305.84,
+    "duration": 3.76
+  },
+  {
+    "text": "example of clear and detailed",
+    "start": 308,
+    "duration": 3.44
+  },
+  {
+    "text": "description to ensure Claude delivers",
+    "start": 309.6,
+    "duration": 4.64
+  },
+  {
+    "text": "exactly what you're looking for. Create",
+    "start": 311.44,
+    "duration": 4.64
+  },
+  {
+    "text": "a clean, modern, single page art",
+    "start": 314.24,
+    "duration": 3.76
+  },
+  {
+    "text": "portfolio website. Include these main",
+    "start": 316.08,
+    "duration": 3.839
+  },
+  {
+    "text": "sections: hero, about me, skills,",
+    "start": 318,
+    "duration": 3.919
+  },
+  {
+    "text": "portfolio, projects, experience, and",
+    "start": 319.919,
+    "duration": 4.081
+  },
+  {
+    "text": "contact. Make the navigation menu sticky",
+    "start": 321.919,
+    "duration": 4
+  },
+  {
+    "text": "and responsive with hamburger menu on",
+    "start": 324,
+    "duration": 4.32
+  },
+  {
+    "text": "mobile. Use a sunset color palette and",
+    "start": 325.919,
+    "duration": 4.521
+  },
+  {
+    "text": "add a dark light mode toggle in the",
+    "start": 328.32,
+    "duration": 4.24
+  },
+  {
+    "text": "navigation. Guidance like this helps",
+    "start": 330.44,
+    "duration": 3.8
+  },
+  {
+    "text": "cloud structure its response to match",
+    "start": 332.56,
+    "duration": 3.84
+  },
+  {
+    "text": "your expectations. When you have a",
+    "start": 334.24,
+    "duration": 4.239
+  },
+  {
+    "text": "complicated request, breaking it down",
+    "start": 336.4,
+    "duration": 4.32
+  },
+  {
+    "text": "into smaller steps helps Cloud follow",
+    "start": 338.479,
+    "duration": 3.841
+  },
+  {
+    "text": "your thinking and deliver better",
+    "start": 340.72,
+    "duration": 4.479
+  },
+  {
+    "text": "results. Think about it this way. If you",
+    "start": 342.32,
+    "duration": 4.48
+  },
+  {
+    "text": "ask a friend to do something for you",
+    "start": 345.199,
+    "duration": 3.681
+  },
+  {
+    "text": "without specifying how, there's a chance",
+    "start": 346.8,
+    "duration": 3.52
+  },
+  {
+    "text": "that they may not do it the way you",
+    "start": 348.88,
+    "duration": 3.68
+  },
+  {
+    "text": "intended them to. We've all been there.",
+    "start": 350.32,
+    "duration": 4.08
+  },
+  {
+    "text": "Listing out task steps ensures that",
+    "start": 352.56,
+    "duration": 4.079
+  },
+  {
+    "text": "Claude follows the process you want to",
+    "start": 354.4,
+    "duration": 4.639
+  },
+  {
+    "text": "in order to accomplish its task. This is",
+    "start": 356.639,
+    "duration": 3.681
+  },
+  {
+    "text": "sometimes called chain of thought",
+    "start": 359.039,
+    "duration": 3.841
+  },
+  {
+    "text": "prompting. For example, instead of",
+    "start": 360.32,
+    "duration": 4.4
+  },
+  {
+    "text": "asking Claude to analyze this quarterly",
+    "start": 362.88,
+    "duration": 3.759
+  },
+  {
+    "text": "sales data, you might say, \"I'd like to",
+    "start": 364.72,
+    "duration": 3.68
+  },
+  {
+    "text": "analyze this quarterly sales data.",
+    "start": 366.639,
+    "duration": 3.521
+  },
+  {
+    "text": "Please approach this by looking through",
+    "start": 368.4,
+    "duration": 3.519
+  },
+  {
+    "text": "our sales records to identify the top",
+    "start": 370.16,
+    "duration": 3.92
+  },
+  {
+    "text": "performing products, comparing current",
+    "start": 371.919,
+    "duration": 4.161
+  },
+  {
+    "text": "quarter results to the previous quarter,",
+    "start": 374.08,
+    "duration": 3.6
+  },
+  {
+    "text": "highlighting any unusual trends or",
+    "start": 376.08,
+    "duration": 3.52
+  },
+  {
+    "text": "patterns, and then suggesting possible",
+    "start": 377.68,
+    "duration": 4.079
+  },
+  {
+    "text": "reasons for these trends. By default,",
+    "start": 379.6,
+    "duration": 3.84
+  },
+  {
+    "text": "you may not need to do this, especially",
+    "start": 381.759,
+    "duration": 3.201
+  },
+  {
+    "text": "for tasks that are relatively",
+    "start": 383.44,
+    "duration": 4.319
+  },
+  {
+    "text": "straightforward. Furthermore, modern",
+    "start": 384.96,
+    "duration": 4.48
+  },
+  {
+    "text": "reasoning models or extended thinking",
+    "start": 387.759,
+    "duration": 3.841
+  },
+  {
+    "text": "models are increasingly capable of",
+    "start": 389.44,
+    "duration": 4.24
+  },
+  {
+    "text": "performing step-by-step reasoning on",
+    "start": 391.6,
+    "duration": 4.56
+  },
+  {
+    "text": "their own, but you can still guide this",
+    "start": 393.68,
+    "duration": 4.2
+  },
+  {
+    "text": "process to ensure it aligns with your",
+    "start": 396.16,
+    "duration": 4.08
+  },
+  {
+    "text": "needs. The more variance there is in",
+    "start": 397.88,
+    "duration": 4.439
+  },
+  {
+    "text": "ways to execute the task well, or the",
+    "start": 400.24,
+    "duration": 4.079
+  },
+  {
+    "text": "more that proper task execution relies",
+    "start": 402.319,
+    "duration": 3.521
+  },
+  {
+    "text": "on experience and knowledge you've",
+    "start": 404.319,
+    "duration": 3.761
+  },
+  {
+    "text": "gained as a domain expert, the more you",
+    "start": 405.84,
+    "duration": 3.76
+  },
+  {
+    "text": "should consider taking the time to",
+    "start": 408.08,
+    "duration": 3.36
+  },
+  {
+    "text": "translate that knowledge into Claude.",
+    "start": 409.6,
+    "duration": 3.92
+  },
+  {
+    "text": "Relatedly, sometimes it can be helpful",
+    "start": 411.44,
+    "duration": 4.24
+  },
+  {
+    "text": "to explicitly give AI assistants like",
+    "start": 413.52,
+    "duration": 4.239
+  },
+  {
+    "text": "Claude space to work through its process",
+    "start": 415.68,
+    "duration": 4.56
+  },
+  {
+    "text": "first before executing its task. This",
+    "start": 417.759,
+    "duration": 4.241
+  },
+  {
+    "text": "approach helps Claude produce more",
+    "start": 420.24,
+    "duration": 4.56
+  },
+  {
+    "text": "thorough and well-considered responses.",
+    "start": 422,
+    "duration": 4.479
+  },
+  {
+    "text": "For example, you can add this to your",
+    "start": 424.8,
+    "duration": 4.16
+  },
+  {
+    "text": "prompt. Before answering, please think",
+    "start": 426.479,
+    "duration": 4.56
+  },
+  {
+    "text": "through this problem carefully. Consider",
+    "start": 428.96,
+    "duration": 3.44
+  },
+  {
+    "text": "the different factors involved,",
+    "start": 431.039,
+    "duration": 3.121
+  },
+  {
+    "text": "potential constraints, and various",
+    "start": 432.4,
+    "duration": 4.079
+  },
+  {
+    "text": "approaches before recommending the best",
+    "start": 434.16,
+    "duration": 4.4
+  },
+  {
+    "text": "solution. As I mentioned, modern",
+    "start": 436.479,
+    "duration": 4.081
+  },
+  {
+    "text": "reasoning or extended thinking models by",
+    "start": 438.56,
+    "duration": 4.24
+  },
+  {
+    "text": "default think before acting. But if",
+    "start": 440.56,
+    "duration": 4
+  },
+  {
+    "text": "you're working with an AI assistant that",
+    "start": 442.8,
+    "duration": 4
+  },
+  {
+    "text": "does not think first by default, you can",
+    "start": 444.56,
+    "duration": 4.4
+  },
+  {
+    "text": "still prompt the AI to do so. I want to",
+    "start": 446.8,
+    "duration": 4.08
+  },
+  {
+    "text": "note the importance of giving the AI",
+    "start": 448.96,
+    "duration": 3.76
+  },
+  {
+    "text": "assistant space to think before doing",
+    "start": 450.88,
+    "duration": 4.159
+  },
+  {
+    "text": "its task, not after. If you want that",
+    "start": 452.72,
+    "duration": 4.319
+  },
+  {
+    "text": "thinking to increase the quality of the",
+    "start": 455.039,
+    "duration": 4.321
+  },
+  {
+    "text": "AI's work, just like how having space to",
+    "start": 457.039,
+    "duration": 4.401
+  },
+  {
+    "text": "think before you act is different than",
+    "start": 459.36,
+    "duration": 4
+  },
+  {
+    "text": "acting first, then being asked to",
+    "start": 461.44,
+    "duration": 4
+  },
+  {
+    "text": "explain your thinking afterwards. As a",
+    "start": 463.36,
+    "duration": 4
+  },
+  {
+    "text": "side benefit, this also allows you to",
+    "start": 465.44,
+    "duration": 3.68
+  },
+  {
+    "text": "better see where the AI assistant might",
+    "start": 467.36,
+    "duration": 4.239
+  },
+  {
+    "text": "be going astray and thus where you could",
+    "start": 469.12,
+    "duration": 4.799
+  },
+  {
+    "text": "hone your description competency further",
+    "start": 471.599,
+    "duration": 4.961
+  },
+  {
+    "text": "by providing more guidance. Specifying",
+    "start": 473.919,
+    "duration": 4.161
+  },
+  {
+    "text": "how you want cloud to communicate and",
+    "start": 476.56,
+    "duration": 3.68
+  },
+  {
+    "text": "behave can significantly change how it",
+    "start": 478.08,
+    "duration": 4.48
+  },
+  {
+    "text": "approaches a task. By specifying the",
+    "start": 480.24,
+    "duration": 4.32
+  },
+  {
+    "text": "level of expected expertise, the",
+    "start": 482.56,
+    "duration": 3.84
+  },
+  {
+    "text": "perspective you want it to take, or its",
+    "start": 484.56,
+    "duration": 4
+  },
+  {
+    "text": "communication style, you can guide both",
+    "start": 486.4,
+    "duration": 3.919
+  },
+  {
+    "text": "Claude's interaction with you and the",
+    "start": 488.56,
+    "duration": 4.079
+  },
+  {
+    "text": "final result of what it produces. Simply",
+    "start": 490.319,
+    "duration": 5.201
+  },
+  {
+    "text": "put, who do you want the AI to act as?",
+    "start": 492.639,
+    "duration": 5.201
+  },
+  {
+    "text": "For example, take this prompt. Please",
+    "start": 495.52,
+    "duration": 4
+  },
+  {
+    "text": "explain how rainbows form from the",
+    "start": 497.84,
+    "duration": 3.44
+  },
+  {
+    "text": "perspective of an experienced science",
+    "start": 499.52,
+    "duration": 3.76
+  },
+  {
+    "text": "teacher speaking to a bright 10-year-old",
+    "start": 501.28,
+    "duration": 4.24
+  },
+  {
+    "text": "who's interested in science. This is",
+    "start": 503.28,
+    "duration": 3.919
+  },
+  {
+    "text": "also a good way to brainstorm or get",
+    "start": 505.52,
+    "duration": 3.679
+  },
+  {
+    "text": "feedback. You can specify a general role",
+    "start": 507.199,
+    "duration": 3.921
+  },
+  {
+    "text": "or even ask Claw to take on the persona",
+    "start": 509.199,
+    "duration": 3.681
+  },
+  {
+    "text": "of a specific figure, such as Richard",
+    "start": 511.12,
+    "duration": 3.799
+  },
+  {
+    "text": "Fineman, when asking for physics",
+    "start": 512.88,
+    "duration": 4.8
+  },
+  {
+    "text": "explanations. Here's another example. As",
+    "start": 514.919,
+    "duration": 5.081
+  },
+  {
+    "text": "a UX design expert, review this website",
+    "start": 517.68,
+    "duration": 4.479
+  },
+  {
+    "text": "wireframe and suggest three improvements",
+    "start": 520,
+    "duration": 3.919
+  },
+  {
+    "text": "focusing on user navigation and",
+    "start": 522.159,
+    "duration": 3.601
+  },
+  {
+    "text": "accessibility. Perhaps the most powerful",
+    "start": 523.919,
+    "duration": 3.441
+  },
+  {
+    "text": "technique is asking Claude to help",
+    "start": 525.76,
+    "duration": 3.519
+  },
+  {
+    "text": "improve your prompt. When you're not",
+    "start": 527.36,
+    "duration": 3.68
+  },
+  {
+    "text": "sure how to ask for something or how to",
+    "start": 529.279,
+    "duration": 3.921
+  },
+  {
+    "text": "improve your prompt, describe to Claude",
+    "start": 531.04,
+    "duration": 4
+  },
+  {
+    "text": "your issue or situation and ask it to",
+    "start": 533.2,
+    "duration": 3.68
+  },
+  {
+    "text": "make your prompt better or write your",
+    "start": 535.04,
+    "duration": 4.56
+  },
+  {
+    "text": "prompt for you. I'm trying to get you,",
+    "start": 536.88,
+    "duration": 4.959
+  },
+  {
+    "text": "Claude, to help me with goal. I'm not",
+    "start": 539.6,
+    "duration": 4.56
+  },
+  {
+    "text": "sure how to phrase my request to get the",
+    "start": 541.839,
+    "duration": 4.321
+  },
+  {
+    "text": "best results. Can you help me craft an",
+    "start": 544.16,
+    "duration": 4.48
+  },
+  {
+    "text": "effective prompt for this? Here's where",
+    "start": 546.16,
+    "duration": 4.56
+  },
+  {
+    "text": "Claude and other AI assistants may vary",
+    "start": 548.64,
+    "duration": 3.759
+  },
+  {
+    "text": "most in terms of performance. So, we",
+    "start": 550.72,
+    "duration": 3.2
+  },
+  {
+    "text": "suggest you experiment with different",
+    "start": 552.399,
+    "duration": 4.801
+  },
+  {
+    "text": "models as part of practicing delegation.",
+    "start": 553.92,
+    "duration": 5.16
+  },
+  {
+    "text": "Effective prompting is iterative and",
+    "start": 557.2,
+    "duration": 4.079
+  },
+  {
+    "text": "experimental. AI systems and best",
+    "start": 559.08,
+    "duration": 4.439
+  },
+  {
+    "text": "practices are constantly evolving. So,",
+    "start": 561.279,
+    "duration": 4.481
+  },
+  {
+    "text": "what works today may change tomorrow.",
+    "start": 563.519,
+    "duration": 3.841
+  },
+  {
+    "text": "Your first attempt won't always yield",
+    "start": 565.76,
+    "duration": 4.079
+  },
+  {
+    "text": "the perfect result, and that's expected.",
+    "start": 567.36,
+    "duration": 4.159
+  },
+  {
+    "text": "When a response isn't quite what you",
+    "start": 569.839,
+    "duration": 3.841
+  },
+  {
+    "text": "need, try refining your approach by",
+    "start": 571.519,
+    "duration": 3.44
+  },
+  {
+    "text": "playing around with any of the",
+    "start": 573.68,
+    "duration": 3.68
+  },
+  {
+    "text": "techniques we mentioned, such as add",
+    "start": 574.959,
+    "duration": 5.041
+  },
+  {
+    "text": "more specificity or context. Provide",
+    "start": 577.36,
+    "duration": 5.44
+  },
+  {
+    "text": "examples of your desired output. Break",
+    "start": 580,
+    "duration": 5.68
+  },
+  {
+    "text": "the task into smaller steps and try a",
+    "start": 582.8,
+    "duration": 4.24
+  },
+  {
+    "text": "different technique or combination of",
+    "start": 585.68,
+    "duration": 3.36
+  },
+  {
+    "text": "techniques. You can also ask for",
+    "start": 587.04,
+    "duration": 3.84
+  },
+  {
+    "text": "variations such as, \"Can you give me",
+    "start": 589.04,
+    "duration": 4.08
+  },
+  {
+    "text": "three different versions of this?\" You",
+    "start": 590.88,
+    "duration": 4.079
+  },
+  {
+    "text": "can request different formats such as,",
+    "start": 593.12,
+    "duration": 3.68
+  },
+  {
+    "text": "\"Instead of a paragraph, could you",
+    "start": 594.959,
+    "duration": 3.121
+  },
+  {
+    "text": "present this in an interactive",
+    "start": 596.8,
+    "duration": 3.52
+  },
+  {
+    "text": "artifact?\" Note that artifacts are a",
+    "start": 598.08,
+    "duration": 3.6
+  },
+  {
+    "text": "unique way that Claude can create",
+    "start": 600.32,
+    "duration": 3.36
+  },
+  {
+    "text": "outputs that may be easier to understand",
+    "start": 601.68,
+    "duration": 4.159
+  },
+  {
+    "text": "or more interesting to digest. You can",
+    "start": 603.68,
+    "duration": 4.08
+  },
+  {
+    "text": "also check confidence, such as for",
+    "start": 605.839,
+    "duration": 3.921
+  },
+  {
+    "text": "factual questions, you can ask, \"How",
+    "start": 607.76,
+    "duration": 4.48
+  },
+  {
+    "text": "confident are you about this answer?\"",
+    "start": 609.76,
+    "duration": 4.079
+  },
+  {
+    "text": "You can also reset the conversation",
+    "start": 612.24,
+    "duration": 3.599
+  },
+  {
+    "text": "entirely. Sometimes starting a fresh",
+    "start": 613.839,
+    "duration": 3.841
+  },
+  {
+    "text": "conversation gives better results than",
+    "start": 615.839,
+    "duration": 3.201
+  },
+  {
+    "text": "trying to correct the conversation",
+    "start": 617.68,
+    "duration": 3.44
+  },
+  {
+    "text": "that's gone off track. Use each",
+    "start": 619.04,
+    "duration": 4.239
+  },
+  {
+    "text": "interaction as feedback to improve your",
+    "start": 621.12,
+    "duration": 4.64
+  },
+  {
+    "text": "next prompt. Over time, you'll develop",
+    "start": 623.279,
+    "duration": 4.161
+  },
+  {
+    "text": "an intuition for how to communicate",
+    "start": 625.76,
+    "duration": 4.48
+  },
+  {
+    "text": "effectively with all AI systems. As you",
+    "start": 627.44,
+    "duration": 4.399
+  },
+  {
+    "text": "apply these techniques in practice,",
+    "start": 630.24,
+    "duration": 4.159
+  },
+  {
+    "text": "here's some guidance to recap. Some",
+    "start": 631.839,
+    "duration": 4.401
+  },
+  {
+    "text": "patterns consistently work well.",
+    "start": 634.399,
+    "duration": 3.361
+  },
+  {
+    "text": "Starting with a clear task overview",
+    "start": 636.24,
+    "duration": 3.2
+  },
+  {
+    "text": "statement, including format",
+    "start": 637.76,
+    "duration": 3.84
+  },
+  {
+    "text": "specifications and examples, setting",
+    "start": 639.44,
+    "duration": 4.399
+  },
+  {
+    "text": "explicit constraints or requirements,",
+    "start": 641.6,
+    "duration": 4.32
+  },
+  {
+    "text": "providing rich and relevant background",
+    "start": 643.839,
+    "duration": 4.081
+  },
+  {
+    "text": "information, and common mistakes to",
+    "start": 645.92,
+    "duration": 3.76
+  },
+  {
+    "text": "avoid are assuming that Claude can read",
+    "start": 647.92,
+    "duration": 4.24
+  },
+  {
+    "text": "your mind, or overloading a single",
+    "start": 649.68,
+    "duration": 4.159
+  },
+  {
+    "text": "prompt or conversation with multiple",
+    "start": 652.16,
+    "duration": 4.08
+  },
+  {
+    "text": "unrelated tasks, being too vague about",
+    "start": 653.839,
+    "duration": 4.081
+  },
+  {
+    "text": "what success looks like, and not",
+    "start": 656.24,
+    "duration": 3.2
+  },
+  {
+    "text": "providing feedback on previous",
+    "start": 657.92,
+    "duration": 3.52
+  },
+  {
+    "text": "responses. To recap, effective",
+    "start": 659.44,
+    "duration": 3.6
+  },
+  {
+    "text": "communication with AI systems like",
+    "start": 661.44,
+    "duration": 3.36
+  },
+  {
+    "text": "Claude combines timeless human",
+    "start": 663.04,
+    "duration": 3.44
+  },
+  {
+    "text": "communication principles with AI",
+    "start": 664.8,
+    "duration": 3.84
+  },
+  {
+    "text": "specific techniques. The approaches",
+    "start": 666.48,
+    "duration": 4
+  },
+  {
+    "text": "we've covered will serve you well across",
+    "start": 668.64,
+    "duration": 3.84
+  },
+  {
+    "text": "different AI systems. These six",
+    "start": 670.48,
+    "duration": 3.44
+  },
+  {
+    "text": "principles together with the secret",
+    "start": 672.48,
+    "duration": 3.84
+  },
+  {
+    "text": "weapon of asking Cloud for help form a",
+    "start": 673.92,
+    "duration": 3.76
+  },
+  {
+    "text": "solid toolkit for applying the",
+    "start": 676.32,
+    "duration": 3.48
+  },
+  {
+    "text": "description competence to your AI",
+    "start": 677.68,
+    "duration": 4.24
+  },
+  {
+    "text": "interactions. Iteration and practice",
+    "start": 679.8,
+    "duration": 4.4
+  },
+  {
+    "text": "here is the key to Swift improvement and",
+    "start": 681.92,
+    "duration": 4.24
+  },
+  {
+    "text": "mastery. Remember that prompt",
+    "start": 684.2,
+    "duration": 4.6
+  },
+  {
+    "text": "engineering is an evolving practice. As",
+    "start": 686.16,
+    "duration": 4.72
+  },
+  {
+    "text": "models improve, some specific techniques",
+    "start": 688.8,
+    "duration": 4.96
+  },
+  {
+    "text": "become less necessary. However, these",
+    "start": 690.88,
+    "duration": 4.48
+  },
+  {
+    "text": "principles of good communication are",
+    "start": 693.76,
+    "duration": 3.519
+  },
+  {
+    "text": "still relevant even if the way we apply",
+    "start": 695.36,
+    "duration": 4.599
+  },
+  {
+    "text": "them changes. Maintain a spirit of",
+    "start": 697.279,
+    "duration": 4.721
+  },
+  {
+    "text": "experimentation and adapt your approach",
+    "start": 699.959,
+    "duration": 5.681
+  },
+  {
+    "text": "based on your results.",
+    "start": 702,
+    "duration": 3.64
+  }
+]

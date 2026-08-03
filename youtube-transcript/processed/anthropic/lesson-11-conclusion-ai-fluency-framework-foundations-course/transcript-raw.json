@@ -1,0 +1,672 @@
+[
+  {
+    "text": "Hello and welcome to our final session",
+    "start": 11.2,
+    "duration": 5.2
+  },
+  {
+    "text": "covering the foundations of AI fluency.",
+    "start": 13.679,
+    "duration": 4.241
+  },
+  {
+    "text": "I'm Professor Rick Dacen from the",
+    "start": 16.4,
+    "duration": 4.24
+  },
+  {
+    "text": "Ringling College of Art and Design. Over",
+    "start": 17.92,
+    "duration": 4.24
+  },
+  {
+    "text": "a short period, we've covered quite a",
+    "start": 20.64,
+    "duration": 3.52
+  },
+  {
+    "text": "lot of ground together exploring the AI",
+    "start": 22.16,
+    "duration": 3.92
+  },
+  {
+    "text": "fluency framework and seeing how it",
+    "start": 24.16,
+    "duration": 3.84
+  },
+  {
+    "text": "applies to everyday collaboration with",
+    "start": 26.08,
+    "duration": 4.56
+  },
+  {
+    "text": "AI. Let's take a moment to reflect on",
+    "start": 28,
+    "duration": 5.079
+  },
+  {
+    "text": "what we've learned, highlight some key",
+    "start": 30.64,
+    "duration": 4.88
+  },
+  {
+    "text": "takeaways, and look ahead to where you",
+    "start": 33.079,
+    "duration": 4.32
+  },
+  {
+    "text": "might go",
+    "start": 35.52,
+    "duration": 4.879
+  },
+  {
+    "text": "next. Let's begin by revisiting the four",
+    "start": 37.399,
+    "duration": 5.081
+  },
+  {
+    "text": "core competencies, also known as the",
+    "start": 40.399,
+    "duration": 5.32
+  },
+  {
+    "text": "four Ds, that make up the AI fluency",
+    "start": 42.48,
+    "duration": 5.599
+  },
+  {
+    "text": "framework. Delegation focuses on",
+    "start": 45.719,
+    "duration": 4.68
+  },
+  {
+    "text": "deciding what work should be done by and",
+    "start": 48.079,
+    "duration": 4.64
+  },
+  {
+    "text": "with AI versus what's best handled by",
+    "start": 50.399,
+    "duration": 4.48
+  },
+  {
+    "text": "humans alone. It combines your",
+    "start": 52.719,
+    "duration": 4
+  },
+  {
+    "text": "understanding of the problem, awareness",
+    "start": 54.879,
+    "duration": 4.241
+  },
+  {
+    "text": "of AI capabilities, and skill in",
+    "start": 56.719,
+    "duration": 4.32
+  },
+  {
+    "text": "distributing work effectively between",
+    "start": 59.12,
+    "duration": 4.92
+  },
+  {
+    "text": "you and your AI",
+    "start": 61.039,
+    "duration": 6.241
+  },
+  {
+    "text": "assistants. Description addresses how we",
+    "start": 64.04,
+    "duration": 5.88
+  },
+  {
+    "text": "communicate with AI systems. Through",
+    "start": 67.28,
+    "duration": 4.8
+  },
+  {
+    "text": "clear articulation of what we want, how",
+    "start": 69.92,
+    "duration": 3.84
+  },
+  {
+    "text": "we want it approached, and what kind of",
+    "start": 72.08,
+    "duration": 4.16
+  },
+  {
+    "text": "interaction is most helpful to us, also",
+    "start": 73.76,
+    "duration": 4.399
+  },
+  {
+    "text": "known as product, process, and",
+    "start": 76.24,
+    "duration": 4.8
+  },
+  {
+    "text": "performance description, we guide AI to",
+    "start": 78.159,
+    "duration": 5.28
+  },
+  {
+    "text": "produce the outputs we need and become",
+    "start": 81.04,
+    "duration": 4.399
+  },
+  {
+    "text": "more effective collaborators and",
+    "start": 83.439,
+    "duration": 4.641
+  },
+  {
+    "text": "assistants.",
+    "start": 85.439,
+    "duration": 4.561
+  },
+  {
+    "text": "Discernment involves critically",
+    "start": 88.08,
+    "duration": 4.64
+  },
+  {
+    "text": "evaluating AI outputs and behaviors. By",
+    "start": 90,
+    "duration": 4.159
+  },
+  {
+    "text": "developing your ability to assess",
+    "start": 92.72,
+    "duration": 3.6
+  },
+  {
+    "text": "outputs, processes, and interactions,",
+    "start": 94.159,
+    "duration": 4.241
+  },
+  {
+    "text": "also known as product, process, and",
+    "start": 96.32,
+    "duration": 4.4
+  },
+  {
+    "text": "performance discernment, you ensure",
+    "start": 98.4,
+    "duration": 4.88
+  },
+  {
+    "text": "quality and appropriateness in all your",
+    "start": 100.72,
+    "duration": 4.8
+  },
+  {
+    "text": "AIdriven outputs.",
+    "start": 103.28,
+    "duration": 6
+  },
+  {
+    "text": "And finally, diligence ensures our AI",
+    "start": 105.52,
+    "duration": 6.239
+  },
+  {
+    "text": "interactions are responsible. Through",
+    "start": 109.28,
+    "duration": 4.56
+  },
+  {
+    "text": "thoughtful selection of AI systems,",
+    "start": 111.759,
+    "duration": 4.241
+  },
+  {
+    "text": "transparency about AI's role in taking",
+    "start": 113.84,
+    "duration": 3.919
+  },
+  {
+    "text": "accountability for the final product,",
+    "start": 116,
+    "duration": 4
+  },
+  {
+    "text": "also known as creation, transparency,",
+    "start": 117.759,
+    "duration": 4.4
+  },
+  {
+    "text": "and deployment diligence, we can work",
+    "start": 120,
+    "duration": 5.6
+  },
+  {
+    "text": "with AI ethically and safely. Remember",
+    "start": 122.159,
+    "duration": 6.32
+  },
+  {
+    "text": "that these competencies apply across all",
+    "start": 125.6,
+    "duration": 6.32
+  },
+  {
+    "text": "three ways we interact with AI.",
+    "start": 128.479,
+    "duration": 5.681
+  },
+  {
+    "text": "Automation, where AI performs specific",
+    "start": 131.92,
+    "duration": 3.88
+  },
+  {
+    "text": "tasks following your",
+    "start": 134.16,
+    "duration": 3.92
+  },
+  {
+    "text": "instructions. Augmentation, where you",
+    "start": 135.8,
+    "duration": 5.48
+  },
+  {
+    "text": "and AI collaborate as thinking partners,",
+    "start": 138.08,
+    "duration": 6.08
+  },
+  {
+    "text": "and agency, where AI is configured to",
+    "start": 141.28,
+    "duration": 5.24
+  },
+  {
+    "text": "act independently on your",
+    "start": 144.16,
+    "duration": 4.88
+  },
+  {
+    "text": "behalf. As you move forward in your AI",
+    "start": 146.52,
+    "duration": 4.6
+  },
+  {
+    "text": "journey, keep these essential insights",
+    "start": 149.04,
+    "duration": 5.44
+  },
+  {
+    "text": "in mind. For delegation, your expertise",
+    "start": 151.12,
+    "duration": 5.839
+  },
+  {
+    "text": "and judgment remain the foundation of",
+    "start": 154.48,
+    "duration": 5.92
+  },
+  {
+    "text": "effective AI use. The most powerful",
+    "start": 156.959,
+    "duration": 5.961
+  },
+  {
+    "text": "outcomes often emerge when you can",
+    "start": 160.4,
+    "duration": 5.68
+  },
+  {
+    "text": "identify opportunities where you and AI",
+    "start": 162.92,
+    "duration": 5.24
+  },
+  {
+    "text": "can build on each other's strengths",
+    "start": 166.08,
+    "duration": 4
+  },
+  {
+    "text": "through iterative collaboration,",
+    "start": 168.16,
+    "duration": 5.48
+  },
+  {
+    "text": "creating outcomes neither could achieve",
+    "start": 170.08,
+    "duration": 6.159
+  },
+  {
+    "text": "alone. For description, clear",
+    "start": 173.64,
+    "duration": 4.599
+  },
+  {
+    "text": "communication bridges your intentions",
+    "start": 176.239,
+    "duration": 5.121
+  },
+  {
+    "text": "and AI capabilities.",
+    "start": 178.239,
+    "duration": 5.36
+  },
+  {
+    "text": "Sometimes the most effective",
+    "start": 181.36,
+    "duration": 4.72
+  },
+  {
+    "text": "instructions aren't elaborate prompts,",
+    "start": 183.599,
+    "duration": 4.481
+  },
+  {
+    "text": "but thoughtful conversations that",
+    "start": 186.08,
+    "duration": 5
+  },
+  {
+    "text": "provide context, examples, and",
+    "start": 188.08,
+    "duration": 5.439
+  },
+  {
+    "text": "feedback for discernment. Critical",
+    "start": 191.08,
+    "duration": 4.56
+  },
+  {
+    "text": "evaluation of AI outputs is a",
+    "start": 193.519,
+    "duration": 4.121
+  },
+  {
+    "text": "non-negotiable",
+    "start": 195.64,
+    "duration": 4.28
+  },
+  {
+    "text": "responsibility. Your discernment skills",
+    "start": 197.64,
+    "duration": 4.679
+  },
+  {
+    "text": "protect against AI limitations and once",
+    "start": 199.92,
+    "duration": 4.399
+  },
+  {
+    "text": "again enable you to achieve results",
+    "start": 202.319,
+    "duration": 4.721
+  },
+  {
+    "text": "neither you nor the AI could easily",
+    "start": 204.319,
+    "duration": 6.401
+  },
+  {
+    "text": "create alone. For diligence, you remain",
+    "start": 207.04,
+    "duration": 6.4
+  },
+  {
+    "text": "accountable for what you do with AI and",
+    "start": 210.72,
+    "duration": 5.519
+  },
+  {
+    "text": "its impact on others. Being transparent",
+    "start": 213.44,
+    "duration": 4.64
+  },
+  {
+    "text": "about AI's role in your work builds",
+    "start": 216.239,
+    "duration": 2.92
+  },
+  {
+    "text": "trust and",
+    "start": 218.08,
+    "duration": 3.439
+  },
+  {
+    "text": "integrity. These competencies aren't",
+    "start": 219.159,
+    "duration": 4.8
+  },
+  {
+    "text": "mastered overnight. They develop through",
+    "start": 221.519,
+    "duration": 5.36
+  },
+  {
+    "text": "practice. As you delegate work, describe",
+    "start": 223.959,
+    "duration": 4.84
+  },
+  {
+    "text": "your needs, discern the quality of",
+    "start": 226.879,
+    "duration": 3.841
+  },
+  {
+    "text": "outputs, and apply diligence to your",
+    "start": 228.799,
+    "duration": 4.16
+  },
+  {
+    "text": "process. Your AI fluency will grow",
+    "start": 230.72,
+    "duration": 4.96
+  },
+  {
+    "text": "naturally. The goal isn't perfection.",
+    "start": 232.959,
+    "duration": 4.321
+  },
+  {
+    "text": "It's about continually developing",
+    "start": 235.68,
+    "duration": 4.479
+  },
+  {
+    "text": "awareness, commitment, and intentional",
+    "start": 237.28,
+    "duration": 5.599
+  },
+  {
+    "text": "approach to working with AI. The fluency",
+    "start": 240.159,
+    "duration": 4.64
+  },
+  {
+    "text": "framework is designed to be widely",
+    "start": 242.879,
+    "duration": 3.841
+  },
+  {
+    "text": "applicable to the broad range of",
+    "start": 244.799,
+    "duration": 4.401
+  },
+  {
+    "text": "generative AI assistants and remain",
+    "start": 246.72,
+    "duration": 5.12
+  },
+  {
+    "text": "relevant even as AI systems continue to",
+    "start": 249.2,
+    "duration": 5.119
+  },
+  {
+    "text": "evolve, but it is up to us to make sure",
+    "start": 251.84,
+    "duration": 4.32
+  },
+  {
+    "text": "we continue to apply our learning as",
+    "start": 254.319,
+    "duration": 3.92
+  },
+  {
+    "text": "well. We hope this course is just the",
+    "start": 256.16,
+    "duration": 4.72
+  },
+  {
+    "text": "beginning of your AI fluency journey. To",
+    "start": 258.239,
+    "duration": 4.761
+  },
+  {
+    "text": "close out the AI Fluency Foundations",
+    "start": 260.88,
+    "duration": 4.48
+  },
+  {
+    "text": "course, you'll find some follow-on",
+    "start": 263,
+    "duration": 4.68
+  },
+  {
+    "text": "activities designed to help you apply",
+    "start": 265.36,
+    "duration": 4.559
+  },
+  {
+    "text": "what you've learned, along with",
+    "start": 267.68,
+    "duration": 5.12
+  },
+  {
+    "text": "resources for continued exploration. We",
+    "start": 269.919,
+    "duration": 4.56
+  },
+  {
+    "text": "began this course with the goal of",
+    "start": 272.8,
+    "duration": 4.24
+  },
+  {
+    "text": "helping you think differently about AI",
+    "start": 274.479,
+    "duration": 4.881
+  },
+  {
+    "text": "and the ways we work with it. These are",
+    "start": 277.04,
+    "duration": 4.719
+  },
+  {
+    "text": "powerful systems, but they're not silver",
+    "start": 279.36,
+    "duration": 4.88
+  },
+  {
+    "text": "bullets or magical solutions to every",
+    "start": 281.759,
+    "duration": 5.121
+  },
+  {
+    "text": "problem. They're only as useful and safe",
+    "start": 284.24,
+    "duration": 4.959
+  },
+  {
+    "text": "as we enable them to be. So invest in",
+    "start": 286.88,
+    "duration": 4.8
+  },
+  {
+    "text": "your own expertise and stay aware of",
+    "start": 289.199,
+    "duration": 4.881
+  },
+  {
+    "text": "technological change so that you can",
+    "start": 291.68,
+    "duration": 5.04
+  },
+  {
+    "text": "delegate appropriately. Practice art of",
+    "start": 294.08,
+    "duration": 4.64
+  },
+  {
+    "text": "description and discernment. That",
+    "start": 296.72,
+    "duration": 3.84
+  },
+  {
+    "text": "thoughtful back and forth conversation",
+    "start": 298.72,
+    "duration": 3.759
+  },
+  {
+    "text": "that transforms AI from simple",
+    "start": 300.56,
+    "duration": 4.24
+  },
+  {
+    "text": "automation machines into genuine",
+    "start": 302.479,
+    "duration": 5.201
+  },
+  {
+    "text": "thinking partners. And above all, take",
+    "start": 304.8,
+    "duration": 4.48
+  },
+  {
+    "text": "responsibility for the way you work with",
+    "start": 307.68,
+    "duration": 4.32
+  },
+  {
+    "text": "AI and what do you create together. Be",
+    "start": 309.28,
+    "duration": 5.199
+  },
+  {
+    "text": "effective and efficient. Be ethical and",
+    "start": 312,
+    "duration": 4.88
+  },
+  {
+    "text": "safe. We're all learning together how to",
+    "start": 314.479,
+    "duration": 4.201
+  },
+  {
+    "text": "navigate this rapidly evolving",
+    "start": 316.88,
+    "duration": 4.24
+  },
+  {
+    "text": "landscape. Thank you for joining us on",
+    "start": 318.68,
+    "duration": 5.079
+  },
+  {
+    "text": "this journey toward greater AI fluency.",
+    "start": 321.12,
+    "duration": 4.799
+  },
+  {
+    "text": "The future of human AI collaboration is",
+    "start": 323.759,
+    "duration": 4.641
+  },
+  {
+    "text": "bright and you're now better equipped to",
+    "start": 325.919,
+    "duration": 5.881
+  },
+  {
+    "text": "shape it thoughtfully.",
+    "start": 328.4,
+    "duration": 3.4
+  }
+]
