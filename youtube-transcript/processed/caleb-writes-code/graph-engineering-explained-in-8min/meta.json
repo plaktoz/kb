@@ -1,0 +1,69 @@
+{
+  "videoId": "mBePcvqLX88",
+  "title": "Graph Engineering explained in 8min..",
+  "channel": "Caleb Writes Code",
+  "channelId": "UCuU9jE4MHHEIyYMbDfUPSew",
+  "description": "Zo Computer: https://zo-computer.cello.so/2XNkhpgqHRy\n\nGraph Engineering, a new focus in agentic engineering as we target the external areas around what makes agents scalable.\nFor a long time, graph was not feasible because the node itself was brittle which made graph not very useful.\n\nBut with the emergence of Claude Code, Codex CLI, Antigravity and more, scaling the agent to a graph has now become feasible as AI adoption grows to bigger use cases.\n\nFollow me:\nX: https://x.com/calebfoundry\nLinkedIn: https://www.linkedin.com/in/calebeom/\nTikTok: https://www.tiktok.com/@calebwritescode\n\nChapters\n00:00 Intro\n01:16 Graph Theory\n02:33 DAG\n03:14 Dynamic Workflow\n03:56 Cost of Graph\n04:49 Sponsor: Zo\n05:58 Multi-Agent\n06:44 Coding Agent\n07:42 Bottleneck\n08:09 Conclusion",
+  "duration": 515,
+  "publishDate": "2026-07-30",
+  "url": "https://www.youtube.com/watch?v=mBePcvqLX88",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/mBePcvqLX88/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "Intro",
+      "start": 0,
+      "end": 76
+    },
+    {
+      "title": "Graph Theory",
+      "start": 76,
+      "end": 153
+    },
+    {
+      "title": "DAG",
+      "start": 153,
+      "end": 194
+    },
+    {
+      "title": "Dynamic Workflow",
+      "start": 194,
+      "end": 236
+    },
+    {
+      "title": "Cost of Graph",
+      "start": 236,
+      "end": 289
+    },
+    {
+      "title": "Sponsor: Zo",
+      "start": 289,
+      "end": 358
+    },
+    {
+      "title": "Multi-Agent",
+      "start": 358,
+      "end": 404
+    },
+    {
+      "title": "Coding Agent",
+      "start": 404,
+      "end": 462
+    },
+    {
+      "title": "Bottleneck",
+      "start": 462,
+      "end": 489
+    },
+    {
+      "title": "Conclusion",
+      "start": 489,
+      "end": 515
+    }
+  ]
+}

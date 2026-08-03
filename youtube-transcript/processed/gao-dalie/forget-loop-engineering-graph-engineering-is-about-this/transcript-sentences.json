@@ -1,0 +1,452 @@
+[
+  {
+    "text": "As AI agents become more complex, simply repeating the same process will no longer be enough to automate tasks.",
+    "start": "00:00:00",
+    "end": "00:00:09"
+  },
+  {
+    "text": "Real-world work involves multiple people, dependencies, approvals, conditional branching, and exception handling.",
+    "start": "00:00:07",
+    "end": "00:00:15"
+  },
+  {
+    "text": "The idea of designing such complex tasks, not as a simple linear process, but as a structure with interconnected relationships, is gaining attention.",
+    "start": "00:00:15",
+    "end": "00:00:25"
+  },
+  {
+    "text": "In July 2026, the term graph engineering began to spread rapidly around the field of AI agent development.",
+    "start": "00:00:25",
+    "end": "00:00:33"
+  },
+  {
+    "text": "One of the triggers was a short post by Peter Steinberger of OpenClaw that essentially asked, \"Are we still talking about loops, or have we moved on to graphs?",
+    "start": "00:00:33",
+    "end": "00:00:46"
+  },
+  {
+    "text": "\" Just a few weeks ago, the hot topic was loop engineering.",
+    "start": "00:00:46",
+    "end": "00:00:48"
+  },
+  {
+    "text": "This concept involves designing an iterative system where AI discovers, executes, verifies, records, and moves on to the next task, rather than humans having to input excellent prompts each time.",
+    "start": "00:00:48",
+    "end": "00:01:02"
+  },
+  {
+    "text": "However, after running the loop many times, new problems arose.",
+    "start": "00:01:02",
+    "end": "00:01:06"
+  },
+  {
+    "text": "It's not that the agents aren't smart enough, but rather that the organizational structure isn't clear enough.",
+    "start": "00:01:06",
+    "end": "00:01:12"
+  },
+  {
+    "text": "An agent can loop through a single task.",
+    "start": "00:01:12",
+    "end": "00:01:14"
+  },
+  {
+    "text": "However, when tasks span product architecture, data security, testing, release, cost, and compliance, the real challenge is no longer getting an agent to try a few more times, but rather getting multiple agents with boundaries to work together in an observable, auditable, and recoverable manner.",
+    "start": "00:01:14",
+    "end": "00:01:33"
+  },
+  {
+    "text": "Then, a graph appeared.",
+    "start": "00:01:33",
+    "end": "00:01:37"
+  },
+  {
+    "text": "So, are loops outdated?",
+    "start": "00:01:37",
+    "end": "00:01:38"
+  },
+  {
+    "text": "Should all AI agents be complex graphs of multiple agents?",
+    "start": "00:01:38",
+    "end": "00:01:43"
+  },
+  {
+    "text": "Graph engineering is about designing the relationships between those processes.",
+    "start": "00:01:43",
+    "end": "00:01:49"
+  },
+  {
+    "text": "The name is new, but most of the hard problems are not.",
+    "start": "00:01:46",
+    "end": "00:01:51"
+  },
+  {
+    "text": "In other words, graph engineering didn't invent anything new.",
+    "start": "00:01:51",
+    "end": "00:01:56"
+  },
+  {
+    "text": "Rather, it gave a new name to those long-standing problems in agent orchestration.",
+    "start": "00:01:54",
+    "end": "00:02:01"
+  },
+  {
+    "text": "These old problems include how to break down tasks, how to express dependencies, which tasks can be parallelized, how to recover from failures, and where to store state.",
+    "start": "00:02:01",
+    "end": "00:02:14"
+  },
+  {
+    "text": "So, what happened after loop engineering?",
+    "start": "00:02:14",
+    "end": "00:02:16"
+  },
+  {
+    "text": "In loop engineering, we don't just give instructions to the AI once and then stop there.",
+    "start": "00:02:16",
+    "end": "00:02:20"
+  },
+  {
+    "text": "Create deliverables, evaluate them, identify problems, fix them, and evaluate again.",
+    "start": "00:02:20",
+    "end": "00:02:26"
+  },
+  {
+    "text": "This iteration continues until a certain quality standard is met.",
+    "start": "00:02:26",
+    "end": "00:02:31"
+  },
+  {
+    "text": "For example, let's consider the case where we have AI write articles.",
+    "start": "00:02:31",
+    "end": "00:02:35"
+  },
+  {
+    "text": "The AI creates articles and reviews their content itself.",
+    "start": "00:02:35",
+    "end": "00:02:40"
+  },
+  {
+    "text": "If there are any weak points, it rewrites them, evaluates them again, and continues to improve them until they meet the standards.",
+    "start": "00:02:40",
+    "end": "00:02:46"
+  },
+  {
+    "text": "Here, the only things humans decide are the purpose and the passing criteria.",
+    "start": "00:02:46",
+    "end": "00:02:52"
+  },
+  {
+    "text": "On the other hand, the specific steps to reach that point are left to the AI.",
+    "start": "00:02:52",
+    "end": "00:02:58"
+  },
+  {
+    "text": "This is a loop.",
+    "start": "00:02:58",
+    "end": "00:03:01"
+  },
+  {
+    "text": "In graphs, humans design the paths.",
+    "start": "00:03:01",
+    "end": "00:03:04"
+  },
+  {
+    "text": "In graph engineering, humans design not only the objectives and passing criteria, but also the entire path through which the work will proceed.",
+    "start": "00:03:04",
+    "end": "00:03:12"
+  },
+  {
+    "text": "If the process is the same for article creation, it would follow these steps.",
+    "start": "00:03:12",
+    "end": "00:03:18"
+  },
+  {
+    "text": "If the quality evaluation does not meet the standards, it will be returned to writing.",
+    "start": "00:03:15",
+    "end": "00:03:21"
+  },
+  {
+    "text": "If the article's direction itself is wrong, we'll go back to the structure creation and research stages.",
+    "start": "00:03:21",
+    "end": "00:03:30"
+  },
+  {
+    "text": "Unapproved documents cannot proceed to the publication process.",
+    "start": "00:03:27",
+    "end": "00:03:33"
+  },
+  {
+    "text": "In other words, in a graph, the AI doesn't wander around freely, but rather moves within a pre-designed map.",
+    "start": "00:03:33",
+    "end": "00:03:40"
+  },
+  {
+    "text": "Definitely stay tuned throughout the end of this video.",
+    "start": "00:03:40",
+    "end": "00:03:44"
+  },
+  {
+    "text": "If you guys haven't followed me, I highly recommend that you do so so you can stay up to date with the latest AI news.",
+    "start": "00:03:44",
+    "end": "00:03:52"
+  },
+  {
+    "text": "Lastly, make sure you guys subscribe, turn the notification bell, like this video, and check out previous videos because there is a lot of content that you will definitely benefit from.",
+    "start": "00:03:50",
+    "end": "00:04:03"
+  },
+  {
+    "text": "So, that thought, let's get right back into the video.",
+    "start": "00:04:03",
+    "end": "00:04:04"
+  },
+  {
+    "text": "The evolution of agent engineering can be summarized in three sentences, roughly as follows.",
+    "start": "00:04:04",
+    "end": "00:04:12"
+  },
+  {
+    "text": "Prompt engineering makes a single model call more reliable.",
+    "start": "00:04:12",
+    "end": "00:04:14"
+  },
+  {
+    "text": "Loop engineering makes an agent's behavior more reliable.",
+    "start": "00:04:14",
+    "end": "00:04:19"
+  },
+  {
+    "text": "Graph engineering makes the collaboration of a group of agents more reliable.",
+    "start": "00:04:19",
+    "end": "00:04:24"
+  },
+  {
+    "text": "The core object of prompt is an instruction.",
+    "start": "00:04:24",
+    "end": "00:04:27"
+  },
+  {
+    "text": "It cares about what the model sees, in what format it is output, and what it should not do.",
+    "start": "00:04:27",
+    "end": "00:04:31"
+  },
+  {
+    "text": "The core object of a loop is the control cycle.",
+    "start": "00:04:31",
+    "end": "00:04:35"
+  },
+  {
+    "text": "You are concerned with triggering conditions, tool calls, state updates, validators, retry strategies, and stopping conditions.",
+    "start": "00:04:35",
+    "end": "00:04:44"
+  },
+  {
+    "text": "The core object of a graph is the topology.",
+    "start": "00:04:44",
+    "end": "00:04:48"
+  },
+  {
+    "text": "You are interested in nodes, edges, state, artifacts, permissions, observations, evaluations, and change history.",
+    "start": "00:04:48",
+    "end": "00:04:56"
+  },
+  {
+    "text": "These three layers are not interchangeable.",
+    "start": "00:04:56",
+    "end": "00:04:59"
+  },
+  {
+    "text": "Graph is not an upgraded wrapper around loop, and loop will not disappear because of the introduction of graph.",
+    "start": "00:04:57",
+    "end": "00:05:06"
+  },
+  {
+    "text": "More precisely, each important node may still contain a loop.",
+    "start": "00:05:04",
+    "end": "00:05:09"
+  },
+  {
+    "text": "The graph determines how these loops are organized, constrained, and connected.",
+    "start": "00:05:09",
+    "end": "00:05:15"
+  },
+  {
+    "text": "If your task only requires a clear loop, such as scanning repository issues daily, fixing the simplest bugs, running tests, and opening PRs, then a loop is sufficient.",
+    "start": "00:05:12",
+    "end": "00:05:25"
+  },
+  {
+    "text": "Adding a graph too early will only increase complexity.",
+    "start": "00:05:25",
+    "end": "00:05:30"
+  },
+  {
+    "text": "However, if the task is inherently cross-domain, such as reconstructing a payment system while ensuring API compatibility, migrating data, updating the front end, completing tests, assessing security risks, and generating release instructions, a single loop will become a complete mess.",
+    "start": "00:05:30",
+    "end": "00:05:48"
+  },
+  {
+    "text": "At this point, what you really need to model is not what the agent will do next, but rather what migration evidence does the data node output?",
+    "start": "00:05:48",
+    "end": "00:05:57"
+  },
+  {
+    "text": "How do API nodes declare compatibility?",
+    "start": "00:05:57",
+    "end": "00:06:00"
+  },
+  {
+    "text": "When can front-end nodes run in parallel?",
+    "start": "00:06:00",
+    "end": "00:06:02"
+  },
+  {
+    "text": "What prerequisites must the release node wait for?",
+    "start": "00:06:02",
+    "end": "00:06:06"
+  },
+  {
+    "text": "This is already a graph problem.",
+    "start": "00:06:06",
+    "end": "00:06:08"
+  },
+  {
+    "text": "Traditional business systems have primarily been built around tabular data.",
+    "start": "00:06:08",
+    "end": "00:06:13"
+  },
+  {
+    "text": "This method organizes information using rows and columns, such as customer lists, product lists, and sales lists.",
+    "start": "00:06:13",
+    "end": "00:06:21"
+  },
+  {
+    "text": "Tabular databases are extremely powerful for aggregation and routine processing.",
+    "start": "00:06:21",
+    "end": "00:06:26"
+  },
+  {
+    "text": "However, the process becomes more complex when dealing with questions like the following: Who is indirectly connected to this person?",
+    "start": "00:06:24",
+    "end": "00:06:33"
+  },
+  {
+    "text": "Are there any common patterns that lead to fraudulent transactions?",
+    "start": "00:06:33",
+    "end": "00:06:37"
+  },
+  {
+    "text": "How far will the impact of a certain failure spread?",
+    "start": "00:06:37",
+    "end": "00:06:41"
+  },
+  {
+    "text": "If this task fails, to what stage should we return to?",
+    "start": "00:06:41",
+    "end": "00:06:43"
+  },
+  {
+    "text": "These are not issues that can be addressed by looking at a single data point.",
+    "start": "00:06:43",
+    "end": "00:06:47"
+  },
+  {
+    "text": "This problem involves tracing multiple objects and investigating the meaning of their relationships.",
+    "start": "00:06:47",
+    "end": "00:06:55"
+  },
+  {
+    "text": "The importance of this relationship is increasing even further with the proliferation of AI agents.",
+    "start": "00:06:55",
+    "end": "00:07:01"
+  },
+  {
+    "text": "Simply feeding AI a large amount of information does not guarantee that it will be able to make correct decisions.",
+    "start": "00:07:01",
+    "end": "00:07:08"
+  },
+  {
+    "text": "Which information is based on which other information?",
+    "start": "00:07:08",
+    "end": "00:07:10"
+  },
+  {
+    "text": "Who approved it and which steps did it go through?",
+    "start": "00:07:10",
+    "end": "00:07:14"
+  },
+  {
+    "text": "If it fails, where do we go back to?",
+    "start": "00:07:14",
+    "end": "00:07:17"
+  },
+  {
+    "text": "By explicitly defining the structure, it becomes easier to control the AI's decisions.",
+    "start": "00:07:17",
+    "end": "00:07:23"
+  },
+  {
+    "text": "Don't graph everything.",
+    "start": "00:07:21",
+    "end": "00:07:24"
+  },
+  {
+    "text": "When a new concept emerges, there's a natural urge to apply it to everything.",
+    "start": "00:07:24",
+    "end": "00:07:30"
+  },
+  {
+    "text": "However, graphs do not solve complexity for free.",
+    "start": "00:07:30",
+    "end": "00:07:34"
+  },
+  {
+    "text": "OpenAI's agent building guide also notes that while declarative graphs can visualize branches and loops, they can become cumbersome in dynamic workflows requiring a dedicated description method.",
+    "start": "00:07:31",
+    "end": "00:07:43"
+  },
+  {
+    "text": "As an alternative, the Open AI agents SDK adopts a code-centric flexible architecture.",
+    "start": "00:07:43",
+    "end": "00:07:51"
+  },
+  {
+    "text": "The next task can be handled with a simple loop.",
+    "start": "00:07:51",
+    "end": "00:07:54"
+  },
+  {
+    "text": "On the other hand, when multiple departments, multiple agents, long execution times, parallel processing, approvals, and audits are required, graphing becomes beneficial.",
+    "start": "00:07:54",
+    "end": "00:08:05"
+  },
+  {
+    "text": "Graph engineering isn't about creating complex diagrams.",
+    "start": "00:08:05",
+    "end": "00:08:09"
+  },
+  {
+    "text": "Design involves clearly indicating only the necessary relationships and discarding unnecessary automation.",
+    "start": "00:08:09",
+    "end": "00:08:15"
+  },
+  {
+    "text": "Let me be honest about the conclusion regarding the new term itself.",
+    "start": "00:08:15",
+    "end": "00:08:18"
+  },
+  {
+    "text": "It's only been 3 days, so no one knows if the term graph engineering will survive.",
+    "start": "00:08:18",
+    "end": "00:08:25"
+  },
+  {
+    "text": "However, the underlying concepts, dividing tasks, running them in parallel, and adding decision checks have outlived the name, and I've seen their effectiveness in my own experience.",
+    "start": "00:08:25",
+    "end": "00:08:36"
+  },
+  {
+    "text": "Even if the term disappears in a month,",
+    "start": "00:08:36",
+    "end": "00:08:38"
+  }
+]

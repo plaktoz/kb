@@ -1,0 +1,3342 @@
+[
+  {
+    "text": "Right now on this screen, a small team",
+    "start": 0.16,
+    "duration": 5.119
+  },
+  {
+    "text": "of AI agents is chasing one question and",
+    "start": 2.72,
+    "duration": 4.32
+  },
+  {
+    "text": "they are doing it in parallel. They",
+    "start": 5.279,
+    "duration": 4.081
+  },
+  {
+    "text": "split the work. Each one digs on its own",
+    "start": 7.04,
+    "duration": 4.4
+  },
+  {
+    "text": "lane and then they turn around and try",
+    "start": 9.36,
+    "duration": 4.48
+  },
+  {
+    "text": "to tear their own answers apart. What",
+    "start": 11.44,
+    "duration": 4.64
+  },
+  {
+    "text": "lands on your desk is a single merged",
+    "start": 13.84,
+    "duration": 4.64
+  },
+  {
+    "text": "result waiting on one thing before it",
+    "start": 16.08,
+    "duration": 4.959
+  },
+  {
+    "text": "goes anywhere. Your yes, that shape you",
+    "start": 18.48,
+    "duration": 5.039
+  },
+  {
+    "text": "just watched has a name. It is called a",
+    "start": 21.039,
+    "duration": 4.561
+  },
+  {
+    "text": "graph. And by the end of this, you're",
+    "start": 23.519,
+    "duration": 4.401
+  },
+  {
+    "text": "going to build one. A little context",
+    "start": 25.6,
+    "duration": 5.12
+  },
+  {
+    "text": "first because this trend has a story and",
+    "start": 27.92,
+    "duration": 4.799
+  },
+  {
+    "text": "the story is the fastest way into the",
+    "start": 30.72,
+    "duration": 4.48
+  },
+  {
+    "text": "craft. Boris Churnney is the engineer",
+    "start": 32.719,
+    "duration": 5.041
+  },
+  {
+    "text": "who built clawed code and this year he",
+    "start": 35.2,
+    "duration": 4.16
+  },
+  {
+    "text": "said something that made me put my",
+    "start": 37.76,
+    "duration": 3.68
+  },
+  {
+    "text": "coffee down. He does not really prompt",
+    "start": 39.36,
+    "duration": 4.56
+  },
+  {
+    "text": "his AI anymore. He writes loops that",
+    "start": 41.44,
+    "duration": 4.24
+  },
+  {
+    "text": "prompt it for him and then he steps",
+    "start": 43.92,
+    "duration": 4.72
+  },
+  {
+    "text": "away. His exact words were, \"My job is",
+    "start": 45.68,
+    "duration": 5.039
+  },
+  {
+    "text": "to write loops. He runs hundreds of",
+    "start": 48.64,
+    "duration": 4.64
+  },
+  {
+    "text": "agents overnight for hours while he",
+    "start": 50.719,
+    "duration": 4.561
+  },
+  {
+    "text": "sleeps.\" A few weeks after that went",
+    "start": 53.28,
+    "duration": 4
+  },
+  {
+    "text": "around, the same corner of the internet",
+    "start": 55.28,
+    "duration": 4.64
+  },
+  {
+    "text": "decided loops were already old news. The",
+    "start": 57.28,
+    "duration": 5.119
+  },
+  {
+    "text": "new word was graphs. The hype machine",
+    "start": 59.92,
+    "duration": 4.72
+  },
+  {
+    "text": "packed up and moved down the street the",
+    "start": 62.399,
+    "duration": 3.921
+  },
+  {
+    "text": "way it tends to. Then the senior",
+    "start": 64.64,
+    "duration": 4
+  },
+  {
+    "text": "engineers showed up within hours with",
+    "start": 66.32,
+    "duration": 4.479
+  },
+  {
+    "text": "one flat, tired objection to the whole",
+    "start": 68.64,
+    "duration": 4.32
+  },
+  {
+    "text": "thing. This is a decades old idea",
+    "start": 70.799,
+    "duration": 4.161
+  },
+  {
+    "text": "wearing a new hoodie, they said. And",
+    "start": 72.96,
+    "duration": 4
+  },
+  {
+    "text": "here is the part that matters. They are",
+    "start": 74.96,
+    "duration": 4
+  },
+  {
+    "text": "right. But that is the good news, not",
+    "start": 76.96,
+    "duration": 4
+  },
+  {
+    "text": "the bad news. And most people who saw",
+    "start": 78.96,
+    "duration": 4.56
+  },
+  {
+    "text": "the fight read it exactly backwards. A",
+    "start": 80.96,
+    "duration": 4.56
+  },
+  {
+    "text": "pattern that has run banks, airlines,",
+    "start": 83.52,
+    "duration": 4.639
+  },
+  {
+    "text": "and power grids for 30 years is exactly",
+    "start": 85.52,
+    "duration": 4.959
+  },
+  {
+    "text": "what you want holding up your business.",
+    "start": 88.159,
+    "duration": 4.96
+  },
+  {
+    "text": "For 30 years, this same idea has held up",
+    "start": 90.479,
+    "duration": 4.561
+  },
+  {
+    "text": "serious systems without breaking a",
+    "start": 93.119,
+    "duration": 4.161
+  },
+  {
+    "text": "sweat. What changed this year is that it",
+    "start": 95.04,
+    "duration": 4.56
+  },
+  {
+    "text": "finally got easy enough for you to use.",
+    "start": 97.28,
+    "duration": 4.159
+  },
+  {
+    "text": "And the reason this is your moment is",
+    "start": 99.6,
+    "duration": 4
+  },
+  {
+    "text": "almost dull. The graph tools got",
+    "start": 101.439,
+    "duration": 4.561
+  },
+  {
+    "text": "genuinely good this year. You drag boxes",
+    "start": 103.6,
+    "duration": 4.799
+  },
+  {
+    "text": "and arrows onto a canvas and the tool",
+    "start": 106,
+    "duration": 4.64
+  },
+  {
+    "text": "wires up the rest. You do not write the",
+    "start": 108.399,
+    "duration": 4.641
+  },
+  {
+    "text": "code, you draw the plan. So, here is the",
+    "start": 110.64,
+    "duration": 4.799
+  },
+  {
+    "text": "map for the next 20 minutes. Four short",
+    "start": 113.04,
+    "duration": 4.8
+  },
+  {
+    "text": "lessons, then three complete builds you",
+    "start": 115.439,
+    "duration": 4.72
+  },
+  {
+    "text": "can run this week. No engineering degree",
+    "start": 117.84,
+    "duration": 4.16
+  },
+  {
+    "text": "required, and I am not exaggerating",
+    "start": 120.159,
+    "duration": 4.481
+  },
+  {
+    "text": "that. Lesson one, what a graph actually",
+    "start": 122,
+    "duration": 5.36
+  },
+  {
+    "text": "is. Lesson two, the one pattern that",
+    "start": 124.64,
+    "duration": 5.36
+  },
+  {
+    "text": "pays for itself. Lesson three, the stop",
+    "start": 127.36,
+    "duration": 5.2
+  },
+  {
+    "text": "rule that guards your bill. Lesson four,",
+    "start": 130,
+    "duration": 4.8
+  },
+  {
+    "text": "the human gate that keeps you safe.",
+    "start": 132.56,
+    "duration": 4
+  },
+  {
+    "text": "Then, we build three real graphs",
+    "start": 134.8,
+    "duration": 4.4
+  },
+  {
+    "text": "together. a deep research desk, an SEO",
+    "start": 136.56,
+    "duration": 4.8
+  },
+  {
+    "text": "content machine, and a full go-to market",
+    "start": 139.2,
+    "duration": 4.56
+  },
+  {
+    "text": "kit. Everything is plain English. Let us",
+    "start": 141.36,
+    "duration": 4.72
+  },
+  {
+    "text": "start with the thing itself. Lesson one,",
+    "start": 143.76,
+    "duration": 5.04
+  },
+  {
+    "text": "what a graph actually is in plain words",
+    "start": 146.08,
+    "duration": 5.44
+  },
+  {
+    "text": "with no jargon anywhere near it. A graph",
+    "start": 148.8,
+    "duration": 5.2
+  },
+  {
+    "text": "is a plan for your AI work drawn out on",
+    "start": 151.52,
+    "duration": 4.88
+  },
+  {
+    "text": "paper so you can finally see it. Not",
+    "start": 154,
+    "duration": 4.959
+  },
+  {
+    "text": "code, not math, not a computer science",
+    "start": 156.4,
+    "duration": 4.8
+  },
+  {
+    "text": "lecture. A picture of who does what and",
+    "start": 158.959,
+    "duration": 4.241
+  },
+  {
+    "text": "in what order. That picture is the",
+    "start": 161.2,
+    "duration": 4.72
+  },
+  {
+    "text": "entire point. and drawing it is 90% of",
+    "start": 163.2,
+    "duration": 5.28
+  },
+  {
+    "text": "the skill. It answers two questions and",
+    "start": 165.92,
+    "duration": 5.599
+  },
+  {
+    "text": "truly only two. First, which jobs need",
+    "start": 168.48,
+    "duration": 5.6
+  },
+  {
+    "text": "to happen at all? Second, which job has",
+    "start": 171.519,
+    "duration": 4.641
+  },
+  {
+    "text": "to wait for which other job before it is",
+    "start": 174.08,
+    "duration": 4.32
+  },
+  {
+    "text": "even allowed to start? Master those two",
+    "start": 176.16,
+    "duration": 4.079
+  },
+  {
+    "text": "questions and the rest is just filling",
+    "start": 178.4,
+    "duration": 4.32
+  },
+  {
+    "text": "in boxes. A job is just one thing you",
+    "start": 180.239,
+    "duration": 4.321
+  },
+  {
+    "text": "would hand to a single assistant and",
+    "start": 182.72,
+    "duration": 4.48
+  },
+  {
+    "text": "then walk away. Research one competitor,",
+    "start": 184.56,
+    "duration": 4.64
+  },
+  {
+    "text": "write one section of the article, check",
+    "start": 187.2,
+    "duration": 4.48
+  },
+  {
+    "text": "one claim against one source. If it fits",
+    "start": 189.2,
+    "duration": 4.8
+  },
+  {
+    "text": "on a single sticky note, it is a job. If",
+    "start": 191.68,
+    "duration": 4.16
+  },
+  {
+    "text": "it needs three sticky notes, it is",
+    "start": 194,
+    "duration": 4.239
+  },
+  {
+    "text": "actually three jobs. When a job needs",
+    "start": 195.84,
+    "duration": 4.319
+  },
+  {
+    "text": "the result of another job before it can",
+    "start": 198.239,
+    "duration": 4
+  },
+  {
+    "text": "begin, you draw an arrow between the",
+    "start": 200.159,
+    "duration": 4.401
+  },
+  {
+    "text": "two. The arrow is not decoration and it",
+    "start": 202.239,
+    "duration": 4.64
+  },
+  {
+    "text": "is not a nice to have. It carries one",
+    "start": 204.56,
+    "duration": 4.48
+  },
+  {
+    "text": "real meaning and the meaning is a single",
+    "start": 206.879,
+    "duration": 5.36
+  },
+  {
+    "text": "word, wait. That arrow says this job",
+    "start": 209.04,
+    "duration": 5.52
+  },
+  {
+    "text": "cannot start until that job hands over",
+    "start": 212.239,
+    "duration": 5.36
+  },
+  {
+    "text": "its answer. No answer yet, no start.",
+    "start": 214.56,
+    "duration": 4.959
+  },
+  {
+    "text": "Which means the arrows are where every",
+    "start": 217.599,
+    "duration": 4.321
+  },
+  {
+    "text": "second of waiting in your entire system",
+    "start": 219.519,
+    "duration": 4.8
+  },
+  {
+    "text": "actually lives. Fewer arrows, less",
+    "start": 221.92,
+    "duration": 4.56
+  },
+  {
+    "text": "waiting. Hold on to that and one more",
+    "start": 224.319,
+    "duration": 4.801
+  },
+  {
+    "text": "piece travels along the whole way. A",
+    "start": 226.48,
+    "duration": 4.56
+  },
+  {
+    "text": "small set of running notes moving with",
+    "start": 229.12,
+    "duration": 4.08
+  },
+  {
+    "text": "the work, holding what was found, what",
+    "start": 231.04,
+    "duration": 4.32
+  },
+  {
+    "text": "was decided so far, and what is still",
+    "start": 233.2,
+    "duration": 4.239
+  },
+  {
+    "text": "left to do. Think of it as a clipboard",
+    "start": 235.36,
+    "duration": 4.239
+  },
+  {
+    "text": "that gets passed handtoand. That",
+    "start": 237.439,
+    "duration": 4.321
+  },
+  {
+    "text": "traveling clipboard has a name, too. It",
+    "start": 239.599,
+    "duration": 4.56
+  },
+  {
+    "text": "is called the state. Every job can read",
+    "start": 241.76,
+    "duration": 4.72
+  },
+  {
+    "text": "it. Every job can add a line to it. And",
+    "start": 244.159,
+    "duration": 4.64
+  },
+  {
+    "text": "it is how a dozen workers stay perfectly",
+    "start": 246.48,
+    "duration": 4.479
+  },
+  {
+    "text": "on the same page without a single one of",
+    "start": 248.799,
+    "duration": 4.241
+  },
+  {
+    "text": "them ever talking to another directly.",
+    "start": 250.959,
+    "duration": 4
+  },
+  {
+    "text": "And this is exactly what makes a graph",
+    "start": 253.04,
+    "duration": 4.319
+  },
+  {
+    "text": "more than a fancy checklist. A checklist",
+    "start": 254.959,
+    "duration": 4.881
+  },
+  {
+    "text": "just list steps in a row. The state",
+    "start": 257.359,
+    "duration": 4.56
+  },
+  {
+    "text": "means the work carries its own memory",
+    "start": 259.84,
+    "duration": 4.32
+  },
+  {
+    "text": "along with it. So a job halfway down the",
+    "start": 261.919,
+    "duration": 4.401
+  },
+  {
+    "text": "line can use something a job at the top",
+    "start": 264.16,
+    "duration": 5.36
+  },
+  {
+    "text": "discovered. Jobs, arrows, state. Write",
+    "start": 266.32,
+    "duration": 5.2
+  },
+  {
+    "text": "those three words on a card and stick it",
+    "start": 269.52,
+    "duration": 4.08
+  },
+  {
+    "text": "to your monitor tonight. You now have",
+    "start": 271.52,
+    "duration": 3.92
+  },
+  {
+    "text": "the entire vocabulary of this whole",
+    "start": 273.6,
+    "duration": 3.599
+  },
+  {
+    "text": "trend. and you will not need to look up",
+    "start": 275.44,
+    "duration": 4
+  },
+  {
+    "text": "a definition again. That is it. That is",
+    "start": 277.199,
+    "duration": 4.081
+  },
+  {
+    "text": "the scary word the whole internet is",
+    "start": 279.44,
+    "duration": 4.479
+  },
+  {
+    "text": "arguing about. A box for each job, an",
+    "start": 281.28,
+    "duration": 4.639
+  },
+  {
+    "text": "arrow for each weight, and a clipboard",
+    "start": 283.919,
+    "duration": 4.481
+  },
+  {
+    "text": "that rides along collecting notes. You",
+    "start": 285.919,
+    "duration": 4.241
+  },
+  {
+    "text": "already understood it before I finish",
+    "start": 288.4,
+    "duration": 3.84
+  },
+  {
+    "text": "the sentence. Now, I want you to do one",
+    "start": 290.16,
+    "duration": 4
+  },
+  {
+    "text": "small thing tonight before you touch a",
+    "start": 292.24,
+    "duration": 4.48
+  },
+  {
+    "text": "single new tool or watch one more video.",
+    "start": 294.16,
+    "duration": 4.72
+  },
+  {
+    "text": "It takes about 10 minutes and it changes",
+    "start": 296.72,
+    "duration": 4.56
+  },
+  {
+    "text": "how you see all of this. Look at the AI",
+    "start": 298.88,
+    "duration": 4.24
+  },
+  {
+    "text": "system you already run today. Whatever",
+    "start": 301.28,
+    "duration": 4.08
+  },
+  {
+    "text": "it is, and hunt down every and then",
+    "start": 303.12,
+    "duration": 4.639
+  },
+  {
+    "text": "hiding inside it. Do this and then do",
+    "start": 305.36,
+    "duration": 4.559
+  },
+  {
+    "text": "that. Get this and then send the next",
+    "start": 307.759,
+    "duration": 4.641
+  },
+  {
+    "text": "thing. Every and then is a suspect. For",
+    "start": 309.919,
+    "duration": 5.041
+  },
+  {
+    "text": "each and then, ask one blunt question.",
+    "start": 312.4,
+    "duration": 4.88
+  },
+  {
+    "text": "Does the next job actually need the last",
+    "start": 314.96,
+    "duration": 4.72
+  },
+  {
+    "text": "job's result sitting in its hands to do",
+    "start": 317.28,
+    "duration": 5.199
+  },
+  {
+    "text": "its work? Yes or no? Be honest with",
+    "start": 319.68,
+    "duration": 4.799
+  },
+  {
+    "text": "yourself because habit will want to say",
+    "start": 322.479,
+    "duration": 4.401
+  },
+  {
+    "text": "yes because an arrow is only real when",
+    "start": 324.479,
+    "duration": 4.801
+  },
+  {
+    "text": "work truly flows through it. If nothing",
+    "start": 326.88,
+    "duration": 4.48
+  },
+  {
+    "text": "actually passes down that line, the",
+    "start": 329.28,
+    "duration": 4.24
+  },
+  {
+    "text": "arrow is a lie you drew out of habit.",
+    "start": 331.36,
+    "duration": 4.8
+  },
+  {
+    "text": "And that lie is costing you real time on",
+    "start": 333.52,
+    "duration": 4.48
+  },
+  {
+    "text": "every single run. Take a classic",
+    "start": 336.16,
+    "duration": 4.16
+  },
+  {
+    "text": "example. Summarize this file and then",
+    "start": 338,
+    "duration": 4.639
+  },
+  {
+    "text": "check my calendar. It sounds like a neat",
+    "start": 340.32,
+    "duration": 4.48
+  },
+  {
+    "text": "little sequence, one clean step after",
+    "start": 342.639,
+    "duration": 4.4
+  },
+  {
+    "text": "the other, everything tidy and in order.",
+    "start": 344.8,
+    "duration": 4.32
+  },
+  {
+    "text": "But look closer at it. The calendar step",
+    "start": 347.039,
+    "duration": 4.241
+  },
+  {
+    "text": "does not need the summary. Not one word",
+    "start": 349.12,
+    "duration": 4.72
+  },
+  {
+    "text": "of it. Those two jobs had no reason to",
+    "start": 351.28,
+    "duration": 4.08
+  },
+  {
+    "text": "wait for each other, which means the",
+    "start": 353.84,
+    "duration": 3.28
+  },
+  {
+    "text": "arrow you drew between them is",
+    "start": 355.36,
+    "duration": 3.679
+  },
+  {
+    "text": "completely fake. And once your eyes",
+    "start": 357.12,
+    "duration": 3.6
+  },
+  {
+    "text": "adjust, you start seeing them",
+    "start": 359.039,
+    "duration": 4.241
+  },
+  {
+    "text": "everywhere. Draw out almost any real",
+    "start": 360.72,
+    "duration": 4.319
+  },
+  {
+    "text": "system you run, and two or three of",
+    "start": 363.28,
+    "duration": 3.759
+  },
+  {
+    "text": "these fake edges will be sitting right",
+    "start": 365.039,
+    "duration": 4.241
+  },
+  {
+    "text": "there in the open, adding delay in",
+    "start": 367.039,
+    "duration": 4.481
+  },
+  {
+    "text": "exchange for nothing at all. Right now,",
+    "start": 369.28,
+    "duration": 4.08
+  },
+  {
+    "text": "your system is almost certainly one",
+    "start": 371.52,
+    "duration": 5.44
+  },
+  {
+    "text": "straight line. Job, arrow, job, arrow.",
+    "start": 373.36,
+    "duration": 5.679
+  },
+  {
+    "text": "Every single step, politely waiting for",
+    "start": 376.96,
+    "duration": 3.76
+  },
+  {
+    "text": "the one in front of it to finish before",
+    "start": 379.039,
+    "duration": 4.081
+  },
+  {
+    "text": "it dares to move. That works. And I am",
+    "start": 380.72,
+    "duration": 4.16
+  },
+  {
+    "text": "not here to mock it, but it is the",
+    "start": 383.12,
+    "duration": 3.84
+  },
+  {
+    "text": "slowest possible way to run anything",
+    "start": 384.88,
+    "duration": 4.64
+  },
+  {
+    "text": "because one stuck job freezes everything",
+    "start": 386.96,
+    "duration": 5.6
+  },
+  {
+    "text": "behind it. One stalled car, one lane,",
+    "start": 389.52,
+    "duration": 4.959
+  },
+  {
+    "text": "and a mile of brake lights that had",
+    "start": 392.56,
+    "duration": 4
+  },
+  {
+    "text": "nowhere else to go. The entire point of",
+    "start": 394.479,
+    "duration": 4.321
+  },
+  {
+    "text": "a graph is to cut the fake arrows and",
+    "start": 396.56,
+    "duration": 4.32
+  },
+  {
+    "text": "let the jobs that do not depend on each",
+    "start": 398.8,
+    "duration": 4.56
+  },
+  {
+    "text": "other run at the same time. That one",
+    "start": 400.88,
+    "duration": 4.8
+  },
+  {
+    "text": "move, cutting fake arrows, is most of",
+    "start": 403.36,
+    "duration": 4
+  },
+  {
+    "text": "the speed you have been missing this",
+    "start": 405.68,
+    "duration": 4.48
+  },
+  {
+    "text": "whole time. Lesson two, the diamond. The",
+    "start": 407.36,
+    "duration": 5.2
+  },
+  {
+    "text": "one pattern that pays for itself over",
+    "start": 410.16,
+    "duration": 5.28
+  },
+  {
+    "text": "and over. Watch any serious agent system",
+    "start": 412.56,
+    "duration": 5.199
+  },
+  {
+    "text": "do real work and the same picture keeps",
+    "start": 415.44,
+    "duration": 4.479
+  },
+  {
+    "text": "showing up again and again like a",
+    "start": 417.759,
+    "duration": 4
+  },
+  {
+    "text": "fingerprint on the glass. And once you",
+    "start": 419.919,
+    "duration": 4.081
+  },
+  {
+    "text": "notice it, you genuinely cannot stop",
+    "start": 421.759,
+    "duration": 4.401
+  },
+  {
+    "text": "seeing it anywhere. The work splits into",
+    "start": 424,
+    "duration": 4.4
+  },
+  {
+    "text": "pieces. Several workers dig side by",
+    "start": 426.16,
+    "duration": 4.319
+  },
+  {
+    "text": "side. Something checks what they came",
+    "start": 428.4,
+    "duration": 4.32
+  },
+  {
+    "text": "back with and then it all merges into",
+    "start": 430.479,
+    "duration": 5.201
+  },
+  {
+    "text": "one clean answer. Say it with me. Split,",
+    "start": 432.72,
+    "duration": 5.52
+  },
+  {
+    "text": "work, check, merge. Draw those four",
+    "start": 435.68,
+    "duration": 4.639
+  },
+  {
+    "text": "moves out and the shape you get is a",
+    "start": 438.24,
+    "duration": 4.16
+  },
+  {
+    "text": "diamond. Narrow at the top where it",
+    "start": 440.319,
+    "duration": 4.081
+  },
+  {
+    "text": "starts, wide in the middle where the",
+    "start": 442.4,
+    "duration": 4.079
+  },
+  {
+    "text": "parallel work happens, and narrow again",
+    "start": 444.4,
+    "duration": 4
+  },
+  {
+    "text": "at the bottom where it all comes back",
+    "start": 446.479,
+    "duration": 4.081
+  },
+  {
+    "text": "together into one. I will say this as",
+    "start": 448.4,
+    "duration": 4.16
+  },
+  {
+    "text": "plainly as I can. This is the only",
+    "start": 450.56,
+    "duration": 4.479
+  },
+  {
+    "text": "pattern you truly need this year. Learn",
+    "start": 452.56,
+    "duration": 4.479
+  },
+  {
+    "text": "this one shape well, and you can build",
+    "start": 455.039,
+    "duration": 4.16
+  },
+  {
+    "text": "90% of what you have watched people",
+    "start": 457.039,
+    "duration": 4.72
+  },
+  {
+    "text": "charge real money to set up. Here is the",
+    "start": 459.199,
+    "duration": 4.801
+  },
+  {
+    "text": "smallest possible version so it clicks.",
+    "start": 461.759,
+    "duration": 4.241
+  },
+  {
+    "text": "Ask three workers to research the same",
+    "start": 464,
+    "duration": 3.919
+  },
+  {
+    "text": "company. each one told to look in a",
+    "start": 466,
+    "duration": 4.24
+  },
+  {
+    "text": "different place. One reads the website,",
+    "start": 467.919,
+    "duration": 4.321
+  },
+  {
+    "text": "one reads the customer reviews, one",
+    "start": 470.24,
+    "duration": 4
+  },
+  {
+    "text": "reads the recent news. Then a fourth",
+    "start": 472.24,
+    "duration": 4.079
+  },
+  {
+    "text": "worker reads all three and writes the",
+    "start": 474.24,
+    "duration": 4.239
+  },
+  {
+    "text": "honest summary. That is a diamond and",
+    "start": 476.319,
+    "duration": 3.841
+  },
+  {
+    "text": "you could sketch it on a napkin right",
+    "start": 478.479,
+    "duration": 3.921
+  },
+  {
+    "text": "now. And this is not a whiteboard theory",
+    "start": 480.16,
+    "duration": 4.56
+  },
+  {
+    "text": "that falls apart in the real world. The",
+    "start": 482.4,
+    "duration": 4.4
+  },
+  {
+    "text": "research feature built into Claude runs",
+    "start": 484.72,
+    "duration": 4.4
+  },
+  {
+    "text": "exactly this diamond in production every",
+    "start": 486.8,
+    "duration": 4.88
+  },
+  {
+    "text": "single day on real questions from real",
+    "start": 489.12,
+    "duration": 5.28
+  },
+  {
+    "text": "paying users. One lead agent reads your",
+    "start": 491.68,
+    "duration": 5.12
+  },
+  {
+    "text": "question and plans the angles of attack.",
+    "start": 494.4,
+    "duration": 4.16
+  },
+  {
+    "text": "Then a handful of worker agents go",
+    "start": 496.8,
+    "duration": 3.76
+  },
+  {
+    "text": "gather the evidence in parallel, each",
+    "start": 498.56,
+    "duration": 4.079
+  },
+  {
+    "text": "one in its own separate context window,",
+    "start": 500.56,
+    "duration": 3.84
+  },
+  {
+    "text": "deliberately blind to what the others",
+    "start": 502.639,
+    "duration": 3.921
+  },
+  {
+    "text": "are doing. Anthropic spawns three to",
+    "start": 504.4,
+    "duration": 4.32
+  },
+  {
+    "text": "five of those workers at once. They are",
+    "start": 506.56,
+    "duration": 4.639
+  },
+  {
+    "text": "not chatting, not comparing notes, not",
+    "start": 508.72,
+    "duration": 4.96
+  },
+  {
+    "text": "slowing each other down. Each just digs",
+    "start": 511.199,
+    "duration": 4.801
+  },
+  {
+    "text": "on its own slice and comes back. And the",
+    "start": 513.68,
+    "duration": 4.4
+  },
+  {
+    "text": "numbers on that design are genuinely",
+    "start": 516,
+    "duration": 3.919
+  },
+  {
+    "text": "worth hearing. In their own published",
+    "start": 518.08,
+    "duration": 4.48
+  },
+  {
+    "text": "tests, that multi- aent diamond beat a",
+    "start": 519.919,
+    "duration": 5.281
+  },
+  {
+    "text": "single hardworking agent by 90% on",
+    "start": 522.56,
+    "duration": 5.839
+  },
+  {
+    "text": "research tasks. 90%. And that lift came",
+    "start": 525.2,
+    "duration": 5.199
+  },
+  {
+    "text": "from the shape of the work, not from a",
+    "start": 528.399,
+    "duration": 4.481
+  },
+  {
+    "text": "smarter or bigger model. It also cut the",
+    "start": 530.399,
+    "duration": 5.12
+  },
+  {
+    "text": "time to an answer by up to 90% on the",
+    "start": 532.88,
+    "duration": 4.88
+  },
+  {
+    "text": "big questions because five workers all",
+    "start": 535.519,
+    "duration": 4.721
+  },
+  {
+    "text": "digging at once obviously finish in a",
+    "start": 537.76,
+    "duration": 4.639
+  },
+  {
+    "text": "fraction of the time one lonely worker",
+    "start": 540.24,
+    "duration": 3.84
+  },
+  {
+    "text": "would take grinding through the same",
+    "start": 542.399,
+    "duration": 3.681
+  },
+  {
+    "text": "list alone. And there is a second,",
+    "start": 544.08,
+    "duration": 4.72
+  },
+  {
+    "text": "quieter gift from that wide middle. Five",
+    "start": 546.08,
+    "duration": 4.72
+  },
+  {
+    "text": "workers coming at a question from five",
+    "start": 548.8,
+    "duration": 3.76
+  },
+  {
+    "text": "different angles give you a range of",
+    "start": 550.8,
+    "duration": 4
+  },
+  {
+    "text": "views to weigh instead of one confident",
+    "start": 552.56,
+    "duration": 4.399
+  },
+  {
+    "text": "agent talking itself into a single",
+    "start": 554.8,
+    "duration": 4.479
+  },
+  {
+    "text": "answer and calling it done. Now the part",
+    "start": 556.959,
+    "duration": 4.32
+  },
+  {
+    "text": "most people skip and it is the exact",
+    "start": 559.279,
+    "duration": 4
+  },
+  {
+    "text": "part that decides whether your graph is",
+    "start": 561.279,
+    "duration": 4.881
+  },
+  {
+    "text": "any good at all. The check that small",
+    "start": 563.279,
+    "duration": 4.961
+  },
+  {
+    "text": "humble node down in the bottom half of",
+    "start": 566.16,
+    "duration": 4.32
+  },
+  {
+    "text": "the diamond right before the merge. You",
+    "start": 568.24,
+    "duration": 3.92
+  },
+  {
+    "text": "have to treat the checking step as",
+    "start": 570.48,
+    "duration": 3.68
+  },
+  {
+    "text": "non-negotiable. And I am about to show",
+    "start": 572.16,
+    "duration": 4.56
+  },
+  {
+    "text": "you why with real research rather than a",
+    "start": 574.16,
+    "duration": 4.64
+  },
+  {
+    "text": "hunch. This is the spot where beginners",
+    "start": 576.72,
+    "duration": 4.48
+  },
+  {
+    "text": "lose without ever realizing they lost.",
+    "start": 578.8,
+    "duration": 4.64
+  },
+  {
+    "text": "There is a well-known paper with a title",
+    "start": 581.2,
+    "duration": 4.639
+  },
+  {
+    "text": "that does not mince a single word. Large",
+    "start": 583.44,
+    "duration": 4.399
+  },
+  {
+    "text": "language models cannot self-correct",
+    "start": 585.839,
+    "duration": 4
+  },
+  {
+    "text": "their reasoning yet. That is Google deep",
+    "start": 587.839,
+    "duration": 3.761
+  },
+  {
+    "text": "mind researchers published,",
+    "start": 589.839,
+    "duration": 4.161
+  },
+  {
+    "text": "peer-reviewed, and widely cited since.",
+    "start": 591.6,
+    "duration": 4.48
+  },
+  {
+    "text": "They took strong models and asked them",
+    "start": 594,
+    "duration": 4.399
+  },
+  {
+    "text": "to grade and then fix their own answers",
+    "start": 596.08,
+    "duration": 4.96
+  },
+  {
+    "text": "with no outside help, no second opinion,",
+    "start": 598.399,
+    "duration": 4.481
+  },
+  {
+    "text": "nothing but the model looking directly",
+    "start": 601.04,
+    "duration": 3.919
+  },
+  {
+    "text": "into its own mirror and trying to spot",
+    "start": 602.88,
+    "duration": 4.079
+  },
+  {
+    "text": "its own errors. The scores did not",
+    "start": 604.959,
+    "duration": 4.161
+  },
+  {
+    "text": "climb. In several cases, they actually",
+    "start": 606.959,
+    "duration": 4.241
+  },
+  {
+    "text": "slid backwards. The model looked",
+    "start": 609.12,
+    "duration": 4.24
+  },
+  {
+    "text": "straight at its own mistake and waved it",
+    "start": 611.2,
+    "duration": 3.92
+  },
+  {
+    "text": "right through because it was the very",
+    "start": 613.36,
+    "duration": 3.84
+  },
+  {
+    "text": "same brain that made the mistake in the",
+    "start": 615.12,
+    "duration": 4.32
+  },
+  {
+    "text": "first place. So, here is the rule, and I",
+    "start": 617.2,
+    "duration": 4.16
+  },
+  {
+    "text": "want you to burn it in. Never let the",
+    "start": 619.44,
+    "duration": 4.48
+  },
+  {
+    "text": "same agent grade its own homework. It is",
+    "start": 621.36,
+    "duration": 4.64
+  },
+  {
+    "text": "the single most confident wrong judge",
+    "start": 623.92,
+    "duration": 4.159
+  },
+  {
+    "text": "you will ever hire, and it works for",
+    "start": 626,
+    "duration": 4.16
+  },
+  {
+    "text": "free, which is exactly what makes it so",
+    "start": 628.079,
+    "duration": 4.081
+  },
+  {
+    "text": "tempting to trust. Give the checking to",
+    "start": 630.16,
+    "duration": 4.48
+  },
+  {
+    "text": "a separate worker instead. A fresh agent",
+    "start": 632.16,
+    "duration": 4.4
+  },
+  {
+    "text": "whose entire job is to attack the",
+    "start": 634.64,
+    "duration": 4.24
+  },
+  {
+    "text": "answer, hunt down the weakest claim, and",
+    "start": 636.56,
+    "duration": 4.32
+  },
+  {
+    "text": "try hard to break it in private before",
+    "start": 638.88,
+    "duration": 3.68
+  },
+  {
+    "text": "your reader ever gets the chance to",
+    "start": 640.88,
+    "duration": 4
+  },
+  {
+    "text": "break it in public. A second set of eyes",
+    "start": 642.56,
+    "duration": 4.24
+  },
+  {
+    "text": "catches what the writer is simply blind",
+    "start": 644.88,
+    "duration": 4.48
+  },
+  {
+    "text": "to. This is simply how good editing has",
+    "start": 646.8,
+    "duration": 4.64
+  },
+  {
+    "text": "worked in every newsroom for a century.",
+    "start": 649.36,
+    "duration": 4.32
+  },
+  {
+    "text": "The Diamond just bakes that same editor",
+    "start": 651.44,
+    "duration": 4.32
+  },
+  {
+    "text": "straight into the machine. One honest",
+    "start": 653.68,
+    "duration": 4.159
+  },
+  {
+    "text": "warning, straight from Anthropic's own",
+    "start": 655.76,
+    "duration": 4.16
+  },
+  {
+    "text": "guidance. Do not reach for the diamond",
+    "start": 657.839,
+    "duration": 4.481
+  },
+  {
+    "text": "when a single call would do the job.",
+    "start": 659.92,
+    "duration": 4.32
+  },
+  {
+    "text": "Start with the simplest thing that works",
+    "start": 662.32,
+    "duration": 4.32
+  },
+  {
+    "text": "and only add workers and checks when the",
+    "start": 664.24,
+    "duration": 4.48
+  },
+  {
+    "text": "task is genuinely big enough to earn",
+    "start": 666.64,
+    "duration": 4.8
+  },
+  {
+    "text": "them. Lesson three, the stop rule. The",
+    "start": 668.72,
+    "duration": 4.96
+  },
+  {
+    "text": "unglamorous one that protects your bank",
+    "start": 671.44,
+    "duration": 4.639
+  },
+  {
+    "text": "account while you sleep. Remember, a",
+    "start": 673.68,
+    "duration": 4.56
+  },
+  {
+    "text": "loop is just a job that keeps running",
+    "start": 676.079,
+    "duration": 3.841
+  },
+  {
+    "text": "until something finally tells it to",
+    "start": 678.24,
+    "duration": 3.76
+  },
+  {
+    "text": "stop. That is its whole nature. It",
+    "start": 679.92,
+    "duration": 4.08
+  },
+  {
+    "text": "repeats itself. And here is the trap",
+    "start": 682,
+    "duration": 3.92
+  },
+  {
+    "text": "that catches almost every builder",
+    "start": 684,
+    "duration": 4.48
+  },
+  {
+    "text": "exactly once and it stings. If you",
+    "start": 685.92,
+    "duration": 4.88
+  },
+  {
+    "text": "forget to say when to stop, it does not",
+    "start": 688.48,
+    "duration": 4.799
+  },
+  {
+    "text": "stop. It keeps calling the model, keeps",
+    "start": 690.8,
+    "duration": 4.32
+  },
+  {
+    "text": "spending your money, and keeps circling",
+    "start": 693.279,
+    "duration": 3.761
+  },
+  {
+    "text": "the same problem, often getting a little",
+    "start": 695.12,
+    "duration": 4.32
+  },
+  {
+    "text": "bit worse with each new pointless lap.",
+    "start": 697.04,
+    "duration": 4.4
+  },
+  {
+    "text": "People have woken up to genuinely ugly",
+    "start": 699.44,
+    "duration": 4.16
+  },
+  {
+    "text": "bills from a single loop that ran all",
+    "start": 701.44,
+    "duration": 4.16
+  },
+  {
+    "text": "night with no exit written into it",
+    "start": 703.6,
+    "duration": 4.16
+  },
+  {
+    "text": "anywhere. It felt clever at midnight",
+    "start": 705.6,
+    "duration": 4
+  },
+  {
+    "text": "when they hit run. It felt very",
+    "start": 707.76,
+    "duration": 3.84
+  },
+  {
+    "text": "expensive at breakfast when they saw the",
+    "start": 709.6,
+    "duration": 4.08
+  },
+  {
+    "text": "total. The agent was not broken, by the",
+    "start": 711.6,
+    "duration": 4.08
+  },
+  {
+    "text": "way. It did exactly what it was told,",
+    "start": 713.68,
+    "duration": 4.32
+  },
+  {
+    "text": "which was to keep going forever. So,",
+    "start": 715.68,
+    "duration": 4.56
+  },
+  {
+    "text": "every loop you build gets a stop rule",
+    "start": 718,
+    "duration": 4.8
+  },
+  {
+    "text": "written down before you ever press run.",
+    "start": 720.24,
+    "duration": 4.96
+  },
+  {
+    "text": "Not after it misbehaves, not later when",
+    "start": 722.8,
+    "duration": 4.32
+  },
+  {
+    "text": "you remember, before. And there are",
+    "start": 725.2,
+    "duration": 4.16
+  },
+  {
+    "text": "three honest kinds of stop rule. And the",
+    "start": 727.12,
+    "duration": 4.08
+  },
+  {
+    "text": "good news is you are allowed to mix",
+    "start": 729.36,
+    "duration": 4.4
+  },
+  {
+    "text": "them. The first is a cap. Try at most",
+    "start": 731.2,
+    "duration": 4.639
+  },
+  {
+    "text": "five times and then hand me whatever you",
+    "start": 733.76,
+    "duration": 4.48
+  },
+  {
+    "text": "have managed to get. simple, a little",
+    "start": 735.839,
+    "duration": 4.401
+  },
+  {
+    "text": "brutal, and it means the loop cannot run",
+    "start": 738.24,
+    "duration": 4.08
+  },
+  {
+    "text": "forever, no matter how badly it gets",
+    "start": 740.24,
+    "duration": 4.24
+  },
+  {
+    "text": "stuck on a hard problem. The second is a",
+    "start": 742.32,
+    "duration": 4.48
+  },
+  {
+    "text": "budget. Spend at most this many dollars",
+    "start": 744.48,
+    "duration": 4.56
+  },
+  {
+    "text": "or make at most this many calls, then",
+    "start": 746.8,
+    "duration": 4.4
+  },
+  {
+    "text": "stop and report back to me. This is the",
+    "start": 749.04,
+    "duration": 4.4
+  },
+  {
+    "text": "one that turns a scary open-ended agent",
+    "start": 751.2,
+    "duration": 4.96
+  },
+  {
+    "text": "into a calm, boring line item you fully",
+    "start": 753.44,
+    "duration": 5.28
+  },
+  {
+    "text": "control. The third is a bar. The moment",
+    "start": 756.16,
+    "duration": 4.239
+  },
+  {
+    "text": "the answer is good enough by a clear",
+    "start": 758.72,
+    "duration": 3.76
+  },
+  {
+    "text": "test you wrote down in advance, stop",
+    "start": 760.399,
+    "duration": 4.721
+  },
+  {
+    "text": "early and move on with your day. Do not",
+    "start": 762.48,
+    "duration": 4.32
+  },
+  {
+    "text": "keep paying for perfect. When good",
+    "start": 765.12,
+    "duration": 3.44
+  },
+  {
+    "text": "enough, already walked through the door",
+    "start": 766.8,
+    "duration": 4.08
+  },
+  {
+    "text": "and passed. How do you pick the numbers?",
+    "start": 768.56,
+    "duration": 4.719
+  },
+  {
+    "text": "Start small and cheap. Watch one real",
+    "start": 770.88,
+    "duration": 4.88
+  },
+  {
+    "text": "run and loosen from there. Three tries",
+    "start": 773.279,
+    "duration": 4.961
+  },
+  {
+    "text": "and a $2 cap will teach you more in one",
+    "start": 775.76,
+    "duration": 4.319
+  },
+  {
+    "text": "evening than a week of reading ever",
+    "start": 778.24,
+    "duration": 4
+  },
+  {
+    "text": "could. You can raise the ceiling later.",
+    "start": 780.079,
+    "duration": 4.161
+  },
+  {
+    "text": "Pick at least one of the three before",
+    "start": 782.24,
+    "duration": 4.32
+  },
+  {
+    "text": "anything runs. And better yet, pick two",
+    "start": 784.24,
+    "duration": 4.719
+  },
+  {
+    "text": "of them. A loop with no stop rule at all",
+    "start": 786.56,
+    "duration": 4.88
+  },
+  {
+    "text": "is not a system. It is a slow leak with",
+    "start": 788.959,
+    "duration": 4.481
+  },
+  {
+    "text": "your credit card taped firmly to the",
+    "start": 791.44,
+    "duration": 4.16
+  },
+  {
+    "text": "bottom of it. Lesson four, the human",
+    "start": 793.44,
+    "duration": 4.24
+  },
+  {
+    "text": "gate. The shortest lesson in the whole",
+    "start": 795.6,
+    "duration": 3.76
+  },
+  {
+    "text": "course and the one that will save you",
+    "start": 797.68,
+    "duration": 3.76
+  },
+  {
+    "text": "the most public embarrassment. A human",
+    "start": 799.36,
+    "duration": 4.159
+  },
+  {
+    "text": "gate is a spot in the graph where the",
+    "start": 801.44,
+    "duration": 4.24
+  },
+  {
+    "text": "whole thing pauses on purpose and waits",
+    "start": 803.519,
+    "duration": 4.721
+  },
+  {
+    "text": "for you. The work stops mid-flight and",
+    "start": 805.68,
+    "duration": 5.04
+  },
+  {
+    "text": "just holds there, handsfolded, doing",
+    "start": 808.24,
+    "duration": 4.56
+  },
+  {
+    "text": "nothing at all until you finally look at",
+    "start": 810.72,
+    "duration": 4
+  },
+  {
+    "text": "it. It looks at what it just built and",
+    "start": 812.8,
+    "duration": 4.159
+  },
+  {
+    "text": "it asks you one question. Do I have your",
+    "start": 814.72,
+    "duration": 4.4
+  },
+  {
+    "text": "yes before this goes out into the real",
+    "start": 816.959,
+    "duration": 4.481
+  },
+  {
+    "text": "world? And then it sits perfectly still",
+    "start": 819.12,
+    "duration": 4.48
+  },
+  {
+    "text": "and does absolutely nothing until you",
+    "start": 821.44,
+    "duration": 4.24
+  },
+  {
+    "text": "actually answer it. The good graph tools",
+    "start": 823.6,
+    "duration": 4.16
+  },
+  {
+    "text": "have this baked right in. The run",
+    "start": 825.68,
+    "duration": 4.159
+  },
+  {
+    "text": "pauses. You read what it made, you",
+    "start": 827.76,
+    "duration": 4
+  },
+  {
+    "text": "approve it, or you send it back with a",
+    "start": 829.839,
+    "duration": 4.161
+  },
+  {
+    "text": "short note like too aggressive. Soften",
+    "start": 831.76,
+    "duration": 4.319
+  },
+  {
+    "text": "it. And only then does it resume from",
+    "start": 834,
+    "duration": 5.12
+  },
+  {
+    "text": "that exact spot. Pause. Review. Resume.",
+    "start": 836.079,
+    "duration": 4.721
+  },
+  {
+    "text": "That is the rhythm. And it cost you",
+    "start": 839.12,
+    "duration": 3.76
+  },
+  {
+    "text": "about 30 seconds of attention. You do",
+    "start": 840.8,
+    "duration": 3.92
+  },
+  {
+    "text": "not gate every step though. And this is",
+    "start": 842.88,
+    "duration": 3.6
+  },
+  {
+    "text": "where people overcorrect. Gate",
+    "start": 844.72,
+    "duration": 3.44
+  },
+  {
+    "text": "everything. And you are just doing the",
+    "start": 846.48,
+    "duration": 3.84
+  },
+  {
+    "text": "whole job by hand again. One nervous",
+    "start": 848.16,
+    "duration": 4.16
+  },
+  {
+    "text": "click at a time and you have thrown away",
+    "start": 850.32,
+    "duration": 3.92
+  },
+  {
+    "text": "the entire reason you built the graph.",
+    "start": 852.32,
+    "duration": 4
+  },
+  {
+    "text": "So gate only the steps you cannot take",
+    "start": 854.24,
+    "duration": 4.719
+  },
+  {
+    "text": "back. The email that actually sends, the",
+    "start": 856.32,
+    "duration": 4.48
+  },
+  {
+    "text": "post that actually publishes, the",
+    "start": 858.959,
+    "duration": 3.921
+  },
+  {
+    "text": "payment that actually clears. Everything",
+    "start": 860.8,
+    "duration": 4.399
+  },
+  {
+    "text": "reversible runs free and fast. The",
+    "start": 862.88,
+    "duration": 4.399
+  },
+  {
+    "text": "irreversible stops and waits for your",
+    "start": 865.199,
+    "duration": 4.561
+  },
+  {
+    "text": "yes. I have watched a fully automated",
+    "start": 867.279,
+    "duration": 4.881
+  },
+  {
+    "text": "system send a broken draft to a real",
+    "start": 869.76,
+    "duration": 4.72
+  },
+  {
+    "text": "client list because no one put a gate in",
+    "start": 872.16,
+    "duration": 4.4
+  },
+  {
+    "text": "front of the send button. One human gate",
+    "start": 874.48,
+    "duration": 4
+  },
+  {
+    "text": "would have caught it in four seconds.",
+    "start": 876.56,
+    "duration": 3.44
+  },
+  {
+    "text": "Put the gate where the regret would",
+    "start": 878.48,
+    "duration": 4.56
+  },
+  {
+    "text": "live. Now we build. Graph one, the deep",
+    "start": 880,
+    "duration": 5.68
+  },
+  {
+    "text": "research desk. This is the diamond aimed",
+    "start": 883.04,
+    "duration": 4.159
+  },
+  {
+    "text": "straight at the thing that eats your",
+    "start": 885.68,
+    "duration": 3.839
+  },
+  {
+    "text": "afternoons alive. Deep research. The",
+    "start": 887.199,
+    "duration": 4.561
+  },
+  {
+    "text": "input is one question. Let us make it",
+    "start": 889.519,
+    "duration": 4.32
+  },
+  {
+    "text": "real and a little scary. Should we",
+    "start": 891.76,
+    "duration": 3.92
+  },
+  {
+    "text": "launch our product in Germany next",
+    "start": 893.839,
+    "duration": 4.641
+  },
+  {
+    "text": "quarter? One fuzzy, expensive, high",
+    "start": 895.68,
+    "duration": 4.8
+  },
+  {
+    "text": "stakes question. That is what goes into",
+    "start": 898.48,
+    "duration": 4.24
+  },
+  {
+    "text": "the very top of the diamond. The first",
+    "start": 900.48,
+    "duration": 4.88
+  },
+  {
+    "text": "job is the lead. It takes your one fuzzy",
+    "start": 902.72,
+    "duration": 4.72
+  },
+  {
+    "text": "question and breaks it into five sharp",
+    "start": 905.36,
+    "duration": 4.32
+  },
+  {
+    "text": "ones exactly the way a good analyst",
+    "start": 907.44,
+    "duration": 4.399
+  },
+  {
+    "text": "would sit down and do before touching a",
+    "start": 909.68,
+    "duration": 4.48
+  },
+  {
+    "text": "single source or opening a single tab.",
+    "start": 911.839,
+    "duration": 4.56
+  },
+  {
+    "text": "Market size over there. Local",
+    "start": 914.16,
+    "duration": 4.72
+  },
+  {
+    "text": "competitors already dug in the rules and",
+    "start": 916.399,
+    "duration": 4.24
+  },
+  {
+    "text": "taxes you would have to follow. What",
+    "start": 918.88,
+    "duration": 3.84
+  },
+  {
+    "text": "price that specific market will actually",
+    "start": 920.639,
+    "duration": 4.32
+  },
+  {
+    "text": "bear and what could go wrong after you",
+    "start": 922.72,
+    "duration": 4.799
+  },
+  {
+    "text": "commit. Five clean separate angles.",
+    "start": 924.959,
+    "duration": 4.88
+  },
+  {
+    "text": "Those five questions fan out to five",
+    "start": 927.519,
+    "duration": 4.88
+  },
+  {
+    "text": "research workers running side by side.",
+    "start": 929.839,
+    "duration": 4.481
+  },
+  {
+    "text": "This is the wide middle of the diamond.",
+    "start": 932.399,
+    "duration": 3.761
+  },
+  {
+    "text": "And this is the exact moment where your",
+    "start": 934.32,
+    "duration": 4.079
+  },
+  {
+    "text": "two-day afternoon collapses into about",
+    "start": 936.16,
+    "duration": 4.4
+  },
+  {
+    "text": "four minutes of wall clock time. Each",
+    "start": 938.399,
+    "duration": 4.401
+  },
+  {
+    "text": "worker owns exactly one question and",
+    "start": 940.56,
+    "duration": 4.48
+  },
+  {
+    "text": "pulls real sources for just that one",
+    "start": 942.8,
+    "duration": 4.479
+  },
+  {
+    "text": "slice. No single worker tries to boil",
+    "start": 945.04,
+    "duration": 4.799
+  },
+  {
+    "text": "the whole ocean at once. One question,",
+    "start": 947.279,
+    "duration": 4.8
+  },
+  {
+    "text": "real citations, then it comes straight",
+    "start": 949.839,
+    "duration": 4.24
+  },
+  {
+    "text": "back with the goods in hand. Think about",
+    "start": 952.079,
+    "duration": 3.76
+  },
+  {
+    "text": "what that actually replaces for a",
+    "start": 954.079,
+    "duration": 4.081
+  },
+  {
+    "text": "second. A junior analyst might burn two",
+    "start": 955.839,
+    "duration": 4.721
+  },
+  {
+    "text": "full days on that one launch question.",
+    "start": 958.16,
+    "duration": 4.479
+  },
+  {
+    "text": "This desk hands you the same five",
+    "start": 960.56,
+    "duration": 4.48
+  },
+  {
+    "text": "angles, sourced and checked in about the",
+    "start": 962.639,
+    "duration": 4.481
+  },
+  {
+    "text": "time it takes to refill your coffee.",
+    "start": 965.04,
+    "duration": 3.84
+  },
+  {
+    "text": "Then comes the worker that makes this",
+    "start": 967.12,
+    "duration": 4.88
+  },
+  {
+    "text": "entire desk worth trusting, the skeptic.",
+    "start": 968.88,
+    "duration": 4.959
+  },
+  {
+    "text": "This is the node that separates a fun",
+    "start": 972,
+    "duration": 3.839
+  },
+  {
+    "text": "little toy from a tool you would",
+    "start": 973.839,
+    "duration": 4
+  },
+  {
+    "text": "actually bet a decision on. So do not",
+    "start": 975.839,
+    "duration": 4.24
+  },
+  {
+    "text": "you dare skip it to save a few cents.",
+    "start": 977.839,
+    "duration": 4.481
+  },
+  {
+    "text": "Its only job is to try to kill the",
+    "start": 980.079,
+    "duration": 4.721
+  },
+  {
+    "text": "findings. It hunts for the weak source,",
+    "start": 982.32,
+    "duration": 4.56
+  },
+  {
+    "text": "the number that is three years stale,",
+    "start": 984.8,
+    "duration": 4.399
+  },
+  {
+    "text": "the confident claim sitting on top of",
+    "start": 986.88,
+    "duration": 4.879
+  },
+  {
+    "text": "nothing solid at all. It is paid to be a",
+    "start": 989.199,
+    "duration": 4.401
+  },
+  {
+    "text": "pain in the neck. Anything that survives",
+    "start": 991.759,
+    "duration": 3.52
+  },
+  {
+    "text": "that skeptic is something you can",
+    "start": 993.6,
+    "duration": 3.52
+  },
+  {
+    "text": "actually stand up in a meeting and",
+    "start": 995.279,
+    "duration": 4.321
+  },
+  {
+    "text": "defend out loud. And anything that dies",
+    "start": 997.12,
+    "duration": 4.48
+  },
+  {
+    "text": "right there just saved you from being",
+    "start": 999.6,
+    "duration": 4.32
+  },
+  {
+    "text": "confidently publicly wrong. That is the",
+    "start": 1001.6,
+    "duration": 4.4
+  },
+  {
+    "text": "whole trade and it is a great one. What",
+    "start": 1003.92,
+    "duration": 4.479
+  },
+  {
+    "text": "lives gets merged into one clean brief",
+    "start": 1006,
+    "duration": 4.24
+  },
+  {
+    "text": "with every source kept sitting right",
+    "start": 1008.399,
+    "duration": 4.081
+  },
+  {
+    "text": "next to the exact claim it supports. No",
+    "start": 1010.24,
+    "duration": 4.399
+  },
+  {
+    "text": "naked assertions floating around. You",
+    "start": 1012.48,
+    "duration": 4.479
+  },
+  {
+    "text": "can click through and verify any single",
+    "start": 1014.639,
+    "duration": 4.32
+  },
+  {
+    "text": "line of it in a few seconds. And the",
+    "start": 1016.959,
+    "duration": 4.24
+  },
+  {
+    "text": "very last node is you. The finished",
+    "start": 1018.959,
+    "duration": 4.24
+  },
+  {
+    "text": "brief waits at a gate until you read it",
+    "start": 1021.199,
+    "duration": 4.161
+  },
+  {
+    "text": "and press approve. Nothing at all leaves",
+    "start": 1023.199,
+    "duration": 4.321
+  },
+  {
+    "text": "that desk without your yes. The human",
+    "start": 1025.36,
+    "duration": 4.479
+  },
+  {
+    "text": "gate from lesson 4 sitting exactly where",
+    "start": 1027.52,
+    "duration": 4.64
+  },
+  {
+    "text": "it belongs. Here is the prompt. And",
+    "start": 1029.839,
+    "duration": 4.561
+  },
+  {
+    "text": "notice that it is just plain English you",
+    "start": 1032.16,
+    "duration": 3.84
+  },
+  {
+    "text": "could have written yourself. Tell the",
+    "start": 1034.4,
+    "duration": 3.6
+  },
+  {
+    "text": "lead, split my question into five",
+    "start": 1036,
+    "duration": 3.919
+  },
+  {
+    "text": "distinct research angles and nothing",
+    "start": 1038,
+    "duration": 4
+  },
+  {
+    "text": "more. Hand it the question and let it",
+    "start": 1039.919,
+    "duration": 4.321
+  },
+  {
+    "text": "plan the attack. Tell the workers,",
+    "start": 1042,
+    "duration": 4.72
+  },
+  {
+    "text": "\"Answer only your assigned angle. Cite",
+    "start": 1044.24,
+    "duration": 4.88
+  },
+  {
+    "text": "every source you use and do not guess.",
+    "start": 1046.72,
+    "duration": 4.64
+  },
+  {
+    "text": "If you cannot find something solid, say",
+    "start": 1049.12,
+    "duration": 4.16
+  },
+  {
+    "text": "clearly that you could not find it. An",
+    "start": 1051.36,
+    "duration": 4
+  },
+  {
+    "text": "honest gap beats a smooth invented",
+    "start": 1053.28,
+    "duration": 4.32
+  },
+  {
+    "text": "answer every time here.\" Tell the",
+    "start": 1055.36,
+    "duration": 4.559
+  },
+  {
+    "text": "skeptic, \"Attack every claim in this",
+    "start": 1057.6,
+    "duration": 5.04
+  },
+  {
+    "text": "brief. Flag anything thin or outdated",
+    "start": 1059.919,
+    "duration": 4.721
+  },
+  {
+    "text": "and keep only what genuinely holds up",
+    "start": 1062.64,
+    "duration": 4.08
+  },
+  {
+    "text": "under pressure. Then have the final step",
+    "start": 1064.64,
+    "duration": 4.64
+  },
+  {
+    "text": "stop and wait for a human yes before it",
+    "start": 1066.72,
+    "duration": 4.64
+  },
+  {
+    "text": "calls the work finished. And just like",
+    "start": 1069.28,
+    "duration": 4.24
+  },
+  {
+    "text": "that, you have traded a two-day research",
+    "start": 1071.36,
+    "duration": 5.28
+  },
+  {
+    "text": "slog for a 20inut review. Same depth, a",
+    "start": 1073.52,
+    "duration": 4.8
+  },
+  {
+    "text": "fraction of the hours, and a more",
+    "start": 1076.64,
+    "duration": 3.919
+  },
+  {
+    "text": "trustworthy result than a tired human",
+    "start": 1078.32,
+    "duration": 4.479
+  },
+  {
+    "text": "racing a deadline at 4 in the afternoon.",
+    "start": 1080.559,
+    "duration": 4.24
+  },
+  {
+    "text": "Run it once and you will not want to",
+    "start": 1082.799,
+    "duration": 4.641
+  },
+  {
+    "text": "research the old way again. Graph two,",
+    "start": 1084.799,
+    "duration": 5.601
+  },
+  {
+    "text": "the SEO content machine. Same diamond",
+    "start": 1087.44,
+    "duration": 5.04
+  },
+  {
+    "text": "pointed at a completely different chore.",
+    "start": 1090.4,
+    "duration": 4.48
+  },
+  {
+    "text": "This one turns a single keyword into a",
+    "start": 1092.48,
+    "duration": 4.72
+  },
+  {
+    "text": "finished publish ready article while you",
+    "start": 1094.88,
+    "duration": 5.28
+  },
+  {
+    "text": "make lunch. The input is one target, one",
+    "start": 1097.2,
+    "duration": 5.04
+  },
+  {
+    "text": "keyword, and the search intent sitting",
+    "start": 1100.16,
+    "duration": 5.12
+  },
+  {
+    "text": "behind it. Somebody typing best CRM for",
+    "start": 1102.24,
+    "duration": 5.28
+  },
+  {
+    "text": "small teams does not want a dictionary",
+    "start": 1105.28,
+    "duration": 4.48
+  },
+  {
+    "text": "definition of a CRM. They want a short,",
+    "start": 1107.52,
+    "duration": 4.399
+  },
+  {
+    "text": "honest comparison with a clear pick at",
+    "start": 1109.76,
+    "duration": 4.56
+  },
+  {
+    "text": "the end. That intent, not the keyword,",
+    "start": 1111.919,
+    "duration": 4.801
+  },
+  {
+    "text": "is the real brief. The lead job builds",
+    "start": 1114.32,
+    "duration": 4.56
+  },
+  {
+    "text": "the outline and then hands each section",
+    "start": 1116.72,
+    "duration": 4.64
+  },
+  {
+    "text": "off to its own dedicated writer. The",
+    "start": 1118.88,
+    "duration": 4.56
+  },
+  {
+    "text": "introduction goes to one. Each main",
+    "start": 1121.36,
+    "duration": 4
+  },
+  {
+    "text": "point goes to another. The conclusion",
+    "start": 1123.44,
+    "duration": 3.68
+  },
+  {
+    "text": "goes to a last one. The piece gets",
+    "start": 1125.36,
+    "duration": 4.24
+  },
+  {
+    "text": "carved up cleanly along its own seams.",
+    "start": 1127.12,
+    "duration": 4.799
+  },
+  {
+    "text": "The writers run in parallel, one section",
+    "start": 1129.6,
+    "duration": 4.24
+  },
+  {
+    "text": "each. So, an article that would eat a",
+    "start": 1131.919,
+    "duration": 3.841
+  },
+  {
+    "text": "full afternoon of your life drafts",
+    "start": 1133.84,
+    "duration": 4.56
+  },
+  {
+    "text": "itself in a single pass. It is the wide",
+    "start": 1135.76,
+    "duration": 4.24
+  },
+  {
+    "text": "middle of the diamond again, doing",
+    "start": 1138.4,
+    "duration": 4.08
+  },
+  {
+    "text": "exactly the thing it is so good at. Now,",
+    "start": 1140,
+    "duration": 4.4
+  },
+  {
+    "text": "the checking step, and this is precisely",
+    "start": 1142.48,
+    "duration": 4.48
+  },
+  {
+    "text": "where most cheap content tools fall flat",
+    "start": 1144.4,
+    "duration": 4.399
+  },
+  {
+    "text": "on their face. They let the writer",
+    "start": 1146.96,
+    "duration": 4.24
+  },
+  {
+    "text": "approve its own work to save a step. And",
+    "start": 1148.799,
+    "duration": 4.721
+  },
+  {
+    "text": "you already know from lesson two exactly",
+    "start": 1151.2,
+    "duration": 4.4
+  },
+  {
+    "text": "how that ends. So, a separate editor",
+    "start": 1153.52,
+    "duration": 4.72
+  },
+  {
+    "text": "reads the whole draft, not the writer. A",
+    "start": 1155.6,
+    "duration": 3.84
+  },
+  {
+    "text": "different agent with different",
+    "start": 1158.24,
+    "duration": 3.84
+  },
+  {
+    "text": "instructions whose actual job is to be a",
+    "start": 1159.44,
+    "duration": 4.239
+  },
+  {
+    "text": "little bit mean about the work and",
+    "start": 1162.08,
+    "duration": 3.76
+  },
+  {
+    "text": "completely unscentimental toward every",
+    "start": 1163.679,
+    "duration": 4.401
+  },
+  {
+    "text": "sentence in it. It checks the facts,",
+    "start": 1165.84,
+    "duration": 4.48
+  },
+  {
+    "text": "cuts the filler, kills the repetition,",
+    "start": 1168.08,
+    "duration": 4.24
+  },
+  {
+    "text": "and forces eight sections written by",
+    "start": 1170.32,
+    "duration": 3.76
+  },
+  {
+    "text": "eight different workers to sound like",
+    "start": 1172.32,
+    "duration": 4.4
+  },
+  {
+    "text": "one calm, consistent human voice instead",
+    "start": 1174.08,
+    "duration": 4.64
+  },
+  {
+    "text": "of an obvious committee arguing with",
+    "start": 1176.72,
+    "duration": 4.48
+  },
+  {
+    "text": "itself in public. Everything merges into",
+    "start": 1178.72,
+    "duration": 4.8
+  },
+  {
+    "text": "one single article formatted and ready,",
+    "start": 1181.2,
+    "duration": 4.16
+  },
+  {
+    "text": "and the prompt behind it is short.",
+    "start": 1183.52,
+    "duration": 4
+  },
+  {
+    "text": "Outline the keyword, assign the sections",
+    "start": 1185.36,
+    "duration": 3.76
+  },
+  {
+    "text": "to separate writers, then have a",
+    "start": 1187.52,
+    "duration": 4
+  },
+  {
+    "text": "separate editor fact check and unify the",
+    "start": 1189.12,
+    "duration": 4.64
+  },
+  {
+    "text": "entire draft into one voice, and the",
+    "start": 1191.52,
+    "duration": 4.159
+  },
+  {
+    "text": "human gate stays right where it should",
+    "start": 1193.76,
+    "duration": 3.919
+  },
+  {
+    "text": "be. You read the piece before it ever",
+    "start": 1195.679,
+    "duration": 3.921
+  },
+  {
+    "text": "touches your live site because your name",
+    "start": 1197.679,
+    "duration": 4.401
+  },
+  {
+    "text": "is the one on it, not the machines. One",
+    "start": 1199.6,
+    "duration": 4.88
+  },
+  {
+    "text": "keyword goes in, one real article you",
+    "start": 1202.08,
+    "duration": 5.2
+  },
+  {
+    "text": "are proud of comes out. Graph three, the",
+    "start": 1204.48,
+    "duration": 4.88
+  },
+  {
+    "text": "go to market kit. This is the one that",
+    "start": 1207.28,
+    "duration": 3.68
+  },
+  {
+    "text": "feels a little bit like cheating the",
+    "start": 1209.36,
+    "duration": 3.52
+  },
+  {
+    "text": "first time you sit and watch it actually",
+    "start": 1210.96,
+    "duration": 4
+  },
+  {
+    "text": "run in front of you. The input is a",
+    "start": 1212.88,
+    "duration": 4.08
+  },
+  {
+    "text": "single thing, a short description of",
+    "start": 1214.96,
+    "duration": 4
+  },
+  {
+    "text": "whatever it is you are launching. One",
+    "start": 1216.96,
+    "duration": 4.079
+  },
+  {
+    "text": "honest paragraph about the product, who",
+    "start": 1218.96,
+    "duration": 4.88
+  },
+  {
+    "text": "it is for, and what it does is genuinely",
+    "start": 1221.039,
+    "duration": 4.88
+  },
+  {
+    "text": "all this graph needs to get moving. From",
+    "start": 1223.84,
+    "duration": 4.48
+  },
+  {
+    "text": "that one paragraph, the workers fan out",
+    "start": 1225.919,
+    "duration": 4.401
+  },
+  {
+    "text": "and build every single piece you would",
+    "start": 1228.32,
+    "duration": 4.64
+  },
+  {
+    "text": "normally grind out by hand over a full",
+    "start": 1230.32,
+    "duration": 4.8
+  },
+  {
+    "text": "painful week. And here is the trick.",
+    "start": 1232.96,
+    "duration": 4.16
+  },
+  {
+    "text": "They build all of them at the very same",
+    "start": 1235.12,
+    "duration": 4.799
+  },
+  {
+    "text": "time, not one after another. One drafts",
+    "start": 1237.12,
+    "duration": 4.799
+  },
+  {
+    "text": "the positioning, the core promise",
+    "start": 1239.919,
+    "duration": 3.841
+  },
+  {
+    "text": "everything else has to hang from. One",
+    "start": 1241.919,
+    "duration": 4
+  },
+  {
+    "text": "writes the launch emails, one writes the",
+    "start": 1243.76,
+    "duration": 4.64
+  },
+  {
+    "text": "landing page, one writes the ad angles,",
+    "start": 1245.919,
+    "duration": 4.801
+  },
+  {
+    "text": "one writes the social post. Five",
+    "start": 1248.4,
+    "duration": 4.48
+  },
+  {
+    "text": "separate lanes, all running on one",
+    "start": 1250.72,
+    "duration": 4.64
+  },
+  {
+    "text": "clock, and each one comes back a real",
+    "start": 1252.88,
+    "duration": 4.72
+  },
+  {
+    "text": "finished deliverable, not a rough sketch",
+    "start": 1255.36,
+    "duration": 4
+  },
+  {
+    "text": "you still have to rewrite. The check",
+    "start": 1257.6,
+    "duration": 4.48
+  },
+  {
+    "text": "here is not about grammar or typos. It",
+    "start": 1259.36,
+    "duration": 4.72
+  },
+  {
+    "text": "is about consistency across the whole",
+    "start": 1262.08,
+    "duration": 4.24
+  },
+  {
+    "text": "set. Do all of these pieces actually",
+    "start": 1264.08,
+    "duration": 4.56
+  },
+  {
+    "text": "tell the same story, or did five workers",
+    "start": 1266.32,
+    "duration": 4.239
+  },
+  {
+    "text": "each invent five slightly different",
+    "start": 1268.64,
+    "duration": 3.84
+  },
+  {
+    "text": "versions of your product? So, a reviewer",
+    "start": 1270.559,
+    "duration": 4.48
+  },
+  {
+    "text": "reads the entire kit as one single thing",
+    "start": 1272.48,
+    "duration": 4.64
+  },
+  {
+    "text": "and fixes any piece that has drifted off",
+    "start": 1275.039,
+    "duration": 4.961
+  },
+  {
+    "text": "message. The emails and the landing page",
+    "start": 1277.12,
+    "duration": 5.2
+  },
+  {
+    "text": "have to promise the exact same thing in",
+    "start": 1280,
+    "duration": 4.559
+  },
+  {
+    "text": "the exact same voice or the whole launch",
+    "start": 1282.32,
+    "duration": 4.64
+  },
+  {
+    "text": "feels off. It all merges into one folder",
+    "start": 1284.559,
+    "duration": 4.561
+  },
+  {
+    "text": "of finished copy. Every word of it",
+    "start": 1286.96,
+    "duration": 4.48
+  },
+  {
+    "text": "pointed at a single clear promise. The",
+    "start": 1289.12,
+    "duration": 5.12
+  },
+  {
+    "text": "prompt is one line. From this product,",
+    "start": 1291.44,
+    "duration": 5.68
+  },
+  {
+    "text": "write positioning, emails, a page, and",
+    "start": 1294.24,
+    "duration": 5.6
+  },
+  {
+    "text": "ads all in one unified voice. You read",
+    "start": 1297.12,
+    "duration": 4.799
+  },
+  {
+    "text": "the kit, you approve it, and a week of",
+    "start": 1299.84,
+    "duration": 4.319
+  },
+  {
+    "text": "dreaded launch writing collapses into a",
+    "start": 1301.919,
+    "duration": 4.801
+  },
+  {
+    "text": "single relaxed afternoon of editing. And",
+    "start": 1304.159,
+    "duration": 4.321
+  },
+  {
+    "text": "because you are the gate, it still",
+    "start": 1306.72,
+    "duration": 4.24
+  },
+  {
+    "text": "sounds like you, not like a robot doing",
+    "start": 1308.48,
+    "duration": 4.48
+  },
+  {
+    "text": "an impression of you. Before I let you",
+    "start": 1310.96,
+    "duration": 4.32
+  },
+  {
+    "text": "go, three mistakes I see beginners make",
+    "start": 1312.96,
+    "duration": 4.32
+  },
+  {
+    "text": "with their very first graph. So you can",
+    "start": 1315.28,
+    "duration": 4
+  },
+  {
+    "text": "skip the pain that taught them. Mistake",
+    "start": 1317.28,
+    "duration": 4
+  },
+  {
+    "text": "one, they let the writer check its own",
+    "start": 1319.28,
+    "duration": 4.32
+  },
+  {
+    "text": "work to save a node. You already know",
+    "start": 1321.28,
+    "duration": 4.8
+  },
+  {
+    "text": "why that fails. The scores do not climb.",
+    "start": 1323.6,
+    "duration": 4.959
+  },
+  {
+    "text": "They slide and the model waves its own",
+    "start": 1326.08,
+    "duration": 4.32
+  },
+  {
+    "text": "error straight through with total",
+    "start": 1328.559,
+    "duration": 4.161
+  },
+  {
+    "text": "confidence. Mistake two. They build a",
+    "start": 1330.4,
+    "duration": 4.639
+  },
+  {
+    "text": "beautiful graph with no stop rule and",
+    "start": 1332.72,
+    "duration": 4.24
+  },
+  {
+    "text": "run it overnight. The graph worked",
+    "start": 1335.039,
+    "duration": 3.841
+  },
+  {
+    "text": "perfectly. It just worked perfectly",
+    "start": 1336.96,
+    "duration": 4.4
+  },
+  {
+    "text": "about 4,000 times in a row and the bill",
+    "start": 1338.88,
+    "duration": 4.64
+  },
+  {
+    "text": "in the morning proved it. Mistake three.",
+    "start": 1341.36,
+    "duration": 4.4
+  },
+  {
+    "text": "They gate every single step out of fear.",
+    "start": 1343.52,
+    "duration": 4.08
+  },
+  {
+    "text": "Then wonder why the whole thing feels",
+    "start": 1345.76,
+    "duration": 4.24
+  },
+  {
+    "text": "slower than just doing it by hand. Gate",
+    "start": 1347.6,
+    "duration": 4.559
+  },
+  {
+    "text": "the send. Gate the publish. Let",
+    "start": 1350,
+    "duration": 4.559
+  },
+  {
+    "text": "everything you can undo simply run. And",
+    "start": 1352.159,
+    "duration": 4.721
+  },
+  {
+    "text": "one last honest note before the recap.",
+    "start": 1354.559,
+    "duration": 4.881
+  },
+  {
+    "text": "Your first graph will be ugly. Mine was.",
+    "start": 1356.88,
+    "duration": 4.72
+  },
+  {
+    "text": "Build the ugly version anyway. Run it",
+    "start": 1359.44,
+    "duration": 4.479
+  },
+  {
+    "text": "exactly once. Watch closely where it",
+    "start": 1361.6,
+    "duration": 4.64
+  },
+  {
+    "text": "breaks and fix that one thing. That",
+    "start": 1363.919,
+    "duration": 4.321
+  },
+  {
+    "text": "single loop is the whole secret to",
+    "start": 1366.24,
+    "duration": 3.919
+  },
+  {
+    "text": "getting good at this. So that is the",
+    "start": 1368.24,
+    "duration": 4.319
+  },
+  {
+    "text": "entire method in one breath. Let me hand",
+    "start": 1370.159,
+    "duration": 4.721
+  },
+  {
+    "text": "it to you clean one more time so it",
+    "start": 1372.559,
+    "duration": 4.321
+  },
+  {
+    "text": "actually sticks when you close this. A",
+    "start": 1374.88,
+    "duration": 4.96
+  },
+  {
+    "text": "graph is jobs, arrows, and state. A job",
+    "start": 1376.88,
+    "duration": 5.12
+  },
+  {
+    "text": "is one thing you hand one assistant. An",
+    "start": 1379.84,
+    "duration": 4.64
+  },
+  {
+    "text": "arrow means wait for this first. State",
+    "start": 1382,
+    "duration": 4.88
+  },
+  {
+    "text": "is the clipboard that rides along. Cut",
+    "start": 1384.48,
+    "duration": 4.64
+  },
+  {
+    "text": "the fake arrows and the jobs that do not",
+    "start": 1386.88,
+    "duration": 4.48
+  },
+  {
+    "text": "depend on each other suddenly run all at",
+    "start": 1389.12,
+    "duration": 4.72
+  },
+  {
+    "text": "once. That right there is the speed you",
+    "start": 1391.36,
+    "duration": 4.16
+  },
+  {
+    "text": "have been missing. The diamond is your",
+    "start": 1393.84,
+    "duration": 3.92
+  },
+  {
+    "text": "default shape for almost everything.",
+    "start": 1395.52,
+    "duration": 4.56
+  },
+  {
+    "text": "Split the work into lanes. Run the lanes",
+    "start": 1397.76,
+    "duration": 4.399
+  },
+  {
+    "text": "in parallel. Check the result with a",
+    "start": 1400.08,
+    "duration": 3.76
+  },
+  {
+    "text": "separate judge who never wrote the",
+    "start": 1402.159,
+    "duration": 3.921
+  },
+  {
+    "text": "answer. Then merge it all into one.",
+    "start": 1403.84,
+    "duration": 4.48
+  },
+  {
+    "text": "Every loop you ever build gets a stop",
+    "start": 1406.08,
+    "duration": 5.36
+  },
+  {
+    "text": "rule, a cap or budget or bar, so it can",
+    "start": 1408.32,
+    "duration": 4.8
+  },
+  {
+    "text": "never run off with your money in the",
+    "start": 1411.44,
+    "duration": 3.84
+  },
+  {
+    "text": "middle of the night. And you, the human,",
+    "start": 1413.12,
+    "duration": 4.16
+  },
+  {
+    "text": "stay the last yes before anything",
+    "start": 1415.28,
+    "duration": 3.92
+  },
+  {
+    "text": "reaches the real world. Here is your",
+    "start": 1417.28,
+    "duration": 4.16
+  },
+  {
+    "text": "homework one final time because it is",
+    "start": 1419.2,
+    "duration": 3.839
+  },
+  {
+    "text": "the part that actually changes things",
+    "start": 1421.44,
+    "duration": 3.84
+  },
+  {
+    "text": "for you. Tonight, draw the system you",
+    "start": 1423.039,
+    "duration": 4.64
+  },
+  {
+    "text": "already run as one straight line of jobs",
+    "start": 1425.28,
+    "duration": 4.8
+  },
+  {
+    "text": "on a piece of paper. Find the two or",
+    "start": 1427.679,
+    "duration": 4.24
+  },
+  {
+    "text": "three arrows that are fake, the ones",
+    "start": 1430.08,
+    "duration": 3.599
+  },
+  {
+    "text": "where nothing actually flows through.",
+    "start": 1431.919,
+    "duration": 4.321
+  },
+  {
+    "text": "Cut them cleanly. Let those free jobs",
+    "start": 1433.679,
+    "duration": 5.281
+  },
+  {
+    "text": "run side by side. Congratulations. You",
+    "start": 1436.24,
+    "duration": 5.04
+  },
+  {
+    "text": "just designed and built your first real",
+    "start": 1438.96,
+    "duration": 4.32
+  },
+  {
+    "text": "graph. You did not need a degree for any",
+    "start": 1441.28,
+    "duration": 3.759
+  },
+  {
+    "text": "of that. You needed to see the work",
+    "start": 1443.28,
+    "duration": 3.92
+  },
+  {
+    "text": "clearly for once, which almost no one",
+    "start": 1445.039,
+    "duration": 4.481
+  },
+  {
+    "text": "ever slows down to do. That is the craft",
+    "start": 1447.2,
+    "duration": 4.479
+  },
+  {
+    "text": "hiding under all the noise. And now it",
+    "start": 1449.52,
+    "duration": 4.159
+  },
+  {
+    "text": "belongs to you. And if you want to go",
+    "start": 1451.679,
+    "duration": 4
+  },
+  {
+    "text": "past this course and turn systems like",
+    "start": 1453.679,
+    "duration": 4.321
+  },
+  {
+    "text": "these into real money, that is exactly",
+    "start": 1455.679,
+    "duration": 4.561
+  },
+  {
+    "text": "what I built the realtime AI ops",
+    "start": 1458,
+    "duration": 5.919
+  },
+  {
+    "text": "community for over at weekly ops.com.",
+    "start": 1460.24,
+    "duration": 5.439
+  },
+  {
+    "text": "That is where the deeper builds live.",
+    "start": 1463.919,
+    "duration": 3.76
+  },
+  {
+    "text": "The ones with more workers, tighter",
+    "start": 1465.679,
+    "duration": 3.921
+  },
+  {
+    "text": "checks, and real clients on the other",
+    "start": 1467.679,
+    "duration": 3.841
+  },
+  {
+    "text": "end of them. That is the whole thing.",
+    "start": 1469.6,
+    "duration": 4.079
+  },
+  {
+    "text": "Draw your first graph tonight. Cut one",
+    "start": 1471.52,
+    "duration": 4.32
+  },
+  {
+    "text": "fake arrow and watch a straight line",
+    "start": 1473.679,
+    "duration": 4.24
+  },
+  {
+    "text": "turn into something that actually moves.",
+    "start": 1475.84,
+    "duration": 5.8
+  },
+  {
+    "text": "I will see you inside.",
+    "start": 1477.919,
+    "duration": 3.721
+  }
+]

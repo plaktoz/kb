@@ -1,0 +1,1067 @@
+[
+  {
+    "text": "As AI agents become more complex, simply",
+    "start": 0,
+    "duration": 5.2
+  },
+  {
+    "text": "repeating the same process will no",
+    "start": 3.16,
+    "duration": 4.72
+  },
+  {
+    "text": "longer be enough to automate tasks.",
+    "start": 5.2,
+    "duration": 4.48
+  },
+  {
+    "text": "Real-world work involves multiple",
+    "start": 7.88,
+    "duration": 4.76
+  },
+  {
+    "text": "people, dependencies, approvals,",
+    "start": 9.68,
+    "duration": 4.8
+  },
+  {
+    "text": "conditional branching, and exception",
+    "start": 12.64,
+    "duration": 4.16
+  },
+  {
+    "text": "handling. The idea of designing such",
+    "start": 14.48,
+    "duration": 5.24
+  },
+  {
+    "text": "complex tasks, not as a simple linear",
+    "start": 16.8,
+    "duration": 4.68
+  },
+  {
+    "text": "process, but as a structure with",
+    "start": 19.72,
+    "duration": 4.12
+  },
+  {
+    "text": "interconnected relationships, is gaining",
+    "start": 21.48,
+    "duration": 6.36
+  },
+  {
+    "text": "attention. In July 2026, the term graph",
+    "start": 23.84,
+    "duration": 6.28
+  },
+  {
+    "text": "engineering began to spread rapidly",
+    "start": 27.84,
+    "duration": 3.88
+  },
+  {
+    "text": "around the field of AI agent",
+    "start": 30.12,
+    "duration": 4.32
+  },
+  {
+    "text": "development. One of the triggers was a",
+    "start": 31.72,
+    "duration": 5
+  },
+  {
+    "text": "short post by Peter Steinberger of",
+    "start": 34.44,
+    "duration": 4.92
+  },
+  {
+    "text": "OpenClaw that essentially asked, \"Are we",
+    "start": 36.72,
+    "duration": 4.96
+  },
+  {
+    "text": "still talking about loops, or have we",
+    "start": 39.36,
+    "duration": 4.4
+  },
+  {
+    "text": "moved on to graphs?\"",
+    "start": 41.68,
+    "duration": 4.88
+  },
+  {
+    "text": "Just a few weeks ago, the hot topic was",
+    "start": 43.76,
+    "duration": 5.48
+  },
+  {
+    "text": "loop engineering. This concept involves",
+    "start": 46.56,
+    "duration": 5.24
+  },
+  {
+    "text": "designing an iterative system where AI",
+    "start": 49.24,
+    "duration": 5.76
+  },
+  {
+    "text": "discovers, executes, verifies, records,",
+    "start": 51.8,
+    "duration": 5.72
+  },
+  {
+    "text": "and moves on to the next task, rather",
+    "start": 55,
+    "duration": 4.56
+  },
+  {
+    "text": "than humans having to input excellent",
+    "start": 57.52,
+    "duration": 4.6
+  },
+  {
+    "text": "prompts each time. However, after",
+    "start": 59.56,
+    "duration": 4.76
+  },
+  {
+    "text": "running the loop many times, new",
+    "start": 62.12,
+    "duration": 4.72
+  },
+  {
+    "text": "problems arose. It's not that the agents",
+    "start": 64.32,
+    "duration": 4.52
+  },
+  {
+    "text": "aren't smart enough, but rather that the",
+    "start": 66.84,
+    "duration": 4.16
+  },
+  {
+    "text": "organizational structure isn't clear",
+    "start": 68.84,
+    "duration": 4.28
+  },
+  {
+    "text": "enough. An agent can loop through a",
+    "start": 71,
+    "duration": 5.16
+  },
+  {
+    "text": "single task. However, when tasks span",
+    "start": 73.12,
+    "duration": 5.56
+  },
+  {
+    "text": "product architecture, data security,",
+    "start": 76.16,
+    "duration": 5.12
+  },
+  {
+    "text": "testing, release, cost, and compliance,",
+    "start": 78.68,
+    "duration": 4.48
+  },
+  {
+    "text": "the real challenge is no longer getting",
+    "start": 81.28,
+    "duration": 4.4
+  },
+  {
+    "text": "an agent to try a few more times, but",
+    "start": 83.16,
+    "duration": 4.52
+  },
+  {
+    "text": "rather getting multiple agents with",
+    "start": 85.68,
+    "duration": 3.96
+  },
+  {
+    "text": "boundaries to work together in an",
+    "start": 87.68,
+    "duration": 5.12
+  },
+  {
+    "text": "observable, auditable, and recoverable",
+    "start": 89.64,
+    "duration": 6.92
+  },
+  {
+    "text": "manner. Then, a graph appeared. So, are",
+    "start": 92.8,
+    "duration": 6.52
+  },
+  {
+    "text": "loops outdated? Should all AI agents be",
+    "start": 96.56,
+    "duration": 5.56
+  },
+  {
+    "text": "complex graphs of multiple agents? Graph",
+    "start": 99.32,
+    "duration": 4.6
+  },
+  {
+    "text": "engineering is about designing the",
+    "start": 102.12,
+    "duration": 4.48
+  },
+  {
+    "text": "relationships between those processes.",
+    "start": 103.92,
+    "duration": 5.4
+  },
+  {
+    "text": "The name is new, but most of the hard",
+    "start": 106.6,
+    "duration": 5.28
+  },
+  {
+    "text": "problems are not. In other words, graph",
+    "start": 109.32,
+    "duration": 5.08
+  },
+  {
+    "text": "engineering didn't invent anything new.",
+    "start": 111.88,
+    "duration": 4.96
+  },
+  {
+    "text": "Rather, it gave a new name to those",
+    "start": 114.4,
+    "duration": 4.4
+  },
+  {
+    "text": "long-standing problems in agent",
+    "start": 116.84,
+    "duration": 4.2
+  },
+  {
+    "text": "orchestration. These old problems",
+    "start": 118.8,
+    "duration": 5.4
+  },
+  {
+    "text": "include how to break down tasks, how to",
+    "start": 121.04,
+    "duration": 5.96
+  },
+  {
+    "text": "express dependencies, which tasks can be",
+    "start": 124.2,
+    "duration": 4.96
+  },
+  {
+    "text": "parallelized, how to recover from",
+    "start": 127,
+    "duration": 4.92
+  },
+  {
+    "text": "failures, and where to store state. So,",
+    "start": 129.16,
+    "duration": 5.56
+  },
+  {
+    "text": "what happened after loop engineering? In",
+    "start": 131.92,
+    "duration": 4.56
+  },
+  {
+    "text": "loop engineering, we don't just give",
+    "start": 134.72,
+    "duration": 4.2
+  },
+  {
+    "text": "instructions to the AI once and then",
+    "start": 136.48,
+    "duration": 4.64
+  },
+  {
+    "text": "stop there. Create deliverables,",
+    "start": 138.92,
+    "duration": 4.96
+  },
+  {
+    "text": "evaluate them, identify problems, fix",
+    "start": 141.12,
+    "duration": 5.76
+  },
+  {
+    "text": "them, and evaluate again. This iteration",
+    "start": 143.88,
+    "duration": 4.96
+  },
+  {
+    "text": "continues until a certain quality",
+    "start": 146.88,
+    "duration": 4.28
+  },
+  {
+    "text": "standard is met. For example, let's",
+    "start": 148.84,
+    "duration": 5.04
+  },
+  {
+    "text": "consider the case where we have AI write",
+    "start": 151.16,
+    "duration": 5.32
+  },
+  {
+    "text": "articles. The AI creates articles and",
+    "start": 153.88,
+    "duration": 4.92
+  },
+  {
+    "text": "reviews their content itself. If there",
+    "start": 156.48,
+    "duration": 4.76
+  },
+  {
+    "text": "are any weak points, it rewrites them,",
+    "start": 158.8,
+    "duration": 4.88
+  },
+  {
+    "text": "evaluates them again, and continues to",
+    "start": 161.24,
+    "duration": 4.2
+  },
+  {
+    "text": "improve them until they meet the",
+    "start": 163.68,
+    "duration": 4.48
+  },
+  {
+    "text": "standards. Here, the only things humans",
+    "start": 165.44,
+    "duration": 5.32
+  },
+  {
+    "text": "decide are the purpose and the passing",
+    "start": 168.16,
+    "duration": 4.96
+  },
+  {
+    "text": "criteria. On the other hand, the",
+    "start": 170.76,
+    "duration": 5.04
+  },
+  {
+    "text": "specific steps to reach that point are",
+    "start": 173.12,
+    "duration": 5.96
+  },
+  {
+    "text": "left to the AI. This is a loop. In",
+    "start": 175.8,
+    "duration": 6.04
+  },
+  {
+    "text": "graphs, humans design the paths. In",
+    "start": 179.08,
+    "duration": 5.6
+  },
+  {
+    "text": "graph engineering, humans design not",
+    "start": 181.84,
+    "duration": 4.56
+  },
+  {
+    "text": "only the objectives and passing",
+    "start": 184.68,
+    "duration": 4.48
+  },
+  {
+    "text": "criteria, but also the entire path",
+    "start": 186.4,
+    "duration": 5.08
+  },
+  {
+    "text": "through which the work will proceed. If",
+    "start": 189.16,
+    "duration": 4.12
+  },
+  {
+    "text": "the process is the same for article",
+    "start": 191.48,
+    "duration": 4.44
+  },
+  {
+    "text": "creation, it would follow these steps.",
+    "start": 193.28,
+    "duration": 5.04
+  },
+  {
+    "text": "If the quality evaluation does not meet",
+    "start": 195.92,
+    "duration": 4.52
+  },
+  {
+    "text": "the standards, it will be returned to",
+    "start": 198.32,
+    "duration": 4.24
+  },
+  {
+    "text": "writing. If the article's direction",
+    "start": 200.44,
+    "duration": 4.56
+  },
+  {
+    "text": "itself is wrong, we'll go back to the",
+    "start": 202.56,
+    "duration": 5.28
+  },
+  {
+    "text": "structure creation and research stages.",
+    "start": 205,
+    "duration": 5.16
+  },
+  {
+    "text": "Unapproved documents cannot proceed to",
+    "start": 207.84,
+    "duration": 5.2
+  },
+  {
+    "text": "the publication process. In other words,",
+    "start": 210.16,
+    "duration": 5.2
+  },
+  {
+    "text": "in a graph, the AI doesn't wander around",
+    "start": 213.04,
+    "duration": 4.6
+  },
+  {
+    "text": "freely, but rather moves within a",
+    "start": 215.36,
+    "duration": 5.28
+  },
+  {
+    "text": "pre-designed map. Definitely stay tuned",
+    "start": 217.64,
+    "duration": 5.52
+  },
+  {
+    "text": "throughout the end of this video. If you",
+    "start": 220.64,
+    "duration": 4.28
+  },
+  {
+    "text": "guys haven't followed me, I highly",
+    "start": 223.16,
+    "duration": 4.359
+  },
+  {
+    "text": "recommend that you do so so you can stay",
+    "start": 224.92,
+    "duration": 5.24
+  },
+  {
+    "text": "up to date with the latest AI news.",
+    "start": 227.519,
+    "duration": 5.321
+  },
+  {
+    "text": "Lastly, make sure you guys subscribe,",
+    "start": 230.16,
+    "duration": 5
+  },
+  {
+    "text": "turn the notification bell, like this",
+    "start": 232.84,
+    "duration": 4.24
+  },
+  {
+    "text": "video, and check out previous videos",
+    "start": 235.16,
+    "duration": 3.96
+  },
+  {
+    "text": "because there is a lot of content that",
+    "start": 237.08,
+    "duration": 4.32
+  },
+  {
+    "text": "you will definitely benefit from. So,",
+    "start": 239.12,
+    "duration": 4.64
+  },
+  {
+    "text": "that thought, let's get right back into",
+    "start": 241.4,
+    "duration": 4.24
+  },
+  {
+    "text": "the video. The evolution of agent",
+    "start": 243.76,
+    "duration": 4.04
+  },
+  {
+    "text": "engineering can be summarized in three",
+    "start": 245.64,
+    "duration": 5.04
+  },
+  {
+    "text": "sentences, roughly as follows. Prompt",
+    "start": 247.8,
+    "duration": 5.2
+  },
+  {
+    "text": "engineering makes a single model call",
+    "start": 250.68,
+    "duration": 4.96
+  },
+  {
+    "text": "more reliable. Loop engineering makes an",
+    "start": 253,
+    "duration": 5.64
+  },
+  {
+    "text": "agent's behavior more reliable. Graph",
+    "start": 255.64,
+    "duration": 5
+  },
+  {
+    "text": "engineering makes the collaboration of a",
+    "start": 258.64,
+    "duration": 4.56
+  },
+  {
+    "text": "group of agents more reliable. The core",
+    "start": 260.64,
+    "duration": 5.2
+  },
+  {
+    "text": "object of prompt is an instruction. It",
+    "start": 263.2,
+    "duration": 4.88
+  },
+  {
+    "text": "cares about what the model sees, in what",
+    "start": 265.84,
+    "duration": 4.44
+  },
+  {
+    "text": "format it is output, and what it should",
+    "start": 268.08,
+    "duration": 5
+  },
+  {
+    "text": "not do. The core object of a loop is the",
+    "start": 270.28,
+    "duration": 5.16
+  },
+  {
+    "text": "control cycle. You are concerned with",
+    "start": 273.08,
+    "duration": 5.24
+  },
+  {
+    "text": "triggering conditions, tool calls, state",
+    "start": 275.44,
+    "duration": 6.16
+  },
+  {
+    "text": "updates, validators, retry strategies,",
+    "start": 278.32,
+    "duration": 5.76
+  },
+  {
+    "text": "and stopping conditions. The core object",
+    "start": 281.6,
+    "duration": 5.12
+  },
+  {
+    "text": "of a graph is the topology. You are",
+    "start": 284.08,
+    "duration": 5.4
+  },
+  {
+    "text": "interested in nodes, edges, state,",
+    "start": 286.72,
+    "duration": 5.68
+  },
+  {
+    "text": "artifacts, permissions, observations,",
+    "start": 289.48,
+    "duration": 5.72
+  },
+  {
+    "text": "evaluations, and change history. These",
+    "start": 292.4,
+    "duration": 5.36
+  },
+  {
+    "text": "three layers are not interchangeable.",
+    "start": 295.2,
+    "duration": 4.76
+  },
+  {
+    "text": "Graph is not an upgraded wrapper around",
+    "start": 297.76,
+    "duration": 4.24
+  },
+  {
+    "text": "loop, and loop will not disappear",
+    "start": 299.96,
+    "duration": 4.2
+  },
+  {
+    "text": "because of the introduction of graph.",
+    "start": 302,
+    "duration": 4.72
+  },
+  {
+    "text": "More precisely, each important node may",
+    "start": 304.16,
+    "duration": 4.6
+  },
+  {
+    "text": "still contain a loop. The graph",
+    "start": 306.72,
+    "duration": 3.76
+  },
+  {
+    "text": "determines how these loops are",
+    "start": 308.76,
+    "duration": 4.159
+  },
+  {
+    "text": "organized, constrained, and connected.",
+    "start": 310.48,
+    "duration": 4.8
+  },
+  {
+    "text": "If your task only requires a clear loop,",
+    "start": 312.919,
+    "duration": 4.641
+  },
+  {
+    "text": "such as scanning repository issues",
+    "start": 315.28,
+    "duration": 5
+  },
+  {
+    "text": "daily, fixing the simplest bugs, running",
+    "start": 317.56,
+    "duration": 5.84
+  },
+  {
+    "text": "tests, and opening PRs, then a loop is",
+    "start": 320.28,
+    "duration": 5.8
+  },
+  {
+    "text": "sufficient. Adding a graph too early",
+    "start": 323.4,
+    "duration": 5.44
+  },
+  {
+    "text": "will only increase complexity. However,",
+    "start": 326.08,
+    "duration": 5.48
+  },
+  {
+    "text": "if the task is inherently cross-domain,",
+    "start": 328.84,
+    "duration": 5
+  },
+  {
+    "text": "such as reconstructing a payment system",
+    "start": 331.56,
+    "duration": 4.88
+  },
+  {
+    "text": "while ensuring API compatibility,",
+    "start": 333.84,
+    "duration": 5.52
+  },
+  {
+    "text": "migrating data, updating the front end,",
+    "start": 336.44,
+    "duration": 5.36
+  },
+  {
+    "text": "completing tests, assessing security",
+    "start": 339.36,
+    "duration": 3.96
+  },
+  {
+    "text": "risks, and generating release",
+    "start": 341.8,
+    "duration": 4.36
+  },
+  {
+    "text": "instructions, a single loop will become",
+    "start": 343.32,
+    "duration": 5.6
+  },
+  {
+    "text": "a complete mess. At this point, what you",
+    "start": 346.16,
+    "duration": 4.96
+  },
+  {
+    "text": "really need to model is not what the",
+    "start": 348.92,
+    "duration": 4.76
+  },
+  {
+    "text": "agent will do next, but rather what",
+    "start": 351.12,
+    "duration": 4.76
+  },
+  {
+    "text": "migration evidence does the data node",
+    "start": 353.68,
+    "duration": 4.56
+  },
+  {
+    "text": "output? How do API nodes declare",
+    "start": 355.88,
+    "duration": 5.12
+  },
+  {
+    "text": "compatibility? When can front-end nodes",
+    "start": 358.24,
+    "duration": 5.28
+  },
+  {
+    "text": "run in parallel? What prerequisites must",
+    "start": 361,
+    "duration": 4.56
+  },
+  {
+    "text": "the release node wait for? This is",
+    "start": 363.52,
+    "duration": 4.24
+  },
+  {
+    "text": "already a graph problem. Traditional",
+    "start": 365.56,
+    "duration": 4.2
+  },
+  {
+    "text": "business systems have primarily been",
+    "start": 367.76,
+    "duration": 4.48
+  },
+  {
+    "text": "built around tabular data. This method",
+    "start": 369.76,
+    "duration": 5.24
+  },
+  {
+    "text": "organizes information using rows and",
+    "start": 372.24,
+    "duration": 5.2
+  },
+  {
+    "text": "columns, such as customer lists, product",
+    "start": 375,
+    "duration": 5
+  },
+  {
+    "text": "lists, and sales lists. Tabular",
+    "start": 377.44,
+    "duration": 4.92
+  },
+  {
+    "text": "databases are extremely powerful for",
+    "start": 380,
+    "duration": 4.76
+  },
+  {
+    "text": "aggregation and routine processing.",
+    "start": 382.36,
+    "duration": 4.32
+  },
+  {
+    "text": "However, the process becomes more",
+    "start": 384.76,
+    "duration": 4.04
+  },
+  {
+    "text": "complex when dealing with questions like",
+    "start": 386.68,
+    "duration": 4.12
+  },
+  {
+    "text": "the following: Who is indirectly",
+    "start": 388.8,
+    "duration": 4.32
+  },
+  {
+    "text": "connected to this person? Are there any",
+    "start": 390.8,
+    "duration": 4.72
+  },
+  {
+    "text": "common patterns that lead to fraudulent",
+    "start": 393.12,
+    "duration": 5.04
+  },
+  {
+    "text": "transactions? How far will the impact of",
+    "start": 395.52,
+    "duration": 4.92
+  },
+  {
+    "text": "a certain failure spread? If this task",
+    "start": 398.16,
+    "duration": 4.56
+  },
+  {
+    "text": "fails, to what stage should we return",
+    "start": 400.44,
+    "duration": 4.56
+  },
+  {
+    "text": "to? These are not issues that can be",
+    "start": 402.72,
+    "duration": 4.28
+  },
+  {
+    "text": "addressed by looking at a single data",
+    "start": 405,
+    "duration": 4.32
+  },
+  {
+    "text": "point. This problem involves tracing",
+    "start": 407,
+    "duration": 4.84
+  },
+  {
+    "text": "multiple objects and investigating the",
+    "start": 409.32,
+    "duration": 4.599
+  },
+  {
+    "text": "meaning of their relationships. The",
+    "start": 411.84,
+    "duration": 3.92
+  },
+  {
+    "text": "importance of this relationship is",
+    "start": 413.919,
+    "duration": 3.921
+  },
+  {
+    "text": "increasing even further with the",
+    "start": 415.76,
+    "duration": 4.8
+  },
+  {
+    "text": "proliferation of AI agents. Simply",
+    "start": 417.84,
+    "duration": 5.2
+  },
+  {
+    "text": "feeding AI a large amount of information",
+    "start": 420.56,
+    "duration": 4.52
+  },
+  {
+    "text": "does not guarantee that it will be able",
+    "start": 423.04,
+    "duration": 3.96
+  },
+  {
+    "text": "to make correct decisions. Which",
+    "start": 425.08,
+    "duration": 3.92
+  },
+  {
+    "text": "information is based on which other",
+    "start": 427,
+    "duration": 4.68
+  },
+  {
+    "text": "information? Who approved it and which",
+    "start": 429,
+    "duration": 5.4
+  },
+  {
+    "text": "steps did it go through? If it fails,",
+    "start": 431.68,
+    "duration": 5.08
+  },
+  {
+    "text": "where do we go back to? By explicitly",
+    "start": 434.4,
+    "duration": 4.6
+  },
+  {
+    "text": "defining the structure, it becomes",
+    "start": 436.76,
+    "duration": 4.76
+  },
+  {
+    "text": "easier to control the AI's decisions.",
+    "start": 439,
+    "duration": 4.48
+  },
+  {
+    "text": "Don't graph everything. When a new",
+    "start": 441.52,
+    "duration": 4.48
+  },
+  {
+    "text": "concept emerges, there's a natural urge",
+    "start": 443.48,
+    "duration": 4.92
+  },
+  {
+    "text": "to apply it to everything. However,",
+    "start": 446,
+    "duration": 5.68
+  },
+  {
+    "text": "graphs do not solve complexity for free.",
+    "start": 448.4,
+    "duration": 6.24
+  },
+  {
+    "text": "OpenAI's agent building guide also notes",
+    "start": 451.68,
+    "duration": 4.72
+  },
+  {
+    "text": "that while declarative graphs can",
+    "start": 454.64,
+    "duration": 3.96
+  },
+  {
+    "text": "visualize branches and loops, they can",
+    "start": 456.4,
+    "duration": 4.519
+  },
+  {
+    "text": "become cumbersome in dynamic workflows",
+    "start": 458.6,
+    "duration": 4.2
+  },
+  {
+    "text": "requiring a dedicated description",
+    "start": 460.919,
+    "duration": 4.681
+  },
+  {
+    "text": "method. As an alternative, the Open AI",
+    "start": 462.8,
+    "duration": 5.92
+  },
+  {
+    "text": "agents SDK adopts a code-centric",
+    "start": 465.6,
+    "duration": 5.84
+  },
+  {
+    "text": "flexible architecture. The next task can",
+    "start": 468.72,
+    "duration": 4.88
+  },
+  {
+    "text": "be handled with a simple loop. On the",
+    "start": 471.44,
+    "duration": 4.32
+  },
+  {
+    "text": "other hand, when multiple departments,",
+    "start": 473.6,
+    "duration": 5.04
+  },
+  {
+    "text": "multiple agents, long execution times,",
+    "start": 475.76,
+    "duration": 5.16
+  },
+  {
+    "text": "parallel processing, approvals, and",
+    "start": 478.64,
+    "duration": 4.96
+  },
+  {
+    "text": "audits are required, graphing becomes",
+    "start": 480.92,
+    "duration": 5
+  },
+  {
+    "text": "beneficial. Graph engineering isn't",
+    "start": 483.6,
+    "duration": 5.08
+  },
+  {
+    "text": "about creating complex diagrams. Design",
+    "start": 485.92,
+    "duration": 4.84
+  },
+  {
+    "text": "involves clearly indicating only the",
+    "start": 488.68,
+    "duration": 4.36
+  },
+  {
+    "text": "necessary relationships and discarding",
+    "start": 490.76,
+    "duration": 4.8
+  },
+  {
+    "text": "unnecessary automation. Let me be honest",
+    "start": 493.04,
+    "duration": 4.28
+  },
+  {
+    "text": "about the conclusion regarding the new",
+    "start": 495.56,
+    "duration": 4.76
+  },
+  {
+    "text": "term itself. It's only been 3 days, so",
+    "start": 497.32,
+    "duration": 5.04
+  },
+  {
+    "text": "no one knows if the term graph",
+    "start": 500.32,
+    "duration": 4.76
+  },
+  {
+    "text": "engineering will survive. However, the",
+    "start": 502.36,
+    "duration": 5.16
+  },
+  {
+    "text": "underlying concepts, dividing tasks,",
+    "start": 505.08,
+    "duration": 4.36
+  },
+  {
+    "text": "running them in parallel, and adding",
+    "start": 507.52,
+    "duration": 4.399
+  },
+  {
+    "text": "decision checks have outlived the name,",
+    "start": 509.44,
+    "duration": 4.279
+  },
+  {
+    "text": "and I've seen their effectiveness in my",
+    "start": 511.919,
+    "duration": 3.761
+  },
+  {
+    "text": "own experience. Even if the term",
+    "start": 513.719,
+    "duration": 5.2
+  },
+  {
+    "text": "disappears in a month,",
+    "start": 515.68,
+    "duration": 3.239
+  }
+]

@@ -1,0 +1,317 @@
+[
+  {
+    "text": "When we ask Claudecode to do a deep research about a specific topic, behind the scenes, it's not just one agent that handles the entire research, but many agents are spawned to handle our research needs.",
+    "start": "00:00:00",
+    "end": "00:00:12"
+  },
+  {
+    "text": "Claudecode actually generates a dynamic workflow that looks something like this, where you have over 100 agents broken into various phases.",
+    "start": "00:00:12",
+    "end": "00:00:22"
+  },
+  {
+    "text": "And this entire workflow is generated on the fly by Claudecode in JavaScript code, like you can see here.",
+    "start": "00:00:19",
+    "end": "00:00:28"
+  },
+  {
+    "text": "That's 427 lines of code, and this very code acts as a runtime environment that will spawn over 100 agents.",
+    "start": "00:00:28",
+    "end": "00:00:34"
+  },
+  {
+    "text": "And every new request that I send, Claudecode will generate a fresh new workflow, and each workflow will spawn different numbers of agents.",
+    "start": "00:00:34",
+    "end": "00:00:44"
+  },
+  {
+    "text": "So, given our example here of JavaScript file, where Claudecode essentially converted my research plan into a workflow as a runtime, Claudecode will then start launching many agents in five different phases.",
+    "start": "00:00:41",
+    "end": "00:00:54"
+  },
+  {
+    "text": "And each phase of the workflow will more or less work in parallel, and each agent has its own context window and its own system prompt.",
+    "start": "00:00:54",
+    "end": "00:01:01"
+  },
+  {
+    "text": "Pretty neat, right?",
+    "start": "00:01:01",
+    "end": "00:01:04"
+  },
+  {
+    "text": "Now, building on this workflow that you can see here, the concept for graphs has been resurfacing lately, as if it's a next natural progression in our agentic engineering.",
+    "start": "00:01:04",
+    "end": "00:01:13"
+  },
+  {
+    "text": "So, we asked the natural question, what exactly is graph engineering?",
+    "start": "00:01:13",
+    "end": "00:01:17"
+  },
+  {
+    "text": "The idea of graphs dates all the way back to 1736, when a Swiss polymath, Leonhard Euler, was considering solving the strange question in a city called Königsberg.",
+    "start": "00:01:17",
+    "end": "00:01:28"
+  },
+  {
+    "text": "They have two mainlands and two islands and seven bridges connecting them.",
+    "start": "00:01:28",
+    "end": "00:01:32"
+  },
+  {
+    "text": "And the question was simple, is there a route through the city that crosses every single bridge, but only exactly once?",
+    "start": "00:01:32",
+    "end": "00:01:39"
+  },
+  {
+    "text": "Now, you might try and hypothesize a way by process of elimination.",
+    "start": "00:01:37",
+    "end": "00:01:42"
+  },
+  {
+    "text": "Maybe you can start here and try to cross the bridge this way, or maybe you just start on the island instead and start out and see if there's another way possible, and you'll soon realize that this is not possible.",
+    "start": "00:01:42",
+    "end": "00:01:55"
+  },
+  {
+    "text": "Euler agreed, but it's not just that this wasn't possible, but how Euler simplified the problem into a simple concept shown in this diagram.",
+    "start": "00:01:53",
+    "end": "00:02:04"
+  },
+  {
+    "text": "Circles are nodes, which in this case were land, and the black lines are edges, which are bridges in this case, and these two constitute a graph.",
+    "start": "00:02:04",
+    "end": "00:02:12"
+  },
+  {
+    "text": "So, this middle island here has five edges, or bridges in this case, connecting to other areas, and so on.",
+    "start": "00:02:12",
+    "end": "00:02:18"
+  },
+  {
+    "text": "And given this representation, Euler concluded with a proof that this kind of route in Königsberg is impossible.",
+    "start": "00:02:18",
+    "end": "00:02:25"
+  },
+  {
+    "text": "Now, the exact proof that Euler proposed is sort of irrelevant to this video, but Euler's graph theory is now applied to agents and graph engineering today.",
+    "start": "00:02:25",
+    "end": "00:02:34"
+  },
+  {
+    "text": "Here's another way to visualize the workflow that Claude code generated for my deep research from earlier.",
+    "start": "00:02:34",
+    "end": "00:02:39"
+  },
+  {
+    "text": "This consists of five phases.",
+    "start": "00:02:39",
+    "end": "00:02:40"
+  },
+  {
+    "text": "One agent for scoping the requirement, five agents to gather credible websites to research for each subtopics, 25 agents to then actually fetch the information and pass it to the next, and 75 agents to verify the facts and vote on the credibility, and finally, one agent that generates the full report in the end.",
+    "start": "00:02:40",
+    "end": "00:03:02"
+  },
+  {
+    "text": "And this workflow you're seeing here is a form of a graph.",
+    "start": "00:03:02",
+    "end": "00:03:04"
+  },
+  {
+    "text": "In this case, because execution only flows from left to right, with no node going backwards, which would form a loop, this is called DAG, or directed acyclic graph.",
+    "start": "00:03:04",
+    "end": "00:03:14"
+  },
+  {
+    "text": "Now, we could technically do this with a single agent instead of hundreds of agents in a graph like we just saw earlier.",
+    "start": "00:03:14",
+    "end": "00:03:21"
+  },
+  {
+    "text": "But this would be a bit silly because using a dynamic workflow for this kind of work is better for many reasons.",
+    "start": "00:03:21",
+    "end": "00:03:27"
+  },
+  {
+    "text": "The most obvious one being time.",
+    "start": "00:03:27",
+    "end": "00:03:29"
+  },
+  {
+    "text": "By parallelizing task into sub-agents that have their own small objective, this helps save a large amount of time by the simple fact that multiple agents are working at the same time.",
+    "start": "00:03:29",
+    "end": "00:03:39"
+  },
+  {
+    "text": "Another benefit is separation of concerns.",
+    "start": "00:03:39",
+    "end": "00:03:42"
+  },
+  {
+    "text": "The fact that each agent has its own context window helps focus its own context window towards its goal.",
+    "start": "00:03:42",
+    "end": "00:03:49"
+  },
+  {
+    "text": "Whereas a single agent might need to keep reusing its own context to store some of it for the goal, some of it for the current task and keep summarizing back and forth.",
+    "start": "00:03:47",
+    "end": "00:03:57"
+  },
+  {
+    "text": "But graphs aren't without its drawbacks either.",
+    "start": "00:03:57",
+    "end": "00:04:00"
+  },
+  {
+    "text": "Anthropic made a post that talked about their multi-agent research system that said a single agent tends to use four times more tokens than a regular chat and a multi-agent system tends to use 15 times more tokens in comparison.",
+    "start": "00:04:00",
+    "end": "00:04:14"
+  },
+  {
+    "text": "So going back to our example, each agent ran on Opus 5 with their own system prompt and each agent used about 20,000 tokens by default to start.",
+    "start": "00:04:14",
+    "end": "00:04:22"
+  },
+  {
+    "text": "So by the time you extrapolate this to 108 agents that it eventually used, the input cost alone would be closer to $10 given Opus 5's pricing.",
+    "start": "00:04:22",
+    "end": "00:04:31"
+  },
+  {
+    "text": "But since we have prompt caching, realistically, this number will look closer to a dollar which helps scale our agent from a single agent to a parallel agents like you can see here.",
+    "start": "00:04:31",
+    "end": "00:04:42"
+  },
+  {
+    "text": "So given the benefits and the drawbacks when it comes to graphs, why are everyone talking about graph and graph engineering as if it's the next evolution when it comes to agentic engineering?",
+    "start": "00:04:40",
+    "end": "00:04:49"
+  },
+  {
+    "text": "But first, a quick word from Zoe sponsoring this video.",
+    "start": "00:04:49",
+    "end": "00:04:53"
+  },
+  {
+    "text": "It's pretty obvious that more and more parts of our lives are being integrated with AI and often our interactions are scattered across Claude, ChatGPT, Codex and Menace.",
+    "start": "00:04:53",
+    "end": "00:05:01"
+  },
+  {
+    "text": "So how can we have more ownership while having a 24/7 agent?",
+    "start": "00:05:01",
+    "end": "00:05:06"
+  },
+  {
+    "text": "Zoe gives you a dedicated computer on the cloud that's yours, meaning your agent is on standby for anything that you give.",
+    "start": "00:05:06",
+    "end": "00:05:11"
+  },
+  {
+    "text": "And part of being 24/7 is the ability to message your agent through text.",
+    "start": "00:05:11",
+    "end": "00:05:15"
+  },
+  {
+    "text": "You can directly message Zoe to have normal conversations through iMessage or ask about files that you have stored on your computer in the cloud and better yet, build an e-commerce website for vintage watches and host directly on Zoe using their AI agent natively through text.",
+    "start": "00:05:15",
+    "end": "00:05:32"
+  },
+  {
+    "text": "What's cool about Zoe is that you can write code and launch sites that are actually useful because you can integrate all your contacts into Zoe and run automations.",
+    "start": "00:05:32",
+    "end": "00:05:41"
+  },
+  {
+    "text": "Custom domains are also included at paid plan and all your sites are hosted on your Zoe's cloud computer.",
+    "start": "00:05:39",
+    "end": "00:05:46"
+  },
+  {
+    "text": "Plus they got some neat tricks like the selector tool to edit exact areas to improve things or even add automations that plug into your website, like a text anytime someone fills out a form.",
+    "start": "00:05:46",
+    "end": "00:05:56"
+  },
+  {
+    "text": "Try Zo today.",
+    "start": "00:05:56",
+    "end": "00:05:57"
+  },
+  {
+    "text": "I'll have the link in the description below.",
+    "start": "00:05:57",
+    "end": "00:06:00"
+  },
+  {
+    "text": "The concept behind agent communicating with another agent is not anything new.",
+    "start": "00:05:57",
+    "end": "00:06:03"
+  },
+  {
+    "text": "We can look back to open-source ideas like AutoGen in 2023 from Microsoft talking about agents communicating with another agent.",
+    "start": "00:06:02",
+    "end": "00:06:10"
+  },
+  {
+    "text": "Companies like LangChain also started messing with cyclic graph in 2023, which led to LangGraph, which became a framework for orchestrating agents.",
+    "start": "00:06:10",
+    "end": "00:06:18"
+  },
+  {
+    "text": "Anthropic also released various ways that agents can work together around the same time, like prompt chaining where LLMs are chained sequentially one after another, routing, which is similar to sub-agents, but from the perspective of the main agent, parallelization, which is similar to our deep research workflow, orchestrator, also similar to what we saw earlier, and evaluator optimizer, where two LLMs adversarially go at each other until a condition is met.",
+    "start": "00:06:18",
+    "end": "00:06:44"
+  },
+  {
+    "text": "But, none of these were materially useful back then because the problem wasn't so much in the graph itself, but what the node inside of the graph can actually do.",
+    "start": "00:06:44",
+    "end": "00:06:54"
+  },
+  {
+    "text": "In LangChain's blog post talking about graph engineering, they said that what changed wasn't the graph, but more in what the node can do.",
+    "start": "00:06:54",
+    "end": "00:07:01"
+  },
+  {
+    "text": "Back then, it was just an LLM call, nothing close to a full agent that we interact with every day like Claude Code or CodeX CLI.",
+    "start": "00:07:01",
+    "end": "00:07:10"
+  },
+  {
+    "text": "These agents are immensely better given their myriads of tools and harness environment.",
+    "start": "00:07:10",
+    "end": "00:07:16"
+  },
+  {
+    "text": "So, with the emergence of coding like Cursor, Kline, Rue, and Winster, which were one of the few early players back then when it comes to agents, they focus more on single agents in improving that very agent instead of extending them to various edges that form a graph of agents actually working together.",
+    "start": "00:07:16",
+    "end": "00:07:35"
+  },
+  {
+    "text": "And over time, these agents individually started to incorporate better methodologies, going from prompt engineering to context engineering, better harnessing, and now the bottleneck started to shift away from what the node can do, but into a graph and the edges that connect the nodes together.",
+    "start": "00:07:35",
+    "end": "00:07:50"
+  },
+  {
+    "text": "And now, no pun intended, we're coming full circle back to graphs.",
+    "start": "00:07:50",
+    "end": "00:07:56"
+  },
+  {
+    "text": "Because the nodes are reliable and more capable, we can now scale our agents from a single agent to a workflow or a graph to target a much wider set of problems like we saw in deep research, which would have been really difficult for a single agent to solve.",
+    "start": "00:07:54",
+    "end": "00:08:11"
+  },
+  {
+    "text": "So, going back to Euler's case, his challenge was to determine the feasibility of crossing all seven bridges exactly once, which led to the birth of graph theory.",
+    "start": "00:08:11",
+    "end": "00:08:21"
+  },
+  {
+    "text": "In our case, our adaptation of graph theory into agents is determining how a task can be divided in a way that a highly capable node now should structurally be configured to solve a much more complicated task that we give our agents to solve.",
+    "start": "00:08:21",
+    "end": "00:08:36"
+  }
+]

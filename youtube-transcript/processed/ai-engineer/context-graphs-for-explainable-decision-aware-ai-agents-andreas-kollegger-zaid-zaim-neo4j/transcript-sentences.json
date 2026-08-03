@@ -1,0 +1,882 @@
+[
+  {
+    "text": "[music] >> Hello, good evening developers.",
+    "start": "00:00:07",
+    "end": "00:00:20"
+  },
+  {
+    "text": "How is everyone doing?",
+    "start": "00:00:18",
+    "end": "00:00:22"
+  },
+  {
+    "text": "Welcome to AI engineer and welcome to the Neo4j context graph session number two.",
+    "start": "00:00:20",
+    "end": "00:00:29"
+  },
+  {
+    "text": "Excited to be here together with my peer Abhik to to share with you more about context graphs, how they can help AI agents to become more decision aware.",
+    "start": "00:00:26",
+    "end": "00:00:40"
+  },
+  {
+    "text": "So, one of the big challenges that we are trying to solve these days in the AI era is basically um using knowledge graphs to unlock AI where we want to use graphs to fill the gap of knowledge, give give AI agents the right tools, and enrich them with the right um content um to do.",
+    "start": "00:00:38",
+    "end": "00:01:07"
+  },
+  {
+    "text": "To to uh to to solve certain challenges.",
+    "start": "00:01:05",
+    "end": "00:01:11"
+  },
+  {
+    "text": "So, we all know that AI agents are really good in language, reasoning, and creativity, but we want to miss or fill the the the missing puzzle piece of of knowledge and um um for for the agents.",
+    "start": "00:01:10",
+    "end": "00:01:27"
+  },
+  {
+    "text": "So, and big um topic we have been we also saw before at Steve's talk is is memory.",
+    "start": "00:01:29",
+    "end": "00:01:38"
+  },
+  {
+    "text": "So, uh to um we talk about different types of memories.",
+    "start": "00:01:38",
+    "end": "00:01:44"
+  },
+  {
+    "text": "So, short-term, long-term, and reasoning memory.",
+    "start": "00:01:44",
+    "end": "00:01:45"
+  },
+  {
+    "text": "So, in a short-term memory we um we try to to understand and capture the um the the conversations that a user had with with the AI agent.",
+    "start": "00:01:45",
+    "end": "00:01:59"
+  },
+  {
+    "text": "And in a long-term memory uh we we capture more um contextual knowledge in this case um things around or organizations, uh people, and things basically.",
+    "start": "00:01:57",
+    "end": "00:02:13"
+  },
+  {
+    "text": "So, that really give us more of the generalized overview of um um of the of the context.",
+    "start": "00:02:13",
+    "end": "00:02:19"
+  },
+  {
+    "text": "And of course, we need here reasoning helping basically the AI to to to to make the right decisions to um achieve a certain task.",
+    "start": "00:02:19",
+    "end": "00:02:30"
+  },
+  {
+    "text": "We saw also that uh I think um the for for the background of this we need we we need a graph.",
+    "start": "00:02:30",
+    "end": "00:02:41"
+  },
+  {
+    "text": "So, um a graph basically is made out of nodes uh and relationships to basically help um help you understand the deep and complex relations and connections between different type of data.",
+    "start": "00:02:41",
+    "end": "00:02:54"
+  },
+  {
+    "text": "So, the big question is now why context graphs?",
+    "start": "00:02:55",
+    "end": "00:02:58"
+  },
+  {
+    "text": "So, we also have been talking also lately a lot about context engineering.",
+    "start": "00:02:58",
+    "end": "00:03:06"
+  },
+  {
+    "text": "And now basically the big ask again, why uh context graphs?",
+    "start": "00:03:03",
+    "end": "00:03:10"
+  },
+  {
+    "text": "So, basically we are still within the sphere of context engineering when we talk about context graph, but context graph is really the shift of having um AI agents that already are very good in in providing knowledge um to uh to their users having the right tools and content and context, but with context graphs we would really like to um provide additionally to the knowledge um the right rules and policies um to the agents to help basically them become more capable to to to to drive um uh decisions.",
+    "start": "00:03:08",
+    "end": "00:03:48"
+  },
+  {
+    "text": "So, not only only knowledge, but also um decisions.",
+    "start": "00:03:48",
+    "end": "00:03:52"
+  },
+  {
+    "text": "So, that's why we're moving not only okay, how an agent or what an agent can do, but also now we want to really capture within a context graph the missing why.",
+    "start": "00:03:52",
+    "end": "00:04:02"
+  },
+  {
+    "text": "So, why an agent needs to do something, and this is something we capture with data that focuses on policies and rules.",
+    "start": "00:04:02",
+    "end": "00:04:12"
+  },
+  {
+    "text": "So, um when we talk about Neo4j um we say also that uh graphs are everywhere.",
+    "start": "00:04:13",
+    "end": "00:04:22"
+  },
+  {
+    "text": "So, this is a basic uh replica of an organization um each organization is basically also reflected here from finance uh or department of an organization from finance to product to suppliers and so on and so forth.",
+    "start": "00:04:20",
+    "end": "00:04:36"
+  },
+  {
+    "text": "We saw also a good example by Steve before on um on financial services.",
+    "start": "00:04:36",
+    "end": "00:04:43"
+  },
+  {
+    "text": "So, um if someone is is eligible to to get a certain amount of money here, so yes or no.",
+    "start": "00:04:39",
+    "end": "00:04:48"
+  },
+  {
+    "text": "So, we uh part of this chapter we are really going deeper with our customers uh and and verticals to understand their needs and basically how we can help them solve the why question and help them drive better better agents that can can be more decision um decision aware.",
+    "start": "00:04:48",
+    "end": "00:05:08"
+  },
+  {
+    "text": "Um This is also uh how a memory graph uh would look like.",
+    "start": "00:05:06",
+    "end": "00:05:14"
+  },
+  {
+    "text": "So, if we want to to um an agent to also drive the right decisions, we need to also um give them memory capabilities.",
+    "start": "00:05:14",
+    "end": "00:05:24"
+  },
+  {
+    "text": "So, this is a quick overview how the memory graph would look like.",
+    "start": "00:05:24",
+    "end": "00:05:28"
+  },
+  {
+    "text": "In green we see the short-term memory, so we are capturing again the the the conversations, the the state history.",
+    "start": "00:05:28",
+    "end": "00:05:35"
+  },
+  {
+    "text": "And then in long-term memory is more like the generalized overview of of organizations, people, um and then most importantly also the the reasoning.",
+    "start": "00:05:34",
+    "end": "00:05:44"
+  },
+  {
+    "text": "So, why an AI agent should should um do a certain task based on on on predefined policies and rules.",
+    "start": "00:05:44",
+    "end": "00:05:55"
+  },
+  {
+    "text": "So, and behind behind these stories always our let's say the foundation if we would like to build agentic graph applications, um we always have the the AI agent where the user sends first a query.",
+    "start": "00:05:56",
+    "end": "00:06:17"
+  },
+  {
+    "text": "Um we the agent looks for this knowledge or for this um topic if it's available in its knowledge source.",
+    "start": "00:06:14",
+    "end": "00:06:22"
+  },
+  {
+    "text": "If not, we uh jump to the graph database.",
+    "start": "00:06:22",
+    "end": "00:06:26"
+  },
+  {
+    "text": "We have a certain um asset of tools like text to cypher that translates text human human text to our query language, and then we try we yeah, uh traverse the the graph on the right content, and hopefully coming back to the user with more reliable and qualitative content.",
+    "start": "00:06:26",
+    "end": "00:06:51"
+  },
+  {
+    "text": "So, Abhik, you have been building um a decision framework in the last couple of days.",
+    "start": "00:06:48",
+    "end": "00:06:56"
+  },
+  {
+    "text": "Let's have a look on that.",
+    "start": "00:06:54",
+    "end": "00:06:57"
+  },
+  {
+    "text": "Sure, thank you, Zane.",
+    "start": "00:06:57",
+    "end": "00:06:57"
+  },
+  {
+    "text": "Thank you, Abhik.",
+    "start": "00:06:57",
+    "end": "00:06:59"
+  },
+  {
+    "text": "So, we've been hearing a lot about like what does the data model look like for how do you store memories?",
+    "start": "00:06:59",
+    "end": "00:07:02"
+  },
+  {
+    "text": "We're talking about context graphs, and it's all about decision-making.",
+    "start": "00:07:02",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Why do we really care about decision-making?",
+    "start": "00:07:06",
+    "end": "00:07:09"
+  },
+  {
+    "text": "And maybe you noticed the awesome animation.",
+    "start": "00:07:09",
+    "end": "00:07:12"
+  },
+  {
+    "text": "How many people have a claw?",
+    "start": "00:07:12",
+    "end": "00:07:15"
+  },
+  {
+    "text": "Claw owners, some of you?",
+    "start": "00:07:13",
+    "end": "00:07:15"
+  },
+  {
+    "text": "Some of us have claws these days, right?",
+    "start": "00:07:15",
+    "end": "00:07:18"
+  },
+  {
+    "text": "At least you've heard about claws.",
+    "start": "00:07:18",
+    "end": "00:07:19"
+  },
+  {
+    "text": "What's awesome about open claw, and all the different claws, is they really exaggerate the need for good decision-making.",
+    "start": "00:07:19",
+    "end": "00:07:26"
+  },
+  {
+    "text": "Where decision-making is basically when you run into a point in the workflow or the life of the agent where it has to do something that it doesn't have in its setup.",
+    "start": "00:07:26",
+    "end": "00:07:34"
+  },
+  {
+    "text": "You haven't given it instructions about what to do in a certain circumstance.",
+    "start": "00:07:34",
+    "end": "00:07:38"
+  },
+  {
+    "text": "Autonomous agents run into this all the time.",
+    "start": "00:07:38",
+    "end": "00:07:41"
+  },
+  {
+    "text": "If you just let them off and go and do stuff for free, give them a credit card, give them access to your Amazon account, and say, \"Hey, keep my stock completely my my fridge stocked with like Red Bull at all times.",
+    "start": "00:07:41",
+    "end": "00:07:52"
+  },
+  {
+    "text": "\" Okay, if they notice that you need some Red Bull, they're going to go order some Red Bull.",
+    "start": "00:07:52",
+    "end": "00:07:58"
+  },
+  {
+    "text": "They may not know like, \"Oh, yeah, I should order Red Bull unless the rent is coming up and I don't have enough money for rent.",
+    "start": "00:07:56",
+    "end": "00:08:02"
+  },
+  {
+    "text": "\" You may not have anticipated that.",
+    "start": "00:08:02",
+    "end": "00:08:03"
+  },
+  {
+    "text": "You can go and fix that with some prompt engineering and keep improving the instructions for the agent, but really there's a meta problem, which is how do you make good decisions?",
+    "start": "00:08:03",
+    "end": "00:08:14"
+  },
+  {
+    "text": "I'm going to talk through given if you have some memory, if you have a graph around, you've got an agent running, what does an agentic workflow look like for actually making good decisions?",
+    "start": "00:08:12",
+    "end": "00:08:25"
+  },
+  {
+    "text": "Because the crab wants help.",
+    "start": "00:08:22",
+    "end": "00:08:28"
+  },
+  {
+    "text": "Help the poor crab.",
+    "start": "00:08:25",
+    "end": "00:08:29"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:08:28",
+    "end": "00:08:30"
+  },
+  {
+    "text": "And actually, it's even worse, of course, if you've gone down this path at all.",
+    "start": "00:08:29",
+    "end": "00:08:32"
+  },
+  {
+    "text": "You start with maybe one agent that's running.",
+    "start": "00:08:32",
+    "end": "00:08:34"
+  },
+  {
+    "text": "That becomes multiple agents that have specialized tasks or all off doing things.",
+    "start": "00:08:34",
+    "end": "00:08:38"
+  },
+  {
+    "text": "They all have to collaborate together.",
+    "start": "00:08:38",
+    "end": "00:08:40"
+  },
+  {
+    "text": "They all have to be self-aware of each other and themselves.",
+    "start": "00:08:40",
+    "end": "00:08:42"
+  },
+  {
+    "text": "The problem gets worse and worse at scale.",
+    "start": "00:08:42",
+    "end": "00:08:45"
+  },
+  {
+    "text": "So, you need a thoughtful framework for how to make decisions.",
+    "start": "00:08:45",
+    "end": "00:08:49"
+  },
+  {
+    "text": "If you have friends who are in MBAs that went through some business school, perhaps here in the Judge Business School in in the UK, they probably have entire courses on how to make good decisions.",
+    "start": "00:08:49",
+    "end": "00:08:59"
+  },
+  {
+    "text": "I'm going to talk through a framework that you can give to an agent, you can implement yourself in your choice of framework, whether it's LangGraph or if you just want to write some skills, you can give that a try as well.",
+    "start": "00:08:59",
+    "end": "00:09:08"
+  },
+  {
+    "text": "But this overall workflow is just how you make decisions generally as a human.",
+    "start": "00:09:08",
+    "end": "00:09:13"
+  },
+  {
+    "text": "And as we know for much of the engineering we do these days, transferring our implicit understanding about how to do things in an explicit way to the agents is what helps agents do their job really well.",
+    "start": "00:09:13",
+    "end": "00:09:26"
+  },
+  {
+    "text": "So, given a context graph, given some memory, here's a workflow for actually making good decisions.",
+    "start": "00:09:24",
+    "end": "00:09:31"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:09:30",
+    "end": "00:09:30"
+  },
+  {
+    "text": "Starts at the top with just framing the problem, basically.",
+    "start": "00:09:30",
+    "end": "00:09:35"
+  },
+  {
+    "text": "It's the local context that matters.",
+    "start": "00:09:35",
+    "end": "00:09:37"
+  },
+  {
+    "text": "And for the local context, there's how did you get here in the first place?",
+    "start": "00:09:37",
+    "end": "00:09:40"
+  },
+  {
+    "text": "That's the the causality of the second one, actually.",
+    "start": "00:09:40",
+    "end": "00:09:43"
+  },
+  {
+    "text": "I would probably lead with that.",
+    "start": "00:09:43",
+    "end": "00:09:45"
+  },
+  {
+    "text": "You went through some reasoning chain, you went through some actions, and suddenly you're at a point where like you have some amount of uncertainty, and rather than just making a choice about what to do next, you're like, \"Hang on.",
+    "start": "00:09:44",
+    "end": "00:09:54"
+  },
+  {
+    "text": "Let me go into this sub-process, which is decision-making, and figure out what to do.",
+    "start": "00:09:52",
+    "end": "00:09:56"
+  },
+  {
+    "text": "\" You've got an objective in mind, something you want to get out of that process.",
+    "start": "00:09:56",
+    "end": "00:10:00"
+  },
+  {
+    "text": "And the example we had before for finance was like actually instigated by somebody who wants to increase their loan or something like that.",
+    "start": "00:10:00",
+    "end": "00:10:07"
+  },
+  {
+    "text": "Fine.",
+    "start": "00:10:07",
+    "end": "00:10:08"
+  },
+  {
+    "text": "Could be that, could be ordering Red Bull, whatever the decision might be.",
+    "start": "00:10:08",
+    "end": "00:10:13"
+  },
+  {
+    "text": "An objective, the causality that led to having that objective be a thing you want to resolve, and then there's an environment within which that's actually operating.",
+    "start": "00:10:11",
+    "end": "00:10:19"
+  },
+  {
+    "text": "That's purchasing, that's actually perhaps medical decision-making guidance in that realm.",
+    "start": "00:10:19",
+    "end": "00:10:25"
+  },
+  {
+    "text": "So, it goes from \"Hey, can I order Red Bull to there's a life at stake.",
+    "start": "00:10:25",
+    "end": "00:10:28"
+  },
+  {
+    "text": "\" Those are very different environments, but those environments matter for like what kinds of decisions you end up making.",
+    "start": "00:10:28",
+    "end": "00:10:35"
+  },
+  {
+    "text": "That's the kind of thing that we understand because we experience these things.",
+    "start": "00:10:34",
+    "end": "00:10:37"
+  },
+  {
+    "text": "You have to tell the agent these things so that they understand it as well.",
+    "start": "00:10:37",
+    "end": "00:10:43"
+  },
+  {
+    "text": "Once you've got the framing, that feeds into a larger context, which is the global context around what did you do before in this situation?",
+    "start": "00:10:41",
+    "end": "00:10:50"
+  },
+  {
+    "text": "That's always a good idea.",
+    "start": "00:10:50",
+    "end": "00:10:51"
+  },
+  {
+    "text": "If you can stay consistent, that's really good.",
+    "start": "00:10:51",
+    "end": "00:10:53"
+  },
+  {
+    "text": "But then also there are global rules, both the hard and soft rules of a business.",
+    "start": "00:10:53",
+    "end": "00:10:57"
+  },
+  {
+    "text": "Maybe they're formally described in a business process language or something like that, or they're just informal in some kind of guidance in Slack channels and Google Docs, whatever.",
+    "start": "00:10:57",
+    "end": "00:11:05"
+  },
+  {
+    "text": "Hard and soft rules come into lot place here for having alignment over the decisions you're making.",
+    "start": "00:11:05",
+    "end": "00:11:11"
+  },
+  {
+    "text": "And it's important to keep both of those things in balance.",
+    "start": "00:11:10",
+    "end": "00:11:13"
+  },
+  {
+    "text": "What did you do before?",
+    "start": "00:11:13",
+    "end": "00:11:13"
+  },
+  {
+    "text": "Could be the right thing to do again.",
+    "start": "00:11:13",
+    "end": "00:11:15"
+  },
+  {
+    "text": "But also, what are the global rules that are applying now that might have been different before?",
+    "start": "00:11:15",
+    "end": "00:11:20"
+  },
+  {
+    "text": "So, there might be a reason to overrule what prior decisions were.",
+    "start": "00:11:20",
+    "end": "00:11:23"
+  },
+  {
+    "text": "These are all part of the framework.",
+    "start": "00:11:23",
+    "end": "00:11:26"
+  },
+  {
+    "text": "You've got the inputs, you've got a framework for the decision-making that is global, and now you've actually got to go through and do the analysis.",
+    "start": "00:11:25",
+    "end": "00:11:34"
+  },
+  {
+    "text": "And this is of course just the classic risk-value analysis.",
+    "start": "00:11:34",
+    "end": "00:11:36"
+  },
+  {
+    "text": "And you're going to figure out for the risk side, that's probably where an agent should spend most of their time.",
+    "start": "00:11:36",
+    "end": "00:11:41"
+  },
+  {
+    "text": "If it's a serious thing, then you spend even more time.",
+    "start": "00:11:41",
+    "end": "00:11:44"
+  },
+  {
+    "text": "And by serious I would mean things like this first point is called a reference class validation, where a reference class is and rather than assuming what is good and what matters, you have to try to decide for the players involved what is the most important thing for them.",
+    "start": "00:11:43",
+    "end": "00:11:58"
+  },
+  {
+    "text": "And so, what is your reference point for like what's important to them?",
+    "start": "00:11:58",
+    "end": "00:12:03"
+  },
+  {
+    "text": "The example I love here is like if you have uh in in medical care, and this is a very dangerous area to be doing letting open claw loose, right?",
+    "start": "00:12:01",
+    "end": "00:12:11"
+  },
+  {
+    "text": "If you're prescribing drugs for somebody, and like 99% of the time you might prescribe drug X for symptom Y, and that's the right thing to do 99% of the time.",
+    "start": "00:12:10",
+    "end": "00:12:20"
+  },
+  {
+    "text": "But for the 1% of the time, if you're in the small 1% of the population, giving that same drug might be fatal.",
+    "start": "00:12:20",
+    "end": "00:12:29"
+  },
+  {
+    "text": "So, before deciding what you should do, it's very important to know if you're part of the 99% or the 1%.",
+    "start": "00:12:27",
+    "end": "00:12:33"
+  },
+  {
+    "text": "Statistical, you know, behavior does not really help you there.",
+    "start": "00:12:33",
+    "end": "00:12:35"
+  },
+  {
+    "text": "That's an extreme example, but there's flavors of that in many decision-making circumstances that right now are kind of implicit for us.",
+    "start": "00:12:35",
+    "end": "00:12:44"
+  },
+  {
+    "text": "A lot of our practice as AI engineers is being explicit about the implicit knowledge that we carry with us.",
+    "start": "00:12:42",
+    "end": "00:12:49"
+  },
+  {
+    "text": "So, keep that in mind.",
+    "start": "00:12:48",
+    "end": "00:12:50"
+  },
+  {
+    "text": "Actually classifying what matters, what doesn't matter, what is the actual risk of involved.",
+    "start": "00:12:50",
+    "end": "00:12:53"
+  },
+  {
+    "text": "Is the decision reversible?",
+    "start": "00:12:53",
+    "end": "00:12:56"
+  },
+  {
+    "text": "It Can you take it back?",
+    "start": "00:12:56",
+    "end": "00:12:57"
+  },
+  {
+    "text": "Be like, \"Oh, sorry, that was obviously a bad idea.",
+    "start": "00:12:57",
+    "end": "00:13:00"
+  },
+  {
+    "text": "Let's just back it off and and do it again.",
+    "start": "00:12:59",
+    "end": "00:13:00"
+  },
+  {
+    "text": "\" That changes the dynamics of how you assess things.",
+    "start": "00:13:00",
+    "end": "00:13:04"
+  },
+  {
+    "text": "And then also, what's the cost of being wrong generally?",
+    "start": "00:13:04",
+    "end": "00:13:08"
+  },
+  {
+    "text": "Again, like is a life at stake or is it the \"Okay, I'm going to not have Red Bull in my refrigerator.",
+    "start": "00:13:06",
+    "end": "00:13:14"
+  },
+  {
+    "text": "\" Not great, but not the end of the world.",
+    "start": "00:13:14",
+    "end": "00:13:17"
+  },
+  {
+    "text": "So, it's okay if that's a bad decision.",
+    "start": "00:13:14",
+    "end": "00:13:19"
+  },
+  {
+    "text": "Then also, of course, on the value side, it isn't obvious what you're maximizing.",
+    "start": "00:13:17",
+    "end": "00:13:23"
+  },
+  {
+    "text": "Are you trying to maximize your saving, your budget?",
+    "start": "00:13:22",
+    "end": "00:13:24"
+  },
+  {
+    "text": "So, actually don't spend all your money on Red Bull.",
+    "start": "00:13:24",
+    "end": "00:13:27"
+  },
+  {
+    "text": "Save some aside because you're saving for a vacation or for buying a house or whatever it might be.",
+    "start": "00:13:27",
+    "end": "00:13:33"
+  },
+  {
+    "text": "What is the Are you maximizing some value or you trying to minimize some cost?",
+    "start": "00:13:31",
+    "end": "00:13:35"
+  },
+  {
+    "text": "That has to be part of it as well, and it has to be explicit.",
+    "start": "00:13:35",
+    "end": "00:13:39"
+  },
+  {
+    "text": "Without that, an agent is going to take its general knowledge of conditions and be like, \"Okay, well, most of the time this is the right thing to do.",
+    "start": "00:13:39",
+    "end": "00:13:46"
+  },
+  {
+    "text": "\" But the particulars matter.",
+    "start": "00:13:46",
+    "end": "00:13:47"
+  },
+  {
+    "text": "The particulars always really are important.",
+    "start": "00:13:47",
+    "end": "00:13:49"
+  },
+  {
+    "text": "And then the final thing is that the output of this stage is actually not making a decision.",
+    "start": "00:13:49",
+    "end": "00:13:53"
+  },
+  {
+    "text": "I like to think in terms of multi-agent systems.",
+    "start": "00:13:53",
+    "end": "00:13:56"
+  },
+  {
+    "text": "For me, I love compartmentalized highly focused agents working together.",
+    "start": "00:13:56",
+    "end": "00:14:02"
+  },
+  {
+    "text": "This agent's job, only thing would be to like actually come up with a proposal of some alternatives, and to give some pros and cons for those alternatives, not to actually make the choice.",
+    "start": "00:13:59",
+    "end": "00:14:09"
+  },
+  {
+    "text": "The choice then would be handed off to the next agent, which would be actually deciding whether or not it can act.",
+    "start": "00:14:09",
+    "end": "00:14:16"
+  },
+  {
+    "text": "Does it have the authority?",
+    "start": "00:14:16",
+    "end": "00:14:17"
+  },
+  {
+    "text": "And if it does, it can go ahead and like rank the options that it has available to it and take those actions and have the impact actually be felt.",
+    "start": "00:14:17",
+    "end": "00:14:27"
+  },
+  {
+    "text": "Or it can decide, \"Actually, I don't have certainty here, or I don't have authority here.",
+    "start": "00:14:25",
+    "end": "00:14:30"
+  },
+  {
+    "text": "So, let me escalate this to either another agent or another actor that could be a human that does have the authority, that can make the decision.",
+    "start": "00:14:30",
+    "end": "00:14:38"
+  },
+  {
+    "text": "\" So, this is incredibly important here.",
+    "start": "00:14:38",
+    "end": "00:14:41"
+  },
+  {
+    "text": "Either act or don't act, let somebody else make the call.",
+    "start": "00:14:38",
+    "end": "00:14:44"
+  },
+  {
+    "text": "And the oversight here is basically the sub-process that would be kicked off for like a human in the loop basically to step in or an agent with higher privileges.",
+    "start": "00:14:42",
+    "end": "00:14:53"
+  },
+  {
+    "text": "The final part of this is really an important self-learning part.",
+    "start": "00:14:51",
+    "end": "00:14:56"
+  },
+  {
+    "text": "Once you're done, once the decision has been made, either a decision has been made or there was not enough information or certainty to make the decision, you might defer actually doing anything.",
+    "start": "00:14:56",
+    "end": "00:15:07"
+  },
+  {
+    "text": "That's a possible state as well.",
+    "start": "00:15:05",
+    "end": "00:15:08"
+  },
+  {
+    "text": "Or you make the decision and if you had, record the entire reasoning process, what you considered, what you didn't consider.",
+    "start": "00:15:08",
+    "end": "00:15:14"
+  },
+  {
+    "text": "This is part of the tracing and accountability that we talked about in all the other moments around context graphs.",
+    "start": "00:15:12",
+    "end": "00:15:20"
+  },
+  {
+    "text": "That all gets saved into the graph along with the decision itself and the actions that were taken.",
+    "start": "00:15:18",
+    "end": "00:15:23"
+  },
+  {
+    "text": "That lets future agents do better at their job because they have this now as precedent that they can refer to.",
+    "start": "00:15:23",
+    "end": "00:15:30"
+  },
+  {
+    "text": "Okay, that was my speed run.",
+    "start": "00:15:29",
+    "end": "00:15:32"
+  },
+  {
+    "text": "This is the full diagram of the workflow.",
+    "start": "00:15:32",
+    "end": "00:15:34"
+  },
+  {
+    "text": "You can implement this again if you want to in LangGraph and ADK, whatever you've got on hand.",
+    "start": "00:15:34",
+    "end": "00:15:37"
+  },
+  {
+    "text": "Write up some skills doing this, that works well.",
+    "start": "00:15:37",
+    "end": "00:15:42"
+  },
+  {
+    "text": "I will say it's very hard to generalize each of these things.",
+    "start": "00:15:40",
+    "end": "00:15:44"
+  },
+  {
+    "text": "This is a general framework.",
+    "start": "00:15:44",
+    "end": "00:15:45"
+  },
+  {
+    "text": "The particulars of every step end up being very domain-specific.",
+    "start": "00:15:45",
+    "end": "00:15:49"
+  },
+  {
+    "text": "So, bit of a bit of a caveat there.",
+    "start": "00:15:49",
+    "end": "00:15:50"
+  },
+  {
+    "text": "Um we're obviously working on like lots of different examples in different domains for this stuff.",
+    "start": "00:15:50",
+    "end": "00:15:54"
+  },
+  {
+    "text": "So, if you've got a domain that we haven't really talked about yet, I'd love to talk about it so we can add it to our kind of catalog of things.",
+    "start": "00:15:54",
+    "end": "00:16:02"
+  },
+  {
+    "text": "Okay.",
+    "start": "00:16:02",
+    "end": "00:16:04"
+  },
+  {
+    "text": "Very quickly, that was me.",
+    "start": "00:16:02",
+    "end": "00:16:05"
+  },
+  {
+    "text": "Call to action is the same as Steve had as well before.",
+    "start": "00:16:05",
+    "end": "00:16:06"
+  },
+  {
+    "text": "If you want to learn more about this stuff, we have free online courses at Graph Academy.",
+    "start": "00:16:06",
+    "end": "00:16:10"
+  },
+  {
+    "text": "You can learn more about context graphs, learn more about graphs.",
+    "start": "00:16:10",
+    "end": "00:16:13"
+  },
+  {
+    "text": "Come talk to us at the booths, come talk to us after this talk.",
+    "start": "00:16:13",
+    "end": "00:16:18"
+  },
+  {
+    "text": "Uh we love to talk about this all day long.",
+    "start": "00:16:18",
+    "end": "00:16:21"
+  },
+  {
+    "text": "Thank you.",
+    "start": "00:16:19",
+    "end": "00:16:23"
+  },
+  {
+    "text": ">> [applause] [music]",
+    "start": "00:16:21",
+    "end": "00:16:30"
+  }
+]

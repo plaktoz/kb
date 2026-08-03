@@ -1,0 +1,18 @@
+{
+  "videoId": "3ySF0I5iE_0",
+  "title": "A Practitioner's Guide to Graphs - Tim Ainge, Good Collective",
+  "channel": "AI Engineer",
+  "channelId": "UCLKPca3kwwd-B59HNr-_lvA",
+  "description": "A speed-run through the basics... what is a graph, extracting graphs from unstructured text, schema first and ontological improvements and then a slightly more detailed discussion of personalised page rank, shortest path and subgraph matching algorithms. \n\nEvery idea is explored with an explanation of the principles, and accessible example with code and linked to real-world implementations or references to articulate the value and relevance.\n\nSpeakers:\n- Tim Ainge (Good Collective): Software Engineering practitioner in startups, private and public sector organisations.\n  X/Twitter: https://x.com/timainge\n  LinkedIn: https://www.linkedin.com/in/timainge/\n  GitHub: https://github.com/timainge/",
+  "duration": 857,
+  "publishDate": "2026-07-18",
+  "url": "https://www.youtube.com/watch?v=3ySF0I5iE_0",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/3ySF0I5iE_0/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": []
+}

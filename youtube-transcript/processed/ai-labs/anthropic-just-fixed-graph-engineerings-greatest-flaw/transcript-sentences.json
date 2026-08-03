@@ -1,0 +1,897 @@
+[
+  {
+    "text": "There's a new term going around called graph engineering and everyone on X is talking about it.",
+    "start": "00:00:00",
+    "end": "00:00:05"
+  },
+  {
+    "text": "Before graphs, it was all loop engineering where you hand the agent a goal and it works toward it on its own.",
+    "start": "00:00:05",
+    "end": "00:00:10"
+  },
+  {
+    "text": "But with graphs, the work gets done faster and covers way more ground at once than a loop ever could.",
+    "start": "00:00:10",
+    "end": "00:00:16"
+  },
+  {
+    "text": "There's a huge problem with them though.",
+    "start": "00:00:16",
+    "end": "00:00:18"
+  },
+  {
+    "text": "One error in a small part of the graph disturbs the entire output that comes back and it's hard to track down because all you get at the end is the finished result.",
+    "start": "00:00:18",
+    "end": "00:00:25"
+  },
+  {
+    "text": "So Anthropic just released something that solves that exact problem and keeps your graphs working without failing.",
+    "start": "00:00:25",
+    "end": "00:00:30"
+  },
+  {
+    "text": "If you're new here, we're a software company and this is our channel AI labs where we show you how to optimize your business with AI and if you don't have your own, you can use these skills to get paid by optimizing it for someone else.",
+    "start": "00:00:30",
+    "end": "00:00:43"
+  },
+  {
+    "text": "And in this video, we're going to go over graph engineering for anyone who doesn't know it and give you the exact fix Anthropic suggested.",
+    "start": "00:00:43",
+    "end": "00:00:51"
+  },
+  {
+    "text": "Before we explain graph engineering to you, you need to understand what loop engineering actually is.",
+    "start": "00:00:49",
+    "end": "00:00:55"
+  },
+  {
+    "text": "If you already know, you can skip this section.",
+    "start": "00:00:55",
+    "end": "00:00:58"
+  },
+  {
+    "text": "A loop is basically a working cycle you hand over to the agent.",
+    "start": "00:00:58",
+    "end": "00:01:01"
+  },
+  {
+    "text": "Instead of you prompting it through every single step yourself, you tell it the end goal it needs to reach and it gets there on its own adjusting as it goes.",
+    "start": "00:01:01",
+    "end": "00:01:09"
+  },
+  {
+    "text": "We've been using them heavily in our own workflows.",
+    "start": "00:01:09",
+    "end": "00:01:12"
+  },
+  {
+    "text": "We've already got a full video on loop engineering too where we went deeper into the different ways you can set them up.",
+    "start": "00:01:11",
+    "end": "00:01:16"
+  },
+  {
+    "text": "But loops are now turning into something called graphs.",
+    "start": "00:01:16",
+    "end": "00:01:20"
+  },
+  {
+    "text": "The problem with loops comes down to the way they're built.",
+    "start": "00:01:20",
+    "end": "00:01:22"
+  },
+  {
+    "text": "A loop does a piece of work then a verification step kicks in to see if it's actually the way it should be.",
+    "start": "00:01:22",
+    "end": "00:01:29"
+  },
+  {
+    "text": "Once it passes, the next step starts.",
+    "start": "00:01:29",
+    "end": "00:01:31"
+  },
+  {
+    "text": "Everything runs in a straight line.",
+    "start": "00:01:29",
+    "end": "00:01:33"
+  },
+  {
+    "text": "So every step sits there waiting on the step before it even when the two have nothing to do with each other.",
+    "start": "00:01:33",
+    "end": "00:01:38"
+  },
+  {
+    "text": "Graph engineering fixes exactly that.",
+    "start": "00:01:38",
+    "end": "00:01:39"
+  },
+  {
+    "text": "Instead of running in a straight line, a graph splits the main task into smaller parts and each part gets its own agent.",
+    "start": "00:01:39",
+    "end": "00:01:46"
+  },
+  {
+    "text": "The first thing you get out of that is speed because several agents cover the work at once instead of one agent grinding through the whole thing.",
+    "start": "00:01:46",
+    "end": "00:01:52"
+  },
+  {
+    "text": "And splitting the work out like that brings the cost somewhat down too because you get to pick which model each one runs on.",
+    "start": "00:01:52",
+    "end": "00:01:59"
+  },
+  {
+    "text": "So, you stop burning your most expensive model on the parts that never needed that much intelligence in the first place.",
+    "start": "00:01:59",
+    "end": "00:02:03"
+  },
+  {
+    "text": "But, that's the cost per agent, not the cost overall.",
+    "start": "00:02:03",
+    "end": "00:02:07"
+  },
+  {
+    "text": "A graph burns way more tokens than a single agent ever will because you've got a whole set of them going at once instead of one.",
+    "start": "00:02:07",
+    "end": "00:02:14"
+  },
+  {
+    "text": "If you are using graphs, expect your limits to hit way sooner than you're used to.",
+    "start": "00:02:14",
+    "end": "00:02:18"
+  },
+  {
+    "text": "So, you can't really set this up with the $20 plans of Claude Code and Codex.",
+    "start": "00:02:16",
+    "end": "00:02:22"
+  },
+  {
+    "text": "Now, if you've been using Claude Code, this probably isn't entirely new to you because you've already seen a graph, which is the dynamic workflow.",
+    "start": "00:02:20",
+    "end": "00:02:30"
+  },
+  {
+    "text": "A dynamic workflow takes the task you hand over and fans it out across a set of sub agents, which is basically what a graph does.",
+    "start": "00:02:30",
+    "end": "00:02:35"
+  },
+  {
+    "text": "Now, before [snorts] we get into the shapes a graph can take, you need to know what actually makes one up.",
+    "start": "00:02:35",
+    "end": "00:02:42"
+  },
+  {
+    "text": "Every graph is built out of two things: nodes and edges.",
+    "start": "00:02:42",
+    "end": "00:02:43"
+  },
+  {
+    "text": "A node is basically a single job out of the bigger task you handed over, and it runs on its own.",
+    "start": "00:02:43",
+    "end": "00:02:49"
+  },
+  {
+    "text": "It is an agent that does a task in its own isolated context window and reports back.",
+    "start": "00:02:49",
+    "end": "00:02:53"
+  },
+  {
+    "text": "What ties all those separate jobs together is the edge.",
+    "start": "00:02:53",
+    "end": "00:02:57"
+  },
+  {
+    "text": "An edge controls how the data moves from one node to the next.",
+    "start": "00:02:57",
+    "end": "00:03:00"
+  },
+  {
+    "text": "So, one agent's output lands with the right agent at the right point.",
+    "start": "00:03:00",
+    "end": "00:03:05"
+  },
+  {
+    "text": "So, every node's got to be tied into the rest of the graph somehow.",
+    "start": "00:03:05",
+    "end": "00:03:08"
+  },
+  {
+    "text": "You can see that in a set of agents all reviewing the same piece of work.",
+    "start": "00:03:08",
+    "end": "00:03:11"
+  },
+  {
+    "text": "None of them ever wait on each other, but they all started from the same work, and every one of their reports feeds into the same place at the end.",
+    "start": "00:03:11",
+    "end": "00:03:18"
+  },
+  {
+    "text": "So, that's what a graph is made of.",
+    "start": "00:03:18",
+    "end": "00:03:20"
+  },
+  {
+    "text": "Now, here are the shapes those pieces get arranged into.",
+    "start": "00:03:20",
+    "end": "00:03:23"
+  },
+  {
+    "text": "The first one's a shape we've already shown you on this channel.",
+    "start": "00:03:22",
+    "end": "00:03:25"
+  },
+  {
+    "text": "And we got the name wrong at the time.",
+    "start": "00:03:25",
+    "end": "00:03:27"
+  },
+  {
+    "text": "We called it a loop because this was before graph engineering was even a thing.",
+    "start": "00:03:27",
+    "end": "00:03:31"
+  },
+  {
+    "text": "But, what we actually had was a graph that we were looping, and the shape of it was a diamond.",
+    "start": "00:03:31",
+    "end": "00:03:34"
+  },
+  {
+    "text": "One task at the top splits out into several sub agents running side by side.",
+    "start": "00:03:34",
+    "end": "00:03:38"
+  },
+  {
+    "text": "Then, they all narrow back down into a single agent that pulls everything they found into one answer.",
+    "start": "00:03:38",
+    "end": "00:03:46"
+  },
+  {
+    "text": "Then, there's the fan in at a barrier graph, and that's the shape you want when one thing has to be judged from several angles at once.",
+    "start": "00:03:44",
+    "end": "00:03:51"
+  },
+  {
+    "text": "The fan out part sends the same problem out to a set of agents, and each one looks at it through a different lens.",
+    "start": "00:03:51",
+    "end": "00:03:57"
+  },
+  {
+    "text": "Nothing moves forward until every one of those agents has reported back, and only then does it go and run their fixes.",
+    "start": "00:03:57",
+    "end": "00:04:02"
+  },
+  {
+    "text": "There are plenty of other shapes, too, but every one of these shapes rests on the same thing, and that's verification.",
+    "start": "00:04:02",
+    "end": "00:04:08"
+  },
+  {
+    "text": "If you don't set those checks up properly, every agent that comes after is just building on top of a mistake.",
+    "start": "00:04:08",
+    "end": "00:04:13"
+  },
+  {
+    "text": "But before we talk about verification, it would be great if you subscribe to the channel and hit the hype button.",
+    "start": "00:04:13",
+    "end": "00:04:18"
+  },
+  {
+    "text": "This small gesture of support goes a long way for us.",
+    "start": "00:04:18",
+    "end": "00:04:22"
+  },
+  {
+    "text": "Once you're running a whole fleet of agents, things go wrong in ways they never do with a single one.",
+    "start": "00:04:22",
+    "end": "00:04:26"
+  },
+  {
+    "text": "The biggest problem is just the amount of work.",
+    "start": "00:04:26",
+    "end": "00:04:29"
+  },
+  {
+    "text": "They're all going at the same time, so a huge pile of it comes back at once, and that's really hard to review at the end.",
+    "start": "00:04:29",
+    "end": "00:04:35"
+  },
+  {
+    "text": "The other problem is that you can't see what happened.",
+    "start": "00:04:35",
+    "end": "00:04:36"
+  },
+  {
+    "text": "When something goes wrong, you've got no way of telling what caused it.",
+    "start": "00:04:36",
+    "end": "00:04:39"
+  },
+  {
+    "text": "Now, all agents verify whatever they write, whether you ask them to or not.",
+    "start": "00:04:39",
+    "end": "00:04:44"
+  },
+  {
+    "text": "If you're working with code, that just means the agent runs your tests and catches the errors that come back.",
+    "start": "00:04:43",
+    "end": "00:04:50"
+  },
+  {
+    "text": "But that only catches major errors.",
+    "start": "00:04:50",
+    "end": "00:04:51"
+  },
+  {
+    "text": "It still doesn't check how the code is written, and that's important because if Claude keeps writing it like this, it's going to cause problems in the future.",
+    "start": "00:04:51",
+    "end": "00:04:58"
+  },
+  {
+    "text": "There are a few built-in tools for this in Claude Code as well.",
+    "start": "00:04:58",
+    "end": "00:05:01"
+  },
+  {
+    "text": "The first is the verify skill, which takes the code from start to finish and confirms it actually behaves the way it's supposed to.",
+    "start": "00:05:01",
+    "end": "00:05:07"
+  },
+  {
+    "text": "The second is tool chaining, which is basically the agent running different tools to verify.",
+    "start": "00:05:07",
+    "end": "00:05:11"
+  },
+  {
+    "text": "Claude already knows to run the tools that check your work, so it reads the errors that come back and fixes them itself.",
+    "start": "00:05:11",
+    "end": "00:05:18"
+  },
+  {
+    "text": "It can work out your project's exact commands on its own, too.",
+    "start": "00:05:18",
+    "end": "00:05:20"
+  },
+  {
+    "text": "But writing them into your Claude.",
+    "start": "00:05:20",
+    "end": "00:05:22"
+  },
+  {
+    "text": "md file saves it the trouble of figuring them out every single time.",
+    "start": "00:05:22",
+    "end": "00:05:27"
+  },
+  {
+    "text": "And the third is a code review skill, which checks the code against a set of standards.",
+    "start": "00:05:27",
+    "end": "00:05:30"
+  },
+  {
+    "text": "Not every agent ships with one, but you can just ask your agent to build you one if yours doesn't.",
+    "start": "00:05:30",
+    "end": "00:05:36"
+  },
+  {
+    "text": "But the verification that actually works best is the one you set up yourself, instead of leaning entirely on the built-in stuff.",
+    "start": "00:05:36",
+    "end": "00:05:43"
+  },
+  {
+    "text": "So, the fastest way to build a skill that verifies your work is the skill creator plugin in Claude Code.",
+    "start": "00:05:41",
+    "end": "00:05:48"
+  },
+  {
+    "text": "You can also use this Claude code skill in Codex as well.",
+    "start": "00:05:48",
+    "end": "00:05:50"
+  },
+  {
+    "text": "You run the plug-in command, search for skill creator, and install it.",
+    "start": "00:05:50",
+    "end": "00:05:53"
+  },
+  {
+    "text": "From there, you've got two options.",
+    "start": "00:05:53",
+    "end": "00:05:57"
+  },
+  {
+    "text": "You can install it at the user scope, which means it's there no matter which folder you're working in, or you can install it just for the project you're working in right now.",
+    "start": "00:05:55",
+    "end": "00:06:04"
+  },
+  {
+    "text": "Since this is a skill you'll be using constantly, we went with the user scope.",
+    "start": "00:06:04",
+    "end": "00:06:08"
+  },
+  {
+    "text": "After that, you reload the plug-ins with the slash command, and skill creator's ready to be used.",
+    "start": "00:06:08",
+    "end": "00:06:11"
+  },
+  {
+    "text": "Now you tell it what you want built, and this is the part where you describe the kind of verification you're actually after.",
+    "start": "00:06:11",
+    "end": "00:06:18"
+  },
+  {
+    "text": "We mostly use a review skill for checking the finished work against what we asked for in the first place.",
+    "start": "00:06:18",
+    "end": "00:06:23"
+  },
+  {
+    "text": "And that matters way more in a graph, because each agent only ever sees its own piece.",
+    "start": "00:06:23",
+    "end": "00:06:28"
+  },
+  {
+    "text": "This is what gives it a way to check that piece against the original requirements.",
+    "start": "00:06:28",
+    "end": "00:06:33"
+  },
+  {
+    "text": "But a skill is only ever as good as the model you run it on.",
+    "start": "00:06:33",
+    "end": "00:06:35"
+  },
+  {
+    "text": "When we were building the verification system for our community website's UI, we ran the reviewer on Haiku, because it's cheap and the job looked simple enough.",
+    "start": "00:06:35",
+    "end": "00:06:44"
+  },
+  {
+    "text": "It came back with a long list of issues.",
+    "start": "00:06:44",
+    "end": "00:06:46"
+  },
+  {
+    "text": "Going off the number of findings alone, it looked like it had done a great job.",
+    "start": "00:06:46",
+    "end": "00:06:50"
+  },
+  {
+    "text": "Then we ran the exact same on Opus, and it flagged way fewer things.",
+    "start": "00:06:50",
+    "end": "00:06:53"
+  },
+  {
+    "text": "That looked like the worst result, right up until we read the reasoning.",
+    "start": "00:06:53",
+    "end": "00:06:57"
+  },
+  {
+    "text": "A lot of what Haiku had reported was stuff we'd left there on purpose.",
+    "start": "00:06:57",
+    "end": "00:07:00"
+  },
+  {
+    "text": "So most of the findings it made were completely unnecessary.",
+    "start": "00:07:00",
+    "end": "00:07:04"
+  },
+  {
+    "text": "Opus had worked that out from the code around it, which Haiku had missed it completely.",
+    "start": "00:07:04",
+    "end": "00:07:09"
+  },
+  {
+    "text": "So the cheap review hadn't saved us anything, because now the review itself needed reviewing.",
+    "start": "00:07:09",
+    "end": "00:07:13"
+  },
+  {
+    "text": "Now put that inside a graph, where a whole set of nodes are all checking their own work with that same skill.",
+    "start": "00:07:13",
+    "end": "00:07:18"
+  },
+  {
+    "text": "You'd have agents burning time and tokens fixing things that were never broken.",
+    "start": "00:07:18",
+    "end": "00:07:22"
+  },
+  {
+    "text": "And because it's happening across separate agents all at once, you'd have no way of telling which one started it.",
+    "start": "00:07:22",
+    "end": "00:07:27"
+  },
+  {
+    "text": "So the model you pick doesn't just decide the quality of the review, it decides the quality of the whole graph.",
+    "start": "00:07:27",
+    "end": "00:07:33"
+  },
+  {
+    "text": "The node that does the judging is the one place where saving tokens costs you everything.",
+    "start": "00:07:33",
+    "end": "00:07:38"
+  },
+  {
+    "text": "The other thing you've got to decide is how and when that skill gets invoked.",
+    "start": "00:07:38",
+    "end": "00:07:42"
+  },
+  {
+    "text": "And that splits them into three kinds.",
+    "start": "00:07:42",
+    "end": "00:07:44"
+  },
+  {
+    "text": "But before we go deep into the types, let's have a word by our sponsor.",
+    "start": "00:07:44",
+    "end": "00:07:47"
+  },
+  {
+    "text": "If you've ever pulled live data off the web, you know scraping is a genuine pain, where you end up fighting captures and rate limits, wrestling with proxies, and patching layouts that break the moment you ship.",
+    "start": "00:07:47",
+    "end": "00:07:57"
+  },
+  {
+    "text": "So, we reach for SerpApi, which solves all these problems, so you can focus on building.",
+    "start": "00:07:57",
+    "end": "00:08:03"
+  },
+  {
+    "text": "It's one API call, you send a request and get back a clean JSON object with exactly the data you need with over 99.",
+    "start": "00:08:03",
+    "end": "00:08:12"
+  },
+  {
+    "text": "9% uptime and around a 1.",
+    "start": "00:08:12",
+    "end": "00:08:12"
+  },
+  {
+    "text": "2-second response.",
+    "start": "00:08:12",
+    "end": "00:08:14"
+  },
+  {
+    "text": "When you're building AI agents, you can point the Google Search API at an agent that needs current information or use the Google Scholar API for peer-reviewed papers with full metadata, which is why so many production agents rely on it.",
+    "start": "00:08:12",
+    "end": "00:08:27"
+  },
+  {
+    "text": "Get started with 250 free credits using the link in the description or scan the QR code on screen.",
+    "start": "00:08:25",
+    "end": "00:08:31"
+  },
+  {
+    "text": "Thanks to SerpApi for sponsoring this video.",
+    "start": "00:08:31",
+    "end": "00:08:34"
+  },
+  {
+    "text": "The first kind is standalone, and that's the sort of skill that only runs when you actually do it yourself.",
+    "start": "00:08:34",
+    "end": "00:08:38"
+  },
+  {
+    "text": "A standalone skill is built to go deep on something that already exists, so it can properly go back over a finished output.",
+    "start": "00:08:38",
+    "end": "00:08:45"
+  },
+  {
+    "text": "That's why you don't want it firing after every single run.",
+    "start": "00:08:45",
+    "end": "00:08:49"
+  },
+  {
+    "text": "You'd be burning tokens on a heavy review of work that isn't even finished yet.",
+    "start": "00:08:47",
+    "end": "00:08:52"
+  },
+  {
+    "text": "One we've used before is the thermonuclear code review by Cursor.",
+    "start": "00:08:52",
+    "end": "00:08:57"
+  },
+  {
+    "text": "It fans out a set of agents and sends each one through the code from a different security angle.",
+    "start": "00:08:57",
+    "end": "00:09:01"
+  },
+  {
+    "text": "Every finding comes back in one place, so it can work through the fixes together, and that's exactly the kind of review you only run once the app's done.",
+    "start": "00:09:01",
+    "end": "00:09:09"
+  },
+  {
+    "text": "To build one of these, you're better off using Skill Creator than just prompting it to do it, because what comes back is tested, and that makes it easier to trust.",
+    "start": "00:09:09",
+    "end": "00:09:17"
+  },
+  {
+    "text": "You tell it in the prompt which area you want reviewed, and make sure you mention that the review should be comprehensive, so it knows you're after a deep pass and not a quick one.",
+    "start": "00:09:17",
+    "end": "00:09:25"
+  },
+  {
+    "text": "But a standalone [snorts] skill is no use to a node that's still working, because you have to run it yourself.",
+    "start": "00:09:25",
+    "end": "00:09:30"
+  },
+  {
+    "text": "That's what embedded skills are for.",
+    "start": "00:09:30",
+    "end": "00:09:32"
+  },
+  {
+    "text": "An embedded skill fires as part of the workflow you're already running without you asking for it.",
+    "start": "00:09:32",
+    "end": "00:09:38"
+  },
+  {
+    "text": "You could build one that kicks in whenever somebody asks for a new feature.",
+    "start": "00:09:38",
+    "end": "00:09:41"
+  },
+  {
+    "text": "It checks that every component being created follows the rules you laid out in the skill, and it won't let the implementation finish until it's been checked against those rules.",
+    "start": "00:09:41",
+    "end": "00:09:50"
+  },
+  {
+    "text": "You can build embedded skills yourself, but you can't take a pre-installed one and have them be invoked automatically like the verify skill we talked about earlier.",
+    "start": "00:09:50",
+    "end": "00:09:58"
+  },
+  {
+    "text": "The instructions those skills run on sit inside the product and you don't get to touch them.",
+    "start": "00:09:56",
+    "end": "00:10:01"
+  },
+  {
+    "text": "To build your own, give skill creator a prompt telling it to run verification steps after every feature implementation.",
+    "start": "00:10:01",
+    "end": "00:10:08"
+  },
+  {
+    "text": "So, you tell it to test the feature from start to finish, so it catches whether the new work broke anything that was already working.",
+    "start": "00:10:08",
+    "end": "00:10:16"
+  },
+  {
+    "text": "Claude then creates the skill for you, and because skill creator generated it, it comes with references and scripts that skill creator structured and tested as part of the process.",
+    "start": "00:10:14",
+    "end": "00:10:24"
+  },
+  {
+    "text": "Now, to verify a feature, Claude uses browser testing by default where it checks the interface by opening a full Chrome browser, loading the page, and taking screenshots of it.",
+    "start": "00:10:24",
+    "end": "00:10:33"
+  },
+  {
+    "text": "And if you've wired up Puppeteer or Playwright, which are basically the tools most people use to drive a browser automatically, they do the same thing.",
+    "start": "00:10:32",
+    "end": "00:10:41"
+  },
+  {
+    "text": "But, Chrome's famous for eating memory and running heavy.",
+    "start": "00:10:39",
+    "end": "00:10:43"
+  },
+  {
+    "text": "And for checking a page over and over inside a workflow, it's slow enough that it starts costing you real time.",
+    "start": "00:10:43",
+    "end": "00:10:48"
+  },
+  {
+    "text": "So, there's a lighter way to do it called Chrome headless shell.",
+    "start": "00:10:48",
+    "end": "00:10:53"
+  },
+  {
+    "text": "It's basically a stripped-down version of the browser with all the extra parts ripped out.",
+    "start": "00:10:51",
+    "end": "00:10:56"
+  },
+  {
+    "text": "The agent still goes to the page and takes its screenshots the same way.",
+    "start": "00:10:56",
+    "end": "00:10:59"
+  },
+  {
+    "text": "It just gets through all of it way faster than a full Chrome does.",
+    "start": "00:10:59",
+    "end": "00:11:04"
+  },
+  {
+    "text": "You can build that straight into the verification skill you create.",
+    "start": "00:11:04",
+    "end": "00:11:07"
+  },
+  {
+    "text": "Then every feature the agent builds gets checked visually without you setting anything up each time.",
+    "start": "00:11:07",
+    "end": "00:11:12"
+  },
+  {
+    "text": "Aside from that, the skill we use the most in our own workflow is one called second opinion, and the reason is simple.",
+    "start": "00:11:12",
+    "end": "00:11:18"
+  },
+  {
+    "text": "The agent that built the thing is the worst possible one to review it.",
+    "start": "00:11:18",
+    "end": "00:11:22"
+  },
+  {
+    "text": "It's judging its own work off the same context it used to build it.",
+    "start": "00:11:22",
+    "end": "00:11:25"
+  },
+  {
+    "text": "So, it just reviews based on that.",
+    "start": "00:11:25",
+    "end": "00:11:26"
+  },
+  {
+    "text": "A fresh Claude session hasn't seen any of that.",
+    "start": "00:11:26",
+    "end": "00:11:29"
+  },
+  {
+    "text": "It gives an unbiased review and gives you a straight answer.",
+    "start": "00:11:29",
+    "end": "00:11:33"
+  },
+  {
+    "text": "Now, Claude does have a built-in advisor that does something along these lines, but it reads the chat you're currently in, so it inherits all that same context.",
+    "start": "00:11:33",
+    "end": "00:11:41"
+  },
+  {
+    "text": "Second opinion is for when you want the review without it.",
+    "start": "00:11:39",
+    "end": "00:11:43"
+  },
+  {
+    "text": "It works by starting another Claude session from inside the one you're already running using the dash P flag.",
+    "start": "00:11:43",
+    "end": "00:11:48"
+  },
+  {
+    "text": "That's the flag that fires off a whole separate Claude code session in the background by handing it a prompt to work on.",
+    "start": "00:11:48",
+    "end": "00:11:54"
+  },
+  {
+    "text": "There are a couple of things you need to know if you're going to use this though.",
+    "start": "00:11:54",
+    "end": "00:11:57"
+  },
+  {
+    "text": "Since it's launching an entirely separate session, it takes a really long time to come back with an answer.",
+    "start": "00:11:57",
+    "end": "00:12:02"
+  },
+  {
+    "text": "And the model matters here more than anywhere else because the whole point is a smarter second read.",
+    "start": "00:12:02",
+    "end": "00:12:08"
+  },
+  {
+    "text": "So, it's worth telling Claude explicitly to start that session on Opus.",
+    "start": "00:12:08",
+    "end": "00:12:12"
+  },
+  {
+    "text": "That gives every node in your graph a way to get its work checked by something that had no hand in doing it.",
+    "start": "00:12:12",
+    "end": "00:12:17"
+  },
+  {
+    "text": "But one skill can't cover everything though.",
+    "start": "00:12:17",
+    "end": "00:12:20"
+  },
+  {
+    "text": "Once you're reviewing something properly, you're reviewing it from several different angles and every angle has its own way of measuring.",
+    "start": "00:12:20",
+    "end": "00:12:27"
+  },
+  {
+    "text": "You can't stuff all review types into one skill because that way agent will have too many directions to review and will end it up getting worse instead of better.",
+    "start": "00:12:27",
+    "end": "00:12:34"
+  },
+  {
+    "text": "So, you build a separate skill for each angle and chain them together.",
+    "start": "00:12:34",
+    "end": "00:12:39"
+  },
+  {
+    "text": "Anthropic's own team works this way, too.",
+    "start": "00:12:37",
+    "end": "00:12:39"
+  },
+  {
+    "text": "They chain the code review skill together with the simplify skill and the verify skill, and all three of those now ship with Claude code.",
+    "start": "00:12:39",
+    "end": "00:12:47"
+  },
+  {
+    "text": "On top of that, they run their own design skill, which checks the interface against the design.",
+    "start": "00:12:47",
+    "end": "00:12:51"
+  },
+  {
+    "text": "md file, which is basically the file that holds every design decision for the product.",
+    "start": "00:12:51",
+    "end": "00:12:57"
+  },
+  {
+    "text": "So, that's a review coming from four directions instead of one.",
+    "start": "00:12:57",
+    "end": "00:12:59"
+  },
+  {
+    "text": "You'll end up in the same place with a stack of skills that each cover a different angle, but you can't just tell the agent to run all of them at once.",
+    "start": "00:12:59",
+    "end": "00:13:08"
+  },
+  {
+    "text": "What you need is one more skill sitting above the rest, which is basically an orchestrator skill whose only job is to run other skills.",
+    "start": "00:13:06",
+    "end": "00:13:14"
+  },
+  {
+    "text": "It spins up an agent for every review skill you've got and hands each one its skill.",
+    "start": "00:13:14",
+    "end": "00:13:19"
+  },
+  {
+    "text": "They all review at the same time in their own separate context windows.",
+    "start": "00:13:19",
+    "end": "00:13:23"
+  },
+  {
+    "text": "Then it pulls every finding back into one report that the fixing agents can work from.",
+    "start": "00:13:23",
+    "end": "00:13:27"
+  },
+  {
+    "text": "Then when you're building a graph, the only thing you have to say in the prompt is that it should use that one skill.",
+    "start": "00:13:27",
+    "end": "00:13:33"
+  },
+  {
+    "text": "Every node it spins up loads that single skill, and the whole review fans out underneath it on its own.",
+    "start": "00:13:33",
+    "end": "00:13:38"
+  },
+  {
+    "text": "Now we have curated a document containing all the ways you can set up verifications for graphs in detail.",
+    "start": "00:13:38",
+    "end": "00:13:43"
+  },
+  {
+    "text": "That doc along with all the skills shown in this video are available in AI Labs Pro, which is our community.",
+    "start": "00:13:43",
+    "end": "00:13:48"
+  },
+  {
+    "text": "So if you found value in what we do and want to support the channel, this is the best way to do it.",
+    "start": "00:13:48",
+    "end": "00:13:54"
+  },
+  {
+    "text": "The link's in the description.",
+    "start": "00:13:54",
+    "end": "00:13:55"
+  },
+  {
+    "text": "That brings us to the end of this video.",
+    "start": "00:13:55",
+    "end": "00:13:57"
+  },
+  {
+    "text": "If you'd like to support the channel and help us keep making videos like this, you can do so by using the Super Thanks button below.",
+    "start": "00:13:57",
+    "end": "00:14:02"
+  },
+  {
+    "text": "As always, thank you for watching and I'll see you in the next one.",
+    "start": "00:14:02",
+    "end": "00:14:07"
+  }
+]

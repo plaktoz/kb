@@ -1,0 +1,18 @@
+{
+  "videoId": "abvQEhvRI_c",
+  "title": "Context Graphs for Explainable, Decision-Aware AI Agents — Andreas Kollegger & Zaid Zaim, Neo4j",
+  "channel": "AI Engineer",
+  "channelId": "UCLKPca3kwwd-B59HNr-_lvA",
+  "description": "Prescribing drug X is correct 99% of the time for symptom Y. For the 1% where it is fatal, statistical reasoning does not help you. Andreas Kollegger calls this reference class validation: before the agent acts, it has to know which group it is in.\n\nContext graphs give agents the why. Not just knowledge and tools but the policies, rules, and prior decisions that explain why a certain action is right in a given context. The decision making framework in this talk has five stages: frame the problem with its causality and environment, pull in global rules and past precedent, run a risk value analysis, either act or escalate to someone with authority, and write the full reasoning chain back into the graph. That last step is the point. Every decision becomes precedent. Future agents inherit it.\n\nSpeaker info:\n- https://x.com/akollegger\n- https://www.linkedin.com/in/akollegger\n- https://github.com/akollegger",
+  "duration": 998,
+  "publishDate": "2026-05-28",
+  "url": "https://www.youtube.com/watch?v=abvQEhvRI_c",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/abvQEhvRI_c/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": []
+}

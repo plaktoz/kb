@@ -1,0 +1,1037 @@
+[
+  {
+    "text": "A control room on this machine was telling me what my agents were doing.",
+    "start": "00:00:00",
+    "end": "00:00:05"
+  },
+  {
+    "text": "And the run history in it was real, all the way down to the token counts.",
+    "start": "00:00:03",
+    "end": "00:00:08"
+  },
+  {
+    "text": "It was reading a copy of itself that I had dragged into the trash.",
+    "start": "00:00:08",
+    "end": "00:00:12"
+  },
+  {
+    "text": "And nothing you're running right now will tell you where it is reading from.",
+    "start": "00:00:12",
+    "end": "00:00:15"
+  },
+  {
+    "text": "That control room is one of ours, and this machine runs agents against real work most weeks.",
+    "start": "00:00:15",
+    "end": "00:00:19"
+  },
+  {
+    "text": "What had gone wrong in there?",
+    "start": "00:00:19",
+    "end": "00:00:22"
+  },
+  {
+    "text": "The model was doing its job, and there was nothing wrong with the words I had typed at it, and the whole problem was where the thing was standing.",
+    "start": "00:00:22",
+    "end": "00:00:27"
+  },
+  {
+    "text": "And when I tell you something broke, that happened on this machine.",
+    "start": "00:00:27",
+    "end": "00:00:29"
+  },
+  {
+    "text": "And I will tell you which of the two you're getting.",
+    "start": "00:00:29",
+    "end": "00:00:33"
+  },
+  {
+    "text": "Where the thing is standing is one of exactly three things that get decided every time an AI does a real job for you.",
+    "start": "00:00:33",
+    "end": "00:00:39"
+  },
+  {
+    "text": "And it is the one you can change today with no code and nobody's help.",
+    "start": "00:00:39",
+    "end": "00:00:42"
+  },
+  {
+    "text": "Can you tell which of the three has gone wrong on your setup right now?",
+    "start": "00:00:42",
+    "end": "00:00:46"
+  },
+  {
+    "text": "There is a sentence you can say out loud that tells you which of the three is broken.",
+    "start": "00:00:46",
+    "end": "00:00:51"
+  },
+  {
+    "text": "And for most people watching, the answer is >> Hey, I'm Johnny Nal.",
+    "start": "00:00:51",
+    "end": "00:00:54"
+  },
+  {
+    "text": "I spent years building businesses the old hard way, managing teams, scaling operations, and doing everything manually.",
+    "start": "00:00:54",
+    "end": "00:01:02"
+  },
+  {
+    "text": "Today, everything I built, from automations and no-code infrastructures to fully AI SaaS products, has AI helping in one way or another.",
+    "start": "00:01:02",
+    "end": "00:01:10"
+  },
+  {
+    "text": ">> First of all, let me quickly show you this.",
+    "start": "00:01:09",
+    "end": "00:01:10"
+  },
+  {
+    "text": "In South Africa, we call this a braai.",
+    "start": "00:01:10",
+    "end": "00:01:13"
+  },
+  {
+    "text": "I built with AI tools that in my opinion anyone can learn to use.",
+    "start": "00:01:13",
+    "end": "00:01:18"
+  },
+  {
+    "text": "My mission is simple: to help creators, entrepreneurs, and business owners get clarity with AI.",
+    "start": "00:01:18",
+    "end": "00:01:22"
+  },
+  {
+    "text": "Let's build smarter together and enjoy this video.",
+    "start": "00:01:22",
+    "end": "00:01:26"
+  },
+  {
+    "text": "The editing tool I use every week publishes an interface where the only thing you're allowed to hand it is a sentence in plain English, and there is no field for a frame or a track anywhere in the whole thing.",
+    "start": "00:01:26",
+    "end": "00:01:39"
+  },
+  {
+    "text": "So, I sat down and wrote better sentences.",
+    "start": "00:01:39",
+    "end": "00:01:42"
+  },
+  {
+    "text": "What I wanted was a graphic laid over the footage holding for said number of seconds, and I described that to it, what it should say and exactly where on the picture it had to go.",
+    "start": "00:01:42",
+    "end": "00:01:50"
+  },
+  {
+    "text": "And every time I got back something close and wrong in a slightly different way.",
+    "start": "00:01:50",
+    "end": "00:01:55"
+  },
+  {
+    "text": "So, was I wording it badly?",
+    "start": "00:01:55",
+    "end": "00:01:56"
+  },
+  {
+    "text": "For a stretch of that week, that is exactly what I thought.",
+    "start": "00:01:56",
+    "end": "00:02:00"
+  },
+  {
+    "text": "And some of you are going to say this is just prompting with extra steps.",
+    "start": "00:02:00",
+    "end": "00:02:03"
+  },
+  {
+    "text": "There was one job in there where the wording genuinely was the problem.",
+    "start": "00:02:03",
+    "end": "00:02:07"
+  },
+  {
+    "text": "And once I described it the way the tool expected, it did the job properly.",
+    "start": "00:02:07",
+    "end": "00:02:10"
+  },
+  {
+    "text": "But the graphic over the footage was never that kind of problem because what I was asking for had nowhere in the software to land.",
+    "start": "00:02:10",
+    "end": "00:02:18"
+  },
+  {
+    "text": "That field does not exist.",
+    "start": "00:02:16",
+    "end": "00:02:18"
+  },
+  {
+    "text": "And a field that does not exist cannot be talked into existing however carefully you word the request.",
+    "start": "00:02:18",
+    "end": "00:02:23"
+  },
+  {
+    "text": "So the whole visual layer came off that tool and onto something we build ourselves to draw the picture.",
+    "start": "00:02:23",
+    "end": "00:02:30"
+  },
+  {
+    "text": "That whole business has a name and I only ran into it afterwards.",
+    "start": "00:02:28",
+    "end": "00:02:33"
+  },
+  {
+    "text": "LangChain published a piece on the 10th of March 2026 written up by Vivek Trivedi.",
+    "start": "00:02:33",
+    "end": "00:02:40"
+  },
+  {
+    "text": "And their line is that a harness is every piece of code, configuration, and execution logic that isn't the model itself.",
+    "start": "00:02:40",
+    "end": "00:02:45"
+  },
+  {
+    "text": "Or as he puts it earlier on, if you're not the model, you're the harness.",
+    "start": "00:02:45",
+    "end": "00:02:52"
+  },
+  {
+    "text": "So essentially, everything that is not the brain is the working conditions.",
+    "start": "00:02:50",
+    "end": "00:02:56"
+  },
+  {
+    "text": "And your working conditions decide what it can actually open and touch.",
+    "start": "00:02:56",
+    "end": "00:02:59"
+  },
+  {
+    "text": "Whatever you are running right now, take the model out of the picture and look hard at what is left around it.",
+    "start": "00:02:59",
+    "end": "00:03:05"
+  },
+  {
+    "text": "Because every one of those things is a choice somebody made once and never went back to.",
+    "start": "00:03:05",
+    "end": "00:03:09"
+  },
+  {
+    "text": "And everything still connected to the model is a set of keys.",
+    "start": "00:03:09",
+    "end": "00:03:12"
+  },
+  {
+    "text": "And the question is which doors those keys open.",
+    "start": "00:03:12",
+    "end": "00:03:14"
+  },
+  {
+    "text": "Most people have never counted their doors and the permissions you handed over on day one are still hanging on the ring.",
+    "start": "00:03:14",
+    "end": "00:03:20"
+  },
+  {
+    "text": "And you might be thinking you would just use a different tool.",
+    "start": "00:03:20",
+    "end": "00:03:22"
+  },
+  {
+    "text": "That is a reasonable answer and it changes something real because a different tool can reach different things.",
+    "start": "00:03:22",
+    "end": "00:03:28"
+  },
+  {
+    "text": "So what you are changing is this first decision, which is the point.",
+    "start": "00:03:28",
+    "end": "00:03:32"
+  },
+  {
+    "text": "So guys, the way I look at it, you can fix a surprising amount of this in an afternoon.",
+    "start": "00:03:32",
+    "end": "00:03:37"
+  },
+  {
+    "text": "And it starts with counting what is switched on.",
+    "start": "00:03:37",
+    "end": "00:03:41"
+  },
+  {
+    "text": "The connectors, the integrations you added in March and forgot about 16 years.",
+    "start": "00:03:41",
+    "end": "00:03:44"
+  },
+  {
+    "text": "And then switching off everything you did not deliberately turn on for the job in front of you.",
+    "start": "00:03:44",
+    "end": "00:03:48"
+  },
+  {
+    "text": "Why does that matter more than it sounds?",
+    "start": "00:03:48",
+    "end": "00:03:50"
+  },
+  {
+    "text": "A crowded tool set most probably makes it reach for the wrong tool.",
+    "start": "00:03:50",
+    "end": "00:03:53"
+  },
+  {
+    "text": "And the descriptions of the tools you never use get sent along on every single turn.",
+    "start": "00:03:53",
+    "end": "00:03:59"
+  },
+  {
+    "text": "Meaning every back and forth between you and the thing, whether you call them or not.",
+    "start": "00:03:59",
+    "end": "00:04:04"
+  },
+  {
+    "text": "And by the end of that afternoon, the list of what your setup can reach is a lot shorter.",
+    "start": "00:04:04",
+    "end": "00:04:10"
+  },
+  {
+    "text": "And everything still on it is there because you put it there on purpose.",
+    "start": "00:04:10",
+    "end": "00:04:14"
+  },
+  {
+    "text": "Every morning, I opened the same chat and typed out the same few paragraphs of background before the thing could do anything useful for me.",
+    "start": "00:04:14",
+    "end": "00:04:21"
+  },
+  {
+    "text": "And guys, I know how that sounds.",
+    "start": "00:04:21",
+    "end": "00:04:22"
+  },
+  {
+    "text": "A grown man retyping the same paragraph before breakfast.",
+    "start": "00:04:22",
+    "end": "00:04:27"
+  },
+  {
+    "text": "But that is what the setup gave me.",
+    "start": "00:04:27",
+    "end": "00:04:28"
+  },
+  {
+    "text": "Because the conversation was the only memory in the building, and the conversation ended every night.",
+    "start": "00:04:28",
+    "end": "00:04:32"
+  },
+  {
+    "text": "Does any of that sound like your own Monday morning?",
+    "start": "00:04:32",
+    "end": "00:04:36"
+  },
+  {
+    "text": "On a building site, the scaffolding you leave standing is still there when you come back.",
+    "start": "00:04:36",
+    "end": "00:04:42"
+  },
+  {
+    "text": "And whatever went into the van at 5:00 went home with the van.",
+    "start": "00:04:42",
+    "end": "00:04:45"
+  },
+  {
+    "text": "Your chat window is the van, and nothing you put in it is standing on site tomorrow.",
+    "start": "00:04:45",
+    "end": "00:04:50"
+  },
+  {
+    "text": "And I know a few of you have already made this exact fix and called it memory.",
+    "start": "00:04:50",
+    "end": "00:04:54"
+  },
+  {
+    "text": "And there's a whole video of mine on that one.",
+    "start": "00:04:54",
+    "end": "00:04:56"
+  },
+  {
+    "text": "So yes, it is the same problem.",
+    "start": "00:04:56",
+    "end": "00:04:57"
+  },
+  {
+    "text": "And I put the fix in that video and then went on retyping my background every morning anyway.",
+    "start": "00:04:57",
+    "end": "00:05:01"
+  },
+  {
+    "text": "Anthropic wrote up what happened when they tried this internally on the 26th of November, 2025.",
+    "start": "00:05:01",
+    "end": "00:05:09"
+  },
+  {
+    "text": "They were building a clone of their own product with over 200 features in it, session after session.",
+    "start": "00:05:09",
+    "end": "00:05:14"
+  },
+  {
+    "text": "And what did they try first?",
+    "start": "00:05:14",
+    "end": "00:05:15"
+  },
+  {
+    "text": "They tried to squeezing the conversation smaller, which is the obvious move and the one you would reach for.",
+    "start": "00:05:15",
+    "end": "00:05:21"
+  },
+  {
+    "text": "And I'll give you their sentence about it word for word.",
+    "start": "00:05:21",
+    "end": "00:05:25"
+  },
+  {
+    "text": "However, compaction isn't sufficient.",
+    "start": "00:05:25",
+    "end": "00:05:28"
+  },
+  {
+    "text": "That is the sentence printed on their own page.",
+    "start": "00:05:28",
+    "end": "00:05:31"
+  },
+  {
+    "text": "What worked instead was basically a text file.",
+    "start": "00:05:31",
+    "end": "00:05:32"
+  },
+  {
+    "text": "The first session writes down what it did and what is still open.",
+    "start": "00:05:32",
+    "end": "00:05:37"
+  },
+  {
+    "text": "And every session after that reads the file before it starts and updates it before it stops.",
+    "start": "00:05:37",
+    "end": "00:05:40"
+  },
+  {
+    "text": "Mine has a heading for what got done and a heading for what is still left.",
+    "start": "00:05:40",
+    "end": "00:05:45"
+  },
+  {
+    "text": "And then blocked sits on its own line underneath.",
+    "start": "00:05:45",
+    "end": "00:05:48"
+  },
+  {
+    "text": "And blocked is the one that saves you the most time because it stops tomorrow's run from walking into the wall you hit today.",
+    "start": "00:05:48",
+    "end": "00:05:54"
+  },
+  {
+    "text": "Now, that is one internal experiment on one demo build and the write-up says the demo was tuned for one kind of work.",
+    "start": "00:05:54",
+    "end": "00:06:01"
+  },
+  {
+    "text": "So, I'm not handing it to you as a law.",
+    "start": "00:06:01",
+    "end": "00:06:04"
+  },
+  {
+    "text": "In my opinion, writing that file is the best hour you will spend on any of this and it is not a hole you are plugging.",
+    "start": "00:06:04",
+    "end": "00:06:10"
+  },
+  {
+    "text": "It is the first piece of your setup that belongs to you rather than to whatever window you happen to open that morning.",
+    "start": "00:06:10",
+    "end": "00:06:17"
+  },
+  {
+    "text": "So, write four lines in it tonight and tomorrow point the thing at the file instead of typing your background out from scratch.",
+    "start": "00:06:15",
+    "end": "00:06:22"
+  },
+  {
+    "text": "And the morning after that, you're opening something that already knows where you got to, which means you start your day on the work rather than on the briefing.",
+    "start": "00:06:22",
+    "end": "00:06:31"
+  },
+  {
+    "text": "There is a part of the laptop in front of you whose entire job is deciding which programs are allowed to open which files and it has been doing that job for decades without anybody calling it a harness.",
+    "start": "00:06:31",
+    "end": "00:06:43"
+  },
+  {
+    "text": "So, most of what I have described to you is that same job with new words on it.",
+    "start": "00:06:41",
+    "end": "00:06:48"
+  },
+  {
+    "text": "And that is a reason to be less nervous about it.",
+    "start": "00:06:46",
+    "end": "00:06:49"
+  },
+  {
+    "text": "The shape of the problem is one your own machine has been handling since before you bought it.",
+    "start": "00:06:49",
+    "end": "00:06:55"
+  },
+  {
+    "text": "Which part of this is genuinely new?",
+    "start": "00:06:55",
+    "end": "00:06:56"
+  },
+  {
+    "text": "The part made of language is the new bit because nothing inside your laptop ever had to write the instructions a thing reads before it starts.",
+    "start": "00:06:56",
+    "end": "00:07:04"
+  },
+  {
+    "text": "The people publishing on this do not agree where the lines between these three side and one of them folds the ordering work into the first decision entirely.",
+    "start": "00:07:04",
+    "end": "00:07:13"
+  },
+  {
+    "text": "So, the way I see it, the split I'm handing you is mine and it is not anybody's standard.",
+    "start": "00:07:13",
+    "end": "00:07:19"
+  },
+  {
+    "text": "I've put most of my time here on that first decision because that is where most of what goes wrong for you happens.",
+    "start": "00:07:19",
+    "end": "00:07:24"
+  },
+  {
+    "text": "And which one of these three has no older version of itself anywhere?",
+    "start": "00:07:24",
+    "end": "00:07:28"
+  },
+  {
+    "text": "Now, everything I have just handed you is written down properly inside the AI founder's vault.",
+    "start": "00:07:28",
+    "end": "00:07:33"
+  },
+  {
+    "text": "There's a 20-minute audit waiting in there that you can run this afternoon and you come out of it holding a written count of what your setup can actually reach.",
+    "start": "00:07:33",
+    "end": "00:07:41"
+  },
+  {
+    "text": "The community's in there running the same audit on their own setups, and the link is down in the description below.",
+    "start": "00:07:41",
+    "end": "00:07:47"
+  },
+  {
+    "text": "All right, so let's get into the second of these three, which is how anything you set running is supposed to know that it is finished.",
+    "start": "00:07:46",
+    "end": "00:07:53"
+  },
+  {
+    "text": "When a render finishes on this machine, the program that did it hands back a number.",
+    "start": "00:07:53",
+    "end": "00:07:59"
+  },
+  {
+    "text": "It tells you whether the job worked without a single person having to look at it.",
+    "start": "00:07:59",
+    "end": "00:08:03"
+  },
+  {
+    "text": "That number was computed by the thing doing the work, which is why you can act on it while you are asleep.",
+    "start": "00:08:03",
+    "end": "00:08:09"
+  },
+  {
+    "text": "An AI job stops when the AI says it is done.",
+    "start": "00:08:09",
+    "end": "00:08:11"
+  },
+  {
+    "text": "And the fair pushback is that you asked it and it told you it was done, which is true.",
+    "start": "00:08:11",
+    "end": "00:08:17"
+  },
+  {
+    "text": "What you did was asked the same source for a second opinion on itself.",
+    "start": "00:08:14",
+    "end": "00:08:21"
+  },
+  {
+    "text": "So, the AI is now the thing that decides its own ending, and the AI is the part that can be wrong, which is why this is the only one of the three with nothing older behind it.",
+    "start": "00:08:21",
+    "end": "00:08:30"
+  },
+  {
+    "text": "No operating system has ever had to decide whether a piece of work is good enough to be called finished, because that is a judgment somebody has to make.",
+    "start": "00:08:30",
+    "end": "00:08:39"
+  },
+  {
+    "text": "Everything before this computed its own ending out of the work it had just done.",
+    "start": "00:08:39",
+    "end": "00:08:43"
+  },
+  {
+    "text": "And an AI hands you a claim instead, which is a different kind of thing to trust.",
+    "start": "00:08:43",
+    "end": "00:08:48"
+  },
+  {
+    "text": "What does that cost you in practice?",
+    "start": "00:08:48",
+    "end": "00:08:50"
+  },
+  {
+    "text": "Your finish line is now something you build from the outside.",
+    "start": "00:08:50",
+    "end": "00:08:54"
+  },
+  {
+    "text": "It has to be cheap enough for you to check, and plain enough that somebody else could check it without asking you what you meant.",
+    "start": "00:08:54",
+    "end": "00:09:00"
+  },
+  {
+    "text": "So, what does the piece of software that runs the job do when nobody can tell whether it is finished?",
+    "start": "00:09:00",
+    "end": "00:09:07"
+  },
+  {
+    "text": "OpenAI's own agent runner does not sit there waiting for a real ending.",
+    "start": "00:09:05",
+    "end": "00:09:11"
+  },
+  {
+    "text": "It ships with a cap on how many turns a single run gets.",
+    "start": "00:09:11",
+    "end": "00:09:13"
+  },
+  {
+    "text": "And when a run goes past that cap, the runner raises an error and stops.",
+    "start": "00:09:13",
+    "end": "00:09:17"
+  },
+  {
+    "text": "The runner stops at 10.",
+    "start": "00:09:17",
+    "end": "00:09:20"
+  },
+  {
+    "text": "That is the default in their own source code, and a cap like that is what you end up with when the ending cannot be worked out from the inside.",
+    "start": "00:09:18",
+    "end": "00:09:28"
+  },
+  {
+    "text": "So, essentially, what I write now before a run starts is what I call a done test.",
+    "start": "00:09:28",
+    "end": "00:09:33"
+  },
+  {
+    "text": "It's a short written list of conditions that have to be true when the thing comes back.",
+    "start": "00:09:31",
+    "end": "00:09:36"
+  },
+  {
+    "text": "I'd say the rule that makes it work sounds like a technicality at first, but it is the part that matters.",
+    "start": "00:09:36",
+    "end": "00:09:43"
+  },
+  {
+    "text": "Every condition on it has to be checkable by somebody who is not in the conversation.",
+    "start": "00:09:42",
+    "end": "00:09:47"
+  },
+  {
+    "text": "And how do you tell a test from a wish?",
+    "start": "00:09:47",
+    "end": "00:09:49"
+  },
+  {
+    "text": "Say your condition is that it should read professionally.",
+    "start": "00:09:49",
+    "end": "00:09:52"
+  },
+  {
+    "text": "That is a wish because the only thing that can grade it is the thing that wrote it.",
+    "start": "00:09:52",
+    "end": "00:09:57"
+  },
+  {
+    "text": "Now, say your condition is that every figure in the draft appears on the source sheet.",
+    "start": "00:09:55",
+    "end": "00:10:01"
+  },
+  {
+    "text": "That is a test because you can settle it in a minute.",
+    "start": "00:10:01",
+    "end": "00:10:05"
+  },
+  {
+    "text": "When I was mixing tracks a mix was never finished when I thought it was finished.",
+    "start": "00:10:05",
+    "end": "00:10:09"
+  },
+  {
+    "text": "It was finished when somebody who had not been in the room could play it through once and not stop me.",
+    "start": "00:10:09",
+    "end": "00:10:13"
+  },
+  {
+    "text": "Your done test is the same thing with different equipment.",
+    "start": "00:10:13",
+    "end": "00:10:17"
+  },
+  {
+    "text": "The standing rule on this machine now is that anything which starts a render sets a check running in the same turn.",
+    "start": "00:10:17",
+    "end": "00:10:22"
+  },
+  {
+    "text": "And that check has to report back when the job dies, not only when it finishes because a check that only ever looks for finished will wait forever on a job that already failed.",
+    "start": "00:10:22",
+    "end": "00:10:31"
+  },
+  {
+    "text": "That is why the rule exists at all.",
+    "start": "00:10:31",
+    "end": "00:10:33"
+  },
+  {
+    "text": "The run had stopped, the check was still open, and there was nothing on the screen that would have told me the difference.",
+    "start": "00:10:33",
+    "end": "00:10:40"
+  },
+  {
+    "text": "You have lived this.",
+    "start": "00:10:40",
+    "end": "00:10:40"
+  },
+  {
+    "text": "You set the thing running and went to lunch, and you came back with no way of telling whether it was working or stuck.",
+    "start": "00:10:40",
+    "end": "00:10:46"
+  },
+  {
+    "text": "Now, some of you guys will have been told to keep trying until it works, and I would look hard at what that is costing you.",
+    "start": "00:10:46",
+    "end": "00:10:52"
+  },
+  {
+    "text": "Every retry is another run you are paying for and another hour you do not get back.",
+    "start": "00:10:52",
+    "end": "00:10:56"
+  },
+  {
+    "text": "A retry only ever helps you when the failure was random.",
+    "start": "00:10:56",
+    "end": "00:11:00"
+  },
+  {
+    "text": "And if two attempts come back failing the same way, what that tells you is the problem lives in the first decision.",
+    "start": "00:11:00",
+    "end": "00:11:05"
+  },
+  {
+    "text": "So, you go and look at what it could reach.",
+    "start": "00:11:05",
+    "end": "00:11:08"
+  },
+  {
+    "text": "So, before your next run, write those conditions down first, three lines on a sticky note.",
+    "start": "00:11:08",
+    "end": "00:11:12"
+  },
+  {
+    "text": "Each one has to be something a stranger could settle, not something only the thing that did the work could grade.",
+    "start": "00:11:12",
+    "end": "00:11:19"
+  },
+  {
+    "text": "Then let it go.",
+    "start": "00:11:19",
+    "end": "00:11:22"
+  },
+  {
+    "text": "Microsoft's own documentation has a page about fixing the order your steps run in, and they call that feature graph.",
+    "start": "00:11:19",
+    "end": "00:11:29"
+  },
+  {
+    "text": "The wording is use graph when you need strict control over the order in which agents act or when different outcomes must lead to different next steps.",
+    "start": "00:11:26",
+    "end": "00:11:36"
+  },
+  {
+    "text": "And the same page marks that feature experimental, with its behavior subject to change.",
+    "start": "00:11:36",
+    "end": "00:11:40"
+  },
+  {
+    "text": "So, the warning is printed next to what they recommend.",
+    "start": "00:11:40",
+    "end": "00:11:44"
+  },
+  {
+    "text": "Strict is their word, not mine.",
+    "start": "00:11:44",
+    "end": "00:11:45"
+  },
+  {
+    "text": "So, this last one is about what has to happen before what, and where I have drawn it, that ordering work falls inside the first decision, and stops mattering the moment nothing later in your run reads what came before it.",
+    "start": "00:11:45",
+    "end": "00:11:56"
+  },
+  {
+    "text": "That is the error test I walked you through last week.",
+    "start": "00:11:56",
+    "end": "00:12:00"
+  },
+  {
+    "text": "And it's linked underneath.",
+    "start": "00:12:00",
+    "end": "00:12:01"
+  },
+  {
+    "text": "When is it worth drawing one of these?",
+    "start": "00:12:01",
+    "end": "00:12:03"
+  },
+  {
+    "text": "If your process still changes every couple of weeks, I would highly advise you build nothing this week, because a diagram freezes a process you are still learning, and that process will most probably have changed before the month is out.",
+    "start": "00:12:03",
+    "end": "00:12:15"
+  },
+  {
+    "text": "There is a green tick somewhere in your week that you have looked at and gone straight past, and I have one of my own.",
+    "start": "00:12:15",
+    "end": "00:12:21"
+  },
+  {
+    "text": "From a small program on this machine, whose only job is to check that the promises I made to myself landed in the finished writing.",
+    "start": "00:12:21",
+    "end": "00:12:28"
+  },
+  {
+    "text": "One of them was that every date I give you comes off the company's own page.",
+    "start": "00:12:28",
+    "end": "00:12:33"
+  },
+  {
+    "text": "So, one afternoon, I pointed it at a page of those promises, and the report came back saying nothing was missing, which is exactly the sentence you want to see.",
+    "start": "00:12:33",
+    "end": "00:12:42"
+  },
+  {
+    "text": "So, why did it say nothing was missing?",
+    "start": "00:12:39",
+    "end": "00:12:44"
+  },
+  {
+    "text": "Nothing was checked.",
+    "start": "00:12:42",
+    "end": "00:12:44"
+  },
+  {
+    "text": "The promises were laid out on that page in a shape the program could not read, and it printed a clean report off the back of zero checks.",
+    "start": "00:12:44",
+    "end": "00:12:51"
+  },
+  {
+    "text": "And a tick on your own screen tells you a check ran, and it does not tell you whether the check read your list, and did it only fail in the one direction?",
+    "start": "00:12:51",
+    "end": "00:12:59"
+  },
+  {
+    "text": "No.",
+    "start": "00:12:59",
+    "end": "00:13:00"
+  },
+  {
+    "text": "It also reported a failure that was not real, because it took a rule that governs the middle of a piece of writing and applied it to the opening line.",
+    "start": "00:13:00",
+    "end": "00:13:08"
+  },
+  {
+    "text": "Now, plenty of you have a checklist that does most of this, and I'm not going to pretend otherwise, but a checklist has never once told me it was ticked when nobody read it.",
+    "start": "00:13:08",
+    "end": "00:13:18"
+  },
+  {
+    "text": "And you can catch the one thing my program never will, which is the promise that never made it onto the list, because you're the one reading the draft, and you notice what is missing.",
+    "start": "00:13:18",
+    "end": "00:13:27"
+  },
+  {
+    "text": "Has it happened to you yet?",
+    "start": "00:13:27",
+    "end": "00:13:27"
+  },
+  {
+    "text": "Where you told the thing to check its own work against a list and it came back saying everything checks out.",
+    "start": "00:13:27",
+    "end": "00:13:34"
+  },
+  {
+    "text": "So, where does that afternoon land against the three decisions and where would yours land?",
+    "start": "00:13:32",
+    "end": "00:13:38"
+  },
+  {
+    "text": "The program could reach both the draft and the list and the list was in the one shape it could not read.",
+    "start": "00:13:38",
+    "end": "00:13:42"
+  },
+  {
+    "text": "What counted as finished should have been every promise traced back to a line in the draft and what came back was nothing missing.",
+    "start": "00:13:42",
+    "end": "00:13:50"
+  },
+  {
+    "text": "And the ordering answer was the easy one because a check that has read nothing has to stop your run before anybody even reads the results.",
+    "start": "00:13:50",
+    "end": "00:13:56"
+  },
+  {
+    "text": "Both of those are fixed now and the fix is the boring kind.",
+    "start": "00:13:56",
+    "end": "00:14:01"
+  },
+  {
+    "text": "It reads that page whichever way it is written and if it ever comes back having read nothing, it stops the whole run instead of printing a tick.",
+    "start": "00:14:01",
+    "end": "00:14:08"
+  },
+  {
+    "text": "So, the next time I pointed it at a finished draft, it read down 28 specifics and told me all 28 of them had survived into the writing.",
+    "start": "00:14:08",
+    "end": "00:14:18"
+  },
+  {
+    "text": "And 28 is the number I read now instead of the tick.",
+    "start": "00:14:18",
+    "end": "00:14:20"
+  },
+  {
+    "text": "Take that control room from the start, the one reading itself out of the trash, and put it through with the first question.",
+    "start": "00:14:20",
+    "end": "00:14:26"
+  },
+  {
+    "text": "Could a competent person have done that job with what the thing was given?",
+    "start": "00:14:26",
+    "end": "00:14:29"
+  },
+  {
+    "text": "The answer is no because what it was given was a copy of itself in the wrong folder.",
+    "start": "00:14:29",
+    "end": "00:14:35"
+  },
+  {
+    "text": "So, you stop there and you do not carry on down the list.",
+    "start": "00:14:35",
+    "end": "00:14:39"
+  },
+  {
+    "text": "I personally believe most of what goes wrong for you stops right at that question.",
+    "start": "00:14:39",
+    "end": "00:14:42"
+  },
+  {
+    "text": "And what happens when it does not?",
+    "start": "00:14:42",
+    "end": "00:14:43"
+  },
+  {
+    "text": "If the thing had everything it needed and still went wrong, the next thing you look at is whether anybody outside the conversation could have told it was finished.",
+    "start": "00:14:43",
+    "end": "00:14:53"
+  },
+  {
+    "text": "And only when both of those come back clean, does the order of the steps become worth changing.",
+    "start": "00:14:53",
+    "end": "00:14:59"
+  },
+  {
+    "text": "Because the lines between these three are contested, what holds up is the order you go through them in.",
+    "start": "00:14:59",
+    "end": "00:15:04"
+  },
+  {
+    "text": "Cheapest and most common first.",
+    "start": "00:15:04",
+    "end": "00:15:06"
+  },
+  {
+    "text": "Now, maybe you are thinking you will sort all three of these out at once.",
+    "start": "00:15:06",
+    "end": "00:15:09"
+  },
+  {
+    "text": "Pick the one thing that annoyed you most this week and change only that because most probably the other two will still be waiting in a fortnight.",
+    "start": "00:15:09",
+    "end": "00:15:16"
+  },
+  {
+    "text": "Your context is your context guys, so none of this is a promise about your outcome.",
+    "start": "00:15:16",
+    "end": "00:15:21"
+  },
+  {
+    "text": "The big takeaway for me was that I stopped guessing which part had gone wrong and started going through them in a fixed order.",
+    "start": "00:15:21",
+    "end": "00:15:28"
+  },
+  {
+    "text": "And the guessing was what used to eat my whole afternoon.",
+    "start": "00:15:28",
+    "end": "00:15:32"
+  },
+  {
+    "text": "For the build I'm running here, that order has done more for me than anything else I changed this month.",
+    "start": "00:15:30",
+    "end": "00:15:37"
+  },
+  {
+    "text": "I can't say too much as of yet, but the next one is me pointing this at a job that touches a customer.",
+    "start": "00:15:37",
+    "end": "00:15:42"
+  },
+  {
+    "text": "An inquiry coming in and a quote going back out.",
+    "start": "00:15:42",
+    "end": "00:15:45"
+  },
+  {
+    "text": "And I'll tell you at the top of it which of these three the fix came out of.",
+    "start": "00:15:45",
+    "end": "00:15:49"
+  },
+  {
+    "text": "So, what is the one thing your AI still can't reach?",
+    "start": "00:15:49",
+    "end": "00:15:52"
+  },
+  {
+    "text": "Drop it down in the comments below and I'll be reading through them.",
+    "start": "00:15:52",
+    "end": "00:15:55"
+  },
+  {
+    "text": "If you feel called to it, hit subscribe so you don't miss what's coming next.",
+    "start": "00:15:55",
+    "end": "00:15:58"
+  },
+  {
+    "text": "And if you want all of this written down, the working conditions kit is inside the AI founder's vault.",
+    "start": "00:15:58",
+    "end": "00:16:04"
+  },
+  {
+    "text": "The piece I would open first is the symptom router where you find the sentence you would say out loud about your own setup and it hands you back which of the three to look at.",
+    "start": "00:16:04",
+    "end": "00:16:14"
+  },
+  {
+    "text": "The link is down in the description below.",
+    "start": "00:16:14",
+    "end": "00:16:18"
+  },
+  {
+    "text": "See you in the next one.",
+    "start": "00:16:15",
+    "end": "00:16:18"
+  }
+]
