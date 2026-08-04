@@ -1,0 +1,1952 @@
+[
+  {
+    "text": "Right now on this screen, a small team of AI agents is chasing one question and they are doing it in parallel.",
+    "start": "00:00:00",
+    "end": "00:00:08"
+  },
+  {
+    "text": "They split the work.",
+    "start": "00:00:08",
+    "end": "00:00:08"
+  },
+  {
+    "text": "Each one digs on its own lane and then they turn around and try to tear their own answers apart.",
+    "start": "00:00:08",
+    "end": "00:00:15"
+  },
+  {
+    "text": "What lands on your desk is a single merged result waiting on one thing before it goes anywhere.",
+    "start": "00:00:15",
+    "end": "00:00:20"
+  },
+  {
+    "text": "Your yes, that shape you just watched has a name.",
+    "start": "00:00:20",
+    "end": "00:00:23"
+  },
+  {
+    "text": "It is called a graph.",
+    "start": "00:00:23",
+    "end": "00:00:24"
+  },
+  {
+    "text": "And by the end of this, you're going to build one.",
+    "start": "00:00:24",
+    "end": "00:00:28"
+  },
+  {
+    "text": "A little context first because this trend has a story and the story is the fastest way into the craft.",
+    "start": "00:00:28",
+    "end": "00:00:33"
+  },
+  {
+    "text": "Boris Churnney is the engineer who built clawed code and this year he said something that made me put my coffee down.",
+    "start": "00:00:33",
+    "end": "00:00:40"
+  },
+  {
+    "text": "He does not really prompt his AI anymore.",
+    "start": "00:00:40",
+    "end": "00:00:43"
+  },
+  {
+    "text": "He writes loops that prompt it for him and then he steps away.",
+    "start": "00:00:43",
+    "end": "00:00:46"
+  },
+  {
+    "text": "His exact words were, \"My job is to write loops.",
+    "start": "00:00:46",
+    "end": "00:00:50"
+  },
+  {
+    "text": "He runs hundreds of agents overnight for hours while he sleeps.",
+    "start": "00:00:50",
+    "end": "00:00:54"
+  },
+  {
+    "text": "\" A few weeks after that went around, the same corner of the internet decided loops were already old news.",
+    "start": "00:00:54",
+    "end": "00:01:01"
+  },
+  {
+    "text": "The new word was graphs.",
+    "start": "00:01:01",
+    "end": "00:01:02"
+  },
+  {
+    "text": "The hype machine packed up and moved down the street the way it tends to.",
+    "start": "00:01:02",
+    "end": "00:01:06"
+  },
+  {
+    "text": "Then the senior engineers showed up within hours with one flat, tired objection to the whole thing.",
+    "start": "00:01:06",
+    "end": "00:01:11"
+  },
+  {
+    "text": "This is a decades old idea wearing a new hoodie, they said.",
+    "start": "00:01:11",
+    "end": "00:01:16"
+  },
+  {
+    "text": "And here is the part that matters.",
+    "start": "00:01:16",
+    "end": "00:01:18"
+  },
+  {
+    "text": "They are right.",
+    "start": "00:01:18",
+    "end": "00:01:17"
+  },
+  {
+    "text": "But that is the good news, not the bad news.",
+    "start": "00:01:17",
+    "end": "00:01:20"
+  },
+  {
+    "text": "And most people who saw the fight read it exactly backwards.",
+    "start": "00:01:20",
+    "end": "00:01:25"
+  },
+  {
+    "text": "A pattern that has run banks, airlines, and power grids for 30 years is exactly what you want holding up your business.",
+    "start": "00:01:25",
+    "end": "00:01:33"
+  },
+  {
+    "text": "For 30 years, this same idea has held up serious systems without breaking a sweat.",
+    "start": "00:01:30",
+    "end": "00:01:35"
+  },
+  {
+    "text": "What changed this year is that it finally got easy enough for you to use.",
+    "start": "00:01:35",
+    "end": "00:01:41"
+  },
+  {
+    "text": "And the reason this is your moment is almost dull.",
+    "start": "00:01:39",
+    "end": "00:01:43"
+  },
+  {
+    "text": "The graph tools got genuinely good this year.",
+    "start": "00:01:43",
+    "end": "00:01:46"
+  },
+  {
+    "text": "You drag boxes and arrows onto a canvas and the tool wires up the rest.",
+    "start": "00:01:46",
+    "end": "00:01:50"
+  },
+  {
+    "text": "You do not write the code, you draw the plan.",
+    "start": "00:01:50",
+    "end": "00:01:53"
+  },
+  {
+    "text": "So, here is the map for the next 20 minutes.",
+    "start": "00:01:53",
+    "end": "00:01:56"
+  },
+  {
+    "text": "Four short lessons, then three complete builds you can run this week.",
+    "start": "00:01:56",
+    "end": "00:01:59"
+  },
+  {
+    "text": "No engineering degree required, and I am not exaggerating that.",
+    "start": "00:01:59",
+    "end": "00:02:02"
+  },
+  {
+    "text": "Lesson one, what a graph actually is.",
+    "start": "00:02:02",
+    "end": "00:02:05"
+  },
+  {
+    "text": "Lesson two, the one pattern that pays for itself.",
+    "start": "00:02:05",
+    "end": "00:02:09"
+  },
+  {
+    "text": "Lesson three, the stop rule that guards your bill.",
+    "start": "00:02:09",
+    "end": "00:02:13"
+  },
+  {
+    "text": "Lesson four, the human gate that keeps you safe.",
+    "start": "00:02:13",
+    "end": "00:02:16"
+  },
+  {
+    "text": "Then, we build three real graphs together.",
+    "start": "00:02:14",
+    "end": "00:02:17"
+  },
+  {
+    "text": "a deep research desk, an SEO content machine, and a full go-to market kit.",
+    "start": "00:02:17",
+    "end": "00:02:21"
+  },
+  {
+    "text": "Everything is plain English.",
+    "start": "00:02:21",
+    "end": "00:02:25"
+  },
+  {
+    "text": "Let us start with the thing itself.",
+    "start": "00:02:25",
+    "end": "00:02:27"
+  },
+  {
+    "text": "Lesson one, what a graph actually is in plain words with no jargon anywhere near it.",
+    "start": "00:02:27",
+    "end": "00:02:32"
+  },
+  {
+    "text": "A graph is a plan for your AI work drawn out on paper so you can finally see it.",
+    "start": "00:02:32",
+    "end": "00:02:38"
+  },
+  {
+    "text": "Not code, not math, not a computer science lecture.",
+    "start": "00:02:38",
+    "end": "00:02:39"
+  },
+  {
+    "text": "A picture of who does what and in what order.",
+    "start": "00:02:39",
+    "end": "00:02:43"
+  },
+  {
+    "text": "That picture is the entire point.",
+    "start": "00:02:43",
+    "end": "00:02:45"
+  },
+  {
+    "text": "and drawing it is 90% of the skill.",
+    "start": "00:02:45",
+    "end": "00:02:47"
+  },
+  {
+    "text": "It answers two questions and truly only two.",
+    "start": "00:02:47",
+    "end": "00:02:50"
+  },
+  {
+    "text": "First, which jobs need to happen at all?",
+    "start": "00:02:50",
+    "end": "00:02:53"
+  },
+  {
+    "text": "Second, which job has to wait for which other job before it is even allowed to start?",
+    "start": "00:02:53",
+    "end": "00:02:58"
+  },
+  {
+    "text": "Master those two questions and the rest is just filling in boxes.",
+    "start": "00:02:58",
+    "end": "00:03:01"
+  },
+  {
+    "text": "A job is just one thing you would hand to a single assistant and then walk away.",
+    "start": "00:03:01",
+    "end": "00:03:06"
+  },
+  {
+    "text": "Research one competitor, write one section of the article, check one claim against one source.",
+    "start": "00:03:06",
+    "end": "00:03:12"
+  },
+  {
+    "text": "If it fits on a single sticky note, it is a job.",
+    "start": "00:03:12",
+    "end": "00:03:15"
+  },
+  {
+    "text": "If it needs three sticky notes, it is actually three jobs.",
+    "start": "00:03:15",
+    "end": "00:03:18"
+  },
+  {
+    "text": "When a job needs the result of another job before it can begin, you draw an arrow between the two.",
+    "start": "00:03:18",
+    "end": "00:03:22"
+  },
+  {
+    "text": "The arrow is not decoration and it is not a nice to have.",
+    "start": "00:03:22",
+    "end": "00:03:27"
+  },
+  {
+    "text": "It carries one real meaning and the meaning is a single word, wait.",
+    "start": "00:03:27",
+    "end": "00:03:30"
+  },
+  {
+    "text": "That arrow says this job cannot start until that job hands over its answer.",
+    "start": "00:03:30",
+    "end": "00:03:36"
+  },
+  {
+    "text": "No answer yet, no start.",
+    "start": "00:03:36",
+    "end": "00:03:39"
+  },
+  {
+    "text": "Which means the arrows are where every second of waiting in your entire system actually lives.",
+    "start": "00:03:37",
+    "end": "00:03:43"
+  },
+  {
+    "text": "Fewer arrows, less waiting.",
+    "start": "00:03:43",
+    "end": "00:03:45"
+  },
+  {
+    "text": "Hold on to that and one more piece travels along the whole way.",
+    "start": "00:03:45",
+    "end": "00:03:50"
+  },
+  {
+    "text": "A small set of running notes moving with the work, holding what was found, what was decided so far, and what is still left to do.",
+    "start": "00:03:50",
+    "end": "00:03:56"
+  },
+  {
+    "text": "Think of it as a clipboard that gets passed handtoand.",
+    "start": "00:03:56",
+    "end": "00:04:01"
+  },
+  {
+    "text": "That traveling clipboard has a name, too.",
+    "start": "00:04:01",
+    "end": "00:04:03"
+  },
+  {
+    "text": "It is called the state.",
+    "start": "00:04:03",
+    "end": "00:04:04"
+  },
+  {
+    "text": "Every job can read it.",
+    "start": "00:04:04",
+    "end": "00:04:04"
+  },
+  {
+    "text": "Every job can add a line to it.",
+    "start": "00:04:04",
+    "end": "00:04:08"
+  },
+  {
+    "text": "And it is how a dozen workers stay perfectly on the same page without a single one of them ever talking to another directly.",
+    "start": "00:04:08",
+    "end": "00:04:14"
+  },
+  {
+    "text": "And this is exactly what makes a graph more than a fancy checklist.",
+    "start": "00:04:13",
+    "end": "00:04:18"
+  },
+  {
+    "text": "A checklist just list steps in a row.",
+    "start": "00:04:18",
+    "end": "00:04:20"
+  },
+  {
+    "text": "The state means the work carries its own memory along with it.",
+    "start": "00:04:20",
+    "end": "00:04:23"
+  },
+  {
+    "text": "So a job halfway down the line can use something a job at the top discovered.",
+    "start": "00:04:23",
+    "end": "00:04:27"
+  },
+  {
+    "text": "Jobs, arrows, state.",
+    "start": "00:04:27",
+    "end": "00:04:30"
+  },
+  {
+    "text": "Write those three words on a card and stick it to your monitor tonight.",
+    "start": "00:04:30",
+    "end": "00:04:34"
+  },
+  {
+    "text": "You now have the entire vocabulary of this whole trend.",
+    "start": "00:04:34",
+    "end": "00:04:36"
+  },
+  {
+    "text": "and you will not need to look up a definition again.",
+    "start": "00:04:36",
+    "end": "00:04:39"
+  },
+  {
+    "text": "That is it.",
+    "start": "00:04:39",
+    "end": "00:04:40"
+  },
+  {
+    "text": "That is the scary word the whole internet is arguing about.",
+    "start": "00:04:40",
+    "end": "00:04:43"
+  },
+  {
+    "text": "A box for each job, an arrow for each weight, and a clipboard that rides along collecting notes.",
+    "start": "00:04:43",
+    "end": "00:04:49"
+  },
+  {
+    "text": "You already understood it before I finish the sentence.",
+    "start": "00:04:49",
+    "end": "00:04:51"
+  },
+  {
+    "text": "Now, I want you to do one small thing tonight before you touch a single new tool or watch one more video.",
+    "start": "00:04:51",
+    "end": "00:04:58"
+  },
+  {
+    "text": "It takes about 10 minutes and it changes how you see all of this.",
+    "start": "00:04:56",
+    "end": "00:05:01"
+  },
+  {
+    "text": "Look at the AI system you already run today.",
+    "start": "00:05:01",
+    "end": "00:05:04"
+  },
+  {
+    "text": "Whatever it is, and hunt down every and then hiding inside it.",
+    "start": "00:05:04",
+    "end": "00:05:07"
+  },
+  {
+    "text": "Do this and then do that.",
+    "start": "00:05:07",
+    "end": "00:05:08"
+  },
+  {
+    "text": "Get this and then send the next thing.",
+    "start": "00:05:08",
+    "end": "00:05:10"
+  },
+  {
+    "text": "Every and then is a suspect.",
+    "start": "00:05:10",
+    "end": "00:05:14"
+  },
+  {
+    "text": "For each and then, ask one blunt question.",
+    "start": "00:05:14",
+    "end": "00:05:17"
+  },
+  {
+    "text": "Does the next job actually need the last job's result sitting in its hands to do its work?",
+    "start": "00:05:14",
+    "end": "00:05:20"
+  },
+  {
+    "text": "Yes or no?",
+    "start": "00:05:20",
+    "end": "00:05:22"
+  },
+  {
+    "text": "Be honest with yourself because habit will want to say yes because an arrow is only real when work truly flows through it.",
+    "start": "00:05:22",
+    "end": "00:05:30"
+  },
+  {
+    "text": "If nothing actually passes down that line, the arrow is a lie you drew out of habit.",
+    "start": "00:05:30",
+    "end": "00:05:36"
+  },
+  {
+    "text": "And that lie is costing you real time on every single run.",
+    "start": "00:05:33",
+    "end": "00:05:38"
+  },
+  {
+    "text": "Take a classic example.",
+    "start": "00:05:38",
+    "end": "00:05:39"
+  },
+  {
+    "text": "Summarize this file and then check my calendar.",
+    "start": "00:05:39",
+    "end": "00:05:42"
+  },
+  {
+    "text": "It sounds like a neat little sequence, one clean step after the other, everything tidy and in order.",
+    "start": "00:05:42",
+    "end": "00:05:49"
+  },
+  {
+    "text": "But look closer at it.",
+    "start": "00:05:47",
+    "end": "00:05:49"
+  },
+  {
+    "text": "The calendar step does not need the summary.",
+    "start": "00:05:49",
+    "end": "00:05:52"
+  },
+  {
+    "text": "Not one word of it.",
+    "start": "00:05:52",
+    "end": "00:05:51"
+  },
+  {
+    "text": "Those two jobs had no reason to wait for each other, which means the arrow you drew between them is completely fake.",
+    "start": "00:05:51",
+    "end": "00:05:58"
+  },
+  {
+    "text": "And once your eyes adjust, you start seeing them everywhere.",
+    "start": "00:05:58",
+    "end": "00:06:02"
+  },
+  {
+    "text": "Draw out almost any real system you run, and two or three of these fake edges will be sitting right there in the open, adding delay in exchange for nothing at all.",
+    "start": "00:06:02",
+    "end": "00:06:12"
+  },
+  {
+    "text": "Right now, your system is almost certainly one straight line.",
+    "start": "00:06:12",
+    "end": "00:06:15"
+  },
+  {
+    "text": "Job, arrow, job, arrow.",
+    "start": "00:06:15",
+    "end": "00:06:19"
+  },
+  {
+    "text": "Every single step, politely waiting for the one in front of it to finish before it dares to move.",
+    "start": "00:06:16",
+    "end": "00:06:22"
+  },
+  {
+    "text": "That works.",
+    "start": "00:06:22",
+    "end": "00:06:23"
+  },
+  {
+    "text": "And I am not here to mock it, but it is the slowest possible way to run anything because one stuck job freezes everything behind it.",
+    "start": "00:06:23",
+    "end": "00:06:30"
+  },
+  {
+    "text": "One stalled car, one lane, and a mile of brake lights that had nowhere else to go.",
+    "start": "00:06:30",
+    "end": "00:06:36"
+  },
+  {
+    "text": "The entire point of a graph is to cut the fake arrows and let the jobs that do not depend on each other run at the same time.",
+    "start": "00:06:36",
+    "end": "00:06:44"
+  },
+  {
+    "text": "That one move, cutting fake arrows, is most of the speed you have been missing this whole time.",
+    "start": "00:06:44",
+    "end": "00:06:48"
+  },
+  {
+    "text": "Lesson two, the diamond.",
+    "start": "00:06:48",
+    "end": "00:06:52"
+  },
+  {
+    "text": "The one pattern that pays for itself over and over.",
+    "start": "00:06:52",
+    "end": "00:06:53"
+  },
+  {
+    "text": "Watch any serious agent system do real work and the same picture keeps showing up again and again like a fingerprint on the glass.",
+    "start": "00:06:53",
+    "end": "00:07:02"
+  },
+  {
+    "text": "And once you notice it, you genuinely cannot stop seeing it anywhere.",
+    "start": "00:07:02",
+    "end": "00:07:06"
+  },
+  {
+    "text": "The work splits into pieces.",
+    "start": "00:07:06",
+    "end": "00:07:07"
+  },
+  {
+    "text": "Several workers dig side by side.",
+    "start": "00:07:07",
+    "end": "00:07:08"
+  },
+  {
+    "text": "Something checks what they came back with and then it all merges into one clean answer.",
+    "start": "00:07:08",
+    "end": "00:07:15"
+  },
+  {
+    "text": "Say it with me.",
+    "start": "00:07:15",
+    "end": "00:07:17"
+  },
+  {
+    "text": "Split, work, check, merge.",
+    "start": "00:07:17",
+    "end": "00:07:18"
+  },
+  {
+    "text": "Draw those four moves out and the shape you get is a diamond.",
+    "start": "00:07:18",
+    "end": "00:07:21"
+  },
+  {
+    "text": "Narrow at the top where it starts, wide in the middle where the parallel work happens, and narrow again at the bottom where it all comes back together into one.",
+    "start": "00:07:21",
+    "end": "00:07:30"
+  },
+  {
+    "text": "I will say this as plainly as I can.",
+    "start": "00:07:30",
+    "end": "00:07:32"
+  },
+  {
+    "text": "This is the only pattern you truly need this year.",
+    "start": "00:07:32",
+    "end": "00:07:36"
+  },
+  {
+    "text": "Learn this one shape well, and you can build 90% of what you have watched people charge real money to set up.",
+    "start": "00:07:36",
+    "end": "00:07:42"
+  },
+  {
+    "text": "Here is the smallest possible version so it clicks.",
+    "start": "00:07:42",
+    "end": "00:07:46"
+  },
+  {
+    "text": "Ask three workers to research the same company.",
+    "start": "00:07:44",
+    "end": "00:07:46"
+  },
+  {
+    "text": "each one told to look in a different place.",
+    "start": "00:07:46",
+    "end": "00:07:49"
+  },
+  {
+    "text": "One reads the website, one reads the customer reviews, one reads the recent news.",
+    "start": "00:07:49",
+    "end": "00:07:54"
+  },
+  {
+    "text": "Then a fourth worker reads all three and writes the honest summary.",
+    "start": "00:07:54",
+    "end": "00:07:57"
+  },
+  {
+    "text": "That is a diamond and you could sketch it on a napkin right now.",
+    "start": "00:07:57",
+    "end": "00:08:00"
+  },
+  {
+    "text": "And this is not a whiteboard theory that falls apart in the real world.",
+    "start": "00:08:00",
+    "end": "00:08:06"
+  },
+  {
+    "text": "The research feature built into Claude runs exactly this diamond in production every single day on real questions from real paying users.",
+    "start": "00:08:06",
+    "end": "00:08:13"
+  },
+  {
+    "text": "One lead agent reads your question and plans the angles of attack.",
+    "start": "00:08:13",
+    "end": "00:08:18"
+  },
+  {
+    "text": "Then a handful of worker agents go gather the evidence in parallel, each one in its own separate context window, deliberately blind to what the others are doing.",
+    "start": "00:08:16",
+    "end": "00:08:25"
+  },
+  {
+    "text": "Anthropic spawns three to five of those workers at once.",
+    "start": "00:08:25",
+    "end": "00:08:30"
+  },
+  {
+    "text": "They are not chatting, not comparing notes, not slowing each other down.",
+    "start": "00:08:30",
+    "end": "00:08:34"
+  },
+  {
+    "text": "Each just digs on its own slice and comes back.",
+    "start": "00:08:34",
+    "end": "00:08:37"
+  },
+  {
+    "text": "And the numbers on that design are genuinely worth hearing.",
+    "start": "00:08:37",
+    "end": "00:08:39"
+  },
+  {
+    "text": "In their own published tests, that multi- aent diamond beat a single hardworking agent by 90% on research tasks.",
+    "start": "00:08:39",
+    "end": "00:08:47"
+  },
+  {
+    "text": "90%.",
+    "start": "00:08:47",
+    "end": "00:08:47"
+  },
+  {
+    "text": "And that lift came from the shape of the work, not from a smarter or bigger model.",
+    "start": "00:08:47",
+    "end": "00:08:53"
+  },
+  {
+    "text": "It also cut the time to an answer by up to 90% on the big questions because five workers all digging at once obviously finish in a fraction of the time one lonely worker would take grinding through the same list alone.",
+    "start": "00:08:53",
+    "end": "00:09:05"
+  },
+  {
+    "text": "And there is a second, quieter gift from that wide middle.",
+    "start": "00:09:05",
+    "end": "00:09:10"
+  },
+  {
+    "text": "Five workers coming at a question from five different angles give you a range of views to weigh instead of one confident agent talking itself into a single answer and calling it done.",
+    "start": "00:09:10",
+    "end": "00:09:19"
+  },
+  {
+    "text": "Now the part most people skip and it is the exact part that decides whether your graph is any good at all.",
+    "start": "00:09:19",
+    "end": "00:09:25"
+  },
+  {
+    "text": "The check that small humble node down in the bottom half of the diamond right before the merge.",
+    "start": "00:09:25",
+    "end": "00:09:31"
+  },
+  {
+    "text": "You have to treat the checking step as non-negotiable.",
+    "start": "00:09:31",
+    "end": "00:09:33"
+  },
+  {
+    "text": "And I am about to show you why with real research rather than a hunch.",
+    "start": "00:09:33",
+    "end": "00:09:37"
+  },
+  {
+    "text": "This is the spot where beginners lose without ever realizing they lost.",
+    "start": "00:09:37",
+    "end": "00:09:43"
+  },
+  {
+    "text": "There is a well-known paper with a title that does not mince a single word.",
+    "start": "00:09:41",
+    "end": "00:09:47"
+  },
+  {
+    "text": "Large language models cannot self-correct their reasoning yet.",
+    "start": "00:09:47",
+    "end": "00:09:49"
+  },
+  {
+    "text": "That is Google deep mind researchers published, peer-reviewed, and widely cited since.",
+    "start": "00:09:49",
+    "end": "00:09:56"
+  },
+  {
+    "text": "They took strong models and asked them to grade and then fix their own answers with no outside help, no second opinion, nothing but the model looking directly into its own mirror and trying to spot its own errors.",
+    "start": "00:09:54",
+    "end": "00:10:06"
+  },
+  {
+    "text": "The scores did not climb.",
+    "start": "00:10:06",
+    "end": "00:10:07"
+  },
+  {
+    "text": "In several cases, they actually slid backwards.",
+    "start": "00:10:07",
+    "end": "00:10:11"
+  },
+  {
+    "text": "The model looked straight at its own mistake and waved it right through because it was the very same brain that made the mistake in the first place.",
+    "start": "00:10:11",
+    "end": "00:10:18"
+  },
+  {
+    "text": "So, here is the rule, and I want you to burn it in.",
+    "start": "00:10:18",
+    "end": "00:10:22"
+  },
+  {
+    "text": "Never let the same agent grade its own homework.",
+    "start": "00:10:22",
+    "end": "00:10:25"
+  },
+  {
+    "text": "It is the single most confident wrong judge you will ever hire, and it works for free, which is exactly what makes it so tempting to trust.",
+    "start": "00:10:25",
+    "end": "00:10:32"
+  },
+  {
+    "text": "Give the checking to a separate worker instead.",
+    "start": "00:10:32",
+    "end": "00:10:35"
+  },
+  {
+    "text": "A fresh agent whose entire job is to attack the answer, hunt down the weakest claim, and try hard to break it in private before your reader ever gets the chance to break it in public.",
+    "start": "00:10:35",
+    "end": "00:10:44"
+  },
+  {
+    "text": "A second set of eyes catches what the writer is simply blind to.",
+    "start": "00:10:44",
+    "end": "00:10:47"
+  },
+  {
+    "text": "This is simply how good editing has worked in every newsroom for a century.",
+    "start": "00:10:47",
+    "end": "00:10:53"
+  },
+  {
+    "text": "The Diamond just bakes that same editor straight into the machine.",
+    "start": "00:10:51",
+    "end": "00:10:56"
+  },
+  {
+    "text": "One honest warning, straight from Anthropic's own guidance.",
+    "start": "00:10:56",
+    "end": "00:10:58"
+  },
+  {
+    "text": "Do not reach for the diamond when a single call would do the job.",
+    "start": "00:10:58",
+    "end": "00:11:04"
+  },
+  {
+    "text": "Start with the simplest thing that works and only add workers and checks when the task is genuinely big enough to earn them.",
+    "start": "00:11:02",
+    "end": "00:11:09"
+  },
+  {
+    "text": "Lesson three, the stop rule.",
+    "start": "00:11:09",
+    "end": "00:11:13"
+  },
+  {
+    "text": "The unglamorous one that protects your bank account while you sleep.",
+    "start": "00:11:13",
+    "end": "00:11:16"
+  },
+  {
+    "text": "Remember, a loop is just a job that keeps running until something finally tells it to stop.",
+    "start": "00:11:16",
+    "end": "00:11:20"
+  },
+  {
+    "text": "That is its whole nature.",
+    "start": "00:11:20",
+    "end": "00:11:23"
+  },
+  {
+    "text": "It repeats itself.",
+    "start": "00:11:23",
+    "end": "00:11:23"
+  },
+  {
+    "text": "And here is the trap that catches almost every builder exactly once and it stings.",
+    "start": "00:11:23",
+    "end": "00:11:29"
+  },
+  {
+    "text": "If you forget to say when to stop, it does not stop.",
+    "start": "00:11:29",
+    "end": "00:11:31"
+  },
+  {
+    "text": "It keeps calling the model, keeps spending your money, and keeps circling the same problem, often getting a little bit worse with each new pointless lap.",
+    "start": "00:11:31",
+    "end": "00:11:41"
+  },
+  {
+    "text": "People have woken up to genuinely ugly bills from a single loop that ran all night with no exit written into it anywhere.",
+    "start": "00:11:39",
+    "end": "00:11:46"
+  },
+  {
+    "text": "It felt clever at midnight when they hit run.",
+    "start": "00:11:46",
+    "end": "00:11:49"
+  },
+  {
+    "text": "It felt very expensive at breakfast when they saw the total.",
+    "start": "00:11:49",
+    "end": "00:11:52"
+  },
+  {
+    "text": "The agent was not broken, by the way.",
+    "start": "00:11:52",
+    "end": "00:11:54"
+  },
+  {
+    "text": "It did exactly what it was told, which was to keep going forever.",
+    "start": "00:11:54",
+    "end": "00:11:59"
+  },
+  {
+    "text": "So, every loop you build gets a stop rule written down before you ever press run.",
+    "start": "00:11:59",
+    "end": "00:12:05"
+  },
+  {
+    "text": "Not after it misbehaves, not later when you remember, before.",
+    "start": "00:12:02",
+    "end": "00:12:07"
+  },
+  {
+    "text": "And there are three honest kinds of stop rule.",
+    "start": "00:12:07",
+    "end": "00:12:10"
+  },
+  {
+    "text": "And the good news is you are allowed to mix them.",
+    "start": "00:12:10",
+    "end": "00:12:11"
+  },
+  {
+    "text": "The first is a cap.",
+    "start": "00:12:11",
+    "end": "00:12:14"
+  },
+  {
+    "text": "Try at most five times and then hand me whatever you have managed to get.",
+    "start": "00:12:14",
+    "end": "00:12:18"
+  },
+  {
+    "text": "simple, a little brutal, and it means the loop cannot run forever, no matter how badly it gets stuck on a hard problem.",
+    "start": "00:12:18",
+    "end": "00:12:25"
+  },
+  {
+    "text": "The second is a budget.",
+    "start": "00:12:25",
+    "end": "00:12:25"
+  },
+  {
+    "text": "Spend at most this many dollars or make at most this many calls, then stop and report back to me.",
+    "start": "00:12:25",
+    "end": "00:12:32"
+  },
+  {
+    "text": "This is the one that turns a scary open-ended agent into a calm, boring line item you fully control.",
+    "start": "00:12:32",
+    "end": "00:12:37"
+  },
+  {
+    "text": "The third is a bar.",
+    "start": "00:12:37",
+    "end": "00:12:39"
+  },
+  {
+    "text": "The moment the answer is good enough by a clear test you wrote down in advance, stop early and move on with your day.",
+    "start": "00:12:39",
+    "end": "00:12:46"
+  },
+  {
+    "text": "Do not keep paying for perfect.",
+    "start": "00:12:46",
+    "end": "00:12:47"
+  },
+  {
+    "text": "When good enough, already walked through the door and passed.",
+    "start": "00:12:47",
+    "end": "00:12:49"
+  },
+  {
+    "text": "How do you pick the numbers?",
+    "start": "00:12:49",
+    "end": "00:12:53"
+  },
+  {
+    "text": "Start small and cheap.",
+    "start": "00:12:50",
+    "end": "00:12:53"
+  },
+  {
+    "text": "Watch one real run and loosen from there.",
+    "start": "00:12:53",
+    "end": "00:12:56"
+  },
+  {
+    "text": "Three tries and a $2 cap will teach you more in one evening than a week of reading ever could.",
+    "start": "00:12:56",
+    "end": "00:13:00"
+  },
+  {
+    "text": "You can raise the ceiling later.",
+    "start": "00:13:00",
+    "end": "00:13:04"
+  },
+  {
+    "text": "Pick at least one of the three before anything runs.",
+    "start": "00:13:02",
+    "end": "00:13:05"
+  },
+  {
+    "text": "And better yet, pick two of them.",
+    "start": "00:13:05",
+    "end": "00:13:07"
+  },
+  {
+    "text": "A loop with no stop rule at all is not a system.",
+    "start": "00:13:07",
+    "end": "00:13:10"
+  },
+  {
+    "text": "It is a slow leak with your credit card taped firmly to the bottom of it.",
+    "start": "00:13:10",
+    "end": "00:13:14"
+  },
+  {
+    "text": "Lesson four, the human gate.",
+    "start": "00:13:14",
+    "end": "00:13:16"
+  },
+  {
+    "text": "The shortest lesson in the whole course and the one that will save you the most public embarrassment.",
+    "start": "00:13:16",
+    "end": "00:13:22"
+  },
+  {
+    "text": "A human gate is a spot in the graph where the whole thing pauses on purpose and waits for you.",
+    "start": "00:13:22",
+    "end": "00:13:26"
+  },
+  {
+    "text": "The work stops mid-flight and just holds there, handsfolded, doing nothing at all until you finally look at it.",
+    "start": "00:13:26",
+    "end": "00:13:33"
+  },
+  {
+    "text": "It looks at what it just built and it asks you one question.",
+    "start": "00:13:33",
+    "end": "00:13:37"
+  },
+  {
+    "text": "Do I have your yes before this goes out into the real world?",
+    "start": "00:13:37",
+    "end": "00:13:39"
+  },
+  {
+    "text": "And then it sits perfectly still and does absolutely nothing until you actually answer it.",
+    "start": "00:13:39",
+    "end": "00:13:45"
+  },
+  {
+    "text": "The good graph tools have this baked right in.",
+    "start": "00:13:45",
+    "end": "00:13:48"
+  },
+  {
+    "text": "The run pauses.",
+    "start": "00:13:48",
+    "end": "00:13:48"
+  },
+  {
+    "text": "You read what it made, you approve it, or you send it back with a short note like too aggressive.",
+    "start": "00:13:48",
+    "end": "00:13:55"
+  },
+  {
+    "text": "Soften it.",
+    "start": "00:13:55",
+    "end": "00:13:54"
+  },
+  {
+    "text": "And only then does it resume from that exact spot.",
+    "start": "00:13:54",
+    "end": "00:13:58"
+  },
+  {
+    "text": "Pause.",
+    "start": "00:13:58",
+    "end": "00:13:58"
+  },
+  {
+    "text": "Review.",
+    "start": "00:13:58",
+    "end": "00:13:59"
+  },
+  {
+    "text": "Resume.",
+    "start": "00:13:59",
+    "end": "00:14:00"
+  },
+  {
+    "text": "That is the rhythm.",
+    "start": "00:13:59",
+    "end": "00:14:01"
+  },
+  {
+    "text": "And it cost you about 30 seconds of attention.",
+    "start": "00:14:01",
+    "end": "00:14:03"
+  },
+  {
+    "text": "You do not gate every step though.",
+    "start": "00:14:03",
+    "end": "00:14:05"
+  },
+  {
+    "text": "And this is where people overcorrect.",
+    "start": "00:14:05",
+    "end": "00:14:07"
+  },
+  {
+    "text": "Gate everything.",
+    "start": "00:14:07",
+    "end": "00:14:07"
+  },
+  {
+    "text": "And you are just doing the whole job by hand again.",
+    "start": "00:14:07",
+    "end": "00:14:10"
+  },
+  {
+    "text": "One nervous click at a time and you have thrown away the entire reason you built the graph.",
+    "start": "00:14:10",
+    "end": "00:14:16"
+  },
+  {
+    "text": "So gate only the steps you cannot take back.",
+    "start": "00:14:14",
+    "end": "00:14:16"
+  },
+  {
+    "text": "The email that actually sends, the post that actually publishes, the payment that actually clears.",
+    "start": "00:14:16",
+    "end": "00:14:23"
+  },
+  {
+    "text": "Everything reversible runs free and fast.",
+    "start": "00:14:23",
+    "end": "00:14:26"
+  },
+  {
+    "text": "The irreversible stops and waits for your yes.",
+    "start": "00:14:26",
+    "end": "00:14:27"
+  },
+  {
+    "text": "I have watched a fully automated system send a broken draft to a real client list because no one put a gate in front of the send button.",
+    "start": "00:14:27",
+    "end": "00:14:36"
+  },
+  {
+    "text": "One human gate would have caught it in four seconds.",
+    "start": "00:14:36",
+    "end": "00:14:40"
+  },
+  {
+    "text": "Put the gate where the regret would live.",
+    "start": "00:14:38",
+    "end": "00:14:40"
+  },
+  {
+    "text": "Now we build.",
+    "start": "00:14:40",
+    "end": "00:14:42"
+  },
+  {
+    "text": "Graph one, the deep research desk.",
+    "start": "00:14:42",
+    "end": "00:14:44"
+  },
+  {
+    "text": "This is the diamond aimed straight at the thing that eats your afternoons alive.",
+    "start": "00:14:44",
+    "end": "00:14:49"
+  },
+  {
+    "text": "Deep research.",
+    "start": "00:14:49",
+    "end": "00:14:51"
+  },
+  {
+    "text": "The input is one question.",
+    "start": "00:14:51",
+    "end": "00:14:52"
+  },
+  {
+    "text": "Let us make it real and a little scary.",
+    "start": "00:14:52",
+    "end": "00:14:54"
+  },
+  {
+    "text": "Should we launch our product in Germany next quarter?",
+    "start": "00:14:54",
+    "end": "00:14:56"
+  },
+  {
+    "text": "One fuzzy, expensive, high stakes question.",
+    "start": "00:14:56",
+    "end": "00:15:00"
+  },
+  {
+    "text": "That is what goes into the very top of the diamond.",
+    "start": "00:15:00",
+    "end": "00:15:04"
+  },
+  {
+    "text": "The first job is the lead.",
+    "start": "00:15:04",
+    "end": "00:15:04"
+  },
+  {
+    "text": "It takes your one fuzzy question and breaks it into five sharp ones exactly the way a good analyst would sit down and do before touching a single source or opening a single tab.",
+    "start": "00:15:04",
+    "end": "00:15:16"
+  },
+  {
+    "text": "Market size over there.",
+    "start": "00:15:14",
+    "end": "00:15:17"
+  },
+  {
+    "text": "Local competitors already dug in the rules and taxes you would have to follow.",
+    "start": "00:15:17",
+    "end": "00:15:22"
+  },
+  {
+    "text": "What price that specific market will actually bear and what could go wrong after you commit.",
+    "start": "00:15:22",
+    "end": "00:15:25"
+  },
+  {
+    "text": "Five clean separate angles.",
+    "start": "00:15:25",
+    "end": "00:15:29"
+  },
+  {
+    "text": "Those five questions fan out to five research workers running side by side.",
+    "start": "00:15:27",
+    "end": "00:15:34"
+  },
+  {
+    "text": "This is the wide middle of the diamond.",
+    "start": "00:15:32",
+    "end": "00:15:36"
+  },
+  {
+    "text": "And this is the exact moment where your two-day afternoon collapses into about four minutes of wall clock time.",
+    "start": "00:15:34",
+    "end": "00:15:42"
+  },
+  {
+    "text": "Each worker owns exactly one question and pulls real sources for just that one slice.",
+    "start": "00:15:42",
+    "end": "00:15:45"
+  },
+  {
+    "text": "No single worker tries to boil the whole ocean at once.",
+    "start": "00:15:45",
+    "end": "00:15:50"
+  },
+  {
+    "text": "One question, real citations, then it comes straight back with the goods in hand.",
+    "start": "00:15:50",
+    "end": "00:15:54"
+  },
+  {
+    "text": "Think about what that actually replaces for a second.",
+    "start": "00:15:54",
+    "end": "00:15:56"
+  },
+  {
+    "text": "A junior analyst might burn two full days on that one launch question.",
+    "start": "00:15:56",
+    "end": "00:16:02"
+  },
+  {
+    "text": "This desk hands you the same five angles, sourced and checked in about the time it takes to refill your coffee.",
+    "start": "00:16:00",
+    "end": "00:16:08"
+  },
+  {
+    "text": "Then comes the worker that makes this entire desk worth trusting, the skeptic.",
+    "start": "00:16:07",
+    "end": "00:16:13"
+  },
+  {
+    "text": "This is the node that separates a fun little toy from a tool you would actually bet a decision on.",
+    "start": "00:16:12",
+    "end": "00:16:18"
+  },
+  {
+    "text": "So do not you dare skip it to save a few cents.",
+    "start": "00:16:18",
+    "end": "00:16:22"
+  },
+  {
+    "text": "Its only job is to try to kill the findings.",
+    "start": "00:16:20",
+    "end": "00:16:23"
+  },
+  {
+    "text": "It hunts for the weak source, the number that is three years stale, the confident claim sitting on top of nothing solid at all.",
+    "start": "00:16:23",
+    "end": "00:16:31"
+  },
+  {
+    "text": "It is paid to be a pain in the neck.",
+    "start": "00:16:31",
+    "end": "00:16:33"
+  },
+  {
+    "text": "Anything that survives that skeptic is something you can actually stand up in a meeting and defend out loud.",
+    "start": "00:16:33",
+    "end": "00:16:38"
+  },
+  {
+    "text": "And anything that dies right there just saved you from being confidently publicly wrong.",
+    "start": "00:16:38",
+    "end": "00:16:44"
+  },
+  {
+    "text": "That is the whole trade and it is a great one.",
+    "start": "00:16:44",
+    "end": "00:16:47"
+  },
+  {
+    "text": "What lives gets merged into one clean brief with every source kept sitting right next to the exact claim it supports.",
+    "start": "00:16:47",
+    "end": "00:16:54"
+  },
+  {
+    "text": "No naked assertions floating around.",
+    "start": "00:16:54",
+    "end": "00:16:56"
+  },
+  {
+    "text": "You can click through and verify any single line of it in a few seconds.",
+    "start": "00:16:56",
+    "end": "00:17:00"
+  },
+  {
+    "text": "And the very last node is you.",
+    "start": "00:17:00",
+    "end": "00:17:01"
+  },
+  {
+    "text": "The finished brief waits at a gate until you read it and press approve.",
+    "start": "00:17:01",
+    "end": "00:17:05"
+  },
+  {
+    "text": "Nothing at all leaves that desk without your yes.",
+    "start": "00:17:05",
+    "end": "00:17:08"
+  },
+  {
+    "text": "The human gate from lesson 4 sitting exactly where it belongs.",
+    "start": "00:17:08",
+    "end": "00:17:11"
+  },
+  {
+    "text": "Here is the prompt.",
+    "start": "00:17:11",
+    "end": "00:17:13"
+  },
+  {
+    "text": "And notice that it is just plain English you could have written yourself.",
+    "start": "00:17:13",
+    "end": "00:17:17"
+  },
+  {
+    "text": "Tell the lead, split my question into five distinct research angles and nothing more.",
+    "start": "00:17:17",
+    "end": "00:17:20"
+  },
+  {
+    "text": "Hand it the question and let it plan the attack.",
+    "start": "00:17:20",
+    "end": "00:17:24"
+  },
+  {
+    "text": "Tell the workers, \"Answer only your assigned angle.",
+    "start": "00:17:24",
+    "end": "00:17:28"
+  },
+  {
+    "text": "Cite every source you use and do not guess.",
+    "start": "00:17:28",
+    "end": "00:17:31"
+  },
+  {
+    "text": "If you cannot find something solid, say clearly that you could not find it.",
+    "start": "00:17:29",
+    "end": "00:17:35"
+  },
+  {
+    "text": "An honest gap beats a smooth invented answer every time here.",
+    "start": "00:17:35",
+    "end": "00:17:38"
+  },
+  {
+    "text": "\" Tell the skeptic, \"Attack every claim in this brief.",
+    "start": "00:17:38",
+    "end": "00:17:40"
+  },
+  {
+    "text": "Flag anything thin or outdated and keep only what genuinely holds up under pressure.",
+    "start": "00:17:40",
+    "end": "00:17:46"
+  },
+  {
+    "text": "Then have the final step stop and wait for a human yes before it calls the work finished.",
+    "start": "00:17:46",
+    "end": "00:17:51"
+  },
+  {
+    "text": "And just like that, you have traded a two-day research slog for a 20inut review.",
+    "start": "00:17:51",
+    "end": "00:17:56"
+  },
+  {
+    "text": "Same depth, a fraction of the hours, and a more trustworthy result than a tired human racing a deadline at 4 in the afternoon.",
+    "start": "00:17:56",
+    "end": "00:18:04"
+  },
+  {
+    "text": "Run it once and you will not want to research the old way again.",
+    "start": "00:18:02",
+    "end": "00:18:08"
+  },
+  {
+    "text": "Graph two, the SEO content machine.",
+    "start": "00:18:08",
+    "end": "00:18:10"
+  },
+  {
+    "text": "Same diamond pointed at a completely different chore.",
+    "start": "00:18:10",
+    "end": "00:18:14"
+  },
+  {
+    "text": "This one turns a single keyword into a finished publish ready article while you make lunch.",
+    "start": "00:18:12",
+    "end": "00:18:18"
+  },
+  {
+    "text": "The input is one target, one keyword, and the search intent sitting behind it.",
+    "start": "00:18:18",
+    "end": "00:18:23"
+  },
+  {
+    "text": "Somebody typing best CRM for small teams does not want a dictionary definition of a CRM.",
+    "start": "00:18:23",
+    "end": "00:18:29"
+  },
+  {
+    "text": "They want a short, honest comparison with a clear pick at the end.",
+    "start": "00:18:29",
+    "end": "00:18:32"
+  },
+  {
+    "text": "That intent, not the keyword, is the real brief.",
+    "start": "00:18:32",
+    "end": "00:18:36"
+  },
+  {
+    "text": "The lead job builds the outline and then hands each section off to its own dedicated writer.",
+    "start": "00:18:36",
+    "end": "00:18:42"
+  },
+  {
+    "text": "The introduction goes to one.",
+    "start": "00:18:42",
+    "end": "00:18:44"
+  },
+  {
+    "text": "Each main point goes to another.",
+    "start": "00:18:44",
+    "end": "00:18:45"
+  },
+  {
+    "text": "The conclusion goes to a last one.",
+    "start": "00:18:45",
+    "end": "00:18:47"
+  },
+  {
+    "text": "The piece gets carved up cleanly along its own seams.",
+    "start": "00:18:47",
+    "end": "00:18:51"
+  },
+  {
+    "text": "The writers run in parallel, one section each.",
+    "start": "00:18:49",
+    "end": "00:18:52"
+  },
+  {
+    "text": "So, an article that would eat a full afternoon of your life drafts itself in a single pass.",
+    "start": "00:18:52",
+    "end": "00:18:58"
+  },
+  {
+    "text": "It is the wide middle of the diamond again, doing exactly the thing it is so good at.",
+    "start": "00:18:58",
+    "end": "00:19:03"
+  },
+  {
+    "text": "Now, the checking step, and this is precisely where most cheap content tools fall flat on their face.",
+    "start": "00:19:03",
+    "end": "00:19:08"
+  },
+  {
+    "text": "They let the writer approve its own work to save a step.",
+    "start": "00:19:08",
+    "end": "00:19:13"
+  },
+  {
+    "text": "And you already know from lesson two exactly how that ends.",
+    "start": "00:19:13",
+    "end": "00:19:15"
+  },
+  {
+    "text": "So, a separate editor reads the whole draft, not the writer.",
+    "start": "00:19:15",
+    "end": "00:19:19"
+  },
+  {
+    "text": "A different agent with different instructions whose actual job is to be a little bit mean about the work and completely unscentimental toward every sentence in it.",
+    "start": "00:19:19",
+    "end": "00:19:27"
+  },
+  {
+    "text": "It checks the facts, cuts the filler, kills the repetition, and forces eight sections written by eight different workers to sound like one calm, consistent human voice instead of an obvious committee arguing with itself in public.",
+    "start": "00:19:27",
+    "end": "00:19:40"
+  },
+  {
+    "text": "Everything merges into one single article formatted and ready, and the prompt behind it is short.",
+    "start": "00:19:40",
+    "end": "00:19:47"
+  },
+  {
+    "text": "Outline the keyword, assign the sections to separate writers, then have a separate editor fact check and unify the entire draft into one voice, and the human gate stays right where it should be.",
+    "start": "00:19:45",
+    "end": "00:19:55"
+  },
+  {
+    "text": "You read the piece before it ever touches your live site because your name is the one on it, not the machines.",
+    "start": "00:19:55",
+    "end": "00:20:03"
+  },
+  {
+    "text": "One keyword goes in, one real article you are proud of comes out.",
+    "start": "00:20:03",
+    "end": "00:20:07"
+  },
+  {
+    "text": "Graph three, the go to market kit.",
+    "start": "00:20:07",
+    "end": "00:20:08"
+  },
+  {
+    "text": "This is the one that feels a little bit like cheating the first time you sit and watch it actually run in front of you.",
+    "start": "00:20:08",
+    "end": "00:20:15"
+  },
+  {
+    "text": "The input is a single thing, a short description of whatever it is you are launching.",
+    "start": "00:20:15",
+    "end": "00:20:20"
+  },
+  {
+    "text": "One honest paragraph about the product, who it is for, and what it does is genuinely all this graph needs to get moving.",
+    "start": "00:20:20",
+    "end": "00:20:27"
+  },
+  {
+    "text": "From that one paragraph, the workers fan out and build every single piece you would normally grind out by hand over a full painful week.",
+    "start": "00:20:27",
+    "end": "00:20:34"
+  },
+  {
+    "text": "And here is the trick.",
+    "start": "00:20:34",
+    "end": "00:20:37"
+  },
+  {
+    "text": "They build all of them at the very same time, not one after another.",
+    "start": "00:20:35",
+    "end": "00:20:40"
+  },
+  {
+    "text": "One drafts the positioning, the core promise everything else has to hang from.",
+    "start": "00:20:40",
+    "end": "00:20:45"
+  },
+  {
+    "text": "One writes the launch emails, one writes the landing page, one writes the ad angles, one writes the social post.",
+    "start": "00:20:45",
+    "end": "00:20:52"
+  },
+  {
+    "text": "Five separate lanes, all running on one clock, and each one comes back a real finished deliverable, not a rough sketch you still have to rewrite.",
+    "start": "00:20:52",
+    "end": "00:21:00"
+  },
+  {
+    "text": "The check here is not about grammar or typos.",
+    "start": "00:21:00",
+    "end": "00:21:03"
+  },
+  {
+    "text": "It is about consistency across the whole set.",
+    "start": "00:21:03",
+    "end": "00:21:04"
+  },
+  {
+    "text": "Do all of these pieces actually tell the same story, or did five workers each invent five slightly different versions of your product?",
+    "start": "00:21:04",
+    "end": "00:21:13"
+  },
+  {
+    "text": "So, a reviewer reads the entire kit as one single thing and fixes any piece that has drifted off message.",
+    "start": "00:21:13",
+    "end": "00:21:18"
+  },
+  {
+    "text": "The emails and the landing page have to promise the exact same thing in the exact same voice or the whole launch feels off.",
+    "start": "00:21:18",
+    "end": "00:21:25"
+  },
+  {
+    "text": "It all merges into one folder of finished copy.",
+    "start": "00:21:25",
+    "end": "00:21:29"
+  },
+  {
+    "text": "Every word of it pointed at a single clear promise.",
+    "start": "00:21:29",
+    "end": "00:21:33"
+  },
+  {
+    "text": "The prompt is one line.",
+    "start": "00:21:33",
+    "end": "00:21:34"
+  },
+  {
+    "text": "From this product, write positioning, emails, a page, and ads all in one unified voice.",
+    "start": "00:21:34",
+    "end": "00:21:40"
+  },
+  {
+    "text": "You read the kit, you approve it, and a week of dreaded launch writing collapses into a single relaxed afternoon of editing.",
+    "start": "00:21:40",
+    "end": "00:21:48"
+  },
+  {
+    "text": "And because you are the gate, it still sounds like you, not like a robot doing an impression of you.",
+    "start": "00:21:48",
+    "end": "00:21:53"
+  },
+  {
+    "text": "Before I let you go, three mistakes I see beginners make with their very first graph.",
+    "start": "00:21:53",
+    "end": "00:21:58"
+  },
+  {
+    "text": "So you can skip the pain that taught them.",
+    "start": "00:21:58",
+    "end": "00:22:00"
+  },
+  {
+    "text": "Mistake one, they let the writer check its own work to save a node.",
+    "start": "00:22:00",
+    "end": "00:22:03"
+  },
+  {
+    "text": "You already know why that fails.",
+    "start": "00:22:03",
+    "end": "00:22:05"
+  },
+  {
+    "text": "The scores do not climb.",
+    "start": "00:22:05",
+    "end": "00:22:08"
+  },
+  {
+    "text": "They slide and the model waves its own error straight through with total confidence.",
+    "start": "00:22:06",
+    "end": "00:22:11"
+  },
+  {
+    "text": "Mistake two.",
+    "start": "00:22:11",
+    "end": "00:22:13"
+  },
+  {
+    "text": "They build a beautiful graph with no stop rule and run it overnight.",
+    "start": "00:22:13",
+    "end": "00:22:16"
+  },
+  {
+    "text": "The graph worked perfectly.",
+    "start": "00:22:16",
+    "end": "00:22:18"
+  },
+  {
+    "text": "It just worked perfectly about 4,000 times in a row and the bill in the morning proved it.",
+    "start": "00:22:18",
+    "end": "00:22:24"
+  },
+  {
+    "text": "Mistake three.",
+    "start": "00:22:24",
+    "end": "00:22:25"
+  },
+  {
+    "text": "They gate every single step out of fear.",
+    "start": "00:22:23",
+    "end": "00:22:27"
+  },
+  {
+    "text": "Then wonder why the whole thing feels slower than just doing it by hand.",
+    "start": "00:22:25",
+    "end": "00:22:31"
+  },
+  {
+    "text": "Gate the send.",
+    "start": "00:22:31",
+    "end": "00:22:31"
+  },
+  {
+    "text": "Gate the publish.",
+    "start": "00:22:31",
+    "end": "00:22:33"
+  },
+  {
+    "text": "Let everything you can undo simply run.",
+    "start": "00:22:33",
+    "end": "00:22:36"
+  },
+  {
+    "text": "And one last honest note before the recap.",
+    "start": "00:22:36",
+    "end": "00:22:39"
+  },
+  {
+    "text": "Your first graph will be ugly.",
+    "start": "00:22:36",
+    "end": "00:22:40"
+  },
+  {
+    "text": "Mine was.",
+    "start": "00:22:40",
+    "end": "00:22:41"
+  },
+  {
+    "text": "Build the ugly version anyway.",
+    "start": "00:22:39",
+    "end": "00:22:43"
+  },
+  {
+    "text": "Run it exactly once.",
+    "start": "00:22:43",
+    "end": "00:22:43"
+  },
+  {
+    "text": "Watch closely where it breaks and fix that one thing.",
+    "start": "00:22:43",
+    "end": "00:22:47"
+  },
+  {
+    "text": "That single loop is the whole secret to getting good at this.",
+    "start": "00:22:47",
+    "end": "00:22:50"
+  },
+  {
+    "text": "So that is the entire method in one breath.",
+    "start": "00:22:50",
+    "end": "00:22:53"
+  },
+  {
+    "text": "Let me hand it to you clean one more time so it actually sticks when you close this.",
+    "start": "00:22:53",
+    "end": "00:22:59"
+  },
+  {
+    "text": "A graph is jobs, arrows, and state.",
+    "start": "00:22:59",
+    "end": "00:23:01"
+  },
+  {
+    "text": "A job is one thing you hand one assistant.",
+    "start": "00:23:01",
+    "end": "00:23:04"
+  },
+  {
+    "text": "An arrow means wait for this first.",
+    "start": "00:23:04",
+    "end": "00:23:06"
+  },
+  {
+    "text": "State is the clipboard that rides along.",
+    "start": "00:23:06",
+    "end": "00:23:08"
+  },
+  {
+    "text": "Cut the fake arrows and the jobs that do not depend on each other suddenly run all at once.",
+    "start": "00:23:08",
+    "end": "00:23:11"
+  },
+  {
+    "text": "That right there is the speed you have been missing.",
+    "start": "00:23:11",
+    "end": "00:23:15"
+  },
+  {
+    "text": "The diamond is your default shape for almost everything.",
+    "start": "00:23:15",
+    "end": "00:23:20"
+  },
+  {
+    "text": "Split the work into lanes.",
+    "start": "00:23:17",
+    "end": "00:23:20"
+  },
+  {
+    "text": "Run the lanes in parallel.",
+    "start": "00:23:20",
+    "end": "00:23:21"
+  },
+  {
+    "text": "Check the result with a separate judge who never wrote the answer.",
+    "start": "00:23:21",
+    "end": "00:23:24"
+  },
+  {
+    "text": "Then merge it all into one.",
+    "start": "00:23:24",
+    "end": "00:23:28"
+  },
+  {
+    "text": "Every loop you ever build gets a stop rule, a cap or budget or bar, so it can never run off with your money in the middle of the night.",
+    "start": "00:23:26",
+    "end": "00:23:35"
+  },
+  {
+    "text": "And you, the human, stay the last yes before anything reaches the real world.",
+    "start": "00:23:35",
+    "end": "00:23:39"
+  },
+  {
+    "text": "Here is your homework one final time because it is the part that actually changes things for you.",
+    "start": "00:23:39",
+    "end": "00:23:44"
+  },
+  {
+    "text": "Tonight, draw the system you already run as one straight line of jobs on a piece of paper.",
+    "start": "00:23:44",
+    "end": "00:23:50"
+  },
+  {
+    "text": "Find the two or three arrows that are fake, the ones where nothing actually flows through.",
+    "start": "00:23:50",
+    "end": "00:23:56"
+  },
+  {
+    "text": "Cut them cleanly.",
+    "start": "00:23:53",
+    "end": "00:23:56"
+  },
+  {
+    "text": "Let those free jobs run side by side.",
+    "start": "00:23:56",
+    "end": "00:23:58"
+  },
+  {
+    "text": "Congratulations.",
+    "start": "00:23:58",
+    "end": "00:24:00"
+  },
+  {
+    "text": "You just designed and built your first real graph.",
+    "start": "00:24:00",
+    "end": "00:24:01"
+  },
+  {
+    "text": "You did not need a degree for any of that.",
+    "start": "00:24:01",
+    "end": "00:24:04"
+  },
+  {
+    "text": "You needed to see the work clearly for once, which almost no one ever slows down to do.",
+    "start": "00:24:04",
+    "end": "00:24:09"
+  },
+  {
+    "text": "That is the craft hiding under all the noise.",
+    "start": "00:24:09",
+    "end": "00:24:12"
+  },
+  {
+    "text": "And now it belongs to you.",
+    "start": "00:24:12",
+    "end": "00:24:13"
+  },
+  {
+    "text": "And if you want to go past this course and turn systems like these into real money, that is exactly what I built the realtime AI ops community for over at weekly ops.",
+    "start": "00:24:13",
+    "end": "00:24:25"
+  },
+  {
+    "text": "com.",
+    "start": "00:24:25",
+    "end": "00:24:25"
+  },
+  {
+    "text": "That is where the deeper builds live.",
+    "start": "00:24:23",
+    "end": "00:24:27"
+  },
+  {
+    "text": "The ones with more workers, tighter checks, and real clients on the other end of them.",
+    "start": "00:24:25",
+    "end": "00:24:30"
+  },
+  {
+    "text": "That is the whole thing.",
+    "start": "00:24:30",
+    "end": "00:24:33"
+  },
+  {
+    "text": "Draw your first graph tonight.",
+    "start": "00:24:31",
+    "end": "00:24:34"
+  },
+  {
+    "text": "Cut one fake arrow and watch a straight line turn into something that actually moves.",
+    "start": "00:24:34",
+    "end": "00:24:41"
+  },
+  {
+    "text": "I will see you inside.",
+    "start": "00:24:37",
+    "end": "00:24:41"
+  }
+]

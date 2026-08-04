@@ -1,0 +1,1182 @@
+[
+  {
+    "text": "When we ask Claudecode to do a deep",
+    "start": 0,
+    "duration": 3.88
+  },
+  {
+    "text": "research about a specific topic, behind",
+    "start": 1.64,
+    "duration": 4.4
+  },
+  {
+    "text": "the scenes, it's not just one agent that",
+    "start": 3.88,
+    "duration": 4.8
+  },
+  {
+    "text": "handles the entire research, but many",
+    "start": 6.04,
+    "duration": 4.6
+  },
+  {
+    "text": "agents are spawned to handle our",
+    "start": 8.68,
+    "duration": 3.72
+  },
+  {
+    "text": "research needs. Claudecode actually",
+    "start": 10.64,
+    "duration": 3.96
+  },
+  {
+    "text": "generates a dynamic workflow that looks",
+    "start": 12.4,
+    "duration": 4.04
+  },
+  {
+    "text": "something like this, where you have over",
+    "start": 14.6,
+    "duration": 4.68
+  },
+  {
+    "text": "100 agents broken into various phases.",
+    "start": 16.44,
+    "duration": 5.64
+  },
+  {
+    "text": "And this entire workflow is generated on",
+    "start": 19.28,
+    "duration": 5.04
+  },
+  {
+    "text": "the fly by Claudecode in JavaScript",
+    "start": 22.08,
+    "duration": 5.44
+  },
+  {
+    "text": "code, like you can see here. That's 427",
+    "start": 24.32,
+    "duration": 5.68
+  },
+  {
+    "text": "lines of code, and this very code acts",
+    "start": 27.52,
+    "duration": 4.72
+  },
+  {
+    "text": "as a runtime environment that will spawn",
+    "start": 30,
+    "duration": 4.84
+  },
+  {
+    "text": "over 100 agents. And every new request",
+    "start": 32.24,
+    "duration": 4.8
+  },
+  {
+    "text": "that I send, Claudecode will generate a",
+    "start": 34.84,
+    "duration": 4.84
+  },
+  {
+    "text": "fresh new workflow, and each workflow",
+    "start": 37.04,
+    "duration": 4.8
+  },
+  {
+    "text": "will spawn different numbers of agents.",
+    "start": 39.68,
+    "duration": 4.52
+  },
+  {
+    "text": "So, given our example here of JavaScript",
+    "start": 41.84,
+    "duration": 4.24
+  },
+  {
+    "text": "file, where Claudecode essentially",
+    "start": 44.2,
+    "duration": 3.84
+  },
+  {
+    "text": "converted my research plan into a",
+    "start": 46.08,
+    "duration": 4.12
+  },
+  {
+    "text": "workflow as a runtime, Claudecode will",
+    "start": 48.04,
+    "duration": 4.88
+  },
+  {
+    "text": "then start launching many agents in five",
+    "start": 50.2,
+    "duration": 4.52
+  },
+  {
+    "text": "different phases. And each phase of the",
+    "start": 52.92,
+    "duration": 3.8
+  },
+  {
+    "text": "workflow will more or less work in",
+    "start": 54.72,
+    "duration": 4.4
+  },
+  {
+    "text": "parallel, and each agent has its own",
+    "start": 56.72,
+    "duration": 4.24
+  },
+  {
+    "text": "context window and its own system",
+    "start": 59.12,
+    "duration": 3.72
+  },
+  {
+    "text": "prompt. Pretty neat, right? Now,",
+    "start": 60.96,
+    "duration": 3.64
+  },
+  {
+    "text": "building on this workflow that you can",
+    "start": 62.84,
+    "duration": 4.32
+  },
+  {
+    "text": "see here, the concept for graphs has",
+    "start": 64.6,
+    "duration": 4.96
+  },
+  {
+    "text": "been resurfacing lately, as if it's a",
+    "start": 67.16,
+    "duration": 4.84
+  },
+  {
+    "text": "next natural progression in our agentic",
+    "start": 69.56,
+    "duration": 4.4
+  },
+  {
+    "text": "engineering. So, we asked the natural",
+    "start": 72,
+    "duration": 4.08
+  },
+  {
+    "text": "question, what exactly is graph",
+    "start": 73.96,
+    "duration": 4.44
+  },
+  {
+    "text": "engineering? The idea of graphs dates",
+    "start": 76.08,
+    "duration": 4.76
+  },
+  {
+    "text": "all the way back to 1736, when a Swiss",
+    "start": 78.4,
+    "duration": 4.44
+  },
+  {
+    "text": "polymath, Leonhard Euler, was",
+    "start": 80.84,
+    "duration": 4.2
+  },
+  {
+    "text": "considering solving the strange question",
+    "start": 82.84,
+    "duration": 4
+  },
+  {
+    "text": "in a city called Königsberg. They have",
+    "start": 85.04,
+    "duration": 4.52
+  },
+  {
+    "text": "two mainlands and two islands and seven",
+    "start": 86.84,
+    "duration": 3.96
+  },
+  {
+    "text": "bridges connecting them. And the",
+    "start": 89.56,
+    "duration": 3.4
+  },
+  {
+    "text": "question was simple, is there a route",
+    "start": 90.8,
+    "duration": 4.36
+  },
+  {
+    "text": "through the city that crosses every",
+    "start": 92.96,
+    "duration": 4.84
+  },
+  {
+    "text": "single bridge, but only exactly once?",
+    "start": 95.16,
+    "duration": 4.12
+  },
+  {
+    "text": "Now, you might try and hypothesize a way",
+    "start": 97.8,
+    "duration": 3.56
+  },
+  {
+    "text": "by process of elimination. Maybe you can",
+    "start": 99.28,
+    "duration": 4.8
+  },
+  {
+    "text": "start here and try to cross the bridge",
+    "start": 101.36,
+    "duration": 4.96
+  },
+  {
+    "text": "this way, or maybe you just start on the",
+    "start": 104.08,
+    "duration": 4.6
+  },
+  {
+    "text": "island instead and start out and see if",
+    "start": 106.32,
+    "duration": 4.48
+  },
+  {
+    "text": "there's another way possible, and you'll",
+    "start": 108.68,
+    "duration": 4.64
+  },
+  {
+    "text": "soon realize that this is not possible.",
+    "start": 110.8,
+    "duration": 4.68
+  },
+  {
+    "text": "Euler agreed, but it's not just that",
+    "start": 113.32,
+    "duration": 4.68
+  },
+  {
+    "text": "this wasn't possible, but how Euler",
+    "start": 115.48,
+    "duration": 5.04
+  },
+  {
+    "text": "simplified the problem into a simple",
+    "start": 118,
+    "duration": 5.16
+  },
+  {
+    "text": "concept shown in this diagram. Circles",
+    "start": 120.52,
+    "duration": 5.12
+  },
+  {
+    "text": "are nodes, which in this case were land,",
+    "start": 123.16,
+    "duration": 4.36
+  },
+  {
+    "text": "and the black lines are edges, which are",
+    "start": 125.64,
+    "duration": 3.88
+  },
+  {
+    "text": "bridges in this case, and these two",
+    "start": 127.52,
+    "duration": 4.28
+  },
+  {
+    "text": "constitute a graph. So, this middle",
+    "start": 129.52,
+    "duration": 4.84
+  },
+  {
+    "text": "island here has five edges, or bridges",
+    "start": 131.8,
+    "duration": 4.72
+  },
+  {
+    "text": "in this case, connecting to other areas,",
+    "start": 134.36,
+    "duration": 3.84
+  },
+  {
+    "text": "and so on. And given this",
+    "start": 136.52,
+    "duration": 4.08
+  },
+  {
+    "text": "representation, Euler concluded with a",
+    "start": 138.2,
+    "duration": 4.4
+  },
+  {
+    "text": "proof that this kind of route in",
+    "start": 140.6,
+    "duration": 4.52
+  },
+  {
+    "text": "Königsberg is impossible. Now, the exact",
+    "start": 142.6,
+    "duration": 4.6
+  },
+  {
+    "text": "proof that Euler proposed is sort of",
+    "start": 145.12,
+    "duration": 4.4
+  },
+  {
+    "text": "irrelevant to this video, but Euler's",
+    "start": 147.2,
+    "duration": 4.68
+  },
+  {
+    "text": "graph theory is now applied to agents",
+    "start": 149.52,
+    "duration": 4
+  },
+  {
+    "text": "and graph engineering today. Here's",
+    "start": 151.88,
+    "duration": 3.28
+  },
+  {
+    "text": "another way to visualize the workflow",
+    "start": 153.52,
+    "duration": 3.56
+  },
+  {
+    "text": "that Claude code generated for my deep",
+    "start": 155.16,
+    "duration": 4.04
+  },
+  {
+    "text": "research from earlier. This consists of",
+    "start": 157.08,
+    "duration": 5
+  },
+  {
+    "text": "five phases. One agent for scoping the",
+    "start": 159.2,
+    "duration": 5
+  },
+  {
+    "text": "requirement, five agents to gather",
+    "start": 162.08,
+    "duration": 4.4
+  },
+  {
+    "text": "credible websites to research for each",
+    "start": 164.2,
+    "duration": 5.2
+  },
+  {
+    "text": "subtopics, 25 agents to then actually",
+    "start": 166.48,
+    "duration": 5
+  },
+  {
+    "text": "fetch the information and pass it to the",
+    "start": 169.4,
+    "duration": 5.8
+  },
+  {
+    "text": "next, and 75 agents to verify the facts",
+    "start": 171.48,
+    "duration": 5.56
+  },
+  {
+    "text": "and vote on the credibility, and",
+    "start": 175.2,
+    "duration": 4.44
+  },
+  {
+    "text": "finally, one agent that generates the",
+    "start": 177.04,
+    "duration": 4.44
+  },
+  {
+    "text": "full report in the end. And this",
+    "start": 179.64,
+    "duration": 3.879
+  },
+  {
+    "text": "workflow you're seeing here is a form of",
+    "start": 181.48,
+    "duration": 4.6
+  },
+  {
+    "text": "a graph. In this case, because execution",
+    "start": 183.519,
+    "duration": 5.161
+  },
+  {
+    "text": "only flows from left to right, with no",
+    "start": 186.08,
+    "duration": 4.72
+  },
+  {
+    "text": "node going backwards, which would form a",
+    "start": 188.68,
+    "duration": 4.88
+  },
+  {
+    "text": "loop, this is called DAG, or directed",
+    "start": 190.8,
+    "duration": 4.76
+  },
+  {
+    "text": "acyclic graph. Now, we could technically",
+    "start": 193.56,
+    "duration": 4.08
+  },
+  {
+    "text": "do this with a single agent instead of",
+    "start": 195.56,
+    "duration": 3.8
+  },
+  {
+    "text": "hundreds of agents in a graph like we",
+    "start": 197.64,
+    "duration": 3.36
+  },
+  {
+    "text": "just saw earlier. But this would be a",
+    "start": 199.36,
+    "duration": 3.64
+  },
+  {
+    "text": "bit silly because using a dynamic",
+    "start": 201,
+    "duration": 4.8
+  },
+  {
+    "text": "workflow for this kind of work is better",
+    "start": 203,
+    "duration": 4.84
+  },
+  {
+    "text": "for many reasons. The most obvious one",
+    "start": 205.8,
+    "duration": 4.64
+  },
+  {
+    "text": "being time. By parallelizing task into",
+    "start": 207.84,
+    "duration": 4.72
+  },
+  {
+    "text": "sub-agents that have their own small",
+    "start": 210.44,
+    "duration": 4.36
+  },
+  {
+    "text": "objective, this helps save a large",
+    "start": 212.56,
+    "duration": 4.24
+  },
+  {
+    "text": "amount of time by the simple fact that",
+    "start": 214.8,
+    "duration": 4
+  },
+  {
+    "text": "multiple agents are working at the same",
+    "start": 216.8,
+    "duration": 4.24
+  },
+  {
+    "text": "time. Another benefit is separation of",
+    "start": 218.8,
+    "duration": 4.6
+  },
+  {
+    "text": "concerns. The fact that each agent has",
+    "start": 221.04,
+    "duration": 4.88
+  },
+  {
+    "text": "its own context window helps focus its",
+    "start": 223.4,
+    "duration": 4.559
+  },
+  {
+    "text": "own context window towards its goal.",
+    "start": 225.92,
+    "duration": 3.92
+  },
+  {
+    "text": "Whereas a single agent might need to",
+    "start": 227.959,
+    "duration": 4.481
+  },
+  {
+    "text": "keep reusing its own context to store",
+    "start": 229.84,
+    "duration": 4.68
+  },
+  {
+    "text": "some of it for the goal, some of it for",
+    "start": 232.44,
+    "duration": 4
+  },
+  {
+    "text": "the current task and keep summarizing",
+    "start": 234.52,
+    "duration": 3.4
+  },
+  {
+    "text": "back and forth. But graphs aren't",
+    "start": 236.44,
+    "duration": 3.28
+  },
+  {
+    "text": "without its drawbacks either. Anthropic",
+    "start": 237.92,
+    "duration": 3.16
+  },
+  {
+    "text": "made a post that talked about their",
+    "start": 239.72,
+    "duration": 3.6
+  },
+  {
+    "text": "multi-agent research system that said a",
+    "start": 241.08,
+    "duration": 4.48
+  },
+  {
+    "text": "single agent tends to use four times",
+    "start": 243.32,
+    "duration": 4.32
+  },
+  {
+    "text": "more tokens than a regular chat and a",
+    "start": 245.56,
+    "duration": 5.12
+  },
+  {
+    "text": "multi-agent system tends to use 15 times",
+    "start": 247.64,
+    "duration": 5.2
+  },
+  {
+    "text": "more tokens in comparison. So going back",
+    "start": 250.68,
+    "duration": 5.32
+  },
+  {
+    "text": "to our example, each agent ran on Opus 5",
+    "start": 252.84,
+    "duration": 4.8
+  },
+  {
+    "text": "with their own system prompt and each",
+    "start": 256,
+    "duration": 4.079
+  },
+  {
+    "text": "agent used about 20,000 tokens by",
+    "start": 257.64,
+    "duration": 4.2
+  },
+  {
+    "text": "default to start. So by the time you",
+    "start": 260.079,
+    "duration": 4.801
+  },
+  {
+    "text": "extrapolate this to 108 agents that it",
+    "start": 261.84,
+    "duration": 5.52
+  },
+  {
+    "text": "eventually used, the input cost alone",
+    "start": 264.88,
+    "duration": 5.24
+  },
+  {
+    "text": "would be closer to $10 given Opus 5's",
+    "start": 267.36,
+    "duration": 4.64
+  },
+  {
+    "text": "pricing. But since we have prompt",
+    "start": 270.12,
+    "duration": 3.92
+  },
+  {
+    "text": "caching, realistically, this number will",
+    "start": 272,
+    "duration": 4.08
+  },
+  {
+    "text": "look closer to a dollar which helps",
+    "start": 274.04,
+    "duration": 4.4
+  },
+  {
+    "text": "scale our agent from a single agent to a",
+    "start": 276.08,
+    "duration": 4.2
+  },
+  {
+    "text": "parallel agents like you can see here.",
+    "start": 278.44,
+    "duration": 3.68
+  },
+  {
+    "text": "So given the benefits and the drawbacks",
+    "start": 280.28,
+    "duration": 3.52
+  },
+  {
+    "text": "when it comes to graphs, why are",
+    "start": 282.12,
+    "duration": 3.48
+  },
+  {
+    "text": "everyone talking about graph and graph",
+    "start": 283.8,
+    "duration": 3.44
+  },
+  {
+    "text": "engineering as if it's the next",
+    "start": 285.6,
+    "duration": 3.28
+  },
+  {
+    "text": "evolution when it comes to agentic",
+    "start": 287.24,
+    "duration": 3.2
+  },
+  {
+    "text": "engineering? But first, a quick word",
+    "start": 288.88,
+    "duration": 3.32
+  },
+  {
+    "text": "from Zoe sponsoring this video. It's",
+    "start": 290.44,
+    "duration": 3.44
+  },
+  {
+    "text": "pretty obvious that more and more parts",
+    "start": 292.2,
+    "duration": 3.32
+  },
+  {
+    "text": "of our lives are being integrated with",
+    "start": 293.88,
+    "duration": 3.6
+  },
+  {
+    "text": "AI and often our interactions are",
+    "start": 295.52,
+    "duration": 4.68
+  },
+  {
+    "text": "scattered across Claude, ChatGPT, Codex",
+    "start": 297.48,
+    "duration": 4.84
+  },
+  {
+    "text": "and Menace. So how can we have more",
+    "start": 300.2,
+    "duration": 5.32
+  },
+  {
+    "text": "ownership while having a 24/7 agent? Zoe",
+    "start": 302.32,
+    "duration": 4.88
+  },
+  {
+    "text": "gives you a dedicated computer on the",
+    "start": 305.52,
+    "duration": 3.88
+  },
+  {
+    "text": "cloud that's yours, meaning your agent",
+    "start": 307.2,
+    "duration": 3.8
+  },
+  {
+    "text": "is on standby for anything that you",
+    "start": 309.4,
+    "duration": 3.8
+  },
+  {
+    "text": "give. And part of being 24/7 is the",
+    "start": 311,
+    "duration": 4.28
+  },
+  {
+    "text": "ability to message your agent through",
+    "start": 313.2,
+    "duration": 4.44
+  },
+  {
+    "text": "text. You can directly message Zoe to",
+    "start": 315.28,
+    "duration": 3.92
+  },
+  {
+    "text": "have normal conversations through",
+    "start": 317.64,
+    "duration": 3.56
+  },
+  {
+    "text": "iMessage or ask about files that you",
+    "start": 319.2,
+    "duration": 3.4
+  },
+  {
+    "text": "have stored on your computer in the",
+    "start": 321.2,
+    "duration": 3.52
+  },
+  {
+    "text": "cloud and better yet, build an",
+    "start": 322.6,
+    "duration": 4.48
+  },
+  {
+    "text": "e-commerce website for vintage watches",
+    "start": 324.72,
+    "duration": 5.12
+  },
+  {
+    "text": "and host directly on Zoe using their AI",
+    "start": 327.08,
+    "duration": 4.96
+  },
+  {
+    "text": "agent natively through text. What's cool",
+    "start": 329.84,
+    "duration": 4.079
+  },
+  {
+    "text": "about Zoe is that you can write code and",
+    "start": 332.04,
+    "duration": 3.879
+  },
+  {
+    "text": "launch sites that are actually useful",
+    "start": 333.919,
+    "duration": 3.521
+  },
+  {
+    "text": "because you can integrate all your",
+    "start": 335.919,
+    "duration": 4
+  },
+  {
+    "text": "contacts into Zoe and run automations.",
+    "start": 337.44,
+    "duration": 4.52
+  },
+  {
+    "text": "Custom domains are also included at paid",
+    "start": 339.919,
+    "duration": 4.041
+  },
+  {
+    "text": "plan and all your sites are hosted on",
+    "start": 341.96,
+    "duration": 3.92
+  },
+  {
+    "text": "your Zoe's cloud computer. Plus they got",
+    "start": 343.96,
+    "duration": 3.76
+  },
+  {
+    "text": "some neat tricks like the selector tool",
+    "start": 345.88,
+    "duration": 4.48
+  },
+  {
+    "text": "to edit exact areas to improve things or",
+    "start": 347.72,
+    "duration": 4.72
+  },
+  {
+    "text": "even add automations that plug into your",
+    "start": 350.36,
+    "duration": 3.96
+  },
+  {
+    "text": "website, like a text anytime someone",
+    "start": 352.44,
+    "duration": 3.76
+  },
+  {
+    "text": "fills out a form. Try Zo today. I'll",
+    "start": 354.32,
+    "duration": 3.56
+  },
+  {
+    "text": "have the link in the description below.",
+    "start": 356.2,
+    "duration": 3.84
+  },
+  {
+    "text": "The concept behind agent communicating",
+    "start": 357.88,
+    "duration": 4.12
+  },
+  {
+    "text": "with another agent is not anything new.",
+    "start": 360.04,
+    "duration": 3.84
+  },
+  {
+    "text": "We can look back to open-source ideas",
+    "start": 362,
+    "duration": 4.76
+  },
+  {
+    "text": "like AutoGen in 2023 from Microsoft",
+    "start": 363.88,
+    "duration": 4.8
+  },
+  {
+    "text": "talking about agents communicating with",
+    "start": 366.76,
+    "duration": 4
+  },
+  {
+    "text": "another agent. Companies like LangChain",
+    "start": 368.68,
+    "duration": 4.28
+  },
+  {
+    "text": "also started messing with cyclic graph",
+    "start": 370.76,
+    "duration": 4.76
+  },
+  {
+    "text": "in 2023, which led to LangGraph, which",
+    "start": 372.96,
+    "duration": 4.64
+  },
+  {
+    "text": "became a framework for orchestrating",
+    "start": 375.52,
+    "duration": 4.32
+  },
+  {
+    "text": "agents. Anthropic also released various",
+    "start": 377.6,
+    "duration": 4.28
+  },
+  {
+    "text": "ways that agents can work together",
+    "start": 379.84,
+    "duration": 3.8
+  },
+  {
+    "text": "around the same time, like prompt",
+    "start": 381.88,
+    "duration": 3.64
+  },
+  {
+    "text": "chaining where LLMs are chained",
+    "start": 383.64,
+    "duration": 4.279
+  },
+  {
+    "text": "sequentially one after another, routing,",
+    "start": 385.52,
+    "duration": 4.399
+  },
+  {
+    "text": "which is similar to sub-agents, but from",
+    "start": 387.919,
+    "duration": 3.841
+  },
+  {
+    "text": "the perspective of the main agent,",
+    "start": 389.919,
+    "duration": 3.601
+  },
+  {
+    "text": "parallelization, which is similar to our",
+    "start": 391.76,
+    "duration": 3.92
+  },
+  {
+    "text": "deep research workflow, orchestrator,",
+    "start": 393.52,
+    "duration": 4.16
+  },
+  {
+    "text": "also similar to what we saw earlier, and",
+    "start": 395.68,
+    "duration": 4.52
+  },
+  {
+    "text": "evaluator optimizer, where two LLMs",
+    "start": 397.68,
+    "duration": 4.92
+  },
+  {
+    "text": "adversarially go at each other until a",
+    "start": 400.2,
+    "duration": 4.52
+  },
+  {
+    "text": "condition is met. But, none of these",
+    "start": 402.6,
+    "duration": 4.88
+  },
+  {
+    "text": "were materially useful back then because",
+    "start": 404.72,
+    "duration": 5.08
+  },
+  {
+    "text": "the problem wasn't so much in the graph",
+    "start": 407.48,
+    "duration": 4.84
+  },
+  {
+    "text": "itself, but what the node inside of the",
+    "start": 409.8,
+    "duration": 4.52
+  },
+  {
+    "text": "graph can actually do. In LangChain's",
+    "start": 412.32,
+    "duration": 3.4
+  },
+  {
+    "text": "blog post talking about graph",
+    "start": 414.32,
+    "duration": 3.68
+  },
+  {
+    "text": "engineering, they said that what changed",
+    "start": 415.72,
+    "duration": 4.56
+  },
+  {
+    "text": "wasn't the graph, but more in what the",
+    "start": 418,
+    "duration": 4.76
+  },
+  {
+    "text": "node can do. Back then, it was just an",
+    "start": 420.28,
+    "duration": 5
+  },
+  {
+    "text": "LLM call, nothing close to a full agent",
+    "start": 422.76,
+    "duration": 4.28
+  },
+  {
+    "text": "that we interact with every day like",
+    "start": 425.28,
+    "duration": 4.52
+  },
+  {
+    "text": "Claude Code or CodeX CLI. These agents",
+    "start": 427.04,
+    "duration": 5.12
+  },
+  {
+    "text": "are immensely better given their myriads",
+    "start": 429.8,
+    "duration": 4.8
+  },
+  {
+    "text": "of tools and harness environment. So,",
+    "start": 432.16,
+    "duration": 4.64
+  },
+  {
+    "text": "with the emergence of coding like",
+    "start": 434.6,
+    "duration": 4.52
+  },
+  {
+    "text": "Cursor, Kline, Rue, and Winster, which",
+    "start": 436.8,
+    "duration": 4.36
+  },
+  {
+    "text": "were one of the few early players back",
+    "start": 439.12,
+    "duration": 4.68
+  },
+  {
+    "text": "then when it comes to agents, they focus",
+    "start": 441.16,
+    "duration": 5.52
+  },
+  {
+    "text": "more on single agents in improving that",
+    "start": 443.8,
+    "duration": 5.32
+  },
+  {
+    "text": "very agent instead of extending them to",
+    "start": 446.68,
+    "duration": 4.76
+  },
+  {
+    "text": "various edges that form a graph of",
+    "start": 449.12,
+    "duration": 4.24
+  },
+  {
+    "text": "agents actually working together. And",
+    "start": 451.44,
+    "duration": 4.44
+  },
+  {
+    "text": "over time, these agents individually",
+    "start": 453.36,
+    "duration": 4.08
+  },
+  {
+    "text": "started to incorporate better",
+    "start": 455.88,
+    "duration": 3.36
+  },
+  {
+    "text": "methodologies, going from prompt",
+    "start": 457.44,
+    "duration": 4
+  },
+  {
+    "text": "engineering to context engineering,",
+    "start": 459.24,
+    "duration": 3.72
+  },
+  {
+    "text": "better harnessing, and now the",
+    "start": 461.44,
+    "duration": 3.76
+  },
+  {
+    "text": "bottleneck started to shift away from",
+    "start": 462.96,
+    "duration": 5.12
+  },
+  {
+    "text": "what the node can do, but into a graph",
+    "start": 465.2,
+    "duration": 4.64
+  },
+  {
+    "text": "and the edges that connect the nodes",
+    "start": 468.08,
+    "duration": 3.84
+  },
+  {
+    "text": "together. And now, no pun intended,",
+    "start": 469.84,
+    "duration": 4.48
+  },
+  {
+    "text": "we're coming full circle back to graphs.",
+    "start": 471.92,
+    "duration": 4.76
+  },
+  {
+    "text": "Because the nodes are reliable and more",
+    "start": 474.32,
+    "duration": 5.12
+  },
+  {
+    "text": "capable, we can now scale our agents",
+    "start": 476.68,
+    "duration": 5.28
+  },
+  {
+    "text": "from a single agent to a workflow or a",
+    "start": 479.44,
+    "duration": 5.32
+  },
+  {
+    "text": "graph to target a much wider set of",
+    "start": 481.96,
+    "duration": 4.96
+  },
+  {
+    "text": "problems like we saw in deep research,",
+    "start": 484.76,
+    "duration": 3.64
+  },
+  {
+    "text": "which would have been really difficult",
+    "start": 486.92,
+    "duration": 3.72
+  },
+  {
+    "text": "for a single agent to solve. So, going",
+    "start": 488.4,
+    "duration": 4.16
+  },
+  {
+    "text": "back to Euler's case, his challenge was",
+    "start": 490.64,
+    "duration": 4.32
+  },
+  {
+    "text": "to determine the feasibility of crossing",
+    "start": 492.56,
+    "duration": 5.12
+  },
+  {
+    "text": "all seven bridges exactly once, which",
+    "start": 494.96,
+    "duration": 4.72
+  },
+  {
+    "text": "led to the birth of graph theory. In our",
+    "start": 497.68,
+    "duration": 4.28
+  },
+  {
+    "text": "case, our adaptation of graph theory",
+    "start": 499.68,
+    "duration": 5.08
+  },
+  {
+    "text": "into agents is determining how a task",
+    "start": 501.96,
+    "duration": 5.4
+  },
+  {
+    "text": "can be divided in a way that a highly",
+    "start": 504.76,
+    "duration": 4.8
+  },
+  {
+    "text": "capable node now should structurally be",
+    "start": 507.36,
+    "duration": 4
+  },
+  {
+    "text": "configured to solve a much more",
+    "start": 509.56,
+    "duration": 4.4
+  },
+  {
+    "text": "complicated task that we give our agents",
+    "start": 511.36,
+    "duration": 5.32
+  },
+  {
+    "text": "to solve.",
+    "start": 513.96,
+    "duration": 2.72
+  }
+]

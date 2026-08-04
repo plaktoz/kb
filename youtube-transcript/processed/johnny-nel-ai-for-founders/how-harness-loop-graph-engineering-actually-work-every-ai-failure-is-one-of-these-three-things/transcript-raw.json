@@ -1,0 +1,2382 @@
+[
+  {
+    "text": "A control room on this machine was",
+    "start": 0,
+    "duration": 3.6
+  },
+  {
+    "text": "telling me what my agents were doing.",
+    "start": 1.68,
+    "duration": 3.92
+  },
+  {
+    "text": "And the run history in it was real, all",
+    "start": 3.6,
+    "duration": 3.96
+  },
+  {
+    "text": "the way down to the token counts. It was",
+    "start": 5.6,
+    "duration": 4
+  },
+  {
+    "text": "reading a copy of itself that I had",
+    "start": 7.56,
+    "duration": 4.04
+  },
+  {
+    "text": "dragged into the trash. And nothing",
+    "start": 9.6,
+    "duration": 3.8
+  },
+  {
+    "text": "you're running right now will tell you",
+    "start": 11.6,
+    "duration": 3.76
+  },
+  {
+    "text": "where it is reading from. That control",
+    "start": 13.4,
+    "duration": 3.84
+  },
+  {
+    "text": "room is one of ours, and this machine",
+    "start": 15.36,
+    "duration": 3.8
+  },
+  {
+    "text": "runs agents against real work most",
+    "start": 17.24,
+    "duration": 3.68
+  },
+  {
+    "text": "weeks. What had gone wrong in there? The",
+    "start": 19.16,
+    "duration": 3.16
+  },
+  {
+    "text": "model was doing its job, and there was",
+    "start": 20.92,
+    "duration": 3.2
+  },
+  {
+    "text": "nothing wrong with the words I had typed",
+    "start": 22.32,
+    "duration": 3.4
+  },
+  {
+    "text": "at it, and the whole problem was where",
+    "start": 24.12,
+    "duration": 3
+  },
+  {
+    "text": "the thing was standing. And when I tell",
+    "start": 25.72,
+    "duration": 3
+  },
+  {
+    "text": "you something broke, that happened on",
+    "start": 27.12,
+    "duration": 3.28
+  },
+  {
+    "text": "this machine. And I will tell you which",
+    "start": 28.72,
+    "duration": 3.32
+  },
+  {
+    "text": "of the two you're getting. Where the",
+    "start": 30.4,
+    "duration": 4.2
+  },
+  {
+    "text": "thing is standing is one of exactly",
+    "start": 32.04,
+    "duration": 4.84
+  },
+  {
+    "text": "three things that get decided every time",
+    "start": 34.6,
+    "duration": 4.2
+  },
+  {
+    "text": "an AI does a real job for you. And it is",
+    "start": 36.88,
+    "duration": 3.6
+  },
+  {
+    "text": "the one you can change today with no",
+    "start": 38.8,
+    "duration": 3.72
+  },
+  {
+    "text": "code and nobody's help. Can you tell",
+    "start": 40.48,
+    "duration": 3.92
+  },
+  {
+    "text": "which of the three has gone wrong on",
+    "start": 42.52,
+    "duration": 3.48
+  },
+  {
+    "text": "your setup right now? There is a",
+    "start": 44.4,
+    "duration": 3.4
+  },
+  {
+    "text": "sentence you can say out loud that tells",
+    "start": 46,
+    "duration": 3.44
+  },
+  {
+    "text": "you which of the three is broken. And",
+    "start": 47.8,
+    "duration": 3.96
+  },
+  {
+    "text": "for most people watching, the answer is",
+    "start": 49.44,
+    "duration": 4.44
+  },
+  {
+    "text": ">> Hey, I'm Johnny Nal. I spent years",
+    "start": 51.76,
+    "duration": 4
+  },
+  {
+    "text": "building businesses the old hard way,",
+    "start": 53.88,
+    "duration": 4.32
+  },
+  {
+    "text": "managing teams, scaling operations, and",
+    "start": 55.76,
+    "duration": 4.92
+  },
+  {
+    "text": "doing everything manually. Today,",
+    "start": 58.2,
+    "duration": 4.96
+  },
+  {
+    "text": "everything I built, from automations and",
+    "start": 60.68,
+    "duration": 5
+  },
+  {
+    "text": "no-code infrastructures to fully AI SaaS",
+    "start": 63.16,
+    "duration": 5.52
+  },
+  {
+    "text": "products, has AI helping in one way or",
+    "start": 65.68,
+    "duration": 3.52
+  },
+  {
+    "text": "another.",
+    "start": 68.68,
+    "duration": 1.4
+  },
+  {
+    "text": ">> First of all, let me quickly show you",
+    "start": 69.2,
+    "duration": 3.16
+  },
+  {
+    "text": "this. In South Africa, we call this a",
+    "start": 70.08,
+    "duration": 4.92
+  },
+  {
+    "text": "braai. I built with AI tools that in my",
+    "start": 72.36,
+    "duration": 4.6
+  },
+  {
+    "text": "opinion anyone can learn to use. My",
+    "start": 75,
+    "duration": 3.68
+  },
+  {
+    "text": "mission is simple: to help creators,",
+    "start": 76.96,
+    "duration": 3.32
+  },
+  {
+    "text": "entrepreneurs, and business owners get",
+    "start": 78.68,
+    "duration": 3.96
+  },
+  {
+    "text": "clarity with AI. Let's build smarter",
+    "start": 80.28,
+    "duration": 6.04
+  },
+  {
+    "text": "together and enjoy this video.",
+    "start": 82.64,
+    "duration": 3.68
+  },
+  {
+    "text": "The editing tool I use every week",
+    "start": 86.64,
+    "duration": 4.28
+  },
+  {
+    "text": "publishes an interface where the only",
+    "start": 88.84,
+    "duration": 4
+  },
+  {
+    "text": "thing you're allowed to hand it is a",
+    "start": 90.92,
+    "duration": 3.84
+  },
+  {
+    "text": "sentence in plain English, and there is",
+    "start": 92.84,
+    "duration": 4.32
+  },
+  {
+    "text": "no field for a frame or a track anywhere",
+    "start": 94.76,
+    "duration": 4.6
+  },
+  {
+    "text": "in the whole thing. So, I sat down and",
+    "start": 97.16,
+    "duration": 4.8
+  },
+  {
+    "text": "wrote better sentences. What I wanted",
+    "start": 99.36,
+    "duration": 4.68
+  },
+  {
+    "text": "was a graphic laid over the footage",
+    "start": 101.96,
+    "duration": 4.24
+  },
+  {
+    "text": "holding for said number of seconds, and",
+    "start": 104.04,
+    "duration": 3.8
+  },
+  {
+    "text": "I described that to it, what it should",
+    "start": 106.2,
+    "duration": 3.52
+  },
+  {
+    "text": "say and exactly where on the picture it",
+    "start": 107.84,
+    "duration": 3.88
+  },
+  {
+    "text": "had to go. And every time I got back",
+    "start": 109.72,
+    "duration": 4.08
+  },
+  {
+    "text": "something close and wrong in a slightly",
+    "start": 111.72,
+    "duration": 3.84
+  },
+  {
+    "text": "different way. So, was I wording it",
+    "start": 113.8,
+    "duration": 4.24
+  },
+  {
+    "text": "badly? For a stretch of that week, that",
+    "start": 115.56,
+    "duration": 4.32
+  },
+  {
+    "text": "is exactly what I thought. And some of",
+    "start": 118.04,
+    "duration": 2.88
+  },
+  {
+    "text": "you are going to say this is just",
+    "start": 119.88,
+    "duration": 3
+  },
+  {
+    "text": "prompting with extra steps. There was",
+    "start": 120.92,
+    "duration": 3.6
+  },
+  {
+    "text": "one job in there where the wording",
+    "start": 122.88,
+    "duration": 3.28
+  },
+  {
+    "text": "genuinely was the problem. And once I",
+    "start": 124.52,
+    "duration": 3.92
+  },
+  {
+    "text": "described it the way the tool expected,",
+    "start": 126.16,
+    "duration": 4.56
+  },
+  {
+    "text": "it did the job properly. But the graphic",
+    "start": 128.44,
+    "duration": 4
+  },
+  {
+    "text": "over the footage was never that kind of",
+    "start": 130.72,
+    "duration": 3.28
+  },
+  {
+    "text": "problem because what I was asking for",
+    "start": 132.44,
+    "duration": 3.76
+  },
+  {
+    "text": "had nowhere in the software to land.",
+    "start": 134,
+    "duration": 4.04
+  },
+  {
+    "text": "That field does not exist. And a field",
+    "start": 136.2,
+    "duration": 3.28
+  },
+  {
+    "text": "that does not exist cannot be talked",
+    "start": 138.04,
+    "duration": 3.88
+  },
+  {
+    "text": "into existing however carefully you word",
+    "start": 139.48,
+    "duration": 4.72
+  },
+  {
+    "text": "the request. So the whole visual layer",
+    "start": 141.92,
+    "duration": 4.44
+  },
+  {
+    "text": "came off that tool and onto something we",
+    "start": 144.2,
+    "duration": 4.32
+  },
+  {
+    "text": "build ourselves to draw the picture.",
+    "start": 146.36,
+    "duration": 4.04
+  },
+  {
+    "text": "That whole business has a name and I",
+    "start": 148.52,
+    "duration": 4.08
+  },
+  {
+    "text": "only ran into it afterwards. LangChain",
+    "start": 150.4,
+    "duration": 4.72
+  },
+  {
+    "text": "published a piece on the 10th of March",
+    "start": 152.6,
+    "duration": 5.92
+  },
+  {
+    "text": "2026 written up by Vivek Trivedi. And",
+    "start": 155.12,
+    "duration": 5.8
+  },
+  {
+    "text": "their line is that a harness is every",
+    "start": 158.52,
+    "duration": 4.72
+  },
+  {
+    "text": "piece of code, configuration, and",
+    "start": 160.92,
+    "duration": 4
+  },
+  {
+    "text": "execution logic that isn't the model",
+    "start": 163.24,
+    "duration": 4.12
+  },
+  {
+    "text": "itself. Or as he puts it earlier on, if",
+    "start": 164.92,
+    "duration": 3.8
+  },
+  {
+    "text": "you're not the model, you're the",
+    "start": 167.36,
+    "duration": 2.76
+  },
+  {
+    "text": "harness.",
+    "start": 168.72,
+    "duration": 3.6
+  },
+  {
+    "text": "So essentially, everything that is not",
+    "start": 170.12,
+    "duration": 4.6
+  },
+  {
+    "text": "the brain is the working conditions. And",
+    "start": 172.32,
+    "duration": 4.48
+  },
+  {
+    "text": "your working conditions decide what it",
+    "start": 174.72,
+    "duration": 4.4
+  },
+  {
+    "text": "can actually open and touch. Whatever",
+    "start": 176.8,
+    "duration": 3.64
+  },
+  {
+    "text": "you are running right now, take the",
+    "start": 179.12,
+    "duration": 3.24
+  },
+  {
+    "text": "model out of the picture and look hard",
+    "start": 180.44,
+    "duration": 3.72
+  },
+  {
+    "text": "at what is left around it. Because every",
+    "start": 182.36,
+    "duration": 4.08
+  },
+  {
+    "text": "one of those things is a choice somebody",
+    "start": 184.16,
+    "duration": 4.4
+  },
+  {
+    "text": "made once and never went back to. And",
+    "start": 186.44,
+    "duration": 3.6
+  },
+  {
+    "text": "everything still connected to the model",
+    "start": 188.56,
+    "duration": 3.48
+  },
+  {
+    "text": "is a set of keys. And the question is",
+    "start": 190.04,
+    "duration": 4.32
+  },
+  {
+    "text": "which doors those keys open. Most people",
+    "start": 192.04,
+    "duration": 3.919
+  },
+  {
+    "text": "have never counted their doors and the",
+    "start": 194.36,
+    "duration": 3.68
+  },
+  {
+    "text": "permissions you handed over on day one",
+    "start": 195.959,
+    "duration": 3.841
+  },
+  {
+    "text": "are still hanging on the ring. And you",
+    "start": 198.04,
+    "duration": 2.96
+  },
+  {
+    "text": "might be thinking you would just use a",
+    "start": 199.8,
+    "duration": 3.32
+  },
+  {
+    "text": "different tool. That is a reasonable",
+    "start": 201,
+    "duration": 3.959
+  },
+  {
+    "text": "answer and it changes something real",
+    "start": 203.12,
+    "duration": 3.8
+  },
+  {
+    "text": "because a different tool can reach",
+    "start": 204.959,
+    "duration": 3.481
+  },
+  {
+    "text": "different things. So what you are",
+    "start": 206.92,
+    "duration": 3.92
+  },
+  {
+    "text": "changing is this first decision, which",
+    "start": 208.44,
+    "duration": 4.56
+  },
+  {
+    "text": "is the point. So guys, the way I look at",
+    "start": 210.84,
+    "duration": 4.76
+  },
+  {
+    "text": "it, you can fix a surprising amount of",
+    "start": 213,
+    "duration": 4.72
+  },
+  {
+    "text": "this in an afternoon. And it starts with",
+    "start": 215.6,
+    "duration": 4
+  },
+  {
+    "text": "counting what is switched on. The",
+    "start": 217.72,
+    "duration": 3.96
+  },
+  {
+    "text": "connectors, the integrations you added",
+    "start": 219.6,
+    "duration": 3.84
+  },
+  {
+    "text": "in March and forgot about 16 years. And",
+    "start": 221.68,
+    "duration": 3.44
+  },
+  {
+    "text": "then switching off everything you did",
+    "start": 223.44,
+    "duration": 4.079
+  },
+  {
+    "text": "not deliberately turn on for the job in",
+    "start": 225.12,
+    "duration": 4.04
+  },
+  {
+    "text": "front of you. Why does that matter more",
+    "start": 227.519,
+    "duration": 4.321
+  },
+  {
+    "text": "than it sounds? A crowded tool set most",
+    "start": 229.16,
+    "duration": 4.04
+  },
+  {
+    "text": "probably makes it reach for the wrong",
+    "start": 231.84,
+    "duration": 3.28
+  },
+  {
+    "text": "tool. And the descriptions of the tools",
+    "start": 233.2,
+    "duration": 4.48
+  },
+  {
+    "text": "you never use get sent along on every",
+    "start": 235.12,
+    "duration": 4.68
+  },
+  {
+    "text": "single turn. Meaning every back and",
+    "start": 237.68,
+    "duration": 4.92
+  },
+  {
+    "text": "forth between you and the thing, whether",
+    "start": 239.8,
+    "duration": 5.12
+  },
+  {
+    "text": "you call them or not. And by the end of",
+    "start": 242.6,
+    "duration": 4.08
+  },
+  {
+    "text": "that afternoon, the list of what your",
+    "start": 244.92,
+    "duration": 3.76
+  },
+  {
+    "text": "setup can reach is a lot shorter. And",
+    "start": 246.68,
+    "duration": 4.04
+  },
+  {
+    "text": "everything still on it is there because",
+    "start": 248.68,
+    "duration": 4
+  },
+  {
+    "text": "you put it there on purpose. Every",
+    "start": 250.72,
+    "duration": 4
+  },
+  {
+    "text": "morning, I opened the same chat and",
+    "start": 252.68,
+    "duration": 3.92
+  },
+  {
+    "text": "typed out the same few paragraphs of",
+    "start": 254.72,
+    "duration": 3.68
+  },
+  {
+    "text": "background before the thing could do",
+    "start": 256.6,
+    "duration": 4.44
+  },
+  {
+    "text": "anything useful for me. And guys, I know",
+    "start": 258.4,
+    "duration": 5
+  },
+  {
+    "text": "how that sounds. A grown man retyping",
+    "start": 261.04,
+    "duration": 4.48
+  },
+  {
+    "text": "the same paragraph before breakfast. But",
+    "start": 263.4,
+    "duration": 4.08
+  },
+  {
+    "text": "that is what the setup gave me. Because",
+    "start": 265.52,
+    "duration": 3.88
+  },
+  {
+    "text": "the conversation was the only memory in",
+    "start": 267.48,
+    "duration": 3.96
+  },
+  {
+    "text": "the building, and the conversation ended",
+    "start": 269.4,
+    "duration": 4.08
+  },
+  {
+    "text": "every night. Does any of that sound like",
+    "start": 271.44,
+    "duration": 4.28
+  },
+  {
+    "text": "your own Monday morning? On a building",
+    "start": 273.48,
+    "duration": 5
+  },
+  {
+    "text": "site, the scaffolding you leave standing",
+    "start": 275.72,
+    "duration": 5
+  },
+  {
+    "text": "is still there when you come back. And",
+    "start": 278.48,
+    "duration": 4.6
+  },
+  {
+    "text": "whatever went into the van at 5:00 went",
+    "start": 280.72,
+    "duration": 4.64
+  },
+  {
+    "text": "home with the van. Your chat window is",
+    "start": 283.08,
+    "duration": 4.72
+  },
+  {
+    "text": "the van, and nothing you put in it is",
+    "start": 285.36,
+    "duration": 4.52
+  },
+  {
+    "text": "standing on site tomorrow. And I know a",
+    "start": 287.8,
+    "duration": 4.119
+  },
+  {
+    "text": "few of you have already made this exact",
+    "start": 289.88,
+    "duration": 3.88
+  },
+  {
+    "text": "fix and called it memory. And there's a",
+    "start": 291.919,
+    "duration": 3.721
+  },
+  {
+    "text": "whole video of mine on that one. So yes,",
+    "start": 293.76,
+    "duration": 3.4
+  },
+  {
+    "text": "it is the same problem. And I put the",
+    "start": 295.64,
+    "duration": 3.6
+  },
+  {
+    "text": "fix in that video and then went on",
+    "start": 297.16,
+    "duration": 3.96
+  },
+  {
+    "text": "retyping my background every morning",
+    "start": 299.24,
+    "duration": 4
+  },
+  {
+    "text": "anyway. Anthropic wrote up what happened",
+    "start": 301.12,
+    "duration": 4.4
+  },
+  {
+    "text": "when they tried this internally on the",
+    "start": 303.24,
+    "duration": 5.24
+  },
+  {
+    "text": "26th of November, 2025. They were",
+    "start": 305.52,
+    "duration": 5.12
+  },
+  {
+    "text": "building a clone of their own product",
+    "start": 308.48,
+    "duration": 5.12
+  },
+  {
+    "text": "with over 200 features in it, session",
+    "start": 310.64,
+    "duration": 4.68
+  },
+  {
+    "text": "after session. And what did they try",
+    "start": 313.6,
+    "duration": 3.2
+  },
+  {
+    "text": "first? They tried to squeezing the",
+    "start": 315.32,
+    "duration": 3.28
+  },
+  {
+    "text": "conversation smaller, which is the",
+    "start": 316.8,
+    "duration": 4
+  },
+  {
+    "text": "obvious move and the one you would reach",
+    "start": 318.6,
+    "duration": 3.84
+  },
+  {
+    "text": "for. And I'll give you their sentence",
+    "start": 320.8,
+    "duration": 4.04
+  },
+  {
+    "text": "about it word for word. However,",
+    "start": 322.44,
+    "duration": 4.76
+  },
+  {
+    "text": "compaction isn't sufficient. That is the",
+    "start": 324.84,
+    "duration": 4.52
+  },
+  {
+    "text": "sentence printed on their own page. What",
+    "start": 327.2,
+    "duration": 4.52
+  },
+  {
+    "text": "worked instead was basically a text",
+    "start": 329.36,
+    "duration": 4.64
+  },
+  {
+    "text": "file. The first session writes down what",
+    "start": 331.72,
+    "duration": 4.28
+  },
+  {
+    "text": "it did and what is still open. And every",
+    "start": 334,
+    "duration": 4.12
+  },
+  {
+    "text": "session after that reads the file before",
+    "start": 336,
+    "duration": 3.919
+  },
+  {
+    "text": "it starts and updates it before it",
+    "start": 338.12,
+    "duration": 4.6
+  },
+  {
+    "text": "stops. Mine has a heading for what got",
+    "start": 339.919,
+    "duration": 4.641
+  },
+  {
+    "text": "done and a heading for what is still",
+    "start": 342.72,
+    "duration": 3.96
+  },
+  {
+    "text": "left. And then blocked sits on its own",
+    "start": 344.56,
+    "duration": 3.92
+  },
+  {
+    "text": "line underneath. And blocked is the one",
+    "start": 346.68,
+    "duration": 3.68
+  },
+  {
+    "text": "that saves you the most time because it",
+    "start": 348.48,
+    "duration": 3.88
+  },
+  {
+    "text": "stops tomorrow's run from walking into",
+    "start": 350.36,
+    "duration": 4.24
+  },
+  {
+    "text": "the wall you hit today. Now, that is one",
+    "start": 352.36,
+    "duration": 4.36
+  },
+  {
+    "text": "internal experiment on one demo build",
+    "start": 354.6,
+    "duration": 4.68
+  },
+  {
+    "text": "and the write-up says the demo was tuned",
+    "start": 356.72,
+    "duration": 4.28
+  },
+  {
+    "text": "for one kind of work. So, I'm not",
+    "start": 359.28,
+    "duration": 4.12
+  },
+  {
+    "text": "handing it to you as a law. In my",
+    "start": 361,
+    "duration": 4.4
+  },
+  {
+    "text": "opinion, writing that file is the best",
+    "start": 363.4,
+    "duration": 4.4
+  },
+  {
+    "text": "hour you will spend on any of this and",
+    "start": 365.4,
+    "duration": 4.28
+  },
+  {
+    "text": "it is not a hole you are plugging. It is",
+    "start": 367.8,
+    "duration": 3.32
+  },
+  {
+    "text": "the first piece of your setup that",
+    "start": 369.68,
+    "duration": 3.88
+  },
+  {
+    "text": "belongs to you rather than to whatever",
+    "start": 371.12,
+    "duration": 4.2
+  },
+  {
+    "text": "window you happen to open that morning.",
+    "start": 373.56,
+    "duration": 3.56
+  },
+  {
+    "text": "So, write four lines in it tonight and",
+    "start": 375.32,
+    "duration": 3.8
+  },
+  {
+    "text": "tomorrow point the thing at the file",
+    "start": 377.12,
+    "duration": 4.04
+  },
+  {
+    "text": "instead of typing your background out",
+    "start": 379.12,
+    "duration": 3.76
+  },
+  {
+    "text": "from scratch. And the morning after",
+    "start": 381.16,
+    "duration": 2.96
+  },
+  {
+    "text": "that, you're opening something that",
+    "start": 382.88,
+    "duration": 2.92
+  },
+  {
+    "text": "already knows where you got to, which",
+    "start": 384.12,
+    "duration": 4.36
+  },
+  {
+    "text": "means you start your day on the work",
+    "start": 385.8,
+    "duration": 4.96
+  },
+  {
+    "text": "rather than on the briefing. There is a",
+    "start": 388.48,
+    "duration": 4.08
+  },
+  {
+    "text": "part of the laptop in front of you whose",
+    "start": 390.76,
+    "duration": 4.48
+  },
+  {
+    "text": "entire job is deciding which programs",
+    "start": 392.56,
+    "duration": 4.88
+  },
+  {
+    "text": "are allowed to open which files and it",
+    "start": 395.24,
+    "duration": 3.84
+  },
+  {
+    "text": "has been doing that job for decades",
+    "start": 397.44,
+    "duration": 4.28
+  },
+  {
+    "text": "without anybody calling it a harness.",
+    "start": 399.08,
+    "duration": 4.68
+  },
+  {
+    "text": "So, most of what I have described to you",
+    "start": 401.72,
+    "duration": 5
+  },
+  {
+    "text": "is that same job with new words on it.",
+    "start": 403.76,
+    "duration": 4.48
+  },
+  {
+    "text": "And that is a reason to be less nervous",
+    "start": 406.72,
+    "duration": 3.48
+  },
+  {
+    "text": "about it. The shape of the problem is",
+    "start": 408.24,
+    "duration": 3.96
+  },
+  {
+    "text": "one your own machine has been handling",
+    "start": 410.2,
+    "duration": 3.88
+  },
+  {
+    "text": "since before you bought it. Which part",
+    "start": 412.2,
+    "duration": 4.4
+  },
+  {
+    "text": "of this is genuinely new? The part made",
+    "start": 414.08,
+    "duration": 4.36
+  },
+  {
+    "text": "of language is the new bit because",
+    "start": 416.6,
+    "duration": 3.88
+  },
+  {
+    "text": "nothing inside your laptop ever had to",
+    "start": 418.44,
+    "duration": 4.2
+  },
+  {
+    "text": "write the instructions a thing reads",
+    "start": 420.48,
+    "duration": 4.6
+  },
+  {
+    "text": "before it starts. The people publishing",
+    "start": 422.64,
+    "duration": 4.72
+  },
+  {
+    "text": "on this do not agree where the lines",
+    "start": 425.08,
+    "duration": 4.839
+  },
+  {
+    "text": "between these three side and one of them",
+    "start": 427.36,
+    "duration": 4.28
+  },
+  {
+    "text": "folds the ordering work into the first",
+    "start": 429.919,
+    "duration": 4.281
+  },
+  {
+    "text": "decision entirely. So, the way I see it,",
+    "start": 431.64,
+    "duration": 4.96
+  },
+  {
+    "text": "the split I'm handing you is mine and it",
+    "start": 434.2,
+    "duration": 4.2
+  },
+  {
+    "text": "is not anybody's standard. I've put most",
+    "start": 436.6,
+    "duration": 4.24
+  },
+  {
+    "text": "of my time here on that first decision",
+    "start": 438.4,
+    "duration": 4.32
+  },
+  {
+    "text": "because that is where most of what goes",
+    "start": 440.84,
+    "duration": 3.68
+  },
+  {
+    "text": "wrong for you happens. And which one of",
+    "start": 442.72,
+    "duration": 3.56
+  },
+  {
+    "text": "these three has no older version of",
+    "start": 444.52,
+    "duration": 3.84
+  },
+  {
+    "text": "itself anywhere? Now, everything I have",
+    "start": 446.28,
+    "duration": 4.4
+  },
+  {
+    "text": "just handed you is written down properly",
+    "start": 448.36,
+    "duration": 4.28
+  },
+  {
+    "text": "inside the AI founder's vault. There's a",
+    "start": 450.68,
+    "duration": 4
+  },
+  {
+    "text": "20-minute audit waiting in there that",
+    "start": 452.64,
+    "duration": 3.8
+  },
+  {
+    "text": "you can run this afternoon and you come",
+    "start": 454.68,
+    "duration": 3.6
+  },
+  {
+    "text": "out of it holding a written count of",
+    "start": 456.44,
+    "duration": 3.72
+  },
+  {
+    "text": "what your setup can actually reach. The",
+    "start": 458.28,
+    "duration": 3.4
+  },
+  {
+    "text": "community's in there running the same",
+    "start": 460.16,
+    "duration": 3.68
+  },
+  {
+    "text": "audit on their own setups, and the link",
+    "start": 461.68,
+    "duration": 4.32
+  },
+  {
+    "text": "is down in the description below.",
+    "start": 463.84,
+    "duration": 4.12
+  },
+  {
+    "text": "All right, so let's get into the second",
+    "start": 466,
+    "duration": 4.52
+  },
+  {
+    "text": "of these three, which is how anything",
+    "start": 467.96,
+    "duration": 4.24
+  },
+  {
+    "text": "you set running is supposed to know that",
+    "start": 470.52,
+    "duration": 3.72
+  },
+  {
+    "text": "it is finished. When a render finishes",
+    "start": 472.2,
+    "duration": 4.36
+  },
+  {
+    "text": "on this machine, the program that did it",
+    "start": 474.24,
+    "duration": 4.24
+  },
+  {
+    "text": "hands back a number. It tells you",
+    "start": 476.56,
+    "duration": 4.28
+  },
+  {
+    "text": "whether the job worked without a single",
+    "start": 478.48,
+    "duration": 4.56
+  },
+  {
+    "text": "person having to look at it. That number",
+    "start": 480.84,
+    "duration": 3.92
+  },
+  {
+    "text": "was computed by the thing doing the",
+    "start": 483.04,
+    "duration": 3.84
+  },
+  {
+    "text": "work, which is why you can act on it",
+    "start": 484.76,
+    "duration": 4.28
+  },
+  {
+    "text": "while you are asleep. An AI job stops",
+    "start": 486.88,
+    "duration": 4
+  },
+  {
+    "text": "when the AI says it is done. And the",
+    "start": 489.04,
+    "duration": 3.72
+  },
+  {
+    "text": "fair pushback is that you asked it and",
+    "start": 490.88,
+    "duration": 4.039
+  },
+  {
+    "text": "it told you it was done, which is true.",
+    "start": 492.76,
+    "duration": 4.28
+  },
+  {
+    "text": "What you did was asked the same source",
+    "start": 494.919,
+    "duration": 4.481
+  },
+  {
+    "text": "for a second opinion on itself. So, the",
+    "start": 497.04,
+    "duration": 5.16
+  },
+  {
+    "text": "AI is now the thing that decides its own",
+    "start": 499.4,
+    "duration": 4.68
+  },
+  {
+    "text": "ending, and the AI is the part that can",
+    "start": 502.2,
+    "duration": 4.48
+  },
+  {
+    "text": "be wrong, which is why this is the only",
+    "start": 504.08,
+    "duration": 4.72
+  },
+  {
+    "text": "one of the three with nothing older",
+    "start": 506.68,
+    "duration": 4.68
+  },
+  {
+    "text": "behind it. No operating system has ever",
+    "start": 508.8,
+    "duration": 5.44
+  },
+  {
+    "text": "had to decide whether a piece of work is",
+    "start": 511.36,
+    "duration": 5.28
+  },
+  {
+    "text": "good enough to be called finished,",
+    "start": 514.24,
+    "duration": 4.359
+  },
+  {
+    "text": "because that is a judgment somebody has",
+    "start": 516.64,
+    "duration": 4.24
+  },
+  {
+    "text": "to make. Everything before this computed",
+    "start": 518.599,
+    "duration": 4.241
+  },
+  {
+    "text": "its own ending out of the work it had",
+    "start": 520.88,
+    "duration": 4
+  },
+  {
+    "text": "just done. And an AI hands you a claim",
+    "start": 522.84,
+    "duration": 3.84
+  },
+  {
+    "text": "instead, which is a different kind of",
+    "start": 524.88,
+    "duration": 4
+  },
+  {
+    "text": "thing to trust. What does that cost you",
+    "start": 526.68,
+    "duration": 4.04
+  },
+  {
+    "text": "in practice? Your finish line is now",
+    "start": 528.88,
+    "duration": 4.48
+  },
+  {
+    "text": "something you build from the outside. It",
+    "start": 530.72,
+    "duration": 4.6
+  },
+  {
+    "text": "has to be cheap enough for you to check,",
+    "start": 533.36,
+    "duration": 3.64
+  },
+  {
+    "text": "and plain enough that somebody else",
+    "start": 535.32,
+    "duration": 3.6
+  },
+  {
+    "text": "could check it without asking you what",
+    "start": 537,
+    "duration": 3.8
+  },
+  {
+    "text": "you meant. So, what does the piece of",
+    "start": 538.92,
+    "duration": 4.24
+  },
+  {
+    "text": "software that runs the job do when",
+    "start": 540.8,
+    "duration": 4.48
+  },
+  {
+    "text": "nobody can tell whether it is finished?",
+    "start": 543.16,
+    "duration": 4.36
+  },
+  {
+    "text": "OpenAI's own agent runner does not sit",
+    "start": 545.28,
+    "duration": 5.24
+  },
+  {
+    "text": "there waiting for a real ending. It",
+    "start": 547.52,
+    "duration": 4.76
+  },
+  {
+    "text": "ships with a cap on how many turns a",
+    "start": 550.52,
+    "duration": 3.64
+  },
+  {
+    "text": "single run gets. And when a run goes",
+    "start": 552.28,
+    "duration": 3.64
+  },
+  {
+    "text": "past that cap, the runner raises an",
+    "start": 554.16,
+    "duration": 4.44
+  },
+  {
+    "text": "error and stops. The runner stops at 10.",
+    "start": 555.92,
+    "duration": 4.8
+  },
+  {
+    "text": "That is the default in their own source",
+    "start": 558.6,
+    "duration": 4.32
+  },
+  {
+    "text": "code, and a cap like that is what you",
+    "start": 560.72,
+    "duration": 4.76
+  },
+  {
+    "text": "end up with when the ending cannot be",
+    "start": 562.92,
+    "duration": 4.08
+  },
+  {
+    "text": "worked out from the inside. So,",
+    "start": 565.48,
+    "duration": 3.4
+  },
+  {
+    "text": "essentially, what I write now before a",
+    "start": 567,
+    "duration": 4.48
+  },
+  {
+    "text": "run starts is what I call a done test.",
+    "start": 568.88,
+    "duration": 4.32
+  },
+  {
+    "text": "It's a short written list of conditions",
+    "start": 571.48,
+    "duration": 3.92
+  },
+  {
+    "text": "that have to be true when the thing",
+    "start": 573.2,
+    "duration": 4
+  },
+  {
+    "text": "comes back. I'd say the rule that makes",
+    "start": 575.4,
+    "duration": 4.04
+  },
+  {
+    "text": "it work sounds like a technicality at",
+    "start": 577.2,
+    "duration": 4.8
+  },
+  {
+    "text": "first, but it is the part that matters.",
+    "start": 579.44,
+    "duration": 4.52
+  },
+  {
+    "text": "Every condition on it has to be",
+    "start": 582,
+    "duration": 3.92
+  },
+  {
+    "text": "checkable by somebody who is not in the",
+    "start": 583.96,
+    "duration": 4.08
+  },
+  {
+    "text": "conversation. And how do you tell a test",
+    "start": 585.92,
+    "duration": 4.12
+  },
+  {
+    "text": "from a wish? Say your condition is that",
+    "start": 588.04,
+    "duration": 3.92
+  },
+  {
+    "text": "it should read professionally. That is a",
+    "start": 590.04,
+    "duration": 3.88
+  },
+  {
+    "text": "wish because the only thing that can",
+    "start": 591.96,
+    "duration": 3.92
+  },
+  {
+    "text": "grade it is the thing that wrote it.",
+    "start": 593.92,
+    "duration": 3.84
+  },
+  {
+    "text": "Now, say your condition is that every",
+    "start": 595.88,
+    "duration": 3.92
+  },
+  {
+    "text": "figure in the draft appears on the",
+    "start": 597.76,
+    "duration": 4.72
+  },
+  {
+    "text": "source sheet. That is a test because you",
+    "start": 599.8,
+    "duration": 4.32
+  },
+  {
+    "text": "can settle it in a minute. When I was",
+    "start": 602.48,
+    "duration": 4.08
+  },
+  {
+    "text": "mixing tracks a mix was never finished",
+    "start": 604.12,
+    "duration": 4.16
+  },
+  {
+    "text": "when I thought it was finished. It was",
+    "start": 606.56,
+    "duration": 3
+  },
+  {
+    "text": "finished when somebody who had not been",
+    "start": 608.28,
+    "duration": 3.24
+  },
+  {
+    "text": "in the room could play it through once",
+    "start": 609.56,
+    "duration": 4.24
+  },
+  {
+    "text": "and not stop me. Your done test is the",
+    "start": 611.52,
+    "duration": 4.32
+  },
+  {
+    "text": "same thing with different equipment. The",
+    "start": 613.8,
+    "duration": 3.96
+  },
+  {
+    "text": "standing rule on this machine now is",
+    "start": 615.84,
+    "duration": 4
+  },
+  {
+    "text": "that anything which starts a render sets",
+    "start": 617.76,
+    "duration": 3.92
+  },
+  {
+    "text": "a check running in the same turn. And",
+    "start": 619.84,
+    "duration": 3.48
+  },
+  {
+    "text": "that check has to report back when the",
+    "start": 621.68,
+    "duration": 4.2
+  },
+  {
+    "text": "job dies, not only when it finishes",
+    "start": 623.32,
+    "duration": 4.36
+  },
+  {
+    "text": "because a check that only ever looks for",
+    "start": 625.88,
+    "duration": 4.24
+  },
+  {
+    "text": "finished will wait forever on a job that",
+    "start": 627.68,
+    "duration": 4.48
+  },
+  {
+    "text": "already failed. That is why the rule",
+    "start": 630.12,
+    "duration": 4.44
+  },
+  {
+    "text": "exists at all. The run had stopped, the",
+    "start": 632.16,
+    "duration": 3.92
+  },
+  {
+    "text": "check was still open, and there was",
+    "start": 634.56,
+    "duration": 3.4
+  },
+  {
+    "text": "nothing on the screen that would have",
+    "start": 636.08,
+    "duration": 3.64
+  },
+  {
+    "text": "told me the difference. You have lived",
+    "start": 637.96,
+    "duration": 3.92
+  },
+  {
+    "text": "this. You set the thing running and went",
+    "start": 639.72,
+    "duration": 3.64
+  },
+  {
+    "text": "to lunch, and you came back with no way",
+    "start": 641.88,
+    "duration": 3.44
+  },
+  {
+    "text": "of telling whether it was working or",
+    "start": 643.36,
+    "duration": 3.8
+  },
+  {
+    "text": "stuck. Now, some of you guys will have",
+    "start": 645.32,
+    "duration": 4.519
+  },
+  {
+    "text": "been told to keep trying until it works,",
+    "start": 647.16,
+    "duration": 4.2
+  },
+  {
+    "text": "and I would look hard at what that is",
+    "start": 649.839,
+    "duration": 3.681
+  },
+  {
+    "text": "costing you. Every retry is another run",
+    "start": 651.36,
+    "duration": 3.84
+  },
+  {
+    "text": "you are paying for and another hour you",
+    "start": 653.52,
+    "duration": 4.24
+  },
+  {
+    "text": "do not get back. A retry only ever helps",
+    "start": 655.2,
+    "duration": 4.04
+  },
+  {
+    "text": "you when the failure was random. And if",
+    "start": 657.76,
+    "duration": 3.28
+  },
+  {
+    "text": "two attempts come back failing the same",
+    "start": 659.24,
+    "duration": 4.4
+  },
+  {
+    "text": "way, what that tells you is the problem",
+    "start": 661.04,
+    "duration": 4.56
+  },
+  {
+    "text": "lives in the first decision. So, you go",
+    "start": 663.64,
+    "duration": 3.12
+  },
+  {
+    "text": "and look at what it could reach. So,",
+    "start": 665.6,
+    "duration": 3.2
+  },
+  {
+    "text": "before your next run, write those",
+    "start": 666.76,
+    "duration": 4.64
+  },
+  {
+    "text": "conditions down first, three lines on a",
+    "start": 668.8,
+    "duration": 4.28
+  },
+  {
+    "text": "sticky note. Each one has to be",
+    "start": 671.4,
+    "duration": 4.04
+  },
+  {
+    "text": "something a stranger could settle, not",
+    "start": 673.08,
+    "duration": 3.88
+  },
+  {
+    "text": "something only the thing that did the",
+    "start": 675.44,
+    "duration": 4.52
+  },
+  {
+    "text": "work could grade. Then let it go.",
+    "start": 676.96,
+    "duration": 5.6
+  },
+  {
+    "text": "Microsoft's own documentation has a page",
+    "start": 679.96,
+    "duration": 4.92
+  },
+  {
+    "text": "about fixing the order your steps run",
+    "start": 682.56,
+    "duration": 4.36
+  },
+  {
+    "text": "in, and they call that feature graph.",
+    "start": 684.88,
+    "duration": 4.36
+  },
+  {
+    "text": "The wording is use graph when you need",
+    "start": 686.92,
+    "duration": 4.08
+  },
+  {
+    "text": "strict control over the order in which",
+    "start": 689.24,
+    "duration": 3.64
+  },
+  {
+    "text": "agents act or when different outcomes",
+    "start": 691,
+    "duration": 4.4
+  },
+  {
+    "text": "must lead to different next steps. And",
+    "start": 692.88,
+    "duration": 4.24
+  },
+  {
+    "text": "the same page marks that feature",
+    "start": 695.4,
+    "duration": 4.2
+  },
+  {
+    "text": "experimental, with its behavior subject",
+    "start": 697.12,
+    "duration": 4.28
+  },
+  {
+    "text": "to change. So, the warning is printed",
+    "start": 699.6,
+    "duration": 3.68
+  },
+  {
+    "text": "next to what they recommend. Strict is",
+    "start": 701.4,
+    "duration": 3.8
+  },
+  {
+    "text": "their word, not mine. So, this last one",
+    "start": 703.28,
+    "duration": 4.52
+  },
+  {
+    "text": "is about what has to happen before what,",
+    "start": 705.2,
+    "duration": 4.76
+  },
+  {
+    "text": "and where I have drawn it, that ordering",
+    "start": 707.8,
+    "duration": 4.56
+  },
+  {
+    "text": "work falls inside the first decision,",
+    "start": 709.96,
+    "duration": 4.2
+  },
+  {
+    "text": "and stops mattering the moment nothing",
+    "start": 712.36,
+    "duration": 3.6
+  },
+  {
+    "text": "later in your run reads what came before",
+    "start": 714.16,
+    "duration": 4.48
+  },
+  {
+    "text": "it. That is the error test I walked you",
+    "start": 715.96,
+    "duration": 4.16
+  },
+  {
+    "text": "through last week. And it's linked",
+    "start": 718.64,
+    "duration": 3.92
+  },
+  {
+    "text": "underneath. When is it worth drawing one",
+    "start": 720.12,
+    "duration": 4.72
+  },
+  {
+    "text": "of these? If your process still changes",
+    "start": 722.56,
+    "duration": 4
+  },
+  {
+    "text": "every couple of weeks, I would highly",
+    "start": 724.84,
+    "duration": 3.52
+  },
+  {
+    "text": "advise you build nothing this week,",
+    "start": 726.56,
+    "duration": 3.72
+  },
+  {
+    "text": "because a diagram freezes a process you",
+    "start": 728.36,
+    "duration": 3.4
+  },
+  {
+    "text": "are still learning, and that process",
+    "start": 730.28,
+    "duration": 3.24
+  },
+  {
+    "text": "will most probably have changed before",
+    "start": 731.76,
+    "duration": 3.84
+  },
+  {
+    "text": "the month is out. There is a green tick",
+    "start": 733.52,
+    "duration": 3.8
+  },
+  {
+    "text": "somewhere in your week that you have",
+    "start": 735.6,
+    "duration": 3.76
+  },
+  {
+    "text": "looked at and gone straight past, and I",
+    "start": 737.32,
+    "duration": 4.08
+  },
+  {
+    "text": "have one of my own. From a small program",
+    "start": 739.36,
+    "duration": 4.2
+  },
+  {
+    "text": "on this machine, whose only job is to",
+    "start": 741.4,
+    "duration": 4.36
+  },
+  {
+    "text": "check that the promises I made to myself",
+    "start": 743.56,
+    "duration": 3.96
+  },
+  {
+    "text": "landed in the finished writing. One of",
+    "start": 745.76,
+    "duration": 3.68
+  },
+  {
+    "text": "them was that every date I give you",
+    "start": 747.52,
+    "duration": 4.32
+  },
+  {
+    "text": "comes off the company's own page. So,",
+    "start": 749.44,
+    "duration": 4.64
+  },
+  {
+    "text": "one afternoon, I pointed it at a page of",
+    "start": 751.84,
+    "duration": 4.2
+  },
+  {
+    "text": "those promises, and the report came back",
+    "start": 754.08,
+    "duration": 3.6
+  },
+  {
+    "text": "saying nothing was missing, which is",
+    "start": 756.04,
+    "duration": 3.68
+  },
+  {
+    "text": "exactly the sentence you want to see.",
+    "start": 757.68,
+    "duration": 4.56
+  },
+  {
+    "text": "So, why did it say nothing was missing?",
+    "start": 759.72,
+    "duration": 4.56
+  },
+  {
+    "text": "Nothing was checked. The promises were",
+    "start": 762.24,
+    "duration": 3.88
+  },
+  {
+    "text": "laid out on that page in a shape the",
+    "start": 764.28,
+    "duration": 3.96
+  },
+  {
+    "text": "program could not read, and it printed a",
+    "start": 766.12,
+    "duration": 4.4
+  },
+  {
+    "text": "clean report off the back of zero",
+    "start": 768.24,
+    "duration": 4.76
+  },
+  {
+    "text": "checks. And a tick on your own screen",
+    "start": 770.52,
+    "duration": 4.4
+  },
+  {
+    "text": "tells you a check ran, and it does not",
+    "start": 773,
+    "duration": 3.16
+  },
+  {
+    "text": "tell you whether the check read your",
+    "start": 774.92,
+    "duration": 3.4
+  },
+  {
+    "text": "list, and did it only fail in the one",
+    "start": 776.16,
+    "duration": 4.76
+  },
+  {
+    "text": "direction? No. It also reported a",
+    "start": 778.32,
+    "duration": 4.92
+  },
+  {
+    "text": "failure that was not real, because it",
+    "start": 780.92,
+    "duration": 4.52
+  },
+  {
+    "text": "took a rule that governs the middle of a",
+    "start": 783.24,
+    "duration": 4.16
+  },
+  {
+    "text": "piece of writing and applied it to the",
+    "start": 785.44,
+    "duration": 3.64
+  },
+  {
+    "text": "opening line. Now, plenty of you have a",
+    "start": 787.4,
+    "duration": 3.56
+  },
+  {
+    "text": "checklist that does most of this, and",
+    "start": 789.08,
+    "duration": 4.28
+  },
+  {
+    "text": "I'm not going to pretend otherwise, but",
+    "start": 790.96,
+    "duration": 4.84
+  },
+  {
+    "text": "a checklist has never once told me it",
+    "start": 793.36,
+    "duration": 4.24
+  },
+  {
+    "text": "was ticked when nobody read it. And you",
+    "start": 795.8,
+    "duration": 3.8
+  },
+  {
+    "text": "can catch the one thing my program never",
+    "start": 797.6,
+    "duration": 3.84
+  },
+  {
+    "text": "will, which is the promise that never",
+    "start": 799.6,
+    "duration": 3.56
+  },
+  {
+    "text": "made it onto the list, because you're",
+    "start": 801.44,
+    "duration": 3.2
+  },
+  {
+    "text": "the one reading the draft, and you",
+    "start": 803.16,
+    "duration": 3.28
+  },
+  {
+    "text": "notice what is missing. Has it happened",
+    "start": 804.64,
+    "duration": 4.48
+  },
+  {
+    "text": "to you yet? Where you told the thing to",
+    "start": 806.44,
+    "duration": 4.84
+  },
+  {
+    "text": "check its own work against a list and it",
+    "start": 809.12,
+    "duration": 3.6
+  },
+  {
+    "text": "came back saying everything checks out.",
+    "start": 811.28,
+    "duration": 3.04
+  },
+  {
+    "text": "So, where does that afternoon land",
+    "start": 812.72,
+    "duration": 3.64
+  },
+  {
+    "text": "against the three decisions and where",
+    "start": 814.32,
+    "duration": 4
+  },
+  {
+    "text": "would yours land? The program could",
+    "start": 816.36,
+    "duration": 4.2
+  },
+  {
+    "text": "reach both the draft and the list and",
+    "start": 818.32,
+    "duration": 3.52
+  },
+  {
+    "text": "the list was in the one shape it could",
+    "start": 820.56,
+    "duration": 3.28
+  },
+  {
+    "text": "not read. What counted as finished",
+    "start": 821.84,
+    "duration": 3.96
+  },
+  {
+    "text": "should have been every promise traced",
+    "start": 823.84,
+    "duration": 3.92
+  },
+  {
+    "text": "back to a line in the draft and what",
+    "start": 825.8,
+    "duration": 3.48
+  },
+  {
+    "text": "came back was nothing missing. And the",
+    "start": 827.76,
+    "duration": 3.56
+  },
+  {
+    "text": "ordering answer was the easy one because",
+    "start": 829.28,
+    "duration": 4.04
+  },
+  {
+    "text": "a check that has read nothing has to",
+    "start": 831.32,
+    "duration": 4.2
+  },
+  {
+    "text": "stop your run before anybody even reads",
+    "start": 833.32,
+    "duration": 5
+  },
+  {
+    "text": "the results. Both of those are fixed now",
+    "start": 835.52,
+    "duration": 4.76
+  },
+  {
+    "text": "and the fix is the boring kind. It reads",
+    "start": 838.32,
+    "duration": 4.44
+  },
+  {
+    "text": "that page whichever way it is written",
+    "start": 840.28,
+    "duration": 3.96
+  },
+  {
+    "text": "and if it ever comes back having read",
+    "start": 842.76,
+    "duration": 4.04
+  },
+  {
+    "text": "nothing, it stops the whole run instead",
+    "start": 844.24,
+    "duration": 4.4
+  },
+  {
+    "text": "of printing a tick. So, the next time I",
+    "start": 846.8,
+    "duration": 4.04
+  },
+  {
+    "text": "pointed it at a finished draft, it read",
+    "start": 848.64,
+    "duration": 5.92
+  },
+  {
+    "text": "down 28 specifics and told me all 28 of",
+    "start": 850.84,
+    "duration": 5.8
+  },
+  {
+    "text": "them had survived into the writing. And",
+    "start": 854.56,
+    "duration": 4.48
+  },
+  {
+    "text": "28 is the number I read now instead of",
+    "start": 856.64,
+    "duration": 4.32
+  },
+  {
+    "text": "the tick. Take that control room from",
+    "start": 859.04,
+    "duration": 4.48
+  },
+  {
+    "text": "the start, the one reading itself out of",
+    "start": 860.96,
+    "duration": 4.12
+  },
+  {
+    "text": "the trash, and put it through with the",
+    "start": 863.52,
+    "duration": 3.2
+  },
+  {
+    "text": "first question. Could a competent person",
+    "start": 865.08,
+    "duration": 3.44
+  },
+  {
+    "text": "have done that job with what the thing",
+    "start": 866.72,
+    "duration": 4.04
+  },
+  {
+    "text": "was given? The answer is no because what",
+    "start": 868.52,
+    "duration": 5.52
+  },
+  {
+    "text": "it was given was a copy of itself in the",
+    "start": 870.76,
+    "duration": 5.2
+  },
+  {
+    "text": "wrong folder. So, you stop there and you",
+    "start": 874.04,
+    "duration": 3.52
+  },
+  {
+    "text": "do not carry on down the list. I",
+    "start": 875.96,
+    "duration": 3.96
+  },
+  {
+    "text": "personally believe most of what goes",
+    "start": 877.56,
+    "duration": 3.72
+  },
+  {
+    "text": "wrong for you stops right at that",
+    "start": 879.92,
+    "duration": 3
+  },
+  {
+    "text": "question. And what happens when it does",
+    "start": 881.28,
+    "duration": 3.88
+  },
+  {
+    "text": "not? If the thing had everything it",
+    "start": 882.92,
+    "duration": 4.56
+  },
+  {
+    "text": "needed and still went wrong, the next",
+    "start": 885.16,
+    "duration": 4.2
+  },
+  {
+    "text": "thing you look at is whether anybody",
+    "start": 887.48,
+    "duration": 4.52
+  },
+  {
+    "text": "outside the conversation could have told",
+    "start": 889.36,
+    "duration": 4.479
+  },
+  {
+    "text": "it was finished. And only when both of",
+    "start": 892,
+    "duration": 4.08
+  },
+  {
+    "text": "those come back clean, does the order of",
+    "start": 893.839,
+    "duration": 4.441
+  },
+  {
+    "text": "the steps become worth changing. Because",
+    "start": 896.08,
+    "duration": 3.88
+  },
+  {
+    "text": "the lines between these three are",
+    "start": 898.28,
+    "duration": 3.84
+  },
+  {
+    "text": "contested, what holds up is the order",
+    "start": 899.96,
+    "duration": 4.52
+  },
+  {
+    "text": "you go through them in. Cheapest and",
+    "start": 902.12,
+    "duration": 4.48
+  },
+  {
+    "text": "most common first. Now, maybe you are",
+    "start": 904.48,
+    "duration": 3.48
+  },
+  {
+    "text": "thinking you will sort all three of",
+    "start": 906.6,
+    "duration": 3.68
+  },
+  {
+    "text": "these out at once. Pick the one thing",
+    "start": 907.96,
+    "duration": 3.8
+  },
+  {
+    "text": "that annoyed you most this week and",
+    "start": 910.28,
+    "duration": 3.24
+  },
+  {
+    "text": "change only that because most probably",
+    "start": 911.76,
+    "duration": 3.76
+  },
+  {
+    "text": "the other two will still be waiting in a",
+    "start": 913.52,
+    "duration": 4.16
+  },
+  {
+    "text": "fortnight. Your context is your context",
+    "start": 915.52,
+    "duration": 4.36
+  },
+  {
+    "text": "guys, so none of this is a promise about",
+    "start": 917.68,
+    "duration": 4.159
+  },
+  {
+    "text": "your outcome. The big takeaway for me",
+    "start": 919.88,
+    "duration": 3.88
+  },
+  {
+    "text": "was that I stopped guessing which part",
+    "start": 921.839,
+    "duration": 4.001
+  },
+  {
+    "text": "had gone wrong and started going through",
+    "start": 923.76,
+    "duration": 4.24
+  },
+  {
+    "text": "them in a fixed order. And the guessing",
+    "start": 925.84,
+    "duration": 4.96
+  },
+  {
+    "text": "was what used to eat my whole afternoon.",
+    "start": 928,
+    "duration": 4.6
+  },
+  {
+    "text": "For the build I'm running here, that",
+    "start": 930.8,
+    "duration": 3.68
+  },
+  {
+    "text": "order has done more for me than anything",
+    "start": 932.6,
+    "duration": 4.08
+  },
+  {
+    "text": "else I changed this month. I can't say",
+    "start": 934.48,
+    "duration": 4.2
+  },
+  {
+    "text": "too much as of yet, but the next one is",
+    "start": 936.68,
+    "duration": 4.32
+  },
+  {
+    "text": "me pointing this at a job that touches a",
+    "start": 938.68,
+    "duration": 4.4
+  },
+  {
+    "text": "customer. An inquiry coming in and a",
+    "start": 941,
+    "duration": 4.28
+  },
+  {
+    "text": "quote going back out. And I'll tell you",
+    "start": 943.08,
+    "duration": 4.32
+  },
+  {
+    "text": "at the top of it which of these three",
+    "start": 945.28,
+    "duration": 3.84
+  },
+  {
+    "text": "the fix came out of. So, what is the one",
+    "start": 947.4,
+    "duration": 3.96
+  },
+  {
+    "text": "thing your AI still can't reach? Drop it",
+    "start": 949.12,
+    "duration": 4.12
+  },
+  {
+    "text": "down in the comments below and I'll be",
+    "start": 951.36,
+    "duration": 3.44
+  },
+  {
+    "text": "reading through them. If you feel called",
+    "start": 953.24,
+    "duration": 3.84
+  },
+  {
+    "text": "to it, hit subscribe so you don't miss",
+    "start": 954.8,
+    "duration": 4.2
+  },
+  {
+    "text": "what's coming next. And if you want all",
+    "start": 957.08,
+    "duration": 3.64
+  },
+  {
+    "text": "of this written down, the working",
+    "start": 959,
+    "duration": 4.2
+  },
+  {
+    "text": "conditions kit is inside the AI",
+    "start": 960.72,
+    "duration": 4.8
+  },
+  {
+    "text": "founder's vault. The piece I would open",
+    "start": 963.2,
+    "duration": 4.12
+  },
+  {
+    "text": "first is the symptom router where you",
+    "start": 965.52,
+    "duration": 3.6
+  },
+  {
+    "text": "find the sentence you would say out loud",
+    "start": 967.32,
+    "duration": 3.92
+  },
+  {
+    "text": "about your own setup and it hands you",
+    "start": 969.12,
+    "duration": 4.28
+  },
+  {
+    "text": "back which of the three to look at. The",
+    "start": 971.24,
+    "duration": 4.16
+  },
+  {
+    "text": "link is down in the description below.",
+    "start": 973.4,
+    "duration": 5.08
+  },
+  {
+    "text": "See you in the next one.",
+    "start": 975.4,
+    "duration": 3.08
+  }
+]

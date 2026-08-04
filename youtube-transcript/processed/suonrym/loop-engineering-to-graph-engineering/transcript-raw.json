@@ -1,0 +1,5992 @@
+[
+  {
+    "text": "And honestly, cloud code didn't work",
+    "start": 0.08,
+    "duration": 4.48
+  },
+  {
+    "text": "very well for, you know, the first six",
+    "start": 2.08,
+    "duration": 4.719
+  },
+  {
+    "text": "months. It it actually it took time. It",
+    "start": 4.56,
+    "duration": 4.64
+  },
+  {
+    "text": "took time to catch up. And it wasn't",
+    "start": 6.799,
+    "duration": 6.561
+  },
+  {
+    "text": "until I would say Opus 4 in May of 2025.",
+    "start": 9.2,
+    "duration": 6.96
+  },
+  {
+    "text": "Here at Anthropic, we've seen an 8x",
+    "start": 13.36,
+    "duration": 4.24
+  },
+  {
+    "text": "increase [music] in code output per",
+    "start": 16.16,
+    "duration": 4.24
+  },
+  {
+    "text": "engineer. And this is just unheard of in",
+    "start": 17.6,
+    "duration": 4.67
+  },
+  {
+    "text": "the industry. Like, you know, typically",
+    "start": 20.4,
+    "duration": 3.039
+  },
+  {
+    "text": "[music] companies see something like a",
+    "start": 22.27,
+    "duration": 3.089
+  },
+  {
+    "text": "few% a year. Quad building bigger and",
+    "start": 23.439,
+    "duration": 4.071
+  },
+  {
+    "text": "bigger things. So, it won't just be",
+    "start": 25.359,
+    "duration": 3.201
+  },
+  {
+    "text": "[music] features, it's going to be",
+    "start": 27.51,
+    "duration": 2.97
+  },
+  {
+    "text": "products. Every time it didn't work, I",
+    "start": 28.56,
+    "duration": 4.64
+  },
+  {
+    "text": "learned a lot. And every time I did a",
+    "start": 30.48,
+    "duration": 4.4
+  },
+  {
+    "text": "startup, I wore a different hat. It was",
+    "start": 33.2,
+    "duration": 3.199
+  },
+  {
+    "text": "sometimes engineering, sometimes",
+    "start": 34.88,
+    "duration": 3.12
+  },
+  {
+    "text": "business, sometimes product, sometimes",
+    "start": 36.399,
+    "duration": 3.601
+  },
+  {
+    "text": "design, you know, you know, you know,",
+    "start": 38,
+    "duration": 3.36
+  },
+  {
+    "text": "like at a at a small company, sometimes",
+    "start": 40,
+    "duration": 3.92
+  },
+  {
+    "text": "you have to do all this stuff. And so",
+    "start": 41.36,
+    "duration": 5.039
+  },
+  {
+    "text": "from from kind of the beginnings of my",
+    "start": 43.92,
+    "duration": 4.799
+  },
+  {
+    "text": "career, I kind of felt this need to",
+    "start": 46.399,
+    "duration": 5.281
+  },
+  {
+    "text": "break down the walls of, you know,",
+    "start": 48.719,
+    "duration": 6.48
+  },
+  {
+    "text": "engineers do this and designers do this.",
+    "start": 51.68,
+    "duration": 6.399
+  },
+  {
+    "text": "And um at some point I you know I did a",
+    "start": 55.199,
+    "duration": 4.16
+  },
+  {
+    "text": "bunch of different startups. I worked in",
+    "start": 58.079,
+    "duration": 3.041
+  },
+  {
+    "text": "VC for a little bit. Then I ended up at",
+    "start": 59.359,
+    "duration": 4.241
+  },
+  {
+    "text": "Meta for for a little while.",
+    "start": 61.12,
+    "duration": 5.6
+  },
+  {
+    "text": ">> And um something that I've I've always",
+    "start": 63.6,
+    "duration": 6.48
+  },
+  {
+    "text": "done as I built products is I built",
+    "start": 66.72,
+    "duration": 5.52
+  },
+  {
+    "text": "developer tools so that I can build",
+    "start": 70.08,
+    "duration": 4.88
+  },
+  {
+    "text": "better products. Because there's this",
+    "start": 72.24,
+    "duration": 5.199
+  },
+  {
+    "text": "sort of intuition that if you have an",
+    "start": 74.96,
+    "duration": 4.08
+  },
+  {
+    "text": "idea and you want to build it, the",
+    "start": 77.439,
+    "duration": 3.281
+  },
+  {
+    "text": "easier it is to use your tool, the",
+    "start": 79.04,
+    "duration": 3.68
+  },
+  {
+    "text": "better you can build it. Imagine if",
+    "start": 80.72,
+    "duration": 4.16
+  },
+  {
+    "text": "you're, you know, a carpenter and, you",
+    "start": 82.72,
+    "duration": 3.52
+  },
+  {
+    "text": "know, like hammers are really badly",
+    "start": 84.88,
+    "duration": 2.879
+  },
+  {
+    "text": "designed. Let's say it takes like, you",
+    "start": 86.24,
+    "duration": 2.559
+  },
+  {
+    "text": "know, let's say it takes like three",
+    "start": 87.759,
+    "duration": 2.561
+  },
+  {
+    "text": "people to hold a hammer to hammer a",
+    "start": 88.799,
+    "duration": 3.041
+  },
+  {
+    "text": "nail. You're going to hammer a lot less",
+    "start": 90.32,
+    "duration": 2.08
+  },
+  {
+    "text": "often.",
+    "start": 91.84,
+    "duration": 0.8
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 92.4,
+    "duration": 1.28
+  },
+  {
+    "text": ">> But if you have like a really",
+    "start": 92.64,
+    "duration": 2.64
+  },
+  {
+    "text": "well-designed hammer and it's very easy",
+    "start": 93.68,
+    "duration": 3.2
+  },
+  {
+    "text": "to use and you enjoy using it, then",
+    "start": 95.28,
+    "duration": 3.519
+  },
+  {
+    "text": "you're going to hammer a lot of nails.",
+    "start": 96.88,
+    "duration": 3.599
+  },
+  {
+    "text": ">> And so, you know, like when when I build",
+    "start": 98.799,
+    "duration": 3.28
+  },
+  {
+    "text": "product, I love to build the developer",
+    "start": 100.479,
+    "duration": 3.28
+  },
+  {
+    "text": "tools that make it even easier to build",
+    "start": 102.079,
+    "duration": 2.561
+  },
+  {
+    "text": "the product.",
+    "start": 103.759,
+    "duration": 2.241
+  },
+  {
+    "text": ">> And the thing that matters is not the",
+    "start": 104.64,
+    "duration": 2.72
+  },
+  {
+    "text": "tool. The thing that matters is the end",
+    "start": 106,
+    "duration": 2.96
+  },
+  {
+    "text": "result of the product.",
+    "start": 107.36,
+    "duration": 2.96
+  },
+  {
+    "text": ">> And so, this is the, you know, this is",
+    "start": 108.96,
+    "duration": 2.72
+  },
+  {
+    "text": "the mindset that I took to Meta. This is",
+    "start": 110.32,
+    "duration": 2.64
+  },
+  {
+    "text": "the mindset that I that I brought to",
+    "start": 111.68,
+    "duration": 3.119
+  },
+  {
+    "text": "Anthropic. You know, at Anthropic, the",
+    "start": 112.96,
+    "duration": 3.199
+  },
+  {
+    "text": "thing that matters more than anything is",
+    "start": 114.799,
+    "duration": 3.121
+  },
+  {
+    "text": "the safety mission. This is the thing",
+    "start": 116.159,
+    "duration": 3.441
+  },
+  {
+    "text": "that brought me there. This is I think",
+    "start": 117.92,
+    "duration": 3.199
+  },
+  {
+    "text": "that just the most important problem to",
+    "start": 119.6,
+    "duration": 3.76
+  },
+  {
+    "text": "work on. And you know, my role at",
+    "start": 121.119,
+    "duration": 5.68
+  },
+  {
+    "text": "Anthropic is to build the tools that let",
+    "start": 123.36,
+    "duration": 5.92
+  },
+  {
+    "text": "people experience the models so they can",
+    "start": 126.799,
+    "duration": 4.401
+  },
+  {
+    "text": "understand where this thing is headed.",
+    "start": 129.28,
+    "duration": 4.16
+  },
+  {
+    "text": "And that lets us make it a little more",
+    "start": 131.2,
+    "duration": 4.399
+  },
+  {
+    "text": "safe and a little more capable and",
+    "start": 133.44,
+    "duration": 3.92
+  },
+  {
+    "text": "hopefully a little more delightful to to",
+    "start": 135.599,
+    "duration": 2.64
+  },
+  {
+    "text": "use.",
+    "start": 137.36,
+    "duration": 2.879
+  },
+  {
+    "text": ">> Well, I tell you, I love hearing that.",
+    "start": 138.239,
+    "duration": 4.64
+  },
+  {
+    "text": "There's there's a bit of Malcolm",
+    "start": 140.239,
+    "duration": 4.561
+  },
+  {
+    "text": "Gladwell in your in your story of the",
+    "start": 142.879,
+    "duration": 4.801
+  },
+  {
+    "text": "art because you look at what you've done",
+    "start": 144.8,
+    "duration": 4.88
+  },
+  {
+    "text": "and you you probably couldn't have done",
+    "start": 147.68,
+    "duration": 3.84
+  },
+  {
+    "text": "it without that myriad of experiences.",
+    "start": 149.68,
+    "duration": 3.36
+  },
+  {
+    "text": "I'm I'm very fortunate in chip design.",
+    "start": 151.52,
+    "duration": 3.84
+  },
+  {
+    "text": "And I've had a chance to be in super",
+    "start": 153.04,
+    "duration": 4.559
+  },
+  {
+    "text": "small teams where we had to do really",
+    "start": 155.36,
+    "duration": 4.56
+  },
+  {
+    "text": "every aspect of chip design and and I",
+    "start": 157.599,
+    "duration": 4.481
+  },
+  {
+    "text": "feel so fortunate because over my career",
+    "start": 159.92,
+    "duration": 4.56
+  },
+  {
+    "text": "it gave me a perspective of how all the",
+    "start": 162.08,
+    "duration": 4.799
+  },
+  {
+    "text": "myriad of pieces have to come together",
+    "start": 164.48,
+    "duration": 4.72
+  },
+  {
+    "text": "and you were so hands-on in the myriad",
+    "start": 166.879,
+    "duration": 4.881
+  },
+  {
+    "text": "of roles uh and you think about how",
+    "start": 169.2,
+    "duration": 4.399
+  },
+  {
+    "text": "inanthropic you're having to put it all",
+    "start": 171.76,
+    "duration": 4.88
+  },
+  {
+    "text": "together to enable people to have that",
+    "start": 173.599,
+    "duration": 6.161
+  },
+  {
+    "text": "end result and to have it be safe. All",
+    "start": 176.64,
+    "duration": 3.84
+  },
+  {
+    "text": "right.",
+    "start": 179.76,
+    "duration": 2.08
+  },
+  {
+    "text": ">> Yeah. Absolutely. And you know like when",
+    "start": 180.48,
+    "duration": 2.88
+  },
+  {
+    "text": "we hire for the team, these are the kind",
+    "start": 181.84,
+    "duration": 3.84
+  },
+  {
+    "text": "of people I look for too. Like I I I",
+    "start": 183.36,
+    "duration": 3.68
+  },
+  {
+    "text": "typically don't look for a person that",
+    "start": 185.68,
+    "duration": 2.479
+  },
+  {
+    "text": "you know has a computer science",
+    "start": 187.04,
+    "duration": 3.279
+  },
+  {
+    "text": "education and then you know like worked",
+    "start": 188.159,
+    "duration": 4
+  },
+  {
+    "text": "in you know big big tech for for",
+    "start": 190.319,
+    "duration": 3.84
+  },
+  {
+    "text": "whatever. I like I love people with",
+    "start": 192.159,
+    "duration": 3.521
+  },
+  {
+    "text": "non-traditional backgrounds. I love",
+    "start": 194.159,
+    "duration": 3.121
+  },
+  {
+    "text": "people with all sorts of different",
+    "start": 195.68,
+    "duration": 3.76
+  },
+  {
+    "text": "experiences cuz the more that you've",
+    "start": 197.28,
+    "duration": 3.679
+  },
+  {
+    "text": "seen the more different ways you've",
+    "start": 199.44,
+    "duration": 2.719
+  },
+  {
+    "text": "approached problems the more you can",
+    "start": 200.959,
+    "duration": 2.241
+  },
+  {
+    "text": "bring to this problem.",
+    "start": 202.159,
+    "duration": 3.601
+  },
+  {
+    "text": ">> Yeah. You have a passion for what you do",
+    "start": 203.2,
+    "duration": 4.56
+  },
+  {
+    "text": "and I assume you look for that in the",
+    "start": 205.76,
+    "duration": 3.759
+  },
+  {
+    "text": "people you're hiring as well.",
+    "start": 207.76,
+    "duration": 3.68
+  },
+  {
+    "text": ">> Yeah. Yeah. And I love people that are",
+    "start": 209.519,
+    "duration": 4.8
+  },
+  {
+    "text": "passionate not just about their work but",
+    "start": 211.44,
+    "duration": 4.719
+  },
+  {
+    "text": "about other stuff too. So like I love",
+    "start": 214.319,
+    "duration": 3.761
+  },
+  {
+    "text": "people with like you know side projects",
+    "start": 216.159,
+    "duration": 4.321
+  },
+  {
+    "text": "and hobbies and just like if someone has",
+    "start": 218.08,
+    "duration": 4.879
+  },
+  {
+    "text": "like an amazing personal website uh and",
+    "start": 220.48,
+    "duration": 3.92
+  },
+  {
+    "text": "also does you know leather working on",
+    "start": 222.959,
+    "duration": 3.121
+  },
+  {
+    "text": "the weekend and they've gotten to a",
+    "start": 224.4,
+    "duration": 3.04
+  },
+  {
+    "text": "point where they do it at like a very",
+    "start": 226.08,
+    "duration": 3.6
+  },
+  {
+    "text": "high level that's a really good sign",
+    "start": 227.44,
+    "duration": 3.439
+  },
+  {
+    "text": "this is a person that's going to perform",
+    "start": 229.68,
+    "duration": 2.559
+  },
+  {
+    "text": "well on the job too.",
+    "start": 230.879,
+    "duration": 3.201
+  },
+  {
+    "text": ">> I would just love to explore a little",
+    "start": 232.239,
+    "duration": 4.401
+  },
+  {
+    "text": "bit of how all of that background and",
+    "start": 234.08,
+    "duration": 5.2
+  },
+  {
+    "text": "you jumped in uh with anthropic. Could",
+    "start": 236.64,
+    "duration": 5.28
+  },
+  {
+    "text": "you have imagined when you uh started",
+    "start": 239.28,
+    "duration": 5.76
+  },
+  {
+    "text": "just thinking like hey we could do",
+    "start": 241.92,
+    "duration": 5.92
+  },
+  {
+    "text": "really a code assist and autocomplete or",
+    "start": 245.04,
+    "duration": 4.559
+  },
+  {
+    "text": "or or or you know just really helping",
+    "start": 247.84,
+    "duration": 4.56
+  },
+  {
+    "text": "code segments. Uh tell me when you",
+    "start": 249.599,
+    "duration": 4.321
+  },
+  {
+    "text": "started to realize that you could",
+    "start": 252.4,
+    "duration": 3.76
+  },
+  {
+    "text": "progress from there uh to really these",
+    "start": 253.92,
+    "duration": 6.319
+  },
+  {
+    "text": "agentic processes that now um are are",
+    "start": 256.16,
+    "duration": 6.24
+  },
+  {
+    "text": "significantly",
+    "start": 260.239,
+    "duration": 3.921
+  },
+  {
+    "text": "uh advancing code to where where",
+    "start": 262.4,
+    "duration": 4.079
+  },
+  {
+    "text": "basically everyone's saying look this",
+    "start": 264.16,
+    "duration": 5.52
+  },
+  {
+    "text": "we're not co we're using uh coding",
+    "start": 266.479,
+    "duration": 4.881
+  },
+  {
+    "text": "agents we're not coding in the",
+    "start": 269.68,
+    "duration": 3.44
+  },
+  {
+    "text": "traditional way which means it's it's",
+    "start": 271.36,
+    "duration": 4.559
+  },
+  {
+    "text": "now we've fundamentally transformed",
+    "start": 273.12,
+    "duration": 5.6
+  },
+  {
+    "text": "software development and it's all",
+    "start": 275.919,
+    "duration": 6
+  },
+  {
+    "text": "happened in a period of months months.",
+    "start": 278.72,
+    "duration": 6
+  },
+  {
+    "text": "How you know did you imagine that?",
+    "start": 281.919,
+    "duration": 5.121
+  },
+  {
+    "text": ">> No. [laughter]",
+    "start": 284.72,
+    "duration": 3.84
+  },
+  {
+    "text": ">> No.",
+    "start": 287.04,
+    "duration": 3.12
+  },
+  {
+    "text": ">> When when I joined Anthropic, the model",
+    "start": 288.56,
+    "duration": 4.24
+  },
+  {
+    "text": "at the time was sauna 3.5. And that's",
+    "start": 290.16,
+    "duration": 4.08
+  },
+  {
+    "text": "the first model that I think broke",
+    "start": 292.8,
+    "duration": 2.8
+  },
+  {
+    "text": "through the mainstream.",
+    "start": 294.24,
+    "duration": 3.2
+  },
+  {
+    "text": ">> And it made people realize that, oh man,",
+    "start": 295.6,
+    "duration": 4
+  },
+  {
+    "text": "maybe there's something to this idea of",
+    "start": 297.44,
+    "duration": 4.24
+  },
+  {
+    "text": "a general model that if you apply it to",
+    "start": 299.6,
+    "duration": 3.52
+  },
+  {
+    "text": "a particular problem like coding,",
+    "start": 301.68,
+    "duration": 1.68
+  },
+  {
+    "text": ">> yeah,",
+    "start": 303.12,
+    "duration": 1.68
+  },
+  {
+    "text": ">> it can be really good.",
+    "start": 303.36,
+    "duration": 3.92
+  },
+  {
+    "text": ">> And um you know, like philanthropic,",
+    "start": 304.8,
+    "duration": 3.679
+  },
+  {
+    "text": "this has just always been the research",
+    "start": 307.28,
+    "duration": 2.88
+  },
+  {
+    "text": "direction. like we we have always been",
+    "start": 308.479,
+    "duration": 5.761
+  },
+  {
+    "text": "focused on uh safety and uh uh security",
+    "start": 310.16,
+    "duration": 6.8
+  },
+  {
+    "text": "and enterprise and coding. It's just",
+    "start": 314.24,
+    "duration": 6.239
+  },
+  {
+    "text": "always been this laser focus and",
+    "start": 316.96,
+    "duration": 5.2
+  },
+  {
+    "text": "we wanted to build these models for a",
+    "start": 320.479,
+    "duration": 3.841
+  },
+  {
+    "text": "long time. The reason we want a good",
+    "start": 322.16,
+    "duration": 4.4
+  },
+  {
+    "text": "coding model is because the model exists",
+    "start": 324.32,
+    "duration": 4.24
+  },
+  {
+    "text": "as software. And as it gets more",
+    "start": 326.56,
+    "duration": 3.359
+  },
+  {
+    "text": "intelligent, the way it interacts with",
+    "start": 328.56,
+    "duration": 3.919
+  },
+  {
+    "text": "the world is through software. And so",
+    "start": 329.919,
+    "duration": 4
+  },
+  {
+    "text": "you want the code that it writes to be",
+    "start": 332.479,
+    "duration": 3.041
+  },
+  {
+    "text": "good so that it can interact well so",
+    "start": 333.919,
+    "duration": 3.041
+  },
+  {
+    "text": "that we can study it and we can make it",
+    "start": 335.52,
+    "duration": 4.72
+  },
+  {
+    "text": "safer and better aligned. And so you",
+    "start": 336.96,
+    "duration": 4.799
+  },
+  {
+    "text": "know for a while for anthropic we knew",
+    "start": 340.24,
+    "duration": 2.799
+  },
+  {
+    "text": "we wanted to build some kind of coding",
+    "start": 341.759,
+    "duration": 2.801
+  },
+  {
+    "text": "product. And my job was to figure out",
+    "start": 343.039,
+    "duration": 2.481
+  },
+  {
+    "text": "what's that product.",
+    "start": 344.56,
+    "duration": 3.199
+  },
+  {
+    "text": ">> Yeah. And when I joined again it was it",
+    "start": 345.52,
+    "duration": 4.72
+  },
+  {
+    "text": "was Sona 3.5 and all the products at the",
+    "start": 347.759,
+    "duration": 5.361
+  },
+  {
+    "text": "time they were fancy autocomplete",
+    "start": 350.24,
+    "duration": 4.56
+  },
+  {
+    "text": ">> and you know at the time this was",
+    "start": 353.12,
+    "duration": 3.28
+  },
+  {
+    "text": "cutting edge and I remember my first",
+    "start": 354.8,
+    "duration": 3.28
+  },
+  {
+    "text": "time you know using some of these",
+    "start": 356.4,
+    "duration": 5.12
+  },
+  {
+    "text": "products and it was just amazing. Um and",
+    "start": 358.08,
+    "duration": 6.72
+  },
+  {
+    "text": "we felt that very soon the models are",
+    "start": 361.52,
+    "duration": 4.48
+  },
+  {
+    "text": "going to get to a point where they're",
+    "start": 364.8,
+    "duration": 3.28
+  },
+  {
+    "text": "going to be much more capable than this.",
+    "start": 366,
+    "duration": 3.759
+  },
+  {
+    "text": "So for coding it's not a matter of",
+    "start": 368.08,
+    "duration": 3.839
+  },
+  {
+    "text": "completing a single line. the model is",
+    "start": 369.759,
+    "duration": 3.28
+  },
+  {
+    "text": "going to be able to write an entire",
+    "start": 371.919,
+    "duration": 3.12
+  },
+  {
+    "text": "function, an entire file, an entire",
+    "start": 373.039,
+    "duration": 4.321
+  },
+  {
+    "text": "feature, an entire project. Now, I think",
+    "start": 375.039,
+    "duration": 3.361
+  },
+  {
+    "text": "by the end of this year, they're going",
+    "start": 377.36,
+    "duration": 3.119
+  },
+  {
+    "text": "to be able to build entire businesses.",
+    "start": 378.4,
+    "duration": 5.2
+  },
+  {
+    "text": "And so, you know, we we kind of saw this",
+    "start": 380.479,
+    "duration": 4.401
+  },
+  {
+    "text": ">> uh you know, we call this the",
+    "start": 383.6,
+    "duration": 2.96
+  },
+  {
+    "text": "exponential and this is just the way",
+    "start": 384.88,
+    "duration": 2.64
+  },
+  {
+    "text": "that, you know, the models are",
+    "start": 386.56,
+    "duration": 1.919
+  },
+  {
+    "text": "developing.",
+    "start": 387.52,
+    "duration": 2.64
+  },
+  {
+    "text": ">> There's these scaling laws that describe",
+    "start": 388.479,
+    "duration": 3.28
+  },
+  {
+    "text": "the way that model intelligence goes up",
+    "start": 390.16,
+    "duration": 3.039
+  },
+  {
+    "text": "over time.",
+    "start": 391.759,
+    "duration": 3.761
+  },
+  {
+    "text": ">> Somehow the laws are continuing and in",
+    "start": 393.199,
+    "duration": 4.641
+  },
+  {
+    "text": "fact it's accelerating and you know,",
+    "start": 395.52,
+    "duration": 4.48
+  },
+  {
+    "text": "it's an empirical kind of observation.",
+    "start": 397.84,
+    "duration": 4.16
+  },
+  {
+    "text": "It's not obvious why it keeps happening,",
+    "start": 400,
+    "duration": 4.08
+  },
+  {
+    "text": "but it seems to keep happening. And so",
+    "start": 402,
+    "duration": 3.52
+  },
+  {
+    "text": "all we did is we kind of traced the line",
+    "start": 404.08,
+    "duration": 2.399
+  },
+  {
+    "text": "and we're like, \"All right, right now",
+    "start": 405.52,
+    "duration": 2.399
+  },
+  {
+    "text": "the model is here. It's going to get",
+    "start": 406.479,
+    "duration": 4.56
+  },
+  {
+    "text": "here. The product that's here is not",
+    "start": 407.919,
+    "duration": 4.241
+  },
+  {
+    "text": "going to be enough to let people",
+    "start": 411.039,
+    "duration": 3.681
+  },
+  {
+    "text": "experience the power of the model.\" And",
+    "start": 412.16,
+    "duration": 4
+  },
+  {
+    "text": "so we wanted something that was purely",
+    "start": 414.72,
+    "duration": 2.479
+  },
+  {
+    "text": "agentic.",
+    "start": 416.16,
+    "duration": 3.36
+  },
+  {
+    "text": ">> And honestly, quad code didn't work very",
+    "start": 417.199,
+    "duration": 4.56
+  },
+  {
+    "text": "well for, you know, the first six",
+    "start": 419.52,
+    "duration": 4.48
+  },
+  {
+    "text": "months. It it actually it took time. It",
+    "start": 421.759,
+    "duration": 4.641
+  },
+  {
+    "text": "took time to catch up. And it wasn't",
+    "start": 424,
+    "duration": 6.56
+  },
+  {
+    "text": "until I would say Opus 4 in May of 2025.",
+    "start": 426.4,
+    "duration": 4.639
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 430.56,
+    "duration": 3.44
+  },
+  {
+    "text": ">> Where it really started to work. And you",
+    "start": 431.039,
+    "duration": 4.56
+  },
+  {
+    "text": "know like since then the grow the growth",
+    "start": 434,
+    "duration": 3.039
+  },
+  {
+    "text": "for you know the product has been",
+    "start": 435.599,
+    "duration": 3.921
+  },
+  {
+    "text": "exponential also. It was not at first",
+    "start": 437.039,
+    "duration": 4.16
+  },
+  {
+    "text": "but that's when it became exponential.",
+    "start": 439.52,
+    "duration": 2.399
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 441.199,
+    "duration": 3.601
+  },
+  {
+    "text": ">> And um we've been finding more and more",
+    "start": 441.919,
+    "duration": 4.801
+  },
+  {
+    "text": "ways to to use this like as the model",
+    "start": 444.8,
+    "duration": 3.6
+  },
+  {
+    "text": "gets more sophisticated we figure out",
+    "start": 446.72,
+    "duration": 3.199
+  },
+  {
+    "text": "more ways to unlock it in the product.",
+    "start": 448.4,
+    "duration": 3.76
+  },
+  {
+    "text": "We launched quad tag and this is kind of",
+    "start": 449.919,
+    "duration": 4.081
+  },
+  {
+    "text": "the latest iteration of this.",
+    "start": 452.16,
+    "duration": 3.84
+  },
+  {
+    "text": "longunning asynchronous agent that you",
+    "start": 454,
+    "duration": 4
+  },
+  {
+    "text": "interact with like a co-orker. It has",
+    "start": 456,
+    "duration": 3.68
+  },
+  {
+    "text": "great common sense. It has a great sense",
+    "start": 458,
+    "duration": 4.56
+  },
+  {
+    "text": "of when to jump in and when not to. And",
+    "start": 459.68,
+    "duration": 4.56
+  },
+  {
+    "text": "you know, this will just keep happening.",
+    "start": 462.56,
+    "duration": 3.039
+  },
+  {
+    "text": "We're going to keep disrupting",
+    "start": 464.24,
+    "duration": 2.56
+  },
+  {
+    "text": "ourselves. So, we're going to keep",
+    "start": 465.599,
+    "duration": 2.88
+  },
+  {
+    "text": "figuring out what is what's the next",
+    "start": 466.8,
+    "duration": 3.6
+  },
+  {
+    "text": "form factor. You know, you talk about",
+    "start": 468.479,
+    "duration": 4.72
+  },
+  {
+    "text": "sort of predicting this this uh this",
+    "start": 470.4,
+    "duration": 6.4
+  },
+  {
+    "text": "line of progress, but to me uh how did",
+    "start": 473.199,
+    "duration": 6
+  },
+  {
+    "text": "you how did you uh think about",
+    "start": 476.8,
+    "duration": 4
+  },
+  {
+    "text": "architecting,",
+    "start": 479.199,
+    "duration": 4.72
+  },
+  {
+    "text": "you know, really multi- aents and how uh",
+    "start": 480.8,
+    "duration": 5.839
+  },
+  {
+    "text": "running these multiple agents can",
+    "start": 483.919,
+    "duration": 5.761
+  },
+  {
+    "text": "actually have us rethink how we",
+    "start": 486.639,
+    "duration": 4.56
+  },
+  {
+    "text": "implement our workflows. I mean that",
+    "start": 489.68,
+    "duration": 4.639
+  },
+  {
+    "text": "that to is what been shocking to me is",
+    "start": 491.199,
+    "duration": 5.201
+  },
+  {
+    "text": "we actually have the opportunity to",
+    "start": 494.319,
+    "duration": 5.121
+  },
+  {
+    "text": "rearchitect re-engineer how all of us",
+    "start": 496.4,
+    "duration": 6.479
+  },
+  {
+    "text": "are getting our work done. And I I have",
+    "start": 499.44,
+    "duration": 7.68
+  },
+  {
+    "text": "to wonder did this was that architected",
+    "start": 502.879,
+    "duration": 7.121
+  },
+  {
+    "text": "uh into your development or is that sort",
+    "start": 507.12,
+    "duration": 4.72
+  },
+  {
+    "text": "of just a natural outcome of the",
+    "start": 510,
+    "duration": 4.159
+  },
+  {
+    "text": "capabilities that you were developing?",
+    "start": 511.84,
+    "duration": 4.48
+  },
+  {
+    "text": ">> I think it's a little bit of both. If I",
+    "start": 514.159,
+    "duration": 4.32
+  },
+  {
+    "text": "think back a couple years, how did how",
+    "start": 516.32,
+    "duration": 4.32
+  },
+  {
+    "text": "did we use models? we you know like they",
+    "start": 518.479,
+    "duration": 4
+  },
+  {
+    "text": "did this like oneline autocomplete and",
+    "start": 520.64,
+    "duration": 3.519
+  },
+  {
+    "text": "and we had agentic workflows at least",
+    "start": 522.479,
+    "duration": 3.681
+  },
+  {
+    "text": "what we called agentic workflows but it",
+    "start": 524.159,
+    "duration": 3.281
+  },
+  {
+    "text": "was essentially these deterministic",
+    "start": 526.16,
+    "duration": 2.96
+  },
+  {
+    "text": "systems where a step at a time might",
+    "start": 527.44,
+    "duration": 3.68
+  },
+  {
+    "text": "call out to an LM to do some bit of",
+    "start": 529.12,
+    "duration": 3.92
+  },
+  {
+    "text": "computation but fundamentally the",
+    "start": 531.12,
+    "duration": 4.64
+  },
+  {
+    "text": "workflow was deterministic and I I think",
+    "start": 533.04,
+    "duration": 4.4
+  },
+  {
+    "text": "what's changed as the model got more",
+    "start": 535.76,
+    "duration": 4.24
+  },
+  {
+    "text": "intelligent is we've realized actually",
+    "start": 537.44,
+    "duration": 4.24
+  },
+  {
+    "text": "it's much better to use the model as the",
+    "start": 540,
+    "duration": 4.08
+  },
+  {
+    "text": "coordinator for this workflow and so",
+    "start": 541.68,
+    "duration": 5.36
+  },
+  {
+    "text": "what you do is the model drives and you",
+    "start": 544.08,
+    "duration": 5.28
+  },
+  {
+    "text": "give it tools to pull in context Next,",
+    "start": 547.04,
+    "duration": 3.919
+  },
+  {
+    "text": "you give it tools to interact with the",
+    "start": 549.36,
+    "duration": 3.52
+  },
+  {
+    "text": "outside world. You ask it to do",
+    "start": 550.959,
+    "duration": 3.361
+  },
+  {
+    "text": "something and then you let it figure out",
+    "start": 552.88,
+    "duration": 3.6
+  },
+  {
+    "text": "how to orchestrate this. You no longer",
+    "start": 554.32,
+    "duration": 3.6
+  },
+  {
+    "text": "tell it, okay, you do step one, then",
+    "start": 556.48,
+    "duration": 3.6
+  },
+  {
+    "text": "step two, and then if not two, then you",
+    "start": 557.92,
+    "duration": 4.32
+  },
+  {
+    "text": "know this, and then else this. And",
+    "start": 560.08,
+    "duration": 3.92
+  },
+  {
+    "text": ">> it it's just not how it works anymore.",
+    "start": 562.24,
+    "duration": 4.24
+  },
+  {
+    "text": "You give it a goal, you give it the",
+    "start": 564,
+    "duration": 3.839
+  },
+  {
+    "text": "starting point, you give it access to",
+    "start": 566.48,
+    "duration": 3.52
+  },
+  {
+    "text": "tools, and then it will figure it out.",
+    "start": 567.839,
+    "duration": 4.081
+  },
+  {
+    "text": "And this has happened, I think, as",
+    "start": 570,
+    "duration": 3.36
+  },
+  {
+    "text": "models got more intelligent. This is",
+    "start": 571.92,
+    "duration": 4
+  },
+  {
+    "text": "just overwhelmingly the reason. But I I",
+    "start": 573.36,
+    "duration": 4.88
+  },
+  {
+    "text": "I think like within quad code, we've",
+    "start": 575.92,
+    "duration": 4.16
+  },
+  {
+    "text": "also learned this. At the very",
+    "start": 578.24,
+    "duration": 3.84
+  },
+  {
+    "text": "beginning, we would kind of spoon feed",
+    "start": 580.08,
+    "duration": 3.6
+  },
+  {
+    "text": "the model context.",
+    "start": 582.08,
+    "duration": 3.04
+  },
+  {
+    "text": ">> And then as the model got more",
+    "start": 583.68,
+    "duration": 3.04
+  },
+  {
+    "text": "sophisticated, we realized, okay, maybe",
+    "start": 585.12,
+    "duration": 3.44
+  },
+  {
+    "text": "actually this isn't it. And we moved",
+    "start": 586.72,
+    "duration": 3.28
+  },
+  {
+    "text": "away from that a little bit. And you",
+    "start": 588.56,
+    "duration": 2.64
+  },
+  {
+    "text": "know, like for example, we have this",
+    "start": 590,
+    "duration": 3.839
+  },
+  {
+    "text": "like file called claw.md. It's loaded",
+    "start": 591.2,
+    "duration": 4.56
+  },
+  {
+    "text": "for every session. And I think more and",
+    "start": 593.839,
+    "duration": 3.841
+  },
+  {
+    "text": "more what we're seeing with customers is",
+    "start": 595.76,
+    "duration": 4.079
+  },
+  {
+    "text": "they're actually moving more to skills",
+    "start": 597.68,
+    "duration": 2.96
+  },
+  {
+    "text": ">> and [clears throat] they're moving more",
+    "start": 599.839,
+    "duration": 4
+  },
+  {
+    "text": "to tools and more to MCPs because this",
+    "start": 600.64,
+    "duration": 4.72
+  },
+  {
+    "text": "way the model has a little bit more",
+    "start": 603.839,
+    "duration": 3.601
+  },
+  {
+    "text": "control over how to load this in.",
+    "start": 605.36,
+    "duration": 6.24
+  },
+  {
+    "text": ">> Well, I have to uh ask I mean you guys",
+    "start": 607.44,
+    "duration": 6.32
+  },
+  {
+    "text": "across Antropic are using cloud every",
+    "start": 611.6,
+    "duration": 4.08
+  },
+  {
+    "text": "day. I mean so you're you're customer",
+    "start": 613.76,
+    "duration": 3.759
+  },
+  {
+    "text": "number one like before the rest of us",
+    "start": 615.68,
+    "duration": 5.279
+  },
+  {
+    "text": "see it uh you know you're you're making",
+    "start": 617.519,
+    "duration": 5.361
+  },
+  {
+    "text": "sure it it accomplishes what you need.",
+    "start": 620.959,
+    "duration": 4.801
+  },
+  {
+    "text": "Tell tell us about your your typical",
+    "start": 622.88,
+    "duration": 7.04
+  },
+  {
+    "text": "day. I mean, it is it is it is is Claude",
+    "start": 625.76,
+    "duration": 6.639
+  },
+  {
+    "text": "like an extension of your of your body",
+    "start": 629.92,
+    "duration": 4.32
+  },
+  {
+    "text": "as you're as you're creating your work",
+    "start": 632.399,
+    "duration": 3.12
+  },
+  {
+    "text": "output?",
+    "start": 634.24,
+    "duration": 2.8
+  },
+  {
+    "text": ">> Yeah, this is this is sort of the weird",
+    "start": 635.519,
+    "duration": 2.88
+  },
+  {
+    "text": "thing about how anthropic works at",
+    "start": 637.04,
+    "duration": 3.52
+  },
+  {
+    "text": "Anthropic. Claude is at the center of",
+    "start": 638.399,
+    "duration": 3.521
+  },
+  {
+    "text": "everything that we do.",
+    "start": 640.56,
+    "duration": 3.279
+  },
+  {
+    "text": ">> It's every single business process,",
+    "start": 641.92,
+    "duration": 3.599
+  },
+  {
+    "text": "every single bit of everything everyone",
+    "start": 643.839,
+    "duration": 3.12
+  },
+  {
+    "text": "does throughout the day, quad is just at",
+    "start": 645.519,
+    "duration": 4
+  },
+  {
+    "text": "the center of it. Um, a way I sometimes",
+    "start": 646.959,
+    "duration": 4.801
+  },
+  {
+    "text": "describe it is, um, let's say you're a",
+    "start": 649.519,
+    "duration": 3.921
+  },
+  {
+    "text": "new hireer and you're onboarding at",
+    "start": 651.76,
+    "duration": 3.28
+  },
+  {
+    "text": "Anthropic.",
+    "start": 653.44,
+    "duration": 3.6
+  },
+  {
+    "text": "Typically, if you have a question like,",
+    "start": 655.04,
+    "duration": 3.6
+  },
+  {
+    "text": "uh, you know, where's the office?",
+    "start": 657.04,
+    "duration": 3.52
+  },
+  {
+    "text": "Where's the address? You know, like at,",
+    "start": 658.64,
+    "duration": 3.28
+  },
+  {
+    "text": "you know, most companies, you would go",
+    "start": 660.56,
+    "duration": 3.04
+  },
+  {
+    "text": "and search a wiki or you would ask a",
+    "start": 661.92,
+    "duration": 4.88
+  },
+  {
+    "text": "coworker at Anthropic, you ask Quad. If",
+    "start": 663.6,
+    "duration": 4.32
+  },
+  {
+    "text": "you have a question like where's the",
+    "start": 666.8,
+    "duration": 3.2
+  },
+  {
+    "text": "codebase and how do I get access to it?",
+    "start": 667.92,
+    "duration": 3.84
+  },
+  {
+    "text": "Again, you don't go to wiki, you go to",
+    "start": 670,
+    "duration": 3.839
+  },
+  {
+    "text": "quad and you ask quad. If your",
+    "start": 671.76,
+    "duration": 3.519
+  },
+  {
+    "text": "question's like, you know, like I took a",
+    "start": 673.839,
+    "duration": 2.961
+  },
+  {
+    "text": "trip, I have an expensor for it. how do",
+    "start": 675.279,
+    "duration": 4
+  },
+  {
+    "text": "I file that expense report? And this is",
+    "start": 676.8,
+    "duration": 4.24
+  },
+  {
+    "text": "how it begins.",
+    "start": 679.279,
+    "duration": 3.601
+  },
+  {
+    "text": ">> But then as you kind of get deeper into",
+    "start": 681.04,
+    "duration": 3.52
+  },
+  {
+    "text": "the work, Claude remains at the center",
+    "start": 682.88,
+    "duration": 2.48
+  },
+  {
+    "text": "of everything.",
+    "start": 684.56,
+    "duration": 1.12
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 685.36,
+    "duration": 2.159
+  },
+  {
+    "text": ">> And so, you know, Claude writes the",
+    "start": 685.68,
+    "duration": 4.24
+  },
+  {
+    "text": "code. Uh it does the the code review. It",
+    "start": 687.519,
+    "duration": 4.721
+  },
+  {
+    "text": "does the security review. Um it",
+    "start": 689.92,
+    "duration": 4.88
+  },
+  {
+    "text": "brainstorms and comes up come comes up",
+    "start": 692.24,
+    "duration": 4.719
+  },
+  {
+    "text": "with new product ideas. It aggregates",
+    "start": 694.8,
+    "duration": 5.279
+  },
+  {
+    "text": "user feedback. It triages incidents.",
+    "start": 696.959,
+    "duration": 4.56
+  },
+  {
+    "text": "Every single part of the engineering",
+    "start": 700.079,
+    "duration": 4
+  },
+  {
+    "text": "SDLC cloud is at the center of it too.",
+    "start": 701.519,
+    "duration": 4.961
+  },
+  {
+    "text": ">> Yes. And you know like now now this is",
+    "start": 704.079,
+    "duration": 3.76
+  },
+  {
+    "text": "happening not just for engineering it's",
+    "start": 706.48,
+    "duration": 3.28
+  },
+  {
+    "text": "happening for product and for design and",
+    "start": 707.839,
+    "duration": 3.68
+  },
+  {
+    "text": "for marketing and for GTM for every",
+    "start": 709.76,
+    "duration": 3.36
+  },
+  {
+    "text": "function. This is what we're seeing and",
+    "start": 711.519,
+    "duration": 3.201
+  },
+  {
+    "text": "the tools look a little different.",
+    "start": 713.12,
+    "duration": 3.68
+  },
+  {
+    "text": ">> It might not be you know quad code in a",
+    "start": 714.72,
+    "duration": 3.679
+  },
+  {
+    "text": "in a terminal. It might be you know a",
+    "start": 716.8,
+    "duration": 3.279
+  },
+  {
+    "text": "tool like co-work instead.",
+    "start": 718.399,
+    "duration": 3.521
+  },
+  {
+    "text": ">> Um but it's still quad at the at the",
+    "start": 720.079,
+    "duration": 2.641
+  },
+  {
+    "text": "center.",
+    "start": 721.92,
+    "duration": 2.159
+  },
+  {
+    "text": ">> And I think this is actually what I see",
+    "start": 722.72,
+    "duration": 3.76
+  },
+  {
+    "text": "with the most successful adopters of of",
+    "start": 724.079,
+    "duration": 5.521
+  },
+  {
+    "text": "quad is you put it just at the center of",
+    "start": 726.48,
+    "duration": 5.28
+  },
+  {
+    "text": "every process.",
+    "start": 729.6,
+    "duration": 3.44
+  },
+  {
+    "text": "We we were talking a little bit before",
+    "start": 731.76,
+    "duration": 3.199
+  },
+  {
+    "text": "about uh my my favorite Harvard Business",
+    "start": 733.04,
+    "duration": 3.599
+  },
+  {
+    "text": "Review article from like from the '90s",
+    "start": 734.959,
+    "duration": 3.521
+  },
+  {
+    "text": "and it it was talking about like I think",
+    "start": 736.639,
+    "duration": 4
+  },
+  {
+    "text": "it was like '92 or '96 or something and",
+    "start": 738.48,
+    "duration": 3.68
+  },
+  {
+    "text": "it was it was titled something like",
+    "start": 740.639,
+    "duration": 3.121
+  },
+  {
+    "text": "computers are here why are we not seeing",
+    "start": 742.16,
+    "duration": 4.239
+  },
+  {
+    "text": "the productivity benefits and you know",
+    "start": 743.76,
+    "duration": 4.48
+  },
+  {
+    "text": "like this was a big question that people",
+    "start": 746.399,
+    "duration": 4.481
+  },
+  {
+    "text": "were debating and essentially the case",
+    "start": 748.24,
+    "duration": 3.92
+  },
+  {
+    "text": "the article made was that there were two",
+    "start": 750.88,
+    "duration": 3.04
+  },
+  {
+    "text": "kinds of companies. There was one kind",
+    "start": 752.16,
+    "duration": 4.56
+  },
+  {
+    "text": "of company that they took a computer and",
+    "start": 753.92,
+    "duration": 4
+  },
+  {
+    "text": "they put it somewhere in the corner of",
+    "start": 756.72,
+    "duration": 3.119
+  },
+  {
+    "text": "the office and then they kept all their,",
+    "start": 757.92,
+    "duration": 3.599
+  },
+  {
+    "text": "you know, paper and pen processes and",
+    "start": 759.839,
+    "duration": 3.201
+  },
+  {
+    "text": "all their filing cabinets and everything",
+    "start": 761.519,
+    "duration": 3.201
+  },
+  {
+    "text": "stayed as is. But now there's a computer",
+    "start": 763.04,
+    "duration": 3.68
+  },
+  {
+    "text": "in the corner. These companies are not",
+    "start": 764.72,
+    "duration": 3.919
+  },
+  {
+    "text": "seeing a productivity improvement. And",
+    "start": 766.72,
+    "duration": 4
+  },
+  {
+    "text": "then there's the companies that took the",
+    "start": 768.639,
+    "duration": 3.841
+  },
+  {
+    "text": "paper, you know, the the filing cabinet",
+    "start": 770.72,
+    "duration": 3.04
+  },
+  {
+    "text": "and threw it away. They took the paper",
+    "start": 772.48,
+    "duration": 2.56
+  },
+  {
+    "text": "and pen and burned it.",
+    "start": 773.76,
+    "duration": 2.639
+  },
+  {
+    "text": ">> And now there's a computer at the center",
+    "start": 775.04,
+    "duration": 2.72
+  },
+  {
+    "text": "of every process. And those are the",
+    "start": 776.399,
+    "duration": 2.56
+  },
+  {
+    "text": "companies that unlock productivity",
+    "start": 777.76,
+    "duration": 3.759
+  },
+  {
+    "text": "improvements. And you know since the",
+    "start": 778.959,
+    "duration": 3.841
+  },
+  {
+    "text": "beginning of this year at Anthropic,",
+    "start": 781.519,
+    "duration": 4.32
+  },
+  {
+    "text": "we've seen an 8x increase in code output",
+    "start": 782.8,
+    "duration": 3.92
+  },
+  {
+    "text": "per engineer.",
+    "start": 785.839,
+    "duration": 1.44
+  },
+  {
+    "text": ">> Mhm.",
+    "start": 786.72,
+    "duration": 1.679
+  },
+  {
+    "text": ">> And [clears throat] this is just unheard",
+    "start": 787.279,
+    "duration": 3.12
+  },
+  {
+    "text": "of in the industry like you know",
+    "start": 788.399,
+    "duration": 3.601
+  },
+  {
+    "text": "typically companies see something like a",
+    "start": 790.399,
+    "duration": 3.68
+  },
+  {
+    "text": "few% a year. And you know now our",
+    "start": 792,
+    "duration": 3.519
+  },
+  {
+    "text": "biggest customers that are using cloud",
+    "start": 794.079,
+    "duration": 2.801
+  },
+  {
+    "text": "code now they're starting to see",
+    "start": 795.519,
+    "duration": 2.56
+  },
+  {
+    "text": "something like this. They're seeing like",
+    "start": 796.88,
+    "duration": 4.72
+  },
+  {
+    "text": "you know 50 100% 150% improvement. And",
+    "start": 798.079,
+    "duration": 5.041
+  },
+  {
+    "text": "the thing that we did to get to the, you",
+    "start": 801.6,
+    "duration": 6.88
+  },
+  {
+    "text": "know, the 8x is we systematically",
+    "start": 803.12,
+    "duration": 7.92
+  },
+  {
+    "text": "improve a bottleneck at a time.",
+    "start": 808.48,
+    "duration": 4.4
+  },
+  {
+    "text": ">> So, you know, first coding is the",
+    "start": 811.04,
+    "duration": 4.32
+  },
+  {
+    "text": "bottleneck. We we throw quad at it and",
+    "start": 812.88,
+    "duration": 3.92
+  },
+  {
+    "text": "quad does the coding.",
+    "start": 815.36,
+    "duration": 3.12
+  },
+  {
+    "text": ">> The next bottleneck is the code review",
+    "start": 816.8,
+    "duration": 3.44
+  },
+  {
+    "text": "and, you know, then we have quad do",
+    "start": 818.48,
+    "duration": 2.32
+  },
+  {
+    "text": "that.",
+    "start": 820.24,
+    "duration": 2.32
+  },
+  {
+    "text": ">> Um, the next bottleneck is, you know,",
+    "start": 820.8,
+    "duration": 4.159
+  },
+  {
+    "text": "like generating materials for GTM.",
+    "start": 822.56,
+    "duration": 4.32
+  },
+  {
+    "text": ">> You know, maybe we throw quad at that.",
+    "start": 824.959,
+    "duration": 3.68
+  },
+  {
+    "text": ">> And so, just like one step at a time, we",
+    "start": 826.88,
+    "duration": 4.639
+  },
+  {
+    "text": "unbott every part of the process. Well,",
+    "start": 828.639,
+    "duration": 4.401
+  },
+  {
+    "text": "what I love that is because you're",
+    "start": 831.519,
+    "duration": 3.361
+  },
+  {
+    "text": "driving your development by your own",
+    "start": 833.04,
+    "duration": 3.359
+  },
+  {
+    "text": "real world needs. It's it's a",
+    "start": 834.88,
+    "duration": 4.319
+  },
+  {
+    "text": "self-reinforcing cycle uh to make sure",
+    "start": 836.399,
+    "duration": 6.161
+  },
+  {
+    "text": "that that of the value of where you're",
+    "start": 839.199,
+    "duration": 5.361
+  },
+  {
+    "text": "spending your your resources. You're an",
+    "start": 842.56,
+    "duration": 5.839
+  },
+  {
+    "text": "AI native company, so you're you're",
+    "start": 844.56,
+    "duration": 6.16
+  },
+  {
+    "text": "adopting that change at an astonishing",
+    "start": 848.399,
+    "duration": 4.641
+  },
+  {
+    "text": "rate. But I'd love to hear your",
+    "start": 850.72,
+    "duration": 4.479
+  },
+  {
+    "text": "experience of how you think about the",
+    "start": 853.04,
+    "duration": 5.84
+  },
+  {
+    "text": "role of of leaders, of engineers. I just",
+    "start": 855.199,
+    "duration": 5.921
+  },
+  {
+    "text": "think you're ahead of most of the rest",
+    "start": 858.88,
+    "duration": 6
+  },
+  {
+    "text": "of us and starting to see that at play",
+    "start": 861.12,
+    "duration": 6.079
+  },
+  {
+    "text": "uh and seeing how you're you're taking",
+    "start": 864.88,
+    "duration": 4.399
+  },
+  {
+    "text": "people with you.",
+    "start": 867.199,
+    "duration": 4
+  },
+  {
+    "text": ">> Stepping back a little bit, engineering",
+    "start": 869.279,
+    "duration": 4.081
+  },
+  {
+    "text": "is this thing that it's just always been",
+    "start": 871.199,
+    "duration": 5.361
+  },
+  {
+    "text": "changing. And you know, as engineers,",
+    "start": 873.36,
+    "duration": 5.52
+  },
+  {
+    "text": "we're no strangers to this. You know, my",
+    "start": 876.56,
+    "duration": 4.32
+  },
+  {
+    "text": "my grandfather actually programmed punch",
+    "start": 878.88,
+    "duration": 5.68
+  },
+  {
+    "text": "cards in the in the Soviet Union. Um,",
+    "start": 880.88,
+    "duration": 5.28
+  },
+  {
+    "text": "you know, like I I grew up I I",
+    "start": 884.56,
+    "duration": 2.959
+  },
+  {
+    "text": "programmed like basic and assembly",
+    "start": 886.16,
+    "duration": 2.72
+  },
+  {
+    "text": "growing up and then, you know, I kind of",
+    "start": 887.519,
+    "duration": 3.44
+  },
+  {
+    "text": "learned higher level languages like as",
+    "start": 888.88,
+    "duration": 4.079
+  },
+  {
+    "text": "as I went. I I worked in JavaScript for",
+    "start": 890.959,
+    "duration": 4.24
+  },
+  {
+    "text": "a while and in JavaScript every every",
+    "start": 892.959,
+    "duration": 3.68
+  },
+  {
+    "text": "engineer knows the frameworks change",
+    "start": 895.199,
+    "duration": 2.801
+  },
+  {
+    "text": "like every month there's a new set of",
+    "start": 896.639,
+    "duration": 2.721
+  },
+  {
+    "text": "frameworks and everyone has to learn new",
+    "start": 898,
+    "duration": 3.279
+  },
+  {
+    "text": "skills and so so I think like for for",
+    "start": 899.36,
+    "duration": 4
+  },
+  {
+    "text": "engineers the it's always been changing",
+    "start": 901.279,
+    "duration": 3.68
+  },
+  {
+    "text": "the languages have always been changing",
+    "start": 903.36,
+    "duration": 3.599
+  },
+  {
+    "text": "the frameworks have always been changing",
+    "start": 904.959,
+    "duration": 3.44
+  },
+  {
+    "text": "what's happening now is it's",
+    "start": 906.959,
+    "duration": 2.641
+  },
+  {
+    "text": "accelerating",
+    "start": 908.399,
+    "duration": 3.361
+  },
+  {
+    "text": ">> and so we went up a level of abstraction",
+    "start": 909.6,
+    "duration": 4.08
+  },
+  {
+    "text": "we went from you know hardware to punch",
+    "start": 911.76,
+    "duration": 3.439
+  },
+  {
+    "text": "cards then we went from punch cards to",
+    "start": 913.68,
+    "duration": 3.279
+  },
+  {
+    "text": "source code now we went from",
+    "start": 915.199,
+    "duration": 4.241
+  },
+  {
+    "text": "manipulating source code to agents and",
+    "start": 916.959,
+    "duration": 4.56
+  },
+  {
+    "text": "now we're going up a level again from",
+    "start": 919.44,
+    "duration": 4
+  },
+  {
+    "text": "managing agents to managing like loops",
+    "start": 921.519,
+    "duration": 5.041
+  },
+  {
+    "text": "and routines. And the crazy thing is",
+    "start": 923.44,
+    "duration": 4.48
+  },
+  {
+    "text": "that these last two steps happened in",
+    "start": 926.56,
+    "duration": 3.68
+  },
+  {
+    "text": "the span of two years. It's just it's",
+    "start": 927.92,
+    "duration": 3.919
+  },
+  {
+    "text": "faster than than it was before. And I",
+    "start": 930.24,
+    "duration": 3.76
+  },
+  {
+    "text": "think it'll continue to accelerate.",
+    "start": 931.839,
+    "duration": 4.24
+  },
+  {
+    "text": ">> And so when it when I think about the",
+    "start": 934,
+    "duration": 3.839
+  },
+  {
+    "text": "engineers and the the people that are",
+    "start": 936.079,
+    "duration": 3.521
+  },
+  {
+    "text": "really successful, I think it's people",
+    "start": 937.839,
+    "duration": 5.44
+  },
+  {
+    "text": "that are empirical and and curious. So",
+    "start": 939.6,
+    "duration": 5.12
+  },
+  {
+    "text": "you're able to look at the data and",
+    "start": 943.279,
+    "duration": 2.8
+  },
+  {
+    "text": "you're able to adjust the approach. You",
+    "start": 944.72,
+    "duration": 2.799
+  },
+  {
+    "text": "don't always assume the same thing they",
+    "start": 946.079,
+    "duration": 2.961
+  },
+  {
+    "text": "always do is going to keep working.",
+    "start": 947.519,
+    "duration": 2.961
+  },
+  {
+    "text": "you're able to kind of take feedback",
+    "start": 949.04,
+    "duration": 2.479
+  },
+  {
+    "text": "from your work",
+    "start": 950.48,
+    "duration": 3.279
+  },
+  {
+    "text": ">> and so if there's new data you can have",
+    "start": 951.519,
+    "duration": 3.76
+  },
+  {
+    "text": "a different approach.",
+    "start": 953.759,
+    "duration": 4.88
+  },
+  {
+    "text": ">> Um it's people that are autonomous",
+    "start": 955.279,
+    "duration": 5.281
+  },
+  {
+    "text": ">> because as engineering is no longer the",
+    "start": 958.639,
+    "duration": 4.241
+  },
+  {
+    "text": "bottleneck now we're actually",
+    "start": 960.56,
+    "duration": 4
+  },
+  {
+    "text": "bottlenecked on the speed with which we",
+    "start": 962.88,
+    "duration": 3.12
+  },
+  {
+    "text": "can generate good ideas and bring them",
+    "start": 964.56,
+    "duration": 5.44
+  },
+  {
+    "text": "to market and you know do so safely. And",
+    "start": 966,
+    "duration": 5.44
+  },
+  {
+    "text": "the people that are really effective at",
+    "start": 970,
+    "duration": 3.36
+  },
+  {
+    "text": "this, they're not people that, you know,",
+    "start": 971.44,
+    "duration": 3.6
+  },
+  {
+    "text": "like they have to have this big process",
+    "start": 973.36,
+    "duration": 3.279
+  },
+  {
+    "text": "for how to get an idea to market and",
+    "start": 975.04,
+    "duration": 3.28
+  },
+  {
+    "text": "they need to collaborate with like 10",
+    "start": 976.639,
+    "duration": 3.44
+  },
+  {
+    "text": "other teams to do it. They're sort of",
+    "start": 978.32,
+    "duration": 3.84
+  },
+  {
+    "text": "like one person armies. It's like the",
+    "start": 980.079,
+    "duration": 3.601
+  },
+  {
+    "text": "the people that are most effective are",
+    "start": 982.16,
+    "duration": 4.08
+  },
+  {
+    "text": "this kind of like CEO archetype. Like",
+    "start": 983.68,
+    "duration": 4
+  },
+  {
+    "text": "you're you're able to come up with an",
+    "start": 986.24,
+    "duration": 2.959
+  },
+  {
+    "text": "idea, you're able to talk to users,",
+    "start": 987.68,
+    "duration": 3.04
+  },
+  {
+    "text": "you're able to look at the data to",
+    "start": 989.199,
+    "duration": 3.44
+  },
+  {
+    "text": "build, to iterate, and to to bring it to",
+    "start": 990.72,
+    "duration": 2.799
+  },
+  {
+    "text": "the market.",
+    "start": 992.639,
+    "duration": 2.32
+  },
+  {
+    "text": ">> And we actually see this coming not just",
+    "start": 993.519,
+    "duration": 2.801
+  },
+  {
+    "text": "from engineers, but from all sorts of",
+    "start": 994.959,
+    "duration": 2.24
+  },
+  {
+    "text": "functions. Mhm.",
+    "start": 996.32,
+    "duration": 2.319
+  },
+  {
+    "text": ">> Um I think I think having this",
+    "start": 997.199,
+    "duration": 4.721
+  },
+  {
+    "text": "engineering background helps today, but",
+    "start": 998.639,
+    "duration": 4.721
+  },
+  {
+    "text": "it's actually I don't I don't think it's",
+    "start": 1001.92,
+    "duration": 2.96
+  },
+  {
+    "text": "really essential anymore to to doing",
+    "start": 1003.36,
+    "duration": 2.88
+  },
+  {
+    "text": "this kind of thing,",
+    "start": 1004.88,
+    "duration": 4.319
+  },
+  {
+    "text": ">> but it does change the kind of skills",
+    "start": 1006.24,
+    "duration": 4.8
+  },
+  {
+    "text": "that we need to emphasize. You need to",
+    "start": 1009.199,
+    "duration": 5.521
+  },
+  {
+    "text": "be adaptable. You need to be uh fearless",
+    "start": 1011.04,
+    "duration": 5.919
+  },
+  {
+    "text": "of change. I love what you said. You you",
+    "start": 1014.72,
+    "duration": 5.039
+  },
+  {
+    "text": "have to be curious. You have to, you",
+    "start": 1016.959,
+    "duration": 4.401
+  },
+  {
+    "text": "know, really be experimenting. I mean",
+    "start": 1019.759,
+    "duration": 4.08
+  },
+  {
+    "text": "that's part of what I think this these",
+    "start": 1021.36,
+    "duration": 6
+  },
+  {
+    "text": "new agentic workflows uh new meaning you",
+    "start": 1023.839,
+    "duration": 5.921
+  },
+  {
+    "text": "know like like we've we've said Lily in",
+    "start": 1027.36,
+    "duration": 4.479
+  },
+  {
+    "text": "the last uh you know 7 months to a year",
+    "start": 1029.76,
+    "duration": 4.24
+  },
+  {
+    "text": "it changes how you can iterate. So how",
+    "start": 1031.839,
+    "duration": 4.08
+  },
+  {
+    "text": "how do you be curious? You can",
+    "start": 1034,
+    "duration": 4.24
+  },
+  {
+    "text": "experiment now in ways you could never",
+    "start": 1035.919,
+    "duration": 4.4
+  },
+  {
+    "text": "experiment before. I mean your learning",
+    "start": 1038.24,
+    "duration": 5.04
+  },
+  {
+    "text": "cycles are vastly accelerated aren't",
+    "start": 1040.319,
+    "duration": 3.36
+  },
+  {
+    "text": "they?",
+    "start": 1043.28,
+    "duration": 2
+  },
+  {
+    "text": ">> Yeah. Totally. Totally. And and I think",
+    "start": 1043.679,
+    "duration": 3.441
+  },
+  {
+    "text": "it's on you know it's on leaders to make",
+    "start": 1045.28,
+    "duration": 3.44
+  },
+  {
+    "text": "space. If you don't adjust for this and",
+    "start": 1047.12,
+    "duration": 2.72
+  },
+  {
+    "text": "you don't create space, everyone's going",
+    "start": 1048.72,
+    "duration": 2.319
+  },
+  {
+    "text": "to keep doing it the old way and you",
+    "start": 1049.84,
+    "duration": 2.48
+  },
+  {
+    "text": "gonna have to force everyone to do it",
+    "start": 1051.039,
+    "duration": 2
+  },
+  {
+    "text": "the new way.",
+    "start": 1052.32,
+    "duration": 1.04
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 1053.039,
+    "duration": 2.081
+  },
+  {
+    "text": ">> But really, for a lot of people, it's",
+    "start": 1053.36,
+    "duration": 3.04
+  },
+  {
+    "text": "actually just really exciting to get to",
+    "start": 1055.12,
+    "duration": 2.48
+  },
+  {
+    "text": "try all these tools, to get to",
+    "start": 1056.4,
+    "duration": 2
+  },
+  {
+    "text": "experiment.",
+    "start": 1057.6,
+    "duration": 2.72
+  },
+  {
+    "text": ">> And so, I actually see a lot of my role",
+    "start": 1058.4,
+    "duration": 4.8
+  },
+  {
+    "text": "as creating space for people to try",
+    "start": 1060.32,
+    "duration": 4.8
+  },
+  {
+    "text": "stuff out, to feel safe doing it. You",
+    "start": 1063.2,
+    "duration": 3.04
+  },
+  {
+    "text": "know, they're not going to get a bad",
+    "start": 1065.12,
+    "duration": 2.72
+  },
+  {
+    "text": "performance review if they, you know,",
+    "start": 1066.24,
+    "duration": 3.12
+  },
+  {
+    "text": "experiment with a new idea because it",
+    "start": 1067.84,
+    "duration": 2.88
+  },
+  {
+    "text": "might actually work.",
+    "start": 1069.36,
+    "duration": 4.64
+  },
+  {
+    "text": ">> Um, and my other job is to just give",
+    "start": 1070.72,
+    "duration": 4.319
+  },
+  {
+    "text": "people context. Yeah.",
+    "start": 1074,
+    "duration": 2.48
+  },
+  {
+    "text": ">> So, to give them business context,",
+    "start": 1075.039,
+    "duration": 2.801
+  },
+  {
+    "text": "product context. so that they can make",
+    "start": 1076.48,
+    "duration": 2.96
+  },
+  {
+    "text": "better decisions.",
+    "start": 1077.84,
+    "duration": 4.56
+  },
+  {
+    "text": ">> But companies that aren't AI native, uh",
+    "start": 1079.44,
+    "duration": 4.56
+  },
+  {
+    "text": "these are lessons like what you went",
+    "start": 1082.4,
+    "duration": 3.2
+  },
+  {
+    "text": "through that it's going to it's going to",
+    "start": 1084,
+    "duration": 4.16
+  },
+  {
+    "text": "take uh showing best practice. It's",
+    "start": 1085.6,
+    "duration": 4.72
+  },
+  {
+    "text": "going to be, you know, educating the the",
+    "start": 1088.16,
+    "duration": 4.48
+  },
+  {
+    "text": "workforce and and really driving culture",
+    "start": 1090.32,
+    "duration": 4.64
+  },
+  {
+    "text": "change to be as you described.",
+    "start": 1092.64,
+    "duration": 4.24
+  },
+  {
+    "text": ">> Yeah. Yeah, that's right. And and our",
+    "start": 1094.96,
+    "duration": 3.599
+  },
+  {
+    "text": "job is to to help companies along the",
+    "start": 1096.88,
+    "duration": 3.28
+  },
+  {
+    "text": "way. You know, like one thing that I've",
+    "start": 1098.559,
+    "duration": 3.201
+  },
+  {
+    "text": "seen companies go through is this kind",
+    "start": 1100.16,
+    "duration": 4.48
+  },
+  {
+    "text": "of natural transition from not using AI",
+    "start": 1101.76,
+    "duration": 4.64
+  },
+  {
+    "text": "to, you know, every engineer running one",
+    "start": 1104.64,
+    "duration": 4
+  },
+  {
+    "text": "agent to every engineer running 10",
+    "start": 1106.4,
+    "duration": 3.12
+  },
+  {
+    "text": "agents,",
+    "start": 1108.64,
+    "duration": 3.12
+  },
+  {
+    "text": ">> then a 100 agents, then a thousand",
+    "start": 1109.52,
+    "duration": 4.32
+  },
+  {
+    "text": "agents. And there there's sort of these",
+    "start": 1111.76,
+    "duration": 4.799
+  },
+  {
+    "text": "like traits that go with each of these.",
+    "start": 1113.84,
+    "duration": 5.36
+  },
+  {
+    "text": "So, you know, with one agent, uh,",
+    "start": 1116.559,
+    "duration": 4.161
+  },
+  {
+    "text": "engineers are using this agent to kind",
+    "start": 1119.2,
+    "duration": 2.88
+  },
+  {
+    "text": "of like write the code and you're kind",
+    "start": 1120.72,
+    "duration": 2.72
+  },
+  {
+    "text": "of focused on it. You're still kind of",
+    "start": 1122.08,
+    "duration": 2.959
+  },
+  {
+    "text": "singlethreaded. You're working on one",
+    "start": 1123.44,
+    "duration": 3.599
+  },
+  {
+    "text": "task. Then at some point you kind of get",
+    "start": 1125.039,
+    "duration": 3.201
+  },
+  {
+    "text": "to the point where you kind of trust the",
+    "start": 1127.039,
+    "duration": 2.88
+  },
+  {
+    "text": "agent and you're like okay maybe maybe",
+    "start": 1128.24,
+    "duration": 2.96
+  },
+  {
+    "text": "it's actually doing the right thing.",
+    "start": 1129.919,
+    "duration": 2.961
+  },
+  {
+    "text": "Maybe while it works I can start a",
+    "start": 1131.2,
+    "duration": 2.32
+  },
+  {
+    "text": "second one.",
+    "start": 1132.88,
+    "duration": 1.039
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 1133.52,
+    "duration": 1.92
+  },
+  {
+    "text": ">> And engineers kind of naturally figure",
+    "start": 1133.919,
+    "duration": 2.561
+  },
+  {
+    "text": "this out like maybe you'll have like",
+    "start": 1135.44,
+    "duration": 2.32
+  },
+  {
+    "text": "multiple checkouts of the same",
+    "start": 1136.48,
+    "duration": 3.439
+  },
+  {
+    "text": "repository or you know multiple views of",
+    "start": 1137.76,
+    "duration": 4.56
+  },
+  {
+    "text": "the same code. So while the agent works",
+    "start": 1139.919,
+    "duration": 4.161
+  },
+  {
+    "text": "you can uh you know work on something",
+    "start": 1142.32,
+    "duration": 3.68
+  },
+  {
+    "text": "else and maybe you can scale up to like",
+    "start": 1144.08,
+    "duration": 3.36
+  },
+  {
+    "text": "10 agents. This way what you're doing is",
+    "start": 1146,
+    "duration": 2.64
+  },
+  {
+    "text": "you're essentially roundroining through",
+    "start": 1147.44,
+    "duration": 2.479
+  },
+  {
+    "text": "the agents. You start the work in one",
+    "start": 1148.64,
+    "duration": 2.96
+  },
+  {
+    "text": "you move on to the second you you do the",
+    "start": 1149.919,
+    "duration": 3.76
+  },
+  {
+    "text": "work there you move on to the third. And",
+    "start": 1151.6,
+    "duration": 3.6
+  },
+  {
+    "text": "this is kind of the workflow that we've",
+    "start": 1153.679,
+    "duration": 3.521
+  },
+  {
+    "text": "now support really well in uh the the",
+    "start": 1155.2,
+    "duration": 5.04
+  },
+  {
+    "text": "desktop app. Um so both for quad code",
+    "start": 1157.2,
+    "duration": 5.28
+  },
+  {
+    "text": "and for co-work you start a session you",
+    "start": 1160.24,
+    "duration": 3.92
+  },
+  {
+    "text": "just start a second session you can you",
+    "start": 1162.48,
+    "duration": 2.96
+  },
+  {
+    "text": "can move on you can have multiple stuff",
+    "start": 1164.16,
+    "duration": 2.72
+  },
+  {
+    "text": "running in parallel but then it gets",
+    "start": 1165.44,
+    "duration": 2.88
+  },
+  {
+    "text": "really interesting once you scale this",
+    "start": 1166.88,
+    "duration": 3.679
+  },
+  {
+    "text": "up a little bit more and I I think like",
+    "start": 1168.32,
+    "duration": 3.84
+  },
+  {
+    "text": "when I look at most companies they're",
+    "start": 1170.559,
+    "duration": 2.961
+  },
+  {
+    "text": "still somewhere between step one and",
+    "start": 1172.16,
+    "duration": 1.759
+  },
+  {
+    "text": "two.",
+    "start": 1173.52,
+    "duration": 1.039
+  },
+  {
+    "text": ">> Yes.",
+    "start": 1173.919,
+    "duration": 2.88
+  },
+  {
+    "text": ">> And uh when I look at anthropic we're",
+    "start": 1174.559,
+    "duration": 3.921
+  },
+  {
+    "text": "probably somewhere around step three on",
+    "start": 1176.799,
+    "duration": 3.681
+  },
+  {
+    "text": "average. So most engineers are running",
+    "start": 1178.48,
+    "duration": 4.079
+  },
+  {
+    "text": "dozens or hundreds of agents",
+    "start": 1180.48,
+    "duration": 3.76
+  },
+  {
+    "text": ">> and um the way you do this is you have",
+    "start": 1182.559,
+    "duration": 4.24
+  },
+  {
+    "text": "the agent run another agent and we have",
+    "start": 1184.24,
+    "duration": 4.96
+  },
+  {
+    "text": "a lot of tools for this. Um so for",
+    "start": 1186.799,
+    "duration": 3.12
+  },
+  {
+    "text": "example",
+    "start": 1189.2,
+    "duration": 2.479
+  },
+  {
+    "text": ">> if you're sub agents so you have agents",
+    "start": 1189.919,
+    "duration": 3.841
+  },
+  {
+    "text": "running basically sub aents. Is that how",
+    "start": 1191.679,
+    "duration": 4.081
+  },
+  {
+    "text": "you think about it or we've coined that",
+    "start": 1193.76,
+    "duration": 3.6
+  },
+  {
+    "text": "phrase if if I don't know if it's",
+    "start": 1195.76,
+    "duration": 2.799
+  },
+  {
+    "text": "industry standard.",
+    "start": 1197.36,
+    "duration": 2.72
+  },
+  {
+    "text": ">> No no that's exactly it. So you have the",
+    "start": 1198.559,
+    "duration": 2.961
+  },
+  {
+    "text": "sub aents and the sub aents can start",
+    "start": 1200.08,
+    "duration": 3.36
+  },
+  {
+    "text": "sub agents. So it can it can actually go",
+    "start": 1201.52,
+    "duration": 3.76
+  },
+  {
+    "text": "quite deep and for cloud code we support",
+    "start": 1203.44,
+    "duration": 3.44
+  },
+  {
+    "text": "up to five layers now",
+    "start": 1205.28,
+    "duration": 3.12
+  },
+  {
+    "text": ">> of this kind of nesting",
+    "start": 1206.88,
+    "duration": 3.12
+  },
+  {
+    "text": ">> and there's different ways to support",
+    "start": 1208.4,
+    "duration": 3.04
+  },
+  {
+    "text": "this on the product side. So you know",
+    "start": 1210,
+    "duration": 2.64
+  },
+  {
+    "text": "we've been experimenting with for",
+    "start": 1211.44,
+    "duration": 3.44
+  },
+  {
+    "text": "example cloud execution. So instead of",
+    "start": 1212.64,
+    "duration": 3.6
+  },
+  {
+    "text": "the agent running locally on your",
+    "start": 1214.88,
+    "duration": 5.12
+  },
+  {
+    "text": "computer it runs in the cloud and uh you",
+    "start": 1216.24,
+    "duration": 5.6
+  },
+  {
+    "text": "can start an agent from the desktop app",
+    "start": 1220,
+    "duration": 3.919
+  },
+  {
+    "text": "or from the mobile app and I actually do",
+    "start": 1221.84,
+    "duration": 3.839
+  },
+  {
+    "text": "a lot of my coding from my phone now.",
+    "start": 1223.919,
+    "duration": 2.561
+  },
+  {
+    "text": ">> I love that.",
+    "start": 1225.679,
+    "duration": 2.24
+  },
+  {
+    "text": ">> And it just runs in the cloud and this",
+    "start": 1226.48,
+    "duration": 3.439
+  },
+  {
+    "text": "is actually what lets you scale up. And",
+    "start": 1227.919,
+    "duration": 3.601
+  },
+  {
+    "text": "then you know we we we're we're",
+    "start": 1229.919,
+    "duration": 3.12
+  },
+  {
+    "text": "continuing to iterate on this to make it",
+    "start": 1231.52,
+    "duration": 2.88
+  },
+  {
+    "text": "even more native and to scale up to",
+    "start": 1233.039,
+    "duration": 3.441
+  },
+  {
+    "text": "thousands of agents. And the way we get",
+    "start": 1234.4,
+    "duration": 4.56
+  },
+  {
+    "text": "there is with dynamic workflows and this",
+    "start": 1236.48,
+    "duration": 3.76
+  },
+  {
+    "text": "is essentially using cloud to",
+    "start": 1238.96,
+    "duration": 3.36
+  },
+  {
+    "text": "orchestrate just very large teams of",
+    "start": 1240.24,
+    "duration": 4.799
+  },
+  {
+    "text": "agents to do the most complex work like",
+    "start": 1242.32,
+    "duration": 4.96
+  },
+  {
+    "text": "large codebased migrations like I think",
+    "start": 1245.039,
+    "duration": 5.201
+  },
+  {
+    "text": "stripe just used this to migrate um it",
+    "start": 1247.28,
+    "duration": 4
+  },
+  {
+    "text": "was something like like it would have",
+    "start": 1250.24,
+    "duration": 2.559
+  },
+  {
+    "text": "taken months and then it took like 4",
+    "start": 1251.28,
+    "duration": 4
+  },
+  {
+    "text": "days to do like a 10,000 line uh Scala",
+    "start": 1252.799,
+    "duration": 4.88
+  },
+  {
+    "text": "to Java migration. Um there's a lot of",
+    "start": 1255.28,
+    "duration": 3.759
+  },
+  {
+    "text": "companies that are using this for large",
+    "start": 1257.679,
+    "duration": 3.441
+  },
+  {
+    "text": "migrations like we just migrated bun",
+    "start": 1259.039,
+    "duration": 4.88
+  },
+  {
+    "text": "from Zigg to Rust and this is like a",
+    "start": 1261.12,
+    "duration": 4.96
+  },
+  {
+    "text": "JavaScript runtime. It's a lot of code",
+    "start": 1263.919,
+    "duration": 4.24
+  },
+  {
+    "text": "and um so for the for these kind of like",
+    "start": 1266.08,
+    "duration": 4.24
+  },
+  {
+    "text": "very very big workflows that would have",
+    "start": 1268.159,
+    "duration": 4.561
+  },
+  {
+    "text": "taken weeks or months or years",
+    "start": 1270.32,
+    "duration": 3.599
+  },
+  {
+    "text": "essentially a way to do it is this",
+    "start": 1272.72,
+    "duration": 3.04
+  },
+  {
+    "text": "divide and conquer where you give the",
+    "start": 1273.919,
+    "duration": 3.76
+  },
+  {
+    "text": "model a lot of agents and you just tell",
+    "start": 1275.76,
+    "duration": 3.76
+  },
+  {
+    "text": "it like go figure it out do this big",
+    "start": 1277.679,
+    "duration": 4.081
+  },
+  {
+    "text": "task. So it goes back to what we said",
+    "start": 1279.52,
+    "duration": 6.08
+  },
+  {
+    "text": "earlier. It uh it's going to be a",
+    "start": 1281.76,
+    "duration": 5.52
+  },
+  {
+    "text": "journey. It's going to take uh it's",
+    "start": 1285.6,
+    "duration": 4.079
+  },
+  {
+    "text": "going to take education uh and it is",
+    "start": 1287.28,
+    "duration": 5.68
+  },
+  {
+    "text": "going to take culture change and uh when",
+    "start": 1289.679,
+    "duration": 4.961
+  },
+  {
+    "text": "you do it right uh we actually have",
+    "start": 1292.96,
+    "duration": 3.04
+  },
+  {
+    "text": "similar examples of what you just",
+    "start": 1294.64,
+    "duration": 4.48
+  },
+  {
+    "text": "described. We have uh we we have uh",
+    "start": 1296,
+    "duration": 6
+  },
+  {
+    "text": "created a rustbased uh application. Our",
+    "start": 1299.12,
+    "duration": 5.439
+  },
+  {
+    "text": "lead of AI software development did it",
+    "start": 1302,
+    "duration": 4.96
+  },
+  {
+    "text": "over a weekend uh for an application",
+    "start": 1304.559,
+    "duration": 4.561
+  },
+  {
+    "text": "that we needed. uh we were we we thought",
+    "start": 1306.96,
+    "duration": 5.36
+  },
+  {
+    "text": "it would be a competitive gap uh and and",
+    "start": 1309.12,
+    "duration": 4.88
+  },
+  {
+    "text": "over a weekend now we had to validate it",
+    "start": 1312.32,
+    "duration": 3.2
+  },
+  {
+    "text": "and get it through all the you know the",
+    "start": 1314,
+    "duration": 3.12
+  },
+  {
+    "text": "test regressions and everything where it",
+    "start": 1315.52,
+    "duration": 4.72
+  },
+  {
+    "text": "could be shipped but that just is was",
+    "start": 1317.12,
+    "duration": 6.799
+  },
+  {
+    "text": "unheard of before. I mean uh it it's",
+    "start": 1320.24,
+    "duration": 6.24
+  },
+  {
+    "text": "just astonishing to me uh what multi-",
+    "start": 1323.919,
+    "duration": 5.76
+  },
+  {
+    "text": "aents can do. Again, you go back to this",
+    "start": 1326.48,
+    "duration": 5.76
+  },
+  {
+    "text": "projection you had. It sounds like",
+    "start": 1329.679,
+    "duration": 4.801
+  },
+  {
+    "text": "that's this is exactly what you expected",
+    "start": 1332.24,
+    "duration": 2.559
+  },
+  {
+    "text": "though.",
+    "start": 1334.48,
+    "duration": 0.64
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 1334.799,
+    "duration": 2.721
+  },
+  {
+    "text": ">> Right. I think this is this was what we",
+    "start": 1335.12,
+    "duration": 3.76
+  },
+  {
+    "text": "expect. Yeah. You know, you never you",
+    "start": 1337.52,
+    "duration": 2.48
+  },
+  {
+    "text": "never know exactly how it's going to",
+    "start": 1338.88,
+    "duration": 3.44
+  },
+  {
+    "text": "scale, but if you know, for some reason,",
+    "start": 1340,
+    "duration": 4.88
+  },
+  {
+    "text": "you know, this is uh this is continuing",
+    "start": 1342.32,
+    "duration": 4.88
+  },
+  {
+    "text": "and you know, like for for these",
+    "start": 1344.88,
+    "duration": 4.24
+  },
+  {
+    "text": "traditional scaling laws and it it it's",
+    "start": 1347.2,
+    "duration": 3.28
+  },
+  {
+    "text": "funny the the people that wrote the",
+    "start": 1349.12,
+    "duration": 2.799
+  },
+  {
+    "text": "scaling was paper like the first few",
+    "start": 1350.48,
+    "duration": 3.679
+  },
+  {
+    "text": "authors like went and started anthropic",
+    "start": 1351.919,
+    "duration": 3.441
+  },
+  {
+    "text": ">> because I think they knew where it was",
+    "start": 1354.159,
+    "duration": 2.801
+  },
+  {
+    "text": "going. They know that safety becomes",
+    "start": 1355.36,
+    "duration": 3.439
+  },
+  {
+    "text": "very important, security becomes very",
+    "start": 1356.96,
+    "duration": 4.32
+  },
+  {
+    "text": "important. Um and so you know",
+    "start": 1358.799,
+    "duration": 4.161
+  },
+  {
+    "text": "traditionally the the scaling law was",
+    "start": 1361.28,
+    "duration": 3.759
+  },
+  {
+    "text": "say that we scale as a function of the",
+    "start": 1362.96,
+    "duration": 3.599
+  },
+  {
+    "text": "the size of the network, the amount of",
+    "start": 1365.039,
+    "duration": 3.921
+  },
+  {
+    "text": "data and the amount of compute. And what",
+    "start": 1366.559,
+    "duration": 3.6
+  },
+  {
+    "text": "we're seeing now is it's also a function",
+    "start": 1368.96,
+    "duration": 3.36
+  },
+  {
+    "text": "of the test time compute. And you know",
+    "start": 1370.159,
+    "duration": 3.681
+  },
+  {
+    "text": "like essentially it's a fancy way of",
+    "start": 1372.32,
+    "duration": 3.76
+  },
+  {
+    "text": "saying how many tokens you throw at it.",
+    "start": 1373.84,
+    "duration": 4.56
+  },
+  {
+    "text": "And so from a product design point of",
+    "start": 1376.08,
+    "duration": 3.68
+  },
+  {
+    "text": "view and kind of model training point of",
+    "start": 1378.4,
+    "duration": 3.279
+  },
+  {
+    "text": "view, we want to make it so you can more",
+    "start": 1379.76,
+    "duration": 3.68
+  },
+  {
+    "text": "productively throw more tokens at a",
+    "start": 1381.679,
+    "duration": 3.441
+  },
+  {
+    "text": "problem to get a better result because",
+    "start": 1383.44,
+    "duration": 3.04
+  },
+  {
+    "text": "if you do it naively, you spend more",
+    "start": 1385.12,
+    "duration": 2.64
+  },
+  {
+    "text": "tokens but you don't get a better",
+    "start": 1386.48,
+    "duration": 3.92
+  },
+  {
+    "text": "result. And so like one one example of",
+    "start": 1387.76,
+    "duration": 4.159
+  },
+  {
+    "text": "this is effort levels. So like in the",
+    "start": 1390.4,
+    "duration": 3.36
+  },
+  {
+    "text": "model you can configure the effort. The",
+    "start": 1391.919,
+    "duration": 3.521
+  },
+  {
+    "text": "higher the effort, the more the maximum",
+    "start": 1393.76,
+    "duration": 3.039
+  },
+  {
+    "text": "amount of tokens the model will be",
+    "start": 1395.44,
+    "duration": 3.44
+  },
+  {
+    "text": "willing to spend on that problem. And so",
+    "start": 1396.799,
+    "duration": 3.601
+  },
+  {
+    "text": "this idea of like multi- aent and",
+    "start": 1398.88,
+    "duration": 3.52
+  },
+  {
+    "text": "dynamic workflows, I actually see it as",
+    "start": 1400.4,
+    "duration": 3.68
+  },
+  {
+    "text": "another version of test time compute.",
+    "start": 1402.4,
+    "duration": 3.68
+  },
+  {
+    "text": "You throw more tokens at it and by",
+    "start": 1404.08,
+    "duration": 3.52
+  },
+  {
+    "text": "orchestrating the agents and having the",
+    "start": 1406.08,
+    "duration": 2.959
+  },
+  {
+    "text": "model orchestrate it, you can use these",
+    "start": 1407.6,
+    "duration": 3.6
+  },
+  {
+    "text": "tokens productively to to get a better",
+    "start": 1409.039,
+    "duration": 5.041
+  },
+  {
+    "text": "result. And Boris, I've heard you uh",
+    "start": 1411.2,
+    "duration": 5.04
+  },
+  {
+    "text": "state that it's really important to",
+    "start": 1414.08,
+    "duration": 3.52
+  },
+  {
+    "text": "throw those tokens at it because",
+    "start": 1416.24,
+    "duration": 2.88
+  },
+  {
+    "text": "otherwise you don't even know the roof",
+    "start": 1417.6,
+    "duration": 4.079
+  },
+  {
+    "text": "line of what you can achieve. Maybe you",
+    "start": 1419.12,
+    "duration": 4.559
+  },
+  {
+    "text": "can share with our our audience what",
+    "start": 1421.679,
+    "duration": 3.601
+  },
+  {
+    "text": "what you mean by that.",
+    "start": 1423.679,
+    "duration": 3.761
+  },
+  {
+    "text": ">> Yeah. So I I think there's a lot of",
+    "start": 1425.28,
+    "duration": 3.6
+  },
+  {
+    "text": "companies right now that are thinking",
+    "start": 1427.44,
+    "duration": 3.28
+  },
+  {
+    "text": "about uh ROI",
+    "start": 1428.88,
+    "duration": 4.4
+  },
+  {
+    "text": ">> and and how you measure this. And I",
+    "start": 1430.72,
+    "duration": 3.68
+  },
+  {
+    "text": "think some companies are actually",
+    "start": 1433.28,
+    "duration": 2.639
+  },
+  {
+    "text": "thinking about it wrong because they're",
+    "start": 1434.4,
+    "duration": 4.32
+  },
+  {
+    "text": "focused purely on the I part of it. And",
+    "start": 1435.919,
+    "duration": 4.081
+  },
+  {
+    "text": "so they think about okay, here's my",
+    "start": 1438.72,
+    "duration": 2.8
+  },
+  {
+    "text": "investment. How do I reduce it? How do I",
+    "start": 1440,
+    "duration": 3.52
+  },
+  {
+    "text": "cost cut? Obviously, this is important",
+    "start": 1441.52,
+    "duration": 3.279
+  },
+  {
+    "text": "and you should just do this. And you",
+    "start": 1443.52,
+    "duration": 2.56
+  },
+  {
+    "text": "know, there's a bunch of tools for this.",
+    "start": 1444.799,
+    "duration": 3.841
+  },
+  {
+    "text": "You can use uh opus plan mode. You can",
+    "start": 1446.08,
+    "duration": 4.8
+  },
+  {
+    "text": "use advisor models. You can use a lower",
+    "start": 1448.64,
+    "duration": 3.919
+  },
+  {
+    "text": "effort setting. You can use a cheaper",
+    "start": 1450.88,
+    "duration": 3.36
+  },
+  {
+    "text": "model. So maybe everything doesn't need",
+    "start": 1452.559,
+    "duration": 2.961
+  },
+  {
+    "text": "opus or you know maybe you can use",
+    "start": 1454.24,
+    "duration": 4
+  },
+  {
+    "text": "haiku. Maybe you can use sonnet. And of",
+    "start": 1455.52,
+    "duration": 4.24
+  },
+  {
+    "text": "course you like you write evals to kind",
+    "start": 1458.24,
+    "duration": 3.439
+  },
+  {
+    "text": "of figure this out. But I think actually",
+    "start": 1459.76,
+    "duration": 5.919
+  },
+  {
+    "text": "the far more important part is the r. So",
+    "start": 1461.679,
+    "duration": 5.681
+  },
+  {
+    "text": "how do you improve the return that",
+    "start": 1465.679,
+    "duration": 3.921
+  },
+  {
+    "text": "you're seeing from models? And and I",
+    "start": 1467.36,
+    "duration": 3.919
+  },
+  {
+    "text": "think the biggest lesson here that we've",
+    "start": 1469.6,
+    "duration": 4.16
+  },
+  {
+    "text": "seen from successful customers is you",
+    "start": 1471.279,
+    "duration": 4.161
+  },
+  {
+    "text": "want to give engineers the freedom to",
+    "start": 1473.76,
+    "duration": 2.88
+  },
+  {
+    "text": "experiment. You want to give everyone",
+    "start": 1475.44,
+    "duration": 3.28
+  },
+  {
+    "text": "the freedom to experiment so that they",
+    "start": 1476.64,
+    "duration": 3.68
+  },
+  {
+    "text": "come up with new use cases. You want",
+    "start": 1478.72,
+    "duration": 2.64
+  },
+  {
+    "text": "people to experiment and you want to",
+    "start": 1480.32,
+    "duration": 2.32
+  },
+  {
+    "text": "create this culture where people feel",
+    "start": 1481.36,
+    "duration": 2.88
+  },
+  {
+    "text": "safe experimenting and they will",
+    "start": 1482.64,
+    "duration": 2.32
+  },
+  {
+    "text": "surprise you.",
+    "start": 1484.24,
+    "duration": 1.12
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 1484.96,
+    "duration": 2
+  },
+  {
+    "text": ">> It's not going to be your most senior",
+    "start": 1485.36,
+    "duration": 3.04
+  },
+  {
+    "text": "engineer that comes up with like some",
+    "start": 1486.96,
+    "duration": 2.959
+  },
+  {
+    "text": "brilliant idea. It's going to be maybe a",
+    "start": 1488.4,
+    "duration": 2.72
+  },
+  {
+    "text": "new grad. You know, it's not going to be",
+    "start": 1489.919,
+    "duration": 3.041
+  },
+  {
+    "text": "some engineer that figures out how do",
+    "start": 1491.12,
+    "duration": 3.28
+  },
+  {
+    "text": "you automate this marketing process. It",
+    "start": 1492.96,
+    "duration": 2.64
+  },
+  {
+    "text": "might be a marketing person somewhere in",
+    "start": 1494.4,
+    "duration": 2.399
+  },
+  {
+    "text": "the corner of the org that you've never",
+    "start": 1495.6,
+    "duration": 3.04
+  },
+  {
+    "text": "met but that comes up with a brilliant",
+    "start": 1496.799,
+    "duration": 3.041
+  },
+  {
+    "text": "idea and they're because they're",
+    "start": 1498.64,
+    "duration": 3.12
+  },
+  {
+    "text": "experimenting. And so the thing you want",
+    "start": 1499.84,
+    "duration": 2.959
+  },
+  {
+    "text": "to encourage up front is this",
+    "start": 1501.76,
+    "duration": 2.64
+  },
+  {
+    "text": "experimentation. If there's an internal",
+    "start": 1502.799,
+    "duration": 3.041
+  },
+  {
+    "text": "use case and it takes off or there's a",
+    "start": 1504.4,
+    "duration": 2.96
+  },
+  {
+    "text": "product and it takes off and it uses a",
+    "start": 1505.84,
+    "duration": 4.88
+  },
+  {
+    "text": "lot of tokens but it's successful that's",
+    "start": 1507.36,
+    "duration": 5.04
+  },
+  {
+    "text": "when you go in and you want to optimize",
+    "start": 1510.72,
+    "duration": 3.36
+  },
+  {
+    "text": "it. But if you don't do the first part",
+    "start": 1512.4,
+    "duration": 4.32
+  },
+  {
+    "text": "you'll never find opportunity. And um",
+    "start": 1514.08,
+    "duration": 4.4
+  },
+  {
+    "text": "then once you find opportunity then then",
+    "start": 1516.72,
+    "duration": 3.28
+  },
+  {
+    "text": "you can optimize it like any other",
+    "start": 1518.48,
+    "duration": 3.6
+  },
+  {
+    "text": "engineering pump. Boris, I love that",
+    "start": 1520,
+    "duration": 3.84
+  },
+  {
+    "text": "description because you what you also",
+    "start": 1522.08,
+    "duration": 6.079
+  },
+  {
+    "text": "highlighted is there's a democratization",
+    "start": 1523.84,
+    "duration": 6.959
+  },
+  {
+    "text": "of opportunity. We've actually had",
+    "start": 1528.159,
+    "duration": 4.88
+  },
+  {
+    "text": "junior engineers uh take a problem, a",
+    "start": 1530.799,
+    "duration": 4.801
+  },
+  {
+    "text": "chip design problem that was was a bug.",
+    "start": 1533.039,
+    "duration": 4.321
+  },
+  {
+    "text": "Uh we had an engineering team had been",
+    "start": 1535.6,
+    "duration": 3.6
+  },
+  {
+    "text": "working for weeks couldn't solve the bug",
+    "start": 1537.36,
+    "duration": 4.64
+  },
+  {
+    "text": "and one of our junior engineers said I I",
+    "start": 1539.2,
+    "duration": 5.04
+  },
+  {
+    "text": "think I can solve that. uh threw a set",
+    "start": 1542,
+    "duration": 5.36
+  },
+  {
+    "text": "of agentic processes at it and came and",
+    "start": 1544.24,
+    "duration": 6.799
+  },
+  {
+    "text": "solved this incredibly you know remote",
+    "start": 1547.36,
+    "duration": 5.679
+  },
+  {
+    "text": "you know 20 things at once had to occur",
+    "start": 1551.039,
+    "duration": 4.321
+  },
+  {
+    "text": "for this uh chip bug to to realize",
+    "start": 1553.039,
+    "duration": 3.841
+  },
+  {
+    "text": "itself. This was obviously before we",
+    "start": 1555.36,
+    "duration": 3.679
+  },
+  {
+    "text": "shipped a product. This was in our our",
+    "start": 1556.88,
+    "duration": 4.08
+  },
+  {
+    "text": "debug and test phase. It actually",
+    "start": 1559.039,
+    "duration": 3.921
+  },
+  {
+    "text": "shocked to the core a number of our",
+    "start": 1560.96,
+    "duration": 4.24
+  },
+  {
+    "text": "senior engineers and and that actually",
+    "start": 1562.96,
+    "duration": 4.64
+  },
+  {
+    "text": "drove up adoption [laughter] of these",
+    "start": 1565.2,
+    "duration": 5.76
+  },
+  {
+    "text": "approaches at AMD because every time you",
+    "start": 1567.6,
+    "duration": 5.92
+  },
+  {
+    "text": "actually have to experience it uh you",
+    "start": 1570.96,
+    "duration": 4.48
+  },
+  {
+    "text": "you can talk you can give it lip service",
+    "start": 1573.52,
+    "duration": 4.08
+  },
+  {
+    "text": "but once you actually have a problem",
+    "start": 1575.44,
+    "duration": 4.719
+  },
+  {
+    "text": "that you couldn't solve or uh or",
+    "start": 1577.6,
+    "duration": 4.559
+  },
+  {
+    "text": "actually experience a huge productivity",
+    "start": 1580.159,
+    "duration": 5.361
+  },
+  {
+    "text": "gain I just leader after leader I see",
+    "start": 1582.159,
+    "duration": 5.361
+  },
+  {
+    "text": "them immediately converted on the spot",
+    "start": 1585.52,
+    "duration": 4
+  },
+  {
+    "text": "to believers.",
+    "start": 1587.52,
+    "duration": 3.2
+  },
+  {
+    "text": ">> That's right. That's right. And you need",
+    "start": 1589.52,
+    "duration": 2.8
+  },
+  {
+    "text": "a certain amount of humility also going",
+    "start": 1590.72,
+    "duration": 4.24
+  },
+  {
+    "text": "in. Like I think this is a lesson I I",
+    "start": 1592.32,
+    "duration": 4.239
+  },
+  {
+    "text": "had to learn like over and over and over",
+    "start": 1594.96,
+    "duration": 4.64
+  },
+  {
+    "text": "again. I tried to do things my way which",
+    "start": 1596.559,
+    "duration": 4.401
+  },
+  {
+    "text": "was, you know, before I just kind of",
+    "start": 1599.6,
+    "duration": 4.24
+  },
+  {
+    "text": "gave up and like let Quad drive. I I",
+    "start": 1600.96,
+    "duration": 6
+  },
+  {
+    "text": "kind of had to I I I manually did it.",
+    "start": 1603.84,
+    "duration": 4.719
+  },
+  {
+    "text": "And you know, for example, maybe this is",
+    "start": 1606.96,
+    "duration": 3.36
+  },
+  {
+    "text": "like a year ago, it was like debugging a",
+    "start": 1608.559,
+    "duration": 5.12
+  },
+  {
+    "text": "a bug also. And um I remember there was",
+    "start": 1610.32,
+    "duration": 4.56
+  },
+  {
+    "text": "like one time I was debugging something",
+    "start": 1613.679,
+    "duration": 2.321
+  },
+  {
+    "text": "and there was a new person that just",
+    "start": 1614.88,
+    "duration": 2.799
+  },
+  {
+    "text": "joined the team and I was debugging it",
+    "start": 1616,
+    "duration": 2.96
+  },
+  {
+    "text": "by hand. that was running a you know a",
+    "start": 1617.679,
+    "duration": 3.041
+  },
+  {
+    "text": "profile to figure out what's going on",
+    "start": 1618.96,
+    "duration": 3.76
+  },
+  {
+    "text": "and they just you know asked Quad to do",
+    "start": 1620.72,
+    "duration": 4.16
+  },
+  {
+    "text": "the same thing and I was like no no no",
+    "start": 1622.72,
+    "duration": 3.28
+  },
+  {
+    "text": "there's no way Quad won't be able to",
+    "start": 1624.88,
+    "duration": 2.08
+  },
+  {
+    "text": "figure it out.",
+    "start": 1626,
+    "duration": 2
+  },
+  {
+    "text": ">> Even you said that",
+    "start": 1626.96,
+    "duration": 2.8
+  },
+  {
+    "text": ">> even I even I said that because you know",
+    "start": 1628,
+    "duration": 3.279
+  },
+  {
+    "text": "in some ways like I'm biased because",
+    "start": 1629.76,
+    "duration": 3.279
+  },
+  {
+    "text": "I've worked with Quad through all the",
+    "start": 1631.279,
+    "duration": 4.241
+  },
+  {
+    "text": "model generations and so somewhere in my",
+    "start": 1633.039,
+    "duration": 3.921
+  },
+  {
+    "text": "head I was still stuck on this like",
+    "start": 1635.52,
+    "duration": 3.68
+  },
+  {
+    "text": "older model generation which is just not",
+    "start": 1636.96,
+    "duration": 3.92
+  },
+  {
+    "text": "where the capability was at that point",
+    "start": 1639.2,
+    "duration": 3.599
+  },
+  {
+    "text": "because the model was improving.",
+    "start": 1640.88,
+    "duration": 4.56
+  },
+  {
+    "text": ">> Um and within 20 minutes they came up",
+    "start": 1642.799,
+    "duration": 4
+  },
+  {
+    "text": "with a solution and I didn't.",
+    "start": 1645.44,
+    "duration": 2.8
+  },
+  {
+    "text": ">> Wow. and they they had the right one.",
+    "start": 1646.799,
+    "duration": 3.041
+  },
+  {
+    "text": "And I've just, you know, learned this",
+    "start": 1648.24,
+    "duration": 3.679
+  },
+  {
+    "text": "lesson over and over. And I think it's",
+    "start": 1649.84,
+    "duration": 4.24
+  },
+  {
+    "text": "like as the model gets more advanced, my",
+    "start": 1651.919,
+    "duration": 4.64
+  },
+  {
+    "text": "relationship with the model changes. And",
+    "start": 1654.08,
+    "duration": 4.16
+  },
+  {
+    "text": "it's less that like I have to handhold",
+    "start": 1656.559,
+    "duration": 4.161
+  },
+  {
+    "text": "it and I have to micromanage it. And it",
+    "start": 1658.24,
+    "duration": 3.84
+  },
+  {
+    "text": "becomes more like working with a senior",
+    "start": 1660.72,
+    "duration": 3.199
+  },
+  {
+    "text": "engineer. I I trust them. I give them",
+    "start": 1662.08,
+    "duration": 4.479
+  },
+  {
+    "text": "context. I give them goals. I check in.",
+    "start": 1663.919,
+    "duration": 3.921
+  },
+  {
+    "text": "The, you know, the less I trust them,",
+    "start": 1666.559,
+    "duration": 2.561
+  },
+  {
+    "text": "maybe the newer they are to the problem,",
+    "start": 1667.84,
+    "duration": 3.04
+  },
+  {
+    "text": "the more often I check in.",
+    "start": 1669.12,
+    "duration": 3.52
+  },
+  {
+    "text": ">> Um, but really it's about setting the",
+    "start": 1670.88,
+    "duration": 3.44
+  },
+  {
+    "text": "right guard rails and then letting the",
+    "start": 1672.64,
+    "duration": 2.48
+  },
+  {
+    "text": "model do the work.",
+    "start": 1674.32,
+    "duration": 2.64
+  },
+  {
+    "text": ">> Boris, I have a question for you. I mean",
+    "start": 1675.12,
+    "duration": 4.32
+  },
+  {
+    "text": "it is a democratization of what teams",
+    "start": 1676.96,
+    "duration": 6
+  },
+  {
+    "text": "can do. And so what what we also see is",
+    "start": 1679.44,
+    "duration": 7.52
+  },
+  {
+    "text": "that um people will be running in",
+    "start": 1682.96,
+    "duration": 5.839
+  },
+  {
+    "text": "parallel and we're going to have five",
+    "start": 1686.96,
+    "duration": 5.199
+  },
+  {
+    "text": "ways to drive a you know a improvement",
+    "start": 1688.799,
+    "duration": 5.76
+  },
+  {
+    "text": "out of a workflow. How do you think",
+    "start": 1692.159,
+    "duration": 3.841
+  },
+  {
+    "text": "about that? How do you think about",
+    "start": 1694.559,
+    "duration": 4.081
+  },
+  {
+    "text": "measuring and you know and how um you",
+    "start": 1696,
+    "duration": 4.64
+  },
+  {
+    "text": "know how how do you at Enthropic and in",
+    "start": 1698.64,
+    "duration": 4.639
+  },
+  {
+    "text": "those cases you know pick the solution",
+    "start": 1700.64,
+    "duration": 4.399
+  },
+  {
+    "text": "to go with? I mean you what's the role",
+    "start": 1703.279,
+    "duration": 4.321
+  },
+  {
+    "text": "of like benchmarking and measuring uh to",
+    "start": 1705.039,
+    "duration": 4.801
+  },
+  {
+    "text": "be able to in this agentic area make",
+    "start": 1707.6,
+    "duration": 5.36
+  },
+  {
+    "text": "these decisions and and not end up with",
+    "start": 1709.84,
+    "duration": 5.04
+  },
+  {
+    "text": "uh this you know just massive",
+    "start": 1712.96,
+    "duration": 4.48
+  },
+  {
+    "text": "bifurcation of of approaches you know as",
+    "start": 1714.88,
+    "duration": 5.12
+  },
+  {
+    "text": "we all are are trying to solve problems.",
+    "start": 1717.44,
+    "duration": 4.08
+  },
+  {
+    "text": ">> Yeah. So I think it's exactly this.",
+    "start": 1720,
+    "duration": 3.039
+  },
+  {
+    "text": "There's there's actually two tools. One",
+    "start": 1721.52,
+    "duration": 4.159
+  },
+  {
+    "text": "is EVEL's so benchmarks. So then one is",
+    "start": 1723.039,
+    "duration": 6.081
+  },
+  {
+    "text": "Vibes and I think both have their place.",
+    "start": 1725.679,
+    "duration": 5.12
+  },
+  {
+    "text": "Um for something like a workflow that",
+    "start": 1729.12,
+    "duration": 3.12
+  },
+  {
+    "text": "you're going to repeat maybe thousands,",
+    "start": 1730.799,
+    "duration": 2.88
+  },
+  {
+    "text": "tens of thousands, hundreds of",
+    "start": 1732.24,
+    "duration": 3.36
+  },
+  {
+    "text": "thousands, millions of times, you",
+    "start": 1733.679,
+    "duration": 3.761
+  },
+  {
+    "text": "definitely want to have evals because",
+    "start": 1735.6,
+    "duration": 3.84
+  },
+  {
+    "text": "the eval measure, let's say a new model",
+    "start": 1737.44,
+    "duration": 4.4
+  },
+  {
+    "text": "comes out, you swap it in in the harness",
+    "start": 1739.44,
+    "duration": 3.839
+  },
+  {
+    "text": "and you want to make sure that it",
+    "start": 1741.84,
+    "duration": 3.28
+  },
+  {
+    "text": "improves. Um and this gives you a way to",
+    "start": 1743.279,
+    "duration": 3.361
+  },
+  {
+    "text": "measure it. for other things like maybe",
+    "start": 1745.12,
+    "duration": 4.08
+  },
+  {
+    "text": "a product experience. Uh vibes actually",
+    "start": 1746.64,
+    "duration": 4.399
+  },
+  {
+    "text": "go pretty far because there's a cost to",
+    "start": 1749.2,
+    "duration": 3.12
+  },
+  {
+    "text": "writing evals. You don't want to write",
+    "start": 1751.039,
+    "duration": 3.601
+  },
+  {
+    "text": "it for everything. Um so you kind of",
+    "start": 1752.32,
+    "duration": 3.839
+  },
+  {
+    "text": "want to like pick and choose when when",
+    "start": 1754.64,
+    "duration": 3.44
+  },
+  {
+    "text": "can intuition when you use something",
+    "start": 1756.159,
+    "duration": 3.201
+  },
+  {
+    "text": "when when when does that tell you",
+    "start": 1758.08,
+    "duration": 2.64
+  },
+  {
+    "text": "something? And then when do you actually",
+    "start": 1759.36,
+    "duration": 3.84
+  },
+  {
+    "text": "need eval to tell you something? And",
+    "start": 1760.72,
+    "duration": 4
+  },
+  {
+    "text": "when you have this bifurcation and all",
+    "start": 1763.2,
+    "duration": 2.8
+  },
+  {
+    "text": "these different products, I think one of",
+    "start": 1764.72,
+    "duration": 4.16
+  },
+  {
+    "text": "the the blessings of uh you know like",
+    "start": 1766,
+    "duration": 4.32
+  },
+  {
+    "text": "having having a model is it's actually",
+    "start": 1768.88,
+    "duration": 3.76
+  },
+  {
+    "text": "very easy to migrate and merge code. And",
+    "start": 1770.32,
+    "duration": 3.68
+  },
+  {
+    "text": "so like when you know you pick the",
+    "start": 1772.64,
+    "duration": 3.84
+  },
+  {
+    "text": "approach that you want usually it's",
+    "start": 1774,
+    "duration": 4.24
+  },
+  {
+    "text": "quite easy to just ask cloud like hey",
+    "start": 1776.48,
+    "duration": 3.679
+  },
+  {
+    "text": "like migrate all these other call sites",
+    "start": 1778.24,
+    "duration": 3.52
+  },
+  {
+    "text": "to this you know workflow and you know",
+    "start": 1780.159,
+    "duration": 2.4
+  },
+  {
+    "text": "that's that.",
+    "start": 1781.76,
+    "duration": 2.24
+  },
+  {
+    "text": ">> Well I'm going to shift gears yet again",
+    "start": 1782.559,
+    "duration": 3.681
+  },
+  {
+    "text": "a little bit. I want to uh talk about",
+    "start": 1784,
+    "duration": 4.32
+  },
+  {
+    "text": "something that that all of us have to",
+    "start": 1786.24,
+    "duration": 4.72
+  },
+  {
+    "text": "focus on and and I think it's just",
+    "start": 1788.32,
+    "duration": 4.56
+  },
+  {
+    "text": "actually centered and anthropic in the",
+    "start": 1790.96,
+    "duration": 4
+  },
+  {
+    "text": "approach you all have taken and that's",
+    "start": 1792.88,
+    "duration": 3.679
+  },
+  {
+    "text": "uh the broad topic of trust and",
+    "start": 1794.96,
+    "duration": 4.24
+  },
+  {
+    "text": "verification. Um I had on a previous",
+    "start": 1796.559,
+    "duration": 5.84
+  },
+  {
+    "text": "episode Kathy Fam who who lectures at u",
+    "start": 1799.2,
+    "duration": 7.12
+  },
+  {
+    "text": "at Harvard and we talked about uh uh you",
+    "start": 1802.399,
+    "duration": 5.681
+  },
+  {
+    "text": "know governance and how you build in the",
+    "start": 1806.32,
+    "duration": 3.68
+  },
+  {
+    "text": "process. So there's one side there's a",
+    "start": 1808.08,
+    "duration": 4.079
+  },
+  {
+    "text": "governance of how to ensure there's safe",
+    "start": 1810,
+    "duration": 4.48
+  },
+  {
+    "text": "AI and then there's the verification",
+    "start": 1812.159,
+    "duration": 5.76
+  },
+  {
+    "text": "like how do you ensure um that you're",
+    "start": 1814.48,
+    "duration": 6.16
+  },
+  {
+    "text": "driving the accuracy that that you need",
+    "start": 1817.919,
+    "duration": 4.88
+  },
+  {
+    "text": "because both both come together to",
+    "start": 1820.64,
+    "duration": 5.44
+  },
+  {
+    "text": "provide trust and and the deployment of",
+    "start": 1822.799,
+    "duration": 5.521
+  },
+  {
+    "text": "AI. I know it's important to you. You've",
+    "start": 1826.08,
+    "duration": 3.92
+  },
+  {
+    "text": "said it from the outset in our in our",
+    "start": 1828.32,
+    "duration": 3.52
+  },
+  {
+    "text": "chat here, but maybe we could just spend",
+    "start": 1830,
+    "duration": 4.159
+  },
+  {
+    "text": "a minute um thinking about like how do",
+    "start": 1831.84,
+    "duration": 4.8
+  },
+  {
+    "text": "you how do you build that in? Like is it",
+    "start": 1834.159,
+    "duration": 5.601
+  },
+  {
+    "text": "is it a a checklist or is it is it",
+    "start": 1836.64,
+    "duration": 5.919
+  },
+  {
+    "text": "actually built in your your own",
+    "start": 1839.76,
+    "duration": 5.84
+  },
+  {
+    "text": "workflows uh that you run every day?",
+    "start": 1842.559,
+    "duration": 5.6
+  },
+  {
+    "text": ">> Yeah, I mean it's it's a it's many",
+    "start": 1845.6,
+    "duration": 5.04
+  },
+  {
+    "text": "layers and exactly like you said for for",
+    "start": 1848.159,
+    "duration": 3.921
+  },
+  {
+    "text": "anthropic this is just at the core of",
+    "start": 1850.64,
+    "duration": 4
+  },
+  {
+    "text": "what we do. As models get increasingly",
+    "start": 1852.08,
+    "duration": 4.4
+  },
+  {
+    "text": "powerful and they get more and more",
+    "start": 1854.64,
+    "duration": 3.6
+  },
+  {
+    "text": "central to the business process, you",
+    "start": 1856.48,
+    "duration": 3.12
+  },
+  {
+    "text": "needed to be safe. You needed to be",
+    "start": 1858.24,
+    "duration": 3.439
+  },
+  {
+    "text": "reliable. You needed to be trustworthy.",
+    "start": 1859.6,
+    "duration": 5.04
+  },
+  {
+    "text": "You needed to be aligned with uh",
+    "start": 1861.679,
+    "duration": 4.641
+  },
+  {
+    "text": "whatever the intent is of of the person",
+    "start": 1864.64,
+    "duration": 3.919
+  },
+  {
+    "text": "that's using the model. So, you know,",
+    "start": 1866.32,
+    "duration": 3.599
+  },
+  {
+    "text": "there there's just like so many ways",
+    "start": 1868.559,
+    "duration": 2.881
+  },
+  {
+    "text": "that that we approach this at different",
+    "start": 1869.919,
+    "duration": 3.521
+  },
+  {
+    "text": "layers. The most basic is model",
+    "start": 1871.44,
+    "duration": 4.16
+  },
+  {
+    "text": "alignment. And, you know, we have a very",
+    "start": 1873.44,
+    "duration": 3.599
+  },
+  {
+    "text": "large team working on it. We publish a",
+    "start": 1875.6,
+    "duration": 2.48
+  },
+  {
+    "text": "lot of research about it and we have a",
+    "start": 1877.039,
+    "duration": 2.321
+  },
+  {
+    "text": "lot of blog posts about what we're",
+    "start": 1878.08,
+    "duration": 3.76
+  },
+  {
+    "text": "learning. And this is just many many",
+    "start": 1879.36,
+    "duration": 5.6
+  },
+  {
+    "text": "years of research go into this. And uh",
+    "start": 1881.84,
+    "duration": 4.959
+  },
+  {
+    "text": "essentially like you know there there's",
+    "start": 1884.96,
+    "duration": 3.04
+  },
+  {
+    "text": "a lot of things that go into alignment",
+    "start": 1886.799,
+    "duration": 2.641
+  },
+  {
+    "text": "but you know for example an element of",
+    "start": 1888,
+    "duration": 4.08
+  },
+  {
+    "text": "alignment is uh truthfulness. So you",
+    "start": 1889.44,
+    "duration": 3.92
+  },
+  {
+    "text": "know the model kind of says the right",
+    "start": 1892.08,
+    "duration": 6.079
+  },
+  {
+    "text": "thing. Another element is uh not being",
+    "start": 1893.36,
+    "duration": 6.4
+  },
+  {
+    "text": "because a failure mode for models for",
+    "start": 1898.159,
+    "duration": 4.081
+  },
+  {
+    "text": "example is agreeing with everything the",
+    "start": 1899.76,
+    "duration": 4.88
+  },
+  {
+    "text": "user is saying but actually a a good",
+    "start": 1902.24,
+    "duration": 4.559
+  },
+  {
+    "text": "model that I like working with will push",
+    "start": 1904.64,
+    "duration": 2.72
+  },
+  {
+    "text": "back.",
+    "start": 1906.799,
+    "duration": 3.12
+  },
+  {
+    "text": ">> Mhm. And I think with uh with some of",
+    "start": 1907.36,
+    "duration": 4.72
+  },
+  {
+    "text": "our later models, so like Opus 4.7,",
+    "start": 1909.919,
+    "duration": 5.12
+  },
+  {
+    "text": "definitely Opus 4.8, um we made a lot of",
+    "start": 1912.08,
+    "duration": 6.8
+  },
+  {
+    "text": "progress in this. Um and so if we train",
+    "start": 1915.039,
+    "duration": 6.64
+  },
+  {
+    "text": "kind of the model well, then if I",
+    "start": 1918.88,
+    "duration": 4.24
+  },
+  {
+    "text": "suggest something and it's a bad idea,",
+    "start": 1921.679,
+    "duration": 4
+  },
+  {
+    "text": "the model will push back and it makes me",
+    "start": 1923.12,
+    "duration": 4.88
+  },
+  {
+    "text": "trust it a little bit more.",
+    "start": 1925.679,
+    "duration": 4.081
+  },
+  {
+    "text": "There's other layers too. So you know,",
+    "start": 1928,
+    "duration": 3.12
+  },
+  {
+    "text": "when we talk about trust, another",
+    "start": 1929.76,
+    "duration": 2.72
+  },
+  {
+    "text": "element of this, you know, there's a lot",
+    "start": 1931.12,
+    "duration": 3.039
+  },
+  {
+    "text": "of stuff wrapped into trust, but another",
+    "start": 1932.48,
+    "duration": 4.88
+  },
+  {
+    "text": "element is uh security. And so this is",
+    "start": 1934.159,
+    "duration": 5.281
+  },
+  {
+    "text": "another element that goes into training",
+    "start": 1937.36,
+    "duration": 4.48
+  },
+  {
+    "text": "is for example anti-prompt injection",
+    "start": 1939.44,
+    "duration": 4.88
+  },
+  {
+    "text": "training and on every model we publish",
+    "start": 1941.84,
+    "duration": 4
+  },
+  {
+    "text": "there's a system card that talks about",
+    "start": 1944.32,
+    "duration": 3.92
+  },
+  {
+    "text": "how resilient is the model to common",
+    "start": 1945.84,
+    "duration": 5.92
+  },
+  {
+    "text": "attacks like prompt injection and opus",
+    "start": 1948.24,
+    "duration": 6.88
+  },
+  {
+    "text": "4.7 op 4.8 aid fable. These are just the",
+    "start": 1951.76,
+    "duration": 5.279
+  },
+  {
+    "text": "least prompt injectable models in the",
+    "start": 1955.12,
+    "duration": 4.48
+  },
+  {
+    "text": "industry by margin of I think like five",
+    "start": 1957.039,
+    "duration": 4.401
+  },
+  {
+    "text": "or 10x. It's it's like a really big",
+    "start": 1959.6,
+    "duration": 2.24
+  },
+  {
+    "text": "margin.",
+    "start": 1961.44,
+    "duration": 2.4
+  },
+  {
+    "text": ">> So you you had to architect that in I",
+    "start": 1961.84,
+    "duration": 3.839
+  },
+  {
+    "text": "mean how did you do that?",
+    "start": 1963.84,
+    "duration": 3.04
+  },
+  {
+    "text": ">> There there's a lot of training that",
+    "start": 1965.679,
+    "duration": 2.161
+  },
+  {
+    "text": "goes into it. [clears throat]",
+    "start": 1966.88,
+    "duration": 2.639
+  },
+  {
+    "text": ">> So you know this is this is just part of",
+    "start": 1967.84,
+    "duration": 4.8
+  },
+  {
+    "text": "the model training process. Um and we we",
+    "start": 1969.519,
+    "duration": 4.481
+  },
+  {
+    "text": "train the models to be resistant to",
+    "start": 1972.64,
+    "duration": 2.8
+  },
+  {
+    "text": "these kind of attacks. And especially",
+    "start": 1974,
+    "duration": 2.799
+  },
+  {
+    "text": "when you combine it with a runtime",
+    "start": 1975.44,
+    "duration": 3.44
+  },
+  {
+    "text": "classifier for proper injection, which",
+    "start": 1976.799,
+    "duration": 4.72
+  },
+  {
+    "text": "we actually also do, the success rate in",
+    "start": 1978.88,
+    "duration": 6
+  },
+  {
+    "text": "practice now is near zero. And obviously",
+    "start": 1981.519,
+    "duration": 4.961
+  },
+  {
+    "text": "this is important because as the models",
+    "start": 1984.88,
+    "duration": 3.039
+  },
+  {
+    "text": "do more, as they interact with more",
+    "start": 1986.48,
+    "duration": 3.76
+  },
+  {
+    "text": "systems, being resistant to these very",
+    "start": 1987.919,
+    "duration": 4.401
+  },
+  {
+    "text": "common attacks becomes very important.",
+    "start": 1990.24,
+    "duration": 3.76
+  },
+  {
+    "text": "As the model gets more capable, we need",
+    "start": 1992.32,
+    "duration": 3.12
+  },
+  {
+    "text": "a way to run the model for a longer",
+    "start": 1994,
+    "duration": 3.679
+  },
+  {
+    "text": "period of time safely. And you know, now",
+    "start": 1995.44,
+    "duration": 4.079
+  },
+  {
+    "text": "there's workloads that run for days,",
+    "start": 1997.679,
+    "duration": 4.561
+  },
+  {
+    "text": "weeks, months at a time. And obviously",
+    "start": 1999.519,
+    "duration": 4.16
+  },
+  {
+    "text": "this means that there can't be a person",
+    "start": 2002.24,
+    "duration": 3.279
+  },
+  {
+    "text": "sitting there. And around the same time,",
+    "start": 2003.679,
+    "duration": 4.72
+  },
+  {
+    "text": "what we were realizing is if there's a",
+    "start": 2005.519,
+    "duration": 4.88
+  },
+  {
+    "text": "person that's deciding yes or no every",
+    "start": 2008.399,
+    "duration": 3.921
+  },
+  {
+    "text": "time, at some point the person actually",
+    "start": 2010.399,
+    "duration": 3.841
+  },
+  {
+    "text": "just stops reading and they just say",
+    "start": 2012.32,
+    "duration": 3.359
+  },
+  {
+    "text": "yes, yes, yes, because they're tired of",
+    "start": 2014.24,
+    "duration": 4.08
+  },
+  {
+    "text": "pressing yes. And I noticed myself doing",
+    "start": 2015.679,
+    "duration": 4.801
+  },
+  {
+    "text": "this, too. You know, I I I would kind of",
+    "start": 2018.32,
+    "duration": 4.479
+  },
+  {
+    "text": "stop reading the bash commands. I would",
+    "start": 2020.48,
+    "duration": 4.4
+  },
+  {
+    "text": "just say yes. And our security people",
+    "start": 2022.799,
+    "duration": 4.72
+  },
+  {
+    "text": "were also realizing this. [laughter]",
+    "start": 2024.88,
+    "duration": 4.88
+  },
+  {
+    "text": "Um and so they the thing that they",
+    "start": 2027.519,
+    "duration": 4.16
+  },
+  {
+    "text": "started working on is is there a way to",
+    "start": 2029.76,
+    "duration": 3.44
+  },
+  {
+    "text": "route this to a classifier so the",
+    "start": 2031.679,
+    "duration": 4.081
+  },
+  {
+    "text": "classifier can decide and you know they",
+    "start": 2033.2,
+    "duration": 5.12
+  },
+  {
+    "text": "started this work it took uh many months",
+    "start": 2035.76,
+    "duration": 5.36
+  },
+  {
+    "text": "to to kind of get this to a mature state",
+    "start": 2038.32,
+    "duration": 5.44
+  },
+  {
+    "text": "and in the end through uh evals uh",
+    "start": 2041.12,
+    "duration": 4.72
+  },
+  {
+    "text": "through red teaming through pentesting",
+    "start": 2043.76,
+    "duration": 3.519
+  },
+  {
+    "text": "we're able to show that this is actually",
+    "start": 2045.84,
+    "duration": 2.16
+  },
+  {
+    "text": "much safer.",
+    "start": 2047.279,
+    "duration": 1.041
+  },
+  {
+    "text": ">> Yeah.",
+    "start": 2048,
+    "duration": 2.079
+  },
+  {
+    "text": ">> And so you know at anthropic we run on",
+    "start": 2048.32,
+    "duration": 3.92
+  },
+  {
+    "text": "auto mode and we we recommend this to",
+    "start": 2050.079,
+    "duration": 4.8
+  },
+  {
+    "text": "all our customers too. Well, Boris, uh,",
+    "start": 2052.24,
+    "duration": 4.56
+  },
+  {
+    "text": "I I I have to ask you, I mean, you you",
+    "start": 2054.879,
+    "duration": 4
+  },
+  {
+    "text": "you're removing bottlenecks at at every",
+    "start": 2056.8,
+    "duration": 4.559
+  },
+  {
+    "text": "stage, but how do you think about scale",
+    "start": 2058.879,
+    "duration": 4.641
+  },
+  {
+    "text": "going forward? I mean, uh, the",
+    "start": 2061.359,
+    "duration": 4.161
+  },
+  {
+    "text": "complexity of what you're taking on and",
+    "start": 2063.52,
+    "duration": 5.04
+  },
+  {
+    "text": "and on traffic is is it just, as you",
+    "start": 2065.52,
+    "duration": 5.359
+  },
+  {
+    "text": "said, growing at at dramatically at",
+    "start": 2068.56,
+    "duration": 5.119
+  },
+  {
+    "text": "every release. Um, how do you how do you",
+    "start": 2070.879,
+    "duration": 5.441
+  },
+  {
+    "text": "think about managing scale uh actually",
+    "start": 2073.679,
+    "duration": 4.4
+  },
+  {
+    "text": "maintaining that pace?",
+    "start": 2076.32,
+    "duration": 4.079
+  },
+  {
+    "text": ">> Yeah. I I think a lot of it comes down",
+    "start": 2078.079,
+    "duration": 6.481
+  },
+  {
+    "text": "to following the scaling laws and uh",
+    "start": 2080.399,
+    "duration": 7.44
+  },
+  {
+    "text": "continuing to reinvent the product as it",
+    "start": 2084.56,
+    "duration": 6
+  },
+  {
+    "text": "scales up. Um a lot of it is you know",
+    "start": 2087.839,
+    "duration": 4.24
+  },
+  {
+    "text": "about finding awesome partners to work",
+    "start": 2090.56,
+    "duration": 3.599
+  },
+  {
+    "text": "with um to you know like support the",
+    "start": 2092.079,
+    "duration": 3.441
+  },
+  {
+    "text": "scale and you know like support this",
+    "start": 2094.159,
+    "duration": 6.481
+  },
+  {
+    "text": "kind of compute. Um and uh I I I I think",
+    "start": 2095.52,
+    "duration": 7.28
+  },
+  {
+    "text": "a lot of it is uh figuring out the right",
+    "start": 2100.64,
+    "duration": 3.68
+  },
+  {
+    "text": "guard rails",
+    "start": 2102.8,
+    "duration": 3.68
+  },
+  {
+    "text": ">> so that we can make sure it's safe",
+    "start": 2104.32,
+    "duration": 3.68
+  },
+  {
+    "text": "because you know like again as the model",
+    "start": 2106.48,
+    "duration": 3.84
+  },
+  {
+    "text": "becomes more and more core to what we do",
+    "start": 2108,
+    "duration": 3.839
+  },
+  {
+    "text": "um we have to make sure that it does the",
+    "start": 2110.32,
+    "duration": 1.92
+  },
+  {
+    "text": "right thing.",
+    "start": 2111.839,
+    "duration": 0.801
+  },
+  {
+    "text": ">> Yes.",
+    "start": 2112.24,
+    "duration": 1.839
+  },
+  {
+    "text": ">> But I'm actually Mark I'm curious how",
+    "start": 2112.64,
+    "duration": 2.56
+  },
+  {
+    "text": "you think about it. Like you're no",
+    "start": 2114.079,
+    "duration": 2.721
+  },
+  {
+    "text": "stranger to scaling and you you've seen",
+    "start": 2115.2,
+    "duration": 3.84
+  },
+  {
+    "text": "this through multiple generations for",
+    "start": 2116.8,
+    "duration": 3.76
+  },
+  {
+    "text": "CPUs for GPUs.",
+    "start": 2119.04,
+    "duration": 2
+  },
+  {
+    "text": ">> Yes.",
+    "start": 2120.56,
+    "duration": 2.32
+  },
+  {
+    "text": ">> How how do you think about it? Well,",
+    "start": 2121.04,
+    "duration": 4.559
+  },
+  {
+    "text": "scaling for us at AMD is is actually",
+    "start": 2122.88,
+    "duration": 5.199
+  },
+  {
+    "text": "fundamental because the old Moore's law,",
+    "start": 2125.599,
+    "duration": 5.281
+  },
+  {
+    "text": "so Moore's law was that you could double",
+    "start": 2128.079,
+    "duration": 5.361
+  },
+  {
+    "text": "the transistor density, double the",
+    "start": 2130.88,
+    "duration": 5.199
+  },
+  {
+    "text": "performance, but stay at the same power",
+    "start": 2133.44,
+    "duration": 4.8
+  },
+  {
+    "text": "envelope and cost envelope. And that",
+    "start": 2136.079,
+    "duration": 5.121
+  },
+  {
+    "text": "that was fantastic for years, but Boris",
+    "start": 2138.24,
+    "duration": 5.2
+  },
+  {
+    "text": "about 10 years ago that started trailing",
+    "start": 2141.2,
+    "duration": 4.08
+  },
+  {
+    "text": "off. Not that we don't still with each",
+    "start": 2143.44,
+    "duration": 4.56
+  },
+  {
+    "text": "new semiconductor node get you know more",
+    "start": 2145.28,
+    "duration": 6.24
+  },
+  {
+    "text": "productivity and more uh density but the",
+    "start": 2148,
+    "duration": 5.76
+  },
+  {
+    "text": "costs are going up and as you've",
+    "start": 2151.52,
+    "duration": 4.88
+  },
+  {
+    "text": "certainly seen the power goes up. Uh so",
+    "start": 2153.76,
+    "duration": 5.44
+  },
+  {
+    "text": "we're having to reimagine how we",
+    "start": 2156.4,
+    "duration": 4.959
+  },
+  {
+    "text": "optimize to be able to maintain we're",
+    "start": 2159.2,
+    "duration": 4.56
+  },
+  {
+    "text": "basically needing to stay on the old",
+    "start": 2161.359,
+    "duration": 5.921
+  },
+  {
+    "text": "Moors law pace without the physics of",
+    "start": 2163.76,
+    "duration": 5.76
+  },
+  {
+    "text": "the semiconductor supporting that old",
+    "start": 2167.28,
+    "duration": 5.28
+  },
+  {
+    "text": "Moors law pace. So um it's a huge",
+    "start": 2169.52,
+    "duration": 5.28
+  },
+  {
+    "text": "challenge uh but we're up for it and",
+    "start": 2172.56,
+    "duration": 5.039
+  },
+  {
+    "text": "frankly uh these agentic flows are",
+    "start": 2174.8,
+    "duration": 5.44
+  },
+  {
+    "text": "proving immensely helpful to let us",
+    "start": 2177.599,
+    "duration": 4.961
+  },
+  {
+    "text": "scale because they're helping us manage",
+    "start": 2180.24,
+    "duration": 4.16
+  },
+  {
+    "text": "at a bigger I'll call it state space",
+    "start": 2182.56,
+    "duration": 4.559
+  },
+  {
+    "text": "more variables more of our chip designs",
+    "start": 2184.4,
+    "duration": 4.959
+  },
+  {
+    "text": "that can be optimized",
+    "start": 2187.119,
+    "duration": 5.281
+  },
+  {
+    "text": "uh and I I don't think we could we could",
+    "start": 2189.359,
+    "duration": 6.24
+  },
+  {
+    "text": "continue to scale without these agent",
+    "start": 2192.4,
+    "duration": 5.52
+  },
+  {
+    "text": "workflows. I literally it's coming about",
+    "start": 2195.599,
+    "duration": 4.801
+  },
+  {
+    "text": "at the perfect time. It's like a perfect",
+    "start": 2197.92,
+    "duration": 6.08
+  },
+  {
+    "text": "confluence uh to to enable us uh to",
+    "start": 2200.4,
+    "duration": 5.76
+  },
+  {
+    "text": "continue to scale. Uh and you talked",
+    "start": 2204,
+    "duration": 3.68
+  },
+  {
+    "text": "about partnership. I mean that's at the",
+    "start": 2206.16,
+    "duration": 3.84
+  },
+  {
+    "text": "core of who we are at AMD like um you",
+    "start": 2207.68,
+    "duration": 3.679
+  },
+  {
+    "text": "know our partnership with you, our",
+    "start": 2210,
+    "duration": 3.92
+  },
+  {
+    "text": "partnership across the industry. That's",
+    "start": 2211.359,
+    "duration": 4.801
+  },
+  {
+    "text": "also fundamentally fundamental for us to",
+    "start": 2213.92,
+    "duration": 4.56
+  },
+  {
+    "text": "to be able to scale because we like to",
+    "start": 2216.16,
+    "duration": 5.12
+  },
+  {
+    "text": "deeply partner um to make sure we are",
+    "start": 2218.48,
+    "duration": 4.56
+  },
+  {
+    "text": "using the best like just as the stories",
+    "start": 2221.28,
+    "duration": 3.36
+  },
+  {
+    "text": "you've told us here. We want to be first",
+    "start": 2223.04,
+    "duration": 5.039
+  },
+  {
+    "text": "adopters of of those best practices uh",
+    "start": 2224.64,
+    "duration": 5.6
+  },
+  {
+    "text": "that that you're doing at at Anthropic.",
+    "start": 2228.079,
+    "duration": 5.681
+  },
+  {
+    "text": "So uh great question uh for us at AMD",
+    "start": 2230.24,
+    "duration": 6.48
+  },
+  {
+    "text": "for our whole chip industry paramount of",
+    "start": 2233.76,
+    "duration": 6.96
+  },
+  {
+    "text": "innovating to keep uh at scale. I I have",
+    "start": 2236.72,
+    "duration": 5.84
+  },
+  {
+    "text": "to ask the question. I mean you talked",
+    "start": 2240.72,
+    "duration": 6.879
+  },
+  {
+    "text": "about uh really seeing us uh progress um",
+    "start": 2242.56,
+    "duration": 7.039
+  },
+  {
+    "text": "uh on on kind of the line you projected.",
+    "start": 2247.599,
+    "duration": 4.641
+  },
+  {
+    "text": "So I have to ask what do you see coming",
+    "start": 2249.599,
+    "duration": 5.601
+  },
+  {
+    "text": "in the next uh you know uh two to three",
+    "start": 2252.24,
+    "duration": 5.04
+  },
+  {
+    "text": "years which in AI time is like an",
+    "start": 2255.2,
+    "duration": 4
+  },
+  {
+    "text": "eternity. [laughter]",
+    "start": 2257.28,
+    "duration": 3.68
+  },
+  {
+    "text": ">> Two to three years is a really long time",
+    "start": 2259.2,
+    "duration": 3.2
+  },
+  {
+    "text": "but it's maybe um I I'll think about",
+    "start": 2260.96,
+    "duration": 2.24
+  },
+  {
+    "text": "maybe six months.",
+    "start": 2262.4,
+    "duration": 1.36
+  },
+  {
+    "text": ">> Six months.",
+    "start": 2263.2,
+    "duration": 3.44
+  },
+  {
+    "text": ">> Um this is just otherwise my prediction",
+    "start": 2263.76,
+    "duration": 4.56
+  },
+  {
+    "text": "is just going to be way off somewhere.",
+    "start": 2266.64,
+    "duration": 2.24
+  },
+  {
+    "text": ">> Of course.",
+    "start": 2268.32,
+    "duration": 3.039
+  },
+  {
+    "text": ">> Um I think I think in six months um we",
+    "start": 2268.88,
+    "duration": 4.719
+  },
+  {
+    "text": "are going to see agents running for",
+    "start": 2271.359,
+    "duration": 4.561
+  },
+  {
+    "text": "longer on average. We're going to see",
+    "start": 2273.599,
+    "duration": 5.121
+  },
+  {
+    "text": "people running more agents on average.",
+    "start": 2275.92,
+    "duration": 4.64
+  },
+  {
+    "text": "we're going to see them be better",
+    "start": 2278.72,
+    "duration": 4.32
+  },
+  {
+    "text": "aligned with your intent. So it's going",
+    "start": 2280.56,
+    "duration": 4
+  },
+  {
+    "text": "to be less course correction, less",
+    "start": 2283.04,
+    "duration": 3.12
+  },
+  {
+    "text": "handholding. There's going to be a lot",
+    "start": 2284.56,
+    "duration": 4.08
+  },
+  {
+    "text": "more autonomy. Um, so I think it'll",
+    "start": 2286.16,
+    "duration": 4.16
+  },
+  {
+    "text": "actually become pretty normal for, you",
+    "start": 2288.64,
+    "duration": 3.52
+  },
+  {
+    "text": "know, most people and definitely most",
+    "start": 2290.32,
+    "duration": 3.36
+  },
+  {
+    "text": "engineers and hopefully more than that",
+    "start": 2292.16,
+    "duration": 3.28
+  },
+  {
+    "text": "to be running agents for, you know, like",
+    "start": 2293.68,
+    "duration": 3.6
+  },
+  {
+    "text": "days or weeks at a time. This would just",
+    "start": 2295.44,
+    "duration": 3.44
+  },
+  {
+    "text": "become a normal thing as opposed to",
+    "start": 2297.28,
+    "duration": 4.4
+  },
+  {
+    "text": "something a few engineers are doing. Um,",
+    "start": 2298.88,
+    "duration": 4.32
+  },
+  {
+    "text": "I think by the end of this year, we're",
+    "start": 2301.68,
+    "duration": 2.88
+  },
+  {
+    "text": "going to we're going to start to see",
+    "start": 2303.2,
+    "duration": 3.52
+  },
+  {
+    "text": "Quad building bigger and bigger things.",
+    "start": 2304.56,
+    "duration": 4.24
+  },
+  {
+    "text": "So it won't just be features, it's going",
+    "start": 2306.72,
+    "duration": 4.32
+  },
+  {
+    "text": "to be products. We might start to see",
+    "start": 2308.8,
+    "duration": 5.68
+  },
+  {
+    "text": "entire startups being built by Quad. Um,",
+    "start": 2311.04,
+    "duration": 6.559
+  },
+  {
+    "text": "so yeah, progress progress marches on",
+    "start": 2314.48,
+    "duration": 6.16
+  },
+  {
+    "text": "and um, you know, we're excited to to to",
+    "start": 2317.599,
+    "duration": 5.041
+  },
+  {
+    "text": "make it safe and to make it something",
+    "start": 2320.64,
+    "duration": 4.719
+  },
+  {
+    "text": "that's delightful for for people to use.",
+    "start": 2322.64,
+    "duration": 4.64
+  },
+  {
+    "text": "Boris, um, thank you very much. Thanks",
+    "start": 2325.359,
+    "duration": 3.921
+  },
+  {
+    "text": "for sharing your insights. Uh, thanks",
+    "start": 2327.28,
+    "duration": 3.6
+  },
+  {
+    "text": "for your vision and the impact you're",
+    "start": 2329.28,
+    "duration": 4.4
+  },
+  {
+    "text": "having on the industry. Uh, and my god,",
+    "start": 2330.88,
+    "duration": 5.28
+  },
+  {
+    "text": "it's an exciting future. Thanks so much.",
+    "start": 2333.68,
+    "duration": 4.32
+  },
+  {
+    "text": "Thank you, Mark.",
+    "start": 2336.16,
+    "duration": 4.08
+  },
+  {
+    "text": ">> I truly enjoyed chatting with Boris. I",
+    "start": 2338,
+    "duration": 4.079
+  },
+  {
+    "text": "think Boris really gave us a preview of",
+    "start": 2340.24,
+    "duration": 3.92
+  },
+  {
+    "text": "how work changes going forward in this",
+    "start": 2342.079,
+    "duration": 4.157
+  },
+  {
+    "text": "agentic era of AI. A few takeaways",
+    "start": 2344.16,
+    "duration": 4.88
+  },
+  {
+    "text": "[music] that really stood out, the value",
+    "start": 2346.236,
+    "duration": 5.363
+  },
+  {
+    "text": "of hiring people with non-traditional",
+    "start": 2349.04,
+    "duration": 4.319
+  },
+  {
+    "text": "backgrounds to bring new perspectives",
+    "start": 2351.599,
+    "duration": 4.641
+  },
+  {
+    "text": "and passions. Also, how at Anthropic",
+    "start": 2353.359,
+    "duration": 4.961
+  },
+  {
+    "text": "Claude is at the center of the employee",
+    "start": 2356.24,
+    "duration": 5.599
+  },
+  {
+    "text": "experience. Gentic AI democratizes the",
+    "start": 2358.32,
+    "duration": 5.68
+  },
+  {
+    "text": "opportunity for anyone at any [music]",
+    "start": 2361.839,
+    "duration": 4.641
+  },
+  {
+    "text": "level to make an impactful difference.",
+    "start": 2364,
+    "duration": 4.4
+  },
+  {
+    "text": "And lastly, when thinking about return",
+    "start": 2366.48,
+    "duration": 4.4
+  },
+  {
+    "text": "on investment, don't just focus on the",
+    "start": 2368.4,
+    "duration": 5.04
+  },
+  {
+    "text": "investment. Focus on the return. The",
+    "start": 2370.88,
+    "duration": 4.8
+  },
+  {
+    "text": "freedom [music] of experimentation that",
+    "start": 2373.44,
+    "duration": 4.32
+  },
+  {
+    "text": "provides will be what comes up with the",
+    "start": 2375.68,
+    "duration": 4.399
+  },
+  {
+    "text": "biggest wins. Thank you for joining us",
+    "start": 2377.76,
+    "duration": 3.847
+  },
+  {
+    "text": "today. I look forward to bringing",
+    "start": 2380.079,
+    "duration": 3.841
+  },
+  {
+    "text": "[music] you more in-depth conversations",
+    "start": 2381.607,
+    "duration": 4.553
+  },
+  {
+    "text": "on the cutting edge of technology,",
+    "start": 2383.92,
+    "duration": 4.48
+  },
+  {
+    "text": "industry insights, and visionary",
+    "start": 2386.16,
+    "duration": 4.4
+  },
+  {
+    "text": "perspectives from some of the brightest",
+    "start": 2388.4,
+    "duration": 3.84
+  },
+  {
+    "text": "minds in the industry. You can [music]",
+    "start": 2390.56,
+    "duration": 3.76
+  },
+  {
+    "text": "watch the video show on AMD's YouTube",
+    "start": 2392.24,
+    "duration": 4.72
+  },
+  {
+    "text": "channel, or you can listen in audio only",
+    "start": 2394.32,
+    "duration": 4.72
+  },
+  {
+    "text": "platforms, including [music] Spotify,",
+    "start": 2396.96,
+    "duration": 4.48
+  },
+  {
+    "text": "Amazon Music, and YouTube Music.",
+    "start": 2399.04,
+    "duration": 5.12
+  },
+  {
+    "text": "Technology is always advancing, and I",
+    "start": 2401.44,
+    "duration": 4.88
+  },
+  {
+    "text": "can't wait to share more insights with",
+    "start": 2404.16,
+    "duration": 6.12
+  },
+  {
+    "text": "you next time.",
+    "start": 2406.32,
+    "duration": 3.96
+  }
+]

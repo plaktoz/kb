@@ -1,0 +1,1502 @@
+[
+  {
+    "text": "Welcome, everyone.",
+    "start": "00:00:00",
+    "end": "00:00:01"
+  },
+  {
+    "text": "We are happy to have you back.",
+    "start": "00:00:01",
+    "end": "00:00:02"
+  },
+  {
+    "text": "Today we have a brand new research paper on integrating memory optimization with graph structures .",
+    "start": "00:00:02",
+    "end": "00:00:09"
+  },
+  {
+    "text": "Let's take a look .",
+    "start": "00:00:09",
+    "end": "00:00:11"
+  },
+  {
+    "text": "This is the main idea of ​​ this paper , and we will talk about it, and within five minutes you will understand everything clearly.",
+    "start": "00:00:11",
+    "end": "00:00:22"
+  },
+  {
+    "text": "But first, yes, we humans still need some research, and here is a paper published on July 15, 2026.",
+    "start": "00:00:21",
+    "end": "00:00:30"
+  },
+  {
+    "text": "It is an experiment to improve a memory graph with one-time error correction for our agents, and it is from the University of Electronic Science and Technology in Changdu, China.",
+    "start": "00:00:30",
+    "end": "00:00:42"
+  },
+  {
+    "text": "I asked, \"Where is it located?",
+    "start": "00:00:42",
+    "end": "00:00:45"
+  },
+  {
+    "text": "Changdo!",
+    "start": "00:00:45",
+    "end": "00:00:46"
+  },
+  {
+    "text": "\" I replied, \"Look at this .",
+    "start": "00:00:46",
+    "end": "00:00:47"
+  },
+  {
+    "text": "It's amazing, truly incredible!",
+    "start": "00:00:47",
+    "end": "00:00:50"
+  },
+  {
+    "text": "\" Today we have a research paper from these experts, so let's begin.",
+    "start": "00:00:50",
+    "end": "00:00:55"
+  },
+  {
+    "text": "In the last video, I showed you here the MIMO Harness technology, where we talked about an agent technology that learns from experience how to optimize its technology for a particular task.",
+    "start": "00:00:55",
+    "end": "00:01:08"
+  },
+  {
+    "text": "This is the thumbnail on YouTube, if you want to find and view it.",
+    "start": "00:01:08",
+    "end": "00:01:13"
+  },
+  {
+    "text": "And now we talk again about Maimo.",
+    "start": "00:01:12",
+    "end": "00:01:15"
+  },
+  {
+    "text": "Why memory specifically?",
+    "start": "00:01:15",
+    "end": "00:01:17"
+  },
+  {
+    "text": "Well, it turns out to be the most important element for agents and system dynamics.",
+    "start": "00:01:17",
+    "end": "00:01:23"
+  },
+  {
+    "text": "I have shown you how the Maimo system learns to configure the appropriate system for a new task.",
+    "start": "00:01:23",
+    "end": "00:01:29"
+  },
+  {
+    "text": "This includes context building, all the different tools we need, full coordination of agents and sub-agents, memory dynamics and creation, generation settings, output processing, and much more.",
+    "start": "00:01:29",
+    "end": "00:01:43"
+  },
+  {
+    "text": "You may be wondering: What is the main new idea of ​​ this initial research paper from our Chinese colleagues?",
+    "start": "00:01:43",
+    "end": "00:01:51"
+  },
+  {
+    "text": "It's simple.",
+    "start": "00:01:50",
+    "end": "00:01:53"
+  },
+  {
+    "text": "We now move from text structures to graphical structures.",
+    "start": "00:01:53",
+    "end": "00:01:56"
+  },
+  {
+    "text": "That is, we move from something for which we do not have a mathematical basis, such as texts, to something for which we have a theory of graphs in mathematics, and we are more precise.",
+    "start": "00:01:56",
+    "end": "00:02:06"
+  },
+  {
+    "text": "This is the qualitative leap today.",
+    "start": "00:02:06",
+    "end": "00:02:09"
+  },
+  {
+    "text": "Let's take a look.",
+    "start": "00:02:08",
+    "end": "00:02:11"
+  },
+  {
+    "text": "EMG, or Experience Memory Schema, now learns the procedure-level corrections and workflows that need to be entered into the agent.",
+    "start": "00:02:11",
+    "end": "00:02:19"
+  },
+  {
+    "text": "Here he is comparing a failed path with a successful one.",
+    "start": "00:02:19",
+    "end": "00:02:27"
+  },
+  {
+    "text": "This represents both the graph as a decision-making graph based on the structure of nodes and edges, and mathematically calculates the structural adjustments needed to turn failure into success.",
+    "start": "00:02:26",
+    "end": "00:02:41"
+  },
+  {
+    "text": "These patches are stored offline and can be retrieved before a new implementation.",
+    "start": "00:02:41",
+    "end": "00:02:49"
+  },
+  {
+    "text": "You might ask: Why do we do this?",
+    "start": "00:02:49",
+    "end": "00:02:51"
+  },
+  {
+    "text": "Okay, so what 's the current situation?",
+    "start": "00:02:51",
+    "end": "00:02:53"
+  },
+  {
+    "text": "Currently, if a customer fails, you say, \" I failed,\" and you think about why you failed, and then you try again, hoping that the Directed Learning (LLM) model is smart enough.",
+    "start": "00:02:53",
+    "end": "00:03:01"
+  },
+  {
+    "text": "But as it turns out, especially for small-scale directed learning models , such as free-trainable parameter models that contain four or eight billion parameters and reside locally on your laptop , this has two drawbacks.",
+    "start": "00:03:01",
+    "end": "00:03:13"
+  },
+  {
+    "text": "First, it is extremely expensive, because running the directed learning model multiple times for each test case drains all of your tokens.",
+    "start": "00:03:13",
+    "end": "00:03:23"
+  },
+  {
+    "text": "Secondly, as I mentioned, it depends on the intelligence of your guided learning model to diagnose its errors.",
+    "start": "00:03:23",
+    "end": "00:03:30"
+  },
+  {
+    "text": "And guess what?",
+    "start": "00:03:30",
+    "end": "00:03:33"
+  },
+  {
+    "text": "Small, guided learning models simply do not excel at this task.",
+    "start": "00:03:33",
+    "end": "00:03:38"
+  },
+  {
+    "text": "It's not as good as Fable Five; it's stuck in endless error loops.",
+    "start": "00:03:37",
+    "end": "00:03:43"
+  },
+  {
+    "text": "To make matters more complicated, look at these episodes we have .",
+    "start": "00:03:43",
+    "end": "00:03:48"
+  },
+  {
+    "text": "We have the LLM core, and then here in the processing system we have the Air loop which causes countless problems .",
+    "start": "00:03:48",
+    "end": "00:03:56"
+  },
+  {
+    "text": "Therefore, millions of tokens are wasted without any result.",
+    "start": "00:03:56",
+    "end": "00:04:01"
+  },
+  {
+    "text": "So what is the solution?",
+    "start": "00:04:01",
+    "end": "00:04:04"
+  },
+  {
+    "text": "The new idea is to move the error correction mechanism from a simple LLM guess to predict the next code in a natural human language like English to a much more powerful algorithm, the deterministic mathematical graph matching algorithm.",
+    "start": "00:04:04",
+    "end": "00:04:23"
+  },
+  {
+    "text": "You will now understand what we are dealing with.",
+    "start": "00:04:23",
+    "end": "00:04:29"
+  },
+  {
+    "text": "Do not ask the agent to verbally explain why he failed.",
+    "start": "00:04:29",
+    "end": "00:04:32"
+  },
+  {
+    "text": "Present the failed behavior and the correct behavior as graphs.",
+    "start": "00:04:32",
+    "end": "00:04:36"
+  },
+  {
+    "text": "Calculate mathematically the structural difference between these two different types of graphs in a mathematical space, and store this difference as a reusable correction memory for the next task.",
+    "start": "00:04:36",
+    "end": "00:04:49"
+  },
+  {
+    "text": "As you can see, this is the solution in the simplest possible way, and I have put an exclamation mark here to assure you that this is the right way.",
+    "start": "00:04:49",
+    "end": "00:04:58"
+  },
+  {
+    "text": "So, you might be wondering: how do we learn this on graphs?",
+    "start": "00:04:58",
+    "end": "00:05:02"
+  },
+  {
+    "text": "Let's assume we conducted some tests.",
+    "start": "00:05:02",
+    "end": "00:05:07"
+  },
+  {
+    "text": "We now have a failed graph where the worker failed to find a solution.",
+    "start": "00:05:07",
+    "end": "00:05:10"
+  },
+  {
+    "text": "We have a lot of dead ends, wrong ends, and so on.",
+    "start": "00:05:10",
+    "end": "00:05:14"
+  },
+  {
+    "text": "Then we have a successful chart where we achieved outstanding success.",
+    "start": "00:05:14",
+    "end": "00:05:19"
+  },
+  {
+    "text": "The task seems simple now.",
+    "start": "00:05:18",
+    "end": "00:05:20"
+  },
+  {
+    "text": "No , we are only comparing the complexity of this graph's structure.",
+    "start": "00:05:20",
+    "end": "00:05:25"
+  },
+  {
+    "text": "Sometimes the graph contains 10,000 nodes or even millions of nodes, and you realize that this mathematical process is not that simple.",
+    "start": "00:05:24",
+    "end": "00:05:32"
+  },
+  {
+    "text": "So how can we improve it?",
+    "start": "00:05:32",
+    "end": "00:05:36"
+  },
+  {
+    "text": "Instead of asking the Learning- Led-Mechanism (LLM) model to guess the error, and relying on it only if we want prior knowledge, the researcher now has two entry points to the learning process: exploring the failing agent (this is the failing graph), and the successful expert path (the blue graph on the right).",
+    "start": "00:05:36",
+    "end": "00:06:03"
+  },
+  {
+    "text": "So, they now take both timelines of comparative learning here and turn them into direct decision-making graphs, where the nodes represent actions, such as picking up the apple, and the edges represent environmental observations, such as what's on the table.",
+    "start": "00:06:03",
+    "end": "00:06:21"
+  },
+  {
+    "text": "Then they use an algorithm such as Weiserstein's integrated graph .",
+    "start": "00:06:21",
+    "end": "00:06:27"
+  },
+  {
+    "text": "If you want to know the precise mathematical algorithms for calculating the differences between the two different graph structures, the solution is simple: the overlapping parts of the two graphs now become a common subgraph.",
+    "start": "00:06:27",
+    "end": "00:06:45"
+  },
+  {
+    "text": "This is the correct workflow, and it has been implemented correctly.",
+    "start": "00:06:45",
+    "end": "00:06:50"
+  },
+  {
+    "text": "Also, in the failed graph, let's say from step 1 to step 25, this is the correct path forward.",
+    "start": "00:06:49",
+    "end": "00:06:57"
+  },
+  {
+    "text": "Then, starting from step 25, you now see a difference in the structure of the graph, and this difference has become the paths for modifying the graph: that is, the action that should be deleted, new ideas added, or the whole renamed based on a specific observation to turn the failing graph into a successful graph.",
+    "start": "00:06:57",
+    "end": "00:07:21"
+  },
+  {
+    "text": "Now, this Fastin distance, as I mentioned earlier, is a precise mathematical engine that allows the system to compare the form and content of the AI's own behavior, using graph theory, completely eliminating the need for a linear linguistic model, as in the previous video , to pinpoint the error in my AI system or in another AI system.",
+    "start": "00:07:21",
+    "end": "00:07:49"
+  },
+  {
+    "text": "Therefore, we do not rely on a black box, but rather we have a mathematical model.",
+    "start": "00:07:49",
+    "end": "00:07:55"
+  },
+  {
+    "text": "How is that done?",
+    "start": "00:07:55",
+    "end": "00:07:57"
+  },
+  {
+    "text": "Simply put, both graphs are fed into this algorithm.",
+    "start": "00:07:56",
+    "end": "00:08:01"
+  },
+  {
+    "text": "The algorithm iteratively rearranges the nodes in a defined mathematical space, attempting to minimize the combined cost.",
+    "start": "00:08:00",
+    "end": "00:08:09"
+  },
+  {
+    "text": "As you can see, we have here a mathematical procedure for optimization, as in AI training , until the optimal flexible allocation matrix is ​​ found.",
+    "start": "00:08:09",
+    "end": "00:08:21"
+  },
+  {
+    "text": "I might ask: What is it ?",
+    "start": "00:08:21",
+    "end": "00:08:22"
+  },
+  {
+    "text": "Let's take a look.",
+    "start": "00:08:22",
+    "end": "00:08:25"
+  },
+  {
+    "text": "It's simple.",
+    "start": "00:08:24",
+    "end": "00:08:25"
+  },
+  {
+    "text": "The matrix is ​​ a network that illustrates here the probability that node I in the field graph ( red graph) will match node J in the expert graph ( blue graph).",
+    "start": "00:08:25",
+    "end": "00:08:37"
+  },
+  {
+    "text": "Thanks to the Vaserashstein component, the identical procedures are correctly linked here.",
+    "start": "00:08:36",
+    "end": "00:08:43"
+  },
+  {
+    "text": "You might say: Great, but we also need the grammar section because it represents the chronological order here .",
+    "start": "00:08:43",
+    "end": "00:08:48"
+  },
+  {
+    "text": "So, if you want the edges of observation, the \"taking the apple\" action from step 2 will not be accidentally linked to the \"taking the apple\" action in step 50 , when the entire environment changes and we have a completely different timeline, because the structural penalty would be too high under the rules of this optimization.",
+    "start": "00:08:48",
+    "end": "00:09:12"
+  },
+  {
+    "text": "I am asking here, and this is a diagram of an artificial intelligence generator.",
+    "start": "00:09:12",
+    "end": "00:09:17"
+  },
+  {
+    "text": "I don't draw it .",
+    "start": "00:09:17",
+    "end": "00:09:19"
+  },
+  {
+    "text": "Some people ask me: Do you do this?",
+    "start": "00:09:18",
+    "end": "00:09:21"
+  },
+  {
+    "text": "No , I just give instructions to my AI system to build it.",
+    "start": "00:09:21",
+    "end": "00:09:24"
+  },
+  {
+    "text": "Therefore, it is a combined graph.",
+    "start": "00:09:24",
+    "end": "00:09:27"
+  },
+  {
+    "text": "Yes, of course we have to integrate it .",
+    "start": "00:09:26",
+    "end": "00:09:28"
+  },
+  {
+    "text": "I will explain the reason to you.",
+    "start": "00:09:28",
+    "end": "00:09:30"
+  },
+  {
+    "text": "Here we have an aligned graph by combining the node's content and structure.",
+    "start": "00:09:30",
+    "end": "00:09:34"
+  },
+  {
+    "text": "Let's begin.",
+    "start": "00:09:34",
+    "end": "00:09:35"
+  },
+  {
+    "text": "Here we have again the red graph, the unsuccessful G graph.",
+    "start": "00:09:35",
+    "end": "00:09:41"
+  },
+  {
+    "text": "Then we have the successful G-Blue chart .",
+    "start": "00:09:40",
+    "end": "00:09:43"
+  },
+  {
+    "text": "Now that they have been combined, we have what is called the cost of observation.",
+    "start": "00:09:43",
+    "end": "00:09:49"
+  },
+  {
+    "text": "Here, it represents a difference in content or feature.",
+    "start": "00:09:49",
+    "end": "00:09:52"
+  },
+  {
+    "text": "Then we have the structure cost function, which is a function of the difference in bilateral relationships.",
+    "start": "00:09:52",
+    "end": "00:09:59"
+  },
+  {
+    "text": "Then we combine them.",
+    "start": "00:09:59",
+    "end": "00:10:00"
+  },
+  {
+    "text": "Guess what?",
+    "start": "00:10:00",
+    "end": "00:10:01"
+  },
+  {
+    "text": "Let's take a closer look now.",
+    "start": "00:10:01",
+    "end": "00:10:03"
+  },
+  {
+    "text": "Let's start with the red graph.",
+    "start": "00:10:03",
+    "end": "00:10:07"
+  },
+  {
+    "text": "We treat contracts as actions and edges as transitions conditioned by observation.",
+    "start": "00:10:07",
+    "end": "00:10:13"
+  },
+  {
+    "text": "The dense red structure in the image, given its red color, indicates the presence of some branches of incorrect actions, perhaps some repetitive actions, perhaps some incorrect loops, perhaps some dead ends , and some transitions that differ from the expert policy you see here in blue.",
+    "start": "00:10:13",
+    "end": "00:10:29"
+  },
+  {
+    "text": "The blue nodes may not appear in the same order as G, because this is G-.",
+    "start": "00:10:29",
+    "end": "00:10:36"
+  },
+  {
+    "text": "It may also contain some additional actions, some missing actions, some different branches , and some different edge structures .",
+    "start": "00:10:36",
+    "end": "00:10:44"
+  },
+  {
+    "text": "We have different designations for the nodes or edges, and a completely different number of nodes.",
+    "start": "00:10:44",
+    "end": "00:10:50"
+  },
+  {
+    "text": "Now you might be wondering: Okay, but how can we compare these two different graph structures?",
+    "start": "00:10:49",
+    "end": "00:10:56"
+  },
+  {
+    "text": "Well, that's the beauty of it, because by using the fuse squ algorithm, we can do this even if the two graphs are not identical.",
+    "start": "00:10:55",
+    "end": "00:11:06"
+  },
+  {
+    "text": "Let's take a look now.",
+    "start": "00:11:07",
+    "end": "00:11:09"
+  },
+  {
+    "text": "I just want to tell you that the transport map, or heat map as I call it here, is the most important element here.",
+    "start": "00:11:09",
+    "end": "00:11:17"
+  },
+  {
+    "text": "Because its rows correspond to the nodes of the graph G, and its columns correspond to the nodes of the graph G-.",
+    "start": "00:11:17",
+    "end": "00:11:24"
+  },
+  {
+    "text": "The position of the bright cell, which glows in the dark at position I K, simply means that the note I in G matches the note K in G with a relatively high degree of match strength.",
+    "start": "00:11:24",
+    "end": "00:11:41"
+  },
+  {
+    "text": "So here you see, in a simple mathematical matrix , how this note structure relates between G and G-.",
+    "start": "00:11:41",
+    "end": "00:11:49"
+  },
+  {
+    "text": "Now note, yes, I asked you for a diagonal heat map because it produced this map, but it doesn't have to be diagonal .",
+    "start": "00:11:49",
+    "end": "00:11:56"
+  },
+  {
+    "text": "You can get irregular diameters, multiple sets, or a diffuse pattern.",
+    "start": "00:11:56",
+    "end": "00:12:02"
+  },
+  {
+    "text": "This is not what we are talking about in country mapping, or linking vectors to values.",
+    "start": "00:12:02",
+    "end": "00:12:08"
+  },
+  {
+    "text": "This is something different.",
+    "start": "00:12:07",
+    "end": "00:12:10"
+  },
+  {
+    "text": "Here, as I mentioned, we have a node cost function.",
+    "start": "00:12:09",
+    "end": "00:12:13"
+  },
+  {
+    "text": "What is its function?",
+    "start": "00:12:13",
+    "end": "00:12:14"
+  },
+  {
+    "text": "Yes, as you can see , it's a great function.",
+    "start": "00:12:14",
+    "end": "00:12:16"
+  },
+  {
+    "text": "But what is the main idea?",
+    "start": "00:12:16",
+    "end": "00:12:19"
+  },
+  {
+    "text": "Simply put, the question is: Does the transport plan link the semantically compatible contracts?",
+    "start": "00:12:18",
+    "end": "00:12:24"
+  },
+  {
+    "text": "It is obvious that linking which allocates a large block to semantically incompatible nodes incurs a high cost.",
+    "start": "00:12:23",
+    "end": "00:12:34"
+  },
+  {
+    "text": "We now know the contract costs, but immediately note that you can have two actions with the same ratings, say G3 and G3 , and possibly another action, while they occupy a completely different causal position in the graph structure .",
+    "start": "00:12:34",
+    "end": "00:12:51"
+  },
+  {
+    "text": "Therefore, we must somehow take into account this difference in position within the graph itself.",
+    "start": "00:12:51",
+    "end": "00:12:58"
+  },
+  {
+    "text": "This is where the structure cost function comes in.",
+    "start": "00:12:58",
+    "end": "00:13:02"
+  },
+  {
+    "text": "The structure cost panel here is in blue, which represents the binary relational asymmetry, simple.",
+    "start": "00:13:02",
+    "end": "00:13:08"
+  },
+  {
+    "text": "What is required?",
+    "start": "00:13:08",
+    "end": "00:13:10"
+  },
+  {
+    "text": "The question is: If relation I is identical to relation K, and relation J is identical to relation L, are the relations from I to J and from K to L compatible?",
+    "start": "00:13:09",
+    "end": "00:13:21"
+  },
+  {
+    "text": "This is the essence of the rule pattern matching idea .",
+    "start": "00:13:21",
+    "end": "00:13:24"
+  },
+  {
+    "text": "It compares relationships within one space to relationships within another space, rather than requiring both graphs to be in a common coordinate system, where we first need a binding function to a unique mathematical space.",
+    "start": "00:13:24",
+    "end": "00:13:41"
+  },
+  {
+    "text": "We can leave these functions in their spaces and compare them using grom.",
+    "start": "00:13:41",
+    "end": "00:13:46"
+  },
+  {
+    "text": "Yes.",
+    "start": "00:13:46",
+    "end": "00:13:47"
+  },
+  {
+    "text": "The central objective now combines these two signals.",
+    "start": "00:13:47",
+    "end": "00:13:52"
+  },
+  {
+    "text": "Therefore, we now have the node cost function and the structure cost function combined, in Vaserstein's combined graph target.",
+    "start": "00:13:51",
+    "end": "00:14:02"
+  },
+  {
+    "text": "As you can see, here specifically we have node compatibility with relational compatibility.",
+    "start": "00:14:02",
+    "end": "00:14:08"
+  },
+  {
+    "text": "This is a simplified explanation of a somewhat complex mathematical concept .",
+    "start": "00:14:09",
+    "end": "00:14:14"
+  },
+  {
+    "text": "But, of course, you might say: \"Okay, can you explain to me here the purely mathematical aspect of this?",
+    "start": "00:14:14",
+    "end": "00:14:22"
+  },
+  {
+    "text": "\" Here it is.",
+    "start": "00:14:22",
+    "end": "00:14:22"
+  },
+  {
+    "text": "As you can see, I have explained this simple mathematical formula to you in easy-to-understand English words so that everyone can understand it.",
+    "start": "00:14:22",
+    "end": "00:14:30"
+  },
+  {
+    "text": "Even though some of my viewers feel a little intimidated when I see a mathematical equation.",
+    "start": "00:14:30",
+    "end": "00:14:36"
+  },
+  {
+    "text": "See how simple and easy it is.",
+    "start": "00:14:36",
+    "end": "00:14:39"
+  },
+  {
+    "text": "It's just two limits, and now you fully understand what each limit does.",
+    "start": "00:14:38",
+    "end": "00:14:43"
+  },
+  {
+    "text": "But of course, we can translate this mathematical equation into an understandable language.",
+    "start": "00:14:43",
+    "end": "00:14:49"
+  },
+  {
+    "text": "This sentence simply means that good contract alignment is not just linking semantically similar contracts, but also linking relational neighbors in one graph to compatible relational neighbors in another graph or another section of the graph.",
+    "start": "00:14:49",
+    "end": "00:15:07"
+  },
+  {
+    "text": "That's all it tells you.",
+    "start": "00:15:07",
+    "end": "00:15:09"
+  },
+  {
+    "text": "Now, if you want an algorithm to build this action decision graph , here it is.",
+    "start": "00:15:09",
+    "end": "00:15:16"
+  },
+  {
+    "text": "And of course, we just talked about this to extract the comments and update them to match the contract here.",
+    "start": "00:15:16",
+    "end": "00:15:23"
+  },
+  {
+    "text": "This is part one.",
+    "start": "00:15:22",
+    "end": "00:15:24"
+  },
+  {
+    "text": "This is the red part and this is the blue part.",
+    "start": "00:15:23",
+    "end": "00:15:28"
+  },
+  {
+    "text": "If you want to see that here in this code, it means that for this conformity, the system can now determine what was already true, which is here the common subgraph, and what should be deleted, inserted, renamed, or modified here in our graph structure, so that our G-graph becomes closer to G- in terms of structural symmetry.",
+    "start": "00:15:27",
+    "end": "00:15:54"
+  },
+  {
+    "text": "Now , here we see the complete process.",
+    "start": "00:15:54",
+    "end": "00:15:57"
+  },
+  {
+    "text": "No, we have that in our test here.",
+    "start": "00:15:57",
+    "end": "00:16:00"
+  },
+  {
+    "text": "Yes, this is particularly important during training time, because we want to use it later during reasoning.",
+    "start": "00:15:59",
+    "end": "00:16:09"
+  },
+  {
+    "text": "Therefore, we need to prepare the training data, and minute by minute, we have the failed exploration paths where the worker cannot come up with a correct solution, and then we have the successful paths, and all these training examples, and intensive training materials.",
+    "start": "00:16:08",
+    "end": "00:16:24"
+  },
+  {
+    "text": "Here we build our paths, and of course, if the system fails, we get failed paths where we get to a dead end, or simply see that this is not working.",
+    "start": "00:16:24",
+    "end": "00:16:34"
+  },
+  {
+    "text": "From the successful paths, we have here the ideal graph structure, we have a working graph structure.",
+    "start": "00:16:34",
+    "end": "00:16:40"
+  },
+  {
+    "text": "This is not the optimal graph structure, and we will talk about this later ; But it works, and we've found a solution.",
+    "start": "00:16:40",
+    "end": "00:16:47"
+  },
+  {
+    "text": "Then we do exactly what we just talked about : we have the graph matching, and this alignment engine, where we see: \"Okay, here in green we have the shared subgraph, and then in red the parts we identified.",
+    "start": "00:16:47",
+    "end": "00:17:01"
+  },
+  {
+    "text": "\" The nodes and edges are not identical in G and G-, so we need to pay attention to them; Therefore, we begin here to construct the graph of the final solution, which we call here the EMG, i.",
+    "start": "00:17:01",
+    "end": "00:17:16"
+  },
+  {
+    "text": "e.",
+    "start": "00:17:16",
+    "end": "00:17:16"
+  },
+  {
+    "text": ", the experience memory graph.",
+    "start": "00:17:16",
+    "end": "00:17:18"
+  },
+  {
+    "text": "That's all , in the simplest way possible , but of course, we don't give up on everything we 've learned during this process.",
+    "start": "00:17:18",
+    "end": "00:17:25"
+  },
+  {
+    "text": "Here we use every element, even failures.",
+    "start": "00:17:25",
+    "end": "00:17:30"
+  },
+  {
+    "text": "We put it into a database.",
+    "start": "00:17:30",
+    "end": "00:17:31"
+  },
+  {
+    "text": "Therefore, we know exactly what did not succeed in a particular task in a particular situation at a particular level of complexity .",
+    "start": "00:17:31",
+    "end": "00:17:38"
+  },
+  {
+    "text": "And imagine what exactly happens: the more we develop this, the deeper understanding we gain of how to build a better graph structure next time .",
+    "start": "00:17:38",
+    "end": "00:17:48"
+  },
+  {
+    "text": "Faster, uses less code, and has higher accuracy.",
+    "start": "00:17:48",
+    "end": "00:17:52"
+  },
+  {
+    "text": "While reading this research paper, a question came to mind.",
+    "start": "00:17:52",
+    "end": "00:17:57"
+  },
+  {
+    "text": "I said: Just a moment, we are now comparing G and G Dash.",
+    "start": "00:17:56",
+    "end": "00:18:01"
+  },
+  {
+    "text": "But what about how to devise a new mathematical structure for the non- shared subpart of the graph, i.",
+    "start": "00:18:01",
+    "end": "00:18:09"
+  },
+  {
+    "text": "e.",
+    "start": "00:18:09",
+    "end": "00:18:09"
+  },
+  {
+    "text": ", the open part?",
+    "start": "00:18:09",
+    "end": "00:18:09"
+  },
+  {
+    "text": "No, there is no solution to this , because the system is now required to almost find a new path on a graph of unknown complexity for my particular problem in theoretical physics.",
+    "start": "00:18:09",
+    "end": "00:18:21"
+  },
+  {
+    "text": "But how does the system do that?",
+    "start": "00:18:21",
+    "end": "00:18:23"
+  },
+  {
+    "text": "I continued reading the paper, and it became clear to me that it simply does not do that at all, because I had previously stated that this database, the offline database , is built during training.",
+    "start": "00:18:23",
+    "end": "00:18:39"
+  },
+  {
+    "text": "This means how is the training data constructed ?",
+    "start": "00:18:39",
+    "end": "00:18:41"
+  },
+  {
+    "text": "This means that for each task in the training set, there are two things: failed attempts ( G-chart, red chart) , and the expert's path ( G-Dash chart, blue chart).",
+    "start": "00:18:41",
+    "end": "00:18:54"
+  },
+  {
+    "text": "Now , the authors of this research paper either provided human solutions, or used a dataset from the internet, or used expert gold trails.",
+    "start": "00:18:54",
+    "end": "00:19:07"
+  },
+  {
+    "text": "So, as you understand, the algorithm does not explore an infinite unknown space to search for the optimal solution, and then look for optimization algorithms.",
+    "start": "00:19:07",
+    "end": "00:19:19"
+  },
+  {
+    "text": "Rather, we already have the correct solution, but initially we have an agent that does not know how to implement it.",
+    "start": "00:19:19",
+    "end": "00:19:25"
+  },
+  {
+    "text": "It fails repeatedly , and then we bring it closer and closer to the expert path on a graphical structure, not on a textual structure.",
+    "start": "00:19:26",
+    "end": "00:19:36"
+  },
+  {
+    "text": "Here we calculate the shortest bridge between the two known graphs.",
+    "start": "00:19:36",
+    "end": "00:19:41"
+  },
+  {
+    "text": "If you want the G graph (red), it is where the agent ended up wrong , and if you want the G- graph (blue), it is where he should have ended up.",
+    "start": "00:19:40",
+    "end": "00:19:50"
+  },
+  {
+    "text": "Remember that I explained to you here how to derive and modify the graph from the matching node, and how to build and modify G to get G-.",
+    "start": "00:19:50",
+    "end": "00:20:04"
+  },
+  {
+    "text": "Now, I will explain this code in simple words.",
+    "start": "00:20:04",
+    "end": "00:20:09"
+  },
+  {
+    "text": "Let's take a look at what's happening.",
+    "start": "00:20:09",
+    "end": "00:20:12"
+  },
+  {
+    "text": "The ZIP system examines the non-matching parts here and classifies them into three distinct mathematical groups.",
+    "start": "00:20:12",
+    "end": "00:20:19"
+  },
+  {
+    "text": "This is the simplest set, and you can add any number you want.",
+    "start": "00:20:19",
+    "end": "00:20:23"
+  },
+  {
+    "text": "First, you have the delete operations, then the add operations, and then the rename operations.",
+    "start": "00:20:22",
+    "end": "00:20:29"
+  },
+  {
+    "text": "Why?",
+    "start": "00:20:29",
+    "end": "00:20:29"
+  },
+  {
+    "text": "This is a simple process that will take us to the next step in our procedure.",
+    "start": "00:20:29",
+    "end": "00:20:34"
+  },
+  {
+    "text": "Let's look first at the deletions.",
+    "start": "00:20:34",
+    "end": "00:20:36"
+  },
+  {
+    "text": "The nodes and edges present in the failed graph, but which have no mathematical outlet in the expert graph , simply mean deleting that procedure.",
+    "start": "00:20:36",
+    "end": "00:20:44"
+  },
+  {
+    "text": "No, because it is not included in the expert solution.",
+    "start": "00:20:44",
+    "end": "00:20:47"
+  },
+  {
+    "text": "So, young customer, you're completely off track.",
+    "start": "00:20:47",
+    "end": "00:20:51"
+  },
+  {
+    "text": "Addition operations: The nodes and edges present in the expert chart are completely missing in the failed chart.",
+    "start": "00:20:50",
+    "end": "00:20:56"
+  },
+  {
+    "text": "We know that we have missing parts of the solution.",
+    "start": "00:20:55",
+    "end": "00:20:59"
+  },
+  {
+    "text": "Therefore, as a general rule, we say: add these specific actions, and then we have renaming.",
+    "start": "00:20:59",
+    "end": "00:21:05"
+  },
+  {
+    "text": "This means that the failed graph matched a node in the expert graph with a node in the expert graph, because they appeared in exactly the same structural place in the timeline, but their labels were different.",
+    "start": "00:21:05",
+    "end": "00:21:17"
+  },
+  {
+    "text": "Let's suppose, for example, that in note y, you chose to put a pencil on a table, but the expert chose to put a pencil on a shelf.",
+    "start": "00:21:17",
+    "end": "00:21:26"
+  },
+  {
+    "text": "So , we now have a rebranding from table to shelf.",
+    "start": "00:21:26",
+    "end": "00:21:29"
+  },
+  {
+    "text": "It looks like a simple process , but notice something.",
+    "start": "00:21:29",
+    "end": "00:21:34"
+  },
+  {
+    "text": "This is no longer a purely mathematical operation, but rather a graphical mathematical operation.",
+    "start": "00:21:33",
+    "end": "00:21:39"
+  },
+  {
+    "text": "But we are now in the process of establishing rules, and these rules are formulated in English.",
+    "start": "00:21:39",
+    "end": "00:21:44"
+  },
+  {
+    "text": "Now we go back to the starting point , and I think this is the weak point, or rather the weak point, in this wonderful research paper that we will now discuss.",
+    "start": "00:21:44",
+    "end": "00:21:54"
+  },
+  {
+    "text": "Did you understand?",
+    "start": "00:21:54",
+    "end": "00:21:56"
+  },
+  {
+    "text": "Built-in spaces.",
+    "start": "00:21:55",
+    "end": "00:21:56"
+  },
+  {
+    "text": "But before I go into detail, let's take a look at one of the results.",
+    "start": "00:21:56",
+    "end": "00:22:00"
+  },
+  {
+    "text": "Let's see how good it is.",
+    "start": "00:22:00",
+    "end": "00:22:02"
+  },
+  {
+    "text": "We now have the Alpha world, the Science world, and the Average Performance.",
+    "start": "00:22:02",
+    "end": "00:22:06"
+  },
+  {
+    "text": "As you can see, for the 4 billion miles in the third quarter, you have all the other models here .",
+    "start": "00:22:06",
+    "end": "00:22:10"
+  },
+  {
+    "text": "And here in the pink line, you have EMG, our new methodology.",
+    "start": "00:22:10",
+    "end": "00:22:16"
+  },
+  {
+    "text": "Just look at the average here, in the last column .",
+    "start": "00:22:15",
+    "end": "00:22:18"
+  },
+  {
+    "text": "As you can see, all the other elements here are in the twenties, and our new methodology is in the forties.",
+    "start": "00:22:18",
+    "end": "00:22:25"
+  },
+  {
+    "text": "This is a preliminary indicator, and it seems interesting, but you might wonder: why is it better here specifically?",
+    "start": "00:22:25",
+    "end": "00:22:34"
+  },
+  {
+    "text": "Especially if we look at the cost of time in the world of visible science and the world of invisible science, we see that the cost of time here is measured in minutes.",
+    "start": "00:22:34",
+    "end": "00:22:45"
+  },
+  {
+    "text": "Our new methodology wastes almost no time.",
+    "start": "00:22:44",
+    "end": "00:22:49"
+  },
+  {
+    "text": "Look at the other reflection here.",
+    "start": "00:22:48",
+    "end": "00:22:51"
+  },
+  {
+    "text": "It takes approximately four times as much time here to achieve a certain success rate .",
+    "start": "00:22:51",
+    "end": "00:22:55"
+  },
+  {
+    "text": "You might ask: Why?",
+    "start": "00:22:55",
+    "end": "00:22:59"
+  },
+  {
+    "text": "Why does this happen?",
+    "start": "00:22:58",
+    "end": "00:23:00"
+  },
+  {
+    "text": "Think about it.",
+    "start": "00:23:00",
+    "end": "00:23:01"
+  },
+  {
+    "text": "It's simple.",
+    "start": "00:23:01",
+    "end": "00:23:03"
+  },
+  {
+    "text": "By framing error correction as a set of discrete, case-related editing factors, as I just explained to you, and derived from expert templates, the mathematical complexity collapses.",
+    "start": "00:23:02",
+    "end": "00:23:16"
+  },
+  {
+    "text": "Certainly, as I told you, we lose mathematical precision when we revert to human language.",
+    "start": "00:23:16",
+    "end": "00:23:22"
+  },
+  {
+    "text": "Now, at the time of testing, when the worker is faced with your real unknown task, and the expert path is no longer available, he does not need to make any graph .",
+    "start": "00:23:22",
+    "end": "00:23:32"
+  },
+  {
+    "text": "Why?",
+    "start": "00:23:32",
+    "end": "00:23:33"
+  },
+  {
+    "text": "Okay, you've seen the process.",
+    "start": "00:23:33",
+    "end": "00:23:37"
+  },
+  {
+    "text": "Simply put, the program takes the current task and searches a database containing all the human language corrections resulting from the graphing process; It searches this vector database, applies simple cosine similarity, and extracts the presupposed editing path from the training task that looks similar.",
+    "start": "00:23:36",
+    "end": "00:23:59"
+  },
+  {
+    "text": "This resulting solution is passed from the vector database to the language model, to the language model prompt , as human-like text such as: \" Avoid making mistake X here, instead, do Y.",
+    "start": "00:23:58",
+    "end": "00:24:12"
+  },
+  {
+    "text": "\" And again, you see how close he is to the skills.",
+    "start": "00:24:12",
+    "end": "00:24:17"
+  },
+  {
+    "text": "When we have skills in Markdown files, and skills that we put here in databases or in vector databases, we include here the skill configuration in vector databases.",
+    "start": "00:24:16",
+    "end": "00:24:27"
+  },
+  {
+    "text": "It's almost always the same basic idea of how to deal with the complexities of artificial intelligence.",
+    "start": "00:24:27",
+    "end": "00:24:35"
+  },
+  {
+    "text": "Therefore, I think we take this beautiful graph result, then translate it back into human language, and put these human language instructions into a database.",
+    "start": "00:24:35",
+    "end": "00:24:47"
+  },
+  {
+    "text": "Well, whether it's a regular database or a vector database, it doesn't matter .",
+    "start": "00:24:47",
+    "end": "00:24:51"
+  },
+  {
+    "text": "We then derive these textual instructions based on the similarity of the cosine function from the task description.",
+    "start": "00:24:51",
+    "end": "00:24:59"
+  },
+  {
+    "text": "I believe this is the weakness of the research paper.",
+    "start": "00:24:59",
+    "end": "00:25:04"
+  },
+  {
+    "text": "Let's talk about the limitations.",
+    "start": "00:25:04",
+    "end": "00:25:07"
+  },
+  {
+    "text": "This new methodology does not guarantee the discovery of the global minimum conversion.",
+    "start": "00:25:07",
+    "end": "00:25:14"
+  },
+  {
+    "text": "It is not the best graphical structure we could find.",
+    "start": "00:25:14",
+    "end": "00:25:18"
+  },
+  {
+    "text": "No, because it depends on the training data, and perhaps in the training dataset, we just had an average solution that worked.",
+    "start": "00:25:18",
+    "end": "00:25:25"
+  },
+  {
+    "text": "No, but it wasn't the ideal solution in terms of energy, time, or number of tokens.",
+    "start": "00:25:25",
+    "end": "00:25:30"
+  },
+  {
+    "text": "It was just a middle ground solution.",
+    "start": "00:25:30",
+    "end": "00:25:32"
+  },
+  {
+    "text": "Therefore, since we are relying here on a training dataset, we have no idea whether this is the global minimum in our multi-group complexity.",
+    "start": "00:25:32",
+    "end": "00:25:42"
+  },
+  {
+    "text": "Secondly, when we have an invisible task, the system almost breaks down because this new methodology does not build the correct unknown graph because it was not present in the training dataset.",
+    "start": "00:25:41",
+    "end": "00:25:55"
+  },
+  {
+    "text": "Therefore, we can only hope that the similarity in our known vector embedding space to our artificial mathematical space gives us an indication, or perhaps this is close to another solution, and perhaps this provides the next step in our solution path, or perhaps not.",
+    "start": "00:25:55",
+    "end": "00:26:16"
+  },
+  {
+    "text": "So this is here this is also rather weak and then at test time the correct graph is genuinely unknown but EMG does not reconstruct it at all mathematically.",
+    "start": "00:26:16",
+    "end": "00:26:28"
+  },
+  {
+    "text": "Yes, because we had the training time where the beautiful mathematical graph operation took place and we fed all the results from the training time into our database.",
+    "start": "00:26:28",
+    "end": "00:26:39"
+  },
+  {
+    "text": "And now at test time, we do n't do any uh algebra at all or any graph structure at all.",
+    "start": "00:26:39",
+    "end": "00:26:46"
+  },
+  {
+    "text": "We just go to the database and have a rag retrieval from a database and it retrieves the correction principles learned from the previous known graph pairs during the training time and relies here on the LLM now to apply this new instruction to the new task.",
+    "start": "00:26:46",
+    "end": "00:27:03"
+  },
+  {
+    "text": "Big question mark will the LLM exceed success will it be able to understand the complexity of the instruction from another task or not?",
+    "start": "00:27:03",
+    "end": "00:27:13"
+  },
+  {
+    "text": "So you see, during test time compute, there's zero graph mathematic happening , and I think this is yet the weak point; At the time of testing, it is limited to searching a vector database , and we go back to the RAG system that we used five years ago, and I think we have better ideas about how to implement this particular step.",
+    "start": "00:27:13",
+    "end": "00:27:33"
+  },
+  {
+    "text": "But what I like about this paper is the first step in the training process , which is training the graphing of this data on a graph structure and applying an advanced algorithm to compare the graphs and find a consistent development path, especially for asymmetric graphs .",
+    "start": "00:27:33",
+    "end": "00:27:52"
+  },
+  {
+    "text": "It's a great solution.",
+    "start": "00:27:52",
+    "end": "00:27:55"
+  },
+  {
+    "text": "Is there anything left?",
+    "start": "00:27:55",
+    "end": "00:27:58"
+  },
+  {
+    "text": "Yes, of course.",
+    "start": "00:27:58",
+    "end": "00:27:59"
+  },
+  {
+    "text": "By moving all the complex mathematical graphing operations to the offline training stage , EMG achieves what the authors now call a \" one-time implementation,\" because everything they trained their model on (and remember, that training is a graph structure they built) is now the content of the database, the vector database.",
+    "start": "00:27:59",
+    "end": "00:28:26"
+  },
+  {
+    "text": "You can send this database file to any other device.",
+    "start": "00:28:26",
+    "end": "00:28:34"
+  },
+  {
+    "text": "Now think about my research paper from yesterday and this paper from today, and you will see that it is the same philosophy of test time that is also used in the Mayo project that was published yesterday.",
+    "start": "00:28:33",
+    "end": "00:28:43"
+  },
+  {
+    "text": "No, both of the first papers were published yesterday from America, and this one is from China .",
+    "start": "00:28:43",
+    "end": "00:28:49"
+  },
+  {
+    "text": "Both of them realized, just one day apart, that the secret to developing independent agents lies not in giving them more time to think when a user asks a particular question, but in providing them with a huge, instantly retrievable database of pre- calculated lessons.",
+    "start": "00:28:49",
+    "end": "00:29:11"
+  },
+  {
+    "text": "This means we are going back to the familiar solutions.",
+    "start": "00:29:11",
+    "end": "00:29:16"
+  },
+  {
+    "text": "We do not have artificial intelligence capable of finding new, unique, and unprecedented solutions.",
+    "start": "00:29:16",
+    "end": "00:29:23"
+  },
+  {
+    "text": "Everything falls apart, and we revert to the same old patterns we discovered years ago, to the same old programming solutions .",
+    "start": "00:29:23",
+    "end": "00:29:32"
+  },
+  {
+    "text": "We never take this evolutionary step to a higher level of complexity, to unique software solutions that have never been seen before , or mathematical explanations, or explanations in physics, medicine, or finance.",
+    "start": "00:29:32",
+    "end": "00:29:50"
+  },
+  {
+    "text": "So, when you have this second part that requires you to go back to database structures, and you rely primarily on the comparability modification of all solution paths in the database, and you hope that a smart solution will suddenly appear out of nowhere, I think that would be an unscientific approach.",
+    "start": "00:29:50",
+    "end": "00:30:14"
+  },
+  {
+    "text": "Therefore, the first part of this paper was excellent, and I highly recommend it.",
+    "start": "00:30:14",
+    "end": "00:30:20"
+  },
+  {
+    "text": "I have some doubts about the uniqueness of the second part of the paper, because you see, as in the Memo Hornis research, they used the same test-time idea for a vector database, and I think we got past that problem three years ago.",
+    "start": "00:30:20",
+    "end": "00:30:35"
+  },
+  {
+    "text": "I hope you enjoyed it a little.",
+    "start": "00:30:35",
+    "end": "00:30:37"
+  },
+  {
+    "text": "Oh, I still have something left.",
+    "start": "00:30:37",
+    "end": "00:30:40"
+  },
+  {
+    "text": "Okay, test reasoning.",
+    "start": "00:30:39",
+    "end": "00:30:42"
+  },
+  {
+    "text": "What is happening?",
+    "start": "00:30:42",
+    "end": "00:30:43"
+  },
+  {
+    "text": "Well, why not?",
+    "start": "00:30:42",
+    "end": "00:30:44"
+  },
+  {
+    "text": "When the user deploys the agent and gives it a completely new task, the system ignores all the graph data, says there is no more graph data, takes the user's request, and passes it through an embedded form to get a specific query vector embedded in the correct mathematical space.",
+    "start": "00:30:44",
+    "end": "00:31:01"
+  },
+  {
+    "text": "Let's assume a space with 24 dimensions.",
+    "start": "00:31:01",
+    "end": "00:31:04"
+  },
+  {
+    "text": "This system performs a simple similarity and convergence search using the nearest 20 neighbors in an offline memory database , which is assumed to have been trained on your specific domain and on your device's complexity class.",
+    "start": "00:31:04",
+    "end": "00:31:20"
+  },
+  {
+    "text": "It then retrieves previously translated and analyzed natural language insights, and then incorporates this text string , as in a traditional racking system, into an agent-guided context.",
+    "start": "00:31:20",
+    "end": "00:31:31"
+  },
+  {
+    "text": "I believe this will not be available until the end of July 2026.",
+    "start": "00:31:31",
+    "end": "00:31:38"
+  },
+  {
+    "text": "Compare several research papers; you will find a lot of useful information.",
+    "start": "00:31:38",
+    "end": "00:31:44"
+  },
+  {
+    "text": "I believe that the Mayo system offers a dynamic system configuration around the underlying Language-Led Learning (LLM) model.",
+    "start": "00:31:44",
+    "end": "00:31:51"
+  },
+  {
+    "text": "The EMG system here offers something completely different , let's call it algorithmic error guidance.",
+    "start": "00:31:51",
+    "end": "00:31:57"
+  },
+  {
+    "text": "And if you are creating a high- quality, integrated AI agent, let's end on a positive note: why not combine the two?",
+    "start": "00:31:57",
+    "end": "00:32:04"
+  },
+  {
+    "text": "Therefore, I will now use the MIMO system rack-based control layer to configure system elements around the kernel, in order to dynamically configure the proxy memory and all tools .",
+    "start": "00:32:04",
+    "end": "00:32:14"
+  },
+  {
+    "text": "Then, if I have to use this method, I will use MG's graph matching inside the agent's procedural memory to ensure that the sequence of actions is executed accurately without the need for costly reflection loops at test runtime.",
+    "start": "00:32:14",
+    "end": "00:32:34"
+  },
+  {
+    "text": "Therefore, you can save a lot of time and money if you have this solution ready.",
+    "start": "00:32:34",
+    "end": "00:32:42"
+  },
+  {
+    "text": "But the downside is that there is a known backup solution, and therefore not a unique solution discovered by artificial intelligence, but just a search table.",
+    "start": "00:32:42",
+    "end": "00:32:57"
+  },
+  {
+    "text": "This is the part that I don't think is keeping up with our times .",
+    "start": "00:32:57",
+    "end": "00:33:01"
+  },
+  {
+    "text": "So, if you were to ask here: What is being fixed?",
+    "start": "00:33:01",
+    "end": "00:33:09"
+  },
+  {
+    "text": "What elements are used?",
+    "start": "00:33:08",
+    "end": "00:33:11"
+  },
+  {
+    "text": "The Memo Harness system views the agent failure and assumes it is a structural failure in the system's configuration itself.",
+    "start": "00:33:11",
+    "end": "00:33:19"
+  },
+  {
+    "text": "While the EMG system looks at the agent's failure and assumes that it failed to make an internal decision.",
+    "start": "00:33:19",
+    "end": "00:33:26"
+  },
+  {
+    "text": "That is, it assumes the agent has the right tools but presses the wrong button.",
+    "start": "00:33:26",
+    "end": "00:33:30"
+  },
+  {
+    "text": "Therefore, the system, under observation X, asks whether the operator chose action Y when they should have chosen action Z.",
+    "start": "00:33:30",
+    "end": "00:33:39"
+  },
+  {
+    "text": "Thus, the sequence of actions is determined based on the known solution.",
+    "start": "00:33:38",
+    "end": "00:33:42"
+  },
+  {
+    "text": "The reason this model (EMG) is successful with small models, such as the four- billion-coupled model in the experiments of this research paper, is that the hard work of analyzing all aspects of the mathematical graph geometry is done by mathematics in the training phase, and then all the information is stored in the database.",
+    "start": "00:33:42",
+    "end": "00:34:05"
+  },
+  {
+    "text": "Therefore, you do not need to deal with four billion operators at all during testing or overlap time; All you have to do is search for the results in the database.",
+    "start": "00:34:04",
+    "end": "00:34:17"
+  },
+  {
+    "text": "This is amazing.",
+    "start": "00:34:17",
+    "end": "00:34:20"
+  },
+  {
+    "text": "There are no complex calculations other than the neural network parameters of your four-billion- parameter model, because everything is utilitarian.",
+    "start": "00:34:20",
+    "end": "00:34:28"
+  },
+  {
+    "text": "The intelligence and knowledge are in the database, and I imagine this is similar to an MD skills bank, where the knowledge of how to build a code solution is in MD files, and this is done here at a higher level.",
+    "start": "00:34:28",
+    "end": "00:34:49"
+  },
+  {
+    "text": "Yesterday I explained to you the structure of the system itself.",
+    "start": "00:34:48",
+    "end": "00:34:53"
+  },
+  {
+    "text": "Now, we have moved to a decision-making framework for long-term tasks, whether they take three hours or twenty hours, to ensure we stay on a consistent path to resolution.",
+    "start": "00:34:53",
+    "end": "00:35:07"
+  },
+  {
+    "text": "I hope you enjoyed it and that you gained new ideas.",
+    "start": "00:35:07",
+    "end": "00:35:11"
+  },
+  {
+    "text": "You may disagree with me on the second part, which relates to vector databases.",
+    "start": "00:35:11",
+    "end": "00:35:18"
+  },
+  {
+    "text": "In any case, I hope there is something that interests you .",
+    "start": "00:35:18",
+    "end": "00:35:21"
+  },
+  {
+    "text": "I'm happy to see you in the next video.",
+    "start": "00:35:21",
+    "end": "00:35:24"
+  }
+]

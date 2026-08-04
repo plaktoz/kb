@@ -1,0 +1,159 @@
+{
+  "videoId": "Np8UTsHnUV0",
+  "title": "How Harness, Loop & Graph Engineering Actually Work (Every AI failure is one of these three things)",
+  "channel": "Johnny Nel | AI for Founders",
+  "channelId": "UCLajqQlKVsV7aqZ4I-BjdaQ",
+  "description": "Most people building with AI agents have never once counted what their setup can actually reach — and the control room on my own machine proved it by reading a copy of itself out of the trash. Nobody's tooling warned me. Nothing you're running right now will tell you either.\n\nIn this video I break down the three decisions that get made every time AI does a real job for you — Harness, Loop, and Graph — and hand you the fixed diagnostic order that replaced my whole afternoon of guessing with a five-minute walkthrough. One of them has no older version of itself anywhere in computing, and it's the one almost everyone skips.\n\nIf you're a non-technical founder running AI agents on real work, this is the framework that tells you which of the three is broken on your setup right now — and it starts with an audit you can run this afternoon.\n\nTIMESTAMPS:\n0:00 – The Control Room That Read Itself Out of the Trash\n0:20 – What Actually Went Wrong\n0:42 – The Sentence That Tells You Which One Is Broken\n0:52 – Meet Johnny Nel\n1:27 – The Editing Tool That Had No Field for What I Needed\n2:32 – What LangChain Calls \"The Harness\"\n2:55 – Count Your Doors\n3:41 – Why a Crowded Toolset Hurts You\n4:12 – The Background Paragraph You Retype Every Morning\n4:32 – What Anthropic Found When They Tried Compaction\n5:20 – The Text File That Fixed It\n5:54 – Write Four Lines Tonight\n6:26 – Your Laptop Has Been Doing This for Decades\n7:00 – The Part Made of Language Is the New Bit\n7:20 – Where the Lines Between the Three Sit\n7:41 – The Vault Audit: Count What Your Setup Can Reach\n7:52 – The Second Decision: How It Knows It's Finished\n8:20 – Why No Operating System Ever Had This Problem\n8:55 – The Done Test\n9:32 – A Test vs. a Wish\n10:12 – The Check That Waits Forever\n10:52 – Stop Retrying — Look at Decision #1\n11:12 – The Third Decision: What Has to Happen Before What\n11:42 – When Not to Build a Graph\n12:15 – The Green Tick That Checked Nothing\n12:52 – Twenty-Eight Specifics Instead of a Tick\n14:20 – The Diagnostic Order: Cheapest and Most Common First\n15:00 – Pick One Thing This Week\n\n🔓 Want the actual system — the folder structure, the wiring, the templates, ready to copy into your own setup? It's inside the AI Founders Vault:\n👉 https://www.skool.com/aifoundersvault \n\nJoin The AI Founder's Vault Skool Community here: https://www.skool.com/aifoundersvault\n\nLets connect:\n- https://twitter.com/JohnnyNel_/ \n- https://linkedin.com/in/johnnynelofficial/\n- https://www.instagram.com/johnnynelofficial/\n- https://youtube.com/@johnnynelofficial/",
+  "duration": 977,
+  "publishDate": "2026-07-29",
+  "url": "https://www.youtube.com/watch?v=Np8UTsHnUV0",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/Np8UTsHnUV0/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "– The Control Room That Read Itself Out of the Trash",
+      "start": 0,
+      "end": 20
+    },
+    {
+      "title": "– What Actually Went Wrong",
+      "start": 20,
+      "end": 42
+    },
+    {
+      "title": "– The Sentence That Tells You Which One Is Broken",
+      "start": 42,
+      "end": 52
+    },
+    {
+      "title": "– Meet Johnny Nel",
+      "start": 52,
+      "end": 87
+    },
+    {
+      "title": "– The Editing Tool That Had No Field for What I Needed",
+      "start": 87,
+      "end": 152
+    },
+    {
+      "title": "– What LangChain Calls \"The Harness\"",
+      "start": 152,
+      "end": 175
+    },
+    {
+      "title": "– Count Your Doors",
+      "start": 175,
+      "end": 221
+    },
+    {
+      "title": "– Why a Crowded Toolset Hurts You",
+      "start": 221,
+      "end": 252
+    },
+    {
+      "title": "– The Background Paragraph You Retype Every Morning",
+      "start": 252,
+      "end": 272
+    },
+    {
+      "title": "– What Anthropic Found When They Tried Compaction",
+      "start": 272,
+      "end": 320
+    },
+    {
+      "title": "– The Text File That Fixed It",
+      "start": 320,
+      "end": 354
+    },
+    {
+      "title": "– Write Four Lines Tonight",
+      "start": 354,
+      "end": 386
+    },
+    {
+      "title": "– Your Laptop Has Been Doing This for Decades",
+      "start": 386,
+      "end": 420
+    },
+    {
+      "title": "– The Part Made of Language Is the New Bit",
+      "start": 420,
+      "end": 440
+    },
+    {
+      "title": "– Where the Lines Between the Three Sit",
+      "start": 440,
+      "end": 461
+    },
+    {
+      "title": "– The Vault Audit: Count What Your Setup Can Reach",
+      "start": 461,
+      "end": 472
+    },
+    {
+      "title": "– The Second Decision: How It Knows It's Finished",
+      "start": 472,
+      "end": 500
+    },
+    {
+      "title": "– Why No Operating System Ever Had This Problem",
+      "start": 500,
+      "end": 535
+    },
+    {
+      "title": "– The Done Test",
+      "start": 535,
+      "end": 572
+    },
+    {
+      "title": "– A Test vs. a Wish",
+      "start": 572,
+      "end": 612
+    },
+    {
+      "title": "– The Check That Waits Forever",
+      "start": 612,
+      "end": 652
+    },
+    {
+      "title": "– Stop Retrying — Look at Decision #1",
+      "start": 652,
+      "end": 672
+    },
+    {
+      "title": "– The Third Decision: What Has to Happen Before What",
+      "start": 672,
+      "end": 702
+    },
+    {
+      "title": "– When Not to Build a Graph",
+      "start": 702,
+      "end": 735
+    },
+    {
+      "title": "– The Green Tick That Checked Nothing",
+      "start": 735,
+      "end": 772
+    },
+    {
+      "title": "– Twenty-Eight Specifics Instead of a Tick",
+      "start": 772,
+      "end": 860
+    },
+    {
+      "title": "– The Diagnostic Order: Cheapest and Most Common First",
+      "start": 860,
+      "end": 900
+    },
+    {
+      "title": "– Pick One Thing This Week",
+      "start": 900,
+      "end": 977
+    }
+  ]
+}

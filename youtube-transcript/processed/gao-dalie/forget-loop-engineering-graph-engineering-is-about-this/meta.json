@@ -1,0 +1,49 @@
+{
+  "videoId": "ueA8RWZ9f5Q",
+  "title": "FORGET Loop Engineering. Graph Engineering is about THIS",
+  "channel": "Gao Dalie (高達烈)",
+  "channelId": "UC6P5WCWjqhhXVFBqbJHNxyw",
+  "description": "#graph #promptengineering #ai #llm #prompt #aiagents #promptengineer \n\nGraph engineering is about designing the relationships between those processes. The name is new. But most of the hard problems are not.\n\nTimeStape : \n00:00 - What Problem Graph Eng Solved \n02:11 - What happened after loop engineering?\n03:39 - Prompt Vs Loop Vs Graph: Three-Tier Engineering\n06:07 - What makes graph engineering Unique?\n07:21 - Don't graph everything.\n08:14 - My Impression",
+  "duration": 517,
+  "publishDate": "2026-07-26",
+  "url": "https://www.youtube.com/watch?v=ueA8RWZ9f5Q",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/ueA8RWZ9f5Q/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "- What Problem Graph Eng Solved",
+      "start": 0,
+      "end": 131
+    },
+    {
+      "title": "- What happened after loop engineering?",
+      "start": 131,
+      "end": 219
+    },
+    {
+      "title": "- Prompt Vs Loop Vs Graph: Three-Tier Engineering",
+      "start": 219,
+      "end": 367
+    },
+    {
+      "title": "- What makes graph engineering Unique?",
+      "start": 367,
+      "end": 441
+    },
+    {
+      "title": "- Don't graph everything.",
+      "start": 441,
+      "end": 494
+    },
+    {
+      "title": "- My Impression",
+      "start": 494,
+      "end": 517
+    }
+  ]
+}

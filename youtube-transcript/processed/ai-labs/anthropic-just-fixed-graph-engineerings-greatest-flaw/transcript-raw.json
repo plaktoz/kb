@@ -1,0 +1,2207 @@
+[
+  {
+    "text": "There's a new term going around called",
+    "start": 0,
+    "duration": 3.64
+  },
+  {
+    "text": "graph engineering and everyone on X is",
+    "start": 1.64,
+    "duration": 3.96
+  },
+  {
+    "text": "talking about it. Before graphs, it was",
+    "start": 3.64,
+    "duration": 3.8
+  },
+  {
+    "text": "all loop engineering where you hand the",
+    "start": 5.6,
+    "duration": 3.88
+  },
+  {
+    "text": "agent a goal and it works toward it on",
+    "start": 7.44,
+    "duration": 3.8
+  },
+  {
+    "text": "its own. But with graphs, the work gets",
+    "start": 9.48,
+    "duration": 4
+  },
+  {
+    "text": "done faster and covers way more ground",
+    "start": 11.24,
+    "duration": 3.96
+  },
+  {
+    "text": "at once than a loop ever could. There's",
+    "start": 13.48,
+    "duration": 3.56
+  },
+  {
+    "text": "a huge problem with them though. One",
+    "start": 15.2,
+    "duration": 3.48
+  },
+  {
+    "text": "error in a small part of the graph",
+    "start": 17.04,
+    "duration": 3.8
+  },
+  {
+    "text": "disturbs the entire output that comes",
+    "start": 18.68,
+    "duration": 4.16
+  },
+  {
+    "text": "back and it's hard to track down because",
+    "start": 20.84,
+    "duration": 3.88
+  },
+  {
+    "text": "all you get at the end is the finished",
+    "start": 22.84,
+    "duration": 3.68
+  },
+  {
+    "text": "result. So Anthropic just released",
+    "start": 24.72,
+    "duration": 3.76
+  },
+  {
+    "text": "something that solves that exact problem",
+    "start": 26.52,
+    "duration": 3.64
+  },
+  {
+    "text": "and keeps your graphs working without",
+    "start": 28.48,
+    "duration": 3.24
+  },
+  {
+    "text": "failing. If you're new here, we're a",
+    "start": 30.16,
+    "duration": 3.68
+  },
+  {
+    "text": "software company and this is our channel",
+    "start": 31.72,
+    "duration": 3.92
+  },
+  {
+    "text": "AI labs where we show you how to",
+    "start": 33.84,
+    "duration": 3.88
+  },
+  {
+    "text": "optimize your business with AI and if",
+    "start": 35.64,
+    "duration": 3.72
+  },
+  {
+    "text": "you don't have your own, you can use",
+    "start": 37.72,
+    "duration": 3.8
+  },
+  {
+    "text": "these skills to get paid by optimizing",
+    "start": 39.36,
+    "duration": 4.12
+  },
+  {
+    "text": "it for someone else. And in this video,",
+    "start": 41.52,
+    "duration": 3.72
+  },
+  {
+    "text": "we're going to go over graph engineering",
+    "start": 43.48,
+    "duration": 3.52
+  },
+  {
+    "text": "for anyone who doesn't know it and give",
+    "start": 45.24,
+    "duration": 4.48
+  },
+  {
+    "text": "you the exact fix Anthropic suggested.",
+    "start": 47,
+    "duration": 4.64
+  },
+  {
+    "text": "Before we explain graph engineering to",
+    "start": 49.72,
+    "duration": 3.64
+  },
+  {
+    "text": "you, you need to understand what loop",
+    "start": 51.64,
+    "duration": 3.76
+  },
+  {
+    "text": "engineering actually is. If you already",
+    "start": 53.36,
+    "duration": 4.04
+  },
+  {
+    "text": "know, you can skip this section. A loop",
+    "start": 55.4,
+    "duration": 4.28
+  },
+  {
+    "text": "is basically a working cycle you hand",
+    "start": 57.4,
+    "duration": 3.84
+  },
+  {
+    "text": "over to the agent. Instead of you",
+    "start": 59.68,
+    "duration": 3.48
+  },
+  {
+    "text": "prompting it through every single step",
+    "start": 61.24,
+    "duration": 3.959
+  },
+  {
+    "text": "yourself, you tell it the end goal it",
+    "start": 63.16,
+    "duration": 3.88
+  },
+  {
+    "text": "needs to reach and it gets there on its",
+    "start": 65.199,
+    "duration": 3.841
+  },
+  {
+    "text": "own adjusting as it goes. We've been",
+    "start": 67.04,
+    "duration": 4.04
+  },
+  {
+    "text": "using them heavily in our own workflows.",
+    "start": 69.04,
+    "duration": 3.8
+  },
+  {
+    "text": "We've already got a full video on loop",
+    "start": 71.08,
+    "duration": 3.64
+  },
+  {
+    "text": "engineering too where we went deeper",
+    "start": 72.84,
+    "duration": 3.72
+  },
+  {
+    "text": "into the different ways you can set them",
+    "start": 74.72,
+    "duration": 3.48
+  },
+  {
+    "text": "up. But loops are now turning into",
+    "start": 76.56,
+    "duration": 3.68
+  },
+  {
+    "text": "something called graphs. The problem",
+    "start": 78.2,
+    "duration": 3.72
+  },
+  {
+    "text": "with loops comes down to the way they're",
+    "start": 80.24,
+    "duration": 3.88
+  },
+  {
+    "text": "built. A loop does a piece of work then",
+    "start": 81.92,
+    "duration": 4.44
+  },
+  {
+    "text": "a verification step kicks in to see if",
+    "start": 84.12,
+    "duration": 4.08
+  },
+  {
+    "text": "it's actually the way it should be. Once",
+    "start": 86.36,
+    "duration": 3.44
+  },
+  {
+    "text": "it passes, the next step starts.",
+    "start": 88.2,
+    "duration": 3.48
+  },
+  {
+    "text": "Everything runs in a straight line. So",
+    "start": 89.8,
+    "duration": 3.56
+  },
+  {
+    "text": "every step sits there waiting on the",
+    "start": 91.68,
+    "duration": 3.44
+  },
+  {
+    "text": "step before it even when the two have",
+    "start": 93.36,
+    "duration": 3.32
+  },
+  {
+    "text": "nothing to do with each other. Graph",
+    "start": 95.12,
+    "duration": 3.6
+  },
+  {
+    "text": "engineering fixes exactly that. Instead",
+    "start": 96.68,
+    "duration": 3.84
+  },
+  {
+    "text": "of running in a straight line, a graph",
+    "start": 98.72,
+    "duration": 4.04
+  },
+  {
+    "text": "splits the main task into smaller parts",
+    "start": 100.52,
+    "duration": 4.04
+  },
+  {
+    "text": "and each part gets its own agent. The",
+    "start": 102.76,
+    "duration": 3.8
+  },
+  {
+    "text": "first thing you get out of that is speed",
+    "start": 104.56,
+    "duration": 3.96
+  },
+  {
+    "text": "because several agents cover the work at",
+    "start": 106.56,
+    "duration": 3.92
+  },
+  {
+    "text": "once instead of one agent grinding",
+    "start": 108.52,
+    "duration": 3.48
+  },
+  {
+    "text": "through the whole thing. And splitting",
+    "start": 110.48,
+    "duration": 3.28
+  },
+  {
+    "text": "the work out like that brings the cost",
+    "start": 112,
+    "duration": 3.4
+  },
+  {
+    "text": "somewhat down too because you get to",
+    "start": 113.76,
+    "duration": 3.92
+  },
+  {
+    "text": "pick which model each one runs on. So,",
+    "start": 115.4,
+    "duration": 4.08
+  },
+  {
+    "text": "you stop burning your most expensive",
+    "start": 117.68,
+    "duration": 3.6
+  },
+  {
+    "text": "model on the parts that never needed",
+    "start": 119.48,
+    "duration": 3.4
+  },
+  {
+    "text": "that much intelligence in the first",
+    "start": 121.28,
+    "duration": 3.6
+  },
+  {
+    "text": "place. But, that's the cost per agent,",
+    "start": 122.88,
+    "duration": 4.28
+  },
+  {
+    "text": "not the cost overall. A graph burns way",
+    "start": 124.88,
+    "duration": 4.32
+  },
+  {
+    "text": "more tokens than a single agent ever",
+    "start": 127.16,
+    "duration": 3.8
+  },
+  {
+    "text": "will because you've got a whole set of",
+    "start": 129.2,
+    "duration": 3.759
+  },
+  {
+    "text": "them going at once instead of one. If",
+    "start": 130.96,
+    "duration": 3.84
+  },
+  {
+    "text": "you are using graphs, expect your limits",
+    "start": 132.959,
+    "duration": 3.681
+  },
+  {
+    "text": "to hit way sooner than you're used to.",
+    "start": 134.8,
+    "duration": 3.36
+  },
+  {
+    "text": "So, you can't really set this up with",
+    "start": 136.64,
+    "duration": 4.28
+  },
+  {
+    "text": "the $20 plans of Claude Code and Codex.",
+    "start": 138.16,
+    "duration": 4.56
+  },
+  {
+    "text": "Now, if you've been using Claude Code,",
+    "start": 140.92,
+    "duration": 4.24
+  },
+  {
+    "text": "this probably isn't entirely new to you",
+    "start": 142.72,
+    "duration": 4.08
+  },
+  {
+    "text": "because you've already seen a graph,",
+    "start": 145.16,
+    "duration": 3.76
+  },
+  {
+    "text": "which is the dynamic workflow. A dynamic",
+    "start": 146.8,
+    "duration": 4.28
+  },
+  {
+    "text": "workflow takes the task you hand over",
+    "start": 148.92,
+    "duration": 4.2
+  },
+  {
+    "text": "and fans it out across a set of sub",
+    "start": 151.08,
+    "duration": 3.96
+  },
+  {
+    "text": "agents, which is basically what a graph",
+    "start": 153.12,
+    "duration": 3.64
+  },
+  {
+    "text": "does. Now, before [snorts] we get into",
+    "start": 155.04,
+    "duration": 3.6
+  },
+  {
+    "text": "the shapes a graph can take, you need to",
+    "start": 156.76,
+    "duration": 3.88
+  },
+  {
+    "text": "know what actually makes one up. Every",
+    "start": 158.64,
+    "duration": 4.24
+  },
+  {
+    "text": "graph is built out of two things: nodes",
+    "start": 160.64,
+    "duration": 4.44
+  },
+  {
+    "text": "and edges. A node is basically a single",
+    "start": 162.88,
+    "duration": 4.12
+  },
+  {
+    "text": "job out of the bigger task you handed",
+    "start": 165.08,
+    "duration": 3.879
+  },
+  {
+    "text": "over, and it runs on its own. It is an",
+    "start": 167,
+    "duration": 3.72
+  },
+  {
+    "text": "agent that does a task in its own",
+    "start": 168.959,
+    "duration": 3.881
+  },
+  {
+    "text": "isolated context window and reports",
+    "start": 170.72,
+    "duration": 4.4
+  },
+  {
+    "text": "back. What ties all those separate jobs",
+    "start": 172.84,
+    "duration": 4.52
+  },
+  {
+    "text": "together is the edge. An edge controls",
+    "start": 175.12,
+    "duration": 4.36
+  },
+  {
+    "text": "how the data moves from one node to the",
+    "start": 177.36,
+    "duration": 4.599
+  },
+  {
+    "text": "next. So, one agent's output lands with",
+    "start": 179.48,
+    "duration": 4.36
+  },
+  {
+    "text": "the right agent at the right point. So,",
+    "start": 181.959,
+    "duration": 3.681
+  },
+  {
+    "text": "every node's got to be tied into the",
+    "start": 183.84,
+    "duration": 3.56
+  },
+  {
+    "text": "rest of the graph somehow. You can see",
+    "start": 185.64,
+    "duration": 3.64
+  },
+  {
+    "text": "that in a set of agents all reviewing",
+    "start": 187.4,
+    "duration": 3.44
+  },
+  {
+    "text": "the same piece of work. None of them",
+    "start": 189.28,
+    "duration": 3.32
+  },
+  {
+    "text": "ever wait on each other, but they all",
+    "start": 190.84,
+    "duration": 3.72
+  },
+  {
+    "text": "started from the same work, and every",
+    "start": 192.6,
+    "duration": 4
+  },
+  {
+    "text": "one of their reports feeds into the same",
+    "start": 194.56,
+    "duration": 3.64
+  },
+  {
+    "text": "place at the end. So, that's what a",
+    "start": 196.6,
+    "duration": 3.28
+  },
+  {
+    "text": "graph is made of. Now, here are the",
+    "start": 198.2,
+    "duration": 3.92
+  },
+  {
+    "text": "shapes those pieces get arranged into.",
+    "start": 199.88,
+    "duration": 3.76
+  },
+  {
+    "text": "The first one's a shape we've already",
+    "start": 202.12,
+    "duration": 3.119
+  },
+  {
+    "text": "shown you on this channel. And we got",
+    "start": 203.64,
+    "duration": 3.319
+  },
+  {
+    "text": "the name wrong at the time. We called it",
+    "start": 205.239,
+    "duration": 3.441
+  },
+  {
+    "text": "a loop because this was before graph",
+    "start": 206.959,
+    "duration": 3.481
+  },
+  {
+    "text": "engineering was even a thing. But, what",
+    "start": 208.68,
+    "duration": 3.68
+  },
+  {
+    "text": "we actually had was a graph that we were",
+    "start": 210.44,
+    "duration": 3.48
+  },
+  {
+    "text": "looping, and the shape of it was a",
+    "start": 212.36,
+    "duration": 3.879
+  },
+  {
+    "text": "diamond. One task at the top splits out",
+    "start": 213.92,
+    "duration": 4.56
+  },
+  {
+    "text": "into several sub agents running side by",
+    "start": 216.239,
+    "duration": 4.241
+  },
+  {
+    "text": "side. Then, they all narrow back down",
+    "start": 218.48,
+    "duration": 3.72
+  },
+  {
+    "text": "into a single agent that pulls",
+    "start": 220.48,
+    "duration": 3.84
+  },
+  {
+    "text": "everything they found into one answer.",
+    "start": 222.2,
+    "duration": 4
+  },
+  {
+    "text": "Then, there's the fan in at a barrier",
+    "start": 224.32,
+    "duration": 3.6
+  },
+  {
+    "text": "graph, and that's the shape you want",
+    "start": 226.2,
+    "duration": 3.4
+  },
+  {
+    "text": "when one thing has to be judged from",
+    "start": 227.92,
+    "duration": 3.88
+  },
+  {
+    "text": "several angles at once. The fan out part",
+    "start": 229.6,
+    "duration": 4.04
+  },
+  {
+    "text": "sends the same problem out to a set of",
+    "start": 231.8,
+    "duration": 3.68
+  },
+  {
+    "text": "agents, and each one looks at it through",
+    "start": 233.64,
+    "duration": 3.8
+  },
+  {
+    "text": "a different lens. Nothing moves forward",
+    "start": 235.48,
+    "duration": 3.68
+  },
+  {
+    "text": "until every one of those agents has",
+    "start": 237.44,
+    "duration": 3.6
+  },
+  {
+    "text": "reported back, and only then does it go",
+    "start": 239.16,
+    "duration": 3.6
+  },
+  {
+    "text": "and run their fixes. There are plenty of",
+    "start": 241.04,
+    "duration": 3.36
+  },
+  {
+    "text": "other shapes, too, but every one of",
+    "start": 242.76,
+    "duration": 3.44
+  },
+  {
+    "text": "these shapes rests on the same thing,",
+    "start": 244.4,
+    "duration": 3.48
+  },
+  {
+    "text": "and that's verification. If you don't",
+    "start": 246.2,
+    "duration": 3.44
+  },
+  {
+    "text": "set those checks up properly, every",
+    "start": 247.88,
+    "duration": 3.72
+  },
+  {
+    "text": "agent that comes after is just building",
+    "start": 249.64,
+    "duration": 3.92
+  },
+  {
+    "text": "on top of a mistake. But before we talk",
+    "start": 251.6,
+    "duration": 3.96
+  },
+  {
+    "text": "about verification, it would be great if",
+    "start": 253.56,
+    "duration": 3.72
+  },
+  {
+    "text": "you subscribe to the channel and hit the",
+    "start": 255.56,
+    "duration": 3.399
+  },
+  {
+    "text": "hype button. This small gesture of",
+    "start": 257.28,
+    "duration": 4
+  },
+  {
+    "text": "support goes a long way for us. Once",
+    "start": 258.959,
+    "duration": 4.001
+  },
+  {
+    "text": "you're running a whole fleet of agents,",
+    "start": 261.28,
+    "duration": 3.6
+  },
+  {
+    "text": "things go wrong in ways they never do",
+    "start": 262.96,
+    "duration": 3.68
+  },
+  {
+    "text": "with a single one. The biggest problem",
+    "start": 264.88,
+    "duration": 3.44
+  },
+  {
+    "text": "is just the amount of work. They're all",
+    "start": 266.64,
+    "duration": 3.84
+  },
+  {
+    "text": "going at the same time, so a huge pile",
+    "start": 268.32,
+    "duration": 3.8
+  },
+  {
+    "text": "of it comes back at once, and that's",
+    "start": 270.48,
+    "duration": 3.32
+  },
+  {
+    "text": "really hard to review at the end. The",
+    "start": 272.12,
+    "duration": 3.56
+  },
+  {
+    "text": "other problem is that you can't see what",
+    "start": 273.8,
+    "duration": 3.52
+  },
+  {
+    "text": "happened. When something goes wrong,",
+    "start": 275.68,
+    "duration": 3.44
+  },
+  {
+    "text": "you've got no way of telling what caused",
+    "start": 277.32,
+    "duration": 3.92
+  },
+  {
+    "text": "it. Now, all agents verify whatever they",
+    "start": 279.12,
+    "duration": 3.88
+  },
+  {
+    "text": "write, whether you ask them to or not.",
+    "start": 281.24,
+    "duration": 3.44
+  },
+  {
+    "text": "If you're working with code, that just",
+    "start": 283,
+    "duration": 3.56
+  },
+  {
+    "text": "means the agent runs your tests and",
+    "start": 284.68,
+    "duration": 3.68
+  },
+  {
+    "text": "catches the errors that come back. But",
+    "start": 286.56,
+    "duration": 3.92
+  },
+  {
+    "text": "that only catches major errors. It still",
+    "start": 288.36,
+    "duration": 3.84
+  },
+  {
+    "text": "doesn't check how the code is written,",
+    "start": 290.48,
+    "duration": 3.48
+  },
+  {
+    "text": "and that's important because if Claude",
+    "start": 292.2,
+    "duration": 3.4
+  },
+  {
+    "text": "keeps writing it like this, it's going",
+    "start": 293.96,
+    "duration": 3.32
+  },
+  {
+    "text": "to cause problems in the future. There",
+    "start": 295.6,
+    "duration": 3.4
+  },
+  {
+    "text": "are a few built-in tools for this in",
+    "start": 297.28,
+    "duration": 3.56
+  },
+  {
+    "text": "Claude Code as well. The first is the",
+    "start": 299,
+    "duration": 3.8
+  },
+  {
+    "text": "verify skill, which takes the code from",
+    "start": 300.84,
+    "duration": 4
+  },
+  {
+    "text": "start to finish and confirms it actually",
+    "start": 302.8,
+    "duration": 3.68
+  },
+  {
+    "text": "behaves the way it's supposed to. The",
+    "start": 304.84,
+    "duration": 3.52
+  },
+  {
+    "text": "second is tool chaining, which is",
+    "start": 306.48,
+    "duration": 3.84
+  },
+  {
+    "text": "basically the agent running different",
+    "start": 308.36,
+    "duration": 4.2
+  },
+  {
+    "text": "tools to verify. Claude already knows to",
+    "start": 310.32,
+    "duration": 4.08
+  },
+  {
+    "text": "run the tools that check your work, so",
+    "start": 312.56,
+    "duration": 3.8
+  },
+  {
+    "text": "it reads the errors that come back and",
+    "start": 314.4,
+    "duration": 3.92
+  },
+  {
+    "text": "fixes them itself. It can work out your",
+    "start": 316.36,
+    "duration": 3.96
+  },
+  {
+    "text": "project's exact commands on its own,",
+    "start": 318.32,
+    "duration": 3.599
+  },
+  {
+    "text": "too. But writing them into your",
+    "start": 320.32,
+    "duration": 4.16
+  },
+  {
+    "text": "Claude.md file saves it the trouble of",
+    "start": 321.919,
+    "duration": 4.561
+  },
+  {
+    "text": "figuring them out every single time. And",
+    "start": 324.48,
+    "duration": 3.84
+  },
+  {
+    "text": "the third is a code review skill, which",
+    "start": 326.48,
+    "duration": 3.32
+  },
+  {
+    "text": "checks the code against a set of",
+    "start": 328.32,
+    "duration": 3.44
+  },
+  {
+    "text": "standards. Not every agent ships with",
+    "start": 329.8,
+    "duration": 3.8
+  },
+  {
+    "text": "one, but you can just ask your agent to",
+    "start": 331.76,
+    "duration": 3.52
+  },
+  {
+    "text": "build you one if yours doesn't. But the",
+    "start": 333.6,
+    "duration": 3.88
+  },
+  {
+    "text": "verification that actually works best is",
+    "start": 335.28,
+    "duration": 4.12
+  },
+  {
+    "text": "the one you set up yourself, instead of",
+    "start": 337.48,
+    "duration": 4.439
+  },
+  {
+    "text": "leaning entirely on the built-in stuff.",
+    "start": 339.4,
+    "duration": 4.32
+  },
+  {
+    "text": "So, the fastest way to build a skill",
+    "start": 341.919,
+    "duration": 3.721
+  },
+  {
+    "text": "that verifies your work is the skill",
+    "start": 343.72,
+    "duration": 3.84
+  },
+  {
+    "text": "creator plugin in Claude Code. You can",
+    "start": 345.64,
+    "duration": 4.2
+  },
+  {
+    "text": "also use this Claude code skill in Codex",
+    "start": 347.56,
+    "duration": 4.16
+  },
+  {
+    "text": "as well. You run the plug-in command,",
+    "start": 349.84,
+    "duration": 3.84
+  },
+  {
+    "text": "search for skill creator, and install",
+    "start": 351.72,
+    "duration": 3.88
+  },
+  {
+    "text": "it. From there, you've got two options.",
+    "start": 353.68,
+    "duration": 3.6
+  },
+  {
+    "text": "You can install it at the user scope,",
+    "start": 355.6,
+    "duration": 3.28
+  },
+  {
+    "text": "which means it's there no matter which",
+    "start": 357.28,
+    "duration": 3.16
+  },
+  {
+    "text": "folder you're working in, or you can",
+    "start": 358.88,
+    "duration": 3.24
+  },
+  {
+    "text": "install it just for the project you're",
+    "start": 360.44,
+    "duration": 3.48
+  },
+  {
+    "text": "working in right now. Since this is a",
+    "start": 362.12,
+    "duration": 3.64
+  },
+  {
+    "text": "skill you'll be using constantly, we",
+    "start": 363.92,
+    "duration": 3.6
+  },
+  {
+    "text": "went with the user scope. After that,",
+    "start": 365.76,
+    "duration": 3.52
+  },
+  {
+    "text": "you reload the plug-ins with the slash",
+    "start": 367.52,
+    "duration": 3.84
+  },
+  {
+    "text": "command, and skill creator's ready to be",
+    "start": 369.28,
+    "duration": 3.96
+  },
+  {
+    "text": "used. Now you tell it what you want",
+    "start": 371.36,
+    "duration": 3.64
+  },
+  {
+    "text": "built, and this is the part where you",
+    "start": 373.24,
+    "duration": 3.8
+  },
+  {
+    "text": "describe the kind of verification you're",
+    "start": 375,
+    "duration": 4.28
+  },
+  {
+    "text": "actually after. We mostly use a review",
+    "start": 377.04,
+    "duration": 4.04
+  },
+  {
+    "text": "skill for checking the finished work",
+    "start": 379.28,
+    "duration": 3.639
+  },
+  {
+    "text": "against what we asked for in the first",
+    "start": 381.08,
+    "duration": 3.76
+  },
+  {
+    "text": "place. And that matters way more in a",
+    "start": 382.919,
+    "duration": 4.361
+  },
+  {
+    "text": "graph, because each agent only ever sees",
+    "start": 384.84,
+    "duration": 4.32
+  },
+  {
+    "text": "its own piece. This is what gives it a",
+    "start": 387.28,
+    "duration": 3.6
+  },
+  {
+    "text": "way to check that piece against the",
+    "start": 389.16,
+    "duration": 3.759
+  },
+  {
+    "text": "original requirements. But a skill is",
+    "start": 390.88,
+    "duration": 4
+  },
+  {
+    "text": "only ever as good as the model you run",
+    "start": 392.919,
+    "duration": 3.281
+  },
+  {
+    "text": "it on. When we were building the",
+    "start": 394.88,
+    "duration": 3.44
+  },
+  {
+    "text": "verification system for our community",
+    "start": 396.2,
+    "duration": 4.32
+  },
+  {
+    "text": "website's UI, we ran the reviewer on",
+    "start": 398.32,
+    "duration": 4.12
+  },
+  {
+    "text": "Haiku, because it's cheap and the job",
+    "start": 400.52,
+    "duration": 3.64
+  },
+  {
+    "text": "looked simple enough. It came back with",
+    "start": 402.44,
+    "duration": 3.56
+  },
+  {
+    "text": "a long list of issues. Going off the",
+    "start": 404.16,
+    "duration": 3.88
+  },
+  {
+    "text": "number of findings alone, it looked like",
+    "start": 406,
+    "duration": 4.08
+  },
+  {
+    "text": "it had done a great job. Then we ran the",
+    "start": 408.04,
+    "duration": 4.56
+  },
+  {
+    "text": "exact same on Opus, and it flagged way",
+    "start": 410.08,
+    "duration": 4.44
+  },
+  {
+    "text": "fewer things. That looked like the worst",
+    "start": 412.6,
+    "duration": 3.6
+  },
+  {
+    "text": "result, right up until we read the",
+    "start": 414.52,
+    "duration": 3.32
+  },
+  {
+    "text": "reasoning. A lot of what Haiku had",
+    "start": 416.2,
+    "duration": 3.52
+  },
+  {
+    "text": "reported was stuff we'd left there on",
+    "start": 417.84,
+    "duration": 4.079
+  },
+  {
+    "text": "purpose. So most of the findings it made",
+    "start": 419.72,
+    "duration": 4.36
+  },
+  {
+    "text": "were completely unnecessary. Opus had",
+    "start": 421.919,
+    "duration": 4
+  },
+  {
+    "text": "worked that out from the code around it,",
+    "start": 424.08,
+    "duration": 3.88
+  },
+  {
+    "text": "which Haiku had missed it completely. So",
+    "start": 425.919,
+    "duration": 3.721
+  },
+  {
+    "text": "the cheap review hadn't saved us",
+    "start": 427.96,
+    "duration": 3.68
+  },
+  {
+    "text": "anything, because now the review itself",
+    "start": 429.64,
+    "duration": 3.88
+  },
+  {
+    "text": "needed reviewing. Now put that inside a",
+    "start": 431.64,
+    "duration": 3.76
+  },
+  {
+    "text": "graph, where a whole set of nodes are",
+    "start": 433.52,
+    "duration": 3.64
+  },
+  {
+    "text": "all checking their own work with that",
+    "start": 435.4,
+    "duration": 3.76
+  },
+  {
+    "text": "same skill. You'd have agents burning",
+    "start": 437.16,
+    "duration": 4.12
+  },
+  {
+    "text": "time and tokens fixing things that were",
+    "start": 439.16,
+    "duration": 3.92
+  },
+  {
+    "text": "never broken. And because it's happening",
+    "start": 441.28,
+    "duration": 3.72
+  },
+  {
+    "text": "across separate agents all at once,",
+    "start": 443.08,
+    "duration": 3.44
+  },
+  {
+    "text": "you'd have no way of telling which one",
+    "start": 445,
+    "duration": 3.32
+  },
+  {
+    "text": "started it. So the model you pick",
+    "start": 446.52,
+    "duration": 3.68
+  },
+  {
+    "text": "doesn't just decide the quality of the",
+    "start": 448.32,
+    "duration": 3.72
+  },
+  {
+    "text": "review, it decides the quality of the",
+    "start": 450.2,
+    "duration": 3.52
+  },
+  {
+    "text": "whole graph. The node that does the",
+    "start": 452.04,
+    "duration": 3.879
+  },
+  {
+    "text": "judging is the one place where saving",
+    "start": 453.72,
+    "duration": 4.16
+  },
+  {
+    "text": "tokens costs you everything. The other",
+    "start": 455.919,
+    "duration": 3.641
+  },
+  {
+    "text": "thing you've got to decide is how and",
+    "start": 457.88,
+    "duration": 3.48
+  },
+  {
+    "text": "when that skill gets invoked. And that",
+    "start": 459.56,
+    "duration": 3.8
+  },
+  {
+    "text": "splits them into three kinds. But before",
+    "start": 461.36,
+    "duration": 3.84
+  },
+  {
+    "text": "we go deep into the types, let's have a",
+    "start": 463.36,
+    "duration": 3.76
+  },
+  {
+    "text": "word by our sponsor. If you've ever",
+    "start": 465.2,
+    "duration": 3.96
+  },
+  {
+    "text": "pulled live data off the web, you know",
+    "start": 467.12,
+    "duration": 3.96
+  },
+  {
+    "text": "scraping is a genuine pain, where you",
+    "start": 469.16,
+    "duration": 3.68
+  },
+  {
+    "text": "end up fighting captures and rate",
+    "start": 471.08,
+    "duration": 3.56
+  },
+  {
+    "text": "limits, wrestling with proxies, and",
+    "start": 472.84,
+    "duration": 3.72
+  },
+  {
+    "text": "patching layouts that break the moment",
+    "start": 474.64,
+    "duration": 4.12
+  },
+  {
+    "text": "you ship. So, we reach for SerpApi,",
+    "start": 476.56,
+    "duration": 4.08
+  },
+  {
+    "text": "which solves all these problems, so you",
+    "start": 478.76,
+    "duration": 3.92
+  },
+  {
+    "text": "can focus on building. It's one API",
+    "start": 480.64,
+    "duration": 4.12
+  },
+  {
+    "text": "call, you send a request and get back a",
+    "start": 482.68,
+    "duration": 4.56
+  },
+  {
+    "text": "clean JSON object with exactly the data",
+    "start": 484.76,
+    "duration": 5.08
+  },
+  {
+    "text": "you need with over 99.9%",
+    "start": 487.24,
+    "duration": 5.52
+  },
+  {
+    "text": "uptime and around a 1.2-second response.",
+    "start": 489.84,
+    "duration": 4.68
+  },
+  {
+    "text": "When you're building AI agents, you can",
+    "start": 492.76,
+    "duration": 3.88
+  },
+  {
+    "text": "point the Google Search API at an agent",
+    "start": 494.52,
+    "duration": 4.04
+  },
+  {
+    "text": "that needs current information or use",
+    "start": 496.64,
+    "duration": 4.16
+  },
+  {
+    "text": "the Google Scholar API for peer-reviewed",
+    "start": 498.56,
+    "duration": 4.359
+  },
+  {
+    "text": "papers with full metadata, which is why",
+    "start": 500.8,
+    "duration": 4.2
+  },
+  {
+    "text": "so many production agents rely on it.",
+    "start": 502.919,
+    "duration": 4.681
+  },
+  {
+    "text": "Get started with 250 free credits using",
+    "start": 505,
+    "duration": 4.4
+  },
+  {
+    "text": "the link in the description or scan the",
+    "start": 507.6,
+    "duration": 4.439
+  },
+  {
+    "text": "QR code on screen. Thanks to SerpApi for",
+    "start": 509.4,
+    "duration": 5.079
+  },
+  {
+    "text": "sponsoring this video. The first kind is",
+    "start": 512.039,
+    "duration": 4.201
+  },
+  {
+    "text": "standalone, and that's the sort of skill",
+    "start": 514.479,
+    "duration": 3.601
+  },
+  {
+    "text": "that only runs when you actually do it",
+    "start": 516.24,
+    "duration": 4
+  },
+  {
+    "text": "yourself. A standalone skill is built to",
+    "start": 518.08,
+    "duration": 3.839
+  },
+  {
+    "text": "go deep on something that already",
+    "start": 520.24,
+    "duration": 3.84
+  },
+  {
+    "text": "exists, so it can properly go back over",
+    "start": 521.919,
+    "duration": 3.841
+  },
+  {
+    "text": "a finished output. That's why you don't",
+    "start": 524.08,
+    "duration": 3.72
+  },
+  {
+    "text": "want it firing after every single run.",
+    "start": 525.76,
+    "duration": 3.76
+  },
+  {
+    "text": "You'd be burning tokens on a heavy",
+    "start": 527.8,
+    "duration": 3.8
+  },
+  {
+    "text": "review of work that isn't even finished",
+    "start": 529.52,
+    "duration": 3.72
+  },
+  {
+    "text": "yet. One we've used before is the",
+    "start": 531.6,
+    "duration": 4.12
+  },
+  {
+    "text": "thermonuclear code review by Cursor. It",
+    "start": 533.24,
+    "duration": 4.72
+  },
+  {
+    "text": "fans out a set of agents and sends each",
+    "start": 535.72,
+    "duration": 3.92
+  },
+  {
+    "text": "one through the code from a different",
+    "start": 537.96,
+    "duration": 3.96
+  },
+  {
+    "text": "security angle. Every finding comes back",
+    "start": 539.64,
+    "duration": 4.16
+  },
+  {
+    "text": "in one place, so it can work through the",
+    "start": 541.92,
+    "duration": 3.88
+  },
+  {
+    "text": "fixes together, and that's exactly the",
+    "start": 543.8,
+    "duration": 4.16
+  },
+  {
+    "text": "kind of review you only run once the",
+    "start": 545.8,
+    "duration": 3.76
+  },
+  {
+    "text": "app's done. To build one of these,",
+    "start": 547.96,
+    "duration": 3.44
+  },
+  {
+    "text": "you're better off using Skill Creator",
+    "start": 549.56,
+    "duration": 3.6
+  },
+  {
+    "text": "than just prompting it to do it, because",
+    "start": 551.4,
+    "duration": 3.6
+  },
+  {
+    "text": "what comes back is tested, and that",
+    "start": 553.16,
+    "duration": 3.8
+  },
+  {
+    "text": "makes it easier to trust. You tell it in",
+    "start": 555,
+    "duration": 4.2
+  },
+  {
+    "text": "the prompt which area you want reviewed,",
+    "start": 556.96,
+    "duration": 3.6
+  },
+  {
+    "text": "and make sure you mention that the",
+    "start": 559.2,
+    "duration": 3.28
+  },
+  {
+    "text": "review should be comprehensive, so it",
+    "start": 560.56,
+    "duration": 4.04
+  },
+  {
+    "text": "knows you're after a deep pass and not a",
+    "start": 562.48,
+    "duration": 3.88
+  },
+  {
+    "text": "quick one. But a standalone [snorts]",
+    "start": 564.6,
+    "duration": 3.76
+  },
+  {
+    "text": "skill is no use to a node that's still",
+    "start": 566.36,
+    "duration": 3.6
+  },
+  {
+    "text": "working, because you have to run it",
+    "start": 568.36,
+    "duration": 3.44
+  },
+  {
+    "text": "yourself. That's what embedded skills",
+    "start": 569.96,
+    "duration": 4.2
+  },
+  {
+    "text": "are for. An embedded skill fires as part",
+    "start": 571.8,
+    "duration": 4.12
+  },
+  {
+    "text": "of the workflow you're already running",
+    "start": 574.16,
+    "duration": 3.36
+  },
+  {
+    "text": "without you asking for it. You could",
+    "start": 575.92,
+    "duration": 3.04
+  },
+  {
+    "text": "build one that kicks in whenever",
+    "start": 577.52,
+    "duration": 3.16
+  },
+  {
+    "text": "somebody asks for a new feature. It",
+    "start": 578.96,
+    "duration": 3.28
+  },
+  {
+    "text": "checks that every component being",
+    "start": 580.68,
+    "duration": 3.44
+  },
+  {
+    "text": "created follows the rules you laid out",
+    "start": 582.24,
+    "duration": 3.36
+  },
+  {
+    "text": "in the skill, and it won't let the",
+    "start": 584.12,
+    "duration": 3.36
+  },
+  {
+    "text": "implementation finish until it's been",
+    "start": 585.6,
+    "duration": 3.44
+  },
+  {
+    "text": "checked against those rules. You can",
+    "start": 587.48,
+    "duration": 3.56
+  },
+  {
+    "text": "build embedded skills yourself, but you",
+    "start": 589.04,
+    "duration": 3.84
+  },
+  {
+    "text": "can't take a pre-installed one and have",
+    "start": 591.04,
+    "duration": 3.72
+  },
+  {
+    "text": "them be invoked automatically like the",
+    "start": 592.88,
+    "duration": 3.76
+  },
+  {
+    "text": "verify skill we talked about earlier.",
+    "start": 594.76,
+    "duration": 4
+  },
+  {
+    "text": "The instructions those skills run on sit",
+    "start": 596.64,
+    "duration": 3.92
+  },
+  {
+    "text": "inside the product and you don't get to",
+    "start": 598.76,
+    "duration": 3.64
+  },
+  {
+    "text": "touch them. To build your own, give",
+    "start": 600.56,
+    "duration": 4.08
+  },
+  {
+    "text": "skill creator a prompt telling it to run",
+    "start": 602.4,
+    "duration": 4.6
+  },
+  {
+    "text": "verification steps after every feature",
+    "start": 604.64,
+    "duration": 4.4
+  },
+  {
+    "text": "implementation. So, you tell it to test",
+    "start": 607,
+    "duration": 3.92
+  },
+  {
+    "text": "the feature from start to finish, so it",
+    "start": 609.04,
+    "duration": 3.64
+  },
+  {
+    "text": "catches whether the new work broke",
+    "start": 610.92,
+    "duration": 3.52
+  },
+  {
+    "text": "anything that was already working.",
+    "start": 612.68,
+    "duration": 3.76
+  },
+  {
+    "text": "Claude then creates the skill for you,",
+    "start": 614.44,
+    "duration": 4
+  },
+  {
+    "text": "and because skill creator generated it,",
+    "start": 616.44,
+    "duration": 3.8
+  },
+  {
+    "text": "it comes with references and scripts",
+    "start": 618.44,
+    "duration": 3.8
+  },
+  {
+    "text": "that skill creator structured and tested",
+    "start": 620.24,
+    "duration": 3.96
+  },
+  {
+    "text": "as part of the process. Now, to verify a",
+    "start": 622.24,
+    "duration": 4.16
+  },
+  {
+    "text": "feature, Claude uses browser testing by",
+    "start": 624.2,
+    "duration": 4.16
+  },
+  {
+    "text": "default where it checks the interface by",
+    "start": 626.4,
+    "duration": 3.88
+  },
+  {
+    "text": "opening a full Chrome browser, loading",
+    "start": 628.36,
+    "duration": 3.92
+  },
+  {
+    "text": "the page, and taking screenshots of it.",
+    "start": 630.28,
+    "duration": 3.68
+  },
+  {
+    "text": "And if you've wired up Puppeteer or",
+    "start": 632.28,
+    "duration": 3.28
+  },
+  {
+    "text": "Playwright, which are basically the",
+    "start": 633.96,
+    "duration": 3.88
+  },
+  {
+    "text": "tools most people use to drive a browser",
+    "start": 635.56,
+    "duration": 4
+  },
+  {
+    "text": "automatically, they do the same thing.",
+    "start": 637.84,
+    "duration": 3.88
+  },
+  {
+    "text": "But, Chrome's famous for eating memory",
+    "start": 639.56,
+    "duration": 3.76
+  },
+  {
+    "text": "and running heavy. And for checking a",
+    "start": 641.72,
+    "duration": 3.68
+  },
+  {
+    "text": "page over and over inside a workflow,",
+    "start": 643.32,
+    "duration": 3.96
+  },
+  {
+    "text": "it's slow enough that it starts costing",
+    "start": 645.4,
+    "duration": 3.92
+  },
+  {
+    "text": "you real time. So, there's a lighter way",
+    "start": 647.28,
+    "duration": 4
+  },
+  {
+    "text": "to do it called Chrome headless shell.",
+    "start": 649.32,
+    "duration": 3.96
+  },
+  {
+    "text": "It's basically a stripped-down version",
+    "start": 651.28,
+    "duration": 4.08
+  },
+  {
+    "text": "of the browser with all the extra parts",
+    "start": 653.28,
+    "duration": 3.92
+  },
+  {
+    "text": "ripped out. The agent still goes to the",
+    "start": 655.36,
+    "duration": 3.92
+  },
+  {
+    "text": "page and takes its screenshots the same",
+    "start": 657.2,
+    "duration": 4.2
+  },
+  {
+    "text": "way. It just gets through all of it way",
+    "start": 659.28,
+    "duration": 4.24
+  },
+  {
+    "text": "faster than a full Chrome does. You can",
+    "start": 661.4,
+    "duration": 3.36
+  },
+  {
+    "text": "build that straight into the",
+    "start": 663.52,
+    "duration": 3.12
+  },
+  {
+    "text": "verification skill you create. Then",
+    "start": 664.76,
+    "duration": 3.72
+  },
+  {
+    "text": "every feature the agent builds gets",
+    "start": 666.64,
+    "duration": 3.56
+  },
+  {
+    "text": "checked visually without you setting",
+    "start": 668.48,
+    "duration": 3.76
+  },
+  {
+    "text": "anything up each time. Aside from that,",
+    "start": 670.2,
+    "duration": 3.92
+  },
+  {
+    "text": "the skill we use the most in our own",
+    "start": 672.24,
+    "duration": 4.32
+  },
+  {
+    "text": "workflow is one called second opinion,",
+    "start": 674.12,
+    "duration": 4.32
+  },
+  {
+    "text": "and the reason is simple. The agent that",
+    "start": 676.56,
+    "duration": 3.8
+  },
+  {
+    "text": "built the thing is the worst possible",
+    "start": 678.44,
+    "duration": 3.96
+  },
+  {
+    "text": "one to review it. It's judging its own",
+    "start": 680.36,
+    "duration": 3.96
+  },
+  {
+    "text": "work off the same context it used to",
+    "start": 682.4,
+    "duration": 3.8
+  },
+  {
+    "text": "build it. So, it just reviews based on",
+    "start": 684.32,
+    "duration": 3.96
+  },
+  {
+    "text": "that. A fresh Claude session hasn't seen",
+    "start": 686.2,
+    "duration": 4.04
+  },
+  {
+    "text": "any of that. It gives an unbiased review",
+    "start": 688.28,
+    "duration": 3.48
+  },
+  {
+    "text": "and gives you a straight answer. Now,",
+    "start": 690.24,
+    "duration": 3.68
+  },
+  {
+    "text": "Claude does have a built-in advisor that",
+    "start": 691.76,
+    "duration": 4.08
+  },
+  {
+    "text": "does something along these lines, but it",
+    "start": 693.92,
+    "duration": 3.72
+  },
+  {
+    "text": "reads the chat you're currently in, so",
+    "start": 695.84,
+    "duration": 3.88
+  },
+  {
+    "text": "it inherits all that same context.",
+    "start": 697.64,
+    "duration": 3.92
+  },
+  {
+    "text": "Second opinion is for when you want the",
+    "start": 699.72,
+    "duration": 3.8
+  },
+  {
+    "text": "review without it. It works by starting",
+    "start": 701.56,
+    "duration": 4.08
+  },
+  {
+    "text": "another Claude session from inside the",
+    "start": 703.52,
+    "duration": 3.76
+  },
+  {
+    "text": "one you're already running using the",
+    "start": 705.64,
+    "duration": 3.92
+  },
+  {
+    "text": "dash P flag. That's the flag that fires",
+    "start": 707.28,
+    "duration": 4.4
+  },
+  {
+    "text": "off a whole separate Claude code session",
+    "start": 709.56,
+    "duration": 4
+  },
+  {
+    "text": "in the background by handing it a prompt",
+    "start": 711.68,
+    "duration": 3.44
+  },
+  {
+    "text": "to work on. There are a couple of things",
+    "start": 713.56,
+    "duration": 3
+  },
+  {
+    "text": "you need to know if you're going to use",
+    "start": 715.12,
+    "duration": 2.92
+  },
+  {
+    "text": "this though. Since it's launching an",
+    "start": 716.56,
+    "duration": 3.48
+  },
+  {
+    "text": "entirely separate session, it takes a",
+    "start": 718.04,
+    "duration": 3.88
+  },
+  {
+    "text": "really long time to come back with an",
+    "start": 720.04,
+    "duration": 3.8
+  },
+  {
+    "text": "answer. And the model matters here more",
+    "start": 721.92,
+    "duration": 3.64
+  },
+  {
+    "text": "than anywhere else because the whole",
+    "start": 723.84,
+    "duration": 3.96
+  },
+  {
+    "text": "point is a smarter second read. So, it's",
+    "start": 725.56,
+    "duration": 4.4
+  },
+  {
+    "text": "worth telling Claude explicitly to start",
+    "start": 727.8,
+    "duration": 4.28
+  },
+  {
+    "text": "that session on Opus. That gives every",
+    "start": 729.96,
+    "duration": 4.24
+  },
+  {
+    "text": "node in your graph a way to get its work",
+    "start": 732.08,
+    "duration": 4.08
+  },
+  {
+    "text": "checked by something that had no hand in",
+    "start": 734.2,
+    "duration": 4.24
+  },
+  {
+    "text": "doing it. But one skill can't cover",
+    "start": 736.16,
+    "duration": 3.92
+  },
+  {
+    "text": "everything though. Once you're reviewing",
+    "start": 738.44,
+    "duration": 3.48
+  },
+  {
+    "text": "something properly, you're reviewing it",
+    "start": 740.08,
+    "duration": 3.8
+  },
+  {
+    "text": "from several different angles and every",
+    "start": 741.92,
+    "duration": 3.96
+  },
+  {
+    "text": "angle has its own way of measuring. You",
+    "start": 743.88,
+    "duration": 4.16
+  },
+  {
+    "text": "can't stuff all review types into one",
+    "start": 745.88,
+    "duration": 4.12
+  },
+  {
+    "text": "skill because that way agent will have",
+    "start": 748.04,
+    "duration": 3.92
+  },
+  {
+    "text": "too many directions to review and will",
+    "start": 750,
+    "duration": 3.6
+  },
+  {
+    "text": "end it up getting worse instead of",
+    "start": 751.96,
+    "duration": 3.56
+  },
+  {
+    "text": "better. So, you build a separate skill",
+    "start": 753.6,
+    "duration": 3.96
+  },
+  {
+    "text": "for each angle and chain them together.",
+    "start": 755.52,
+    "duration": 3.92
+  },
+  {
+    "text": "Anthropic's own team works this way,",
+    "start": 757.56,
+    "duration": 3.68
+  },
+  {
+    "text": "too. They chain the code review skill",
+    "start": 759.44,
+    "duration": 3.8
+  },
+  {
+    "text": "together with the simplify skill and the",
+    "start": 761.24,
+    "duration": 4.2
+  },
+  {
+    "text": "verify skill, and all three of those now",
+    "start": 763.24,
+    "duration": 4.16
+  },
+  {
+    "text": "ship with Claude code. On top of that,",
+    "start": 765.44,
+    "duration": 3.96
+  },
+  {
+    "text": "they run their own design skill, which",
+    "start": 767.4,
+    "duration": 3.48
+  },
+  {
+    "text": "checks the interface against the",
+    "start": 769.4,
+    "duration": 4.08
+  },
+  {
+    "text": "design.md file, which is basically the",
+    "start": 770.88,
+    "duration": 4.88
+  },
+  {
+    "text": "file that holds every design decision",
+    "start": 773.48,
+    "duration": 3.88
+  },
+  {
+    "text": "for the product. So, that's a review",
+    "start": 775.76,
+    "duration": 3.44
+  },
+  {
+    "text": "coming from four directions instead of",
+    "start": 777.36,
+    "duration": 3.72
+  },
+  {
+    "text": "one. You'll end up in the same place",
+    "start": 779.2,
+    "duration": 3.68
+  },
+  {
+    "text": "with a stack of skills that each cover a",
+    "start": 781.08,
+    "duration": 3.6
+  },
+  {
+    "text": "different angle, but you can't just tell",
+    "start": 782.88,
+    "duration": 3.84
+  },
+  {
+    "text": "the agent to run all of them at once.",
+    "start": 784.68,
+    "duration": 3.96
+  },
+  {
+    "text": "What you need is one more skill sitting",
+    "start": 786.72,
+    "duration": 3.72
+  },
+  {
+    "text": "above the rest, which is basically an",
+    "start": 788.64,
+    "duration": 4.04
+  },
+  {
+    "text": "orchestrator skill whose only job is to",
+    "start": 790.44,
+    "duration": 4.6
+  },
+  {
+    "text": "run other skills. It spins up an agent",
+    "start": 792.68,
+    "duration": 4.2
+  },
+  {
+    "text": "for every review skill you've got and",
+    "start": 795.04,
+    "duration": 3.799
+  },
+  {
+    "text": "hands each one its skill. They all",
+    "start": 796.88,
+    "duration": 3.76
+  },
+  {
+    "text": "review at the same time in their own",
+    "start": 798.839,
+    "duration": 3.881
+  },
+  {
+    "text": "separate context windows. Then it pulls",
+    "start": 800.64,
+    "duration": 4.24
+  },
+  {
+    "text": "every finding back into one report that",
+    "start": 802.72,
+    "duration": 4.119
+  },
+  {
+    "text": "the fixing agents can work from. Then",
+    "start": 804.88,
+    "duration": 3.48
+  },
+  {
+    "text": "when you're building a graph, the only",
+    "start": 806.839,
+    "duration": 3.121
+  },
+  {
+    "text": "thing you have to say in the prompt is",
+    "start": 808.36,
+    "duration": 3.48
+  },
+  {
+    "text": "that it should use that one skill. Every",
+    "start": 809.96,
+    "duration": 3.96
+  },
+  {
+    "text": "node it spins up loads that single",
+    "start": 811.84,
+    "duration": 3.92
+  },
+  {
+    "text": "skill, and the whole review fans out",
+    "start": 813.92,
+    "duration": 3.48
+  },
+  {
+    "text": "underneath it on its own. Now we have",
+    "start": 815.76,
+    "duration": 3.68
+  },
+  {
+    "text": "curated a document containing all the",
+    "start": 817.4,
+    "duration": 3.88
+  },
+  {
+    "text": "ways you can set up verifications for",
+    "start": 819.44,
+    "duration": 3.84
+  },
+  {
+    "text": "graphs in detail. That doc along with",
+    "start": 821.28,
+    "duration": 3.76
+  },
+  {
+    "text": "all the skills shown in this video are",
+    "start": 823.28,
+    "duration": 3.96
+  },
+  {
+    "text": "available in AI Labs Pro, which is our",
+    "start": 825.04,
+    "duration": 4.44
+  },
+  {
+    "text": "community. So if you found value in what",
+    "start": 827.24,
+    "duration": 4.2
+  },
+  {
+    "text": "we do and want to support the channel,",
+    "start": 829.48,
+    "duration": 3.36
+  },
+  {
+    "text": "this is the best way to do it. The",
+    "start": 831.44,
+    "duration": 3.2
+  },
+  {
+    "text": "link's in the description. That brings",
+    "start": 832.84,
+    "duration": 3.4
+  },
+  {
+    "text": "us to the end of this video. If you'd",
+    "start": 834.64,
+    "duration": 3.44
+  },
+  {
+    "text": "like to support the channel and help us",
+    "start": 836.24,
+    "duration": 3.92
+  },
+  {
+    "text": "keep making videos like this, you can do",
+    "start": 838.08,
+    "duration": 3.88
+  },
+  {
+    "text": "so by using the Super Thanks button",
+    "start": 840.16,
+    "duration": 3.96
+  },
+  {
+    "text": "below. As always, thank you for watching",
+    "start": 841.96,
+    "duration": 5.6
+  },
+  {
+    "text": "and I'll see you in the next one.",
+    "start": 844.12,
+    "duration": 3.44
+  }
+]

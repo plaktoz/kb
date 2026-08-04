@@ -1,0 +1,64 @@
+{
+  "videoId": "HbMrbTgp7Jw",
+  "title": "From Loop Engineering to Graph Engineering — how to structure AI agent work",
+  "channel": "This AI Pulse ",
+  "channelId": "UCrSsuTypszQoHwBadTQ00qA",
+  "description": "The next step after loop engineering: describe agent work as a graph — nodes of work, edges of dependency, and verification built into the topology instead of relying on discipline.\n\nInteractive guide (try the loop-vs-graph race demo): https://graph-engineering.pages.dev/en/\n\nChapters:\n0:00 Intro\n0:18 The four loops of loop engineering\n0:53 Where loops hit their ceiling\n1:24 The idea: the work is a graph\n1:46 The six building blocks\n2:23 The mapping: every loop becomes a graph structure\n3:01 The migration: seven steps\n3:43 The advantages\n4:19 When to stay with a loop",
+  "duration": 294,
+  "publishDate": "2026-07-18",
+  "url": "https://www.youtube.com/watch?v=HbMrbTgp7Jw",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/HbMrbTgp7Jw/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "Intro",
+      "start": 0,
+      "end": 18
+    },
+    {
+      "title": "The four loops of loop engineering",
+      "start": 18,
+      "end": 53
+    },
+    {
+      "title": "Where loops hit their ceiling",
+      "start": 53,
+      "end": 84
+    },
+    {
+      "title": "The idea: the work is a graph",
+      "start": 84,
+      "end": 106
+    },
+    {
+      "title": "The six building blocks",
+      "start": 106,
+      "end": 143
+    },
+    {
+      "title": "The mapping: every loop becomes a graph structure",
+      "start": 143,
+      "end": 181
+    },
+    {
+      "title": "The migration: seven steps",
+      "start": 181,
+      "end": 223
+    },
+    {
+      "title": "The advantages",
+      "start": 223,
+      "end": 259
+    },
+    {
+      "title": "When to stay with a loop",
+      "start": 259,
+      "end": 294
+    }
+  ]
+}

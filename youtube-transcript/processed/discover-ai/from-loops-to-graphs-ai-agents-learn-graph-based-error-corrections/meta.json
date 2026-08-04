@@ -1,0 +1,18 @@
+{
+  "videoId": "yC9cd3gKaIc",
+  "title": "From LOOPS to GRAPHS: AI Agents Learn Graph-Based Error Corrections",
+  "channel": "Discover AI",
+  "channelId": "UCfOvNb3xj28SNqPQ_JIbumg",
+  "description": "From LOOPS to GRAPHS.\n\nTest-time RAG, prompt injection, skill.md files, Fused Gromov-Wasserstein (FGW) algorithm, training-time graph-theoretical mathematics. Negative knowledge patterns,  highly specific IF-THEN conditional rules.\n\nLanguage Models as Agents are too brittle if left to figure everything out on the fly.\nMemoHarness introduces Dynamic System Configuration.\nEMG introduces Algorithmic Error Routing.\n\nStart with MemoHarness RAG-based control layer to dynamically configure the agent's memory and tools, and then you would use EMG's graph-matching inside the agent's procedural memory to ensure it executes the precise sequence of actions without needing costly reflection loops.\n\nall rights w/ authors:\nExperience Memory Graph: One-Shot Error Correction for Agents\nWenjun Wang∗\nUniversity of Electronic Science and\nTechnology of China\nChengdu, China\n202522080926@std.uestc.edu.cn\nYuchen Fang∗\nUniversity of Electronic Science and\nTechnology of China\nChengdu, China\nfangyuchen@std.uestc.edu.cn\nFengrui Liu\nUniversity of Electronic Science and\nTechnology of China\nChengdu, China\n202522080925@std.uestc.edu.cn\nZibo Liang\nUniversity of Electronic Science and\nTechnology of China\nChengdu, China\nzbliang@std.uestc.edu.cn\nKai Zheng†\nUniversity of Electronic Science and\nTechnology of China\nChengdu, China\nzhengkai@uestc.edu.cn\narXiv:2607.13884\n\n#airesearch \n#aiexplained \n#aitechnology \n#nextbots \n#nextgen \n#futuretech",
+  "duration": 2124,
+  "publishDate": "2026-07-20",
+  "url": "https://www.youtube.com/watch?v=yC9cd3gKaIc",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/yC9cd3gKaIc/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": []
+}

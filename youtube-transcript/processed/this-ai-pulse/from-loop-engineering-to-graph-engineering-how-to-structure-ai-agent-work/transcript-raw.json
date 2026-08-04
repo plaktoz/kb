@@ -1,0 +1,577 @@
+[
+  {
+    "text": "Hello and welcome.",
+    "start": 0.64,
+    "duration": 5.4
+  },
+  {
+    "text": "Today we take the next step in AI agent",
+    "start": 2.8,
+    "duration": 5.44
+  },
+  {
+    "text": "engineering, moving from loop",
+    "start": 6.04,
+    "duration": 4.96
+  },
+  {
+    "text": "engineering to graph engineering.",
+    "start": 8.24,
+    "duration": 5.36
+  },
+  {
+    "text": "We'll see how the two approaches differ,",
+    "start": 11,
+    "duration": 5.36
+  },
+  {
+    "text": "how to migrate in practice, and what you",
+    "start": 13.6,
+    "duration": 5.96
+  },
+  {
+    "text": "gain from the move.",
+    "start": 16.36,
+    "duration": 5.76
+  },
+  {
+    "text": "Our starting point is the four familiar",
+    "start": 19.56,
+    "duration": 3.8
+  },
+  {
+    "text": "loops.",
+    "start": 22.12,
+    "duration": 4.44
+  },
+  {
+    "text": "The agent loop, model and tools until",
+    "start": 23.36,
+    "duration": 5.08
+  },
+  {
+    "text": "the task is done.",
+    "start": 26.56,
+    "duration": 4
+  },
+  {
+    "text": "The verification loop,",
+    "start": 28.44,
+    "duration": 4.96
+  },
+  {
+    "text": "after every change, define a check that",
+    "start": 30.56,
+    "duration": 5.68
+  },
+  {
+    "text": "would fail if you're wrong, and actually",
+    "start": 33.4,
+    "duration": 4.44
+  },
+  {
+    "text": "run it.",
+    "start": 36.24,
+    "duration": 3.8
+  },
+  {
+    "text": "The event-driven loop,",
+    "start": 37.84,
+    "duration": 3.32
+  },
+  {
+    "text": "when you're waiting on something",
+    "start": 40.04,
+    "duration": 3.84
+  },
+  {
+    "text": "external, arm a trigger instead of",
+    "start": 41.16,
+    "duration": 4.36
+  },
+  {
+    "text": "blocking.",
+    "start": 43.88,
+    "duration": 4
+  },
+  {
+    "text": "And the hill-climbing loop,",
+    "start": 45.52,
+    "duration": 5.2
+  },
+  {
+    "text": "generate a candidate, score it,",
+    "start": 47.88,
+    "duration": 6.64
+  },
+  {
+    "text": "keep the best, and repeat.",
+    "start": 50.72,
+    "duration": 6.28
+  },
+  {
+    "text": "But loops have a ceiling.",
+    "start": 54.52,
+    "duration": 5.48
+  },
+  {
+    "text": "Everything runs serially, even steps",
+    "start": 57,
+    "duration": 5.48
+  },
+  {
+    "text": "that don't depend on each other at all.",
+    "start": 60,
+    "duration": 4.8
+  },
+  {
+    "text": "The order is a writing habit, not a",
+    "start": 62.48,
+    "duration": 5.2
+  },
+  {
+    "text": "declaration of real dependency.",
+    "start": 64.8,
+    "duration": 5.08
+  },
+  {
+    "text": "When you crash midway, you start",
+    "start": 67.68,
+    "duration": 3.96
+  },
+  {
+    "text": "everything over.",
+    "start": 69.88,
+    "duration": 4.16
+  },
+  {
+    "text": "Verification depends on the operator's",
+    "start": 71.64,
+    "duration": 4.52
+  },
+  {
+    "text": "discipline, and under pressure,",
+    "start": 74.04,
+    "duration": 4.04
+  },
+  {
+    "text": "discipline erodes.",
+    "start": 76.16,
+    "duration": 5
+  },
+  {
+    "text": "And a single context simply cannot hold",
+    "start": 78.08,
+    "duration": 6.8
+  },
+  {
+    "text": "a truly large task.",
+    "start": 81.16,
+    "duration": 7.24
+  },
+  {
+    "text": "The idea of graph engineering is simple.",
+    "start": 84.88,
+    "duration": 6.36
+  },
+  {
+    "text": "Describe the work as a graph,",
+    "start": 88.4,
+    "duration": 6.56
+  },
+  {
+    "text": "nodes of work and edges of dependency.",
+    "start": 91.24,
+    "duration": 6.4
+  },
+  {
+    "text": "Whatever is not connected by an edge,",
+    "start": 94.96,
+    "duration": 4.6
+  },
+  {
+    "text": "runs in parallel.",
+    "start": 97.64,
+    "duration": 5.08
+  },
+  {
+    "text": "And notice, the loops don't disappear.",
+    "start": 99.56,
+    "duration": 7.8
+  },
+  {
+    "text": "They become structures inside the graph.",
+    "start": 102.72,
+    "duration": 7
+  },
+  {
+    "text": "Six building blocks.",
+    "start": 107.36,
+    "duration": 5.04
+  },
+  {
+    "text": "A node, a focused agent with an",
+    "start": 109.72,
+    "duration": 5.08
+  },
+  {
+    "text": "input-output contract.",
+    "start": 112.4,
+    "duration": 5.04
+  },
+  {
+    "text": "An edge, a declaration of real",
+    "start": 114.8,
+    "duration": 4.24
+  },
+  {
+    "text": "dependency.",
+    "start": 117.44,
+    "duration": 4.4
+  },
+  {
+    "text": "Fan out, independent items running as",
+    "start": 119.04,
+    "duration": 4.76
+  },
+  {
+    "text": "parallel nodes.",
+    "start": 121.84,
+    "duration": 5.12
+  },
+  {
+    "text": "Pipeline, the default. Each item flows",
+    "start": 123.8,
+    "duration": 5.4
+  },
+  {
+    "text": "at its own pace with no needless",
+    "start": 126.96,
+    "duration": 3.6
+  },
+  {
+    "text": "waiting.",
+    "start": 129.2,
+    "duration": 4.44
+  },
+  {
+    "text": "A barrier, a deliberate sync point. Only",
+    "start": 130.56,
+    "duration": 5.92
+  },
+  {
+    "text": "when you need all the results together.",
+    "start": 133.64,
+    "duration": 5.8
+  },
+  {
+    "text": "And a cycle, a loop kept on purpose",
+    "start": 136.48,
+    "duration": 4.88
+  },
+  {
+    "text": "because there is real feedback between",
+    "start": 139.44,
+    "duration": 4.44
+  },
+  {
+    "text": "rounds.",
+    "start": 141.36,
+    "duration": 2.52
+  },
+  {
+    "text": "And here is the mapping.",
+    "start": 143.92,
+    "duration": 5.039
+  },
+  {
+    "text": "The agent loop becomes a node. The",
+    "start": 145.88,
+    "duration": 5.96
+  },
+  {
+    "text": "verification loop becomes verification",
+    "start": 148.959,
+    "duration": 5.881
+  },
+  {
+    "text": "nodes sitting on the edges, including an",
+    "start": 151.84,
+    "duration": 5.8
+  },
+  {
+    "text": "adversarial panel, several independent",
+    "start": 154.84,
+    "duration": 5.44
+  },
+  {
+    "text": "checkers, and a majority vote.",
+    "start": 157.64,
+    "duration": 5.36
+  },
+  {
+    "text": "The event-driven loop becomes an event",
+    "start": 160.28,
+    "duration": 5
+  },
+  {
+    "text": "edge waking the branch when something",
+    "start": 163,
+    "duration": 4.24
+  },
+  {
+    "text": "happens outside.",
+    "start": 165.28,
+    "duration": 4
+  },
+  {
+    "text": "And the hill climbing loop becomes a",
+    "start": 167.24,
+    "duration": 4.8
+  },
+  {
+    "text": "cycle with a judge panel. A whole",
+    "start": 169.28,
+    "duration": 6.12
+  },
+  {
+    "text": "generation of candidates every round.",
+    "start": 172.04,
+    "duration": 5.96
+  },
+  {
+    "text": "The recurring principle, what used to be",
+    "start": 175.4,
+    "duration": 7
+  },
+  {
+    "text": "discipline becomes structure.",
+    "start": 178,
+    "duration": 4.4
+  },
+  {
+    "text": "The migration itself, seven steps.",
+    "start": 182.44,
+    "duration": 6.76
+  },
+  {
+    "text": "One, break the loop body into nodes with",
+    "start": 185.959,
+    "duration": 5.161
+  },
+  {
+    "text": "clear contracts.",
+    "start": 189.2,
+    "duration": 6.12
+  },
+  {
+    "text": "Two, draw only edges of real dependency.",
+    "start": 191.12,
+    "duration": 7.64
+  },
+  {
+    "text": "Three, turn per item iteration into fan",
+    "start": 195.32,
+    "duration": 4.4
+  },
+  {
+    "text": "out.",
+    "start": 198.76,
+    "duration": 4.36
+  },
+  {
+    "text": "Four, default to pipeline. Add a barrier",
+    "start": 199.72,
+    "duration": 5.56
+  },
+  {
+    "text": "only with justification.",
+    "start": 203.12,
+    "duration": 4.839
+  },
+  {
+    "text": "Five, keep cycles only where there is",
+    "start": 205.28,
+    "duration": 4.4
+  },
+  {
+    "text": "real feedback.",
+    "start": 207.959,
+    "duration": 5
+  },
+  {
+    "text": "Six, make verification structural with",
+    "start": 209.68,
+    "duration": 6.36
+  },
+  {
+    "text": "adversarial panels for critical claims.",
+    "start": 212.959,
+    "duration": 5.481
+  },
+  {
+    "text": "And seven, keep a journal of every",
+    "start": 216.04,
+    "duration": 5.28
+  },
+  {
+    "text": "node's output so you can resume exactly",
+    "start": 218.44,
+    "duration": 5.56
+  },
+  {
+    "text": "where you stopped.",
+    "start": 221.32,
+    "duration": 4.639
+  },
+  {
+    "text": "And what do you gain?",
+    "start": 224,
+    "duration": 4.6
+  },
+  {
+    "text": "Wall clock time. Branches run in",
+    "start": 225.959,
+    "duration": 4.961
+  },
+  {
+    "text": "parallel and the run takes as long as",
+    "start": 228.6,
+    "duration": 4.84
+  },
+  {
+    "text": "the slowest branch, not the sum of all",
+    "start": 230.92,
+    "duration": 3.76
+  },
+  {
+    "text": "of them.",
+    "start": 233.44,
+    "duration": 4.36
+  },
+  {
+    "text": "Structural reliability. No artifact",
+    "start": 234.68,
+    "duration": 6.28
+  },
+  {
+    "text": "moves on without verification.",
+    "start": 237.8,
+    "duration": 4.68
+  },
+  {
+    "text": "Resumability.",
+    "start": 240.96,
+    "duration": 4.2
+  },
+  {
+    "text": "Fix one node and rerun only what is",
+    "start": 242.48,
+    "duration": 4.56
+  },
+  {
+    "text": "downstream of it.",
+    "start": 245.16,
+    "duration": 5.2
+  },
+  {
+    "text": "Scale beyond a single context.",
+    "start": 247.04,
+    "duration": 5.96
+  },
+  {
+    "text": "Full observability of progress.",
+    "start": 250.36,
+    "duration": 5.84
+  },
+  {
+    "text": "And budget as a lever. The same graph,",
+    "start": 253,
+    "duration": 6.88
+  },
+  {
+    "text": "wide or narrow, as needed.",
+    "start": 256.2,
+    "duration": 7.16
+  },
+  {
+    "text": "Finally, the graph is not a religion.",
+    "start": 259.88,
+    "duration": 5.8
+  },
+  {
+    "text": "A deep dependency chain? Stay with a",
+    "start": 263.36,
+    "duration": 3.48
+  },
+  {
+    "text": "loop.",
+    "start": 265.68,
+    "duration": 4.16
+  },
+  {
+    "text": "Tight shared state? Isolate or stay",
+    "start": 266.84,
+    "duration": 4.2
+  },
+  {
+    "text": "serial.",
+    "start": 269.84,
+    "duration": 3.84
+  },
+  {
+    "text": "A small task? Just do it.",
+    "start": 271.04,
+    "duration": 5.16
+  },
+  {
+    "text": "The rule of thumb, ask what truly",
+    "start": 273.68,
+    "duration": 4.48
+  },
+  {
+    "text": "depends on what.",
+    "start": 276.2,
+    "duration": 4.719
+  },
+  {
+    "text": "If the answer draws a wide tree, it's a",
+    "start": 278.16,
+    "duration": 3.759
+  },
+  {
+    "text": "graph.",
+    "start": 280.919,
+    "duration": 3.081
+  },
+  {
+    "text": "If it draws a straight line, it's a",
+    "start": 281.919,
+    "duration": 3.041
+  },
+  {
+    "text": "loop.",
+    "start": 284,
+    "duration": 3.76
+  },
+  {
+    "text": "And either way, no artifact is done",
+    "start": 284.96,
+    "duration": 5.2
+  },
+  {
+    "text": "without a green check.",
+    "start": 287.76,
+    "duration": 4.28
+  },
+  {
+    "text": "Thanks for watching, and good luck with",
+    "start": 290.16,
+    "duration": 4.68
+  },
+  {
+    "text": "the migration.",
+    "start": 292.04,
+    "duration": 2.8
+  }
+]

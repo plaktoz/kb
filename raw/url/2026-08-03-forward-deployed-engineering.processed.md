@@ -1,0 +1,9 @@
+https://en.wikipedia.org/wiki/Forward_Deployed_Engineer
+https://builders.ramp.com/post/forward-deployed-engineering
+https://www.svpg.com/forward-deployed-engineers/
+https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers
+https://newsletter.gtmengineering.ai/p/forward-deployed-engineering-101
+https://bloomberry.com/blog/i-analyzed-1000-forward-deployed-engineer-jobs-what-i-learned/
+https://en.wikipedia.org/wiki/Palantir_Technologies
+https://en.wikipedia.org/wiki/Scale_AI
+https://en.wikipedia.org/wiki/Anduril_Industries

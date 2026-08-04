@@ -1,0 +1,74 @@
+{
+  "videoId": "-90E2Pke9BQ",
+  "title": "How to Master Graph Engineering (Full Course 25 minutes )",
+  "channel": "Cloud AI",
+  "channelId": "UCHnwaQYwKiTHohGVz8IXC-w",
+  "description": "Are your AI agents getting stuck in infinite loops, forgetting context, and hallucinating bad answers? Discover the system architecture of AI Graph Engineering, and why elite developers are abandoning simple linear AI loops in favor of highly parallel, multi-agent Graph workflows. \n\nIn this video, Cloud Codes breaks down the exact system design required to build production-grade AI agents. We explore the 3 core components of a Graph (Jobs, Arrows/Dependencies, and State), and reveal the ultimate multi-agent architecture: The Diamond Pattern (Split, Work, Check, Merge). \n\nWe also dive into the terrifying 2026 DeepMind research paper proving that Large Language Models (LLMs) cannot self-correct their own reasoning, explaining why you must NEVER let an AI grade its own homework. Finally, we walk through 3 practical, real-world Graph builds: an autonomous Deep Research Desk, an SEO Content Machine, and a complete Go-To-Market (GTM) Kit, while showing you how to implement Stop Rules and Human Gates to protect your API billing account.\n\n⏱️ TIMESTAMPS:\n0:00 - The New AI Architecture (Graphs vs Loops)\n2:25 - Lesson 1: What is a Graph? (Jobs, Arrows, State)\n4:50 - The \"Fake Arrow\" Bottleneck\n6:48 - Lesson 2: The Diamond Pattern (Split, Work, Check, Merge)\n9:41 - The DeepMind Paper: Why AI Can't Check Its Own Work\n11:09 - Lesson 3: The Stop Rule (Preventing Massive API Bills)\n13:14 - Lesson 4: The Human Gate\n14:40 - Build 1: The Deep Research Desk\n18:06 - Build 2: The SEO Content Machine\n20:05 - Build 3: The Go-To-Market Kit\n22:49 - Summary: Master Graph Engineering\n\n#graphengineering #aiagents #systemdesign #softwareengineering #machinelearning #cloudai #langgraph #artificialintelligence #deepmind #architecture\n\nUser Queries: \nai graph engineering tutorial\nhow to build multi agent ai systems\nlanggraph system design explained\nwhy llms cannot self correct deepmind paper\nstop building linear ai agents\nthe diamond pattern ai architecture\nhow to build an ai deep research agent\nai agent state management and routing\nprevent infinite loops in ai agents\nhow to structure complex ai workflows",
+  "duration": 1487,
+  "publishDate": "2026-07-24",
+  "url": "https://www.youtube.com/watch?v=-90E2Pke9BQ",
+  "coverImage": "imgs/cover.jpg",
+  "thumbnailUrl": "https://i.ytimg.com/vi/-90E2Pke9BQ/maxresdefault.jpg",
+  "language": {
+    "code": "en",
+    "name": "English",
+    "isGenerated": true
+  },
+  "chapters": [
+    {
+      "title": "- The New AI Architecture (Graphs vs Loops)",
+      "start": 0,
+      "end": 145
+    },
+    {
+      "title": "- Lesson 1: What is a Graph? (Jobs, Arrows, State)",
+      "start": 145,
+      "end": 290
+    },
+    {
+      "title": "- The \"Fake Arrow\" Bottleneck",
+      "start": 290,
+      "end": 408
+    },
+    {
+      "title": "- Lesson 2: The Diamond Pattern (Split, Work, Check, Merge)",
+      "start": 408,
+      "end": 581
+    },
+    {
+      "title": "- The DeepMind Paper: Why AI Can't Check Its Own Work",
+      "start": 581,
+      "end": 669
+    },
+    {
+      "title": "- Lesson 3: The Stop Rule (Preventing Massive API Bills)",
+      "start": 669,
+      "end": 794
+    },
+    {
+      "title": "- Lesson 4: The Human Gate",
+      "start": 794,
+      "end": 880
+    },
+    {
+      "title": "- Build 1: The Deep Research Desk",
+      "start": 880,
+      "end": 1086
+    },
+    {
+      "title": "- Build 2: The SEO Content Machine",
+      "start": 1086,
+      "end": 1205
+    },
+    {
+      "title": "- Build 3: The Go-To-Market Kit",
+      "start": 1205,
+      "end": 1369
+    },
+    {
+      "title": "- Summary: Master Graph Engineering",
+      "start": 1369,
+      "end": 1487
+    }
+  ]
+}

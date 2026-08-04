@@ -1,0 +1,5857 @@
+[
+  {
+    "text": "Welcome, everyone. We are happy to have",
+    "start": 0.35,
+    "duration": 2.485
+  },
+  {
+    "text": "you back. Today we have a",
+    "start": 1.935,
+    "duration": 2.949
+  },
+  {
+    "text": "brand new research paper on integrating",
+    "start": 5.241,
+    "duration": 2.569
+  },
+  {
+    "text": "memory optimization with",
+    "start": 6.852,
+    "duration": 2.272
+  },
+  {
+    "text": "graph structures",
+    "start": 8.167,
+    "duration": 1.975
+  },
+  {
+    "text": ". Let's take a look",
+    "start": 9.185,
+    "duration": 3.283
+  },
+  {
+    "text": ". This is the",
+    "start": 11.468,
+    "duration": 2.972
+  },
+  {
+    "text": "main idea of ​​ this paper",
+    "start": 13.499,
+    "duration": 3.227
+  },
+  {
+    "text": ", and we will talk about it, and",
+    "start": 15.726,
+    "duration": 3.051
+  },
+  {
+    "text": "within five minutes",
+    "start": 17.835,
+    "duration": 2.524
+  },
+  {
+    "text": "you will understand everything clearly.",
+    "start": 19.418,
+    "duration": 3.227
+  },
+  {
+    "text": "But first, yes, we",
+    "start": 21.914,
+    "duration": 2.701
+  },
+  {
+    "text": "humans still need",
+    "start": 23.664,
+    "duration": 2.702
+  },
+  {
+    "text": "some research, and here is a",
+    "start": 25.414,
+    "duration": 2.799
+  },
+  {
+    "text": "paper published on",
+    "start": 27.262,
+    "duration": 2.896
+  },
+  {
+    "text": "July 15, 2026. It is an experiment",
+    "start": 29.207,
+    "duration": 2.896
+  },
+  {
+    "text": "to improve a",
+    "start": 31.152,
+    "duration": 2.458
+  },
+  {
+    "text": "memory graph with one-time error correction for",
+    "start": 32.659,
+    "duration": 2.799
+  },
+  {
+    "text": "our agents, and",
+    "start": 34.507,
+    "duration": 2.847
+  },
+  {
+    "text": "it is from the University of Electronic Science",
+    "start": 36.403,
+    "duration": 2.702
+  },
+  {
+    "text": "and Technology",
+    "start": 38.153,
+    "duration": 2.167
+  },
+  {
+    "text": "in",
+    "start": 39.369,
+    "duration": 2.312
+  },
+  {
+    "text": "Changdu, China. I asked,",
+    "start": 40.73,
+    "duration": 2.958
+  },
+  {
+    "text": "\"Where is it located? Changdo!\"",
+    "start": 42.743,
+    "duration": 3.588
+  },
+  {
+    "text": "I replied, \"Look at this",
+    "start": 45.431,
+    "duration": 2.462
+  },
+  {
+    "text": ". It's amazing, truly incredible!\"",
+    "start": 46.893,
+    "duration": 3.828
+  },
+  {
+    "text": "Today we have a",
+    "start": 49.821,
+    "duration": 2.362
+  },
+  {
+    "text": "research paper from these",
+    "start": 51.229,
+    "duration": 2.181
+  },
+  {
+    "text": "experts, so let's begin. In the",
+    "start": 52.456,
+    "duration": 3.513
+  },
+  {
+    "text": "last video,",
+    "start": 55.022,
+    "duration": 2.54
+  },
+  {
+    "text": "I showed you here the",
+    "start": 56.615,
+    "duration": 2.859
+  },
+  {
+    "text": "MIMO Harness technology, where we talked about an",
+    "start": 58.527,
+    "duration": 3.071
+  },
+  {
+    "text": "agent technology that learns from",
+    "start": 60.651,
+    "duration": 2.859
+  },
+  {
+    "text": "experience how to optimize its",
+    "start": 62.563,
+    "duration": 2.912
+  },
+  {
+    "text": "technology for a",
+    "start": 64.528,
+    "duration": 3.018
+  },
+  {
+    "text": "particular task. This is the",
+    "start": 66.599,
+    "duration": 2.795
+  },
+  {
+    "text": "thumbnail on YouTube,",
+    "start": 68.437,
+    "duration": 2.537
+  },
+  {
+    "text": "if you want to find",
+    "start": 70.017,
+    "duration": 2.281
+  },
+  {
+    "text": "and view it.",
+    "start": 71.341,
+    "duration": 2.282
+  },
+  {
+    "text": "And now we talk again about",
+    "start": 72.723,
+    "duration": 2.785
+  },
+  {
+    "text": "Maimo. Why memory",
+    "start": 74.554,
+    "duration": 2.692
+  },
+  {
+    "text": "specifically? Well, it turns out to be the most",
+    "start": 76.289,
+    "duration": 2.856
+  },
+  {
+    "text": "important element for",
+    "start": 78.196,
+    "duration": 2.968
+  },
+  {
+    "text": "agents and",
+    "start": 80.214,
+    "duration": 2.867
+  },
+  {
+    "text": "system dynamics. I have shown you",
+    "start": 82.132,
+    "duration": 3.014
+  },
+  {
+    "text": "how the Maimo system learns to",
+    "start": 84.189,
+    "duration": 2.618
+  },
+  {
+    "text": "configure the appropriate system for a",
+    "start": 85.85,
+    "duration": 2.661
+  },
+  {
+    "text": "new task. This",
+    "start": 87.555,
+    "duration": 2.399
+  },
+  {
+    "text": "includes context building,",
+    "start": 88.997,
+    "duration": 2.351
+  },
+  {
+    "text": "all the different tools",
+    "start": 90.39,
+    "duration": 2.055
+  },
+  {
+    "text": "we need,",
+    "start": 92.585,
+    "duration": 2.394
+  },
+  {
+    "text": "full coordination of agents and",
+    "start": 94.021,
+    "duration": 2.14
+  },
+  {
+    "text": "sub-agents,",
+    "start": 95.203,
+    "duration": 2.478
+  },
+  {
+    "text": "memory dynamics and",
+    "start": 96.723,
+    "duration": 2.562
+  },
+  {
+    "text": "creation,",
+    "start": 98.328,
+    "duration": 2.477
+  },
+  {
+    "text": "generation settings,",
+    "start": 99.848,
+    "duration": 2.309
+  },
+  {
+    "text": "output processing, and",
+    "start": 101.199,
+    "duration": 2.435
+  },
+  {
+    "text": "much more. You may be wondering:",
+    "start": 102.677,
+    "duration": 3.34
+  },
+  {
+    "text": "What is the main new idea",
+    "start": 105.058,
+    "duration": 2.489
+  },
+  {
+    "text": "of ​​ this",
+    "start": 106.587,
+    "duration": 2.53
+  },
+  {
+    "text": "initial research paper from our",
+    "start": 108.158,
+    "duration": 2.369
+  },
+  {
+    "text": "Chinese colleagues?",
+    "start": 109.567,
+    "duration": 2.329
+  },
+  {
+    "text": "It's simple. We",
+    "start": 110.996,
+    "duration": 2.693
+  },
+  {
+    "text": "now move from text structures",
+    "start": 112.73,
+    "duration": 2.536
+  },
+  {
+    "text": "to",
+    "start": 114.308,
+    "duration": 2.245
+  },
+  {
+    "text": "graphical structures. That is, we move from",
+    "start": 115.595,
+    "duration": 2.681
+  },
+  {
+    "text": "something for which we do not have a",
+    "start": 117.319,
+    "duration": 2.663
+  },
+  {
+    "text": "mathematical basis, such as texts, to",
+    "start": 119.026,
+    "duration": 2.663
+  },
+  {
+    "text": "something for which we have a theory of",
+    "start": 120.732,
+    "duration": 2.532
+  },
+  {
+    "text": "graphs in",
+    "start": 122.308,
+    "duration": 2.487
+  },
+  {
+    "text": "mathematics, and we are",
+    "start": 123.839,
+    "duration": 2.357
+  },
+  {
+    "text": "more precise. This is the",
+    "start": 125.239,
+    "duration": 2.286
+  },
+  {
+    "text": "qualitative leap today.",
+    "start": 126.569,
+    "duration": 2.722
+  },
+  {
+    "text": "Let's take a look. EMG, or",
+    "start": 128.391,
+    "duration": 3.784
+  },
+  {
+    "text": "Experience Memory Schema,",
+    "start": 131.227,
+    "duration": 2.754
+  },
+  {
+    "text": "now learns the",
+    "start": 133.032,
+    "duration": 2.754
+  },
+  {
+    "text": "procedure-level corrections and",
+    "start": 134.838,
+    "duration": 2.754
+  },
+  {
+    "text": "workflows that need to be",
+    "start": 136.643,
+    "duration": 2.342
+  },
+  {
+    "text": "entered into the agent. Here he is",
+    "start": 138.036,
+    "duration": 2.703
+  },
+  {
+    "text": "comparing a",
+    "start": 139.912,
+    "duration": 2.889
+  },
+  {
+    "text": "failed path with a successful one.",
+    "start": 141.853,
+    "duration": 5.198
+  },
+  {
+    "text": "This represents both the",
+    "start": 146.151,
+    "duration": 2.616
+  },
+  {
+    "text": "graph as a",
+    "start": 147.812,
+    "duration": 2.527
+  },
+  {
+    "text": "decision-making graph based on the",
+    "start": 150.462,
+    "duration": 2.527
+  },
+  {
+    "text": "structure of nodes and edges, and",
+    "start": 152.034,
+    "duration": 2.617
+  },
+  {
+    "text": "mathematically calculates the",
+    "start": 153.696,
+    "duration": 2.123
+  },
+  {
+    "text": "structural adjustments",
+    "start": 154.864,
+    "duration": 2.572
+  },
+  {
+    "text": "needed to turn failure",
+    "start": 158.717,
+    "duration": 2.938
+  },
+  {
+    "text": "into success. These patches are stored",
+    "start": 160.706,
+    "duration": 3.66
+  },
+  {
+    "text": "offline and can be",
+    "start": 164.958,
+    "duration": 2.216
+  },
+  {
+    "text": "retrieved before a",
+    "start": 166.216,
+    "duration": 2.508
+  },
+  {
+    "text": "new implementation. You might ask: Why do",
+    "start": 167.766,
+    "duration": 3.193
+  },
+  {
+    "text": "we do this? Okay, so what",
+    "start": 170.011,
+    "duration": 2.684
+  },
+  {
+    "text": "'s the current situation?",
+    "start": 171.737,
+    "duration": 2.239
+  },
+  {
+    "text": "Currently, if a",
+    "start": 173.076,
+    "duration": 2.153
+  },
+  {
+    "text": "customer fails, you say, \"",
+    "start": 174.262,
+    "duration": 2.219
+  },
+  {
+    "text": "I failed,\" and you think about",
+    "start": 175.481,
+    "duration": 2.12
+  },
+  {
+    "text": "why you failed, and then you try",
+    "start": 176.634,
+    "duration": 2.088
+  },
+  {
+    "text": "again, hoping that the",
+    "start": 177.755,
+    "duration": 2.087
+  },
+  {
+    "text": "Directed Learning (LLM) model is smart",
+    "start": 179.963,
+    "duration": 2.186
+  },
+  {
+    "text": "enough. But as it turns out,",
+    "start": 181.182,
+    "duration": 2.202
+  },
+  {
+    "text": "especially for small-scale",
+    "start": 182.415,
+    "duration": 2.177
+  },
+  {
+    "text": "directed learning models",
+    "start": 183.623,
+    "duration": 1.775
+  },
+  {
+    "text": ", such as",
+    "start": 184.429,
+    "duration": 2.053
+  },
+  {
+    "text": "free-trainable parameter models",
+    "start": 186.504,
+    "duration": 1.96
+  },
+  {
+    "text": "that contain four",
+    "start": 187.495,
+    "duration": 2.147
+  },
+  {
+    "text": "or eight billion",
+    "start": 188.673,
+    "duration": 1.991
+  },
+  {
+    "text": "parameters and reside",
+    "start": 189.695,
+    "duration": 1.898
+  },
+  {
+    "text": "locally on your laptop",
+    "start": 190.624,
+    "duration": 1.991
+  },
+  {
+    "text": ", this has two",
+    "start": 191.646,
+    "duration": 1.992
+  },
+  {
+    "text": "drawbacks. First, it is",
+    "start": 192.669,
+    "duration": 2.379
+  },
+  {
+    "text": "extremely expensive, because",
+    "start": 194.098,
+    "duration": 2.482
+  },
+  {
+    "text": "running the directed learning model",
+    "start": 195.63,
+    "duration": 2.68
+  },
+  {
+    "text": "multiple times for each",
+    "start": 197.359,
+    "duration": 2.73
+  },
+  {
+    "text": "test case drains",
+    "start": 199.138,
+    "duration": 2.68
+  },
+  {
+    "text": "all of",
+    "start": 200.867,
+    "duration": 2.779
+  },
+  {
+    "text": "your tokens. Secondly, as I",
+    "start": 202.696,
+    "duration": 2.756
+  },
+  {
+    "text": "mentioned, it depends on the intelligence of",
+    "start": 204.505,
+    "duration": 2.975
+  },
+  {
+    "text": "your guided learning model to diagnose its",
+    "start": 208.508,
+    "duration": 2.495
+  },
+  {
+    "text": "errors. And guess what?",
+    "start": 210.057,
+    "duration": 3.01
+  },
+  {
+    "text": "Small, guided learning models simply do not",
+    "start": 213.894,
+    "duration": 2.495
+  },
+  {
+    "text": "excel at this task.",
+    "start": 215.435,
+    "duration": 2.682
+  },
+  {
+    "text": "It's not as good as",
+    "start": 217.217,
+    "duration": 2.597
+  },
+  {
+    "text": "Fable",
+    "start": 218.859,
+    "duration": 2.643
+  },
+  {
+    "text": "Five; it's stuck in",
+    "start": 220.548,
+    "duration": 2.642
+  },
+  {
+    "text": "endless error loops. To make matters more",
+    "start": 222.236,
+    "duration": 2.643
+  },
+  {
+    "text": "complicated, look at these",
+    "start": 225.077,
+    "duration": 2.648
+  },
+  {
+    "text": "episodes we have",
+    "start": 226.767,
+    "duration": 2.31
+  },
+  {
+    "text": ". We have the LLM core, and",
+    "start": 228.12,
+    "duration": 2.887
+  },
+  {
+    "text": "then here in the",
+    "start": 230.06,
+    "duration": 2.904
+  },
+  {
+    "text": "processing system we have the Air loop which",
+    "start": 232.017,
+    "duration": 3.01
+  },
+  {
+    "text": "causes countless problems",
+    "start": 234.08,
+    "duration": 2.745
+  },
+  {
+    "text": ". Therefore,",
+    "start": 235.878,
+    "duration": 2.391
+  },
+  {
+    "text": "millions of tokens are wasted without",
+    "start": 237.318,
+    "duration": 2.55
+  },
+  {
+    "text": "any result.",
+    "start": 238.917,
+    "duration": 2.745
+  },
+  {
+    "text": "So what is the solution?",
+    "start": 241.983,
+    "duration": 2.553
+  },
+  {
+    "text": "The new idea is to move the",
+    "start": 244.594,
+    "duration": 2.965
+  },
+  {
+    "text": "error correction mechanism from a",
+    "start": 246.609,
+    "duration": 2.966
+  },
+  {
+    "text": "simple LLM guess",
+    "start": 248.625,
+    "duration": 2.361
+  },
+  {
+    "text": "to predict the next code",
+    "start": 250.037,
+    "duration": 2.915
+  },
+  {
+    "text": "in a natural human language like English",
+    "start": 252.002,
+    "duration": 2.764
+  },
+  {
+    "text": "to a much more",
+    "start": 253.816,
+    "duration": 2.462
+  },
+  {
+    "text": "powerful algorithm, the",
+    "start": 255.328,
+    "duration": 2.916
+  },
+  {
+    "text": "deterministic mathematical graph matching algorithm.",
+    "start": 260.671,
+    "duration": 2.613
+  },
+  {
+    "text": "You will now understand what we are",
+    "start": 263.755,
+    "duration": 2.69
+  },
+  {
+    "text": "dealing with. Do not ask",
+    "start": 267.367,
+    "duration": 3.038
+  },
+  {
+    "text": "the agent to verbally explain why he",
+    "start": 269.454,
+    "duration": 2.696
+  },
+  {
+    "text": "failed. Present the",
+    "start": 271.199,
+    "duration": 2.603
+  },
+  {
+    "text": "failed behavior and the",
+    "start": 272.848,
+    "duration": 2.15
+  },
+  {
+    "text": "correct behavior as",
+    "start": 274.044,
+    "duration": 2.748
+  },
+  {
+    "text": "graphs. Calculate mathematically the",
+    "start": 275.838,
+    "duration": 2.719
+  },
+  {
+    "text": "structural difference between",
+    "start": 277.602,
+    "duration": 2.42
+  },
+  {
+    "text": "these two",
+    "start": 279.066,
+    "duration": 2.021
+  },
+  {
+    "text": "different types of",
+    "start": 280.131,
+    "duration": 2.598
+  },
+  {
+    "text": "graphs in a",
+    "start": 281.773,
+    "duration": 2.331
+  },
+  {
+    "text": "mathematical space, and store this",
+    "start": 283.149,
+    "duration": 2.331
+  },
+  {
+    "text": "difference as a reusable correction memory for the",
+    "start": 284.524,
+    "duration": 2.509
+  },
+  {
+    "text": "next task. As you can see, this",
+    "start": 288.563,
+    "duration": 2.947
+  },
+  {
+    "text": "is the solution in the simplest",
+    "start": 290.561,
+    "duration": 2.677
+  },
+  {
+    "text": "possible way, and I have put an",
+    "start": 292.289,
+    "duration": 2.88
+  },
+  {
+    "text": "exclamation mark here to assure you",
+    "start": 294.22,
+    "duration": 2.779
+  },
+  {
+    "text": "that this is the",
+    "start": 296.049,
+    "duration": 2.474
+  },
+  {
+    "text": "right way. So, you might be",
+    "start": 297.574,
+    "duration": 3.239
+  },
+  {
+    "text": "wondering: how do we learn this",
+    "start": 299.861,
+    "duration": 2.839
+  },
+  {
+    "text": "on graphs? Let's assume we",
+    "start": 301.748,
+    "duration": 2.839
+  },
+  {
+    "text": "conducted",
+    "start": 303.687,
+    "duration": 2.313
+  },
+  {
+    "text": "some tests. We",
+    "start": 305.039,
+    "duration": 2.592
+  },
+  {
+    "text": "now have a failed graph",
+    "start": 306.672,
+    "duration": 2.438
+  },
+  {
+    "text": "where the worker failed to",
+    "start": 308.151,
+    "duration": 2.274
+  },
+  {
+    "text": "find a solution. We have",
+    "start": 309.466,
+    "duration": 2.087
+  },
+  {
+    "text": "a lot of",
+    "start": 310.586,
+    "duration": 1.922
+  },
+  {
+    "text": "dead ends,",
+    "start": 311.541,
+    "duration": 2.153
+  },
+  {
+    "text": "wrong ends, and so on.",
+    "start": 312.727,
+    "duration": 2.186
+  },
+  {
+    "text": "Then we have a",
+    "start": 314.013,
+    "duration": 2.36
+  },
+  {
+    "text": "successful chart where we achieved",
+    "start": 315.415,
+    "duration": 2.608
+  },
+  {
+    "text": "outstanding success.",
+    "start": 317.064,
+    "duration": 2.313
+  },
+  {
+    "text": "The task seems simple now. No",
+    "start": 318.422,
+    "duration": 2.489
+  },
+  {
+    "text": ", we are only comparing the",
+    "start": 320.011,
+    "duration": 2.437
+  },
+  {
+    "text": "complexity of this",
+    "start": 321.492,
+    "duration": 2.437
+  },
+  {
+    "text": "graph's structure.",
+    "start": 322.973,
+    "duration": 2.133
+  },
+  {
+    "text": "Sometimes the graph contains",
+    "start": 324.206,
+    "duration": 2.504
+  },
+  {
+    "text": "10,000 nodes",
+    "start": 325.752,
+    "duration": 2.505
+  },
+  {
+    "text": "or even millions of nodes, and",
+    "start": 327.299,
+    "duration": 2.546
+  },
+  {
+    "text": "you realize that this",
+    "start": 328.887,
+    "duration": 2.547
+  },
+  {
+    "text": "mathematical process is not that",
+    "start": 330.476,
+    "duration": 2.421
+  },
+  {
+    "text": "simple. So how can we",
+    "start": 331.939,
+    "duration": 2.777
+  },
+  {
+    "text": "improve it? Instead of",
+    "start": 333.766,
+    "duration": 5.474
+  },
+  {
+    "text": "asking the Learning-",
+    "start": 338.294,
+    "duration": 3.003
+  },
+  {
+    "text": "Led-Mechanism (LLM) model",
+    "start": 340.352,
+    "duration": 2.786
+  },
+  {
+    "text": "to guess the error, and relying",
+    "start": 342.192,
+    "duration": 2.949
+  },
+  {
+    "text": "on it only if we want",
+    "start": 344.195,
+    "duration": 2.787
+  },
+  {
+    "text": "prior knowledge, the",
+    "start": 346.036,
+    "duration": 3.111
+  },
+  {
+    "text": "researcher now has two entry points",
+    "start": 348.201,
+    "duration": 2.841
+  },
+  {
+    "text": "to the learning process:",
+    "start": 350.096,
+    "duration": 2.408
+  },
+  {
+    "text": "exploring the",
+    "start": 351.558,
+    "duration": 2.462
+  },
+  {
+    "text": "failing agent (this is the",
+    "start": 353.074,
+    "duration": 2.949
+  },
+  {
+    "text": "failing graph), and the",
+    "start": 355.077,
+    "duration": 2.624
+  },
+  {
+    "text": "successful expert path (the",
+    "start": 356.755,
+    "duration": 3.057
+  },
+  {
+    "text": "blue graph",
+    "start": 358.812,
+    "duration": 3.057
+  },
+  {
+    "text": "on the right). So,",
+    "start": 360.924,
+    "duration": 3.33
+  },
+  {
+    "text": "they now take both",
+    "start": 363.303,
+    "duration": 2.356
+  },
+  {
+    "text": "timelines of",
+    "start": 364.707,
+    "duration": 2.405
+  },
+  {
+    "text": "comparative learning here and",
+    "start": 366.161,
+    "duration": 2.744
+  },
+  {
+    "text": "turn them into",
+    "start": 367.953,
+    "duration": 2.744
+  },
+  {
+    "text": "direct decision-making graphs,",
+    "start": 371.005,
+    "duration": 2.696
+  },
+  {
+    "text": "where the nodes represent",
+    "start": 372.749,
+    "duration": 2.26
+  },
+  {
+    "text": "actions, such as picking up the",
+    "start": 374.057,
+    "duration": 2.648
+  },
+  {
+    "text": "apple, and the edges represent",
+    "start": 375.753,
+    "duration": 2.308
+  },
+  {
+    "text": "environmental observations, such as what's on the",
+    "start": 378.66,
+    "duration": 2.695
+  },
+  {
+    "text": "table. Then they use an",
+    "start": 380.404,
+    "duration": 4.804
+  },
+  {
+    "text": "algorithm such as Weiserstein's",
+    "start": 384.252,
+    "duration": 2.516
+  },
+  {
+    "text": "integrated graph",
+    "start": 385.812,
+    "duration": 2.204
+  },
+  {
+    "text": ". If",
+    "start": 387.06,
+    "duration": 2.98
+  },
+  {
+    "text": "you want to know the",
+    "start": 389.086,
+    "duration": 1.96
+  },
+  {
+    "text": "precise mathematical algorithms for calculating",
+    "start": 391.92,
+    "duration": 2.143
+  },
+  {
+    "text": "the differences between the two",
+    "start": 393.109,
+    "duration": 2.555
+  },
+  {
+    "text": "different graph structures, the solution is",
+    "start": 395.898,
+    "duration": 2.509
+  },
+  {
+    "text": "simple: the",
+    "start": 397.453,
+    "duration": 2.097
+  },
+  {
+    "text": "overlapping parts of the two",
+    "start": 398.596,
+    "duration": 2.738
+  },
+  {
+    "text": "graphs now become a",
+    "start": 400.379,
+    "duration": 2.738
+  },
+  {
+    "text": "common subgraph. This is the",
+    "start": 403.946,
+    "duration": 2.779
+  },
+  {
+    "text": "correct workflow, and it has been",
+    "start": 405.776,
+    "duration": 2.908
+  },
+  {
+    "text": "implemented correctly.",
+    "start": 407.735,
+    "duration": 2.599
+  },
+  {
+    "text": "Also, in the",
+    "start": 409.434,
+    "duration": 2.132
+  },
+  {
+    "text": "failed graph,",
+    "start": 410.606,
+    "duration": 2.173
+  },
+  {
+    "text": "let's say from step 1 to",
+    "start": 411.819,
+    "duration": 2.577
+  },
+  {
+    "text": "step 25, this is the",
+    "start": 413.437,
+    "duration": 2.172
+  },
+  {
+    "text": "correct path",
+    "start": 414.65,
+    "duration": 2.455
+  },
+  {
+    "text": "forward. Then, starting from",
+    "start": 416.146,
+    "duration": 3.212
+  },
+  {
+    "text": "step 25, you now see a",
+    "start": 418.405,
+    "duration": 2.533
+  },
+  {
+    "text": "difference in the structure of the",
+    "start": 419.984,
+    "duration": 2.394
+  },
+  {
+    "text": "graph, and",
+    "start": 421.424,
+    "duration": 2.579
+  },
+  {
+    "text": "this difference has become",
+    "start": 423.05,
+    "duration": 2.486
+  },
+  {
+    "text": "the paths for modifying the",
+    "start": 424.582,
+    "duration": 2.58
+  },
+  {
+    "text": "graph: that is, the action",
+    "start": 426.208,
+    "duration": 2.626
+  },
+  {
+    "text": "that should be deleted,",
+    "start": 427.88,
+    "duration": 2.44
+  },
+  {
+    "text": "new ideas added, or the",
+    "start": 429.367,
+    "duration": 2.811
+  },
+  {
+    "text": "whole renamed based",
+    "start": 431.225,
+    "duration": 2.765
+  },
+  {
+    "text": "on a",
+    "start": 433.036,
+    "duration": 2.394
+  },
+  {
+    "text": "specific observation to turn the",
+    "start": 434.476,
+    "duration": 2.579
+  },
+  {
+    "text": "failing graph into a",
+    "start": 436.102,
+    "duration": 2.579
+  },
+  {
+    "text": "successful graph. Now,",
+    "start": 437.727,
+    "duration": 4.714
+  },
+  {
+    "text": "this Fastin distance, as I mentioned earlier, is a",
+    "start": 443.191,
+    "duration": 2.896
+  },
+  {
+    "text": "precise mathematical engine that allows the system",
+    "start": 446.594,
+    "duration": 2.653
+  },
+  {
+    "text": "to compare the form and content of the",
+    "start": 448.296,
+    "duration": 2.652
+  },
+  {
+    "text": "AI's own behavior,",
+    "start": 451.067,
+    "duration": 2.847
+  },
+  {
+    "text": "using",
+    "start": 452.963,
+    "duration": 2.312
+  },
+  {
+    "text": "graph theory,",
+    "start": 454.324,
+    "duration": 2.847
+  },
+  {
+    "text": "completely eliminating the need",
+    "start": 456.22,
+    "duration": 2.75
+  },
+  {
+    "text": "for a linear linguistic model,",
+    "start": 458.019,
+    "duration": 2.701
+  },
+  {
+    "text": "as in the previous video",
+    "start": 459.769,
+    "duration": 2.896
+  },
+  {
+    "text": ", to pinpoint the error",
+    "start": 461.665,
+    "duration": 2.701
+  },
+  {
+    "text": "in",
+    "start": 463.415,
+    "duration": 2.264
+  },
+  {
+    "text": "my AI system or",
+    "start": 464.728,
+    "duration": 2.896
+  },
+  {
+    "text": "in",
+    "start": 466.672,
+    "duration": 2.264
+  },
+  {
+    "text": "another AI system. Therefore, we do",
+    "start": 467.985,
+    "duration": 3.353
+  },
+  {
+    "text": "not rely on a",
+    "start": 470.393,
+    "duration": 2.837
+  },
+  {
+    "text": "black box, but rather we have a",
+    "start": 472.286,
+    "duration": 3.059
+  },
+  {
+    "text": "mathematical model. How is that done?",
+    "start": 474.4,
+    "duration": 2.988
+  },
+  {
+    "text": "Simply put, both graphs are fed",
+    "start": 476.488,
+    "duration": 2.309
+  },
+  {
+    "text": "into this algorithm.",
+    "start": 478.972,
+    "duration": 2.175
+  },
+  {
+    "text": "The algorithm",
+    "start": 480.247,
+    "duration": 2.393
+  },
+  {
+    "text": "iteratively rearranges the nodes in a",
+    "start": 483.369,
+    "duration": 2.682
+  },
+  {
+    "text": "defined mathematical space, attempting to",
+    "start": 485.099,
+    "duration": 2.73
+  },
+  {
+    "text": "minimize the",
+    "start": 486.877,
+    "duration": 2.201
+  },
+  {
+    "text": "combined cost. As you can see,",
+    "start": 488.126,
+    "duration": 2.692
+  },
+  {
+    "text": "we have here a mathematical procedure for",
+    "start": 489.864,
+    "duration": 2.816
+  },
+  {
+    "text": "optimization, as",
+    "start": 491.726,
+    "duration": 2.816
+  },
+  {
+    "text": "in AI training",
+    "start": 493.588,
+    "duration": 2.303
+  },
+  {
+    "text": ", until the",
+    "start": 494.938,
+    "duration": 2.583
+  },
+  {
+    "text": "optimal flexible allocation matrix is ​​ found. I might ask: What is it",
+    "start": 499.406,
+    "duration": 3.762
+  },
+  {
+    "text": "? Let's take a look.",
+    "start": 502.227,
+    "duration": 2.916
+  },
+  {
+    "text": "It's simple. The matrix",
+    "start": 504.243,
+    "duration": 2.816
+  },
+  {
+    "text": "is ​​ a network that illustrates",
+    "start": 506.097,
+    "duration": 2.254
+  },
+  {
+    "text": "here the probability that",
+    "start": 507.389,
+    "duration": 2.064
+  },
+  {
+    "text": "node I in the",
+    "start": 508.491,
+    "duration": 2.216
+  },
+  {
+    "text": "field graph (",
+    "start": 509.745,
+    "duration": 2.445
+  },
+  {
+    "text": "red graph) will match",
+    "start": 511.19,
+    "duration": 2.482
+  },
+  {
+    "text": "node J in the",
+    "start": 512.71,
+    "duration": 2.33
+  },
+  {
+    "text": "expert graph (",
+    "start": 514.078,
+    "duration": 2.482
+  },
+  {
+    "text": "blue graph).",
+    "start": 515.598,
+    "duration": 2.103
+  },
+  {
+    "text": "Thanks to the Vaserashstein component, the",
+    "start": 516.801,
+    "duration": 2.647
+  },
+  {
+    "text": "identical procedures are correctly linked here. You",
+    "start": 520.494,
+    "duration": 2.847
+  },
+  {
+    "text": "might say: Great, but we",
+    "start": 522.441,
+    "duration": 2.555
+  },
+  {
+    "text": "also need the",
+    "start": 524.039,
+    "duration": 2.513
+  },
+  {
+    "text": "grammar section because it",
+    "start": 525.595,
+    "duration": 2.642
+  },
+  {
+    "text": "represents the chronological order here",
+    "start": 527.28,
+    "duration": 2.297
+  },
+  {
+    "text": ". So, if",
+    "start": 528.62,
+    "duration": 2.405
+  },
+  {
+    "text": "you want the edges of observation, the",
+    "start": 530.075,
+    "duration": 2.884
+  },
+  {
+    "text": "\"taking the",
+    "start": 532.009,
+    "duration": 2.934
+  },
+  {
+    "text": "apple\" action from step 2 will not be accidentally linked to the",
+    "start": 533.992,
+    "duration": 2.736
+  },
+  {
+    "text": "\"taking the apple\" action",
+    "start": 535.777,
+    "duration": 2.786
+  },
+  {
+    "text": "in step 50",
+    "start": 537.612,
+    "duration": 2.686
+  },
+  {
+    "text": ", when the",
+    "start": 539.348,
+    "duration": 2.686
+  },
+  {
+    "text": "entire environment changes and",
+    "start": 541.083,
+    "duration": 2.885
+  },
+  {
+    "text": "we have a",
+    "start": 543.017,
+    "duration": 2.488
+  },
+  {
+    "text": "completely different timeline, because the",
+    "start": 544.554,
+    "duration": 2.587
+  },
+  {
+    "text": "structural penalty",
+    "start": 546.191,
+    "duration": 2.537
+  },
+  {
+    "text": "would be too high",
+    "start": 547.778,
+    "duration": 2.785
+  },
+  {
+    "text": "under the rules of this",
+    "start": 549.612,
+    "duration": 2.339
+  },
+  {
+    "text": "optimization. I am asking here, and",
+    "start": 551.001,
+    "duration": 3.647
+  },
+  {
+    "text": "this is a diagram of an",
+    "start": 553.691,
+    "duration": 2.6
+  },
+  {
+    "text": "artificial intelligence generator. I don't draw it",
+    "start": 555.334,
+    "duration": 2.781
+  },
+  {
+    "text": ".",
+    "start": 557.165,
+    "duration": 2.422
+  },
+  {
+    "text": "Some people ask me: Do you do this? No",
+    "start": 558.631,
+    "duration": 2.735
+  },
+  {
+    "text": ", I just give",
+    "start": 560.366,
+    "duration": 1.853
+  },
+  {
+    "text": "instructions to my",
+    "start": 561.253,
+    "duration": 1.989
+  },
+  {
+    "text": "AI system to",
+    "start": 562.276,
+    "duration": 2.057
+  },
+  {
+    "text": "build it. Therefore, it is a",
+    "start": 563.367,
+    "duration": 2.396
+  },
+  {
+    "text": "combined graph.",
+    "start": 564.815,
+    "duration": 2.739
+  },
+  {
+    "text": "Yes, of course we have to integrate it",
+    "start": 566.654,
+    "duration": 2.406
+  },
+  {
+    "text": ". I will explain the reason to you.",
+    "start": 568.104,
+    "duration": 2.858
+  },
+  {
+    "text": "Here we have an",
+    "start": 570.062,
+    "duration": 2.419
+  },
+  {
+    "text": "aligned graph by combining the",
+    "start": 571.52,
+    "duration": 2.266
+  },
+  {
+    "text": "node's content and structure. Let's",
+    "start": 572.824,
+    "duration": 2.497
+  },
+  {
+    "text": "begin. Here we have",
+    "start": 574.421,
+    "duration": 2.394
+  },
+  {
+    "text": "again the",
+    "start": 575.856,
+    "duration": 2.564
+  },
+  {
+    "text": "red graph, the",
+    "start": 577.461,
+    "duration": 2.029
+  },
+  {
+    "text": "unsuccessful G graph.",
+    "start": 578.531,
+    "duration": 2.523
+  },
+  {
+    "text": "Then we have the successful",
+    "start": 580.154,
+    "duration": 2.298
+  },
+  {
+    "text": "G-Blue chart",
+    "start": 581.502,
+    "duration": 2.448
+  },
+  {
+    "text": ". Now that they have",
+    "start": 583,
+    "duration": 2.865
+  },
+  {
+    "text": "been combined, we have what is called the cost of",
+    "start": 584.916,
+    "duration": 2.511
+  },
+  {
+    "text": "observation. Here, it",
+    "start": 588.04,
+    "duration": 2.527
+  },
+  {
+    "text": "represents a difference in content",
+    "start": 589.611,
+    "duration": 2.581
+  },
+  {
+    "text": "or feature. Then we have the",
+    "start": 591.236,
+    "duration": 2.715
+  },
+  {
+    "text": "structure cost function,",
+    "start": 593.001,
+    "duration": 2.728
+  },
+  {
+    "text": "which is a function of the difference in",
+    "start": 594.78,
+    "duration": 2.422
+  },
+  {
+    "text": "bilateral relationships. Then",
+    "start": 596.253,
+    "duration": 3.61
+  },
+  {
+    "text": "we combine them. Guess",
+    "start": 598.919,
+    "duration": 2.831
+  },
+  {
+    "text": "what? Let's take a",
+    "start": 600.814,
+    "duration": 2.775
+  },
+  {
+    "text": "closer look now. Let's start with the",
+    "start": 602.644,
+    "duration": 2.878
+  },
+  {
+    "text": "red graph. We treat",
+    "start": 605.703,
+    "duration": 3.054
+  },
+  {
+    "text": "contracts as actions and edges as",
+    "start": 607.807,
+    "duration": 2.891
+  },
+  {
+    "text": "transitions conditioned",
+    "start": 609.748,
+    "duration": 2.543
+  },
+  {
+    "text": "by observation. The dense",
+    "start": 611.341,
+    "duration": 3.139
+  },
+  {
+    "text": "red structure",
+    "start": 613.515,
+    "duration": 1.94
+  },
+  {
+    "text": "in the image,",
+    "start": 614.49,
+    "duration": 2.183
+  },
+  {
+    "text": "given its red color, indicates the",
+    "start": 615.708,
+    "duration": 2.323
+  },
+  {
+    "text": "presence of some branches of",
+    "start": 617.066,
+    "duration": 2.079
+  },
+  {
+    "text": "incorrect actions,",
+    "start": 618.18,
+    "duration": 2.08
+  },
+  {
+    "text": "perhaps some",
+    "start": 619.294,
+    "duration": 2.115
+  },
+  {
+    "text": "repetitive actions, perhaps some",
+    "start": 620.443,
+    "duration": 2.254
+  },
+  {
+    "text": "incorrect loops,",
+    "start": 621.732,
+    "duration": 2.323
+  },
+  {
+    "text": "perhaps some dead ends",
+    "start": 623.089,
+    "duration": 1.975
+  },
+  {
+    "text": ", and some",
+    "start": 624.099,
+    "duration": 1.94
+  },
+  {
+    "text": "transitions that",
+    "start": 625.074,
+    "duration": 2.01
+  },
+  {
+    "text": "differ from the expert policy",
+    "start": 626.119,
+    "duration": 2.357
+  },
+  {
+    "text": "you see here in",
+    "start": 627.511,
+    "duration": 2.358
+  },
+  {
+    "text": "blue. The blue nodes may not appear",
+    "start": 628.904,
+    "duration": 3.65
+  },
+  {
+    "text": "in the same",
+    "start": 631.608,
+    "duration": 2.835
+  },
+  {
+    "text": "order as G, because this is G-. It",
+    "start": 633.497,
+    "duration": 2.998
+  },
+  {
+    "text": "may also contain",
+    "start": 636.355,
+    "duration": 2.255
+  },
+  {
+    "text": "some",
+    "start": 637.648,
+    "duration": 1.951
+  },
+  {
+    "text": "additional actions, some",
+    "start": 638.637,
+    "duration": 2.027
+  },
+  {
+    "text": "missing actions,",
+    "start": 639.702,
+    "duration": 2.407
+  },
+  {
+    "text": "some different branches",
+    "start": 641.147,
+    "duration": 2.446
+  },
+  {
+    "text": ", and some different edge structures",
+    "start": 642.593,
+    "duration": 2.331
+  },
+  {
+    "text": ". We have",
+    "start": 643.962,
+    "duration": 2.172
+  },
+  {
+    "text": "different designations for the nodes",
+    "start": 645.177,
+    "duration": 2.534
+  },
+  {
+    "text": "or edges, and a completely different number",
+    "start": 646.753,
+    "duration": 2.662
+  },
+  {
+    "text": "of nodes.",
+    "start": 648.457,
+    "duration": 2.236
+  },
+  {
+    "text": "Now you might be wondering:",
+    "start": 649.793,
+    "duration": 2.061
+  },
+  {
+    "text": "Okay, but how",
+    "start": 650.891,
+    "duration": 2.025
+  },
+  {
+    "text": "can we compare",
+    "start": 651.953,
+    "duration": 2.318
+  },
+  {
+    "text": "these two different graph structures?",
+    "start": 654.26,
+    "duration": 2.062
+  },
+  {
+    "text": "Well, that's the beauty",
+    "start": 655.422,
+    "duration": 2.606
+  },
+  {
+    "text": "of it, because by using the",
+    "start": 657.077,
+    "duration": 2.849
+  },
+  {
+    "text": "fuse squ algorithm,",
+    "start": 658.975,
+    "duration": 2.314
+  },
+  {
+    "text": "we can do this",
+    "start": 660.338,
+    "duration": 2.655
+  },
+  {
+    "text": "even if the two graphs are not",
+    "start": 662.042,
+    "duration": 2.849
+  },
+  {
+    "text": "identical.",
+    "start": 663.94,
+    "duration": 2.753
+  },
+  {
+    "text": "Let's take a look now. I",
+    "start": 667.092,
+    "duration": 3.159
+  },
+  {
+    "text": "just want to tell you that the",
+    "start": 669.299,
+    "duration": 2.826
+  },
+  {
+    "text": "transport map, or",
+    "start": 671.173,
+    "duration": 2.345
+  },
+  {
+    "text": "heat map as I call it",
+    "start": 672.567,
+    "duration": 2.633
+  },
+  {
+    "text": "here, is the most",
+    "start": 674.248,
+    "duration": 2.874
+  },
+  {
+    "text": "important element here. Because its rows",
+    "start": 676.171,
+    "duration": 3.109
+  },
+  {
+    "text": "correspond to the nodes of the",
+    "start": 678.331,
+    "duration": 2.517
+  },
+  {
+    "text": "graph G, and its columns",
+    "start": 679.899,
+    "duration": 2.77
+  },
+  {
+    "text": "correspond to the nodes of the",
+    "start": 681.719,
+    "duration": 2.518
+  },
+  {
+    "text": "graph G-. The position of the",
+    "start": 683.287,
+    "duration": 3.823
+  },
+  {
+    "text": "bright cell, which",
+    "start": 686.163,
+    "duration": 3.018
+  },
+  {
+    "text": "glows in the dark at",
+    "start": 688.235,
+    "duration": 2.859
+  },
+  {
+    "text": "position I K,",
+    "start": 690.147,
+    "duration": 2.434
+  },
+  {
+    "text": "simply means that the note I in G",
+    "start": 691.634,
+    "duration": 3.072
+  },
+  {
+    "text": "matches the note K in G with a",
+    "start": 693.759,
+    "duration": 2.86
+  },
+  {
+    "text": "relatively high degree of match strength. So here you see,",
+    "start": 698.97,
+    "duration": 4.094
+  },
+  {
+    "text": "in a simple mathematical matrix",
+    "start": 702.123,
+    "duration": 2.761
+  },
+  {
+    "text": ", how",
+    "start": 703.943,
+    "duration": 3.289
+  },
+  {
+    "text": "this note structure relates between G and G-.",
+    "start": 706.291,
+    "duration": 3.055
+  },
+  {
+    "text": "Now note, yes, I asked",
+    "start": 709.409,
+    "duration": 2.457
+  },
+  {
+    "text": "you for a diagonal heat map",
+    "start": 710.904,
+    "duration": 2.121
+  },
+  {
+    "text": "because it produced this",
+    "start": 712.063,
+    "duration": 2.457
+  },
+  {
+    "text": "map, but it doesn't have to",
+    "start": 713.558,
+    "duration": 2.383
+  },
+  {
+    "text": "be diagonal",
+    "start": 714.978,
+    "duration": 2.458
+  },
+  {
+    "text": ". You can get",
+    "start": 716.436,
+    "duration": 2.481
+  },
+  {
+    "text": "irregular diameters,",
+    "start": 717.962,
+    "duration": 2.657
+  },
+  {
+    "text": "multiple sets, or a",
+    "start": 719.664,
+    "duration": 2.523
+  },
+  {
+    "text": "diffuse pattern. This is not what",
+    "start": 721.231,
+    "duration": 2.636
+  },
+  {
+    "text": "we are talking about in",
+    "start": 722.907,
+    "duration": 2.175
+  },
+  {
+    "text": "country mapping, or",
+    "start": 724.123,
+    "duration": 2.459
+  },
+  {
+    "text": "linking vectors to values.",
+    "start": 725.622,
+    "duration": 2.5
+  },
+  {
+    "text": "This is something different.",
+    "start": 727.222,
+    "duration": 3.721
+  },
+  {
+    "text": "Here, as I mentioned, we have a",
+    "start": 729.992,
+    "duration": 2.796
+  },
+  {
+    "text": "node cost function. What is",
+    "start": 731.837,
+    "duration": 2.463
+  },
+  {
+    "text": "its function? Yes, as you can see",
+    "start": 733.349,
+    "duration": 2.992
+  },
+  {
+    "text": ", it's a great function. But what is the",
+    "start": 735.341,
+    "duration": 2.7
+  },
+  {
+    "text": "main idea?",
+    "start": 737.082,
+    "duration": 2.261
+  },
+  {
+    "text": "Simply put, the question is: Does the",
+    "start": 738.443,
+    "duration": 2.922
+  },
+  {
+    "text": "transport plan link the",
+    "start": 740.415,
+    "duration": 2.417
+  },
+  {
+    "text": "semantically compatible contracts?",
+    "start": 741.882,
+    "duration": 2.771
+  },
+  {
+    "text": "It is obvious that linking",
+    "start": 743.753,
+    "duration": 2.832
+  },
+  {
+    "text": "which allocates a large block to",
+    "start": 745.634,
+    "duration": 2.932
+  },
+  {
+    "text": "semantically incompatible nodes incurs a",
+    "start": 749.448,
+    "duration": 2.485
+  },
+  {
+    "text": "high cost. We",
+    "start": 750.983,
+    "duration": 4.674
+  },
+  {
+    "text": "now know the contract costs,",
+    "start": 754.712,
+    "duration": 2.847
+  },
+  {
+    "text": "but immediately note that",
+    "start": 756.614,
+    "duration": 2.793
+  },
+  {
+    "text": "you can have",
+    "start": 758.461,
+    "duration": 2.631
+  },
+  {
+    "text": "two actions with the same",
+    "start": 760.146,
+    "duration": 2.25
+  },
+  {
+    "text": "ratings, say G3 and G3",
+    "start": 761.45,
+    "duration": 3.065
+  },
+  {
+    "text": ", and possibly another action,",
+    "start": 763.515,
+    "duration": 2.794
+  },
+  {
+    "text": "while they occupy a completely",
+    "start": 765.363,
+    "duration": 2.956
+  },
+  {
+    "text": "different causal position",
+    "start": 767.374,
+    "duration": 2.467
+  },
+  {
+    "text": "in the graph structure",
+    "start": 768.895,
+    "duration": 3.011
+  },
+  {
+    "text": ". Therefore, we must",
+    "start": 770.96,
+    "duration": 3.425
+  },
+  {
+    "text": "somehow take into account this",
+    "start": 773.427,
+    "duration": 2.566
+  },
+  {
+    "text": "difference in position",
+    "start": 775.035,
+    "duration": 2.438
+  },
+  {
+    "text": "within the graph",
+    "start": 776.515,
+    "duration": 2.439
+  },
+  {
+    "text": "itself. This is where the",
+    "start": 777.996,
+    "duration": 3.101
+  },
+  {
+    "text": "structure cost function comes in. The",
+    "start": 780.147,
+    "duration": 2.648
+  },
+  {
+    "text": "structure cost panel here is",
+    "start": 782.412,
+    "duration": 2.563
+  },
+  {
+    "text": "in blue, which",
+    "start": 784.015,
+    "duration": 2.523
+  },
+  {
+    "text": "represents the",
+    "start": 785.578,
+    "duration": 2.202
+  },
+  {
+    "text": "binary relational asymmetry,",
+    "start": 786.82,
+    "duration": 2.323
+  },
+  {
+    "text": "simple. What is required?",
+    "start": 788.183,
+    "duration": 2.397
+  },
+  {
+    "text": "The question is: If",
+    "start": 789.68,
+    "duration": 2.328
+  },
+  {
+    "text": "relation I is identical",
+    "start": 791.061,
+    "duration": 2.541
+  },
+  {
+    "text": "to relation K, and relation J is",
+    "start": 792.655,
+    "duration": 2.966
+  },
+  {
+    "text": "identical to relation L, are",
+    "start": 794.674,
+    "duration": 3.02
+  },
+  {
+    "text": "the relations from I to J and from K",
+    "start": 796.747,
+    "duration": 3.072
+  },
+  {
+    "text": "to L compatible? This is the",
+    "start": 798.872,
+    "duration": 3.851
+  },
+  {
+    "text": "essence of the rule pattern matching idea",
+    "start": 801.777,
+    "duration": 3.014
+  },
+  {
+    "text": ". It compares",
+    "start": 803.845,
+    "duration": 2.953
+  },
+  {
+    "text": "relationships within",
+    "start": 805.845,
+    "duration": 2.598
+  },
+  {
+    "text": "one space to relationships within",
+    "start": 807.49,
+    "duration": 2.692
+  },
+  {
+    "text": "another space, rather",
+    "start": 809.229,
+    "duration": 2.692
+  },
+  {
+    "text": "than requiring both graphs to be",
+    "start": 810.968,
+    "duration": 2.551
+  },
+  {
+    "text": "in a",
+    "start": 812.566,
+    "duration": 2.786
+  },
+  {
+    "text": "common coordinate system,",
+    "start": 814.399,
+    "duration": 2.786
+  },
+  {
+    "text": "where we first need a",
+    "start": 816.232,
+    "duration": 2.833
+  },
+  {
+    "text": "binding function to a",
+    "start": 818.112,
+    "duration": 2.645
+  },
+  {
+    "text": "unique mathematical space. We can",
+    "start": 819.804,
+    "duration": 2.599
+  },
+  {
+    "text": "leave these functions in",
+    "start": 821.45,
+    "duration": 2.446
+  },
+  {
+    "text": "their spaces and compare them",
+    "start": 822.942,
+    "duration": 2.633
+  },
+  {
+    "text": "using grom. Yes. The",
+    "start": 824.621,
+    "duration": 4.102
+  },
+  {
+    "text": "central objective",
+    "start": 827.961,
+    "duration": 2.635
+  },
+  {
+    "text": "now combines these two signals.",
+    "start": 829.641,
+    "duration": 2.772
+  },
+  {
+    "text": "Therefore, we now have the",
+    "start": 831.513,
+    "duration": 2.811
+  },
+  {
+    "text": "node cost function and the",
+    "start": 833.373,
+    "duration": 2.664
+  },
+  {
+    "text": "structure cost function",
+    "start": 835.086,
+    "duration": 2.126
+  },
+  {
+    "text": "combined, in",
+    "start": 836.261,
+    "duration": 2.469
+  },
+  {
+    "text": "Vaserstein's combined graph target. As you can see,",
+    "start": 839.688,
+    "duration": 4.113
+  },
+  {
+    "text": "here specifically we have",
+    "start": 842.848,
+    "duration": 2.508
+  },
+  {
+    "text": "node compatibility with",
+    "start": 844.403,
+    "duration": 2.32
+  },
+  {
+    "text": "relational compatibility.",
+    "start": 845.77,
+    "duration": 2.509
+  },
+  {
+    "text": "This is a simplified explanation of a somewhat",
+    "start": 849.68,
+    "duration": 2.987
+  },
+  {
+    "text": "complex mathematical concept",
+    "start": 851.723,
+    "duration": 3.215
+  },
+  {
+    "text": ". But, of course, you might say:",
+    "start": 853.938,
+    "duration": 3.899
+  },
+  {
+    "text": "\"Okay, can you",
+    "start": 856.837,
+    "duration": 2.506
+  },
+  {
+    "text": "explain to me here the",
+    "start": 858.385,
+    "duration": 2.38
+  },
+  {
+    "text": "purely mathematical aspect of this?\"",
+    "start": 859.807,
+    "duration": 2.548
+  },
+  {
+    "text": "Here it is. As you can see, I have",
+    "start": 861.455,
+    "duration": 2.894
+  },
+  {
+    "text": "explained this simple mathematical formula to you in",
+    "start": 863.39,
+    "duration": 2.358
+  },
+  {
+    "text": "easy-to-understand English words",
+    "start": 866.105,
+    "duration": 2.563
+  },
+  {
+    "text": "so that",
+    "start": 867.709,
+    "duration": 2.152
+  },
+  {
+    "text": "everyone can understand it. Even though",
+    "start": 868.902,
+    "duration": 2.559
+  },
+  {
+    "text": "some of my viewers",
+    "start": 870.506,
+    "duration": 2.468
+  },
+  {
+    "text": "feel a little intimidated",
+    "start": 872.018,
+    "duration": 2.201
+  },
+  {
+    "text": "when I see a",
+    "start": 873.264,
+    "duration": 2.334
+  },
+  {
+    "text": "mathematical equation. See",
+    "start": 874.643,
+    "duration": 2.704
+  },
+  {
+    "text": "how simple and easy it is.",
+    "start": 876.402,
+    "duration": 2.789
+  },
+  {
+    "text": "It's just two limits, and now you",
+    "start": 878.291,
+    "duration": 3.086
+  },
+  {
+    "text": "fully understand what",
+    "start": 880.431,
+    "duration": 2.98
+  },
+  {
+    "text": "each limit does. But of course,",
+    "start": 882.464,
+    "duration": 2.581
+  },
+  {
+    "text": "we can translate this",
+    "start": 884.09,
+    "duration": 2.35
+  },
+  {
+    "text": "mathematical equation",
+    "start": 885.485,
+    "duration": 2.485
+  },
+  {
+    "text": "into an understandable language. This",
+    "start": 887.015,
+    "duration": 2.695
+  },
+  {
+    "text": "sentence simply means that",
+    "start": 888.758,
+    "duration": 2.855
+  },
+  {
+    "text": "good",
+    "start": 890.661,
+    "duration": 2.522
+  },
+  {
+    "text": "contract alignment is not just linking",
+    "start": 892.231,
+    "duration": 2.57
+  },
+  {
+    "text": "semantically similar contracts, but also",
+    "start": 895.275,
+    "duration": 2.761
+  },
+  {
+    "text": "linking",
+    "start": 897.083,
+    "duration": 1.999
+  },
+  {
+    "text": "relational neighbors in",
+    "start": 898.13,
+    "duration": 2.522
+  },
+  {
+    "text": "one graph to",
+    "start": 899.7,
+    "duration": 2.522
+  },
+  {
+    "text": "compatible relational neighbors in",
+    "start": 901.27,
+    "duration": 2.808
+  },
+  {
+    "text": "another graph or",
+    "start": 903.125,
+    "duration": 2.713
+  },
+  {
+    "text": "another section of the graph. That's",
+    "start": 904.886,
+    "duration": 2.808
+  },
+  {
+    "text": "all it tells you.",
+    "start": 907.083,
+    "duration": 2.832
+  },
+  {
+    "text": "Now, if you want an",
+    "start": 909.891,
+    "duration": 2.601
+  },
+  {
+    "text": "algorithm to build this action",
+    "start": 911.541,
+    "duration": 2.553
+  },
+  {
+    "text": "decision graph",
+    "start": 913.142,
+    "duration": 2.651
+  },
+  {
+    "text": ", here it is. And",
+    "start": 914.841,
+    "duration": 2.214
+  },
+  {
+    "text": "of course, we just talked about",
+    "start": 916.155,
+    "duration": 2.499
+  },
+  {
+    "text": "this to extract",
+    "start": 917.698,
+    "duration": 2.411
+  },
+  {
+    "text": "the comments and update them",
+    "start": 919.153,
+    "duration": 2.543
+  },
+  {
+    "text": "to match the contract here.",
+    "start": 920.74,
+    "duration": 2.456
+  },
+  {
+    "text": "This is part one.",
+    "start": 922.296,
+    "duration": 2.572
+  },
+  {
+    "text": "This is the red part and",
+    "start": 923.968,
+    "duration": 2.513
+  },
+  {
+    "text": "this is the blue part.",
+    "start": 925.524,
+    "duration": 2.643
+  },
+  {
+    "text": "If you want to see that",
+    "start": 927.356,
+    "duration": 2.388
+  },
+  {
+    "text": "here in this code,",
+    "start": 928.786,
+    "duration": 2.304
+  },
+  {
+    "text": "it means that for",
+    "start": 930.132,
+    "duration": 2.641
+  },
+  {
+    "text": "this conformity, the",
+    "start": 931.815,
+    "duration": 2.431
+  },
+  {
+    "text": "system can now determine what",
+    "start": 933.288,
+    "duration": 2.557
+  },
+  {
+    "text": "was already true,",
+    "start": 934.887,
+    "duration": 2.431
+  },
+  {
+    "text": "which is here the",
+    "start": 936.36,
+    "duration": 2.641
+  },
+  {
+    "text": "common subgraph, and what",
+    "start": 938.043,
+    "duration": 2.514
+  },
+  {
+    "text": "should be deleted, inserted,",
+    "start": 939.599,
+    "duration": 2.599
+  },
+  {
+    "text": "renamed, or",
+    "start": 941.24,
+    "duration": 2.178
+  },
+  {
+    "text": "modified here in",
+    "start": 942.461,
+    "duration": 2.388
+  },
+  {
+    "text": "our graph structure,",
+    "start": 943.891,
+    "duration": 2.599
+  },
+  {
+    "text": "so that",
+    "start": 945.532,
+    "duration": 2.178
+  },
+  {
+    "text": "our G-graph becomes",
+    "start": 946.752,
+    "duration": 2.431
+  },
+  {
+    "text": "closer to G- in terms of",
+    "start": 948.225,
+    "duration": 3.78
+  },
+  {
+    "text": "structural symmetry. Now",
+    "start": 951.055,
+    "duration": 4.256
+  },
+  {
+    "text": ", here we see the",
+    "start": 954.311,
+    "duration": 2.554
+  },
+  {
+    "text": "complete process. No, we have that",
+    "start": 955.915,
+    "duration": 2.722
+  },
+  {
+    "text": "in our test here.",
+    "start": 957.688,
+    "duration": 2.842
+  },
+  {
+    "text": "Yes, this is particularly important",
+    "start": 959.635,
+    "duration": 4.876
+  },
+  {
+    "text": "during training time, because we",
+    "start": 963.556,
+    "duration": 2.747
+  },
+  {
+    "text": "want to use it later",
+    "start": 965.348,
+    "duration": 2.702
+  },
+  {
+    "text": "during reasoning.",
+    "start": 967.095,
+    "duration": 2.389
+  },
+  {
+    "text": "Therefore, we need to prepare the",
+    "start": 968.584,
+    "duration": 2.342
+  },
+  {
+    "text": "training data, and",
+    "start": 969.968,
+    "duration": 2.511
+  },
+  {
+    "text": "minute by minute,",
+    "start": 971.52,
+    "duration": 2.259
+  },
+  {
+    "text": "we have the",
+    "start": 972.821,
+    "duration": 1.965
+  },
+  {
+    "text": "failed exploration paths",
+    "start": 973.828,
+    "duration": 2.385
+  },
+  {
+    "text": "where the worker cannot",
+    "start": 975.255,
+    "duration": 2.552
+  },
+  {
+    "text": "come up with a correct solution, and",
+    "start": 976.849,
+    "duration": 2.468
+  },
+  {
+    "text": "then we have the",
+    "start": 978.359,
+    "duration": 2.343
+  },
+  {
+    "text": "successful paths, and all",
+    "start": 979.744,
+    "duration": 2.594
+  },
+  {
+    "text": "these training examples, and",
+    "start": 981.38,
+    "duration": 2.427
+  },
+  {
+    "text": "intensive training materials. Here we build",
+    "start": 982.849,
+    "duration": 2.72
+  },
+  {
+    "text": "our paths, and",
+    "start": 984.614,
+    "duration": 2.128
+  },
+  {
+    "text": "of course, if",
+    "start": 985.787,
+    "duration": 2.355
+  },
+  {
+    "text": "the system fails, we get",
+    "start": 987.187,
+    "duration": 2.354
+  },
+  {
+    "text": "failed paths where we get",
+    "start": 988.586,
+    "duration": 2.67
+  },
+  {
+    "text": "to a dead end, or",
+    "start": 990.301,
+    "duration": 2.49
+  },
+  {
+    "text": "simply see that this is not",
+    "start": 991.836,
+    "duration": 2.625
+  },
+  {
+    "text": "working. From the",
+    "start": 993.506,
+    "duration": 2.332
+  },
+  {
+    "text": "successful paths, we have here the",
+    "start": 994.877,
+    "duration": 2.336
+  },
+  {
+    "text": "ideal graph structure, we have a",
+    "start": 997.628,
+    "duration": 2.494
+  },
+  {
+    "text": "working graph structure. This is not the",
+    "start": 999.161,
+    "duration": 2.543
+  },
+  {
+    "text": "optimal graph structure, and",
+    "start": 1001.767,
+    "duration": 2.101
+  },
+  {
+    "text": "we will talk about this later",
+    "start": 1002.906,
+    "duration": 2.481
+  },
+  {
+    "text": "; But it works, and",
+    "start": 1004.387,
+    "duration": 2.177
+  },
+  {
+    "text": "we've found a solution. Then we do",
+    "start": 1005.602,
+    "duration": 2.395
+  },
+  {
+    "text": "exactly what we just talked about",
+    "start": 1007.038,
+    "duration": 2.525
+  },
+  {
+    "text": ": we have the",
+    "start": 1008.604,
+    "duration": 2.443
+  },
+  {
+    "text": "graph matching, and",
+    "start": 1010.088,
+    "duration": 2.277
+  },
+  {
+    "text": "this alignment engine,",
+    "start": 1011.406,
+    "duration": 2.484
+  },
+  {
+    "text": "where we see: \"Okay,",
+    "start": 1012.931,
+    "duration": 2.607
+  },
+  {
+    "text": "here in green we have the",
+    "start": 1014.579,
+    "duration": 2.319
+  },
+  {
+    "text": "shared subgraph, and then in",
+    "start": 1017.546,
+    "duration": 2.401
+  },
+  {
+    "text": "red the parts",
+    "start": 1018.989,
+    "duration": 2.483
+  },
+  {
+    "text": "we identified.\" The nodes",
+    "start": 1020.513,
+    "duration": 2.32
+  },
+  {
+    "text": "and edges are not identical",
+    "start": 1021.889,
+    "duration": 3.13
+  },
+  {
+    "text": "in G and G-, so we need to",
+    "start": 1024.075,
+    "duration": 3.017
+  },
+  {
+    "text": "pay attention to them; Therefore,",
+    "start": 1026.148,
+    "duration": 3.186
+  },
+  {
+    "text": "we begin here to construct",
+    "start": 1028.39,
+    "duration": 2.625
+  },
+  {
+    "text": "the graph of the",
+    "start": 1030.071,
+    "duration": 2.906
+  },
+  {
+    "text": "final solution, which we call",
+    "start": 1032.033,
+    "duration": 3.13
+  },
+  {
+    "text": "here the EMG, i.e., the",
+    "start": 1034.219,
+    "duration": 2.961
+  },
+  {
+    "text": "experience memory graph. That's all",
+    "start": 1036.236,
+    "duration": 3.424
+  },
+  {
+    "text": ", in the simplest way possible",
+    "start": 1038.702,
+    "duration": 2.674
+  },
+  {
+    "text": ", but of course, we don't give up",
+    "start": 1040.376,
+    "duration": 2.33
+  },
+  {
+    "text": "on everything we",
+    "start": 1041.749,
+    "duration": 2.073
+  },
+  {
+    "text": "'ve learned during this",
+    "start": 1042.865,
+    "duration": 2.287
+  },
+  {
+    "text": "process. Here we use",
+    "start": 1044.195,
+    "duration": 4.029
+  },
+  {
+    "text": "every element, even",
+    "start": 1047.277,
+    "duration": 2.738
+  },
+  {
+    "text": "failures. We put it into a",
+    "start": 1049.067,
+    "duration": 3.025
+  },
+  {
+    "text": "database. Therefore, we know",
+    "start": 1051.144,
+    "duration": 2.633
+  },
+  {
+    "text": "exactly what did not succeed in a",
+    "start": 1052.828,
+    "duration": 2.823
+  },
+  {
+    "text": "particular task in a",
+    "start": 1054.702,
+    "duration": 2.671
+  },
+  {
+    "text": "particular situation at a particular level of complexity",
+    "start": 1056.423,
+    "duration": 2.874
+  },
+  {
+    "text": ". And imagine what",
+    "start": 1058.348,
+    "duration": 3.127
+  },
+  {
+    "text": "exactly happens: the more we develop",
+    "start": 1060.521,
+    "duration": 2.632
+  },
+  {
+    "text": "this, the",
+    "start": 1062.198,
+    "duration": 2.451
+  },
+  {
+    "text": "deeper understanding we gain of how to",
+    "start": 1063.695,
+    "duration": 2.451
+  },
+  {
+    "text": "build a better graph structure",
+    "start": 1065.191,
+    "duration": 2.587
+  },
+  {
+    "text": "next time",
+    "start": 1066.824,
+    "duration": 2.768
+  },
+  {
+    "text": ". Faster,",
+    "start": 1068.592,
+    "duration": 2.125
+  },
+  {
+    "text": "uses less code, and has higher",
+    "start": 1069.768,
+    "duration": 2.7
+  },
+  {
+    "text": "accuracy. While",
+    "start": 1071.52,
+    "duration": 2.466
+  },
+  {
+    "text": "reading this",
+    "start": 1073.03,
+    "duration": 2.492
+  },
+  {
+    "text": "research paper, a question came to mind.",
+    "start": 1074.566,
+    "duration": 2.711
+  },
+  {
+    "text": "I said: Just a moment, we are",
+    "start": 1076.377,
+    "duration": 3.16
+  },
+  {
+    "text": "now comparing G and G Dash. But",
+    "start": 1078.597,
+    "duration": 3.074
+  },
+  {
+    "text": "what about how to devise a",
+    "start": 1080.72,
+    "duration": 2.81
+  },
+  {
+    "text": "new mathematical structure for the",
+    "start": 1082.578,
+    "duration": 2.566
+  },
+  {
+    "text": "non-",
+    "start": 1085.414,
+    "duration": 2.244
+  },
+  {
+    "text": "shared subpart of the",
+    "start": 1086.7,
+    "duration": 2.244
+  },
+  {
+    "text": "graph, i.e., the",
+    "start": 1087.986,
+    "duration": 2.327
+  },
+  {
+    "text": "open part? No, there is no solution to this",
+    "start": 1089.355,
+    "duration": 2.686
+  },
+  {
+    "text": ", because the system is now",
+    "start": 1091.082,
+    "duration": 2.467
+  },
+  {
+    "text": "required to almost",
+    "start": 1092.591,
+    "duration": 2.216
+  },
+  {
+    "text": "find a new path on a",
+    "start": 1093.848,
+    "duration": 2.551
+  },
+  {
+    "text": "graph of",
+    "start": 1095.441,
+    "duration": 2.383
+  },
+  {
+    "text": "unknown complexity for my",
+    "start": 1096.866,
+    "duration": 2.341
+  },
+  {
+    "text": "particular problem in",
+    "start": 1098.249,
+    "duration": 2.425
+  },
+  {
+    "text": "theoretical physics. But how does the",
+    "start": 1099.716,
+    "duration": 2.993
+  },
+  {
+    "text": "system do that? I continued",
+    "start": 1101.759,
+    "duration": 3.722
+  },
+  {
+    "text": "reading the paper,",
+    "start": 1104.53,
+    "duration": 2.687
+  },
+  {
+    "text": "and it became clear to me that it simply does",
+    "start": 1106.266,
+    "duration": 2.737
+  },
+  {
+    "text": "not do that at",
+    "start": 1108.788,
+    "duration": 2.267
+  },
+  {
+    "text": "all, because I had",
+    "start": 1110.099,
+    "duration": 2.661
+  },
+  {
+    "text": "previously stated that",
+    "start": 1111.804,
+    "duration": 2.224
+  },
+  {
+    "text": "this database, the offline database",
+    "start": 1113.072,
+    "duration": 2.573
+  },
+  {
+    "text": ", is built",
+    "start": 1116.394,
+    "duration": 2.355
+  },
+  {
+    "text": "during training. This",
+    "start": 1117.793,
+    "duration": 2.809
+  },
+  {
+    "text": "means how is the training data constructed",
+    "start": 1119.644,
+    "duration": 2.633
+  },
+  {
+    "text": "? This means that for",
+    "start": 1121.319,
+    "duration": 2.609
+  },
+  {
+    "text": "each task in the",
+    "start": 1122.966,
+    "duration": 2.26
+  },
+  {
+    "text": "training set, there are two things:",
+    "start": 1124.264,
+    "duration": 2.412
+  },
+  {
+    "text": "failed attempts (",
+    "start": 1125.714,
+    "duration": 2.336
+  },
+  {
+    "text": "G-chart,",
+    "start": 1127.05,
+    "duration": 2.107
+  },
+  {
+    "text": "red chart)",
+    "start": 1128.195,
+    "duration": 2.488
+  },
+  {
+    "text": ", and the expert's path (",
+    "start": 1129.683,
+    "duration": 2.451
+  },
+  {
+    "text": "G-Dash chart,",
+    "start": 1131.172,
+    "duration": 2.298
+  },
+  {
+    "text": "blue chart). Now",
+    "start": 1132.508,
+    "duration": 2.615
+  },
+  {
+    "text": ", the authors of this",
+    "start": 1134.123,
+    "duration": 2.636
+  },
+  {
+    "text": "research paper either",
+    "start": 1135.81,
+    "duration": 2.38
+  },
+  {
+    "text": "provided human solutions,",
+    "start": 1137.241,
+    "duration": 2.943
+  },
+  {
+    "text": "or used a dataset",
+    "start": 1139.235,
+    "duration": 2.84
+  },
+  {
+    "text": "from the internet,",
+    "start": 1141.126,
+    "duration": 2.84
+  },
+  {
+    "text": "or used",
+    "start": 1143.017,
+    "duration": 2.84
+  },
+  {
+    "text": "expert gold trails. So, as you",
+    "start": 1144.908,
+    "duration": 4.061
+  },
+  {
+    "text": "understand, the algorithm does",
+    "start": 1148.02,
+    "duration": 2.94
+  },
+  {
+    "text": "not explore an infinite unknown space",
+    "start": 1150.011,
+    "duration": 2.43
+  },
+  {
+    "text": "to search for the optimal solution, and",
+    "start": 1153.229,
+    "duration": 2.991
+  },
+  {
+    "text": "then look for",
+    "start": 1155.272,
+    "duration": 2.889
+  },
+  {
+    "text": "optimization algorithms. Rather, we",
+    "start": 1157.212,
+    "duration": 2.89
+  },
+  {
+    "text": "already have the correct solution, but",
+    "start": 1159.153,
+    "duration": 2.838
+  },
+  {
+    "text": "initially we have an agent that does",
+    "start": 1161.042,
+    "duration": 2.992
+  },
+  {
+    "text": "not know how to implement it.",
+    "start": 1163.085,
+    "duration": 2.635
+  },
+  {
+    "text": "It fails repeatedly",
+    "start": 1166.083,
+    "duration": 3.119
+  },
+  {
+    "text": ", and then we bring it closer and closer to the",
+    "start": 1168.202,
+    "duration": 3.119
+  },
+  {
+    "text": "expert path on a",
+    "start": 1170.377,
+    "duration": 2.841
+  },
+  {
+    "text": "graphical structure, not on a",
+    "start": 1172.274,
+    "duration": 3.175
+  },
+  {
+    "text": "textual structure. Here we calculate the",
+    "start": 1174.505,
+    "duration": 4.131
+  },
+  {
+    "text": "shortest bridge between the two",
+    "start": 1177.671,
+    "duration": 2.262
+  },
+  {
+    "text": "known graphs.",
+    "start": 1178.968,
+    "duration": 2.331
+  },
+  {
+    "text": "If you want the",
+    "start": 1180.333,
+    "duration": 1.955
+  },
+  {
+    "text": "G graph (red), it is",
+    "start": 1181.322,
+    "duration": 2.297
+  },
+  {
+    "text": "where",
+    "start": 1182.654,
+    "duration": 2.092
+  },
+  {
+    "text": "the agent ended up wrong",
+    "start": 1183.78,
+    "duration": 2.331
+  },
+  {
+    "text": ", and if you want the",
+    "start": 1185.111,
+    "duration": 2.058
+  },
+  {
+    "text": "G- graph (blue), it is where he should have",
+    "start": 1186.203,
+    "duration": 2.297
+  },
+  {
+    "text": "ended up. Remember",
+    "start": 1188.899,
+    "duration": 3.224
+  },
+  {
+    "text": "that I explained to you here",
+    "start": 1191.164,
+    "duration": 2.284
+  },
+  {
+    "text": "how to derive",
+    "start": 1192.49,
+    "duration": 2.408
+  },
+  {
+    "text": "and modify the graph from the",
+    "start": 1193.94,
+    "duration": 2.408
+  },
+  {
+    "text": "matching node,",
+    "start": 1195.39,
+    "duration": 2.284
+  },
+  {
+    "text": "and how to build and modify G",
+    "start": 1196.715,
+    "duration": 5.496
+  },
+  {
+    "text": "to get G-. Now,",
+    "start": 1201.27,
+    "duration": 4.302
+  },
+  {
+    "text": "I will explain this code in",
+    "start": 1204.63,
+    "duration": 2.612
+  },
+  {
+    "text": "simple words. Let's take a",
+    "start": 1207.863,
+    "duration": 3.278
+  },
+  {
+    "text": "look at what's happening. The",
+    "start": 1210.191,
+    "duration": 2.925
+  },
+  {
+    "text": "ZIP system examines the",
+    "start": 1212.159,
+    "duration": 2.552
+  },
+  {
+    "text": "non-matching parts here and",
+    "start": 1213.754,
+    "duration": 2.379
+  },
+  {
+    "text": "classifies them into three",
+    "start": 1215.176,
+    "duration": 2.293
+  },
+  {
+    "text": "distinct mathematical groups. This is the simplest",
+    "start": 1217.718,
+    "duration": 2.548
+  },
+  {
+    "text": "set, and you can add",
+    "start": 1219.31,
+    "duration": 2.687
+  },
+  {
+    "text": "any number you want.",
+    "start": 1221.041,
+    "duration": 2.315
+  },
+  {
+    "text": "First, you have the",
+    "start": 1222.405,
+    "duration": 2.849
+  },
+  {
+    "text": "delete operations, then the",
+    "start": 1224.303,
+    "duration": 2.46
+  },
+  {
+    "text": "add operations, and then the",
+    "start": 1225.812,
+    "duration": 2.557
+  },
+  {
+    "text": "rename operations. Why? This is a",
+    "start": 1227.418,
+    "duration": 3.23
+  },
+  {
+    "text": "simple process that will take us",
+    "start": 1229.694,
+    "duration": 2.674
+  },
+  {
+    "text": "to the next step in",
+    "start": 1231.415,
+    "duration": 2.813
+  },
+  {
+    "text": "our procedure. Let's look",
+    "start": 1233.275,
+    "duration": 2.381
+  },
+  {
+    "text": "first at the",
+    "start": 1234.696,
+    "duration": 2.192
+  },
+  {
+    "text": "deletions. The nodes and edges",
+    "start": 1235.927,
+    "duration": 2.404
+  },
+  {
+    "text": "present in the",
+    "start": 1237.365,
+    "duration": 2.109
+  },
+  {
+    "text": "failed graph, but which",
+    "start": 1238.509,
+    "duration": 2.317
+  },
+  {
+    "text": "have no mathematical outlet in the",
+    "start": 1239.86,
+    "duration": 2.317
+  },
+  {
+    "text": "expert graph",
+    "start": 1241.212,
+    "duration": 2.316
+  },
+  {
+    "text": ", simply mean deleting that",
+    "start": 1242.528,
+    "duration": 2.317
+  },
+  {
+    "text": "procedure. No, because it is not",
+    "start": 1243.88,
+    "duration": 2.518
+  },
+  {
+    "text": "included in the expert solution.",
+    "start": 1245.438,
+    "duration": 2.552
+  },
+  {
+    "text": "So,",
+    "start": 1247.09,
+    "duration": 2.026
+  },
+  {
+    "text": "young customer, you're",
+    "start": 1248.15,
+    "duration": 1.957
+  },
+  {
+    "text": "completely off track.",
+    "start": 1249.142,
+    "duration": 2.334
+  },
+  {
+    "text": "Addition operations: The nodes",
+    "start": 1250.576,
+    "duration": 2.08
+  },
+  {
+    "text": "and edges present in the",
+    "start": 1251.683,
+    "duration": 1.997
+  },
+  {
+    "text": "expert chart are",
+    "start": 1252.708,
+    "duration": 2.052
+  },
+  {
+    "text": "completely missing in the",
+    "start": 1253.788,
+    "duration": 1.831
+  },
+  {
+    "text": "failed chart.",
+    "start": 1254.646,
+    "duration": 2.081
+  },
+  {
+    "text": "We know that we have",
+    "start": 1255.827,
+    "duration": 2.386
+  },
+  {
+    "text": "missing parts of the solution. Therefore, as a",
+    "start": 1257.252,
+    "duration": 2.687
+  },
+  {
+    "text": "general rule, we say: add",
+    "start": 1258.991,
+    "duration": 2.966
+  },
+  {
+    "text": "these",
+    "start": 1261.009,
+    "duration": 2.293
+  },
+  {
+    "text": "specific actions, and then we have",
+    "start": 1262.354,
+    "duration": 2.655
+  },
+  {
+    "text": "renaming. This means",
+    "start": 1264.061,
+    "duration": 2.766
+  },
+  {
+    "text": "that the",
+    "start": 1265.862,
+    "duration": 2.054
+  },
+  {
+    "text": "failed graph matched a node in the",
+    "start": 1266.952,
+    "duration": 2.23
+  },
+  {
+    "text": "expert graph",
+    "start": 1268.217,
+    "duration": 2.336
+  },
+  {
+    "text": "with a node in the",
+    "start": 1269.588,
+    "duration": 2.019
+  },
+  {
+    "text": "expert graph,",
+    "start": 1270.642,
+    "duration": 2.02
+  },
+  {
+    "text": "because they appeared in exactly the same",
+    "start": 1271.697,
+    "duration": 2.23
+  },
+  {
+    "text": "structural place",
+    "start": 1272.962,
+    "duration": 1.95
+  },
+  {
+    "text": "in the",
+    "start": 1273.947,
+    "duration": 2.054
+  },
+  {
+    "text": "timeline, but",
+    "start": 1275.036,
+    "duration": 1.739
+  },
+  {
+    "text": "their labels were different.",
+    "start": 1275.81,
+    "duration": 2.125
+  },
+  {
+    "text": "Let's suppose, for",
+    "start": 1277.035,
+    "duration": 2.238
+  },
+  {
+    "text": "example, that in",
+    "start": 1278.314,
+    "duration": 2.074
+  },
+  {
+    "text": "note y, you chose to put a",
+    "start": 1279.429,
+    "duration": 2.569
+  },
+  {
+    "text": "pencil on a table,",
+    "start": 1281.039,
+    "duration": 2.445
+  },
+  {
+    "text": "but the expert chose to put a",
+    "start": 1282.526,
+    "duration": 2.527
+  },
+  {
+    "text": "pencil on a shelf. So",
+    "start": 1284.094,
+    "duration": 2.763
+  },
+  {
+    "text": ", we now have a",
+    "start": 1285.857,
+    "duration": 2.612
+  },
+  {
+    "text": "rebranding from table to",
+    "start": 1287.517,
+    "duration": 2.709
+  },
+  {
+    "text": "shelf. It looks like a simple process",
+    "start": 1289.275,
+    "duration": 3.435
+  },
+  {
+    "text": ", but notice something.",
+    "start": 1291.71,
+    "duration": 2.865
+  },
+  {
+    "text": "This is no longer a",
+    "start": 1293.675,
+    "duration": 2.508
+  },
+  {
+    "text": "purely mathematical operation, but rather a",
+    "start": 1295.235,
+    "duration": 2.717
+  },
+  {
+    "text": "graphical mathematical operation.",
+    "start": 1297.004,
+    "duration": 2.926
+  },
+  {
+    "text": "But we are now in the process of establishing",
+    "start": 1299.03,
+    "duration": 2.464
+  },
+  {
+    "text": "rules, and these rules",
+    "start": 1300.536,
+    "duration": 2.507
+  },
+  {
+    "text": "are formulated in",
+    "start": 1302.085,
+    "duration": 1.963
+  },
+  {
+    "text": "English. Now",
+    "start": 1303.09,
+    "duration": 2.394
+  },
+  {
+    "text": "we go back to the starting point",
+    "start": 1304.526,
+    "duration": 2.622
+  },
+  {
+    "text": ", and I think this is the",
+    "start": 1306.148,
+    "duration": 2.331
+  },
+  {
+    "text": "weak point, or",
+    "start": 1307.521,
+    "duration": 2.081
+  },
+  {
+    "text": "rather the weak point, in",
+    "start": 1308.644,
+    "duration": 2.539
+  },
+  {
+    "text": "this wonderful research paper",
+    "start": 1310.225,
+    "duration": 2.414
+  },
+  {
+    "text": "that",
+    "start": 1311.681,
+    "duration": 1.956
+  },
+  {
+    "text": "we will now discuss. Did",
+    "start": 1312.679,
+    "duration": 2.479
+  },
+  {
+    "text": "you understand?",
+    "start": 1314.212,
+    "duration": 2.367
+  },
+  {
+    "text": "Built-in spaces. But before I",
+    "start": 1315.625,
+    "duration": 2.401
+  },
+  {
+    "text": "go into detail,",
+    "start": 1317.06,
+    "duration": 2.163
+  },
+  {
+    "text": "let's take a look at",
+    "start": 1318.257,
+    "duration": 2.197
+  },
+  {
+    "text": "one of the results. Let's see",
+    "start": 1319.488,
+    "duration": 2.302
+  },
+  {
+    "text": "how good it is. We",
+    "start": 1320.838,
+    "duration": 2.506
+  },
+  {
+    "text": "now have the Alpha world, the",
+    "start": 1322.389,
+    "duration": 2.765
+  },
+  {
+    "text": "Science world, and the Average",
+    "start": 1324.199,
+    "duration": 2.222
+  },
+  {
+    "text": "Performance. As you can see,",
+    "start": 1325.466,
+    "duration": 2.264
+  },
+  {
+    "text": "for the 4 billion",
+    "start": 1326.764,
+    "duration": 2.22
+  },
+  {
+    "text": "miles in the third quarter,",
+    "start": 1328.018,
+    "duration": 2.253
+  },
+  {
+    "text": "you have all the other models here",
+    "start": 1329.305,
+    "duration": 2.321
+  },
+  {
+    "text": ". And here in the",
+    "start": 1330.66,
+    "duration": 2.636
+  },
+  {
+    "text": "pink line, you have EMG, our",
+    "start": 1332.346,
+    "duration": 2.444
+  },
+  {
+    "text": "new methodology.",
+    "start": 1333.84,
+    "duration": 2.594
+  },
+  {
+    "text": "Just look at the average",
+    "start": 1335.534,
+    "duration": 2.341
+  },
+  {
+    "text": "here, in the last column",
+    "start": 1336.911,
+    "duration": 2.414
+  },
+  {
+    "text": ". As you can see, all the",
+    "start": 1338.325,
+    "duration": 2.183
+  },
+  {
+    "text": "other elements here are in",
+    "start": 1339.548,
+    "duration": 2.569
+  },
+  {
+    "text": "the twenties, and",
+    "start": 1341.157,
+    "duration": 2.247
+  },
+  {
+    "text": "our new methodology is in the",
+    "start": 1342.444,
+    "duration": 2.529
+  },
+  {
+    "text": "forties. This is a",
+    "start": 1344.013,
+    "duration": 2.892
+  },
+  {
+    "text": "preliminary indicator, and it seems",
+    "start": 1345.96,
+    "duration": 2.555
+  },
+  {
+    "text": "interesting, but you",
+    "start": 1347.57,
+    "duration": 3.111
+  },
+  {
+    "text": "might wonder: why is it",
+    "start": 1349.736,
+    "duration": 3.11
+  },
+  {
+    "text": "better here specifically?",
+    "start": 1351.902,
+    "duration": 2.777
+  },
+  {
+    "text": "Especially if we look at the",
+    "start": 1354.726,
+    "duration": 2.615
+  },
+  {
+    "text": "cost of time in the world of",
+    "start": 1356.387,
+    "duration": 2.615
+  },
+  {
+    "text": "visible science and the world of",
+    "start": 1358.048,
+    "duration": 2.754
+  },
+  {
+    "text": "invisible science,",
+    "start": 1359.848,
+    "duration": 2.662
+  },
+  {
+    "text": "we see that the cost of time",
+    "start": 1361.556,
+    "duration": 2.523
+  },
+  {
+    "text": "here is measured in minutes.",
+    "start": 1363.125,
+    "duration": 2.108
+  },
+  {
+    "text": "Our new methodology",
+    "start": 1364.707,
+    "duration": 2.661
+  },
+  {
+    "text": "wastes almost no time.",
+    "start": 1366.414,
+    "duration": 2.754
+  },
+  {
+    "text": "Look at the",
+    "start": 1368.268,
+    "duration": 2.383
+  },
+  {
+    "text": "other reflection here. It takes approximately",
+    "start": 1369.69,
+    "duration": 2.734
+  },
+  {
+    "text": "four times as much time here",
+    "start": 1371.477,
+    "duration": 3.042
+  },
+  {
+    "text": "to achieve a certain success rate",
+    "start": 1373.572,
+    "duration": 3.042
+  },
+  {
+    "text": ". You might ask: Why?",
+    "start": 1375.614,
+    "duration": 3.507
+  },
+  {
+    "text": "Why does this happen? Think",
+    "start": 1378.398,
+    "duration": 3.255
+  },
+  {
+    "text": "about it. It's simple.",
+    "start": 1380.696,
+    "duration": 3.186
+  },
+  {
+    "text": "By framing",
+    "start": 1382.926,
+    "duration": 2.319
+  },
+  {
+    "text": "error correction as a set of discrete,",
+    "start": 1384.289,
+    "duration": 2.319
+  },
+  {
+    "text": "case-related editing factors, as I just explained to",
+    "start": 1388.289,
+    "duration": 2.495
+  },
+  {
+    "text": "you, and derived",
+    "start": 1389.828,
+    "duration": 2.583
+  },
+  {
+    "text": "from expert templates, the",
+    "start": 1391.454,
+    "duration": 2.407
+  },
+  {
+    "text": "mathematical complexity collapses. Certainly,",
+    "start": 1394.048,
+    "duration": 2.857
+  },
+  {
+    "text": "as I told you, we lose",
+    "start": 1395.954,
+    "duration": 2.566
+  },
+  {
+    "text": "mathematical precision when we",
+    "start": 1397.569,
+    "duration": 2.664
+  },
+  {
+    "text": "revert to",
+    "start": 1399.282,
+    "duration": 2.468
+  },
+  {
+    "text": "human language. Now, at the time of",
+    "start": 1400.799,
+    "duration": 3.843
+  },
+  {
+    "text": "testing, when",
+    "start": 1403.685,
+    "duration": 2.241
+  },
+  {
+    "text": "the worker is faced with your",
+    "start": 1404.969,
+    "duration": 2.454
+  },
+  {
+    "text": "real unknown task, and the",
+    "start": 1406.466,
+    "duration": 2.498
+  },
+  {
+    "text": "expert path is no longer",
+    "start": 1408.007,
+    "duration": 2.498
+  },
+  {
+    "text": "available, he does not need",
+    "start": 1409.547,
+    "duration": 2.669
+  },
+  {
+    "text": "to make any graph",
+    "start": 1411.259,
+    "duration": 2.241
+  },
+  {
+    "text": ". Why? Okay, you've",
+    "start": 1412.543,
+    "duration": 3.109
+  },
+  {
+    "text": "seen the process.",
+    "start": 1414.705,
+    "duration": 2.76
+  },
+  {
+    "text": "Simply put,",
+    "start": 1416.565,
+    "duration": 1.983
+  },
+  {
+    "text": "the program takes the",
+    "start": 1417.59,
+    "duration": 2.24
+  },
+  {
+    "text": "current task and searches a",
+    "start": 1418.873,
+    "duration": 2.367
+  },
+  {
+    "text": "database containing",
+    "start": 1420.283,
+    "duration": 2.454
+  },
+  {
+    "text": "all the",
+    "start": 1421.779,
+    "duration": 2.283
+  },
+  {
+    "text": "human language corrections",
+    "start": 1423.104,
+    "duration": 2.069
+  },
+  {
+    "text": "resulting from the",
+    "start": 1424.216,
+    "duration": 2.282
+  },
+  {
+    "text": "graphing process; It searches",
+    "start": 1425.541,
+    "duration": 2.539
+  },
+  {
+    "text": "this vector database, applies",
+    "start": 1428.362,
+    "duration": 2.539
+  },
+  {
+    "text": "simple cosine similarity, and extracts the",
+    "start": 1431.268,
+    "duration": 2.625
+  },
+  {
+    "text": "presupposed editing path",
+    "start": 1432.935,
+    "duration": 2.325
+  },
+  {
+    "text": "from the",
+    "start": 1434.303,
+    "duration": 2.112
+  },
+  {
+    "text": "training task that looks",
+    "start": 1435.457,
+    "duration": 2.454
+  },
+  {
+    "text": "similar.",
+    "start": 1436.953,
+    "duration": 2.716
+  },
+  {
+    "text": "This resulting solution is passed from the",
+    "start": 1438.712,
+    "duration": 2.419
+  },
+  {
+    "text": "vector database to the",
+    "start": 1441.205,
+    "duration": 2.461
+  },
+  {
+    "text": "language model, to the language model prompt",
+    "start": 1442.709,
+    "duration": 2.677
+  },
+  {
+    "text": ", as human-like text such as: \"",
+    "start": 1444.429,
+    "duration": 4.14
+  },
+  {
+    "text": "Avoid making mistake X",
+    "start": 1447.569,
+    "duration": 3.076
+  },
+  {
+    "text": "here, instead,",
+    "start": 1449.706,
+    "duration": 3.014
+  },
+  {
+    "text": "do Y.\" And again, you see",
+    "start": 1451.781,
+    "duration": 3.754
+  },
+  {
+    "text": "how close he is to the skills.",
+    "start": 1454.585,
+    "duration": 2.898
+  },
+  {
+    "text": "When we have",
+    "start": 1456.583,
+    "duration": 2.063
+  },
+  {
+    "text": "skills in Markdown files,",
+    "start": 1457.682,
+    "duration": 2.383
+  },
+  {
+    "text": "and skills that we put here in",
+    "start": 1459.1,
+    "duration": 2.313
+  },
+  {
+    "text": "databases or in",
+    "start": 1460.448,
+    "duration": 2.312
+  },
+  {
+    "text": "vector databases, we",
+    "start": 1462.647,
+    "duration": 2.028
+  },
+  {
+    "text": "include here the",
+    "start": 1463.711,
+    "duration": 2.064
+  },
+  {
+    "text": "skill configuration in",
+    "start": 1464.81,
+    "duration": 2.064
+  },
+  {
+    "text": "vector databases. It's almost always the same",
+    "start": 1465.91,
+    "duration": 3.019
+  },
+  {
+    "text": "basic idea of",
+    "start": 1469.382,
+    "duration": 2.326
+  },
+  {
+    "text": "how to deal with the",
+    "start": 1470.751,
+    "duration": 2.368
+  },
+  {
+    "text": "complexities of",
+    "start": 1472.162,
+    "duration": 2.154
+  },
+  {
+    "text": "artificial intelligence. Therefore, I think we",
+    "start": 1473.359,
+    "duration": 4.466
+  },
+  {
+    "text": "take",
+    "start": 1476.872,
+    "duration": 2.814
+  },
+  {
+    "text": "this beautiful graph result,",
+    "start": 1478.732,
+    "duration": 2.768
+  },
+  {
+    "text": "then translate it back into",
+    "start": 1480.546,
+    "duration": 2.442
+  },
+  {
+    "text": "human language, and put",
+    "start": 1482.035,
+    "duration": 2.674
+  },
+  {
+    "text": "these human language instructions into a",
+    "start": 1483.756,
+    "duration": 2.721
+  },
+  {
+    "text": "database. Well,",
+    "start": 1485.523,
+    "duration": 2.698
+  },
+  {
+    "text": "whether it's a",
+    "start": 1487.261,
+    "duration": 2.123
+  },
+  {
+    "text": "regular database or a",
+    "start": 1488.424,
+    "duration": 2.565
+  },
+  {
+    "text": "vector database, it doesn't matter",
+    "start": 1490.029,
+    "duration": 2.564
+  },
+  {
+    "text": ". We then derive these",
+    "start": 1491.593,
+    "duration": 2.728
+  },
+  {
+    "text": "textual instructions",
+    "start": 1493.368,
+    "duration": 2.467
+  },
+  {
+    "text": "based on the similarity of the",
+    "start": 1494.882,
+    "duration": 2.656
+  },
+  {
+    "text": "cosine function from the task description.",
+    "start": 1496.585,
+    "duration": 2.798
+  },
+  {
+    "text": "I believe this is the",
+    "start": 1499.391,
+    "duration": 2.678
+  },
+  {
+    "text": "weakness of the",
+    "start": 1501.115,
+    "duration": 2.306
+  },
+  {
+    "text": "research paper. Let's talk",
+    "start": 1502.467,
+    "duration": 4.024
+  },
+  {
+    "text": "about the limitations. This new methodology does not guarantee",
+    "start": 1505.542,
+    "duration": 5.087
+  },
+  {
+    "text": "the discovery of the",
+    "start": 1511.015,
+    "duration": 2.135
+  },
+  {
+    "text": "global minimum conversion. It is",
+    "start": 1512.192,
+    "duration": 3.141
+  },
+  {
+    "text": "not the best graphical structure",
+    "start": 1514.379,
+    "duration": 2.759
+  },
+  {
+    "text": "we could find. No,",
+    "start": 1516.183,
+    "duration": 2.704
+  },
+  {
+    "text": "because it depends on the",
+    "start": 1517.928,
+    "duration": 2.167
+  },
+  {
+    "text": "training data,",
+    "start": 1519.137,
+    "duration": 2.209
+  },
+  {
+    "text": "and perhaps in the",
+    "start": 1520.387,
+    "duration": 2.167
+  },
+  {
+    "text": "training dataset, we",
+    "start": 1521.596,
+    "duration": 2.5
+  },
+  {
+    "text": "just had an average solution that",
+    "start": 1523.138,
+    "duration": 2.459
+  },
+  {
+    "text": "worked. No, but it wasn't the",
+    "start": 1524.638,
+    "duration": 2.642
+  },
+  {
+    "text": "ideal solution in terms of",
+    "start": 1526.323,
+    "duration": 2.425
+  },
+  {
+    "text": "energy, time, or",
+    "start": 1527.791,
+    "duration": 2.426
+  },
+  {
+    "text": "number of tokens. It was just a",
+    "start": 1529.26,
+    "duration": 2.856
+  },
+  {
+    "text": "middle ground solution. Therefore, since we are",
+    "start": 1531.176,
+    "duration": 2.687
+  },
+  {
+    "text": "relying here on a",
+    "start": 1532.901,
+    "duration": 2.234
+  },
+  {
+    "text": "training dataset, we have no",
+    "start": 1535.145,
+    "duration": 2.346
+  },
+  {
+    "text": "idea whether",
+    "start": 1536.528,
+    "duration": 2.272
+  },
+  {
+    "text": "this is the",
+    "start": 1537.837,
+    "duration": 2.235
+  },
+  {
+    "text": "global minimum in",
+    "start": 1539.109,
+    "duration": 2.122
+  },
+  {
+    "text": "our multi-group complexity.",
+    "start": 1540.268,
+    "duration": 2.235
+  },
+  {
+    "text": "Secondly, when",
+    "start": 1541.603,
+    "duration": 2.427
+  },
+  {
+    "text": "we have an invisible task, the",
+    "start": 1543.072,
+    "duration": 2.636
+  },
+  {
+    "text": "system almost breaks down",
+    "start": 1544.75,
+    "duration": 2.595
+  },
+  {
+    "text": "because this",
+    "start": 1546.387,
+    "duration": 2.259
+  },
+  {
+    "text": "new methodology does not build the",
+    "start": 1547.688,
+    "duration": 2.637
+  },
+  {
+    "text": "correct unknown graph",
+    "start": 1549.367,
+    "duration": 2.427
+  },
+  {
+    "text": "because it was not",
+    "start": 1550.836,
+    "duration": 2.469
+  },
+  {
+    "text": "present in the",
+    "start": 1552.347,
+    "duration": 2.343
+  },
+  {
+    "text": "training dataset. Therefore, we can",
+    "start": 1553.732,
+    "duration": 2.85
+  },
+  {
+    "text": "only hope that",
+    "start": 1555.625,
+    "duration": 2.574
+  },
+  {
+    "text": "the similarity",
+    "start": 1557.242,
+    "duration": 2.617
+  },
+  {
+    "text": "in our known vector embedding space to our",
+    "start": 1558.903,
+    "duration": 2.049
+  },
+  {
+    "text": "artificial mathematical space gives us",
+    "start": 1562.53,
+    "duration": 2.443
+  },
+  {
+    "text": "an indication, or perhaps",
+    "start": 1565.934,
+    "duration": 2.961
+  },
+  {
+    "text": "this is close to another solution,",
+    "start": 1567.948,
+    "duration": 3.015
+  },
+  {
+    "text": "and perhaps this provides the",
+    "start": 1570.016,
+    "duration": 3.067
+  },
+  {
+    "text": "next step in our solution path,",
+    "start": 1572.136,
+    "duration": 3.068
+  },
+  {
+    "text": "or perhaps not. So this is here",
+    "start": 1574.257,
+    "duration": 4.045
+  },
+  {
+    "text": "this is also rather weak and then at",
+    "start": 1577.376,
+    "duration": 3.661
+  },
+  {
+    "text": "test time the correct graph is",
+    "start": 1580.111,
+    "duration": 3.217
+  },
+  {
+    "text": "genuinely unknown but EMG does not",
+    "start": 1582.402,
+    "duration": 3.513
+  },
+  {
+    "text": "reconstruct it at all mathematically.",
+    "start": 1584.989,
+    "duration": 3.735
+  },
+  {
+    "text": "Yes, because we had the training time",
+    "start": 1588.003,
+    "duration": 3.652
+  },
+  {
+    "text": "where the beautiful mathematical graph",
+    "start": 1590.724,
+    "duration": 3.652
+  },
+  {
+    "text": "operation took place and we fed all the",
+    "start": 1593.446,
+    "duration": 3.722
+  },
+  {
+    "text": "results from the training time into our",
+    "start": 1596.238,
+    "duration": 3.722
+  },
+  {
+    "text": "database. And now at test time, we do",
+    "start": 1599.029,
+    "duration": 3.529
+  },
+  {
+    "text": "n't do any uh algebra at all or any",
+    "start": 1601.633,
+    "duration": 3.775
+  },
+  {
+    "text": "graph structure at all. We just go to",
+    "start": 1604.483,
+    "duration": 3.678
+  },
+  {
+    "text": "the database and have a rag retrieval",
+    "start": 1607.227,
+    "duration": 3.429
+  },
+  {
+    "text": "from a database and it retrieves the",
+    "start": 1609.721,
+    "duration": 3.364
+  },
+  {
+    "text": "correction principles learned from the",
+    "start": 1612.151,
+    "duration": 3.495
+  },
+  {
+    "text": "previous known graph pairs during the",
+    "start": 1614.711,
+    "duration": 3.429
+  },
+  {
+    "text": "training time and relies here on the",
+    "start": 1617.206,
+    "duration": 3.364
+  },
+  {
+    "text": "LLM now to apply this new instruction",
+    "start": 1619.635,
+    "duration": 3.429
+  },
+  {
+    "text": "to the new task. Big question mark will",
+    "start": 1622.13,
+    "duration": 4.088
+  },
+  {
+    "text": "the LLM exceed success will it be able",
+    "start": 1625.285,
+    "duration": 3.556
+  },
+  {
+    "text": "to understand the complexity of the",
+    "start": 1627.908,
+    "duration": 3.355
+  },
+  {
+    "text": "instruction from another task or not?",
+    "start": 1630.33,
+    "duration": 3.49
+  },
+  {
+    "text": "So you see, during test time compute,",
+    "start": 1633.985,
+    "duration": 2.663
+  },
+  {
+    "text": "there's zero graph mathematic happening",
+    "start": 1635.693,
+    "duration": 2.753
+  },
+  {
+    "text": ", and I think this is yet the weak",
+    "start": 1637.446,
+    "duration": 2.529
+  },
+  {
+    "text": "point; At the time of testing, it is",
+    "start": 1639.02,
+    "duration": 2.753
+  },
+  {
+    "text": "limited to searching a",
+    "start": 1640.818,
+    "duration": 2.754
+  },
+  {
+    "text": "vector database",
+    "start": 1642.617,
+    "duration": 2.753
+  },
+  {
+    "text": ", and we go back to the RAG system",
+    "start": 1644.37,
+    "duration": 2.484
+  },
+  {
+    "text": "that we used",
+    "start": 1645.898,
+    "duration": 2.529
+  },
+  {
+    "text": "five years ago, and I think",
+    "start": 1647.472,
+    "duration": 2.663
+  },
+  {
+    "text": "we have better ideas",
+    "start": 1649.18,
+    "duration": 2.529
+  },
+  {
+    "text": "about how to implement this",
+    "start": 1650.754,
+    "duration": 2.349
+  },
+  {
+    "text": "particular step. But what I",
+    "start": 1652.148,
+    "duration": 2.63
+  },
+  {
+    "text": "like about this",
+    "start": 1653.823,
+    "duration": 2.401
+  },
+  {
+    "text": "paper is the",
+    "start": 1655.27,
+    "duration": 2.356
+  },
+  {
+    "text": "first step in the training process",
+    "start": 1656.671,
+    "duration": 2.763
+  },
+  {
+    "text": ", which is training the graphing of this",
+    "start": 1658.434,
+    "duration": 2.537
+  },
+  {
+    "text": "data on a",
+    "start": 1660.016,
+    "duration": 2.447
+  },
+  {
+    "text": "graph structure and applying an",
+    "start": 1661.508,
+    "duration": 2.13
+  },
+  {
+    "text": "advanced algorithm",
+    "start": 1662.684,
+    "duration": 2.311
+  },
+  {
+    "text": "to compare the",
+    "start": 1664.04,
+    "duration": 2.22
+  },
+  {
+    "text": "graphs and find a",
+    "start": 1665.306,
+    "duration": 3.959
+  },
+  {
+    "text": "consistent development path, especially for",
+    "start": 1668.315,
+    "duration": 2.603
+  },
+  {
+    "text": "asymmetric graphs",
+    "start": 1669.968,
+    "duration": 2.804
+  },
+  {
+    "text": ". It's a",
+    "start": 1671.822,
+    "duration": 3.134
+  },
+  {
+    "text": "great solution. Is there anything left? Yes,",
+    "start": 1674.031,
+    "duration": 5.067
+  },
+  {
+    "text": "of course. By moving",
+    "start": 1678.156,
+    "duration": 2.787
+  },
+  {
+    "text": "all the complex mathematical graphing operations",
+    "start": 1679.99,
+    "duration": 2.488
+  },
+  {
+    "text": "to the",
+    "start": 1683.014,
+    "duration": 2.489
+  },
+  {
+    "text": "offline training stage",
+    "start": 1684.549,
+    "duration": 2.675
+  },
+  {
+    "text": ", EMG achieves what",
+    "start": 1686.271,
+    "duration": 2.768
+  },
+  {
+    "text": "the authors now call a \"",
+    "start": 1688.085,
+    "duration": 2.768
+  },
+  {
+    "text": "one-time implementation,\"",
+    "start": 1689.853,
+    "duration": 2.722
+  },
+  {
+    "text": "because everything they trained",
+    "start": 1691.621,
+    "duration": 2.675
+  },
+  {
+    "text": "their model on (and remember,",
+    "start": 1693.343,
+    "duration": 2.628
+  },
+  {
+    "text": "that training is a",
+    "start": 1695.018,
+    "duration": 2.628
+  },
+  {
+    "text": "graph structure they built) is",
+    "start": 1696.693,
+    "duration": 2.815
+  },
+  {
+    "text": "now the content of the",
+    "start": 1700.455,
+    "duration": 2.797
+  },
+  {
+    "text": "database, the",
+    "start": 1702.298,
+    "duration": 2.336
+  },
+  {
+    "text": "vector database.",
+    "start": 1703.68,
+    "duration": 2.383
+  },
+  {
+    "text": "You can send",
+    "start": 1706.391,
+    "duration": 2.632
+  },
+  {
+    "text": "this database file",
+    "start": 1708.074,
+    "duration": 2.734
+  },
+  {
+    "text": "to any other device.",
+    "start": 1709.859,
+    "duration": 4.766
+  },
+  {
+    "text": "Now think about my research paper from",
+    "start": 1713.666,
+    "duration": 2.596
+  },
+  {
+    "text": "yesterday and this paper from",
+    "start": 1715.303,
+    "duration": 2.391
+  },
+  {
+    "text": "today, and you will see that it is the same",
+    "start": 1716.735,
+    "duration": 2.596
+  },
+  {
+    "text": "philosophy of test time",
+    "start": 1718.372,
+    "duration": 2.391
+  },
+  {
+    "text": "that is also used in the",
+    "start": 1719.804,
+    "duration": 2.473
+  },
+  {
+    "text": "Mayo project that was published",
+    "start": 1721.318,
+    "duration": 2.514
+  },
+  {
+    "text": "yesterday. No, both of the",
+    "start": 1722.873,
+    "duration": 2.433
+  },
+  {
+    "text": "first papers",
+    "start": 1724.353,
+    "duration": 2.649
+  },
+  {
+    "text": "were published yesterday from",
+    "start": 1726.049,
+    "duration": 2.414
+  },
+  {
+    "text": "America, and this one is from China",
+    "start": 1727.51,
+    "duration": 2.837
+  },
+  {
+    "text": ". Both of them realized, just",
+    "start": 1729.347,
+    "duration": 3.107
+  },
+  {
+    "text": "one day apart,",
+    "start": 1731.502,
+    "duration": 2.681
+  },
+  {
+    "text": "that the secret to developing",
+    "start": 1733.231,
+    "duration": 2.489
+  },
+  {
+    "text": "independent agents lies not in",
+    "start": 1734.768,
+    "duration": 2.585
+  },
+  {
+    "text": "giving them more time to",
+    "start": 1736.401,
+    "duration": 2.873
+  },
+  {
+    "text": "think when a user asks a",
+    "start": 1738.322,
+    "duration": 2.633
+  },
+  {
+    "text": "particular question, but in providing them with a",
+    "start": 1741.444,
+    "duration": 2.873
+  },
+  {
+    "text": "huge,",
+    "start": 1743.365,
+    "duration": 2.633
+  },
+  {
+    "text": "instantly retrievable database of pre-",
+    "start": 1746.487,
+    "duration": 2.441
+  },
+  {
+    "text": "calculated lessons. This",
+    "start": 1747.976,
+    "duration": 5.008
+  },
+  {
+    "text": "means we are going back to the",
+    "start": 1752.028,
+    "duration": 2.448
+  },
+  {
+    "text": "familiar solutions. We do not",
+    "start": 1753.52,
+    "duration": 4.123
+  },
+  {
+    "text": "have",
+    "start": 1756.692,
+    "duration": 2.111
+  },
+  {
+    "text": "artificial intelligence capable of",
+    "start": 1757.851,
+    "duration": 2.836
+  },
+  {
+    "text": "finding new, unique, and",
+    "start": 1759.735,
+    "duration": 2.449
+  },
+  {
+    "text": "unprecedented solutions.",
+    "start": 1761.233,
+    "duration": 2.691
+  },
+  {
+    "text": "Everything falls apart, and we revert",
+    "start": 1763.634,
+    "duration": 2.796
+  },
+  {
+    "text": "to the same old patterns",
+    "start": 1765.481,
+    "duration": 2.437
+  },
+  {
+    "text": "we discovered years ago,",
+    "start": 1768.202,
+    "duration": 2.95
+  },
+  {
+    "text": "to the same old programming solutions",
+    "start": 1770.203,
+    "duration": 2.899
+  },
+  {
+    "text": ". We never take",
+    "start": 1772.154,
+    "duration": 4.049
+  },
+  {
+    "text": "this",
+    "start": 1775.255,
+    "duration": 2.548
+  },
+  {
+    "text": "evolutionary step to a",
+    "start": 1776.855,
+    "duration": 2.755
+  },
+  {
+    "text": "higher level of complexity, to",
+    "start": 1778.662,
+    "duration": 2.91
+  },
+  {
+    "text": "unique software solutions that have never been seen before",
+    "start": 1780.624,
+    "duration": 2.91
+  },
+  {
+    "text": ", or",
+    "start": 1782.586,
+    "duration": 2.703
+  },
+  {
+    "text": "mathematical explanations, or explanations in",
+    "start": 1784.341,
+    "duration": 2.704
+  },
+  {
+    "text": "physics, medicine, or",
+    "start": 1786.096,
+    "duration": 2.807
+  },
+  {
+    "text": "finance. So, when",
+    "start": 1787.955,
+    "duration": 5.222
+  },
+  {
+    "text": "you have this",
+    "start": 1792.229,
+    "duration": 2.794
+  },
+  {
+    "text": "second part that requires you to",
+    "start": 1794.074,
+    "duration": 2.999
+  },
+  {
+    "text": "go back to",
+    "start": 1796.124,
+    "duration": 2.538
+  },
+  {
+    "text": "database structures, and",
+    "start": 1797.713,
+    "duration": 2.487
+  },
+  {
+    "text": "you rely primarily",
+    "start": 1799.251,
+    "duration": 2.999
+  },
+  {
+    "text": "on the comparability modification",
+    "start": 1801.301,
+    "duration": 2.948
+  },
+  {
+    "text": "of all solution paths in the",
+    "start": 1803.301,
+    "duration": 2.896
+  },
+  {
+    "text": "database,",
+    "start": 1805.248,
+    "duration": 2.487
+  },
+  {
+    "text": "and you hope that a smart solution will suddenly appear out",
+    "start": 1806.786,
+    "duration": 2.948
+  },
+  {
+    "text": "of nowhere, I think that would be an",
+    "start": 1808.785,
+    "duration": 2.794
+  },
+  {
+    "text": "unscientific approach. Therefore, the",
+    "start": 1812.373,
+    "duration": 3.737
+  },
+  {
+    "text": "first part of this",
+    "start": 1815.159,
+    "duration": 2.599
+  },
+  {
+    "text": "paper was excellent, and I",
+    "start": 1816.807,
+    "duration": 2.842
+  },
+  {
+    "text": "highly recommend it. I have some",
+    "start": 1818.697,
+    "duration": 2.382
+  },
+  {
+    "text": "doubts about the uniqueness of the",
+    "start": 1820.125,
+    "duration": 2.809
+  },
+  {
+    "text": "second part of the paper,",
+    "start": 1821.98,
+    "duration": 2.485
+  },
+  {
+    "text": "because you see, as in the",
+    "start": 1823.511,
+    "duration": 2.67
+  },
+  {
+    "text": "Memo Hornis research, they",
+    "start": 1825.227,
+    "duration": 2.392
+  },
+  {
+    "text": "used the same test-time idea for a",
+    "start": 1826.665,
+    "duration": 2.809
+  },
+  {
+    "text": "vector database, and I think we",
+    "start": 1829.912,
+    "duration": 2.763
+  },
+  {
+    "text": "got past that",
+    "start": 1831.721,
+    "duration": 2.392
+  },
+  {
+    "text": "problem three",
+    "start": 1833.159,
+    "duration": 2.392
+  },
+  {
+    "text": "years ago. I hope you",
+    "start": 1834.597,
+    "duration": 2.635
+  },
+  {
+    "text": "enjoyed it a little. Oh, I still have",
+    "start": 1836.273,
+    "duration": 2.607
+  },
+  {
+    "text": "something left.",
+    "start": 1837.925,
+    "duration": 2.759
+  },
+  {
+    "text": "Okay,",
+    "start": 1839.784,
+    "duration": 2.068
+  },
+  {
+    "text": "test reasoning. What is happening?",
+    "start": 1840.891,
+    "duration": 2.684
+  },
+  {
+    "text": "Well, why not? When the",
+    "start": 1842.675,
+    "duration": 2.794
+  },
+  {
+    "text": "user deploys",
+    "start": 1844.506,
+    "duration": 2.256
+  },
+  {
+    "text": "the agent and gives it a",
+    "start": 1845.799,
+    "duration": 2.329
+  },
+  {
+    "text": "completely new task,",
+    "start": 1847.165,
+    "duration": 2.404
+  },
+  {
+    "text": "the system ignores all the",
+    "start": 1848.606,
+    "duration": 2.256
+  },
+  {
+    "text": "graph data, says there is",
+    "start": 1849.899,
+    "duration": 2.403
+  },
+  {
+    "text": "no more",
+    "start": 1851.339,
+    "duration": 1.997
+  },
+  {
+    "text": "graph data,",
+    "start": 1852.373,
+    "duration": 2.182
+  },
+  {
+    "text": "takes the user's request,",
+    "start": 1853.592,
+    "duration": 2.33
+  },
+  {
+    "text": "and passes it through an embedded form",
+    "start": 1854.959,
+    "duration": 2.44
+  },
+  {
+    "text": "to get a",
+    "start": 1856.436,
+    "duration": 2.035
+  },
+  {
+    "text": "specific query vector embedded in the",
+    "start": 1857.508,
+    "duration": 2.366
+  },
+  {
+    "text": "correct mathematical space. Let's assume a space with",
+    "start": 1859.945,
+    "duration": 2.883
+  },
+  {
+    "text": "24 dimensions. This",
+    "start": 1861.885,
+    "duration": 2.921
+  },
+  {
+    "text": "system performs a simple",
+    "start": 1863.844,
+    "duration": 2.338
+  },
+  {
+    "text": "similarity and convergence search",
+    "start": 1865.219,
+    "duration": 2.338
+  },
+  {
+    "text": "using the nearest 20 neighbors",
+    "start": 1866.594,
+    "duration": 2.45
+  },
+  {
+    "text": "in an",
+    "start": 1868.081,
+    "duration": 2.041
+  },
+  {
+    "text": "offline memory database",
+    "start": 1869.159,
+    "duration": 2.338
+  },
+  {
+    "text": ", which is",
+    "start": 1870.534,
+    "duration": 2.338
+  },
+  {
+    "text": "assumed to have been",
+    "start": 1871.909,
+    "duration": 2.227
+  },
+  {
+    "text": "trained on your",
+    "start": 1873.173,
+    "duration": 2.189
+  },
+  {
+    "text": "specific domain and on",
+    "start": 1874.4,
+    "duration": 2.04
+  },
+  {
+    "text": "your device's complexity class. It then retrieves",
+    "start": 1876.518,
+    "duration": 6.413
+  },
+  {
+    "text": "previously translated and analyzed natural language insights, and",
+    "start": 1883.846,
+    "duration": 2.476
+  },
+  {
+    "text": "then incorporates this text string",
+    "start": 1885.362,
+    "duration": 2.555
+  },
+  {
+    "text": ", as in a",
+    "start": 1886.957,
+    "duration": 2.157
+  },
+  {
+    "text": "traditional racking system, into an",
+    "start": 1888.154,
+    "duration": 2.436
+  },
+  {
+    "text": "agent-guided context.",
+    "start": 1889.63,
+    "duration": 2.237
+  },
+  {
+    "text": "I believe this will not be",
+    "start": 1891.502,
+    "duration": 2.972
+  },
+  {
+    "text": "available until the end of",
+    "start": 1893.538,
+    "duration": 3.037
+  },
+  {
+    "text": "July 2026. Compare several",
+    "start": 1895.638,
+    "duration": 6.247
+  },
+  {
+    "text": "research papers; you will find",
+    "start": 1900.923,
+    "duration": 2.216
+  },
+  {
+    "text": "a lot of",
+    "start": 1902.177,
+    "duration": 2.368
+  },
+  {
+    "text": "useful information. I believe that the",
+    "start": 1903.583,
+    "duration": 2.21
+  },
+  {
+    "text": "Mayo system offers a",
+    "start": 1904.829,
+    "duration": 2.008
+  },
+  {
+    "text": "dynamic",
+    "start": 1905.873,
+    "duration": 2.26
+  },
+  {
+    "text": "system configuration around the",
+    "start": 1907.169,
+    "duration": 2.08
+  },
+  {
+    "text": "underlying Language-Led Learning (LLM) model. The",
+    "start": 1909.473,
+    "duration": 2.152
+  },
+  {
+    "text": "EMG system here offers",
+    "start": 1910.725,
+    "duration": 2.48
+  },
+  {
+    "text": "something completely different",
+    "start": 1912.249,
+    "duration": 2.655
+  },
+  {
+    "text": ", let's call it",
+    "start": 1913.904,
+    "duration": 2.394
+  },
+  {
+    "text": "algorithmic error guidance.",
+    "start": 1915.341,
+    "duration": 2.569
+  },
+  {
+    "text": "And if you are creating a",
+    "start": 1917.108,
+    "duration": 2.482
+  },
+  {
+    "text": "high-",
+    "start": 1919.65,
+    "duration": 2.144
+  },
+  {
+    "text": "quality, integrated AI agent, let's end on a",
+    "start": 1920.836,
+    "duration": 2.61
+  },
+  {
+    "text": "positive note: why not combine the",
+    "start": 1922.489,
+    "duration": 2.652
+  },
+  {
+    "text": "two? Therefore, I will",
+    "start": 1924.183,
+    "duration": 2.666
+  },
+  {
+    "text": "now use the MIMO system rack-based control layer",
+    "start": 1925.892,
+    "duration": 2.269
+  },
+  {
+    "text": "to configure",
+    "start": 1928.726,
+    "duration": 2.184
+  },
+  {
+    "text": "system elements around the kernel,",
+    "start": 1929.953,
+    "duration": 2.438
+  },
+  {
+    "text": "in order to dynamically configure the",
+    "start": 1931.433,
+    "duration": 2.354
+  },
+  {
+    "text": "proxy memory and all tools",
+    "start": 1932.829,
+    "duration": 2.608
+  },
+  {
+    "text": ". Then, if I",
+    "start": 1934.479,
+    "duration": 3.22
+  },
+  {
+    "text": "have to use this",
+    "start": 1936.745,
+    "duration": 2.754
+  },
+  {
+    "text": "method, I will use",
+    "start": 1938.545,
+    "duration": 2.523
+  },
+  {
+    "text": "MG's graph matching",
+    "start": 1941.315,
+    "duration": 2.708
+  },
+  {
+    "text": "inside the",
+    "start": 1943.069,
+    "duration": 2.062
+  },
+  {
+    "text": "agent's procedural memory",
+    "start": 1944.177,
+    "duration": 2.431
+  },
+  {
+    "text": "to ensure that the sequence of",
+    "start": 1945.654,
+    "duration": 2.477
+  },
+  {
+    "text": "actions is executed accurately without the",
+    "start": 1947.177,
+    "duration": 2.57
+  },
+  {
+    "text": "need for",
+    "start": 1948.793,
+    "duration": 2.385
+  },
+  {
+    "text": "costly reflection loops at",
+    "start": 1950.224,
+    "duration": 2.616
+  },
+  {
+    "text": "test runtime.",
+    "start": 1951.886,
+    "duration": 2.293
+  },
+  {
+    "text": "Therefore, you can save a",
+    "start": 1954.36,
+    "duration": 2.69
+  },
+  {
+    "text": "lot of time and",
+    "start": 1956.095,
+    "duration": 2.246
+  },
+  {
+    "text": "money if you have",
+    "start": 1957.385,
+    "duration": 2.558
+  },
+  {
+    "text": "this solution ready. But the",
+    "start": 1958.987,
+    "duration": 5.087
+  },
+  {
+    "text": "downside is that there is a",
+    "start": 1963.129,
+    "duration": 3.138
+  },
+  {
+    "text": "known backup solution, and",
+    "start": 1965.322,
+    "duration": 2.754
+  },
+  {
+    "text": "therefore not a",
+    "start": 1967.131,
+    "duration": 2.754
+  },
+  {
+    "text": "unique solution discovered",
+    "start": 1968.94,
+    "duration": 2.754
+  },
+  {
+    "text": "by artificial intelligence,",
+    "start": 1970.749,
+    "duration": 3.083
+  },
+  {
+    "text": "but just a search table. This",
+    "start": 1972.887,
+    "duration": 5.854
+  },
+  {
+    "text": "is the part that I don't",
+    "start": 1977.789,
+    "duration": 2.408
+  },
+  {
+    "text": "think is keeping up with our times",
+    "start": 1979.246,
+    "duration": 2.893
+  },
+  {
+    "text": ". So, if you were to ask here:",
+    "start": 1981.139,
+    "duration": 6.602
+  },
+  {
+    "text": "What is being fixed?",
+    "start": 1986.793,
+    "duration": 2.819
+  },
+  {
+    "text": "What elements are",
+    "start": 1988.712,
+    "duration": 2.486
+  },
+  {
+    "text": "used? The",
+    "start": 1990.243,
+    "duration": 3.102
+  },
+  {
+    "text": "Memo Harness system views the",
+    "start": 1992.397,
+    "duration": 2.836
+  },
+  {
+    "text": "agent failure and assumes it is a",
+    "start": 1994.285,
+    "duration": 3.045
+  },
+  {
+    "text": "structural failure in the system's configuration",
+    "start": 1996.383,
+    "duration": 3.045
+  },
+  {
+    "text": "itself. While the EMG system looks",
+    "start": 1998.481,
+    "duration": 3.622
+  },
+  {
+    "text": "at the agent's failure",
+    "start": 2001.153,
+    "duration": 2.496
+  },
+  {
+    "text": "and assumes that it failed to",
+    "start": 2002.699,
+    "duration": 2.546
+  },
+  {
+    "text": "make an internal decision. That is, it",
+    "start": 2004.295,
+    "duration": 2.785
+  },
+  {
+    "text": "assumes the agent",
+    "start": 2006.115,
+    "duration": 2.223
+  },
+  {
+    "text": "has the",
+    "start": 2007.373,
+    "duration": 1.803
+  },
+  {
+    "text": "right tools but presses the",
+    "start": 2008.211,
+    "duration": 2.257
+  },
+  {
+    "text": "wrong button. Therefore,",
+    "start": 2009.503,
+    "duration": 2.368
+  },
+  {
+    "text": "the system, under",
+    "start": 2010.912,
+    "duration": 2.339
+  },
+  {
+    "text": "observation X, asks whether the",
+    "start": 2012.291,
+    "duration": 2.582
+  },
+  {
+    "text": "operator chose action",
+    "start": 2013.914,
+    "duration": 2.582
+  },
+  {
+    "text": "Y when they should have",
+    "start": 2015.537,
+    "duration": 2.582
+  },
+  {
+    "text": "chosen action Z.",
+    "start": 2017.16,
+    "duration": 2.055
+  },
+  {
+    "text": "Thus,",
+    "start": 2018.255,
+    "duration": 2.177
+  },
+  {
+    "text": "the sequence of actions is determined based",
+    "start": 2019.473,
+    "duration": 2.46
+  },
+  {
+    "text": "on the known solution. The",
+    "start": 2020.974,
+    "duration": 2.258
+  },
+  {
+    "text": "reason this",
+    "start": 2023.543,
+    "duration": 2.42
+  },
+  {
+    "text": "model (EMG) is successful with",
+    "start": 2025.006,
+    "duration": 2.076
+  },
+  {
+    "text": "small models, such as the",
+    "start": 2026.125,
+    "duration": 2.635
+  },
+  {
+    "text": "four-",
+    "start": 2027.803,
+    "duration": 2.119
+  },
+  {
+    "text": "billion-coupled model in",
+    "start": 2028.965,
+    "duration": 2.377
+  },
+  {
+    "text": "the experiments of this",
+    "start": 2030.385,
+    "duration": 2.291
+  },
+  {
+    "text": "research paper, is that the",
+    "start": 2031.719,
+    "duration": 2.679
+  },
+  {
+    "text": "hard work of",
+    "start": 2033.441,
+    "duration": 2.291
+  },
+  {
+    "text": "analyzing all aspects of the",
+    "start": 2034.775,
+    "duration": 2.291
+  },
+  {
+    "text": "mathematical graph geometry is done by",
+    "start": 2037.702,
+    "duration": 2.463
+  },
+  {
+    "text": "mathematics in the",
+    "start": 2039.208,
+    "duration": 2.463
+  },
+  {
+    "text": "training phase, and then",
+    "start": 2040.714,
+    "duration": 2.377
+  },
+  {
+    "text": "all the information is stored in the",
+    "start": 2042.134,
+    "duration": 2.377
+  },
+  {
+    "text": "database.",
+    "start": 2043.554,
+    "duration": 2.206
+  },
+  {
+    "text": "Therefore, you do not need",
+    "start": 2044.937,
+    "duration": 2.507
+  },
+  {
+    "text": "to deal with four",
+    "start": 2046.489,
+    "duration": 2.64
+  },
+  {
+    "text": "billion operators at",
+    "start": 2048.174,
+    "duration": 2.508
+  },
+  {
+    "text": "all during",
+    "start": 2049.726,
+    "duration": 2.109
+  },
+  {
+    "text": "testing or",
+    "start": 2050.879,
+    "duration": 2.242
+  },
+  {
+    "text": "overlap time; All you have to",
+    "start": 2052.165,
+    "duration": 2.552
+  },
+  {
+    "text": "do is search for the",
+    "start": 2053.761,
+    "duration": 2.287
+  },
+  {
+    "text": "results in the",
+    "start": 2055.092,
+    "duration": 2.33
+  },
+  {
+    "text": "database. This is amazing. There",
+    "start": 2056.467,
+    "duration": 4.401
+  },
+  {
+    "text": "are no complex calculations other than the",
+    "start": 2059.913,
+    "duration": 2.756
+  },
+  {
+    "text": "neural network parameters of your",
+    "start": 2063.155,
+    "duration": 2.531
+  },
+  {
+    "text": "four-billion-",
+    "start": 2064.731,
+    "duration": 2.306
+  },
+  {
+    "text": "parameter model, because everything is",
+    "start": 2066.082,
+    "duration": 2.486
+  },
+  {
+    "text": "utilitarian. The intelligence",
+    "start": 2067.613,
+    "duration": 2.851
+  },
+  {
+    "text": "and knowledge are in the",
+    "start": 2069.521,
+    "duration": 3.049
+  },
+  {
+    "text": "database, and",
+    "start": 2071.627,
+    "duration": 2.652
+  },
+  {
+    "text": "I imagine this is similar to an",
+    "start": 2073.335,
+    "duration": 2.993
+  },
+  {
+    "text": "MD skills bank, where",
+    "start": 2075.385,
+    "duration": 2.879
+  },
+  {
+    "text": "the knowledge of how to build a",
+    "start": 2077.321,
+    "duration": 5.609
+  },
+  {
+    "text": "code solution is in MD files, and this is",
+    "start": 2081.988,
+    "duration": 3.071
+  },
+  {
+    "text": "done here at a",
+    "start": 2084.117,
+    "duration": 2.669
+  },
+  {
+    "text": "higher level.",
+    "start": 2085.843,
+    "duration": 3.711
+  },
+  {
+    "text": "Yesterday I explained to you the structure of the",
+    "start": 2088.602,
+    "duration": 2.855
+  },
+  {
+    "text": "system itself. Now,",
+    "start": 2090.505,
+    "duration": 4.188
+  },
+  {
+    "text": "we have moved to a",
+    "start": 2093.746,
+    "duration": 2.596
+  },
+  {
+    "text": "decision-making framework for",
+    "start": 2095.396,
+    "duration": 2.809
+  },
+  {
+    "text": "long-term tasks,",
+    "start": 2097.258,
+    "duration": 3.022
+  },
+  {
+    "text": "whether they take three",
+    "start": 2099.333,
+    "duration": 2.702
+  },
+  {
+    "text": "hours or twenty hours,",
+    "start": 2101.089,
+    "duration": 2.968
+  },
+  {
+    "text": "to ensure we stay on a",
+    "start": 2103.11,
+    "duration": 3.075
+  },
+  {
+    "text": "consistent path to resolution. I hope you",
+    "start": 2105.239,
+    "duration": 3.064
+  },
+  {
+    "text": "enjoyed it and that you",
+    "start": 2107.343,
+    "duration": 2.201
+  },
+  {
+    "text": "gained",
+    "start": 2108.584,
+    "duration": 2.282
+  },
+  {
+    "text": "new ideas. You may",
+    "start": 2109.906,
+    "duration": 2.423
+  },
+  {
+    "text": "disagree with me",
+    "start": 2111.374,
+    "duration": 2.585
+  },
+  {
+    "text": "on the second part, which",
+    "start": 2113.004,
+    "duration": 2.359
+  },
+  {
+    "text": "relates to",
+    "start": 2114.408,
+    "duration": 2.223
+  },
+  {
+    "text": "vector databases. In",
+    "start": 2115.676,
+    "duration": 2.742
+  },
+  {
+    "text": "any case, I hope there is something that interests",
+    "start": 2117.465,
+    "duration": 2.607
+  },
+  {
+    "text": "you",
+    "start": 2119.119,
+    "duration": 2.842
+  },
+  {
+    "text": ". I'm happy to see you in the",
+    "start": 2120.961,
+    "duration": 2.37
+  },
+  {
+    "text": "next video.",
+    "start": 2122.372,
+    "duration": 2.141
+  }
+]
