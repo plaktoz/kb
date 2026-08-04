@@ -32,3 +32,7 @@ Professionals switch between apps 1,200+ times per day and spend 58% of work tim
 ## 🧠 First Principles & Mental Models
 
 - **[[Switching Cost]]**: The 1,200+ app switches/day aren't just time lost — each context switch depletes prefrontal cortex resources needed for focused work. A workflow tool's primary value is reducing this switching tax, not adding features.
+
+## Update (2026-08-04, source: https://thedigitalprojectmanager.com/tools/workflow-management-software)
+
+A separate comparison of 10 workflow management tools frames the software category around three recurring organizational problems it solves: lack of transparency/visibility (fixed by visual workflow representations showing task ownership and progress), inefficiency and delays (fixed by automating repetitive steps), and error-prone manual processes (fixed by removing manual handoffs). Recommended best practices when adopting workflow software: define clear objectives before selecting a tool, map the current process before automating it, build in visibility so ownership is clear at a glance, automate low-judgment repetitive steps first, and continuously revisit workflows rather than treating initial setup as final.

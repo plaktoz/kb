@@ -24,3 +24,7 @@ The [[Momentum Trade]] — buying recent winners — has unwound sharply in July
 - **Morgan Stanley's downside floor is 7000** for the S&P 500 if the AI-stock decline spreads further.
 - **Year-end S&P 500 target of 8000** remains "very achievable" per Morgan Stanley, implying ~7% upside.
 - **Equal-weight ETF (RSP) outperforming**: 11% YTD versus the cap-weighted S&P's 9%.
+
+## Update (2026-08-04, additional source: https://www.marketwatch.com/story/why-the-stock-markets-red-hot-momentum-trade-might-be-headed-for-a-violent-unwind-this-month-78a45397)
+
+[[Warren Pies]], co-founder of [[3Fourteen Research]], warned of a possible "violent rotation" away from the momentum factor, noting momentum stocks (tracked via the [[SPMO]] ETF) sold off in each of the past five Julys, averaging about -5% for the month per 3Fourteen's momentum-factor heat map (top 10% vs. bottom 10% of S&P 500 stocks by momentum). The momentum rally had just helped the S&P 500 and Nasdaq post their biggest quarterly gain in six years. Pies suggested investors taking profits from the chip-stock run-up may find opportunities in oversold "quality factor" names — a "disjointed" pocket of beaten-down stocks with bottom-decile momentum scores — favoring incremental buying over aggressive rotation. This is directly relevant to momentum-tilted holdings like SPMO and [[IWMO]] (iShares MSCI World Momentum Factor ETF), which face outsized volatility risk if the seasonal unwind pattern repeats.
