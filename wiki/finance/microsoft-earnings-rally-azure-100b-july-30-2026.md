@@ -35,3 +35,7 @@ Markets rebounded sharply on July 30 as [[Microsoft]] stock surged more than 16%
 ## 🧠 First Principles & Mental Models
 
 - **[[Regression to the Mean]]**: A single earnings beat driving a 16% single-day move after a prior sell-off illustrates how far sentiment (not fundamentals) had drifted from a reasonable valuation — the "surprise" is partly the market correcting an overly pessimistic prior, not purely new information.
+
+## Update (2026-08-04, technical follow-through, source: https://www.investors.com/news/technology/microsoft-stock-msft-breaks-out-after-fiscal-q4-report)
+
+Microsoft's post-earnings surge formed a technical [[Cup Base]] pattern with a buy point of 466.32 per IBD MarketSurge. The stock flirted with that buy point on July 31 (high of 466.84, closed 464.72, +3%), then broke out Monday, August 3, jumping nearly 4% to 482.43 amid a broader rotation into hyperscale cloud providers (Alphabet, Amazon, and Meta also rose). The 5% buy zone extends to 489.64. At least 10 Wall Street analysts raised their MSFT price targets following the report, and Microsoft 365 [[Copilot]] has surpassed 30 million paid seats.

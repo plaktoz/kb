@@ -853,3 +853,42 @@
 | 2026-08-04 | wiki/finance/microsoft-anthropic-openai-investment-returns-q4-2026.md | ingest |
 | 2026-08-03 | wiki/finance/microsoft-capex-short-lived-assets-wall-street-scrutiny.md | ingest |
 | 2026-08-04 | daily-update/2026-08/2026-08-04-2.md | newsletter |
+| 2026-08-04 | 2026-08-04-news-aggregation-2.md | news-fetch |
+| 2026-08-04 | 2026-08-03-alibaba-qwen3-8-max-ai-model-rally.md | scrape |
+| 2026-08-04 | 2026-08-03-amazon-3-trillion-market-cap.md | scrape |
+| 2026-08-04 | 2026-08-03-ibm-arvind-krishna-quantum-computing-2028.md | scrape |
+| 2026-08-04 | 2026-08-03-fed-56-years-fomc-dissent-rate-decision.md | scrape |
+| 2026-08-04 | 2026-08-01-sp-gains-earnings-strength-offsets-fed-uncertainty.md | scrape |
+| 2026-08-04 | 2026-08-03-investors-interpreting-earnings-fed-signals.md | scrape |
+| 2026-08-04 | 2026-08-03-only-3-in-10-workers-reach-deep-focus.md | scrape |
+| 2026-08-04 | 2026-04-01-productivity-tools-for-entrepreneurs.md | scrape |
+| 2026-08-04 | 2026-08-01-workflow-management-software-2026-picks.md | scrape |
+| 2026-08-04 | 2026-08-01-learn-to-struggle-with-ai-cognitive-decline.md | scrape |
+| 2026-08-04 | 2026-07-28-how-to-learn-faster-and-better.md | scrape |
+| 2026-08-04 | 2026-08-03-ai-changing-rules-career-readiness.md | scrape |
+| 2026-08-04 | 2026-08-03-fda-breakthrough-olomorasib-pancreatic-cancer.md | scrape |
+| 2026-08-04 | 2026-07-31-early-menopause-high-blood-pressure-risk.md | scrape |
+| 2026-08-04 | 2026-08-03-ai-healthcare-revolution-diagnosis-wellness.md | scrape |
+| 2026-08-04 | 2026-08-03-microsoft-stock-breaks-out-buy-zone.md | scrape |
+| 2026-08-04 | 2026-08-03-ibm-dividend-cost-33-percent-drawdown.md | scrape |
+| 2026-08-04 | 2026-07-05-momentum-trade-violent-unwind-risk.md | scrape |
+| 2026-08-04 | 2026-08-04-news-aggregation-2.processed.md | archive |
+| 2026-08-04 | wiki/technology/alibaba-qwen3-8-max-ai-model.md | ingest |
+| 2026-08-04 | wiki/finance/amazon-3-trillion-market-cap-2026.md | ingest |
+| 2026-08-04 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
+| 2026-08-04 | wiki/finance/dow-selloff-fed-hold-iran-attack-2026-07-29.md (updated) | ingest |
+| 2026-08-04 | wiki/finance/dow-selloff-fed-hold-iran-attack-2026-07-29.md (updated) | ingest |
+| 2026-08-04 | wiki/finance/economies-investors-earnings-fed-signals-week-ahead-aug2026.md | ingest |
+| 2026-08-04 | wiki/productivity/only-3-in-10-workers-deep-focus-survey.md | ingest |
+| 2026-08-04 | wiki/productivity/productivity-tools-for-entrepreneurs.md | ingest |
+| 2026-08-04 | wiki/productivity/workflow-management-tools-2026.md (updated) | ingest |
+| 2026-08-04 | wiki/learning/learn-to-struggle-with-ai-cognitive-decline.md | ingest |
+| 2026-08-04 | wiki/learning/how-to-learn-faster-and-better-science-backed.md (dup, no new content) | ingest |
+| 2026-08-04 | wiki/learning/ai-changing-rules-career-readiness.md | ingest |
+| 2026-08-04 | wiki/health/fda-breakthrough-olomorasib-pancreatic-cancer.md | ingest |
+| 2026-08-04 | wiki/health/early-menopause-linked-to-high-blood-pressure.md (dup, no new content) | ingest |
+| 2026-08-04 | wiki/health/ai-healthcare-revolution-diagnosis-wellness.md | ingest |
+| 2026-08-04 | wiki/finance/microsoft-earnings-rally-azure-100b-july-30-2026.md (updated) | ingest |
+| 2026-08-04 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
+| 2026-08-04 | wiki/finance/momentum-trade-unwind-sp500-broadening.md (updated) | ingest |
+| 2026-08-04 | daily-update/2026-08/2026-08-04-3.md | newsletter |
