@@ -797,3 +797,11 @@
 | 2026-08-04 | a-practitioners-guide-to-graphs-tim-ainge-good-collective | archive |
 | 2026-08-04 | context-graphs-for-explainable-decision-aware-ai-agents-andreas-kollegger-zaid-zaim-neo4j | archive |
 | 2026-08-04 | aug3.processed.md | archive |
+| 2026-08-03 | wiki/technology/forward-deployed-engineer-role-analysis.md | ingest |
+| 2026-08-03 | wiki/technology/forward-deployed-engineer.md | ingest |
+| 2026-08-04 | wiki/technology/forward-deployed-engineer.md | ingest |
+| 2026-08-04 | wiki/strategy/forward-deployed-engineering-ramp.md | ingest |
+| 2026-08-03 | wiki/strategy/forward-deployed-engineers.md | ingest |
+| 2026-08-03 | wiki/technology/forward-deployed-engineers.md | ingest |
+| 2026-08-04 | 2026-08-04-news-aggregation.md | news-fetch |
+| 2026-08-04 | daily-update/2026-08/2026-08-04.md | newsletter |

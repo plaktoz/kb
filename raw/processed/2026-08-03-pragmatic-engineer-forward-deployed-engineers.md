@@ -1,3 +1,7 @@
+---
+source_url: https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers
+---
+
 # What are Forward Deployed Engineers, and why are they so in demand?
 
 **Author:** Gergely Orosz

@@ -1,3 +1,7 @@
+---
+source_url: https://builders.ramp.com/post/forward-deployed-engineering
+---
+
 # Forward Deployed Engineering (FDE): Lessons from Ramp
 
 Source: https://builders.ramp.com/post/forward-deployed-engineering

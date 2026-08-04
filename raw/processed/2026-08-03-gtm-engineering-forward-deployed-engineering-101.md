@@ -1,3 +1,7 @@
+---
+source_url: https://newsletter.gtmengineering.ai/p/forward-deployed-engineering-101
+---
+
 # Rise of the Forward Deployed Engineer
 
 **Author:** Alex Lindahl | GTM Engineering

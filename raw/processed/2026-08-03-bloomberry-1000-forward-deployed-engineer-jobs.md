@@ -1,3 +1,7 @@
+---
+source_url: https://bloomberry.com/blog/i-analyzed-1000-forward-deployed-engineer-jobs-what-i-learned/
+---
+
 # What I Learned Analyzing 1K Forward Deployed Engineer Jobs
 
 **Author:** Henley Wing Chiu

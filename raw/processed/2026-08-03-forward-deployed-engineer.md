@@ -1,3 +1,7 @@
+---
+source_url: https://en.wikipedia.org/wiki/Forward_Deployed_Engineer
+---
+
 # Forward Deployed Engineer (FDE)
 
 Source: https://en.wikipedia.org/wiki/Forward_Deployed_Engineer
