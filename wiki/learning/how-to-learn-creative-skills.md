@@ -33,3 +33,14 @@ date_consumed: 2026-08-01
 
 - **[[Signal vs. Noise]]**: Creativity produces many random ideas; expertise builds the filter that extracts signal — Young's framework reframes creative development as filter-calibration rather than inspiration-seeking.
 - **[[Skill Decomposition]]**: Breaking a fuzzy ability (creativity) into learnable components (methods, concepts, practice, knowledge, disposition) makes deliberate practice tractable where "just be more creative" fails.
+
+## 🃏 Review Questions
+
+**Q1**: What is Scott Young's central argument about creative skills?
+**A**: Creative skills are learnable, not innate — they decompose into technical skills (methods, concepts, practice) and ideational skills (knowledge depth and dispositional risk-taking).
+
+**Q2**: Why does deep domain immersion matter for creativity, according to Young?
+**A**: Domain knowledge sharpens the filter for judging which randomly generated ideas are actually good; most successful creatives are insiders because expertise calibrates taste.
+
+**Q3**: How should a learner apply the Goldilocks zone concept when producing creative work?
+**A**: Aim for work that is novel enough to attract interest yet comprehensible within existing taste frameworks — too conventional gets ignored, too radical gets rejected.
