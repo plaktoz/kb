@@ -34,3 +34,14 @@ Shane Parrish, adapting from *Clear Thinking*, identifies five key signals that 
 - **[[Circle of Competence]]**: Munger's framework maps directly — the inability to identify one's own limits is the defining failure mode of the imitator, and awareness of those limits is the clearest signal of genuine expertise.
 - **[[Hanlon's Razor]] (inverted)**: Defensiveness when questioned is not malice but a symptom of shallow knowledge — the imitator has no deeper model to retreat to, so they defend the surface.
 - **[[Goodhart's Law]]**: When credentials or confident vocabulary become proxies for expertise, imitators optimize for those signals rather than underlying knowledge — exactly the dynamic Parrish warns against with popularizers.
+
+## 🃏 Review Questions
+
+**Q1**: What is the central argument of the experts-vs-imitators framework?
+**A**: Genuine experts differ from imitators on five dimensions — depth, vocabulary flexibility, reaction to confusion, relationship with failure, and awareness of limits — rather than on surface confidence or presentation style.
+
+**Q2**: How does the "popularizer" distinction function as a practical warning?
+**A**: Skilled communicators who make a subject famous are often not its deepest authorities; when genuine expertise matters, one should seek original sources and primary researchers, not the person who popularized the topic.
+
+**Q3**: How can you apply these signals when evaluating an advisor or source?
+**A**: Ask the person to restate a key idea in plain language or probe an edge case — a genuine expert will engage openly and acknowledge limits, while an imitator will grow defensive or fall back on jargon.
