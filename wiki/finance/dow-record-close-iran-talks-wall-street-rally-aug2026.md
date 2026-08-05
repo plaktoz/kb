@@ -36,3 +36,11 @@ Wall Street rallied on August 4, 2026, with the Dow Jones Industrial Average clo
 
 **Q3**: How might an investor use this rally as a signal about the Iran-driven risk cycle?
 **A**: A Dow record close alongside a falling VIX and rising mega-cap tech suggests the market is pricing in a sustained de-escalation; investors could watch whether subsequent Iran talks stall and reverse these gains as a confirmation or refutation of the thesis.
+
+## Update (2026-08-05, additional sources: Investopedia, Yahoo Finance)
+
+Earnings, not just Iran diplomacy, did much of the work on August 4: the S&P 500 and Dow both closed at fresh records (Nasdaq +2.6%, S&P 500 +1.8%, Dow +1.7%/~900 points) after [[Palantir]] soared nearly 30% — its best day in over a year — on what CEO Alex Karp called an "otherworldly" quarter, with US government commercial revenue up 90% year over year. [[Caterpillar]] surged about 10% after revenue topped $20 billion for the first time, with CEO Joe Creed citing "broadening momentum" from customers building AI data centers. The rally also lifted chip stocks broadly (PHLX Semiconductor Index +6%).
+
+[[Amazon]] was a rare decliner (-2.5%) after a regulatory filing showed founder [[Jeff Bezos]] intended to sell 15 million shares worth over $4 billion — a pullback that came just a day after Amazon joined the $3 trillion market-cap club. Oil extended its slide after Treasury Secretary [[Scott Bessent]] said a deal to reopen the [[Strait of Hormuz]] could come "today or tomorrow"; WTI crude fell 5.8% to $75.70/barrel, and energy stocks (NRG Energy, Diamondback Energy) were among the day's worst performers even as the broader market rallied.
+
+Separately, Philadelphia Fed president [[Anna Paulson]] said the same day that she supported the prior week's rate hold and is "keeping an open mind" on next steps, estimating underlying inflation (stripping out tariffs/energy) at 2.4%–2.8% — a reminder that the rally's macro backdrop (a Fed still undecided on its next move) hadn't fully resolved even as equities hit records.

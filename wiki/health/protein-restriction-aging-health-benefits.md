@@ -36,3 +36,11 @@ A review of over 350 papers published in *Cell Press Blue* finds that reducing p
 
 - **[[One-Size-Fits-All Fallacy]]**: High protein benefits athletes who stress their muscles but harms sedentary individuals — the same input produces opposite outcomes depending on metabolic context, which is exactly why population-level guidelines distort individual decisions.
 - **[[Goodhart's Law]]**: Protein became a proxy metric for health, so food manufacturers fortified everything with it; the review reveals that optimizing for the proxy (protein quantity) decoupled from the actual goal (metabolic health and longevity) for most of the population.
+
+## Update (2026-08-05, Medical News Today)
+
+Additional mechanistic detail beyond FGF21: protein restriction inhibits [[mTORC1]] and activates [[GCN2]] — two nutrient-sensing pathways that regulate cell growth and stress response — telling cells to slow growth and clear cellular waste via [[autophagy]]. It also reduces senescent ("zombie") cells that drive background inflammation, and improves mitochondrial function while reducing reactive oxygen species (ROS) damage to tissues.
+
+This source draws a distinction not present in the earlier note: [[Cellular Longevity]] (keeping individual cells healthy at a molecular level, the focus of this review) versus [[Functional Longevity]] (staying strong, mobile, and frail-resistant, the focus of most prior muscle-preservation research) — the two bodies of research aren't necessarily contradictory, they're measuring different things.
+
+It also refines which amino acids matter: isoleucine, valine, and methionine (essential) plus tyrosine and cysteine (nonessential) appear beneficial when *restricted*, while glycine, serine, and proline may be beneficial when *supplemented* — meaning the effect isn't simply "less protein is better" across all amino acids. Plant protein, compared with animal protein, is separately associated with lower frailty risk. Outside experts flagged that protein restriction could be harmful for adults over 65, who face elevated risk of frailty and sarcopenia from insufficient protein — a caveat not present in the earlier note's coverage.

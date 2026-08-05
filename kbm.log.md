@@ -892,3 +892,45 @@
 | 2026-08-04 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
 | 2026-08-04 | wiki/finance/momentum-trade-unwind-sp500-broadening.md (updated) | ingest |
 | 2026-08-04 | daily-update/2026-08/2026-08-04-3.md | newsletter |
+
+| 2026-08-05 | 2026-08-05-news-aggregation.md | news-fetch |
+| 2026-08-05 | hbr.org/2026/05/managers-are-struggling-to-keep-up-with-the-ai-productivity-boom (paywalled, no body) | scrape-failed |
+| 2026-08-05 | fs.blog/knowledge-project-podcast/truth-over-feelings-inside-opendoors-turnaround (404) | scrape-failed |
+| 2026-08-05 | 2026-08-04-anthropic-signs-10-billion-deal-with-ai-cloud-startup-volta.md | scrape |
+| 2026-08-05 | 2026-08-04-nvidia-open-ai-industry-group-progress.md | scrape |
+| 2026-08-05 | 2026-08-04-white-house-whipsaws-silicon-valley-ai-rules.md | scrape |
+| 2026-08-05 | 2026-08-04-sp500-dow-close-records-palantir-caterpillar.md | scrape |
+| 2026-08-05 | 2026-08-04-dow-sp500-record-highs-nasdaq-hormuz-deal-hopes.md | scrape |
+| 2026-08-05 | 2026-08-04-philadelphia-fed-open-mind-interest-rates.md | scrape |
+| 2026-08-05 | 2024-03-01-when-time-management-was-easy.md | scrape |
+| 2026-08-05 | 2026-08-05-productivity-tips-fast-paced-work.md | scrape |
+| 2026-08-05 | 2026-08-05-ultimate-deliberate-practice-guide.md | scrape |
+| 2026-08-05 | 2016-01-12-should-you-use-deliberate-practice-or-just-practice.md | scrape |
+| 2026-08-05 | 2023-01-11-expertise-expert-8-tips-learning-new-skill.md | scrape |
+| 2026-08-05 | 2026-08-04-sugar-restriction-infancy-lower-dementia-alzheimers-risk.md | scrape |
+| 2026-08-05 | 2026-08-04-restricting-amino-acids-protein-healthy-aging.md | scrape |
+| 2026-08-05 | 2026-08-05-meditation-techniques-stress-sleep-focus.md | scrape |
+| 2026-08-05 | 2026-08-04-ibm-stock-up-3-5-percent-key-drivers.md | scrape |
+| 2026-08-05 | 2026-07-31-microsoft-stock-price-forecast.md | scrape |
+| 2026-08-05 | 2026-07-30-first-principles-thinking-what-it-is-15-examples.md | scrape |
+| 2026-08-05 | 2026-08-05-jpmorgan-global-equity-views-3q-2026.md | scrape |
+| 2026-08-05 | 2026-08-05-news-aggregation.processed.md | archive |
+| 2026-08-05 | wiki/technology/anthropic-signs-10-billion-deal-volta.md | ingest |
+| 2026-08-05 | wiki/technology/nvidia-open-secure-ai-alliance-osaa-progress.md | ingest |
+| 2026-08-05 | wiki/technology/white-house-ai-regulation-whiplash-open-source.md | ingest |
+| 2026-08-05 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated) | ingest |
+| 2026-08-05 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated) | ingest |
+| 2026-08-05 | wiki/finance/philadelphia-fed-paulson-open-mind-rates.md | ingest |
+| 2026-08-05 | wiki/productivity/cal-newport-when-time-management-was-easy.md | ingest |
+| 2026-08-05 | wiki/productivity/productivity-tips-fast-paced-work-environments.md | ingest |
+| 2026-08-05 | wiki/learning/deliberate-practice-ericsson-elements-guide.md | ingest |
+| 2026-08-05 | wiki/learning/deliberate-practice-vs-just-practice-scott-young.md | ingest |
+| 2026-08-05 | wiki/learning/expertise-8-tips-learning-new-skill.md (dup, no new content) | ingest |
+| 2026-08-05 | wiki/health/sugar-restriction-infancy-dementia-alzheimers-risk.md | ingest |
+| 2026-08-05 | wiki/health/protein-restriction-aging-health-benefits.md (updated) | ingest |
+| 2026-08-05 | wiki/health/meditation-techniques-stress-sleep-focus.md | ingest |
+| 2026-08-05 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
+| 2026-08-05 | wiki/finance/microsoft-earnings-rally-azure-100b-july-30-2026.md (dup, no new content) | ingest |
+| 2026-08-05 | wiki/strategy/first-principles-thinking.md (updated) | ingest |
+| 2026-08-05 | wiki/finance/jpmorgan-global-equity-views-momentum-market-2026.md | ingest |
+| 2026-08-05 | daily-update/2026-08/2026-08-05.md | newsletter |
