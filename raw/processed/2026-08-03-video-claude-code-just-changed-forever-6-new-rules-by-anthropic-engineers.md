@@ -1,0 +1,1593 @@
+# Claude Code Just Changed Forever (6 NEW Rules by Anthropic Engineers)
+
+source_url: https://www.youtube.com/watch?v=gQeRjkb_Hlc
+author: Jay E | RoboNuggets
+
+---
+
+# Claude Code Just Changed Forever (6 NEW Rules by Anthropic Engineers)
+
+Get the /doctor-plus skill for free ➡️ https://www.skool.com/robonuggets-free search for n69 Learn to build & sell AI Systems businesses pay for 🚀 https://www.skool.com/robonuggets/about?ref=c1365a0fede2445292bc2bbd2b9e9359
+
+# Description
+
+Get the /doctor-plus skill for free ➡️ https://www.skool.com/robonuggets-free search for n69
+Learn to build & sell AI Systems businesses pay for 🚀 https://www.skool.com/robonuggets/about?ref=c1365a0fede2445292bc2bbd2b9e9359
+
+Get RUBRIC - The Command Centre for AI Agents: https://www.getrubric.app/
+
+Thariq's article (The New Rules of Context Engineering for Claude 5 Models): https://x.com/trq212/status/2080710971228918066
+***
+
+
+Our AI Partner Tools (affiliate revenue go to community perks):
+🥚 Free trial of Blotato: https://blotato.com/?ref=robonuggets
+🥚 Free trial of n8n: https://n8n.partnerlinks.io/o3jqtj032c02
+🥚 Free trial of Make https://www.make.com/en/register?pc=robonuggets
+🥚 Free trial of ElevenLabs: https://try.elevenlabs.io/m5mn2jkv5rzk
+🥚 Free credits at Apify:  https://www.apify.com?fpr=sffv1
+
+---
+About Me 👋🏻
+
+Hey thanks for watching! I'm Jay - spent my career in data and brand building, founded the ROBO Group to help forward-looking businesses grow with AI, and now teaching what I know through this channel and the RoboNuggets community.
+
+If you learned something new and want to see more, support the channel by subscribing: https://www.youtube.com/@RoboNuggets
+
+Follow on other platforms 🔻
+➗ Instagram: https://www.instagram.com/robonuggets
+➖ Tiktok: https://www.tiktok.com/@robonuggets
+✖️ Twitter/X:  https://www.twitter.com/robonuggets
+➕ LinkedIn: https://www.linkedin.com/in/j-enri/
+
+For business, reach out at https://robolabs.so
+
+Leave me a comment if you have a specific request! Thanks.
+- Jay
+
+---
+
+Timestamps
+00:00 - The 4M-view Anthropic article
+00:45 - Context engineering + the ARMS framework
+03:03 - Anthropic deleted 80% of the system prompt
+05:38 - Rule 1
+08:24 - Rule 2
+10:51 - Rule 3:
+15:02 - Rule 4
+16:25 - Rule 5
+18:04 - Rule 6
+20:37 - The /doctor command
+22:15 - /doctor-plus: the free upgrade skill
+
+#AIAgents #AgenticAI #AIAutomation #OpenClaw #ClaudeCode #Antigravity #MCPProtocol #Anthropic #AIAgency #AgentBuilding #AITools #AIWorkflow #AutonomousAgents #MultiAgent #VibeCoding
+
+# Chapters
+
+* [00:00:00] - The 4M-view Anthropic article
+* [00:00:45] - Context engineering + the ARMS framework
+* [00:03:03] - Anthropic deleted 80% of the system prompt
+* [00:05:38] - Rule 1
+* [00:08:24] - Rule 2
+* [00:10:51] - Rule 3:
+* [00:15:02] - Rule 4
+* [00:16:25] - Rule 5
+* [00:18:04] - Rule 6
+* [00:20:37] - The /doctor command
+* [00:22:15] - /doctor-plus: the free upgrade skill
+
+# Transcript
+
+So one of the lead engineers at
+
+Anthropic just published this
+
+breakthrough article on X. It now has 4
+
+million views [music] and in it he
+
+outlines the important changes that
+
+they've made to Claude code, which if
+
+you pay attention to can make your setup
+
+faster, can make your systems cost less,
+
+and just overall let you upgrade your
+
+agentic operating system. I read through
+
+this whole article and today I'll break
+
+down for you the six new rules of Claude
+
+code that it talks about, which some of
+
+them by the way are the exact opposite
+
+of the advice we've been following for
+
+months. And by the end I'm also going to
+
+share with you a skill that lets you
+
+automatically apply these improvements
+
+[music]
+
+to your own setup. And if you're new, my
+
+name is Jay. I spent over a decade
+
+working with brands you may know, have
+
+been in AI since my masters in data
+
+science. Now I'm running an AI business
+
+and one of the largest AI communities
+
+globally. Let's dive into it.
+
+>> [music]
+
+>> So to give you some context, this person
+
+Tariq, he's one of the more well-known
+
+engineers who is working in Anthropic
+
+and this past week he published this
+
+really good article called the new rules
+
+of context engineering for Claude 5
+
+models. And this has been out for only a
+
+few days, but you can see already
+
+garnered something like 4.3 million
+
+views. So that's a very good signal that
+
+there's a couple of great nuggets to
+
+learn from here. Now it's a pretty long
+
+article so I read through it so that you
+
+don't have to and in this video I'll
+
+just break down all of the insights for
+
+you so that you can directly benefit
+
+from it. And with this article the core
+
+topic of it is this piece called context
+
+engineering, which if you haven't heard
+
+that term before it's probably worth
+
+stepping back to just understand what it
+
+is because whenever you work with AI
+
+agents like Claude or Hermes or Codex,
+
+then for sure you yourself even without
+
+knowing it have done a bit of context
+
+engineering as well. And Tariq mentions
+
+it here as well because when you send a
+
+message or a prompt to Claude that
+
+prompt is actually only a small part of
+
+the context that it gets. And a big part
+
+of the output is that your agent gives
+
+you is coming from your context. And
+
+just to hone in on this point, whenever
+
+you start a Claude session and you send
+
+your first prompt, Claude actually
+
+doesn't just work from that prompt or
+
+that message that you send, right?
+
+Because in this case the prompt is just
+
+a direction that you're giving to
+
+Claude, but it becomes so much more
+
+powerful if you have your context
+
+organized. And just to make it simple,
+
+whenever I talk about context in our
+
+community, I always use this arms
+
+framework with the core idea being that
+
+if you organize and engineer this arms
+
+framework properly as your context, then
+
+you're actually ahead of like 99% of
+
+Claude and agentic AI users. Because the
+
+entirety of your context that consists
+
+of the applications that you are using,
+
+which you have connected via tools like
+
+MCPs or APIs or CLIs. You have your
+
+routines, which are basically your
+
+scheduled tasks or your crons that you
+
+have set up. You have your memory, which
+
+are all the artifacts and all of the
+
+reports and documents that you have
+
+generated over time. And finally, you
+
+have your skills, which are SOPs or
+
+processes that you can actually invoke
+
+through skill commands that immediately
+
+just teach Claude how to do a given set
+
+of work. And so when we talk about
+
+context engineering, the way that I
+
+think of it is always just revolving
+
+around these four elements. And what
+
+Tarek is saying in this article is that
+
+because the way that Claude's models
+
+have evolved, there's actually a few new
+
+things that have changed quite
+
+drastically when it comes to operating
+
+or engineering the context for these
+
+models. And to give you a clear example
+
+of how drastic it is, at least in
+
+Anthropic's team, he is mentioning here
+
+that they actually removed over 80% of
+
+Claude code's system prompt for models
+
+like Opus 5 and Fable 5. And even just
+
+by doing that, they experienced no
+
+measurable loss on their coding
+
+evaluations. And this is quite a big
+
+deal and just shows you how far we've
+
+come in terms of the intelligence and
+
+the raw capability of these models.
+
+Because if you just take a step back,
+
+only last year when Opus 4 was launched
+
+and also coincidentally around the same
+
+time that Claude code was launched, the
+
+benchmark intelligence score of Opus 4
+
+back then was only 31% on the artificial
+
+analysis index. Which just to quickly
+
+share with you what that is, that is
+
+coming straight from this company called
+
+artificialanalysis.ai.
+
+And their benchmarks here for raw
+
+intelligence is actually quite good
+
+because what they essentially do here is
+
+throw a a of really difficult tasks to
+
+these models across a variety of
+
+disciplines and score them out of 100.
+
+And this company is also backed by some
+
+big names in the AI field like Nat
+
+Friedman, who's the ex-CEO of GitHub, as
+
+well as Andrew Ng, who's the former head
+
+of Google Brain. And so, the point being
+
+that I think if you're looking for like
+
+one benchmark that is a good reference
+
+every time new models drop, I think
+
+artificialanalysis.ai
+
+would be a good source for you. And if
+
+you look at the chart here, the ones
+
+that are topping the leaderboards right
+
+now is Opus 5 as well as Fable 5, and
+
+they're getting a score of 60 out of
+
+100. Which again, if you go back to our
+
+comparison here, that 61% is actually
+
+leagues better versus what we had only a
+
+year ago. And so, what Tarek was sharing
+
+in that article is that because these
+
+models are now so capable, there's
+
+actually a few new rules to understand
+
+when it comes to engineering the context
+
+of your workspace so that your agents
+
+can work more effectively. And so, when
+
+you're building out your own second
+
+brain or you're building out an agentic
+
+operating system for companies, then
+
+this is a good article for you to get
+
+insights from. And the great thing about
+
+what Anthropic outlined here is that
+
+they actually provided a then and now
+
+view. So, what are the rules that were
+
+true before, and what are the revised
+
+rules that we should consider now as we
+
+work with these agents. And so, I'll go
+
+through each one of these along with a
+
+few examples so that we can all
+
+understand it. And by the way, if you
+
+want to learn how to build and sell AI
+
+systems that businesses actually pay
+
+for, then that's pretty much all we do
+
+over at the Robo Nuggets community.
+
+Where not only do you get access to the
+
+Claude Living Masterclass, which we
+
+update every week and takes you from
+
+zero to mastery with the latest on AI,
+
+but you also get access to our Agents as
+
+Course, which walks you through how to
+
+actually get paid for all these AI
+
+skills that you're learning. You also
+
+get to be part of a genuinely great
+
+community of AI builders. In fact, you
+
+can see just some of the recent wins our
+
+members are getting from the program
+
+right here. So, if you want to start
+
+earning from AI, then check that just in
+
+the pinned comment below. Now, back to
+
+the video. So, a big one for us to
+
+understand is that if before it's
+
+important to give Claude a lot of rules,
+
+this time it is actually important to
+
+let Claude use judgment. And here Tarek
+
+explains it that when they first rolled
+
+out Claude code, they needed to be sure
+
+that Claude avoided worst-case scenarios
+
+such as deleting files. Because
+
+remember, the models weren't as smart
+
+back then. And so that meant that they
+
+would give particularly strong guidance
+
+and rules that might not always be true
+
+and is actually limiting Claude Fable 5
+
+or Opus 5 in today's world. So the
+
+example he gives here because they deal
+
+with a lot of code documentation is that
+
+before in the system prompt of Claude
+
+code, they were actually giving a more
+
+stringent set of rules like this where
+
+they're asking Claude to default to
+
+writing no comments, to never write
+
+multi-paragraph docstrings, and
+
+basically just very specific rules.
+
+Which now with models that are much
+
+smarter than what we started with, it's
+
+actually better sometimes to just let
+
+your AI agent use a bit of judgement in
+
+order for you to get better results. So
+
+one example they're mentioning here is
+
+that they actually trimmed down that
+
+system prompt to just say this, to write
+
+code that reads like the surrounding
+
+code, to match its comment density,
+
+naming, and idiom. Now you might not be
+
+into coding and development yourself,
+
+but you can actually still take
+
+advantage of this new rule. So to give
+
+an example from my own second brain
+
+setup, which is basically how I'm
+
+engineering my context, I've started now
+
+to develop some skills that are
+
+literally just meant for Claude to
+
+surprise me with its output. And if I
+
+just look for that skill because I
+
+literally just named it as surprise me.
+
+I think it's this skill.md. And if I
+
+would look at the actual description of
+
+this surprise me skill, essentially it's
+
+one that I built in order for Fable and
+
+Opus to create really good front-end
+
+designs. If you just browse through some
+
+of the description lines of this skill,
+
+you can see that the direction here is
+
+for Claude to demonstrate extreme
+
+capability, taste, and artistic flavor.
+
+So it's really up to Claude to use his
+
+judgement in order to create better
+
+front-end designs. And to give you an
+
+example of some of the designs that it
+
+created, there's a lot of really good
+
+ones here depending on the niche that
+
+you are in. So there's one that has
+
+these kinetic dots design that looks
+
+pretty good especially when you are
+
+developing for the tech niche. There's
+
+is origami design that has even
+
+interactivity built into that. This one
+
+is quite good because it implements some
+
+really advanced ways to have more
+
+kinetic typography. And if I just scroll
+
+down here, there's a lot of optionality
+
+here in terms of different ways by which
+
+your AI agent can avoid that AI sloppy
+
+look that it usually defaults to. And
+
+the way that these were all created is
+
+because that surprise me skill just
+
+basically lets Claude use its own
+
+judgment in order to create effects like
+
+these that you may have not thought of
+
+yourself. And so the point being,
+
+especially when it comes to more
+
+creative thinking, you might actually
+
+want to just let Claude run with
+
+multiple iterations and multiple options
+
+instead of caging it with structured
+
+rules which may actually just hamstring
+
+your output rather than help you. Now, a
+
+related shift that is equally as
+
+important is this. Whereas before, if it
+
+was important to give Claude some
+
+examples, now Tariq mentions that it's
+
+even more important to give it design
+
+interfaces. And he elaborates it here
+
+where when they were designing the tool
+
+usage capability for Claude, before they
+
+were providing Claude some specific
+
+examples on how to actually use them.
+
+But with the newest models now like
+
+Fable 5 and Opus 5, what they found is
+
+that giving examples actually constrains
+
+them to a certain exploration space. And
+
+I find this to be true in our own work
+
+and projects as well. Because now it's
+
+really important for you to have your
+
+own design system if you want to stand
+
+out from the crowd and actually build
+
+your own brand. To give an example, a
+
+lot of the artifacts and builds that you
+
+see here in our platform like this
+
+getrubric.app website or its Rubric
+
+Flows tool which we use to visualize
+
+systems that we build out for clients or
+
+even the look of this second brain
+
+system that I made a video for before.
+
+And even these title slides that I'm
+
+showing in this video, all of this is
+
+being designed automatically by Claude
+
+using my design interface system skill.
+
+And if I were to just look for it, I
+
+call mine as /robo. And you can see if I
+
+zoom in here, whenever I create a Robo
+
+Nuggets branded material, I just invoke
+
+/robo and it's able to invoke this
+
+skill.md which is connected through this
+
+brandbook.html.
+
+And if I go ahead and open that,
+
+essentially what this HTML does is it
+
+just outlines the different rules when
+
+it comes to this design system. So, let
+
+me just shift that so you can see, and
+
+it provides color palettes, it provides
+
+some guidance on the voices as well as
+
+the fonts that we are using. It gives
+
+that visual style for the dot matrix
+
+effect that you're seeing a lot in the
+
+videos that I create. And essentially
+
+what we're doing here is we're not
+
+really giving examples to Claude
+
+anymore. Not specific examples entirely,
+
+so that it has more freedom to design,
+
+but still within a few guidelines that
+
+the design interface system is actually
+
+providing it. And so, if you were
+
+building out a design system for
+
+yourself for the first time, then these
+
+two rules that we just went over, you
+
+probably need to keep in mind. Because
+
+what I would do first is I'll probably
+
+ask people five to give me different
+
+design systems and give it feedback
+
+until we arrive at a point that we like
+
+that particular look. Then, let's say
+
+you actually like this Helvetica 26
+
+Swiss brutalist design, then you can
+
+just ask Claude to create a brand book
+
+HTML file that provides rules of how
+
+that design system is built, and then
+
+just ask Claude to make that into a
+
+skill file, something like /robo, or in
+
+this case it's probably /helvetica. And
+
+then, the next time that you create some
+
+materials, then it will always look this
+
+good. Now, another important shift that
+
+the article talked about is what we're
+
+calling as progressive disclosure, which
+
+you can see Tarek differentiates versus
+
+the practice before, where you are
+
+putting all of the context up front. And
+
+just to elaborate on that, he mentions
+
+here that because Claude Code in the
+
+very beginning was focused on coding,
+
+their system prompt included or needed
+
+to include detailed information on how
+
+to do code review verification, which
+
+are all these details that are not
+
+always needed, but when they are, it was
+
+actually crucial information. But what
+
+has changed since then is that Claude
+
+Code and these new batch of models have
+
+actually gotten very competent at using
+
+progressive disclosure, which is
+
+essentially loading the right context at
+
+the right times. And a great example of
+
+this is your own claw.md because it
+
+wasn't that long ago that there's a
+
+common advice that if you want to make
+
+your claw.md as strong as you can, you
+
+would want to make that a central
+
+repository of every known practice that
+
+you might run into. But in today's world
+
+and with these more powerful models,
+
+your claw.md actually becomes more
+
+powerful if you make it function as a
+
+router to your tree of files. And just
+
+to make that point clearer, if I go back
+
+to my second brain system here, you can
+
+see that my claw.md is at the center of
+
+this whole second brain system. And
+
+essentially what you're seeing here, all
+
+of these nodes are simply all of the
+
+files in my workspace. But because of
+
+the amount of files and context that's
+
+already in here, you can see I have
+
+something like 57,000 files already in
+
+this whole workspace, then it doesn't
+
+really make sense if you try to stuff
+
+your claw.md with every single context
+
+and way of working and operational rules
+
+that you would like your agent to
+
+remember. And so here you can see how I
+
+represented it in our second brain
+
+system is that our claw.md is actually
+
+just a router, so that it knows when I'm
+
+asking or working with it for content,
+
+then it's able to just tap to this set
+
+of files over here. If I'm working with
+
+it for my community, then there's this
+
+set of files that it can work with. If
+
+I'm dealing with product development,
+
+there is this branch. Personal stuff is
+
+this branch, and all the business
+
+dealings will happen on this side. And
+
+going back to Thrivec's point around
+
+building a tree of files, if claw.md is
+
+a pointer to these different departments
+
+or set of files, then what I actually
+
+have in my workspace, which you can try
+
+and emulate as well, is to have sub
+
+routers that basically just let Claude
+
+find the right files within this
+
+specific department. Just to give one
+
+example, let's say for content, I
+
+actually have a file that's called
+
+content.md. And you can see here that
+
+it's basically a router that gives
+
+Claude some direction on where to find
+
+things whenever we're working on
+
+content. So let's say we're in the
+
+process of ideating content ideas,
+
+there's some skills here that it names
+
+that are useful for that intent. When it
+
+comes to researching or producing the
+
+actual lesson or video, then it has
+
+several markdown file references and
+
+skills here as well. And so the point
+
+being here is that as your agentic
+
+operating system evolves and you start
+
+to have a workspace for your company or
+
+for your team that becomes a bit more
+
+complex, what you can start to do is to
+
+actually identify the different
+
+departments of your life and of your
+
+work and actually build out these sub
+
+indexes in order to help Claude navigate
+
+your tree of files more efficiently. So
+
+that instead of just filling your
+
+Claude.md with every single fact about
+
+your business, then you can start to
+
+make it a lot thinner and a bit more
+
+efficient so that it only progressively
+
+loads the context that you need during
+
+the sessions where you need them. Which
+
+in its essence is what progressive
+
+disclosure really is. And also remember
+
+that this has implications on cost and
+
+how often you run into usage limits.
+
+Because before, if you have your
+
+Claude.md set up so that it's quite
+
+thick and is quite verbose, then what
+
+really happens here is if this rectangle
+
+denoted by the broken lines would be
+
+your session and your context window,
+
+then every session that you start with
+
+Claude, you actually use up this much
+
+tokens, which is equivalent to your
+
+Claude.md the moment that you send your
+
+first prompt. Which in my view is a bit
+
+of a waste, especially if as time goes
+
+by and you start to use Claude or any
+
+agent platform a lot more, then that
+
+token usage does rack up. Now in
+
+contrast to that, if your Claude.md is
+
+thin and only serves as a router, then
+
+the more that you interact with your
+
+agent, you actually start to realize the
+
+efficiency gains because you are not
+
+using up as much tokens with this
+
+Claude.md that is essentially a system
+
+prompt that gets injected and also uses
+
+your token budget allocation the moment
+
+that you start a new session. Now this
+
+next one is quite simple because before
+
+with older models, you may find that you
+
+needed to repeat yourself quite a lot in
+
+order for the model to understand what
+
+you mean. But this time, Tarikin that
+
+article mentions that it's actually
+
+better to have more simple tool
+
+descriptions. And this is probably
+
+something that you will just notice in
+
+the background because before if you
+
+recall, there were some advice where if
+
+you continuously chat with a model in a
+
+particular session and that session
+
+starts to build up context, there is a
+
+more noticeable case of what we're
+
+calling context rot. And a good example
+
+of how that was is that models before
+
+were more likely to listen to
+
+instructions at the end of the context
+
+window, which are the most recent
+
+messages, than the ones at the start.
+
+And so as a result of that, you would
+
+sometimes need to provide more repeated
+
+instructions for a model in order for it
+
+to understand or remember what you mean.
+
+Now, what Tarek is mentioning here
+
+simply is that that has actually changed
+
+because a lot of these models with table
+
+five and opus five are actually more
+
+intelligent and a bit more smart. Same
+
+with the example by the Entropic team
+
+here, where he's saying that in the
+
+past, their system prompt would
+
+sometimes have references to tools in
+
+the main system prompt as well as
+
+instructions in the tool description.
+
+So, they're basically just putting it in
+
+two places at once. But now, they could
+
+just delete those other repeat examples,
+
+which in their case would be in the tool
+
+descriptions rather than the system
+
+prompt. So, there's less duplication.
+
+You also save on the token cost simply
+
+because these newer set of models are
+
+much more intelligent versus what we
+
+started with. And that leads us to
+
+another shift, which you also might have
+
+noticed in the background, which is
+
+basically this concept of automatic
+
+memory. And this concept and shift is
+
+very simple. What Entropic's mentioning
+
+here is that before, they actually used
+
+to encourage users to save things in
+
+Claude's memory, which if you don't
+
+know, you can actually use the hash
+
+hotkey to write to their cloud.md
+
+automatically. But instead, at this
+
+point in Claude code's development, it
+
+now can actually automatically save
+
+memories that are relevant to the work
+
+and to you. Now, this particular advice
+
+and this saving memories, I do see it
+
+happen on my side, but generally, I
+
+think if you have a productive session
+
+with Claude that you think there's a lot
+
+of information there that would be
+
+useful to be logged or remembered by
+
+Claude, I think it's definitely still
+
+worth just asking Claude to remember
+
+those things depending on how your
+
+second brain system and your agenda
+
+operating system is set up. Now, to give
+
+an example, at least in how I do it, I
+
+built out this skill called {slash}
+
+calibrate. And this is probably one of
+
+my most used skills because whenever I
+
+end a session with Claude, I just do
+
+/calibrate. And what it does is it will
+
+just review that current conversation
+
+and applies the best updates to skills,
+
+to claw.md rules, to memory, and to
+
+workflows that we have so that it
+
+captures the learning in that whole
+
+session and applies it to our operating
+
+system. As to give you a view of my VS
+
+Code IDE here where I'm using Claude
+
+Code. You see I've used calibrate here
+
+and what that did is it just updated
+
+these skills that I gave some feedback
+
+for. And apart from skills, it also
+
+calibrates my claw.md, the content.md
+
+router that I showed earlier, my memory
+
+files. It logged a new recipe or format
+
+under my prompt packs and so on and so
+
+forth. And so you can see with this one
+
+skill and the more that you use Claude
+
+Code, you're actually starting to refine
+
+the way you work with them so that it
+
+gets to know you better. And last but
+
+not least is the transition from simple
+
+specs to richer references. And to me
+
+this shift is really important because I
+
+use it on the daily. So what Tarek
+
+mentions here is that previously,
+
+literally just a few probably months
+
+ago, there was this over-reliance on
+
+markdown files with creating plans, with
+
+creating assets and artifacts because
+
+the prevailing knowledge is that these
+
+markdown files are simple enough and
+
+light enough so that it would help
+
+Claude have proper references for things
+
+like code or specs or essentially plans
+
+for projects that you're creating with
+
+it. And obviously markdown files still
+
+very important like your claw.md and
+
+your skill files are still in the
+
+markdown format, right? But what we're
+
+saying here is that you don't actually
+
+need to be limited anymore with just
+
+markdown files. Because with this newer
+
+batch of models, it can handle
+
+increasingly more complicated
+
+references. And the one that I really
+
+like and probably start to use more now
+
+more than markdown files are HTML
+
+artifacts. And a good example of an HTML
+
+artifact or reference is that brand book
+
+that I showed earlier. Because if this
+
+were a markdown file, it probably won't
+
+be able to convey the same idea. It
+
+won't be able to show visually what are
+
+the color palettes of this design
+
+system. And so having a reference like
+
+this, which you can see is an HTML file,
+
+basically a hypertext markup language,
+
+that when you open them, it just allows
+
+browsers like Chrome to render them
+
+visually. Then, there's a benefit of
+
+number one, your agent being able to
+
+parse through it, because under the
+
+hood, this is all still just code and
+
+still just text. But, also equally as
+
+important is that you, as the human,
+
+should be able to see and understand
+
+these references, especially the more
+
+visual ones. And this is also important
+
+when you're communicating ideas to other
+
+people, just like what I'm doing now.
+
+So, let's say this document about this
+
+skill called Dr. Plus, which I'll go
+
+over in a bit. This is much more visual,
+
+much more engaging versus the say if I
+
+were presenting to you right now a
+
+markdown file, then this probably won't
+
+be as effective as how it looks right
+
+now. In fact, sometimes if I feel like I
+
+have a lot of token budget remaining
+
+during the week, and I want to
+
+understand concepts or new skills that
+
+I'm investigating or trying out, simply,
+
+I routinely just ask Claude to create
+
+HTML artifacts for me, because this is
+
+just much easier to review versus like a
+
+markdown file or just being locked in
+
+the chat window terminal session, where
+
+you need to read through a wall of text.
+
+So, this is just one example where I
+
+literally just ask it to create an
+
+infographic using that {slash} Robo
+
+skill, our design system, in order to
+
+understand what are these new rules that
+
+the article was talking about. So, I
+
+pointed Claude to that article, it gave
+
+me those six shifts, gave me some
+
+examples of what these shifts are
+
+pertaining to, and this gives me a more
+
+solid idea in a much faster way versus
+
+me just having to read through Claude's
+
+essay on what this whole article is
+
+about. Now, the good news about all this
+
+is that Anthropic has actually made it
+
+really simple to apply all of these best
+
+practices with the latest version of
+
+Claude Code. So, if you update your
+
+Claude Code to the latest, then you'll
+
+be able to also get this {slash} doctor
+
+skill, which if you invoke that command,
+
+what it will basically do is five
+
+things. So, it will check your install
+
+of Claude Code to see if there's like
+
+any broken or duplicate installs, any
+
+path file path problems. It also finds
+
+dead weight, so for example, your skills
+
+or MCP servers, and even your cloud.md,
+
+it trims it down so that it's optimized
+
+to be thinner, just like what we
+
+mentioned earlier. If you have hooks set
+
+up, which are essentially these
+
+deterministic codes that you may have
+
+already set up if you're a bit more
+
+advanced in Cloud Code, then {slash}
+
+doctor will call out these hooks that
+
+add a bit of slowness to every turn or
+
+every message that you send to Cloud.
+
+And then finally, it just reports its
+
+findings before applying those fixes. If
+
+I go to my Cloud and just show, you can
+
+see I ran that {slash} doctor command a
+
+while ago. Gives me a summary of what it
+
+found. So, it says here that my install
+
+is healthy and up to date. It gives me a
+
+lot of detail around the stuff that it
+
+recommends. But, at the end of this, it
+
+gave me these options on what I actually
+
+want to do. So, it gave some MCP servers
+
+that I might consider disabling, which I
+
+think we can do that. There's a couple
+
+of skills in here that I think I either
+
+might have replaced already, which we
+
+can probably archive. There's also a
+
+plugin that I was demoing in a tutorial
+
+previously. And then it also tells me
+
+here that I am a bit behind on the
+
+versioning because I think every day
+
+there's a new version of Cloud Code. So,
+
+you might find that to be true for
+
+yourself as well. So, if you submit
+
+that, that just gets your Cloud Code
+
+instance to be up to spec, let's say, to
+
+these best practices. However, with just
+
+this {slash} doctor skill, I actually
+
+found that it is a bit more basic. It
+
+doesn't really capture the learnings
+
+that Tariq was mentioning in those six
+
+shifts. So, what I basically did is I
+
+just made this {slash} doctor plus,
+
+which is a skill that you can just grab
+
+below. It's available for free. And what
+
+that does, if in case you want a more
+
+complete checkup, is that apart from
+
+doing all the things that {slash} doctor
+
+does, basically by just invoking the
+
+same {slash} doctor command that ships
+
+with Cloud Code, is it also does a check
+
+of those six shifts that we talked
+
+about. And you can see when I ran this
+
+on my device, says doctor's clean
+
+because I've already done it before
+
+this. And then the good thing about this
+
+is that it actually tells me with those
+
+six shifts, what are some of the skills
+
+and artifacts that I can actually
+
+optimize based on these new rules of
+
+Cloud. So, it's telling me that this
+
+last 30-day skill, which is meant for
+
+research, is hitting a lot of red flags
+
+based on those new rules. And I actually
+
+I'm not surprised with this because I
+
+remember with this last 30 days, it came
+
+out a few months ago already. So, it's
+
+telling me here that this skill is
+
+actually really thick. It's like 2,090
+
+lines long. And we can probably optimize
+
+that by making this skill.md more of a
+
+router rather than dumping this whole
+
+2,000 lines of context in there. But,
+
+there in essence, what you can do is to
+
+run this Dr. Plus skill and just do a
+
+more advanced checkup based on the
+
+shifts, based on the new rules that
+
+Tarek was mentioning in that now viral
+
+article. And again, you can just grab
+
+that whole skill, which you can import
+
+or customize for your setup or even set
+
+up a routine for. So, that let's say
+
+every month you run this Dr. Plus skill
+
+to do a check with your Cloud Code
+
+instance. And you can just get that in
+
+the description below.

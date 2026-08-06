@@ -89,7 +89,9 @@ const [urlDiscovery, speakerPromptLoad] = await parallel([
   ),
 ])
 
-const urls = (urlDiscovery && urlDiscovery.urls) ? urlDiscovery.urls : []
+const discoveredUrls = (urlDiscovery && urlDiscovery.urls) ? urlDiscovery.urls : []
+const argsUrls = args ? (Array.isArray(args) ? args : [args]).filter(s => typeof s === 'string' && s.startsWith('http')) : []
+const urls = [...new Set([...argsUrls, ...discoveredUrls])]
 const sourceFiles = (urlDiscovery && urlDiscovery.sourceFiles) ? urlDiscovery.sourceFiles : []
 const speakerPrompt = (speakerPromptLoad && speakerPromptLoad.content) ? speakerPromptLoad.content : ''
 

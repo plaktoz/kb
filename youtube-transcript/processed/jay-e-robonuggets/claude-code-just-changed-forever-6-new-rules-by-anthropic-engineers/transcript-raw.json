@@ -1,0 +1,3787 @@
+[
+  {
+    "text": "So one of the lead engineers at",
+    "start": 0,
+    "duration": 2.68
+  },
+  {
+    "text": "Anthropic just published this",
+    "start": 1.28,
+    "duration": 3.96
+  },
+  {
+    "text": "breakthrough article on X. It now has 4",
+    "start": 2.68,
+    "duration": 4.04
+  },
+  {
+    "text": "million views [music] and in it he",
+    "start": 5.24,
+    "duration": 3.04
+  },
+  {
+    "text": "outlines the important changes that",
+    "start": 6.72,
+    "duration": 3.2
+  },
+  {
+    "text": "they've made to Claude code, which if",
+    "start": 8.28,
+    "duration": 3.4
+  },
+  {
+    "text": "you pay attention to can make your setup",
+    "start": 9.92,
+    "duration": 4
+  },
+  {
+    "text": "faster, can make your systems cost less,",
+    "start": 11.68,
+    "duration": 3.88
+  },
+  {
+    "text": "and just overall let you upgrade your",
+    "start": 13.92,
+    "duration": 3.36
+  },
+  {
+    "text": "agentic operating system. I read through",
+    "start": 15.56,
+    "duration": 3.12
+  },
+  {
+    "text": "this whole article and today I'll break",
+    "start": 17.28,
+    "duration": 3.48
+  },
+  {
+    "text": "down for you the six new rules of Claude",
+    "start": 18.68,
+    "duration": 3.72
+  },
+  {
+    "text": "code that it talks about, which some of",
+    "start": 20.76,
+    "duration": 3.2
+  },
+  {
+    "text": "them by the way are the exact opposite",
+    "start": 22.4,
+    "duration": 2.92
+  },
+  {
+    "text": "of the advice we've been following for",
+    "start": 23.96,
+    "duration": 3.04
+  },
+  {
+    "text": "months. And by the end I'm also going to",
+    "start": 25.32,
+    "duration": 3.24
+  },
+  {
+    "text": "share with you a skill that lets you",
+    "start": 27,
+    "duration": 3.14
+  },
+  {
+    "text": "automatically apply these improvements",
+    "start": 28.56,
+    "duration": 2.24
+  },
+  {
+    "text": "[music]",
+    "start": 30.14,
+    "duration": 2.58
+  },
+  {
+    "text": "to your own setup. And if you're new, my",
+    "start": 30.8,
+    "duration": 3.48
+  },
+  {
+    "text": "name is Jay. I spent over a decade",
+    "start": 32.72,
+    "duration": 3.16
+  },
+  {
+    "text": "working with brands you may know, have",
+    "start": 34.28,
+    "duration": 3.28
+  },
+  {
+    "text": "been in AI since my masters in data",
+    "start": 35.88,
+    "duration": 3.36
+  },
+  {
+    "text": "science. Now I'm running an AI business",
+    "start": 37.56,
+    "duration": 3.28
+  },
+  {
+    "text": "and one of the largest AI communities",
+    "start": 39.24,
+    "duration": 3.335
+  },
+  {
+    "text": "globally. Let's dive into it.",
+    "start": 40.84,
+    "duration": 3.755
+  },
+  {
+    "text": ">> [music]",
+    "start": 42.575,
+    "duration": 2.02
+  },
+  {
+    "text": ">> So to give you some context, this person",
+    "start": 45.4,
+    "duration": 3.48
+  },
+  {
+    "text": "Tariq, he's one of the more well-known",
+    "start": 47.2,
+    "duration": 3.76
+  },
+  {
+    "text": "engineers who is working in Anthropic",
+    "start": 48.88,
+    "duration": 3.8
+  },
+  {
+    "text": "and this past week he published this",
+    "start": 50.96,
+    "duration": 3.68
+  },
+  {
+    "text": "really good article called the new rules",
+    "start": 52.68,
+    "duration": 4.32
+  },
+  {
+    "text": "of context engineering for Claude 5",
+    "start": 54.64,
+    "duration": 4.24
+  },
+  {
+    "text": "models. And this has been out for only a",
+    "start": 57,
+    "duration": 3.48
+  },
+  {
+    "text": "few days, but you can see already",
+    "start": 58.88,
+    "duration": 3.36
+  },
+  {
+    "text": "garnered something like 4.3 million",
+    "start": 60.48,
+    "duration": 3.56
+  },
+  {
+    "text": "views. So that's a very good signal that",
+    "start": 62.24,
+    "duration": 3.64
+  },
+  {
+    "text": "there's a couple of great nuggets to",
+    "start": 64.04,
+    "duration": 3.44
+  },
+  {
+    "text": "learn from here. Now it's a pretty long",
+    "start": 65.88,
+    "duration": 3.04
+  },
+  {
+    "text": "article so I read through it so that you",
+    "start": 67.48,
+    "duration": 2.84
+  },
+  {
+    "text": "don't have to and in this video I'll",
+    "start": 68.92,
+    "duration": 2.88
+  },
+  {
+    "text": "just break down all of the insights for",
+    "start": 70.32,
+    "duration": 2.72
+  },
+  {
+    "text": "you so that you can directly benefit",
+    "start": 71.8,
+    "duration": 2.88
+  },
+  {
+    "text": "from it. And with this article the core",
+    "start": 73.04,
+    "duration": 3.8
+  },
+  {
+    "text": "topic of it is this piece called context",
+    "start": 74.68,
+    "duration": 3.4
+  },
+  {
+    "text": "engineering, which if you haven't heard",
+    "start": 76.84,
+    "duration": 2.48
+  },
+  {
+    "text": "that term before it's probably worth",
+    "start": 78.08,
+    "duration": 2.92
+  },
+  {
+    "text": "stepping back to just understand what it",
+    "start": 79.32,
+    "duration": 3.2
+  },
+  {
+    "text": "is because whenever you work with AI",
+    "start": 81,
+    "duration": 4.08
+  },
+  {
+    "text": "agents like Claude or Hermes or Codex,",
+    "start": 82.52,
+    "duration": 4.6
+  },
+  {
+    "text": "then for sure you yourself even without",
+    "start": 85.08,
+    "duration": 3.8
+  },
+  {
+    "text": "knowing it have done a bit of context",
+    "start": 87.12,
+    "duration": 3.64
+  },
+  {
+    "text": "engineering as well. And Tariq mentions",
+    "start": 88.88,
+    "duration": 3.52
+  },
+  {
+    "text": "it here as well because when you send a",
+    "start": 90.76,
+    "duration": 3.36
+  },
+  {
+    "text": "message or a prompt to Claude that",
+    "start": 92.4,
+    "duration": 4
+  },
+  {
+    "text": "prompt is actually only a small part of",
+    "start": 94.12,
+    "duration": 4.16
+  },
+  {
+    "text": "the context that it gets. And a big part",
+    "start": 96.4,
+    "duration": 3.68
+  },
+  {
+    "text": "of the output is that your agent gives",
+    "start": 98.28,
+    "duration": 4.2
+  },
+  {
+    "text": "you is coming from your context. And",
+    "start": 100.08,
+    "duration": 4
+  },
+  {
+    "text": "just to hone in on this point, whenever",
+    "start": 102.48,
+    "duration": 4
+  },
+  {
+    "text": "you start a Claude session and you send",
+    "start": 104.08,
+    "duration": 3.84
+  },
+  {
+    "text": "your first prompt, Claude actually",
+    "start": 106.48,
+    "duration": 3.2
+  },
+  {
+    "text": "doesn't just work from that prompt or",
+    "start": 107.92,
+    "duration": 3.12
+  },
+  {
+    "text": "that message that you send, right?",
+    "start": 109.68,
+    "duration": 2.96
+  },
+  {
+    "text": "Because in this case the prompt is just",
+    "start": 111.04,
+    "duration": 2.84
+  },
+  {
+    "text": "a direction that you're giving to",
+    "start": 112.64,
+    "duration": 2.84
+  },
+  {
+    "text": "Claude, but it becomes so much more",
+    "start": 113.88,
+    "duration": 3.64
+  },
+  {
+    "text": "powerful if you have your context",
+    "start": 115.48,
+    "duration": 3.64
+  },
+  {
+    "text": "organized. And just to make it simple,",
+    "start": 117.52,
+    "duration": 3.04
+  },
+  {
+    "text": "whenever I talk about context in our",
+    "start": 119.12,
+    "duration": 3.56
+  },
+  {
+    "text": "community, I always use this arms",
+    "start": 120.56,
+    "duration": 3.84
+  },
+  {
+    "text": "framework with the core idea being that",
+    "start": 122.68,
+    "duration": 4.16
+  },
+  {
+    "text": "if you organize and engineer this arms",
+    "start": 124.4,
+    "duration": 4.92
+  },
+  {
+    "text": "framework properly as your context, then",
+    "start": 126.84,
+    "duration": 4.84
+  },
+  {
+    "text": "you're actually ahead of like 99% of",
+    "start": 129.32,
+    "duration": 4.44
+  },
+  {
+    "text": "Claude and agentic AI users. Because the",
+    "start": 131.68,
+    "duration": 4.279
+  },
+  {
+    "text": "entirety of your context that consists",
+    "start": 133.76,
+    "duration": 4.28
+  },
+  {
+    "text": "of the applications that you are using,",
+    "start": 135.959,
+    "duration": 3.881
+  },
+  {
+    "text": "which you have connected via tools like",
+    "start": 138.04,
+    "duration": 4.88
+  },
+  {
+    "text": "MCPs or APIs or CLIs. You have your",
+    "start": 139.84,
+    "duration": 4.48
+  },
+  {
+    "text": "routines, which are basically your",
+    "start": 142.92,
+    "duration": 3.56
+  },
+  {
+    "text": "scheduled tasks or your crons that you",
+    "start": 144.32,
+    "duration": 3.92
+  },
+  {
+    "text": "have set up. You have your memory, which",
+    "start": 146.48,
+    "duration": 3.96
+  },
+  {
+    "text": "are all the artifacts and all of the",
+    "start": 148.24,
+    "duration": 3.8
+  },
+  {
+    "text": "reports and documents that you have",
+    "start": 150.44,
+    "duration": 3.519
+  },
+  {
+    "text": "generated over time. And finally, you",
+    "start": 152.04,
+    "duration": 4.96
+  },
+  {
+    "text": "have your skills, which are SOPs or",
+    "start": 153.959,
+    "duration": 4.921
+  },
+  {
+    "text": "processes that you can actually invoke",
+    "start": 157,
+    "duration": 4.04
+  },
+  {
+    "text": "through skill commands that immediately",
+    "start": 158.88,
+    "duration": 4.56
+  },
+  {
+    "text": "just teach Claude how to do a given set",
+    "start": 161.04,
+    "duration": 3.8
+  },
+  {
+    "text": "of work. And so when we talk about",
+    "start": 163.44,
+    "duration": 2.76
+  },
+  {
+    "text": "context engineering, the way that I",
+    "start": 164.84,
+    "duration": 3.44
+  },
+  {
+    "text": "think of it is always just revolving",
+    "start": 166.2,
+    "duration": 4.36
+  },
+  {
+    "text": "around these four elements. And what",
+    "start": 168.28,
+    "duration": 4.32
+  },
+  {
+    "text": "Tarek is saying in this article is that",
+    "start": 170.56,
+    "duration": 4
+  },
+  {
+    "text": "because the way that Claude's models",
+    "start": 172.6,
+    "duration": 3.68
+  },
+  {
+    "text": "have evolved, there's actually a few new",
+    "start": 174.56,
+    "duration": 3.32
+  },
+  {
+    "text": "things that have changed quite",
+    "start": 176.28,
+    "duration": 4.12
+  },
+  {
+    "text": "drastically when it comes to operating",
+    "start": 177.88,
+    "duration": 4.6
+  },
+  {
+    "text": "or engineering the context for these",
+    "start": 180.4,
+    "duration": 3.68
+  },
+  {
+    "text": "models. And to give you a clear example",
+    "start": 182.48,
+    "duration": 3.44
+  },
+  {
+    "text": "of how drastic it is, at least in",
+    "start": 184.08,
+    "duration": 3.92
+  },
+  {
+    "text": "Anthropic's team, he is mentioning here",
+    "start": 185.92,
+    "duration": 4.599
+  },
+  {
+    "text": "that they actually removed over 80% of",
+    "start": 188,
+    "duration": 5
+  },
+  {
+    "text": "Claude code's system prompt for models",
+    "start": 190.519,
+    "duration": 4.72
+  },
+  {
+    "text": "like Opus 5 and Fable 5. And even just",
+    "start": 193,
+    "duration": 3.84
+  },
+  {
+    "text": "by doing that, they experienced no",
+    "start": 195.239,
+    "duration": 3.72
+  },
+  {
+    "text": "measurable loss on their coding",
+    "start": 196.84,
+    "duration": 3.84
+  },
+  {
+    "text": "evaluations. And this is quite a big",
+    "start": 198.959,
+    "duration": 3.401
+  },
+  {
+    "text": "deal and just shows you how far we've",
+    "start": 200.68,
+    "duration": 3.16
+  },
+  {
+    "text": "come in terms of the intelligence and",
+    "start": 202.36,
+    "duration": 3.24
+  },
+  {
+    "text": "the raw capability of these models.",
+    "start": 203.84,
+    "duration": 3.2
+  },
+  {
+    "text": "Because if you just take a step back,",
+    "start": 205.6,
+    "duration": 3.48
+  },
+  {
+    "text": "only last year when Opus 4 was launched",
+    "start": 207.04,
+    "duration": 3.919
+  },
+  {
+    "text": "and also coincidentally around the same",
+    "start": 209.08,
+    "duration": 3.439
+  },
+  {
+    "text": "time that Claude code was launched, the",
+    "start": 210.959,
+    "duration": 4.081
+  },
+  {
+    "text": "benchmark intelligence score of Opus 4",
+    "start": 212.519,
+    "duration": 5.681
+  },
+  {
+    "text": "back then was only 31% on the artificial",
+    "start": 215.04,
+    "duration": 5.08
+  },
+  {
+    "text": "analysis index. Which just to quickly",
+    "start": 218.2,
+    "duration": 3.24
+  },
+  {
+    "text": "share with you what that is, that is",
+    "start": 220.12,
+    "duration": 3.2
+  },
+  {
+    "text": "coming straight from this company called",
+    "start": 221.44,
+    "duration": 3.56
+  },
+  {
+    "text": "artificialanalysis.ai.",
+    "start": 223.32,
+    "duration": 3.28
+  },
+  {
+    "text": "And their benchmarks here for raw",
+    "start": 225,
+    "duration": 3.08
+  },
+  {
+    "text": "intelligence is actually quite good",
+    "start": 226.6,
+    "duration": 3.2
+  },
+  {
+    "text": "because what they essentially do here is",
+    "start": 228.08,
+    "duration": 3.72
+  },
+  {
+    "text": "throw a a of really difficult tasks to",
+    "start": 229.8,
+    "duration": 4.08
+  },
+  {
+    "text": "these models across a variety of",
+    "start": 231.8,
+    "duration": 4.56
+  },
+  {
+    "text": "disciplines and score them out of 100.",
+    "start": 233.88,
+    "duration": 4.04
+  },
+  {
+    "text": "And this company is also backed by some",
+    "start": 236.36,
+    "duration": 3.4
+  },
+  {
+    "text": "big names in the AI field like Nat",
+    "start": 237.92,
+    "duration": 3.88
+  },
+  {
+    "text": "Friedman, who's the ex-CEO of GitHub, as",
+    "start": 239.76,
+    "duration": 3.84
+  },
+  {
+    "text": "well as Andrew Ng, who's the former head",
+    "start": 241.8,
+    "duration": 3.56
+  },
+  {
+    "text": "of Google Brain. And so, the point being",
+    "start": 243.6,
+    "duration": 3.28
+  },
+  {
+    "text": "that I think if you're looking for like",
+    "start": 245.36,
+    "duration": 3.56
+  },
+  {
+    "text": "one benchmark that is a good reference",
+    "start": 246.88,
+    "duration": 3.44
+  },
+  {
+    "text": "every time new models drop, I think",
+    "start": 248.92,
+    "duration": 3.039
+  },
+  {
+    "text": "artificialanalysis.ai",
+    "start": 250.32,
+    "duration": 3.56
+  },
+  {
+    "text": "would be a good source for you. And if",
+    "start": 251.959,
+    "duration": 3.081
+  },
+  {
+    "text": "you look at the chart here, the ones",
+    "start": 253.88,
+    "duration": 2.88
+  },
+  {
+    "text": "that are topping the leaderboards right",
+    "start": 255.04,
+    "duration": 3.88
+  },
+  {
+    "text": "now is Opus 5 as well as Fable 5, and",
+    "start": 256.76,
+    "duration": 4.039
+  },
+  {
+    "text": "they're getting a score of 60 out of",
+    "start": 258.92,
+    "duration": 3.76
+  },
+  {
+    "text": "100. Which again, if you go back to our",
+    "start": 260.799,
+    "duration": 4.561
+  },
+  {
+    "text": "comparison here, that 61% is actually",
+    "start": 262.68,
+    "duration": 5.52
+  },
+  {
+    "text": "leagues better versus what we had only a",
+    "start": 265.36,
+    "duration": 4.52
+  },
+  {
+    "text": "year ago. And so, what Tarek was sharing",
+    "start": 268.2,
+    "duration": 3.6
+  },
+  {
+    "text": "in that article is that because these",
+    "start": 269.88,
+    "duration": 3.8
+  },
+  {
+    "text": "models are now so capable, there's",
+    "start": 271.8,
+    "duration": 3.56
+  },
+  {
+    "text": "actually a few new rules to understand",
+    "start": 273.68,
+    "duration": 3.56
+  },
+  {
+    "text": "when it comes to engineering the context",
+    "start": 275.36,
+    "duration": 4.12
+  },
+  {
+    "text": "of your workspace so that your agents",
+    "start": 277.24,
+    "duration": 4.12
+  },
+  {
+    "text": "can work more effectively. And so, when",
+    "start": 279.48,
+    "duration": 3.28
+  },
+  {
+    "text": "you're building out your own second",
+    "start": 281.36,
+    "duration": 3
+  },
+  {
+    "text": "brain or you're building out an agentic",
+    "start": 282.76,
+    "duration": 3.48
+  },
+  {
+    "text": "operating system for companies, then",
+    "start": 284.36,
+    "duration": 4.12
+  },
+  {
+    "text": "this is a good article for you to get",
+    "start": 286.24,
+    "duration": 3.88
+  },
+  {
+    "text": "insights from. And the great thing about",
+    "start": 288.48,
+    "duration": 3.24
+  },
+  {
+    "text": "what Anthropic outlined here is that",
+    "start": 290.12,
+    "duration": 3.72
+  },
+  {
+    "text": "they actually provided a then and now",
+    "start": 291.72,
+    "duration": 3.88
+  },
+  {
+    "text": "view. So, what are the rules that were",
+    "start": 293.84,
+    "duration": 3.6
+  },
+  {
+    "text": "true before, and what are the revised",
+    "start": 295.6,
+    "duration": 4
+  },
+  {
+    "text": "rules that we should consider now as we",
+    "start": 297.44,
+    "duration": 3.92
+  },
+  {
+    "text": "work with these agents. And so, I'll go",
+    "start": 299.6,
+    "duration": 2.96
+  },
+  {
+    "text": "through each one of these along with a",
+    "start": 301.36,
+    "duration": 2.64
+  },
+  {
+    "text": "few examples so that we can all",
+    "start": 302.56,
+    "duration": 2.72
+  },
+  {
+    "text": "understand it. And by the way, if you",
+    "start": 304,
+    "duration": 2.8
+  },
+  {
+    "text": "want to learn how to build and sell AI",
+    "start": 305.28,
+    "duration": 3.36
+  },
+  {
+    "text": "systems that businesses actually pay",
+    "start": 306.8,
+    "duration": 3.76
+  },
+  {
+    "text": "for, then that's pretty much all we do",
+    "start": 308.64,
+    "duration": 3.44
+  },
+  {
+    "text": "over at the Robo Nuggets community.",
+    "start": 310.56,
+    "duration": 3.2
+  },
+  {
+    "text": "Where not only do you get access to the",
+    "start": 312.08,
+    "duration": 3.44
+  },
+  {
+    "text": "Claude Living Masterclass, which we",
+    "start": 313.76,
+    "duration": 3.32
+  },
+  {
+    "text": "update every week and takes you from",
+    "start": 315.52,
+    "duration": 3.6
+  },
+  {
+    "text": "zero to mastery with the latest on AI,",
+    "start": 317.08,
+    "duration": 4.28
+  },
+  {
+    "text": "but you also get access to our Agents as",
+    "start": 319.12,
+    "duration": 4
+  },
+  {
+    "text": "Course, which walks you through how to",
+    "start": 321.36,
+    "duration": 3.64
+  },
+  {
+    "text": "actually get paid for all these AI",
+    "start": 323.12,
+    "duration": 3.4
+  },
+  {
+    "text": "skills that you're learning. You also",
+    "start": 325,
+    "duration": 3.32
+  },
+  {
+    "text": "get to be part of a genuinely great",
+    "start": 326.52,
+    "duration": 3.72
+  },
+  {
+    "text": "community of AI builders. In fact, you",
+    "start": 328.32,
+    "duration": 3.599
+  },
+  {
+    "text": "can see just some of the recent wins our",
+    "start": 330.24,
+    "duration": 3.32
+  },
+  {
+    "text": "members are getting from the program",
+    "start": 331.919,
+    "duration": 2.761
+  },
+  {
+    "text": "right here. So, if you want to start",
+    "start": 333.56,
+    "duration": 2.64
+  },
+  {
+    "text": "earning from AI, then check that just in",
+    "start": 334.68,
+    "duration": 2.92
+  },
+  {
+    "text": "the pinned comment below. Now, back to",
+    "start": 336.2,
+    "duration": 2.8
+  },
+  {
+    "text": "the video. So, a big one for us to",
+    "start": 337.6,
+    "duration": 3.2
+  },
+  {
+    "text": "understand is that if before it's",
+    "start": 339,
+    "duration": 4.08
+  },
+  {
+    "text": "important to give Claude a lot of rules,",
+    "start": 340.8,
+    "duration": 4.04
+  },
+  {
+    "text": "this time it is actually important to",
+    "start": 343.08,
+    "duration": 4.2
+  },
+  {
+    "text": "let Claude use judgment. And here Tarek",
+    "start": 344.84,
+    "duration": 4.36
+  },
+  {
+    "text": "explains it that when they first rolled",
+    "start": 347.28,
+    "duration": 3.44
+  },
+  {
+    "text": "out Claude code, they needed to be sure",
+    "start": 349.2,
+    "duration": 3.48
+  },
+  {
+    "text": "that Claude avoided worst-case scenarios",
+    "start": 350.72,
+    "duration": 3.32
+  },
+  {
+    "text": "such as deleting files. Because",
+    "start": 352.68,
+    "duration": 3.24
+  },
+  {
+    "text": "remember, the models weren't as smart",
+    "start": 354.04,
+    "duration": 3.48
+  },
+  {
+    "text": "back then. And so that meant that they",
+    "start": 355.92,
+    "duration": 3.84
+  },
+  {
+    "text": "would give particularly strong guidance",
+    "start": 357.52,
+    "duration": 4.84
+  },
+  {
+    "text": "and rules that might not always be true",
+    "start": 359.76,
+    "duration": 5.04
+  },
+  {
+    "text": "and is actually limiting Claude Fable 5",
+    "start": 362.36,
+    "duration": 4.52
+  },
+  {
+    "text": "or Opus 5 in today's world. So the",
+    "start": 364.8,
+    "duration": 3.76
+  },
+  {
+    "text": "example he gives here because they deal",
+    "start": 366.88,
+    "duration": 4.12
+  },
+  {
+    "text": "with a lot of code documentation is that",
+    "start": 368.56,
+    "duration": 4.28
+  },
+  {
+    "text": "before in the system prompt of Claude",
+    "start": 371,
+    "duration": 4
+  },
+  {
+    "text": "code, they were actually giving a more",
+    "start": 372.84,
+    "duration": 3.6
+  },
+  {
+    "text": "stringent set of rules like this where",
+    "start": 375,
+    "duration": 2.96
+  },
+  {
+    "text": "they're asking Claude to default to",
+    "start": 376.44,
+    "duration": 3.12
+  },
+  {
+    "text": "writing no comments, to never write",
+    "start": 377.96,
+    "duration": 3.28
+  },
+  {
+    "text": "multi-paragraph docstrings, and",
+    "start": 379.56,
+    "duration": 3.92
+  },
+  {
+    "text": "basically just very specific rules.",
+    "start": 381.24,
+    "duration": 4.08
+  },
+  {
+    "text": "Which now with models that are much",
+    "start": 383.48,
+    "duration": 3.76
+  },
+  {
+    "text": "smarter than what we started with, it's",
+    "start": 385.32,
+    "duration": 3.44
+  },
+  {
+    "text": "actually better sometimes to just let",
+    "start": 387.24,
+    "duration": 3.92
+  },
+  {
+    "text": "your AI agent use a bit of judgement in",
+    "start": 388.76,
+    "duration": 4.4
+  },
+  {
+    "text": "order for you to get better results. So",
+    "start": 391.16,
+    "duration": 3.28
+  },
+  {
+    "text": "one example they're mentioning here is",
+    "start": 393.16,
+    "duration": 2.84
+  },
+  {
+    "text": "that they actually trimmed down that",
+    "start": 394.44,
+    "duration": 3.32
+  },
+  {
+    "text": "system prompt to just say this, to write",
+    "start": 396,
+    "duration": 3.36
+  },
+  {
+    "text": "code that reads like the surrounding",
+    "start": 397.76,
+    "duration": 3.36
+  },
+  {
+    "text": "code, to match its comment density,",
+    "start": 399.36,
+    "duration": 3.52
+  },
+  {
+    "text": "naming, and idiom. Now you might not be",
+    "start": 401.12,
+    "duration": 3.56
+  },
+  {
+    "text": "into coding and development yourself,",
+    "start": 402.88,
+    "duration": 3.039
+  },
+  {
+    "text": "but you can actually still take",
+    "start": 404.68,
+    "duration": 3.28
+  },
+  {
+    "text": "advantage of this new rule. So to give",
+    "start": 405.919,
+    "duration": 3.961
+  },
+  {
+    "text": "an example from my own second brain",
+    "start": 407.96,
+    "duration": 3.44
+  },
+  {
+    "text": "setup, which is basically how I'm",
+    "start": 409.88,
+    "duration": 3.68
+  },
+  {
+    "text": "engineering my context, I've started now",
+    "start": 411.4,
+    "duration": 4.16
+  },
+  {
+    "text": "to develop some skills that are",
+    "start": 413.56,
+    "duration": 3.52
+  },
+  {
+    "text": "literally just meant for Claude to",
+    "start": 415.56,
+    "duration": 3.32
+  },
+  {
+    "text": "surprise me with its output. And if I",
+    "start": 417.08,
+    "duration": 3.2
+  },
+  {
+    "text": "just look for that skill because I",
+    "start": 418.88,
+    "duration": 4.08
+  },
+  {
+    "text": "literally just named it as surprise me.",
+    "start": 420.28,
+    "duration": 4.88
+  },
+  {
+    "text": "I think it's this skill.md. And if I",
+    "start": 422.96,
+    "duration": 4.56
+  },
+  {
+    "text": "would look at the actual description of",
+    "start": 425.16,
+    "duration": 4.52
+  },
+  {
+    "text": "this surprise me skill, essentially it's",
+    "start": 427.52,
+    "duration": 4.72
+  },
+  {
+    "text": "one that I built in order for Fable and",
+    "start": 429.68,
+    "duration": 4.8
+  },
+  {
+    "text": "Opus to create really good front-end",
+    "start": 432.24,
+    "duration": 4.08
+  },
+  {
+    "text": "designs. If you just browse through some",
+    "start": 434.48,
+    "duration": 3.56
+  },
+  {
+    "text": "of the description lines of this skill,",
+    "start": 436.32,
+    "duration": 3.2
+  },
+  {
+    "text": "you can see that the direction here is",
+    "start": 438.04,
+    "duration": 3.4
+  },
+  {
+    "text": "for Claude to demonstrate extreme",
+    "start": 439.52,
+    "duration": 4.32
+  },
+  {
+    "text": "capability, taste, and artistic flavor.",
+    "start": 441.44,
+    "duration": 3.72
+  },
+  {
+    "text": "So it's really up to Claude to use his",
+    "start": 443.84,
+    "duration": 3.16
+  },
+  {
+    "text": "judgement in order to create better",
+    "start": 445.16,
+    "duration": 3.28
+  },
+  {
+    "text": "front-end designs. And to give you an",
+    "start": 447,
+    "duration": 3.12
+  },
+  {
+    "text": "example of some of the designs that it",
+    "start": 448.44,
+    "duration": 3.24
+  },
+  {
+    "text": "created, there's a lot of really good",
+    "start": 450.12,
+    "duration": 3.12
+  },
+  {
+    "text": "ones here depending on the niche that",
+    "start": 451.68,
+    "duration": 3.04
+  },
+  {
+    "text": "you are in. So there's one that has",
+    "start": 453.24,
+    "duration": 3.4
+  },
+  {
+    "text": "these kinetic dots design that looks",
+    "start": 454.72,
+    "duration": 3.32
+  },
+  {
+    "text": "pretty good especially when you are",
+    "start": 456.64,
+    "duration": 3.36
+  },
+  {
+    "text": "developing for the tech niche. There's",
+    "start": 458.04,
+    "duration": 3.96
+  },
+  {
+    "text": "is origami design that has even",
+    "start": 460,
+    "duration": 4.16
+  },
+  {
+    "text": "interactivity built into that. This one",
+    "start": 462,
+    "duration": 4.52
+  },
+  {
+    "text": "is quite good because it implements some",
+    "start": 464.16,
+    "duration": 4.68
+  },
+  {
+    "text": "really advanced ways to have more",
+    "start": 466.52,
+    "duration": 4.44
+  },
+  {
+    "text": "kinetic typography. And if I just scroll",
+    "start": 468.84,
+    "duration": 4.08
+  },
+  {
+    "text": "down here, there's a lot of optionality",
+    "start": 470.96,
+    "duration": 4.04
+  },
+  {
+    "text": "here in terms of different ways by which",
+    "start": 472.92,
+    "duration": 4.84
+  },
+  {
+    "text": "your AI agent can avoid that AI sloppy",
+    "start": 475,
+    "duration": 5.56
+  },
+  {
+    "text": "look that it usually defaults to. And",
+    "start": 477.76,
+    "duration": 4.84
+  },
+  {
+    "text": "the way that these were all created is",
+    "start": 480.56,
+    "duration": 3.92
+  },
+  {
+    "text": "because that surprise me skill just",
+    "start": 482.6,
+    "duration": 3.72
+  },
+  {
+    "text": "basically lets Claude use its own",
+    "start": 484.48,
+    "duration": 4.32
+  },
+  {
+    "text": "judgment in order to create effects like",
+    "start": 486.32,
+    "duration": 4.68
+  },
+  {
+    "text": "these that you may have not thought of",
+    "start": 488.8,
+    "duration": 3.56
+  },
+  {
+    "text": "yourself. And so the point being,",
+    "start": 491,
+    "duration": 2.68
+  },
+  {
+    "text": "especially when it comes to more",
+    "start": 492.36,
+    "duration": 3
+  },
+  {
+    "text": "creative thinking, you might actually",
+    "start": 493.68,
+    "duration": 3.56
+  },
+  {
+    "text": "want to just let Claude run with",
+    "start": 495.36,
+    "duration": 3.84
+  },
+  {
+    "text": "multiple iterations and multiple options",
+    "start": 497.24,
+    "duration": 3.4
+  },
+  {
+    "text": "instead of caging it with structured",
+    "start": 499.2,
+    "duration": 3.719
+  },
+  {
+    "text": "rules which may actually just hamstring",
+    "start": 500.64,
+    "duration": 4.48
+  },
+  {
+    "text": "your output rather than help you. Now, a",
+    "start": 502.919,
+    "duration": 3.681
+  },
+  {
+    "text": "related shift that is equally as",
+    "start": 505.12,
+    "duration": 3.64
+  },
+  {
+    "text": "important is this. Whereas before, if it",
+    "start": 506.6,
+    "duration": 3.56
+  },
+  {
+    "text": "was important to give Claude some",
+    "start": 508.76,
+    "duration": 3.399
+  },
+  {
+    "text": "examples, now Tariq mentions that it's",
+    "start": 510.16,
+    "duration": 4.12
+  },
+  {
+    "text": "even more important to give it design",
+    "start": 512.159,
+    "duration": 4.081
+  },
+  {
+    "text": "interfaces. And he elaborates it here",
+    "start": 514.28,
+    "duration": 3.72
+  },
+  {
+    "text": "where when they were designing the tool",
+    "start": 516.24,
+    "duration": 3.84
+  },
+  {
+    "text": "usage capability for Claude, before they",
+    "start": 518,
+    "duration": 3.479
+  },
+  {
+    "text": "were providing Claude some specific",
+    "start": 520.08,
+    "duration": 3.44
+  },
+  {
+    "text": "examples on how to actually use them.",
+    "start": 521.479,
+    "duration": 3.681
+  },
+  {
+    "text": "But with the newest models now like",
+    "start": 523.52,
+    "duration": 3.56
+  },
+  {
+    "text": "Fable 5 and Opus 5, what they found is",
+    "start": 525.16,
+    "duration": 3.84
+  },
+  {
+    "text": "that giving examples actually constrains",
+    "start": 527.08,
+    "duration": 4.32
+  },
+  {
+    "text": "them to a certain exploration space. And",
+    "start": 529,
+    "duration": 4.12
+  },
+  {
+    "text": "I find this to be true in our own work",
+    "start": 531.4,
+    "duration": 3.36
+  },
+  {
+    "text": "and projects as well. Because now it's",
+    "start": 533.12,
+    "duration": 3
+  },
+  {
+    "text": "really important for you to have your",
+    "start": 534.76,
+    "duration": 3.6
+  },
+  {
+    "text": "own design system if you want to stand",
+    "start": 536.12,
+    "duration": 3.92
+  },
+  {
+    "text": "out from the crowd and actually build",
+    "start": 538.36,
+    "duration": 3.4
+  },
+  {
+    "text": "your own brand. To give an example, a",
+    "start": 540.04,
+    "duration": 3.44
+  },
+  {
+    "text": "lot of the artifacts and builds that you",
+    "start": 541.76,
+    "duration": 3.6
+  },
+  {
+    "text": "see here in our platform like this",
+    "start": 543.48,
+    "duration": 4.12
+  },
+  {
+    "text": "getrubric.app website or its Rubric",
+    "start": 545.36,
+    "duration": 4.24
+  },
+  {
+    "text": "Flows tool which we use to visualize",
+    "start": 547.6,
+    "duration": 4.08
+  },
+  {
+    "text": "systems that we build out for clients or",
+    "start": 549.6,
+    "duration": 3.52
+  },
+  {
+    "text": "even the look of this second brain",
+    "start": 551.68,
+    "duration": 3.84
+  },
+  {
+    "text": "system that I made a video for before.",
+    "start": 553.12,
+    "duration": 4
+  },
+  {
+    "text": "And even these title slides that I'm",
+    "start": 555.52,
+    "duration": 3.24
+  },
+  {
+    "text": "showing in this video, all of this is",
+    "start": 557.12,
+    "duration": 3.76
+  },
+  {
+    "text": "being designed automatically by Claude",
+    "start": 558.76,
+    "duration": 4.8
+  },
+  {
+    "text": "using my design interface system skill.",
+    "start": 560.88,
+    "duration": 4
+  },
+  {
+    "text": "And if I were to just look for it, I",
+    "start": 563.56,
+    "duration": 4.279
+  },
+  {
+    "text": "call mine as /robo. And you can see if I",
+    "start": 564.88,
+    "duration": 4.88
+  },
+  {
+    "text": "zoom in here, whenever I create a Robo",
+    "start": 567.839,
+    "duration": 4
+  },
+  {
+    "text": "Nuggets branded material, I just invoke",
+    "start": 569.76,
+    "duration": 4.32
+  },
+  {
+    "text": "/robo and it's able to invoke this",
+    "start": 571.839,
+    "duration": 5.321
+  },
+  {
+    "text": "skill.md which is connected through this",
+    "start": 574.08,
+    "duration": 4.76
+  },
+  {
+    "text": "brandbook.html.",
+    "start": 577.16,
+    "duration": 3.4
+  },
+  {
+    "text": "And if I go ahead and open that,",
+    "start": 578.84,
+    "duration": 4.32
+  },
+  {
+    "text": "essentially what this HTML does is it",
+    "start": 580.56,
+    "duration": 4.48
+  },
+  {
+    "text": "just outlines the different rules when",
+    "start": 583.16,
+    "duration": 4.12
+  },
+  {
+    "text": "it comes to this design system. So, let",
+    "start": 585.04,
+    "duration": 4.04
+  },
+  {
+    "text": "me just shift that so you can see, and",
+    "start": 587.28,
+    "duration": 4.08
+  },
+  {
+    "text": "it provides color palettes, it provides",
+    "start": 589.08,
+    "duration": 4.28
+  },
+  {
+    "text": "some guidance on the voices as well as",
+    "start": 591.36,
+    "duration": 3.88
+  },
+  {
+    "text": "the fonts that we are using. It gives",
+    "start": 593.36,
+    "duration": 3.92
+  },
+  {
+    "text": "that visual style for the dot matrix",
+    "start": 595.24,
+    "duration": 3.76
+  },
+  {
+    "text": "effect that you're seeing a lot in the",
+    "start": 597.28,
+    "duration": 3.28
+  },
+  {
+    "text": "videos that I create. And essentially",
+    "start": 599,
+    "duration": 3.04
+  },
+  {
+    "text": "what we're doing here is we're not",
+    "start": 600.56,
+    "duration": 3.32
+  },
+  {
+    "text": "really giving examples to Claude",
+    "start": 602.04,
+    "duration": 4.28
+  },
+  {
+    "text": "anymore. Not specific examples entirely,",
+    "start": 603.88,
+    "duration": 4.52
+  },
+  {
+    "text": "so that it has more freedom to design,",
+    "start": 606.32,
+    "duration": 4.12
+  },
+  {
+    "text": "but still within a few guidelines that",
+    "start": 608.4,
+    "duration": 4.48
+  },
+  {
+    "text": "the design interface system is actually",
+    "start": 610.44,
+    "duration": 3.76
+  },
+  {
+    "text": "providing it. And so, if you were",
+    "start": 612.88,
+    "duration": 2.64
+  },
+  {
+    "text": "building out a design system for",
+    "start": 614.2,
+    "duration": 3.48
+  },
+  {
+    "text": "yourself for the first time, then these",
+    "start": 615.52,
+    "duration": 3.92
+  },
+  {
+    "text": "two rules that we just went over, you",
+    "start": 617.68,
+    "duration": 3.52
+  },
+  {
+    "text": "probably need to keep in mind. Because",
+    "start": 619.44,
+    "duration": 3.12
+  },
+  {
+    "text": "what I would do first is I'll probably",
+    "start": 621.2,
+    "duration": 3.32
+  },
+  {
+    "text": "ask people five to give me different",
+    "start": 622.56,
+    "duration": 3.6
+  },
+  {
+    "text": "design systems and give it feedback",
+    "start": 624.52,
+    "duration": 3.28
+  },
+  {
+    "text": "until we arrive at a point that we like",
+    "start": 626.16,
+    "duration": 3.28
+  },
+  {
+    "text": "that particular look. Then, let's say",
+    "start": 627.8,
+    "duration": 4.64
+  },
+  {
+    "text": "you actually like this Helvetica 26",
+    "start": 629.44,
+    "duration": 4.92
+  },
+  {
+    "text": "Swiss brutalist design, then you can",
+    "start": 632.44,
+    "duration": 4.08
+  },
+  {
+    "text": "just ask Claude to create a brand book",
+    "start": 634.36,
+    "duration": 4.6
+  },
+  {
+    "text": "HTML file that provides rules of how",
+    "start": 636.52,
+    "duration": 4.2
+  },
+  {
+    "text": "that design system is built, and then",
+    "start": 638.96,
+    "duration": 3.6
+  },
+  {
+    "text": "just ask Claude to make that into a",
+    "start": 640.72,
+    "duration": 4.04
+  },
+  {
+    "text": "skill file, something like /robo, or in",
+    "start": 642.56,
+    "duration": 4.44
+  },
+  {
+    "text": "this case it's probably /helvetica. And",
+    "start": 644.76,
+    "duration": 3.8
+  },
+  {
+    "text": "then, the next time that you create some",
+    "start": 647,
+    "duration": 3.88
+  },
+  {
+    "text": "materials, then it will always look this",
+    "start": 648.56,
+    "duration": 4.36
+  },
+  {
+    "text": "good. Now, another important shift that",
+    "start": 650.88,
+    "duration": 3.64
+  },
+  {
+    "text": "the article talked about is what we're",
+    "start": 652.92,
+    "duration": 3.96
+  },
+  {
+    "text": "calling as progressive disclosure, which",
+    "start": 654.52,
+    "duration": 4.16
+  },
+  {
+    "text": "you can see Tarek differentiates versus",
+    "start": 656.88,
+    "duration": 3.68
+  },
+  {
+    "text": "the practice before, where you are",
+    "start": 658.68,
+    "duration": 3.96
+  },
+  {
+    "text": "putting all of the context up front. And",
+    "start": 660.56,
+    "duration": 3.64
+  },
+  {
+    "text": "just to elaborate on that, he mentions",
+    "start": 662.64,
+    "duration": 3.08
+  },
+  {
+    "text": "here that because Claude Code in the",
+    "start": 664.2,
+    "duration": 3.6
+  },
+  {
+    "text": "very beginning was focused on coding,",
+    "start": 665.72,
+    "duration": 4.2
+  },
+  {
+    "text": "their system prompt included or needed",
+    "start": 667.8,
+    "duration": 3.76
+  },
+  {
+    "text": "to include detailed information on how",
+    "start": 669.92,
+    "duration": 4
+  },
+  {
+    "text": "to do code review verification, which",
+    "start": 671.56,
+    "duration": 4.44
+  },
+  {
+    "text": "are all these details that are not",
+    "start": 673.92,
+    "duration": 4
+  },
+  {
+    "text": "always needed, but when they are, it was",
+    "start": 676,
+    "duration": 3.839
+  },
+  {
+    "text": "actually crucial information. But what",
+    "start": 677.92,
+    "duration": 3.8
+  },
+  {
+    "text": "has changed since then is that Claude",
+    "start": 679.839,
+    "duration": 3.961
+  },
+  {
+    "text": "Code and these new batch of models have",
+    "start": 681.72,
+    "duration": 4.2
+  },
+  {
+    "text": "actually gotten very competent at using",
+    "start": 683.8,
+    "duration": 3.52
+  },
+  {
+    "text": "progressive disclosure, which is",
+    "start": 685.92,
+    "duration": 3.8
+  },
+  {
+    "text": "essentially loading the right context at",
+    "start": 687.32,
+    "duration": 4.2
+  },
+  {
+    "text": "the right times. And a great example of",
+    "start": 689.72,
+    "duration": 4.2
+  },
+  {
+    "text": "this is your own claw.md because it",
+    "start": 691.52,
+    "duration": 3.72
+  },
+  {
+    "text": "wasn't that long ago that there's a",
+    "start": 693.92,
+    "duration": 3.44
+  },
+  {
+    "text": "common advice that if you want to make",
+    "start": 695.24,
+    "duration": 4.08
+  },
+  {
+    "text": "your claw.md as strong as you can, you",
+    "start": 697.36,
+    "duration": 3.48
+  },
+  {
+    "text": "would want to make that a central",
+    "start": 699.32,
+    "duration": 3.68
+  },
+  {
+    "text": "repository of every known practice that",
+    "start": 700.84,
+    "duration": 4.24
+  },
+  {
+    "text": "you might run into. But in today's world",
+    "start": 703,
+    "duration": 3.68
+  },
+  {
+    "text": "and with these more powerful models,",
+    "start": 705.08,
+    "duration": 3.44
+  },
+  {
+    "text": "your claw.md actually becomes more",
+    "start": 706.68,
+    "duration": 4.4
+  },
+  {
+    "text": "powerful if you make it function as a",
+    "start": 708.52,
+    "duration": 5.12
+  },
+  {
+    "text": "router to your tree of files. And just",
+    "start": 711.08,
+    "duration": 4.12
+  },
+  {
+    "text": "to make that point clearer, if I go back",
+    "start": 713.64,
+    "duration": 3.44
+  },
+  {
+    "text": "to my second brain system here, you can",
+    "start": 715.2,
+    "duration": 4.64
+  },
+  {
+    "text": "see that my claw.md is at the center of",
+    "start": 717.08,
+    "duration": 4.4
+  },
+  {
+    "text": "this whole second brain system. And",
+    "start": 719.84,
+    "duration": 3.08
+  },
+  {
+    "text": "essentially what you're seeing here, all",
+    "start": 721.48,
+    "duration": 3.44
+  },
+  {
+    "text": "of these nodes are simply all of the",
+    "start": 722.92,
+    "duration": 4.44
+  },
+  {
+    "text": "files in my workspace. But because of",
+    "start": 724.92,
+    "duration": 4.24
+  },
+  {
+    "text": "the amount of files and context that's",
+    "start": 727.36,
+    "duration": 3.32
+  },
+  {
+    "text": "already in here, you can see I have",
+    "start": 729.16,
+    "duration": 4.32
+  },
+  {
+    "text": "something like 57,000 files already in",
+    "start": 730.68,
+    "duration": 4.68
+  },
+  {
+    "text": "this whole workspace, then it doesn't",
+    "start": 733.48,
+    "duration": 4.24
+  },
+  {
+    "text": "really make sense if you try to stuff",
+    "start": 735.36,
+    "duration": 5.28
+  },
+  {
+    "text": "your claw.md with every single context",
+    "start": 737.72,
+    "duration": 5.04
+  },
+  {
+    "text": "and way of working and operational rules",
+    "start": 740.64,
+    "duration": 3.84
+  },
+  {
+    "text": "that you would like your agent to",
+    "start": 742.76,
+    "duration": 3.4
+  },
+  {
+    "text": "remember. And so here you can see how I",
+    "start": 744.48,
+    "duration": 3.28
+  },
+  {
+    "text": "represented it in our second brain",
+    "start": 746.16,
+    "duration": 4.12
+  },
+  {
+    "text": "system is that our claw.md is actually",
+    "start": 747.76,
+    "duration": 4.48
+  },
+  {
+    "text": "just a router, so that it knows when I'm",
+    "start": 750.28,
+    "duration": 3.76
+  },
+  {
+    "text": "asking or working with it for content,",
+    "start": 752.24,
+    "duration": 3.68
+  },
+  {
+    "text": "then it's able to just tap to this set",
+    "start": 754.04,
+    "duration": 3.52
+  },
+  {
+    "text": "of files over here. If I'm working with",
+    "start": 755.92,
+    "duration": 3.2
+  },
+  {
+    "text": "it for my community, then there's this",
+    "start": 757.56,
+    "duration": 3.36
+  },
+  {
+    "text": "set of files that it can work with. If",
+    "start": 759.12,
+    "duration": 3.16
+  },
+  {
+    "text": "I'm dealing with product development,",
+    "start": 760.92,
+    "duration": 3.48
+  },
+  {
+    "text": "there is this branch. Personal stuff is",
+    "start": 762.28,
+    "duration": 3.52
+  },
+  {
+    "text": "this branch, and all the business",
+    "start": 764.4,
+    "duration": 3.6
+  },
+  {
+    "text": "dealings will happen on this side. And",
+    "start": 765.8,
+    "duration": 3.6
+  },
+  {
+    "text": "going back to Thrivec's point around",
+    "start": 768,
+    "duration": 4.08
+  },
+  {
+    "text": "building a tree of files, if claw.md is",
+    "start": 769.4,
+    "duration": 5.04
+  },
+  {
+    "text": "a pointer to these different departments",
+    "start": 772.08,
+    "duration": 4.24
+  },
+  {
+    "text": "or set of files, then what I actually",
+    "start": 774.44,
+    "duration": 3.84
+  },
+  {
+    "text": "have in my workspace, which you can try",
+    "start": 776.32,
+    "duration": 3.76
+  },
+  {
+    "text": "and emulate as well, is to have sub",
+    "start": 778.28,
+    "duration": 3.64
+  },
+  {
+    "text": "routers that basically just let Claude",
+    "start": 780.08,
+    "duration": 3.759
+  },
+  {
+    "text": "find the right files within this",
+    "start": 781.92,
+    "duration": 3.72
+  },
+  {
+    "text": "specific department. Just to give one",
+    "start": 783.839,
+    "duration": 3.361
+  },
+  {
+    "text": "example, let's say for content, I",
+    "start": 785.64,
+    "duration": 2.92
+  },
+  {
+    "text": "actually have a file that's called",
+    "start": 787.2,
+    "duration": 3.36
+  },
+  {
+    "text": "content.md. And you can see here that",
+    "start": 788.56,
+    "duration": 3.44
+  },
+  {
+    "text": "it's basically a router that gives",
+    "start": 790.56,
+    "duration": 3.48
+  },
+  {
+    "text": "Claude some direction on where to find",
+    "start": 792,
+    "duration": 3.76
+  },
+  {
+    "text": "things whenever we're working on",
+    "start": 794.04,
+    "duration": 2.92
+  },
+  {
+    "text": "content. So let's say we're in the",
+    "start": 795.76,
+    "duration": 3.44
+  },
+  {
+    "text": "process of ideating content ideas,",
+    "start": 796.96,
+    "duration": 3.56
+  },
+  {
+    "text": "there's some skills here that it names",
+    "start": 799.2,
+    "duration": 3.4
+  },
+  {
+    "text": "that are useful for that intent. When it",
+    "start": 800.52,
+    "duration": 4
+  },
+  {
+    "text": "comes to researching or producing the",
+    "start": 802.6,
+    "duration": 3.92
+  },
+  {
+    "text": "actual lesson or video, then it has",
+    "start": 804.52,
+    "duration": 4.08
+  },
+  {
+    "text": "several markdown file references and",
+    "start": 806.52,
+    "duration": 3.56
+  },
+  {
+    "text": "skills here as well. And so the point",
+    "start": 808.6,
+    "duration": 3
+  },
+  {
+    "text": "being here is that as your agentic",
+    "start": 810.08,
+    "duration": 3.44
+  },
+  {
+    "text": "operating system evolves and you start",
+    "start": 811.6,
+    "duration": 4
+  },
+  {
+    "text": "to have a workspace for your company or",
+    "start": 813.52,
+    "duration": 3.68
+  },
+  {
+    "text": "for your team that becomes a bit more",
+    "start": 815.6,
+    "duration": 3.52
+  },
+  {
+    "text": "complex, what you can start to do is to",
+    "start": 817.2,
+    "duration": 3.6
+  },
+  {
+    "text": "actually identify the different",
+    "start": 819.12,
+    "duration": 3.92
+  },
+  {
+    "text": "departments of your life and of your",
+    "start": 820.8,
+    "duration": 4.8
+  },
+  {
+    "text": "work and actually build out these sub",
+    "start": 823.04,
+    "duration": 5.56
+  },
+  {
+    "text": "indexes in order to help Claude navigate",
+    "start": 825.6,
+    "duration": 5.96
+  },
+  {
+    "text": "your tree of files more efficiently. So",
+    "start": 828.6,
+    "duration": 4.24
+  },
+  {
+    "text": "that instead of just filling your",
+    "start": 831.56,
+    "duration": 4.36
+  },
+  {
+    "text": "Claude.md with every single fact about",
+    "start": 832.84,
+    "duration": 4.6
+  },
+  {
+    "text": "your business, then you can start to",
+    "start": 835.92,
+    "duration": 3.28
+  },
+  {
+    "text": "make it a lot thinner and a bit more",
+    "start": 837.44,
+    "duration": 3.96
+  },
+  {
+    "text": "efficient so that it only progressively",
+    "start": 839.2,
+    "duration": 4.4
+  },
+  {
+    "text": "loads the context that you need during",
+    "start": 841.4,
+    "duration": 4.4
+  },
+  {
+    "text": "the sessions where you need them. Which",
+    "start": 843.6,
+    "duration": 4.08
+  },
+  {
+    "text": "in its essence is what progressive",
+    "start": 845.8,
+    "duration": 3.76
+  },
+  {
+    "text": "disclosure really is. And also remember",
+    "start": 847.68,
+    "duration": 4.08
+  },
+  {
+    "text": "that this has implications on cost and",
+    "start": 849.56,
+    "duration": 4.12
+  },
+  {
+    "text": "how often you run into usage limits.",
+    "start": 851.76,
+    "duration": 3.2
+  },
+  {
+    "text": "Because before, if you have your",
+    "start": 853.68,
+    "duration": 3.36
+  },
+  {
+    "text": "Claude.md set up so that it's quite",
+    "start": 854.96,
+    "duration": 3.88
+  },
+  {
+    "text": "thick and is quite verbose, then what",
+    "start": 857.04,
+    "duration": 3.96
+  },
+  {
+    "text": "really happens here is if this rectangle",
+    "start": 858.84,
+    "duration": 4.32
+  },
+  {
+    "text": "denoted by the broken lines would be",
+    "start": 861,
+    "duration": 4.16
+  },
+  {
+    "text": "your session and your context window,",
+    "start": 863.16,
+    "duration": 3.32
+  },
+  {
+    "text": "then every session that you start with",
+    "start": 865.16,
+    "duration": 3.24
+  },
+  {
+    "text": "Claude, you actually use up this much",
+    "start": 866.48,
+    "duration": 3.24
+  },
+  {
+    "text": "tokens, which is equivalent to your",
+    "start": 868.4,
+    "duration": 3.6
+  },
+  {
+    "text": "Claude.md the moment that you send your",
+    "start": 869.72,
+    "duration": 3.96
+  },
+  {
+    "text": "first prompt. Which in my view is a bit",
+    "start": 872,
+    "duration": 3.64
+  },
+  {
+    "text": "of a waste, especially if as time goes",
+    "start": 873.68,
+    "duration": 4.32
+  },
+  {
+    "text": "by and you start to use Claude or any",
+    "start": 875.64,
+    "duration": 4.199
+  },
+  {
+    "text": "agent platform a lot more, then that",
+    "start": 878,
+    "duration": 4.16
+  },
+  {
+    "text": "token usage does rack up. Now in",
+    "start": 879.839,
+    "duration": 4.601
+  },
+  {
+    "text": "contrast to that, if your Claude.md is",
+    "start": 882.16,
+    "duration": 4.36
+  },
+  {
+    "text": "thin and only serves as a router, then",
+    "start": 884.44,
+    "duration": 3.68
+  },
+  {
+    "text": "the more that you interact with your",
+    "start": 886.52,
+    "duration": 3.64
+  },
+  {
+    "text": "agent, you actually start to realize the",
+    "start": 888.12,
+    "duration": 4.24
+  },
+  {
+    "text": "efficiency gains because you are not",
+    "start": 890.16,
+    "duration": 4.24
+  },
+  {
+    "text": "using up as much tokens with this",
+    "start": 892.36,
+    "duration": 4.36
+  },
+  {
+    "text": "Claude.md that is essentially a system",
+    "start": 894.4,
+    "duration": 4.52
+  },
+  {
+    "text": "prompt that gets injected and also uses",
+    "start": 896.72,
+    "duration": 4.48
+  },
+  {
+    "text": "your token budget allocation the moment",
+    "start": 898.92,
+    "duration": 4.16
+  },
+  {
+    "text": "that you start a new session. Now this",
+    "start": 901.2,
+    "duration": 3.72
+  },
+  {
+    "text": "next one is quite simple because before",
+    "start": 903.08,
+    "duration": 3.56
+  },
+  {
+    "text": "with older models, you may find that you",
+    "start": 904.92,
+    "duration": 3.6
+  },
+  {
+    "text": "needed to repeat yourself quite a lot in",
+    "start": 906.64,
+    "duration": 3.64
+  },
+  {
+    "text": "order for the model to understand what",
+    "start": 908.52,
+    "duration": 3.36
+  },
+  {
+    "text": "you mean. But this time, Tarikin that",
+    "start": 910.28,
+    "duration": 3.04
+  },
+  {
+    "text": "article mentions that it's actually",
+    "start": 911.88,
+    "duration": 3.24
+  },
+  {
+    "text": "better to have more simple tool",
+    "start": 913.32,
+    "duration": 3.32
+  },
+  {
+    "text": "descriptions. And this is probably",
+    "start": 915.12,
+    "duration": 3.2
+  },
+  {
+    "text": "something that you will just notice in",
+    "start": 916.64,
+    "duration": 3.28
+  },
+  {
+    "text": "the background because before if you",
+    "start": 918.32,
+    "duration": 3.6
+  },
+  {
+    "text": "recall, there were some advice where if",
+    "start": 919.92,
+    "duration": 4.44
+  },
+  {
+    "text": "you continuously chat with a model in a",
+    "start": 921.92,
+    "duration": 4.04
+  },
+  {
+    "text": "particular session and that session",
+    "start": 924.36,
+    "duration": 3.64
+  },
+  {
+    "text": "starts to build up context, there is a",
+    "start": 925.96,
+    "duration": 3.72
+  },
+  {
+    "text": "more noticeable case of what we're",
+    "start": 928,
+    "duration": 3.48
+  },
+  {
+    "text": "calling context rot. And a good example",
+    "start": 929.68,
+    "duration": 4.4
+  },
+  {
+    "text": "of how that was is that models before",
+    "start": 931.48,
+    "duration": 4.08
+  },
+  {
+    "text": "were more likely to listen to",
+    "start": 934.08,
+    "duration": 3.44
+  },
+  {
+    "text": "instructions at the end of the context",
+    "start": 935.56,
+    "duration": 3.36
+  },
+  {
+    "text": "window, which are the most recent",
+    "start": 937.52,
+    "duration": 3.56
+  },
+  {
+    "text": "messages, than the ones at the start.",
+    "start": 938.92,
+    "duration": 3.8
+  },
+  {
+    "text": "And so as a result of that, you would",
+    "start": 941.08,
+    "duration": 3.96
+  },
+  {
+    "text": "sometimes need to provide more repeated",
+    "start": 942.72,
+    "duration": 4.52
+  },
+  {
+    "text": "instructions for a model in order for it",
+    "start": 945.04,
+    "duration": 4.12
+  },
+  {
+    "text": "to understand or remember what you mean.",
+    "start": 947.24,
+    "duration": 2.92
+  },
+  {
+    "text": "Now, what Tarek is mentioning here",
+    "start": 949.16,
+    "duration": 3.04
+  },
+  {
+    "text": "simply is that that has actually changed",
+    "start": 950.16,
+    "duration": 3.84
+  },
+  {
+    "text": "because a lot of these models with table",
+    "start": 952.2,
+    "duration": 3.96
+  },
+  {
+    "text": "five and opus five are actually more",
+    "start": 954,
+    "duration": 3.92
+  },
+  {
+    "text": "intelligent and a bit more smart. Same",
+    "start": 956.16,
+    "duration": 3.28
+  },
+  {
+    "text": "with the example by the Entropic team",
+    "start": 957.92,
+    "duration": 2.76
+  },
+  {
+    "text": "here, where he's saying that in the",
+    "start": 959.44,
+    "duration": 2.76
+  },
+  {
+    "text": "past, their system prompt would",
+    "start": 960.68,
+    "duration": 3.68
+  },
+  {
+    "text": "sometimes have references to tools in",
+    "start": 962.2,
+    "duration": 4.2
+  },
+  {
+    "text": "the main system prompt as well as",
+    "start": 964.36,
+    "duration": 3.6
+  },
+  {
+    "text": "instructions in the tool description.",
+    "start": 966.4,
+    "duration": 3.08
+  },
+  {
+    "text": "So, they're basically just putting it in",
+    "start": 967.96,
+    "duration": 3.16
+  },
+  {
+    "text": "two places at once. But now, they could",
+    "start": 969.48,
+    "duration": 3.64
+  },
+  {
+    "text": "just delete those other repeat examples,",
+    "start": 971.12,
+    "duration": 3.52
+  },
+  {
+    "text": "which in their case would be in the tool",
+    "start": 973.12,
+    "duration": 3.32
+  },
+  {
+    "text": "descriptions rather than the system",
+    "start": 974.64,
+    "duration": 3.48
+  },
+  {
+    "text": "prompt. So, there's less duplication.",
+    "start": 976.44,
+    "duration": 3.64
+  },
+  {
+    "text": "You also save on the token cost simply",
+    "start": 978.12,
+    "duration": 3.76
+  },
+  {
+    "text": "because these newer set of models are",
+    "start": 980.08,
+    "duration": 3.44
+  },
+  {
+    "text": "much more intelligent versus what we",
+    "start": 981.88,
+    "duration": 3
+  },
+  {
+    "text": "started with. And that leads us to",
+    "start": 983.52,
+    "duration": 2.8
+  },
+  {
+    "text": "another shift, which you also might have",
+    "start": 984.88,
+    "duration": 2.84
+  },
+  {
+    "text": "noticed in the background, which is",
+    "start": 986.32,
+    "duration": 3.36
+  },
+  {
+    "text": "basically this concept of automatic",
+    "start": 987.72,
+    "duration": 4.04
+  },
+  {
+    "text": "memory. And this concept and shift is",
+    "start": 989.68,
+    "duration": 3.8
+  },
+  {
+    "text": "very simple. What Entropic's mentioning",
+    "start": 991.76,
+    "duration": 3.48
+  },
+  {
+    "text": "here is that before, they actually used",
+    "start": 993.48,
+    "duration": 3.56
+  },
+  {
+    "text": "to encourage users to save things in",
+    "start": 995.24,
+    "duration": 3.24
+  },
+  {
+    "text": "Claude's memory, which if you don't",
+    "start": 997.04,
+    "duration": 2.799
+  },
+  {
+    "text": "know, you can actually use the hash",
+    "start": 998.48,
+    "duration": 3.44
+  },
+  {
+    "text": "hotkey to write to their cloud.md",
+    "start": 999.839,
+    "duration": 3.761
+  },
+  {
+    "text": "automatically. But instead, at this",
+    "start": 1001.92,
+    "duration": 3.28
+  },
+  {
+    "text": "point in Claude code's development, it",
+    "start": 1003.6,
+    "duration": 3.08
+  },
+  {
+    "text": "now can actually automatically save",
+    "start": 1005.2,
+    "duration": 3.48
+  },
+  {
+    "text": "memories that are relevant to the work",
+    "start": 1006.68,
+    "duration": 3.92
+  },
+  {
+    "text": "and to you. Now, this particular advice",
+    "start": 1008.68,
+    "duration": 4.76
+  },
+  {
+    "text": "and this saving memories, I do see it",
+    "start": 1010.6,
+    "duration": 4.92
+  },
+  {
+    "text": "happen on my side, but generally, I",
+    "start": 1013.44,
+    "duration": 3.76
+  },
+  {
+    "text": "think if you have a productive session",
+    "start": 1015.52,
+    "duration": 3.48
+  },
+  {
+    "text": "with Claude that you think there's a lot",
+    "start": 1017.2,
+    "duration": 3.12
+  },
+  {
+    "text": "of information there that would be",
+    "start": 1019,
+    "duration": 3.72
+  },
+  {
+    "text": "useful to be logged or remembered by",
+    "start": 1020.32,
+    "duration": 4.04
+  },
+  {
+    "text": "Claude, I think it's definitely still",
+    "start": 1022.72,
+    "duration": 3.719
+  },
+  {
+    "text": "worth just asking Claude to remember",
+    "start": 1024.36,
+    "duration": 3.8
+  },
+  {
+    "text": "those things depending on how your",
+    "start": 1026.439,
+    "duration": 3.4
+  },
+  {
+    "text": "second brain system and your agenda",
+    "start": 1028.16,
+    "duration": 3.32
+  },
+  {
+    "text": "operating system is set up. Now, to give",
+    "start": 1029.839,
+    "duration": 3.48
+  },
+  {
+    "text": "an example, at least in how I do it, I",
+    "start": 1031.48,
+    "duration": 3.719
+  },
+  {
+    "text": "built out this skill called {slash}",
+    "start": 1033.319,
+    "duration": 3.401
+  },
+  {
+    "text": "calibrate. And this is probably one of",
+    "start": 1035.199,
+    "duration": 3.64
+  },
+  {
+    "text": "my most used skills because whenever I",
+    "start": 1036.72,
+    "duration": 3.88
+  },
+  {
+    "text": "end a session with Claude, I just do",
+    "start": 1038.839,
+    "duration": 4.081
+  },
+  {
+    "text": "/calibrate. And what it does is it will",
+    "start": 1040.6,
+    "duration": 4.32
+  },
+  {
+    "text": "just review that current conversation",
+    "start": 1042.92,
+    "duration": 4.279
+  },
+  {
+    "text": "and applies the best updates to skills,",
+    "start": 1044.92,
+    "duration": 4.8
+  },
+  {
+    "text": "to claw.md rules, to memory, and to",
+    "start": 1047.199,
+    "duration": 4.121
+  },
+  {
+    "text": "workflows that we have so that it",
+    "start": 1049.72,
+    "duration": 2.96
+  },
+  {
+    "text": "captures the learning in that whole",
+    "start": 1051.32,
+    "duration": 3.8
+  },
+  {
+    "text": "session and applies it to our operating",
+    "start": 1052.68,
+    "duration": 4.8
+  },
+  {
+    "text": "system. As to give you a view of my VS",
+    "start": 1055.12,
+    "duration": 4.2
+  },
+  {
+    "text": "Code IDE here where I'm using Claude",
+    "start": 1057.48,
+    "duration": 4.12
+  },
+  {
+    "text": "Code. You see I've used calibrate here",
+    "start": 1059.32,
+    "duration": 3.96
+  },
+  {
+    "text": "and what that did is it just updated",
+    "start": 1061.6,
+    "duration": 3.76
+  },
+  {
+    "text": "these skills that I gave some feedback",
+    "start": 1063.28,
+    "duration": 3.72
+  },
+  {
+    "text": "for. And apart from skills, it also",
+    "start": 1065.36,
+    "duration": 4.44
+  },
+  {
+    "text": "calibrates my claw.md, the content.md",
+    "start": 1067,
+    "duration": 4.72
+  },
+  {
+    "text": "router that I showed earlier, my memory",
+    "start": 1069.8,
+    "duration": 4.32
+  },
+  {
+    "text": "files. It logged a new recipe or format",
+    "start": 1071.72,
+    "duration": 4.64
+  },
+  {
+    "text": "under my prompt packs and so on and so",
+    "start": 1074.12,
+    "duration": 3.8
+  },
+  {
+    "text": "forth. And so you can see with this one",
+    "start": 1076.36,
+    "duration": 3.44
+  },
+  {
+    "text": "skill and the more that you use Claude",
+    "start": 1077.92,
+    "duration": 3.96
+  },
+  {
+    "text": "Code, you're actually starting to refine",
+    "start": 1079.8,
+    "duration": 3.44
+  },
+  {
+    "text": "the way you work with them so that it",
+    "start": 1081.88,
+    "duration": 2.84
+  },
+  {
+    "text": "gets to know you better. And last but",
+    "start": 1083.24,
+    "duration": 3.76
+  },
+  {
+    "text": "not least is the transition from simple",
+    "start": 1084.72,
+    "duration": 4.64
+  },
+  {
+    "text": "specs to richer references. And to me",
+    "start": 1087,
+    "duration": 4.2
+  },
+  {
+    "text": "this shift is really important because I",
+    "start": 1089.36,
+    "duration": 3.56
+  },
+  {
+    "text": "use it on the daily. So what Tarek",
+    "start": 1091.2,
+    "duration": 3.32
+  },
+  {
+    "text": "mentions here is that previously,",
+    "start": 1092.92,
+    "duration": 3.4
+  },
+  {
+    "text": "literally just a few probably months",
+    "start": 1094.52,
+    "duration": 3.92
+  },
+  {
+    "text": "ago, there was this over-reliance on",
+    "start": 1096.32,
+    "duration": 4.44
+  },
+  {
+    "text": "markdown files with creating plans, with",
+    "start": 1098.44,
+    "duration": 4.2
+  },
+  {
+    "text": "creating assets and artifacts because",
+    "start": 1100.76,
+    "duration": 3.72
+  },
+  {
+    "text": "the prevailing knowledge is that these",
+    "start": 1102.64,
+    "duration": 4.04
+  },
+  {
+    "text": "markdown files are simple enough and",
+    "start": 1104.48,
+    "duration": 3.68
+  },
+  {
+    "text": "light enough so that it would help",
+    "start": 1106.68,
+    "duration": 3.8
+  },
+  {
+    "text": "Claude have proper references for things",
+    "start": 1108.16,
+    "duration": 5.16
+  },
+  {
+    "text": "like code or specs or essentially plans",
+    "start": 1110.48,
+    "duration": 4.48
+  },
+  {
+    "text": "for projects that you're creating with",
+    "start": 1113.32,
+    "duration": 3.52
+  },
+  {
+    "text": "it. And obviously markdown files still",
+    "start": 1114.96,
+    "duration": 3.76
+  },
+  {
+    "text": "very important like your claw.md and",
+    "start": 1116.84,
+    "duration": 3.44
+  },
+  {
+    "text": "your skill files are still in the",
+    "start": 1118.72,
+    "duration": 3
+  },
+  {
+    "text": "markdown format, right? But what we're",
+    "start": 1120.28,
+    "duration": 3.04
+  },
+  {
+    "text": "saying here is that you don't actually",
+    "start": 1121.72,
+    "duration": 3.24
+  },
+  {
+    "text": "need to be limited anymore with just",
+    "start": 1123.32,
+    "duration": 3.48
+  },
+  {
+    "text": "markdown files. Because with this newer",
+    "start": 1124.96,
+    "duration": 3.24
+  },
+  {
+    "text": "batch of models, it can handle",
+    "start": 1126.8,
+    "duration": 2.88
+  },
+  {
+    "text": "increasingly more complicated",
+    "start": 1128.2,
+    "duration": 3
+  },
+  {
+    "text": "references. And the one that I really",
+    "start": 1129.68,
+    "duration": 3.48
+  },
+  {
+    "text": "like and probably start to use more now",
+    "start": 1131.2,
+    "duration": 4.48
+  },
+  {
+    "text": "more than markdown files are HTML",
+    "start": 1133.16,
+    "duration": 4.92
+  },
+  {
+    "text": "artifacts. And a good example of an HTML",
+    "start": 1135.68,
+    "duration": 4.92
+  },
+  {
+    "text": "artifact or reference is that brand book",
+    "start": 1138.08,
+    "duration": 4.8
+  },
+  {
+    "text": "that I showed earlier. Because if this",
+    "start": 1140.6,
+    "duration": 4.12
+  },
+  {
+    "text": "were a markdown file, it probably won't",
+    "start": 1142.88,
+    "duration": 3.76
+  },
+  {
+    "text": "be able to convey the same idea. It",
+    "start": 1144.72,
+    "duration": 3.32
+  },
+  {
+    "text": "won't be able to show visually what are",
+    "start": 1146.64,
+    "duration": 2.92
+  },
+  {
+    "text": "the color palettes of this design",
+    "start": 1148.04,
+    "duration": 3.24
+  },
+  {
+    "text": "system. And so having a reference like",
+    "start": 1149.56,
+    "duration": 3.72
+  },
+  {
+    "text": "this, which you can see is an HTML file,",
+    "start": 1151.28,
+    "duration": 4.16
+  },
+  {
+    "text": "basically a hypertext markup language,",
+    "start": 1153.28,
+    "duration": 3.64
+  },
+  {
+    "text": "that when you open them, it just allows",
+    "start": 1155.44,
+    "duration": 3.44
+  },
+  {
+    "text": "browsers like Chrome to render them",
+    "start": 1156.92,
+    "duration": 3.96
+  },
+  {
+    "text": "visually. Then, there's a benefit of",
+    "start": 1158.88,
+    "duration": 3.52
+  },
+  {
+    "text": "number one, your agent being able to",
+    "start": 1160.88,
+    "duration": 2.92
+  },
+  {
+    "text": "parse through it, because under the",
+    "start": 1162.4,
+    "duration": 3.12
+  },
+  {
+    "text": "hood, this is all still just code and",
+    "start": 1163.8,
+    "duration": 3.64
+  },
+  {
+    "text": "still just text. But, also equally as",
+    "start": 1165.52,
+    "duration": 4
+  },
+  {
+    "text": "important is that you, as the human,",
+    "start": 1167.44,
+    "duration": 4.28
+  },
+  {
+    "text": "should be able to see and understand",
+    "start": 1169.52,
+    "duration": 4.16
+  },
+  {
+    "text": "these references, especially the more",
+    "start": 1171.72,
+    "duration": 3.92
+  },
+  {
+    "text": "visual ones. And this is also important",
+    "start": 1173.68,
+    "duration": 3.6
+  },
+  {
+    "text": "when you're communicating ideas to other",
+    "start": 1175.64,
+    "duration": 3.16
+  },
+  {
+    "text": "people, just like what I'm doing now.",
+    "start": 1177.28,
+    "duration": 3.16
+  },
+  {
+    "text": "So, let's say this document about this",
+    "start": 1178.8,
+    "duration": 3.76
+  },
+  {
+    "text": "skill called Dr. Plus, which I'll go",
+    "start": 1180.44,
+    "duration": 3.92
+  },
+  {
+    "text": "over in a bit. This is much more visual,",
+    "start": 1182.56,
+    "duration": 4
+  },
+  {
+    "text": "much more engaging versus the say if I",
+    "start": 1184.36,
+    "duration": 3.84
+  },
+  {
+    "text": "were presenting to you right now a",
+    "start": 1186.56,
+    "duration": 3.68
+  },
+  {
+    "text": "markdown file, then this probably won't",
+    "start": 1188.2,
+    "duration": 4.6
+  },
+  {
+    "text": "be as effective as how it looks right",
+    "start": 1190.24,
+    "duration": 4.24
+  },
+  {
+    "text": "now. In fact, sometimes if I feel like I",
+    "start": 1192.8,
+    "duration": 3.28
+  },
+  {
+    "text": "have a lot of token budget remaining",
+    "start": 1194.48,
+    "duration": 2.56
+  },
+  {
+    "text": "during the week, and I want to",
+    "start": 1196.08,
+    "duration": 2.96
+  },
+  {
+    "text": "understand concepts or new skills that",
+    "start": 1197.04,
+    "duration": 4.16
+  },
+  {
+    "text": "I'm investigating or trying out, simply,",
+    "start": 1199.04,
+    "duration": 4.36
+  },
+  {
+    "text": "I routinely just ask Claude to create",
+    "start": 1201.2,
+    "duration": 4.2
+  },
+  {
+    "text": "HTML artifacts for me, because this is",
+    "start": 1203.4,
+    "duration": 4.04
+  },
+  {
+    "text": "just much easier to review versus like a",
+    "start": 1205.4,
+    "duration": 3.72
+  },
+  {
+    "text": "markdown file or just being locked in",
+    "start": 1207.44,
+    "duration": 4
+  },
+  {
+    "text": "the chat window terminal session, where",
+    "start": 1209.12,
+    "duration": 4.04
+  },
+  {
+    "text": "you need to read through a wall of text.",
+    "start": 1211.44,
+    "duration": 3.44
+  },
+  {
+    "text": "So, this is just one example where I",
+    "start": 1213.16,
+    "duration": 3.24
+  },
+  {
+    "text": "literally just ask it to create an",
+    "start": 1214.88,
+    "duration": 3.32
+  },
+  {
+    "text": "infographic using that {slash} Robo",
+    "start": 1216.4,
+    "duration": 3.68
+  },
+  {
+    "text": "skill, our design system, in order to",
+    "start": 1218.2,
+    "duration": 4.08
+  },
+  {
+    "text": "understand what are these new rules that",
+    "start": 1220.08,
+    "duration": 3.32
+  },
+  {
+    "text": "the article was talking about. So, I",
+    "start": 1222.28,
+    "duration": 3.04
+  },
+  {
+    "text": "pointed Claude to that article, it gave",
+    "start": 1223.4,
+    "duration": 3.72
+  },
+  {
+    "text": "me those six shifts, gave me some",
+    "start": 1225.32,
+    "duration": 3.8
+  },
+  {
+    "text": "examples of what these shifts are",
+    "start": 1227.12,
+    "duration": 3.84
+  },
+  {
+    "text": "pertaining to, and this gives me a more",
+    "start": 1229.12,
+    "duration": 4.24
+  },
+  {
+    "text": "solid idea in a much faster way versus",
+    "start": 1230.96,
+    "duration": 4.56
+  },
+  {
+    "text": "me just having to read through Claude's",
+    "start": 1233.36,
+    "duration": 4.2
+  },
+  {
+    "text": "essay on what this whole article is",
+    "start": 1235.52,
+    "duration": 3.6
+  },
+  {
+    "text": "about. Now, the good news about all this",
+    "start": 1237.56,
+    "duration": 3.2
+  },
+  {
+    "text": "is that Anthropic has actually made it",
+    "start": 1239.12,
+    "duration": 3.6
+  },
+  {
+    "text": "really simple to apply all of these best",
+    "start": 1240.76,
+    "duration": 3.56
+  },
+  {
+    "text": "practices with the latest version of",
+    "start": 1242.72,
+    "duration": 3.12
+  },
+  {
+    "text": "Claude Code. So, if you update your",
+    "start": 1244.32,
+    "duration": 3.4
+  },
+  {
+    "text": "Claude Code to the latest, then you'll",
+    "start": 1245.84,
+    "duration": 4.6
+  },
+  {
+    "text": "be able to also get this {slash} doctor",
+    "start": 1247.72,
+    "duration": 5.28
+  },
+  {
+    "text": "skill, which if you invoke that command,",
+    "start": 1250.44,
+    "duration": 4.76
+  },
+  {
+    "text": "what it will basically do is five",
+    "start": 1253,
+    "duration": 4.76
+  },
+  {
+    "text": "things. So, it will check your install",
+    "start": 1255.2,
+    "duration": 4.36
+  },
+  {
+    "text": "of Claude Code to see if there's like",
+    "start": 1257.76,
+    "duration": 4.4
+  },
+  {
+    "text": "any broken or duplicate installs, any",
+    "start": 1259.56,
+    "duration": 5.04
+  },
+  {
+    "text": "path file path problems. It also finds",
+    "start": 1262.16,
+    "duration": 4.12
+  },
+  {
+    "text": "dead weight, so for example, your skills",
+    "start": 1264.6,
+    "duration": 4.44
+  },
+  {
+    "text": "or MCP servers, and even your cloud.md,",
+    "start": 1266.28,
+    "duration": 4.88
+  },
+  {
+    "text": "it trims it down so that it's optimized",
+    "start": 1269.04,
+    "duration": 3.56
+  },
+  {
+    "text": "to be thinner, just like what we",
+    "start": 1271.16,
+    "duration": 3.6
+  },
+  {
+    "text": "mentioned earlier. If you have hooks set",
+    "start": 1272.6,
+    "duration": 3.68
+  },
+  {
+    "text": "up, which are essentially these",
+    "start": 1274.76,
+    "duration": 3.64
+  },
+  {
+    "text": "deterministic codes that you may have",
+    "start": 1276.28,
+    "duration": 3.24
+  },
+  {
+    "text": "already set up if you're a bit more",
+    "start": 1278.4,
+    "duration": 2.92
+  },
+  {
+    "text": "advanced in Cloud Code, then {slash}",
+    "start": 1279.52,
+    "duration": 3.52
+  },
+  {
+    "text": "doctor will call out these hooks that",
+    "start": 1281.32,
+    "duration": 3.88
+  },
+  {
+    "text": "add a bit of slowness to every turn or",
+    "start": 1283.04,
+    "duration": 4
+  },
+  {
+    "text": "every message that you send to Cloud.",
+    "start": 1285.2,
+    "duration": 3.16
+  },
+  {
+    "text": "And then finally, it just reports its",
+    "start": 1287.04,
+    "duration": 3.8
+  },
+  {
+    "text": "findings before applying those fixes. If",
+    "start": 1288.36,
+    "duration": 4.56
+  },
+  {
+    "text": "I go to my Cloud and just show, you can",
+    "start": 1290.84,
+    "duration": 3.76
+  },
+  {
+    "text": "see I ran that {slash} doctor command a",
+    "start": 1292.92,
+    "duration": 3.8
+  },
+  {
+    "text": "while ago. Gives me a summary of what it",
+    "start": 1294.6,
+    "duration": 3.76
+  },
+  {
+    "text": "found. So, it says here that my install",
+    "start": 1296.72,
+    "duration": 3.52
+  },
+  {
+    "text": "is healthy and up to date. It gives me a",
+    "start": 1298.36,
+    "duration": 4.2
+  },
+  {
+    "text": "lot of detail around the stuff that it",
+    "start": 1300.24,
+    "duration": 3.88
+  },
+  {
+    "text": "recommends. But, at the end of this, it",
+    "start": 1302.56,
+    "duration": 3.36
+  },
+  {
+    "text": "gave me these options on what I actually",
+    "start": 1304.12,
+    "duration": 3.92
+  },
+  {
+    "text": "want to do. So, it gave some MCP servers",
+    "start": 1305.92,
+    "duration": 4.36
+  },
+  {
+    "text": "that I might consider disabling, which I",
+    "start": 1308.04,
+    "duration": 3.64
+  },
+  {
+    "text": "think we can do that. There's a couple",
+    "start": 1310.28,
+    "duration": 3.4
+  },
+  {
+    "text": "of skills in here that I think I either",
+    "start": 1311.68,
+    "duration": 3.68
+  },
+  {
+    "text": "might have replaced already, which we",
+    "start": 1313.68,
+    "duration": 3.92
+  },
+  {
+    "text": "can probably archive. There's also a",
+    "start": 1315.36,
+    "duration": 4.68
+  },
+  {
+    "text": "plugin that I was demoing in a tutorial",
+    "start": 1317.6,
+    "duration": 4.12
+  },
+  {
+    "text": "previously. And then it also tells me",
+    "start": 1320.04,
+    "duration": 3.76
+  },
+  {
+    "text": "here that I am a bit behind on the",
+    "start": 1321.72,
+    "duration": 4.08
+  },
+  {
+    "text": "versioning because I think every day",
+    "start": 1323.8,
+    "duration": 3.28
+  },
+  {
+    "text": "there's a new version of Cloud Code. So,",
+    "start": 1325.8,
+    "duration": 2.72
+  },
+  {
+    "text": "you might find that to be true for",
+    "start": 1327.08,
+    "duration": 2.84
+  },
+  {
+    "text": "yourself as well. So, if you submit",
+    "start": 1328.52,
+    "duration": 3.24
+  },
+  {
+    "text": "that, that just gets your Cloud Code",
+    "start": 1329.92,
+    "duration": 4.32
+  },
+  {
+    "text": "instance to be up to spec, let's say, to",
+    "start": 1331.76,
+    "duration": 4.76
+  },
+  {
+    "text": "these best practices. However, with just",
+    "start": 1334.24,
+    "duration": 3.84
+  },
+  {
+    "text": "this {slash} doctor skill, I actually",
+    "start": 1336.52,
+    "duration": 3.68
+  },
+  {
+    "text": "found that it is a bit more basic. It",
+    "start": 1338.08,
+    "duration": 3.4
+  },
+  {
+    "text": "doesn't really capture the learnings",
+    "start": 1340.2,
+    "duration": 3.72
+  },
+  {
+    "text": "that Tariq was mentioning in those six",
+    "start": 1341.48,
+    "duration": 4.84
+  },
+  {
+    "text": "shifts. So, what I basically did is I",
+    "start": 1343.92,
+    "duration": 4.52
+  },
+  {
+    "text": "just made this {slash} doctor plus,",
+    "start": 1346.32,
+    "duration": 3.4
+  },
+  {
+    "text": "which is a skill that you can just grab",
+    "start": 1348.44,
+    "duration": 3
+  },
+  {
+    "text": "below. It's available for free. And what",
+    "start": 1349.72,
+    "duration": 3.52
+  },
+  {
+    "text": "that does, if in case you want a more",
+    "start": 1351.44,
+    "duration": 4.08
+  },
+  {
+    "text": "complete checkup, is that apart from",
+    "start": 1353.24,
+    "duration": 4
+  },
+  {
+    "text": "doing all the things that {slash} doctor",
+    "start": 1355.52,
+    "duration": 3.44
+  },
+  {
+    "text": "does, basically by just invoking the",
+    "start": 1357.24,
+    "duration": 3.32
+  },
+  {
+    "text": "same {slash} doctor command that ships",
+    "start": 1358.96,
+    "duration": 4.32
+  },
+  {
+    "text": "with Cloud Code, is it also does a check",
+    "start": 1360.56,
+    "duration": 4.56
+  },
+  {
+    "text": "of those six shifts that we talked",
+    "start": 1363.28,
+    "duration": 3.52
+  },
+  {
+    "text": "about. And you can see when I ran this",
+    "start": 1365.12,
+    "duration": 3.8
+  },
+  {
+    "text": "on my device, says doctor's clean",
+    "start": 1366.8,
+    "duration": 3.76
+  },
+  {
+    "text": "because I've already done it before",
+    "start": 1368.92,
+    "duration": 3.2
+  },
+  {
+    "text": "this. And then the good thing about this",
+    "start": 1370.56,
+    "duration": 3.36
+  },
+  {
+    "text": "is that it actually tells me with those",
+    "start": 1372.12,
+    "duration": 3.84
+  },
+  {
+    "text": "six shifts, what are some of the skills",
+    "start": 1373.92,
+    "duration": 3.76
+  },
+  {
+    "text": "and artifacts that I can actually",
+    "start": 1375.96,
+    "duration": 4.32
+  },
+  {
+    "text": "optimize based on these new rules of",
+    "start": 1377.68,
+    "duration": 4.04
+  },
+  {
+    "text": "Cloud. So, it's telling me that this",
+    "start": 1380.28,
+    "duration": 3.48
+  },
+  {
+    "text": "last 30-day skill, which is meant for",
+    "start": 1381.72,
+    "duration": 4.48
+  },
+  {
+    "text": "research, is hitting a lot of red flags",
+    "start": 1383.76,
+    "duration": 4.88
+  },
+  {
+    "text": "based on those new rules. And I actually",
+    "start": 1386.2,
+    "duration": 3.76
+  },
+  {
+    "text": "I'm not surprised with this because I",
+    "start": 1388.64,
+    "duration": 3.2
+  },
+  {
+    "text": "remember with this last 30 days, it came",
+    "start": 1389.96,
+    "duration": 3.8
+  },
+  {
+    "text": "out a few months ago already. So, it's",
+    "start": 1391.84,
+    "duration": 3.92
+  },
+  {
+    "text": "telling me here that this skill is",
+    "start": 1393.76,
+    "duration": 4.04
+  },
+  {
+    "text": "actually really thick. It's like 2,090",
+    "start": 1395.76,
+    "duration": 3.68
+  },
+  {
+    "text": "lines long. And we can probably optimize",
+    "start": 1397.8,
+    "duration": 3.68
+  },
+  {
+    "text": "that by making this skill.md more of a",
+    "start": 1399.44,
+    "duration": 4.24
+  },
+  {
+    "text": "router rather than dumping this whole",
+    "start": 1401.48,
+    "duration": 4.2
+  },
+  {
+    "text": "2,000 lines of context in there. But,",
+    "start": 1403.68,
+    "duration": 3.96
+  },
+  {
+    "text": "there in essence, what you can do is to",
+    "start": 1405.68,
+    "duration": 4.36
+  },
+  {
+    "text": "run this Dr. Plus skill and just do a",
+    "start": 1407.64,
+    "duration": 4.4
+  },
+  {
+    "text": "more advanced checkup based on the",
+    "start": 1410.04,
+    "duration": 3.56
+  },
+  {
+    "text": "shifts, based on the new rules that",
+    "start": 1412.04,
+    "duration": 4.16
+  },
+  {
+    "text": "Tarek was mentioning in that now viral",
+    "start": 1413.6,
+    "duration": 4.52
+  },
+  {
+    "text": "article. And again, you can just grab",
+    "start": 1416.2,
+    "duration": 3.8
+  },
+  {
+    "text": "that whole skill, which you can import",
+    "start": 1418.12,
+    "duration": 4.04
+  },
+  {
+    "text": "or customize for your setup or even set",
+    "start": 1420,
+    "duration": 4.08
+  },
+  {
+    "text": "up a routine for. So, that let's say",
+    "start": 1422.16,
+    "duration": 4.04
+  },
+  {
+    "text": "every month you run this Dr. Plus skill",
+    "start": 1424.08,
+    "duration": 3.88
+  },
+  {
+    "text": "to do a check with your Cloud Code",
+    "start": 1426.2,
+    "duration": 3.36
+  },
+  {
+    "text": "instance. And you can just get that in",
+    "start": 1427.96,
+    "duration": 4.52
+  },
+  {
+    "text": "the description below.",
+    "start": 1429.56,
+    "duration": 2.92
+  }
+]

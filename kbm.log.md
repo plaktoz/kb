@@ -2,6 +2,8 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-06 | daily-update/2026-08/2026-08-06-2.md | newsletter |
+| 2026-08-06 | wiki/productivity/deep-work-techniques-daily-practice.md | ingest |
 | 2026-08-03 | wiki/finance/apple-stock-dip-buy-analysis-august-2026.md | ingest |
 | 2026-08-03 | research/graph-engineering/report.md | research |
 | 2026-08-04 | wiki/strategy/experts-vs-imitators.md | ingest |
@@ -976,3 +978,45 @@
 | 2026-08-06 | wiki/finance/microsoft-earnings-rally-azure-100b-july-30-2026.md (updated) | ingest |
 | 2026-08-06 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
 | 2026-08-06 | daily-update/2026-08/2026-08-06.md | newsletter |
+| 2026-08-06 | 2026-08-06-news-aggregation-2.md | news-fetch |
+| 2026-08-06 | 2026-08-02-eu-ai-act-labels-transparency-rules.md | scrape |
+| 2026-08-06 | 2026-08-04-google-ai-updates-july-2026.md | scrape |
+| 2026-08-06 | https://www.digitimes.com/news/a20260805PD222/demand-ai-chip-capacity-2028-abf-substrate.html | scrape-failed |
+| 2026-08-06 | 2026-08-03-cloudflare-q2-earnings-preview.md | scrape |
+| 2026-08-06 | 2026-08-05-conocophillips-earnings-options-implied-move.md | scrape |
+| 2026-08-06 | 2026-08-05-stock-market-new-highs-spacex-amd-weakness.md | scrape |
+| 2026-08-06 | 2026-03-11-activtrak-2026-state-of-the-workplace.md | scrape |
+| 2026-08-06 | 2026-08-05-stanford-ruptoblasts-exploding-immune-cells.md | scrape |
+| 2026-08-06 | 2026-08-04-bioengineered-chewing-gum-hpv-reduction.md | scrape |
+| 2026-08-06 | 2026-08-03-vanderbilt-taok1-alzheimers-compounds.md | scrape |
+| 2026-08-06 | 2025-09-09-10-deep-work-techniques.md | scrape |
+| 2026-08-06 | 2026-04-24-deep-work-vs-shallow-work.md | scrape |
+| 2026-08-06 | https://www.talentlms.com/research/learning-development-report-2026 | scrape-failed |
+| 2026-08-06 | 2026-08-06-21-teaching-strategies-backed-by-research.md | scrape |
+| 2026-08-06 | 2026-04-28-ag5-learning-development-strategy-2026-guide.md | scrape |
+| 2026-08-06 | 2025-09-18-clickup-10-mental-models.md | scrape |
+| 2026-08-06 | 2025-11-11-mental-models-strategic-decision-making.md | scrape |
+| 2026-08-06 | 2026-08-04-ibm-stock-key-drivers.md | scrape |
+| 2026-08-06 | 2026-07-28-spmo-momentum-etf-standout.md | scrape |
+| 2026-08-06 | 2026-07-30-microsoft-azure-blowout-growth-ai-bet.md | scrape |
+| 2026-08-06 | 2026-08-06-news-aggregation-2.processed.md | archive |
+| 2026-08-06 | 2026-08-03-video-claude-code-just-changed-forever-6-new-rules-by-anthropic-engineers.md | ingest |
+| 2026-08-06 | claude-code-just-changed-forever-6-new-rules-by-anthropic-engineers | archive |
+| 2026-08-06 | wiki/strategy/clickup-10-mental-models-for-decisions.md | ingest |
+| 2026-08-06 | wiki/productivity/deep-work-techniques-daily-practice.md | ingest |
+| 2026-08-06 | wiki/strategy/mental-models-strategic-decision-making.md | ingest |
+| 2026-08-06 | wiki/productivity/2026-state-of-workplace-ai-adoption-focus-erosion.md | ingest |
+| 2026-08-06 | wiki/learning/ld-strategy-framework-2026.md | ingest |
+| 2026-08-06 | wiki/productivity/deep-work-techniques-daily-practice.md | ingest |
+| 2026-08-06 | wiki/finance/spmo-momentum-etf-2026-standout.md | ingest |
+| 2026-08-06 | wiki/finance/microsoft-azure-blowout-q4-2026-earnings.md | ingest |
+| 2026-08-06 | wiki/finance/cloudflare-q2-2026-earnings-preview.md | ingest |
+| 2026-08-06 | wiki/health/vanderbilt-taok1-alzheimers-tool-compounds.md | ingest |
+| 2026-08-06 | wiki/technology/eu-ai-act-transparency-rules-august-2026.md | ingest |
+| 2026-08-06 | wiki/finance/conocophillips-earnings-options-implied-moves.md | ingest |
+| 2026-08-06 | wiki/technology/google-gemini-july-2026-updates.md | ingest |
+| 2026-08-06 | wiki/others/bioengineered-chewing-gum-hpv-cancer-microbes.md | ingest |
+| 2026-08-06 | wiki/finance/ibm-stock-rally-mainframe-investigation-risk.md | ingest |
+| 2026-08-06 | wiki/finance/stock-market-record-highs-spacex-amd-weakness-aug2026.md | ingest |
+| 2026-08-06 | wiki/health/stanford-ruptoblasts-exploding-immune-cells.md | ingest |
+| 2026-08-06 | wiki/learning/21-teaching-strategies-backed-by-research.md | ingest |
