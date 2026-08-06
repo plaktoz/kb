@@ -934,3 +934,45 @@
 | 2026-08-05 | wiki/strategy/first-principles-thinking.md (updated) | ingest |
 | 2026-08-05 | wiki/finance/jpmorgan-global-equity-views-momentum-market-2026.md | ingest |
 | 2026-08-05 | daily-update/2026-08/2026-08-05.md | newsletter |
+| 2026-08-06 | 2026-08-06-news-aggregation.md | news-fetch |
+| 2026-08-06 | 2026-08-05-anthropic-hiring-ai-chip-design-team.md | scrape |
+| 2026-08-06 | 2026-08-05-google-deepmind-ai-leadership-shakeup.md | scrape |
+| 2026-08-06 | 2026-08-05-jeff-dean-google-researchers-discovery-loop-startup.md | scrape |
+| 2026-08-06 | 2026-08-05-dow-sp500-record-highs-amd-spacex-earnings-dive.md | scrape |
+| 2026-08-06 | 2026-08-04-dow-surges-900-points-sp500-record-iran-talks.md | scrape |
+| 2026-08-06 | https://www.marketwatch.com/livecoverage/stock-market-today-sp500-dow-fresh-records-nasdaq-up-spacex-amd-falkl-sandisk-earnings | scrape-failed |
+| 2026-08-06 | 2026-07-30-readers-share-best-productivity-tips.md | scrape |
+| 2026-08-06 | 2008-07-14-stop-procrastinating-making-it-easier-to-procrastinate.md | scrape |
+| 2026-08-06 | https://news.ycombinator.com/item?id=49152222 | scrape-failed |
+| 2026-08-06 | https://news.ycombinator.com/item?id=49163104 | scrape-failed |
+| 2026-08-06 | 2021-05-09-10-essential-strategies-deeper-learning.md | scrape |
+| 2026-08-06 | 2013-06-20-learn-physics-like-newton-beginner-expert-strategies.md | scrape |
+| 2026-08-06 | 2026-08-01-student-engagement-strategies-complete-guide.md | scrape |
+| 2026-08-06 | https://news.ycombinator.com/item?id=49084324 | scrape-failed |
+| 2026-08-06 | 2025-11-25-early-life-nutrition-lifelong-health.md | scrape |
+| 2026-08-06 | 2026-05-16-sleep-duration-slower-biological-aging.md | scrape |
+| 2026-08-06 | https://www.nih.gov/news-events/news-releases/fda-nih-announce-innovative-joint-nutrition-regulatory-science-program | scrape-failed |
+| 2026-08-06 | 2026-08-06-mental-models-vs-first-principles-decision-matrix.md | scrape |
+| 2026-08-06 | 2025-10-14-mental-models-for-modern-thinkers.md | scrape |
+| 2026-08-06 | 2026-08-03-msft-stock-bear-market-21-percent-drop.md | scrape |
+| 2026-08-06 | 2026-08-04-ibm-sovereign-ai-india-sarvam-partnership.md | scrape |
+| 2026-08-06 | 2026-08-05-dow-record-alphabet-ai-leadership-nvidia-gains.md | scrape |
+| 2026-08-06 | 2026-08-06-news-aggregation.processed.md | archive |
+| 2026-08-06 | wiki/technology/anthropic-custom-ai-chip-team.md | ingest |
+| 2026-08-06 | wiki/technology/google-deepmind-leadership-shakeup-discovery-loop.md | ingest |
+| 2026-08-06 | wiki/technology/google-deepmind-leadership-shakeup-discovery-loop.md (merged, second source) | ingest |
+| 2026-08-06 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated) | ingest |
+| 2026-08-06 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (dup, no new content) | ingest |
+| 2026-08-06 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated) | ingest |
+| 2026-08-06 | wiki/productivity/reader-crowdsourced-productivity-tactics.md | ingest |
+| 2026-08-06 | wiki/productivity/deep-procrastination-schedule-overload.md | ingest |
+| 2026-08-06 | wiki/learning/10-essential-strategies-deeper-learning.md | ingest |
+| 2026-08-06 | wiki/learning/beginner-vs-expert-learning-strategies.md | ingest |
+| 2026-08-06 | wiki/learning/student-engagement-strategies-behavioral-emotional-cognitive.md | ingest |
+| 2026-08-06 | wiki/health/sugar-restriction-infancy-dementia-alzheimers-risk.md (updated) | ingest |
+| 2026-08-06 | wiki/health/sleep-duration-biological-aging-organ-clocks.md | ingest |
+| 2026-08-06 | wiki/strategy/first-principles-thinking.md (updated) | ingest |
+| 2026-08-06 | wiki/strategy/first-principles-thinking.md (merged, second source) | ingest |
+| 2026-08-06 | wiki/finance/microsoft-earnings-rally-azure-100b-july-30-2026.md (updated) | ingest |
+| 2026-08-06 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md (updated) | ingest |
+| 2026-08-06 | daily-update/2026-08/2026-08-06.md | newsletter |
