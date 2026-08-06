@@ -35,3 +35,16 @@ A study published in *npj Aging*, using the natural experiment of the UK's 1953 
 
 **Q3**: What's the practical takeaway for someone concerned about their own (adult) sugar intake and brain health?
 **A**: This specific study doesn't test adult sugar restriction, so it can't be used to claim the same magnitude of benefit — but reducing added sugar as part of a broader healthy lifestyle (exercise, sleep, blood pressure control) remains reasonable given sugar's separate links to obesity, insulin resistance, and cardiovascular risk, all of which independently affect dementia risk.
+
+
+## Update (2026-08-06, NIH Research Matters — broader natural-experiment evidence)
+
+A wider NIH research roundup situates the UK sugar-rationing study above within a larger body of "natural experiment" nutrition research, adding three complementary findings:
+
+**Pregnancy diet quality** (Nansel & Lipsky, NIH): tracking diet quality of 300+ pregnant people found that "empty calorie" foods (sugar, refined grains, saturated fat) eaten during pregnancy predicted babies born larger and gaining excess weight faster — but even small reductions in empty-calorie intake produced an outsized drop in that risk, both during pregnancy and while breastfeeding.
+
+**Dutch Hunger Winter famine (1944-45)**: people exposed to famine while still in the womb showed faster biological aging via epigenetic clocks decades later — more weeks of exposure correlated with faster aging — plus higher adult obesity risk, reinforcing that early-life nutritional *deprivation* (not just excess sugar) leaves a lasting biological signature.
+
+**Holodomor famine and Great Depression**: in-utero exposure to the Holodomor was linked to more than double the risk of adult type 2 diabetes; separately, in-utero exposure to the worst economic hardship of the Great Depression (independent of early-childhood exposure) predicted faster epigenetic aging and markers of higher mortality risk — the effect held only for womb exposure, not childhood exposure, underscoring the womb as a uniquely sensitive developmental window.
+
+Researchers emphasize this doesn't mean health is fixed at birth — dietary changes at any life stage still produce measurable health improvements — but the added natural experiments strengthen the case that early-life (including prenatal) nutrition quality has outsized, decades-long downstream effects beyond the sugar-specific dementia/Alzheimer's findings already logged above.
