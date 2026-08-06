@@ -1020,3 +1020,44 @@
 | 2026-08-06 | wiki/finance/stock-market-record-highs-spacex-amd-weakness-aug2026.md | ingest |
 | 2026-08-06 | wiki/health/stanford-ruptoblasts-exploding-immune-cells.md | ingest |
 | 2026-08-06 | wiki/learning/21-teaching-strategies-backed-by-research.md | ingest |
+| 2026-08-07 | 2026-08-07-news-aggregation.md | news-fetch |
+| 2026-08-07 | 2026-08-05-google-targets-ai-startup-mechanize-1-5b-deal.md | scrape |
+| 2026-08-07 | 2026-08-06-globant-globai-ai-native-tech-services.md | scrape |
+| 2026-08-07 | 2026-08-06-ai-pioneers-split-technology-risk-jobs.md | scrape |
+| 2026-08-07 | 2026-08-06-stock-market-spacex-lockup-dow-record.md | scrape |
+| 2026-08-07 | https://apnews.com/article/stocks-markets-ai-spacex-hynix-bonds-2f4f2638cb8430bb7c8e5d59a7b50731 | scrape-failed |
+| 2026-08-07 | 2026-08-06-dow-falls-breaks-winning-streak-hormuz.md | scrape |
+| 2026-08-07 | 2026-08-06-16-time-management-skills.md | scrape |
+| 2026-08-07 | 2026-08-06-time-management-statistics-2026.md | scrape |
+| 2026-08-07 | 2026-08-01-time-maximizing-strategies-successful-people.md | scrape |
+| 2026-08-07 | 2026-07-28-how-to-learn-faster-and-better.md | scrape |
+| 2026-08-07 | 2025-09-09-using-spaced-repetition-effective-practice.md | scrape |
+| 2026-08-07 | https://www.researchgate.net/publication/263713247_Deliberate_Practice_and_Performance_in_Music_Games_Sports_Education_and_Professions_A_Meta-Analysis | scrape-failed |
+| 2026-08-07 | 2026-07-29-oral-semaglutide-heavy-drinking-aud-trial.md | scrape |
+| 2026-08-07 | 2026-07-31-early-menopause-high-blood-pressure-risk.md | scrape |
+| 2026-08-07 | 2026-08-04-invasive-mosquito-spreading-africa-cities.md | scrape |
+| 2026-08-07 | 2026-08-06-5-decision-making-models-explained.md | scrape |
+| 2026-08-07 | 2026-08-05-charlie-munger-lattice-of-mental-models.md | scrape |
+| 2026-08-07 | 2026-08-06-msft-india-data-center-cloud-race.md | scrape |
+| 2026-08-07 | 2026-08-06-singapore-stocks-rise-sti-up-1-percent.md | scrape |
+| 2026-08-07 | 2026-08-03-ibm-stock-forecast-sell-candidate-technical.md | scrape |
+| 2026-08-07 | 2026-08-07-news-aggregation.processed.md | archive |
+| 2026-08-07 | wiki/technology/google-targets-mechanize-ai-startup-1-5b-deal.md | ingest |
+| 2026-08-07 | wiki/technology/globant-globai-ai-native-tech-services.md | ingest |
+| 2026-08-07 | wiki/technology/ai-pioneers-hinton-ng-li-ai4-jobs-debate-2026.md | ingest |
+| 2026-08-07 | wiki/finance/dow-falls-464-points-spacex-lockup-hormuz-aug2026.md | ingest |
+| 2026-08-07 | wiki/finance/dow-falls-464-points-spacex-lockup-hormuz-aug2026.md (merged, second source) | ingest |
+| 2026-08-07 | wiki/finance/msft-india-hyderabad-data-center-cloud-race.md | ingest |
+| 2026-08-07 | wiki/finance/singapore-stocks-rise-sti-up-1-percent-aug2026.md | ingest |
+| 2026-08-07 | wiki/finance/ibm-stock-forecast-sell-candidate-aug2026.md | ingest |
+| 2026-08-07 | wiki/productivity/time-maximizing-strategies-successful-people.md | ingest |
+| 2026-08-07 | wiki/productivity/16-time-management-skills-simplilearn.md | ingest |
+| 2026-08-07 | wiki/productivity/time-management-statistics-2026.md | ingest |
+| 2026-08-07 | wiki/learning/how-to-learn-faster-and-better-10-strategies.md | ingest |
+| 2026-08-07 | wiki/learning/spaced-repetition-effective-music-practice.md | ingest |
+| 2026-08-07 | wiki/strategy/charlie-munger-lattice-of-mental-models.md | ingest |
+| 2026-08-07 | wiki/strategy/5-decision-making-models-explained.md | ingest |
+| 2026-08-07 | wiki/health/semaglutide-alcohol-use-disorder-trial.md (updated, merged AJMC source) | ingest |
+| 2026-08-07 | 2026-07-31-early-menopause-high-blood-pressure-risk.md (dup, no new content — same source_url already in wiki/health/early-menopause-linked-to-high-blood-pressure.md) | ingest |
+| 2026-08-07 | wiki/health/invasive-mosquito-spreading-africa-cities.md | ingest |
+| 2026-08-07 | daily-update/2026-08/2026-08-07.md | newsletter |
