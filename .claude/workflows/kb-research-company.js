@@ -2,7 +2,7 @@ export const meta = {
   name: 'kb-research-company',
   description: 'Deep 6-part investment analysis of a company — saved to research/<ticker>/report.md',
   phases: [
-    { title: 'Research', detail: '6 parallel agents: Business Model, Market, MOAT, Financials, Management, Valuation' },
+    { title: 'Research', detail: '7 parallel agents: Business Model, Market, MOAT, Financials (x2), Management, Valuation' },
     { title: 'Synthesize', detail: 'Coordinator writes Bull vs. Bear synthesis, saves report, logs to kbm.log.md' },
   ],
 }
@@ -35,7 +35,7 @@ const PART_SCHEMA = {
 phase('Research')
 log(`Researching ${ticker} across 6 dimensions in parallel...`)
 
-const [p1, p2, p3, p4, p5, p6] = await parallel([
+const [p1, p2, p3, p4a, p4b, p5, p6] = await parallel([
   () => agent(
     `${ANALYST_PERSONA}
 
@@ -100,20 +100,32 @@ Return a well-structured markdown section with heading "## Part 3: MOAT".`,
   () => agent(
     `${ANALYST_PERSONA}
 
-## Part 4: Financials
+## Part 4a: Financials — Margins and Earnings Quality
 
-Research and answer all of the following about ${ticker}. Source all financial data from reputable databases (SEC/EDGAR filings, company IR pages, Macrotrends, established financial news). Cover at least the last 5 years where available.
+Research and answer the following about ${ticker}. Source data from SEC/EDGAR filings, company IR pages, Macrotrends, or established financial news. Cover at least the last 5 years.
 
-- What are the gross profit margins?
-- What are the operating margins?
+- What are the gross profit margins (TTM and trend over 5 years)?
+- What are the operating margins (TTM and trend over 5 years)?
 - How do these margins compare against main competitors?
 - Quality of Earnings: compare Net Income to Free Cash Flow (FCF) over the last 5 years. Is FCF consistently lower than Net Income? If so, why? (Look for heavy Stock-Based Compensation, aggressive revenue recognition, or ballooning inventory.)
 - Operating Leverage: as revenue has grown over the last 5 years, have Operating Expenses grown at a slower or faster rate? Does the company profit more from each additional dollar of sales, or is it getting more expensive to grow?
+
+Return a well-structured markdown section with heading "## Part 4: Financials" (subsection: Margins & Earnings Quality).`,
+    { label: 'part4a-margins', schema: PART_SCHEMA }
+  ),
+
+  () => agent(
+    `${ANALYST_PERSONA}
+
+## Part 4b: Financials — Key Metrics and Capital Allocation
+
+Research and answer the following about ${ticker}. Source data from SEC/EDGAR filings, company IR pages, Macrotrends, or established financial news.
+
 - Provide a key metrics table covering: current price, market cap, P/E (TTM, forward, and last 5 years), revenue, operating income, net income, ROIC (TTM and 5-year average), cash, current liabilities, EPS, R&D spending, FCF, operating cash flow, EBITDA, EBIT, CAPEX, WACC.
 - Capital Allocation Policy over the last 10 years: how much FCF was returned to shareholders (dividends/buybacks) vs. reinvested (CAPEX/M&A)? Did reinvested capital generate higher ROIC, or is ROIC degrading as they grow?
 
-Return a well-structured markdown section with heading "## Part 4: Financials".`,
-    { label: 'part4-financials', schema: PART_SCHEMA }
+Return a well-structured markdown subsection continuing "## Part 4: Financials" (subsection: Key Metrics & Capital Allocation).`,
+    { label: 'part4b-metrics', schema: PART_SCHEMA }
   ),
 
   () => agent(
@@ -154,12 +166,26 @@ Return a well-structured markdown section with heading "## Part 6: Valuation".`,
 phase('Synthesize')
 log('All 6 parts complete. Writing synthesis and saving report...')
 
+const p4 = (p4a && p4b)
+  ? { content: (p4a.content || '') + '\n\n' + (p4b.content || '') }
+  : (p4a || p4b || null)
 const parts = [p1, p2, p3, p4, p5, p6].filter(Boolean)
 const combinedContent = parts.map(p => p.content).join('\n\n')
 
+// Step 1: Write each part to its own staging file in parallel (one part per agent — manageable prompt size)
+await parallel(
+  parts.map((p, i) => () => agent(
+    `Write the following markdown content to the file research/${ticker}/parts/part-${i + 1}.md (create directories as needed):\n\n${p.content}`,
+    { label: `write-part-${i + 1}` }
+  ))
+)
+
+log('Parts staged. Assembling report and adding Bull vs. Bear synthesis...')
+
+// Step 2: Assembly agent reads from disk — no large content in prompt
 await agent(
-  `You are a senior investment analyst. You have just completed a 6-part research report on ${ticker}. Here are the 6 parts:\n\n${combinedContent}\n\nComplete the following tasks:\n\n1. Write a concise "## Bull vs. Bear" synthesis section that distills the key investment thesis tension from all 6 parts. Present 3–5 bull points and 3–5 bear points in bullet form. Be objective — no recommendations.\n\n2. Assemble the full report in this exact order:\n   - Header: "# ${ticker} — Investment Analysis"\n   - Dateline: "Analysed: <today's date in YYYY-MM-DD format>"\n   - The Bull vs. Bear synthesis section\n   - All 6 parts in order\n\n3. Save the complete report to research/${ticker}/report.md (create the directory if it does not exist).\n\n4. Append this row to kbm.log.md (add to the existing table — do not overwrite):\n   | <today's date YYYY-MM-DD> | research/${ticker}/report.md | research |`,
-  { label: 'synthesize-and-save' }
+  `Do the following in order:\n\n1. Read files research/${ticker}/parts/part-1.md through research/${ticker}/parts/part-6.md (read whichever exist).\n\n2. Write a concise "## Bull vs. Bear" synthesis section distilling the key investment thesis tension: 3–5 bull points and 3–5 bear points in bullet form. Be objective — no recommendations.\n\n3. Assemble the full report in this order and save to research/${ticker}/report.md:\n   - "# ${ticker} — Investment Analysis"\n   - "Analysed: <today's date YYYY-MM-DD>"\n   - The Bull vs. Bear synthesis section\n   - The content of part-1.md through part-6.md in order\n\n4. Append this row to kbm.log.md (add to the existing table — do not overwrite):\n   | <today's date YYYY-MM-DD> | research/${ticker}/report.md | research |`,
+  { label: 'assemble-and-log' }
 )
 
 log(`Report saved to research/${ticker}/report.md`)
