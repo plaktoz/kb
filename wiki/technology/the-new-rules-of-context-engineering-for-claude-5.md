@@ -28,3 +28,14 @@ Anthropic eliminated over 80% of Claude Code's system prompt for Claude 5-genera
 - **Front-loading is waste**: Load context progressively — only when the task demands it.
 - **Rich references win**: Test suites and HTML artifacts outperform plain markdown for complex specs.
 - **Run `/doctor`**: Claude Code can automatically rightsize your context files.
+
+## Practical Applications (via RoboNuggets / Jay E)
+
+*From a video commentary on the Thariq article: https://www.youtube.com/watch?v=gQeRjkb_Hlc*
+
+- **ARMS framework** — a mental model for context engineering: **A**pplications (MCPs, APIs, CLIs), **R**outines (crons, scheduled tasks), **M**emory (artifacts, reports, documents), **S**kills (SOPs invoked via slash commands)
+- **CLAUDE.md as a router** — instead of a monolithic rules file, CLAUDE.md points to department sub-routers (e.g. `content.md`, `community.md`) that hold domain-specific context; reduces token overhead at session start
+- **Sub-routers per domain** — each department has its own index file that helps Claude navigate domain-specific skills, memory files, and references without loading everything upfront
+- **HTML artifacts as design interface systems** — brand books in HTML (color palettes, fonts, visual style rules) give Claude richer references than markdown; visible to both the agent and the human
+- **`/calibrate` skill** — run at end of each session to capture learnings and automatically update skills, CLAUDE.md rules, memory files, and workflows; prevents knowledge loss between sessions
+- **`/doctor` and `/doctor-plus`** — Claude Code ships a `/doctor` command that checks for broken installs, dead-weight skills/MCP servers, and slow hooks; a community-built `/doctor-plus` also audits against the 6 new context engineering rules
