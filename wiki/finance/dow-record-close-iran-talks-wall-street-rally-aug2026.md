@@ -57,3 +57,11 @@ The rally continued into Wednesday, August 5, with the Dow extending its winning
 **Nvidia rose ~3.5%** after Elon Musk said on SpaceX's first public-company earnings call that SpaceX will buy Nvidia chips "exclusively" going forward, citing the Vera Rubin architecture; Nvidia is up 17% YTD but still ~7% off its May highs.
 
 Weaker-than-expected ADP private payrolls (+44,000 in July vs. +75,000 expected, down from +98,000 in June) were a soft spot in an otherwise risk-on session. Oil stayed roughly flat (WTI ~$75.15-75.60/barrel) as investors awaited a possible US-Iran deal to reopen the Strait of Hormuz. *(An additional CNBC recap of the prior day's August 4 session — Dow +907pts, Palantir +29%, Caterpillar earnings beat, Bezos's $4.1B Amazon share sale, Fed's Anna Paulson comments — largely duplicated ground already captured in the update above; no new facts added from that source.)*
+
+## Update (2026-08-07, additional source: Yahoo Finance — August 6 session)
+
+The five-session winning streak snapped on Thursday, August 6: the Dow slid 0.9%, the S&P 500 fell 0.2%, and the Nasdaq slipped 0.1% as Treasury yields rose and investors digested a fresh wave of earnings alongside prospects of an imminent [[Strait of Hormuz]] shipping deal. Iran said it had reached an agreement with Oman for a temporary shipping route, with Iranian Foreign Ministry spokesperson Esmail Baghaei cautioning the deal would be finalized "if certain third parties do not obstruct this process."
+
+AI capex and monetization concerns drove punishing earnings reactions for **Sandisk** and **Western Digital**, both AI-adjacent highfliers. **SpaceX** stock popped early in the session but gave back most gains as its post-earnings lockup period expired, freeing insiders to sell. Global oil rose to $83/barrel on the lingering geopolitical uncertainty, pushing the 30-year Treasury yield to 5.21% and the 10-year to 4.67%.
+
+A Challenger, Gray & Christmas report showed July layoffs at their lowest level in two years, while jobless claims ticked up slightly to 199,000 for the week of Aug. 1 — setting the stage for Friday's closely watched July jobs report.

@@ -1061,3 +1061,31 @@
 | 2026-08-07 | 2026-07-31-early-menopause-high-blood-pressure-risk.md (dup, no new content — same source_url already in wiki/health/early-menopause-linked-to-high-blood-pressure.md) | ingest |
 | 2026-08-07 | wiki/health/invasive-mosquito-spreading-africa-cities.md | ingest |
 | 2026-08-07 | daily-update/2026-08/2026-08-07.md | newsletter |
+| 2026-08-07 | 2026-08-07-news-aggregation-2.md | news-fetch |
+| 2026-08-07 | 2026-08-06-dow-slips-record-sp500-nasdaq-drop.md | scrape |
+| 2026-08-07 | 2026-08-06-small-caps-outperforming-sp500-magnificent-7.md | scrape |
+| 2026-08-07 | 2026-08-04-is-ai-making-us-dumber.md | scrape |
+| 2026-08-07 | 2026-08-07-dry-cleaner-parkinsons-disease-link.md | scrape |
+| 2026-08-07 | 2026-08-07-molecular-glue-oxidative-cancer-cells.md | scrape |
+| 2026-08-07 | 2026-08-06-ibm-stock-down-3-17-percent-analysis.md | scrape |
+| 2026-08-07 | 2026-08-04-bell-ringer-cognitive-science-back-to-school.md | scrape |
+| 2026-08-07 | https://www.theguardian.com/science/2026/aug/06/safety-fears-as-scientists-make-first-viruses-designed-by-ai (blocked) | scrape-failed |
+| 2026-08-07 | https://www.cnn.com/2026/08/05/tech/meta-ai-hacking (empty response) | scrape-failed |
+| 2026-08-07 | https://quantumcomputingreport.com/d-wave-demonstrates-two-qubit-gate-breakthrough-for-dual-rail-erasure-qubits-in-nature (js required) | scrape-failed |
+| 2026-08-07 | https://www.cnbc.com/2026/08/06/5-things-to-know-before-the-stock-market-opens.html (empty response) | scrape-failed |
+| 2026-08-07 | https://www.shrm.org/topics-tools/tracking-shrms-2026-workplace-predictions-midyear-review (paywalled, no body) | scrape-failed |
+| 2026-08-07 | https://federalnewsnetwork.com/fed-thread/2026/08/the-hidden-costs-of-performative-productivity (empty response) | scrape-failed |
+| 2026-08-07 | https://9ambusiness.co.uk/exclusive/ai-cant-fix-productivity-if-the-workplace-is-broken (empty response) | scrape-failed |
+| 2026-08-07 | https://link.springer.com/article/10.1007/s10212-026-01169-z (paywalled, abstract only) | scrape-failed |
+| 2026-08-07 | https://www.theguardian.com/society/2026/aug/05/midlife-health-factors-delay-dementia-study (blocked) | scrape-failed |
+| 2026-08-07 | https://www.straitstimes.com/business/companies-markets/sgx-reports-higher-net-profit-as-efforts-to-boost-local-stock-market-reap-results (blocked) | scrape-failed |
+| 2026-08-07 | https://www.morningstar.com/news/marketwatch/2026080699/flash-crash-briefly-fells-sk-hynix-while-socgen-strategist-says-korean-shakeout-is-nearly-done (empty response) | scrape-failed |
+| 2026-08-07 | raw/url/2026-08-07-news-aggregation-2.processed.md | archive |
+| 2026-08-07 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated) | ingest |
+| 2026-08-07 | wiki/finance/small-caps-outperforming-sp500-magnificent-7-2026.md | ingest |
+| 2026-08-07 | wiki/finance/ibm-stock-forecast-sell-candidate-aug2026.md (updated) | ingest |
+| 2026-08-07 | wiki/learning/duckworth-grit-ai-learning-cover-letter-experiment.md (updated) | ingest |
+| 2026-08-07 | wiki/others/dry-cleaner-parkinsons-disease-link.md | ingest |
+| 2026-08-07 | wiki/others/molecular-glue-oxidative-cancer-cells.md | ingest |
+| 2026-08-07 | wiki/learning/bell-ringer-cognitive-science-back-to-school-roundup.md | ingest |
+| 2026-08-07 | daily-update/2026-08/2026-08-07-2.md | newsletter |
