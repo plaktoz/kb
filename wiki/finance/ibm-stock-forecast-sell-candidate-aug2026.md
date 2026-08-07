@@ -36,3 +36,7 @@ StockInvest.us rated [[IBM]] a "Sell Candidate" (-2.20 on a -10 to +10 technical
 
 **Q3**: What does the falling-volume-on-rising-price pattern potentially signal?
 **A**: A divergence between volume and price that the service flags as an early warning that the price gain may lack conviction and could reverse.
+
+## Update (2026-08-07, additional source: TradingKey — August 6 session)
+
+The bearish technical picture found a fundamental echo on August 6, when IBM opened down 3.17%, underperforming its Software & IT Services sector (-0.54%) and peers Microsoft (+0.53%) and Alphabet (-0.03%). TradingKey attributes the selloff to growing investor doubt about the pace of enterprise AI adoption and a slower-than-hoped recovery in IBM's Consulting segment, compounded by macro headwinds: persistent inflation signals raising the odds the Fed holds rates restrictive for longer, which disproportionately dents the valuation of long-duration software/infrastructure cash flows. Company-specific risks flagged include integration and valuation concerns around the $6.4 billion HashiCorp acquisition, competitive lag in generative AI versus hyperscalers pressuring Watsonx pricing, and a maturing z16 mainframe cycle that historically brings a lull in hardware sales. Despite the drop, analysts maintained an average Buy-leaning price target of $243.32 (range $174–$350), and technicals (MACD 5.752, RSI 48.8) read neutral rather than deeply oversold.
