@@ -30,3 +30,17 @@ date_consumed: 2026-08-06
 
 **Q3**: How should an investor interpret Microsoft's changed capex accounting (25-year vs. 15-year lease depreciation)?
 **A**: The lower reported capex figure doesn't reflect reduced actual spending — it's an accounting change — so investors should look at underlying commitments like the $329.1 billion in not-yet-commenced leases and the growing cloud backlog to gauge real investment scale.
+
+
+## Update (full Q4 FY2026 earnings call transcript, 2026-08-08)
+
+Additional detail from the official call transcript (source: https://www.fool.com/earnings/call-transcripts/2026/08/07/microsoft-msft-q4-2026-earnings-call-transcript), covering the AI product stack beyond the headline financials:
+
+- **[[Agent 365]]**: Nearly 40 million agents registered across tens of thousands of companies within two months of launch — a governance/control-plane product for AI agents.
+- **[[GitHub Copilot]]**: Revenue accelerated over 60% quarter-over-quarter after shifting to usage-based pricing in June; Nadella noted 1 in 3 GitHub pull requests now involve an agent.
+- **[[Microsoft Fabric]] and [[Microsoft Foundry]]**: Fabric reached 40,000 paid customers; Foundry grew to 100,000 customers with revenue more than doubling year-over-year, drawing from a catalog of 11,000+ models (OpenAI, [[Anthropic]], [[Mistral]], xAI, and Microsoft's own MAI family) — a 5x increase in customers building with multiple model providers since the start of the year.
+- **[[Maia 200]]**: Microsoft's custom AI accelerator delivers 30% better performance per dollar than existing fleet hardware and is scaling to support both OpenAI and MAI models; Cobalt CPU VMs power customers including Adobe, Arm, Elastic, OpenAI, Sprinklr, and TomTom.
+- **Microsoft Frontier Co.**: New engineering organization of 6,000 experts formed to co-design AI systems directly with enterprise customers.
+- **Sovereign AI**: Partnership announced with [[Mistral]] to bring its models to Microsoft Sovereign Cloud for customers with high data-compliance requirements.
+- **Other segment detail**: Healthcare AI on pace to automate 100M+ patient encounters this calendar year (28M in Q4); PostgreSQL revenue +55% for a third straight quarter of acceleration; LinkedIn revenue +12% with a fifth consecutive year of double-digit member growth; Windows OEM/Devices -7% and Xbox -10%, with Xbox growth expected to return in FY2027.
+- **Forward guidance**: Q1 FY2027 revenue guided to $89.85B-$90.95B (16-17% growth); FY2027 capex outlook ~$175B, with data-center and office-building useful life extended from 15 to 25 years starting FY2027.

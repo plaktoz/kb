@@ -65,3 +65,8 @@ The five-session winning streak snapped on Thursday, August 6: the Dow slid 0.9%
 AI capex and monetization concerns drove punishing earnings reactions for **Sandisk** and **Western Digital**, both AI-adjacent highfliers. **SpaceX** stock popped early in the session but gave back most gains as its post-earnings lockup period expired, freeing insiders to sell. Global oil rose to $83/barrel on the lingering geopolitical uncertainty, pushing the 30-year Treasury yield to 5.21% and the 10-year to 4.67%.
 
 A Challenger, Gray & Christmas report showed July layoffs at their lowest level in two years, while jobless claims ticked up slightly to 199,000 for the week of Aug. 1 — setting the stage for Friday's closely watched July jobs report.
+
+
+## Update (2026-08-08, additional source: Investopedia — August 7 session)
+
+The rally continued into Friday, August 7, with the [[S&P 500]] closing at a record high for the second time this week (+0.6%), the [[Nasdaq Composite]] adding 1.3%, and the [[Dow Jones Industrial Average]] up 0.3% — the major indexes' biggest weekly gains since April. The catalyst was the long-awaited July [[jobs report]]: nonfarm payrolls fell by 23,000 versus economists' expectations for an 83,000 increase, while the unemployment rate ticked down to 4.1% as labor force participation shrank. The report also included a downward revision to June's employment figure. Investors read the weak jobs data as reducing the odds of a near-term rate hike from the Fed under new Chair [[Kevin Warsh]], who has repeatedly stressed inflation-fighting as the central bank's top priority. Per the day's headline coverage, [[SpaceX]] shares also rallied sharply in the session.
