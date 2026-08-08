@@ -1089,3 +1089,46 @@
 | 2026-08-07 | wiki/others/molecular-glue-oxidative-cancer-cells.md | ingest |
 | 2026-08-07 | wiki/learning/bell-ringer-cognitive-science-back-to-school-roundup.md | ingest |
 | 2026-08-07 | daily-update/2026-08/2026-08-07-2.md | newsletter |
+| 2026-08-08 | 2026-08-08-news-aggregation.md | news-fetch |
+| 2026-08-07 | 2026-08-07-only-startup-moats-ai-data-distribution.md | scrape |
+| 2026-08-07 | 2026-08-07-ai-uk-venture-funding-margin-problem.md | scrape |
+| 2026-08-07 | 2026-08-07-la-startups-ai-infrastructure-funding.md | scrape |
+| 2026-08-07 | 2026-08-07-sp500-record-high-jobs-report-aug2026.md | scrape |
+| 2026-08-07 | 2026-08-07-corning-tariff-polysilicon-sp500-record.md | scrape |
+| 2026-08-07 | 2026-08-07-gold-rally-fed-jobs-data-aug2026.md | scrape |
+| 2026-08-07 | 2026-08-07-science-backed-tips-avoid-distractions.md | scrape |
+| 2026-08-04 | 2026-08-04-ai-turned-best-work-into-bare-minimum.md | scrape |
+| 2026-08-04 | 2026-08-04-ai-driven-four-day-workweek-case.md | scrape |
+| 2026-08-07 | 2026-08-07-ai-dementia-caregivers-spaced-repetition.md | scrape |
+| 2026-08-07 | 2026-08-07-ai-impacts-developing-brain.md | scrape |
+| 2026-08-07 | 2026-08-07-back-to-school-brain-health-memory-tips.md | scrape |
+| 2026-08-07 | 2026-08-07-alzheimers-inflammatory-processes-brain-shrinkage.md | scrape |
+| 2026-08-07 | 2026-08-07-vegan-diet-slows-biological-aging.md | scrape |
+| 2026-08-07 | 2026-08-07-new-science-of-aging-healthier-not-just-longer.md | scrape |
+| 2026-08-08 | 2026-08-08-best-mental-models-to-master-2026.md | scrape |
+| 2026-08-08 | 2026-08-08-how-to-not-know-munger-latticework.md | scrape |
+| 2026-08-07 | 2026-08-07-microsoft-msft-q4-2026-earnings-call-transcript.md | scrape |
+| 2026-08-07 | 2026-08-07-ibm-accelerates-ai-strategy-major-announcements.md | scrape |
+| 2026-08-07 | 2026-08-07-sp500-momentum-strategy-shines-volatile-market.md | scrape |
+| 2026-08-08 | 2026-08-08-news-aggregation.processed.md | archive |
+| 2026-08-08 | wiki/technology/only-startup-moats-ai-era-data-distribution.md | ingest |
+| 2026-08-08 | wiki/technology/ai-margin-problem-uk-venture-funding.md | ingest |
+| 2026-08-08 | wiki/technology/la-startups-hadrian-valar-atomics-infrastructure-funding.md | ingest |
+| 2026-08-08 | wiki/finance/microsoft-azure-blowout-q4-2026-earnings.md (updated, merged) | ingest |
+| 2026-08-08 | wiki/finance/ibm-granite-4-amd-partnership-uk-defense-contract.md | ingest |
+| 2026-08-08 | wiki/finance/dow-record-close-iran-talks-wall-street-rally-aug2026.md (updated, merged) | ingest |
+| 2026-08-08 | wiki/finance/corning-tariff-polysilicon-sp500-record-aug2026.md | ingest |
+| 2026-08-08 | wiki/finance/gold-rally-fed-jobs-data-aug2026.md | ingest |
+| 2026-08-08 | wiki/finance/spmo-momentum-etf-2026-standout.md (updated, merged) | ingest |
+| 2026-08-08 | wiki/productivity/ai-four-day-workweek-productivity-case.md | ingest |
+| 2026-08-08 | wiki/productivity/science-backed-tips-avoid-distractions.md | ingest |
+| 2026-08-08 | wiki/productivity/ai-turned-best-work-into-bare-minimum.md | ingest |
+| 2026-08-08 | wiki/learning/ai-dementia-caregivers-spaced-repetition.md | ingest |
+| 2026-08-08 | wiki/learning/ai-impacts-developing-brain.md | ingest |
+| 2026-08-08 | wiki/learning/back-to-school-brain-health-memory-tips.md | ingest |
+| 2026-08-08 | wiki/others/alzheimers-inflammatory-blood-markers-brain-shrinkage.md | ingest |
+| 2026-08-08 | wiki/others/vegan-diet-epigenetic-biological-aging.md | ingest |
+| 2026-08-08 | wiki/others/geroscience-healthspan-not-just-lifespan.md | ingest |
+| 2026-08-08 | wiki/strategy/best-mental-models-to-master-2026.md | ingest |
+| 2026-08-08 | wiki/strategy/how-to-not-know-uncertainty-munger-latticework.md | ingest |
+| 2026-08-08 | daily-update/2026-08/2026-08-08.md | newsletter |

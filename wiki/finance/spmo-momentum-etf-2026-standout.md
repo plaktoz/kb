@@ -30,3 +30,8 @@ The Invesco S&P 500 Momentum ETF ([[SPMO]]) outperformed both the broader S&P 50
 
 **Q3**: As an SPMO holder, what should this data suggest about position monitoring?
 **A**: SPMO's edge has come from higher exposure to the market's strongest performers via momentum weighting and semiannual rebalancing — a strategy that outperforms in trending markets but could underperform sharply if leadership rotates suddenly between rebalances.
+
+
+## Update (2026-08-08, additional source: Seoul Economic Daily — Aug 7)
+
+A Korean feeder product tracking the same underlying index — the "KIWOOM US [[S&P 500]] Momentum" ETF, nicknamed "Korea's [[SPMO]]" — recorded a 22.95% year-to-date return as of August 6, more than 10 percentage points ahead of the S&P 500 (12.42%) and 6.42 points ahead of the Nasdaq 100 (16.53%) over the same period. The fund compresses the roughly 100 top S&P 500 stocks by risk-adjusted momentum and rebalances twice yearly (March, September); its March rebalance saw 54.5% stock-level turnover, raising IT-sector weight from 33.2% to 44.4% while cutting financials from 19.5% to 6.3% — adding [[Micron]] as top holding while trimming [[Meta]], [[JPMorgan]], and [[Visa]]. Kiwoom Asset Management's Lee Kyung-jun called momentum "an index investment method optimized for the AI era," where winners keep changing and systematic rebalancing captures new leaders.
