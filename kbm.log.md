@@ -1132,3 +1132,46 @@
 | 2026-08-08 | wiki/strategy/best-mental-models-to-master-2026.md | ingest |
 | 2026-08-08 | wiki/strategy/how-to-not-know-uncertainty-munger-latticework.md | ingest |
 | 2026-08-08 | daily-update/2026-08/2026-08-08.md | newsletter |
+| 2026-08-08 | 2026-08-08-news-aggregation-2.md | news-fetch |
+| 2026-08-08 | 2026-08-08-google-deepmind-ai-leadership-reshuffle.md | scrape |
+| 2026-08-08 | 2026-08-07-epic-ehr-ai-boom-startup-opportunities.md | scrape |
+| 2026-08-08 | 2026-08-07-anthropic-custom-ai-inference-chips-samsung.md | scrape |
+| 2026-08-08 | 2026-08-07-berkshire-hathaway-q2-2026-earnings-preview.md | scrape |
+| 2026-08-08 | 2026-08-07-meta-942-million-child-safety-fine.md | scrape |
+| 2026-08-08 | 2026-08-07-us-stocks-rise-rate-hike-bets-fade-palantir.md | scrape |
+| 2026-08-08 | 2026-08-03-only-3-in-10-workers-reach-deep-focus-daily.md | scrape |
+| 2026-08-08 | 2026-08-04-federal-workforce-burnout-risk-management.md | scrape |
+| 2026-08-08 | 2026-05-21-employee-engagement-strategies-2026.md | scrape |
+| 2026-08-08 | 2026-08-05-skills-based-learning-rise-2026.md | scrape |
+| 2026-08-08 | 2026-08-01-ai-tutoring-evidence-schools.md | scrape |
+| 2026-08-08 | 2026-08-01-online-learning-statistics-2026.md | scrape |
+| 2026-08-08 | 2026-08-07-lecanemab-real-world-safety-study-duke.md | scrape |
+| 2026-08-08 | 2026-08-07-neurology-research-highlights-august-2026.md | scrape |
+| 2026-08-08 | 2026-08-01-colorectal-cancer-clinical-trials-roundup-august.md | scrape |
+| 2026-08-08 | 2026-08-01-ai-competitive-strategy-agentic-era.md | scrape |
+| 2026-08-08 | 2026-07-01-five-forces-competitive-analysis-field-guide.md | scrape |
+| 2026-08-08 | 2026-08-07-msci-world-etf-momentum-rule-change.md | scrape |
+| 2026-08-08 | 2026-08-07-microsoft-one-week-after-earnings.md | scrape |
+| 2026-08-08 | 2026-08-07-tom-lee-2027-sp500-8000-outlook.md | scrape |
+| 2026-08-08 | 2026-08-08-news-aggregation-2.processed.md | archive |
+| 2026-08-08 | wiki/technology/google-deepmind-leadership-shakeup-discovery-loop.md (updated) | ingest |
+| 2026-08-08 | wiki/technology/anthropic-custom-ai-chip-team.md (updated) | ingest |
+| 2026-08-08 | wiki/finance/microsoft-azure-blowout-q4-2026-earnings.md (updated) | ingest |
+| 2026-08-08 | wiki/learning/current-evidence-ai-tutoring-impact-learners.md (duplicate source, no changes) | ingest |
+| 2026-08-08 | wiki/productivity/only-3-in-10-workers-deep-focus-survey.md (duplicate source, no changes) | ingest |
+| 2026-08-08 | wiki/technology/epic-ehr-ai-boom-startup-competitive-landscape.md | ingest |
+| 2026-08-08 | wiki/finance/berkshire-hathaway-q2-2026-earnings-preview.md | ingest |
+| 2026-08-08 | wiki/finance/meta-942-million-child-safety-ruling.md | ingest |
+| 2026-08-08 | wiki/finance/us-stocks-rate-hike-bets-fade-palantir-surge.md | ingest |
+| 2026-08-08 | wiki/finance/msci-world-etf-momentum-eligibility-rule-change.md | ingest |
+| 2026-08-08 | wiki/finance/tom-lee-2027-sp500-8000-bull-case.md | ingest |
+| 2026-08-08 | wiki/productivity/federal-workforce-burnout-risk-management.md | ingest |
+| 2026-08-08 | wiki/productivity/employee-engagement-strategies-2026.md | ingest |
+| 2026-08-08 | wiki/learning/skills-based-learning-rise-2026.md | ingest |
+| 2026-08-08 | wiki/learning/online-learning-statistics-2026.md | ingest |
+| 2026-08-08 | wiki/others/lecanemab-real-world-safety-study.md | ingest |
+| 2026-08-08 | wiki/others/neurology-research-highlights-august-2026.md | ingest |
+| 2026-08-08 | wiki/others/colorectal-cancer-clinical-trials-august-2026.md | ingest |
+| 2026-08-08 | wiki/strategy/ai-competitive-strategy-agentic-era.md | ingest |
+| 2026-08-08 | wiki/strategy/five-forces-competitive-analysis-field-guide.md | ingest |
+| 2026-08-08 | daily-update/2026-08/2026-08-08-2.md | newsletter |
