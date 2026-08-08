@@ -40,3 +40,12 @@ Google announced a major AI leadership reshuffle on August 5, 2026: [[Demis Hass
 
 **Q3**: What does Discovery Loop's mission reveal about where big AI labs are focusing next?
 **A**: Its ambition to automate the "complete experimental loop" of scientific research — including using AI to build more powerful AI — signals a shift in focus from AI-as-product toward AI-as-a-tool for accelerating discovery itself, backed by both venture capital and Alphabet.
+
+## Update (official Google memo, 2026-08-08)
+
+Primary-source detail from Sundar Pichai and Demis Hassabis's internal memos to staff (source: https://blog.google/company-news/inside-google/message-ceo/next-chapter-ai-momentum), confirming and extending the Verge/TechCrunch reporting above:
+
+- Pichai cited the Gemini app reaching **950M+ monthly users**, [[Gemma]] models surpassing **900M+ downloads**, and the Cyber model going live as evidence of GDM momentum ahead of the reshuffle.
+- Hassabis said AI's "number one application should be to improve human health," framing his deeper focus on [[Isomorphic Labs]] around curing diseases like cancer, and will operate out of new London "Platform 37" offices.
+- [[Koray Kavukcuoglu]] has been at DeepMind since its early days (13+ years) and started its deep learning team, having led breakthroughs including [[WaveNet]] and [[DQN]] — context not in the original Verge/TechCrunch coverage.
+- Both memos frame the reorganization as enabling GDM to "move fast" on upcoming model releases (including [[Gemini 4]]) while Hassabis shifts to advising on strategic AGI questions rather than day-to-day operations.

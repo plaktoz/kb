@@ -44,3 +44,13 @@ Additional detail from the official call transcript (source: https://www.fool.co
 - **Sovereign AI**: Partnership announced with [[Mistral]] to bring its models to Microsoft Sovereign Cloud for customers with high data-compliance requirements.
 - **Other segment detail**: Healthcare AI on pace to automate 100M+ patient encounters this calendar year (28M in Q4); PostgreSQL revenue +55% for a third straight quarter of acceleration; LinkedIn revenue +12% with a fifth consecutive year of double-digit member growth; Windows OEM/Devices -7% and Xbox -10%, with Xbox growth expected to return in FY2027.
 - **Forward guidance**: Q1 FY2027 revenue guided to $89.85B-$90.95B (16-17% growth); FY2027 capex outlook ~$175B, with data-center and office-building useful life extended from 15 to 25 years starting FY2027.
+
+## Update (one week after earnings, 2026-08-08)
+
+Source: https://www.marketbeat.com/articles/no-hangover-revisiting-microsoft-one-week-after-earnings
+
+- MSFT is up **more than 25%** since the July 29 earnings report and turned positive for the year on August 5, a recovery from a nearly 30% drop between October 2025 and March 2026 driven by hyperscaler-spending and AI-monetization concerns.
+- **Chevron's Project Kilby**: a 20-year take-or-pay power agreement covering 2.67 gigawatts of behind-the-meter capacity in West Texas dedicated to Microsoft, moving toward a final investment decision later in 2026 with expected mid-teens returns — evidence Microsoft is locking in long-term AI infrastructure power rather than speculatively building it.
+- **[[Constellation Energy]]** has a separate 20-year power agreement with Microsoft anchored by the restart of the Crane Clean Energy Center (nuclear), diversifying Microsoft's AI power supply across gas and nuclear sources.
+- **Free cash flow trade-off**: $19.6B in FCF, down 23% YoY, repeating the prior quarter's pattern. Microsoft still posts positive FCF (unlike Oracle, which is taking on debt for AI infrastructure, or Alphabet, which reported negative FCF), but the declining trend makes MSFT expensive on discounted-cash-flow models that weight FCF heavily.
+- The stock's 25%+ one-week move is an outlier — MSFT typically takes a month or longer to move that much — but RSI suggests it isn't yet technically overbought. At time of writing MSFT traded at $499.86 with a Moderate Buy consensus rating and $558.87 average price target.
