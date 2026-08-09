@@ -1175,3 +1175,36 @@
 | 2026-08-08 | wiki/strategy/ai-competitive-strategy-agentic-era.md | ingest |
 | 2026-08-08 | wiki/strategy/five-forces-competitive-analysis-field-guide.md | ingest |
 | 2026-08-08 | daily-update/2026-08/2026-08-08-2.md | newsletter |
+| 2026-08-09 | 2026-08-09-news-aggregation.md | news-fetch |
+| 2026-08-09 | 2026-08-05-jeff-dean-google-deepmind-discovery-loop-startup.md | scrape |
+| 2026-08-09 | 2026-08-03-congress-chatgpt-ai-spending.md | scrape |
+| 2026-08-09 | 2026-08-05-nvidia-open-secure-ai-alliance-safe-working-group.md | scrape |
+| 2026-08-09 | 2026-08-08-sp500-record-close-weekly-surge.md | scrape |
+| 2026-08-09 | 2026-03-30-in-defense-of-thinking.md | scrape |
+| 2026-08-09 | 2026-03-01-why-gen-ai-feels-threatening-to-workers.md | scrape |
+| 2026-08-09 | 2026-04-30-empathetic-leadership-ai-adoption.md | scrape |
+| 2026-08-09 | 2024-01-01-it-students-skill-development-online-vs-f2f.md | scrape |
+| 2026-08-09 | 2026-08-08-ancient-protein-c3-cancer-immunotherapy.md | scrape |
+| 2026-08-09 | 2026-08-08-exercise-volume-heart-protection-study.md | scrape |
+| 2026-08-09 | 2026-08-06-ibm-apptio-ai-value-roi.md | scrape |
+| 2026-08-09 | https://www.cnn.com/2026/08/04/investing/us-stock-market | scrape-failed |
+| 2026-08-09 | https://www.cnbc.com/2026/08/03/stock-market-today-live-updates.html | scrape-failed |
+| 2026-08-09 | https://www.bloomberg.com/news/newsletters/2026-08-06/the-s-p-500-hit-another-record-high-in-2026-so-what-money | scrape-failed |
+| 2026-08-09 | https://www.cnbc.com/2026/08/05/microsoft-makes-openai-gpt-5point6-sol-default-in-github-copilot-for-staff.html | scrape-failed |
+| 2026-08-09 | https://phys.org/news/2026-08-nanoparticles-surgeons-destroy-brain-cancer.html | scrape-failed |
+| 2026-08-09 | https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2025.1522905/full | scrape-failed |
+| 2026-08-09 | https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2025.1546208/full | scrape-failed |
+| 2026-08-09 | 2026-08-09-news-aggregation.processed.md | archive |
+| 2026-08-09 | wiki/technology/google-deepmind-leadership-shakeup-discovery-loop.md (duplicate source, no changes) | ingest |
+| 2026-08-09 | wiki/technology/nvidia-open-secure-ai-alliance-osaa-progress.md (duplicate source, no changes) | ingest |
+| 2026-08-09 | wiki/technology/congress-chatgpt-ai-spending-2026.md | ingest |
+| 2026-08-09 | wiki/finance/sp500-record-close-weak-jobs-report-aug2026.md | ingest |
+| 2026-08-09 | wiki/finance/ibm-apptio-ai-value-roi.md | ingest |
+| 2026-08-09 | wiki/productivity/cal-newport-in-defense-of-thinking.md | ingest |
+| 2026-08-09 | wiki/productivity/why-gen-ai-feels-threatening-to-workers.md | ingest |
+| 2026-08-09 | wiki/productivity/empathetic-leadership-ai-adoption.md | ingest |
+| 2026-08-09 | wiki/learning/it-students-skill-development-online-vs-f2f.md | ingest |
+| 2026-08-09 | wiki/others/ancient-protein-c3-cancer-immunotherapy.md | ingest |
+| 2026-08-09 | wiki/others/exercise-volume-heart-protection-study.md | ingest |
+| 2026-08-09 | daily-update/2026-08/2026-08-09.md | newsletter |
+| 2026-08-09 | weekly-update/2026-08/2026-W32-weekly.md | newsletter |
