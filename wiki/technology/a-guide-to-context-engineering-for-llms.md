@@ -21,6 +21,10 @@ A 2025 Chroma study testing 18 frontier LLMs found every model's accuracy degrad
 - [[Retrieval-Augmented Generation]] (RAG) — retrieves only relevant chunks instead of stuffing all knowledge into context
 - [[Prompt Engineering]] — narrower discipline of instruction phrasing, nested inside context engineering
 - [[Andrej Karpathy]] — coined context engineering as "the delicate art and science of filling the context window"
+- [[Harrison Chase]] (LangChain) — framed context engineering as building dynamic systems supplying right information, tools, and format so an LLM can *plausibly* complete a task; considers prompt engineering a subset
+- [[LangGraph]] — agent framework giving full control over agent steps and LLM context inputs
+- [[LangSmith]] — tracing tool for inspecting exactly what context was passed to the model
+- [[12 Factor Agents]] (Dex Horthy) — related principles including "own your prompts" and "own your context building"
 - [[Claude Code]] — triggers auto-compaction at 95% context capacity
 - [[Anthropic]] — multi-agent research system that isolated context across a lead Opus 4 agent and Sonnet 4 sub-agents
 - [[Silent Failure]] — RAG-specific failure mode where retrieval returns wrong chunks; LLM responds without the needed information with no visible error signal ← `[[is-rag-still-needed-long-context-vs-rag]]`
@@ -35,6 +39,9 @@ A 2025 Chroma study testing 18 frontier LLMs found every model's accuracy degrad
 - Four core strategies: write, select, compress, isolate
 - Scratchpads externalize plans so long tasks survive context truncation
 - RAG retrieval precision matters — near-relevant documents become distractors
+- Agent failures trace to two causes: model error or missing context — as models improve, missing context dominates ← `[[Harrison Chase]]`
+- Context sources include: developer instructions, user input, prior interactions, tool outputs, and external data
+- Format matters as much as content — a concise error message outperforms a raw JSON blob; tool parameter design is part of context engineering
 - Claude Code auto-compacts at 95% context capacity to save tokens
 - Anthropic's isolated multi-agent system beat a single agent by 90.2%
 - **RAG vs. long-context decision rule**: bounded data + global cross-document reasoning → long context; infinite/private enterprise data → RAG ← `[[is-rag-still-needed-long-context-vs-rag]]`
