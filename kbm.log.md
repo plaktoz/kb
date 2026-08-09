@@ -1207,3 +1207,4 @@
 | 2026-08-09 | wiki/others/ancient-protein-c3-cancer-immunotherapy.md | ingest |
 | 2026-08-09 | wiki/others/exercise-volume-heart-protection-study.md | ingest |
 | 2026-08-09 | daily-update/2026-08/2026-08-09.md | newsletter |
+| 2026-08-09 | weekly-update/2026-08/2026-W32-weekly.md | newsletter |
