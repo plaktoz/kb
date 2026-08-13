@@ -48,3 +48,22 @@ A wider NIH research roundup situates the UK sugar-rationing study above within 
 **Holodomor famine and Great Depression**: in-utero exposure to the Holodomor was linked to more than double the risk of adult type 2 diabetes; separately, in-utero exposure to the worst economic hardship of the Great Depression (independent of early-childhood exposure) predicted faster epigenetic aging and markers of higher mortality risk — the effect held only for womb exposure, not childhood exposure, underscoring the womb as a uniquely sensitive developmental window.
 
 Researchers emphasize this doesn't mean health is fixed at birth — dietary changes at any life stage still produce measurable health improvements — but the added natural experiments strengthen the case that early-life (including prenatal) nutrition quality has outsized, decades-long downstream effects beyond the sugar-specific dementia/Alzheimer's findings already logged above.
+
+
+## Update (2026-08-13, MedPage Today — Neurology journal figures and expert commentary)
+
+A MedPage Today writeup of what appears to be the same UK Biobank sugar-rationing natural experiment (published in *Neurology*, Zheng et al., Hong Kong University of Science and Technology) reports somewhat different effect sizes than the npj Aging-sourced figures above, along with new mechanistic and expert context worth logging:
+
+**Hazard ratios**: in-utero + first-year sugar rationing was linked to HR 0.79 (95% CI 0.66–0.94) for all-cause dementia and HR 0.77 (95% CI 0.59–1.00) for Alzheimer's disease; rationing extended to ages 1–2 showed similar HRs (0.77 and 0.72 respectively). Vascular dementia associations were not significant.
+
+**Delay effect**: in-utero-plus-1-to-2-years rationing was tied to dementia onset being delayed by 2.55 years on average.
+
+**Mediation**: incident type 2 diabetes and hypertension jointly mediated about 25.5% of the sugar-rationing/dementia association — pointing to metabolic and vascular health as a partial pathway alongside direct neurodevelopmental effects.
+
+**Imaging substudy**: early-life sugar rationing was associated with higher total gray matter volume, lower white matter hyperintensity volume, and better processing speed and reasoning performance.
+
+**Independent expert commentary** (Tadeja Gracner, PhD, USC, who has separately researched this same cohort): persistence of dietary habits appears to be one carrying mechanism — people rationed as infants or toddlers were still eating less added sugar and more fiber 50 years later. Rationing also shifted schooling, occupation, and wealth, which could independently shape later health. Notably, effects "concentrate among people genetically predisposed to obesity" — in Gracner's ongoing work, early sugar restriction narrowed the genetic gap in adult obesity by about 40%.
+
+**Zheng's caveat**: the findings do not support restricting overall calories or essential nutrients during pregnancy or infancy — rather, they suggest guideline-consistent reductions in *added and free* sugars during the first 1,000 days may have long-term brain-health benefits. As an observational natural-experiment study, causal claims require further research.
+
+Source: https://www.medpagetoday.com/neurology/dementia/122400
