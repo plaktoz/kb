@@ -13,10 +13,12 @@ Apple CEO Tim Cook, in his final earnings call, signaled that the upgraded [[Sir
 ## Core Concepts
 
 - **[[Siri]] AI Paywall**: Tiered paid access via [[iCloud+]] subscriptions for heavy Siri AI usage
-- **[[Apple]] AI Strategy**: Reliance on licensed [[Google Gemini]] model due to internal AI development lag
+- **[[Apple]] AI Strategy**: Historically resistant to subscription upsells; now relying on licensed [[Google Gemini]] model due to internal AI development lag
+- **[[iOS 27]]**: Platform version hosting the current Siri AI beta; broader fall rollout expected
+- **[[Tim Cook]]**: Outgoing Apple CEO who made the tiered-access announcement in his final earnings call
 - **[[John Ternus]]**: Incoming Apple CEO succeeding [[Tim Cook]], inheriting AI and supply chain challenges
 - **[[RAM Shortage]]**: Industry-wide hardware supply pressure driving up device prices across [[Meta]], [[Samsung]], [[Microsoft]], and [[Sony]]
-- **AI Monetization Models**: Convergence toward usage-tiered subscription pricing across major AI providers
+- **AI Monetization Models**: Convergence toward usage-tiered subscription pricing across major AI providers ([[Anthropic]], [[OpenAI]], now potentially Apple)
 
 ## Key Takeaways
 

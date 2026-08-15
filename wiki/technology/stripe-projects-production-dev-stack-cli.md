@@ -31,3 +31,4 @@ date_consumed: 2026-08-01
 
 - **[[Abstraction Layer]]**: Stripe Projects is a coordination layer over existing providers — it adds value not by replacing services but by eliminating the integration tax between them, a classic platform play.
 - **[[Reducing Activation Energy]]**: The tool embodies the principle that reducing setup friction lowers the barrier to production-grade work — the fewer steps between idea and running stack, the more developers ship.
+- **[[Single Source of Truth]]**: Centralizing credentials in one synced `.env` eliminates the coordination overhead of key sprawl — the same principle that makes monorepos and config servers valuable in large engineering orgs.

@@ -27,8 +27,10 @@ At the 2026 DAC Chips to Systems Conference, [[Synopsys]] (SNPS) announced fully
 - **Investment signal**: AI investment in chip design automation is accelerating, not plateauing.
 - **SNPS positioning**: Synopsys is explicitly positioning itself at the frontier of AI-native chip development.
 - **Downstream holdings relevance**: Benefits MSFT (Azure AI infrastructure), IBM (quantum + AI), and broad AI ETFs (CSPX, VWRA, SPMO, IWMO).
+- **AMD parallel**: Both AMD (ROCm.ai) and NVIDIA are racing to make AI-native tools the standard infrastructure layer for chip design.
 
 ## 🧠 First Principles & Mental Models
 
 - **[[Automation Substitution]]**: Agentic AI in EDA follows the classic automation pattern — tasks requiring coordination across many specialists get collapsed into a single autonomous workflow, reducing time-to-silicon and engineering headcount requirements simultaneously.
 - **[[Second-Order Effects]]**: The AI chip demand narrative typically focuses on GPU sales; this announcement surfaces the second-order effect — AI is also reshaping how chips are designed, creating a compounding feedback loop where better AI accelerates chip design which produces better AI hardware.
+- **[[Specialization Advantage]]**: Domain-specific AI agents outperform general-purpose ones in complex engineering because the value comes not from language capability but from deep domain knowledge — the same reason specialist engineers outperform generalists in chip design. Nemotron's domain grounding is the key differentiator over general LLMs for EDA tasks.

@@ -24,11 +24,11 @@ date_consumed: 2026-07-28
 
 ## Key Takeaways
 
-- **400X output claim**: Garry Tan measures his personal coding output at 400X vs. 2013 baseline; floor estimate after discounting is 8X.
+- **400X output claim**: Garry Tan measures his personal coding output at 400X vs. 2013 baseline; floor estimate 8X, median estimate ~80X under skeptical assumptions.
 - **Same model, different results**: 2X and 100X engineers use identical [[Claude]] weights — leverage is in workflow wiring, not model choice.
 - **Workforce metaphor**: Skill files = employees; resolver tables = org chart; filing rules = internal process; trigger evals = performance reviews.
 - **Revenue-per-head records**: [[Emergence (YC S24)]] hit 9-figure ARR with 15 people at $15M ARR; [[Retailo (YC W24)]] hit $60M ARR with ~40 people.
-- **400X is org-wide**: The multiplier applies to non-engineers (media, finance, ops) not just developers — YC finance staff collapsed 100 Excel workbooks into a single app.
+- **400X is org-wide**: The multiplier applies to non-engineers (media, finance, ops) not just developers — YC finance staff collapsed 100 Excel workbooks into a single app; everyone becomes an agent manager who builds skill files and cron jobs.
 - **Memory hygiene is critical**: Uncurated brains become "garbage dumps with great search" — provenance, contradiction checks, and active pruning are required.
 - **Never do one-off work**: Always skillify completed tasks; asking for something twice is a system failure.
 - **Model quality is rented; brain is owned**: Compounding institutional knowledge creates durable moats models cannot replicate.
