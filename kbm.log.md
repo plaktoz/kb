@@ -2,6 +2,12 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-15 | research/autonomous-multi-agent-dev-team/report.md | research |
+| 2026-08-15 | research/ui-testing-tool-maestro-style/report.md | research |
+| 2026-08-15 | research/levers-business-personal/lessons/ | lessons |
+| 2026-08-15 | research/levers-business-personal/report.md | research |
+| 2026-08-15 | research/thinking-like-world-class-minds-90-day/report.md | research |
+| 2026-08-15 | research/thinking-like-world-class-minds-90-day/lessons/ | lessons |
 | 2026-08-09 | research/react-frontend-best-practices/report.md | research |
 | 2026-08-09 | research/claude-design-language-website/report.md | research |
 | 2026-08-09 | wiki/technology/claude-design-language-step-by-step.md | ingest |

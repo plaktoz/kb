@@ -1,0 +1,354 @@
+/* Tufte-inspired stylesheet for World-Class Minds lesson course */
+
+:root {
+  --color-bg: #fffff8;
+  --color-text: #111;
+  --color-secondary: #444;
+  --color-muted: #888;
+  --color-border: #ddd;
+  --color-accent: #2a5caa;
+  --color-accent-hover: #1a3c7a;
+  --color-key-bg: #f0f4ff;
+  --color-key-border: #2a5caa;
+  --color-warning-bg: #fff8e8;
+  --color-warning-border: #c8860a;
+  --color-correct: #1a7a40;
+  --color-incorrect: #b52222;
+  --color-quiz-correct-bg: #e8f7ee;
+  --color-quiz-incorrect-bg: #fdeaea;
+  --font-body: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --max-width: 720px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 18px; scroll-behavior: smooth; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  padding: 2rem 1rem 4rem;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Header ── */
+.lesson-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.breadcrumb {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+}
+
+.breadcrumb a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--color-text);
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+  color: var(--color-secondary);
+}
+
+.lesson-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+.lesson-meta span::before { content: '○  '; }
+
+/* ── Body text ── */
+p { margin-bottom: 1rem; }
+
+strong { font-weight: 600; }
+em { font-style: italic; }
+
+ul, ol {
+  margin: 0.75rem 0 1rem 1.5rem;
+}
+
+li { margin-bottom: 0.4rem; }
+
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-hover); }
+
+/* ── Source card ── */
+.source-card {
+  background: #f6f6f0;
+  border-left: 4px solid var(--color-muted);
+  border-radius: 0 6px 6px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+  color: var(--color-secondary);
+}
+
+.source-card strong { display: block; margin-bottom: 0.3rem; color: var(--color-text); }
+
+/* ── Callouts ── */
+.callout {
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  font-size: 0.95rem;
+}
+
+.callout.key {
+  background: var(--color-key-bg);
+  border-left: 4px solid var(--color-key-border);
+}
+
+.callout.key::before {
+  content: 'Key insight';
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+}
+
+.callout.warning {
+  background: var(--color-warning-bg);
+  border-left: 4px solid var(--color-warning-border);
+}
+
+.callout.warning::before {
+  content: 'Common misconception';
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-warning-border);
+  margin-bottom: 0.4rem;
+}
+
+/* ── Quiz ── */
+.quiz {
+  background: #fafaf6;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.quiz h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-muted);
+  margin: 0 0 0.75rem;
+}
+
+.quiz p { margin-bottom: 1rem; font-size: 0.97rem; }
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-options button {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 0.65rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.quiz-options button:hover:not(:disabled) {
+  background: var(--color-key-bg);
+  border-color: var(--color-accent);
+}
+
+.quiz-options button:disabled { cursor: default; }
+
+.quiz-options button.correct {
+  background: var(--color-quiz-correct-bg);
+  border-color: var(--color-correct);
+  color: var(--color-correct);
+  font-weight: 600;
+}
+
+.quiz-options button.incorrect {
+  background: var(--color-quiz-incorrect-bg);
+  border-color: var(--color-incorrect);
+  color: var(--color-incorrect);
+}
+
+.quiz-feedback {
+  display: none;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: var(--color-quiz-correct-bg); color: var(--color-correct); }
+.quiz-feedback.incorrect { background: var(--color-quiz-incorrect-bg); color: var(--color-incorrect); }
+
+/* ── Exercise ── */
+.exercise {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2.5rem 0;
+  background: #fdfdf8;
+}
+
+.exercise::before {
+  content: 'Skill exercise';
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.exercise p {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.exercise textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background: white;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.exercise textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(42, 92, 170, 0.12);
+}
+
+/* ── Navigation ── */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  gap: 1rem;
+}
+
+.lesson-nav a {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-secondary);
+  transition: background 0.15s;
+}
+
+.lesson-nav a:hover { background: #f0f0ea; }
+
+.lesson-nav a.primary {
+  background: var(--color-accent);
+  color: white;
+  border-color: var(--color-accent);
+}
+
+.lesson-nav a.primary:hover { background: var(--color-accent-hover); }
+
+/* ── Tutor prompt ── */
+.tutor-prompt {
+  background: #f0f4ff;
+  border: 1px dashed var(--color-accent);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  margin: 2.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+th {
+  background: #f0f0ea;
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-border);
+}
+
+td {
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: none; }
+
+/* ── Print ── */
+@media print {
+  body { background: white; padding: 0; font-size: 12pt; }
+  .lesson-nav, .tutor-prompt, .exercise textarea { display: none; }
+  .callout, .quiz, .exercise { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+}
