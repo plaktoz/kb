@@ -12,6 +12,8 @@ A personal knowledge management (PKM) system that captures raw information, tran
 
 - **[daily-update/](daily-update/)** — daily newsletter digests, organized by month (`YYYY-MM/YYYY-MM-DD-N.md`)
 - **[weekly-update/](weekly-update/)** — weekly synthesis digests, organized by month (`YYYY-MM/YYYY-WXX-weekly.md`)
+- **[research/](research/)** — sourced research reports and interactive lesson courses, organized by topic slug
+- **[Published site](https://plaktoz.github.io/kb)** — GitHub Pages view of this knowledge base
 
 ## Folder map
 
