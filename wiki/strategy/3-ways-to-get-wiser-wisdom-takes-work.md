@@ -21,7 +21,7 @@ date_consumed: 2026-07-29
 
 ## Key Takeaways
 
-- **Read three book categories**: human condition, timeless philosophy, and self-knowledge.
+- **Read three book categories**: human condition (Anne Frank, Gulag Archipelago), timeless philosophy (Meditations, Bhagavad Gita), and self-knowledge (Man's Search for Meaning).
 - **Extract, don't just read**: Margin notes → 1–2 week delay → key ideas onto single-idea cards.
 - **Each card holds**: the idea (quote/summary), its connecting theme, and personal relevance.
 - **Write before speaking**: Understand your own position before voicing it.
@@ -34,3 +34,4 @@ date_consumed: 2026-07-29
 - **[[Confirmation Bias]]**: Most people use AI (and reading) to confirm what they already believe — Holiday's "work to be wrong" directly counters this by building a habit of active disconfirmation.
 - **[[Spaced Repetition]]**: The 1–2 week delay before reviewing book notes filters for durability — ideas that still matter after a cooling period are worth internalizing, mirroring the spacing effect in memory research.
 - **[[Stoicism]]**: The Epictetus close ties the entire framework to the Stoic principle of focusing on what is within your control (effort, attention, willingness to be wrong) and releasing what is not.
+- **[[Writing as Thinking]]**: Externalizing thoughts onto paper forces clarity and exposes hidden assumptions — the same first-principle behind rubber-duck debugging, journaling, and pre-mortems. Eisenhower asked for hours to write before advising on Pearl Harbor response; Joan Didion: "I don't know what I think until I write it down."
