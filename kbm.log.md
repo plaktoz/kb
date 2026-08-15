@@ -2033,3 +2033,24 @@
 | 2026-08-15 | 2026-08-15-time-management-strategies-12-methods-ranked.md | librarian |
 | 2026-08-15 | 2026-08-15-why-does-opus-5-feel-worse-to-work-with.md | librarian |
 | 2026-08-15 | 2026-08-15-news-aggregation-2.md | news-fetch |
+| 2026-08-13 | 2026-08-13-cerebras-ultrafast-mode-gpt-56-sol.md | scrape |
+| 2026-08-04 | 2026-08-04-bending-spoons-acquire-airtable-129-billion.md | scrape |
+| 2026-08-14 | 2026-08-14-top-tech-news-today-august-14-2026.md | scrape |
+| 2026-08-14 | 2026-08-14-stock-market-record-run-bofa-two-things-stop-it.md | scrape |
+| 2026-08-13 | 2026-08-13-databricks-5-billion-funding-190-billion-valuation.md | scrape |
+| 2026-08-14 | 2026-08-14-strait-of-hormuz-oil-prices-impact.md | scrape |
+| 2026-08-11 | 2026-08-11-pam-jeffries-online-active-learning-strategies.md | scrape |
+| 2026-08-10 | 2026-08-10-ai-missed-learning-not-cheating-pearson.md | scrape |
+| 2026-08-10 | 2026-08-10-parents-educators-ai-data-skills-survey.md | scrape |
+| 2026-08-11 | 2026-08-11-abcellera-menopause-drug-phase-2-trial-results.md | scrape |
+| 2026-08-14 | 2026-08-14-uterine-cancer-survival-gap-younger-black-women.md | scrape |
+| 2026-08-13 | 2026-08-13-fda-approves-zenbexus-celmod-multiple-myeloma.md | scrape |
+| 2026-08-14 | 2026-08-14-nvidias-risky-business.md | scrape |
+| 2026-08-08 | 2026-08-08-best-etf-beat-market-vanguard-momentum-factor.md | scrape |
+| 2026-08-13 | 2026-08-13-ibm-openai-partnership-enterprise-ai-deployment.md | scrape |
+| 2026-08-15 | https://hbr.org/2026/06/3-forces-are-redefining-the-transition-from-manager-to-leader (paywalled, summary only) | scrape-failed |
+| 2026-08-15 | https://hbr.org/2026/05/supporting-your-employees-career-growth-when-everyone-is-overwhelmed (paywalled, summary only) | scrape-failed |
+| 2026-08-15 | https://hbr.org/2026/07/want-workers-to-reskill-show-them-who-they-can-become (paywalled, summary only) | scrape-failed |
+| 2026-08-15 | https://hbr.org/2026/08/how-to-develop-a-game-changing-worldview (paywalled, summary only) | scrape-failed |
+| 2026-08-15 | https://seekingalpha.com/news/4633212-momentum-stocks-are-cheaper-than-the-market-jp-morgan-says (paywalled, stub only) | scrape-failed |
+| 2026-08-15 | raw/url/2026-08-15-news-aggregation-2.processed.md | archive |
