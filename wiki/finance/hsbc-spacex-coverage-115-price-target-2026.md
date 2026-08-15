@@ -14,6 +14,8 @@ HSBC initiated coverage of [[SpaceX]] (NASDAQ: SPCX) with a Hold rating and a $1
 
 - **[[SpaceX]] (NASDAQ: SPCX)**: Recently public aerospace company led by [[Elon Musk]], trading at a significant premium to revenue despite being unprofitable.
 - **[[HSBC]] Initiation**: Coverage started at Hold with a $115 price target derived from a sum-of-parts analysis augmented by a 2x innovation premium.
+- **[[Elon Musk Premium]]**: HSBC explicitly applied a 2x valuation premium to account for Musk's track record with disruptive technology ventures — yet that premium only justified the current share price.
+- **[[Valuation Uncertainty]]**: SpaceX as a case study in deep uncertainty at frontier-technology IPOs; the $62–$800 analyst target range reflects genuine unknowability about the monetization path, not just input disagreement.
 - **[[Sum-of-Parts Valuation]]**: Method used to justify the $115 base case; bull case at $293 hinges on [[Starship]] commercial viability by 2027 and doubled launch capacity.
 - **[[Starship]]**: SpaceX's next-generation rocket whose commercial readiness is a key swing factor in upside scenarios.
 - **[[Post-IPO Correction]]**: Shares down ~50% from peak of $225.64, reflecting valuation reset after initial enthusiasm.

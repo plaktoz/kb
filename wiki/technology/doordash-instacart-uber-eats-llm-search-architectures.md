@@ -17,7 +17,7 @@ DoorDash, Instacart, and Uber Eats each rebuilt their search systems around LLMs
 - **[[Retrieval-Augmented Generation]] (RAG)**: Used as a guardrail by DoorDash — the LLM picks from a retrieved taxonomy shortlist rather than generating free-form output.
 - **[[Two-Tower Retrieval]]**: [[Uber Eats]] architecture with separate query and document encoders, fine-tuned [[Qwen LLM]] as the backbone embedding layer, pre-computing document vectors into an [[HNSW]] vector index.
 - **[[Fine-Tuning]]**: [[Instacart]] fine-tuned [[Llama-3-8B]] on proprietary data for real-time tail query handling; Uber Eats fine-tuned Qwen for domain alignment across verticals and languages.
-- **[[Head vs. Tail Query Distribution]]**: Instacart splits serving — offline RAG-and-cache pipeline for frequent head queries; real-time fine-tuned model for cold-start tail queries.
+- **[[Head vs. Tail Query Distribution]]** / **[[Long-Tail Query Problem]]**: Instacart splits serving — offline RAG-and-cache pipeline for frequent head queries (top ~98%); real-time fine-tuned model for cold-start tail queries (bottom ~2%, but disproportionate quality impact).
 - **[[Matryoshka Representation Learning]]**: Uber Eats optimization allowing embedding truncation (1536 → 256 dimensions, <0.3% recall loss) to reduce storage and latency.
 - **[[Scalar Quantization]]**: int7 instead of float32, halving latency with recall above 0.95.
 - **[[Constrained Output Space]]**: DoorDash inverts the standard RAG pattern — RAG defines valid output labels; the LLM selects from them rather than generating freely.

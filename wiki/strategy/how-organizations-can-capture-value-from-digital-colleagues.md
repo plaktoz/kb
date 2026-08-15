@@ -12,6 +12,7 @@ MIT CISR researchers argue that as AI systems mature, organizations must move be
 
 ## Core Concepts
 
+- **[[MIT Center for Information Systems Research]] (MIT CISR)**: Research center that authored the "Leveraging Digital Colleagues for Enterprise Value" briefing; home of [[Peter Weill]] and [[Stephanie Woerner]].
 - **[[Digital Colleagues]]**: AI-enabled systems defined by [[MIT CISR]] researchers [[Peter Weill]] and [[Stephanie Woerner]] that collaborate with humans on complex work, acting autonomously within governance boundaries and seeking human approval for consequential decisions.
 - **[[AI Governance]]**: Because legal and ethical frameworks for nonhuman actors are still developing, humans must remain accountable for digital colleagues' decisions — especially high-consequence ones.
 - **[[Workflow Redesign]]**: Integrating digital colleagues requires leaders to redesign workflows, clarify accountability, rethink roles, and identify where [[Human Judgment]] remains essential.

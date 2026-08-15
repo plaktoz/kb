@@ -37,3 +37,4 @@ date_consumed: 2026-08-01
 
 - **[[Surrogate Endpoint Fallacy]]**: Ziltivekimab improved biomarkers (IL-6, CRP) but not the clinical outcome that matters (MACE), illustrating how optimizing a measurable proxy does not guarantee improvement in the underlying outcome — a recurring trap in drug development and investing alike.
 - **[[Mr. Market]]**: The ~9.4% single-day drop on one failed trial of a non-core drug, while the $120B GLP-1 franchise is unaffected, reflects market overreaction — the kind of short-term pessimism [[Benjamin Graham]]'s Mr. Market is known for creating.
+- **[[Pipeline Discount]]**: Pharma valuation implicitly prices in probability-weighted pipeline optionality; a Phase 3 failure reprices that option to zero, causing a step-down disproportionate to the drug's contribution to intrinsic value if the base business is healthy.

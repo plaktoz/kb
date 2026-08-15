@@ -1,6 +1,6 @@
 ---
 type: literature-note
-source_url: https://www.foxnews.com/health/daily-eating-habit-linked-better-brain-health-older-adults-new-research-suggests
+source_url: [https://www.foxnews.com/health/daily-eating-habit-linked-better-brain-health-older-adults-new-research-suggests, https://www.usatoday.com/story/life/health-wellness/2026/07/28/restricted-eating-hours-brain-health-study/91076516007]
 author: Angelica Stabile
 tags: [time-restricted-eating, brain-health, cognitive-decline, intermittent-fasting]
 date_consumed: 2026-08-01
@@ -26,7 +26,8 @@ A small six-month trial of 47 postmenopausal women found that eating within an 8
 - **Study design**: 47 postmenopausal obese/overweight women, 50–79, six-month trial.
 - **Eating windows**: Short group ate within 8.2 hrs (10am–6pm); control group across 12.3 hrs.
 - **Weight loss equal**: Both groups lost ~15 lbs; cognitive gains were independent of weight loss alone.
-- **Cognitive gains**: Short-window group scored higher on spatial planning, problem-solving, and memory accuracy.
+- **Cognitive gains**: Short-window group scored higher on spatial planning, problem-solving, and memory accuracy; no significant group differences in reaction time or multitasking.
+- **Eating window timing**: Restricted group ate within 8.2 hrs ending ~4 hours before bedtime.
 - **Mechanism hypothesis**: Circadian regulation, reduced inflammation, improved metabolic health.
 - **Dementia risk**: Women and overweight adults face elevated risk of [[Alzheimer's Disease]] and dementia.
 - **Caution**: Physical activity, sleep, blood pressure control have stronger evidence for brain protection.
