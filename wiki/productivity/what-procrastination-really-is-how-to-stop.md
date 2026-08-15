@@ -34,3 +34,16 @@ Procrastination is a self-regulation problem rooted in short-term mood managemen
 
 **Q3**: What does the research on self-forgiveness suggest as a practical first step for chronic procrastinators?
 **A**: A 2010 study found students who forgave themselves for procrastinating on one exam procrastinated less on their next exam — suggesting that starting with self-compassion, rather than self-criticism, is a more effective first step than harsh self-discipline.
+
+## Update (2026-08-15, goalsandprogress.com — Procrastination Equation, four types, and 7 evidence-based tools)
+
+A complementary research-backed guide adds concrete frameworks on top of the mood-regulation model above:
+
+- **[[Procrastination Equation]]** (Piers Steel): Motivation = (Expectancy × Value) / (Impulsiveness × Delay) — a formal model of why low-expectancy, low-value, high-delay tasks get deprioritized in favor of impulsive alternatives.
+- **Four procrastination types**, each with a best-fit strategy: anxiety-driven (self-compassion), perfectionism-driven (minimum viable output), boredom-driven (temptation bundling — Milkman et al.'s RCT found it raised gym attendance 51%), and overwhelm-driven (task decomposition).
+- **Root-Cause Response Method**: identify the emotional trigger → apply the matched strategy → build a precommitment structure (accountability partner, website blocker, financial stake) that removes the future decision point.
+- **[[Implementation Intentions]]** (if-then plans): Gollwitzer & Sheeran's meta-analysis of 94 studies found medium-to-large effects — one of the strongest evidence-based tools cited.
+- **ADHD distinction**: Russell Barkley's model frames ADHD-linked procrastination as an executive-function/temporal-discounting difference, not purely emotional avoidance — general productivity tactics alone won't fix it; body doubling and external time cues help more.
+- New habits take a median of 66 days to become automatic (range 18-254 days), per Lally et al. (2010).
+
+Roughly 20% of adults are chronic procrastinators (Joseph Ferrari) — reinforcing this note's original framing that procrastination is an emotion-regulation problem, not a character flaw.

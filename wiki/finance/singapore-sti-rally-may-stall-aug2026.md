@@ -28,3 +28,9 @@ The [[Straits Times Index (STI)]], tracked by the [[SPDR STI ETF (ES3)]], closed
 
 **Q3**: What sectors were driving the rally, and what's the outlook?
 **A**: Financial shares and property stocks led the gains; the outlook is cautious given soft U.S. and European markets and oil-price pressure from the Middle East conflict.
+
+## Update (2026-08-14, Business Times — STI closes at fresh high, banks mixed)
+
+The STI gained a further 0.4% (23.54 points) on Friday, Aug 14, to close at 5,743.59. [[Genting Singapore]] led gainers (+6.4%), while UOL Group was the worst performer (-2.8%). The three local banks were mixed: OCBC +0.9%, UOB +0.2%, DBS -1.3%. Losers outnumbered gainers 307 to 262 on S$2.7B traded. Regional markets were mixed — Hong Kong's Hang Seng -1.1%, Malaysia's KLCI -0.4%, Japan's Nikkei 225 +0.6%, South Korea's Kospi +2.4%.
+
+Swissquote analyst Ipek Ozkardeskaya noted uncertainty over whether the Fed's priority is taming inflation or easing the market into lower rates given growing US debt-interest costs, while Japan's PM Sanae Takaichi favors softer rates and spending even as persistent yen weakness may force a near-term BOJ rate hike.

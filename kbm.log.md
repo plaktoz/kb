@@ -2,6 +2,12 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-15 | research/autonomous-multi-agent-dev-team/report.md | research |
+| 2026-08-15 | research/ui-testing-tool-maestro-style/report.md | research |
+| 2026-08-15 | research/levers-business-personal/lessons/ | lessons |
+| 2026-08-15 | research/levers-business-personal/report.md | research |
+| 2026-08-15 | research/thinking-like-world-class-minds-90-day/report.md | research |
+| 2026-08-15 | research/thinking-like-world-class-minds-90-day/lessons/ | lessons |
 | 2026-08-09 | research/react-frontend-best-practices/report.md | research |
 | 2026-08-09 | research/claude-design-language-website/report.md | research |
 | 2026-08-09 | wiki/technology/claude-design-language-step-by-step.md | ingest |
@@ -1402,3 +1408,84 @@
 | 2026-08-13 | wiki/technology/microsoft-limits-m365-onedrive-windows10.md | ingest |
 | 2026-08-13 | wiki/finance/sti-could-hit-7000-jpmorgan-bull-case.md | ingest |
 | 2026-08-13 | daily-update/2026-08/2026-08-13.md | newsletter |
+| 2026-08-15 | 2026-08-15-news-aggregation.md | news-fetch |
+| 2026-08-15 | 2026-08-14-kog-gpu-inference-optimization.md | scrape |
+| 2026-08-15 | 2026-08-11-how-claudes-text-watermark-works.md | scrape |
+| 2026-08-15 | 2026-08-15-why-does-opus-5-feel-worse-to-work-with.md | scrape |
+| 2026-08-15 | 2026-08-14-markets-news-tech-shares-pull-back-sp500-nasdaq.md | scrape |
+| 2026-08-15 | 2026-08-13-reddit-stock-jumps-sp500-inclusion.md | scrape |
+| 2026-08-15 | https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-retail-sales-applied-materials-stock-amat (paywalled, stub only) | scrape-failed |
+| 2026-08-15 | 2026-08-15-time-management-strategies-12-methods-ranked.md | scrape |
+| 2026-08-15 | 2026-07-20-time-management-tips-for-new-teachers.md | scrape |
+| 2026-08-15 | 2026-08-15-how-to-overcome-procrastination-research-backed-guide.md | scrape |
+| 2026-08-15 | 2026-08-10-ai-agents-taking-entire-online-courses-cheating.md | scrape |
+| 2026-08-15 | 2026-08-14-back-to-school-how-ai-is-being-used-in-classroom.md | scrape |
+| 2026-08-15 | 2026-08-08-i-hate-what-ai-is-doing-to-minds-happiness-young.md | scrape |
+| 2026-08-15 | 2026-08-14-super-movers-walking-brain-health.md | scrape |
+| 2026-08-15 | 2026-08-11-sleep-could-identify-alzheimers-risk-earlier-stage.md | scrape |
+| 2026-08-15 | 2026-08-14-brain-healthy-habits-barriers-aarp.md | scrape |
+| 2026-08-15 | 2026-08-15-mental-model-game-theory.md | scrape |
+| 2026-08-15 | https://hbr.org/2026/07/our-favorite-management-tips-on-setting-strategy-when-the-path-is-unclear (paywalled, summary only) | scrape-failed |
+| 2026-08-15 | 2026-08-14-microsoft-stock-down-5-up-33-since-june-2026.md | scrape |
+| 2026-08-15 | 2026-08-14-singapore-stocks-end-higher-sti-gains.md | scrape |
+| 2026-08-15 | 2026-08-14-ibm-san-jose-research-center-rezoning.md | scrape |
+| 2026-08-15 | raw/url/2026-08-15-news-aggregation.processed.md | archive |
+| 2026-08-15 | wiki/finance/microsoft-earnings-rally-azure-100b-july-30-2026.md (updated) | ingest |
+| 2026-08-15 | wiki/finance/singapore-sti-rally-may-stall-aug2026.md (updated) | ingest |
+| 2026-08-15 | wiki/technology/kog-gpu-inference-optimization.md | ingest |
+| 2026-08-15 | wiki/technology/how-claudes-text-watermark-works.md | ingest |
+| 2026-08-15 | wiki/technology/why-opus-5-feels-worse-to-work-with.md | ingest |
+| 2026-08-15 | wiki/finance/reddit-joins-sp500-aug18-2026.md | ingest |
+| 2026-08-15 | wiki/finance/markets-tech-pullback-aug14-2026.md | ingest |
+| 2026-08-15 | wiki/finance/ibm-almaden-research-center-rezoning-2026.md | ingest |
+| 2026-08-15 | wiki/productivity/time-management-12-methods-ranked.md | ingest |
+| 2026-08-15 | wiki/productivity/time-management-tips-new-teachers.md | ingest |
+| 2026-08-15 | wiki/productivity/what-procrastination-really-is-how-to-stop.md (updated) | ingest |
+| 2026-08-15 | wiki/learning/ai-agents-cheating-online-courses.md | ingest |
+| 2026-08-15 | wiki/learning/ai-in-classroom-fresno-teachers.md | ingest |
+| 2026-08-15 | wiki/learning/ai-harming-young-minds-happiness-guardian.md | ingest |
+| 2026-08-15 | wiki/others/super-movers-walking-brain-health.md | ingest |
+| 2026-08-15 | wiki/others/sleep-micro-awakenings-alzheimers-risk.md | ingest |
+| 2026-08-15 | wiki/others/brain-healthy-habits-barriers-aarp.md | ingest |
+| 2026-08-15 | wiki/strategy/mental-model-game-theory.md | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-4d-framework.md (pre-existing, matched: 1-2-ai-fluency-summary-16x9) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-4d-framework.md (pre-existing, matched: 1-2-ai-fluency-summary-one-pager) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-delegation-competency.md (pre-existing, matched: 1-3-delegation-summary-16x9) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-delegation-competency.md (pre-existing, matched: 1-3-delegation-summary) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-description-competency.md (pre-existing, matched: 1-5-description-summary-16x9) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-description-competency.md (pre-existing, matched: 1-5-description-summary) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-discernment-product-process-performance.md (pre-existing, matched: 1-6-discernment-summary-16x9) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-discernment-product-process-performance.md (pre-existing, matched: 1-6-discernment-summary) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-diligence-three-types.md (pre-existing, matched: 1-8-diligence-summary-16x9) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-diligence-three-types.md (pre-existing, matched: 1-8-diligence-summary) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-framework-four-ds.md (pre-existing, matched: ai-fluency-vocabulary-cheat-sheet) | ingest |
+| 2026-08-15 | wiki/learning/anthropic-ai-fluency-framework-introduction.md (pre-existing, matched: dd1-handout-overview-of-generative-ai) | ingest |
+| 2026-08-15 | wiki/learning/ai-fluency-effective-prompting-techniques.md (pre-existing, matched: dd2-handout-6-effective-prompting-techniques) | ingest |
+| 2026-08-15 | wiki/technology/knowledge-graph.md (pre-existing, matched: 2026-08-03-knowledge-graph) | ingest |
+| 2026-08-15 | wiki/technology/graph-rag-implementation-neo4j-langchain.md (pre-existing, matched: 2026-08-03-neo4j) | ingest |
+| 2026-08-15 | wiki/technology/tigergraph-solutions.md (pre-existing, matched: 2026-08-03-tigergraph) | ingest |
+| 2026-08-15 | wiki/technology/ai-agent-memory-what-why-how.md (pre-existing, matched: agentic-memory-types-management-langgraph) | ingest |
+| 2026-08-15 | wiki/technology/agents-md-vs-claude-md-context-files.md (pre-existing, matched: agents-md-claude-md) | ingest |
+| 2026-08-15 | wiki/technology/ai-coding-agent-patterns.md (pre-existing, matched: ai-coding-agent-patterns) | ingest |
+| 2026-08-15 | wiki/technology/ai-coding-agents-codebase-context-three-tiers.md (pre-existing, matched: ai-coding-agents-codebase-context) | ingest |
+| 2026-08-15 | wiki/technology/prompt-context-analysis-context-engineering-playbook.md (pre-existing, matched: augmentcode-context-engineering-playbook) | ingest |
+| 2026-08-15 | wiki/technology/ai-agent-memory-what-why-how.md (pre-existing, matched: beyond-short-term-memory-3-types-long-term-memory-ai-agents) | ingest |
+| 2026-08-15 | wiki/technology/llm-assisted-open-source-bug-fix-case-study.md (pre-existing, matched: can-an-llm-really-fix-a-bug-case-study) | ingest |
+| 2026-08-15 | wiki/technology/ai-agent-codebase-qa-onboarding.md (pre-existing, matched: codebase-qa-onboarding) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-best-practices-memory-layer.md (pre-existing, matched: context-engineering-best-practices-redis) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-coding-agents.md (pre-existing, matched: context-engineering-coding-agents) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-multi-agent-llm-code-assistants.md (pre-existing, matched: context-engineering-multi-agent-llm-code-assistants) | ingest |
+| 2026-08-15 | wiki/technology/context-window-llms-ai-agents.md (pre-existing, matched: context-window-llms-comet) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-the-next-frontier-beyond-prompt-engineering.md (pre-existing, matched: deepset-context-engineering-next-frontier) | ingest |
+| 2026-08-15 | wiki/technology/writing-project-context-files-for-ai-coding-assistants.md (pre-existing, matched: how-to-write-project-context-files-for-ai-coding-assistants) | ingest |
+| 2026-08-15 | wiki/technology/langchain-llamaindex-production-integration.md (pre-existing, matched: langchain-llamaindex-integration) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-coding-agents.md (pre-existing, matched: langchain-rise-of-context-engineering) | ingest |
+| 2026-08-15 | wiki/technology/ai-agent-memory-what-why-how.md (pre-existing, matched: memory-in-agents-what-why-and-how) | ingest |
+| 2026-08-15 | wiki/technology/llamaindex-rag-pipeline-step-by-step.md (pre-existing, matched: rag-pipeline-llamaindex-guide) | ingest |
+| 2026-08-15 | wiki/technology/repowise-mcp-codebase-context-ai-agents.md (pre-existing, matched: repowise-codebase-context-for-ai-agents) | ingest |
+| 2026-08-15 | wiki/technology/self-improving-bug-fixing-agent-langgraph.md | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-practical-guide-ai-agents.md (pre-existing, matched: sourcegraph-context-engineering-practical-guide) | ingest |
+| 2026-08-15 | wiki/technology/spec-driven-ai-code-generation-multi-agent-systems.md (pre-existing, matched: spec-driven-ai-code-generation-multi-agent) | ingest |
+| 2026-08-15 | wiki/technology/claude-md-files-customizing-claude-code.md (pre-existing, matched: using-claude-md-files) | ingest |
+| 2026-08-15 | wiki/technology/context-engineering-vscode-copilot-workflow.md (pre-existing, matched: vscode-context-engineering-guide) | ingest |
+| 2026-08-15 | daily-update/2026-08/2026-08-15.md | newsletter |

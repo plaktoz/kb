@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn by Reproducing — Karpathy's Method | Lesson 8</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Thinking Like World-Class Minds
+        &rsaquo; Module 3: Structured Thinking &amp; Communication
+        &rsaquo; Lesson 8 of 15
+      </div>
+      <h1>Learn by Reproducing — Karpathy's Method</h1>
+      <div class="lesson-meta">
+        <span>~20 min</span>
+        <span>Module 3: Structured Thinking &amp; Communication</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      Andrej Karpathy —
+      <a href="https://karpathy.github.io/2022/03/14/lecun1989/" target="_blank" rel="noopener">
+        karpathy.github.io/2022/03/14/lecun1989/
+      </a><br />
+      Key result: re-implementing a 1989 deep learning paper from scratch and isolating one variable
+      at a time revealed that simple modern improvements (cross-entropy loss, AdamW, dropout) cut
+      error rates ~60% without any architectural overhaul — and that the macro-level principles of
+      deep learning have remained surprisingly stable across three decades.
+    </div>
+
+    <!-- ── Section 1 ── -->
+    <h2>The Experiment: Re-implementing 33 Years of Progress</h2>
+
+    <p>
+      In 2022, Andrej Karpathy took a canonical 1989 deep learning paper and rebuilt it from
+      scratch. His stated goal was to use the project as "a case study on the nature of progress
+      in deep learning." By reconstructing what was known at the time — the original architecture,
+      loss function, optimizer, and training procedure — he created a controlled baseline he could
+      then interrogate systematically.
+    </p>
+
+    <p>
+      The result was clarifying in a way that reading dozens of survey papers would not have been.
+      When you rebuild something yourself, every assumption the original authors left undocumented
+      becomes a decision you are forced to make consciously. Gaps in your understanding cannot
+      hide behind fluency with the vocabulary.
+    </p>
+
+    <p>
+      Karpathy's observation that "not much has changed on the macro level" across thirty-three
+      years is only visible from this vantage point. Without the reconstruction, the surface-level
+      complexity of modern deep learning makes it easy to mistake novelty for fundamental change.
+      The rebuild strips that away.
+    </p>
+
+    <div class="callout key">
+      "Deep understanding comes from doing — rebuilding, measuring, and projecting — not just
+      reading about results." Active reconstruction forces your gaps into the open. Reading about
+      a result keeps them hidden.
+    </div>
+
+    <!-- ── Section 2 ── -->
+    <h2>Variable Isolation: Changing One Thing at a Time</h2>
+
+    <p>
+      Once Karpathy had a working baseline, he did not apply every modern improvement at once.
+      He swapped components one at a time — loss function, then optimizer, then data augmentation,
+      then regularization — and measured the impact of each change independently.
+    </p>
+
+    <p>
+      This is the same discipline used in controlled experiments: isolate the variable, hold
+      everything else constant, and observe the outcome before moving on. The findings were
+      concrete. Simple substitutions produced outsized gains:
+    </p>
+
+    <ul>
+      <li>
+        Replacing the original loss function with cross-entropy produced a measurable improvement
+        on its own.
+      </li>
+      <li>
+        Switching to AdamW as the optimizer added further gains.
+      </li>
+      <li>
+        Adding dropout as a regularizer contributed additional error reduction.
+      </li>
+      <li>
+        Together, these straightforward changes cut errors roughly 60% — without touching the
+        underlying architecture.
+      </li>
+    </ul>
+
+    <p>
+      This finding carries a practical principle: more data often beats more architectural
+      complexity at the same inference cost. The compulsion to reach for structural novelty
+      frequently obscures the return available from simpler, well-understood improvements.
+    </p>
+
+    <div class="callout warning">
+      A common misconception is that re-implementing something is only useful if you are trying
+      to extend or improve it. In fact, the value comes before any improvement is made — in the
+      act of reconstruction itself. You are not trying to build something better. You are trying
+      to find out what you do not actually know.
+    </div>
+
+    <!-- ── Section 3 ── -->
+    <h2>History as a Mirror: Benchmarking Against the Past</h2>
+
+    <p>
+      By working with a 1989 baseline, Karpathy transformed the past into a measuring instrument.
+      The question was not simply "what works today?" — it was "what changed, and why does
+      it matter?" That second question is far harder to answer without a concrete historical anchor.
+    </p>
+
+    <p>
+      This is the principle that Karpathy calls "think in trajectories." Rather than taking a
+      snapshot of the current state of a field and treating it as the ground truth, a trajectory
+      view asks: where did this come from, what has been consistent across time, and where does
+      the trend line point? The 1989 re-implementation made the trajectory visible in a way that
+      a literature review of current papers would not.
+    </p>
+
+    <p>
+      The same habit appears across high-caliber thinkers. Donald Knuth re-derives algorithms
+      from first principles rather than citing them by name. Richard Feynman famously refused to
+      accept a result he could not re-derive himself. Jeff Dean builds intuition for large-scale
+      systems by reconstructing their behavior from primitive components. The pattern is
+      consistent: the reconstruction is the learning.
+    </p>
+
+    <!-- ── Section 4 ── -->
+    <h2>Applying Active Reconstruction Beyond Research</h2>
+
+    <p>
+      Karpathy's method is not confined to machine learning. The logic applies wherever you have
+      acquired knowledge by reading or watching rather than by building.
+    </p>
+
+    <ul>
+      <li>
+        <strong>Learning a new tool or framework:</strong> Do not just follow a tutorial.
+        Complete the tutorial once, then close the documentation and build the same output from
+        scratch. The places where you get stuck are exactly the places where you understood the
+        words but not the underlying logic.
+      </li>
+      <li>
+        <strong>Inheriting a system or process at work:</strong> Before making any changes,
+        try to reproduce the system's logic from scratch on paper. This will surface assumptions
+        the original author treated as obvious and never documented — the same gaps that trip up
+        every subsequent maintainer.
+      </li>
+      <li>
+        <strong>Auditing a career skill:</strong> Pick one skill you use regularly and believe
+        you know well — writing a performance review, building a financial model, designing a
+        presentation structure. Rebuild it entirely from memory, without your notes or templates.
+        Where you reach for a reference is where your actual understanding ends.
+      </li>
+    </ul>
+
+    <p>
+      In each case, the exercise produces a map of real gaps — not the gaps you thought you had,
+      but the ones that exist regardless of how confident you feel when explaining the topic to
+      others.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-8">
+      <h3>Check your understanding</h3>
+      <p>
+        What does Karpathy's 1989 paper re-implementation demonstrate about gaining deep
+        understanding of a subject?
+      </p>
+      <div class="quiz-options">
+        <button>Active reconstruction surfaces real gaps that reading never reveals</button>
+        <button>Reading papers and watching lectures builds the same depth</button>
+        <button>Memorizing key facts from research ensures lasting conceptual mastery</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <p>
+        <strong>Identify one skill you "know" but have never rebuilt from scratch</strong> —
+        a process, a model, a framework, a tool you use regularly. It could be writing a
+        performance review, building a spreadsheet model, explaining a technical architecture,
+        or constructing an argument from evidence.
+      </p>
+      <p>
+        Spend 30 minutes rebuilding it entirely from memory, without your notes, templates, or
+        documentation. Do not look anything up until the time is up.
+      </p>
+      <p>
+        Afterward, write down exactly where you got stuck. Those are your real gaps — the
+        difference between fluency with the vocabulary and genuine structural understanding.
+      </p>
+      <textarea placeholder="e.g. I tried to rebuild our quarterly planning template from memory. I got the structure right but couldn't recall how we weight impact vs. effort — I always just copy-paste from last quarter. That weighting logic is where I need to go deeper. Also got stuck on the risk section; I know it exists but have no mental model for what belongs there..."></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      Ask me to go deeper: "How do I find time to rebuild things from scratch?" &middot;
+      "What's the difference between this and the Feynman Technique?" &middot;
+      "How do I apply variable isolation to a business process instead of a model?"
+    </div>
+
+    <!-- ── Navigation ── -->
+    <nav class="lesson-nav">
+      <a href="0007-feynman-technique.html">&larr; Prev: The Feynman Technique</a>
+      <a href="0009-paradigm-shifts-design-problems.html" class="primary">Next: Paradigm Shifts &amp; Design Problems &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-8', 0, 'Correct. Karpathy\'s central finding is that active reconstruction — rebuilding from scratch and measuring each component independently — surfaces the gaps that reading never exposes. When you can only read results, hidden assumptions and missing knowledge stay invisible. Rebuilding forces every assumption into a decision you must make consciously.');
+  </script>
+</body>
+</html>

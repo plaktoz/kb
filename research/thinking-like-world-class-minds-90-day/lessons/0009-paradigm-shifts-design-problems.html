@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paradigm Shifts as Design Problems | Thinking Like World-Class Minds</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Thinking Like World-Class Minds
+        &rsaquo; Module 3: Structured Thinking &amp; Communication
+        &rsaquo; Lesson 9 of 15
+      </div>
+      <h1>Paradigm Shifts as Design Problems</h1>
+      <div class="lesson-meta">
+        <span>~20 min</span>
+        <span>Module 3: Structured Thinking &amp; Communication</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank" rel="noopener">
+        Andrej Karpathy &mdash; Software 2.0
+      </a><br />
+      Key finding: When neural networks are categorized as a new programming paradigm rather than
+      just classifiers, the extrapolations become obvious &mdash; and the infrastructure gaps
+      become visible. Karpathy asks not only &ldquo;what can this do?&rdquo; but &ldquo;what does
+      it demand of everything surrounding it?&rdquo; &mdash; identifying missing Software&nbsp;2.0
+      IDEs, dataset repositories, and package managers as the natural next design problems.
+    </div>
+
+    <!-- Section 1 -->
+    <h2>Categorization Determines What You Can Predict</h2>
+
+    <p>
+      Karpathy opens with a deceptively simple observation: how you categorize something determines
+      what you can predict from it. If you categorize a neural network as a <em>classifier</em>
+      &mdash; a clever statistical tool for labeling inputs &mdash; your predictions are local.
+      You ask: how accurate is it? How fast? How much data does it need? The category bounds the
+      question.
+    </p>
+
+    <p>
+      But if you categorize neural networks as a <strong>new programming paradigm</strong> &mdash;
+      a fundamentally different way of specifying software behavior &mdash; the extrapolations become
+      much more obvious. You stop asking about individual model performance and start asking what
+      this paradigm demands of the entire surrounding ecosystem: the tools developers use, the way
+      software is debugged, the way code is stored and shared, the way compute is provisioned. A
+      different category opens a different set of questions.
+    </p>
+
+    <p>
+      This is the first move in paradigm-shift thinking: resist the category your field is currently
+      using and ask whether a better one exists. The right category doesn&rsquo;t just describe more
+      accurately &mdash; it unlocks a richer set of predictions. Karpathy&rsquo;s framing of
+      Software&nbsp;2.0 was not just a rhetorical choice; it was a cognitive tool that made
+      downstream design problems visible.
+    </p>
+
+    <div class="callout key">
+      The single most powerful move in paradigm-shift thinking is this: ask &ldquo;what does this
+      shift demand of everything surrounding it?&rdquo; That question turns an observation about
+      what is new into a concrete design problem about what is missing.
+    </div>
+
+    <!-- Section 2 -->
+    <h2>Analogy-Driven Abstraction: Making the New Legible</h2>
+
+    <p>
+      Once Karpathy establishes the new category, he faces a familiar challenge: the paradigm is
+      abstract, and abstract ideas do not persuade or stick. His technique is
+      <strong>analogy-driven abstraction</strong> &mdash; mapping unfamiliar concepts onto familiar
+      structures so the logic becomes legible without requiring the reader to already be an expert.
+    </p>
+
+    <p>
+      He draws a direct analogy between neural network training and compilation. In Software&nbsp;1.0,
+      a programmer writes explicit source code in a high-level language; a compiler translates it
+      into binary. In Software&nbsp;2.0, the desired behavior is the &ldquo;source code&rdquo; &mdash;
+      a dataset of correct input-output pairs &mdash; and the training process is the
+      &ldquo;compiler&rdquo; that translates that specification into network weights. The analogy
+      is not perfect, but it is precise enough to carry real load: it immediately implies that
+      datasets are a form of source code that should be versioned, curated, and shared, just as
+      source code is today.
+    </p>
+
+    <p>
+      He reinforces the argument not by deepening a single example but by surveying breadth: vision
+      systems, speech recognition, machine translation, game-playing agents, database query
+      optimization. Each domain is a data point confirming the same pattern. Empirical breadth builds
+      the case where a single compelling example might be dismissed as a special case. The reader
+      arrives at the generalization not because Karpathy asserted it, but because they saw it repeat
+      across multiple independent domains.
+    </p>
+
+    <div class="callout warning">
+      A common mistake is to treat analogies as proofs. Karpathy&rsquo;s compilation analogy makes
+      Software&nbsp;2.0 <em>legible</em> &mdash; it does not make it correct by definition. Analogies
+      are tools for building initial understanding, not substitutes for empirical grounding. The
+      analogy should generate questions and predictions you then test, not conclusions you stop
+      questioning.
+    </div>
+
+    <!-- Section 3 -->
+    <h2>Turning Observations Into Design Problems</h2>
+
+    <p>
+      The sharpest part of Karpathy&rsquo;s essay is where he pivots from description to design.
+      After establishing the paradigm, he asks a directed question: <em>what infrastructure
+      doesn&rsquo;t exist yet?</em> This question &mdash; &ldquo;what does this paradigm demand of
+      everything surrounding it?&rdquo; &mdash; is the move that separates passive observation from
+      productive thinking.
+    </p>
+
+    <p>
+      The answer is specific and testable. Software&nbsp;1.0 has IDEs that let you write, run, and
+      debug code interactively. Software&nbsp;2.0 has no equivalent: there is no mature environment
+      for visualizing and editing a dataset the way an IDE lets you edit source code. Software&nbsp;1.0
+      has package managers for sharing and versioning code. Software&nbsp;2.0 has no standard for
+      sharing and versioning trained model weights or curated datasets. Software&nbsp;1.0 has compilers
+      that produce portable binaries. Software&nbsp;2.0 has the beginnings of portability through
+      hardware-agnostic weight formats, but the infrastructure is nascent. Each gap is a concrete
+      design problem, not a vague aspiration.
+    </p>
+
+    <p>
+      Karpathy also specifies properties that make Software&nbsp;2.0 tractable: the compute required
+      at inference time is roughly constant regardless of the complexity of the task encoded in the
+      weights; the compute is homogeneous and maps well onto specialized hardware like GPUs; and the
+      weights are portable in ways that compiled binaries often are not. These are not rhetorical
+      claims &mdash; they are testable properties that constrain where the paradigm works and where
+      it doesn&rsquo;t.
+    </p>
+
+    <!-- Section 4 -->
+    <h2>Candor as Part of the Argument</h2>
+
+    <p>
+      Karpathy does not oversell. He notes explicitly that neural networks can <strong>silently
+      fail</strong> by adopting statistical biases present in their training data &mdash; biases that
+      are difficult to detect because the failure is invisible: the model produces an answer, and the
+      answer looks plausible. He also acknowledges that high accuracy often comes with opacity: a
+      Software&nbsp;2.0 component achieves its result through learned weights that no human can read
+      or audit in the way a human can read source code. These are genuine limitations, and stating
+      them makes the argument stronger, not weaker.
+    </p>
+
+    <p>
+      This pattern &mdash; enthusiasm paired with honest acknowledgment of failure modes &mdash; is
+      a signature of clear thinkers across domains. Munger built his latticework of mental models
+      precisely because he knew any single model could mislead; the diversity was a hedge against
+      overconfidence. Feynman used analogies to make physics tangible, but was equally rigorous
+      about where the analogy broke down. Dalio&rsquo;s systems thinking applies equally to macro
+      and micro, and he is explicit about the conditions under which his models fail. In each case,
+      the acknowledgment of limitation is not humility theater &mdash; it is a signal that the
+      thinker has thought past the easy version of their own argument.
+    </p>
+
+    <p>
+      For the reader, candor is also a reliability signal. An essay that only describes successes
+      is a sales pitch. An essay that names where the paradigm breaks down is a map. Karpathy&rsquo;s
+      acknowledgment of silent failure modes makes the rest of the essay more trustworthy, not less
+      compelling.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-9">
+      <h3>Check your understanding</h3>
+      <p>
+        What is Karpathy&rsquo;s key move when he identifies a paradigm shift?
+      </p>
+      <div class="quiz-options">
+        <button>Ask what the shift demands of everything surrounding it</button>
+        <button>Ask which existing tools will still function reliably enough</button>
+        <button>Ask whether the old paradigm had fundamental underlying flaws</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        <strong>Skill exercise:</strong> Identify one change happening in your field right now &mdash;
+        a new tool, a new process, or a new expectation. Apply Karpathy&rsquo;s question:
+        &ldquo;What does this demand of everything surrounding it?&rdquo;
+      </p>
+      <p>
+        Write <strong>3 specific things</strong> this change demands that don&rsquo;t exist yet &mdash;
+        in your team, your skills, or your industry. Be concrete: name the gap, not the vague
+        category. (For example, not &ldquo;better training&rdquo; but &ldquo;a standard way to audit
+        model outputs before they go to customers&rdquo;.)
+      </p>
+      <textarea placeholder="Name the change you're observing in your field.&#10;&#10;Then write 3 specific things it demands that don't exist yet:&#10;1. [Gap in your team or workflow]&#10;2. [Gap in your skills or knowledge]&#10;3. [Gap in your industry or tooling]"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Want to go deeper? Ask your tutor: &ldquo;Help me stress-test my three gaps &mdash; are these
+      real missing infrastructure, or am I just describing things I find hard?&rdquo; or &ldquo;What
+      other paradigm shifts in the past decade had a similar infrastructure-gap pattern, and how did
+      those gaps get filled?&rdquo;
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0008-learn-by-reproducing.html">&larr; Previous: Learn by Reproducing</a>
+      <a href="0010-writing-is-thinking.html" class="primary">Next: Writing Is Thinking &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-9', 0, 'Correct. Karpathy\'s key move is to ask "what does this paradigm shift demand of everything surrounding it?" — turning the observation that neural networks form a new programming paradigm into a set of concrete design problems: missing Software 2.0 IDEs, no standard for versioning datasets, underdeveloped infrastructure for sharing trained weights. The question converts a category insight into an actionable map of what needs to be built.');
+  </script>
+</body>
+</html>

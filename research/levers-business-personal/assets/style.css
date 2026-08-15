@@ -1,0 +1,494 @@
+/* Tufte-inspired lesson stylesheet */
+:root {
+  --color-bg: #fffff8;
+  --color-text: #111111;
+  --color-muted: #555555;
+  --color-accent: #2b6cb0;
+  --color-accent-light: #ebf4ff;
+  --color-border: #e2e8f0;
+  --color-callout-key-bg: #fffbeb;
+  --color-callout-key-border: #d97706;
+  --color-callout-warning-bg: #fff5f5;
+  --color-callout-warning-border: #c53030;
+  --color-exercise-bg: #f0fff4;
+  --color-exercise-border: #276749;
+  --color-quiz-bg: #f7fafc;
+  --color-source-bg: #f8f8f8;
+  --color-correct: #276749;
+  --color-incorrect: #c53030;
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --max-width: 680px;
+  --spacing-unit: 1.5rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Layout ── */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* ── Header ── */
+.lesson-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.breadcrumb {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.breadcrumb a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.lesson-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+  color: var(--color-text);
+}
+
+.lesson-meta {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  display: flex;
+  gap: 1rem;
+}
+
+.lesson-meta span::before {
+  content: '• ';
+}
+
+.lesson-meta span:first-child::before {
+  content: '';
+}
+
+/* ── Typography ── */
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1.25rem;
+}
+
+ul, ol {
+  margin: 0 0 1.25rem 1.5rem;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: italic;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+blockquote {
+  border-left: 4px solid var(--color-accent);
+  margin: 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+th {
+  background: var(--color-border);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+td {
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Source Card ── */
+.source-card {
+  background: var(--color-source-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+}
+
+.source-card .source-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-bottom: 0.35rem;
+}
+
+.source-card p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.source-card a {
+  word-break: break-all;
+}
+
+/* ── Callouts ── */
+.callout {
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.75rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.callout .callout-label {
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.callout.key {
+  background: var(--color-callout-key-bg);
+  border-left: 4px solid var(--color-callout-key-border);
+}
+
+.callout.key .callout-label {
+  color: var(--color-callout-key-border);
+}
+
+.callout.warning {
+  background: var(--color-callout-warning-bg);
+  border-left: 4px solid var(--color-callout-warning-border);
+}
+
+.callout.warning .callout-label {
+  color: var(--color-callout-warning-border);
+}
+
+/* ── Quiz ── */
+.quiz {
+  background: var(--color-quiz-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.quiz h3 {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.quiz-question {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-options button {
+  background: white;
+  border: 1.5px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.65rem 1rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.quiz-options button:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+.quiz-options button:disabled {
+  cursor: default;
+}
+
+.quiz-options button.correct {
+  border-color: var(--color-correct);
+  background: #f0fff4;
+  color: var(--color-correct);
+  font-weight: 600;
+}
+
+.quiz-options button.incorrect {
+  border-color: var(--color-incorrect);
+  background: #fff5f5;
+  color: var(--color-incorrect);
+}
+
+.quiz-feedback {
+  margin-top: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  display: none;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-feedback.correct {
+  background: #f0fff4;
+  color: var(--color-correct);
+  border: 1px solid var(--color-correct);
+}
+
+.quiz-feedback.incorrect {
+  background: #fff5f5;
+  color: #742a2a;
+  border: 1px solid var(--color-incorrect);
+}
+
+/* ── Exercise ── */
+.exercise {
+  background: var(--color-exercise-bg);
+  border-left: 4px solid var(--color-exercise-border);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.exercise .exercise-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-exercise-border);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.exercise p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.exercise textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1.5px solid var(--color-exercise-border);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  resize: vertical;
+  background: white;
+  color: var(--color-text);
+}
+
+.exercise textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+}
+
+/* ── Tutor Prompt ── */
+.tutor-prompt {
+  background: var(--color-accent-light);
+  border: 1px solid #bee3f8;
+  border-radius: 4px;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: #2c5282;
+  margin: 2.5rem 0 1.5rem;
+  line-height: 1.5;
+}
+
+/* ── Navigation ── */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.lesson-nav a {
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.lesson-nav a:hover {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+  text-decoration: none;
+}
+
+.lesson-nav a.primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+  font-weight: 600;
+}
+
+.lesson-nav a.primary:hover {
+  background: #2c5282;
+  border-color: #2c5282;
+}
+
+.lesson-nav-spacer {
+  flex: 1;
+}
+
+/* ── Print ── */
+@media print {
+  .lesson-nav,
+  .tutor-prompt,
+  .exercise textarea,
+  .quiz-options button {
+    display: none;
+  }
+
+  body {
+    font-size: 11pt;
+    background: white;
+    color: black;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .callout,
+  .source-card,
+  .quiz {
+    border: 1px solid #999;
+    break-inside: avoid;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
+    padding: 1.25rem 1rem 3rem;
+  }
+
+  .lesson-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .lesson-nav {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .lesson-nav a {
+    width: 100%;
+    text-align: center;
+  }
+}
