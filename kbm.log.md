@@ -2054,3 +2054,19 @@
 | 2026-08-15 | https://hbr.org/2026/08/how-to-develop-a-game-changing-worldview (paywalled, summary only) | scrape-failed |
 | 2026-08-15 | https://seekingalpha.com/news/4633212-momentum-stocks-are-cheaper-than-the-market-jp-morgan-says (paywalled, stub only) | scrape-failed |
 | 2026-08-15 | raw/url/2026-08-15-news-aggregation-2.processed.md | archive |
+| 2026-08-15 | wiki/technology/cerebras-ultrafast-inference-gpt-56-sol.md | ingest |
+| 2026-08-15 | wiki/technology/bending-spoons-acquires-airtable.md | ingest |
+| 2026-08-15 | wiki/technology/ai-model-price-war-openai-anthropic-deepseek-aug2026.md | ingest |
+| 2026-08-15 | wiki/finance/stock-market-record-bofa-debt-yields-risk-aug2026.md | ingest |
+| 2026-08-15 | wiki/finance/databricks-190-billion-valuation-aug2026.md | ingest |
+| 2026-08-15 | wiki/finance/strait-of-hormuz-oil-market-analysis-aug2026.md | ingest |
+| 2026-08-15 | wiki/learning/pam-jeffries-online-active-learning-strategies.md | ingest |
+| 2026-08-15 | wiki/learning/ai-missed-learning-not-cheating.md | ingest |
+| 2026-08-15 | wiki/learning/parents-educators-ai-data-literacy-survey.md | ingest |
+| 2026-08-15 | wiki/others/abcellera-menopause-drug-phase2-trial.md | ingest |
+| 2026-08-15 | wiki/others/uterine-cancer-survival-gap-black-women.md | ingest |
+| 2026-08-15 | wiki/others/fda-approves-zenbexus-celmod-multiple-myeloma.md | ingest |
+| 2026-08-15 | wiki/strategy/nvidias-risky-business-ai-infrastructure-financing.md | ingest |
+| 2026-08-15 | wiki/finance/vanguard-momentum-factor-etf-beats-sp500.md | ingest |
+| 2026-08-15 | wiki/finance/ibm-openai-partnership-consulting-aug2026.md (pre-existing, matched: ibm-openai-partnership-enterprise-ai-deployment) | ingest |
+| 2026-08-15 | daily-update/2026-08/2026-08-15-2.md | newsletter |
