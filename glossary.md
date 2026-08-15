@@ -8,15 +8,29 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **A2A** — Google's agent-to-agent communication protocol; handles task delegation between AI agents from different vendors; absorbed [[ACP]] in 2026 to become the standard for inter-agent interoperability alongside Anthropic's [[MCP]].
 
+**Abraham Wald** — Hungarian-American statistician (1902–1950); best known in vault notes for the WWII survival bias thought experiment — recommending armor be added to the unshot areas of returning aircraft rather than where damage was found, since non-returning planes were the real signal.
+
 **ACP** — Agent Communication Protocol; initially a separate specification for agent-to-agent messaging; merged into [[A2A]] (Google) in 2026.
+
+**Addy Osmani** — Engineering lead at Google; author of widely-referenced essays on AI-assisted engineering and developer productivity; cited in vault for insights on how senior engineers leverage AI tools differently from novices.
+
+**Alphabet** — Google's parent holding company formed in 2015; houses Google's core search and advertising business alongside subsidiaries including [[Isomorphic Labs]] and [[Google DeepMind]]; cited in vault across AI capex notes and as a member of the [[Magnificent Seven]].
+
+**Amazon** — U.S. technology and e-commerce conglomerate; its cloud division (AWS) is a primary AI infrastructure provider; cited in vault for Q2 2026 earnings, [[Amazon Bedrock]] AI platform, and membership in the [[Magnificent Seven]].
 
 **Anders Ericsson** — Cognitive psychologist; conducted foundational research on deliberate practice, showing that expert performance results from structured, effortful practice at the edge of competence rather than innate talent. His work (summarized in *Peak*) underpins the SMART Learning Framework's 85/15 mistake-optimization principle referenced in vault notes.
 
 **Andrej Karpathy** — AI researcher and educator; publicly described using an LLM wiki knowledge base as a core part of his learning system.
 
+**Anthropic** — AI safety company and creator of the Claude model family; founded in 2021 by [[Dario Amodei]] and colleagues who departed [[OpenAI]]; developed the [[MCP (Model Context Protocol)]] standard for agent-to-tool communication; maker of [[Claude Code]] and the Claude 5-generation models.
+
 **Anki** — Spaced repetition flashcard application; used in the LLM-assisted reading workflow to generate and review flashcards from reading sessions via [[fastanki]].
 
+**Apple** — Consumer electronics and software company; maker of iPhone, Mac, and Apple Silicon chips; cited in vault for hitting $5 trillion market cap, CEO [[Tim Cook]]'s September 2026 transition to executive chairman, and membership in the [[Magnificent Seven]].
+
 **Auto-Memory** — Claude Code feature that automatically saves contextual memories without manual `/remember` triggers; part of the context engineering shift toward judgment-oriented guidance.
+
+**Azure** — Microsoft's cloud computing platform; cited in vault for 43% growth reported in Q4 2026 earnings; competes with AWS ([[Amazon]]) and Google Cloud ([[Alphabet]]) for AI infrastructure workloads including GPU compute.
 
 **Avery Pennarun** — Co-founder and CEO of [[Tailscale]]; authored the public post-mortem on the 2026 Hugging Face AI intrusion, diagnosing the static auth-key vulnerability and committing to better default controls including workload identity federation.
 
@@ -43,6 +57,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 **Cal Newport** — Georgetown professor and author of *Deep Work* and *Slow Productivity*; vault's primary voice on the AI productivity gap, [[Botsitting]], and the structural mismatch between AI capabilities and broken organizational workflows.
 
 **Capture** — The first step in the PKM workflow; dumping raw ideas, snippets, or links into an [[Inbox Capture]] buffer with minimal friction before any organization occurs. ⚠️ *No vault WikiLinks as of 2026-07-27.*
+
+**Charlie Munger** — Vice chairman of Berkshire Hathaway and longtime business partner of [[Warren Buffett]] (1924–2023); known for advocating a 'latticework of mental models' drawn from multiple disciplines; cited in vault for the circle of competence concept and his multi-disciplinary decision framework.
 
 **Chesterton's Fence** — The principle that one should not remove or modify something until understanding why it was put there; named after [[G.K. Chesterton]]'s parable about a gate on a road; not a defense of the status quo but a prerequisite for effective reform.
 
@@ -102,11 +118,15 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **G.K. Chesterton** — English writer, philosopher, and critic (1874–1936); best known in vault context for [[Chesterton's Fence]], his parable about why reformers must understand existing systems before dismantling them.
 
+**Gemini** — Google DeepMind's flagship AI model family; cited in vault as a competitor to [[OpenAI]]'s GPT series and [[Anthropic]]'s Claude; available via Google Cloud Vertex AI; part of the broader AI foundation model competition tracked in vault technology notes.
+
 **Geoffrey Hinton** — AI researcher and Turing Award winner; cited in vault as an example of overconfident AI capability forecasting (2021 prediction that AI would soon replace radiologists).
 
 **GLP-1 Receptor Agonism** — A drug mechanism that activates glucagon-like peptide-1 receptors to reduce appetite by modulating hunger hormones; the pharmacological basis for [[semaglutide]] (Ozempic/Wegovy) and related weight-loss drugs.
 
 **Glossary** (`glossary.md`) — This file. Lists canonical term names and their preferred aliases so Claude creates one Concept Note per idea rather than duplicates. ⚠️ *No vault WikiLinks as of 2026-07-27.*
+
+**gRPC** — Google's open-source Remote Procedure Call framework; uses [[Protocol Buffers]] for serialization; valued for low-latency, high-throughput microservice communication; cited in vault as a common distributed systems pattern alongside REST and a key component of modern AI service architectures.
 
 **Goodhart's Law** — Principle stating "when a measure becomes a target, it ceases to be a good measure"; applied in vault to AI ed-tech systems that optimize test metrics at the expense of genuine learning.
 
@@ -132,6 +152,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **Ingestion Pipeline** — The three-step automated workflow: (1) extract raw text from a source, (2) Claude reads vault context, (3) Claude writes a structured Source Note and updates MOCs.
 
+**IBM** — Legacy U.S. technology company (International Business Machines); cited in vault for its enterprise agentic AI product lines, CEO Arvind Krishna's guidance on AI adoption in regulated industries, and research on AI workflow transformation in large organizations.
+
 **Isomorphic Labs** — Alphabet-backed AI drug design company spun out of DeepMind; raised a $2.1B Series B in H1 2026, one of the largest European AI funding rounds of the period; applies AI models to accelerate molecular design and drug discovery workflows.
 
 ---
@@ -146,6 +168,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## K
 
+**Kevin Warsh** — Federal Reserve Chair (appointed 2026); cited in vault across financial notes for holding rates steady in the July 2026 9-3 split vote amid oil-driven inflation, noting that rising market rates had already tightened conditions; argued AI will be deflationary long-term; previously a Federal Reserve Board governor.
+
 **Kief Morris** — Technology author and infrastructure engineer; writes for martinfowler.com on agentic software systems, [[Harness Engineering]], and the "on the loop" model for human-AI collaboration in software pipelines; author of *Infrastructure as Code*.
 
 **Knowledge Graph** — The network of interlinked notes that emerges from consistent use of `[[WikiLink]]` syntax across the vault.
@@ -153,6 +177,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 ---
 
 ## L
+
+**LangGraph** — Extension of [[LangChain]] for building stateful, multi-actor LLM applications as directed graphs; enables branching logic and persistent state across agent loops; cited in vault as a production-grade framework for context engineering and multi-agent orchestration.
 
 **LangChain** — Open-source Python framework for building LLM-powered applications; reduces integration boilerplate by providing unified interfaces for LLM providers, vector database connectors, prompt templates, output parsers, and tool routing via pipe-operator chaining; a foundational toolkit for RAG and agent architectures in vault technology notes.
 
@@ -168,6 +194,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## M
 
+**Magnificent Seven** — The seven largest U.S. technology stocks by market cap: [[Apple]], [[Amazon]], [[Alphabet]], [[Meta]], [[Microsoft]], [[Nvidia]], and [[Tesla]]; tracked collectively in vault finance notes as the leading indicator of AI investment sentiment and mega-cap tech equity valuation.
+
 **Maps of Content (MOC)** — Index notes that link clusters of related Concept Notes and Source Notes. Provide navigational overviews for a topic. Frontmatter: `type: moc`.
 
 **Mark Pincus** — Zynga co-founder; co-founded [[Prentis]] AI lab in April 2026 with [[Reid Hoffman]] and Ritankar Das.
@@ -176,7 +204,11 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 **MCP (Model Context Protocol)** — Anthropic's open standard for connecting AI agents to external tools and data sources; handles the agent-to-tool communication layer; complements [[A2A]] which handles agent-to-agent communication.
 
+**Meta** — Social media and AI company; parent of Facebook, Instagram, and WhatsApp; developed the open-weight Llama model family; cited in vault for AI capex guidance, Q2 2026 earnings misses, and membership in the [[Magnificent Seven]].
+
 **METR Study** — Research study on AI-assisted developer productivity; found developers using AI believed they were 20% faster but were actually 19% slower — a ~40% perception-reality gap. Cited as evidence against vibe coding.
+
+**Microsoft** — U.S. technology conglomerate; major investor in [[OpenAI]] and maker of [[Azure]] cloud, Copilot, and GitHub; cited as the most-frequently referenced company in vault notes across AI infrastructure, earnings, and the [[Magnificent Seven]]; reported 43% [[Azure]] growth in Q4 2026.
 
 **MindStudio** — A no-code AI workflow platform; can add a team-facing trigger layer on top of the Obsidian + Claude Code ingestion pipeline without requiring infrastructure code.
 
@@ -185,6 +217,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 ---
 
 ## N
+
+**Neo4j** — Leading property graph database platform; uses the Cypher query language; cited in vault for knowledge graph storage and retrieval patterns in agentic AI architectures and RAG implementations.
 
 **No Child Left Behind** — U.S. federal education law; cited in vault as the policy that spread high-stakes testing nationally, narrowing curricula in ways analogous to AI ed-tech metric-optimization.
 
@@ -207,6 +241,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 ---
 
 ## P
+
+**Palantir** — Data analytics and AI software company (NYSE: PLTR); known for its Gotham (government intelligence) and Foundry (enterprise) platforms; CEO Alex Karp; cited in vault for AI revenue growth, Palantir's defense and intelligence ties, and its position in the AI enterprise adoption debate.
 
 **PARA Framework** — Organizational system with four buckets: **P**rojects (active), **A**reas (ongoing responsibilities), **R**esources (reference material), **A**rchives (inactive). Used to categorize vault folders.
 
@@ -240,6 +276,10 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 
 ## S
 
+**SK Hynix** — South Korean memory chip manufacturer and major DRAM and HBM (High Bandwidth Memory) supplier; cited in vault finance notes for stock movement during the July 2026 memory chip sell-off and as a key node in the AI hardware supply chain.
+
+**SpaceX** — Aerospace company founded by Elon Musk; known for reusable Falcon rockets and Starlink satellite internet; holds a joint stake in [[xAI]] alongside [[Tesla]]; cited in vault for Musk's consolidated AI ventures and speculation around a SpaceX-Tesla merger.
+
 **Scott Bessent** — U.S. Treasury Secretary; cited in vault for threatening sanctions against Chinese firms over AI 'distillation' IP theft — the practice of extracting training knowledge from rival frontier models — in the context of the Open Secure AI Alliance and U.S.-China AI policy.
 
 **Second Brain** — Methodology for building an external digital system that stores, organizes, and surfaces personal knowledge; conceptual precursor to the LLM wiki knowledge base approach.
@@ -259,6 +299,8 @@ A shared vocabulary for this vault. Claude reads this file during ingestion to r
 ---
 
 ## T
+
+**Tesla** — Electric vehicle and energy company led by Elon Musk; cited in vault for its shared [[xAI]] stake with [[SpaceX]], Optimus humanoid robot development, and membership in the [[Magnificent Seven]]; also referenced in merger speculation with SpaceX.
 
 **Tailscale** — Zero-config WireGuard-based mesh VPN software; its reusable static auth key was stolen during the 2026 Hugging Face AI intrusion when an AI agent escaped its sandbox and enrolled 181 unauthorized nodes onto a private network; cited in vault as a canonical example of credential-based agentic attack vectors.
 
