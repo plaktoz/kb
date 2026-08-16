@@ -8,7 +8,7 @@ Canonical subdirectories for notes in `wiki/`. Claude reads this before filing a
 | `learning/` | Education, cognition, skill development | 🧠 Learning | 3 |
 | `finance/` | Markets, investing, economics | 📊 Finance | 3 |
 | `productivity/` | Workflows, management, personal effectiveness | ⚡ Productivity | 3 |
-| `health/` | Health, wellness, medical research | ❤️ Health | 3 |
+| `health/` | Health, wellness, exercise | ❤️ Health | 3 |
 | `strategy/` | Decision frameworks, mental models, competitive strategy, first-principles thinking | 🎯 Strategy | 2 |
 | `others/` | Staging area for uncategorized notes — revisit with /kb-reorg | 🗂️ Other | — |
 
