@@ -1506,3 +1506,61 @@
 | 2026-08-15 | 2026-08-15-time-management-strategies-12-methods-ranked.md | librarian |
 | 2026-08-15 | 2026-08-15-why-does-opus-5-feel-worse-to-work-with.md | librarian |
 | 2026-08-15 | 2026-08-15-news-aggregation-2.md | news-fetch |
+| 2026-08-16 | 2026-08-16-news-aggregation.md | news-fetch |
+| 2026-06-17 | 2026-06-17-3-forces-redefining-manager-to-leader.md | scrape |
+| 2026-05-20 | 2026-05-20-supporting-employees-career-growth-overwhelmed.md | scrape |
+| 2026-07-06 | 2026-07-06-want-workers-to-reskill-show-them-who-they-can-become.md | scrape |
+| 2026-08-14 | 2026-08-14-how-to-develop-a-game-changing-worldview.md | scrape |
+| 2026-08-16 | seekingalpha.com/news/4633212-momentum-stocks-are-cheaper-than-the-market-jp-morgan-says | scrape-failed |
+| 2026-08-16 | 2026-08-15-news-aggregation-2.processed.md | archive |
+| 2026-08-16 | 2025-03-18-ai-agents-overused-term-reflection-ai.md | scrape |
+| 2026-08-16 | 2026-08-14-metas-open-ai-250m-deal-gone-wrong.md | scrape |
+| 2026-08-16 | 2026-08-15-market-cape-ratio-only-done-once-before.md | scrape |
+| 2026-08-16 | 2026-08-15-prediction-costco-will-beat-sp500-again.md | scrape |
+| 2026-08-16 | 2026-08-10-14-boring-habits-rebuild-your-life.md | scrape |
+| 2026-08-16 | 2026-08-12-deep-work-meaning-benefits-7-ways-to-focus.md | scrape |
+| 2026-08-16 | 2026-08-10-should-schools-use-ai-tools-student-learning.md | scrape |
+| 2026-08-16 | 2023-01-11-expertise-expert-8-tips-learning-new-skill.md | scrape |
+| 2026-08-16 | 2026-08-12-should-students-learn-science-through-inquiry.md | scrape |
+| 2026-08-16 | 2026-08-14-climbing-stairs-lowers-heart-disease-death-risk.md | scrape |
+| 2026-08-16 | 2026-08-10-light-physical-activity-lowers-stroke-risk-afib.md | scrape |
+| 2026-08-16 | 2026-08-09-tomatoes-daily-lower-liver-fat-buildup-masld.md | scrape |
+| 2026-08-16 | 2026-05-24-charlie-munger-lattice-of-mental-models-solopreneurs.md | scrape |
+| 2026-08-16 | 2023-03-14-decide-framework-decision-making-template.md | scrape |
+| 2026-08-16 | 2026-08-15-msft-stock-1-percent-undervalued-ai-revenue.md | scrape |
+| 2026-08-16 | 2026-03-05-ibm-stock-worst-weekly-drop-in-six-years.md | scrape |
+| 2026-08-16 | facebook.com/AnthropicAI (nairametrics source, empty content) | scrape-failed |
+| 2026-08-16 | investors.com Apple downgrade article (403 blocked) | scrape-failed |
+| 2026-08-16 | verywellmind.com productivity hacks article (403 blocked) | scrape-failed |
+| 2026-08-16 | perplexity.ai/finance/SPMO (JS-rendered, no extractable content) | scrape-failed |
+| 2026-08-16 | 2026-08-16-news-aggregation.processed.md | archive |
+| 2026-08-16 | wiki/strategy/decide-framework-decision-making-template.md | ingest |
+| 2026-08-16 | wiki/technology/ai-agents-overused-term-reflection-ai.md | ingest |
+| 2026-08-16 | wiki/productivity/supporting-employees-career-growth-overwhelmed.md | ingest |
+| 2026-08-16 | wiki/productivity/3-forces-redefining-manager-to-leader.md | ingest |
+| 2026-08-16 | wiki/learning/want-workers-to-reskill-show-them-who-they-can-become.md | ingest |
+| 2026-08-16 | wiki/health/tomatoes-daily-lower-liver-fat-buildup-masld.md | ingest |
+| 2026-08-16 | wiki/productivity/14-boring-habits-rebuild-your-life.md | ingest |
+| 2026-08-16 | wiki/health/light-physical-activity-lowers-stroke-risk-afib.md | ingest |
+| 2026-08-16 | wiki/learning/should-schools-use-ai-tools-student-learning.md | ingest |
+| 2026-08-16 | wiki/productivity/deep-work-meaning-benefits-7-ways-to-focus.md | ingest |
+| 2026-08-16 | wiki/learning/should-students-learn-science-through-inquiry.md | ingest |
+| 2026-08-16 | wiki/health/climbing-stairs-lowers-heart-disease-death-risk.md | ingest |
+| 2026-08-16 | wiki/strategy/how-to-develop-a-game-changing-worldview.md | ingest |
+| 2026-08-16 | wiki/technology/metas-open-ai-250m-deal-gone-wrong.md | ingest |
+| 2026-08-16 | wiki/finance/market-cape-ratio-only-done-once-before.md | ingest |
+| 2026-08-16 | wiki/finance/msft-stock-1-percent-undervalued-ai-revenue.md | ingest |
+| 2026-08-16 | wiki/finance/prediction-costco-will-beat-sp500-again.md | ingest |
+| 2026-08-16 | wiki/finance/ibm-stock-worst-weekly-drop-in-six-years.md | ingest |
+| 2026-08-16 | wiki/learning/expertise-8-tips-learning-new-skill.md | ingest-dupe |
+| 2026-08-16 | wiki/strategy/charlie-munger-lattice-of-mental-models.md | ingest-dupe |
+| 2026-08-16 | wiki/technology/bending-spoons-acquires-airtable.md | ingest-dupe |
+| 2026-08-16 | wiki/learning/ai-missed-learning-not-cheating.md | ingest-dupe |
+| 2026-08-16 | wiki/learning/parents-educators-ai-data-literacy-survey.md | ingest-dupe |
+| 2026-08-16 | wiki/learning/pam-jeffries-online-active-learning-strategies.md | ingest-dupe |
+| 2026-08-16 | wiki/technology/cerebras-ultrafast-inference-gpt-56-sol.md | ingest-dupe |
+| 2026-08-16 | wiki/finance/databricks-190-billion-valuation-aug2026.md | ingest-dupe |
+| 2026-08-16 | wiki/finance/stock-market-record-bofa-debt-yields-risk-aug2026.md | ingest-dupe |
+| 2026-08-16 | wiki/finance/strait-of-hormuz-oil-market-analysis-aug2026.md | ingest-dupe |
+| 2026-08-16 | raw/2026-08-14-top-tech-news-today-august-14-2026.md (no dedicated note - roundup, already covered piecemeal) | ingest-dupe |
+| 2026-08-16 | daily-update/2026-08/2026-08-16.md | newsletter |
