@@ -1564,3 +1564,42 @@
 | 2026-08-16 | wiki/finance/strait-of-hormuz-oil-market-analysis-aug2026.md | ingest-dupe |
 | 2026-08-16 | raw/2026-08-14-top-tech-news-today-august-14-2026.md (no dedicated note - roundup, already covered piecemeal) | ingest-dupe |
 | 2026-08-16 | daily-update/2026-08/2026-08-16.md | newsletter |
+| 2026-08-16 | 2026-08-16-news-aggregation-2.md | news-fetch |
+| 2026-08-16 | 2026-08-15-spacex-officially-closes-its-cursor-acquisition.md | scrape |
+| 2026-08-16 | 2026-08-16-southeast-asia-ai-startup-funding-hits-4-1bn-in-2026.md | scrape |
+| 2026-08-16 | 2026-08-15-google-launches-gemini-37-flash-for-coding-and-ai-agents.md | scrape |
+| 2026-08-16 | 2026-08-12-kevin-warshs-fed-faces-split-verdict-on-inflation-data.md | scrape |
+| 2026-08-16 | 2026-08-15-beneath-the-sp-500-rally-where-performance-and-fundamentals-diverge.md | scrape |
+| 2026-08-16 | 2026-08-16-wall-street-week-ahead-home-depot-walmart-earnings-fed-minutes.md | scrape |
+| 2026-08-16 | 2026-08-13-supporting-well-being-together-browns-staff-development-day.md | scrape |
+| 2026-08-16 | 2026-08-10-burnout-prevention-starts-with-better-benefits.md | scrape |
+| 2026-08-16 | 2026-08-12-the-missing-piece-in-productivity-employee-physical-wellbeing.md | scrape |
+| 2026-08-16 | 2026-08-14-students-say-theyre-becoming-dependent-on-ai-for-schoolwork.md | scrape |
+| 2026-08-16 | 2025-06-05-the-science-of-spaced-repetition.md | scrape |
+| 2026-08-16 | research.com/how-ai-education-is-changing-higher-education (extraction exceeded size limit) | scrape-failed |
+| 2026-08-16 | 2026-08-15-strength-training-is-replacing-weight-loss-as-the-top-gym-goal.md | scrape |
+| 2026-08-16 | 2026-08-13-noninvasive-deep-brain-stimulation-strengthens-reward-signals-reduces-anxiety.md | scrape |
+| 2026-08-16 | nytimes.com 6-exercises-physical-therapists-wish-everyone-did-to-age-well (paywalled, insufficient content) | scrape-failed |
+| 2026-08-16 | 2026-08-13-how-to-use-lattice-of-mental-models-better-decisions.md | scrape |
+| 2026-08-16 | 2026-08-16-spore-raises-2026-growth-targets-markets-this-week.md | scrape |
+| 2026-08-16 | 2026-08-15-market-factors-sectors-with-triple-momentum.md | scrape |
+| 2026-08-16 | 2026-08-11-foreign-stocks-lose-their-edge-as-us-momentum-roars-back.md | scrape |
+| 2026-08-16 | 2026-08-16-news-aggregation-2.processed.md | archive |
+| 2026-08-16 | wiki/technology/spacex-closes-cursor-acquisition.md | ingest |
+| 2026-08-16 | wiki/finance/southeast-asia-ai-startup-funding-4-1bn-2026.md | ingest |
+| 2026-08-16 | wiki/technology/google-gemini-37-flash-coding-agents.md | ingest |
+| 2026-08-16 | wiki/finance/kevin-warsh-fed-cpi-split-verdict.md | ingest |
+| 2026-08-16 | wiki/finance/sp500-rally-fundamentals-diverge-aug2026.md | ingest |
+| 2026-08-16 | wiki/finance/wall-street-week-ahead-home-depot-walmart-fed-minutes.md | ingest |
+| 2026-08-16 | wiki/productivity/anxiety-as-learned-habit-brewer-browns-staff-day.md | ingest |
+| 2026-08-16 | wiki/productivity/burnout-prevention-benefits-perception-gap.md | ingest |
+| 2026-08-16 | wiki/productivity/physical-health-missing-piece-productivity.md | ingest |
+| 2026-08-16 | wiki/learning/students-dependent-on-ai-for-schoolwork-nz.md | ingest |
+| 2026-08-16 | wiki/health/strength-training-replaces-weight-loss-top-gym-goal-2026.md | ingest |
+| 2026-08-16 | wiki/health/temporal-interference-stimulation-reward-anxiety-emory.md | ingest |
+| 2026-08-16 | wiki/finance/triple-momentum-factor-sectors-bofa.md | ingest |
+| 2026-08-16 | wiki/finance/foreign-stocks-lose-edge-us-momentum-aug2026.md | ingest |
+| 2026-08-16 | wiki/finance/sti-could-hit-7000-jpmorgan-bull-case.md (updated with Q2 earnings roundup) | ingest |
+| 2026-08-16 | 2025-06-05-the-science-of-spaced-repetition.md (same source_url as wiki/learning/science-of-spaced-repetition.md) | ingest-dupe |
+| 2026-08-16 | 2026-08-13-how-to-use-lattice-of-mental-models-better-decisions.md (same source_url as wiki/strategy/charlie-munger-lattice-of-mental-models.md) | ingest-dupe |
+| 2026-08-16 | daily-update/2026-08/2026-08-16-2.md | newsletter |
