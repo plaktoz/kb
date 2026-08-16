@@ -2,6 +2,7 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-16 | weekly-update/2026-08/2026-W33-weekly.md | newsletter |
 | 2026-08-16 | topics/mental-models.md | compound |
 | 2026-08-16 | topics/deep-work.md | compound |
 | 2026-08-16 | topics/ai-agents.md | compound |
