@@ -2,6 +2,11 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-16 | topics/mental-models.md | compound |
+| 2026-08-16 | topics/deep-work.md | compound |
+| 2026-08-16 | topics/ai-agents.md | compound |
+| 2026-08-16 | topics/ai-in-education.md | compound |
+| 2026-08-16 | topics/procrastination.md | compound |
 | 2026-08-15 | research/autonomous-multi-agent-dev-team/report.md | research |
 | 2026-08-15 | research/ui-testing-tool-maestro-style/report.md | research |
 | 2026-08-15 | research/levers-business-personal/lessons/ | lessons |
