@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 7 — Adding and Using Your First Component · shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <p class="breadcrumb">shadcn/ui Course › Module 3 — Installation &amp; First Components › Lesson 7 of 10</p>
+      <h1>Adding and Using Your First Component</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 3</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Primary source</strong>
+      <a href="https://ui.shadcn.com/docs/components/button" target="_blank" rel="noopener noreferrer">https://ui.shadcn.com/docs/components/button</a>
+    </div>
+
+    <p>You now have a configured project. The next step is to add your first component. The Button is the best starting point — it is simple, visual, and demonstrates every concept that carries over to <em>every other</em> shadcn/ui component. Master this loop once and you can install any component in the library.</p>
+
+    <h2>The Three-Step Loop: Install → Import → Use</h2>
+
+    <h3>Step 1 — Install via the CLI</h3>
+
+    <p>Components are not bundled with shadcn/ui. You copy each one into your project on demand. For the Button:</p>
+
+    <pre><code>pnpm dlx shadcn@latest add button</code></pre>
+
+    <p>This creates a new file at <code>components/ui/button.tsx</code> (or <code>.jsx</code> if you chose JavaScript at init time). The file is ordinary source code sitting in your repo — you can open it, read it, and modify it freely. Nothing is hidden inside a <code>node_modules</code> folder.</p>
+
+    <h3>Step 2 — Import the component</h3>
+
+    <p>Once the file exists, import it using the <code>@/</code> path alias that <code>shadcn init</code> configured in your <code>tsconfig.json</code>:</p>
+
+    <pre><code>import { Button } from "@/components/ui/button"</code></pre>
+
+    <p>The import path always follows the same pattern: <code>@/components/ui/&lt;component-name&gt;</code>. Every component you add lives under <code>components/ui/</code> — the CLI always writes there.</p>
+
+    <h3>Step 3 — Use the component with props</h3>
+
+    <p>Drop the component into your JSX and control its appearance with the <code>variant</code> and <code>size</code> props:</p>
+
+    <pre><code>&lt;Button variant="outline"&gt;Click me&lt;/Button&gt;
+
+&lt;Button variant="destructive" size="sm"&gt;Delete&lt;/Button&gt;</code></pre>
+
+    <div class="callout key">
+      <p>This three-step loop — <strong>add via CLI → import from <code>@/components/ui/</code> → use with <code>variant</code> and <code>size</code> props</strong> — is identical for every shadcn/ui component. Learn it once with Button and you already know how to add Input, Card, Dialog, and every other component in the library.</p>
+    </div>
+
+    <div class="callout warning">
+      <p>Do not import from <code>@/components/ui/button</code> before running <code>pnpm dlx shadcn@latest add button</code>. The file does not exist until the CLI creates it. This is one of the most common beginner errors — the import line is easy to write first, but the module will not resolve until the component is actually added to your project.</p>
+    </div>
+
+    <h2>Button Variants</h2>
+
+    <p>The Button component ships with six variants covering the most common design needs out of the box:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>When to use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>default</code></td>
+          <td>Primary call-to-action; solid filled background using your theme's primary color</td>
+        </tr>
+        <tr>
+          <td><code>outline</code></td>
+          <td>Secondary action — bordered with a transparent background</td>
+        </tr>
+        <tr>
+          <td><code>secondary</code></td>
+          <td>Lower-emphasis action with a muted filled background</td>
+        </tr>
+        <tr>
+          <td><code>ghost</code></td>
+          <td>Minimal presence — no border, no background until hovered</td>
+        </tr>
+        <tr>
+          <td><code>destructive</code></td>
+          <td>Dangerous or irreversible actions such as delete or remove</td>
+        </tr>
+        <tr>
+          <td><code>link</code></td>
+          <td>Looks like a text hyperlink — underlined on hover, no border or fill</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Pass the variant as a string prop: <code>&lt;Button variant="ghost"&gt;</code>. If you omit the prop, <code>default</code> is applied automatically.</p>
+
+    <h2>Button Sizes</h2>
+
+    <p>The Button also supports eight size options controlled via the <code>size</code> prop. Sizes scale both the padding and font-size together, so proportions stay consistent at every step. The most frequently used options are <code>sm</code> for compact interfaces, the default (no prop needed) for standard layouts, <code>lg</code> for high-emphasis actions, and <code>icon</code>, which collapses the button to a square — ideal when the button contains only an icon and no text label.</p>
+
+    <pre><code>&lt;Button size="sm"&gt;Small&lt;/Button&gt;
+&lt;Button&gt;Default size&lt;/Button&gt;
+&lt;Button size="lg"&gt;Large&lt;/Button&gt;
+&lt;Button size="icon"&gt;&lt;SearchIcon /&gt;&lt;/Button&gt;</code></pre>
+
+    <h2>The <code>buttonVariants</code> Helper</h2>
+
+    <p>Sometimes you need button <em>styling</em> on an element that is not a <code>&lt;button&gt;</code>. The most common case is a navigation link: semantically it should be an <code>&lt;a&gt;</code> tag so the browser handles focus, history, and accessibility correctly — but visually it should look like a button.</p>
+
+    <p>shadcn/ui exports a <code>buttonVariants</code> helper function alongside the component. It returns the Tailwind class string for any variant and size combination, which you can apply to any HTML element via its <code>className</code> prop:</p>
+
+    <pre><code>import { buttonVariants } from "@/components/ui/button"
+
+// Renders as an anchor tag with button styling
+&lt;a href="/dashboard" className={buttonVariants({ variant: "outline" })}&gt;
+  Go to Dashboard
+&lt;/a&gt;</code></pre>
+
+    <p>You can combine it with Next.js <code>&lt;Link&gt;</code> for client-side navigation that looks like a button:</p>
+
+    <pre><code>import Link from "next/link"
+import { buttonVariants } from "@/components/ui/button"
+
+&lt;Link href="/settings" className={buttonVariants({ variant: "secondary", size: "sm" })}&gt;
+  Settings
+&lt;/Link&gt;</code></pre>
+
+    <p><code>buttonVariants</code> decouples the visual styling from the HTML element, giving you full semantic control without writing custom CSS.</p>
+
+    <h2>Additional Patterns</h2>
+
+    <h3>Icon buttons</h3>
+
+    <p>Place an icon component inside a button as a sibling to the label text. For icon-only buttons, use <code>size="icon"</code> to keep the square proportions:</p>
+
+    <pre><code>// Icon + label
+&lt;Button&gt;
+  &lt;PlusIcon /&gt;
+  Add item
+&lt;/Button&gt;
+
+// Icon only — square button
+&lt;Button size="icon" aria-label="Search"&gt;
+  &lt;SearchIcon /&gt;
+&lt;/Button&gt;</code></pre>
+
+    <h3>Loading state</h3>
+
+    <p>Combine the Button with a <code>&lt;Spinner /&gt;</code> component and the <code>disabled</code> prop to communicate an ongoing async operation:</p>
+
+    <pre><code>&lt;Button disabled={isLoading}&gt;
+  {isLoading ? &lt;Spinner /&gt; : "Submit"}
+&lt;/Button&gt;</code></pre>
+
+    <hr />
+
+    <div class="quiz" id="quiz-7">
+      <h3>Quick check</h3>
+      <p class="question">How many variants does the shadcn/ui Button component support?</p>
+      <ul class="quiz-options">
+        <li><button>Six: the button has six variants</button></li>
+        <li><button>Four: the button has four variants</button></li>
+        <li><button>Eight: the button has eight variants</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <p>Write the JSX for two elements — without copy-pasting from the examples above:</p>
+      <ol>
+        <li>A <code>&lt;Button&gt;</code> using the <code>outline</code> variant and <code>sm</code> size, with the label "Cancel".</li>
+        <li>An <code>&lt;a&gt;</code> tag that renders with button styling using <code>buttonVariants</code>, linking to <code>/signup</code> with the label "Get started". Choose any variant.</li>
+      </ol>
+      <p>Include both import lines at the top — they come from the same module.</p>
+      <textarea placeholder="// imports go here&#10;&#10;// JSX goes here"></textarea>
+    </div>
+
+    <p class="tutor-prompt">Paste your answer above, then ask: "Does my <code>buttonVariants</code> usage correctly decouple styling from the element? What is the difference between this approach and using <code>&lt;Button asChild&gt;</code>?"</p>
+
+    <nav class="lesson-nav">
+      <a href="0006-components-json.html">&larr; Prev: components.json</a>
+      <a href="0008-cli-reference.html" class="primary">Next: The CLI Reference &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-7', 0, 'Correct! The Button component supports 6 variants: default, outline, secondary, ghost, destructive, and link.');
+  </script>
+</body>
+</html>

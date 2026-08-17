@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 5 — First-Time Setup on Next.js · shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">shadcn/ui Course</a> ›
+        Module 3 — Installation &amp; First Components ›
+        Lesson 5 of 10
+      </p>
+      <h1>First-Time Setup on Next.js</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 3</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      <a href="https://ui.shadcn.com/docs/installation/next" target="_blank" rel="noopener">
+        https://ui.shadcn.com/docs/installation/next
+      </a>
+      — canonical four-command walkthrough for adding shadcn/ui to a new Next.js project from scratch
+    </div>
+
+    <!-- Intro -->
+    <p>
+      This lesson walks through the exact four commands you need to go from nothing to a working
+      Next.js app with a shadcn/ui component on the screen. Each step has one job; run them in order
+      and you will not get confused.
+    </p>
+
+    <!-- Step 1 -->
+    <h2>Step 1 — Create a new Next.js project</h2>
+    <pre><code>pnpm create next-app@latest my-app
+cd my-app</code></pre>
+    <p>
+      <code>pnpm create next-app@latest</code> scaffolds a full Next.js project: App Router,
+      TypeScript, Tailwind CSS, and the <code>@/*</code> path alias all in one shot. The interactive
+      prompts let you confirm each choice before anything is written to disk. Once the scaffold
+      finishes, <code>cd my-app</code> moves you into the project root — every subsequent command
+      must run from there.
+    </p>
+    <p>
+      When the <code>create next-app</code> wizard asks about the import alias, accept the default
+      (<code>@/*</code>). shadcn/ui's tooling expects this alias to exist; you will see why in
+      Step 4.
+    </p>
+
+    <!-- Step 2 -->
+    <h2>Step 2 — Initialize shadcn/ui</h2>
+    <pre><code>pnpm dlx shadcn@latest init</code></pre>
+    <p>
+      <code>pnpm dlx</code> runs a package without permanently installing it. The <code>init</code>
+      command launches an interactive prompt that collects three project-wide decisions:
+    </p>
+    <ul>
+      <li><strong>Style</strong> — <code>default</code> (rounded, softer) or <code>new-york</code> (sharper, tighter)</li>
+      <li><strong>Base color</strong> — the neutral palette used for backgrounds and text (e.g. <code>slate</code>, <code>zinc</code>)</li>
+      <li><strong>CSS variables</strong> — whether to use CSS custom properties for theming (strongly recommended)</li>
+    </ul>
+    <p>
+      After you answer, <code>init</code> writes a <code>components.json</code> file at your project
+      root that records these choices, and updates <code>globals.css</code> with the CSS variable
+      definitions. These settings are effectively locked in — Lesson 6 covers exactly why they are
+      hard to change later.
+    </p>
+
+    <!-- Step 3 -->
+    <h2>Step 3 — Add individual components</h2>
+    <pre><code>pnpm dlx shadcn@latest add button
+pnpm dlx shadcn@latest add input
+pnpm dlx shadcn@latest add card</code></pre>
+    <p>
+      Components are added one by one, only when you need them. Each <code>add</code> command copies
+      the component's source file directly into <code>components/ui/</code> inside your project. You
+      own that file immediately — no package to update, no version to pin. If you want to see what
+      will be written before committing, append <code>--dry-run</code> to any <code>add</code>
+      command.
+    </p>
+    <p>
+      After running the button command above, you will find a new file at
+      <code>components/ui/button.tsx</code> in your project. Open it — that is the entire component.
+    </p>
+
+    <!-- Step 4 -->
+    <h2>Step 4 — Import and use a component in your page</h2>
+    <pre><code>// In app/page.tsx:
+import { Button } from "@/components/ui/button"
+
+export default function Page() {
+  return (
+    &lt;main&gt;
+      &lt;Button variant="outline"&gt;Click me&lt;/Button&gt;
+    &lt;/main&gt;
+  )
+}</code></pre>
+    <p>
+      The import path <code>@/components/ui/button</code> uses the <code>@/*</code> alias that
+      points to your project root. TypeScript resolves it, your editor autocompletes it, and you
+      never have to count <code>../../</code> levels.
+    </p>
+
+    <!-- tsconfig note -->
+    <h2>The <code>@/*</code> path alias and <code>tsconfig.json</code></h2>
+    <p>
+      All shadcn/ui import paths begin with <code>@/</code>. For this to work, your
+      <code>tsconfig.json</code> must contain a <code>paths</code> entry that maps <code>@/*</code>
+      to the project root:
+    </p>
+    <pre><code>{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}</code></pre>
+    <p>
+      <code>pnpm create next-app</code> writes this automatically when you accept the default import
+      alias during setup. If you are adding shadcn/ui to an existing project that lacks this entry,
+      add it manually before running <code>init</code>.
+    </p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <p>
+        shadcn/ui components live inside <em>your</em> project, not in <code>node_modules</code>.
+        The four-command sequence — create, init, add, import — produces files you own and can edit
+        freely. There is no upstream package to update when you want a change.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <p>
+        In a monorepo, do not run the shadcn commands from the repository root. Run them from the
+        specific app directory (<code>apps/web</code>, for example), or pass the <code>-c</code>
+        flag with the path to your app's <code>components.json</code>. Running <code>init</code>
+        from the wrong directory writes <code>components.json</code> to the wrong location and
+        all subsequent <code>add</code> commands will place component files in the wrong place.
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-5">
+      <h3>Check your understanding</h3>
+      <p class="question">
+        What does <code>pnpm dlx shadcn@latest init</code> actually do when you run it?
+      </p>
+      <ul class="quiz-options">
+        <li><button>Adds shadcn/ui as a tracked npm dependency into your project</button></li>
+        <li><button>Prompts you to pick style, colors, and CSS variable settings</button></li>
+        <li><button>Downloads every shadcn/ui component source file into your project folder</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        You have just run the four-command sequence on a fresh Next.js project: created the app,
+        ran <code>init</code>, added the button component, and are now editing
+        <code>app/page.tsx</code>.
+      </p>
+      <p>
+        Write the exact import line you would type at the top of <code>app/page.tsx</code> to bring
+        in the Button component. Use the <code>@/</code> path alias.
+      </p>
+      <textarea
+        placeholder="import { Button } from ..."
+        aria-label="Your import line for app/page.tsx"
+      ></textarea>
+      <p style="font-size:0.82rem; color: var(--color-text-muted); margin-top: 0.5rem; margin-bottom: 0;">
+        Expected answer: <code>import { Button } from "@/components/ui/button"</code>
+      </p>
+    </div>
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Ask your tutor: "What happens if I run <code>shadcn add button</code> in a project that does
+      not have the <code>@/*</code> alias in <code>tsconfig.json</code>?" — or — "How do I add
+      shadcn/ui to an existing Next.js app that was created without Tailwind?"
+    </p>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0004-pros-cons.html">&larr; Lesson 4: Pros, Cons, and When to Commit</a>
+      <a href="0006-components-json.html" class="primary">Lesson 6: components.json &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    // Option index 1 (zero-based) is correct:
+    // "Prompts you to pick style, colors, and CSS variable settings"
+    initQuiz(
+      'quiz-5',
+      1,
+      'Correct. pnpm dlx shadcn@latest init runs an interactive wizard that asks you to choose a style (default or new-york), a base color, and whether to use CSS variables. It writes these decisions to components.json and updates globals.css — but it does not install shadcn as a package or copy any component files.'
+    );
+  </script>
+</body>
+</html>

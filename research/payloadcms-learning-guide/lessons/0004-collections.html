@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 4 — Collections: Modeling Repeatable Content | PayloadCMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="#">PayloadCMS</a> › <a href="#">Module 2: Core Building Blocks</a> › Lesson 4 of 12
+      </div>
+      <h1>Collections — Modeling Repeatable Content</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 2 — Core Building Blocks</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <div class="source-card-label">Primary Source</div>
+      <a href="https://payloadcms.com/docs/configuration/collections" target="_blank" rel="noopener">
+        https://payloadcms.com/docs/configuration/collections
+      </a>
+    </div>
+
+    <h2>What Are Collections?</h2>
+    <p>
+      A <strong>collection</strong> is a group of documents that share a common schema. Think of it as a database table paired with a configuration object that tells Payload how to handle every aspect of those documents: their data shape, who can access them, how they version, and how they appear in the admin panel.
+    </p>
+    <p>
+      Payload automatically generates three APIs from every collection you define — a <strong>Local API</strong> for server-side Node.js calls, a <strong>REST API</strong> over HTTP, and a <strong>GraphQL API</strong>. You write the config once and all three surfaces appear automatically, with no additional wiring required.
+    </p>
+    <p>
+      Collections are ideal for content that repeats across many instances: blog posts, products, users, orders, uploaded media, or comments. If you only ever need a single document — a site-wide navigation menu, global app settings — reach for a <strong>Global</strong> instead. (Globals are covered in Lesson 6.)
+    </p>
+
+    <h2>Required Properties</h2>
+    <p>Every collection must include exactly two required properties:</p>
+    <ul>
+      <li>
+        <strong><code>slug</code></strong> — a unique, URL-friendly string identifier. Payload uses the slug to construct API routes (<code>/api/products</code>), derive database table names, and reference the collection inside hooks and relationship fields. Keep it lowercase and kebab-case.
+      </li>
+      <li>
+        <strong><code>fields</code></strong> — an array of field definitions describing the document's data structure. Each field maps to a database column (SQL adapters) or a document property (MongoDB). Without fields, your collection stores no meaningful data.
+      </li>
+    </ul>
+    <p>
+      Everything beyond <code>slug</code> and <code>fields</code> is optional — you layer in capability as your use case demands it.
+    </p>
+
+    <h2>Configuration Options</h2>
+    <p>The table below covers the most commonly used top-level options beyond the two required properties:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>access</code></td>
+          <td>Controls who can create, read, update, and delete documents. Accepts functions that return a boolean or a Payload query constraint object.</td>
+        </tr>
+        <tr>
+          <td><code>hooks</code></td>
+          <td>Lifecycle event handlers that run server-side at defined points — <code>beforeChange</code>, <code>afterRead</code>, <code>beforeDelete</code>, and others.</td>
+        </tr>
+        <tr>
+          <td><code>auth</code></td>
+          <td>Enables user authentication for this collection, auto-generating login, logout, token refresh, and password-reset endpoints.</td>
+        </tr>
+        <tr>
+          <td><code>versions</code></td>
+          <td>Turns on document versioning. Set to <code>{ drafts: true }</code> to add a publish workflow where documents start as unpublished drafts.</td>
+        </tr>
+        <tr>
+          <td><code>upload</code></td>
+          <td>Configures file upload support, adding MIME type handling, image resizing, and a storage adapter to the collection.</td>
+        </tr>
+        <tr>
+          <td><code>timestamps</code></td>
+          <td>Automatically adds <code>createdAt</code> and <code>updatedAt</code> fields to every document. Set to <code>false</code> to disable both.</td>
+        </tr>
+        <tr>
+          <td><code>orderable</code></td>
+          <td>Enables drag-and-drop document reordering in the admin List View via fractional indexing — useful for manually curated content sequences.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Admin Panel Options</h2>
+    <p>
+      The <code>admin</code> key inside a <code>CollectionConfig</code> controls how Payload presents the collection in the admin panel. None of these options affect the generated APIs — they are purely presentation-layer settings.
+    </p>
+    <ul>
+      <li>
+        <strong><code>useAsTitle</code></strong> — the name of the field whose value Payload uses as the document's human-readable label in the List View, breadcrumbs, and relationship pickers. Without it, documents are identified only by their auto-generated ID.
+      </li>
+      <li>
+        <strong><code>defaultColumns</code></strong> — an array of field names that appear as columns in the List View by default. Users can change their personal column configuration, but this sets the initial state everyone sees.
+      </li>
+      <li>
+        <strong><code>listSearchableFields</code></strong> — the fields the admin search input queries when a user types in the List View. The Payload docs stress that you should index each of these fields in your database for acceptable query performance.
+      </li>
+      <li>
+        <strong><code>pagination</code></strong> — configures the default page size and the page-size options available in the List View footer.
+      </li>
+      <li>
+        <strong><code>enableListViewSelectAPI</code></strong> — a performance optimization that fetches only the currently visible columns rather than full documents. Pair it with <strong><code>forceSelect</code></strong> to guarantee critical fields are always included in that reduced query.
+      </li>
+    </ul>
+
+    <h2>Example: A Posts Collection</h2>
+    <p>
+      Here is a complete, minimal <code>posts</code> collection demonstrating the required properties and several optional ones working together:
+    </p>
+
+<pre><code>// collections/Posts.ts
+import type { CollectionConfig } from 'payload'
+
+export const Posts: CollectionConfig = {
+  slug: 'posts',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'status', 'updatedAt'],
+  },
+  fields: [
+    { name: 'title', type: 'text', required: true },
+    { name: 'content', type: 'richText' },
+    {
+      name: 'status',
+      type: 'select',
+      options: ['draft', 'published'],
+      defaultValue: 'draft',
+    },
+  ],
+  versions: { drafts: true },
+}</code></pre>
+
+    <p>
+      Notice the TypeScript import: <code>CollectionConfig</code> from <code>'payload'</code> gives you full editor autocomplete and catches misspelled option names at compile time. Typing your collection configs is a best practice that pays dividends immediately when your config file grows.
+    </p>
+
+    <h2>Best Practices</h2>
+    <ol>
+      <li>
+        <strong>One file per collection.</strong> Keep each collection in its own file — e.g. <code>collections/Posts.ts</code> — and import it into your main <code>payload.config.ts</code>. This keeps the config file short and makes individual collections easy to locate and reason about in isolation.
+      </li>
+      <li>
+        <strong>Index every field in <code>listSearchableFields</code>.</strong> Payload will not warn you when a search field lacks an index. The search box will simply grow progressively slower as documents accumulate. Add the database index immediately after wiring up searchable fields.
+      </li>
+      <li>
+        <strong>Single-document content belongs in a Global.</strong> If a collection will always have exactly one document, stop and use a Global instead. Collections carry overhead — list views, pagination, bulk operations — that is pure waste for singleton content.
+      </li>
+      <li>
+        <strong>Use <code>forceSelect</code> with <code>enableListViewSelectAPI</code>.</strong> The select optimization reduces data fetched per row, but it can silently omit fields your custom components depend on. List those fields in <code>forceSelect</code> so they are always included in the partial query.
+      </li>
+      <li>
+        <strong>Override the Edit View with <code>admin.components.edit.*</code>.</strong> When the default edit form does not fit your editorial workflow, swap in a custom React component at the field level, section level, or full-page level using Payload's component override system.
+      </li>
+    </ol>
+
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>
+        A single <code>CollectionConfig</code> object is all Payload needs to generate a full CRUD API across three transports (Local, REST, GraphQL) <em>and</em> a fully functional admin UI. Every option you add — access control, versioning, search, uploads — enriches all three surfaces simultaneously. Write the config once; everything else is derived.
+      </p>
+    </div>
+
+    <div class="callout warning">
+      <div class="callout-label">Common Mistake</div>
+      <p>
+        Placing <code>useAsTitle</code> at the top level of the config instead of inside the <code>admin</code> object. Payload will silently ignore it, and every document in the list will show its raw ID instead of a readable title. Always nest admin panel options under the <code>admin</code> key.
+      </p>
+    </div>
+
+    <div class="quiz" id="quiz-4">
+      <h3>Check Your Understanding</h3>
+      <p class="quiz-question">Which admin option controls how each document is labeled in the List View and relationship pickers?</p>
+      <div class="quiz-options">
+        <button>The <code>useAsTitle</code> field picks which field value labels each document row.</button>
+        <button>The <code>defaultColumns</code> field sets which columns appear by default in rows.</button>
+        <button>The <code>listSearchableFields</code> array sets which document fields are searched when filtering.</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <p>
+        Write a complete <code>CollectionConfig</code> object for a <code>products</code> collection. Requirements:
+      </p>
+      <ul>
+        <li>At least 4 fields: <code>name</code> (text, required), <code>price</code> (number), <code>description</code> (textarea or richText), and <code>status</code> (select with options <code>active</code> and <code>archived</code>)</li>
+        <li><code>useAsTitle</code> set to the <code>name</code> field</li>
+        <li>Draft versioning enabled via <code>versions: { drafts: true }</code></li>
+      </ul>
+      <textarea placeholder="// collections/Products.ts&#10;import type { CollectionConfig } from 'payload'&#10;&#10;export const Products: CollectionConfig = {&#10;  // write your config here&#10;}"></textarea>
+    </div>
+
+    <div class="tutor-prompt">
+      After writing your config, verify three things: (1) both <code>slug</code> and <code>fields</code> exist at the top level; (2) <code>useAsTitle</code> is nested inside the <code>admin</code> object, not at the top level; and (3) your versioning value is <code>{ drafts: true }</code> — an object — rather than the bare boolean <code>true</code>, which enables versioning without the draft workflow.
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0003-installation-setup.html">← Lesson 3: Installation &amp; Setup</a>
+      <a href="0005-fields.html" class="primary">Lesson 5: Fields →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-4',
+      0,
+      'Correct. useAsTitle tells Payload which field value to use as the document\'s human-readable label in the admin list, breadcrumb, and relationship pickers. Without it, documents are identified only by their auto-generated ID.'
+    );
+  </script>
+</body>
+</html>

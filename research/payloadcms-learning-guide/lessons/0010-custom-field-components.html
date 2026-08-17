@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 — Custom Field Components · PayloadCMS Lessons</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 3: Admin UI Customization › Lesson 10 of 12
+    </div>
+    <h1>Custom Field Components</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 3 — Admin UI Customization</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/docs/admin/components" target="_blank" rel="noopener">payloadcms.com/docs/admin/components</a>
+    <p>Official documentation for component overrides in the Payload admin panel — covers field-level slots, the useField hook, and client component requirements.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>What Are Field Component Overrides?</h2>
+    <p>
+      Every field Payload renders in the admin panel has a default UI — a text input, a toggle, a date picker, and so on. These defaults are chosen based on the field's <code>type</code>. But sometimes the default control is not expressive enough for your use case. A color value stored as a hex string should ideally show a colour swatch, not a plain text box. A rating stored as an integer should probably render as stars, not a bare number spinner.
+    </p>
+    <p>
+      Payload's <strong>field component overrides</strong> let you replace any part of that default UI without changing the underlying data model. You declare a path to a React component in your field's <code>admin.components</code> object, and Payload swaps in your component wherever that field appears. Your data type, validation, and API shape stay exactly the same — only the visual presentation changes.
+    </p>
+    <p>
+      This is a clean separation of concerns: the schema owns the data contract, the component owns the render. You can iterate on the UI independently of the rest of the collection definition.
+    </p>
+  </section>
+
+  <section>
+    <h2>The Override Slots Available</h2>
+    <p>
+      The <code>admin.components</code> object on a field definition accepts overrides for eight distinct slots. Most customisations touch only one or two of them:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Slot</th>
+          <th>What It Controls</th>
+          <th>Typical Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Field</code></td>
+          <td>The entire input UI in the document edit form</td>
+          <td>Replace a text box with a colour picker, star rating, or rich selector</td>
+        </tr>
+        <tr>
+          <td><code>Cell</code></td>
+          <td>How the field value appears in list view table cells</td>
+          <td>Render a coloured badge instead of raw hex text</td>
+        </tr>
+        <tr>
+          <td><code>Filter</code></td>
+          <td>The filter control when searching/filtering the list view</td>
+          <td>Provide a dropdown of known values rather than a free-text input</td>
+        </tr>
+        <tr>
+          <td><code>Label</code></td>
+          <td>The label rendered above the input in the edit form</td>
+          <td>Add a tooltip icon or custom layout alongside the field name</td>
+        </tr>
+        <tr>
+          <td><code>Error</code></td>
+          <td>The validation error message displayed below the input</td>
+          <td>Style errors to match your brand or add contextual help links</td>
+        </tr>
+        <tr>
+          <td><code>Diff</code></td>
+          <td>How the field's changes look in the version history diff view</td>
+          <td>Render colour values as swatches side-by-side instead of hex strings</td>
+        </tr>
+        <tr>
+          <td><code>beforeInput</code></td>
+          <td>UI inserted immediately before the existing input element</td>
+          <td>Prefix label, unit badge, or helper text without replacing the input</td>
+        </tr>
+        <tr>
+          <td><code>afterInput</code></td>
+          <td>UI inserted immediately after the existing input element</td>
+          <td>Live preview, character counter, or copy-to-clipboard button</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The most common override by far is <code>Field</code> — it replaces the entire input UI. The others let you make surgical changes around the existing input rather than rebuilding it from scratch.
+    </p>
+  </section>
+
+  <section>
+    <h2>Registering a Custom Field Component</h2>
+    <p>
+      To attach a custom component to a field, add it to <code>admin.components</code> in the field definition. The value is a string path pointing to the component file and its named export, separated by a <code>#</code>:
+    </p>
+    <pre><code>{
+  name: 'color',
+  type: 'text',
+  admin: {
+    components: {
+      Field: '/src/components/ColorPicker#ColorPicker',
+    },
+  },
+}</code></pre>
+    <p>
+      The path before <code>#</code> is the module path (relative to your project root). The part after <code>#</code> is the named export. Payload resolves this at build time and passes the component into the admin bundle. You do not need to import anything in your collection config — the string reference is enough.
+    </p>
+    <p>
+      You can override multiple slots in the same field by adding more keys to <code>admin.components</code>. For example, providing both <code>Field</code> and <code>Cell</code> means your custom UI appears both in the edit form and in the list view.
+    </p>
+  </section>
+
+  <section>
+    <h2>How the <code>useField</code> Hook Works</h2>
+    <p>
+      When Payload renders your custom <code>Field</code> component, it does not pass the current value as a plain prop. Instead, it expects you to reach into Payload's internal form state yourself using the <code>useField</code> hook from <code>@payloadcms/ui</code>.
+    </p>
+    <p>
+      <code>useField</code> accepts an options object with a <code>path</code> property. The path is the field's name — or a dot-separated path for nested fields. It returns two things: <code>value</code> (the current stored value) and <code>setValue</code> (a function to write a new value back into the form).
+    </p>
+    <pre><code>import { useField } from '@payloadcms/ui'
+
+const { value, setValue } = useField&lt;string&gt;({ path })</code></pre>
+    <p>
+      When you call <code>setValue</code>, Payload marks the form as dirty and stages the new value for submission — exactly as if the user had typed into the default input. Your component never deals with form submission, validation, or save logic directly. <code>useField</code> is the single bridge between your custom React UI and everything Payload manages internally.
+    </p>
+    <p>
+      The <code>path</code> prop itself is automatically passed to your component by Payload. You declare it in your component's props and forward it straight to <code>useField</code> — no manual wiring required.
+    </p>
+  </section>
+
+  <!-- Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> <code>useField</code> is the bridge between your custom UI and Payload's form state. You supply <code>{ path }</code> (the field name), get back <code>value</code> and <code>setValue</code>, and your component stays completely decoupled from form submission and validation logic.
+  </div>
+
+  <section>
+    <h2>Full Example: The ColorPicker Component</h2>
+    <p>
+      The ColorPicker is the canonical example in Payload's documentation because it shows the complete pattern in about ten lines. Here is the field definition followed by the component:
+    </p>
+    <p><strong>Field definition in your collection:</strong></p>
+    <pre><code>{
+  name: 'color',
+  type: 'text',
+  admin: {
+    components: {
+      Field: '/src/components/ColorPicker#ColorPicker',
+    },
+  },
+}</code></pre>
+    <p><strong>Component file at <code>src/components/ColorPicker.tsx</code>:</strong></p>
+    <pre><code>'use client'
+import { useField } from '@payloadcms/ui'
+
+export function ColorPicker({ path }: { path: string }) {
+  const { value, setValue } = useField&lt;string&gt;({ path })
+  return (
+    &lt;input
+      type="color"
+      value={value || '#000000'}
+      onChange={e =&gt; setValue(e.target.value)}
+    /&gt;
+  )
+}</code></pre>
+    <p>
+      Walk through the pattern step by step. The component receives <code>path</code> as a prop — Payload injects this automatically. It passes <code>path</code> to <code>useField</code>, which returns the current stored hex value and a <code>setValue</code> callback. The native <code>&lt;input type="color"&gt;</code> element renders the browser's colour picker and calls <code>setValue</code> whenever the user picks a colour. The fallback <code>'#000000'</code> handles the case where the field has not been set yet.
+    </p>
+    <p>
+      Notice what is absent: no <code>useState</code>, no <code>useEffect</code>, no form submit handler. Payload's form state management handles all of that. The component's only job is translating between the browser's colour picker event and <code>useField</code>'s <code>setValue</code>.
+    </p>
+  </section>
+
+  <section>
+    <h2>The <code>beforeInput</code> and <code>afterInput</code> Pattern</h2>
+    <p>
+      Replacing the entire <code>Field</code> slot gives you maximum control but also maximum responsibility — you must replicate any behaviour from the default input that you still want. Sometimes a lighter touch is preferable.
+    </p>
+    <p>
+      <code>beforeInput</code> and <code>afterInput</code> let you inject custom UI immediately before or after the existing input element without replacing it. The original input keeps working exactly as before; your component simply adds content around it.
+    </p>
+    <pre><code>{
+  name: 'slug',
+  type: 'text',
+  admin: {
+    components: {
+      afterInput: '/src/components/SlugPreview#SlugPreview',
+    },
+  },
+}</code></pre>
+    <p>
+      A slug preview component using <code>afterInput</code> could read the current value via <code>useField</code> and display a live URL preview below the text box — without touching the input itself. The same approach works for character counters, unit labels, helper links, or copy buttons.
+    </p>
+    <p>
+      As a rule of thumb: use <code>Field</code> when the default input control is fundamentally wrong for your data (a colour, a star rating, a map pin). Use <code>beforeInput</code> or <code>afterInput</code> when the default input is fine but you want to add supporting context around it.
+    </p>
+  </section>
+
+  <!-- Warning callout -->
+  <div class="callout warning">
+    <strong>Required:</strong> Custom field components that use React state, event handlers, or the <code>useField</code> hook <strong>must</strong> be Client Components. Add <code>'use client'</code> as the very first line of the file. Omitting it causes a server-rendering error because hooks are not available in React Server Components.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-10">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">What does the <code>useField</code> hook from <code>@payloadcms/ui</code> return when called with <code>{ path }</code>?</p>
+    <div class="quiz-options">
+      <button>Reads the current value and gives a setValue function to update form state</button>
+      <button>Registers the field with React and validates input against the collection's defined schema</button>
+      <button>Fetches the current value from REST API and pushes updates on document change</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>Sketch a custom field component for a <code>rating</code> field that renders 5 clickable stars instead of a number input. Write both the field definition (in your collection config) and the React component structure. You can use pseudocode or real TypeScript — the goal is to show you understand how <code>useField</code> connects the star UI to Payload's form state.</p>
+    <p>Hints: the field type is <code>'number'</code>, the component receives <code>path</code> as a prop, <code>useField&lt;number&gt;({ path })</code> gives you value and setValue, and you can render the 5 stars as buttons that call <code>setValue(starIndex)</code> on click.</p>
+    <textarea placeholder="// Field definition
+{
+  name: 'rating',
+  type: 'number',
+  admin: {
+    components: {
+      Field: '/src/components/StarRating#StarRating',
+    },
+  },
+}
+
+// Component
+'use client'
+import { useField } from '@payloadcms/ui'
+
+export function StarRating({ path }: { path: string }) {
+  const { value, setValue } = useField&lt;number&gt;({ path })
+  // render 5 stars here...
+}"></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper, or paste your exercise sketch for feedback.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0009-component-overrides.html">&larr; Prev: Component Overrides</a>
+    <a href="0011-payload-vs-competition.html" class="primary">Next: Payload vs Competition &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-10', 0, 'Correct. useField accepts { path } — the field name — and returns two things: value (the current stored value from Payload\'s form state) and setValue (a function that writes a new value back in). Your custom UI reads value to render and calls setValue to respond to user interaction. All form submission, validation, and save logic is handled by Payload internally.');</script>
+
+</div>
+</body>
+</html>

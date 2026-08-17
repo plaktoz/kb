@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6 — Generics | Learning TypeScript</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── Header ──────────────────────────────────────────── -->
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      <a href="../index.html">Learning TypeScript</a> ›
+      Module 2 — The Type System ›
+      Lesson 6 of 13
+    </p>
+    <h1>Generics</h1>
+    <div class="lesson-meta">
+      <span>Module 2 — The Type System</span>
+      <span>Lesson 6 of 13</span>
+      <span>~20 min</span>
+    </div>
+  </header>
+
+  <!-- ─── Source ──────────────────────────────────────────── -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    TypeScript Handbook — Generics
+    <a href="https://www.typescriptlang.org/docs/handbook/2/generics.html" target="_blank" rel="noopener">typescriptlang.org/docs/handbook/2/generics.html</a>
+    — same <code>&lt;T&gt;</code> syntax as Java; type inference is relied on heavily (TypeScript infers from arguments; no need to write <code>identity&lt;string&gt;("hello")</code>); <code>extends</code> constraints mirror Java bounded type params; <code>keyof</code> returns union of object's keys (no Java equivalent); default type parameters (<code>&lt;T = HTMLDivElement&gt;</code>) — no Java equivalent; generics erased at runtime like Java; static members cannot use class type parameter (same as Java)
+  </div>
+
+  <!-- ─── 1. Generic Functions ─────────────────────────────── -->
+  <h2>1. Generic Functions</h2>
+
+  <p>
+    The syntax for a generic function in TypeScript will look immediately familiar to a
+    Java developer: a type parameter in angle brackets, a name by convention, the same
+    constraint vocabulary. The structural difference is placement — in Java the type
+    parameter comes <em>before</em> the return type, while in TypeScript it follows
+    the function name:
+  </p>
+
+  <pre><code>// Java
+public static &lt;T&gt; T identity(T value) {
+    return value;
+}
+
+// TypeScript — type parameter after the function name
+function identity&lt;T&gt;(value: T): T {
+  return value;
+}</code></pre>
+
+  <p>
+    Both achieve the same thing: a function that works with any type while preserving
+    that type through the return value. The mental model transfers directly; only the
+    syntax position changes.
+  </p>
+
+  <p>
+    Arrow functions use the same angle-bracket syntax, with one small exception in
+    <code>.tsx</code> files where the parser might confuse <code>&lt;T&gt;</code> with
+    a JSX tag — in that context, use <code>&lt;T,&gt;</code> (trailing comma) or
+    <code>&lt;T extends object&gt;</code> to disambiguate:
+  </p>
+
+  <pre><code>// Regular .ts file — fine
+const identity = &lt;T&gt;(value: T): T =&gt; value;
+
+// In a .tsx file — trailing comma disambiguates from JSX
+const identity = &lt;T,&gt;(value: T): T =&gt; value;</code></pre>
+
+  <!-- ─── 2. Calling Generic Functions: Explicit vs Inferred ─ -->
+  <h2>2. Calling Generic Functions: Explicit vs Inferred</h2>
+
+  <p>
+    Java gained limited type inference with the diamond operator (<code>new ArrayList&lt;&gt;()</code>),
+    but TypeScript's inference goes much further. When you call a generic function and
+    pass a concrete argument, TypeScript almost always infers the type parameter from
+    the argument — no angle brackets needed at the call site:
+  </p>
+
+  <pre><code>// Explicit — compiles, but unnecessary
+const a = identity&lt;string&gt;("hello");  // T = string, stated explicitly
+
+// Inferred — TypeScript sees the argument "hello" and infers T = string
+const b = identity("hello");           // T = string, inferred automatically
+const c = identity(42);                // T = number
+const d = identity({ x: 1, y: 2 });   // T = { x: number; y: number }</code></pre>
+
+  <p>
+    The TypeScript handbook recommends leaning on inference. Writing explicit type
+    arguments is appropriate when inference cannot work (for instance, when the type
+    parameter is not derivable from the arguments, or when you want to override
+    inference for clarity). In practice, you write the angle brackets much less often
+    than in Java.
+  </p>
+
+  <!-- ─── 3. Generic Interfaces and Classes ────────────────── -->
+  <h2>3. Generic Interfaces and Classes</h2>
+
+  <p>
+    Both <code>interface</code> and <code>class</code> accept type parameters the same
+    way. Generic interfaces describe shapes; generic classes carry type-safe state:
+  </p>
+
+  <pre><code>// Generic interface
+interface Box&lt;T&gt; {
+  value: T;
+  map: &lt;U&gt;(fn: (x: T) =&gt; U) =&gt; Box&lt;U&gt;;
+}
+
+// Generic class
+class Stack&lt;T&gt; {
+  private items: T[] = [];
+
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+}
+
+const numbers = new Stack&lt;number&gt;();  // explicit
+const words   = new Stack();           // inferred when first push supplies T</code></pre>
+
+  <p>
+    Generic classes in TypeScript behave structurally: two independent classes that
+    happen to have the same generic shape are assignable to each other — a direct
+    consequence of structural typing introduced in Lesson 2.
+  </p>
+
+  <!-- ─── 4. Constraints with extends ─────────────────────── -->
+  <h2>4. Constraints with <code>extends</code></h2>
+
+  <p>
+    Java bounded type parameters use <code>&lt;T extends Comparable&lt;T&gt;&gt;</code> to
+    restrict which types may fill a type parameter. TypeScript uses the identical
+    keyword — <code>extends</code> — but the bound is any shape, not just a class or
+    interface name:
+  </p>
+
+  <pre><code>// Java — bound to an interface
+public static &lt;T extends Comparable&lt;T&gt;&gt; T max(T a, T b) {
+    return a.compareTo(b) &gt;= 0 ? a : b;
+}
+
+// TypeScript — bound to any shape with a .length property
+function getLength&lt;T extends { length: number }&gt;(arg: T): number {
+  return arg.length;
+}
+
+getLength("hello");          // OK — strings have .length
+getLength([1, 2, 3]);        // OK — arrays have .length
+getLength({ length: 7 });    // OK — matches the shape
+getLength(42);               // Error — number has no .length</code></pre>
+
+  <p>
+    Because TypeScript's type system is structural, the bound can be any object shape.
+    There is no requirement that the bound be a named interface — an inline object
+    literal type works, as shown above. This is more flexible than Java's
+    <code>extends</code>, which requires a named class or interface.
+  </p>
+
+  <!-- ─── 5. keyof ─────────────────────────────────────────── -->
+  <h2>5. The <code>keyof</code> Operator</h2>
+
+  <p>
+    <code>keyof T</code> is a TypeScript operator with no Java equivalent. Given a type
+    <code>T</code>, it produces a <em>union</em> of all the string (or number) literal
+    types that are valid property names on <code>T</code>:
+  </p>
+
+  <pre><code>interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+type UserKey = keyof User;
+// Equivalent to: "name" | "age" | "email"
+
+// The compiler knows that only these three strings are valid
+function readProp(u: User, key: UserKey) {
+  return u[key];
+}
+
+readProp(user, "name");    // OK
+readProp(user, "phone");   // Error — "phone" is not a key of User</code></pre>
+
+  <p>
+    The union is computed statically from the type — it exists only in TypeScript's type
+    layer and disappears after compilation. At runtime, <code>Object.keys(user)</code>
+    returns a plain <code>string[]</code>; the key-narrowing only happens at compile time.
+  </p>
+
+  <div class="callout key">
+    <p style="margin:0">
+      <strong>keyof is one of TypeScript's unique superpowers.</strong> Java has no
+      equivalent: you cannot form a type-safe union of an object's property names. In
+      TypeScript, <code>keyof T</code> makes property access generics compile-time safe
+      in a way that Java simply cannot express. It is central to utility types like
+      <code>Pick&lt;T, K&gt;</code>, <code>Omit&lt;T, K&gt;</code>, and <code>Record&lt;K, V&gt;</code>.
+    </p>
+  </div>
+
+  <!-- ─── 6. Type Param Constrained by Another ─────────────── -->
+  <h2>6. Type Parameter Constrained by Another Type Parameter</h2>
+
+  <p>
+    <code>keyof</code> and <code>extends</code> combine into one of generics' most
+    common real-world patterns: a second type parameter that must be a valid key of
+    the first. This lets you write a property-access function that is fully type-safe —
+    the compiler rejects invalid key names at the call site:
+  </p>
+
+  <pre><code>function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const user = { name: "Alice", age: 30, email: "alice@example.com" };
+
+const name  = getProperty(user, "name");   // type is string ✓
+const age   = getProperty(user, "age");    // type is number ✓
+const bad   = getProperty(user, "phone");  // Error: "phone" not in keyof typeof user</code></pre>
+
+  <p>
+    The return type <code>T[K]</code> is an <em>indexed access type</em>: it looks up
+    what TypeScript knows about property <code>K</code> on <code>T</code> and uses that
+    as the return. This is why <code>getProperty(user, "age")</code> returns
+    <code>number</code>, not <code>string | number | string</code> — the compiler
+    knows exactly which property type corresponds to <code>"age"</code>.
+  </p>
+
+  <!-- ─── 7. Default Type Parameters ──────────────────────── -->
+  <h2>7. Default Type Parameters</h2>
+
+  <p>
+    TypeScript adds a feature Java does not have: type parameter defaults. When a type
+    argument can be omitted by the caller, you can specify a fallback type that TypeScript
+    uses in its place:
+  </p>
+
+  <pre><code>// Without a default: caller must always provide T
+function createWrapper&lt;T&gt;(value: T): { wrapped: T } {
+  return { wrapped: value };
+}
+
+// With a default: T defaults to string if omitted
+function createWrapper&lt;T = string&gt;(value: T): { wrapped: T } {
+  return { wrapped: value };
+}
+
+const a = createWrapper("hello");  // T = string (inferred from arg — same result)
+const b = createWrapper(42);       // T = number (inferred from arg)
+
+// Default type params are most useful in class/interface definitions
+interface EventEmitter&lt;T = Event&gt; {
+  on(event: string, handler: (e: T) =&gt; void): void;
+}
+
+// Using without a type argument: T defaults to Event
+const emitter: EventEmitter = createEmitter();</code></pre>
+
+  <p>
+    Default type parameters are particularly common in library code where a generic
+    interface needs a sensible fallback so callers who do not care about specialization
+    can use it without any angle brackets. The React type definitions make heavy use of
+    this pattern: <code>useState&lt;S = undefined&gt;</code>, for instance.
+  </p>
+
+  <!-- ─── 8. Java Comparison Table ─────────────────────────── -->
+  <h2>Java vs TypeScript Generics: Side-by-Side</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Java</th>
+        <th>TypeScript</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Generic syntax</td>
+        <td><code>&lt;T&gt;</code> before return type: <code>&lt;T&gt; T id(T v)</code></td>
+        <td><code>&lt;T&gt;</code> after function name: <code>function id&lt;T&gt;(v: T): T</code></td>
+      </tr>
+      <tr>
+        <td>Type inference at call site</td>
+        <td>Limited — diamond operator only for construction</td>
+        <td>Pervasive — inferred from arguments; rarely write <code>&lt;T&gt;</code> explicitly</td>
+      </tr>
+      <tr>
+        <td>Bounded type parameters</td>
+        <td><code>&lt;T extends Comparable&lt;T&gt;&gt;</code> — must name a type</td>
+        <td><code>&lt;T extends { compareTo: ... }&gt;</code> — any shape works</td>
+      </tr>
+      <tr>
+        <td>Union of property keys</td>
+        <td>No equivalent</td>
+        <td><code>keyof T</code> produces <code>"key1" | "key2" | ...</code></td>
+      </tr>
+      <tr>
+        <td>Default type parameters</td>
+        <td>Not supported</td>
+        <td><code>&lt;T = HTMLDivElement&gt;</code></td>
+      </tr>
+      <tr>
+        <td>Runtime check via instanceof</td>
+        <td>Not possible — generics are erased</td>
+        <td>Not possible — generics are erased</td>
+      </tr>
+      <tr>
+        <td>Static members using class <code>T</code></td>
+        <td>Compile error — not allowed</td>
+        <td>Compile error — not allowed</td>
+      </tr>
+      <tr>
+        <td>Variance</td>
+        <td>Wildcards: <code>? extends T</code> / <code>? super T</code></td>
+        <td>Variance annotations: <code>out T</code> (covariant) / <code>in T</code> (contravariant)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ─── 9. Erased at Runtime ─────────────────────────────── -->
+  <h2>8. Erased at Runtime</h2>
+
+  <p>
+    Java and TypeScript generics are erased by the time your code runs. This means you
+    cannot use a type parameter in any runtime operation that depends on knowing the
+    concrete type — no <code>instanceof T</code>, no <code>new T()</code>, no
+    reflective inspection of <code>T</code>:
+  </p>
+
+  <pre><code>// This looks plausible but does not compile
+function isType&lt;T&gt;(value: unknown): value is T {
+  return value instanceof T;  // Error: T only refers to a type, but is being used as a value here
+}
+
+// The correct approach: pass a constructor as a runtime value
+function isType&lt;T&gt;(value: unknown, ctor: new (...args: any[]) =&gt; T): value is T {
+  return value instanceof ctor;
+}
+
+isType(user, User);   // OK — User is a real runtime value (the constructor)</code></pre>
+
+  <p>
+    This is the same limitation Java developers encounter: you cannot write
+    <code>x instanceof T</code> in Java either, for the same reason. The fix is also
+    analogous — pass a <code>Class&lt;T&gt;</code> token in Java, or a constructor
+    reference in TypeScript.
+  </p>
+
+  <!-- ─── 10. Static Members Cannot Use Class Type Param ───── -->
+  <h2>9. Static Members Cannot Use the Class Type Parameter</h2>
+
+  <p>
+    Static members belong to the class itself, not to any particular instance. Because
+    a class type parameter describes the shape of instances, it is meaningless in the
+    static context — there is no instance <code>T</code> to refer to. Both Java and
+    TypeScript enforce this:
+  </p>
+
+  <pre><code>class Container&lt;T&gt; {
+  // Instance members: fine to use T
+  value: T;
+  constructor(v: T) { this.value = v; }
+
+  // Static members: T is not in scope here
+  static count = 0;                     // OK — no T involved
+  // static default: T;                 // Error: Static members cannot use T
+  // static create(v: T): Container&lt;T&gt;  // Error: T is not defined in static scope
+}
+
+// Workaround: introduce a separate type parameter on the static method
+class Container&lt;T&gt; {
+  static of&lt;U&gt;(value: U): Container&lt;U&gt; {  // Own type param U — independent of T
+    return new Container(value);
+  }
+}</code></pre>
+
+  <p>
+    The workaround is the same in both languages: introduce a separate type parameter on
+    the static method itself rather than relying on the class's <code>T</code>.
+  </p>
+
+  <!-- ─── Warning Callout ──────────────────────────────────── -->
+  <div class="callout warning">
+    <p style="margin:0">
+      <strong>Unnecessary generics are an anti-pattern.</strong> If a type parameter
+      appears only once in a function signature — in one argument position, never in the
+      return type or another argument — it carries no useful constraint. Replace it with
+      <code>unknown</code> or the specific type directly.
+      <code>function log&lt;T&gt;(value: T): void</code> adds nothing over
+      <code>function log(value: unknown): void</code>; it just adds visual noise and
+      confuses readers about what relationship is being expressed.
+    </p>
+  </div>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-6">
+    <h3>Check Your Understanding</h3>
+    <p class="quiz-question">
+      What does TypeScript's <code>keyof T</code> operator produce?
+    </p>
+    <ul class="quiz-options">
+      <li>
+        <button>
+          A. A union type of every property key name in T
+        </button>
+      </li>
+      <li>
+        <button>
+          B. A mapped type that transforms each property value of T
+        </button>
+      </li>
+      <li>
+        <button>
+          C. A conditional type that checks if T has any properties
+        </button>
+      </li>
+    </ul>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Exercise ─────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Skill Exercise — getProperty with keyof</h3>
+    <p>
+      Implement the generic property-access function from Section 6 and call it with
+      both a valid and an invalid key to see TypeScript's error in action:
+    </p>
+    <ol>
+      <li>
+        Write <code>getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K]</code>
+        — the body is just <code>return obj[key];</code>
+      </li>
+      <li>
+        Define a <code>const person = { name: "Alice", age: 30 };</code>
+      </li>
+      <li>
+        Call <code>getProperty(person, "name")</code> — should succeed, hover to confirm
+        the return type is <code>string</code>
+      </li>
+      <li>
+        Call <code>getProperty(person, "phone")</code> — should produce a compile error
+        because <code>"phone"</code> is not a key of <code>person</code>
+      </li>
+    </ol>
+    <p style="font-size:0.88rem; color: var(--text-muted); margin-bottom:0.25rem;">
+      Write your implementation below. If you are using a local TypeScript setup, paste
+      this into a <code>.ts</code> file and run <code>tsc --noEmit</code> to see the
+      error on the invalid call without generating output files.
+    </p>
+    <textarea placeholder="// Step 1: function definition&#10;function getProperty&lt;T, K extends keyof T&gt;(obj: T, key: K): T[K] {&#10;  // your body here&#10;}&#10;&#10;// Step 2: test object&#10;const person = { name: 'Alice', age: 30 };&#10;&#10;// Step 3: valid call (return type should be string)&#10;const n = getProperty(person, 'name');&#10;&#10;// Step 4: invalid call (should produce a compile error)&#10;const bad = getProperty(person, 'phone');"></textarea>
+  </div>
+
+  <!-- ─── Tutor Prompt ──────────────────────────────────────── -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> "Why does <code>getProperty(person, "age")</code>
+    return the type <code>number</code> rather than <code>string | number</code>? Walk
+    me through how TypeScript resolves <code>T[K]</code> when <code>T</code> is
+    <code>{ name: string; age: number }</code> and <code>K</code> is
+    <code>"age"</code>."
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────── -->
+  <nav class="lesson-nav">
+    <a href="0005-classes.html">&#8592; Lesson 5: Classes</a>
+    <a href="0007-narrowing.html" class="primary">Lesson 7: Narrowing &#8594;</a>
+  </nav>
+
+</div><!-- /.container -->
+
+<script src="../assets/quiz.js"></script>
+<script>
+  // Correct answer is option A (index 0)
+  // keyof T produces a union type of every property key name in the given type T
+  initQuiz('quiz-6', 0,
+    'keyof T produces a union of all property key names on the type T. ' +
+    'For example, keyof { name: string; age: number } is "name" | "age". ' +
+    'This is a TypeScript-only feature with no Java equivalent — it enables ' +
+    'type-safe property access patterns like getProperty<T, K extends keyof T>.'
+  );
+</script>
+</body>
+</html>

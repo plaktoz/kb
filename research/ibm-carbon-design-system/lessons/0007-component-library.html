@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Component Library Map — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> › Module 3 — Component Library in Depth › Lesson 7
+      </div>
+      <h1>Component Library Map</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 3 — Component Library in Depth · Lesson 7 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">Carbon Design System — Component library (carbondesignsystem.com/components/overview)</div>
+      <div class="source-result">Key result: Carbon ships 49 components organized across 7 functional categories — UI Shell, Inputs &amp; Controls, Navigation, Data Display, Feedback &amp; Status, Overlays &amp; Popovers, and Content &amp; Layout — each category serving a distinct role in the user interface so that teams can reason about which component to reach for by thinking about <em>purpose</em> rather than browsing a flat alphabetical list.</div>
+    </div>
+
+    <!-- Section 1: Components as a system -->
+    <h2>How to think about components as a system, not a grab-bag</h2>
+
+    <p>A newcomer to Carbon can open the component documentation and feel overwhelmed. Forty-nine components. Dozens of variants. Countless configuration options. It is tempting to treat the library as a flat catalog — to search for something that visually resembles what you need and drop it into your design. This grab-bag approach to component selection is exactly what leads to incoherent user interfaces, where things technically work but feel assembled from unrelated sources rather than designed as a unified whole.</p>
+
+    <p>The right mental model is to treat Carbon's components as a <em>system</em> of interlocking parts, each with a defined role. Every component was created to solve a specific class of problem. A Modal exists because sometimes you need to interrupt the user with a decision they must make before continuing. A Data Table exists because users often need to scan, sort, and act on large sets of structured records. A Notification exists because the application needs to communicate a system-level event without hijacking the entire screen. When you understand a component's intended purpose, you stop asking "which component looks right?" and start asking "which component is designed to solve this problem?"</p>
+
+    <p>Carbon's 7-category taxonomy is the key to this shift. The categories are not arbitrary filing labels — they describe what a component <em>does in the interface architecture</em>. UI Shell components frame the page. Input and Navigation components let users act on the application. Data Display and Feedback components communicate results and system state. Overlays and Content components handle contextual and supplementary information. Knowing which category a component belongs to tells you something meaningful about when and how to use it. This lesson maps all 49 components across those 7 categories so you can navigate the library by intent rather than by appearance.</p>
+
+    <!-- Full component map table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Count</th>
+          <th>Components (examples)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>UI Shell</strong></td>
+          <td>3</td>
+          <td>Header, Left Panel (SideNav), Right Panel</td>
+        </tr>
+        <tr>
+          <td><strong>Inputs &amp; Controls</strong></td>
+          <td>13</td>
+          <td>Button, Checkbox, Date Picker, Dropdown, File Uploader, Number Input, Radio Button, Search, Select, Slider, Text Input, Toggle, Accordion</td>
+        </tr>
+        <tr>
+          <td><strong>Navigation</strong></td>
+          <td>8</td>
+          <td>Breadcrumb, Menu, Menu Buttons, Overflow Menu, Pagination, Progress Indicator, Tabs, Tree View</td>
+        </tr>
+        <tr>
+          <td><strong>Data Display</strong></td>
+          <td>6</td>
+          <td>Contained List, Data Table, List, Structured List, Tag, Tile</td>
+        </tr>
+        <tr>
+          <td><strong>Feedback &amp; Status</strong></td>
+          <td>4</td>
+          <td>Inline Loading, Loading, Notification, Progress Bar</td>
+        </tr>
+        <tr>
+          <td><strong>Overlays &amp; Popovers</strong></td>
+          <td>4</td>
+          <td>Modal, Popover, Toggletip, Tooltip</td>
+        </tr>
+        <tr>
+          <td><strong>Content &amp; Layout</strong></td>
+          <td>5</td>
+          <td>AI Label, Code Snippet, Content Switcher, Form, Link</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 2: UI Shell -->
+    <h2>UI Shell — the structural frame of every Carbon app</h2>
+
+    <p>The UI Shell is the skeleton that every other component lives inside. It consists of three structural pieces: the <strong>Header</strong>, the <strong>Left Panel</strong> (also called SideNav), and the <strong>Right Panel</strong>. Together they define the persistent chrome of your application — the parts of the interface that remain stable while content in the main body changes. The UI Shell is not optional decoration; it is the scaffolding from which the rest of the interface hangs.</p>
+
+    <p>The Header occupies the top of the application and carries global-level elements: the IBM product logo or wordmark, the product name, global navigation links, and utility icons such as search, notifications, and the user profile menu. Its position at the top of the visual hierarchy signals to users that it controls things that span the entire application rather than a single screen. Carbon's Header is designed to collapse gracefully on smaller viewports, ensuring the global navigation remains accessible without consuming precious screen space on mobile devices.</p>
+
+    <p>The Left Panel (SideNav) provides the primary navigation structure within a product. Where the Header holds global controls, the SideNav holds product-level navigation — the tree of sections, features, and settings that a user navigates within one application. The Right Panel is a more specialized structural element, typically used for contextual panels, filters, or supplementary information that relates to the content in the main area. When you are starting the architecture of a new Carbon application, these three UI Shell components are the first decisions you make — they establish the spatial grammar that every subsequent component decision will relate to.</p>
+
+    <!-- Section 3: Inputs and Navigation -->
+    <h2>Inputs &amp; Controls and Navigation — interacting with the app</h2>
+
+    <p>With the structural frame established, the next two categories — Inputs &amp; Controls and Navigation — cover everything that lets a user <em>act on</em> the application. They are the tools of agency: the components a user reaches for to give the system information, to move through it, and to invoke operations upon it.</p>
+
+    <p><strong>Inputs &amp; Controls</strong> is Carbon's largest category, with 13 components. It encompasses every mechanism by which a user provides data or makes a choice. Text Input and Number Input capture free-form typed values. Checkbox, Radio Button, Toggle, and Select handle constrained choices with varying degrees of mutual exclusivity. Dropdown handles longer lists of options in a compact form. Date Picker provides structured date entry with calendar assistance. Search enables free-text query entry. File Uploader handles binary content submission. Slider captures numeric values along a range. Accordion is somewhat atypical in this category — it is a disclosure pattern that expands and collapses sections of content, and Carbon groups it here because it often wraps form fields. Together these components cover virtually every data-entry scenario a product team is likely to encounter. The critical discipline is matching the right input to the nature of the data: a Toggle for binary on/off state, a Radio Button group when exactly one option must be chosen from a small set, a Dropdown when the choice set is longer than about five items.</p>
+
+    <p><strong>Navigation</strong> covers how users move through the application and understand where they are. Breadcrumb provides wayfinding context in hierarchically structured content. Tabs organize related content into parallel views that the user can switch between without leaving the page. Pagination divides large datasets into digestible pages. Progress Indicator shows a user's position in a multi-step workflow. Tree View exposes hierarchical data structures — like file systems or organizational charts — as navigable trees. Menu, Menu Buttons, and Overflow Menu all handle command invocation: ways to expose actions without dedicating permanent screen space to every possible operation. Choosing among these navigation components requires understanding how your content is structured: Tabs for parallel alternatives, Breadcrumb for deep hierarchies, Pagination for long lists, Progress Indicator for sequential processes.</p>
+
+    <!-- Section 4: Data Display and Feedback -->
+    <h2>Data Display and Feedback &amp; Status — showing results and progress</h2>
+
+    <p>If Inputs and Navigation are about what users <em>do</em> to the application, Data Display and Feedback &amp; Status are about what the application communicates <em>back</em> to users. These categories close the loop in the user-interface dialogue.</p>
+
+    <p><strong>Data Display</strong> contains 6 components for presenting structured information. Data Table is Carbon's most powerful and configurable data presentation component — it supports sorting, filtering, batch actions, inline editing, and pagination, making it the right choice whenever users need to work with a set of structured records rather than just view them. Structured List handles simpler read-only key-value information with less overhead than a full Data Table. Contained List and List handle simpler enumerations. Tag communicates categorical labels on items — status, type, category — in a compact visual form that works well alongside other content. Tile is a versatile card-like container that groups related content into a visually bounded unit, particularly useful in dashboards and content feeds. The distinction between these components often comes down to structure and interactivity: Data Table when users need to act on rows, Structured List for read-only tabular data, Tile for mixed content blocks.</p>
+
+    <p><strong>Feedback &amp; Status</strong> addresses one of the most critical responsibilities in UI design: telling users what the system is doing and what has happened. Loading and Inline Loading communicate that an operation is in progress — the difference between them is scope. Loading is a full-screen or prominent spinner for operations that block the entire interface. Inline Loading is a subtle indicator for operations contained within a single element, like a button that is waiting for a server response. Progress Bar communicates how far along a known-length operation is, giving users a concrete sense of elapsed and remaining time. Notification communicates system-level events — successes, warnings, errors, and informational messages — across four distinct severity levels. Getting Feedback &amp; Status right is often the difference between an application that feels responsive and trustworthy and one that feels broken and opaque.</p>
+
+    <!-- Section 5: Overlays and Content -->
+    <h2>Overlays &amp; Popovers and Content &amp; Layout — contextual and supplementary elements</h2>
+
+    <p><strong>Overlays &amp; Popovers</strong> covers the 4 components that float above the main page surface to deliver contextual content or require user decisions. Modal is the most disruptive — it blocks the entire background and demands user attention before the underlying application can be interacted with again. Use Modal when a decision genuinely requires the user's focused attention and cannot be deferred: confirming a destructive action, completing a focused data entry task, displaying a critical warning. Overusing Modal is one of the most common friction sources in application design; if the content does not require blocking the user, a less disruptive component is almost always the right choice.</p>
+
+    <p>Popover, Toggletip, and Tooltip are the lighter members of this category, all providing contextual information near a trigger element without blocking the page. The distinctions among them are subtle but important. Tooltip is non-interactive and appears on hover, making it suitable only for supplementary labels and definitions — never for interactive content. Toggletip appears on click and can contain more complex content. Popover is the most capable of the three, supporting rich interactive content within its floating panel. Choosing among them comes down to whether the content needs to be interactive (Popover), clickable-to-show (Toggletip), or purely informational on hover (Tooltip).</p>
+
+    <p><strong>Content &amp; Layout</strong> contains 5 components that handle supplementary and structural content within the main body of a page. Form wraps inputs and controls with semantic structure, layout, and validation messaging. Link provides accessible anchor behavior. Code Snippet displays code samples with appropriate monospace styling and copy-to-clipboard functionality. Content Switcher lets users toggle between two or three views of the same content area — similar to Tabs but for smaller, more compact switching contexts. AI Label is a distinctive Carbon component that identifies content generated by AI systems, giving users a consistent signal that they are reading AI-produced output. This category handles the content layer of a page: not the global chrome (UI Shell), not the data structures (Data Display), but the inline and supplementary elements that give meaning to the page's text and code.</p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      Choose components by purpose, not by appearance. Every Carbon component belongs to a category that describes its role in the interface architecture. Before reaching for a component, ask what the interface needs to <em>do</em> at that moment — frame the page, collect user input, display data, communicate system state, surface contextual information — and let the answer point you to the right category. A component chosen because it "looks right" without asking what it is designed to do will almost always create problems downstream.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common Mistake</div>
+      Reinventing components that already exist. The most frequent anti-pattern teams encounter with Carbon is building a custom solution for a problem that one of the 49 components already solves. Custom tooltips that lack keyboard accessibility, ad hoc notification banners that miss error severity levels, hand-rolled data tables without sort or filter — these all represent duplicated effort and almost always ship with worse accessibility, keyboard behavior, and visual consistency than the Carbon equivalent. Before writing a custom component, spend ten minutes verifying that Carbon does not already provide one that fits. It usually does.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-7">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>Which category does the Notification component belong to?</h3>
+      <div class="quiz-options">
+        <button>Feedback and Status category</button>
+        <button>Overlays and Popovers category</button>
+        <button>Content and Layout category</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Map a product to Carbon components</h3>
+      <p>You are building a file management dashboard with: a top navigation bar, a sidebar for folder navigation, a table of files with sorting, a delete confirmation, and a progress indicator during file upload. List 6-8 Carbon components you would use (one per line) and write one sentence justifying each choice.</p>
+      <textarea placeholder="Example format:&#10;Header — provides the top navigation bar with the product name and global controls.&#10;SideNav — organizes the folder hierarchy as a navigable sidebar tree.&#10;…" aria-label="Exercise response"></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0006-accessibility.html">← Prev: Accessibility</a>
+      <a href="0008-buttons-controls.html" class="primary">Next: Buttons &amp; Controls →</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> If you are unsure whether to use a Popover vs. a Tooltip vs. a Modal for a particular UX moment, describe the scenario to Claude and ask it to walk through the decision. Similarly, if your exercise answer uses a component but you are not sure whether the category justification is right, paste your answer and ask for feedback. The component-selection reasoning is the most transferable skill from this lesson.
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-7', 0, 'Notification belongs to Feedback & Status — it communicates system-level information to users. Overlays are for modal dialogs and tooltips.');
+  </script>
+</body>
+</html>

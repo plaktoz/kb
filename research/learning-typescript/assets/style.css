@@ -1,0 +1,418 @@
+/* Tufte-inspired stylesheet for TypeScript lessons */
+
+:root {
+  --bg: #fffff8;
+  --text: #111;
+  --text-muted: #555;
+  --accent: #1a73e8;
+  --accent-dark: #1558b0;
+  --border: #ddd;
+  --callout-key-bg: #eef6ff;
+  --callout-key-border: #1a73e8;
+  --callout-warn-bg: #fff8e1;
+  --callout-warn-border: #f9a825;
+  --correct-bg: #e8f5e9;
+  --correct-border: #43a047;
+  --incorrect-bg: #ffebee;
+  --incorrect-border: #e53935;
+  --code-bg: #f4f4f4;
+  --exercise-bg: #f9f9f9;
+  --exercise-border: #4a90d9;
+  --source-bg: #f0f4f8;
+  --source-border: #a0b8d0;
+  --tutor-bg: #f3e8ff;
+  --tutor-border: #9c27b0;
+  --nav-btn-bg: #1a73e8;
+  --nav-btn-text: #fff;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Lora, Georgia, 'Times New Roman', serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Header */
+.lesson-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  font-size: 0.82rem;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.breadcrumb a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.lesson-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.3rem 0 0.6rem;
+  line-height: 1.25;
+}
+
+.lesson-meta {
+  font-size: 0.82rem;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text-muted);
+  display: flex;
+  gap: 1rem;
+}
+
+.lesson-meta span::before {
+  content: '● ';
+  font-size: 0.6rem;
+  vertical-align: middle;
+}
+
+/* Typography */
+h2 {
+  font-size: 1.4rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.25rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+p {
+  margin: 0.8rem 0;
+}
+
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--accent-dark);
+}
+
+/* Code */
+code {
+  font-family: 'Fira Code', 'Cascadia Code', 'Source Code Pro', monospace;
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+pre {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  margin: 1rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Callouts */
+.callout {
+  border-left: 4px solid var(--border);
+  background: var(--exercise-bg);
+  padding: 0.9rem 1.1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 6px 6px 0;
+}
+
+.callout.key {
+  background: var(--callout-key-bg);
+  border-color: var(--callout-key-border);
+}
+
+.callout.key::before {
+  content: '💡 Key insight';
+  display: block;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--callout-key-border);
+  margin-bottom: 0.4rem;
+}
+
+.callout.warning {
+  background: var(--callout-warn-bg);
+  border-color: var(--callout-warn-border);
+}
+
+.callout.warning::before {
+  content: '⚠️ Watch out';
+  display: block;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #b45309;
+  margin-bottom: 0.4rem;
+}
+
+/* Source card */
+.source-card {
+  background: var(--source-bg);
+  border: 1px solid var(--source-border);
+  border-radius: 6px;
+  padding: 0.8rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.source-card strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* Quiz */
+.quiz {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  margin: 2rem 0;
+  background: #fff;
+}
+
+.quiz h3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin: 0 0 0.7rem;
+}
+
+.quiz p {
+  font-size: 1rem;
+  margin: 0 0 1rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-options button {
+  text-align: left;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  font-family: Lora, Georgia, serif;
+  font-size: 0.95rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.quiz-options button:hover:not(:disabled) {
+  background: #e8edf5;
+  border-color: var(--accent);
+}
+
+.quiz-options button:disabled {
+  cursor: default;
+}
+
+.quiz-options button.correct {
+  background: var(--correct-bg);
+  border-color: var(--correct-border);
+  color: #1b5e20;
+}
+
+.quiz-options button.incorrect {
+  background: var(--incorrect-bg);
+  border-color: var(--incorrect-border);
+  color: #b71c1c;
+}
+
+.quiz-feedback {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 5px;
+  display: none;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-feedback.correct {
+  background: var(--correct-bg);
+  border: 1px solid var(--correct-border);
+  color: #1b5e20;
+}
+
+.quiz-feedback.incorrect {
+  background: var(--incorrect-bg);
+  border: 1px solid var(--incorrect-border);
+  color: #b71c1c;
+}
+
+/* Exercise */
+.exercise {
+  border: 2px solid var(--exercise-border);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  margin: 2rem 0;
+  background: var(--exercise-bg);
+}
+
+.exercise h3 {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--exercise-border);
+  margin: 0 0 0.6rem;
+}
+
+.exercise p {
+  margin: 0 0 0.8rem;
+}
+
+.exercise textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  background: #fff;
+}
+
+/* Tutor prompt */
+.tutor-prompt {
+  border: 1px dashed var(--tutor-border);
+  background: var(--tutor-bg);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 2.5rem 0 1.5rem;
+  font-size: 0.88rem;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #5b2d8a;
+}
+
+/* Nav */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.9rem;
+  gap: 1rem;
+}
+
+.lesson-nav a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: background 0.15s;
+}
+
+.lesson-nav a:hover {
+  background: var(--code-bg);
+}
+
+.lesson-nav a.primary {
+  background: var(--nav-btn-bg);
+  color: var(--nav-btn-text);
+  border-color: var(--nav-btn-bg);
+}
+
+.lesson-nav a.primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+}
+
+th {
+  background: var(--code-bg);
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: #fafaf6;
+}
+
+/* Print */
+@media print {
+  body { background: #fff; font-size: 12pt; }
+  .lesson-nav, .tutor-prompt, .quiz-options button { display: none; }
+  .container { max-width: 100%; padding: 0; }
+  pre { white-space: pre-wrap; }
+}

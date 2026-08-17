@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Token System and Color Themes — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a>
+        &rsaquo; Module 1 — Foundations
+        &rsaquo; Lesson 2 of 12
+      </p>
+      <h1>The Token System and Color Themes</h1>
+      <div class="lesson-meta">
+        <span>Module 1 — Foundations</span>
+        <span>Lesson 2 of 12</span>
+        <span>~15 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <p class="source-label">Source</p>
+      <p class="source-title">IBM Carbon Design System — Color Documentation</p>
+      <p class="source-result">Carbon's official color guidelines covering design tokens, the IBM Design Language palette, built-in themes, layering logic, interaction states, and WCAG accessibility requirements.</p>
+    </div>
+
+    <!-- Section 1: What are design tokens? -->
+    <h2>What Are Design Tokens, and Why Do They Exist?</h2>
+
+    <p>Imagine you are building a large product — dozens of components, hundreds of screens, multiple teams working in parallel. Every button, every input field, every heading needs a color. The naive approach is to hard-code hex values directly into each component: <code>#0f62fe</code> for a primary button, <code>#161616</code> for body text, <code>#e0e0e0</code> for a border. That approach works fine until the day you need to support a dark mode, or your brand guidelines update the primary blue, or a new accessibility audit demands higher contrast. Suddenly you are hunting through thousands of lines of CSS or styles code, changing hex values one at a time, and praying nothing was missed.</p>
+
+    <p>Design tokens solve this problem by introducing a layer of indirection. Instead of writing <code>#0f62fe</code>, you write <code>$interactive</code>. Instead of <code>#161616</code>, you write <code>$text-primary</code>. Each token is a named, role-based identifier that maps to a concrete value underneath — but crucially, that mapping can change depending on context (for example, which theme is active) without you touching any component code. The component stays the same; only the token's resolved value changes.</p>
+
+    <p>Carbon's token system is built on the IBM Design Language palette of neutral grays and a core blue. Neutral grays form the dominant surface tones throughout all themes, while IBM's core blue (<code>#0f62fe</code> in light themes) drives primary interactive elements. Tokens layer on top of this palette as semantic, role-based names, so a designer or developer never needs to remember exact hex codes — they need to know the role a color plays, and pick the token for that role.</p>
+
+    <!-- Section 2: The ten token groups -->
+    <h2>The Ten Core Token Groups</h2>
+
+    <p>Carbon organizes its color tokens into ten named groups. Each group covers a distinct role in the UI, and tokens within a group share that role while varying by state or emphasis. Understanding the groups is the foundation of working with Carbon color — once you know which group a color belongs to, you know roughly which token to reach for.</p>
+
+    <p>The ten groups are: <strong>Background</strong>, <strong>Layer</strong>, <strong>Field</strong>, <strong>Border</strong>, <strong>Text</strong>, <strong>Link</strong>, <strong>Icon</strong>, <strong>Support</strong>, <strong>Focus</strong>, and <strong>Skeleton</strong>. Background tokens set the page-level canvas. Layer tokens control the surfaces stacked above it — cards, panels, modals. Field tokens handle form input backgrounds. Border tokens draw dividers, outlines, and separators. Text tokens govern all written content. Link tokens are specifically for navigational anchor text. Icon tokens color iconography. Support tokens carry semantic meaning: error, success, and warning states. Focus tokens define the visible keyboard-focus ring. Skeleton tokens drive loading placeholder animations.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Token Group</th>
+          <th>Role</th>
+          <th>Example Tokens</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Background</strong></td>
+          <td>Page-level canvas color</td>
+          <td><code>$background</code>, <code>$background-hover</code></td>
+        </tr>
+        <tr>
+          <td><strong>Layer</strong></td>
+          <td>Raised surfaces: cards, panels, modals</td>
+          <td><code>$layer-hover</code>, <code>$layer-active</code></td>
+        </tr>
+        <tr>
+          <td><strong>Field</strong></td>
+          <td>Form input backgrounds</td>
+          <td><code>$field-01</code>, <code>$field-hover-01</code></td>
+        </tr>
+        <tr>
+          <td><strong>Border</strong></td>
+          <td>Dividers, outlines, separators</td>
+          <td><code>$border-subtle</code>, <code>$border-strong</code></td>
+        </tr>
+        <tr>
+          <td><strong>Text</strong></td>
+          <td>All written content</td>
+          <td><code>$text-primary</code>, <code>$text-secondary</code></td>
+        </tr>
+        <tr>
+          <td><strong>Link</strong></td>
+          <td>Navigational anchor text</td>
+          <td><code>$link-primary</code></td>
+        </tr>
+        <tr>
+          <td><strong>Icon</strong></td>
+          <td>Iconography fill and stroke</td>
+          <td><code>$icon-primary</code></td>
+        </tr>
+        <tr>
+          <td><strong>Support</strong></td>
+          <td>Semantic state colors</td>
+          <td><code>$support-error</code>, <code>$support-success</code>, <code>$support-warning</code></td>
+        </tr>
+        <tr>
+          <td><strong>Focus</strong></td>
+          <td>Keyboard focus ring</td>
+          <td><code>$focus</code></td>
+        </tr>
+        <tr>
+          <td><strong>Skeleton</strong></td>
+          <td>Loading placeholder animations</td>
+          <td><code>$skeleton-background</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Notice that some groups have only a handful of tokens while others — like Text or Layer — have many, covering different emphasis levels and interactive states. The token naming convention is consistent: group name first, then a qualifier. <code>$text-primary</code> is primary-emphasis text; <code>$text-secondary</code> is de-emphasized text. <code>$border-subtle</code> is a low-contrast divider; <code>$border-strong</code> is a higher-contrast edge. This predictability means you can often infer a token name before looking it up.</p>
+
+    <!-- Section 3: Four themes and layering -->
+    <h2>The Four Built-In Themes and Layering Logic</h2>
+
+    <p>Carbon ships with four production-ready themes. Two are light and two are dark. The light themes are <strong>White</strong> (base color <code>#ffffff</code>) and <strong>Gray 10</strong> (base color <code>#f4f4f4</code>). The dark themes are <strong>Gray 90</strong> (base color <code>#262626</code>) and <strong>Gray 100</strong> (base color <code>#161616</code>). Each theme maps every token to a concrete palette value. When you switch themes, every token resolves differently — but the semantic meaning of each token stays identical. <code>$text-primary</code> is always "the primary text color for this theme," whether that resolves to near-black in a light theme or near-white in a dark one.</p>
+
+    <p>Switching between themes at runtime — for inline dark/light mode — is straightforward because token names never change. A component written against tokens simply re-renders correctly when the theme changes. This is the practical power of the token abstraction: theme switching is a data change, not a code change.</p>
+
+    <p>Within any given theme, Carbon uses a <strong>layering model</strong> to create visual depth. In light themes, layers alternate between the two light palette values — White and Gray 10. The page background might be White, a card surface above it uses Gray 10, and a popover or modal above that returns to White. In dark themes the logic inverts: each additional layer becomes one step lighter. The darkest base sits at the bottom; every panel or surface elevated above it is slightly lighter, communicating hierarchy through luminance. This alternating or stepping pattern means components designed for layer 1 also look correct in layer 3 without modification — the tokens handle the value swapping.</p>
+
+    <!-- Section 4: Interaction state tokens -->
+    <h2>Interaction State Tokens</h2>
+
+    <p>A well-designed color system must account for more than the "enabled" (default) state of a component. Users hover, click, focus, and select elements constantly. Each of these interactions deserves a visually distinct response so that the interface feels alive and communicates clearly what is happening. Carbon's token system has dedicated tokens for every major interaction state, paired with a consistent visual logic for how much each state changes from the enabled baseline.</p>
+
+    <p>The five interaction states beyond "enabled" are: <strong>Hover</strong>, <strong>Active</strong>, <strong>Selected</strong>, <strong>Focus</strong>, and <strong>Disabled</strong>. Each follows a predictable pattern:</p>
+
+    <ul>
+      <li><strong>Hover</strong> — the cursor is over an element but it has not been pressed. The color shifts a half-step lighter or darker from the enabled value. Token example: <code>$layer-hover</code>, <code>$background-hover</code>.</li>
+      <li><strong>Active</strong> — the element is being pressed or activated. The color shifts a full two steps lighter or darker — a noticeably larger change than hover, so press feedback feels distinct. Token example: <code>$layer-active</code>.</li>
+      <li><strong>Selected</strong> — the element has been chosen in a selection context (e.g., a tab, a list item). One full step lighter or darker from enabled. Token example: <code>$layer-selected</code>.</li>
+      <li><strong>Focus</strong> — keyboard focus ring. In light themes the ring uses Blue 60; in dark themes it uses White. There is often a companion <code>$focus-inset</code> token that draws a thin buffer border inside the focus ring, improving contrast on colored backgrounds. Token: <code>$focus</code>.</li>
+      <li><strong>Disabled</strong> — the element is unavailable for interaction. Disabled colors are drawn exclusively from the gray family, and <em>no contrast ratio requirements apply</em> to disabled states, because the intent is to show unavailability rather than readable content.</li>
+    </ul>
+
+    <p>Having discrete tokens for each state means teams never need to compute derived colors manually. If a designer or developer reaches for a hex value to shade a hover state by hand, they have stepped outside the system — and they lose the guarantee that their chosen shade is consistent with every other hover state across the product. Token-based interaction states are what make a Carbon application feel cohesive and intentional even when built by many different teams.</p>
+
+    <!-- Section 5: WCAG contrast -->
+    <h2>WCAG Contrast Requirements and How Carbon Meets Them</h2>
+
+    <p>Accessibility is not an afterthought in Carbon — it is built into the token system itself. Carbon's color tokens are designed to satisfy the Web Content Accessibility Guidelines (WCAG) contrast requirements by default when used correctly. The two key thresholds from WCAG 2.1 are: text smaller than 24px (or bold text smaller than 18.66px) must achieve a <strong>4.5:1</strong> contrast ratio against its background, and large text (24px and above) as well as non-text graphics must achieve at least <strong>3:1</strong>.</p>
+
+    <p>When you use <code>$text-primary</code> on a <code>$background</code> surface, or <code>$text-secondary</code> on a <code>$layer-01</code> surface, Carbon has pre-verified that those token pairings meet the required ratio across all four themes. This pre-verification is only guaranteed when you stay within the token system. If you reach for a raw hex value — say, placing a mid-gray text color you picked yourself on a white background — you lose that guarantee entirely and must run your own contrast audit.</p>
+
+    <p>Focus states have their own minimum: <strong>3:1</strong> contrast between the focus ring and adjacent colors. In practice, Carbon often exceeds this minimum. The <code>$focus-inset</code> token adds a white (or dark) buffer border between the focus ring and the element's own background, which prevents the ring from visually merging into a same-colored surface. This pattern is especially important on interactive elements that appear on colored backgrounds — without the inset buffer, a blue ring on a blue button would be invisible. The layered approach of <code>$focus</code> plus <code>$focus-inset</code> makes the keyboard focus indicator robust across all theme contexts.</p>
+
+    <p>Disabled states are the one explicit carve-out: since disabled elements are intentionally unavailable and carry no readable information, WCAG does not require contrast compliance for them. Carbon's disabled tokens therefore use muted grays that communicate "unavailable" without meeting the active-state contrast thresholds. Everything else in the system — text, icons, links, support indicators — is designed to comply when tokens are used as intended.</p>
+
+    <!-- Key insight callout -->
+    <div class="callout key">
+      <p class="callout-label">Key insight</p>
+      <p>Design tokens are semantic roles, not color values. When you write <code>$layer-hover</code>, you are saying "the hover state of a raised surface in whatever theme is active." The token system is what makes theme switching free — no component code changes, only the token-to-value mappings change.</p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <p class="callout-label">Common misconception</p>
+      <p>Avoid using raw hex values from the IBM Design Language palette directly in components — for example writing <code>color: #0f62fe</code> instead of <code>color: $interactive</code>. Even if the hex is "correct" today, it will not respond to theme switching, will not be recognized by Carbon's theming tools, and may fail accessibility checks in dark contexts. Always reference a token by name; never a palette hex.</p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-2">
+      <p class="quiz-label">Check your understanding</p>
+      <h3>Which token group would you use to set the background color of a hovered list item?</h3>
+      <div class="quiz-options">
+        <button type="button">The Layer token group</button>
+        <button type="button">The Border token group</button>
+        <button type="button">The Support token group</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p class="exercise-label">Skill exercise</p>
+      <h3>Token labeling: replace hex values with Carbon token names</h3>
+      <p>A UI mockup has five color decisions made with raw hex values. Your job is to identify the correct Carbon token name for each — do not write hex values in your answer.</p>
+      <p>A UI mockup has: (1) the page background color, (2) a button's text label, (3) a hovered card background, (4) a success notification icon color, (5) a text input's border. Write the Carbon token name you would use for each — do not use hex values.</p>
+      <textarea placeholder="1. Page background:&#10;2. Button text label:&#10;3. Hovered card background:&#10;4. Success notification icon:&#10;5. Text input border:"></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0001-what-is-carbon.html">&larr; Previous: What Is Carbon?</a>
+      <a href="0003-typography-spacing.html" class="primary">Next: Typography &amp; Spacing &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your tutor: "Can you show me how Carbon tokens map to actual CSS custom properties?" or "How does Carbon handle inline theme switching in React?" or "What happens to token contrast ratios in the Gray 90 theme?"
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-2', 0, 'Layer tokens control background surfaces and containers. $layer-hover is the correct token for a hovered list item background.');
+  </script>
+</body>
+</html>

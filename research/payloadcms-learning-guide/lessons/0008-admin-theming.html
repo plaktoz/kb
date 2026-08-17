@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 — Admin Panel Theming: CSS and Dark/Light Mode</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 3: Admin UI Customization › Lesson 8 of 12
+    </div>
+    <h1>Admin Panel Theming — CSS and Dark/Light Mode</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 3 — Admin UI Customization</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/docs/admin/overview">payloadcms.com/docs/admin/overview</a>
+    <p>Official documentation covering admin panel configuration — theming, CSS custom properties, dark/light mode, custom routes, views, and internationalization.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>Theming Approach Overview</h2>
+    <p>
+      Payload's admin panel is a fully functional React application that ships with its own design system. Rather than forcing you to rebuild that system from scratch, Payload exposes several controlled extension points that let you progressively customize the look and behavior of the admin panel without replacing its foundation.
+    </p>
+    <p>
+      The three main customization layers work at different levels of commitment:
+    </p>
+    <ul>
+      <li><strong>CSS custom properties via <code>custom.scss</code>:</strong> The lightest touch. Override the design tokens that the admin panel already uses — colors, elevations, spacing — without touching any JavaScript or React. Changes cascade globally and instantly reflect everywhere.</li>
+      <li><strong><code>admin.theme</code>:</strong> A single config value that locks the panel to a specific color mode (dark or light), bypassing the per-user toggle. Useful when a project has a strict branding requirement.</li>
+      <li><strong><code>admin.components</code> and <code>admin.views</code>:</strong> Full component or page replacement for cases where CSS alone is insufficient. Covered in depth in Lesson 9.</li>
+    </ul>
+    <p>
+      For most branding tasks — logo swap, brand colors, background tones — the <code>custom.scss</code> route is all you need and is the recommended starting point.
+    </p>
+  </section>
+
+  <section>
+    <h2>Custom SCSS and CSS Custom Properties</h2>
+    <p>
+      When you initialize a Payload project, it auto-generates a <code>custom.scss</code> file. This file is loaded globally across the admin panel. Any CSS rules you write here override the built-in styles, including the design tokens that control colors, backgrounds, and elevations.
+    </p>
+    <p>
+      The admin panel's design system is built on <strong>CSS custom properties</strong> (also called CSS variables). Instead of hard-coding color values into component-level selectors, Payload components reference token names like <code>--theme-elevation-0</code> and <code>--theme-text</code>. When you redefine these properties on <code>:root</code>, the new values cascade through every component that references them — no JavaScript required.
+    </p>
+    <p>
+      The key properties to override for a brand color scheme are:
+    </p>
+    <ul>
+      <li><code>--theme-elevation-0</code> — the primary panel background (deepest surface)</li>
+      <li><code>--theme-elevation-50</code> — a slightly raised surface (cards, sidebars)</li>
+      <li><code>--theme-text</code> — the primary text color</li>
+      <li><code>--theme-success-500</code> — accent color, used for active states and highlights</li>
+    </ul>
+    <p>Example <code>custom.scss</code> applying a dark navy brand palette:</p>
+    <pre><code>:root {
+  --theme-elevation-0: #1a1a2e;
+  --theme-elevation-50: #16213e;
+  --theme-text: #eaeaea;
+  --theme-success-500: #00d4aa;
+}</code></pre>
+    <p>
+      These four overrides alone shift the admin panel's background to dark navy, set body text to near-white, and replace the default green accent with teal — without touching a single React component.
+    </p>
+  </section>
+
+  <section>
+    <h2>Locking Dark or Light Mode with <code>admin.theme</code></h2>
+    <p>
+      By default, the admin panel respects each user's system color preference and allows individual users to toggle between dark and light mode from their account settings. If a project requires a fixed color mode — for example, a brand style guide that mandates dark interfaces — you can override this with the <code>admin.theme</code> property.
+    </p>
+    <pre><code>// payload.config.ts
+import { buildConfig } from 'payload/config'
+
+export default buildConfig({
+  admin: {
+    theme: 'dark', // 'light' | 'dark' — forces this mode for all users
+  },
+  // ...
+})</code></pre>
+    <p>
+      Setting <code>theme: 'dark'</code> disables the per-user toggle and locks the interface to dark mode globally. Setting <code>theme: 'light'</code> does the same for light mode. Omitting the property (the default) restores user control.
+    </p>
+    <p>
+      Note that <code>admin.theme</code> controls <em>which mode</em> is active, not the actual colors within that mode. To change specific colors, you still need <code>custom.scss</code>. The two settings are complementary — you might force dark mode with <code>admin.theme</code> and then fine-tune the dark palette via CSS custom properties.
+    </p>
+  </section>
+
+  <section>
+    <h2>Replacing Entire Pages with <code>admin.views</code></h2>
+    <p>
+      For cases where CSS overrides are not enough — such as replacing the dashboard home page or adding a completely custom analytics screen — Payload provides <code>admin.views</code>. This config key lets you swap any top-level admin page with your own React component.
+    </p>
+    <pre><code>// payload.config.ts
+import { buildConfig } from 'payload/config'
+import { CustomDashboard } from './components/CustomDashboard'
+
+export default buildConfig({
+  admin: {
+    views: {
+      Dashboard: {
+        Component: CustomDashboard,
+      },
+    },
+  },
+})</code></pre>
+    <p>
+      When Payload renders the dashboard route, it mounts <code>CustomDashboard</code> instead of its default component. Your custom view receives the same Payload context and auth state as any other admin component, so you have full access to the current user, collections metadata, and Payload's REST client.
+    </p>
+    <p>
+      Unlike <code>admin.components</code> (which targets individual widgets like the nav bar or logo), <code>admin.views</code> operates at the page level. Use it when you need to rebuild an entire page's layout rather than just swap a small element.
+    </p>
+  </section>
+
+  <section>
+    <h2>Custom Routes with <code>admin.routes</code></h2>
+    <p>
+      Payload exposes two levels of route configuration:
+    </p>
+    <p>
+      <strong>Root-level routes</strong> change the base path of the admin panel itself. By default the admin lives at <code>/admin</code>; you can move it to any path:
+    </p>
+    <pre><code>// payload.config.ts
+export default buildConfig({
+  routes: {
+    admin: '/custom-admin-route', // admin now lives at /custom-admin-route
+  },
+})</code></pre>
+    <p>
+      <strong>Admin-level routes</strong> rename sub-paths within the admin panel, such as the account settings page or the login screen:
+    </p>
+    <pre><code>// payload.config.ts
+export default buildConfig({
+  admin: {
+    routes: {
+      account: '/my-account', // was /admin/account, now /admin/my-account
+    },
+  },
+})</code></pre>
+    <p>
+      Route customization is typically used for security (obscuring the default admin path) or for integration with external systems that expect predictable URLs. It does not affect the visual appearance of the panel — it only changes the URL structure.
+    </p>
+  </section>
+
+  <section>
+    <h2>Internationalization and Additional Configuration</h2>
+    <p>
+      The Payload admin panel ships with support for over 30 languages, covering major European, Asian, and Middle Eastern locales. Language detection is automatic: Payload reads the user's browser language setting and renders the admin in the closest matching translation. Individual users can override this from their account preferences.
+    </p>
+    <p>
+      Two additional admin configuration keys handle ancillary behavior:
+    </p>
+    <ul>
+      <li>
+        <strong><code>admin.toast</code></strong> — configures the notification toasts that appear when records are saved, deleted, or when an error occurs. You can set the display duration, screen position, and maximum number of simultaneous toasts.
+      </li>
+      <li>
+        <strong><code>admin.timezones</code></strong> — configures how date and time fields are displayed and interpreted in the admin UI relative to specific timezones.
+      </li>
+    </ul>
+    <p>
+      These options are set inline on the <code>admin</code> key in <code>payload.config.ts</code>, following the same pattern as <code>admin.theme</code> and <code>admin.routes</code>.
+    </p>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> CSS custom properties are the simplest and most maintainable branding path for the Payload admin panel. Redefining a handful of <code>:root</code> variables in <code>custom.scss</code> — such as <code>--theme-elevation-0</code>, <code>--theme-text</code>, and <code>--theme-success-500</code> — cascades your brand colors through every component in the panel without touching any React code.
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Gotcha:</strong> SCSS overrides in <code>custom.scss</code> are global and apply in both light and dark modes. If you override <code>--theme-elevation-0</code> with a dark color on <code>:root</code>, that same value will be used when the panel is in light mode too — potentially making text unreadable. Always test your custom palette in both modes, or use <code>admin.theme</code> to lock the mode so you only need to style one variant.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-8">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">What is the simplest way to apply brand colors across the Payload admin panel?</p>
+    <div class="quiz-options">
+      <button>Override CSS custom properties in a custom.scss file — named variables like --theme-elevation-0 propagate brand colors across the whole admin UI</button>
+      <button>Set admin.theme to 'dark' or 'light' inside the config — this single value switches Payload's built-in color palette for all users</button>
+      <button>Replace admin components via admin.components in the config — swap each built-in widget with a custom React component rendering brand colors</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>Write a <code>custom.scss</code> snippet that changes the admin panel to use a dark navy background, near-white text, and a teal accent color. Use the correct CSS custom property names (<code>--theme-elevation-0</code>, <code>--theme-elevation-50</code>, <code>--theme-text</code>, <code>--theme-success-500</code>). Wrap your rules in a <code>:root</code> selector and pick realistic hex values for each property.</p>
+    <textarea placeholder="Write your custom.scss snippet here...
+
+:root {
+  --theme-elevation-0: /* dark navy background */;
+  --theme-elevation-50: /* slightly lighter navy for cards */;
+  --theme-text: /* near-white text color */;
+  --theme-success-500: /* teal accent color */;
+}"></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0007-hooks.html">&larr; Prev: Hooks</a>
+    <a href="0009-component-overrides.html" class="primary">Next: Component Overrides &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-8', 0, 'Correct. CSS custom properties defined in custom.scss are the recommended starting point for admin branding. Variables like --theme-elevation-0 and --theme-text cascade through every component in the panel. admin.theme only switches between dark and light mode — it does not change individual brand colors. Replacing components via admin.components works but is a heavier approach than necessary for color changes alone.');</script>
+
+</div>
+</body>
+</html>

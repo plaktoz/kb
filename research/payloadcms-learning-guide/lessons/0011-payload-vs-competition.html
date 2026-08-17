@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 — Payload vs. The Competition</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 4: Industry Assessment › Lesson 11 of 12
+    </div>
+    <h1>Payload vs. The Competition</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 4 — Industry Assessment</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/compare">payloadcms.com/compare</a>
+    <p>Payload's official comparison page, positioning the CMS against WordPress, Contentful, Sanity, Strapi, and Directus across developer experience, pricing, hosting, and extensibility dimensions.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>The Headless CMS Landscape</h2>
+    <p>
+      The content management space has fragmented into three distinct camps, each making a different trade-off between convenience, cost, and control.
+    </p>
+    <ul>
+      <li>
+        <strong>Traditional CMS (WordPress):</strong> Monolithic systems that couple the editor UI, rendering layer, and data storage into one application. Easy to get started, but difficult to decouple for modern frontend frameworks and API-first architectures.
+      </li>
+      <li>
+        <strong>SaaS Headless CMS (Contentful, Sanity):</strong> Cloud-hosted services that provide a managed API for content. Fast to start — no infrastructure to manage — but content, schema, and data live on a vendor's servers, and pricing scales with usage or seat count.
+      </li>
+      <li>
+        <strong>Open-Source Headless CMS (Strapi, Directus, Payload):</strong> Self-hosted, code-first tools where the schema and admin panel are defined in your own repository. You own the data, control the deployment environment, and pay no ongoing SaaS fees.
+      </li>
+    </ul>
+    <p>
+      Payload positions itself as the "fastest growing open-source headless CMS" — and within its own category, it claims a stronger TypeScript story and a tighter Next.js integration than its open-source peers.
+    </p>
+  </section>
+
+  <section>
+    <h2>Payload vs. Each Competitor</h2>
+    <p>
+      The table below summarizes how Payload frames each head-to-head comparison. Note that these positions come from Payload's own compare page — see the warning callout at the bottom of this lesson.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Competitor</th>
+          <th>Type</th>
+          <th>Payload's claimed edge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>WordPress</strong></td>
+          <td>Traditional CMS</td>
+          <td>Modern TypeScript stack, headless-first architecture — no theme layer, no plugin sprawl</td>
+        </tr>
+        <tr>
+          <td><strong>Contentful</strong></td>
+          <td>SaaS Headless</td>
+          <td>Self-hosted deployment, no vendor lock-in, significantly lower total cost at scale</td>
+        </tr>
+        <tr>
+          <td><strong>Sanity</strong></td>
+          <td>SaaS Headless</td>
+          <td>No usage-based pricing, full code ownership — schema lives in your repo, not a dashboard</td>
+        </tr>
+        <tr>
+          <td><strong>Strapi</strong></td>
+          <td>Open Source</td>
+          <td>Deeper Next.js integration, cleaner TypeScript developer experience throughout the config</td>
+        </tr>
+        <tr>
+          <td><strong>Directus</strong></td>
+          <td>Open Source</td>
+          <td>More flexible field system, stronger built-in access control and authentication model</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>vs. WordPress</h3>
+    <p>
+      WordPress powers roughly 43% of the web, but its architecture was designed for server-rendered PHP pages in the early 2000s. Building a modern decoupled front end on WordPress typically means layering the WPGraphQL or REST API on top of a system that was never designed for it. Payload starts headless — the rendering layer is entirely your concern — and the entire schema is TypeScript code that lives in your repository.
+    </p>
+
+    <h3>vs. Contentful</h3>
+    <p>
+      Contentful is the dominant SaaS headless CMS in enterprise. It has a polished editor UI, a large ecosystem, and reliable uptime. The trade-off is cost at scale and dependency on Contentful's infrastructure. Large content volumes trigger expensive plan tiers, and migrating away from Contentful means re-exporting all content and rebuilding the schema elsewhere. With Payload, the schema is TypeScript config in your codebase, the data lives in your own database, and deployment is to any Node.js host.
+    </p>
+
+    <h3>vs. Sanity</h3>
+    <p>
+      Sanity is a strong competitor known for its real-time collaborative editor (Sanity Studio) and highly flexible content graph. Sanity's pricing model, however, is usage-based — API requests, bandwidth, and hosted dataset storage all carry costs that grow with traffic. Payload's argument is straightforward: all of that goes away when you self-host. Your schema is in your repo, your data is in your database, and there are no metered API calls to your content backend.
+    </p>
+
+    <h3>vs. Strapi</h3>
+    <p>
+      Strapi is the most direct competitor — both are open-source, self-hosted, and TypeScript-capable. Payload's edge lies in depth of integration. Payload can run <em>inside</em> a Next.js application as a route handler, meaning no separate service to deploy or maintain. Strapi runs as a standalone server. On TypeScript, Payload is strictly code-first — collections and fields are TypeScript objects — whereas Strapi historically mixed database-introspection and GUI-driven schema editing alongside code.
+    </p>
+
+    <h3>vs. Directus</h3>
+    <p>
+      Directus takes a database-first approach: it wraps an existing SQL database and auto-generates an admin UI and API from the schema. This makes it very accessible for teams already managing a database, but the field system and access control are less flexible for complex use cases. Payload's field system is code-defined and highly composable, and its access control is expressed as TypeScript functions rather than GUI-configured rules.
+    </p>
+  </section>
+
+  <section>
+    <h2>Payload's Core Differentiators</h2>
+    <p>
+      Across all five comparisons, several themes recur as Payload's genuine strengths:
+    </p>
+    <ul>
+      <li>
+        <strong>Developer experience:</strong> TypeScript-first from the ground up — collections, fields, hooks, access control, and custom components are all TypeScript objects or functions. Autocompletion works throughout because the config is code, not JSON or a GUI.
+      </li>
+      <li>
+        <strong>True ownership:</strong> Self-hosted on any Node.js-compatible host (Vercel, Railway, Render, bare VPS). Your content lives in your own MongoDB or PostgreSQL database. No vendor controls your data schema or migration path.
+      </li>
+      <li>
+        <strong>Next.js native:</strong> Payload can run as a Next.js App Router route handler inside your existing Next.js project — no additional service to deploy, no cross-origin API calls, no separate process to monitor. This is a meaningful operational simplification.
+      </li>
+      <li>
+        <strong>Extensible at every level:</strong> Hooks fire at the field, collection, and global level. The admin panel accepts custom React components for fields, views, and navigation. Custom REST and GraphQL endpoints are first-class configuration.
+      </li>
+      <li>
+        <strong>Active community:</strong> Growing Discord server, strong GitHub activity, and regular releases signal that the project is actively maintained and not at risk of abandonment.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Enterprise Adoption and Acquisition</h2>
+    <p>
+      Payload's growing adoption at large organizations provides some signal that it scales beyond hobby projects. Notable enterprise customers include <strong>Microsoft</strong>, <strong>ASICS</strong>, and <strong>Blue Origin</strong> — organizations with serious infrastructure requirements and content at scale.
+    </p>
+    <p>
+      Payload was recently acquired by <strong>Figma</strong>. The strategic rationale is not yet fully public, but the acquisition suggests significant confidence in Payload's technology and trajectory. For teams evaluating long-term platform risk, an acquisition by a well-capitalized company like Figma reduces the concern about the project going unmaintained — though it also introduces the possibility of future commercial pricing tiers or product direction shifts under new ownership.
+    </p>
+    <p>
+      As with any acquisition, teams doing a long-term CMS evaluation should weigh both the stability signal and the strategic uncertainty that comes with a change in ownership.
+    </p>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> Payload's competitive identity is the combination of code-first TypeScript configuration and genuine self-hosting. Every other differentiator — no vendor lock-in, no SaaS fees, full code ownership, Next.js native deployment — flows from these two commitments. When evaluating Payload against a SaaS platform, those two properties are the right place to start the comparison.
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Source bias:</strong> This lesson draws heavily from payloadcms.com/compare — Payload's own marketing material. Every comparison is framed to highlight Payload's strengths. An independent evaluation would surface real weaknesses: a steeper learning curve than GUI-driven tools, a smaller plugin ecosystem than Strapi, less enterprise support infrastructure than Contentful, and risks from the Figma acquisition. Use this comparison as a starting point, not a final verdict.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-11">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">Compared to SaaS platforms like Contentful and Sanity, what best describes Payload CMS's core competitive identity?</p>
+    <div class="quiz-options">
+      <button>A code-first TypeScript configuration combined with self-hosting gives you complete control, eliminates vendor lock-in, and removes all usage-based pricing fees.</button>
+      <button>TypeScript-first, code-based configuration with autocompletion everywhere delivers a far cleaner developer experience than any other headless CMS on the market.</button>
+      <button>A growing open-source community on GitHub and Discord ensures regular releases, active maintenance, and an ecosystem of useful integrations available.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>Without looking back at the lesson, fill in the comparison table below from memory. For each CMS, write what you recall about its pricing model, hosting options, TypeScript support, admin customizability, and learning curve.</p>
+    <textarea placeholder="Fill in the table from memory:
+
+| Dimension           | Payload        | Contentful     | Strapi         |
+|---------------------|----------------|----------------|----------------|
+| Pricing model       |                |                |                |
+| Hosting options     |                |                |                |
+| TypeScript support  |                |                |                |
+| Admin customizability |              |                |                |
+| Learning curve      |                |                |                |
+
+After filling it in, compare against the lesson. What did you get right? What surprised you?"></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0010-custom-field-components.html">&larr; Prev: Custom Field Components</a>
+    <a href="0012-when-to-choose-payload.html" class="primary">Next: When to Choose Payload &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-11', 0, 'Correct. Payload\'s core identity is the pairing of code-first TypeScript configuration with genuine self-hosting. Together these eliminate vendor lock-in and SaaS fees and keep full code ownership in your hands. Option B captures TypeScript DX — a real strength — but TypeScript alone does not distinguish Payload from Strapi or other typed open-source tools. Option C describes community health, which is a positive signal but not a competitive identity. The code-first plus self-hosted combination is what Payload consistently leads with against SaaS competitors like Contentful and Sanity.');</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 12 — When to Choose Payload — and When Not To</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 4: Industry Assessment › Lesson 12 of 12
+    </div>
+    <h1>When to Choose Payload — and When Not To</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 4 — Industry Assessment</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/compare">payloadcms.com/compare</a>
+    <p>Payload's official comparison page — where the team documents the honest trade-offs between Payload and competing CMS tools, covering framework coupling, ecosystem maturity, and target use cases.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>The Core Premise: Payload Is a Bet on Next.js</h2>
+    <p>
+      Every evaluation of Payload CMS should start with one question: <em>Are you building with Next.js?</em> Unlike Strapi, Directus, or Contentful — which are framework-agnostic and connect to any frontend via API — Payload is architecturally coupled to Next.js. The admin panel, routing, and server components are all built on top of the Next.js runtime. This is not an incidental implementation detail; it is a deliberate design choice that Payload's team has leaned into as a core value proposition.
+    </p>
+    <p>
+      The payoff for teams on Next.js is significant: your CMS logic, API routes, and frontend live in the same repo, share the same TypeScript types, and deploy as a single unit. The cost for teams not on Next.js is equally significant: you lose every benefit of that co-location and are left with a heavyweight system that requires unnecessary scaffolding just to adapt to a different stack.
+    </p>
+    <p>
+      Getting this question right saves you from investing weeks in a tool that was never a fit. The sections below walk through all material trade-offs — not just the framework coupling — so you can make an informed call.
+    </p>
+  </section>
+
+  <section>
+    <h2>Payload's Trade-offs in Detail</h2>
+    <p>
+      No CMS is uniformly superior. Here are the genuine weaknesses you should weigh before committing to Payload:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Trade-off</th>
+          <th>What it means in practice</th>
+          <th>Who it hurts most</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Next.js dependency</strong></td>
+          <td>Payload's admin UI, routing, and server components are built on Next.js internals. Teams using Remix, SvelteKit, Nuxt, or a plain Express/Node backend must fight the grain.</td>
+          <td>Any team not on Next.js</td>
+        </tr>
+        <tr>
+          <td><strong>Newer ecosystem</strong></td>
+          <td>Compared to WordPress (20+ years of plugins) or even Strapi (large community integrations), Payload has a smaller library of ready-made plugins and community extensions. Expect to build more from scratch.</td>
+          <td>Teams that rely on off-the-shelf integrations</td>
+        </tr>
+        <tr>
+          <td><strong>Admin UI theming complexity</strong></td>
+          <td>Payload's admin panel is itself a React app. Surface-level customisation (logo, colours) is straightforward, but deep visual overrides require knowledge of React component overrides and SCSS custom properties.</td>
+          <td>Teams without front-end engineering capacity</td>
+        </tr>
+        <tr>
+          <td><strong>Figma acquisition uncertainty</strong></td>
+          <td>Payload was acquired by Figma. The open-source licence has not changed, but strategic direction, feature prioritisation, and future licensing decisions are now influenced by a corporate roadmap.</td>
+          <td>Teams that require long-term open-source commitment guarantees</td>
+        </tr>
+        <tr>
+          <td><strong>Code-first learning curve</strong></td>
+          <td>Every collection, field, and access rule is defined in TypeScript config files — not through a GUI wizard. This is a superpower for developers and a blocker for non-technical content managers who need to modify the schema themselves.</td>
+          <td>Non-technical teams or agencies managing client schemas</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>When to Choose Payload</h2>
+    <p>
+      Payload is the right call when several of these conditions align:
+    </p>
+    <ul>
+      <li><strong>You are building a Next.js application</strong> and want your CMS, API, and business logic in a single deployable repo. The developer experience benefit is real and compounding — shared types mean you catch schema mismatches at compile time rather than at runtime.</li>
+      <li><strong>You need custom content workflows, complex access control, or multi-tenancy.</strong> Payload's hooks, access functions, and collection-level permissions are designed for non-trivial authorization logic. If your project has user roles, tenant isolation, or approval workflows, Payload's code-first config handles it without plugins.</li>
+      <li><strong>You want to avoid SaaS pricing as you scale.</strong> Self-hosted and open-source, Payload does not charge per seat, per API call, or per environment. For high-traffic or large-team projects, the total cost of ownership compares favourably to Contentful, Sanity, or similar hosted options.</li>
+      <li><strong>Your team is comfortable with TypeScript and wants full ownership of data and infrastructure.</strong> Payload stores data in MongoDB or Postgres — your database, your schema, your backups. There is no proprietary data layer that traps your content.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>When NOT to Choose Payload</h2>
+    <p>
+      Equally important: the scenarios where a different tool will serve you better.
+    </p>
+    <ul>
+      <li><strong>Your team is not using Next.js.</strong> This is the clearest disqualifier. If your stack is Remix, Astro, SvelteKit, or a decoupled backend, Payload's tight Next.js coupling creates friction at every layer — routing, middleware, deployment. Choose Directus or Strapi instead; both are framework-agnostic.</li>
+      <li><strong>Your team is non-technical and needs a GUI-first admin experience.</strong> Payload's schema is code. A content manager who needs to add a new field or restructure a collection will require a developer to update the config and redeploy. WordPress and even Strapi offer GUI schema editors that non-developers can operate.</li>
+      <li><strong>You need a large third-party plugin ecosystem.</strong> WordPress has over 50,000 plugins. If your requirements include a specific payment gateway, form builder, SEO suite, or CRM integration and you want a maintained plugin rather than custom code, WordPress or Strapi are far ahead.</li>
+      <li><strong>You require stable long-term open-source commitment guarantees.</strong> Directus, for example, is backed by a community-governed foundation with an explicit open-core model and no pending acquisition. Payload's Figma ownership adds a corporate variable to its roadmap that pure community-driven projects do not carry.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>The Figma Acquisition — What We Know and Don't Know</h2>
+    <p>
+      In 2024, Figma acquired Payload CMS. At the time of writing, the MIT licence remains in place and active development has continued. Figma's stated intention is to help Payload grow as an open-source project. That is the honest summary of what is publicly documented.
+    </p>
+    <p>
+      What is less certain is the medium-term roadmap. Acquisitions change incentive structures. Features that benefit enterprise Figma customers may be prioritised over community requests. Open-source licences can change in future versions — a pattern seen with projects like HashiCorp Terraform, Redis, and Elastic. None of these changes have happened with Payload, but the structural risk exists in a way that it does not for independently governed projects like Directus.
+    </p>
+    <p>
+      The practical guidance: if you are building a project with a three-to-five-year horizon, treat the acquisition as a factor to monitor rather than a current blocker. If your organisation has legal or procurement requirements around open-source licence stability, document your due diligence now and set a review checkpoint at each major Payload version release.
+    </p>
+  </section>
+
+  <section>
+    <h2>Decision Criteria at a Glance</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Favours Payload</th>
+          <th>Favours an alternative</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frontend framework?</td>
+          <td>Next.js</td>
+          <td>Remix, SvelteKit, Nuxt, or framework-agnostic</td>
+        </tr>
+        <tr>
+          <td>Team technical profile?</td>
+          <td>TypeScript developers comfortable with code-first config</td>
+          <td>Non-technical editors or GUI-first preference</td>
+        </tr>
+        <tr>
+          <td>Plugin needs?</td>
+          <td>Willing to build custom integrations</td>
+          <td>Relies on large third-party plugin library (→ WordPress)</td>
+        </tr>
+        <tr>
+          <td>Deployment model?</td>
+          <td>Self-hosted, full infrastructure ownership</td>
+          <td>Managed SaaS preferred (→ Contentful, Sanity)</td>
+        </tr>
+        <tr>
+          <td>Access control complexity?</td>
+          <td>Multi-tenant, custom roles, complex workflows</td>
+          <td>Simple public/private toggle is sufficient</td>
+        </tr>
+        <tr>
+          <td>Open-source stability priority?</td>
+          <td>Acceptable with monitoring</td>
+          <td>Hard requirement for community governance (→ Directus)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> Payload is the ideal CMS for TypeScript developers who are already committed to Next.js and want to own their data, their infrastructure, and their content model — without paying SaaS pricing at scale. It is purpose-built for that profile, and it excels there. Outside that profile, its trade-offs accumulate quickly.
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Figma acquisition watch:</strong> Unlike Directus, which is governed by a community foundation with an explicit open-core model, Payload's open-source roadmap is now shaped by a corporate acquirer. The MIT licence is intact today, but history shows that corporate ownership introduces licence-change risk over time. Teams with strict long-term open-source requirements should track Payload's major version releases and licence file changes as part of routine vendor due diligence.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-12">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">A startup team is building a content site using Remix, not Next.js. Which Payload trade-off is the most direct disqualifier?</p>
+    <div class="quiz-options">
+      <button>Payload's tight coupling to Next.js makes it a poor fit for teams not on that framework.</button>
+      <button>Payload has fewer plugins than WordPress or Strapi, limiting teams that depend on a rich ecosystem.</button>
+      <button>The Figma acquisition raises open-source licensing uncertainty, giving careful teams a reason to evaluate alternatives first.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>
+      A well-funded startup is building a marketing site that needs three things: a blog with author attribution, configurable landing pages, and a team directory. Their engineering team of two writes TypeScript and is planning to use Next.js as the frontend framework. They have a modest budget and want to avoid ongoing SaaS fees.
+    </p>
+    <p>
+      Write a one-paragraph recommendation — either for or against Payload CMS — for this specific project. Your paragraph must justify the recommendation using at least three specific trade-offs from this lesson. Do not give a generic pros/cons list; write a direct recommendation as if advising the founding team.
+    </p>
+    <textarea placeholder="Write your recommendation paragraph here. Cite specific trade-offs: Next.js fit, SaaS pricing, TypeScript ownership, ecosystem maturity, or Figma acquisition risk — as appropriate to your conclusion."></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">You have reached the end of the PayloadCMS course. Questions about any lesson? Ask your tutor — copy any concept you want to revisit or explore further.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0011-payload-vs-competition.html">&larr; Previous</a>
+    <a href="../lessons.md" class="primary">Back to Curriculum</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-12', 0, 'Correct. Payload is tightly coupled to Next.js — its admin panel, routing, and server component architecture are all built on Next.js internals. A team using Remix loses every co-location benefit that makes Payload compelling and inherits unnecessary complexity. The plugin ecosystem gap and Figma acquisition are genuine trade-offs, but they apply across all teams — the Next.js coupling is the definitive blocker when the stack does not match.');</script>
+
+</div>
+</body>
+</html>

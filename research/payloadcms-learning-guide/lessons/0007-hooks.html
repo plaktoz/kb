@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 7 — Hooks: Server-side Lifecycle Logic</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 2: Core Building Blocks › Lesson 7 of 12
+    </div>
+    <h1>Hooks — Server-side Lifecycle Logic</h1>
+    <div class="lesson-meta">
+      <span>~14 min</span>
+      <span>Module 2 — Core Building Blocks</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/docs/hooks/overview">payloadcms.com/docs/hooks/overview</a>
+    <p>Official overview of the Payload hooks system — covering hook types, execution model, context, and best practices for running server-side logic at lifecycle points.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>What Are Hooks and Why Do They Matter?</h2>
+    <p>
+      When Payload receives a request — say, a create or update operation on a collection document — it does not simply write data to the database and return. It runs through an ordered lifecycle: validation, access checks, field processing, persistence, and response. <strong>Hooks</strong> are named insertion points along that lifecycle where you can attach your own async functions.
+    </p>
+    <p>
+      A hook function receives a context object describing the operation in progress and can do anything: mutate the incoming data before it is saved, call a third-party API after a save completes, send an email when a document is published, queue a background job, or block the operation entirely with an error. Because hooks run entirely on the server, they never appear in the client bundle — sensitive credentials, database calls, and business logic all stay server-side.
+    </p>
+    <p>
+      This is the mechanism Payload provides instead of model callbacks or event emitters. If you want to stamp an audit field, synchronise data to another service, or enforce a business rule that goes beyond simple field validation, hooks are the place to do it.
+    </p>
+  </section>
+
+  <section>
+    <h2>The Four Hook Types</h2>
+    <p>
+      Payload organises hooks by scope. Each scope corresponds to a different level of your config:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Defined in</th>
+          <th>Typical use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Root Hooks</strong></td>
+          <td>The top-level <code>payload.config.ts</code></td>
+          <td>Application-wide error handling, global request instrumentation</td>
+        </tr>
+        <tr>
+          <td><strong>Collection Hooks</strong></td>
+          <td>A collection's <code>hooks</code> key</td>
+          <td>beforeChange, afterChange, beforeRead, afterRead, beforeDelete, afterDelete on that collection's documents</td>
+        </tr>
+        <tr>
+          <td><strong>Global Hooks</strong></td>
+          <td>A global's <code>hooks</code> key</td>
+          <td>Same lifecycle events as Collection Hooks but for singleton global documents</td>
+        </tr>
+        <tr>
+          <td><strong>Field Hooks</strong></td>
+          <td>An individual field's <code>hooks</code> key</td>
+          <td>Transforming or validating a single field's value in isolation</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      Collection Hooks are the most common starting point. You attach an array of functions under the hook name — <code>beforeChange</code>, <code>afterChange</code>, <code>beforeRead</code>, <code>afterRead</code> — and Payload calls them in array order at the matching lifecycle moment.
+    </p>
+  </section>
+
+  <section>
+    <h2>Execution Model: Async vs. Fire-and-Forget</h2>
+    <p>
+      Every hook function can be <code>async</code>. Whether Payload waits for it depends on whether the function returns something:
+    </p>
+    <ul>
+      <li><strong>Returns a Promise (async function with a return value):</strong> Payload awaits the Promise before moving to the next step. This is the right choice when the rest of the operation depends on what your hook does — for example, when you are stamping a field that must exist on the saved document.</li>
+      <li><strong>Returns nothing:</strong> Payload does not wait. The hook fires, the request continues immediately. This is useful for side effects that do not affect the saved data — logging to an analytics service, triggering a webhook, sending an email — where delaying the response would hurt the user experience.</li>
+    </ul>
+    <p>
+      The practical rule: if the hook modifies <code>data</code> and must have that modification reflected in the persisted document, return <code>data</code>. If the hook is purely a side effect, return nothing and let it run in the background.
+    </p>
+
+    <h3>Hook Context</h3>
+    <p>
+      Each hook receives a <strong>context object</strong> (<code>req.context</code> or the <code>context</code> argument, depending on hook type) that persists across all hooks within a single request. You can write arbitrary keys onto this object to pass information between hooks or to signal that a step has already run.
+    </p>
+    <p>
+      The most important use of context is breaking infinite loops. An <code>afterChange</code> hook that calls <code>payload.update()</code> inside itself will trigger another <code>afterChange</code>, which triggers another update, forever. Setting a flag on context and checking it at the top of the hook stops the cycle:
+    </p>
+    <pre><code>afterChange: [
+  async ({ doc, req, context }) => {
+    if (context.alreadyProcessed) return doc
+    context.alreadyProcessed = true
+    // Safely call payload.update() or do other work here
+    return doc
+  },
+],</code></pre>
+  </section>
+
+  <section>
+    <h2>Best Practices</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Practice</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Avoid expensive logic in <code>beforeRead</code> / <code>afterRead</code></td>
+          <td>These hooks run on <em>every</em> read request — list views, detail views, API calls. A slow operation here multiplies across every page load.</td>
+        </tr>
+        <tr>
+          <td>Prefer <code>beforeChange</code> / <code>afterChange</code> for heavy work</td>
+          <td>These run only on create and update operations, so expensive calls (external API, image processing) fire far less often.</td>
+        </tr>
+        <tr>
+          <td>Use Hook Context to prevent infinite loops</td>
+          <td>Any hook that triggers another Payload operation on the same collection risks recursion. A context flag stops the cycle on the second pass.</td>
+        </tr>
+        <tr>
+          <td>Offload long-running tasks to the jobs queue</td>
+          <td>The jobs queue frees up the request to continue processing without waiting. A hook can enqueue a task and return immediately.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Blocking Operations with APIError</h2>
+    <p>
+      Sometimes a hook should stop the operation entirely — for example, if a rate limit has been exceeded, if a required external service is unavailable, or if a business rule is violated that field-level validation cannot express. Throwing an <code>APIError</code> inside a hook causes Payload to abort the operation and return the error as an HTTP response with the status code you supply:
+    </p>
+    <pre><code>import { APIError } from 'payload'
+
+beforeChange: [
+  async ({ data, req }) => {
+    const allowed = await checkRateLimit(req.user.id)
+    if (!allowed) {
+      throw new APIError('Rate limit exceeded. Try again later.', 429)
+    }
+    return data
+  },
+],</code></pre>
+    <p>
+      The first argument is the human-readable message; the second is the HTTP status code. Use standard codes: 400 for bad input, 403 for access denied, 429 for rate limiting, 500 for unexpected server errors.
+    </p>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> Whether Payload waits for your hook is determined entirely by whether the hook returns a value. Return <code>data</code> (or <code>doc</code>) and Payload awaits the Promise before continuing — your mutation lands in the saved document. Return nothing and the hook runs as a fire-and-forget side effect, never blocking the response.
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Two gotchas to avoid:</strong> First, any hook that calls <code>payload.update()</code> on the same collection it belongs to will trigger itself again — always guard with a context flag (<code>if (context.alreadyProcessed) return</code>) to break the loop. Second, <code>beforeRead</code> and <code>afterRead</code> fire on every single read, including list views with dozens of documents. Putting a database query or HTTP call inside them will visibly slow every page in the admin panel.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-7">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">When an async Payload hook returns a value, how does Payload handle execution?</p>
+    <div class="quiz-options">
+      <button>Payload awaits the returned Promise before continuing the request lifecycle any further</button>
+      <button>Payload ignores the returned value and always continues immediately without any waiting</button>
+      <button>Payload logs the returned value and enqueues remaining steps to run later</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>Write a <code>beforeChange</code> hook for a <code>posts</code> collection that automatically sets a <code>publishedAt</code> field to the current ISO timestamp when <code>status</code> changes from <code>draft</code> to <code>published</code>. The hook should only stamp the date on the first transition — if the document is already published, it should leave <code>publishedAt</code> untouched.</p>
+    <p>Start from this skeleton and complete it:</p>
+    <pre><code>// collections/Posts.ts
+export const Posts = {
+  slug: 'posts',
+  hooks: {
+    beforeChange: [
+      async ({ data, originalDoc }) => {
+        // Your logic here
+
+
+
+        return data
+      },
+    ],
+  },
+  fields: [
+    { name: 'status', type: 'select', options: ['draft', 'published'] },
+    { name: 'publishedAt', type: 'date' },
+    // ... other fields
+  ],
+}</code></pre>
+    <textarea placeholder="Write your completed beforeChange hook here. Check: does it only set publishedAt once? Does it return data?"></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0006-globals.html">&larr; Prev: Globals</a>
+    <a href="0008-admin-theming.html" class="primary">Next: Admin Theming &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-7', 0, 'Correct. When a Payload hook is async and returns a value, it returns a Promise — Payload awaits that Promise before moving on to the next lifecycle step. If the hook returns nothing, Payload treats it as fire-and-forget and continues without waiting.');</script>
+
+</div>
+</body>
+</html>

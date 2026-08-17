@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pros, Cons, and When to Commit — shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">shadcn/ui Course › Module 2 — Choosing shadcn/ui › Lesson 4 of 10</p>
+      <h1>Pros, Cons, and When to Commit</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 2</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      LogRocket — shadcn/ui Adoption Guide: advantages, drawbacks, and real-world trade-offs.<br />
+      <a href="https://blog.logrocket.com/shadcn-ui-adoption-guide/" target="_blank" rel="noopener">https://blog.logrocket.com/shadcn-ui-adoption-guide/</a>
+    </div>
+
+    <!-- Intro -->
+    <p>You have seen how shadcn/ui compares to MUI, Chakra, and Ant Design on a feature matrix. Now it is time to go deeper: what does it actually feel like to <em>own</em> the code, and when does that ownership become a burden? By the end of this lesson you will be able to make a confident go / no-go call for any project type.</p>
+
+    <!-- Pros -->
+    <h2>The Advantages</h2>
+
+    <p>shadcn/ui's design choices are deliberate. Each pro below is a direct consequence of the copy-to-project model covered in Lesson 1.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Advantage</th>
+          <th>What it means in practice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Polished modern design</strong></td>
+          <td>Ships with a clean, neutral aesthetic tuned for real products — not a generic "developer" look. Ready to use from day one.</td>
+        </tr>
+        <tr>
+          <td><strong>Accessibility built in</strong></td>
+          <td>Components are WCAG-compliant with screen reader support and full keyboard navigation. You inherit this automatically — no extra effort required.</td>
+        </tr>
+        <tr>
+          <td><strong>Full code ownership</strong></td>
+          <td>Components live in your codebase. Modify them directly — delete a hover state, add a loading prop, rewrite the markup — without fighting library APIs or submitting PRs upstream.</td>
+        </tr>
+        <tr>
+          <td><strong>Tailwind-powered styling</strong></td>
+          <td>Customisation is just changing utility classes. No styled-components, no CSS-in-JS layer, no theme object to hunt through.</td>
+        </tr>
+        <tr>
+          <td><strong>Usage-dependent bundle size</strong></td>
+          <td>You only add the components you actually use. Unused components are never bundled — contrast this with tree-shaking that sometimes fails.</td>
+        </tr>
+        <tr>
+          <td><strong>AI tooling compatibility</strong></td>
+          <td>Because component code sits in your repo as plain files, LLMs can read, understand, and improve it directly. No API surface to reverse-engineer.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <p>The single biggest advantage is <strong>code ownership</strong>. Every other pro — design quality, accessibility, AI compatibility — is available in other libraries too. But the ability to open <code>components/ui/button.tsx</code> and change anything without hitting a library version wall is uniquely shadcn/ui's model.</p>
+    </div>
+
+    <!-- Cons -->
+    <h2>The Drawbacks</h2>
+
+    <p>The same ownership model that unlocks freedom also introduces real costs. None of these are dealbreakers in every situation, but they <em>are</em> genuine constraints.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Drawback</th>
+          <th>What it means in practice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Manual component installation</strong></td>
+          <td>Each component must be added individually with <code>shadcn add &lt;component&gt;</code>. There is no single <code>npm install</code> that gets you everything — you build the component library incrementally.</td>
+        </tr>
+        <tr>
+          <td><strong>Larger codebase over time</strong></td>
+          <td>Owning the code means more files to maintain. A project with 20 components has 20 source files to review on upgrades, lint, and keep consistent.</td>
+        </tr>
+        <tr>
+          <td><strong>Tailwind CSS dependency</strong></td>
+          <td>Tailwind is a hard requirement — not just recommended. Teams unfamiliar with utility-first CSS face a learning curve before they can confidently customise anything.</td>
+        </tr>
+        <tr>
+          <td><strong>No official Figma design kit</strong></td>
+          <td>Unlike MUI or Ant Design, there is no maintained Figma component library to hand off to designers. Design-developer handoff must be managed with screenshots, Storybook, or custom Figma work.</td>
+        </tr>
+        <tr>
+          <td><strong>Young ecosystem</strong></td>
+          <td>shadcn/ui is newer than MUI or Ant Design. Third-party integrations, advanced data-grid components, and community extensions are still catching up to what older libraries offer.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <p>The most common mistake: treating shadcn/ui as a drop-in replacement for MUI in an enterprise workflow that already has a Figma design system. The missing Figma kit is not a minor inconvenience — it breaks the designer-to-developer handoff that large teams depend on. Re-evaluate before migrating an existing design system.</p>
+    </div>
+
+    <!-- When to commit -->
+    <h2>When to Commit</h2>
+
+    <p>The decision comes down to two questions:</p>
+
+    <ol>
+      <li><strong>Does your team work from Figma designs?</strong> If yes — and especially if a dedicated design team produces specs — the missing Figma kit is a real friction point. Evaluate MUI or Ant Design first.</li>
+      <li><strong>Is your team comfortable with Tailwind?</strong> If no — and there is no appetite to learn — the customisation story falls apart. Tailwind is not optional.</li>
+    </ol>
+
+    <p>If both answers are "not a concern," shadcn/ui is almost certainly the right call for any project that values clean design, good accessibility defaults, and long-term flexibility over component code.</p>
+
+    <h3>Quick decision map</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Project type</th>
+          <th>Best fit</th>
+          <th>Key reason</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Solo portfolio or personal app</td>
+          <td>shadcn/ui</td>
+          <td>Full control, no team constraints, polished defaults, bundles only what you use.</td>
+        </tr>
+        <tr>
+          <td>Startup MVP (small dev team, Tailwind-comfortable)</td>
+          <td>shadcn/ui</td>
+          <td>Fast to iterate, easy to diverge from defaults later, no licensing concerns.</td>
+        </tr>
+        <tr>
+          <td>Enterprise app with dedicated design team on Figma</td>
+          <td>MUI or Ant Design</td>
+          <td>Mature Figma kits enable designer-developer handoff that shadcn/ui cannot match today.</td>
+        </tr>
+        <tr>
+          <td>App that needs advanced data grids or complex charts</td>
+          <td>Ant Design or MUI</td>
+          <td>Richer third-party integration ecosystem; shadcn/ui's younger ecosystem is still maturing.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <p>shadcn/ui is not always the best choice — but for solo developers and small teams who are comfortable with Tailwind and do not need Figma handoff, it hits a sweet spot that no other library currently matches: great defaults, complete freedom, and near-zero bundle overhead.</p>
+    </div>
+
+    <hr />
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-4">
+      <h3>Check your understanding</h3>
+      <p class="question">A project has a dedicated design team that creates detailed Figma component specs for every screen. Which shadcn/ui con matters most for this team?</p>
+      <ul class="quiz-options">
+        <li><button>No official Figma design kit makes design handoff much harder</button></li>
+        <li><button>Tailwind CSS dependency means learning a new styling approach first</button></li>
+        <li><button>Manual component installation adds friction to every initial project setup</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>Read each project description below. For each one, write: (1) which library you would choose — shadcn/ui, MUI, or Ant Design — and (2) the single most important deciding factor for that choice.</p>
+      <p><strong>Project A — Solo portfolio.</strong> You are building your personal portfolio site. You work alone, you know Tailwind, and you want it to look polished without spending weeks on CSS.</p>
+      <p><strong>Project B — Startup MVP.</strong> A three-person startup needs to ship a SaaS product in six weeks. The dev team all know Tailwind. There is no designer — the founders will review Figma mockups you create yourself.</p>
+      <p><strong>Project C — Enterprise Figma-driven app.</strong> A 40-person company with a two-person design team uses Figma as the source of truth. Designers hand off annotated component specs to developers, and the design system must stay in sync across Figma and code.</p>
+      <textarea placeholder="Project A: I would choose ___ because ...&#10;&#10;Project B: I would choose ___ because ...&#10;&#10;Project C: I would choose ___ because ..."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">Ask a tutor: "What happens to my shadcn/ui components when the library releases a breaking change?" — a great follow-up question that tests whether you have really internalised the ownership model.</p>
+
+    <!-- Nav -->
+    <nav class="lesson-nav">
+      <a href="0003-comparison.html">← Previous: shadcn/ui vs. MUI, Chakra, and Ant Design</a>
+      <a href="0005-nextjs-setup.html" class="primary">Next: First-Time Setup on Next.js →</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-4', 0, 'Correct. Design-team-heavy projects rely on Figma component specs for handoff. With no official Figma kit, designers and developers cannot share a common visual language — this friction grows with team size. Tailwind and manual installs are developer-side concerns that do not affect the design collaboration workflow.');
+  </script>
+</body>
+</html>

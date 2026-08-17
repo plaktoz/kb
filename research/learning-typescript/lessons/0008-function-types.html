@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 8: Function Types and Overloads — Learning TypeScript</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Learning TypeScript</a> ›
+      Module 3 — Advanced Type Patterns › Lesson 8 of 13
+    </div>
+    <h1>Function Types and Overloads</h1>
+    <div class="lesson-meta">
+      <span>Module 3</span>
+      <span>~20 min</span>
+      <span>call signatures · overloads · void · rest · destructuring</span>
+    </div>
+  </header>
+
+  <!-- SOURCE CARD -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://www.typescriptlang.org/docs/handbook/2/functions.html" target="_blank">
+      TypeScript Handbook — More on Functions
+    </a>
+    — implementation signature is invisible to callers; prefer union types over overloads;
+    <code>void</code> means "I don't care about the return value"; over-constraining generics is a
+    common mistake.
+  </div>
+
+  <!-- SECTION 1: Function Type Syntax -->
+  <h2>1. Function Type Syntax</h2>
+
+  <p>
+    A function type in TypeScript is written as a parameter list followed by a fat arrow and a
+    return type. This form appears in type aliases, interface properties, and inline annotations:
+  </p>
+
+  <pre><code>// Standalone type alias
+type Greet = (name: string) => string;
+
+// Inline annotation on a variable
+const greet: (name: string) => string = (name) => `Hello, ${name}`;
+
+// Optional parameter — add ? after the name
+type MaybeGreet = (name?: string) => string;
+
+// Default value — only in the implementation, not the type
+const hi = (name = "world"): string => `Hi, ${name}`;</code></pre>
+
+  <p>
+    TypeScript infers the return type from the implementation body, so you rarely need to annotate
+    it explicitly. Annotate the return type when you want to make a contract explicit or catch
+    mistakes at the declaration site rather than at every call site.
+  </p>
+
+  <!-- SECTION 2: Call Signatures -->
+  <h2>2. Call Signatures in Object Types</h2>
+
+  <p>
+    Functions are objects in JavaScript. When a function also carries properties, describe it with
+    a <em>call signature</em> inside an object type or interface:
+  </p>
+
+  <pre><code>// Object type with a call signature
+type DescribableFunction = {
+  description: string;
+  (someArg: number): boolean;  // call signature — no fat arrow, uses colon
+};
+
+function doSomething(fn: DescribableFunction) {
+  console.log(fn.description + " returned " + fn(6));
+}
+
+// Construct signature — for callable constructors
+type SomeConstructor = {
+  new (s: string): SomeObject;
+};
+
+// Some objects (like Date) can be called or constructed:
+interface CallOrConstruct {
+  (n?: number): string;
+  new (s: string): Date;
+}</code></pre>
+
+  <p>
+    The call signature syntax uses a colon (<code>:</code>) between parameters and return type,
+    not a fat arrow. This is the only place where the two forms differ.
+  </p>
+
+  <!-- SECTION 3: Overloads -->
+  <h2>3. Overloads: When One Signature Isn't Enough</h2>
+
+  <p>
+    TypeScript overloads let a single function name accept inputs of different shapes. The
+    mechanics look like this: write two or more <em>overload signatures</em> above the function
+    body, then write an <em>implementation signature</em> below them that is broad enough to handle
+    all the cases.
+  </p>
+
+  <pre><code>// Two overload signatures (visible to callers)
+function makeDate(timestamp: number): Date;
+function makeDate(m: number, d: number, y: number): Date;
+
+// Implementation signature (NOT visible to callers)
+function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+  if (d !== undefined && y !== undefined) {
+    return new Date(y, mOrTimestamp, d);
+  }
+  return new Date(mOrTimestamp);
+}
+
+makeDate(12345678);         // OK — matches first overload
+makeDate(5, 5, 5);          // OK — matches second overload
+makeDate(1, 3);             // Error — matches neither overload</code></pre>
+
+  <p>
+    The implementation signature is intentionally hidden. Even though it has optional parameters,
+    callers cannot pass two arguments and expect it to work — TypeScript checks against the overload
+    signatures, not the implementation. You must have at least two overload signatures above the
+    body; a single overload signature alone is not valid.
+  </p>
+
+  <div class="callout warning">
+    Reach for overloads only when the <em>shape</em> of parameters genuinely changes between call
+    forms — not just the types. If the differences can be expressed with a union type, that is
+    almost always cleaner. Overloads add cognitive overhead: every caller must mentally filter which
+    overload applies, and every maintainer must keep the implementation signature consistent with all
+    overload signatures above it.
+  </div>
+
+  <!-- SECTION 4: Union Types over Overloads -->
+  <h2>4. Prefer Union Types Over Overloads</h2>
+
+  <p>
+    Most real-world overload patterns are better written as a single signature with union types.
+    Compare these two versions of a <code>len</code> function:
+  </p>
+
+  <pre><code>// Overloaded version — more verbose, harder to reason about
+function len(s: string): number;
+function len(arr: any[]): number;
+function len(x: any) {
+  return x.length;
+}
+
+// Union type version — simpler, exactly as type-safe
+function len(x: string | any[]): number {
+  return x.length;
+}
+
+// The union version even accepts a union-typed argument directly:
+len(Math.random() > 0.5 ? "hello" : [1, 2, 3]);  // OK with union, Error with overloads</code></pre>
+
+  <p>
+    The union version is strictly better here: it accepts a value whose type is
+    <code>string | number[]</code> without TypeScript complaining, because the single overload
+    already covers both. The overloaded version rejects that call because neither individual
+    overload matches a union-typed argument.
+  </p>
+
+  <!-- SECTION 5: void vs undefined -->
+  <h2>5. <code>void</code> vs <code>undefined</code></h2>
+
+  <p>
+    <code>void</code> and <code>undefined</code> are different types. <code>undefined</code> is a
+    concrete value — the function literally returns <code>undefined</code>. <code>void</code> is a
+    signal to callers that the return value is not meant to be used; TypeScript enforces this at
+    the <em>call site</em>, not inside the function body.
+  </p>
+
+  <pre><code>// undefined — function must return the value undefined
+function mustReturnUndefined(): undefined {
+  return;          // OK
+  return undefined; // OK
+  return 1;        // Error
+}
+
+// void — function's return value will be ignored by caller
+function returnsVoid(): void {
+  return;          // OK
+  return undefined; // OK
+  return 1;        // Also OK — TypeScript allows this for contextual void
+}
+
+// Difference at assignment:
+const f: () => void = () => true;  // OK — return value is ignored
+const v: void = f();               // v is void — you can't use it as boolean</code></pre>
+
+  <div class="callout key">
+    <code>void</code> does not mean "returns nothing." It means "the caller is not expected to use
+    the return value." TypeScript imposes <code>void</code> as a constraint on the <em>caller</em>,
+    not on the <em>implementation</em>. A <code>() => void</code> function is free to return a
+    value; TypeScript simply prevents the caller from treating that value as meaningful.
+  </div>
+
+  <!-- SECTION 6: void and forEach -->
+  <h2>6. Why <code>void</code> Enables the <code>forEach</code> Pattern</h2>
+
+  <p>
+    The <code>Array.prototype.forEach</code> callback is typed as <code>(value: T) => void</code>.
+    This is intentional: <code>forEach</code> ignores whatever the callback returns, so the type
+    says so. The payoff is that you can pass any function as a callback, even one that returns a
+    value, without a type error:
+  </p>
+
+  <pre><code>const src = [1, 2, 3];
+const dst: number[] = [];
+
+// Array.prototype.push returns number (the new array length)
+// But forEach's callback is typed as (value: number) => void
+// So TypeScript accepts push as the callback without complaint
+src.forEach(el => dst.push(el));  // OK — push's return value is discarded
+
+// If forEach required () => undefined instead, this would be an error:
+// src.forEach(el => dst.push(el));  // Would fail: number is not assignable to undefined</code></pre>
+
+  <p>
+    This is the reason the TypeScript team chose <code>void</code> over <code>undefined</code> for
+    callback return types throughout the standard library. It keeps the type system practical:
+    existing functions with return values can be used as callbacks without wrapping them in a
+    <code>() => { fn(); }</code> shell.
+  </p>
+
+  <!-- SECTION 7: Rest Parameters and Spread -->
+  <h2>7. Rest Parameters and Spread</h2>
+
+  <p>
+    Rest parameters collect any number of arguments into an array. In TypeScript, the array type
+    must be annotated:
+  </p>
+
+  <pre><code>// Rest parameter — typed as array
+function multiply(n: number, ...m: number[]): number[] {
+  return m.map(x => n * x);
+}
+
+const result = multiply(10, 1, 2, 3);  // [10, 20, 30]</code></pre>
+
+  <p>
+    Spreading an array into a function call has a subtle gotcha. TypeScript infers
+    <code>[1, 2]</code> as <code>number[]</code>, not as the tuple <code>[number, number]</code>.
+    <code>Math.atan2</code> takes exactly two arguments, so spreading a <code>number[]</code> fails:
+  </p>
+
+  <pre><code>// Spread gotcha — inferred as number[], not [number, number]
+const args = [8, 5];
+Math.atan2(...args);  // Error: A spread argument must either have a tuple type
+                      // or be passed to a rest parameter
+
+// Fix 1: as const — infers [8, 5] as readonly [8, 5]
+const args2 = [8, 5] as const;
+Math.atan2(...args2);  // OK
+
+// Fix 2: explicit tuple annotation
+const args3: [number, number] = [8, 5];
+Math.atan2(...args3);  // OK</code></pre>
+
+  <!-- SECTION 8: Destructuring Parameters -->
+  <h2>8. Destructuring Parameters with Types</h2>
+
+  <p>
+    When a function accepts an object and you want to destructure it in the parameter list,
+    the type annotation goes after the destructuring pattern — not inside it:
+  </p>
+
+  <pre><code>// Named type — preferred for reuse
+type Point = { x: number; y: number };
+
+function printPoint({ x, y }: Point): void {
+  console.log(`(${x}, ${y})`);
+}
+
+// Inline annotation — fine for one-off use
+function sum({ a, b, c }: { a: number; b: number; c: number }): number {
+  return a + b + c;
+}
+
+// Default values work inside the destructuring pattern, as in plain JS
+function greet({ name, greeting = "Hello" }: { name: string; greeting?: string }): string {
+  return `${greeting}, ${name}`;
+}</code></pre>
+
+  <p>
+    A common mistake is putting the type annotation <em>inside</em> the braces
+    (<code>{ x: number }</code> as a destructuring default), which JavaScript interprets as
+    renaming the property to "number" rather than typing it. Always keep the type annotation
+    outside the destructuring pattern.
+  </p>
+
+  <!-- SECTION 9: Common Generic Mistakes -->
+  <h2>9. Common Mistakes with Generics in Functions</h2>
+
+  <p>Three patterns look reasonable but cause real problems:</p>
+
+  <h3>Over-constraining a generic</h3>
+  <pre><code>// Bad — extends any[] widens the return type to any[]
+function firstElement1&lt;T extends any[]&gt;(arr: T): any {
+  return arr[0];
+}
+
+// Good — T inferred exactly, return type is T
+function firstElement2&lt;T&gt;(arr: T[]): T | undefined {
+  return arr[0];
+}
+
+firstElement2(["a", "b", "c"]);  // returns string | undefined  ✓</code></pre>
+
+  <h3>Unnecessary generic (type param appears only once)</h3>
+  <pre><code>// Bad — T is not doing any work; just use the type directly
+function greet&lt;Str extends string&gt;(s: Str): void {
+  console.log("Hello, " + s);
+}
+
+// Good — no generic needed
+function greet(s: string): void {
+  console.log("Hello, " + s);
+}</code></pre>
+
+  <h3>Optional callback parameters</h3>
+  <pre><code>// Bad — marking the callback param optional causes downstream errors
+function myForEach(arr: number[], callback: (arg: number, index?: number) => void) {
+  // Inside, TypeScript thinks index might be undefined when it's always provided
+  for (let i = 0; i &lt; arr.length; i++) {
+    callback(arr[i], i);
+  }
+}
+
+// If the caller expects to use index:
+myForEach([1, 2, 3], (a, i) => {
+  console.log(i.toFixed()); // Error: i is possibly undefined — but it's always a number!
+});
+
+// Good — don't mark it optional if it will always be passed
+function myForEach(arr: number[], callback: (arg: number, index: number) => void) { ... }</code></pre>
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz-8">
+    <h3>Check your understanding</h3>
+    <p>What does annotating a function's return type as <code>void</code> actually mean?</p>
+    <div class="quiz-options">
+      <button>The function cannot return anything other than undefined value</button>
+      <button>The caller does not care about any return value</button>
+      <button>The function returns undefined and void are always identical</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- EXERCISE -->
+  <div class="exercise">
+    <h3>Exercise — Two challenges</h3>
+    <p>
+      <strong>Part 1:</strong> Rewrite <code>makeDate</code> using a union type parameter instead
+      of overloads. Remove both overload signatures and collapse the function to a single signature.<br />
+      <strong>Part 2:</strong> Fill in <code>myCallback</code> so it is typed as
+      <code>(el: number) => void</code> but its body returns the result of <code>dst.push(el)</code>
+      — a <code>number</code>. Confirm TypeScript does not complain.
+    </p>
+    <pre><code>// PART 1: Rewrite using a union type (remove the overload signatures)
+function makeDate(timestamp: number): Date;
+function makeDate(m: number, d: number, y: number): Date;
+function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+  if (d !== undefined && y !== undefined) {
+    return new Date(y, mOrTimestamp, d);
+  }
+  return new Date(mOrTimestamp);
+}
+
+// PART 2: A callback typed () => void that returns a number value
+const dst: number[] = [];
+const src = [1, 2, 3];
+const myCallback: (el: number) => void = (el) => {
+  // your code here
+};
+src.forEach(myCallback);</code></pre>
+    <textarea spellcheck="false" placeholder="// Part 1 — single-signature makeDate with union type:
+function makeDate(mOrTimestamp: number | ..., d?: number, y?: number): Date { ... }
+
+// Part 2 — fill in the body of myCallback:
+const myCallback: (el: number) => void = (el) => {
+  return dst.push(el);  // returns number; TypeScript is fine with it
+};"></textarea>
+  </div>
+
+  <!-- TUTOR PROMPT -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> "Why does <code>Array.prototype.forEach</code> use
+    <code>void</code> instead of <code>undefined</code> for its callback return type? And if I have
+    a function that overloads on two argument <em>counts</em>, when is an overload genuinely better
+    than a union type with optional parameters?"
+  </div>
+
+  <!-- NAV -->
+  <nav class="lesson-nav">
+    <a href="0007-narrowing.html">&larr; Lesson 7: Narrowing</a>
+    <a href="0009-types-from-types.html" class="primary">Lesson 9: Types from Types &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-8',
+    1,
+    'Correct. void is a signal to the caller that the return value will not be used — it is not a constraint on what the function can return. A () => void function is allowed to return a value; TypeScript simply prevents the caller from treating that value as meaningful. This is why forEach accepts callbacks like el => dst.push(el), even though push returns a number.'
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 3 — Installation &amp; Project Setup | PayloadCMS Learning Guide</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        PayloadCMS &rsaquo; Module 1: Foundations &rsaquo; Lesson 3 of 12
+      </div>
+      <h1>Installation &amp; Project Setup</h1>
+      <div class="lesson-meta">
+        <span>&#x23F1; ~14 min</span>
+        <span>Module 1 &mdash; Foundations</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <div class="source-card-label">Primary Source</div>
+      <a href="https://payloadcms.com/docs/getting-started/installation" target="_blank" rel="noopener">
+        https://payloadcms.com/docs/getting-started/installation
+      </a>
+    </div>
+
+    <h2>Prerequisites</h2>
+    <p>Before you begin, confirm your environment meets these requirements:</p>
+    <ul>
+      <li><strong>Node.js 20.9.0 or higher.</strong> Payload requires this minimum for native ESM support and the built-in fetch API.</li>
+      <li><strong>pnpm recommended.</strong> All official Payload documentation and templates use pnpm. Yarn 1.x (classic) is explicitly unsupported.</li>
+      <li><strong>A compatible Next.js version.</strong> Supported releases are 15.2.x, 15.3.x, 15.4.x, and 16.2.6+. Avoid patch releases that fall outside these ranges.</li>
+      <li><strong>A database.</strong> Choose one: MongoDB, PostgreSQL, or SQLite. Each is served by a dedicated adapter package you install separately.</li>
+    </ul>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning</div>
+      <p><strong>Yarn 1.x is not supported.</strong> If your project currently uses Yarn classic, migrate to pnpm, npm, or Yarn 2+ (Berry) before adding Payload. Installing with Yarn 1.x produces dependency resolution errors that cannot be easily worked around. Also note that <code>next.config.js</code> must use <strong>ESM syntax</strong> — using CommonJS <code>require()</code> for the <code>withPayload</code> import will cause the build to fail.</p>
+    </div>
+
+    <h2>Two Ways to Get Started</h2>
+    <p>Payload offers two installation paths: scaffold a brand-new project, or manually integrate Payload into an existing Next.js application.</p>
+
+    <h3>Option 1 &mdash; Quickstart (New Project)</h3>
+    <p>Run the official scaffold CLI and follow the interactive prompts. This is the fastest route and handles all configuration for you:</p>
+    <pre><code>npx create-payload-app</code></pre>
+    <p>The wizard asks for a project name, a starter template, and a database choice. When it finishes you have a fully wired project ready to run with <code>pnpm dev</code>. Use this for any greenfield project where you are not inheriting existing Next.js code.</p>
+
+    <h3>Option 2 &mdash; Manual Installation (Existing Next.js App)</h3>
+    <p>If you already have a Next.js project and want to layer Payload in alongside your existing code, follow the seven manual steps below. The steps are ordered — do not skip ahead, because each step depends on the previous one being in place.</p>
+
+    <h2>Manual Installation &mdash; Step by Step</h2>
+
+    <h3>Step 1 &mdash; Install core packages</h3>
+    <p>Add the two required packages. All optional extras can be added at any time and do not need to be present for the first boot.</p>
+    <pre><code># Required
+pnpm i payload @payloadcms/next
+
+# Optional extras (add as needed)
+pnpm i @payloadcms/richtext-lexical   # Lexical rich text editor
+pnpm i sharp                           # Image resizing and optimisation
+pnpm i graphql                         # Enables the GraphQL API endpoint</code></pre>
+
+    <h3>Step 2 &mdash; Install a database adapter</h3>
+    <p>Pick exactly one adapter that matches your database. The adapter manages schema migrations, query execution, and the connection lifecycle for its target database engine.</p>
+    <pre><code>pnpm i @payloadcms/db-mongodb   # MongoDB via Mongoose
+pnpm i @payloadcms/db-postgres  # PostgreSQL via Drizzle ORM
+pnpm i @payloadcms/db-sqlite    # SQLite via Drizzle ORM</code></pre>
+    <p>SQLite with a local file is the simplest choice for getting started — it requires no external database process and no connection string beyond a file path.</p>
+
+    <h3>Step 3 &mdash; Add the Payload app directory</h3>
+    <p>Create the directory <code>/app/(payload)/</code> inside your Next.js project and copy the route handler files from the Blank Template on GitHub. These files wire up the Admin UI pages and the Payload REST/GraphQL API handlers inside the Next.js App Router.</p>
+    <p>The parenthetical <code>(payload)</code> route group keeps Payload's internal pages isolated from your own application routes, so there are no URL or layout conflicts.</p>
+
+    <h3>Step 4 &mdash; Wrap Next.js config with <code>withPayload</code></h3>
+    <p>Edit <code>next.config.js</code> (or <code>next.config.mjs</code>) to import <code>withPayload</code> from <code>@payloadcms/next/withPayload</code> and wrap your existing config object. Use ESM <code>import</code> and <code>export default</code> &mdash; not CommonJS:</p>
+    <pre><code>import { withPayload } from '@payloadcms/next/withPayload'
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {}
+
+export default withPayload(nextConfig)</code></pre>
+    <p>The <code>withPayload</code> wrapper patches the Next.js build pipeline so Payload's internal packages are compiled and bundled correctly. Without it, the Admin UI will not load and you will see module resolution errors at build time.</p>
+
+    <h3>Step 5 &mdash; Create <code>payload.config.ts</code></h3>
+    <p>Create this file at the project root &mdash; the same directory as your <code>package.json</code>. It is the single source of truth for your entire Payload application. You define the editor, your collections, the database adapter, and the secret key here. Payload derives the Admin UI, REST API, GraphQL API, and TypeScript types automatically from this file.</p>
+    <pre><code>import { buildConfig } from 'payload'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+
+export default buildConfig({
+  editor: lexicalEditor(),
+  collections: [],
+  db: sqliteAdapter({
+    client: { url: 'file:./payload.db' },
+  }),
+  secret: process.env.PAYLOAD_SECRET || 'your-secret',
+})</code></pre>
+    <p>This minimal config is enough to start the dev server and reach the admin login page. You will add collections in the next lesson.</p>
+
+    <h3>Step 6 &mdash; Add the <code>@payload-config</code> alias to <code>tsconfig.json</code></h3>
+    <p>Payload's internal packages import your config file using the fixed alias <code>@payload-config</code> rather than a relative path. Add the alias under <code>compilerOptions.paths</code>:</p>
+    <pre><code>{
+  "compilerOptions": {
+    "paths": {
+      "@payload-config": ["./payload.config.ts"]
+    }
+  }
+}</code></pre>
+    <p>Without this alias, TypeScript compilation fails and Payload's runtime cannot locate the config. This entry is mandatory — it is not optional TypeScript hygiene.</p>
+
+    <h3>Step 7 &mdash; Start the dev server</h3>
+    <p>Run the Next.js development server and open the admin panel in your browser:</p>
+    <pre><code>pnpm dev</code></pre>
+    <p>Navigate to <a href="http://localhost:3000/admin" target="_blank" rel="noopener"><code>http://localhost:3000/admin</code></a>. On first load, Payload prompts you to create the initial admin user. Once you log in, you will see the empty admin dashboard — ready for collections.</p>
+
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p><strong><code>payload.config.ts</code> is the center of gravity of your entire application.</strong> The Admin UI, REST API, GraphQL API, database schema, and TypeScript types are all derived automatically from what you declare in this one file. Every future customization — adding collections, enabling authentication, configuring uploads, registering custom components — flows through <code>payload.config.ts</code>. Understanding that this single file drives everything is the most important mental model in Payload.</p>
+    </div>
+
+    <h2>Installation at a Glance</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Step</th>
+          <th>What You Do</th>
+          <th>Why It Is Needed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>pnpm i payload @payloadcms/next</code></td>
+          <td>Core runtime and Next.js integration layer</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Install one database adapter package</td>
+          <td>Payload needs a DB driver to read and write documents</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Add <code>/app/(payload)/</code> route handlers</td>
+          <td>Wires Admin UI and API routes into the App Router</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Wrap <code>next.config.js</code> with <code>withPayload</code></td>
+          <td>Patches the Next.js build for Payload compatibility</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Create <code>payload.config.ts</code> at project root</td>
+          <td>Defines collections, DB adapter, editor, and secret</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Add <code>@payload-config</code> alias to <code>tsconfig.json</code></td>
+          <td>Lets Payload internals resolve the config file path</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Run <code>pnpm dev</code>, visit <code>/admin</code></td>
+          <td>Confirms the full setup is working end to end</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quiz" id="quiz-3">
+      <h3>Knowledge Check</h3>
+      <p class="quiz-question">What role does <code>payload.config.ts</code> play in a Payload project?</p>
+      <div class="quiz-options">
+        <button>It defines your collections, database adapter, editor, and secret — Payload generates the Admin UI and API from this single file</button>
+        <button>It configures your Next.js routes and middleware — Payload reads it at build time to inject API endpoints and admin routes</button>
+        <button>It holds your database credentials and environment config — Payload reads this file at runtime instead of pulling data from <code>.env</code></button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <p>Without looking back at the lesson, write the five manual installation checkpoints in order from memory. Cover: (1) what packages to install, (2) what directory to add, (3) what to do in <code>next.config.js</code>, (4) what file to create at the project root, and (5) what to add to <code>tsconfig.json</code>.</p>
+      <p><em>Focus on the conceptual "what and why" for each step rather than exact command syntax. When you are done, compare against the lesson table above.</em></p>
+      <textarea placeholder="1. Install packages: ...&#10;2. Add directory: ...&#10;3. In next.config.js: ...&#10;4. Create at root: ...&#10;5. In tsconfig.json: ..."></textarea>
+    </div>
+
+    <div class="tutor-prompt">
+      After completing the exercise, ask your tutor: <em>"What exactly does withPayload patch inside the Next.js build pipeline, and what error would I see if I forgot to add it?"</em> Understanding the build-time plumbing will help you diagnose module resolution failures if you ever set up Payload in a non-standard monorepo configuration.
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0002-payload-2-modern-features.html">&larr; Prev: Payload 2.0 &mdash; Modern Features</a>
+      <a href="0004-collections.html" class="primary">Next: Collections &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-3',
+      0,
+      'Correct. payload.config.ts is the central source of truth — Payload derives the full Admin UI, REST endpoints, GraphQL API, database schema, and TypeScript types automatically from the collections, fields, database adapter, and editor you declare in this one file.'
+    );
+  </script>
+</body>
+</html>

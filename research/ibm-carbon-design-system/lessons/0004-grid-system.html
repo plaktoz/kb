@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The 2x Grid System — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> &rsaquo;
+        Module 2 — Layout, Motion, and Accessibility &rsaquo;
+        Lesson 4 of 12
+      </div>
+      <h1>The 2x Grid System</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — Layout, Motion, and Accessibility</span>
+        <span>Lesson 4 of 12</span>
+        <span>~14 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">IBM Carbon Design System — 2x Grid Documentation</div>
+      <div class="source-result">
+        Covers the 8px mini unit foundation, breakpoint definitions and column counts, fluid vs. fixed vs. hybrid grid models, React <code>&lt;Grid&gt;</code> and <code>&lt;Column&gt;</code> usage, and recommended aspect ratios for maintaining visual unity across products.
+      </div>
+    </div>
+
+    <!-- Section 1: 8px mini unit -->
+    <h2>The 8px mini unit foundation</h2>
+
+    <p>
+      Everything in Carbon's layout system traces back to a single, remarkably simple rule: measure in multiples of 8. The <strong>mini unit</strong> is 8px, and it serves as the geometric atom from which all spacing, sizing, and grid structures are derived. Margins, padding, component heights, icon sizes, and column widths are all defined as integer multiples of this base unit. The result is a layout system where every element is, by definition, harmonically proportioned with every other element.
+    </p>
+
+    <p>
+      The choice of 8px is not arbitrary. The number 8 divides cleanly by 2 four times — yielding 4, 2, and 1 — and multiplies easily into 16, 32, 64, and 128. This property is the origin of the name <em>2x Grid</em>: the system is built on the principle of dividing or multiplying by two. When you need finer precision, Carbon also defines a 4px micro unit for inline spacing within text and icon contexts, but the 8px unit governs all structural layout decisions.
+    </p>
+
+    <p>
+      In practice, working with mini units means you rarely calculate spacing from scratch. You pick from a well-defined scale — 8, 16, 24, 32, 40, 48, 56, 64, 72, 80px — and the system guarantees that combinations of those values will align on a shared grid. This eliminates a broad category of visual inconsistency that arises in systems where designers and engineers use arbitrary pixel values ("just add 12px here, 20px there"). The mini unit is Carbon's answer to that chaos: a single constraint that, once internalized, makes layout decisions fast and predictable.
+    </p>
+
+    <!-- Section 2: Breakpoints and columns -->
+    <h2>Breakpoints and the column system</h2>
+
+    <p>
+      Carbon defines five named breakpoints, each associated with a minimum viewport width, a column count, a margin size, and a padding value. The column count doubles from 4 to 8 to 16 as the viewport grows, following the same doubling principle that underlies the mini unit. Understanding these breakpoints — and knowing when each activates — is the foundation of writing responsive Carbon layouts.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Breakpoint</th>
+          <th>Min Width</th>
+          <th>Columns</th>
+          <th>Margin</th>
+          <th>Padding</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Small</strong> (<code>sm</code>)</td>
+          <td>320px</td>
+          <td>4</td>
+          <td>0</td>
+          <td>16px</td>
+        </tr>
+        <tr>
+          <td><strong>Medium</strong> (<code>md</code>)</td>
+          <td>672px</td>
+          <td>8</td>
+          <td>16px</td>
+          <td>16px</td>
+        </tr>
+        <tr>
+          <td><strong>Large</strong> (<code>lg</code>)</td>
+          <td>1056px</td>
+          <td>16</td>
+          <td>16px</td>
+          <td>16px</td>
+        </tr>
+        <tr>
+          <td><strong>X-Large</strong> (<code>xlg</code>)</td>
+          <td>1312px</td>
+          <td>16</td>
+          <td>16px</td>
+          <td>16px</td>
+        </tr>
+        <tr>
+          <td><strong>Max</strong> (<code>max</code>)</td>
+          <td>1584px</td>
+          <td>16</td>
+          <td>24px</td>
+          <td>16px</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Several things are worth observing in this table. First, padding is consistently 16px (two mini units) across all five breakpoints — this gives content a reliable breathing room regardless of screen size. Second, gutters between columns are 32px total, formed by 16px of padding on each side of the column boundary. Third, the margin is 0 at the Small breakpoint, meaning content runs edge-to-edge on the smallest screens, while it gains a 16px margin at Medium and a wider 24px margin at Max.
+    </p>
+
+    <p>
+      The jump from 8 columns to 16 columns between Medium (672px) and Large (1056px) is the most consequential breakpoint transition in most Carbon UIs. At that threshold, designs gain the flexibility to express complex multi-column layouts — three-up card grids, sidebar-plus-content compositions, and rich data tables all become natural. Many Carbon components define their own responsive behavior keyed to this same lg breakpoint, making it the de facto "desktop" dividing line in the system.
+    </p>
+
+    <!-- Section 3: Grid types -->
+    <h2>Fluid, fixed, and hybrid grids — when to use each</h2>
+
+    <p>
+      Carbon's 2x Grid supports three distinct operating modes, each suited to different content types and design intentions. Choosing the right mode is one of the more consequential architectural decisions you'll make when starting a new layout, and getting it wrong can produce layouts that look acceptable in isolation but feel inconsistent when placed next to other screens in the same product.
+    </p>
+
+    <h3>Fluid grids</h3>
+
+    <p>
+      In a <strong>fluid grid</strong>, columns divide the available space proportionally. The column count stays fixed within a breakpoint, but the actual width of each column scales continuously as the viewport resizes. A 16-column fluid grid at 1200px wide has columns roughly 56px wide; the same grid at 1400px has columns roughly 72px wide — no layout shift occurs, just a smooth expansion.
+    </p>
+
+    <p>
+      Fluid grids are the default and most common choice in Carbon. They are ideal for editorial content, dashboards, hero images, video embeds, and data visualizations — anything that benefits from using all available horizontal space. The key advantage is that content naturally fills the screen without awkward gaps or jarring snaps at arbitrary widths.
+    </p>
+
+    <h3>Fixed grids</h3>
+
+    <p>
+      In a <strong>fixed grid</strong>, column widths are set to specific values from the sizing scale (multiples of 8px, ranging from 8px at 1x to 80px at 10x). Rather than stretching to fill space, columns tile at their defined size, and the column count emerges organically from how many fit at a given viewport width. Fixed grids are useful when you're laying out content that has an inherently optimal display width — for instance, a form where input fields should never exceed 320px, or a compact sidebar with fixed-width navigation items.
+    </p>
+
+    <h3>Hybrid grids</h3>
+
+    <p>
+      <strong>Hybrid grids</strong> combine both approaches, applying fluid and fixed modes to different regions of the same layout. A common pattern is a fixed-width navigation sidebar alongside a fluid main content area: the sidebar retains its fixed unit size while the content zone scales freely. Hybrid grids require more deliberate planning but unlock the most sophisticated layouts. An important constraint to keep in mind: <em>margins remain fixed within a breakpoint even when columns are fluid</em>. The margin is a property of the breakpoint, not of the grid mode, so it provides a stable anchor point regardless of which grid type you choose.
+    </p>
+
+    <!-- Section 4: React Grid and Column -->
+    <h2>Using Grid and Column in React</h2>
+
+    <p>
+      Carbon's React package exposes two primary layout primitives: <code>&lt;Grid&gt;</code> and <code>&lt;Column&gt;</code>. The <code>&lt;Grid&gt;</code> component establishes the grid context — it renders a row container with the appropriate gutter and margin behavior for the current breakpoint. The <code>&lt;Column&gt;</code> component specifies how many columns a child element should span at each breakpoint, using the <code>lg</code>, <code>md</code>, and <code>sm</code> props.
+    </p>
+
+    <p>
+      The values you pass to those props refer to column-span counts, not pixel widths. At the Large breakpoint, <code>lg={8}</code> means "span 8 of the 16 available columns" — half the container. At Medium, <code>md={4}</code> means "span 4 of the 8 available columns" — also half. This symmetry makes it straightforward to build layouts that maintain proportional relationships across breakpoints while adapting to available space.
+    </p>
+
+    <p>
+      Here is a full-width column that spans the entire grid at every breakpoint:
+    </p>
+
+    <pre><code>&lt;Grid fullWidth&gt;
+  &lt;Column lg={16} md={8} sm={4}&gt;Full width content&lt;/Column&gt;
+&lt;/Grid&gt;</code></pre>
+
+    <p>
+      The <code>fullWidth</code> prop on <code>&lt;Grid&gt;</code> removes the outer margin, allowing the grid to extend to the viewport edges. This is commonly used for hero banners, full-bleed images, and page-level wrappers where you want content to run edge-to-edge.
+    </p>
+
+    <p>
+      Two equal-width columns side by side at the Large breakpoint, collapsing to stacked halves at Medium and full-width at Small:
+    </p>
+
+    <pre><code>&lt;Grid&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Left content&lt;/Column&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Right content&lt;/Column&gt;
+&lt;/Grid&gt;</code></pre>
+
+    <p>
+      Notice that both columns declare <code>sm={4}</code>, which equals the full Small column count of 4. On a small screen, each column occupies the full width and stacks vertically — this is the expected and desirable behavior for mobile-first layouts.
+    </p>
+
+    <p>
+      For more advanced placement, the <code>Column</code> component accepts an object form that combines a span with an offset. This is useful when you want to indent content or center a narrower column within a wider grid:
+    </p>
+
+    <pre><code>&lt;Column lg={{ span: 8, offset: 7 }}&gt;Offset content&lt;/Column&gt;</code></pre>
+
+    <p>
+      An offset of 7 combined with a span of 8 places the column in the center of a 16-column grid (with one empty column on each side, since 7 + 8 + 1 = 16). Offsets follow the same 0-to-column-count range as spans and obey the same breakpoint logic.
+    </p>
+
+    <!-- Section 5: Aspect ratios -->
+    <h2>Aspect ratios</h2>
+
+    <p>
+      Carbon recommends a specific set of aspect ratios for use across products: <strong>1:1, 2:1, 2:3, 3:2, 4:3, and 16:9</strong>. These are not arbitrary choices — each ratio appears naturally in common content types and has a long typographic or cinematic history. By restricting product teams to this palette, Carbon ensures that images, video containers, card thumbnails, and promotional tiles share a visual vocabulary that reads as coherent even when mixed on the same page.
+    </p>
+
+    <p>
+      The 1:1 (square) ratio is a natural fit for avatar images, icon containers, and profile cards. The 16:9 ratio is the standard for video embeds and cinematic hero imagery. The 4:3 ratio suits traditional photographs and data visualization panels. The 2:1 ratio is commonly used for wide promotional banners. The 2:3 and 3:2 ratios work well for portrait and landscape editorial photography, respectively.
+    </p>
+
+    <p>
+      When you apply these ratios consistently, a page composed of varied content types — a video hero, a grid of product cards, a featured article with a landscape photo — achieves a sense of intentional design even before any color or typography is applied. Aspect ratio discipline is one of those "invisible" constraints that experienced designers immediately notice when it's missing and never think about when it's working correctly.
+    </p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>
+        The 2x Grid is not just a column system — it is a complete spatial philosophy. Every measurement in Carbon, from the smallest icon padding to the widest page margin, is a multiple of 8px. When you internalize this, layout decisions stop being guesswork: you are always choosing from a finite, harmonically consistent set of values. The column props <code>lg</code>, <code>md</code>, and <code>sm</code> map directly to the column counts at each breakpoint (16, 8, 4), so <code>lg={16}</code>, <code>md={8}</code>, and <code>sm={4}</code> always mean "full width" — a useful mnemonic to keep in mind as you build layouts.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common Pitfall</div>
+      <p>
+        A frequent mistake when starting with Carbon's grid is specifying column span values that don't add up to the available column count at a given breakpoint. For example, placing two <code>&lt;Column md={5}&gt;</code> elements in a single row produces a total of 10 columns at the Medium breakpoint — which only has 8. Carbon does not throw an error; it simply wraps the overflow column onto the next row, producing an unexpected single-column layout on medium screens. Always verify that the sum of your <code>md</code> values equals 8, your <code>lg</code> values equal 16, and your <code>sm</code> values equal 4 (or less, if intentional). Additionally, avoid mixing fluid and fixed grid modes in adjacent nested grids without a clear plan — the margin behavior differs between modes, and mismatched assumptions create subtle misalignment that is hard to debug later.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-4">
+      <div class="quiz-label">Knowledge Check</div>
+      <h3>How many columns does Carbon's grid have at the Large breakpoint (1056px)?</h3>
+      <div class="quiz-options">
+        <button>Sixteen columns at large</button>
+        <button>Eight columns at large</button>
+        <button>Four columns at large</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Design a three-section landing page layout</h3>
+      <p>
+        Describe a three-section landing page layout: (1) a full-width hero banner, (2) a two-column feature section, (3) a full-width footer. For each section, write the <code>lg</code>, <code>md</code>, and <code>sm</code> Column props you would use in JSX.
+      </p>
+      <textarea placeholder="Example:
+// Hero banner — full width at all breakpoints
+&lt;Grid fullWidth&gt;
+  &lt;Column lg={16} md={8} sm={4}&gt;Hero&lt;/Column&gt;
+&lt;/Grid&gt;
+
+// Feature section — two equal columns at large, stacked at small
+&lt;Grid&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Feature A&lt;/Column&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Feature B&lt;/Column&gt;
+&lt;/Grid&gt;
+
+// Footer — full width at all breakpoints
+&lt;Grid fullWidth&gt;
+  &lt;Column lg={16} md={8} sm={4}&gt;Footer&lt;/Column&gt;
+&lt;/Grid&gt;"></textarea>
+    </div>
+
+    <!-- Lesson navigation -->
+    <nav class="lesson-nav">
+      <a href="0003-typography-spacing.html">&larr; Lesson 3: Typography &amp; Spacing</a>
+      <a href="0005-motion-design.html" class="primary">Lesson 5: Motion Design &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your AI tutor: "Walk me through how Carbon's column system changes from a 320px phone to a 1200px desktop," or "Show me how to build a three-column card grid in Carbon React that collapses to a single column on mobile." You can also ask for clarification on offset syntax or when to choose a fluid vs. fixed grid for a specific use case.
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-4', 0, 'The Large breakpoint (1056px and above) uses 16 columns. Small uses 4, Medium uses 8.');
+  </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buttons and Controls — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* Lesson-local overrides */
+    .variant-demo {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin: 16px 0 24px;
+    }
+    .btn-demo {
+      font-family: sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: none;
+      cursor: default;
+      border-radius: 0;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary   { background: #0f62fe; color: #fff; }
+    .btn-secondary { background: #fff; color: #0f62fe; border: 2px solid #0f62fe; }
+    .btn-tertiary  { background: transparent; color: #0f62fe; border: 1px solid #0f62fe; }
+    .btn-ghost     { background: transparent; color: #0f62fe; }
+    .btn-danger    { background: #da1e28; color: #fff; }
+    .size-table td:first-child { font-family: var(--font-mono); font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> › Module 3 — Component Library in Depth › Lesson 8
+      </div>
+      <h1>Buttons and Controls</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 3 — Component Library in Depth · Lesson 8 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">Carbon Design System — "Button" component documentation (carbondesignsystem.com)</div>
+      <div class="source-result">Key result: Carbon defines five button variants arranged in a strict emphasis hierarchy. Every layout should contain at most one primary button; remaining calls to action descend in emphasis through secondary, tertiary, ghost, and danger variants. Labels follow a verb + noun formula, icons appear to the right of labels, and alignment shifts between left (full-page) and right (wizard/dialog) depending on context.</div>
+    </div>
+
+    <!-- Section 1: Five variants and their hierarchy -->
+    <h2>The five variants and their emphasis hierarchy</h2>
+
+    <p>Carbon's button system is built around a single organizing idea: every button on a screen occupies a specific position in a visual hierarchy, and that position should be communicated through the button's visual weight. There are five variants, each carrying a distinct level of emphasis. Together they form a vocabulary for expressing how important an action is relative to every other action on the same screen.</p>
+
+    <p>The hierarchy runs from most to least prominent: <strong>Primary</strong> → <strong>Secondary</strong> → <strong>Tertiary</strong> → <strong>Ghost</strong> → <strong>Danger</strong>. Danger sits outside the main descending hierarchy because its emphasis is specialized — it signals destructive intent rather than general importance. A danger button should be visually unmistakable, but it should never be confused with the principal call to action.</p>
+
+    <p>Understanding the variants is only half the job. The other half is understanding how to use them together. Carbon makes an important observation: "You don't necessarily need to use the buttons in the order that their labels imply." This means you should choose variants based on the visual hierarchy you need for the screen, not based on a mechanical mapping of variant name to action name. A "Back" button in a wizard uses secondary styling not because back is inherently secondary, but because the primary action in that context is "Next" or "Submit."</p>
+
+    <!-- Variant demo -->
+    <div class="variant-demo">
+      <button class="btn-demo btn-primary" tabindex="-1">Primary</button>
+      <button class="btn-demo btn-secondary" tabindex="-1">Secondary</button>
+      <button class="btn-demo btn-tertiary" tabindex="-1">Tertiary</button>
+      <button class="btn-demo btn-ghost" tabindex="-1">Ghost</button>
+      <button class="btn-demo btn-danger" tabindex="-1">Danger</button>
+    </div>
+
+    <!-- Variant table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Emphasis</th>
+          <th>Intended purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary</strong></td>
+          <td>Highest</td>
+          <td>The principal call to action on a screen — use only once per page</td>
+        </tr>
+        <tr>
+          <td><strong>Secondary</strong></td>
+          <td>High</td>
+          <td>Negative actions such as Cancel or Back; always paired with a primary button</td>
+        </tr>
+        <tr>
+          <td><strong>Tertiary</strong></td>
+          <td>Medium</td>
+          <td>Less prominent, independent, or grouped actions that complement the primary</td>
+        </tr>
+        <tr>
+          <td><strong>Ghost</strong></td>
+          <td>Low</td>
+          <td>Least emphasis; supplementary actions, cancel in informal contexts, or inline actions within dense layouts</td>
+        </tr>
+        <tr>
+          <td><strong>Danger</strong></td>
+          <td>Specialized</td>
+          <td>Destructive actions only — Delete, Remove, Stop; signals irreversibility, not general importance</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 2: One primary per screen -->
+    <h2>The one-primary-per-screen rule and why it matters</h2>
+
+    <p>Carbon is explicit: each page should have <strong>only one primary button</strong>. All remaining calls to action should use lower-emphasis variants. This constraint is not arbitrary — it flows directly from how visual attention works. When a user lands on a screen, their eye is drawn to the most visually prominent element. A primary button's high-contrast filled style is designed to capture that attention and guide the user toward the single most important action available. If two or more buttons compete for that top position, the hierarchy collapses and users must read every button label to determine what the screen wants them to do.</p>
+
+    <p>In practical terms, the rule forces a design decision that is often uncomfortable but always clarifying: what is the <em>one thing</em> this screen exists to accomplish? A form submission screen exists to submit the form — that is the primary action. A confirmation dialog exists to confirm or cancel — the destructive confirmation is primary (and in that specific case, it may be styled as a danger button that carries primary weight within the dialog). A search results page may exist to let users refine their search, open a result, or export — but only one of those can be the top-level intent, and the button hierarchy makes that intent visible without a word of instruction.</p>
+
+    <p>Violating the one-primary rule produces a predictable failure mode: the user pauses, scans, and hesitates. Every additional primary button increases the cognitive cost of using the screen. In user research, screens with multiple primary buttons consistently generate more errors and longer task completion times than equivalent screens with a clear hierarchy. The rule is not a stylistic preference — it is a usability guarantee that Carbon's component constraints help enforce.</p>
+
+    <!-- Section 3: Label rules -->
+    <h2>Label rules: verb + noun, sentence case, no truncation</h2>
+
+    <p>A button label is a promise. It tells the user what will happen the moment they click. Carbon's labeling guidance is designed to make that promise as precise and readable as possible. The core formula is <strong>verb + noun</strong>: pair an action word with the object of that action. "Save file." "Delete record." "Submit form." "Add user." This pattern works because it leaves no ambiguity about what the button does — the verb describes the action and the noun specifies what is affected. Avoid noun-only labels ("Settings", "Profile") that describe destinations rather than actions; those belong on links, not buttons.</p>
+
+    <p>Labels must be written in <strong>sentence case</strong> — capitalize only the first word and proper nouns. "Save changes" is correct; "Save Changes" is title case and incorrect; "SAVE CHANGES" is all-caps and doubly incorrect. All-caps labels are particularly problematic: they reduce readability (words are harder to distinguish), they can inadvertently read as shouting, and they force users to parse individual letters rather than whole-word shapes. Carbon's sentence case requirement is consistent with its broader typography guidance and with WCAG readability best practices.</p>
+
+    <p>Labels within the button are always <strong>left-aligned</strong> inside the button container. When a label is too long to fit on one line, it should <strong>wrap</strong> rather than truncate. Truncation with an ellipsis is never acceptable for button labels — it hides information that users need to make an informed click decision. If a label regularly overflows the available space, that is a signal to shorten it (can you make the verb + noun more concise?) or to reconsider the button's size tier rather than to hide the text. Limit button groups to 2–3 actions; if you have more than three actions to present, use a menu button (an overflow control that reveals additional options) rather than proliferating individual buttons.</p>
+
+    <!-- Section 4: Icon placement and icon-only requirements -->
+    <h2>Icon placement and icon-only button requirements</h2>
+
+    <p>Icons in Carbon buttons always appear to the <strong>right</strong> of the label text. This is the opposite of many other design systems and is worth memorizing explicitly. The rationale is rooted in reading direction: in left-to-right interfaces, the eye reads the label first and then encounters the icon as a reinforcing visual. Standard buttons use <strong>16px icons</strong>; large expressive buttons use <strong>20px icons</strong>. Do not mix icon sizes within a button group, and do not use non-standard sizes that fall outside these two values.</p>
+
+    <p>Icon-only buttons — buttons that display an icon with no visible label text — are permitted in Carbon but carry a strict requirement: they <strong>must always have a tooltip</strong>. The tooltip exposes the action name that the icon represents. Without this tooltip, icon-only buttons are inaccessible: screen reader users cannot determine the button's purpose, and sighted users who do not recognize the icon are equally blocked. The tooltip is not optional decoration; it is the required accessible name of the button. If you are building an icon-only button and feel the tooltip would be redundant or obvious, that is not a justification for omitting it — it is still required.</p>
+
+    <p>There is one important exception: <strong>danger buttons cannot be icon-only</strong>. Because danger buttons trigger destructive, often irreversible actions, Carbon requires that their intent always be made explicit through visible text. An icon alone — even a universally recognizable trash-can icon — is insufficient for a button that will delete a record, stop a process, or remove a user. The text label is the safeguard that ensures the user has read and understood the action before triggering it. Pair an icon with a label on danger buttons; never omit the label.</p>
+
+    <!-- Section 5: Alignment rules -->
+    <h2>Alignment rules: page designs vs. wizards and dialogs</h2>
+
+    <p>Button alignment in Carbon depends on context. In <strong>full-page designs</strong>, the primary button is <strong>left-aligned</strong>. This follows the natural reading gravity of the page: important content and actions sit at the left edge, where the eye returns at the start of each new line. A left-aligned primary button in a form, for example, is visually anchored to the content it submits and reads as part of the same left-to-right flow as the form fields above it.</p>
+
+    <p>In <strong>wizards and dialogs</strong>, the convention inverts: the primary button is <strong>right-aligned</strong>. This reflects a different spatial metaphor. Wizards are step sequences, and "forward" is to the right — the primary action (Next, Submit, Confirm) lives at the right edge of the footer, while the secondary action (Back, Cancel) lives at the left. This right-aligned convention is so widely adopted in modal dialogs and multi-step flows that deviating from it will feel unfamiliar to users even if they cannot articulate why. Respecting this pattern is an act of respecting user muscle memory.</p>
+
+    <p>One additional grouping rule applies regardless of context: buttons within a group should share the <strong>same width</strong>. Mismatched button widths in a group create visual noise that distracts from the content. If one button's label is substantially longer than another's, consider whether the labels can be made more parallel — both the same approximate length — or whether the buttons should be laid out differently to avoid the size mismatch.</p>
+
+    <!-- Section 6: Loading states -->
+    <h2>Loading states and inline feedback</h2>
+
+    <p>Carbon buttons support an <strong>inline loading</strong> state that provides feedback during asynchronous operations. When a user clicks a button that triggers a process — a form submission, a data export, a long-running API call — the button can transition to a loading state that shows a spinner or progress indicator inline within the button's own footprint. This design eliminates the need for a separate full-page loading overlay for actions that originate from a button click.</p>
+
+    <p>A critical rule accompanies the loading state: the button must be <strong>disabled while loading is in progress</strong>. This prevents double-submission — the most common failure mode in submit-button interactions. If the button remained active during the loading state, a user who clicks again (either impatiently or by accident) would trigger a second action before the first completes. Disabling the button during loading is both a usability safeguard and a data integrity measure, particularly important for operations like payments, record creation, or any action with side effects.</p>
+
+    <p>The inline loading pattern is intentionally scoped to the button that triggered the action. It signals "something is happening as a result of what you just did" without disrupting the rest of the screen. Once the operation completes, the button returns to its normal state (or, in some flows, transitions to a success state momentarily before resetting). This contained feedback model is consistent with Carbon's broader philosophy of giving users precise, contextually appropriate information rather than blunt full-screen interruptions.</p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      The entire Carbon button system is an argument about hierarchy. Every rule — one primary per screen, descending emphasis variants, size consistency within groups, left vs. right alignment — serves the same underlying goal: the most important action on any given screen should be immediately, unambiguously obvious to any user who glances at it. When the hierarchy is correct, users do not need to read every button to know what the screen wants them to do. When the hierarchy breaks down, cognitive load rises and errors follow.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common Violation</div>
+      The two most frequent button violations in real product work are (1) placing multiple primary buttons on a single screen — often because a designer wants to give equal prominence to two competing actions — and (2) writing labels that are nouns, all-caps, or truncated rather than using the verb + noun formula in sentence case. Both violations erode the hierarchy that makes buttons work. If a screen has more than one primary button, it means the design has not yet committed to a single principal action — that is an information architecture problem, not a styling one.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-8">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>Where should the primary button be placed in a full-page design?</h3>
+      <div class="quiz-options">
+        <button>Left-aligned on the page</button>
+        <button>Right-aligned on the page</button>
+        <button>Centered on the page</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Button spec audit: identify violations and rewrite correctly</h3>
+      <p>A designer has placed these five buttons on a single page:</p>
+      <ol>
+        <li><strong>Primary</strong> — label: "SUBMIT" (all caps)</li>
+        <li><strong>Primary</strong> — label: "Cancel"</li>
+        <li><strong>Ghost</strong> — label: "Delete record"</li>
+        <li><strong>Danger (icon-only)</strong> — no tooltip provided</li>
+        <li><strong>Two buttons of different sizes</strong> in the same group</li>
+      </ol>
+      <p>Identify every violation in the spec above and rewrite it correctly — specifying the correct variant, label format (including casing), and any missing requirements for each button. There is at least one violation in every item.</p>
+      <textarea placeholder="List each violation and your corrected spec here…" aria-label="Exercise response"></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0007-component-library.html" class="secondary">← Previous: Component Library Overview</a>
+      <a href="0009-modals-datatables.html" class="primary">Next: Modals and Data Tables →</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> If you found the exercise tricky — particularly deciding which variant should replace the ghost "Delete record" button, or what the correct label casing rules require — paste the relevant section of the lesson into a conversation with Claude and ask it to walk through the reasoning. The best way to lock in the variant hierarchy is to practice mapping real button scenarios to the five-variant framework until the mapping feels automatic.
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-8', 0, 'In full-page designs, the primary button is left-aligned. Right alignment is reserved for wizards and dialogs/modals.');
+  </script>
+</body>
+</html>

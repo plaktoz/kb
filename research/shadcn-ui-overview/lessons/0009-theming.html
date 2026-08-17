@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CSS Variable Theming and Dark Mode — shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../index.html">shadcn/ui Course</a> ›
+        Module 4 — Customisation &amp; Production Patterns ›
+        Lesson 9 of 10
+      </p>
+      <h1>CSS Variable Theming and Dark Mode</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 4</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      shadcn/ui Docs — Theming (CSS variable architecture, semantic surface/foreground pattern, dark mode)<br />
+      <a href="https://ui.shadcn.com/docs/theming" target="_blank" rel="noopener">
+        https://ui.shadcn.com/docs/theming
+      </a>
+    </div>
+
+    <!-- Intro -->
+    <p>
+      shadcn/ui uses <strong>CSS custom properties</strong> (CSS variables) as its entire
+      theming layer. Rather than passing props or overriding class names, you define a set
+      of named tokens in CSS — and every component in the library reads from those tokens
+      automatically. Swapping your brand colors, border radius, or adding dark mode becomes
+      a change in one place, not a search-and-replace across dozens of component files.
+    </p>
+
+    <!-- Semantic token pairs -->
+    <h2>The Semantic Surface / Foreground Pattern</h2>
+
+    <p>
+      Every UI surface in shadcn/ui comes as a <strong>token pair</strong>: one token for
+      the surface (background) and one for the content (foreground) placed on top of it.
+      The convention is straightforward — the foreground token shares the surface name with
+      a <code>-foreground</code> suffix:
+    </p>
+
+    <ul>
+      <li><code>--primary</code> — the background color of primary-intent elements (buttons, badges, active states)</li>
+      <li><code>--primary-foreground</code> — the text (and icon) color rendered <em>on top of</em> a primary surface</li>
+      <li><code>--secondary</code> / <code>--secondary-foreground</code> — secondary intent surfaces</li>
+      <li><code>--muted</code> / <code>--muted-foreground</code> — low-emphasis backgrounds and placeholder text</li>
+      <li><code>--destructive</code> / <code>--destructive-foreground</code> — error and danger states</li>
+      <li><code>--card</code> / <code>--card-foreground</code> — card containers and the text inside them</li>
+    </ul>
+
+    <p>
+      Colors are expressed as <strong>HSL channel values</strong> (hue space lightness) without
+      the <code>hsl()</code> wrapper, which lets Tailwind utility classes compose alpha variants
+      on the fly using the <code>/</code> syntax (e.g. <code>bg-primary/80</code> for 80%
+      opacity).
+    </p>
+
+    <!-- :root / .dark example -->
+    <h2>The <code>:root</code> and <code>.dark</code> Token Blocks</h2>
+
+    <p>
+      All tokens live in your global CSS file (typically <code>globals.css</code>). Light mode
+      tokens go under <code>:root</code>; dark mode tokens go under the <code>.dark</code>
+      class. shadcn/ui toggles dark mode by adding or removing the <code>.dark</code> class
+      on <code>&lt;html&gt;</code> — no separate stylesheet, no media-query duplication.
+    </p>
+
+<pre><code>@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+  }
+}</code></pre>
+
+    <p>
+      Notice that <code>--radius</code> is only defined under <code>:root</code> — it does
+      not change between light and dark mode, so a single declaration is sufficient.
+    </p>
+
+    <!-- --radius -->
+    <h2>The <code>--radius</code> Variable and <code>calc()</code> Scale</h2>
+
+    <p>
+      Border radius is controlled by a single <code>--radius</code> variable. The rest of
+      the scale is derived from it using <code>calc()</code>:
+    </p>
+
+<pre><code>/* set once */
+--radius: 0.5rem;
+
+/* Tailwind config reads it as a scale */
+borderRadius: {
+  lg: "var(--radius)",
+  md: "calc(var(--radius) - 2px)",
+  sm: "calc(var(--radius) - 4px)",
+}</code></pre>
+
+    <p>
+      This means changing <code>--radius: 9999px</code> (pill-shaped) or
+      <code>--radius: 0</code> (sharp corners) instantly cascades to every component that
+      uses <code>rounded-lg</code>, <code>rounded-md</code>, or <code>rounded-sm</code>.
+      You never need to hunt through individual component files.
+    </p>
+
+    <!-- Theme editor -->
+    <h2>Using the Theme Editor</h2>
+
+    <p>
+      Generating correct HSL values by hand is tedious and error-prone. The official
+      shadcn/ui <strong>theme editor</strong> (available at
+      <a href="https://ui.shadcn.com/themes" target="_blank" rel="noopener">ui.shadcn.com/themes</a>)
+      lets you visually pick colors and instantly preview how they look across all
+      components. Once you are satisfied, click "Copy code" to get the complete
+      <code>:root</code> and <code>.dark</code> CSS block, ready to paste directly into
+      your <code>globals.css</code>. This is the recommended workflow — it ensures every
+      foreground token is legibly contrasted against its paired surface.
+    </p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <p>
+        The surface / foreground pair pattern is how <strong>all</strong> shadcn/ui
+        components stay visually consistent. When you set <code>--primary</code>, every
+        button, badge, and active indicator in the entire library automatically uses that
+        value — and <code>--primary-foreground</code> guarantees readable text on top of
+        it. You never have to hunt down individual component color props.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <p>
+        Running <code>npx shadcn init</code> with the <code>--no-css-variables</code> flag
+        switches the entire project to inline Tailwind utility classes instead of CSS
+        variable tokens. This is an <strong>irreversible architectural choice</strong> —
+        you cannot switch back without re-adding every component. Avoid this flag unless
+        you have a specific reason to reject CSS variable theming; it sacrifices dark mode
+        support, runtime theme switching, and the one-place customisation model that makes
+        shadcn/ui worth using.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-9">
+      <h3>Quick check</h3>
+      <p class="question">
+        What does the <code>primary-foreground</code> CSS variable control in shadcn/ui?
+      </p>
+      <ul class="quiz-options">
+        <li><button>Text color placed on primary surfaces</button></li>
+        <li><button>Background fill for all primary components</button></li>
+        <li><button>Border radius applied to primary buttons</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        <strong>Skill exercise:</strong> Write the <code>:root</code> CSS block that changes
+        the primary color to a custom brand purple and adjusts the border radius to
+        pill-shaped. You need to supply at minimum: <code>--primary</code>,
+        <code>--primary-foreground</code> (derive a readable contrast value yourself —
+        think: what text color looks good on a purple background?), and
+        <code>--radius</code>.
+      </p>
+      <p>
+        Express colors as bare HSL channels (e.g. <code>270 75% 50%</code>) — no
+        <code>hsl()</code> wrapper.
+      </p>
+      <textarea rows="10" placeholder=":root {
+  --primary: /* your purple HSL channels */;
+  --primary-foreground: /* contrast text color */;
+  --radius: /* pill-shaped value */;
+}"></textarea>
+      <p>
+        <strong>Reference answer (one valid solution):</strong><br />
+        <code>--primary: 270 75% 50%;</code> (medium purple) ·
+        <code>--primary-foreground: 0 0% 100%;</code> (white — high contrast on a mid-dark purple) ·
+        <code>--radius: 9999px;</code> (pill shape — any very large value works)
+      </p>
+    </div>
+
+    <hr />
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Ask your tutor: "Why does shadcn/ui express colors as bare HSL channels instead of
+      hex codes?" or "How do I support a user-toggled dark mode rather than relying on a
+      CSS class?"
+    </p>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0008-cli-reference.html">← CLI Reference</a>
+      <a href="0010-production-patterns.html" class="primary">Next: Production Patterns →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-9', 0, 'primary-foreground controls the text (and icon) color rendered on top of a primary-colored surface. It is the foreground half of the semantic pair — primary sets the background, primary-foreground sets what is readable against it. Background fill is controlled by --primary itself, and border radius is controlled by --radius.');
+  </script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classes in TypeScript — Module 2, Lesson 5 | TypeScript Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">TypeScript Course</a> &rsaquo; Module 2 &rsaquo; Lesson 5
+      </div>
+      <h1>Classes in TypeScript</h1>
+      <div class="lesson-meta">
+        <span>~25 min</span>
+        <span>Module 2 — The Type System</span>
+        <span>Lesson 5 of 13</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      TypeScript Handbook — Classes &mdash;
+      <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html"
+         target="_blank" rel="noopener">
+        typescriptlang.org/docs/handbook/2/classes.html
+      </a>
+    </div>
+
+    <!-- ── Section 1: Access Modifiers ── -->
+    <h2>1. Access Modifiers: public, protected, private</h2>
+
+    <p>
+      TypeScript uses the same three access modifier keywords you know from Java:
+      <code>public</code>, <code>protected</code>, and <code>private</code>.
+      The semantics map closely — <code>public</code> is accessible everywhere,
+      <code>protected</code> is accessible within the class and its subclasses,
+      and <code>private</code> is accessible only within the declaring class.
+      Unlike Java, <code>public</code> is the default in TypeScript; you do not need
+      to write it explicitly.
+    </p>
+
+    <pre><code>// Java
+public class Animal {
+    public String name;
+    protected int age;
+    private String secret;
+}
+
+// TypeScript — public is the default, no keyword needed
+class Animal {
+  name: string;          // implicitly public
+  protected age: number;
+  private secret: string;
+
+  constructor(name: string, age: number, secret: string) {
+    this.name = name;
+    this.age = age;
+    this.secret = secret;
+  }
+}</code></pre>
+
+    <p>
+      The syntax is familiar enough that Java developers often skip straight to
+      writing class-heavy code — and that is where the critical differences surface.
+    </p>
+
+    <!-- ── Section 2: The critical difference ── -->
+    <h2>2. TypeScript <code>private</code> Is Compile-Time Only</h2>
+
+    <p>
+      This is the most important thing to understand about TypeScript access modifiers:
+      <strong>they are enforced only by the compiler, not at runtime.</strong>
+      When TypeScript compiles to JavaScript, all <code>private</code> and
+      <code>protected</code> annotations are erased. The resulting JavaScript has no
+      memory of those restrictions.
+    </p>
+
+    <p>
+      This means that bracket notation — which TypeScript's type checker does not
+      allow on a typed reference — still works at runtime against the plain JavaScript
+      object:
+    </p>
+
+    <pre><code>// TypeScript source
+class BankAccount {
+  private balance: number = 0;
+
+  deposit(amount: number) {
+    this.balance += amount;
+  }
+}
+
+const account = new BankAccount();
+account.deposit(100);
+
+// TypeScript compile error — good:
+// account.balance;  // Error: Property 'balance' is private
+
+// But at runtime (after compilation), bracket notation bypasses the check:
+(account as any)["balance"];  // 100 — no error at runtime!</code></pre>
+
+    <div class="callout key">
+      <div class="callout-title">Key Point</div>
+      TypeScript's <code>private</code> keyword is a compile-time guard only. It prevents
+      accidental access in your editor and during compilation — but it does not create any
+      runtime enforcement. Any caller can bypass it with bracket notation or a cast to
+      <code>any</code>. If you need real runtime privacy, use <code>#field</code> instead.
+    </div>
+
+    <!-- ── Section 3: Hard privacy with #field ── -->
+    <h2>3. Hard Privacy with <code>#field</code></h2>
+
+    <p>
+      JavaScript (and TypeScript) natively supports truly private fields using the
+      <code>#</code> prefix — called <strong>private class fields</strong>. These are
+      enforced by the JavaScript engine itself at runtime, not just by the type checker.
+      No amount of casting or bracket notation can access a <code>#field</code> from
+      outside the class.
+    </p>
+
+    <pre><code>// Java — private fields are enforced by the JVM at runtime
+public class BankAccount {
+    private double balance = 0;
+    // Cannot be accessed via reflection without special permissions
+}
+
+// TypeScript — TypeScript private (compile-time only)
+class BankAccount {
+  private balance: number = 0;
+  // (account as any)["balance"] still works at runtime
+}
+
+// TypeScript — #field (JavaScript native, truly private at runtime)
+class SecureBankAccount {
+  #balance: number = 0;
+
+  deposit(amount: number) {
+    this.#balance += amount;
+  }
+
+  getBalance(): number {
+    return this.#balance;
+  }
+}
+
+const account = new SecureBankAccount();
+account.deposit(100);
+// account.#balance;           // Compile error
+// (account as any)["#balance"]; // undefined at runtime — truly inaccessible</code></pre>
+
+    <p>
+      Prefer <code>#field</code> over <code>private</code> when you genuinely need
+      encapsulation guarantees — such as when your class will be serialized, inspected,
+      or used in contexts where the TypeScript compiler is not present.
+    </p>
+
+    <!-- ── Section 4: readonly vs final ── -->
+    <h2>4. <code>readonly</code> vs Java's <code>final</code></h2>
+
+    <p>
+      TypeScript's <code>readonly</code> modifier is the direct equivalent of Java's
+      <code>final</code> for fields. A <code>readonly</code> property can be assigned
+      in the constructor but not anywhere else. Attempts to reassign it after construction
+      produce a compile error.
+    </p>
+
+    <pre><code>// Java — final field
+public class Point {
+    public final int x;
+    public final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+// TypeScript — readonly field
+class Point {
+  readonly x: number;
+  readonly y: number;
+
+  constructor(x: number, y: number) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+const p = new Point(3, 4);
+// p.x = 10;  // Error: Cannot assign to 'x' because it is a read-only property</code></pre>
+
+    <p>
+      Note that <code>readonly</code> is also a compile-time constraint — the emitted
+      JavaScript contains no enforcement. At runtime, the property is a plain writable
+      JavaScript property. Use <code>Object.freeze()</code> if you need runtime
+      immutability.
+    </p>
+
+    <!-- ── Section 5: Abstract classes ── -->
+    <h2>5. Abstract Classes</h2>
+
+    <p>
+      Abstract classes work in TypeScript the same way they do in Java: you cannot
+      instantiate an abstract class directly, and any concrete subclass must implement
+      all abstract methods. The <code>abstract</code> keyword marks both the class and
+      the methods that subclasses must provide.
+    </p>
+
+    <pre><code>// Java
+abstract class Shape {
+    abstract double area();
+
+    void describe() {
+        System.out.println("Area: " + area());
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+    Circle(double r) { this.radius = r; }
+
+    @Override
+    double area() { return Math.PI * radius * radius; }
+}
+
+// TypeScript
+abstract class Shape {
+  abstract area(): number;  // must be implemented by subclasses
+
+  describe(): void {
+    console.log("Area:", this.area());
+  }
+}
+
+class Circle extends Shape {
+  constructor(public radius: number) { super(); }
+
+  area(): number {
+    return Math.PI * this.radius ** 2;
+  }
+}
+
+// new Shape();  // Error: Cannot create an instance of an abstract class
+const c = new Circle(5);
+c.describe();  // Area: 78.53...</code></pre>
+
+    <!-- ── Section 6: implements gotcha ── -->
+    <h2>6. The <code>implements</code> Gotcha</h2>
+
+    <p>
+      In Java, when a class <code>implements</code> an interface, the compiler fills in
+      the declared parameter types from the interface signature. If
+      <code>Greeter</code> declares <code>greet(name: String)</code>, your implementing
+      method automatically knows its parameter is a <code>String</code>.
+    </p>
+
+    <p>
+      TypeScript does not work this way. <code>implements</code> only checks that the
+      class satisfies the interface contract — it does not propagate type information
+      into the method bodies. Inside the class, parameters are untyped unless you
+      annotate them explicitly.
+    </p>
+
+    <pre><code>// Java — interface parameter types flow into the implementing class
+interface Greeter {
+    void greet(String name);
+}
+
+class FriendlyGreeter implements Greeter {
+    public void greet(String name) {
+        // 'name' is automatically String — no annotation needed
+        System.out.println("Hello, " + name.toUpperCase());
+    }
+}
+
+// TypeScript — implements does NOT infer parameter types
+interface Greeter {
+  greet(name: string): void;
+}
+
+class FriendlyGreeter implements Greeter {
+  greet(name) {
+    // With strict mode, 'name' is implicitly 'any' here — NOT inferred as string!
+    // TypeScript compile error under strictNullChecks / noImplicitAny:
+    // Parameter 'name' implicitly has an 'any' type.
+    console.log("Hello, " + name.toUpperCase());
+  }
+}
+
+// Correct TypeScript — annotate the parameter yourself
+class FriendlyGreeter implements Greeter {
+  greet(name: string): void {
+    console.log("Hello, " + name.toUpperCase());
+  }
+}</code></pre>
+
+    <div class="callout warning">
+      <div class="callout-title">Java Developer Warning</div>
+      TypeScript's <code>implements</code> is a shape-check, not a type-inference
+      trigger. Writing <code>implements Greeter</code> tells the compiler "verify that
+      this class satisfies Greeter" — it does not automatically annotate your method
+      parameters with the interface's types. Always annotate parameters explicitly in
+      implementing classes, even when the interface already defines them.
+    </div>
+
+    <!-- ── Section 7: Structural class comparison ── -->
+    <h2>7. Structural Class Comparison</h2>
+
+    <p>
+      As covered in Lesson 2, TypeScript uses structural typing — and this applies
+      fully to classes. Two completely unrelated classes with the same shape are
+      interchangeable from the type checker's perspective. You do not need a shared
+      base class or interface for TypeScript to accept one in place of the other.
+    </p>
+
+    <pre><code>// Java — this does NOT compile; Dog and Cat are unrelated types
+class Dog { String name; }
+class Cat { String name; }
+
+Dog d = new Cat();  // Compile error: incompatible types
+
+// TypeScript — this compiles fine; same shape = compatible types
+class Dog {
+  constructor(public name: string) {}
+}
+
+class Cat {
+  constructor(public name: string) {}
+}
+
+// Dog and Cat are completely unrelated — no extends, no shared interface.
+// TypeScript accepts this because their shapes are identical.
+const d: Dog = new Cat("Whiskers");  // OK!</code></pre>
+
+    <p>
+      This behavior surprises Java developers regularly. If you need nominal-style
+      safety (accept a <code>Dog</code> but never a <code>Cat</code>, even if they
+      look alike), you need a branded type or a discriminant field — both of which
+      are advanced patterns covered later in the course.
+    </p>
+
+    <!-- ── Section 8: Parameter properties ── -->
+    <h2>8. Parameter Properties — No Java Equivalent</h2>
+
+    <p>
+      TypeScript offers a shorthand that Java has no equivalent for: <strong>parameter
+      properties</strong>. When you prefix a constructor parameter with an access
+      modifier or <code>readonly</code>, TypeScript automatically declares a field with
+      the same name and assigns the argument to it. This eliminates the Java boilerplate
+      of declaring a field, then assigning it in the constructor body.
+    </p>
+
+    <pre><code>// Java — three separate steps: declare field, accept param, assign
+public class Person {
+    private final String name;
+    private final int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+// TypeScript — verbose equivalent (works but is unnecessary)
+class Person {
+  private readonly name: string;
+  private readonly age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
+
+// TypeScript — parameter property shorthand (idiomatic)
+class Person {
+  constructor(
+    private readonly name: string,
+    private readonly age: number,
+  ) {}
+  // TypeScript generates the field declarations and assignments automatically.
+  // The constructor body is empty — nothing else is needed.
+}
+
+const p = new Person("Alice", 30);
+// p.name is inaccessible from outside (private)
+// p.age is inaccessible from outside (private)</code></pre>
+
+    <p>
+      Parameter properties work with any access modifier: <code>public</code>,
+      <code>protected</code>, <code>private</code>, <code>readonly</code>, or any
+      combination. They are the idiomatic way to define simple value-holding classes
+      in TypeScript.
+    </p>
+
+    <!-- ── Section 9: No static utility classes ── -->
+    <h2>9. No Need for Static Utility Classes</h2>
+
+    <p>
+      Java forces nearly all code into classes, which leads to a common pattern: a
+      class with nothing but <code>static</code> methods, serving as a namespace for
+      related utilities. TypeScript does not require this. Because TypeScript modules
+      are first-class namespaces, you can export plain functions and objects directly
+      from a file. The static utility class antipattern has no purpose in TypeScript.
+    </p>
+
+    <pre><code>// Java — everything must live in a class
+public class MathUtils {
+    public static int clamp(int value, int min, int max) {
+        return Math.max(min, Math.min(max, value));
+    }
+    public static double lerp(double a, double b, double t) {
+        return a + (b - a) * t;
+    }
+}
+int result = MathUtils.clamp(15, 0, 10);
+
+// TypeScript — plain module-level functions (idiomatic)
+export function clamp(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(max, value));
+}
+
+export function lerp(a: number, b: number, t: number): number {
+  return a + (b - a) * t;
+}
+
+// Caller imports only what they need
+import { clamp } from "./math-utils";
+const result = clamp(15, 0, 10);</code></pre>
+
+    <p>
+      Classes in TypeScript exist for encapsulation, inheritance, and instances that
+      carry mutable state. If your class would have no instance methods and no
+      constructor — just static methods — replace it with module-level functions.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-5">
+      <h3>Quick check</h3>
+      <p>
+        A TypeScript class field is marked <code>private</code>. Which statement
+        is accurate?
+      </p>
+      <div class="quiz-options">
+        <button>The compiler blocks access but runtime JavaScript still exposes the field</button>
+        <button>Both the compiler and the JavaScript runtime enforce field access restrictions</button>
+        <button>Only the JavaScript runtime blocks access leaving the compiler fully permissive</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <h3>Practice — Port a Java-Style Class</h3>
+      <p>
+        Below is a Java-style class description. Port it to idiomatic TypeScript
+        using parameter properties where possible. Then, in a comment block below
+        your code, list <strong>three things that silently differ</strong> from
+        the Java version (access enforcement, structural compatibility, field
+        initialization shorthand, etc.).
+      </p>
+      <p>
+        <strong>Java class to port:</strong> A <code>User</code> class that
+        implements a <code>Printable</code> interface (which declares
+        <code>print(): void</code>). The class has a private final
+        <code>String id</code>, a private <code>String name</code>, and a
+        constructor that accepts both. The <code>print()</code> method prints
+        the id and name.
+      </p>
+      <textarea
+        placeholder="// Write your TypeScript port here...
+// Then add a comment block listing 3 things that silently differ from Java:
+//
+// 1.
+// 2.
+// 3."
+        rows="18"
+        spellcheck="false"
+        aria-label="Class port exercise response"
+      ></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Paste your exercise code and ask &ldquo;Does
+      this use parameter properties correctly? Are there any places where my code
+      still relies on Java assumptions that TypeScript handles differently?&rdquo;
+    </div>
+
+    <!-- ── Nav ── -->
+    <nav class="lesson-nav">
+      <a href="0004-everyday-types.html">&larr; Prev: Everyday Types</a>
+      <a href="0006-generics.html" class="primary">Next: Generics &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-5',
+      0,
+      'Correct. TypeScript\'s private keyword is enforced only at compile time. The compiled JavaScript output is a plain object with no access restrictions — bracket notation or a cast to any bypasses it entirely. Use #field for true runtime privacy.'
+    );
+  </script>
+</body>
+</html>

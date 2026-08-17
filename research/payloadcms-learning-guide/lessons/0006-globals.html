@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6 — Globals: Singletons and App-wide Settings</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 2: Core Building Blocks › Lesson 6 of 12
+    </div>
+    <h1>Globals — Singletons and App-wide Settings</h1>
+    <div class="lesson-meta">
+      <span>~10 min</span>
+      <span>Module 2 — Core Building Blocks</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/docs/configuration/globals">payloadcms.com/docs/configuration/globals</a>
+    <p>Official documentation for Globals — how to define them, how they differ from Collections, and when to reach for each one.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>What Is a Global?</h2>
+    <p>
+      A <strong>Global</strong> in Payload is similar to a Collection in that it has its own schema of typed fields, its own access control rules, and its own automatically generated APIs — Local, REST, and GraphQL. The critical difference is that a Global corresponds to exactly <em>one</em> document. No list view, no pagination, no "create another." Just a single record in the database.
+    </p>
+    <p>
+      The canonical use cases are app-wide singletons: a header navigation structure, a site-wide banner alert, localized string tables, or a global settings object that controls feature flags. These are things where your application always needs exactly one version, and there is no meaningful concept of "multiple instances."
+    </p>
+    <p>
+      Because Globals are defined in <code>payload.config.ts</code> just like Collections, they benefit from all the same code-first advantages: version control, TypeScript autocomplete, environment parity, and no surprises between staging and production.
+    </p>
+  </section>
+
+  <section>
+    <h2>Defining a Global with GlobalConfig</h2>
+    <p>
+      You define a Global by creating an object that satisfies Payload's <code>GlobalConfig</code> type, then registering it in your config under the <code>globals</code> array. The shape is intentionally similar to a Collection — a <code>slug</code> and a <code>fields</code> array — with the key difference that there is no <code>timestamps</code> toggle for auto-generating multiple documents.
+    </p>
+    <p>
+      Below is the canonical example from the docs: a site navigation Global that stores an array of link objects, each with a label and a URL.
+    </p>
+    <pre><code>import type { GlobalConfig } from 'payload'
+
+export const SiteNav: GlobalConfig = {
+  slug: 'site-nav',
+  fields: [
+    {
+      name: 'links',
+      type: 'array',
+      fields: [
+        { name: 'label', type: 'text', required: true },
+        { name: 'url',   type: 'text', required: true },
+      ],
+    },
+  ],
+}</code></pre>
+    <p>
+      Once registered in <code>payload.config.ts</code> under <code>globals: [SiteNav]</code>, Payload auto-generates the Admin UI panel for editing it, plus the REST endpoint <code>GET /api/globals/site-nav</code> and equivalent GraphQL and Local API access.
+    </p>
+  </section>
+
+  <section>
+    <h2>Globals vs. Collections — Side by Side</h2>
+    <p>
+      The distinction often trips up newcomers because the configuration syntax looks almost identical. The meaningful difference is purely about cardinality: how many documents will this config produce?
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Globals</th>
+          <th>Collections</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Document count</strong></td>
+          <td>Exactly one document</td>
+          <td>Zero to unlimited documents</td>
+        </tr>
+        <tr>
+          <td><strong>Best for</strong></td>
+          <td>App-wide singletons</td>
+          <td>Repeatable content types</td>
+        </tr>
+        <tr>
+          <td><strong>Admin UI</strong></td>
+          <td>Single edit form, no list view</td>
+          <td>List view + per-document edit form</td>
+        </tr>
+        <tr>
+          <td><strong>API shape</strong></td>
+          <td><code>GET/POST /api/globals/slug</code></td>
+          <td><code>GET /api/slug</code>, <code>GET /api/slug/:id</code></td>
+        </tr>
+        <tr>
+          <td><strong>Versioning</strong></td>
+          <td>Supported</td>
+          <td>Supported</td>
+        </tr>
+        <tr>
+          <td><strong>Hooks</strong></td>
+          <td>Supported</td>
+          <td>Supported</td>
+        </tr>
+        <tr>
+          <td><strong>Access Control</strong></td>
+          <td>Unique per Global</td>
+          <td>Unique per Collection</td>
+        </tr>
+        <tr>
+          <td><strong>Examples</strong></td>
+          <td>Nav, banners, site settings</td>
+          <td>Blog posts, users, products</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Versioning Globals</h2>
+    <p>
+      One underappreciated feature is that Globals support Payload's full versioning system — including drafts and publishing workflows — just like Collections do. This is especially useful for things like a site-wide promotional banner that you want to schedule, preview, and then publish at a specific time without pushing code.
+    </p>
+    <p>
+      Enable versioning on a Global by adding a <code>versions</code> key to your <code>GlobalConfig</code> object, exactly as you would on a Collection. The version history for the Global's single document becomes navigable in the Admin UI.
+    </p>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core rule:</strong> Use a Global when your app needs exactly one instance of something; use a Collection when you need multiple documents of the same type. The Payload docs state it plainly — "if you have more than one Global that share the same structure, consider using a Collection instead."
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Common mistake:</strong> Developers sometimes create a Global for every piece of editable text — "homepage hero," "about page header," "contact page intro." This leads to a proliferation of single-field Globals. If the content follows a consistent structure across multiple pages, it almost always belongs in a Collection (e.g., a <code>pages</code> collection) where each page is its own document. Globals are for truly app-wide, genuinely one-of-a-kind data.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-6">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">What is Payload's rule of thumb for deciding when to use a Global versus a Collection?</p>
+    <div class="quiz-options">
+      <button>Use a Global when your app needs exactly one instance of something; use a Collection when you need multiple documents of the same type.</button>
+      <button>Use a Global when your app is small and simple; use a Collection when your project grows larger and needs more complex document relationships.</button>
+      <button>Use a Global when you want versioning and live preview support; use a Collection when your content requires full-text search and per-document access control.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>For each item below, decide whether it should be a <strong>Collection</strong> or a <strong>Global</strong>, and write one sentence justifying your choice. Think about how many documents are needed and whether the structure is reused across multiple instances.</p>
+    <ul>
+      <li><strong>Site navigation</strong> — the main header nav links shown on every page</li>
+      <li><strong>Team members</strong> — profiles for each person on the company's About page</li>
+      <li><strong>FAQ items</strong> — individual question-and-answer pairs for a help section</li>
+      <li><strong>Privacy policy text</strong> — the single legal page all users must accept</li>
+      <li><strong>Homepage hero banner</strong> — the large image and headline at the top of the home page</li>
+    </ul>
+    <textarea placeholder="Write your decisions and justifications here, one per line. For example: 'Site navigation — Global, because ...'"></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <a href="0005-fields.html">&larr; Prev: Fields</a>
+    <a href="0007-hooks.html" class="primary">Next: Hooks &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-6', 0, 'Correct. The docs state the rule directly: use a Global when you need exactly one instance of something app-wide, and use a Collection when you need many documents of a similar type. Size of the project and versioning support are not the deciding factors — cardinality is.');</script>
+
+</div>
+</body>
+</html>

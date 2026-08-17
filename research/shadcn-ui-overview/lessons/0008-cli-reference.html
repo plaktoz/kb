@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 — The CLI Reference</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      shadcn/ui Course › Module 3 — Installation &amp; First Components › Lesson 8 of 10
+    </div>
+    <h1>The CLI Reference</h1>
+    <div class="lesson-meta">
+      <span>~10 min</span>
+      <span>Module 3 — Installation &amp; First Components</span>
+    </div>
+  </header>
+
+  <!-- SOURCE CARD -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    <a href="https://ui.shadcn.com/docs/cli">https://ui.shadcn.com/docs/cli</a>
+    <p style="margin:0.5rem 0 0;">The official CLI documentation covers every sub-command and flag in the shadcn toolchain. All commands run via <code>pnpm dlx shadcn@latest</code> — no global install required.</p>
+  </div>
+
+  <!-- CONTENT SECTIONS -->
+
+  <h2>One Entrypoint, Six Sub-commands</h2>
+
+  <p>Every interaction with the shadcn toolchain goes through a single runner:</p>
+
+  <pre><code>pnpm dlx shadcn@latest &lt;sub-command&gt; [options]</code></pre>
+
+  <p>You do not install the CLI globally. <code>pnpm dlx</code> (or <code>npx</code>) fetches the latest version each time, so you always get current behavior without a separate upgrade step. The six sub-commands cover the full lifecycle — from bootstrapping a project to previewing source code before anything is written to disk.</p>
+
+  <h2>Sub-command Reference</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Sub-command</th>
+        <th>What it does</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>init</code></td>
+        <td>Scaffold a project: prompts for style, base color, and CSS variable preferences, then writes <code>components.json</code> and updates <code>tailwind.config</code></td>
+        <td><code>pnpm dlx shadcn@latest init</code></td>
+      </tr>
+      <tr>
+        <td><code>add [component]</code></td>
+        <td>Copy a component's source code into your project under <code>components/ui/</code></td>
+        <td><code>pnpm dlx shadcn@latest add button</code></td>
+      </tr>
+      <tr>
+        <td><code>view [component]</code></td>
+        <td>Print a component's full source to your terminal so you can inspect it before installing</td>
+        <td><code>pnpm dlx shadcn@latest view dialog</code></td>
+      </tr>
+      <tr>
+        <td><code>search [query]</code></td>
+        <td>Search for components available in the default registry or a custom one</td>
+        <td><code>pnpm dlx shadcn@latest search input</code></td>
+      </tr>
+      <tr>
+        <td><code>apply [preset]</code></td>
+        <td>Install a preset — a curated bundle of component configs — in one step</td>
+        <td><code>pnpm dlx shadcn@latest apply</code></td>
+      </tr>
+      <tr>
+        <td><code>migrate</code></td>
+        <td>Handle structural migrations such as icon library swaps or RTL support changes</td>
+        <td><code>pnpm dlx shadcn@latest migrate</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Key Flags</h2>
+
+  <p>Most flags modify the behavior of <code>add</code>, though several work across multiple sub-commands. Learn these four and you cover the vast majority of real-world scenarios.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Flag</th>
+        <th>Works with</th>
+        <th>What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>-o</code></td>
+        <td><code>add</code></td>
+        <td>Overwrite an existing component file without prompting — useful when you want to pull a fresh copy from the registry</td>
+      </tr>
+      <tr>
+        <td><code>-a</code></td>
+        <td><code>add</code></td>
+        <td>Add all components from the registry at once instead of specifying them individually</td>
+      </tr>
+      <tr>
+        <td><code>--dry-run</code></td>
+        <td><code>add</code>, <code>apply</code></td>
+        <td>Show exactly what would be written or changed without touching any files</td>
+      </tr>
+      <tr>
+        <td><code>-c &lt;path&gt;</code></td>
+        <td><code>add</code>, <code>init</code></td>
+        <td>Point the CLI at a specific app directory — essential in monorepos where the config is not at the repo root</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Monorepo Usage</h2>
+
+  <p>In a monorepo you typically have multiple apps at paths like <code>apps/web</code> and <code>apps/dashboard</code>, each with its own <code>components.json</code>. The CLI needs to find the right config to know where to write files. You have two options:</p>
+
+  <p><strong>Option 1 — run from the app directory:</strong></p>
+
+  <pre><code>cd apps/web
+pnpm dlx shadcn@latest add card</code></pre>
+
+  <p><strong>Option 2 — use the <code>-c</code> flag from anywhere in the repo:</strong></p>
+
+  <pre><code>pnpm dlx shadcn@latest add card -c apps/web</code></pre>
+
+  <p>Both produce the same result. The <code>-c</code> flag is handy in CI scripts or when you want to add components to multiple apps without changing directories between commands.</p>
+
+  <!-- KEY CALLOUT -->
+  <div class="callout key">
+    <p>The <code>view</code> command is the most underused command in the CLI. Before you run <code>add</code>, run <code>view</code> first — you get the full source in your terminal and can check exactly what dependencies it pulls in, what props it exposes, and whether you want to customize anything before the file lands in your project. It takes ten seconds and saves you from surprises.</p>
+  </div>
+
+  <!-- WARNING CALLOUT -->
+  <div class="callout warning">
+    <p>Use <code>--dry-run</code> before committing changes in scripts or CI pipelines. The flag prints a diff of every file that would be created or overwritten, then exits without writing anything. Run it once to verify the output looks right, then drop the flag for the real run. Skipping this step when adding components to an existing project is an easy way to accidentally overwrite customized files.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz-8">
+    <h3>Check Your Understanding</h3>
+    <p class="question">You already have a customized <code>button.tsx</code> in your project. You want to pull a fresh copy from the registry, replacing your file. Which command do you run?</p>
+    <ul class="quiz-options">
+      <button>Pass -o to overwrite the existing file.</button>
+      <button>Pass -a to install all available components.</button>
+      <button>Pass --dry-run to preview without any writes.</button>
+    </ul>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- EXERCISE -->
+  <div class="exercise">
+    <p>For each scenario below, write the exact CLI command you would run. Use <code>pnpm dlx shadcn@latest</code> as the base.</p>
+    <ol>
+      <li><strong>Monorepo:</strong> Add a <code>badge</code> component to the <code>apps/marketing</code> app from the repo root.</li>
+      <li><strong>Overwrite:</strong> You have already customized <code>input.tsx</code> but want to pull the latest registry version, replacing your file.</li>
+      <li><strong>Preview first:</strong> You want to see the full source of the <code>dialog</code> component before deciding whether to install it.</li>
+    </ol>
+    <textarea placeholder="Scenario 1:&#10;pnpm dlx shadcn@latest ...&#10;&#10;Scenario 2:&#10;pnpm dlx shadcn@latest ...&#10;&#10;Scenario 3:&#10;pnpm dlx shadcn@latest ..."></textarea>
+  </div>
+
+  <!-- TUTOR PROMPT -->
+  <div class="tutor-prompt">Questions about this lesson? Copy any command or flag you want to explore deeper and ask your tutor.</div>
+
+  <!-- NAV -->
+  <nav class="lesson-nav">
+    <a href="0007-first-component.html">← Prev: Your First Component</a>
+    <a href="0009-theming.html" class="primary">Next: Theming →</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-8',
+    0,
+    'Correct. The -o flag tells the CLI to overwrite an existing file without prompting. Run: pnpm dlx shadcn@latest add button -o. The -a flag adds all components at once (unrelated to overwriting), and --dry-run previews changes without writing anything — the opposite of what you want here.'
+  );
+</script>
+</body>
+</html>

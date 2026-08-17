@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Your First Carbon Page — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> &rsaquo;
+        Module 4 — Building with Carbon &rsaquo;
+        Lesson 11 of 12
+      </div>
+      <h1>Building Your First Carbon Page</h1>
+      <div class="lesson-meta">
+        <span>Module 4 — Building with Carbon</span>
+        <span>Lesson 11 of 12</span>
+        <span>~18 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">IBM Carbon Design System — React Tutorial: Building a Page</div>
+      <div class="source-result">
+        Covers the UI Shell component set from <code>@carbon/react</code>, the <code>&lt;Theme&gt;</code> wrapper for consistent theming, the <code>&lt;Grid&gt;</code> and <code>&lt;Column&gt;</code> layout primitives, coordinating multiple component imports, and correct ARIA labelling when more than one <code>&lt;nav&gt;</code> element appears on the same page.
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>Anatomy of a Carbon app: Shell, Theme, Content</h2>
+
+    <p>
+      A complete Carbon application is built from three cooperating structural layers. The <strong>UI Shell</strong> provides the persistent navigation frame — the top header bar, optional side navigation panel, and global action bar. The <strong>Theme</strong> wrapper establishes a design token context so that every Carbon component inside it reads its colors, background values, and interactive states from the same coherent token set. The <strong>Content</strong> component wraps the main page body, adding the standard spacing and background that Carbon's design guidelines specify for content areas.
+    </p>
+
+    <p>
+      Understanding how these three layers compose is the prerequisite for building any Carbon page. They are not optional refinements — they are the structural skeleton. Without the Shell, users have no way to navigate between sections of your application. Without the Theme wrapper, Carbon components fall back to their default token values, which may not match the palette the rest of your UI expects. Without Content, the main body of the page will lack the standard padding and background that Carbon's visual language prescribes.
+    </p>
+
+    <p>
+      In practice, you will typically create a <code>providers.js</code> (or equivalent layout file) that composes all three layers in a single place. This makes it easy to apply a consistent Shell and theme across every page of your application without duplicating the wrapper structure in each route. The Shell lives inside the Theme so it inherits the correct token values; the Content wrapper sits outside the Theme so it can use its own background token. This asymmetry is intentional and worth understanding before you write your first layout file.
+    </p>
+
+    <!-- Section 2 -->
+    <h2>Building the TutorialHeader with UI Shell components</h2>
+
+    <p>
+      Carbon's UI Shell is composed from a family of focused, composable React components, all exported from <code>@carbon/react</code>. The outermost wrapper is <code>HeaderContainer</code>, which manages the open/closed state of the side navigation panel and passes it down through a render prop. Inside the render prop, you place the <code>Header</code> element, which renders the top bar and accepts an <code>aria-label</code> that identifies the application to assistive technologies.
+    </p>
+
+    <p>
+      Within <code>Header</code>, you place <code>HeaderName</code> for the branded application title (the IBM product name prefix goes in the <code>prefix</code> prop), <code>HeaderNavigation</code> for the primary link set, <code>HeaderGlobalBar</code> for icon actions such as notifications and user settings, and <code>SideNav</code> for the collapsible panel that mirrors the top navigation on small screens. Each of these components has a clear, single responsibility, and together they assemble a complete, accessible navigation shell with almost no custom CSS required.
+    </p>
+
+    <p>
+      Icons in the global bar come from the separate <code>@carbon/icons-react</code> package. The import path changed in recent Carbon versions: rather than importing from a standalone package, you import icons from <code>@carbon/react/icons</code>. Each icon component accepts a <code>size</code> prop (commonly 20) that sets its SVG dimensions. Wrapping each icon in a <code>HeaderGlobalAction</code> component provides the correct button affordance, keyboard focus ring, and hover state — you should never render a raw icon as a bare clickable element.
+    </p>
+
+    <p>
+      One important implementation detail: use Next.js <code>Link</code> inside <code>HeaderMenuItem</code> and <code>SideNavMenuItem</code> rather than plain anchor tags. Carbon's shell components handle the visual styling, but the routing behavior — including client-side navigation without a full page reload — comes from the framework's Link component. Mixing raw anchors with Next.js routing causes unnecessary full-page reloads that degrade perceived performance.
+    </p>
+
+    <pre><code>import {
+  Header,
+  HeaderContainer,
+  HeaderName,
+  HeaderNavigation,
+  HeaderMenuItem,
+  HeaderGlobalBar,
+  HeaderGlobalAction,
+  SideNav,
+  SideNavItems,
+  SideNavMenuItem,
+} from '@carbon/react';
+import { Switcher, Notification, UserAvatar } from '@carbon/react/icons';
+import Link from 'next/link';
+
+const TutorialHeader = () =&gt; (
+  &lt;HeaderContainer
+    render={({ isSideNavExpanded, onClickSideNavExpand }) =&gt; (
+      &lt;Header aria-label="Carbon Tutorial"&gt;
+        &lt;HeaderName href="/" prefix="IBM"&gt;
+          Carbon Tutorial
+        &lt;/HeaderName&gt;
+        &lt;HeaderNavigation aria-label="Carbon Tutorial"&gt;
+          &lt;HeaderMenuItem&gt;
+            &lt;Link href="/repos"&gt;Repositories&lt;/Link&gt;
+          &lt;/HeaderMenuItem&gt;
+        &lt;/HeaderNavigation&gt;
+        &lt;HeaderGlobalBar&gt;
+          &lt;HeaderGlobalAction aria-label="Notifications"&gt;
+            &lt;Notification size={20} /&gt;
+          &lt;/HeaderGlobalAction&gt;
+          &lt;HeaderGlobalAction aria-label="User Avatar"&gt;
+            &lt;UserAvatar size={20} /&gt;
+          &lt;/HeaderGlobalAction&gt;
+          &lt;HeaderGlobalAction aria-label="App Switcher"&gt;
+            &lt;Switcher size={20} /&gt;
+          &lt;/HeaderGlobalAction&gt;
+        &lt;/HeaderGlobalBar&gt;
+        &lt;SideNav aria-label="Side navigation" expanded={isSideNavExpanded}&gt;
+          &lt;SideNavItems&gt;
+            &lt;SideNavMenuItem&gt;
+              &lt;Link href="/repos"&gt;Repositories&lt;/Link&gt;
+            &lt;/SideNavMenuItem&gt;
+          &lt;/SideNavItems&gt;
+        &lt;/SideNav&gt;
+      &lt;/Header&gt;
+    )}
+  /&gt;
+);
+</code></pre>
+
+    <!-- Section 3 -->
+    <h2>The providers.js theming wrapper</h2>
+
+    <p>
+      In a Next.js application using Carbon, it is common practice to centralize the theming and shell composition in a single file — typically named <code>providers.js</code> or placed in the root layout. This file imports <code>Theme</code> and <code>Content</code> from <code>@carbon/react</code> alongside your <code>TutorialHeader</code> component, then wraps them around the application's child content.
+    </p>
+
+    <p>
+      The <code>Theme</code> component accepts a <code>theme</code> prop whose value is one of Carbon's four built-in themes: <code>white</code>, <code>g10</code> (light gray), <code>g90</code> (dark gray), or <code>g100</code> (near-black). Wrapping <code>TutorialHeader</code> inside <code>&lt;Theme theme="g100"&gt;</code> applies the near-black palette to the shell while leaving the page body free to use a different theme. This layered approach is what allows Carbon products to display a dark top bar with a light content area — a common pattern in IBM enterprise applications.
+    </p>
+
+    <p>
+      The <code>Content</code> component is placed outside the <code>Theme</code> wrapper in the example below. This is deliberate: <code>Content</code> should inherit the ambient theme of the page body rather than the shell's dark theme. It renders a <code>&lt;main&gt;</code> element with Carbon's standard content padding and background, giving the page body its structural foundation. All route-level page components passed as <code>children</code> will be rendered inside this <code>Content</code> wrapper.
+    </p>
+
+    <pre><code>import { Theme, Content } from '@carbon/react';
+import TutorialHeader from '@/components/TutorialHeader/TutorialHeader';
+
+export default function Providers({ children }) {
+  return (
+    &lt;&gt;
+      &lt;Theme theme="g100"&gt;
+        &lt;TutorialHeader /&gt;
+      &lt;/Theme&gt;
+      &lt;Content&gt;{children}&lt;/Content&gt;
+    &lt;/&gt;
+  );
+}
+</code></pre>
+
+    <!-- Section 4 -->
+    <h2>Responsive layout with Grid and Column</h2>
+
+    <p>
+      With the Shell and Theme in place, the next step is building the page content itself. Carbon's layout system is built around two React components: <code>&lt;Grid&gt;</code> and <code>&lt;Column&gt;</code>. The <code>Grid</code> establishes a row container governed by Carbon's 2x grid rules — 4 columns at small (320px), 8 at medium (672px), and 16 at large (1056px). Each <code>Column</code> inside the grid declares how many columns it should span at each breakpoint using the <code>sm</code>, <code>md</code>, and <code>lg</code> props.
+    </p>
+
+    <p>
+      The most important pattern to memorize is full-width: <code>lg={16} md={8} sm={4}</code>. These values match the maximum column count at each breakpoint, so the column spans the entire available width regardless of viewport size. This is the correct choice for hero banners, full-bleed section backgrounds, and any container that should always occupy the full page width. Pairing this with the <code>fullWidth</code> prop on <code>Grid</code> additionally removes the outer margin, allowing content to reach the viewport edges.
+    </p>
+
+    <p>
+      For two-column layouts, split the columns evenly at each breakpoint: each column gets <code>lg={8} md={4} sm={4}</code>. At large, each column occupies half of the 16-column grid. At medium, each column occupies half of the 8-column grid. At small, each column uses all 4 available columns — meaning both columns stack vertically, filling the full width on mobile screens. This stacking behavior is automatic and is the correct pattern for mobile-first responsive design.
+    </p>
+
+    <p>
+      For more complex compositions, the <code>Column</code> component also supports an object syntax for individual breakpoints, allowing you to specify both a span and an offset in one expression. An offset shifts the column to the right by the specified number of columns, leaving empty space before the content. This is useful for centering a narrower column within a wider grid without needing extra wrapper elements or CSS margin hacks.
+    </p>
+
+    <pre><code>import { Grid, Column, Breadcrumb, BreadcrumbItem, Button,
+  Tabs, Tab, TabList, TabPanels, TabPanel } from '@carbon/react';
+
+// Full width at all breakpoints — hero banner pattern
+&lt;Grid className="landing-page" fullWidth&gt;
+  &lt;Column lg={16} md={8} sm={4} className="landing-page__banner"&gt;
+    {/* hero content */}
+  &lt;/Column&gt;
+&lt;/Grid&gt;
+
+// Two equal columns at large, stacked at small
+&lt;Grid&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Left&lt;/Column&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Right&lt;/Column&gt;
+&lt;/Grid&gt;
+
+// With offset at large — center a column within the grid
+&lt;Column md={4} lg={{ span: 8, offset: 7 }} sm={4}&gt;
+  Offset content
+&lt;/Column&gt;
+</code></pre>
+
+    <!-- Section 5 -->
+    <h2>Styling with Sass tokens</h2>
+
+    <p>
+      Carbon components are styled internally with design tokens, but your custom page-level CSS should also draw from the same token vocabulary whenever possible. Carbon ships its Sass variables through a set of namespaced modules that you import with <code>@use</code>. The key modules are <code>spacing</code>, <code>type</code>, <code>breakpoint</code>, and <code>theme</code>. Importing them makes Carbon's full token scale available to your stylesheet as Sass variables, ensuring your custom styles stay consistent with the system.
+    </p>
+
+    <p>
+      The spacing tokens follow Carbon's 8px mini-unit scale, prefixed with <code>$spacing-</code> and numbered from 01 (4px) up through 13 (96px). A common landing page pattern uses <code>$spacing-05</code> (16px) for top padding and <code>$spacing-06</code> (24px) for side padding on banner sections. The theme tokens — such as <code>$layer-01</code> — give you access to Carbon's semantic color system so your background colors automatically adapt when users switch between light and dark themes.
+    </p>
+
+    <p>
+      One practical advantage of using Sass tokens over raw pixel values is that your styles automatically stay in sync when Carbon updates its token definitions. If IBM revises the spacing scale or adjusts a background color in a future Carbon release, your stylesheet picks up the change without any modifications to your own code. This is the same benefit that Carbon component consumers receive — tokens decouple intent from specific values.
+    </p>
+
+    <pre><code>@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '@carbon/react/scss/breakpoint' as *;
+@use '@carbon/react/scss/theme' as *;
+
+.landing-page__banner {
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-07 * 4;
+  padding-left: $spacing-06;
+}
+
+.landing-page-background {
+  background-color: $layer-01;
+}
+</code></pre>
+
+    <!-- Section 6 -->
+    <h2>Accessibility: ARIA labels for duplicate nav elements</h2>
+
+    <p>
+      A subtle but important accessibility requirement arises when you place multiple navigation landmarks on the same page. In HTML, both <code>&lt;nav&gt;</code> and elements with <code>role="navigation"</code> are landmark regions — assistive technology users can jump between landmarks quickly using keyboard shortcuts or rotor menus. When two or more navigation landmarks exist on the same page, they must each carry a distinct <code>aria-label</code> so screen reader users can tell them apart and navigate to the right one.
+    </p>
+
+    <p>
+      In a typical Carbon landing page, this situation arises because two different components both render <code>&lt;nav&gt;</code> elements. The <code>Breadcrumb</code> component renders a <code>&lt;nav&gt;</code> for the breadcrumb trail at the top of the page content. The <code>TabList</code> component inside a <code>Tabs</code> group also renders a <code>&lt;nav&gt;</code> element. Without distinct labels, a screen reader would announce both as simply "navigation," leaving the user unable to distinguish between them.
+    </p>
+
+    <p>
+      The fix is straightforward: pass a unique, descriptive <code>aria-label</code> to each component that will render a navigation landmark. Carbon's <code>Breadcrumb</code> component passes its <code>aria-label</code> directly to its internal <code>&lt;nav&gt;</code> element. The <code>TabList</code> component similarly forwards <code>aria-label</code> to its container. The labels you choose should describe the purpose of each navigation region — "Page navigation" for the breadcrumb and "Tab navigation" for the tab list are clear and unambiguous choices.
+    </p>
+
+    <pre><code>// Breadcrumb — renders a &lt;nav&gt; element, needs a unique aria-label
+&lt;Breadcrumb noTrailingSlash aria-label="Page navigation"&gt;
+  &lt;BreadcrumbItem&gt;
+    &lt;a href="/"&gt;Getting started&lt;/a&gt;
+  &lt;/BreadcrumbItem&gt;
+&lt;/Breadcrumb&gt;
+
+// TabList — also renders a &lt;nav&gt; element, needs a different aria-label
+&lt;TabList className="tabs-group" aria-label="Tab navigation"&gt;
+  &lt;Tab&gt;About&lt;/Tab&gt;
+  &lt;Tab&gt;Design&lt;/Tab&gt;
+  &lt;Tab&gt;Develop&lt;/Tab&gt;
+&lt;/TabList&gt;
+</code></pre>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>
+        The structural trinity of a Carbon application — <strong>Shell, Theme, Content</strong> — should be the first thing you set up before building any page-level layout. The Shell (<code>HeaderContainer</code> and its children) provides navigation. The <code>Theme</code> wrapper establishes the token context that gives every Carbon component inside it consistent colors and interactive states. The <code>Content</code> wrapper frames the page body with the correct padding and background. Once this skeleton is in place, adding pages becomes a matter of composing <code>Grid</code> and <code>Column</code> inside <code>Content</code> — the structural decisions are already made. Trying to add theming or the Shell after the fact is significantly harder than wiring them up correctly at the start.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common Pitfall</div>
+      <p>
+        Forgetting to add <code>aria-label</code> attributes when multiple navigation landmarks appear on the same page is one of the most common accessibility oversights in Carbon applications. It is easy to overlook because the visual result looks identical — the labels exist only in the accessibility tree. Components like <code>Breadcrumb</code> and <code>TabList</code> both render <code>&lt;nav&gt;</code> elements, and without distinct labels, screen readers announce them identically. Before shipping a page, run an automated accessibility scan (such as axe or IBM Equal Access Checker) and verify that every landmark region has a label that meaningfully distinguishes it from all others on the same page.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-11">
+      <div class="quiz-label">Knowledge Check</div>
+      <h3>What column span values would you use for a full-width section at all breakpoints?</h3>
+      <div class="quiz-options">
+        <button><code>lg={16} md={8} sm={4}</code> breakpoint props</button>
+        <button><code>lg={8} md={4} sm={2}</code> breakpoint props</button>
+        <button><code>lg={12} md={6} sm={3}</code> breakpoint props</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Write a responsive landing page section</h3>
+      <p>
+        Write the complete JSX for a landing page section that has: (1) a full-width hero banner at large breakpoint, (2) two equal-width columns at medium breakpoint, (3) a single full-width column at small breakpoint. Include the Grid and Column components with correct sm/md/lg props.
+      </p>
+      <textarea placeholder="// Full-width hero banner
+&lt;Grid className=&quot;landing-page&quot; fullWidth&gt;
+  &lt;Column lg={16} md={8} sm={4} className=&quot;landing-page__banner&quot;&gt;
+    Hero content
+  &lt;/Column&gt;
+&lt;/Grid&gt;
+
+// Two equal columns at medium, single column at small
+&lt;Grid&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Left content&lt;/Column&gt;
+  &lt;Column lg={8} md={4} sm={4}&gt;Right content&lt;/Column&gt;
+&lt;/Grid&gt;"></textarea>
+    </div>
+
+    <!-- Lesson navigation -->
+    <nav class="lesson-nav">
+      <a href="0010-setup.html">&larr; Lesson 10: Setup</a>
+      <a href="0012-theming-content.html" class="primary">Lesson 12: Theming Content &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your AI tutor: "Explain how HeaderContainer manages side nav state through its render prop," or "Show me how to add a second theme zone inside a Carbon page so the footer uses a different palette than the main content," or "Walk me through what happens when a screen reader encounters two unlabeled nav elements on the same page."
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-11', 0, 'Full-width sections use lg={16} md={8} sm={4} — the maximum column count at each breakpoint (16 at large, 8 at medium, 4 at small).');
+  </script>
+</body>
+</html>

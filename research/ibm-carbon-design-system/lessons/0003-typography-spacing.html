@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography and Spacing — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <nav class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a>
+        &rsaquo; Module 1 — Foundations
+        &rsaquo; Lesson 3 of 12
+      </nav>
+      <h1>Typography and Spacing</h1>
+      <div class="lesson-meta">
+        <span>Module 1 — Foundations</span>
+        <span>Lesson 3 of 12</span>
+        <span>~14 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source Material</div>
+      <div class="source-title">IBM Carbon Design System — Typography &amp; Spacing</div>
+      <div class="source-result">
+        Covers type tokens, IBM Plex typeface families, productive vs expressive token sets, the mathematical spacing scale, and the Stack component for consistent layout rhythm.
+      </div>
+    </div>
+
+    <!-- Section 1: IBM Plex and the typeface foundation -->
+    <section>
+      <h2>IBM Plex and the typeface foundation</h2>
+
+      <p>Carbon's typographic foundation is built on <strong>IBM Plex</strong>, an open-source typeface family released by IBM in 2017. Plex was designed from scratch to reflect IBM's personality — analytical, precise, and human — while remaining highly legible across product interfaces and editorial contexts alike. Because it is open-source, IBM Plex is free to use in both commercial and personal projects.</p>
+
+      <p>IBM Plex comes in three stacks that cover the full range of design needs:</p>
+      <ul>
+        <li><strong>IBM Plex Sans</strong> — the primary UI typeface. Clean, modern, and optimised for screen reading at a wide range of sizes. Used for almost all body copy, labels, headings, and interactive elements in Carbon components.</li>
+        <li><strong>IBM Plex Serif</strong> — a transitional serif suitable for long-form editorial content, articles, and contexts where a more classical voice is desired. Not commonly used in data-dense product screens.</li>
+        <li><strong>IBM Plex Mono</strong> — a monospaced variant for code samples, technical values, and numeric data that benefits from character alignment. Used in code editors, terminal output, and data tables wherever fixed-width rendering matters.</li>
+      </ul>
+
+      <p>Carbon recommends three weight tiers: <strong>Light (300)</strong> for large display sizes where heavy ink feels overwhelming, <strong>Regular (400)</strong> as the everyday workhorse for body copy and secondary labels, and <strong>SemiBold (600)</strong> for headings, section titles, and UI labels that need hierarchical emphasis. SemiBold works well for short strings like section headers but becomes tiring and harder to read in long paragraphs — use Regular there instead. Italics in Carbon have a specific, limited role: emphasis within prose, titles of works, technical terms on first introduction, and captions. Avoid italics as a stylistic decoration; use them only when the semantic meaning requires it.</p>
+
+      <p>Color in type follows the same purposeful logic. Running body text stays in neutral Carbon text tokens — never styled blue or otherwise coloured without reason. Blue is reserved for interactive, primary action elements such as links and buttons. Coloured type appears in narrowly defined contexts: error messages, warning banners, inline code, and status indicators. Using colour in typography decoratively undermines the signal-to-noise ratio of the entire interface.</p>
+    </section>
+
+    <!-- Section 2: Type tokens: productive vs expressive -->
+    <section>
+      <h2>Type tokens: productive vs expressive</h2>
+
+      <p>Rather than hard-coding font sizes, Carbon abstracts typography into <strong>type tokens</strong> — named references that encapsulate a complete typographic configuration including font size, line height, font weight, and letter spacing. This means that when you apply a token like <code>$heading-03</code>, you get a consistent, tested combination of properties rather than assembling them ad hoc. This is the core mechanism that keeps text visually coherent across an entire product suite, even when different teams contribute different components.</p>
+
+      <p>The token system is divided into two semantically distinct sets distinguished by their naming suffix:</p>
+
+      <ul>
+        <li>
+          <strong>Productive type tokens</strong> (e.g. <code>$label-01</code>, <code>$body-compact-01</code>, <code>$heading-03</code>): Condensed, fixed-size configurations optimised for task-focused product interfaces — dashboards, forms, data tables, and toolbars. Sizes do not change across breakpoints. Productive tokens prioritise information density and scanning speed. The <code>-01</code> suffix signals this set.
+        </li>
+        <li>
+          <strong>Expressive type tokens</strong> (e.g. <code>$display-01</code>, <code>$heading-06</code>): Larger, more dramatic configurations that respond across breakpoints, growing at wider viewports to fill editorial layouts, landing pages, and marketing surfaces. The <code>-02</code> suffix signals this set. Expressive heading sizes are not fixed — they scale responsively to create visual impact that would feel out of place in a compact product UI.
+        </li>
+      </ul>
+
+      <p>The distinction matters in practice. If you are building a settings panel, a data grid, or a form, you almost always want productive tokens: they keep the interface tight and functional. If you are building a hero banner, a docs landing page, or a promotional section, expressive tokens deliver the visual weight and typographic drama appropriate to that context. Mixing the two carelessly — for example, using an expressive display token inside a compact modal — creates jarring size inconsistencies that break the visual rhythm of the product.</p>
+
+      <p>The underlying scale from which all tokens are derived starts at <strong>12px</strong> (denoted <code>y₀ = 12</code>) and follows a mathematical formula to generate consistent hierarchical size steps. This means every step up in the scale represents a deliberate, proportional increase rather than an arbitrary jump. The mathematical consistency is what allows diverse tokens — from small label text to large display headings — to feel like they belong to the same visual system.</p>
+    </section>
+
+    <!-- Section 3: The spacing scale and why it uses multiples of 8 -->
+    <section>
+      <h2>The spacing scale and why it uses multiples of 8</h2>
+
+      <p>Carbon's spacing system is built on multiples of <strong>2, 4, and 8 pixels</strong>. This is not arbitrary. Most screen resolutions divide cleanly by 8, meaning 8px increments align perfectly to subpixel rendering boundaries on retina and high-DPI displays. Interfaces built on an 8px grid look sharper because they avoid the slight blurring that occurs when a fractional pixel boundary falls between physical pixels. The base grid also makes mathematical relationships between elements predictable: doubling a spacing value (for example, moving from 16px to 32px) communicates a meaningful jump in visual weight or separation, while halving suggests finer control.</p>
+
+      <p>The practical benefit for designers and developers working together is a shared vocabulary. When a designer annotates a comp with "32px below the heading", both parties know that maps to <code>$spacing-07</code>. No translation needed, no divergence in implementation. The tokens replace raw CSS values entirely — you write <code>margin-bottom: $spacing-07</code> instead of <code>margin-bottom: 32px</code>, and the design intent is preserved as a named reference rather than a magic number.</p>
+
+      <p>Here is the full Carbon spacing scale with each token's pixel value:</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value (px)</th>
+            <th>Typical use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>$spacing-01</code></td><td>2</td><td>Fine rule offsets, icon nudges</td></tr>
+          <tr><td><code>$spacing-02</code></td><td>4</td><td>Tight icon-to-label gaps, badge padding</td></tr>
+          <tr><td><code>$spacing-03</code></td><td>8</td><td>Compact internal padding, inline gaps</td></tr>
+          <tr><td><code>$spacing-04</code></td><td>12</td><td>Small component internal padding</td></tr>
+          <tr><td><code>$spacing-05</code></td><td>16</td><td>Standard component padding, list gaps</td></tr>
+          <tr><td><code>$spacing-06</code></td><td>24</td><td>Section sub-grouping, card inner gaps</td></tr>
+          <tr><td><code>$spacing-07</code></td><td>32</td><td>Between components, heading bottom margin</td></tr>
+          <tr><td><code>$spacing-08</code></td><td>40</td><td>Large component sections</td></tr>
+          <tr><td><code>$spacing-09</code></td><td>48</td><td>Between major sections on a page</td></tr>
+          <tr><td><code>$spacing-10</code></td><td>64</td><td>Wide layout gutters, hero vertical padding</td></tr>
+          <tr><td><code>$spacing-11</code></td><td>80</td><td>Large layout separators</td></tr>
+          <tr><td><code>$spacing-12</code></td><td>96</td><td>Very large editorial spacing</td></tr>
+          <tr><td><code>$spacing-13</code></td><td>160</td><td>Full-bleed hero vertical rhythm</td></tr>
+        </tbody>
+      </table>
+
+      <p>Notice how the scale grows: steps 01–05 advance by 2px, 2px, 4px, and 4px — fine granularity at small sizes where precision matters most. From step 05 onward the gaps grow larger — 8px, 8px, 8px, 8px — until the very top of the scale where jumps become dramatic to support major layout decisions. This graduated density mirrors how human perception works: we are more sensitive to spatial differences at small scales (the difference between 2px and 4px is very noticeable) and less sensitive at large ones (the difference between 80px and 96px reads as roughly equivalent).</p>
+    </section>
+
+    <!-- Section 4: Applying spacing tokens in practice -->
+    <section>
+      <h2>Applying spacing tokens in practice</h2>
+
+      <p>Spacing tokens are used as direct replacements for CSS <code>margin</code> and <code>padding</code> values. In Sass, this looks exactly like using a variable:</p>
+
+      <pre><code>// Single-side padding
+.cds--card {
+  padding: $spacing-05; // 16px on all sides
+}
+
+// Mixed margins (top, right, bottom, left)
+.cds--section-heading {
+  margin: $spacing-07 $spacing-04 0 $spacing-04; // 32px top, 12px sides, 0 bottom
+}
+
+// Gap between stacked elements
+.cds--form-group {
+  margin-bottom: $spacing-06; // 24px below each form group
+}</code></pre>
+
+      <p>A key design principle behind the scale is that <strong>more space signals higher importance and stronger focus</strong>. Elements with generous whitespace around them attract the eye and communicate that they are primary focal points. Conversely, tightly packed elements read as related, secondary, or subordinate. When you increase the margin above a section heading from <code>$spacing-07</code> (32px) to <code>$spacing-09</code> (48px), you are telling the reader: this is a significant transition, not a minor sub-topic.</p>
+
+      <p><strong>Proximity implies relationship; distance implies separation.</strong> This gestalt principle is at the heart of why tokens are chosen deliberately rather than guessed. Two labels 4px apart (<code>$spacing-02</code>) feel like parts of the same unit. Two sections 64px apart (<code>$spacing-10</code>) feel like distinct chapters. When your spacing tokens reflect the actual hierarchy of your content, users can scan and navigate without having to read every word.</p>
+
+      <p>Tokens are <strong>not responsive by default</strong> — <code>$spacing-07</code> is always 32px regardless of screen size. However, it is an accepted pattern to step the scale up or down at breakpoints when the design demands it. For example, you might use <code>$spacing-09</code> (48px) for vertical section gaps on large displays and step down to <code>$spacing-07</code> (32px) on mobile. This is done explicitly in your responsive styles rather than being automatic, giving you precise control over the layout at every viewport size.</p>
+    </section>
+
+    <!-- Section 5: The Stack component -->
+    <section>
+      <h2>The Stack component</h2>
+
+      <p>Carbon includes a <strong>Stack component</strong> that brings the spacing scale directly into layout without requiring manual margin declarations on every child element. Instead of styling each item individually, you wrap a group of related items in a Stack and set a single <code>gap</code> property using a spacing scale value. Stack handles the rest — applying equal spacing between every child in the group, in either a vertical (column) or horizontal (row) orientation.</p>
+
+      <p>This is especially useful for form fields, button groups, notification stacks, and list layouts where you want uniform rhythm without the fragility of collapsing margins. Classic CSS margin collapsing can make margin-based spacing unpredictable when adjacent elements have different margins. Stack sidesteps this entirely by using CSS <code>gap</code> under the hood, which does not collapse.</p>
+
+      <pre><code>// Stack children vertically with $spacing-05 (16px) between each
+&lt;Stack gap={5}&gt;
+  &lt;FormLabel /&gt;
+  &lt;TextInput /&gt;
+  &lt;HelperText /&gt;
+&lt;/Stack&gt;
+
+// Stack children horizontally with $spacing-03 (8px) between each
+&lt;Stack orientation="horizontal" gap={3}&gt;
+  &lt;Button kind="primary"&gt;Save&lt;/Button&gt;
+  &lt;Button kind="secondary"&gt;Cancel&lt;/Button&gt;
+&lt;/Stack&gt;</code></pre>
+
+      <p>The <code>gap</code> prop accepts a number corresponding to the spacing scale step — so <code>gap={5}</code> maps to <code>$spacing-05</code> (16px). This keeps the same token vocabulary consistent whether you are writing Sass, CSS-in-JS, or React JSX. The Stack component removes an entire category of spacing bugs by making it impossible to accidentally use an off-scale value: if the gap prop accepts only integers mapping to defined tokens, there is no way to sneak a raw pixel value past code review.</p>
+    </section>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>Spacing and type tokens are not just organisational conveniences — they are the mechanism by which design decisions survive translation from mockup to code. When every developer on a team reaches for <code>$spacing-05</code> instead of <code>16px</code>, the design system gains a single source of truth: change the token once, update the entire product. The same logic applies to type tokens. This is the compounding value of a token-based system over time.</p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Watch Out</div>
+      <p>Using arbitrary pixel values — <code>margin-top: 14px</code>, <code>padding: 22px</code> — instead of spacing tokens is one of the most common ways to break the visual rhythm of a Carbon interface. These "magic numbers" are invisible to the design system: they do not respond to theme changes, they do not communicate design intent, and they diverge silently over time as components are updated. Even a value that looks close to a token value (14px instead of <code>$spacing-04</code> at 12px or <code>$spacing-05</code> at 16px) introduces an inconsistency that accumulates across hundreds of components. Always use the nearest token and discuss with your designer if the token does not fit.</p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-3">
+      <div class="quiz-label">Knowledge Check</div>
+      <h3>Which spacing token should you use for a standard 16px padding?</h3>
+      <div class="quiz-options">
+        <button type="button"><code>$spacing-05</code> for sixteen pixels</button>
+        <button type="button"><code>$spacing-03</code> for sixteen pixels</button>
+        <button type="button"><code>$spacing-07</code> for sixteen pixels</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Write the spacing token declarations</h3>
+      <p>
+        A card component has: <strong>16px internal padding on all sides</strong>, a <strong>32px gap between the card title and body text</strong>, and an <strong>8px gap between the body text and a footer link</strong>. Write the three Sass token declarations using <code>$spacing-XX</code> variables.
+      </p>
+      <textarea
+        placeholder="// e.g.&#10;.cds--card {&#10;  padding: $spacing-...;&#10;}&#10;&#10;.cds--card__title {&#10;  margin-bottom: $spacing-...;&#10;}&#10;&#10;.cds--card__body {&#10;  margin-bottom: $spacing-...;&#10;}"
+        aria-label="Write your spacing token declarations here"
+      ></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0002-color-tokens.html">&larr; Color Tokens</a>
+      <a href="0004-grid-system.html" class="primary">Grid System &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Open a new Claude conversation and paste this prompt to go deeper —
+      <em>"I'm learning the IBM Carbon Design System. Explain the difference between productive and expressive type tokens with two real-world UI examples, and show me how to decide which spacing token to reach for when a designer gives me a spec in pixels."</em>
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-3', 0, '$spacing-05 equals 16px. The scale goes: 01=2px, 02=4px, 03=8px, 04=12px, 05=16px.');
+  </script>
+</body>
+</html>

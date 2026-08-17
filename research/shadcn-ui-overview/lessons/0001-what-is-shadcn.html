@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — What shadcn/ui Is (and Isn't)</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      shadcn/ui Course › Module 1 — The Mental Model › Lesson 1 of 10
+    </div>
+    <h1>What shadcn/ui Is (and Isn't)</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 1 — The Mental Model</span>
+    </div>
+  </header>
+
+  <!-- SOURCE CARD -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    <a href="https://ui.shadcn.com/docs">https://ui.shadcn.com/docs</a>
+    <p style="margin:0.5rem 0 0;">The official shadcn/ui documentation defines itself as a "code distribution platform," not a component library. Components are not installed as a package — a CLI copies their source code directly into your project, giving you full ownership and control.</p>
+  </div>
+
+  <!-- CONTENT SECTIONS -->
+
+  <h2>The Label That Trips Everyone Up</h2>
+
+  <p>When developers first hear about shadcn/ui, they mentally file it next to MUI, Chakra, or Ant Design — drop-in component libraries you install once and import forever. That comparison is understandable but wrong, and the mismatch will confuse you until you correct it.</p>
+
+  <p>The shadcn/ui documentation is unusually direct about this: it describes itself as a <strong>code distribution platform</strong>. That phrase is doing real work. A distribution platform moves code from one place (the registry) to another (your project). What arrives in your project is not a reference to a package — it is the actual source code, sitting in your own file tree, ready for you to read, modify, or delete.</p>
+
+  <p>This is the foundational mental shift the rest of the course builds on. Until it clicks, every other shadcn/ui decision will seem arbitrary.</p>
+
+  <h2>How Components Actually Arrive: The CLI-Copy Model</h2>
+
+  <p>The mechanism is a command-line tool. When you want a Button component, you run something like:</p>
+
+  <pre><code>pnpm dlx shadcn@latest add button</code></pre>
+
+  <p>The CLI fetches the component's source code from the registry and <strong>writes it directly into your project</strong> — typically under <code>components/ui/button.tsx</code>. That file is yours. It is not inside <code>node_modules</code>. It is not a peer dependency. It does not receive automatic updates. It exists in your repository exactly like any other file you wrote yourself.</p>
+
+  <p>Compare that to installing MUI:</p>
+
+  <pre><code>npm install @mui/material</code></pre>
+
+  <p>With MUI, the component code lives in <code>node_modules</code>, maintained by the MUI team. You cannot touch it without forking the package. Upgrades are delivered by bumping a version number. If the public API changes, your code breaks.</p>
+
+  <p>With shadcn/ui, there is nothing to upgrade in the traditional sense. You own the code. If shadcn releases an improved version of Button, you decide whether to re-run the CLI (overwriting your file) or keep your customized version. The tradeoff is explicit and yours to manage.</p>
+
+  <h2>Code Ownership: What It Means in Practice</h2>
+
+  <p>Owning the code has concrete consequences that developers coming from traditional libraries often underestimate:</p>
+
+  <ul>
+    <li><strong>You can open the file and change anything.</strong> Want to add a loading spinner variant, change the default padding, or swap the underlying HTML element? Edit the file. No workarounds, no CSS overrides fighting specificity battles, no <code>sx</code> prop gymnastics.</li>
+    <li><strong>The code is readable.</strong> shadcn/ui components are intentionally minimal and well-structured. Opening one teaches you how it works, not just how to use it.</li>
+    <li><strong>AI tools can read and modify your implementation.</strong> Because the component lives in your codebase as plain source, language models can inspect it, suggest changes, and apply edits the same way they would with any file you wrote. This is called AI-Ready design, and it is one of the five principles shadcn/ui is built on.</li>
+  </ul>
+
+  <h2>What shadcn/ui Is Built On</h2>
+
+  <p>Under the hood, shadcn/ui components are built on <a href="https://www.radix-ui.com/" rel="noopener">Radix UI</a> primitives for accessibility and behavior, styled with <a href="https://tailwindcss.com/" rel="noopener">Tailwind CSS</a> utility classes. The CLI pulls those together into components that look polished by default but are fully editable from day one.</p>
+
+  <p>The project's five guiding principles — Open Code, Composition, Distribution (flat-file schema plus CLI), Beautiful Defaults, and AI-Ready design — will each get their own attention in Lesson 2. For now, the through-line is the same: every principle supports the idea that <em>you</em> hold the code, not a package maintainer.</p>
+
+  <!-- KEY CALLOUT -->
+  <div class="callout key">
+    <p>shadcn/ui is not a package you install — it is a <strong>code distribution platform</strong>. The CLI copies component source code directly into your project. You own it, you modify it, and you are responsible for it. This single distinction explains almost every other shadcn/ui design decision.</p>
+  </div>
+
+  <!-- WARNING CALLOUT -->
+  <div class="callout warning">
+    <p>A common mistake: assuming <code>pnpm dlx shadcn@latest add button</code> installs a package the way <code>npm install</code> does. It does not. The command writes a <code>.tsx</code> file into your <code>components/ui/</code> folder. After that, the CLI is done — there is no live link back to a registry, no version to pin, and no automatic update mechanism. What you have is source code you now own.</p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz-1">
+    <h3>Check Your Understanding</h3>
+    <p class="question">What does running the shadcn CLI on a component do?</p>
+    <ul class="quiz-options">
+      <button>Copies source code files directly into your project.</button>
+      <button>Adds it as a versioned npm package dependency.</button>
+      <button>Streams components from a CDN on each request.</button>
+    </ul>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- EXERCISE -->
+  <div class="exercise">
+    <p>Your teammate has only ever used MUI. In exactly two sentences — no jargon allowed — explain what shadcn/ui is and why it is different. Aim for clarity a non-developer could follow.</p>
+    <textarea placeholder="Write your two-sentence explanation here..."></textarea>
+  </div>
+
+  <!-- TUTOR PROMPT -->
+  <div class="tutor-prompt">Questions about this lesson? Copy any sentence you want to explore deeper and ask your tutor.</div>
+
+  <!-- NAV -->
+  <nav class="lesson-nav">
+    <span></span>
+    <a href="0002-five-principles.html" class="primary">Next: The Five Principles →</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-1',
+    0,
+    'Correct. The shadcn CLI uses a copy model — it writes the component\'s source code as a file in your project. That file is yours to own and edit. It is not an npm package in node_modules, and it receives no automatic updates.'
+  );
+</script>
+</body>
+</html>
