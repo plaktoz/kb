@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion Design — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Lesson Plan</a> /
+        Module 2 — Layout, Motion, and Accessibility /
+        Lesson 5 of 12
+      </div>
+      <h1>Motion Design</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — Layout, Motion, and Accessibility</span>
+        <span>Lesson 5 of 12</span>
+        <span>~12 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">IBM Carbon Design System — Motion Guidelines</div>
+      <div class="source-result">
+        Carbon's motion documentation covers two motion styles (productive and expressive), three easing curve types, six duration tokens ranging from 70ms to 700ms, and guidelines for motion sensitivity and accessible animation.
+      </div>
+    </div>
+
+    <!-- Section 1: Why motion matters -->
+    <h2>Why motion matters in UI design</h2>
+
+    <p>Motion in a user interface is far more than decoration. When used well, animation communicates meaning: it tells the user where an element came from, where it went, and how one state relates to the next. Carbon articulates this purpose precisely — motion guides users "from here to there, now to next, start to finish." Without motion, state changes appear as abrupt cuts that force users to reconstruct context for themselves. With thoughtful motion, the interface narrates its own transitions.</p>
+
+    <p>Carbon defines four qualities that purposeful motion must have. It should be <strong>purposeful</strong> — every movement carries intent and reinforces the message of the interface rather than distracting from it. It should be <strong>responsive</strong> — animation reacts immediately to user input, signalling that the system is alive and listening. It should be <strong>meticulous</strong> — the timing and easing of each element are carefully chosen rather than copied from a default. And it should be <strong>unobtrusive</strong> — motion never draws so much attention to itself that it competes with the content the user came to see.</p>
+
+    <p>These four qualities exist in tension. Expressive motion that delights users in a marketing context becomes obtrusive in a dense data dashboard where users are trying to work quickly. Understanding this tension — and resolving it by matching the motion style to the context — is the central skill this lesson develops.</p>
+
+    <!-- Section 2: Productive vs expressive motion -->
+    <h2>Productive vs expressive motion</h2>
+
+    <p><strong>Productive motion</strong> is subtle, efficient, and task-focused. It is designed for interfaces where users are in flow — accomplishing a goal, scanning data, entering input. Productive motion keeps itself small and quick, using shorter duration tokens and understated easing curves. The aim is to provide just enough feedback to confirm a state change without interrupting the user's cognitive momentum. Examples include button hover and active states, dropdown menus opening and closing, data table rows expanding, toggle switches flipping, and form validation messages appearing inline.</p>
+
+    <p><strong>Expressive motion</strong> is vibrant, highly visible, and attention-capturing. It is reserved for significant moments in the user journey — transitions that mark a meaningful change of context. Carbon explicitly instructs designers to "reserve expressive motion for occasional, important moments." Examples include full-page transitions to a new route, primary call-to-action confirmations, onboarding celebrations, and prominent notification toasts that carry system-level information. Because expressive motion commands attention, overusing it defeats its own purpose: if every action triggers expressive animation, nothing feels significant.</p>
+
+    <p>The distinction between the two styles maps onto the productive-versus-expressive vocabulary already seen in Carbon's type token system. Just as expressive type styles are reserved for headlines that need visual weight, expressive motion styles are reserved for moments that need emotional emphasis. In both cases, the productive variant is the default and the expressive variant is the deliberate exception. When in doubt, start with productive motion — it is almost always the safer, more professional choice for business software.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Style</th>
+          <th>Character</th>
+          <th>Typical contexts</th>
+          <th>Duration range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Productive</td>
+          <td>Subtle, efficient, task-focused</td>
+          <td>Buttons, dropdowns, toggles, data tables</td>
+          <td>Faster (70–150ms typical)</td>
+        </tr>
+        <tr>
+          <td>Expressive</td>
+          <td>Vibrant, visible, attention-capturing</td>
+          <td>Page transitions, primary actions, notifications</td>
+          <td>Slower (240–700ms typical)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 3: Easing curves explained -->
+    <h2>Easing curves explained</h2>
+
+    <p>Easing curves define the velocity profile of a transition — how fast the animation accelerates and decelerates over its duration. A linear curve moves at a constant speed from start to finish, which feels mechanical and unnatural because physical objects in the real world almost never move that way. Carbon's motion system, by contrast, is grounded in the "physics of a light-weight material": elements should accelerate quickly and decelerate gently (or the reverse), matching the intuitions users bring from everyday experience with real objects.</p>
+
+    <p>Carbon defines three functional easing curve types, each available in both a productive and an expressive variant. The <strong>standard</strong> curve is for elements that remain visible throughout the entire transition — moving from one position or state to another within the same view. The <strong>entrance</strong> curve is for elements entering the visible area from outside — they start fast (already in motion as they cross the boundary) and ease to a stop. The <strong>exit</strong> curve is for elements leaving the visible area — they start from rest, accelerate, and leave the frame quickly. Using the wrong curve type for a given interaction — say, applying an entrance curve to an element that never leaves the screen — produces motion that feels physically implausible and subtly wrong to users even if they cannot articulate why.</p>
+
+    <p>Carbon explicitly warns against certain curve characteristics: no bounce, no stretch, and no sudden-stop curves. Bounce and stretch introduce springy elastic motion that conflicts with the "light-weight material" metaphor and tends to read as playful or frivolous in professional contexts. Sudden stops — linear or near-linear curves — feel abrupt because real objects do not halt instantaneously. If you are tempted by a bouncy easing from a general animation library, Carbon's answer is to use a standard curve with a slightly longer duration instead.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Purpose</th>
+          <th>Productive CSS</th>
+          <th>Expressive CSS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Standard</td>
+          <td>Element visible throughout</td>
+          <td><code>cubic-bezier(0.2, 0, 0.38, 0.9)</code></td>
+          <td><code>cubic-bezier(0.4, 0.14, 0.3, 1)</code></td>
+        </tr>
+        <tr>
+          <td>Entrance</td>
+          <td>Elements entering view</td>
+          <td><code>cubic-bezier(0, 0, 0.38, 0.9)</code></td>
+          <td><code>cubic-bezier(0, 0, 0.3, 1)</code></td>
+        </tr>
+        <tr>
+          <td>Exit</td>
+          <td>Elements leaving view</td>
+          <td><code>cubic-bezier(0.2, 0, 1, 0.9)</code></td>
+          <td><code>cubic-bezier(0.4, 0.14, 1, 1)</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>In practice, you will use these values via Carbon's Sass motion mixins rather than writing <code>cubic-bezier()</code> values by hand. But understanding the underlying values helps you recognise when a colleague's custom animation is straying outside the system — and helps you explain, concretely, why it looks off.</p>
+
+    <!-- Section 4: Duration tokens -->
+    <h2>Duration tokens</h2>
+
+    <p>Carbon provides six duration tokens, named along a fast–moderate–slow scale. Each token has a specific millisecond value and an intended use case. The naming follows the same <code>-01</code> (subtler) and <code>-02</code> (more prominent) convention seen elsewhere in the Carbon token system: within each speed tier, <code>-01</code> is the shorter, quieter variant and <code>-02</code> is the longer, more noticeable one.</p>
+
+    <p>The guiding principle for choosing a duration is that animation duration should scale with the size of the visual change. A button changing colour involves almost no spatial displacement — it deserves the shortest token available (<code>duration-fast-01</code>, 70ms). A full-panel expansion that reshuffles a large section of the layout involves substantial spatial movement — it warrants one of the slower tokens (<code>duration-slow-01</code>, 400ms or <code>duration-slow-02</code>, 700ms). Applying a long duration to a tiny microinteraction makes the interface feel sluggish; applying a short duration to a large layout shift makes elements appear to teleport rather than travel.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Use case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>duration-fast-01</code></td>
+          <td>70ms</td>
+          <td>Buttons, toggles — the smallest state-change microinteractions</td>
+        </tr>
+        <tr>
+          <td><code>duration-fast-02</code></td>
+          <td>110ms</td>
+          <td>Fades — elements cross-fading in place without spatial movement</td>
+        </tr>
+        <tr>
+          <td><code>duration-moderate-01</code></td>
+          <td>150ms</td>
+          <td>Small expansions — dropdowns, tooltips, short accordion panels</td>
+        </tr>
+        <tr>
+          <td><code>duration-moderate-02</code></td>
+          <td>240ms</td>
+          <td>Toasts and system communication — visible enough to be noticed</td>
+        </tr>
+        <tr>
+          <td><code>duration-slow-01</code></td>
+          <td>400ms</td>
+          <td>Large expansions — side panels, full-height drawers, page sections</td>
+        </tr>
+        <tr>
+          <td><code>duration-slow-02</code></td>
+          <td>700ms</td>
+          <td>Background dimming — modal scrim overlays, gradual context shifts</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Notice that the slower tokens are not reserved only for expressive motion. A large sidebar panel expanding is a productive interaction — it is task-focused and part of normal workflow — yet it appropriately uses <code>duration-slow-01</code> because the spatial change is large. The speed tiers describe the size of the visual change, not the emotional register of the moment. The motion style (productive vs expressive) and the duration token are two independent axes that you apply together.</p>
+
+    <!-- Section 5: Motion sensitivity and accessibility -->
+    <h2>Motion sensitivity and accessibility</h2>
+
+    <p>Not every user experiences animation the same way. For people with vestibular disorders, certain motion patterns — particularly large-scale translations, parallax effects, and sustained looping animations — can trigger vertigo, nausea, or disorientation. The <code>prefers-reduced-motion</code> CSS media query gives these users a way to signal their preference to the browser, and Carbon's motion guidance requires that this signal be respected.</p>
+
+    <p>The practical rule is straightforward: <strong>always provide a static alternative</strong> for users with motion sensitivity. In most cases this means wrapping animated properties in a <code>@media (prefers-reduced-motion: reduce)</code> block that either eliminates the animation entirely or replaces it with a simple opacity fade at a very short duration. A dropdown that normally slides open should simply appear when reduced motion is preferred. A page transition that normally sweeps in from the side should cut directly to the new content. The information conveyed by the interface must not depend on the animation; the animation should only enhance an experience that already works without it.</p>
+
+    <p>Beyond motion sensitivity, lower-powered devices — older mobile phones, constrained embedded browsers — may render complex animations poorly, producing jank that undermines the very sense of responsiveness the animation was meant to create. Carbon's guidance to provide static alternatives applies equally here: an animation that degrades to jank is worse than no animation at all. If you are building for a wide hardware spectrum, err toward shorter durations and simpler easing, and test on real constrained devices rather than relying solely on desktop browser tooling.</p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key insight</div>
+      The productive/expressive distinction is not about how much effort an animation takes to build — it is about how much attention it should command. Productive motion should disappear into the background of the user's awareness. Expressive motion earns the right to be noticed by being reserved for genuinely significant moments. When every interaction feels significant, none of them do.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common mistake</div>
+      <strong>Applying expressive motion to every interaction.</strong> It is tempting to use the more dramatic, slower easing curves throughout a UI because they feel more polished in isolation. In practice, pervasive expressive animation makes an interface feel slow and overwrought — users cannot work at their natural pace because the interface keeps demanding their attention. Expressive motion loses its meaning the moment it is no longer exceptional. Default to productive motion everywhere, then consciously decide which two or three moments per screen truly warrant the expressive treatment.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-5">
+      <div class="quiz-label">Knowledge check</div>
+      <h3>Which duration token is correct for animating a button state change?</h3>
+      <div class="quiz-options">
+        <button><code>duration-fast-01</code> at seventy milliseconds</button>
+        <button><code>duration-slow-01</code> at four hundred milliseconds</button>
+        <button><code>duration-moderate-02</code> at two-forty milliseconds</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill exercise</div>
+      <h3>Classify five UI interactions</h3>
+      <p>For each of these five interactions, write (a) the motion style (productive or expressive) and (b) the best duration token: 1. A dropdown menu opening. 2. A full page transition to a new route. 3. A toggle switching on. 4. A toast notification appearing. 5. A modal overlay background dimming.</p>
+      <textarea placeholder="1. (a) style: ... (b) token: ...&#10;2. (a) style: ... (b) token: ...&#10;3. (a) style: ... (b) token: ...&#10;4. (a) style: ... (b) token: ...&#10;5. (a) style: ... (b) token: ..."></textarea>
+    </div>
+
+    <!-- Lesson navigation -->
+    <nav class="lesson-nav">
+      <a href="0004-grid-system.html">&larr; Lesson 4: The 2x Grid System</a>
+      <a href="0006-accessibility.html" class="primary">Lesson 6: Accessibility in Carbon &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your tutor: "Walk me through choosing the right duration token for a side panel that slides in from the left — what size of change is this, and does that change if it's a mobile vs. desktop viewport?" Or try: "Show me how to write a <code>prefers-reduced-motion</code> media query that disables the slide animation on the dropdown from exercise item 1."
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-5', 0, 'Button state changes are microinteractions — duration-fast-01 (70ms) is correct. Slow durations are for large expansions and background changes.');
+  </script>
+</body>
+</html>

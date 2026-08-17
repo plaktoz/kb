@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shadcn/ui vs. MUI, Chakra, and Ant Design — shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../index.html">shadcn/ui Course</a> ›
+        Module 2 — Choosing shadcn/ui ›
+        Lesson 3 of 10
+      </p>
+      <h1>shadcn/ui vs. MUI, Chakra, and Ant Design</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 2</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      LogRocket Blog — shadcn/ui Adoption Guide (head-to-head comparison)<br />
+      <a href="https://blog.logrocket.com/shadcn-ui-adoption-guide/" target="_blank" rel="noopener">
+        https://blog.logrocket.com/shadcn-ui-adoption-guide/
+      </a>
+    </div>
+
+    <!-- Intro -->
+    <p>
+      Picking a component library is one of the first real architectural decisions you make when
+      starting a React project. Four names come up constantly: <strong>shadcn/ui</strong>,
+      <strong>MUI (Material UI)</strong>, <strong>Chakra UI</strong>, and
+      <strong>Ant Design</strong>. This lesson puts them side by side so you can make that
+      choice with numbers, not guesses.
+    </p>
+
+    <!-- Comparison table -->
+    <h2>Head-to-Head Comparison</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>shadcn/ui</th>
+          <th>MUI</th>
+          <th>Chakra UI</th>
+          <th>Ant Design</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>GitHub Stars</strong></td>
+          <td>~105k</td>
+          <td>~97k</td>
+          <td>~40k</td>
+          <td>~97k</td>
+        </tr>
+        <tr>
+          <td><strong>Bundle Size (min+gzip)</strong></td>
+          <td>Usage-dependent</td>
+          <td>93.7 KB</td>
+          <td>89 KB</td>
+          <td>429 KB</td>
+        </tr>
+        <tr>
+          <td><strong>Design System</strong></td>
+          <td>User-defined</td>
+          <td>Google Material</td>
+          <td>Chakra system</td>
+          <td>Ant Design system</td>
+        </tr>
+        <tr>
+          <td><strong>Figma Kit</strong></td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>No</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><strong>Code Ownership</strong></td>
+          <td>Full (copy)</td>
+          <td>No (npm package)</td>
+          <td>No (npm package)</td>
+          <td>No (npm package)</td>
+        </tr>
+        <tr>
+          <td><strong>Best For</strong></td>
+          <td>Custom UI, full control</td>
+          <td>Small–large projects</td>
+          <td>Small–large projects</td>
+          <td>Enterprise</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Dimension explanations -->
+    <h2>What Each Dimension Means</h2>
+
+    <h3>GitHub Stars</h3>
+    <p>
+      Stars are a rough proxy for community size and momentum. shadcn/ui's ~105k stars make
+      it the most starred of the four, despite being far newer than MUI or Ant Design (both
+      around ~97k). Chakra UI trails at ~40k. More stars generally means more tutorials,
+      more Stack Overflow answers, and more third-party component ports you can borrow.
+    </p>
+
+    <h3>Bundle Size</h3>
+    <p>
+      This is where the libraries diverge most sharply. Ant Design ships a single large
+      package at 429 KB min+gzip — every page that loads it pays that cost regardless of
+      which components you use. MUI comes in at 93.7 KB and Chakra at 89 KB; both are
+      tree-shakeable but still contribute baseline runtime overhead.
+    </p>
+    <p>
+      shadcn/ui lists its bundle size as <em>usage-dependent</em> because you copy only the
+      component source files you need into your project. There is no npm package overhead.
+      If you use five components, your bundle grows by the size of those five components' code
+      only — nothing more.
+    </p>
+
+    <h3>Design System</h3>
+    <p>
+      MUI implements Google's Material Design specification: elevation shadows, ripple effects,
+      and a specific color-role vocabulary. Ant Design enforces its own enterprise-oriented
+      visual grammar. Chakra ships a sensible default theme but also exposes a design-token
+      system you can override.
+    </p>
+    <p>
+      shadcn/ui ships with no enforced design language. The components render unstyled
+      Radix UI primitives, styled with Tailwind utility classes that you control. "User-defined"
+      is not a gap — it is the point. You define the system.
+    </p>
+
+    <h3>Figma Kit</h3>
+    <p>
+      MUI and Ant Design both publish official Figma component kits that mirror their React
+      components, enabling designers to prototype in the exact same vocabulary developers
+      build with. shadcn/ui does not have an official Figma kit. If your team has a dedicated
+      designer who works in Figma, this gap matters and must be planned around (community kits
+      exist, but they are not officially maintained).
+    </p>
+
+    <h3>Code Ownership</h3>
+    <p>
+      When you install MUI, Chakra, or Ant Design, you consume them as npm packages. The
+      component code lives in <code>node_modules</code> — you cannot edit it without forking
+      or patching. Upgrading the package is how you get bug fixes, which means upstream
+      authors control your component behavior.
+    </p>
+    <p>
+      With shadcn/ui you run <code>npx shadcn-ui add button</code> and a <code>button.tsx</code>
+      file appears in your repository. You own that file immediately. Want to change the
+      focus ring behavior? Edit the file. No fork, no patch, no waiting for a maintainer.
+    </p>
+
+    <h3>Best For</h3>
+    <p>
+      Each library has a practical sweet spot. Ant Design's extensive enterprise component
+      set (date pickers, data grids, cascaders) makes it well-suited to internal tooling and
+      dashboards where design consistency matters more than brand uniqueness. MUI and Chakra
+      are general-purpose and flexible across project scales. shadcn/ui is purpose-built for
+      teams that need a custom visual identity without starting from zero.
+    </p>
+
+    <!-- Key takeaway -->
+    <div class="callout key">
+      <p>
+        shadcn/ui leads in GitHub stars (~105k) and ships zero bundle overhead by default.
+        The decisive difference is ownership: you get the source code, not a package
+        dependency. That trade-off — no Figma kit, no enforced design language — is exactly
+        what teams building custom UIs are willing to make.
+      </p>
+    </div>
+
+    <!-- Common misconception -->
+    <div class="callout warning">
+      <p>
+        Comparing shadcn/ui's bundle size directly to MUI or Ant Design is misleading.
+        MUI's 93.7 KB figure is the <em>minimum</em> baseline even if you import one button.
+        shadcn/ui has no baseline cost — you only ship what you copy. If you use many
+        complex components the per-file costs accumulate, but the starting point is zero.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-3">
+      <h3>Quick check</h3>
+      <p class="question">
+        Which library has the largest min+gzip bundle size among the four compared?
+      </p>
+      <ul class="quiz-options">
+        <li><button>Ant Design, at over 400 kilobytes</button></li>
+        <li><button>MUI, sitting near ninety-four kilobytes total</button></li>
+        <li><button>Chakra UI, at eighty-nine kilobytes total</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        <strong>Fill out this blank comparison matrix from memory.</strong> Write one row per
+        library using the column headers below, then scroll back up to check your answers
+        against the table.
+      </p>
+      <p>
+        <strong>Columns:</strong> Library | Stars | Bundle | Design System | Figma Kit | Code Ownership | Best For
+      </p>
+      <textarea rows="8" placeholder="shadcn/ui | ? | ? | ? | ? | ? | ?&#10;MUI       | ? | ? | ? | ? | ? | ?&#10;Chakra UI | ? | ? | ? | ? | ? | ?&#10;Ant Design| ? | ? | ? | ? | ? | ?"></textarea>
+    </div>
+
+    <hr />
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Ask your tutor: "Why would a team that values a Figma-to-code handoff still choose
+      shadcn/ui over MUI?" or "When does Ant Design's 429 KB cost stop being a blocker?"
+    </p>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0002-five-principles.html">← Five Core Principles</a>
+      <a href="0004-pros-cons.html" class="primary">Next: Pros and Cons →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-3', 0, 'Ant Design ships at 429 KB min+gzip — by far the heaviest baseline of the four. MUI is 93.7 KB and Chakra is 89 KB. shadcn/ui has no fixed baseline because only the components you copy into your project are included in the bundle.');
+  </script>
+</body>
+</html>

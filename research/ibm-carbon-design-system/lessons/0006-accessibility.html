@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessibility in Carbon — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header block -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> &rsaquo;
+        Module 2 — Layout, Motion, and Accessibility &rsaquo;
+        Lesson 6 of 12
+      </div>
+      <h1>Accessibility in Carbon</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — Layout, Motion, and Accessibility</span>
+        <span>Lesson 6 of 12</span>
+        <span>~13 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">IBM Carbon Design System — Accessibility Guidelines</div>
+      <div class="source-result">
+        Drawn from Carbon's official accessibility documentation, IBM's Accessibility Checklist,
+        WCAG 2.1 AA requirements, and component-level guidance for buttons and interactive elements.
+        All contrast ratios and tool recommendations are sourced directly from Carbon and IBM's
+        published standards.
+      </div>
+    </div>
+
+    <!-- Section 1: Why accessibility is built in -->
+    <h2>Why Accessibility Is Built into Carbon by Default</h2>
+
+    <p>
+      Carbon is built on the conviction that digital experiences should work for everyone.
+      This is not a policy aspiration added after the fact — it is an architectural commitment
+      baked into every component, every color token, and every interaction pattern from the start.
+      IBM's Accessibility Checklist, which drives Carbon's standards, covers both the W3C's
+      Web Content Accessibility Guidelines (WCAG) AA level and the United States Section 508
+      federal requirements.
+    </p>
+
+    <p>
+      When a design system handles accessibility at the component level, individual product teams
+      no longer need to re-solve the same problems in isolation. A button component that ships with
+      a visible focus ring, keyboard interactivity, and proper ARIA semantics means every team that
+      uses it inherits those properties automatically. This approach shifts accessibility from a
+      checklist that teams rush through before launch into a baseline guarantee that the system
+      maintains on their behalf.
+    </p>
+
+    <p>
+      Carbon's commitment also reflects a business and ethical reality: accessibility is not
+      optional for IBM. As a global enterprise selling software and services to governments,
+      healthcare organizations, and regulated industries, Section 508 compliance is a contractual
+      requirement in many procurement contexts. Building accessibility into the design system
+      protects every team that ships on top of it.
+    </p>
+
+    <!-- Section 2: The six user groups -->
+    <h2>The Six User Groups Carbon Designs For</h2>
+
+    <p>
+      Accessibility thinking starts with understanding who is affected and how. Carbon identifies
+      six primary user groups, each with distinct needs that map to concrete design decisions.
+      Designing well for all six groups is not an exercise in edge-case coverage — it produces
+      interfaces that work better for the entire population.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User group</th>
+          <th>Primary need</th>
+          <th>Real-world scenario</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Blind users</strong></td>
+          <td>Visual content must translate to meaningful text</td>
+          <td>A screen reader user navigating a data table needs column headers and row labels to be programmatically associated so the software can announce "Revenue, Q3, $4.2M" rather than just reading numbers out of context.</td>
+        </tr>
+        <tr>
+          <td><strong>Low-vision users</strong> (~4% of population)</td>
+          <td>Readability, visual clarity, logical page order</td>
+          <td>A user with macular degeneration zooms the browser to 200%. Content must reflow without horizontal scrolling and maintain a logical reading order so they do not miss critical actions.</td>
+        </tr>
+        <tr>
+          <td><strong>Color-blind users</strong></td>
+          <td>Information must not rely solely on color</td>
+          <td>A form that marks required fields only in red is invisible to users with deuteranopia. An asterisk or "Required" label alongside the red indicator ensures the message is conveyed through multiple channels.</td>
+        </tr>
+        <tr>
+          <td><strong>Deaf and hard-of-hearing users</strong></td>
+          <td>Audio content must have text alternatives</td>
+          <td>A product walkthrough video without captions excludes users who are deaf and also those watching in a noisy open-plan office with the sound off.</td>
+        </tr>
+        <tr>
+          <td><strong>Users with physical disabilities</strong></td>
+          <td>Full keyboard navigation without a mouse</td>
+          <td>A user with limited hand mobility navigates entirely via keyboard or switch device. Every action reachable by mouse must also be reachable by Tab, Enter, Space, and arrow keys.</td>
+        </tr>
+        <tr>
+          <td><strong>Users with cognitive disabilities</strong></td>
+          <td>Minimized complexity, no autoplay, reduced cognitive load</td>
+          <td>Autoplay carousels and animated banners fragment attention and can trigger seizures. Keeping interactions predictable and reducing the number of simultaneous decisions lowers error rates for everyone.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Notice that these groups are not mutually exclusive. A user recovering from a stroke may
+      have both visual and cognitive considerations. An aging professional may have low vision
+      and reduced fine motor control simultaneously. Designing for the full spectrum of human
+      diversity means the system must be robust enough to handle overlapping needs — not just
+      the cleanest single-disability scenario.
+    </p>
+
+    <!-- Section 3: WCAG 2.1 AA and Section 508 -->
+    <h2>WCAG 2.1 AA and Section 508 — What They Mean in Practice</h2>
+
+    <p>
+      The W3C's Web Content Accessibility Guidelines (WCAG) are the global benchmark for digital
+      accessibility. WCAG 2.1 AA is the level Carbon targets. "AA" sits in the middle of a
+      three-tier system: Level A covers the most critical barriers (content that is completely
+      inaccessible without it), Level AA adds a broader set of requirements that make content
+      usable by a wide range of people, and Level AAA represents the highest and most stringent
+      standard, which is impractical to meet for all content. AA is the tier required by most
+      governments, major accessibility laws, and enterprise procurement standards.
+    </p>
+
+    <p>
+      Section 508 is a United States federal statute requiring federal agencies and organizations
+      receiving federal funding to make their electronic and information technology accessible.
+      In practice, Section 508's technical requirements closely follow WCAG 2.1 AA, so an
+      interface that meets one standard is largely compliant with the other. IBM's Accessibility
+      Checklist unifies both into a single reference.
+    </p>
+
+    <p>
+      For Carbon teams, the most tangible WCAG 2.1 AA requirements translate into three
+      concrete engineering concerns. First, <strong>contrast ratios</strong>: small text (below
+      24px) requires a minimum contrast ratio of 4.5:1 between text and background; large text
+      and graphical elements above 24px require a minimum of 3:1. Second,
+      <strong>focus states</strong>: every interactive element must have a visible focus
+      indicator meeting a 3:1 contrast minimum — Carbon often implements this using a
+      <code>$focus-inset</code> border as a visual buffer so the ring reads clearly against
+      any background color. Third, <strong>keyboard operability</strong>: all functionality
+      available by mouse must also be reachable and operable by keyboard alone, without
+      time constraints.
+    </p>
+
+    <!-- Section 4: Tools for testing -->
+    <h2>Tools for Testing Accessibility</h2>
+
+    <p>
+      Carbon recommends a small set of well-regarded tools that span automated detection,
+      manual review, and design-phase checks. No single tool catches everything — automated
+      scanners typically surface around 30–40% of real accessibility issues. The remainder
+      require human judgment, particularly around semantic meaning, logical reading order,
+      and the quality of alternative text.
+    </p>
+
+    <ul>
+      <li>
+        <strong>IBM Equal Access Toolkit</strong> — IBM's own open-source browser extension
+        and automated checker. It integrates with the CI pipeline and provides rule-level
+        explanations linked back to IBM's Accessibility Checklist. It is the primary tool
+        Carbon teams use for automated scanning.
+      </li>
+      <li>
+        <strong>High Contrast Chrome plugin</strong> — Simulates high-contrast display modes
+        in the browser, revealing whether interfaces remain usable when OS-level contrast
+        overrides are active. Essential for validating that decorative color is not the only
+        carrier of meaning.
+      </li>
+      <li>
+        <strong>Stark (Figma plugin)</strong> — Adds contrast checking, colorblindness
+        simulation, and focus order visualization directly inside Figma. Catching issues
+        at the design stage is orders of magnitude cheaper than fixing them after development.
+      </li>
+      <li>
+        <strong>Color contrast checker</strong> — A generic category of tools (browser
+        extensions, web apps, and command-line utilities) that compute the exact luminance
+        ratio between two colors. Used to verify custom token combinations before they ship.
+      </li>
+    </ul>
+
+    <p>
+      A mature accessibility testing workflow pairs automated tools with manual keyboard
+      walkthroughs and screen reader testing. For screen readers, the most common combinations
+      are NVDA with Firefox on Windows, JAWS with Chrome on Windows, and VoiceOver with Safari
+      on macOS and iOS. Because each screen reader interprets the DOM somewhat differently,
+      testing with at least two is best practice for critical workflows.
+    </p>
+
+    <!-- Section 5: The universal benefit argument -->
+    <h2>The Universal Benefit Argument</h2>
+
+    <p>
+      A persistent misconception about accessibility is that it is a specialized concern
+      benefiting only a small minority of users. The data does not support this view.
+      Approximately 4% of the global population has some form of low vision — a group larger
+      than the population of most European countries. When you add users with color vision
+      deficiency, situational impairments (a broken arm, bright sunlight), and temporary
+      impairments (post-surgery recovery, eye strain from a long flight), the proportion of
+      users who benefit from accessibility improvements at any given moment is substantial.
+    </p>
+
+    <p>
+      Carbon's documentation makes the case explicitly: most accessibility improvements help
+      all users. Higher contrast text is easier to read outdoors on a mobile screen in sunlight —
+      even for users with perfect vision. Keyboard navigation shortcuts dramatically accelerate
+      productivity for power users who rarely touch the mouse. Reduced cognitive load and
+      clearer information hierarchy lower error rates across the board, not only for users
+      with cognitive disabilities. Captions on videos benefit users in noisy environments just
+      as they benefit deaf users.
+    </p>
+
+    <p>
+      This reframe is strategically important for design teams. When accessibility is positioned
+      as "helping disabled users," it can feel like an optional charitable act — something teams
+      squeeze in if budget and time allow. When it is positioned as "making the product better
+      for every user in every context," it becomes a quality standard that no serious team would
+      deprioritize. Carbon embeds this philosophy into its component defaults so teams default
+      toward quality without having to make the argument on every project.
+    </p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key insight</div>
+      <p>
+        Accessibility built into a design system at the component level is fundamentally more
+        reliable and scalable than accessibility enforced through audits and retrofits. Carbon's
+        approach — shipping every component with visible focus states, semantic markup, keyboard
+        support, and WCAG-compliant contrast tokens — means teams inherit compliance rather than
+        earning it separately on every product.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Warning</div>
+      <p>
+        Treating accessibility as a bolt-on phase — "we'll add accessibility after the feature
+        ships" — consistently produces worse outcomes at higher cost. Retrofitting focus states,
+        semantic structure, and keyboard navigation into a finished interface can require
+        dismantling layout decisions that were not designed with those constraints in mind.
+        Beyond technical debt, late accessibility fixes risk violating legal requirements that
+        apply from the moment a product is publicly available.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-6">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>What is the required contrast ratio for small text (below 24px) per WCAG 2.1 AA?</h3>
+      <div class="quiz-options">
+        <button type="button">A four point five ratio</button>
+        <button type="button">A three point zero ratio</button>
+        <button type="button">A seven point one ratio</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill exercise</div>
+      <h3>Accessibility audit — button pass/fail report</h3>
+      <p>
+        Audit this button scenario against three accessibility criteria and write PASS or FAIL
+        for each:
+      </p>
+      <p>
+        (1) A button labeled "Submit" with a check icon — does it have a tooltip?<br />
+        (2) A primary action button — is its focus ring visible when tabbing to it?<br />
+        (3) A button labeled "Delete" — does it follow the verb+noun label rule?
+      </p>
+      <p>
+        For each item, write your verdict (PASS or FAIL) and one sentence explaining your
+        reasoning based on Carbon's accessibility requirements.
+      </p>
+      <textarea placeholder="(1) PASS/FAIL — reason&#10;(2) PASS/FAIL — reason&#10;(3) PASS/FAIL — reason"></textarea>
+    </div>
+
+    <!-- Lesson navigation -->
+    <nav class="lesson-nav">
+      <a href="0005-motion-design.html">&larr; Prev: Motion Design</a>
+      <a href="0007-component-library.html" class="primary">Next: Component Library &rarr;</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Open a conversation with Claude and paste your exercise
+      answers. Ask: "Review my accessibility pass/fail audit against Carbon's button guidelines —
+      did I apply the tooltip requirement, focus state rule, and verb+noun label convention
+      correctly?" You can also ask: "What are the most common WCAG 2.1 AA failures in real
+      Carbon-based products, and how does the Equal Access Toolkit surface them?"
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-6',
+      0,
+      'WCAG 2.1 AA requires 4.5:1 contrast for small text (below 24px). The 3:1 ratio applies to large text and graphical elements.'
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 7: Narrowing and Discriminated Unions — Learning TypeScript</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Learning TypeScript</a> /
+        Module 2 — The Type System / Lesson 7 of 13
+      </div>
+      <h1>Narrowing and Discriminated Unions</h1>
+      <div class="lesson-meta">
+        <span>Module 2</span>
+        <span>~25 min</span>
+        <span>typeof · instanceof · in · discriminated unions · never · type predicates</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ────────────────────────────────────── -->
+    <div class="source-card">
+      <strong>Primary Source</strong>
+      <a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" target="_blank" rel="noopener">
+        TypeScript Handbook — Narrowing
+      </a><br />
+      Control-flow narrows types; discriminated unions replace <code>instanceof</code> chains;
+      <code>never</code> enforces exhaustiveness; user-defined predicates (<code>pet is Fish</code>)
+      extend narrowing to arbitrary conditions.
+    </div>
+
+    <!-- ── 1. typeof guards ───────────────────────────────── -->
+    <h2>1. <code>typeof</code> Type Guards</h2>
+
+    <p>
+      TypeScript understands the eight values <code>typeof</code> can return and narrows the type
+      inside each branch accordingly. If you write <code>typeof x === "string"</code>, TypeScript
+      treats <code>x</code> as <code>string</code> for the rest of that block — no cast required.
+    </p>
+
+    <pre><code>function padLeft(value: string, padding: string | number): string {
+  if (typeof padding === "number") {
+    // padding is narrowed to number here
+    return " ".repeat(padding) + value;
+  }
+  // padding is narrowed to string here
+  return padding + value;
+}</code></pre>
+
+    <p>
+      The narrowing is bidirectional: TypeScript also knows what type remains in an <code>else</code>
+      branch. If <code>x</code> is <code>string | number</code> and the <code>if</code> checks
+      <code>typeof x === "string"</code>, then inside <code>else</code>, <code>x</code> is
+      unambiguously <code>number</code>.
+    </p>
+
+    <div class="callout warning">
+      In JavaScript, <code>typeof null === "object"</code> — this is a 25-year-old language bug
+      that TypeScript inherits. A <code>typeof x === "object"</code> guard does <em>not</em>
+      eliminate <code>null</code>; you must combine it with a truthiness check
+      (<code>x !== null</code>) to safely treat <code>x</code> as a real object. Skipping this
+      step leads to silent runtime errors even with strict mode on.
+    </div>
+
+    <pre><code>function processValue(x: string | null) {
+  // WRONG — typeof null === "object" in JS
+  if (typeof x === "object") {
+    console.log(x.toUpperCase()); // runtime crash if x is null
+  }
+
+  // CORRECT — combine with null check
+  if (x !== null) {
+    console.log(x.toUpperCase()); // x is string here, safe
+  }
+}</code></pre>
+
+    <!-- ── 2. instanceof ──────────────────────────────────── -->
+    <h2>2. <code>instanceof</code> Narrowing</h2>
+
+    <p>
+      <code>instanceof</code> works exactly as it does in Java: it checks whether a value was
+      constructed by a particular class. TypeScript narrows the type inside an
+      <code>instanceof</code> branch to that class. The runtime check and the compile-time
+      narrowing happen together.
+    </p>
+
+    <pre><code>class NetworkError {
+  constructor(public statusCode: number) {}
+}
+
+class ValidationError {
+  constructor(public field: string) {}
+}
+
+function handleError(err: NetworkError | ValidationError) {
+  if (err instanceof NetworkError) {
+    // err is NetworkError — .statusCode is available
+    console.log("HTTP", err.statusCode);
+  } else {
+    // err is ValidationError — .field is available
+    console.log("Bad field:", err.field);
+  }
+}</code></pre>
+
+    <p>
+      One important difference from Java: because TypeScript's type system is structural, two
+      classes with identical shapes are interchangeable at the type level — but
+      <code>instanceof</code> still checks the actual constructor chain at runtime. The two are
+      independent.
+    </p>
+
+    <!-- ── 3. in operator ─────────────────────────────────── -->
+    <h2>3. The <code>in</code> Operator</h2>
+
+    <p>
+      When union members are plain objects (not class instances), you cannot use
+      <code>instanceof</code>. The <code>in</code> operator checks whether a property exists on
+      an object, and TypeScript uses that to narrow the union.
+    </p>
+
+    <pre><code>type Fish = { swim: () => void };
+type Bird = { fly: () => void };
+
+function move(animal: Fish | Bird) {
+  if ("swim" in animal) {
+    // animal is Fish here
+    animal.swim();
+  } else {
+    // animal is Bird here
+    animal.fly();
+  }
+}</code></pre>
+
+    <p>
+      This is especially useful when you are working with plain data objects from an API or JSON
+      payload where a class hierarchy is not available or appropriate.
+    </p>
+
+    <!-- ── 4. Discriminated unions ────────────────────────── -->
+    <h2>4. Discriminated Unions</h2>
+
+    <p>
+      A discriminated union (sometimes called a <em>tagged union</em>) is a union of types that
+      each carry a shared literal-type property — the <em>discriminant</em>. TypeScript uses the
+      value of that literal to narrow the entire union in a <code>switch</code> or
+      <code>if</code> chain.
+    </p>
+
+    <pre><code>type Circle = {
+  kind: "circle";
+  radius: number;
+};
+
+type Square = {
+  kind: "square";
+  sideLength: number;
+};
+
+type Shape = Circle | Square;
+
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      // shape is Circle here — .radius is available
+      return Math.PI * shape.radius ** 2;
+    case "square":
+      // shape is Square here — .sideLength is available
+      return shape.sideLength ** 2;
+  }
+}</code></pre>
+
+    <p>
+      The discriminant (<code>kind</code>) must be a <em>literal type</em> — a specific string,
+      number, or boolean value — not just <code>string</code>. That precision is what lets
+      TypeScript eliminate possibilities case-by-case.
+    </p>
+
+    <!-- ── 5. never + exhaustiveness ─────────────────────── -->
+    <h2>5. The <code>never</code> Type and Exhaustiveness Checking</h2>
+
+    <p>
+      When TypeScript narrows a union down to nothing — every member accounted for — the remaining
+      type is <code>never</code>. You can exploit this to enforce <em>exhaustiveness</em>: if you
+      add a new union member without updating the switch, the assignment to <code>never</code>
+      becomes a compile error, catching the omission at build time.
+    </p>
+
+    <pre><code>type Circle = { kind: "circle"; radius: number };
+type Square = { kind: "square"; sideLength: number };
+type Triangle = { kind: "triangle"; base: number; height: number };
+
+// Add Triangle to the union and every switch without a "triangle"
+// case immediately reports a compile error.
+type Shape = Circle | Square | Triangle;
+
+function assertNever(x: never): never {
+  throw new Error("Unhandled case: " + JSON.stringify(x));
+}
+
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+    case "square":
+      return shape.sideLength ** 2;
+    // Without a "triangle" case, the next line is a compile error:
+    // Argument of type 'Triangle' is not assignable to parameter
+    // of type 'never'.
+    default:
+      return assertNever(shape);
+  }
+}</code></pre>
+
+    <p>
+      The pattern is: define a helper <code>assertNever(x: never): never</code>, call it in the
+      <code>default</code> branch, and TypeScript enforces that <code>shape</code> must be
+      <code>never</code> there. As soon as a new shape is added, the compiler tells you exactly
+      which switch needs a new case.
+    </p>
+
+    <div class="callout key">
+      Discriminated unions with a <code>never</code> exhaustiveness check replace the fragile
+      <code>instanceof</code> chain common in Java. In Java you write
+      <code>if (shape instanceof Circle) … else if (shape instanceof Square) …</code> with no
+      compiler guarantee that all subtypes are covered. TypeScript's discriminated union gives
+      you the same pattern with a <em>compile-time proof</em> of completeness — add a new variant
+      and the build breaks until every switch is updated.
+    </div>
+
+    <!-- ── 6. User-defined type predicates ───────────────── -->
+    <h2>6. User-Defined Type Predicates</h2>
+
+    <p>
+      Sometimes none of the built-in narrowing operators fit. You can write your own narrowing
+      function using a <em>type predicate</em> return type: <code>value is SomeType</code>.
+      When the function returns <code>true</code>, TypeScript narrows the argument to
+      <code>SomeType</code> in the calling scope.
+    </p>
+
+    <pre><code>type Fish = { swim: () => void };
+type Cat  = { meow: () => void };
+
+function isFish(pet: Fish | Cat): pet is Fish {
+  return (pet as Fish).swim !== undefined;
+}
+
+function interact(pet: Fish | Cat) {
+  if (isFish(pet)) {
+    // pet is Fish here
+    pet.swim();
+  } else {
+    // pet is Cat here
+    pet.meow();
+  }
+}</code></pre>
+
+    <p>
+      The predicate form is useful for validating data at a system boundary — for example,
+      asserting that a parsed JSON value matches a known shape — without reaching for
+      <code>as</code> casts that suppress the type checker silently.
+    </p>
+
+    <!-- ── 7. Control flow analysis ───────────────────────── -->
+    <h2>7. Control Flow Analysis</h2>
+
+    <p>
+      TypeScript tracks narrowing through the <em>entire control flow</em> of a function, not
+      just inside a single <code>if</code> block. It handles early returns, loops, assignments,
+      and label-based breaks.
+    </p>
+
+    <pre><code>function example(x: string | number | boolean) {
+  // x: string | number | boolean
+
+  if (typeof x === "string") {
+    return x.toUpperCase(); // x: string — early return exits
+  }
+
+  // x: number | boolean — string branch already returned
+
+  if (typeof x === "number") {
+    return x.toFixed(2);   // x: number — early return exits
+  }
+
+  // x: boolean — only possibility left
+  return x ? "yes" : "no";
+}</code></pre>
+
+    <p>
+      Assignments also reset narrowing. If you narrow <code>x</code> to <code>string</code>
+      and then write <code>x = someNumberVariable</code>, TypeScript widens the type back to
+      whatever <code>someNumberVariable</code>'s type is. The narrowed type is not permanent —
+      it tracks the actual flow of values through your code.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Technique</th>
+          <th>Best for</th>
+          <th>Java equivalent</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>typeof</code></td>
+          <td>Primitive types (string, number, boolean)</td>
+          <td><code>instanceof String</code> (but rarely used)</td>
+        </tr>
+        <tr>
+          <td><code>instanceof</code></td>
+          <td>Class instances</td>
+          <td><code>instanceof ClassName</code></td>
+        </tr>
+        <tr>
+          <td><code>in</code></td>
+          <td>Plain object shapes without a class</td>
+          <td>No direct equivalent</td>
+        </tr>
+        <tr>
+          <td>Discriminated union</td>
+          <td>Closed sets of variants with a shared tag field</td>
+          <td>Sealed class hierarchy (Java 17+)</td>
+        </tr>
+        <tr>
+          <td>Type predicate</td>
+          <td>Custom runtime validation logic</td>
+          <td>No direct equivalent</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ── Quiz ───────────────────────────────────────────── -->
+    <div class="quiz" id="quiz-7">
+      <h3>Quick check</h3>
+      <p>
+        When every branch of a switch handles one union member, what type does TypeScript assign
+        to the value in the <code>default</code> block?
+      </p>
+      <div class="quiz-options">
+        <button>never, since all members have been fully narrowed</button>
+        <button>void, since the block cannot execute any code</button>
+        <button>any, since no specific union member is left</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ───────────────────────────────────────── -->
+    <div class="exercise">
+      <h3>Exercise — Exhaustive Shape Switch</h3>
+      <p>
+        Work through these steps in the textarea below (or in a local <code>.ts</code> file with
+        strict mode on):
+      </p>
+      <ol>
+        <li>
+          Define a <code>Circle</code> type (<code>kind: "circle"</code>, <code>radius: number</code>)
+          and a <code>Square</code> type (<code>kind: "square"</code>, <code>sideLength: number</code>).
+          Combine them into a <code>Shape</code> union.
+        </li>
+        <li>
+          Write a <code>getArea(shape: Shape): number</code> function with an exhaustive
+          <code>switch</code> on <code>shape.kind</code>. Add an <code>assertNever</code> helper
+          and call it in the <code>default</code> branch.
+        </li>
+        <li>
+          Verify it compiles cleanly with just <code>Circle | Square</code>.
+        </li>
+        <li>
+          Add <code>Triangle</code> (<code>kind: "triangle"</code>, <code>base: number</code>,
+          <code>height: number</code>) to the <code>Shape</code> union without adding a case to
+          the switch. Note the compile error TypeScript reports at the <code>assertNever</code>
+          call — then fix it by adding the missing case.
+        </li>
+      </ol>
+      <textarea placeholder="// Step 1 — define Circle, Square, Shape
+type Circle = { kind: 'circle'; radius: number };
+type Square = { kind: 'square'; sideLength: number };
+type Shape = Circle | Square;
+
+// Step 2 — assertNever helper
+function assertNever(x: never): never {
+  throw new Error('Unhandled shape: ' + JSON.stringify(x));
+}
+
+// Step 3 — exhaustive getArea
+function getArea(shape: Shape): number {
+  switch (shape.kind) {
+    case 'circle':
+      return Math.PI * shape.radius ** 2;
+    case 'square':
+      return shape.sideLength ** 2;
+    default:
+      return assertNever(shape); // no error — all cases covered
+  }
+}
+
+// Step 4 — add Triangle and watch the compile error appear
+type Triangle = { kind: 'triangle'; base: number; height: number };
+// type Shape = Circle | Square | Triangle;
+// Uncommenting the line above causes a compile error at assertNever(shape)
+// until you add: case 'triangle': return 0.5 * shape.base * shape.height;
+"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ───────────────────────────────────── -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> "Why does adding a new type to a discriminated union break
+      the switch even though I haven't changed the switch code? Walk me through what
+      <code>never</code> actually means and why passing a <code>Triangle</code> to
+      <code>assertNever</code> is a compile error."
+    </div>
+
+    <!-- ── Nav ────────────────────────────────────────────── -->
+    <nav class="lesson-nav">
+      <a href="0006-generics.html">&larr; Lesson 6: Generics</a>
+      <a href="0008-function-types.html" class="primary">Lesson 8: Function Types &rarr;</a>
+    </nav>
+
+  </div><!-- .container -->
+
+  <!-- ── Scripts ────────────────────────────────────────── -->
+  <script src="../assets/quiz.js"></script>
+  <script>
+    // correctIndex 0 = "never, since all members have been fully narrowed"
+    initQuiz(
+      'quiz-7',
+      0,
+      'Correct. When every union member has a dedicated case, TypeScript narrows ' +
+      'the remaining type to never — a type with no values. Passing that never ' +
+      'value to assertNever(x: never) is what triggers the compile error when a ' +
+      'new union member is added without a matching case.'
+    );
+  </script>
+</body>
+</html>

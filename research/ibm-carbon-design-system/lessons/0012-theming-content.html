@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theming, Customization, and Content Writing — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header block -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> &rsaquo;
+        Module 4 — Building with Carbon &rsaquo;
+        Lesson 12 of 12
+      </div>
+      <h1>Theming, Customization, and Content Writing</h1>
+      <div class="lesson-meta">
+        <span>Module 4 — Building with Carbon</span>
+        <span>Lesson 12 of 12 — Final Lesson</span>
+        <span>~16 min</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">IBM Carbon Design System — Theming, Token System, and Content Guidelines</div>
+      <div class="source-result">
+        Drawn from Carbon's official theming documentation, the <code>@carbon/react</code> Sass API,
+        and IBM's published content and voice guidelines. Token structures and Sass syntax are sourced
+        from the <code>@carbon/themes</code> package. IBM voice and tone guidance is sourced from
+        IBM's Content Design documentation. No facts have been added beyond these published sources.
+      </div>
+    </div>
+
+    <!-- Section 1: How Carbon's theming system works -->
+    <h2>How Carbon's Theming System Works</h2>
+
+    <p>
+      Carbon's theming system is built on a single core principle: tokens are the only stable
+      surface you should touch when customizing appearance. A token is a named design decision —
+      <code>background</code>, <code>text-primary</code>, <code>interactive</code> — that maps to
+      a specific value in a given theme. Change the token once, and the new value propagates
+      automatically across every component that references it. This is the correct, supported way
+      to customize Carbon.
+    </p>
+
+    <p>
+      The alternative — writing raw CSS overrides that target component class names directly —
+      is explicitly discouraged. Component class names are implementation details, not a public API.
+      They can change between Carbon releases without notice. A product that relies on direct CSS
+      overrides will regularly break during upgrades, requiring manual patching of every affected
+      selector. Token overrides, by contrast, are guaranteed to remain semantically stable: the
+      token <code>background</code> will always control the surface color, regardless of what
+      internal class structure changes underneath.
+    </p>
+
+    <p>
+      Tokens also nest internally. For example, the <code>$interactive</code> token references
+      <code>$blue-60</code> under the hood. When you override a high-level token like
+      <code>$interactive</code>, you do not need to know or touch the low-level palette value it
+      resolves to. This layered architecture keeps customization ergonomic while preserving the
+      system's coherence. The full list of available tokens is published in the
+      <code>@carbon/themes</code> package on GitHub, organized into four categories: Color,
+      Spacing, Typography, and Global (which covers border widths, layer usage, and similar
+      structural properties).
+    </p>
+
+    <!-- Section 2: Using the four built-in themes -->
+    <h2>Using the Four Built-In Themes</h2>
+
+    <p>
+      Carbon ships with four built-in themes out of the box: White (the default light theme),
+      Gray 10 (a softer light variant), Gray 90 (a dark theme), and Gray 100 (the darkest variant,
+      suited to high-contrast dark interfaces). These four themes cover the most common light and
+      dark mode use cases without requiring any custom token work. Each theme is a complete,
+      coherent token set — switching between them changes not just background colors but the entire
+      cascade of interactive, text, border, and layer tokens simultaneously.
+    </p>
+
+    <p>
+      To switch from the default White theme to a different built-in theme, you use the Sass
+      <code>@use ... with</code> syntax at the top of your stylesheet. The following example
+      applies the Gray 100 dark theme across your entire application:
+    </p>
+
+<pre><code>@use '@carbon/react/scss/theme' with ($theme: themes.$g100);</code></pre>
+
+    <p>
+      This single declaration is all that is required to switch the entire token set. No component
+      code changes are needed. Because every Carbon component reads from the same token layer, the
+      theme change flows through automatically. The four available theme variables from the
+      <code>themes</code> namespace are <code>$white</code>, <code>$g10</code>, <code>$g90</code>,
+      and <code>$g100</code>. White is the default, so you only need to declare it explicitly if
+      you are overriding a parent stylesheet that has set a different theme.
+    </p>
+
+    <!-- Section 3: Creating custom themes with Sass token overrides -->
+    <h2>Creating Custom Themes with Sass Token Overrides</h2>
+
+    <p>
+      When none of the four built-in themes fit your product's brand, you can create a custom
+      theme by providing a token map to the same <code>$theme</code> parameter. You only need to
+      specify the tokens you want to override — all other tokens continue to resolve to the values
+      defined in the base theme you are building on top of. This makes partial overrides safe and
+      minimal: you change what matters for your brand, and Carbon handles the rest.
+    </p>
+
+    <p>
+      The following example creates a custom theme that overrides the background surface, the
+      primary text color, and introduces a product-specific custom token:
+    </p>
+
+<pre><code>@use '@carbon/react/scss/theme' with (
+  $theme: (
+    background: #e2e2e2,
+    text-primary: #1a1a1a,
+    custom-token-01: #000000
+  )
+);</code></pre>
+
+    <p>
+      A few details are worth understanding here. First, the <code>with</code> keyword is a Sass
+      module configuration feature introduced in Sass modules (the <code>@use</code> system). It
+      lets you pass named configuration values to a module at the point it is loaded — you can only
+      do this once, at the top of the first file that imports the module. This is different from
+      overriding a variable after the fact, and it is how Carbon intentionally exposes its
+      configuration surface. Second, custom tokens like <code>custom-token-01</code> can be defined
+      in the same map — they become part of your product's token vocabulary and can be used
+      alongside Carbon's built-in tokens in your own component styles. Third, the four token
+      categories — Color, Spacing, Typography, and Global — cover everything Carbon controls.
+      The complete token reference in the <code>@carbon/themes</code> package on GitHub documents
+      every token name, its semantic meaning, and the value it resolves to in each built-in theme.
+    </p>
+
+    <!-- Section 4: IBM voice — what makes it distinct -->
+    <h2>IBM Voice: What Makes It Distinct</h2>
+
+    <p>
+      IBM's content voice is defined by a set of characteristics that distinguish it from both
+      bland corporate language and overly casual marketing copy. The core positioning is:
+      <em>persuasive, not poetic</em>. IBM products communicate with data, logic, and directness
+      rather than with metaphor or emotional appeal. The voice is confident without boasting,
+      simple without being condescending, and always oriented toward outcomes the user cares about
+      rather than features the product wants to advertise.
+    </p>
+
+    <p>
+      IBM's content guidelines describe the voice as treating users as intellectual equals. This
+      has a practical implication: you do not explain obvious things at length, you do not hedge
+      every statement with qualifications, and you do not pad content with filler phrases. If a
+      task requires three steps, you list three steps clearly. If an error has a specific cause,
+      you name the cause. Specificity is a form of respect. Vagueness — "something went wrong,"
+      "an error occurred," "please try again" — forces the user to do investigative work the
+      product should have done for them.
+    </p>
+
+    <p>
+      The distinction between voice and tone is important here. <strong>Voice</strong> is the
+      persistent character of the product: clear, fact-focused, direct, and confident. It does not
+      change from screen to screen. <strong>Tone</strong> adapts to context. A voice can be
+      consistently IBM while the tone in an error message is terse and the tone in an onboarding
+      welcome screen is warmer. The voice is a constant; the tone is a setting you adjust for
+      the emotional register of each moment.
+    </p>
+
+    <!-- Section 5: Tone adaptation by context -->
+    <h2>Tone Adaptation by Context</h2>
+
+    <p>
+      Understanding tone adaptation requires thinking about what users are experiencing at each
+      moment. Error messages arrive when something has gone wrong — the user is typically
+      frustrated or confused. The correct tonal response is economical and direct, often
+      phrase-based rather than full sentences. "File not found. Check the path and try again." is
+      better than "We're sorry, but it seems like the file you were looking for could not be
+      located at this time." The shorter version respects the user's time and gets them back on
+      track faster. It is not cold — it is efficient.
+    </p>
+
+    <p>
+      Onboarding flows have a different emotional context. The user is new, possibly uncertain,
+      and deciding whether this product is worth their investment of time. Here, the tone can be
+      warmer and use fuller sentences with friendly explanations. "Welcome to the dashboard. This
+      is where you'll find all your active projects." gives a first-time user spatial orientation
+      without being patronizing. It is still the IBM voice — clear, direct, factual — but the
+      tone is open and welcoming rather than terse.
+    </p>
+
+    <p>
+      IBM's content guidelines frame this as a "conversation" between the product and the user —
+      a dialogue that works alongside visuals and interactions rather than competing with them.
+      Good content writing does not comment on what the interface already shows visually. It adds
+      context, guides action, or acknowledges what just happened. A button labeled "Save file"
+      does not need a tooltip explaining "clicking this button saves the current file" if the
+      action is already clear from context. Words earn their place by doing work that visuals
+      and interactions cannot do on their own.
+    </p>
+
+    <!-- Section 6: UI label rules in practice -->
+    <h2>UI Label Rules in Practice</h2>
+
+    <p>
+      Carbon's content guidelines specify a precise format for button labels, menu items, and
+      form actions: the <code>{verb} + {noun}</code> pattern. The verb states the action;
+      the noun names the object being acted on. "Save file." "Delete record." "Upload document."
+      "Export report." This format is unambiguous and scannable. A user glancing at a toolbar
+      does not need to read full sentences — they need to know what will happen and what it will
+      happen to, in that order.
+    </p>
+
+    <p>
+      Capitalization follows sentence case: only the first word is capitalized. "Get started"
+      not "Get Started". "Upload document" not "Upload Document". Title case — capitalizing
+      every significant word — is a common mistake that makes interfaces feel more formal than
+      IBM's voice intends, and it introduces inconsistency as teams disagree about which words
+      count as "significant." Sentence case is simpler, more consistent, and aligns with how
+      users read natural language.
+    </p>
+
+    <p>
+      A few additional label rules round out the system. Text should never be truncated with an
+      ellipsis — if a label does not fit, the container should expand or the label should be
+      rewritten. Overflow text wraps. Text within buttons and form labels is left-aligned, not
+      centered or right-aligned. All-caps labels — a legacy pattern from early UI design — are
+      prohibited. They are harder to read and convey an unintentionally aggressive or shouting
+      tone that conflicts with IBM's conversational voice. When accessibility intersects with
+      content, the rules compound: form inputs require either a visible label or an
+      <code>aria-label</code>, and error messages must tell users both what happened and what
+      to do next — not just that an error occurred.
+    </p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key insight</div>
+      <p>
+        Always use token overrides to customize Carbon — never override component CSS directly.
+        Token overrides propagate changes coherently across all components that reference the
+        token, keep your customizations upgrade-safe, and work with Carbon's theming architecture
+        as intended. Direct CSS overrides target implementation details that can change at any
+        Carbon release, breaking your product silently during upgrades.
+      </p>
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Warning</div>
+      <p>
+        Overriding component styles directly with raw CSS — for example, targeting
+        <code>.cds--btn--primary</code> to change a button's background color — bypasses the token
+        system entirely. This approach breaks upgrade safety because Carbon component class names
+        are internal implementation details, not a stable public API. After a Carbon minor version
+        bump, those selectors may no longer exist or may no longer target the element you expect.
+        It also breaks system coherence: a direct override applies only to the specific element
+        you targeted, while every other component that shares the same token remains unchanged,
+        creating visual inconsistency across your UI.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-12">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>Which is the correct Carbon-compliant button label format?</h3>
+      <div class="quiz-options">
+        <button type="button">"Save document" verb-noun format</button>
+        <button type="button">"SAVE DOCUMENT" all-caps format</button>
+        <button type="button">"Saving Document" title-case format</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill exercise</div>
+      <h3>IBM voice rewrite and Sass token override</h3>
+      <p>
+        <strong>Part A — Rewrite these five non-compliant UI strings to follow IBM voice
+        guidelines:</strong>
+      </p>
+      <ol>
+        <li><code>SUBMIT FORM</code></li>
+        <li><code>Are You Sure You Want to Delete?</code></li>
+        <li><code>Plz confirm ur action</code></li>
+        <li><code>Deletion</code></li>
+        <li><code>Our Amazing Upload Feature!</code></li>
+      </ol>
+      <p>
+        For each, write the corrected label. Apply the verb+noun format, sentence case,
+        and IBM's direct, fact-focused voice. Remove all-caps, title case, informal
+        abbreviations, and marketing language.
+      </p>
+      <p>
+        <strong>Part B — Write the Sass snippet</strong> to override Carbon's
+        <code>background</code> token to <code>#f0f0f0</code> and <code>text-primary</code>
+        to <code>#161616</code> for a custom theme using the <code>@use ... with</code> syntax.
+      </p>
+      <textarea placeholder="Part A — rewrites:&#10;1. &#10;2. &#10;3. &#10;4. &#10;5. &#10;&#10;Part B — Sass snippet:&#10;@use '@carbon/react/scss/theme' with (&#10;  $theme: (&#10;    ...&#10;  )&#10;);"></textarea>
+    </div>
+
+    <!-- Congratulations section -->
+    <div class="callout key">
+      <div class="callout-label">Course complete</div>
+      <p>
+        You've completed the IBM Carbon Design System course. You now have the foundations to
+        build accessible, consistent React applications using Carbon's components, tokens, and
+        grid system. From color and typography tokens in the early lessons through grid layout,
+        motion, accessibility, and the component library, to theming and content writing here in
+        the final lesson — you have covered the full arc of what Carbon provides and how to work
+        with it correctly. The next step is to apply these patterns in a real project, refer back
+        to the Carbon documentation as you encounter specific components, and use the token system
+        as your customization surface whenever you need to adapt Carbon to your product's brand.
+      </p>
+    </div>
+
+    <!-- Lesson navigation -->
+    <nav class="lesson-nav">
+      <a href="0011-first-page.html">&larr; Prev: Your First Carbon Page</a>
+      <a href="../lessons.md">Back to Curriculum</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Open a conversation with Claude and paste your exercise
+      answers. Ask: "Review my IBM voice rewrites — did I apply sentence case, verb+noun format,
+      and remove non-compliant patterns correctly for each string?" For Part B, ask: "Does my
+      Sass token override snippet correctly use the <code>@use ... with</code> syntax to apply
+      a custom Carbon theme?" You can also ask: "What are common mistakes teams make when first
+      customizing Carbon's theming system, and how does the token approach prevent them?"
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-12',
+      0,
+      'Carbon labels use sentence case with verb+noun format: "Save document". All-caps and title case both violate IBM voice guidelines.'
+    );
+  </script>
+</body>
+</html>

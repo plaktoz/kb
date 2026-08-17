@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payload 2.0 — What Changed and Why It Matters · PayloadCMS Lessons</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">PayloadCMS</a> › Module 1: Foundations › Lesson 2 of 12
+      </div>
+      <h1>Payload 2.0 — What Changed and Why It Matters</h1>
+      <div class="lesson-meta">
+        <span>~10 min</span>
+        <span>Module 1 — Foundations</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-card-label">Primary Source</div>
+      <a href="https://payloadcms.com/blog/payload-2-0" target="_blank" rel="noopener">
+        https://payloadcms.com/blog/payload-2-0
+      </a>
+    </div>
+
+    <!-- Section 1: What Payload 2.0 Is About -->
+    <h2>A Ground-Up Architectural Rethink</h2>
+    <p>
+      Payload 2.0 is not a feature drop — it is a deliberate redesign of how the framework's
+      internal layers connect. The Payload team identified three areas where tight coupling
+      was creating problems: the database driver, the admin panel bundler, and the rich-text
+      editor. Swapping any one of them previously meant patching internals. Version 2.0 solves
+      this by introducing a formal abstraction boundary called the <strong>adapter pattern</strong>.
+    </p>
+    <p>
+      The result is a framework that keeps its stable, code-first API on the surface while
+      letting the layers underneath evolve independently. For developers, this means fewer
+      breaking upgrades and real choices about tooling.
+    </p>
+
+    <!-- Key callout: adapter pattern -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>
+        The adapter pattern is the structural reason that everything else in Payload 2.0
+        is possible. Postgres support, Vite bundling, and the Lexical editor each exist
+        as <em>adapters</em> — pluggable modules that satisfy a shared interface. Adding
+        a new database or editor in the future requires writing a new adapter, not forking
+        the framework.
+      </p>
+    </div>
+
+    <!-- Section 2: Postgres & Drizzle ORM -->
+    <h2>Postgres Support via Drizzle ORM</h2>
+    <p>
+      For the first time, Payload supports a fully relational database. Install the
+      <code>@payloadcms/db-postgres</code> package and pass it as the <code>db</code>
+      adapter in your config — MongoDB remains the default, so existing projects are
+      unaffected.
+    </p>
+    <p>
+      Under the hood, the Postgres adapter uses <strong>Drizzle ORM</strong>. This has
+      concrete consequences for how your schema looks at the database level:
+    </p>
+    <ul>
+      <li>
+        <strong>Arrays create real tables.</strong> In MongoDB, an array field lives inside
+        a document as a JSON array. In Postgres, Payload generates a proper join table,
+        which means you can query individual array items efficiently.
+      </li>
+      <li>
+        <strong>Relationships maintain ordering.</strong> The adapter tracks position so
+        that ordered relationship fields round-trip correctly.
+      </li>
+      <li>
+        <strong>Direct Drizzle access.</strong> You can reach the raw Drizzle client at
+        <code>payload.db.drizzle</code> for custom queries without leaving the Payload
+        request context.
+      </li>
+    </ul>
+
+    <div class="callout warning">
+      <div class="callout-label">Caveat</div>
+      <p>
+        Postgres support shipped as <strong>beta</strong> in Payload 2.0. The schema
+        generation and migration tooling were still stabilising at launch. If you were
+        adopting Payload for a production project at the time of the 2.0 release, MongoDB
+        remained the safer, battle-tested default.
+      </p>
+    </div>
+
+    <!-- Section 3: Lexical Editor -->
+    <h2>The Lexical Rich Text Editor</h2>
+    <p>
+      Payload 1.x used Slate.js for its rich text fields. Slate served well for basic
+      editing but had limitations in extensibility. Payload 2.0 replaces it with
+      <strong>Lexical</strong>, Meta's open-source editor framework.
+    </p>
+    <p>What the switch delivers to content editors:</p>
+    <ul>
+      <li>A <strong>"/" command menu</strong> — type a slash to insert headings, lists, embeds, or custom blocks.</li>
+      <li>A <strong>popup toolbar</strong> — appears on text selection for inline formatting without hunting for a fixed toolbar.</li>
+      <li><strong>Drag-and-drop</strong> reordering of blocks and elements within the editor canvas.</li>
+      <li>
+        <strong>Inline block embedding</strong> — you can place any collection block you have already defined
+        directly inside rich text content, closing the gap between structured data and prose.
+      </li>
+    </ul>
+    <p>
+      For developers, Lexical exposes a node-based plugin architecture. Because it ships as
+      a Payload adapter, you can also swap it out entirely if you need a different editing
+      experience in a specific field.
+    </p>
+
+    <!-- Section 4: Migrations & Transactions -->
+    <h2>Database Migrations and Transaction Support</h2>
+    <p>
+      Payload 2.0 introduces <strong>first-class TypeScript migration support</strong> through
+      seven new CLI commands. The most commonly used are:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Command</th>
+          <th>What it does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>payload migrate:create</code></td>
+          <td>Generates a new TypeScript migration file from schema changes</td>
+        </tr>
+        <tr>
+          <td><code>payload migrate</code></td>
+          <td>Runs all pending migrations against the connected database</td>
+        </tr>
+        <tr>
+          <td><code>payload migrate:down</code></td>
+          <td>Rolls back the most recently applied migration</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      A <strong>push mode</strong> is available for local development: instead of writing a
+      migration file, Payload synchronises the database schema directly from your current
+      config. This keeps development fast — you iterate on collections without managing
+      migration files until you are ready to commit a schema change.
+    </p>
+    <p>
+      On the transaction side, Payload now wraps database operations in transactions
+      automatically where appropriate. If you need to participate in a transaction from a
+      custom hook, the identifier is available at <code>req.transactionID</code>, letting
+      you coordinate multiple writes as a single atomic unit.
+    </p>
+
+    <!-- Section 5: Other Notable Features -->
+    <h2>Other Notable Features in 2.0</h2>
+
+    <h3>Live Preview</h3>
+    <p>
+      Editors can preview content changes in real time directly inside the Payload admin UI,
+      without publishing or switching to a separate browser tab. The preview iframe updates
+      as fields are edited, shortening the feedback loop between writing and seeing the
+      rendered result.
+    </p>
+
+    <h3>Vite Bundler Support</h3>
+    <p>
+      Webpack remains available as the default admin bundler. Vite is now a supported
+      alternative. Switching to Vite is a single adapter change in your config and typically
+      delivers faster hot-module replacement during admin customisation work.
+    </p>
+
+    <h3>Image Cropping and Focal Point Selection</h3>
+    <p>
+      Upload management now ships with built-in cropping tools and focal point controls
+      enabled by default. Content editors can set a focal point directly in the admin panel,
+      which downstream image-processing utilities can read to crop consistently across
+      different aspect ratios.
+    </p>
+
+    <h3>Draft Query Performance</h3>
+    <p>
+      The draft querying system was fully refactored. In Payload 1.x, querying collections
+      with many draft versions could become slow. The 2.0 rewrite delivers consistent
+      performance regardless of how many draft documents exist in a collection.
+    </p>
+
+    <h3>Monorepo and Cross-Database Testing</h3>
+    <p>
+      Payload's own codebase migrated to a PNPM monorepo structure. Integration tests now
+      run against both MongoDB and Postgres on every commit, which means database-specific
+      bugs surface before they reach users rather than after.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-2">
+      <h3>Check Your Understanding</h3>
+      <p class="quiz-question">
+        What was the primary goal of the adapter pattern introduced in Payload 2.0?
+      </p>
+      <div class="quiz-options">
+        <button>Enforce Postgres as the only supported database adapter for all new Payload 2.0 projects.</button>
+        <button>Abstract the database, bundler, and editor so each can swap without breaking the rest.</button>
+        <button>Replace the Slate editor with Lexical and remove support for all legacy database drivers.</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <p>
+        List the three Payload 2.0 features you would use first in a real project and write
+        one sentence explaining why each one matters to you.
+      </p>
+      <textarea placeholder="1. [Feature name] — [why it matters to me]&#10;2. [Feature name] — [why it matters to me]&#10;3. [Feature name] — [why it matters to me]"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Stuck or want to go deeper? Open a conversation with your AI tutor and ask:
+      "Walk me through how I would configure the Postgres adapter in a new Payload project,
+      and explain what happens to my schema the first time I run <code>payload migrate</code>."
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0001-what-is-payloadcms.html">← Lesson 1: What Is PayloadCMS?</a>
+      <a href="0003-installation-setup.html" class="primary">Lesson 3: Installation &amp; Setup →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-2', 1, 'Correct. The adapter pattern\'s purpose is to decouple three major subsystems — the database, the admin bundler, and the rich-text editor — so that each can be replaced or upgraded independently without cascading breaking changes into the rest of your Payload application.');
+  </script>
+</body>
+</html>

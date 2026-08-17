@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Production Best Practices — shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../index.html">shadcn/ui Course</a> ›
+        Module 4 — Customisation &amp; Production Patterns ›
+        Lesson 10 of 10
+      </p>
+      <h1>Production Best Practices</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 4</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      LogRocket Blog — shadcn/ui Adoption Guide (six production patterns)<br />
+      <a href="https://blog.logrocket.com/shadcn-ui-adoption-guide/" target="_blank" rel="noopener">
+        https://blog.logrocket.com/shadcn-ui-adoption-guide/
+      </a>
+    </div>
+
+    <!-- Intro -->
+    <p>
+      You have learned what shadcn/ui is, how it compares to alternatives, how to install and
+      use components, and how theming works. This final lesson pulls it all together with six
+      production-proven patterns — the decisions and habits that separate a polished,
+      maintainable codebase from one that fights you every day.
+    </p>
+
+    <!-- Pattern 1 -->
+    <h2>Pattern 1 — Configure Style with <code>shadcn/create</code> Before <code>init</code></h2>
+
+    <p>
+      Before you run <code>npx shadcn-ui@latest init</code>, use the
+      <strong>shadcn/create</strong> visual configurator to lock in your colors, font stack,
+      spacing scale, and icon set. This matters because several init-time choices —
+      <code>style</code>, <code>baseColor</code>, and whether to use CSS variables — are
+      baked into every component file that the CLI copies into your project. Changing your mind
+      later means manually editing dozens of generated files.
+    </p>
+    <p>
+      Think of <code>shadcn/create</code> as a pre-flight checklist. It generates the correct
+      <code>components.json</code> configuration block so that <code>init</code> copies
+      components already tuned to your brand, not to the neutral default palette.
+    </p>
+
+    <!-- Pattern 2 -->
+    <h2>Pattern 2 — Blocks + Lift Mode</h2>
+
+    <p>
+      shadcn/ui ships with <strong>Blocks</strong>: full page-level templates such as
+      authentication pages, dashboards, and settings screens. They are a fast starting point,
+      but they include every component in that layout — including sub-components you may not
+      need.
+    </p>
+    <p>
+      <strong>Lift Mode</strong> solves this. After adding a Block, you enable Lift Mode in
+      the shadcn/ui registry browser and click the exact sub-components you actually want
+      extracted. The CLI then copies only those pieces into your <code>components/ui/</code>
+      directory. The result is a leaner codebase with no dead code inherited from a template
+      you barely used.
+    </p>
+
+    <div class="callout warning">
+      <p>
+        Do not blindly import an entire Block into your project. Blocks are composed of many
+        nested components, and importing the whole thing means carrying code you will never
+        use. Enable Lift Mode and take only what you need.
+      </p>
+    </div>
+
+    <!-- Pattern 3 -->
+    <h2>Pattern 3 — Form + react-hook-form + Zod</h2>
+
+    <p>
+      The shadcn/ui <strong>Form</strong> component is a thin, accessible wrapper around
+      <a href="https://react-hook-form.com/" target="_blank" rel="noopener">react-hook-form</a>.
+      It provides <code>FormField</code>, <code>FormItem</code>, <code>FormLabel</code>,
+      <code>FormControl</code>, <code>FormDescription</code>, and <code>FormMessage</code>
+      sub-components that wire directly into the hook-form context — meaning accessible
+      labels, error messages, and ARIA attributes are handled for you.
+    </p>
+    <p>
+      The recommended validation layer is <strong>Zod</strong> (or Yup as an alternative).
+      Zod schemas describe the shape and constraints of your form data — required fields,
+      minimum lengths, email formats, password rules — in pure TypeScript. You pass the
+      schema to <code>useForm</code> via a resolver, and react-hook-form enforces those rules
+      on submit (and optionally on change).
+    </p>
+    <p>
+      The data flow looks like this:
+    </p>
+    <ol>
+      <li>Define a Zod schema that describes valid form data.</li>
+      <li>Pass the schema to <code>useForm({ resolver: zodResolver(schema) })</code>.</li>
+      <li>Render <code>&lt;Form&gt;</code> and its sub-components, binding each field via <code>FormField</code>.</li>
+      <li>On submit, react-hook-form runs the Zod resolver. If validation fails, <code>FormMessage</code> renders the error next to the relevant field automatically.</li>
+    </ol>
+
+    <div class="callout key">
+      <p>
+        Form + react-hook-form + Zod is the pattern you will use for nearly every form in a
+        production shadcn/ui project. Learn this combination once and you have a consistent,
+        type-safe, accessible validation pattern that scales from a two-field login form to
+        a ten-section settings page.
+      </p>
+    </div>
+
+    <!-- Pattern 4 -->
+    <h2>Pattern 4 — Manual Code Splitting</h2>
+
+    <p>
+      Because shadcn/ui components live in your repository rather than an npm package, the
+      bundler cannot automatically tree-shake unused ones (there is no "package boundary" to
+      optimize against). If you import many heavy components at the top-level of a page, they
+      all land in the initial bundle — even if most users never see those components.
+    </p>
+    <p>
+      The fix is <strong>manual code splitting</strong> using React's <code>lazy()</code> and
+      <code>Suspense</code>. Wrap components that are only needed on interaction (dialogs,
+      date pickers, rich text editors) in a <code>lazy()</code> import so the browser fetches
+      their code only when the user needs them. This keeps first-paint fast and defers weight
+      to later navigations.
+    </p>
+
+    <!-- Pattern 5 -->
+    <h2>Pattern 5 — Theme Editor for Color Tokens</h2>
+
+    <p>
+      The shadcn/ui website provides an interactive <strong>theme editor</strong> where you
+      pick a base color palette, preview it across real components, and then copy the generated
+      CSS variable block into your <code>globals.css</code>. This takes less than five minutes
+      and produces a complete set of correctly named tokens for both light and dark mode.
+    </p>
+    <p>
+      The alternative — writing CSS variables by hand — is error-prone: it is easy to
+      miscalculate contrast ratios, forget a dark-mode override, or misname a token so that
+      components silently fall back to the default. The theme editor avoids all of these
+      mistakes because the generated output is tested against the actual component library.
+    </p>
+    <p>
+      Use the theme editor any time you want to experiment with a new color direction. Generate
+      the tokens, paste them, save, and see the change reflected immediately across every
+      component that consumes those variables.
+    </p>
+
+    <!-- Pattern 6 -->
+    <h2>Pattern 6 — v0 Integration for AI-Assisted Design</h2>
+
+    <p>
+      <a href="https://v0.dev/" target="_blank" rel="noopener">v0</a> is Vercel's AI
+      component generator that speaks shadcn/ui natively. You describe a UI in plain English
+      ("a pricing table with three tiers and a toggle for monthly/yearly billing") and v0
+      produces a working shadcn/ui + Tailwind component tree that you can copy directly into
+      your project.
+    </p>
+    <p>
+      The practical workflow is: use v0 to quickly sketch component ideas you are not sure how
+      to structure, export the generated code, then apply Lift Mode thinking to trim anything
+      you do not need. v0 is not a replacement for understanding shadcn/ui — but it accelerates
+      the iteration loop once you already know what the components do.
+    </p>
+
+    <!-- Best practices table -->
+    <h2>Production Best Practices — Summary</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Practice</th>
+          <th>Why It Matters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lock in <code>style</code>, <code>baseColor</code>, and <code>cssVariables</code> at init</td>
+          <td>These settings cannot be changed later without manual edits to every generated component</td>
+        </tr>
+        <tr>
+          <td>Use CSS variables (<code>cssVariables: true</code>)</td>
+          <td>Easiest way to customize and support dark mode across all components</td>
+        </tr>
+        <tr>
+          <td>Add components only as needed</td>
+          <td>Keeps the codebase lean; components live in <code>components/ui/</code> and you own them all</td>
+        </tr>
+        <tr>
+          <td>Use react-hook-form + Zod with the Form component</td>
+          <td>Consistent, type-safe validation pattern across the entire project</td>
+        </tr>
+        <tr>
+          <td>Use the theme editor for color tokens</td>
+          <td>Avoids manually writing and mismatching CSS variables</td>
+        </tr>
+        <tr>
+          <td>Set up path aliases (<code>@/</code>) early</td>
+          <td>The CLI and all imports depend on <code>@/components/ui/</code></td>
+        </tr>
+        <tr>
+          <td>Pin <code>style: "new-york"</code> (not <code>"default"</code>)</td>
+          <td>The default style is deprecated; new-york is the maintained style going forward</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Course complete -->
+    <h2>Course Complete</h2>
+
+    <p>
+      You have completed the full shadcn/ui overview course. Here is what you can now do:
+    </p>
+    <ul>
+      <li>
+        <strong>Explain what shadcn/ui is</strong> — a copy-to-own component registry built on
+        Radix UI primitives and Tailwind CSS, not an npm package dependency.
+      </li>
+      <li>
+        <strong>Compare it to alternatives</strong> — articulate the ownership, bundle, and
+        design-system trade-offs versus MUI, Chakra UI, and Ant Design.
+      </li>
+      <li>
+        <strong>Install and run it</strong> — use the CLI to scaffold a project, configure
+        <code>components.json</code>, and add your first components.
+      </li>
+      <li>
+        <strong>Read and adapt generated component code</strong> — understand the Radix +
+        Tailwind + <code>cn()</code> utility pattern that every component follows.
+      </li>
+      <li>
+        <strong>Apply theming</strong> — generate a light/dark CSS variable set with the theme
+        editor and wire it into your Tailwind config.
+      </li>
+      <li>
+        <strong>Use production patterns confidently</strong> — Blocks + Lift Mode, Form +
+        react-hook-form + Zod, code splitting, and v0 integration.
+      </li>
+    </ul>
+
+    <p>
+      From here, the next step is practice: build something real. Start with a sign-up form
+      (hint: the exercise below), then a settings page, then a data table. Every component
+      you add deepens your fluency with the ownership model that makes shadcn/ui distinctive.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-10">
+      <h3>Quick check</h3>
+      <p class="question">
+        Which pair of libraries does the shadcn/ui Form component officially recommend for validation?
+      </p>
+      <ul class="quiz-options">
+        <li><button>react-hook-form paired with Zod or Yup schemas</button></li>
+        <li><button>Formik paired with custom JavaScript validator functions</button></li>
+        <li><button>useState paired with manual HTML constraint validation</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        <strong>Skill exercise — sign-up form component tree.</strong>
+        You need to build a sign-up form with an email field and a password field. Both must
+        be validated: email must be a valid email address; password must be at least 8
+        characters.
+      </p>
+      <p>
+        In the text area below, sketch the component tree. Answer the following:
+      </p>
+      <ul>
+        <li>Which shadcn/ui components do you use? (Name each one from <code>components/ui/</code>.)</li>
+        <li>Which libraries sit outside shadcn/ui? (Hint: think validation layer.)</li>
+        <li>Where exactly does the Zod schema live in the data flow — before, inside, or after the Form render?</li>
+        <li>What handles the error messages: your own state, or a shadcn/ui sub-component?</li>
+      </ul>
+      <textarea rows="12" placeholder="Example sketch:
+&lt;Form&gt; (react-hook-form context, Zod resolver wired here)
+  &lt;FormField name=&quot;email&quot;&gt;
+    &lt;FormItem&gt;
+      &lt;FormLabel&gt; ...
+      &lt;FormControl&gt;
+        &lt;Input type=&quot;email&quot; /&gt;   &lt;-- shadcn/ui Input
+      &lt;FormMessage&gt; ...         &lt;-- shows Zod error
+  &lt;FormField name=&quot;password&quot;&gt;
+    ...
+  &lt;Button type=&quot;submit&quot; /&gt;     &lt;-- shadcn/ui Button
+
+Zod schema: defined OUTSIDE the component, passed to useForm({ resolver: zodResolver(schema) })
+Libraries: react-hook-form (state + submit), @hookform/resolvers (adapter), zod (schema)"></textarea>
+    </div>
+
+    <hr />
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Ask your tutor: "Walk me through connecting a Zod schema to a shadcn/ui Form step by
+      step" or "When should I use Lift Mode instead of just adding individual components?"
+      or "How does v0 output compare to what I would write myself?"
+    </p>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0009-theming.html">← Theming</a>
+      <a href="../lessons.md">← Back to Curriculum</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-10', 0, 'The shadcn/ui Form component is built to work with react-hook-form. You connect a Zod (or Yup) schema via a resolver passed to useForm(). FormMessage then automatically renders the validation errors from that schema next to each field. Formik and manual useState patterns are not the recommended approach.');
+  </script>
+</body>
+</html>

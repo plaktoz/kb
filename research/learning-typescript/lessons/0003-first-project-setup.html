@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your First TypeScript Project — Learning TypeScript</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- 1. Header block -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Learning TypeScript</a> &rsaquo; Module 1 &rsaquo; Lesson 3
+      </div>
+      <h1>Your First TypeScript Project</h1>
+      <div class="lesson-meta">
+        <span>~20 min</span>
+        <span>Module 1 &mdash; Foundations</span>
+        <span>Lesson 3 of 13</span>
+      </div>
+    </header>
+
+    <!-- 2. Source card -->
+    <div class="source-card">
+      <strong>Primary Sources</strong>
+      <a href="https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html" target="_blank">
+        TypeScript Tooling in 5 Minutes — typescriptlang.org
+      </a><br />
+      <a href="https://www.typescriptlang.org/tsconfig" target="_blank">
+        TSConfig Reference — typescriptlang.org
+      </a>
+    </div>
+
+    <!-- 3. Content sections -->
+
+    <h2>1. Installing TypeScript</h2>
+    <p>
+      TypeScript is distributed as an npm package. The most common approach for a new project is
+      to install it as a <em>local</em> dev dependency so every contributor uses the same version
+      pinned to your <code>package.json</code>. A global install is convenient for quick experiments
+      but can cause version mismatches across projects.
+    </p>
+
+    <h3>Global install (quick experiments)</h3>
+    <pre><code># Install the TypeScript compiler globally
+npm install -g typescript
+
+# Verify the install
+tsc --version</code></pre>
+
+    <h3>Local install (recommended for real projects)</h3>
+    <pre><code># Inside your project directory
+npm init -y
+npm install --save-dev typescript
+
+# Run tsc via npx so it uses the local version
+npx tsc --version</code></pre>
+
+    <p>
+      With a local install, the <code>tsc</code> binary lives in
+      <code>node_modules/.bin/tsc</code>. You can also add a
+      <code>build</code> script in <code>package.json</code> so <code>npm run build</code>
+      always uses the project-local compiler.
+    </p>
+
+    <h2>2. Writing Your First <code>.ts</code> File</h2>
+    <p>
+      A TypeScript file is just JavaScript with type annotations layered on top. Start by annotating
+      a simple function — add a type to each parameter and a return type after the closing parenthesis.
+    </p>
+
+    <pre><code>// src/index.ts
+
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+
+console.log(greet("TypeScript"));</code></pre>
+
+    <p>
+      The <code>: string</code> after each parameter and the <code>: string</code> after
+      <code>(name: string)</code> are the only additions compared to plain JavaScript.
+      If you call <code>greet(42)</code>, TypeScript reports an error at compile time —
+      before the code ever runs.
+    </p>
+
+    <h2>3. Compiling with <code>tsc</code></h2>
+    <p>
+      The TypeScript compiler converts <code>.ts</code> files into plain JavaScript that any
+      runtime (Node.js, browsers) can execute. In the simplest case, pass the file directly:
+    </p>
+
+    <pre><code># Compile a single file
+tsc src/index.ts
+
+# This produces: src/index.js
+node src/index.js
+# → Hello, TypeScript</code></pre>
+
+    <div class="callout warning">
+      Even when <code>tsc</code> reports type errors, it still emits a <code>.js</code> output file
+      by default. This means you can accidentally deploy broken code if you rely on the file being
+      present as a signal of success. Always check the exit code, or set
+      <code>"noEmitOnError": true</code> in your tsconfig to suppress output on failure.
+    </div>
+
+    <h2>4. Why <code>tsconfig.json</code> Matters</h2>
+    <p>
+      Compiling single files with <code>tsc filename.ts</code> does not scale. For any real
+      project you need a <code>tsconfig.json</code> — the configuration file that tells the
+      compiler which files to include, where to write output, and which rules to enforce.
+      Think of it as the TypeScript equivalent of <code>pom.xml</code> or
+      <code>build.gradle</code>: it defines the build contract for the entire project so
+      every developer and every CI run uses identical settings.
+    </p>
+
+    <p>
+      Once <code>tsconfig.json</code> exists in the project root, you simply run:
+    </p>
+
+    <pre><code># Compile the whole project using tsconfig.json
+npx tsc
+
+# Or watch for changes and recompile automatically
+npx tsc --watch</code></pre>
+
+    <h2>5. The Recommended Starter <code>tsconfig.json</code></h2>
+    <p>
+      The options below cover the most important compiler settings for a modern Node.js project.
+      You can generate a baseline with <code>npx tsc --init</code> and then adjust, or start
+      from this file directly.
+    </p>
+
+    <pre><code>{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}</code></pre>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>What it does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>target</code></td>
+          <td>Which JavaScript version to emit. <code>ES2020</code> supports modern syntax while remaining broadly compatible.</td>
+        </tr>
+        <tr>
+          <td><code>module</code></td>
+          <td>Module system for emitted code. <code>nodenext</code> enables native ESM for Node.js 12+.</td>
+        </tr>
+        <tr>
+          <td><code>outDir</code></td>
+          <td>Where compiled <code>.js</code> files are written. Keeps source and build artifacts separate.</td>
+        </tr>
+        <tr>
+          <td><code>rootDir</code></td>
+          <td>Root of your TypeScript source files. Mirrors the <code>src/</code> structure inside <code>dist/</code>.</td>
+        </tr>
+        <tr>
+          <td><code>strict</code></td>
+          <td>Enables the full suite of strict type-checking options (see below).</td>
+        </tr>
+        <tr>
+          <td><code>sourceMap</code></td>
+          <td>Emits <code>.js.map</code> files so debuggers map runtime errors back to TypeScript lines.</td>
+        </tr>
+        <tr>
+          <td><code>declaration</code></td>
+          <td>Emits <code>.d.ts</code> type declaration files — essential if publishing a library.</td>
+        </tr>
+        <tr>
+          <td><code>esModuleInterop</code></td>
+          <td>Allows default imports from CommonJS modules (<code>import fs from 'fs'</code> instead of <code>import * as fs</code>).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>6. Why <code>strict: true</code> Is the Single Most Important Setting</h2>
+
+    <div class="callout key">
+      <code>"strict": true</code> is a shorthand that activates a bundle of checks in a single
+      line. The two most impactful are <code>strictNullChecks</code>, which makes TypeScript
+      treat <code>null</code> and <code>undefined</code> as distinct types that must be handled
+      explicitly, and <code>noImplicitAny</code>, which disallows parameters or variables whose
+      type would silently default to <code>any</code>. Together, these two checks eliminate the
+      largest categories of real-world runtime errors. Always start a project with
+      <code>strict: true</code> — retrofitting it onto an existing codebase later is painful.
+    </div>
+
+    <p>
+      The full list of checks enabled by <code>strict: true</code> includes:
+    </p>
+
+    <ul>
+      <li><code>strictNullChecks</code> — <code>null</code> and <code>undefined</code> are not assignable to other types</li>
+      <li><code>noImplicitAny</code> — parameters without a type annotation raise an error instead of defaulting to <code>any</code></li>
+      <li><code>strictFunctionTypes</code> — function parameters are checked contravariantly</li>
+      <li><code>strictBindCallApply</code> — <code>.bind</code>, <code>.call</code>, and <code>.apply</code> are type-checked</li>
+      <li><code>strictPropertyInitialization</code> — class properties must be assigned in the constructor</li>
+      <li><code>noImplicitThis</code> — <code>this</code> in functions must have an explicit type</li>
+      <li><code>useUnknownInCatchVariables</code> — caught error variables are typed as <code>unknown</code>, not <code>any</code></li>
+    </ul>
+
+    <h2>7. Project Structure: <code>src/</code> &rarr; <code>dist/</code></h2>
+    <p>
+      The <code>rootDir</code> / <code>outDir</code> pair enforces a clean separation: TypeScript
+      source lives in <code>src/</code> and compiled JavaScript lands in <code>dist/</code>.
+      Add <code>dist/</code> to your <code>.gitignore</code> — build artifacts belong in CI, not
+      version control.
+    </p>
+
+    <pre><code>my-project/
+├── src/
+│   └── index.ts        ← TypeScript source (what you edit)
+├── dist/
+│   ├── index.js        ← compiled output (generated by tsc)
+│   ├── index.js.map    ← source map (generated when sourceMap: true)
+│   └── index.d.ts      ← type declarations (generated when declaration: true)
+├── tsconfig.json
+└── package.json</code></pre>
+
+    <h2>8. Running the Compiled JavaScript</h2>
+    <p>
+      After <code>npx tsc</code> succeeds, run the output file with Node.js directly. There is no
+      TypeScript runtime — <code>node</code> executes plain JavaScript that the compiler produced.
+    </p>
+
+    <pre><code># Compile
+npx tsc
+
+# Run the output
+node dist/index.js
+# → Hello, TypeScript</code></pre>
+
+    <p>
+      During development you may prefer <code>ts-node</code> or <code>tsx</code>, which compile
+      and run a <code>.ts</code> file in one step without writing to <code>dist/</code>. For
+      production, always compile first and run the compiled output — that is what your users execute.
+    </p>
+
+    <!-- 4. Quiz -->
+    <div class="quiz" id="quiz-3">
+      <h3>Quick Check</h3>
+      <p>What does running <code>tsc filename.ts</code> produce by default?</p>
+      <div class="quiz-options">
+        <button>A compiled JavaScript file, even if type errors exist</button>
+        <button>An error report that shows all type problems found</button>
+        <button>A source map for debugging in the browser console</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- 5. Exercise -->
+    <div class="exercise">
+      <h3>Exercise &mdash; Scaffold Your First Project</h3>
+      <p>
+        Write the contents of two files from scratch: a <code>tsconfig.json</code> with all
+        recommended options from this lesson, and a <code>src/index.ts</code> file that
+        exports a typed function. Use the text area below as a scratchpad. When you are
+        ready, create the files in a real directory and run <code>npx tsc</code> to verify.
+      </p>
+      <p><strong>Starter scaffold (fill in the blanks):</strong></p>
+      <textarea spellcheck="false" placeholder='// === tsconfig.json ===
+{
+  "compilerOptions": {
+    "target": "___",
+    "module": "___",
+    "moduleResolution": "___",
+    "outDir": "___",
+    "rootDir": "___",
+    "strict": ___,
+    "sourceMap": ___,
+    "declaration": ___,
+    "esModuleInterop": ___
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
+
+// === src/index.ts ===
+// Write a typed function below.
+// Example: a function that takes a name (string) and age (number)
+// and returns a greeting string.
+
+function ___(_: ___, _: ___): ___ {
+  return "___";
+}
+
+export { ___ };'></textarea>
+    </div>
+
+    <!-- 6 (already covered via callouts). Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Open this lesson in Claude and paste any part of your
+      tsconfig or <code>.ts</code> file that is not behaving as expected. Ask: <em>"Why does
+      tsc still emit output when I have a type error?"</em> or <em>"What does each strict
+      sub-flag actually check?"</em>
+    </div>
+
+    <!-- 7. Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0002-structural-typing.html">&larr; Lesson 2: Structural Typing</a>
+      <a href="0004-everyday-types.html" class="primary">Lesson 4: Everyday Types &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <!-- Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>
+    // correctIndex = 0: "A compiled JavaScript file, even if type errors exist"
+    initQuiz('quiz-3', 0, 'Correct. By default tsc emits a .js file regardless of type errors. To suppress output on errors, add "noEmitOnError": true to your tsconfig.');
+  </script>
+</body>
+</html>

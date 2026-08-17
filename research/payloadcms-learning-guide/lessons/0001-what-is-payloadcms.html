@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — What Is PayloadCMS?</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- 1. Header with breadcrumb -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">PayloadCMS</a> › Module 1: Foundations › Lesson 1 of 12
+    </div>
+    <h1>What Is PayloadCMS?</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 1 — Foundations</span>
+    </div>
+  </header>
+
+  <!-- 2. Source card -->
+  <div class="source-card">
+    <div class="source-card-label">Primary Source</div>
+    <a href="https://payloadcms.com/docs/getting-started/what-is-payload">payloadcms.com/docs/getting-started/what-is-payload</a>
+    <p>Official introduction to what Payload is — a TypeScript-first, code-first CMS/backend that auto-generates APIs and admin UI from a single config file.</p>
+  </div>
+
+  <!-- 3. Content sections -->
+
+  <section>
+    <h2>What Is a Headless CMS?</h2>
+    <p>
+      A traditional CMS — think WordPress or Drupal — bundles two concerns together: a backend that stores and manages content, and a front-end presentation layer that decides how that content looks in a browser. These two halves are tightly coupled. Changing the front end often means touching the back end, and vice versa.
+    </p>
+    <p>
+      A <strong>headless CMS</strong> separates those concerns. The backend handles content storage and exposes it through APIs (typically REST or GraphQL). Any front end — a Next.js website, a React Native app, a digital signage board — consumes those APIs however it likes. The CMS is "headless" because it has no opinion about the display layer: the head (the front end) has been removed.
+    </p>
+    <p>
+      This separation gives development teams flexibility. You can redesign your website without touching your content model. You can publish the same content to a website and a mobile app simultaneously. You can swap out your front end framework years from now without migrating your content database.
+    </p>
+  </section>
+
+  <section>
+    <h2>What Does "Code-First" Mean?</h2>
+    <p>
+      Most GUI-based CMS tools let you define content types through a web interface: click "Add Field", type a label, choose a field type, save. This is intuitive for non-developers, but it has a hidden cost — your schema lives in a database, not in your codebase. It is hard to version-control, hard to review in a pull request, and hard to reproduce across environments.
+    </p>
+    <p>
+      <strong>Code-first</strong> inverts this. In Payload, you define your entire schema in a single TypeScript file: <code>payload.config.ts</code>. This file lives in your repository, gets committed to version control, and serves as the single source of truth for your data model. Every field, every collection, every access rule is declared as code.
+    </p>
+    <p>
+      The payoff is significant. Schema changes go through normal code review. You can spin up a new environment and have the exact same content structure instantly. Your IDE provides autocomplete and type-checking across your schema definitions. And because the config is just TypeScript, you can apply programming constructs — loops, conditionals, shared constants — to eliminate repetition.
+    </p>
+  </section>
+
+  <section>
+    <h2>Payload's Architecture: Five Layers</h2>
+    <p>
+      Everything in Payload flows from one source: <code>payload.config.ts</code>. Define your schema there and Payload auto-generates the APIs, the admin panel, and the authentication system. There is no separate setup for each layer — they derive directly from your config.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>What It Does</th>
+          <th>How It Is Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Schema</strong></td>
+          <td>Defines collections (like database tables), globals (singleton records), and individual fields with types and validation rules.</td>
+          <td>You write it in <code>payload.config.ts</code> — this is the only layer you author directly.</td>
+        </tr>
+        <tr>
+          <td><strong>APIs</strong></td>
+          <td>REST endpoints, a GraphQL schema, and a Local Node.js API are all available for querying and mutating your data.</td>
+          <td>Auto-generated from your schema. Add a new collection and all three APIs immediately reflect it.</td>
+        </tr>
+        <tr>
+          <td><strong>Admin UI</strong></td>
+          <td>A fully functional, React-based admin panel with list views, detail forms, and rich-text editing.</td>
+          <td>Auto-generated from your schema. Field types determine which UI components render in the panel.</td>
+        </tr>
+        <tr>
+          <td><strong>Auth</strong></td>
+          <td>Built-in authentication — login, sessions, password reset — plus access control at the document level and down to individual fields.</td>
+          <td>Configured in your collection definitions. No third-party auth library required for basic use.</td>
+        </tr>
+        <tr>
+          <td><strong>Storage</strong></td>
+          <td>File upload handling with automatic image resizing, format conversion, and focal-point cropping for responsive images.</td>
+          <td>Enabled by adding an upload collection to your config and specifying image size presets.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Primary Use Cases</h2>
+    <p>
+      Payload positions itself not just as a CMS but as a general-purpose backend framework. The four primary categories it targets are:
+    </p>
+    <ul>
+      <li><strong>Headless CMS:</strong> Power a marketing site or blog. Authors manage content through the Admin UI; your Next.js front end fetches it via the REST or GraphQL API.</li>
+      <li><strong>Enterprise App Builder:</strong> Model complex business data — users, orders, workflows — using collections and globals, then build custom admin views on top.</li>
+      <li><strong>E-Commerce backends:</strong> Define products, variants, inventory, and orders in code. The Local API lets your Next.js server actions query Payload directly without an HTTP round-trip.</li>
+      <li><strong>Digital Asset Management (DAM):</strong> Centralise images, videos, and documents with upload collections, metadata fields, and access-controlled delivery.</li>
+    </ul>
+    <p>
+      Notable enterprise features include SSO integration, AI auto-embedding for semantic search, publishing workflows with draft/preview support, visual editing, and A/B testing capabilities.
+    </p>
+  </section>
+
+  <section>
+    <h2>Self-Hosting and Database Support</h2>
+    <p>
+      Payload runs inside your Next.js project as a first-class dependency — it is not a separate service you call over the network. This means you deploy one application, not two. Your Next.js server actions can call the Payload Local API directly in-process, with zero HTTP overhead and full TypeScript type safety.
+    </p>
+    <p>
+      Payload supports three databases out of the box: <strong>MongoDB</strong>, <strong>PostgreSQL</strong>, and <strong>SQLite</strong>. You pick the adapter that suits your infrastructure and the same <code>payload.config.ts</code> schema works with all three. Because there is no Payload cloud service you must use, you retain complete ownership of your data. Deploy on a VPS, a container platform, or any Node.js-compatible cloud provider.
+    </p>
+  </section>
+
+  <!-- 4. Key callout -->
+  <div class="callout key">
+    <strong>Core insight:</strong> You define your schema exactly once in <code>payload.config.ts</code>, and Payload derives three APIs (REST, GraphQL, Local), a full admin panel, and an auth system from that single file. There is no separate wiring step for each layer — the config is the entire contract.
+  </div>
+
+  <!-- 5. Warning callout -->
+  <div class="callout warning">
+    <strong>Common misconception:</strong> Payload is not a hosted SaaS product or a WordPress plugin — it is a TypeScript library that lives inside your codebase. You own the schema, the data, and the deployment. This also means there is no "install and click" setup: you need a Node.js environment and at least basic TypeScript familiarity to get started.
+  </div>
+
+  <!-- 6. Quiz -->
+  <div class="quiz" id="quiz-1">
+    <h3>Quick Check</h3>
+    <p class="quiz-question">What does Payload auto-generate from a single <code>payload.config.ts</code> file?</p>
+    <div class="quiz-options">
+      <button>REST API, GraphQL API, and Admin UI</button>
+      <button>Database tables, migration files, and CSS classes</button>
+      <button>TypeScript types, React components, and server routes</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- 7. Exercise -->
+  <div class="exercise">
+    <div class="exercise-label">Skill Exercise</div>
+    <p>Draw a diagram (on paper or as indented text below) showing how <code>payload.config.ts</code> generates the Admin UI, REST API, and GraphQL API. Then write one sentence explaining why code-first config is different from GUI-based CMS tools like WordPress.</p>
+    <textarea placeholder="Sketch your diagram here, then write your one-sentence explanation below it..."></textarea>
+  </div>
+
+  <!-- 8. Tutor prompt -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <!-- 9. Nav -->
+  <nav class="lesson-nav">
+    <span></span>
+    <a href="0002-payload-2-modern-features.html" class="primary">Next: Payload 2.0 &rarr;</a>
+  </nav>
+
+  <!-- 10. Scripts -->
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-1', 0, 'Correct. Payload reads your schema from payload.config.ts and automatically generates the REST API, GraphQL API, and the React-based Admin UI — you define the shape of your data once and all three layers appear without any additional wiring.');</script>
+
+</div>
+</body>
+</html>

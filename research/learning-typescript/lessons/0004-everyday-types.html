@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 4 — Everyday Types | Learning TypeScript</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── Header ─────────────────────────────────────────────────────────── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Learning TypeScript</a>
+      &rsaquo; Module 2 &mdash; The Type System
+      &rsaquo; Lesson 4 of 13
+    </div>
+    <h1>Everyday Types</h1>
+    <div class="lesson-meta">
+      <span>~25 min</span>
+      <span>Module 2 &mdash; The Type System</span>
+      <span>Lesson 4 of 13</span>
+    </div>
+  </header>
+
+  <!-- ─── Source card ─────────────────────────────────────────────────────── -->
+  <div class="source-card">
+    <strong>Source</strong>
+    <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html"
+       target="_blank" rel="noopener">
+      TypeScript Handbook &mdash; Everyday Types
+    </a>
+  </div>
+
+  <!-- ─── Section 1: Core Primitives ──────────────────────────────────────── -->
+  <h2>1. The Three Core Primitives</h2>
+
+  <p>
+    TypeScript builds on three JavaScript primitives that map to the most
+    common leaf values you will annotate every day:
+    <code>string</code>, <code>number</code>, and <code>boolean</code>.
+    They are <em>always written in lowercase</em> — this is not a style
+    preference, it is a correctness requirement.
+  </p>
+
+  <pre><code>// Correct — lowercase primitives
+let username: string  = "alice";
+let score:    number  = 42;
+let isActive: boolean = true;
+
+// Also valid with const — type is inferred automatically
+const greeting = "hello";   // TypeScript infers: string
+const pi       = 3.14159;   // TypeScript infers: number
+const done     = false;     // TypeScript infers: boolean</code></pre>
+
+  <p>
+    The lowercase keywords are the actual types in the TypeScript type system.
+    Use them in every annotation you write.
+  </p>
+
+  <!-- ─── Section 2: Capitalized Wrappers ──────────────────────────────────── -->
+  <h2>2. Never Use the Capitalized Wrapper Types</h2>
+
+  <p>
+    JavaScript has three built-in <em>wrapper objects</em> &mdash;
+    <code>String</code>, <code>Number</code>, and <code>Boolean</code>
+    (capital first letter). They exist for historical reasons and wrap
+    primitive values in a full object. TypeScript exposes these as types, but
+    they almost never represent what you intend.
+  </p>
+
+  <div class="callout warning">
+    Do not use <code>String</code>, <code>Number</code>, or
+    <code>Boolean</code> (capitalised) as type annotations. They refer to the
+    rarely-used JavaScript wrapper <em>objects</em>, not the primitive values
+    you actually work with. The TypeScript documentation explicitly warns
+    against them. Always use the lowercase forms: <code>string</code>,
+    <code>number</code>, <code>boolean</code>.
+  </div>
+
+  <pre><code>// Wrong — wrapper objects, not primitives
+function greet(name: String): String {   // ❌ do not do this
+  return "Hello, " + name;
+}
+
+// Right — lowercase primitives
+function greet(name: string): string {   // ✓
+  return "Hello, " + name;
+}</code></pre>
+
+  <p>
+    The practical difference matters: a <code>String</code> object is not
+    assignable to a <code>string</code> variable, yet a <code>string</code>
+    primitive <em>is</em> assignable to a <code>String</code> variable &mdash;
+    the asymmetry is a source of confusion with no upside.
+  </p>
+
+  <!-- ─── Section 3: Arrays ────────────────────────────────────────────────── -->
+  <h2>3. Arrays</h2>
+
+  <p>
+    TypeScript offers two syntactically equivalent ways to declare an array
+    type. The shorthand form is more common in practice:
+  </p>
+
+  <pre><code>// Shorthand (preferred in most codebases)
+let scores:  number[];
+let names:   string[];
+let flags:   boolean[];
+
+// Generic form — identical meaning, useful inside complex generics
+let scores2: Array&lt;number&gt;;
+let names2:  Array&lt;string&gt;;
+
+// Inference works as expected
+const ids = [1, 2, 3];        // inferred: number[]
+const tags = ["ts", "react"]; // inferred: string[]</code></pre>
+
+  <p>
+    Both forms are interchangeable. The shorthand <code>T[]</code> is
+    idiomatic for everyday use; <code>Array&lt;T&gt;</code> is sometimes
+    clearer when nested inside another generic.
+  </p>
+
+  <!-- ─── Section 4: Union Types ──────────────────────────────────────────── -->
+  <h2>4. Union Types</h2>
+
+  <p>
+    A <strong>union type</strong> declares that a value can be one of several
+    types. The pipe character <code>|</code> separates the members:
+  </p>
+
+  <pre><code>// A value that is either a string or a number
+type StringOrNumber = string | number;
+
+function formatId(id: string | number): string {
+  return String(id);
+}
+
+formatId(42);      // ✓
+formatId("abc");   // ✓
+formatId(true);    // ✗ — boolean is not in the union</code></pre>
+
+  <h3>The narrowing requirement</h3>
+
+  <p>
+    When you hold a union type, TypeScript allows only the operations that are
+    valid for <em>all</em> members of the union. If a method exists on
+    <code>string</code> but not on <code>number</code>, calling it directly on
+    a <code>string | number</code> is a compile error:
+  </p>
+
+  <pre><code>function loudId(id: string | number): string {
+  // id.toUpperCase();  ✗ — number has no toUpperCase
+
+  // Must narrow first
+  if (typeof id === "string") {
+    return id.toUpperCase();  // ✓ — TypeScript knows it's string here
+  }
+  return String(id);          // ✓ — safe fallback for number branch
+}</code></pre>
+
+  <p>
+    This is <strong>narrowing</strong> &mdash; TypeScript tracks which branch
+    of a conditional is reachable and adjusts the inferred type accordingly.
+    Narrowing is covered in depth in Lesson 7.
+  </p>
+
+  <!-- ─── Section 5: interface vs type alias ───────────────────────────────── -->
+  <h2>5. <code>interface</code> vs <code>type</code> Alias</h2>
+
+  <p>
+    TypeScript offers two ways to name an object shape. For most object
+    descriptions they are interchangeable, but they differ in a few
+    important ways:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th><code>interface</code></th>
+        <th><code>type</code></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Describe an object shape</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Extend another type with <code>extends</code></td>
+        <td>Yes</td>
+        <td>Yes (via intersection <code>&amp;</code>)</td>
+      </tr>
+      <tr>
+        <td>Declaration merging (add properties in a second block)</td>
+        <td>Yes</td>
+        <td>No &mdash; error</td>
+      </tr>
+      <tr>
+        <td>Reopen and extend after initial definition</td>
+        <td>Yes</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Describe a union type (<code>A | B</code>)</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Alias a primitive or tuple</td>
+        <td>No</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre><code>// interface — object shape
+interface User {
+  id:   number;
+  name: string;
+}
+
+// Declaration merging: a second block adds to the same interface
+interface User {
+  email: string;    // merged in — now User has id, name, AND email
+}
+
+// type alias — object shape (equivalent for basic use)
+type Point = {
+  x: number;
+  y: number;
+};
+
+// type alias — union (interface cannot do this)
+type Status = "active" | "inactive" | "pending";
+
+// type alias — primitive alias
+type UserId = number;</code></pre>
+
+  <div class="callout key">
+    <strong>The heuristic:</strong> use <code>interface</code> by default for
+    object shapes. Reach for <code>type</code> when you need a union type, a
+    primitive alias, or a tuple. In practice: if your annotation starts with
+    <code>{ }</code>, lean toward <code>interface</code>; if it involves
+    <code>|</code> or a non-object value, use <code>type</code>.
+  </div>
+
+  <!-- ─── Section 6: Optional Properties & null ────────────────────────────── -->
+  <h2>6. Optional Properties and <code>null</code> Handling</h2>
+
+  <h3>Optional properties with <code>?</code></h3>
+
+  <p>
+    Appending a <code>?</code> to a property name marks it as optional,
+    meaning it may be present or absent. The type of an optional property is
+    automatically widened to include <code>undefined</code>.
+  </p>
+
+  <pre><code>interface Config {
+  host:    string;
+  port:    number;
+  timeout?: number;   // may be number or undefined
+}
+
+const cfg: Config = { host: "localhost", port: 3000 };  // ✓
+// timeout is absent — that's allowed
+
+function buildUrl(cfg: Config): string {
+  const t = cfg.timeout ?? 5000;  // nullish coalescing for the undefined case
+  return `${cfg.host}:${cfg.port} (timeout ${t}ms)`;
+}</code></pre>
+
+  <h3><code>strictNullChecks</code> makes null explicit</h3>
+
+  <p>
+    With <code>strictNullChecks: true</code> (included in <code>strict: true</code>),
+    <code>null</code> and <code>undefined</code> are <em>not</em> assignable
+    to every type. You must declare them explicitly in a union and narrow
+    before using the value:
+  </p>
+
+  <pre><code>// Without strictNullChecks (avoid this)
+let name: string = null;   // TypeScript would allow it — dangerous
+
+// With strictNullChecks (the correct setting)
+let name: string | null = null;   // must be explicit in the union
+name = "alice";                   // ✓
+name = null;                      // ✓
+name = undefined;                 // ✗ — undefined is not in string | null
+
+function greet(name: string | null): string {
+  if (name === null) {
+    return "Hello, stranger";
+  }
+  return "Hello, " + name;  // ✓ — TypeScript knows name is string here
+}</code></pre>
+
+  <p>
+    The non-null assertion operator <code>!</code> tells TypeScript you are
+    certain a value is not null or undefined. Use it sparingly and only when
+    you have external knowledge the type system cannot see:
+  </p>
+
+  <pre><code>const el = document.getElementById("root")!;  // asserting el is not null
+el.innerHTML = "mounted";                      // ✓ — no null-check required</code></pre>
+
+  <!-- ─── Section 7: Java comparison table ─────────────────────────────────── -->
+  <h2>7. Comparison: Java Types vs TypeScript Types</h2>
+
+  <p>
+    If you are coming from Java, several familiar concepts either change
+    meaning or disappear entirely in TypeScript:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Java</th>
+        <th>TypeScript equivalent</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>int</code>, <code>long</code>, <code>float</code>, <code>double</code></td>
+        <td><code>number</code></td>
+        <td>All numeric values share one type. No integer/float distinction.</td>
+      </tr>
+      <tr>
+        <td><code>String</code> (capital S)</td>
+        <td><code>string</code> (lowercase)</td>
+        <td>TypeScript's <code>string</code> is a primitive, not a wrapper object.</td>
+      </tr>
+      <tr>
+        <td><code>boolean</code></td>
+        <td><code>boolean</code></td>
+        <td>Same name, same semantics.</td>
+      </tr>
+      <tr>
+        <td><code>Optional&lt;T&gt;</code></td>
+        <td><code>T | null</code> or <code>T | undefined</code></td>
+        <td>No wrapper type &mdash; nullability is expressed directly in the union with <code>strictNullChecks</code>.</td>
+      </tr>
+      <tr>
+        <td><code>int[]</code></td>
+        <td><code>number[]</code> or <code>Array&lt;number&gt;</code></td>
+        <td>Two syntaxes, identical meaning.</td>
+      </tr>
+      <tr>
+        <td><code>Object</code></td>
+        <td><code>object</code> or <code>Record&lt;string, unknown&gt;</code></td>
+        <td>Rarely useful in annotations; prefer a named <code>interface</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ─── Quiz ──────────────────────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-4">
+    <h3>Quick check</h3>
+    <p>What can <code>interface</code> do that <code>type</code> cannot?</p>
+    <div class="quiz-options">
+      <button>Merge separate declarations into one type</button>
+      <button>Define unions of string and number</button>
+      <button>Make all object properties entirely optional</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Exercise ──────────────────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Exercise — Annotate five function signatures</h3>
+    <p>
+      Each function below uses <code>any</code> (or has no annotation) where a
+      precise TypeScript type should go. Replace every <code>any</code> with
+      the correct type. Use what you have learned in this lesson: primitives,
+      arrays, union types, and optional parameters.
+    </p>
+    <pre><code>// 1. Takes a user's display name, returns a greeting string
+function greet(name: any): any { ... }
+
+// 2. Takes a list of scores and returns the highest one
+function maxScore(scores: any): any { ... }
+
+// 3. Takes an ID that may be a number or a string, returns a string label
+function formatId(id: any): any { ... }
+
+// 4. Takes a first name and an optional middle name, returns the full name
+function fullName(first: any, middle: any): any { ... }
+
+// 5. Takes an array of tags (strings) and a required count, returns a boolean
+function hasTags(tags: any, count: any): any { ... }</code></pre>
+    <p>Write your annotated versions here:</p>
+    <textarea
+      rows="16"
+      placeholder="// 1.
+function greet(name: string): string { ... }
+
+// 2.
+function maxScore(scores: ___): ___ { ... }
+
+// 3.
+function formatId(id: ___ | ___): ___ { ... }
+
+// 4.
+function fullName(first: ___, middle?: ___): ___ { ... }
+
+// 5.
+function hasTags(tags: ___, count: ___): ___ { ... }"
+    ></textarea>
+    <p style="font-size:0.85rem; color: var(--text-muted); margin-top:0.5rem;">
+      Suggested answers: (1) <code>name: string</code>, returns <code>string</code> &mdash;
+      (2) <code>scores: number[]</code>, returns <code>number</code> &mdash;
+      (3) <code>id: string | number</code>, returns <code>string</code> &mdash;
+      (4) <code>first: string, middle?: string</code>, returns <code>string</code> &mdash;
+      (5) <code>tags: string[], count: number</code>, returns <code>boolean</code>.
+    </p>
+  </div>
+
+  <!-- ─── Tutor prompt ──────────────────────────────────────────────────────── -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> "In exercise 3, what happens inside
+    <code>formatId</code> if I try to call <code>id.toUpperCase()</code>
+    without narrowing first? Walk me through the error TypeScript produces and
+    how to fix it with a <code>typeof</code> check."
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────────── -->
+  <nav class="lesson-nav">
+    <a href="0003-first-project-setup.html">&larr; Lesson 3: Your First Project</a>
+    <a href="0005-classes.html" class="primary">Lesson 5: Classes &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-4',
+    0,
+    'Correct. Only interface supports declaration merging — you can write a second interface block with the same name and TypeScript will merge the properties. A type alias cannot be reopened or merged after its initial definition.'
+  );
+</script>
+</body>
+</html>

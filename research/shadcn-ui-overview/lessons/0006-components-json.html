@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 6 — components.json: The Decisions You Can't Undo · shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">shadcn/ui Course</a> ›
+        Module 3 — Installation &amp; First Components ›
+        Lesson 6 of 10
+      </p>
+      <h1>components.json — The Decisions You Can't Undo</h1>
+      <div class="lesson-meta">
+        <span>~10 min</span>
+        <span>Module 3</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      <a href="https://ui.shadcn.com/docs/components-json" target="_blank" rel="noopener">
+        https://ui.shadcn.com/docs/components-json
+      </a>
+      — explains every field in <code>components.json</code>, which settings are locked at <code>init</code>, and what each one controls
+    </div>
+
+    <!-- Intro -->
+    <p>
+      When you run <code>shadcn init</code>, the CLI writes a file called
+      <code>components.json</code> to your project root. It is a short JSON configuration
+      that tells the CLI everything it needs to know about your setup: where to put components,
+      what style you chose, whether you are using TypeScript, and how to resolve path aliases.
+    </p>
+    <p>
+      Most of those settings can be adjusted later without drama. Three of them cannot.
+      Understanding which three — and why — is the entire point of this lesson.
+    </p>
+
+    <!-- What it looks like -->
+    <h2>What <code>components.json</code> looks like</h2>
+    <p>
+      A freshly generated file looks roughly like this:
+    </p>
+    <pre><code>{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "app/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  }
+}</code></pre>
+    <p>
+      Every field has a job. The table below gives a quick tour.
+    </p>
+
+    <!-- Field reference table -->
+    <h2>Field-by-field reference</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>What it controls</th>
+          <th>Changeable later?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>style</code></td>
+          <td>Visual design language for all components — <code>new-york</code> (sharp, tighter spacing) or <code>default</code> (softer, more rounded)</td>
+          <td><strong>No</strong></td>
+        </tr>
+        <tr>
+          <td><code>tailwind.baseColor</code></td>
+          <td>The neutral palette (e.g. <code>zinc</code>, <code>slate</code>, <code>gray</code>) baked into CSS variable values that every component references</td>
+          <td><strong>No</strong></td>
+        </tr>
+        <tr>
+          <td><code>tailwind.cssVariables</code></td>
+          <td>Whether components use CSS custom properties (<code>true</code>) or inline Tailwind utility classes (<code>false</code>) for theming</td>
+          <td><strong>No</strong></td>
+        </tr>
+        <tr>
+          <td><code>rsc</code></td>
+          <td>Whether to generate React Server Component-compatible files</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><code>tsx</code></td>
+          <td>Whether to output <code>.tsx</code> (TypeScript) or <code>.jsx</code> (JavaScript) files</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><code>tailwind.config</code></td>
+          <td>Path to your Tailwind config file</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><code>tailwind.css</code></td>
+          <td>Path to the CSS file where shadcn writes its CSS variable definitions</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td><code>aliases.*</code></td>
+          <td>Where the CLI puts component files, utils, and hooks — defaults map to <code>@/components/ui/</code></td>
+          <td>Yes (but reset up early)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- The three locked decisions -->
+    <h2>The three locked decisions</h2>
+
+    <h3><code>style</code> — visual design language</h3>
+    <p>
+      <code>style</code> is not a Tailwind class — it is a template selector. Every component
+      the CLI copies into your project is rendered from one of two template sets:
+      <code>new-york</code> or <code>default</code>. Those templates embed different spacing,
+      border-radius, and shadow choices directly into the component source code. Once components
+      are in your project, swapping the style would require re-adding every single one from scratch.
+    </p>
+
+    <div class="callout warning">
+      <p>
+        The <code>default</code> style is deprecated. Always pin <code>"style": "new-york"</code>
+        when running <code>init</code>. If you accidentally choose <code>default</code>, you will
+        need to delete all your components, change this field, and re-add them — there is no
+        migration path.
+      </p>
+    </div>
+
+    <h3><code>tailwind.baseColor</code> — the neutral palette</h3>
+    <p>
+      <code>baseColor</code> determines the exact HSL values written into your
+      <code>globals.css</code> for tokens like <code>--background</code>, <code>--foreground</code>,
+      <code>--muted</code>, and <code>--border</code>. Every component uses these tokens. Changing
+      <code>baseColor</code> after the fact means manually replacing all those variable values in
+      <code>globals.css</code> — the CLI will not do it for you.
+    </p>
+
+    <h3><code>tailwind.cssVariables</code> — theming mode</h3>
+    <p>
+      When <code>cssVariables</code> is <code>true</code>, every component references color tokens
+      like <code>bg-background</code> and <code>text-foreground</code> — short utility classes
+      that point to CSS custom properties. When it is <code>false</code>, components are written
+      with hard-coded Tailwind utilities like <code>bg-zinc-950</code>. The two outputs are
+      structurally different: you cannot flip this setting without re-adding every component.
+    </p>
+    <p>
+      Use <code>cssVariables: true</code>. It is the only mode that makes dark mode painless —
+      you swap the values of the custom properties in a <code>.dark</code> selector and every
+      component updates automatically.
+    </p>
+
+    <div class="callout key">
+      <p>
+        <code>style</code>, <code>baseColor</code>, and <code>cssVariables</code> are locked at
+        <code>init</code> because they are baked into the source code of every component file
+        written to your project. The CLI does not patch existing files. Changing any of these
+        after the fact means deleting all your components and starting the <code>add</code> step
+        over from scratch.
+      </p>
+    </div>
+
+    <!-- Path aliases -->
+    <h2>Path aliases — set them up early</h2>
+    <p>
+      The <code>aliases</code> section is not locked in the same way, but it needs to be
+      correct before you run <code>init</code>. The CLI uses these paths when writing
+      <code>import</code> statements inside every component it generates. The default —
+      <code>@/components/ui/</code> — works automatically if you used <code>create next-app</code>
+      with the default import alias. If your project uses a different alias (or none at all),
+      update both <code>tsconfig.json</code> <em>and</em> this section before adding any components.
+    </p>
+    <p>
+      All components also import from <code>@/lib/utils</code>, which is where shadcn writes its
+      <code>cn()</code> helper function. That path must resolve correctly too, or every component
+      will fail to compile.
+    </p>
+
+    <!-- What to do if you got one wrong -->
+    <h2>What to do if you got a locked setting wrong</h2>
+    <p>
+      There is no <code>shadcn migrate</code> command. The recovery path is manual and
+      straightforward, even if tedious:
+    </p>
+    <ol>
+      <li>Delete the files in <code>components/ui/</code>.</li>
+      <li>Edit <code>components.json</code> with the correct <code>style</code>, <code>baseColor</code>, or <code>cssVariables</code> value.</li>
+      <li>Update the CSS variable definitions in <code>globals.css</code> (re-run <code>init</code> or edit manually).</li>
+      <li>Re-add every component you had previously: <code>pnpm dlx shadcn@latest add button card input ...</code></li>
+    </ol>
+    <p>
+      For a project with ten or twenty components this is a half-hour task. For a project with
+      fifty components and customized variants, it is a painful afternoon. Make the three
+      decisions once, upfront.
+    </p>
+
+    <hr />
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-6">
+      <h3>Check your understanding</h3>
+      <p class="question">
+        Which of these settings in <code>components.json</code> cannot be changed after <code>init</code>?
+      </p>
+      <ul class="quiz-options">
+        <li><button>The path aliases and TypeScript settings</button></li>
+        <li><button>The style, baseColor, and cssVariables settings</button></li>
+        <li><button>The Tailwind config and component directory</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        You are about to run <code>shadcn init</code> on an imaginary project: a personal dashboard
+        with a dark mode toggle and about thirty components planned.
+      </p>
+      <p>
+        Write out the three lock-in decisions you would make — <code>style</code>,
+        <code>baseColor</code>, and <code>cssVariables</code> — and give a one-sentence reason for
+        each choice. Then explain what you would have to do if you later discovered you had chosen
+        the wrong <code>baseColor</code>.
+      </p>
+      <textarea
+        placeholder="style: new-york — because...&#10;baseColor: zinc — because...&#10;cssVariables: true — because...&#10;&#10;If I got baseColor wrong, I would..."
+        aria-label="Your three lock-in decisions and recovery plan"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Ask your tutor: "Is there any automated way to migrate from one <code>style</code> to
+      another, or is manual deletion always required?" — or — "What is the practical difference
+      between the <code>zinc</code> and <code>slate</code> base colors — will I actually see it?"
+    </p>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0005-nextjs-setup.html">&larr; Lesson 5: First-Time Setup on Next.js</a>
+      <a href="0007-first-component.html" class="primary">Lesson 7: Your First Component &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    // Option index 1 (zero-based) is correct:
+    // "The style, baseColor, and cssVariables settings"
+    initQuiz(
+      'quiz-6',
+      1,
+      'Correct. style, baseColor, and cssVariables are baked into the source code of every component file the CLI generates. Changing any of them after init means deleting all your components and re-adding them from scratch — the CLI does not patch existing files.'
+    );
+  </script>
+</body>
+</html>

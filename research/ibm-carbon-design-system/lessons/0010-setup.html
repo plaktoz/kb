@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting Up Carbon in a React Project — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> › Module 4 — Building with Carbon › Lesson 10
+      </div>
+      <h1>Setting Up Carbon in a React Project</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 4 — Building with Carbon · Lesson 10 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">Carbon Design System — Official Tutorial: "Getting Started with @carbon/react" (carbondesignsystem.com)</div>
+      <div class="source-result">Key result: Going from a blank Next.js project to a working Carbon application requires three package installs, two file changes (rename globals.css to globals.scss and add <code>@use '@carbon/react'</code>), and a single import statement — the entire setup is five commands and two edits.</div>
+    </div>
+
+    <!-- Section 1: Prerequisites -->
+    <h2>Prerequisites and what you will need</h2>
+
+    <p>Before you install Carbon, you need a React project to install it into. The official Carbon tutorial is written against Next.js, so that is what this lesson uses. You should be comfortable creating a Next.js app with <code>create-next-app</code>, navigating its directory structure, and editing files. You do not need prior Carbon experience — that is what this module is for — but familiarity with JSX and basic npm or yarn package management is assumed.</p>
+
+    <p>On your machine you will need Node.js (18 or later is a safe choice for modern Next.js), and either npm or yarn as your package manager. The official Carbon tutorial uses yarn, so the commands below follow that convention. If you prefer npm, simply substitute <code>npm install</code> for <code>yarn add</code> in each command — the package names are identical.</p>
+
+    <p>The three packages you are about to install serve distinct roles. <strong>@carbon/react</strong> is the main component library — it contains every Carbon component (buttons, modals, data tables, notifications, and so on) compiled for React. <strong>sass</strong> is the Dart Sass compiler, which Carbon requires to compile its stylesheets; this is not optional. <strong>@carbon/icons-react</strong> is the icon library, separate from the main component package so you only pay the bundle cost when you actually use icons.</p>
+
+    <!-- Section 2: Installing the packages -->
+    <h2>Installing the packages</h2>
+
+    <p>Start by scaffolding a fresh Next.js project. The <code>create-next-app</code> scaffolder will ask you several questions about TypeScript, ESLint, and the App Router — answer according to your preferences. If you are following along with the official Carbon tutorial, accepting the defaults works fine.</p>
+
+<pre><code># Create a Next.js project (if starting fresh)
+npx create-next-app@latest my-carbon-app</code></pre>
+
+    <p>Once scaffolding completes, move into the new directory and install the three Carbon packages. The versions pinned below are the ones used in the official Carbon tutorial (<code>@carbon/react@1.33.0</code>, <code>sass@1.63.6</code>) — installing these exact versions avoids any surprise breaking changes if you are following the tutorial step by step. In a real project you would ordinarily install the latest stable versions.</p>
+
+<pre><code># Install Carbon component library
+yarn add @carbon/react
+
+# Install Dart Sass (required for Carbon styles)
+yarn add sass
+
+# Install Carbon icon library
+yarn add @carbon/icons-react</code></pre>
+
+    <p>After these three commands your <code>package.json</code> will list all three packages as dependencies. The <code>sass</code> package in the npm registry is Dart Sass — the same compiler the Carbon team uses internally. Dart Sass is required because Carbon's stylesheets use the modern <code>@use</code> and <code>@forward</code> module syntax that older LibSass does not support. If you accidentally install the legacy <code>node-sass</code> package instead, the Sass compilation step will fail with module resolution errors.</p>
+
+    <!-- Section 3: Configuring Sass -->
+    <h2>Configuring Sass</h2>
+
+    <p>Installing the packages is only the first half of setup. Carbon's styles are written in Sass, which means your project needs to know how to compile them. Next.js supports Sass out of the box once the <code>sass</code> package is installed, but you still need to wire up the Carbon stylesheet import. This requires two file changes.</p>
+
+    <p>The first change is a rename. Find <code>app/globals.css</code> in your project (or <code>styles/globals.css</code> depending on how you answered the scaffolding questions) and rename it to <code>globals.scss</code>. This tells Next.js to treat the file as Sass rather than plain CSS, which is what allows the <code>@use</code> directive you are about to add to work.</p>
+
+    <p>The second change is to update the import in your layout file. Open <code>app/layout.js</code> (or <code>app/layout.tsx</code> for TypeScript projects) and find the import that references <code>globals.css</code>. Change the file extension from <code>.css</code> to <code>.scss</code> so it points to the renamed file:</p>
+
+<pre><code>// Before
+import './globals.css';
+
+// After
+import './globals.scss';</code></pre>
+
+    <p>Now open <code>globals.scss</code> and add the Carbon stylesheet import at the top of the file. This single line is what triggers Dart Sass to compile all Carbon component styles into your project's output CSS:</p>
+
+<pre><code>@use '@carbon/react';</code></pre>
+
+    <p>This loads every Carbon component's styles — all of them, in one directive. For most projects starting out, this is exactly what you want: zero configuration, full coverage. As your project matures and you want to optimize bundle size, you can switch to importing only the styles for components you actually use. To scope styles to a single component — the button, for instance — replace the broad import with a targeted one:</p>
+
+<pre><code>/* Load styles for a specific component only */
+@use '@carbon/react/scss/components/button';</code></pre>
+
+    <p>The targeted import approach requires you to add one <code>@use</code> line per component type. This is worth the extra effort for large production applications where every kilobyte matters, but it is an optimization you should reach for after your application is working, not before.</p>
+
+    <!-- Section 4: Importing and using your first component -->
+    <h2>Importing and using your first component</h2>
+
+    <p>With the packages installed and Sass configured, you are ready to use Carbon components in your JSX. Carbon exports all of its components from the top-level <code>@carbon/react</code> package, so a single named import gives you access to whichever component you need. To render a button:</p>
+
+<pre><code>import { Button } from '@carbon/react';
+
+export default function MyPage() {
+  return (
+    &lt;main&gt;
+      &lt;Button kind="primary"&gt;Get started&lt;/Button&gt;
+    &lt;/main&gt;
+  );
+}</code></pre>
+
+    <p>The <code>kind</code> prop controls the button's visual variant. Carbon defines several button kinds: <code>"primary"</code> (the main call-to-action, filled with the interactive color), <code>"secondary"</code> (an outlined variant for secondary actions), <code>"tertiary"</code> (transparent with a border), <code>"ghost"</code> (no border, minimal visual weight), and <code>"danger"</code> (for destructive actions). All are available as named values on the same <code>kind</code> prop — no separate component imports needed.</p>
+
+    <p>Icons work slightly differently. The icon library is a separate package (<code>@carbon/icons-react</code>), and icons are imported from a path within that package, not from <code>@carbon/react</code> directly. Each icon is a React component you pass as a prop to the Carbon component that accepts it:</p>
+
+<pre><code>import { Add } from '@carbon/react/icons';
+
+export default function MyPage() {
+  return (
+    &lt;Button kind="primary" renderIcon={Add}&gt;
+      Add item
+    &lt;/Button&gt;
+  );
+}</code></pre>
+
+    <p>The separation between component and icon imports is intentional. Icons are a large catalog — hundreds of items — and bundling them all with the component library would significantly increase the initial install footprint. By keeping them in a separate package with individual named exports, tree-shaking can eliminate every icon you do not use, so your final bundle only includes the icons your code explicitly imports.</p>
+
+    <!-- Section 5: Theming wrapper with providers.js -->
+    <h2>The theming wrapper: providers.js</h2>
+
+    <p>Carbon ships with four built-in themes: <code>"white"</code> (light, default background), <code>"g10"</code> (light gray), <code>"g90"</code> (dark gray), and <code>"g100"</code> (near-black, the darkest option). These map to the IBM Design Language's official light and dark palettes. Wrapping your application — or sections of it — in a <code>&lt;Theme&gt;</code> component activates the corresponding set of design tokens, changing colors, border tones, and interactive states throughout the subtree in one step.</p>
+
+    <p>The official tutorial pattern is to create a <code>providers.js</code> file that centralizes theming alongside other global layout wrappers. The <code>Theme</code> component controls the active token set, and the <code>Content</code> component provides the correct padding and background color for the page body. A typical <code>providers.js</code> looks like this:</p>
+
+<pre><code>import { Theme, Content } from '@carbon/react';
+
+export default function Providers({ children }) {
+  return (
+    &lt;&gt;
+      &lt;Theme theme="g100"&gt;
+        {/* Navigation components go here */}
+      &lt;/Theme&gt;
+      &lt;Content&gt;{children}&lt;/Content&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+
+    <p>In this pattern, the navigation area (header, side nav) is wrapped in <code>&lt;Theme theme="g100"&gt;</code>, giving it the dark shell treatment that is characteristic of IBM products. The main page content lives inside <code>&lt;Content&gt;</code>, which uses the default theme. You can nest <code>&lt;Theme&gt;</code> components at any level of the tree — wrapping a sidebar in <code>"g10"</code> while keeping the main canvas in <code>"white"</code> is perfectly valid and is how Carbon achieves its signature two-tone layouts.</p>
+
+    <p>Once you have created <code>providers.js</code>, import it into your root <code>layout.js</code> and wrap your page output with it. Every page your application renders will then have access to Carbon's theme tokens, and the correct background and text colors will apply automatically to all Carbon components in the tree.</p>
+
+    <!-- Section 6: TypeScript notes -->
+    <h2>TypeScript notes</h2>
+
+    <p>If your Next.js project uses TypeScript, there is one additional configuration step. Not all Carbon components are fully typed yet — the library is large and type coverage is an ongoing community effort. Without the following setting, TypeScript's type checker may surface errors from within Carbon's own source files when you run a build. These are not errors in your code; they are gaps in Carbon's type declarations. The fix is to tell TypeScript to skip type checking inside node_modules:</p>
+
+<pre><code>// tsconfig.json
+{
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}</code></pre>
+
+    <p>Add <code>"skipLibCheck": true</code> to the <code>compilerOptions</code> object in your <code>tsconfig.json</code>. This option is a standard escape hatch for exactly this situation — third-party libraries that are not yet fully typed. It does not affect type checking of your own code; TypeScript continues to check everything you write. It only suppresses errors originating inside <code>node_modules</code>.</p>
+
+    <p>Beyond this single setting, Carbon's TypeScript experience is generally good. Components accept typed props, and your editor will provide autocompletion for valid <code>kind</code> values, icon names, and theme strings. As the Carbon community fills in the remaining type gaps over time, the need for <code>skipLibCheck</code> will diminish — but for now it is the recommended approach in the official documentation.</p>
+
+    <!-- Framework guides note -->
+    <h2>Framework-specific guides</h2>
+
+    <p>This lesson walked through setup using Next.js, which is the framework the official Carbon tutorial targets. Carbon also publishes dedicated Sass integration guides for Remix, Gatsby, Vite, and Webpack. Each guide covers any framework-specific configuration differences — for example, Vite handles Sass imports slightly differently from Next.js, and Gatsby has its own <code>gatsby-config.js</code> patterns for global style injection. If you are building on one of these frameworks instead of Next.js, consult the corresponding guide on the Carbon documentation site before following this lesson's file-change instructions literally.</p>
+
+    <p>Regardless of framework, the core sequence is the same: install <code>@carbon/react</code>, install <code>sass</code>, add <code>@use '@carbon/react'</code> to your global stylesheet, and import components from <code>@carbon/react</code>. The framework guides only change where and how you hook in the global stylesheet — the component API is identical across all setups.</p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      The <code>@use '@carbon/react'</code> directive in your global Sass file is not optional decoration — it is the step that triggers Dart Sass to compile Carbon's component styles into your project's output CSS. Without it, your Carbon components will render without any visual styling: no colors, no spacing, no interactive states. Every other step in setup can be done in any order, but this one line must be present before Carbon components will look correct.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      <div class="callout-label">Common Error</div>
+      Two setup mistakes account for most "Carbon components look unstyled" reports. The first is forgetting to rename <code>globals.css</code> to <code>globals.scss</code> — if the file extension stays <code>.css</code>, Next.js will not invoke the Sass compiler, and the <code>@use</code> directive will be silently ignored. The second is forgetting to add <code>@use '@carbon/react'</code> to the renamed file entirely. Check both before reaching for other debugging steps: the file must be named <code>.scss</code>, and it must contain the <code>@use</code> import.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-10">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>What must you add to your globals.scss file for Carbon component styles to load?</h3>
+      <div class="quiz-options">
+        <button><code>@use '@carbon/react'</code> directive</button>
+        <button><code>@import 'carbon-styles'</code> directive</button>
+        <button><code>@include carbon-reset()</code> directive</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>Set up Carbon from memory</h3>
+      <p>From memory, write out: (1) the three yarn install commands, (2) the two file changes needed in globals.scss and layout.js, and (3) the JSX to render a primary Button with the label 'Get started'.</p>
+      <textarea placeholder="Type your setup steps here…" aria-label="Exercise response"></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0009-modals-datatables.html">← Previous: Modals &amp; Data Tables</a>
+      <a href="0011-first-page.html" class="primary">Next: Building Your First Page →</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> If you run into Sass compilation errors, a missing styles issue, or TypeScript problems after following these steps, paste the error message into a Claude conversation and describe which step you were on. Setup errors in Carbon almost always fall into one of a few known categories, and they are usually quick to resolve once you know where to look.
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-10', 0, 'You must add @use \'@carbon/react\' to your globals.scss. This is what triggers Dart Sass to compile all Carbon component styles into your project.');
+  </script>
+</body>
+</html>

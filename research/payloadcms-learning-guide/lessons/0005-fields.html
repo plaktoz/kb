@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fields — Building Your Content Schema · PayloadCMS Lessons</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        PayloadCMS &rsaquo; Module 2: Core Building Blocks &rsaquo; Lesson 5 of 12
+      </div>
+      <h1>Fields — Building Your Content Schema</h1>
+      <div class="lesson-meta">
+        <span>~16 min</span>
+        <span>Module 2 — Core Building Blocks</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-card-label">Primary Source</div>
+      <a href="https://payloadcms.com/docs/fields/overview" target="_blank" rel="noopener">
+        https://payloadcms.com/docs/fields/overview
+      </a>
+    </div>
+
+    <!-- Introduction -->
+    <h2>What Is a Field?</h2>
+    <p>
+      Fields are the atomic building blocks of any Payload schema. Every collection and global has a <code>fields</code> array, and that array governs what data can be stored, how it is validated, how it appears in the Admin Panel, and who can read or write it.
+    </p>
+    <p>
+      Payload provides 20+ field types organized into three distinct categories: <strong>data fields</strong>, <strong>presentational fields</strong>, and <strong>virtual fields</strong>. Understanding which category a field belongs to tells you immediately whether it writes to the database, and how to use it.
+    </p>
+
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>Every field that <em>stores data</em> requires a <code>name</code> property — that name becomes the database column and the key in your JSON response. Presentational fields have no <code>name</code> and write nothing to the database; they exist only to organize the Admin UI. Getting this distinction right early prevents a lot of confusion about why some field changes appear in your data and others do not.</p>
+    </div>
+
+    <!-- Data Fields -->
+    <h2>Data Fields</h2>
+    <p>
+      Data fields are the most common type. They read from and write to the database. Each one requires a <code>name</code> property that identifies the column, and Payload maps the field type to an appropriate database column through its adapter layer (SQLite, Postgres, or MongoDB).
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Field Type</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>text</code></td><td>Simple string input</td></tr>
+        <tr><td><code>textarea</code></td><td>Multi-line string input</td></tr>
+        <tr><td><code>number</code></td><td>Numeric values</td></tr>
+        <tr><td><code>email</code></td><td>Validates proper email format</td></tr>
+        <tr><td><code>checkbox</code></td><td>Boolean true/false</td></tr>
+        <tr><td><code>date</code></td><td>Date picker that saves a timestamp</td></tr>
+        <tr><td><code>select</code></td><td>Dropdown/picklist selector</td></tr>
+        <tr><td><code>radio</code></td><td>Single-choice radio button group</td></tr>
+        <tr><td><code>richText</code></td><td>Extensible rich text editor (Lexical by default in Payload 2)</td></tr>
+        <tr><td><code>code</code></td><td>Code editor that saves a string</td></tr>
+        <tr><td><code>json</code></td><td>JSON editor interface for arbitrary JSON blobs</td></tr>
+        <tr><td><code>array</code></td><td>Repeating content with nested fields — each row is a sub-document</td></tr>
+        <tr><td><code>blocks</code></td><td>Block-based content where each block type defines its own nested schema</td></tr>
+        <tr><td><code>group</code> (named)</td><td>Nests fields inside a keyed object in the database</td></tr>
+        <tr><td><code>tabs</code> (named)</td><td>Tabbed layout where each named tab creates a key in the stored document</td></tr>
+        <tr><td><code>relationship</code></td><td>Links to documents in one or more other collections</td></tr>
+        <tr><td><code>upload</code></td><td>References a locally uploaded file or image from an upload collection</td></tr>
+        <tr><td><code>point</code></td><td>Geographic coordinates stored as a GeoJSON point</td></tr>
+      </tbody>
+    </table>
+
+    <p>Here are three data field definitions showing common configurations:</p>
+
+<pre><code>// Inside a CollectionConfig.fields array
+
+{
+  name: 'title',
+  type: 'text',
+  required: true,
+},
+{
+  name: 'publishedAt',
+  type: 'date',
+  admin: {
+    date: {
+      pickerAppearance: 'dayAndTime',
+    },
+  },
+},
+{
+  name: 'category',
+  type: 'select',
+  options: [
+    { label: 'Tutorial', value: 'tutorial' },
+    { label: 'News',     value: 'news' },
+    { label: 'Opinion',  value: 'opinion' },
+  ],
+},</code></pre>
+
+    <p>
+      Notice that each field has a <code>name</code> and a <code>type</code>. The <code>name</code> maps directly to the column name in your database and the key in the API response. Field-specific options like <code>options</code> for <code>select</code> or <code>pickerAppearance</code> for <code>date</code> live inside the field definition or inside its <code>admin</code> sub-object.
+    </p>
+
+    <h3>Nested data: array, group, and blocks</h3>
+    <p>
+      Three data field types let you nest other fields within them. The key differences are:
+    </p>
+    <ul>
+      <li><strong>array</strong> — a list of repeating rows, each with the same shape (e.g., a list of team members with name and role)</li>
+      <li><strong>group</strong> (named) — a single object nested under a key (e.g., <code>seo</code> containing <code>metaTitle</code> and <code>metaDescription</code>)</li>
+      <li><strong>blocks</strong> — like array but each row can pick from a set of different block types, each with its own schema (e.g., a page builder with text, image, and CTA blocks)</li>
+    </ul>
+
+<pre><code>// array: repeating rows with the same shape
+{
+  name: 'tags',
+  type: 'array',
+  fields: [
+    {
+      name: 'label',
+      type: 'text',
+    },
+  ],
+},
+
+// group: a single nested object under a key
+{
+  name: 'seo',
+  type: 'group',
+  fields: [
+    { name: 'metaTitle',       type: 'text' },
+    { name: 'metaDescription', type: 'textarea' },
+  ],
+},</code></pre>
+
+    <!-- Presentational Fields -->
+    <h2>Presentational Fields</h2>
+    <p>
+      Presentational fields do not write to the database. They exist purely to organize the Admin Panel layout — arranging fields side by side, collapsing infrequently-used sections, or injecting fully custom components into any part of the edit form.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Field Type</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>row</code></td><td>Arranges its child fields horizontally side by side in the Admin Panel</td></tr>
+        <tr><td><code>collapsible</code></td><td>Wraps child fields in a collapsible accordion component</td></tr>
+        <tr><td><code>tabs</code> (unnamed)</td><td>Tabbed layout where tabs have no name key — nothing extra is stored in the database</td></tr>
+        <tr><td><code>group</code> (unnamed)</td><td>Groups fields visually without adding any key to the stored document</td></tr>
+        <tr><td><code>ui</code></td><td>Blank slate for fully custom React components with no built-in input</td></tr>
+      </tbody>
+    </table>
+
+    <p>A <code>row</code> wrapping two text fields looks like this:</p>
+
+<pre><code>{
+  type: 'row',
+  fields: [
+    {
+      name: 'firstName',
+      type: 'text',
+    },
+    {
+      name: 'lastName',
+      type: 'text',
+    },
+  ],
+},</code></pre>
+
+    <p>
+      The <code>row</code> itself has no <code>name</code> — it is invisible to the database and to the API. Only <code>firstName</code> and <code>lastName</code> are stored and returned. The row is purely a layout instruction for the Admin Panel.
+    </p>
+    <p>
+      The <code>ui</code> field type is the most flexible: you register a custom React component path in <code>admin.components.Field</code> and Payload renders it inside the form with no database backing at all. This is useful for custom dashboards, inline documentation, or interactive tools embedded in the edit view.
+    </p>
+
+    <!-- Virtual Fields -->
+    <h2>Virtual Fields</h2>
+    <p>
+      Virtual fields are computed or derived at runtime and never persisted to the database on their own. Payload supports three forms of virtual fields, each with a different mechanism for populating the value.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>How it works</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>join</code> field type</td>
+          <td>Enables two-way data binding between collections — the joined side is queried and attached to the document at read time, not stored inside the document itself</td>
+        </tr>
+        <tr>
+          <td><code>virtual: true</code></td>
+          <td>Marks any data field as virtual; the value must be supplied by a hook (e.g., an <code>afterRead</code> hook that computes a full name from separate <code>firstName</code> and <code>lastName</code> fields)</td>
+        </tr>
+        <tr>
+          <td><code>virtual: 'dot.path'</code></td>
+          <td>Auto-resolves data from a related field path — for example, <code>virtual: 'author.name'</code> automatically reads the name from the linked author record when the document is fetched</td>
+        </tr>
+      </tbody>
+    </table>
+
+<pre><code>// Virtual field populated by an afterRead hook
+{
+  name: 'fullName',
+  type: 'text',
+  virtual: true,
+  // Value set in an afterRead hook:
+  // ({ doc }) => { doc.fullName = `${doc.firstName} ${doc.lastName}` }
+},
+
+// Virtual field auto-resolved from a linked relationship
+{
+  name: 'authorName',
+  type: 'text',
+  virtual: 'author.name', // reads .name from the linked Authors record
+},
+
+// Join field: shows all Posts linked to this Author record
+{
+  name: 'posts',
+  type: 'join',
+  collection: 'posts',
+  on: 'author', // the relationship field in the posts collection
+},</code></pre>
+
+    <p>
+      Virtual fields are especially useful when you want to expose computed or aggregated data through the API without storing redundant values in the database. Because they are not stored, they also cannot be queried directly in the database — you cannot filter by a virtual field value.
+    </p>
+
+    <!-- Key Universal Options -->
+    <h2>Key Universal Field Options</h2>
+    <p>
+      These options are available on most data fields regardless of type. Understanding them unlocks the majority of customization you will need day to day.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>defaultValue</code></td>
+          <td>A static value or a function receiving <code>{ user, locale, req }</code>. Sets the field's initial value when a new document is created in the Admin Panel or via the API.</td>
+        </tr>
+        <tr>
+          <td><code>validate</code></td>
+          <td>Custom validation function. Must return <code>true</code> on success or an error string on failure. Runs on both the server and in the Admin Panel before save.</td>
+        </tr>
+        <tr>
+          <td><code>hooks</code></td>
+          <td>Field-level lifecycle callbacks — <code>beforeChange</code>, <code>afterRead</code>, etc. — scoped to this single field rather than the entire document.</td>
+        </tr>
+        <tr>
+          <td><code>access</code></td>
+          <td>Field-level permission control. Overrides collection-level access for this field alone. Useful for hiding sensitive fields from non-admin users.</td>
+        </tr>
+        <tr>
+          <td><code>admin.condition</code></td>
+          <td>A function <code>(data, siblingData) =&gt; boolean</code>. Conditionally shows or hides the field in the Admin Panel based on the values of other fields. The field still exists in the schema; it is only hidden in the UI.</td>
+        </tr>
+        <tr>
+          <td><code>admin.components</code></td>
+          <td>Swap in custom React components for specific rendering slots: <code>Field</code> (the input itself), <code>Cell</code> (list view column), <code>Filter</code>, <code>Label</code>, <code>Error</code>, <code>Diff</code>, <code>beforeInput</code>, and <code>afterInput</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Here is a field that uses <code>validate</code> and <code>admin.condition</code> together to make a date field conditionally required:</p>
+
+<pre><code>{
+  name: 'scheduledAt',
+  type: 'date',
+  admin: {
+    // Only show this field when the status field equals 'scheduled'
+    condition: (data, siblingData) => siblingData.status === 'scheduled',
+  },
+  validate: (value, { data }) => {
+    if (data.status === 'scheduled' && !value) {
+      return 'A scheduled date is required when status is "scheduled".'
+    }
+    return true
+  },
+},</code></pre>
+
+    <p>
+      Note that <code>admin.condition</code> controls only the <em>visibility</em> of the field in the Admin Panel — it does not make the field conditionally required by itself. You pair it with <code>validate</code> to enforce the business rule server-side.
+    </p>
+
+    <h3>Custom components via admin.components</h3>
+    <p>
+      The <code>admin.components</code> option lets you replace any rendering slot of a field with your own React component, registered by file path (not by import). For example, to use a custom color picker instead of the default text input for a <code>color</code> field:
+    </p>
+
+<pre><code>{
+  name: 'color',
+  type: 'text',
+  admin: {
+    components: {
+      Field: '/src/components/ColorPicker#ColorPickerField',
+    },
+  },
+},</code></pre>
+
+    <p>
+      The path syntax is <code>'file/path#ExportName'</code>. Server Components are the default; add <code>'use client'</code> at the top of your component file for interactive inputs that need browser APIs or React state.
+    </p>
+
+    <!-- Reserved Names -->
+    <h2>Reserved Field Names</h2>
+    <p>
+      Payload reserves a handful of field names for its own internal use. Defining a custom field with any of these names will conflict with Payload's internals and cause data corruption or runtime errors.
+    </p>
+
+    <div class="callout warning">
+      <div class="callout-label">Warning — Forbidden Field Names</div>
+      <p>
+        Never use these as your own field <code>name</code> values: <code>__v</code>, <code>salt</code>, <code>hash</code>, <code>file</code>.
+      </p>
+      <p>
+        Additionally, <code>status</code> is reserved when you are using <strong>Postgres with drafts enabled</strong> — Payload uses it internally to track draft state. Using any reserved name will either silently overwrite Payload's internal data or produce runtime errors that are difficult to trace back to a naming collision.
+      </p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-5">
+      <h3>Knowledge Check</h3>
+      <div class="quiz-question">You need to link each blog post document to a record in a separate <code>authors</code> collection. Which field type is designed for this?</div>
+      <div class="quiz-options">
+        <button>Relationship — creates a foreign-key reference to documents in one or more other collections</button>
+        <button>Upload — stores a reference to locally uploaded files like images or PDF attachments</button>
+        <button>Array — holds a list of repeating sub-documents each containing their own defined fields</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise — ~8 min</div>
+      <p>
+        Write the <code>fields</code> array for a <code>posts</code> collection that models a full blog post. It must include all six of these properties using the correct field type for each:
+      </p>
+      <ul>
+        <li><strong>title</strong> — a short string</li>
+        <li><strong>author</strong> — a link to a record in the <code>authors</code> collection</li>
+        <li><strong>tags</strong> — a repeating list where each item has a string label</li>
+        <li><strong>heroImage</strong> — a reference to an upload in the <code>media</code> collection</li>
+        <li><strong>publishedAt</strong> — a date and time picker</li>
+        <li><strong>body</strong> — a rich text editor</li>
+      </ul>
+      <p>Write TypeScript/JavaScript object syntax. Use the correct <code>type</code> value for every field — refer to the data fields table above if needed.</p>
+      <textarea placeholder="fields: [
+  {
+    name: 'title',
+    type: 'text',
+    required: true,
+  },
+  {
+    name: 'author',
+    type: 'relationship',
+    relationTo: 'authors',
+    required: true,
+  },
+  // ... continue for the remaining four fields
+]"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Ask your tutor: "Why does Payload split fields into three separate categories — data, presentational, and virtual — instead of using a single flat list with flags?" The answer reveals how the adapter pattern cleanly separates UI concerns from persistence concerns, and why that makes swapping databases possible without changing your field definitions.
+    </div>
+
+    <!-- Nav -->
+    <nav class="lesson-nav">
+      <a href="0004-collections.html">&larr; Collections</a>
+      <a href="0006-globals.html" class="primary">Globals &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-5',
+      0,
+      'Correct. The relationship field type is designed specifically to link a document to records in other collections — it stores a foreign-key reference and supports both single-value and multi-value relationships. Upload stores a reference to a locally uploaded file (like an image), and Array stores repeating nested content within the same document.'
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 — Types from Types</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">TypeScript Course</a> / Module 3 — Advanced Type Patterns / Lesson 9
+    </div>
+    <h1>Types from Types</h1>
+    <div class="lesson-meta">
+      <span>~30 min</span>
+      <span>Module 3 — Advanced Type Patterns &middot; Lesson 9 of 13</span>
+    </div>
+  </header>
+
+  <!-- Source card -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    TypeScript Handbook &mdash; "Types from Types" &mdash;
+    <a href="https://www.typescriptlang.org/docs/handbook/2/types-from-types.html" target="_blank" rel="noopener">
+      typescriptlang.org/docs/handbook/2/types-from-types.html
+    </a>
+  </div>
+
+  <!-- Section 1: Mapped types -->
+  <h2>Mapped types: iterating over properties</h2>
+
+  <p>
+    A <strong>mapped type</strong> loops over every key in an existing type and transforms each
+    property. The syntax uses an index signature with <code>in keyof</code>:
+    <code>[K in keyof T]: ...</code>. Read it as: "for each key <code>K</code> that exists in
+    <code>T</code>, produce this property."
+  </p>
+
+  <p>
+    The two most common mapped types in TypeScript's standard library are
+    <code>Partial&lt;T&gt;</code> and <code>Readonly&lt;T&gt;</code>. Here is how each is
+    implemented from scratch:
+  </p>
+
+  <pre><code>// Partial&lt;T&gt;: make every property optional
+type MyPartial&lt;T&gt; = {
+  [K in keyof T]?: T[K];
+};
+
+// Readonly&lt;T&gt;: make every property read-only
+type MyReadonly&lt;T&gt; = {
+  readonly [K in keyof T]: T[K];
+};
+
+// --- Using them ---
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type PartialUser = MyPartial&lt;User&gt;;
+// { id?: number; name?: string; email?: string }
+
+type ReadonlyUser = MyReadonly&lt;User&gt;;
+// { readonly id: number; readonly name: string; readonly email: string }</code></pre>
+
+  <p>
+    The <code>?</code> after <code>[K in keyof T]</code> makes every property optional. The
+    <code>readonly</code> modifier before it makes every property immutable. Both modifiers can be
+    removed with a <code>-</code> prefix: <code>-readonly [K in keyof T]-?: T[K]</code> would
+    strip both from every property.
+  </p>
+
+  <p>
+    The value <code>T[K]</code> is called an <strong>indexed access type</strong> — it says "give
+    me the type of property <code>K</code> on type <code>T</code>." Together,
+    <code>[K in keyof T]: T[K]</code> is the identity mapped type: it produces an exact copy of
+    <code>T</code> with no changes.
+  </p>
+
+  <!-- Section 2: Conditional types -->
+  <h2>Conditional types: if/else at the type level</h2>
+
+  <p>
+    A <strong>conditional type</strong> is TypeScript's way of expressing "if this type satisfies
+    some constraint, resolve to one type; otherwise resolve to another." The syntax mirrors the
+    JavaScript ternary operator:
+  </p>
+
+  <pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
+
+type A = IsString&lt;string&gt;;   // true
+type B = IsString&lt;number&gt;;   // false
+type C = IsString&lt;"hello"&gt;;  // true  (string literal extends string)</code></pre>
+
+  <p>
+    Read <code>T extends U ? X : Y</code> as: "if <code>T</code> is assignable to <code>U</code>,
+    the result is <code>X</code>; otherwise it is <code>Y</code>." The word <em>extends</em> here
+    means "is a subtype of" or "is assignable to" — the same extends used in class inheritance,
+    but applied purely to types.
+  </p>
+
+  <p>
+    Conditional types are not evaluated at runtime. TypeScript resolves them during compilation
+    and replaces the entire expression with either <code>X</code> or <code>Y</code> depending on
+    what <code>T</code> is.
+  </p>
+
+  <!-- Section 3: Distribution over unions -->
+  <h2>Distribution over unions</h2>
+
+  <p>
+    When a conditional type receives a union as its input, TypeScript applies the condition to
+    each union member <em>separately</em> and then unions the results. This behavior is called
+    <strong>distributive conditional types</strong>.
+  </p>
+
+  <pre><code>type IsString&lt;T&gt; = T extends string ? true : false;
+
+// Passing a union distributes over each member:
+type D = IsString&lt;string | number&gt;;
+// Expands to: IsString&lt;string&gt; | IsString&lt;number&gt;
+//           = true            | false
+//           = boolean</code></pre>
+
+  <p>
+    Distribution only happens when the type parameter appears <em>bare</em> on the left of
+    <code>extends</code> — meaning it is not wrapped in another type. Wrapping <code>T</code> in a
+    tuple suppresses distribution:
+  </p>
+
+  <pre><code>// Distributive (bare T):
+type Dist&lt;T&gt; = T extends string ? "yes" : "no";
+type R1 = Dist&lt;string | number&gt;;  // "yes" | "no"
+
+// Non-distributive (T wrapped in a tuple):
+type NoDist&lt;T&gt; = [T] extends [string] ? "yes" : "no";
+type R2 = NoDist&lt;string | number&gt;;  // "no" (the whole union fails the check)</code></pre>
+
+  <!-- Section 4: NonNullable -->
+  <h2>NonNullable: filtering with <code>never</code></h2>
+
+  <p>
+    <code>never</code> is the empty type — no value can ever have type <code>never</code>. When a
+    conditional type resolves to <code>never</code> for one branch of a union, that branch
+    disappears from the result. This makes <code>never</code> a useful tool for filtering union
+    members.
+  </p>
+
+  <p>
+    <code>NonNullable&lt;T&gt;</code> from the standard library uses exactly this trick:
+  </p>
+
+  <pre><code>// Standard library implementation:
+type MyNonNullable&lt;T&gt; = T extends null | undefined ? never : T;
+
+// How it works step by step:
+type E = MyNonNullable&lt;string | null | undefined&gt;;
+// Distributes:
+//   string    extends null | undefined ? never : string  →  string
+//   null      extends null | undefined ? never : string  →  never
+//   undefined extends null | undefined ? never : string  →  never
+// Union of results: string | never | never
+// never drops out of unions: string
+type E = string;  // ✓</code></pre>
+
+  <p>
+    This pattern — distribute over a union, return <code>never</code> for members you want to
+    exclude, return <code>T</code> for members you want to keep — is the foundation of many
+    filtering utility types.
+  </p>
+
+  <!-- Section 5: Template literal types -->
+  <h2>Template literal types: building string unions</h2>
+
+  <p>
+    TypeScript extends JavaScript template literals into the type system. A
+    <strong>template literal type</strong> constructs a string union type by interpolating other
+    string unions into a template.
+  </p>
+
+  <pre><code>type Side = "top" | "bottom" | "left" | "right";
+type CSSProp = `padding-${Side}`;
+// "padding-top" | "padding-bottom" | "padding-left" | "padding-right"
+
+type Axis = "x" | "y";
+type Scale = "sm" | "md" | "lg";
+type SpacingClass = `gap-${Axis}-${Scale}`;
+// "gap-x-sm" | "gap-x-md" | "gap-x-lg"
+// | "gap-y-sm" | "gap-y-md" | "gap-y-lg"  (cartesian product)</code></pre>
+
+  <p>
+    When multiple union types appear in a single template literal, TypeScript computes the
+    <strong>cartesian product</strong> — every possible combination of members. Two unions of size
+    3 produce 9 strings; three unions of size 2 produce 8.
+  </p>
+
+  <p>
+    TypeScript also exposes four intrinsic string manipulation types:
+    <code>Uppercase&lt;S&gt;</code>, <code>Lowercase&lt;S&gt;</code>,
+    <code>Capitalize&lt;S&gt;</code>, and <code>Uncapitalize&lt;S&gt;</code>, which operate on
+    string literal types and integrate naturally with template literals.
+  </p>
+
+  <!-- Section 6: Template literals + mapped types -->
+  <h2>Combining template literals with mapped types</h2>
+
+  <p>
+    The real power of template literal types emerges when they are combined with mapped types.
+    You can rename every property in an object type by wrapping <code>K</code> in a template
+    literal inside the mapped type's key remapping clause (<code>as</code>):
+  </p>
+
+  <pre><code>type EventMap&lt;T&gt; = {
+  [K in keyof T as `on${Capitalize&lt;string &amp; K&gt;}`]: (value: T[K]) =&gt; void;
+};
+
+interface Config {
+  width: number;
+  height: number;
+  label: string;
+}
+
+type ConfigEvents = EventMap&lt;Config&gt;;
+// {
+//   onWidth:  (value: number) =&gt; void;
+//   onHeight: (value: number) =&gt; void;
+//   onLabel:  (value: string) =&gt; void;
+// }</code></pre>
+
+  <p>
+    The <code>as</code> clause rewrites each key. <code>string &amp; K</code> is used because
+    <code>keyof T</code> can include symbols, and <code>Capitalize</code> only accepts strings —
+    the intersection narrows <code>K</code> to just string keys.
+  </p>
+
+  <!-- Section 7: The infer keyword -->
+  <h2>The <code>infer</code> keyword: extracting types</h2>
+
+  <p>
+    The <code>infer</code> keyword appears inside a conditional type's <code>extends</code>
+    clause. It declares a new type variable and instructs TypeScript to <em>infer</em> (capture)
+    whatever type occupies that position in the matched pattern. If the match succeeds, the
+    inferred variable is available in the true branch.
+  </p>
+
+  <pre><code>// infer R captures "whatever the element type is"
+type ArrayElement&lt;T&gt; = T extends Array&lt;infer R&gt; ? R : never;
+
+type F = ArrayElement&lt;string[]&gt;;   // string
+type G = ArrayElement&lt;number[]&gt;;   // number
+type H = ArrayElement&lt;boolean&gt;;    // never  (boolean is not an array)</code></pre>
+
+  <p>
+    Think of <code>infer R</code> as a typed wildcard: it matches whatever is in that structural
+    position and binds it to <code>R</code> for use on the right side of the <code>?</code>. The
+    variable is scoped to the true branch only; it does not exist in the false branch.
+  </p>
+
+  <!-- Section 8: ReturnType -->
+  <h2>ReturnType&lt;T&gt;: extracting the return type of a function</h2>
+
+  <p>
+    <code>ReturnType&lt;T&gt;</code> is the standard library's canonical example of
+    <code>infer</code>. It matches a function-shaped type and extracts the return type using an
+    inferred variable:
+  </p>
+
+  <pre><code>// Standard library implementation:
+type MyReturnType&lt;T extends (...args: any) =&gt; any&gt; =
+  T extends (...args: any) =&gt; infer R ? R : never;
+
+// How it works:
+function add(a: number, b: number): number { return a + b; }
+
+type AddReturn = MyReturnType&lt;typeof add&gt;;  // number
+
+function fetchUser(id: string): Promise&lt;{ name: string }&gt; {
+  return fetch(`/users/${id}`).then(r =&gt; r.json());
+}
+
+type FetchReturn = MyReturnType&lt;typeof fetchUser&gt;;
+// Promise&lt;{ name: string }&gt;</code></pre>
+
+  <p>
+    The constraint <code>T extends (...args: any) =&gt; any</code> on the type parameter ensures
+    you only pass function types to <code>ReturnType</code>. If you pass a non-function,
+    TypeScript reports an error at the call site rather than silently returning <code>never</code>.
+  </p>
+
+  <!-- Section 9: Awaited -->
+  <h2>Awaited&lt;T&gt;: unwrapping promises recursively</h2>
+
+  <p>
+    <code>Awaited&lt;T&gt;</code> models what JavaScript's <code>await</code> keyword does to a
+    type — it recursively unwraps <code>Promise</code> wrappers until it reaches the final
+    resolved value. This is useful when combining <code>ReturnType</code> with async functions.
+  </p>
+
+  <pre><code>// Simplified version (actual standard library is more thorough):
+type MyAwaited&lt;T&gt; =
+  T extends Promise&lt;infer U&gt; ? MyAwaited&lt;U&gt; : T;
+
+// How it works:
+type I = MyAwaited&lt;Promise&lt;string&gt;&gt;;                 // string
+type J = MyAwaited&lt;Promise&lt;Promise&lt;number&gt;&gt;&gt;;        // number
+type K = MyAwaited&lt;boolean&gt;;                          // boolean  (not a Promise, returned as-is)
+
+// Practical use: get the resolved value of an async function
+async function loadConfig() {
+  return { theme: "dark", fontSize: 16 };
+}
+
+type ConfigShape = Awaited&lt;ReturnType&lt;typeof loadConfig&gt;&gt;;
+// { theme: string; fontSize: number }</code></pre>
+
+  <p>
+    The real <code>Awaited</code> in TypeScript's standard library also handles
+    <code>PromiseLike&lt;T&gt;</code> (any object with a <code>then</code> method), not just the
+    built-in <code>Promise</code> class. The recursive structure is the same: keep unwrapping
+    until the type is no longer promise-shaped.
+  </p>
+
+  <!-- Key callout -->
+  <div class="callout key">
+    These patterns underlie every utility type in TypeScript's standard library. Once you can
+    read <code>[K in keyof T]</code>, <code>T extends U ? X : Y</code>, and
+    <code>infer R</code>, you can open any library's <code>.d.ts</code> file and understand
+    exactly what its type-level code is doing. The entire utility type ecosystem —
+    <code>Partial</code>, <code>Required</code>, <code>Pick</code>, <code>Exclude</code>,
+    <code>Extract</code>, <code>Parameters</code>, <code>ReturnType</code>,
+    <code>Awaited</code> — is written using exactly these three mechanisms.
+  </div>
+
+  <!-- Warning callout -->
+  <div class="callout warning">
+    Mapped types, conditional types, and template literal types are compile-time constructs only.
+    TypeScript erases all of them before emitting JavaScript — no runtime code is generated, no
+    objects are created, and no branching logic runs in the browser or Node. If you need runtime
+    validation (e.g. checking that an API response matches a shape), you need a separate
+    runtime library such as Zod or Valibot. TypeScript's type system cannot protect you from data
+    that arrives at runtime from outside the compiled codebase.
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-9">
+    <h3>Quick Check</h3>
+    <p>What does the <code>infer</code> keyword do inside a conditional type?</p>
+    <div class="quiz-options">
+      <button>Extract and name a type from within the extends clause</button>
+      <button>Force TypeScript to compute the type automatically from usage context</button>
+      <button>Prevent TypeScript from widening the type beyond its inferred literal</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Hands-On Exercise</h3>
+    <p>
+      Implement <code>MyPartial&lt;T&gt;</code> and <code>MyReturnType&lt;T&gt;</code> from
+      scratch, without using the built-in <code>Partial</code> or <code>ReturnType</code>.
+    </p>
+    <p>
+      For <code>MyPartial</code>: use a mapped type with <code>[K in keyof T]</code> and make
+      every property optional. For <code>MyReturnType</code>: use a conditional type with
+      <code>infer</code> to capture the return type of a function.
+    </p>
+    <p>Verify your implementations match these types:</p>
+    <pre><code>// These should all pass without TypeScript errors:
+type P = MyPartial&lt;{ id: number; name: string }&gt;;
+// Expected: { id?: number; name?: string }
+
+function greet(name: string): string { return "hi " + name; }
+type R = MyReturnType&lt;typeof greet&gt;;
+// Expected: string
+
+async function loadData(): Promise&lt;number[]&gt; { return []; }
+type A = Awaited&lt;MyReturnType&lt;typeof loadData&gt;&gt;;
+// Expected: number[]</code></pre>
+    <p>Write your implementations below:</p>
+    <textarea placeholder="type MyPartial&lt;T&gt; = {
+  // your mapped type here
+};
+
+type MyReturnType&lt;T extends (...args: any) =&gt; any&gt; =
+  // your conditional type with infer here;" aria-label="Exercise response"></textarea>
+  </div>
+
+  <!-- Tutor prompt -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> When would you use a non-distributive conditional type
+    (wrapping <code>T</code> in <code>[T]</code>) instead of a distributive one? And why does
+    TypeScript's <code>Awaited</code> handle <code>PromiseLike</code> rather than just
+    <code>Promise</code> — what real-world problem does that solve?
+  </div>
+
+  <!-- Navigation -->
+  <nav class="lesson-nav">
+    <a href="0008-function-types.html">&larr; Previous: Function Types</a>
+    <a href="0010-react-typescript.html" class="primary">Next: React and TypeScript &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-9', 0, 'Correct. The infer keyword declares a new type variable and captures whatever type occupies that structural position in the extends pattern. It is available only in the true branch of the conditional, and it is how ReturnType, Awaited, and similar utilities extract inner types without any runtime code.');
+  </script>
+
+</div>
+</body>
+</html>

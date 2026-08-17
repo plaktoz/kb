@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TypeScript with React | TypeScript Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">TypeScript Course</a> &rsaquo; Module 4 &rsaquo; Lesson 10
+      </div>
+      <h1>TypeScript with React</h1>
+      <div class="lesson-meta">
+        <span>~25 min</span>
+        <span>Module 4 &mdash; Real-World TypeScript</span>
+        <span>Lesson 10 of 13</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      TypeScript + React &mdash;
+      <a href="https://www.typescriptlang.org/docs/handbook/react.html"
+         target="_blank" rel="noopener">
+        typescriptlang.org/docs/handbook/react.html
+      </a>
+    </div>
+
+    <!-- ── Section 1: Getting started ── -->
+    <h2>1. Getting Started: Skip the Manual Config</h2>
+
+    <p>
+      TypeScript supports JSX natively, but in practice you should never configure the
+      compiler by hand for a new project. Two scaffolding tools handle everything for you:
+    </p>
+
+    <pre><code># Next.js — TypeScript is the default
+npx create-next-app@latest my-app
+
+# Vite — choose the React + TypeScript template
+npm create vite@latest my-app -- --template react-ts</code></pre>
+
+    <p>
+      Both tools ship a <code>tsconfig.json</code> with the correct
+      <code>"jsx": "react-jsx"</code> setting, the right <code>lib</code> entries, and
+      path aliases pre-wired. Starting from scratch with <code>tsc --init</code> is
+      unnecessary and error-prone for React projects.
+    </p>
+
+    <p>
+      Once scaffolded, rename any file from <code>.js</code> to <code>.tsx</code> to enable
+      JSX syntax with full type checking. Files that contain no JSX can use <code>.ts</code>.
+    </p>
+
+    <!-- ── Section 2: Typing props ── -->
+    <h2>2. Typing Props with an Interface</h2>
+
+    <p>
+      The idiomatic pattern is to define an <code>interface</code> for a component's props
+      and then destructure directly in the function signature. TypeScript checks every caller
+      against that interface at compile time.
+    </p>
+
+    <pre><code>// Button.tsx
+interface ButtonProps {
+  label: string;
+  onClick: () => void;
+  variant: "primary" | "secondary";
+}
+
+function Button({ label, onClick, variant }: ButtonProps) {
+  return (
+    &lt;button className={variant} onClick={onClick}&gt;
+      {label}
+    &lt;/button&gt;
+  );
+}
+
+// Usage — TypeScript enforces all three props are present and correct:
+&lt;Button label="Save" onClick={() =&gt; save()} variant="primary" /&gt;
+
+// TypeScript error — "variant" is missing:
+&lt;Button label="Save" onClick={() =&gt; save()} /&gt;</code></pre>
+
+    <div class="callout warning">
+      Do not type the component itself as <code>React.FC&lt;ButtonProps&gt;</code>. That
+      pattern adds an implicit <code>children</code> prop you may not want and obscures the
+      return type. Annotating props directly in the function signature gives clearer types,
+      better inference, and less boilerplate.
+    </div>
+
+    <!-- ── Section 3: Optional props ── -->
+    <h2>3. Optional Props with <code>?</code></h2>
+
+    <p>
+      Append <code>?</code> to any prop name in the interface to make it optional. TypeScript
+      will treat the prop's type as <code>T | undefined</code> inside the component, which
+      forces you to handle the absent case explicitly.
+    </p>
+
+    <pre><code>interface AlertProps {
+  message: string;
+  title?: string;          // optional — may be undefined
+  onDismiss?: () => void;  // optional callback
+}
+
+function Alert({ message, title, onDismiss }: AlertProps) {
+  return (
+    &lt;div className="alert"&gt;
+      {title &amp;&amp; &lt;strong&gt;{title}&lt;/strong&gt;}
+      &lt;p&gt;{message}&lt;/p&gt;
+      {onDismiss &amp;&amp; (
+        &lt;button onClick={onDismiss}&gt;Dismiss&lt;/button&gt;
+      )}
+    &lt;/div&gt;
+  );
+}
+
+// Valid — only the required prop:
+&lt;Alert message="Disk space low" /&gt;
+
+// Also valid — all props supplied:
+&lt;Alert message="Disk space low" title="Warning" onDismiss={handleDismiss} /&gt;</code></pre>
+
+    <!-- ── Section 4: useState generics ── -->
+    <h2>4. <code>useState</code> with an Explicit Type Parameter</h2>
+
+    <p>
+      When you call <code>useState</code>, TypeScript infers the state type from the initial
+      value. That works perfectly when the initial value reveals the full type:
+    </p>
+
+    <pre><code>const [count, setCount] = useState(0);       // inferred: number
+const [name, setName]   = useState("Alice"); // inferred: string</code></pre>
+
+    <p>
+      But when the initial value is <code>null</code>, <code>[]</code>, or <code>{}</code>,
+      inference cannot determine the full type — it would lock you into
+      <code>null</code> forever, or infer <code>never[]</code> for the array. Supply the
+      type parameter explicitly:
+    </p>
+
+    <pre><code>interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+// Initial value is null — TypeScript needs the full union:
+const [user, setUser] = useState&lt;User | null&gt;(null);
+
+// Initial value is [] — TypeScript needs to know what goes in the array:
+const [items, setItems] = useState&lt;string[]&gt;([]);
+
+// Initial value is {} — same problem:
+const [filters, setFilters] = useState&lt;Record&lt;string, string&gt;&gt;({});</code></pre>
+
+    <div class="callout key">
+      Always provide an explicit type parameter to <code>useState</code> when the initial
+      value is <code>null</code>, an empty array <code>[]</code>, or an empty object
+      <code>{}</code>. Without it, TypeScript infers a type that is too narrow and you will
+      hit errors the moment you try to set real data.
+    </div>
+
+    <!-- ── Section 5: useRef typing ── -->
+    <h2>5. Typing Refs with <code>useRef</code></h2>
+
+    <p>
+      <code>useRef</code> takes a generic type parameter for the DOM element it will point
+      to. Pass <code>null</code> as the initial value so React can manage the assignment
+      during mount.
+    </p>
+
+    <pre><code>import { useRef, useEffect } from "react";
+
+function SearchBox() {
+  // Type parameter = the DOM element type; initial value = null
+  const inputRef = useRef&lt;HTMLInputElement&gt;(null);
+
+  useEffect(() =&gt; {
+    // inputRef.current is HTMLInputElement | null
+    // The optional chain handles the null case safely:
+    inputRef.current?.focus();
+  }, []);
+
+  return &lt;input ref={inputRef} type="text" placeholder="Search..." /&gt;;
+}</code></pre>
+
+    <p>
+      The generic parameter tells TypeScript exactly which properties and methods are
+      available on <code>inputRef.current</code>. Use the matching HTML element type:
+      <code>HTMLButtonElement</code>, <code>HTMLFormElement</code>,
+      <code>HTMLDivElement</code>, and so on.
+    </p>
+
+    <!-- ── Section 6: Event handler types ── -->
+    <h2>6. Event Handler Types</h2>
+
+    <p>
+      React's synthetic events are generic types parameterised on the element that fires
+      them. TypeScript uses this to give you accurate access to
+      <code>event.target</code> and <code>event.currentTarget</code> properties.
+    </p>
+
+    <pre><code>import { useState } from "react";
+
+function ContactForm() {
+  const [email, setEmail] = useState("");
+
+  // input onChange
+  function handleEmailChange(event: React.ChangeEvent&lt;HTMLInputElement&gt;) {
+    setEmail(event.target.value); // event.target is HTMLInputElement
+  }
+
+  // form onSubmit
+  function handleSubmit(event: React.FormEvent&lt;HTMLFormElement&gt;) {
+    event.preventDefault();
+    console.log("Submitting:", email);
+  }
+
+  // button onClick
+  function handleReset(event: React.MouseEvent&lt;HTMLButtonElement&gt;) {
+    event.currentTarget.blur();
+    setEmail("");
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;input
+        type="email"
+        value={email}
+        onChange={handleEmailChange}
+      /&gt;
+      &lt;button type="submit"&gt;Send&lt;/button&gt;
+      &lt;button type="button" onClick={handleReset}&gt;Clear&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}</code></pre>
+
+    <p>
+      The three event types you will reach for most often:
+    </p>
+
+    <ul>
+      <li><code>React.ChangeEvent&lt;HTMLInputElement&gt;</code> &mdash; input, textarea, select <code>onChange</code></li>
+      <li><code>React.FormEvent&lt;HTMLFormElement&gt;</code> &mdash; form <code>onSubmit</code></li>
+      <li><code>React.MouseEvent&lt;HTMLButtonElement&gt;</code> &mdash; button and div <code>onClick</code></li>
+    </ul>
+
+    <!-- ── Section 7: ReactNode ── -->
+    <h2>7. The Children Prop: <code>React.ReactNode</code></h2>
+
+    <p>
+      When a component accepts children, add a <code>children</code> prop typed as
+      <code>React.ReactNode</code>. This type is a broad union that covers every value React
+      can render: JSX elements, strings, numbers, arrays, fragments, portals, booleans, and
+      <code>null</code>.
+    </p>
+
+    <pre><code>interface CardProps {
+  title: string;
+  children: React.ReactNode; // any valid React output
+}
+
+function Card({ title, children }: CardProps) {
+  return (
+    &lt;div className="card"&gt;
+      &lt;h2 className="card-title"&gt;{title}&lt;/h2&gt;
+      &lt;div className="card-body"&gt;{children}&lt;/div&gt;
+    &lt;/div&gt;
+  );
+}
+
+// All of these are valid children:
+&lt;Card title="Info"&gt;Plain text content&lt;/Card&gt;
+&lt;Card title="Form"&gt;&lt;ContactForm /&gt;&lt;/Card&gt;
+&lt;Card title="List"&gt;{[1, 2, 3].map(n =&gt; &lt;span key={n}&gt;{n}&lt;/span&gt;)}&lt;/Card&gt;</code></pre>
+
+    <p>
+      Use <code>React.ReactElement</code> instead when you need to enforce that only a
+      single JSX element can be passed (no strings, no null). This is less common but useful
+      for slot-based APIs.
+    </p>
+
+    <!-- ── Section 8: Generic components ── -->
+    <h2>8. Generic Components for Type-Safe Lists</h2>
+
+    <p>
+      Function components can be generic, just like any other TypeScript function. This lets
+      you write reusable components that stay fully typed over whatever data they receive.
+    </p>
+
+    <pre><code>// A list component that works with any item type,
+// as long as each item has a numeric id.
+function List&lt;T extends { id: number }&gt;({
+  items,
+  renderItem,
+}: {
+  items: T[];
+  renderItem: (item: T) =&gt; React.ReactNode;
+}) {
+  return (
+    &lt;ul&gt;
+      {items.map((item) =&gt; (
+        &lt;li key={item.id}&gt;{renderItem(item)}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}
+
+// TypeScript infers T = { id: number; name: string } from usage:
+const users = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+];
+
+&lt;List
+  items={users}
+  renderItem={(user) =&gt; &lt;span&gt;{user.name}&lt;/span&gt;}
+/&gt;
+
+// TypeScript error — passing a string where a number is expected:
+&lt;List
+  items={[{ id: "x", name: "Alice" }]}  // ERROR: string is not assignable to number
+  renderItem={(user) =&gt; &lt;span&gt;{user.name}&lt;/span&gt;}
+/&gt;</code></pre>
+
+    <p>
+      The constraint <code>T extends { id: number }</code> means TypeScript will reject any
+      item type that lacks a numeric <code>id</code> — while still inferring the full shape
+      of <code>T</code> and passing it through to <code>renderItem</code>.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-10">
+      <h3>Quick check</h3>
+      <p>What is the correct type for a prop that should accept any valid React output?</p>
+      <div class="quiz-options">
+        <button>React.ReactNode &mdash; accepts JSX, strings, numbers, and null values</button>
+        <button>React.ReactElement &mdash; accepts JSX, strings, numbers, and null values</button>
+        <button>JSX.Element &mdash; accepts JSX, strings, numbers, and null values</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <h3>Practice</h3>
+      <p>
+        Write a typed <code>SearchInput</code> component that has two props:
+      </p>
+      <ul>
+        <li><code>onChange</code> &mdash; a handler called when the input value changes</li>
+        <li><code>results</code> &mdash; an array of strings to display below the input</li>
+      </ul>
+      <p>
+        Define a <code>SearchInputProps</code> interface, use
+        <code>React.ChangeEvent&lt;HTMLInputElement&gt;</code> for the event type, and render
+        both the input and a list of results. Write it from memory first:
+      </p>
+      <textarea placeholder="interface SearchInputProps {
+  onChange: ...;
+  results: ...;
+}
+
+function SearchInput({ onChange, results }: SearchInputProps) {
+  return (
+    // your JSX here
+  );
+}" spellcheck="false"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Paste your <code>SearchInput</code> attempt and ask
+      &ldquo;Is the event type correct here? How would I change this component to also accept
+      an optional placeholder string and a loading boolean?&rdquo;
+    </div>
+
+    <!-- ── Nav ── -->
+    <nav class="lesson-nav">
+      <a href="0009-types-from-types.html">&larr; Prev: Types from Types</a>
+      <a href="0011-typescript-5x.html" class="primary">Next: TypeScript 5.x &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-10',
+      0,
+      'Correct! React.ReactNode is the broad union type for anything React can render — JSX elements, strings, numbers, arrays, booleans, and null. React.ReactElement is more restrictive (JSX only, no strings or null), and JSX.Element is even narrower (a single element, no null).'
+    );
+  </script>
+</body>
+</html>

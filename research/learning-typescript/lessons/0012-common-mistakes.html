@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Do's, Don'ts, and Java Developer Pitfalls | TypeScript Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">TypeScript Course</a> &rsaquo; Module 4 &rsaquo; Lesson 12
+      </div>
+      <h1>Do's, Don'ts, and Java Developer Pitfalls</h1>
+      <div class="lesson-meta">
+        <span>~25 min</span>
+        <span>Module 4 &mdash; Real-World TypeScript</span>
+        <span>Lesson 12 of 13</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Primary sources</strong>
+      TypeScript Do's and Don'ts &mdash;
+      <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html"
+         target="_blank" rel="noopener">
+        typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html
+      </a>
+      &nbsp;&middot;&nbsp;
+      Java developer pitfalls from the course research report.
+    </div>
+
+    <!-- ── Section 1: Capitalized primitives ── -->
+    <h2>1. Never Use Capitalized Primitive Types</h2>
+
+    <p>
+      Coming from Java, you instinctively write <code>String</code> for text,
+      <code>Integer</code> for numbers, <code>Boolean</code> for true/false. In TypeScript the
+      equivalent-looking names <code>String</code>, <code>Number</code>, and
+      <code>Boolean</code> exist but they mean something completely different — and using them
+      is almost always wrong.
+    </p>
+
+    <p>
+      The lowercase versions (<code>string</code>, <code>number</code>, <code>boolean</code>)
+      are TypeScript's <strong>primitive types</strong>. They describe the actual values
+      you work with: <code>"hello"</code>, <code>42</code>, <code>true</code>.
+    </p>
+
+    <p>
+      The capitalized versions (<code>String</code>, <code>Number</code>, <code>Boolean</code>)
+      are the <strong>JavaScript wrapper object types</strong>. They represent boxed objects
+      created via <code>new String("hello")</code>. In practice you almost never create these
+      objects, and they behave surprisingly:
+    </p>
+
+    <pre><code>// Don't — String (capital S) is the wrapper object type
+function greet(name: String): string {
+  return `Hello, ${name}`;
+}
+
+greet("Alice");        // OK by accident — primitive is assignable to wrapper
+const s: string = new String("Bob");  // ERROR: String is not assignable to string
+                                       // (wrapper object is NOT a primitive)</code></pre>
+
+    <pre><code>// Do — always use lowercase primitives
+function greet(name: string): string {
+  return `Hello, ${name}`;
+}
+
+greet("Alice");        // OK
+greet(new String("Bob"));  // ERROR at call site — catches the mistake early</code></pre>
+
+    <p>
+      The same rule applies to <code>Number</code>/<code>number</code>,
+      <code>Boolean</code>/<code>boolean</code>, <code>Symbol</code>/<code>symbol</code>, and
+      <code>BigInt</code>/<code>bigint</code>. Use the lowercase form. Always.
+    </p>
+
+    <div class="callout key">
+      Rule of thumb: if it looks like a Java class name, it is probably the wrong type in
+      TypeScript. Use <code>string</code>, <code>number</code>, and <code>boolean</code>
+      (all lowercase) for every primitive value.
+    </div>
+
+    <!-- ── Section 2: any vs unknown ── -->
+    <h2>2. <code>any</code> vs <code>unknown</code> — One Disables Type Checking Entirely</h2>
+
+    <p>
+      When you do not know the type of a value, TypeScript gives you two escape hatches:
+      <code>any</code> and <code>unknown</code>. They look similar but behave very differently.
+    </p>
+
+    <p>
+      <code>any</code> is a complete opt-out. The type checker stops watching that value — you
+      can assign it to anything, call methods on it, index into it, pass it anywhere. No errors.
+      No safety. It is contagious: once a value is <code>any</code>, everything downstream of
+      it also becomes unchecked.
+    </p>
+
+    <pre><code>// Don't — any disables all checking
+function process(input: any) {
+  input.toUpperCase();       // No error — even if input is 42
+  input.nonExistentMethod(); // No error — TypeScript has given up
+  const n: number = input;   // No error — assignable to anything
+}</code></pre>
+
+    <p>
+      <code>unknown</code> is the safe alternative. It says "I don't know the type yet" but
+      it requires you to <strong>narrow</strong> the value before you can use it. The type
+      checker stays engaged the whole time.
+    </p>
+
+    <pre><code>// Do — unknown forces explicit narrowing before use
+function process(input: unknown) {
+  input.toUpperCase();       // ERROR — cannot call method on unknown
+  input.nonExistentMethod(); // ERROR — correctly caught
+
+  if (typeof input === "string") {
+    input.toUpperCase();     // OK — narrowed to string inside the branch
+  }
+
+  if (typeof input === "number") {
+    const doubled = input * 2;  // OK — narrowed to number
+  }
+}</code></pre>
+
+    <div class="callout warning">
+      <code>any</code> feels like Java's <code>Object</code> but is actually worse: Java's
+      <code>Object</code> still enforces that methods exist; <code>any</code> disables all type
+      checking in both directions. You can assign <code>any</code> to a <code>number</code>
+      variable without error, which Java would never allow with <code>Object</code>.
+    </div>
+
+    <!-- ── Section 3: void for callback return types ── -->
+    <h2>3. Use <code>void</code> for Callback Return Types — Not <code>any</code></h2>
+
+    <p>
+      When you accept a callback whose return value you do not care about, annotate it as
+      returning <code>void</code>, not <code>any</code>. The two look interchangeable but they
+      carry different semantics.
+    </p>
+
+    <pre><code>// Don't — any for a callback's return allows any return type
+type Listener = (event: MouseEvent) => any;
+
+// Do — void says "the return value will be ignored"
+type Listener = (event: MouseEvent) => void;</code></pre>
+
+    <p>
+      <code>void</code> means "the caller will not use the return value." This is looser than
+      <code>undefined</code> — it allows the callback to return <em>something</em> (TypeScript
+      just ignores it). This enables a useful pattern: passing a value-returning function where
+      a void-returning callback is expected.
+    </p>
+
+    <pre><code>// forEach expects (value: number) => void
+// push returns a number — but that's fine, the return is ignored
+const src = [1, 2, 3];
+const dst: number[] = [];
+src.forEach(n => dst.push(n));  // OK — push returns number, void discards it</code></pre>
+
+    <p>
+      If you used <code>any</code> instead of <code>void</code>, callers could accidentally
+      rely on the return value and TypeScript would not warn them.
+    </p>
+
+    <!-- ── Section 4: Optional callback parameters ── -->
+    <h2>4. Do Not Mark Callback Parameters Optional Unless They Truly Won't Be Passed</h2>
+
+    <p>
+      It might seem defensive to mark a callback's parameters optional — "the callback might
+      not receive all its arguments." But this is almost always wrong, and it causes problems
+      for callers.
+    </p>
+
+    <pre><code>// Don't — marking the callback parameter optional
+type Handler = (err?: Error, data?: string) => void;
+
+// Now callers must handle undefined even when you always pass both
+function callHandler(h: Handler) {
+  const err = new Error("oops");
+  const data = "result";
+  h(err, data);  // TypeScript types err and data as Error | undefined inside h
+                 // even though you always pass them — misleading
+}</code></pre>
+
+    <pre><code>// Do — parameters are required unless callers genuinely omit them
+type Handler = (err: Error, data: string) => void;
+
+// Callers can still pass a function that ignores some args —
+// in TypeScript, extra parameters are safely dropped
+const simple: Handler = (err) => console.error(err.message);  // OK
+</code></pre>
+
+    <p>
+      The rule from the TypeScript handbook: if a callback parameter will always receive a
+      value when the callback is called, declare it required. Optional parameters on callbacks
+      tell callers "prepare for undefined" when they do not need to.
+    </p>
+
+    <!-- ── Section 5: Overload ordering ── -->
+    <h2>5. Order Overloads from Most Specific to Most General</h2>
+
+    <p>
+      TypeScript picks the <strong>first matching overload</strong> when resolving a call. If
+      you place a broad overload before a narrow one, the narrow one is never reached — callers
+      always get the general signature, even when the specific one would be more accurate.
+    </p>
+
+    <pre><code>// Don't — general overload comes first; specific one is unreachable
+function create(x: string | number): string | number;
+function create(x: string): string;
+// TypeScript always picks the first overload for string input — returns string | number
+
+// Do — most specific overload first
+function create(x: string): string;
+function create(x: number): number;
+function create(x: string | number): string | number {
+  return typeof x === "string" ? x.toUpperCase() : x * 2;
+}
+
+const a = create("hello");  // inferred as string
+const b = create(42);       // inferred as number</code></pre>
+
+    <!-- ── Section 6: Union types over overloads ── -->
+    <h2>6. Prefer Union Types Over Overloads When the Return Type Is the Same</h2>
+
+    <p>
+      Overloads are most useful when the return type changes based on the argument type. When
+      the return type is the same regardless, a union type in a single signature is cleaner,
+      easier to read, and easier to maintain.
+    </p>
+
+    <pre><code>// Don't — overloads when return type doesn't change
+function format(x: string): string;
+function format(x: number): string;
+function format(x: string | number): string {
+  return String(x).trim();
+}
+
+// Do — single signature with a union parameter
+function format(x: string | number): string {
+  return String(x).trim();
+}</code></pre>
+
+    <p>
+      The same principle applies to arities. If you have two overloads that differ only in
+      whether an optional parameter is present, use an optional parameter instead:
+    </p>
+
+    <pre><code>// Don't — separate overloads for optional param
+function log(message: string): void;
+function log(message: string, level: string): void;
+function log(message: string, level?: string): void { /* ... */ }
+
+// Do — single signature with optional param
+function log(message: string, level?: string): void { /* ... */ }</code></pre>
+
+    <!-- ── Section 7: Java pitfall table ── -->
+    <h2>7. Java Developer Pitfall Reference</h2>
+
+    <p>
+      The following table collects the nine most common mistakes Java developers make when
+      moving to TypeScript, with a broken example and the corrected version side by side.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Mistake</th>
+          <th>Wrong code</th>
+          <th>Right code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Capitalized primitives</strong> — Java capitalizes types, TypeScript does not</td>
+          <td><code>function f(s: String) {}</code></td>
+          <td><code>function f(s: string) {}</code></td>
+        </tr>
+        <tr>
+          <td><strong>Overusing <code>any</code></strong> — feels like Java's <code>Object</code> but disables all checking</td>
+          <td><code>function parse(x: any) { x.foo(); }</code></td>
+          <td><code>function parse(x: unknown) { if (typeof x === "object" &amp;&amp; x !== null &amp;&amp; "foo" in x) { /* narrow first */ } }</code></td>
+        </tr>
+        <tr>
+          <td><strong>Assuming <code>private</code> is enforced at runtime</strong> — Java's <code>private</code> is truly private; TypeScript's is compile-time only</td>
+          <td><code>class A { private x = 1; }</code> (accessible via <code>(a as any).x</code>)</td>
+          <td><code>class A { #x = 1; }</code> (true runtime privacy via JS private fields)</td>
+        </tr>
+        <tr>
+          <td><strong>Expecting <code>implements</code> to infer parameter types</strong> — Java infers from the interface; TypeScript does not</td>
+          <td><code>class C implements I { method(x) { } }</code> — <code>x</code> is implicitly <code>any</code></td>
+          <td><code>class C implements I { method(x: ParamType) { } }</code> — annotate explicitly</td>
+        </tr>
+        <tr>
+          <td><strong>Structural typing surprises</strong> — Java uses nominal typing; TypeScript uses shape</td>
+          <td>Expects <code>new Dog()</code> to be incompatible with <code>Cat</code> if they share shape</td>
+          <td>Accept that <code>{ bark(): void }</code> satisfies <code>Dog</code> — shape is all that matters</td>
+        </tr>
+        <tr>
+          <td><strong>Forcing OOP everywhere</strong> — Java requires classes; TypeScript does not</td>
+          <td><code>class MathUtils { static add(a: number, b: number) { return a + b; } }</code></td>
+          <td><code>function add(a: number, b: number): number { return a + b; }</code></td>
+        </tr>
+        <tr>
+          <td><strong>Forgetting types are erased at runtime</strong> — Java reflection works at runtime; TypeScript generics are gone</td>
+          <td><code>if (value instanceof MyGenericClass&lt;string&gt;) {}</code> — runtime error or invalid syntax</td>
+          <td>Check shape manually: <code>typeof value === "object" &amp;&amp; "items" in value</code></td>
+        </tr>
+        <tr>
+          <td><strong>Not enabling <code>strict: true</code></strong> — no equivalent decision in Java; TypeScript is loose by default</td>
+          <td><code>{ "compilerOptions": {} }</code> — implicit any, no null checks</td>
+          <td><code>{ "compilerOptions": { "strict": true } }</code> — catches null bugs and implicit any</td>
+        </tr>
+        <tr>
+          <td><strong>Using class type parameters on static members</strong> — Java also disallows this, but the error is less obvious in TypeScript</td>
+          <td><code>class Box&lt;T&gt; { static empty(): Box&lt;T&gt; {} }</code> — <code>T</code> not in scope on static</td>
+          <td><code>class Box&lt;T&gt; { static empty&lt;U&gt;(): Box&lt;U&gt; {} }</code> — static needs its own type parameter</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ── Section 8: Error messages ── -->
+    <h2>8. Reading TypeScript Error Messages</h2>
+
+    <p>
+      TypeScript error codes follow a consistent numbering pattern. Knowing the ranges helps
+      you triage errors faster:
+    </p>
+
+    <ul>
+      <li>
+        <strong>2xxx — Semantic errors</strong>: The most common category. Type mismatches,
+        missing properties, incorrect argument types, undefined references. If you see a
+        four-digit code starting with 2, you have a type system disagreement.
+        <br />
+        Examples: <code>TS2322</code> (type not assignable), <code>TS2345</code> (argument
+        type mismatch), <code>TS2339</code> (property does not exist).
+      </li>
+      <li>
+        <strong>7xxx — Implicit <code>any</code></strong>: TypeScript could not infer a type
+        and fell back to <code>any</code>. Usually means a missing annotation or a missing
+        <code>strict: true</code> in tsconfig.
+        <br />
+        Examples: <code>TS7006</code> (parameter implicitly has <code>any</code> type),
+        <code>TS7031</code> (binding element implicitly has <code>any</code> type).
+      </li>
+    </ul>
+
+    <p>
+      TypeScript's error messages can be verbose and deeply nested. The VS Code extension
+      <strong>Pretty TypeScript Errors</strong> reformats them into plain-language explanations,
+      highlights the exact mismatch, and links to the relevant handbook section. It is highly
+      recommended for beginners and experienced developers alike.
+    </p>
+
+    <div class="callout key">
+      Always enable <code>strict: true</code> in your <code>tsconfig.json</code>. It activates
+      <code>strictNullChecks</code>, <code>noImplicitAny</code>,
+      <code>strictPropertyInitialization</code>, and five other checks. This single setting
+      catches roughly 80% of the mistakes described in this lesson automatically — before you
+      even read an error message.
+    </div>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-12">
+      <h3>Quick check</h3>
+      <p>
+        What is the key difference between <code>any</code> and <code>unknown</code>
+        in TypeScript?
+      </p>
+      <div class="quiz-options">
+        <button><code>unknown</code> requires narrowing first; <code>any</code> skips all checks</button>
+        <button><code>any</code> requires narrowing first; <code>unknown</code> skips all checks</button>
+        <button><code>unknown</code> and <code>any</code> both require explicit type narrowing</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <h3>Practice: Find the Five Mistakes</h3>
+      <p>
+        The snippet below contains <strong>five deliberate mistakes</strong>. Your task is to
+        find all five and write the corrected version of each line. Read carefully — one mistake
+        is about type names, one is about <code>any</code>, one is about overload ordering, one
+        is about an optional callback parameter, and one is about a structural assumption.
+      </p>
+      <pre><code>// Broken TypeScript — five mistakes hidden below
+
+// Mistake area 1: primitive type names
+function shout(message: String): String {
+  return message.toUpperCase();
+}
+
+// Mistake area 2: escape hatch type
+function parseConfig(raw: any) {
+  console.log(raw.host, raw.port);
+}
+
+// Mistake area 3: overload ordering
+function wrap(x: string | number): string;
+function wrap(x: string): string;
+function wrap(x: string | number): string {
+  return String(x);
+}
+
+// Mistake area 4: optional callback param
+type DataCallback = (err?: Error, result?: string) => void;
+function fetchData(cb: DataCallback) {
+  cb(new Error("fail"), "data");
+}
+
+// Mistake area 5: structural assumption
+class Admin { name: string; role: "admin"; constructor(n: string) { this.name = n; this.role = "admin"; } }
+class Editor { name: string; role: "admin"; constructor(n: string) { this.name = n; this.role = "admin"; } }
+const a: Admin = new Editor("Alex");  // developer expects an error here
+</code></pre>
+      <p>Write your corrected version in the text area below. Try to fix all five before checking.</p>
+      <textarea placeholder="// Write your corrected version here...
+// Fix 1 (primitive types): ...
+// Fix 2 (any → unknown + narrowing): ...
+// Fix 3 (overload ordering): ...
+// Fix 4 (callback params): ...
+// Fix 5 (structural typing — note: this IS valid TypeScript because shapes match)" spellcheck="false"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Paste your exercise attempt and ask &ldquo;Did I identify
+      and fix all five mistakes correctly? For mistake 5, explain why TypeScript accepts the
+      assignment even though the classes are unrelated — and what pattern I would need to make
+      them incompatible.&rdquo;
+    </div>
+
+    <!-- ── Nav ── -->
+    <nav class="lesson-nav">
+      <a href="0011-typescript-5x.html">&larr; Prev: TypeScript 5.x Features</a>
+      <a href="0013-practice-path.html" class="primary">Next: Practice Path &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-12',
+      0,
+      '<code>unknown</code> is the safe escape hatch: you can hold any value in it, but you must narrow the type (with typeof, instanceof, or a type guard) before using it. <code>any</code> skips all checking — you can call methods, index, and assign freely with no errors, but TypeScript has stopped protecting you entirely.'
+    );
+  </script>
+</body>
+</html>

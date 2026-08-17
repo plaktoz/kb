@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Component Overrides — Replacing Admin UI Pieces · PayloadCMS Lessons</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">PayloadCMS</a> › Module 3: Admin UI Customization › Lesson 9 of 12
+      </div>
+      <h1>Component Overrides — Replacing Admin UI Pieces</h1>
+      <div class="lesson-meta">
+        <span>~14 min</span>
+        <span>Module 3 — Admin UI Customization</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-card-label">Primary Source</div>
+      <a href="https://payloadcms.com/docs/admin/components" target="_blank" rel="noopener">
+        https://payloadcms.com/docs/admin/components
+      </a>
+    </div>
+
+    <!-- Section 1: Path strings, not imports -->
+    <h2>Why Payload Uses Path Strings Instead of Imports</h2>
+    <p>
+      Every other configuration system you have worked with likely accepts direct imports — you
+      write <code>import MyButton from './components/MyButton'</code> at the top of the file and
+      pass the variable. Payload deliberately does not work that way for admin components.
+    </p>
+    <p>
+      Instead, you register components as <strong>path strings</strong> inside
+      <code>admin.components</code>. Payload reads those strings at startup and resolves the
+      file and export itself. The reason is architectural: your Payload config runs on the
+      server, and directly importing a React component there would pull client-side code into
+      the server bundle. Path strings keep the two bundles cleanly separate — Payload can
+      decide when and where to load each component without you worrying about the bundler
+      boundary.
+    </p>
+
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      <p>
+        You never <code>import</code> custom admin components into <code>payload.config.ts</code>.
+        You register them as <strong>path strings</strong>. This is the single most
+        unusual thing about Payload's customisation API, and understanding it is what makes
+        everything else fall into place. Payload's build tooling reads those strings and wires
+        the components into the admin bundle for you.
+      </p>
+    </div>
+
+    <!-- Section 2: Path syntax -->
+    <h2>Component Path Syntax</h2>
+    <p>
+      A component path is a string that tells Payload where to find the file and which export
+      to use. Three forms are supported:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Pattern</th>
+          <th>Example</th>
+          <th>When to use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Default export</td>
+          <td><code>'/src/components/MyButton'</code></td>
+          <td>The file uses <code>export default</code></td>
+        </tr>
+        <tr>
+          <td>Named export (hash)</td>
+          <td><code>'/src/components/MyButton#MyButton'</code></td>
+          <td>The file uses a named export; append <code>#ExportName</code></td>
+        </tr>
+        <tr>
+          <td>Object form</td>
+          <td><code>{ path: '/src/components/MyButton', exportName: 'MyButton' }</code></td>
+          <td>Same as hash syntax but type-safe and readable in long configs</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The hash shorthand (<code>#ExportName</code>) is the most compact and most commonly seen
+      in documentation examples. The object form with explicit <code>path</code> and
+      <code>exportName</code> properties is preferable when you are also passing
+      <code>clientProps</code> or <code>serverProps</code>, since you need the object form
+      to attach those additional keys.
+    </p>
+
+    <div class="callout warning">
+      <div class="callout-label">Gotcha</div>
+      <p>
+        Component paths must be <strong>absolute from your project root</strong>, not relative
+        to the config file. Write <code>'/src/components/MyButton'</code>, not
+        <code>'./components/MyButton'</code>. A relative path will silently fail to resolve
+        at build time, and you will see either a missing component or an unhelpful bundler
+        error rather than a clear message about the path format.
+      </p>
+    </div>
+
+    <!-- Section 3: Four categories -->
+    <h2>The Four Categories of Overridable Components</h2>
+    <p>
+      Payload divides overridable components into four scopes. Understanding the scope tells
+      you where in the config the override lives.
+    </p>
+
+    <h3>1. Root Components</h3>
+    <p>
+      Root components are top-level elements of the admin panel that exist independently of
+      any collection or global — the navigation bar, the logout button, the dashboard, the
+      global header and footer, and the before/after slots that wrap the main content area.
+      They are configured directly under <code>admin.components</code> in the root Payload
+      config.
+    </p>
+    <pre><code>// payload.config.ts
+admin: {
+  components: {
+    logout: {
+      Button: '/src/components/MyLogoutButton#MyLogoutButton',
+    },
+    Nav: '/src/components/MyNav',
+  },
+}</code></pre>
+
+    <h3>2. Collection Components</h3>
+    <p>
+      Collection components are scoped to a specific collection. Override slots include the
+      list view, the edit view, the save button, and various before/after injection points
+      around the form. They live inside the collection definition's own
+      <code>admin.components</code> key.
+    </p>
+    <pre><code>// collections/Posts.ts
+{
+  slug: 'posts',
+  admin: {
+    components: {
+      edit: {
+        SaveButton: '/src/components/CustomSaveButton#CustomSaveButton',
+      },
+    },
+  },
+}</code></pre>
+
+    <h3>3. Global Components</h3>
+    <p>
+      Global components work the same way as collection components but apply to a global
+      document rather than a collection. The same slot names are available and the config
+      key is also <code>admin.components</code>, this time inside the global definition.
+    </p>
+
+    <h3>4. Field Components</h3>
+    <p>
+      Field components override how individual fields render in the admin UI — their label,
+      their input element, their description, or the entire field block. These are covered in
+      depth in the next lesson; the override syntax follows the same path string pattern.
+    </p>
+
+    <!-- Section 4: Server vs client, auto-props -->
+    <h2>Server Components, Client Components, and Auto-Props</h2>
+    <p>
+      Because Payload's admin panel is built on Next.js App Router, your custom components
+      can be either server components or client components. Payload supports both.
+    </p>
+
+    <h3>Server Components (default)</h3>
+    <p>
+      Any component without a <code>'use client'</code> directive is treated as a server
+      component. It renders on the server, can use async data fetching, and is never sent
+      to the browser as JavaScript. Server components receive two props automatically:
+    </p>
+    <ul>
+      <li>
+        <code>payload</code> — the fully-initialised Payload instance, giving you access to
+        the Local API, collections, globals, and config directly inside the component.
+      </li>
+      <li>
+        <code>i18n</code> — the internationalisation object, so your component can surface
+        translated strings that match the admin panel's current locale setting.
+      </li>
+    </ul>
+
+    <h3>Client Components</h3>
+    <p>
+      Add <code>'use client'</code> as the first line of the file and the component becomes
+      a client component. It runs in the browser, can use React hooks like
+      <code>useState</code>, <code>useEffect</code>, and Next.js's <code>useRouter</code>.
+      Client components still receive <code>payload</code> and <code>i18n</code> automatically,
+      but the <code>payload</code> object in client context is a limited client-safe version —
+      it does not give you access to the full server API.
+    </p>
+    <pre><code>// src/components/MyLogoutButton.tsx
+'use client'
+import { useRouter } from 'next/navigation'
+
+export function MyLogoutButton() {
+  const router = useRouter()
+  return (
+    &lt;button onClick={() =&gt; {
+      // perform logout logic
+      router.push('/login')
+    }}&gt;
+      Sign out
+    &lt;/button&gt;
+  )
+}</code></pre>
+
+    <!-- Section 5: clientProps and serverProps -->
+    <h2>Passing Custom Props with clientProps and serverProps</h2>
+    <p>
+      Sometimes your component needs data from outside itself — a label string, a feature
+      flag, an API endpoint. Rather than hardcoding that data into the component file,
+      you can pass it from the config using the <code>clientProps</code> and
+      <code>serverProps</code> keys on the component object.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Purpose</th>
+          <th>Constraint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>clientProps</code></td>
+          <td>Props forwarded to a Client Component</td>
+          <td>Must be JSON-serialisable (strings, numbers, plain objects — no functions)</td>
+        </tr>
+        <tr>
+          <td><code>serverProps</code></td>
+          <td>Props forwarded to a Server Component</td>
+          <td>Can include non-serialisable values since they never cross the network</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      To use either, switch to the object form of the component path so you have a place to
+      attach the extra keys:
+    </p>
+    <pre><code>admin: {
+  components: {
+    logout: {
+      Button: {
+        path: '/src/components/MyLogoutButton',
+        exportName: 'MyLogoutButton',
+        clientProps: {
+          redirectPath: '/login',
+          label: 'Sign out',
+        },
+      },
+    },
+  },
+}</code></pre>
+    <p>
+      Inside the component, those values arrive as regular React props alongside the
+      automatically-injected <code>payload</code> and <code>i18n</code>.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-9">
+      <h3>Check Your Understanding</h3>
+      <p class="quiz-question">
+        Which statement correctly describes how Payload registers custom admin components?
+      </p>
+      <div class="quiz-options">
+        <button>You register components as file path strings so Payload can resolve them independently, preventing client bundle bloat in the server config file.</button>
+        <button>You directly import each component at the top of your config, then reference the imported variable inside the admin.components configuration object instead.</button>
+        <button>You wrap each component in a dynamic import function, then pass that callback to the relevant admin.components property in your Payload config.</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <p>
+        Write the <code>admin.components</code> config entry to replace the logout button
+        with a custom component located at <code>/src/components/MyLogout</code> that uses
+        a named export called <code>MyLogoutButton</code>. Use the hash syntax.
+      </p>
+      <textarea placeholder="admin: {
+  components: {
+    logout: {
+      Button: '...',
+    },
+  },
+}"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Stuck or want to go deeper? Open a conversation with your AI tutor and ask:
+      "Walk me through the difference between passing clientProps and serverProps to a Payload
+      component override, and show me a concrete example where I would need to use
+      <code>serverProps</code> instead of <code>clientProps</code>."
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0008-admin-theming.html">← Lesson 8: Admin Theming</a>
+      <a href="0010-custom-field-components.html" class="primary">Lesson 10: Custom Field Components →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-9', 0, 'Correct. Payload uses path strings rather than direct imports so the build tooling can place components into the correct bundle — server or client — without you importing them into the config file, which runs on the server. Options B and C both describe direct import patterns that Payload deliberately does not use.');
+  </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structural Typing — The Java Instinct to Unlearn | TypeScript Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">TypeScript Course</a> &rsaquo; Module 1 &rsaquo; Lesson 2
+      </div>
+      <h1>Structural Typing — The Java Instinct to Unlearn</h1>
+      <div class="lesson-meta">
+        <span>~20 min</span>
+        <span>Module 1 — Foundations</span>
+        <span>Lesson 2 of 13</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      TypeScript for Java/OOP Programmers &mdash;
+      <a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html"
+         target="_blank" rel="noopener">
+        typescriptlang.org/docs/handbook/typescript-in-5-minutes-oop.html
+      </a>
+    </div>
+
+    <!-- ── Section 1: Nominal typing recap ── -->
+    <h2>1. How Java Thinks: Types by Name</h2>
+
+    <p>
+      If you learned to code in Java (or C#, or another classical OOP language), you carry a
+      deep instinct about types: <em>a value belongs to a type only if it was explicitly
+      declared to be that type.</em> This is called <strong>nominal typing</strong>.
+    </p>
+
+    <p>
+      In Java, two classes with identical fields are <em>not</em> interchangeable unless one
+      explicitly extends the other or they share a common interface. The type system tracks
+      names and inheritance chains, not structure.
+    </p>
+
+    <pre><code>// Java
+class Dog {
+    String name;
+    void speak() { System.out.println("Woof"); }
+}
+
+class Cat {
+    String name;
+    void speak() { System.out.println("Meow"); }
+}
+
+// This does NOT compile in Java — Cat is not Dog,
+// regardless of how similar they look.
+Dog d = new Cat();  // ERROR: incompatible types</code></pre>
+
+    <p>
+      The Java compiler enforces this even if <code>Cat</code> and <code>Dog</code> have
+      identical fields and methods. Name matters. Declaration matters.
+      Shape does not.
+    </p>
+
+    <!-- ── Section 2: Structural typing in TypeScript ── -->
+    <h2>2. How TypeScript Thinks: Types by Shape</h2>
+
+    <p>
+      TypeScript takes the opposite approach: <strong>structural typing</strong>.
+      The type checker asks only one question — <em>does this value have all the properties
+      the type requires?</em> If yes, the value is compatible. Where it came from, what class
+      it was instantiated from, and what name you gave that class are all irrelevant.
+    </p>
+
+    <pre><code>// TypeScript
+class Dog {
+  name: string;
+  constructor(name: string) { this.name = name; }
+  speak() { console.log("Woof"); }
+}
+
+class Cat {
+  name: string;
+  constructor(name: string) { this.name = name; }
+  speak() { console.log("Meow"); }
+}
+
+// TypeScript: this works fine.
+// Dog and Cat have the same shape, so Cat satisfies a Dog variable.
+const d: Dog = new Cat("Whiskers");  // OK!</code></pre>
+
+    <p>
+      There is no inheritance link between <code>Dog</code> and <code>Cat</code>, yet
+      TypeScript accepts the assignment. Both classes have a <code>name: string</code>
+      property and a <code>speak()</code> method — their shapes match, so they are
+      compatible.
+    </p>
+
+    <div class="callout key">
+      In TypeScript, shape wins. The type checker does not care what you called your class.
+      If a value carries all the properties a type requires, it <em>is</em> that type —
+      whether or not it was ever declared as such.
+    </div>
+
+    <div class="callout warning">
+      Java developers are often surprised to discover that two completely unrelated classes
+      are silently interchangeable in TypeScript. This is not a bug — it is the language's
+      core design. Expect it everywhere. Nominal-style safety (type X only when declared X)
+      requires extra patterns like branded types, which come much later.
+    </div>
+
+    <!-- ── Section 3: Types as sets ── -->
+    <h2>3. Types as Sets of Values</h2>
+
+    <p>
+      A helpful mental model: every type in TypeScript is a <strong>set of values</strong>.
+      A variable typed as <code>Dog</code> can hold any value that belongs to the Dog set —
+      any object that has at least the properties Dog describes.
+    </p>
+
+    <p>
+      This means a single value can belong to <em>multiple types simultaneously</em>. An
+      object with properties <code>name</code>, <code>speak</code>, and <code>fly</code>
+      belongs to the Dog set (has name + speak), the Cat set (also has name + speak), and
+      some hypothetical Bird set (has fly). Sets can overlap freely.
+    </p>
+
+    <pre><code>// TypeScript — a value in multiple types at once
+type Named   = { name: string };
+type Audible = { speak(): void };
+
+class Parrot {
+  name: string;
+  constructor(name: string) { this.name = name; }
+  speak() { console.log("Squawk"); }
+  fly() { console.log("Flap"); }
+}
+
+const p = new Parrot("Polly");
+
+// p belongs to Named — it has .name
+const n: Named   = p;   // OK
+
+// p belongs to Audible — it has .speak()
+const a: Audible = p;   // OK
+
+// p belongs to both at once — no contradiction
+const na: Named & Audible = p;  // also OK</code></pre>
+
+    <!-- ── Section 4: Empty types ── -->
+    <h2>4. Empty Types Accept Everything</h2>
+
+    <p>
+      One immediate consequence of the set model: an <strong>empty type</strong> — a type
+      with no required properties — places no constraints on a value. Every possible value
+      already satisfies an empty shape, so every value belongs to the empty-type set.
+    </p>
+
+    <pre><code>// TypeScript
+class Empty {}
+
+// An empty class has no shape requirements to fail.
+// Any object with any properties satisfies it.
+const e1: Empty = { name: "Alice", age: 30 };  // OK
+const e2: Empty = new Date();                   // OK
+const e3: Empty = () => 42;                    // OK (functions are objects)
+
+// Compare this to Java: new Empty() in Java is just new Empty() —
+// nothing else can be assigned to an Empty variable.
+// In TypeScript, empty means "no requirements" = "accepts everything."</code></pre>
+
+    <p>
+      This is surprising if you expect empty to mean "nothing allowed." In the set model,
+      empty type = the set of all values with at least zero properties = every value.
+    </p>
+
+    <!-- ── Section 5: Runtime erasure ── -->
+    <h2>5. TypeScript Types Disappear at Runtime</h2>
+
+    <p>
+      In Java, type information is preserved at runtime. You can call
+      <code>obj.getClass()</code>, use <code>instanceof</code> reliably across the hierarchy,
+      and use reflection to inspect annotations and field types.
+    </p>
+
+    <p>
+      TypeScript has no equivalent. <strong>All type information is fully erased when your
+      code is compiled to JavaScript.</strong> The output is plain JavaScript — there is no
+      trace of your interfaces, type aliases, or generic type parameters at runtime.
+    </p>
+
+    <pre><code>// TypeScript source
+interface Point { x: number; y: number; }
+
+function log(p: Point) {
+  console.log(p.x, p.y);
+}
+
+// Compiled JavaScript output — interface is gone
+function log(p) {
+  console.log(p.x, p.y);
+}</code></pre>
+
+    <pre><code>// TypeScript — runtime type checking must use JavaScript means only
+function isPoint(val: unknown): val is Point {
+  // You cannot ask "is this a Point?" at runtime directly.
+  // You must check properties manually:
+  return (
+    typeof val === "object" &&
+    val !== null &&
+    "x" in val &&
+    "y" in val
+  );
+}</code></pre>
+
+    <p>
+      There is no <code>getClass()</code>. There is no generic reflection over TypeScript
+      types. At runtime, you have JavaScript. Plan accordingly.
+    </p>
+
+    <!-- ── Section 6: Free functions are idiomatic ── -->
+    <h2>6. You Do Not Need Classes</h2>
+
+    <p>
+      Java forces almost all code into classes. TypeScript does not. Because structural
+      typing cares only about shape, a plain function is just as valid as a method on a
+      class. In fact, <strong>free functions are idiomatic TypeScript</strong> — they are
+      simpler, easier to test, and do not carry the overhead of class instantiation.
+    </p>
+
+    <pre><code>// Java style — everything in a class
+class MathUtils {
+    public static int add(int a, int b) {
+        return a + b;
+    }
+}
+int result = MathUtils.add(2, 3);</code></pre>
+
+    <pre><code>// TypeScript — free function, no class needed
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+const result = add(2, 3);  // 5</code></pre>
+
+    <p>
+      Classes still exist in TypeScript and are useful for encapsulation, but they are a
+      tool, not a requirement. You will write many TypeScript files with no class at all.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-2">
+      <h3>Quick check</h3>
+      <p>What determines type compatibility in TypeScript?</p>
+      <div class="quiz-options">
+        <button>The name you used when declaring the type</button>
+        <button>The shape, meaning the properties and their types</button>
+        <button>The runtime class hierarchy checked via instanceof calls</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <h3>Practice</h3>
+      <p>
+        Write two TypeScript classes that have <em>no inheritance relationship</em> with each
+        other but share an identical shape (same property names and types). Then declare a
+        variable typed as the first class and assign an instance of the second class to it.
+        Observe that TypeScript accepts the assignment.
+      </p>
+      <p>
+        Try it below — sketch the code from memory before looking anything up:
+      </p>
+      <textarea placeholder="// Write your two classes and the cross-assignment here...
+// Example starter:
+// class Circle { ... }
+// class Badge { ... }
+// const c: Circle = new Badge(...);" spellcheck="false"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Paste your exercise attempt and ask &ldquo;Does this
+      demonstrate structural typing correctly? What would break if TypeScript used nominal
+      typing instead?&rdquo;
+    </div>
+
+    <!-- ── Nav ── -->
+    <nav class="lesson-nav">
+      <a href="0001-what-typescript-is.html">&larr; Prev: What TypeScript Is</a>
+      <a href="0003-first-project-setup.html" class="primary">Next: First Project Setup &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-2',
+      1,
+      'Correct! TypeScript uses structural typing — it checks whether the value\'s properties match the type\'s shape. The class name and declaration hierarchy are ignored by the type checker.'
+    );
+  </script>
+</body>
+</html>

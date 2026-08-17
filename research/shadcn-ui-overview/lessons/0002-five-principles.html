@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Five Principles — shadcn/ui Course</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        shadcn/ui Course &rsaquo; Module 1 &mdash; The Mental Model &rsaquo; Lesson 2 of 10
+      </p>
+      <h1>The Five Principles</h1>
+      <div class="lesson-meta">
+        <span>~10 min</span>
+        <span>Module 1</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Primary source</strong>
+      <a href="https://ui.shadcn.com/docs" target="_blank" rel="noopener">
+        https://ui.shadcn.com/docs
+      </a>
+      — the five explicit design principles behind every architectural decision in shadcn/ui
+    </div>
+
+    <!-- Intro -->
+    <p>
+      shadcn/ui is not a grab-bag of components. Every decision — why you copy code instead of installing a package, why it uses Tailwind, why it works well with AI editors — traces back to five stated principles. Learn these five, and the rest of the library starts to explain itself.
+    </p>
+
+    <div class="callout key">
+      <p>The five principles are not marketing copy. They are the <em>architectural constraints</em> that determined every design choice in shadcn/ui. When something about the library surprises you, one of these principles is almost always the explanation.</p>
+    </div>
+
+    <!-- Principle 1 -->
+    <h2>1 &mdash; Open Code</h2>
+    <p>
+      When you add a shadcn/ui component, its source code lands directly in your repository. You own it outright — there is no upstream version to wait for, no API boundary to work around, no PR to submit. If you want to remove the hover animation on <code>Button</code>, you open the file and delete it.
+    </p>
+    <p>
+      This is a deliberate inversion of the conventional library model. Most UI libraries hide their internals behind a versioned package. shadcn/ui exposes them by design, treating <em>editability</em> as a first-class feature.
+    </p>
+
+    <!-- Principle 2 -->
+    <h2>2 &mdash; Composition</h2>
+    <p>
+      Components are built from smaller, focused primitives rather than monolithic widgets. A <code>Dialog</code> is assembled from a <code>DialogTrigger</code>, <code>DialogContent</code>, <code>DialogHeader</code>, and so on — each piece exported separately so you can use exactly the parts you need.
+    </p>
+    <p>
+      Because the source lives in your project, you can also compose pieces in ways the original author never anticipated. The composition principle means you extend by assembling, not by overriding a deeply nested prop.
+    </p>
+    <p>
+      All components are built to be accessible — WCAG-compliant, screen-reader friendly, and keyboard-navigable — because accessibility is baked into the Radix UI primitives that shadcn/ui wraps.
+    </p>
+
+    <!-- Principle 3 -->
+    <h2>3 &mdash; Distribution</h2>
+    <p>
+      shadcn/ui distributes components through a flat-file schema and a CLI. When you run <code>shadcn add button</code>, the CLI reads a registry definition and writes the component files directly into your project. Nothing is installed as a runtime dependency; the component <em>is</em> your code from that point forward.
+    </p>
+    <p>
+      The flat-file schema also means the distribution mechanism is transparent. You can inspect exactly what will be written before it lands, and the CLI respects your project's existing path aliases and style configuration set during <code>shadcn init</code>.
+    </p>
+
+    <!-- Principle 4 -->
+    <h2>4 &mdash; Beautiful Defaults</h2>
+    <p>
+      Components ship with sensible visual defaults so a freshly added button looks polished without any extra configuration. The styling is powered by Tailwind utility classes, which are straightforward to read and override — changing a background color means swapping a class name rather than fighting a theme object or CSS specificity.
+    </p>
+    <p>
+      CSS variables underpin the color system, so a single change to <code>--primary</code> in your stylesheet propagates to every component that references that token. Beautiful defaults are a starting point, not a cage.
+    </p>
+
+    <!-- Principle 5 -->
+    <h2>5 &mdash; AI-Ready</h2>
+    <p>
+      Because you own the source, an AI coding assistant can read your actual component implementation. It is not guessing from documentation or reasoning about a black-box package — it sees the real file, with your real customisations, and can suggest targeted edits.
+    </p>
+    <p>
+      This is not a retrofitted feature. It is a direct consequence of the Open Code principle: when implementation details live in your repository rather than inside a node_modules folder, every tool that reads your codebase gains full visibility into your UI layer.
+    </p>
+
+    <div class="callout warning">
+      <p>
+        A common misconception is that "AI-Ready" is a separate, special feature you enable. It is not. AI tooling works well with shadcn/ui <em>because</em> Open Code puts the source in your repo. The two principles are the cause and the effect, not two independent switches.
+      </p>
+    </div>
+
+    <!-- How the principles interlock -->
+    <h2>How the Principles Work Together</h2>
+    <p>
+      The five principles are not independent. Open Code makes Distribution meaningful (copying code into your project only matters if you can actually edit it). Distribution makes Composition practical (flat files are easy to assemble and reorganise). Beautiful Defaults lower the cost of starting, and AI-Ready makes iterating faster once you have something working.
+    </p>
+    <p>
+      Understood together, they explain why shadcn/ui feels different from other UI libraries — not just in what it gives you, but in the kind of ownership it asks you to take on.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-2">
+      <h3>Check your understanding</h3>
+      <p class="question">Which principle is the direct reason AI tools can read and modify your actual component implementation?</p>
+      <ul class="quiz-options">
+        <li><button>Open Code gives you full source ownership</button></li>
+        <li><button>AI-Ready ensures models can read your code</button></li>
+        <li><button>Distribution copies component files into your project</button></li>
+      </ul>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        For each of the five principles, write one concrete thing you will be able to do <em>because of it</em>. Be specific — describe an action, not an abstract benefit.
+      </p>
+      <p>
+        Example format: <em>Open Code &rarr; I can delete the hover state on Button without submitting a PR</em>
+      </p>
+      <textarea
+        rows="10"
+        placeholder="Open Code → I can ...
+Composition → I can ...
+Distribution → I can ...
+Beautiful Defaults → I can ...
+AI-Ready → I can ..."
+        aria-label="Five principles exercise"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <p class="tutor-prompt">
+      Stuck on the exercise? Try working backwards: pick a specific file or workflow in a project you are building and ask &ldquo;which principle would change my experience here?&rdquo; Real scenarios make the abstractions click faster than working through the list top-to-bottom.
+    </p>
+
+    <!-- Nav -->
+    <nav class="lesson-nav" aria-label="Lesson navigation">
+      <a href="0001-what-is-shadcn.html">&larr; What Is shadcn/ui?</a>
+      <a href="0003-comparison.html" class="primary">Next: shadcn/ui vs. the Field &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-2',
+      1,
+      'AI-Ready is the named principle — it describes the direct benefit for AI tooling. The mechanism behind it is Open Code (you own the source), but AI-Ready is the principle that captures this specific capability. Open Code is the cause; AI-Ready is the named effect.'
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Carbon? Philosophy and Purpose — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> › Module 1 — Foundations › Lesson 1
+      </div>
+      <h1>What is Carbon? Philosophy and Purpose</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 1 — Foundations · Lesson 1 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">Carbon Design System — "What is Carbon?" (carbondesignsystem.com)</div>
+      <div class="source-result">Key result: Carbon is IBM's open-source design system grounded in the IBM Design Language, built on five core principles — Open, Inclusive, Modular &amp; Flexible, User-first, and Consistent — that together ensure every IBM digital product feels like part of a single, coherent brand.</div>
+    </div>
+
+    <!-- Section 1: Why design systems exist -->
+    <h2>The problem: building without a shared language</h2>
+
+    <p>Imagine a large software company with dozens of product teams, each building their own buttons, form inputs, color palettes, and navigation patterns from scratch. One team ships a blue primary button at 14px. Another ships it at 16px with rounded corners. A third team chooses a completely different shade of blue. Each decision is locally reasonable, but globally the product portfolio feels fragmented — like it was made by strangers rather than a single brand.</p>
+
+    <p>This fragmentation has real costs. Designers spend hours solving problems that were already solved elsewhere in the organization. Engineers re-implement the same component repeatedly, introducing subtle bugs and accessibility gaps each time. Users who move between IBM products have to relearn interactions that should feel familiar. And when IBM needs to refresh its visual identity, every team must update their bespoke implementations independently, making a coordinated rollout nearly impossible.</p>
+
+    <p>A design system solves this by establishing a single shared vocabulary — one set of decisions about color, spacing, typography, and interaction patterns that all teams draw from. Rather than each team reinventing the wheel, they inherit a foundation that already encodes best practices around accessibility, visual consistency, and brand alignment. Teams can focus creative energy on problems unique to their product rather than on solved infrastructure problems.</p>
+
+    <!-- Section 2: What Carbon is and where it came from -->
+    <h2>What Carbon is and where it came from</h2>
+
+    <p>Carbon is IBM's open-source design system for building consistent digital products. It serves as the practical implementation of the IBM Design Language — the philosophical and visual rulebook that defines how IBM expresses itself visually and interactively in the digital world. Where the IBM Design Language defines the <em>why</em> and <em>what</em>, Carbon provides the <em>how</em>: the actual components, tokens, patterns, and guidelines that teams use to build products.</p>
+
+    <p>The name Carbon is drawn from nature. Carbon atoms are remarkable because they can form an enormous variety of complex structures — from graphite to diamonds to the organic molecules in living things — all by combining simple building blocks in different configurations. Carbon the design system works the same way: individual components (buttons, modals, data tables, notifications) combine in countless configurations to produce sophisticated, complete user interfaces. Complexity emerges from well-designed simplicity.</p>
+
+    <p>Carbon did not arrive fully formed. It grew out of real product work at IBM, with patterns harvested from teams building actual products and fed back into a central, community-maintained system. This origin matters because it means Carbon's patterns are battle-tested — they exist because real products needed them, not because a design committee hypothesized they might be useful someday. Over time Carbon has become a living resource, continuously shaped by the community that uses it.</p>
+
+    <p>Carbon functions as "the digital expression of the IBM brand." This is not marketing language — it is a precise description of Carbon's role. Every screen a user sees when interacting with any IBM product is, in a very direct sense, a rendering of Carbon. The system is the foundation underlying every digital touchpoint IBM has with its users, across its entire product portfolio.</p>
+
+    <!-- Section 3: Five core principles -->
+    <h2>The five core principles</h2>
+
+    <p>Carbon is not just a collection of components — it is organized around a set of principles that shape how the system is built, governed, and evolved. Understanding these principles helps explain why Carbon makes the specific decisions it does, and why those decisions tend to hold up over time.</p>
+
+    <h3>1. Open</h3>
+    <p>Carbon is collaboratively built: its users are also its contributors. The system is published under the Apache 2.0 open-source license, and development happens in the open on GitHub. The real-world problem this solves is <em>institutional knowledge rot</em>. In closed systems, improvements made by one team are invisible to everyone else. A team that solves an obscure accessibility bug in a dropdown component keeps that fix to themselves. In an open model, that fix flows back into the shared foundation and every team benefits immediately. The community becomes smarter together.</p>
+
+    <h3>2. Inclusive</h3>
+    <p>Carbon components are designed to be accessible regardless of ability or circumstance — they target WCAG 2.1 AA compliance by default. The problem this addresses is invisible exclusion: when a screen reader cannot navigate a modal, or when color contrast is too low for users with low vision, products silently fail entire user populations. By baking accessibility requirements into the system rather than leaving them as optional afterthoughts, Carbon ensures that teams cannot accidentally ship inaccessible components without explicitly overriding defaults that work.</p>
+
+    <h3>3. Modular &amp; Flexible</h3>
+    <p>Carbon components are designed to interoperate seamlessly in any combination. Each component is a self-contained unit with well-defined inputs and outputs, and the pieces are designed to compose without conflict. The real-world problem this solves is the <em>integration tax</em>: in systems where components were not designed to work together, combining them requires custom glue code, workarounds for conflicting styles, and ongoing maintenance. Carbon's modular architecture means that assembling a complex page layout from smaller components is additive, not combative.</p>
+
+    <h3>4. User-first</h3>
+    <p>Carbon's patterns are driven by rigorous research into real human needs rather than by design trends or technical convenience. When a pattern changes in Carbon, the change is grounded in evidence — user testing, accessibility audits, and feedback from real product teams. The problem this addresses is <em>design theater</em>: systems that look good in a design tool but confuse or frustrate actual users. A User-first principle ensures that the system's priorities remain anchored to the people who will ultimately use the products built with it.</p>
+
+    <h3>5. Consistent</h3>
+    <p>Every element in Carbon is designed to work together, producing cohesive user experiences across the portfolio. Consistent does not mean identical — it means that a user moving from one IBM product to another will find familiar patterns, recognizable visual language, and predictable behavior. The problem this solves is <em>cognitive re-entry cost</em>: users should not need to relearn how a dropdown menu works, or where to look for an error message, every time they open a new IBM application. Consistency is what makes the whole greater than the sum of its parts.</p>
+
+    <!-- Section 4: How Carbon is structured -->
+    <h2>How Carbon is structured: packages and framework support</h2>
+
+    <p>Carbon is not a single library — it is a family of packages, each responsible for a focused slice of the design system. This separation of concerns means teams can adopt exactly what they need without pulling in unnecessary dependencies, and it means each layer can evolve independently. The core packages include:</p>
+
+    <ul>
+      <li><code>@carbon/react</code> — React component library</li>
+      <li><code>@carbon/web-components</code> — framework-agnostic Web Components implementation</li>
+      <li><code>@carbon/styles</code> — the full CSS stylesheet without any JavaScript framework dependency</li>
+      <li><code>@carbon/themes</code> — the four built-in themes (White, Gray 10, Gray 90, Gray 100) as design tokens</li>
+      <li><code>@carbon/icons</code> — the complete icon library, available for multiple frameworks</li>
+      <li><code>@carbon/colors</code> — IBM's color palette as programmatic values</li>
+      <li><code>@carbon/layout</code> — spacing scale and layout utilities</li>
+      <li><code>@carbon/type</code> — typography scale and type styles</li>
+      <li><code>@carbon/motion</code> — IBM motion design language (easing curves, durations)</li>
+      <li><code>@carbon/grid</code> — the 16-column responsive grid system</li>
+    </ul>
+
+    <p>On the code side, Carbon supports React as its primary framework, with official implementations also available for Web Components, Angular, Vue, and Svelte. On the design side, Carbon maintains design kits in Figma that stay in sync with the code implementations — ensuring that the component a designer places in Figma corresponds directly to the component an engineer ships. This alignment between design and code is one of Carbon's most practically important features, because it eliminates the common gap between "what was designed" and "what was built."</p>
+
+    <p>The package structure also reflects Carbon's modular principle in practice. A team building a React application can install <code>@carbon/react</code> and get components immediately. A team using a different framework can reach for <code>@carbon/styles</code> and <code>@carbon/web-components</code> instead. A brand team that only needs the color values can install <code>@carbon/colors</code> without touching anything else. The system is designed to meet teams where they are rather than requiring a full adoption-or-nothing commitment.</p>
+
+    <!-- Key callout -->
+    <div class="callout key">
+      <div class="callout-label">Key Insight</div>
+      Carbon is not merely a UI kit — it is the digital expression of the IBM brand. Because every IBM product is built on Carbon, learning Carbon means learning the shared visual and interactive language that unifies the entire IBM product portfolio. Its five principles are not aspirational values; they are active design constraints that shape every component decision the system makes.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-1">
+      <div class="quiz-label">Check your understanding</div>
+      <h3>Which of Carbon's five principles most directly addresses the problem of products accidentally excluding users with disabilities?</h3>
+      <div class="quiz-options">
+        <button>Open — because shared code reaches all developers equally</button>
+        <button>Inclusive — because components target accessibility by default</button>
+        <button>Consistent — because uniform patterns reduce all user confusion</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <div class="exercise-label">Skill Exercise</div>
+      <h3>In your own words: why does Carbon exist?</h3>
+      <p>Write a single paragraph explaining why a design system like Carbon exists. Name at least three of Carbon's five core principles and describe a real product problem that each one solves. Try to write from memory before looking back at the lesson — this is how the material sticks.</p>
+      <textarea placeholder="Type your paragraph here…" aria-label="Exercise response"></textarea>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <span></span>
+      <a href="0002-color-tokens.html" class="primary">Next: Color Tokens →</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> If any part of this lesson raised questions — about why Carbon chose these five principles, how it compares to other design systems, or what it means to "express a brand" through code — paste the passage into a conversation with Claude and ask it to explain further. The best learning happens when you chase down the moments of genuine confusion.
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-1', 1, 'Correct. The Inclusive principle is the one that directly targets accessibility — Carbon components are built to be accessible by default, regardless of a user\'s ability or circumstance. Open is about collaborative contribution, and Consistent is about coherent cross-product experiences.');
+  </script>
+</body>
+</html>

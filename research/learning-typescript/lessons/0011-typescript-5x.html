@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 — TypeScript 5.x Ecosystem</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">TypeScript Course</a> / Module 4 — Real-World TypeScript / Lesson 11
+    </div>
+    <h1>TypeScript 5.x Ecosystem</h1>
+    <div class="lesson-meta">
+      <span>~20 min</span>
+      <span>Module 4 — Real-World TypeScript &middot; Lesson 11 of 13</span>
+    </div>
+  </header>
+
+  <!-- Source card -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    TypeScript 5.0 Release Notes &mdash;
+    <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html" target="_blank" rel="noopener">
+      typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html
+    </a>
+  </div>
+
+  <!-- Section 1 -->
+  <h2>Standard Decorators</h2>
+  <p>
+    TypeScript 5.0 shipped <strong>standard decorators</strong> as a stable feature, implementing
+    the TC39 decorator proposal. Unlike the old <code>experimentalDecorators</code> flag, standard
+    decorators require no special tsconfig option — they are just on by default.
+  </p>
+  <p>
+    A decorator is a function that wraps a class or class member. Here is a <code>@loggedMethod</code>
+    decorator that logs calls to any method it is applied to:
+  </p>
+  <pre><code>function loggedMethod(originalMethod: any, context: ClassMethodDecoratorContext) {
+  const methodName = String(context.name);
+
+  function replacement(this: any, ...args: any[]) {
+    console.log(`Entering ${methodName}`);
+    const result = originalMethod.call(this, ...args);
+    console.log(`Exiting ${methodName}`);
+    return result;
+  }
+
+  return replacement;
+}
+
+class Greeter {
+  @loggedMethod
+  greet(name: string) {
+    console.log(`Hello, ${name}!`);
+  }
+}
+
+const g = new Greeter();
+g.greet("world");
+// Logs: Entering greet → Hello, world! → Exiting greet</code></pre>
+  <p>
+    You can <strong>stack multiple decorators</strong> on the same target. They are applied
+    <em>bottom-up</em> — the decorator closest to the class member runs first, the outermost
+    runs last:
+  </p>
+  <pre><code>@first   // runs second (outermost)
+@second  // runs first (closest to the method)
+greet(name: string) { ... }</code></pre>
+  <p>
+    <strong>Decorator factories</strong> are functions that return a decorator, letting you pass
+    configuration at the call site:
+  </p>
+  <pre><code>function loggedMethod(label: string) {
+  return function (originalMethod: any, context: ClassMethodDecoratorContext) {
+    return function (this: any, ...args: any[]) {
+      console.log(`[${label}] Entering ${String(context.name)}`);
+      return originalMethod.call(this, ...args);
+    };
+  };
+}
+
+class Greeter {
+  @loggedMethod("DEBUG")
+  greet(name: string) {
+    console.log(`Hello, ${name}!`);
+  }
+}</code></pre>
+
+  <div class="callout warning">
+    The old <code>experimentalDecorators</code> flag and the new standard decorators are
+    <strong>incompatible systems</strong>. If <code>experimentalDecorators: true</code> is set in
+    your tsconfig, TypeScript uses the legacy behavior and will not accept standard decorator
+    syntax. If your codebase or a library relies on the old decorator API, you must choose one
+    or the other — you cannot mix them in the same compilation.
+  </div>
+
+  <!-- Section 2 -->
+  <h2>const Type Parameters</h2>
+  <p>
+    Before TypeScript 5.0, when you passed an array literal to a generic function, TypeScript
+    inferred a wide type (<code>string[]</code>) rather than a narrow tuple. The only workaround
+    was a manual <code>as const</code> at every call site:
+  </p>
+  <pre><code>// Before: infers string[], not ["a", "b"]
+function first&lt;T&gt;(arr: T[]) { return arr[0]; }
+const x = first(["a", "b"]); // type: string
+
+// Caller had to write:
+const x = first(["a", "b"] as const); // type: "a"</code></pre>
+  <p>
+    TypeScript 5.0 lets you add a <code>const</code> modifier directly on the type parameter.
+    The compiler then infers the narrowest possible type automatically — no <code>as const</code>
+    required at each call site:
+  </p>
+  <pre><code>// After: const modifier on the type parameter
+function first&lt;const T extends readonly unknown[]&gt;(arr: T) {
+  return arr[0];
+}
+
+const x = first(["a", "b"]); // type: "a" — narrow, no as const needed</code></pre>
+  <p>
+    This is especially useful for utility functions that build configuration objects, route
+    definitions, or any API where callers want narrow literal types without extra boilerplate.
+  </p>
+
+  <!-- Section 3 -->
+  <h2>Multiple extends in tsconfig</h2>
+  <p>
+    Previously, a <code>tsconfig.json</code> could only extend a single base config. TypeScript
+    5.0 allows <code>extends</code> to accept an <strong>array</strong> of base configs. Later
+    entries in the array override earlier ones:
+  </p>
+  <pre><code>// tsconfig.json
+{
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node20/tsconfig.json"
+  ],
+  "compilerOptions": {
+    "outDir": "dist"
+  }
+}</code></pre>
+  <p>
+    This makes it easier to compose community-maintained base configs (like those from
+    <a href="https://github.com/tsconfig/bases" target="_blank" rel="noopener">tsconfig/bases</a>)
+    without manually duplicating their options into a single file.
+  </p>
+
+  <!-- Section 4 -->
+  <h2>All Enums Are Now Union Enums</h2>
+  <p>
+    In earlier TypeScript, only enums with literal values (strings or simple numbers) were treated
+    as <strong>union enums</strong> — unions of their member literal types — enabling type narrowing
+    on individual members. Computed enum members were excluded, which created inconsistent behavior.
+  </p>
+  <p>
+    TypeScript 5.0 makes <em>all</em> enums union enums. This means you can now narrow on any
+    enum member, and TypeScript reports an error if a switch statement or conditional does not
+    cover all members:
+  </p>
+  <pre><code>enum Direction {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+function move(dir: Direction) {
+  if (dir === Direction.Up) {
+    // TypeScript knows dir is Direction.Up here
+  } else if (dir === Direction.Down) {
+    // TypeScript knows dir is Direction.Down here
+  }
+  // Exhaustiveness checking now works for all enums
+}</code></pre>
+  <p>
+    This brings enums in line with discriminated unions for the purposes of control-flow analysis
+    and exhaustiveness checking.
+  </p>
+
+  <!-- Section 5 -->
+  <h2>moduleResolution: "bundler"</h2>
+  <p>
+    Modern build tools like Vite, esbuild, and webpack handle module resolution differently from
+    Node.js. They allow <strong>extensionless imports</strong> (<code>import './utils'</code> instead
+    of <code>import './utils.js'</code>) and support <code>package.json</code> <code>exports</code>
+    fields for subpath mapping.
+  </p>
+  <p>
+    TypeScript 5.0 introduces <code>moduleResolution: "bundler"</code> specifically for these
+    environments. It lets TypeScript model the bundler's behavior accurately — accepting
+    extensionless relative imports without requiring the <code>.js</code> extension that
+    <code>moduleResolution: "node16"</code> demands:
+  </p>
+  <pre><code>// tsconfig.json — for a Vite project
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  }
+}</code></pre>
+  <pre><code>// With moduleResolution: "bundler" — both of these are valid
+import { add } from './math';       // extensionless ✓
+import { add } from './math.js';    // with extension also ✓
+
+// With moduleResolution: "node16" — this would be an error
+import { add } from './math';       // must write './math.js' ✗</code></pre>
+
+  <div class="callout key">
+    If you are building a project with Vite, esbuild, or webpack, use
+    <code>moduleResolution: "bundler"</code> — it matches what your build tool actually does and
+    avoids spurious errors about missing <code>.js</code> extensions. Pair it with
+    <code>verbatimModuleSyntax: true</code> (covered below) for a well-configured modern setup.
+  </div>
+
+  <!-- Section 6 -->
+  <h2>verbatimModuleSyntax</h2>
+  <p>
+    TypeScript 5.0 introduced <code>verbatimModuleSyntax</code> as a cleaner, more predictable
+    replacement for the older <code>importsNotUsedAsValues</code> and <code>preserveValueImports</code>
+    flags. The rule is simple:
+  </p>
+  <ul>
+    <li>
+      <code>import type { Foo }</code> — the <code>type</code> keyword signals a type-only import.
+      TypeScript <strong>erases</strong> this import entirely from the compiled output. It will
+      never appear in the <code>.js</code> file.
+    </li>
+    <li>
+      <code>import { Bar }</code> — no <code>type</code> keyword. TypeScript <strong>keeps</strong>
+      this import in the output as-is, assuming it may have a runtime side effect or that
+      <code>Bar</code> is a value, not just a type.
+    </li>
+  </ul>
+  <pre><code>// Source (.ts)
+import type { User } from './types';   // type-only — will be erased
+import { createUser } from './api';    // value import — will be kept
+
+// Compiled output (.js)
+import { createUser } from './api';    // only this survives</code></pre>
+  <p>
+    With <code>verbatimModuleSyntax</code> enabled, TypeScript enforces that you are explicit:
+    if you import something that is only used as a type, you <em>must</em> write
+    <code>import type</code>. Forgetting to do so causes a compile error, which prevents
+    accidental runtime imports of type-only modules.
+  </p>
+  <pre><code>// tsconfig.json
+{
+  "compilerOptions": {
+    "verbatimModuleSyntax": true
+  }
+}
+
+// This is now an error if `User` is only used as a type:
+import { User } from './types';       // Error: use `import type` instead
+import type { User } from './types';  // Correct</code></pre>
+
+  <!-- Section 7 -->
+  <h2>Performance Improvements</h2>
+  <p>
+    TypeScript 5.0 delivered significant build toolchain improvements alongside the language features:
+  </p>
+  <ul>
+    <li>
+      <strong>10–20% faster compilation</strong> — the TypeScript team rewrote internal data
+      structures (moving from namespaces to modules) and restructured the compiler pipeline,
+      yielding measurable speed gains on real-world projects.
+    </li>
+    <li>
+      <strong>59% smaller npm package</strong> — the published <code>typescript</code> package
+      on npm dropped from ~63 MB to ~26 MB. This speeds up <code>npm install</code> in CI
+      environments and reduces disk usage across projects.
+    </li>
+  </ul>
+  <p>
+    These gains are automatic — no config changes are needed. They apply to any project that
+    upgrades to TypeScript 5.x.
+  </p>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-11">
+    <h3>Quick Check</h3>
+    <p>What happens to <code>import type { Foo }</code> when <code>verbatimModuleSyntax</code> is enabled?</p>
+    <div class="quiz-options">
+      <button>It is erased from the JS output</button>
+      <button>It is kept in the JS output</button>
+      <button>It is converted to a require call</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Hands-On Exercise</h3>
+    <p>
+      Below is a minimal <code>tsconfig.json</code> for a new Vite project. Update it to use
+      <code>moduleResolution: "bundler"</code> and <code>verbatimModuleSyntax: true</code>.
+      Then write a short paragraph (3–5 sentences) explaining what each option changes about
+      how TypeScript resolves imports and emits code.
+    </p>
+    <pre><code>// Starting tsconfig.json — update the compilerOptions below
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "strict": true,
+    "outDir": "dist"
+  }
+}</code></pre>
+    <textarea placeholder="Paste your updated tsconfig here, then write your explanation paragraph below it.&#10;&#10;Example:&#10;{&#10;  &quot;compilerOptions&quot;: {&#10;    &quot;target&quot;: &quot;ESNext&quot;,&#10;    &quot;module&quot;: &quot;ESNext&quot;,&#10;    &quot;moduleResolution&quot;: &quot;bundler&quot;,&#10;    &quot;verbatimModuleSyntax&quot;: true,&#10;    &quot;strict&quot;: true,&#10;    &quot;outDir&quot;: &quot;dist&quot;&#10;  }&#10;}&#10;&#10;Explanation: ..."></textarea>
+  </div>
+
+  <!-- Tutor prompt -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Standard decorators run bottom-up when stacked. Why might
+    that order matter in practice — can you think of a real-world case where reversing the order
+    of two decorators would change the program's behavior?
+  </div>
+
+  <!-- Navigation -->
+  <nav class="lesson-nav">
+    <a href="0010-react-typescript.html">&larr; Previous: React + TypeScript</a>
+    <a href="0012-common-mistakes.html" class="primary">Next: Common Mistakes &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-11', 0, 'Correct — import type is a type-only import. verbatimModuleSyntax erases it entirely from the compiled JavaScript output, since it carries no runtime value.');</script>
+
+</div>
+</body>
+</html>

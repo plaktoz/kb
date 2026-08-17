@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modals and Data Tables — IBM Carbon Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=IBM+Plex+Mono&display=swap">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">IBM Carbon Design System</a> › Module 3 — Component Library in Depth › Lesson 9
+      </div>
+      <h1>Modals and Data Tables</h1>
+      <div class="lesson-meta">
+        <span>~16 min</span>
+        <span>Module 3 — Component Library in Depth · Lesson 9 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <div class="source-title">Carbon Design System — "Modal" and "Data Table" component documentation (carbondesignsystem.com)</div>
+      <div class="source-result">Key result: Modals and Data Tables are two of Carbon's most interaction-intensive components. Modals demand careful restraint — use them only when interruption is genuinely warranted — and rigorous focus management. Data Tables offer four structural variants and a set of layered behaviors (sorting, selection, batch actions, skeleton loading) that compose together to handle complex tabular data needs.</div>
+    </div>
+
+    <!-- Section 1: When to use modals -->
+    <h2>When to use modals — and when not to</h2>
+
+    <p>A modal dialog is a deliberate interruption. It seizes the user's full attention by placing a panel over the main content and blocking interaction with everything behind it. That power makes modals valuable for a narrow set of scenarios — and harmful when applied too broadly. Carbon defines three situations where a modal is the right tool: <strong>immediate responses</strong>, where the system requires user input before a workflow can continue; <strong>urgent notifications</strong>, where a system error or the consequences of an action must be communicated before the user proceeds; and <strong>confirming decisions</strong>, particularly destructive or irreversible ones, where a moment of friction protects users from costly mistakes.</p>
+
+    <p>What makes the modal appropriate in those cases is precisely what makes it inappropriate for routine tasks. If a user needs to perform the same action repeatedly — filtering a list, adding a tag, editing a field — a modal creates constant interruption and teaches users to dismiss dialogs reflexively without reading them. The Carbon guidance is direct: use modals sparingly, and if a task is performed frequently, move it onto the main page rather than hiding it behind a dialog. The goal is not to make modals convenient for developers; it is to make interfaces respectful of users' attention and flow.</p>
+
+    <p>A useful test before reaching for a modal: ask whether the user can complete this action inline, in a side panel, or on a dedicated page. If any of those alternatives is viable, it is likely the better choice. The modal earns its place only when genuine interruption is necessary — when proceeding without a decision or acknowledgment would leave the system or the user in an undefined or dangerous state.</p>
+
+    <div class="callout warning">
+      <strong>Warning:</strong> Overusing modals for tasks users perform repeatedly trains users to dismiss dialogs without reading them. If an action is frequent, place it on the main page. Reserve modals for genuine interruptions — errors, confirmations, and branching decisions that must be resolved before the workflow can continue.
+    </div>
+
+    <!-- Section 2: The five modal variants -->
+    <h2>The five modal variants</h2>
+
+    <p>Carbon provides five distinct modal variants, each calibrated to a different type of interruption. The distinctions matter because they communicate different levels of urgency, different expectations about what the user must do, and different structures of available actions. Choosing the wrong variant sends the wrong signal — a passive modal used for a destructive action will not adequately communicate the stakes, while a danger modal used for a simple acknowledgment creates unnecessary alarm.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Passive</strong></td>
+          <td>Informational only; no user action is required to continue. Used to surface information the user may want to read but does not need to act on.</td>
+        </tr>
+        <tr>
+          <td><strong>Transactional</strong></td>
+          <td>Requires deliberate action to complete — always includes both a cancel button and a primary action button. The user must choose a path.</td>
+        </tr>
+        <tr>
+          <td><strong>Danger</strong></td>
+          <td>A transactional modal specifically for destructive or irreversible actions. The visual treatment (typically a red primary button) reinforces the severity of the action.</td>
+        </tr>
+        <tr>
+          <td><strong>Acknowledgment</strong></td>
+          <td>Confirms user awareness with a single button, typically labelled "OK". Used when information must be seen before proceeding but no real choice is offered.</td>
+        </tr>
+        <tr>
+          <td><strong>Progress</strong></td>
+          <td>Supports multi-step flows within the modal. Provides Cancel, Previous, and Next buttons, allowing users to move through a sequence without leaving the dialog.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The Passive variant is the lightest-weight interruption — it surfaces information without demanding anything back. The user can dismiss it by pressing ESC, clicking the × icon, or clicking outside the modal. Transactional and Danger variants require an explicit choice: the user cannot simply click away. This is intentional. When a workflow requires a commitment — especially one that cannot be undone — the interface should make it clear that a choice must be made, not accidentally dismissed.</p>
+
+    <p>The Danger variant deserves special attention. Its visual distinction (the red-tinted primary button) is not decoration — it is a communication device. It tells the user, before they read a word, that something serious is about to happen. The label on the primary button should be specific and action-oriented: "Delete account" rather than the generic "Confirm" or "OK". Vague labels on danger modals are a common failure pattern that leaves users unsure of what they are agreeing to.</p>
+
+    <p>The Progress variant handles the relatively rare case where a multi-step process is complex enough to warrant a modal but short enough that navigating to a full page feels disproportionate. The key discipline here is keeping the number of steps small — if the flow requires more than a few steps, a full page or wizard pattern is likely more appropriate than a modal.</p>
+
+    <!-- Section 3: Modal best practices -->
+    <h2>Modal best practices: focus trapping, dismissal, and validation</h2>
+
+    <p>Modals introduce complex interaction requirements beyond their visual design. Three areas demand particular care: focus management, dismissal behavior, and inline validation. Getting these right determines whether a modal feels polished and accessible or clunky and disorienting.</p>
+
+    <div class="callout key">
+      <strong>Key insight:</strong> When a modal opens, focus must move into the modal and be trapped there. Users navigating by keyboard should cycle through only the modal's interactive elements — they must not be able to tab into background content. When the modal closes, focus must return to the element that triggered it. This is not a polish detail; it is a foundational accessibility requirement that determines whether keyboard-only and screen reader users can use the modal at all.
+    </div>
+
+    <p><strong>Focus management</strong> is the single most important behavioral requirement for accessible modals. When the modal opens, the browser's focus indicator must move inside it — Carbon's guidance specifies setting initial focus to the first interactive element (an input field if one is present, or the primary action button). While the modal is open, pressing Tab must cycle through only the modal's interactive elements. When the user reaches the last focusable element and presses Tab again, focus should wrap back to the first focusable element inside the modal — not escape to the background page. This behavior is called a focus trap. When the modal closes (through any method), focus returns to the element that triggered the modal, so users with keyboards or screen readers do not lose their place in the page.</p>
+
+    <p><strong>Dismissal</strong> should always be supported through three mechanisms: pressing the ESC key, clicking the × close icon in the modal header, and — for Passive modals specifically — clicking the dimmed overlay behind the modal. Transactional and Danger modals should not dismiss on overlay click, because an accidental click could be misread as a cancellation of a user's intended action. Dismissal via the Cancel button in Transactional or Danger modals is always explicit and unambiguous; that path is always supported regardless of variant.</p>
+
+    <p><strong>Validation</strong> in modals has one cardinal rule: do not close the modal on error. If the user submits a Transactional modal and the entries fail validation, the modal must remain open, inline error messages must appear adjacent to the failing fields, and the primary button must be re-enabled once errors are corrected. Closing the modal and showing a page-level error means the user has lost context about what they filled in; keeping the modal open preserves their work and makes correction obvious. For longer processing operations, disable the primary button while the request is in flight and consider a spinner overlay for operations that take more than a second or two.</p>
+
+    <!-- Section 4: DataTable and its variants -->
+    <h2>The DataTable and its four variants</h2>
+
+    <p>The DataTable component is Carbon's answer to the pervasive need to display structured, navigable data in enterprise interfaces. It is designed for situations where users must scan rows to locate specific records and then take action on them — not for situations where users need to edit data in bulk the way they would in a spreadsheet. That distinction matters: Carbon's guidance explicitly advises against using DataTable as a spreadsheet replacement. The component is optimized for reading, filtering, selecting, and acting on records, not for inline cell-by-cell editing of large data sets.</p>
+
+    <p>DataTable supports five row size options (extra small, small, medium, large, extra large) applied uniformly to all rows. Choosing the right row size is a density decision: information-dense administrative interfaces with many rows benefit from smaller row sizes; interfaces intended for occasional, careful reading can afford larger ones. The choice should be driven by the user's task and the volume of data, not by aesthetic preference alone.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Default</strong></td>
+          <td>Basic header and rows with no selection or expansion. Available in all five row sizes. Use when users only need to read and navigate records without selecting or drilling into them.</td>
+        </tr>
+        <tr>
+          <td><strong>With Selection</strong></td>
+          <td>Adds checkboxes (multi-select) or radio buttons (single-select) to enable row selection. Essential when users need to apply batch actions to multiple records at once.</td>
+        </tr>
+        <tr>
+          <td><strong>With Expansion</strong></td>
+          <td>Adds collapsible rows that reveal supplementary information when expanded. Use when records have contextual detail that is not needed at a glance but is valuable for specific records.</td>
+        </tr>
+        <tr>
+          <td><strong>Expandable + Selectable</strong></td>
+          <td>Combines expansion and selection. The expand icon always appears to the left of the selection icon. Use when users need both to drill into individual records and to act on groups of records.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The Default variant is the right starting point — add structural complexity only when the use case genuinely demands it. Adding checkboxes implies that a batch action exists to perform on selected rows; adding expansion implies there is meaningful supplementary content worth revealing. If neither is true, the extra controls add visual noise without value. The Expandable + Selectable variant should be reserved for the most information-rich tables where both capabilities are independently justified.</p>
+
+    <!-- Section 5: DataTable behaviors -->
+    <h2>DataTable behaviors: sorting, batch actions, and skeleton loading</h2>
+
+    <p>Beyond its structural variants, DataTable composes a set of interaction behaviors that can be layered on top of any variant. Understanding how these behaviors work — and how they interact with each other — is key to building tables that feel coherent rather than cluttered.</p>
+
+    <p><strong>Sorting</strong> in Carbon DataTable uses three states: unsorted, sorted ascending (sorted-up), and sorted descending (sorted-down). A critical detail in Carbon's implementation is that the sort icon appears only on the column that is currently sorted — not on all sortable columns at once. Showing an arrow on every column header would create visual clutter and suggest that every column is in an active sort state. The unsorted state is implicit: the absence of an icon means the column is sortable but not currently active. This restraint in iconography keeps the table header readable even when many columns are sortable. Column headers should use sentence case capitalization and be kept to one or two words; longer headers truncate at two lines with the full text available in a hover tooltip.</p>
+
+    <p><strong>Batch Actions</strong> become available when the DataTable is configured with row selection. When one or more rows are selected, an action bar appears — typically above the table — that exposes actions applicable to the entire selection: "Delete selected", "Export", "Archive", and so on. A critical behavioral constraint: while the batch action bar is active (rows are selected), inline row-level actions are disabled. This prevents the ambiguity of having both row-level and selection-level actions active simultaneously — the user would have no way to know which scope an action applies to. The batch action bar itself typically includes a count of selected rows and a "Cancel selection" control to deselect everything and dismiss the bar.</p>
+
+    <p><strong>Inline Actions</strong> operate at the individual row level, not the selection level. Carbon's guidance for inline actions follows a count-based rule: if a row has three or more actions available, use an overflow menu (the three-dot icon) to contain them. If a row has fewer actions, they can appear as visible icon buttons directly in the row. This threshold keeps the table scannable — a row sprouting five icon buttons becomes visually noisy and the icons themselves lose distinctiveness. Fewer visible actions means each one can be larger and clearer.</p>
+
+    <p><strong>Skeleton loading</strong> is the recommended approach for delayed table content. Rather than displaying a spinner in the center of an empty table while data loads, Carbon's DataTable supports a skeleton state: placeholder shapes in the same structure as the final content, animated with a subtle shimmer. Skeleton states communicate the structure of what is coming, which reduces perceived load time — users begin building a mental model of the layout before any real data arrives. Spinners are appropriate for shorter, more focused loading feedback; skeleton states are better for content-heavy regions like tables where the structural preview is meaningful.</p>
+
+    <p><strong>Search</strong> in DataTable comes in two configurations: collapsed (the search input is hidden behind a magnifying glass icon and expands on click) and always-open (the search input is persistently visible). The collapsed configuration keeps the table header compact when search is a secondary concern; the always-open configuration is appropriate when search is a primary way users interact with the table. Neither is universally correct — choose based on how prominently search features in users' typical workflow with the table.</p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-9">
+      <div class="quiz-question">Which modal variant should you use for a destructive, irreversible action?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" data-index="0">The Danger modal variant</button>
+        <button class="quiz-option" data-index="1">The Passive modal variant</button>
+        <button class="quiz-option" data-index="2">The Progress modal variant</button>
+      </div>
+      <div class="quiz-feedback" aria-live="polite"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Skill exercise</h3>
+      <p>A user clicks "Delete account". Answer these three questions: (1) Which modal variant do you use and why? (2) When the modal opens, where does focus go and why? (3) Write the exact text for the destructive action button following Carbon's label rules.</p>
+      <textarea rows="8" placeholder="Write your answer here…" aria-label="Exercise answer"></textarea>
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0008-buttons-controls.html" class="nav-prev">← Buttons and Controls</a>
+      <a href="0010-setup.html" class="nav-next">Setup →</a>
+    </nav>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      <strong>Ask your tutor:</strong> Paste this lesson's URL into Claude and ask — "Why does Carbon require focus trapping in modals rather than letting users tab freely?" or "Walk me through the batch actions flow in a DataTable with row selection."
+    </div>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-9', 0, 'The Danger variant is specifically for destructive or irreversible actions like deleting data. It signals the severity clearly to the user.');
+  </script>
+</body>
+</html>

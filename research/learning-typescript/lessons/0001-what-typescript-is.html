@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — What TypeScript Actually Is</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">TypeScript Course</a> / Module 1 — Foundations / Lesson 1
+    </div>
+    <h1>What TypeScript Actually Is</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 1 — Foundations &middot; Lesson 1 of 13</span>
+    </div>
+  </header>
+
+  <!-- Source card -->
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    TypeScript Handbook — Introduction &mdash;
+    <a href="https://www.typescriptlang.org/docs/handbook/intro.html" target="_blank" rel="noopener">
+      typescriptlang.org/docs/handbook/intro.html
+    </a>
+  </div>
+
+  <!-- Section 1 -->
+  <h2>TypeScript is a static typechecker</h2>
+  <p>
+    TypeScript is a tool that checks your code for type errors <em>before</em> it ever runs.
+    This is called <strong>static type checking</strong>: the analysis happens at compile time, not
+    at runtime, so whole classes of bugs are caught while you are still writing code — not after
+    a user triggers them in production.
+  </p>
+  <p>
+    Think of <code>tsc</code> (the TypeScript compiler) as a strict proofreader that reads your
+    <code>.ts</code> files and reports every place where a value is used in a way that contradicts
+    how you declared it.
+  </p>
+
+  <!-- Section 2 -->
+  <h2>The superset relationship: all valid JS is valid TS</h2>
+  <p>
+    TypeScript is a <strong>strict superset</strong> of JavaScript. This means every valid JavaScript
+    file is also a valid TypeScript file — you can rename <code>app.js</code> to <code>app.ts</code>
+    and it will compile without changes.
+  </p>
+  <p>
+    TypeScript <em>adds</em> optional type annotations on top of JavaScript syntax. You layer
+    in as much or as little type information as you need. The language is designed so that
+    adoption can be gradual.
+  </p>
+  <pre><code>// Plain JavaScript — also valid TypeScript
+function greet(name) {
+  return "Hello, " + name;
+}
+
+// TypeScript with an added type annotation
+function greet(name: string): string {
+  return "Hello, " + name;
+}</code></pre>
+
+  <!-- Section 3 -->
+  <h2>How it compiles: tsc and type erasure</h2>
+  <p>
+    You run the TypeScript compiler with the command <code>tsc yourfile.ts</code>. It reads the
+    <code>.ts</code> source, checks for type errors, and then outputs a <code>.js</code> file.
+  </p>
+  <p>
+    The critical thing to understand is <strong>type erasure</strong>: every type annotation you
+    write is <em>completely removed</em> from the output. The resulting <code>.js</code> file
+    contains no TypeScript-specific syntax at all — it is plain JavaScript that any browser
+    or Node.js runtime can execute.
+  </p>
+  <pre><code>// greet.ts (TypeScript source)
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+
+// greet.js (compiled output — types are gone)
+function greet(name) {
+  return "Hello, " + name;
+}</code></pre>
+
+  <div class="callout key">
+    TypeScript's types exist only in your editor and at compile time. They are completely
+    invisible to the JavaScript runtime. Types cost zero bytes at runtime — they are erased
+    before your code ever executes.
+  </div>
+
+  <!-- Section 4 -->
+  <h2>tsc outputs .js even when there are type errors</h2>
+  <p>
+    By default, <code>tsc</code> is forgiving: it reports type errors in the terminal but still
+    produces a <code>.js</code> output file. This is a deliberate design choice. TypeScript
+    assumes you know what you are doing; it warns you but does not refuse to compile.
+  </p>
+  <p>
+    You can opt into stricter behavior by passing <code>--noEmitOnError</code> to <code>tsc</code>,
+    which stops output when errors exist. Many real-world projects enable this flag in their
+    <code>tsconfig.json</code> to enforce a clean compile before shipping.
+  </p>
+
+  <!-- Section 5 -->
+  <h2>What TypeScript catches before runtime</h2>
+  <p>
+    Because TypeScript knows the <em>shape</em> of your values at compile time, it can catch
+    a wide range of mistakes:
+  </p>
+  <ul>
+    <li><strong>Typos in property names</strong> — accessing <code>user.nmae</code> when the property is <code>name</code></li>
+    <li><strong>Wrong API usage</strong> — passing a <code>number</code> where a function expects a <code>string</code></li>
+    <li><strong>Incorrect assumptions</strong> — calling a method on a value that might be <code>undefined</code></li>
+  </ul>
+  <p>
+    None of these errors require running the program. TypeScript surfaces them instantly as
+    you type, directly in your editor.
+  </p>
+
+  <div class="callout warning">
+    TypeScript type checking is not the same as JavaScript validation at runtime. Once your
+    code compiles and runs, all type information is gone. If external data (from an API, a form,
+    or user input) arrives in an unexpected shape, TypeScript cannot catch that — you still
+    need runtime validation for data that crosses a trust boundary.
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-1">
+    <h3>Quick Check</h3>
+    <p>What happens to TypeScript type annotations when <code>tsc</code> compiles your <code>.ts</code> file?</p>
+    <div class="quiz-options">
+      <button>They are stripped out, leaving only plain JavaScript behind</button>
+      <button>They are kept and enforced by the JavaScript runtime</button>
+      <button>They are turned into comments that document your code</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Hands-On Exercise</h3>
+    <p>
+      Confirm type erasure for yourself. Create a small <code>.ts</code> file with a typed function,
+      compile it, then inspect the output.
+    </p>
+    <ol>
+      <li>Create <code>greet.ts</code> with the content below and save it.</li>
+      <li>Run <code>tsc greet.ts</code> in your terminal.</li>
+      <li>Open <code>greet.js</code> and compare it to the source — notice the type annotations are gone.</li>
+      <li>Optionally, intentionally break the type (pass a number instead of a string) and run <code>tsc</code> again. Observe the error message, then check that <code>greet.js</code> was still updated.</li>
+    </ol>
+    <pre><code>// greet.ts — starter code
+function greet(name: string): string {
+  return "Hello, " + name;
+}
+
+console.log(greet("world"));</code></pre>
+    <p>Paste your observed <code>greet.js</code> output here, or jot down what changed:</p>
+    <textarea placeholder="// greet.js output (paste here)&#10;function greet(name) {&#10;  return &quot;Hello, &quot; + name;&#10;}"></textarea>
+  </div>
+
+  <!-- Tutor prompt -->
+  <div class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Why does TypeScript erase types instead of keeping them in the
+    output? What would go wrong if browsers had to understand TypeScript type syntax directly?
+  </div>
+
+  <!-- Navigation -->
+  <nav class="lesson-nav">
+    <span></span>
+    <a href="0002-structural-typing.html" class="primary">Next: Structural Typing &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-1', 0, 'Correct — this is type erasure. tsc strips every type annotation from the output, so the resulting .js file is plain JavaScript with no trace of TypeScript syntax.');</script>
+
+</div>
+</body>
+</html>
