@@ -1609,3 +1609,46 @@
 | 2026-08-16 | 2025-06-05-the-science-of-spaced-repetition.md (same source_url as wiki/learning/science-of-spaced-repetition.md) | ingest-dupe |
 | 2026-08-16 | 2026-08-13-how-to-use-lattice-of-mental-models-better-decisions.md (same source_url as wiki/strategy/charlie-munger-lattice-of-mental-models.md) | ingest-dupe |
 | 2026-08-16 | daily-update/2026-08/2026-08-16-2.md | newsletter |
+| 2026-08-17 | 2026-08-17-news-aggregation.md | news-fetch |
+| 2026-08-17 | 2026-08-13-legora-legal-ai-10-billion-valuation.md | scrape |
+| 2026-08-17 | 2026-08-16-ai-financing-backstops-nvidia-broadcom.md | scrape |
+| 2026-08-17 | 2026-08-16-anthropic-claude-outage.md | scrape |
+| 2026-08-17 | 2026-08-14-sp500-record-high-august-2026.md | scrape |
+| 2026-08-17 | 2026-08-14-sp500-slips-record-high-third-weekly-gain.md | scrape |
+| 2026-08-17 | 2026-08-13-dollar-falls-fed-rate-hike-bets-ppi.md | scrape |
+| 2026-08-17 | 2026-08-10-on-ai-coding-and-its-discontents.md | scrape |
+| 2026-08-17 | 2026-08-12-deep-work-meaning-benefits-7-ways-focus.md | scrape |
+| 2026-08-17 | 2026-04-10-mastering-deep-work-clickup.md | scrape |
+| 2026-08-17 | 2026-08-05-latest-findings-ai-learning-august-2026.md | scrape |
+| 2026-08-17 | 2026-02-20-learning-development-2026-trends.md | scrape |
+| 2026-08-17 | 2026-04-15-universities-ai-integration-models.md | scrape |
+| 2026-08-17 | 2026-08-13-orange-juice-genes-heart-health.md | scrape |
+| 2026-08-17 | 2026-08-07-wearable-ultrasound-patch-rem-sleep.md | scrape |
+| 2026-08-17 | 2026-08-09-fruit-juice-lower-depression-scores.md | scrape |
+| 2026-08-17 | 2026-08-12-ai-makes-building-easy-choosing-what-to-build.md | scrape |
+| 2026-08-17 | 2026-08-11-innovation-strategy-most-companies-miss.md | scrape |
+| 2026-08-17 | 2026-08-16-microsoft-stock-jumped-18-percent-azure-100-billion.md | scrape |
+| 2026-08-17 | 2026-08-14-ibm-stock-steadies-after-july-selloff.md | scrape |
+| 2026-08-17 | 2026-08-03-morgan-stanley-momentum-etf-comeback.md | scrape |
+| 2026-08-17 | 2026-08-17-news-aggregation.processed.md | archive |
+| 2026-08-17 | wiki/technology/legora-legal-ai-10-billion-valuation.md | ingest |
+| 2026-08-17 | wiki/finance/ai-financing-backstops-nvidia-broadcom-aug2026.md | ingest |
+| 2026-08-17 | wiki/technology/anthropic-claude-outage-aug16-2026.md | ingest |
+| 2026-08-17 | wiki/finance/sp500-record-high-7800-aug2026.md | ingest |
+| 2026-08-17 | wiki/finance/sp500-slips-record-high-third-weekly-gain-aug2026.md | ingest |
+| 2026-08-17 | wiki/finance/dollar-falls-fed-rate-hike-bets-ppi-aug2026.md | ingest |
+| 2026-08-17 | wiki/productivity/ai-coding-discontents-cal-newport.md | ingest |
+| 2026-08-17 | 2026-08-12-deep-work-meaning-benefits-7-ways-focus.md (same source_url as wiki/productivity/deep-work-meaning-benefits-7-ways-to-focus.md) | ingest-dupe |
+| 2026-08-17 | wiki/productivity/mastering-deep-work-clickup-guide.md | ingest |
+| 2026-08-17 | wiki/learning/ai-learning-findings-august-2026.md | ingest |
+| 2026-08-17 | wiki/learning/learning-development-2026-trends.md | ingest |
+| 2026-08-17 | wiki/learning/universities-ai-integration-models.md | ingest |
+| 2026-08-17 | wiki/strategy/ai-makes-building-easy-choosing-what-to-build.md | ingest |
+| 2026-08-17 | wiki/strategy/global-by-design-innovation-strategy.md | ingest |
+| 2026-08-17 | wiki/others/orange-juice-genes-heart-health.md | ingest |
+| 2026-08-17 | wiki/others/wearable-ultrasound-patch-rem-sleep.md | ingest |
+| 2026-08-17 | wiki/others/fruit-juice-lower-depression-scores.md | ingest |
+| 2026-08-17 | wiki/finance/microsoft-stock-azure-100b-aug16-2026.md | ingest |
+| 2026-08-17 | wiki/finance/ibm-stock-steadies-july-selloff-aug2026.md | ingest |
+| 2026-08-17 | wiki/finance/momentum-etf-comeback-morgan-stanley.md | ingest |
+| 2026-08-17 | daily-update/2026-08/2026-08-17.md | newsletter |
