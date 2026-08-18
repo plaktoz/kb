@@ -11,3 +11,4 @@
 - how to use openrouter
 - archunit
 - consume into wiki https://www.shortform.com/best-books/genre/best-software-architecture-books-of-all-time
+- learn about uiux
