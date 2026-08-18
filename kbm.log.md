@@ -2,7 +2,30 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-17 | daily-update/2026-08/2026-08-17-2.md | newsletter |
+| 2026-08-17 | wiki/technology/anthropic-2t-ipo-zuck-ai-manifesto-nvidia-500b-grok.md | ingest |
+| 2026-08-17 | wiki/strategy/vivek-ramaswamy-elon-musk-david-sacks-governance-policy.md | ingest |
+| 2026-08-17 | wiki/technology/anthropic-claude-code-agentic-software-engineering.md | ingest |
+| 2026-08-17 | wiki/strategy/rahm-emanuel-trump-foreign-policy-china-europe-immigration.md | ingest |
+| 2026-08-17 | wiki/technology/genai-red-teaming-owasp-prompt-injection.md | ingest |
+| 2026-08-17 | wiki/technology/unicorn-startup-oidc-misconfiguration-security.md | ingest |
+| 2026-08-17 | wiki/technology/defensive-coding-ai-agents-owasp-asvs.md | ingest |
+| 2026-08-17 | 2023-08-08-transcript-vivek-ramaswamy-elon-musk-david-sacks.md | scrape |
+| 2026-08-17 | 2026-08-14-anthropic-2t-ipo-zuck-ai-manifesto-nvidia-500b-ai-bet-grok-comeback.md | scrape |
+| 2026-08-17 | 2026-08-13-rahm-emanuel-trump-foreign-policy-china-europe-immigration-dsa-democrats.md | scrape |
+| 2026-08-17 | 2026-08-17-anthropic-claude-code-agentic-software-engineering.md | scrape |
+| 2026-08-17 | 2026-08-17-chasing-unicorns-lovable-security-story.md | scrape |
+| 2026-08-17 | 2026-08-17-testing-generative-ai-full-spectrum.md | scrape |
+| 2026-08-17 | 2026-08-17-defensive-coding-ai.md | scrape |
+| 2026-08-17 | raw/url/podcast-part2.processed.md | archive |
+| 2026-08-17 | research/learning-typescript/lessons/ | lessons |
+| 2026-08-17 | research/learning-typescript/report.md | research |
+| 2026-08-17 | research/payloadcms-learning-guide/lessons/ | lessons |
+| 2026-08-17 | research/ibm-carbon-design-system/lessons/ | lessons |
+| 2026-08-17 | research/shadcn-ui-overview/lessons/ | lessons |
 | 2026-08-16 | weekly-update/2026-08/2026-W33-weekly.md | newsletter |
+| 2026-08-17 | research/ibm-carbon-design-system/report.md | research |
+| 2026-08-17 | research/payloadcms-learning-guide/report.md | research |
 | 2026-08-16 | topics/mental-models.md | compound |
 | 2026-08-16 | topics/deep-work.md | compound |
 | 2026-08-16 | topics/ai-agents.md | compound |
@@ -1652,3 +1675,4 @@
 | 2026-08-17 | wiki/finance/ibm-stock-steadies-july-selloff-aug2026.md | ingest |
 | 2026-08-17 | wiki/finance/momentum-etf-comeback-morgan-stanley.md | ingest |
 | 2026-08-17 | daily-update/2026-08/2026-08-17.md | newsletter |
+| 2026-08-17 | research/shadcn-ui-overview/report.md | research |
