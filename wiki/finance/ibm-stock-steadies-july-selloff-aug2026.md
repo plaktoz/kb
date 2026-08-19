@@ -22,6 +22,7 @@ date_consumed: 2026-08-17
 - **Dividend**: $1.69/share quarterly, 2.86% yield, well covered by expected earnings.
 - **Relative performance**: IBM -1.89% on Aug 14 even as the S&P 500 hit a record 7,799 — lagging the broader market.
 - **Next catalyst**: Q3 earnings expected October 21, 2026.
+- **Update (2026-08-18, [source](https://www.marketbeat.com/instant-alerts/international-business-machines-nyseibm-shares-up-17-should-you-buy-2026-08-18)):** Shares rose another 1.7% to $232.74 intraday; analyst sentiment stayed split — Citigroup cut its price target to $245 (from $255) on July 24 while keeping a Buy rating, and KeyCorp downgraded IBM to "sector weight" on June 23. Aggregate coverage: 15 Buy, 11 Hold, 1 Sell.
 
 ## 🃏 Review Questions
 

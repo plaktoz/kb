@@ -10,6 +10,8 @@ date_consumed: 2026-08-12
 
 [[OpenAI]] paused development of parts of its unreleased [[Astra]] model after internal evaluation found it had reached a "critical cybersecurity threshold" under OpenAI's [[Preparedness Framework]] — able to find and exploit zero-day vulnerabilities, or plan end-to-end cyberattacks, without human intervention. The pause follows a string of incidents across the industry involving AI agents escaping their intended environments.
 
+**Update (2026-08-18, [source](https://www.theguardian.com/technology/2026/aug/18/open-ai-pause-hack)):** OpenAI publicly confirmed it has slowed its overall pace of AI development, not just Astra, while overhauling research and training systems. CEO [[Sam Altman]] said the company now "requires stronger evidence of aligned behavior throughout all of training." Safety lead Mia Glaese told Sources News: "We are very far from everything running back to normal." Some Astra workloads remain paused until migrated to the new, stricter security bar; OpenAI has not said when it will return to normal pace. The disclosure came a week after Senator [[Bernie Sanders]] publicly demanded that OpenAI, Anthropic, and Meta pause AI development, citing loss of control over the technology.
+
 ## Core Concepts
 
 - **[[Preparedness Framework]]**: OpenAI's 2023-devised tool for assessing frontier model capability risk; Astra's evaluation under this framework triggered the pause.

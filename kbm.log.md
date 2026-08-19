@@ -1676,3 +1676,43 @@
 | 2026-08-17 | wiki/finance/momentum-etf-comeback-morgan-stanley.md | ingest |
 | 2026-08-17 | daily-update/2026-08/2026-08-17.md | newsletter |
 | 2026-08-17 | research/shadcn-ui-overview/report.md | research |
+| 2026-08-19 | 2026-08-19-news-aggregation.md | news-fetch |
+| 2026-08-19 | 2026-08-18-openai-slows-development-after-rogue-agent-hack.md | scrape |
+| 2026-08-19 | 2026-08-12-lovable-confirms-13-3b-valuation-raises-400m.md | scrape |
+| 2026-08-19 | 2026-08-18-whats-hot-now-custom-ai-chips.md | scrape |
+| 2026-08-19 | marketwatch.com stock-market-today Aug 18 (live blog, no extractable body content) | scrape-failed |
+| 2026-08-19 | 2026-08-18-global-bond-selloff-yields-multiyear-highs.md | scrape |
+| 2026-08-19 | 2026-08-18-stock-market-live-updates-fomc-minutes-earnings.md | scrape |
+| 2026-08-19 | 2026-08-18-deep-work-strategies-complete-guide.md | scrape |
+| 2026-08-19 | 2026-08-19-daily-fruit-intake-workplace-productivity-research.md | scrape |
+| 2026-08-19 | 2026-08-17-ai-mastery-learning-tennessee-math-study.md | scrape |
+| 2026-08-19 | 2026-08-18-teens-use-ai-academic-support-survey.md | scrape |
+| 2026-08-19 | fastcompany.com pearson-ai-education article (subscriber-exclusive paywall, insufficient content) | scrape-failed |
+| 2026-08-19 | 2026-08-18-stop-multitasking-science-backed-habits-deep-work.md | scrape |
+| 2026-08-19 | 2026-08-18-poor-sleep-cost-over-50s-nine-months-career.md | scrape |
+| 2026-08-19 | 2026-08-19-almonds-improve-sleep-quality-study.md | scrape |
+| 2026-08-19 | 2026-08-18-decade-old-sleep-recommendations-still-sound.md | scrape |
+| 2026-08-19 | 2026-08-19-next-gen-strategist-age-of-ai-bcg.md | scrape |
+| 2026-08-19 | 2026-08-17-why-microsoft-stock-falling-3-percent.md | scrape |
+| 2026-08-19 | seekingalpha.com/article/4937389 S&P 500 bull market (paywalled, insufficient content) | scrape-failed |
+| 2026-08-19 | 2026-08-18-ibm-shares-up-1-7-percent-analyst-ratings.md | scrape |
+| 2026-08-19 | 2026-08-15-strategic-thinking-mental-models-first-principles.md | scrape |
+| 2026-08-19 | 2026-08-19-news-aggregation.processed.md | archive |
+| 2026-08-19 | wiki/technology/openai-astra-model-security-pause.md (updated with Aug 18 public confirmation) | ingest |
+| 2026-08-19 | wiki/technology/lovable-13-3b-valuation-series-c.md | ingest |
+| 2026-08-19 | wiki/technology/etched-700m-custom-ai-inference-chips.md | ingest |
+| 2026-08-19 | wiki/finance/global-bond-selloff-chip-stocks-fomc-minutes-aug18-2026.md | ingest |
+| 2026-08-19 | 2026-08-18-stock-market-live-updates-fomc-minutes-earnings.md (merged into global-bond-selloff-chip-stocks-fomc-minutes-aug18-2026.md) | ingest |
+| 2026-08-19 | wiki/productivity/task-switching-costs-research-roundup-2026.md | ingest |
+| 2026-08-19 | 2026-08-18-stop-multitasking-science-backed-habits-deep-work.md (merged into task-switching-costs-research-roundup-2026.md) | ingest |
+| 2026-08-19 | wiki/productivity/fruit-intake-workplace-cognitive-performance.md | ingest |
+| 2026-08-19 | wiki/learning/ai-mastery-learning-tennessee-fractions-study.md | ingest |
+| 2026-08-19 | wiki/learning/teens-ai-academic-support-common-sense-survey.md | ingest |
+| 2026-08-19 | wiki/health/poor-sleep-career-length-over-50s.md | ingest |
+| 2026-08-19 | wiki/health/almonds-sleep-quality-study.md | ingest |
+| 2026-08-19 | wiki/health/nsf-sleep-duration-recommendations-review.md | ingest |
+| 2026-08-19 | wiki/strategy/next-gen-strategist-age-of-ai-bcg.md | ingest |
+| 2026-08-19 | wiki/finance/microsoft-ai-chip-count-dispute-aug2026.md | ingest |
+| 2026-08-19 | wiki/finance/ibm-stock-steadies-july-selloff-aug2026.md (updated with analyst ratings) | ingest |
+| 2026-08-19 | 2026-08-15-strategic-thinking-mental-models-first-principles.md (same topic as wiki/strategy/best-mental-models-to-master-2026.md) | ingest-dupe |
+| 2026-08-19 | daily-update/2026-08/2026-08-19.md | newsletter |
