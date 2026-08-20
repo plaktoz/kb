@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRIDE — The Developer's Primary Threat Framework · Threat Modeling Basics</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 2 &mdash; Frameworks &rsaquo; Lesson 4 of 12
+      </div>
+      <h1>STRIDE &mdash; The Developer&rsquo;s Primary Threat Framework</h1>
+      <div class="lesson-meta">
+        <span>Module 2 &mdash; Frameworks</span>
+        <span>Lesson 4 of 12</span>
+        <span>~15 min read</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <p>
+        <strong>Primary source</strong>
+        Microsoft Azure Security: Threat Modeling Tool Threats &mdash;
+        <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats" target="_blank" rel="noopener">
+          learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: What is STRIDE -->
+    <h2>What Is STRIDE?</h2>
+
+    <p>
+      STRIDE is a mnemonic developed at Microsoft in the late 1990s by Loren Kohnfelder and Praerit Garg. It gives you six threat categories — one per letter — that cover the most common ways a web application can be attacked or abused. Today it is the most widely taught threat identification framework for software developers and is the default framework in both Microsoft&rsquo;s Threat Modeling Tool and OWASP&rsquo;s Threat Dragon.
+    </p>
+
+    <p>
+      The six categories are: <strong>S</strong>poofing, <strong>T</strong>ampering, <strong>R</strong>epudiation, <strong>I</strong>nformation Disclosure, <strong>D</strong>enial of Service, and <strong>E</strong>levation of Privilege. Each category corresponds to a fundamental security property your system is supposed to uphold. When a threat violates one of those properties, it falls into the matching STRIDE bucket.
+    </p>
+
+    <div class="callout key">
+      <p>STRIDE does not tell you about every possible attack &mdash; it gives you six questions to ask about every data flow in your system. Asking the same six questions consistently is what makes it powerful.</p>
+    </div>
+
+    <!-- Section 2: The Six Categories -->
+    <h2>The Six STRIDE Categories</h2>
+
+    <p>
+      The table below is your primary reference. For each category you get: the full name, the security property it threatens, a plain-English definition, and a concrete web app example you can visualise immediately.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Letter</th>
+          <th>Threat Type</th>
+          <th>Security Property Violated</th>
+          <th>Web App Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>S</strong></td>
+          <td>Spoofing</td>
+          <td>Authentication</td>
+          <td>An attacker steals a user&rsquo;s session cookie and replays it to the server, logging in as that user without knowing the password.</td>
+        </tr>
+        <tr>
+          <td><strong>T</strong></td>
+          <td>Tampering</td>
+          <td>Integrity</td>
+          <td>An attacker sits between the browser and the server on an unencrypted Wi-Fi network and silently changes the quantity field in a submitted order form from 1 to 100.</td>
+        </tr>
+        <tr>
+          <td><strong>R</strong></td>
+          <td>Repudiation</td>
+          <td>Accountability</td>
+          <td>A user places an order, then disputes the charge and claims they never placed it. Because the app has no audit log recording who placed the order and when, there is no way to prove the claim either way.</td>
+        </tr>
+        <tr>
+          <td><strong>I</strong></td>
+          <td>Information Disclosure</td>
+          <td>Confidentiality</td>
+          <td>A misconfigured API endpoint returns all user records instead of just the authenticated user&rsquo;s own record, leaking names, emails, and hashed passwords to anyone who calls it.</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Denial of Service</td>
+          <td>Availability</td>
+          <td>An attacker sends thousands of login requests per second to <code>/api/login</code> without rate limiting, saturating the server&rsquo;s CPU and making the endpoint unavailable to legitimate users.</td>
+        </tr>
+        <tr>
+          <td><strong>E</strong></td>
+          <td>Elevation of Privilege</td>
+          <td>Authorization</td>
+          <td>A regular user discovers that navigating directly to <code>/admin/users</code> returns the admin dashboard because the server only checks authentication (are you logged in?) but not authorization (are you an admin?).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 3: Each category in depth -->
+    <h2>Each Category in Depth</h2>
+
+    <h3>S &mdash; Spoofing (Authentication)</h3>
+    <p>
+      Spoofing means pretending to be someone or something you are not. The security property it threatens is <em>authentication</em> &mdash; the system&rsquo;s ability to verify that an identity is genuine. In web apps, spoofing attacks target the mechanisms that establish identity: session tokens, JSON Web Tokens, API keys, and OAuth flows. An attacker who can spoof a legitimate user or service bypasses every access control that depends on knowing who you are.
+    </p>
+    <p>
+      Common spoofing vectors include: stolen or forged session cookies, credential stuffing (replaying leaked username/password pairs), open redirect attacks that impersonate a trusted redirect URL, and DNS spoofing that points a domain at an attacker-controlled server.
+    </p>
+
+    <h3>T &mdash; Tampering (Integrity)</h3>
+    <p>
+      Tampering means maliciously modifying data &mdash; either in transit across a network or at rest in a database or file system. The security property threatened is <em>integrity</em>: the guarantee that data has not been altered by an unauthorised party. Even a small, targeted modification (changing a price from $1 to $0.01, flipping an <code>isAdmin</code> flag from <code>false</code> to <code>true</code>) can have large downstream consequences.
+    </p>
+    <p>
+      Defences against tampering include: TLS for data in transit, cryptographic signatures or HMACs for critical data, parameterised queries (preventing SQL injection that overwrites rows), and input validation on the server side &mdash; never on the client side alone.
+    </p>
+
+    <h3>R &mdash; Repudiation (Accountability)</h3>
+    <p>
+      Repudiation occurs when a user can convincingly deny having performed an action because the system lacks the audit trail to prove otherwise. The security property is <em>accountability</em> (sometimes called non-repudiation). This category is about the gap between what happened and what can be proven to have happened.
+    </p>
+    <p>
+      Repudiation threats become legal and financial problems fast. A user who successfully disputes a legitimate charge triggers a chargeback. An employee who deletes a record and denies it creates a compliance failure. The fix is durable, tamper-evident logging: record who did what, when, from which IP, on which resource &mdash; and store those logs somewhere the subject of the log cannot modify them.
+    </p>
+
+    <div class="callout warning">
+      <p>Repudiation is the most overlooked STRIDE category. It means your system cannot prove that a user did or did not do something &mdash; which matters for debugging, legal disputes, and fraud detection.</p>
+    </div>
+
+    <h3>I &mdash; Information Disclosure (Confidentiality)</h3>
+    <p>
+      Information disclosure means exposing data to parties who should not have access to it. The threatened property is <em>confidentiality</em>. This is perhaps the broadest STRIDE category: it covers data leaks via API responses that return too much, verbose error messages that reveal stack traces or database schemas, unencrypted data at rest, improperly scoped access tokens, and directory listings on web servers.
+    </p>
+    <p>
+      A useful heuristic: every data flow in your system is a potential information disclosure threat. Ask &ldquo;what is crossing this boundary and who can intercept or read it?&rdquo; for every arrow on your data flow diagram.
+    </p>
+
+    <h3>D &mdash; Denial of Service (Availability)</h3>
+    <p>
+      Denial of Service (DoS) threats target the <em>availability</em> of your system &mdash; the guarantee that legitimate users can use it when they need to. Attacks range from volumetric floods (sending more traffic than the server can handle) to algorithmic complexity attacks (crafting inputs that trigger worst-case behaviour in your code) to resource exhaustion (opening thousands of database connections without releasing them).
+    </p>
+    <p>
+      For web developers, availability threats are often not exotic attacks but rather missing guardrails: no rate limiting on public endpoints, no pagination on queries that can return millions of rows, no timeouts on external API calls. These are design-level gaps, which is exactly why you want to catch them in threat modeling before they reach production.
+    </p>
+
+    <h3>E &mdash; Elevation of Privilege (Authorization)</h3>
+    <p>
+      Elevation of Privilege (EoP) means a user gaining capabilities beyond those they were granted. The threatened property is <em>authorization</em>: the system&rsquo;s ability to enforce what an authenticated identity is <em>allowed</em> to do. Authentication and authorization are distinct: knowing <em>who you are</em> does not automatically tell the system <em>what you can do</em>.
+    </p>
+    <p>
+      Web app EoP examples include: accessing another user&rsquo;s resources by changing an ID in a URL (Insecure Direct Object Reference), exploiting a mass-assignment vulnerability that lets a regular user set <code>role: "admin"</code> in a POST body, and path traversal attacks that allow a low-privilege user to read files outside their permitted directory.
+    </p>
+
+    <!-- Section 4: How to Use STRIDE -->
+    <h2>How to Use STRIDE in Practice</h2>
+
+    <p>
+      STRIDE is most effective when applied systematically to each element in your Data Flow Diagram (DFD). The standard workflow is:
+    </p>
+
+    <ol>
+      <li><strong>Draw your DFD</strong> for the feature you are analyzing. Mark every process, data store, external entity, data flow, and trust boundary.</li>
+      <li><strong>Pick an element</strong> &mdash; start with a data flow arrow, since that is where most web app threats live.</li>
+      <li><strong>Ask all six STRIDE questions</strong> about that element. &ldquo;Could this data flow be spoofed? Could it be tampered with? Could its occurrence be repudiated? Could it disclose information? Could it be disrupted? Could it be used to gain higher privileges?&rdquo;</li>
+      <li><strong>Write one specific threat statement per &ldquo;yes&rdquo; answer.</strong> Specific means: name the attacker action and the target component. &ldquo;SQL injection via the <code>email</code> parameter overwrites rows in the <code>users</code> table&rdquo; is specific. &ldquo;Tampering&rdquo; alone is not.</li>
+      <li><strong>Move to the next element</strong> and repeat. Cover every element in the DFD before moving on to mitigation.</li>
+    </ol>
+
+    <p>
+      The power of the checklist is that it forces you to consider categories you would not naturally think of. Most developers instinctively think about tampering and information disclosure. STRIDE reminds you not to skip spoofing, repudiation, availability, and privilege escalation.
+    </p>
+
+    <!-- Section 5: Why STRIDE for web developers -->
+    <h2>Why STRIDE Is the Right Starting Framework for Web Developers</h2>
+
+    <p>
+      Several competing frameworks exist &mdash; PASTA, LINDDUN, VAST, OCTAVE &mdash; and we will cover the most relevant ones in later lessons. STRIDE is the recommended starting point for web developers for three reasons:
+    </p>
+
+    <ul>
+      <li><strong>It maps directly to web app attack surfaces.</strong> Every major OWASP Top 10 vulnerability fits neatly into one or more STRIDE categories. Injection attacks are Tampering. Broken access control is Elevation of Privilege. Security misconfiguration often leads to Information Disclosure. STRIDE gives you a vocabulary for what you are already defending against.</li>
+      <li><strong>It is designed for developers, not security specialists.</strong> Microsoft created STRIDE to be used by developers during design &mdash; not by a dedicated red team after the fact. The questions are simple enough to ask in a sprint planning session without deep security expertise.</li>
+      <li><strong>It integrates with free tooling.</strong> Both OWASP Threat Dragon and Microsoft&rsquo;s Threat Modeling Tool use STRIDE as their default threat classification system. Learning STRIDE first means you can immediately use the tools that auto-generate threat lists from your DFDs.</li>
+    </ul>
+
+    <p>
+      STRIDE is not perfect. It does not cover privacy threats well (that is LINDDUN&rsquo;s strength), it does not prioritise threats by business risk (that is PASTA&rsquo;s strength), and it does not account for insider threats with unusual richness. But for a junior web developer building their first threat model on a web feature, STRIDE covers the ground that matters most and is learnable in an afternoon.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-4">
+      <h3>Knowledge check</h3>
+      <p>Which STRIDE category does &ldquo;a user denying they placed an order&rdquo; represent?</p>
+      <div class="quiz-options">
+        <button>A: Spoofing &mdash; impersonating a legitimate user identity</button>
+        <button>B: Repudiation &mdash; denying an action without audit proof</button>
+        <button>C: Tampering &mdash; modifying data after it was stored</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Fill in a STRIDE threat table for a &ldquo;user submits a contact form&rdquo; feature. For each of the six STRIDE letters, write one specific threat that could apply to this flow. Be specific &mdash; name the attacker action and the target component.
+      </p>
+      <p>
+        The flow to model: <em>Browser &rarr; (HTTPS) &rarr; Contact Form API endpoint &rarr; (internal network) &rarr; Email service &rarr; (internal network) &rarr; Database (stores submissions)</em>
+      </p>
+      <p>
+        For each letter, write a sentence in this format: <em>&ldquo;[Attacker action] targeting [component], allowing [consequence].&rdquo;</em>
+      </p>
+      <p>Example for S: &ldquo;An attacker forges the <code>From</code> header in the email notification to make it appear the submission came from <code>admin@yoursite.com</code>, potentially tricking staff into acting on a fraudulent request.&rdquo;</p>
+      <textarea placeholder="S (Spoofing): ...&#10;T (Tampering): ...&#10;R (Repudiation): ...&#10;I (Information Disclosure): ...&#10;D (Denial of Service): ...&#10;E (Elevation of Privilege): ..."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Ask your tutor: &ldquo;Can you review my STRIDE table for the contact form and tell me which threats are specific enough and which need more detail?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0003-threat-modeling-in-sdlc.html">&larr; Prev: Threat Modeling in the SDLC</a>
+      <a href="0005-stride-in-action.html" class="primary">Next: STRIDE in Action &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-4',
+      1,
+      'Repudiation threats arise when a user can deny performing an action and the system has no way to prove otherwise — typically because audit logging is missing or insufficient.'
+    );
+  </script>
+</body>
+</html>

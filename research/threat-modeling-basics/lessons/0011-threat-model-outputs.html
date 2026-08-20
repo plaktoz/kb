@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What a Finished Threat Model Looks Like · Threat Modeling Basics</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 4 &mdash; Outputs and Tooling &rsaquo; Lesson 11 of 12
+      </div>
+      <h1>What a Finished Threat Model Looks Like</h1>
+      <div class="lesson-meta">
+        <span>Module 4 &mdash; Outputs and Tooling</span>
+        <span>Lesson 11 of 12</span>
+        <span>~15 min read</span>
+      </div>
+    </header>
+
+    <!-- Source cards -->
+    <div class="source-card">
+      <p>
+        <strong>Primary source</strong>
+        OWASP Threat Modeling Cheat Sheet &mdash;
+        <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html" target="_blank" rel="noopener">
+          cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html
+        </a>
+      </p>
+    </div>
+
+    <div class="source-card">
+      <p>
+        <strong>Supporting source</strong>
+        Microsoft Threat Modeling Tool &mdash; Getting Started &mdash;
+        <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started" target="_blank" rel="noopener">
+          learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started
+        </a>
+      </p>
+    </div>
+
+    <div class="source-card">
+      <p>
+        <strong>Supporting source</strong>
+        OWASP Attack Surface Analysis Cheat Sheet &mdash;
+        <a href="https://cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html" target="_blank" rel="noopener">
+          cheatsheetseries.owasp.org/cheatsheets/Attack_Surface_Analysis_Cheat_Sheet.html
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: Introduction -->
+    <h2>From Process to Artifact</h2>
+
+    <p>
+      The earlier lessons in this course covered the <em>process</em> of threat modeling: drawing data flow diagrams, running STRIDE across each element, scoring threats, and choosing a response. This lesson is about the <em>artifacts</em> that process produces. When you finish a threat modeling session, what should you actually have on disk?
+    </p>
+
+    <p>
+      The OWASP Threat Modeling Cheat Sheet identifies five canonical outputs. Together they form a durable record that a new team member, an auditor, or your future self can open in six months and immediately understand what risks this system carries, what decisions were made, and what remains to be done.
+    </p>
+
+    <p>
+      Understanding these outputs matters for two reasons. First, they are the deliverable &mdash; what you hand to a tech lead, a security reviewer, or a compliance team to demonstrate that threat modeling actually happened. Second, they create a feedback loop: outputs that are wrong or stale are evidence that the system has drifted and threat modeling needs to run again.
+    </p>
+
+    <!-- Section 2: The Five Canonical Outputs -->
+    <h2>The Five Canonical Outputs</h2>
+
+    <h3>1. The Data Flow Diagram</h3>
+
+    <p>
+      The DFD is the visual foundation of the entire threat model. It shows every process, data store, external entity, trust boundary, and data flow in the scope you defined. Everything else &mdash; the threat list, the threat register, the attack surface map &mdash; is derived from or anchored to the DFD. If the DFD is wrong, every downstream output is suspect.
+    </p>
+
+    <p>
+      A finished DFD should be saved as an image or editable file alongside the rest of the threat model documentation. When using a tool like OWASP Threat Dragon or Microsoft&rsquo;s Threat Modeling Tool, the tool file <em>is</em> the DFD. Commit it to source control so it changes in lockstep with the code it describes. A DFD that lives only on a whiteboard photograph or in someone&rsquo;s personal folder is not a deliverable &mdash; it is a memory.
+    </p>
+
+    <h3>2. The Ranked Threat List</h3>
+
+    <p>
+      This is the exhaustive list of every threat you identified during the STRIDE analysis, each scored by likelihood, impact, and overall risk (as covered in Lesson 10). The list is sorted by score so the highest-risk threats appear at the top. This ordering tells the team where to spend effort first when mitigation work is prioritised in a sprint.
+    </p>
+
+    <p>
+      Every threat in the list should be a specific, named threat &mdash; not a category label. &ldquo;SQL injection in the <code>email</code> parameter of <code>POST /api/register</code> overwrites rows in the <code>users</code> table&rdquo; is a ranked threat entry. &ldquo;Tampering&rdquo; is not.
+    </p>
+
+    <h3>3. Response Strategies</h3>
+
+    <p>
+      For every threat on the ranked list, you record a response decision: <strong>mitigate</strong> (add a control to reduce likelihood or impact), <strong>eliminate</strong> (remove the feature or flow that creates the threat), <strong>transfer</strong> (shift responsibility to a third-party service or contract), or <strong>accept</strong> (document the risk and consciously decide not to act on it now). The response must be recorded even when the decision is to accept. Undocumented acceptance is not a strategy &mdash; it is an oversight that looks identical to work that was never done.
+    </p>
+
+    <h3>4. Mitigation Requirements</h3>
+
+    <p>
+      A response of &ldquo;mitigate&rdquo; generates a mitigation requirement: a specific, testable control that a developer can implement and a tester can verify. The OWASP Threat Modeling Cheat Sheet recommends anchoring mitigation requirements to a published standard rather than writing freehand descriptions, for two reasons. First, standards are already testable: OWASP&rsquo;s Application Security Verification Standard (ASVS) numbers each requirement, which means you can reference &ldquo;OWASP ASVS v4 requirement 3.3.3&rdquo; and anyone on the team knows exactly what &ldquo;done&rdquo; looks like. Second, standards are maintained: if the standard is updated, your requirement inherits the update.
+    </p>
+
+    <p>
+      MITRE&rsquo;s Common Weakness Enumeration (CWE) is the other common reference. CWE numbers describe the underlying weakness class (CWE-89 is SQL Injection, CWE-307 is Improper Restriction of Excessive Authentication Attempts). Citing a CWE in a mitigation requirement connects your threat model to a shared vocabulary used by static analysis tools, bug trackers, and vulnerability databases.
+    </p>
+
+    <div class="callout warning">
+      <p>A mitigation requirement that says &ldquo;add authentication&rdquo; is not actionable enough. Reference a specific standard: &ldquo;Implement session token rotation per OWASP ASVS v4 requirement 3.3.3.&rdquo; That is something you can test and verify.</p>
+    </div>
+
+    <h3>5. Formal Documentation</h3>
+
+    <p>
+      The four outputs above should be consolidated into a single document &mdash; or a small set of linked documents &mdash; that is accessible to everyone who needs it: developers, tech leads, security engineers, and auditors. The Microsoft Threat Modeling Tool exports a report containing threat title, STRIDE category, priority, status (Not Started / Needs Investigation / Mitigated / Not Applicable), and mitigation notes. That structure is a reasonable template even if you are not using Microsoft&rsquo;s tool.
+    </p>
+
+    <p>
+      The documentation should be stored in source control alongside the code it describes &mdash; ideally in a <code>threat-model/</code> or <code>docs/security/</code> directory at the root of the repository. This means the threat model is reviewed in pull requests, updated when code changes, and visible to the whole team. A threat model that exists only in a shared drive accessible only to security engineers is not a living document &mdash; it is a filing cabinet that will go stale.
+    </p>
+
+    <!-- Section 3: The Threat Register -->
+    <h2>The Threat Register</h2>
+
+    <p>
+      In practice, the ranked threat list and the response strategies are usually combined into a single table called the <strong>threat register</strong>. The threat register is the living heart of your threat model: one row per identified threat, all the information you need to track it from identification through to resolution.
+    </p>
+
+    <div class="callout key">
+      <p>The threat register is the living heart of your threat model. It is not a one-time document &mdash; update it when you add features, when incidents occur, and when the architecture changes.</p>
+    </div>
+
+    <p>
+      The columns recommended by OWASP and Microsoft together produce a register that is both analytical and operational:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Column</th>
+          <th>Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Threat</strong></td>
+          <td>A specific, named threat statement identifying the attacker action, the targeted component, and the consequence.</td>
+        </tr>
+        <tr>
+          <td><strong>STRIDE Category</strong></td>
+          <td>The primary STRIDE category: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, or Elevation of Privilege.</td>
+        </tr>
+        <tr>
+          <td><strong>Likelihood</strong></td>
+          <td>Numeric or qualitative score (e.g. 1&ndash;3) for how probable exploitation is.</td>
+        </tr>
+        <tr>
+          <td><strong>Impact</strong></td>
+          <td>Numeric or qualitative score (e.g. 1&ndash;3) for the damage if exploited.</td>
+        </tr>
+        <tr>
+          <td><strong>Score</strong></td>
+          <td>Combined risk score used to rank threats (e.g. Likelihood &times; Impact).</td>
+        </tr>
+        <tr>
+          <td><strong>Response</strong></td>
+          <td>The chosen response strategy: Mitigate, Eliminate, Transfer, or Accept.</td>
+        </tr>
+        <tr>
+          <td><strong>Mitigation Note</strong></td>
+          <td>For Mitigate responses: the specific, testable control, ideally referencing OWASP ASVS or MITRE CWE.</td>
+        </tr>
+        <tr>
+          <td><strong>Status</strong></td>
+          <td>Current progress: Not Started, Needs Investigation, Mitigated, or Not Applicable.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Below is a sample threat register using the user registration flow modeled in earlier lessons. Two example rows are filled in to show the format.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Threat</th>
+          <th>STRIDE Category</th>
+          <th>Likelihood</th>
+          <th>Impact</th>
+          <th>Score</th>
+          <th>Response</th>
+          <th>Mitigation Note</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Attacker submits SQL injection via the <code>email</code> field of <code>POST /api/register</code>, allowing arbitrary reads or writes to the <code>users</code> table.</td>
+          <td>Tampering</td>
+          <td>2</td>
+          <td>3</td>
+          <td>6</td>
+          <td>Mitigate</td>
+          <td>Use parameterised queries for all database interactions; address CWE-89 and OWASP ASVS v4 req 5.3.4.</td>
+          <td>Not Started</td>
+        </tr>
+        <tr>
+          <td>Attacker sends unlimited registration requests to <code>POST /api/register</code> without rate limiting, enumerating valid email addresses via differing error responses.</td>
+          <td>Information Disclosure</td>
+          <td>3</td>
+          <td>2</td>
+          <td>6</td>
+          <td>Mitigate</td>
+          <td>Apply per-IP rate limiting; return identical error messages for existing and non-existing emails; OWASP ASVS v4 req 11.1.6.</td>
+          <td>Needs Investigation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The status column is what makes the threat register operational rather than merely analytical. When a developer addresses a threat, they update the status to Mitigated and add a note referencing the commit or pull request. This transforms the register into a traceable record of what was decided, what was done, and when.
+    </p>
+
+    <!-- Section 4: The Attack Surface Map -->
+    <h2>The Attack Surface Map</h2>
+
+    <p>
+      The OWASP Attack Surface Analysis Cheat Sheet describes a companion artifact to the threat register: the <strong>attack surface map</strong>. Where the DFD shows how data flows between components, the attack surface map catalogs every entry point into the system &mdash; every place where an attacker could interact with or inject data.
+    </p>
+
+    <p>
+      Entry points to document in an attack surface map include:
+    </p>
+
+    <ul>
+      <li>All public-facing UI forms (login, registration, contact, search, file upload)</li>
+      <li>All HTTP API endpoints, including their methods and authentication requirements</li>
+      <li>HTTP request headers that the application reads and acts on (e.g. <code>Authorization</code>, <code>X-Forwarded-For</code>, <code>Content-Type</code>)</li>
+      <li>Files read from disk, including configuration files and user-uploaded content</li>
+      <li>Database connections, including any third-party databases or data feeds</li>
+      <li>External service integrations (payment processors, email providers, OAuth providers)</li>
+      <li>Background jobs, cron tasks, and message queue consumers</li>
+    </ul>
+
+    <p>
+      The attack surface map and the threat model are intentionally coupled. According to the OWASP Attack Surface Analysis Cheat Sheet, any change to the attack surface &mdash; adding a new API endpoint, enabling a new file upload type, integrating a new external service &mdash; should trigger a new threat modeling session for the affected scope. Conversely, a new threat modeling session should prompt a review of whether the attack surface map is still accurate. They are twin lenses on the same system.
+    </p>
+
+    <p>
+      In a small project, the attack surface map can be a simple list in the same document as the threat register. In a larger system, it might be a structured table with columns for entry point type, URL or identifier, authentication required, and notes. The important thing is that it exists, is maintained, and is used as a change-detection mechanism.
+    </p>
+
+    <!-- Section 5: Validation checklist -->
+    <h2>The Validation Checklist</h2>
+
+    <p>
+      Before you consider a threat model &ldquo;done,&rdquo; run through a validation checklist. The OWASP Threat Modeling Cheat Sheet provides questions to confirm completeness. The goal is to catch gaps before they reach a security reviewer or, worse, production.
+    </p>
+
+    <ol>
+      <li>Does the DFD accurately reflect the current system? Are all processes, data stores, external entities, data flows, and trust boundaries present and correctly labelled?</li>
+      <li>Have all threats been captured and assigned a response? Is every STRIDE category applied to every data flow and process in the DFD?</li>
+      <li>Are response decisions justified? Is there a written rationale for each threat accepted or transferred, not just mitigated?</li>
+      <li>Are mitigations specific and measurable? Does every &ldquo;Mitigate&rdquo; entry reference a testable control or a published standard requirement?</li>
+      <li>Is the attack surface map complete? Does it account for all entry points, including background jobs, webhooks, and third-party integrations?</li>
+      <li>Is documentation accessible? Is the threat model stored where the whole development team can find and update it, not siloed with a single person or team?</li>
+      <li>Is there a plan for keeping the threat model current? Is there a trigger condition &mdash; architecture change, new feature, security incident &mdash; that will prompt the next review?</li>
+    </ol>
+
+    <p>
+      A threat model that passes this checklist is not necessarily perfect &mdash; but it is complete enough to be useful and honest enough to be trusted. The sign-off question to ask yourself is: &ldquo;Could a developer who was not in the room reconstruct the security reasoning behind this system from these documents alone?&rdquo; If the answer is yes, the outputs are sufficient.
+    </p>
+
+    <!-- Section 6: Putting it all together -->
+    <h2>What the Complete Package Looks Like</h2>
+
+    <p>
+      A finished threat model for a single web feature typically lives in a source-controlled directory containing:
+    </p>
+
+    <ul>
+      <li>A DFD file (tool export, SVG, or embedded diagram in the README)</li>
+      <li>A threat register (Markdown table, spreadsheet, or tool-generated report)</li>
+      <li>An attack surface map (list or table, may be a section within the same document)</li>
+      <li>A short narrative document covering: scope and assumptions, the analysis approach used, key decisions (especially accepted risks), and a validation sign-off</li>
+    </ul>
+
+    <p>
+      The Microsoft Threat Modeling Tool generates all of these in a single report export: threat title, STRIDE category, priority, status, and mitigation notes per threat, plus a copy of the DFD. That report can be stored in a <code>docs/security/</code> directory and updated in-place as mitigations are completed and the architecture evolves.
+    </p>
+
+    <p>
+      Whether you use a tool or assemble the documents by hand, the format matters less than the habits: keep it in source control, update it when the system changes, and make sure the team knows where it lives.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-11">
+      <h3>Knowledge check</h3>
+      <p>Where should you store the threat model documentation for a web app?</p>
+      <div class="quiz-options">
+        <button>A: In a shared drive accessible only to security engineers</button>
+        <button>B: In source control alongside the code it describes</button>
+        <button>C: In a wiki separate from the development repository</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Using the work you did in Lessons 8&ndash;10, assemble a mini threat model for your user registration flow. Write all three parts in the box below.
+      </p>
+      <p>
+        <strong>Part 1 &mdash; Text-form DFD.</strong> Describe your user registration data flow in structured prose. Name every component (Browser, Registration API, Users Database, Email Service), every data flow between them, and every trust boundary crossed. Example: &ldquo;Browser &rarr; [trust boundary: public internet / server] &rarr; Registration API &rarr; [trust boundary: app tier / data tier] &rarr; Users Database.&rdquo;
+      </p>
+      <p>
+        <strong>Part 2 &mdash; Threat register.</strong> Write at least three rows using plain-text columns: <code>Threat | Category | Score | Response | Mitigation Note</code>. Use specific threat statements, not category labels. Include at least one &ldquo;Accept&rdquo; or &ldquo;Transfer&rdquo; response to practice writing a justification.
+      </p>
+      <p>
+        <strong>Part 3 &mdash; Validation sign-off.</strong> Write one sentence beginning with: &ldquo;I have reviewed this threat model and confirm that &hellip;&rdquo; &mdash; fill in what you are specifically confirming (e.g. completeness of the DFD, coverage of all STRIDE categories, specificity of mitigations).
+      </p>
+      <textarea placeholder="Part 1 — DFD:&#10;&#10;&#10;Part 2 — Threat register (Threat | Category | Score | Response | Mitigation Note):&#10;&#10;1. &#10;2. &#10;3. &#10;&#10;Part 3 — Validation sign-off:&#10;I have reviewed this threat model and confirm that ..."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Ask your tutor: &ldquo;Can you review my mini threat model and tell me whether the threat statements are specific enough, whether any mitigation notes need a standard reference, and whether my validation sign-off captures something meaningful?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0010-prioritizing-and-responding.html">&larr; Prev: Prioritizing and Responding to Threats</a>
+      <a href="0012-tooling-threat-dragon-mstmt.html" class="primary">Next: Tooling &mdash; Threat Dragon and Microsoft TMT &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-11',
+      1,
+      'Storing the threat model in source control means it can be reviewed in pull requests, updated when code changes, and is accessible to the whole team — not siloed with a security expert.'
+    );
+  </script>
+</body>
+</html>

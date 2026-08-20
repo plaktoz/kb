@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Four Core Questions Every Threat Model Must Answer — Threat Modeling Basics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 1 &mdash; Foundations &rsaquo; Lesson 2 of 12
+      </div>
+      <h1>The Four Core Questions Every Threat Model Must Answer</h1>
+      <div class="lesson-meta">
+        <span>Module 1 &mdash; Foundations</span>
+        <span>Lesson 2 of 12</span>
+        <span>~10 min read</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <p>
+        <strong>Primary source</strong>
+        Threat Modeling Manifesto &mdash; a community-authored document defining values, principles, and the four questions that underpin every threat modeling effort.<br>
+        <a href="https://www.threatmodelingmanifesto.org/" target="_blank" rel="noopener noreferrer">https://www.threatmodelingmanifesto.org/</a>
+      </p>
+    </div>
+
+    <!-- Introduction -->
+    <p>
+      Before you pick a framework, open a diagramming tool, or write a single threat statement, you need to answer four questions. The Threat Modeling Manifesto calls these the universal foundation: they work regardless of which methodology you use, how big your team is, or what kind of system you are building. Master the questions first; the frameworks come later.
+    </p>
+
+    <!-- Section 1: The four questions -->
+    <h2>The Four Core Questions</h2>
+
+    <p>
+      Every meaningful threat model &mdash; no matter how simple or elaborate &mdash; can be reduced to four questions asked in sequence. Skipping any one of them produces an incomplete model.
+    </p>
+
+    <h3>1. What are we working on?</h3>
+    <p>
+      You cannot protect what you have not described. This question asks you to build a shared understanding of the system: its components, its data flows, the users and external systems it interacts with, and the assets worth protecting. The output is usually a diagram &mdash; a simple whiteboard sketch counts &mdash; that everyone on the team can look at and agree represents reality.
+    </p>
+    <p>
+      For a junior developer, the most common mistake here is rushing past this step. If the team disagrees on what the system does, every threat discussion that follows will be talking past each other.
+    </p>
+
+    <h3>2. What can go wrong?</h3>
+    <p>
+      This is the core creative work of threat modeling. Given the system you just described, what could an adversary do to harm it? What could go wrong by accident? This is where structured frameworks like STRIDE (covered in Lesson 4) become useful &mdash; they give you a checklist of threat categories to work through so you do not rely solely on imagination.
+    </p>
+    <p>
+      The goal is not to find every conceivable threat. It is to find the important ones &mdash; the threats specific to your design that a reasonable attacker would actually attempt.
+    </p>
+
+    <h3>3. What are we going to do about it?</h3>
+    <p>
+      Each threat you identified needs a response. The four canonical responses are: <strong>mitigate</strong> (reduce the risk with a control), <strong>eliminate</strong> (remove the vulnerable component entirely), <strong>transfer</strong> (shift the risk to a third party, e.g. by using a managed service), or <strong>accept</strong> (acknowledge the risk and consciously choose not to act on it). "Accept" is a legitimate strategy, but it must be a deliberate decision, not an oversight.
+    </p>
+    <p>
+      This question is what separates a useful threat model from a threat audit that goes nowhere. Identifying problems without deciding how to address them is not threat modeling &mdash; it is just a worry list.
+    </p>
+
+    <h3>4. Did we do a good enough job?</h3>
+    <p>
+      The final question is a quality check. Did the team cover the system completely? Did you revisit the model after a design change? Are the mitigations actually implemented and testable? This question forces closure on each cycle and seeds the next one. It is also the question that connects threat modeling to the rest of your development process: threat modeling is only useful if it changes what gets built.
+    </p>
+
+    <div class="callout key">
+      <p>These four questions work regardless of which framework you use &mdash; STRIDE, PASTA, or any other. They are the universal skeleton of every threat model.</p>
+    </div>
+
+    <!-- Section 2: Why the questions matter -->
+    <h2>Why These Questions Matter</h2>
+
+    <p>
+      The power of the four-question framework is that it is methodology-agnostic. Whether your team uses sticky notes on a whiteboard, a formal tool like OWASP Threat Dragon, or a spreadsheet, you are always asking the same four questions in the same order.
+    </p>
+    <p>
+      This also means the framework scales. A solo developer spending fifteen minutes on a new feature is doing threat modeling. A security team running a formal workshop for a distributed system is also doing threat modeling. The questions are the same; only the depth of analysis changes.
+    </p>
+    <p>
+      The Manifesto frames these questions as applicable to "any system" &mdash; not just software. But for web developers, the practical implication is simpler: before you ship a new feature, ask the four questions. They do not have to take long. The habit of asking them is what matters.
+    </p>
+
+    <!-- Section 3: The Manifesto's values -->
+    <h2>The Threat Modeling Manifesto Values</h2>
+
+    <p>
+      The Manifesto is modelled on the Agile Manifesto in structure: it states five values where the left side is prioritised over the right. These values explain <em>why</em> threat modeling often fails in practice and what mindset corrects those failures.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Prioritise this&hellip;</th>
+          <th>&hellip;over this</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Finding and fixing design issues</td>
+          <td>Checkbox compliance</td>
+        </tr>
+        <tr>
+          <td>People and collaboration</td>
+          <td>Process and tools</td>
+        </tr>
+        <tr>
+          <td>A journey of understanding</td>
+          <td>A one-time snapshot</td>
+        </tr>
+        <tr>
+          <td>Actually doing it</td>
+          <td>Just discussing it</td>
+        </tr>
+        <tr>
+          <td>Continuous refinement</td>
+          <td>Single delivery</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      A few of these deserve closer attention for developers new to security work.
+    </p>
+
+    <p>
+      <strong>Finding and fixing design issues over checkbox compliance.</strong> Threat modeling exists to make systems more secure, not to produce a document that satisfies an audit. If your threat model generates a report that nobody reads and no mitigations get built, you have done the wrong thing even if the paperwork looks correct.
+    </p>
+
+    <p>
+      <strong>People and collaboration over process and tools.</strong> A threat model produced by one person in isolation &mdash; even a skilled security expert &mdash; will miss things that a developer, a product manager, and a tester would catch together. The tool you use matters much less than whether the right people are in the room.
+    </p>
+
+    <p>
+      <strong>A journey of understanding over a one-time snapshot.</strong> Your threat model from six months ago describes the system you had six months ago. Every time the design changes &mdash; a new API endpoint, a new data store, a third-party integration &mdash; the threat model needs to keep pace. This is not a burden; it is how threat modeling stays connected to reality.
+    </p>
+
+    <p>
+      <strong>Actually doing it over just discussing it.</strong> Teams that spend months debating the "right" threat modeling methodology before doing any threat modeling are not doing threat modeling. An imperfect threat model produced this sprint is worth more than a perfect process that never starts.
+    </p>
+
+    <div class="callout warning">
+      <p>Threat modeling is not a one-time event. The Manifesto explicitly values "continuous refinement over single delivery" &mdash; a threat model that is never updated is already out of date.</p>
+    </div>
+
+    <!-- Section 4: Anti-patterns -->
+    <h2>Anti-Patterns to Avoid</h2>
+
+    <p>
+      The Manifesto also names several common failure modes. Recognising them early will help you avoid building bad habits.
+    </p>
+
+    <h3>The hero threat modeler</h3>
+    <p>
+      This happens when a single security expert is made solely responsible for threat modeling, everyone else waits for their output, and no one else builds the skill. The result is a bottleneck: threat modeling only happens when that person is available, and the rest of the team never develops adversarial thinking. Threat modeling is a team practice. The security expert's role is to facilitate and deepen the conversation, not to own it.
+    </p>
+
+    <h3>Stopping at problem analysis</h3>
+    <p>
+      A threat model that only answers the first two questions &mdash; what are we building, and what can go wrong &mdash; but never reaches a response strategy is incomplete. Producing a long list of threats and filing it away is not useful work. Every identified threat needs a decision: mitigate, eliminate, transfer, or accept.
+    </p>
+
+    <h3>Overfocusing on one element</h3>
+    <p>
+      A common pattern in developer-led threat modeling is spending ninety percent of the session on the component the developer is most familiar with &mdash; often the application code &mdash; while underweighting the database, the network layer, or third-party integrations. The four-question framework applied to a full system diagram guards against this by forcing you to account for every element on the diagram.
+    </p>
+
+    <h3>Seeking the one perfect model</h3>
+    <p>
+      No threat model is complete. Waiting to reach completeness before acting means never acting. The Manifesto's value of continuous refinement over single delivery is a direct response to this anti-pattern: aim for a threat model that is good enough to improve your design today, and return to it as the system evolves.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-2">
+      <h3>Check your understanding</h3>
+      <p>Which Threat Modeling Manifesto value best describes the right mindset?</p>
+      <div class="quiz-options">
+        <button>A. Completing a thorough one-time security audit</button>
+        <button>B. Continuously refining your understanding over time</button>
+        <button>C. Documenting every possible risk before coding</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>For a web app login feature, briefly answer all four Manifesto questions in bullet points:</p>
+      <ol>
+        <li><strong>What are we working on?</strong> Describe the login feature &mdash; its components, data flows, and assets at stake.</li>
+        <li><strong>What can go wrong?</strong> List two or three threats specific to this feature.</li>
+        <li><strong>What are we going to do about it?</strong> For each threat, name a response (mitigate / eliminate / transfer / accept) and a brief action.</li>
+        <li><strong>Did we do a good enough job?</strong> Write one sentence on how you would verify the mitigations are working.</li>
+      </ol>
+      <p>Focus on the spirit &mdash; don&rsquo;t worry about getting everything right.</p>
+      <textarea placeholder="(1) What are we working on?&#10;  - ...&#10;&#10;(2) What can go wrong?&#10;  - ...&#10;&#10;(3) What are we going to do about it?&#10;  - ...&#10;&#10;(4) Did we do a good enough job?&#10;  - ..."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Paste your exercise answer above into a conversation with an AI tutor and ask: &ldquo;Does my answer capture the spirit of the four questions? What am I missing or could make more specific?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0001-what-is-threat-modeling.html">&larr; Lesson 1: What is Threat Modeling?</a>
+      <a href="0003-threat-modeling-in-sdlc.html" class="primary">Lesson 3: Threat Modeling in the SDLC &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-2',
+      1,
+      "The Manifesto values ‘a journey of understanding’ and ‘continuous refinement over single delivery’ — threat modeling is an ongoing practice that evolves with the system, not a one-time audit."
+    );
+  </script>
+</body>
+</html>

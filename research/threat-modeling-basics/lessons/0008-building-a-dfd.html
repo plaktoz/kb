@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 — Step 1: Building Your Data Flow Diagram</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    .dfd-example {
+      background: #f9f9f5;
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      line-height: 1.9;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .dfd-example .label {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      display: block;
+      margin-bottom: 0.5rem;
+      font-style: italic;
+      white-space: normal;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Threat Modeling Basics &rsaquo; Module 3 &mdash; The Process &rsaquo; Lesson 8 of 12
+    </div>
+    <h1>Step 1 &mdash; Building Your Data Flow Diagram</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 3 &mdash; The Process</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <p>
+      <strong>Primary source: Agile Threat Modelling &mdash; Martin Fowler</strong>
+      <a href="https://martinfowler.com/articles/agile-threat-modelling.html" target="_blank" rel="noopener">
+        https://martinfowler.com/articles/agile-threat-modelling.html
+      </a><br>
+      Covers what to include in a DFD for agile teams: components (services, databases, UIs), users (internal, external, privileged), directional data flows, trust boundaries, and assets &mdash; anything whose loss causes financial, reputational, or legal harm.
+    </p>
+  </div>
+
+  <div class="source-card">
+    <p>
+      <strong>Secondary source: Microsoft Threat Modeling Tool &mdash; Getting Started</strong>
+      <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started" target="_blank" rel="noopener">
+        https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started
+      </a><br>
+      Documents the standard DFD stencil conventions: square = external entity (user or external system), circle = process (web server, API), parallel lines = data store (database, file system), red dotted line = trust boundary.
+    </p>
+  </div>
+
+  <!-- ─── Section 1: What a DFD Is ─────────────────────────────────────── -->
+
+  <h2>What is a data flow diagram?</h2>
+
+  <p>A <strong>data flow diagram (DFD)</strong> is a visual map of how data moves through a system. It shows the components involved, the data that travels between them, and the points where control or ownership changes hands. That last part &mdash; the trust boundaries &mdash; is what makes a DFD the right starting point for threat modeling.</p>
+
+  <p>Before you can reason about what an attacker might do, you need to be able to see where data enters your system, what processes touch it along the way, where it is stored, and where it leaves. A DFD makes all of that visible on a single page. Once it is drawn, the question "where could something go wrong?" becomes much easier to answer because you can point to a specific arrow or a specific boundary crossing.</p>
+
+  <div class="callout key">
+    <p>A DFD is not an architecture diagram. Its purpose is to make trust boundaries and data flows visible &mdash; if you cannot see where data crosses a trust boundary, you cannot reason about what can go wrong there.</p>
+  </div>
+
+  <p>Architecture diagrams show deployment topology: servers, load balancers, Kubernetes pods, cloud regions. That information is useful for operations, but it is not what you need for threat modeling. What you need to know is simpler and more specific: <em>who sends what data to whom, and where does the level of trust change?</em> A DFD answers those questions directly. It strips away infrastructure detail and focuses on the thing that matters for security: data movement and ownership.</p>
+
+  <!-- ─── Section 2: The Four DFD Element Types ────────────────────────── -->
+
+  <h2>The four DFD element types</h2>
+
+  <p>Every DFD is built from exactly four kinds of element. Learning these four shapes is the entirety of the notation &mdash; there is nothing else to memorize.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>DFD Element</th>
+        <th>Symbol</th>
+        <th>Example in a web app</th>
+        <th>What to ask about it</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>External Entity</strong></td>
+        <td>Square or rectangle <code>[ ]</code></td>
+        <td>Browser, mobile client, third-party payment API, admin user</td>
+        <td>Is this entity trusted? Can it send malformed or malicious data?</td>
+      </tr>
+      <tr>
+        <td><strong>Process</strong></td>
+        <td>Circle or oval <code>( )</code></td>
+        <td>Web server, authentication service, background job, email sender</td>
+        <td>What does this process do with the data? Could it be subverted or bypassed?</td>
+      </tr>
+      <tr>
+        <td><strong>Data Store</strong></td>
+        <td>Two parallel lines <code>|| ||</code></td>
+        <td>User database, session store, file system, cache</td>
+        <td>Who can read or write here? Is this data encrypted at rest?</td>
+      </tr>
+      <tr>
+        <td><strong>Data Flow</strong></td>
+        <td>Arrow with direction <code>&rarr;</code></td>
+        <td>Login request, API response, database query, email delivery</td>
+        <td>Is this flow encrypted in transit? Is it authenticated? Can it be intercepted or replayed?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The notation is deliberately minimal. Some teams use slightly different shapes (rectangles instead of squares for external entities, for example), and that is fine &mdash; consistency within your team matters more than strict adherence to a standard. What cannot vary is the <em>meaning</em>: every element must be clearly identifiable as one of these four types.</p>
+
+  <!-- ─── Section 3: Trust Boundaries ─────────────────────────────────── -->
+
+  <h2>Trust boundaries: the most important concept in a DFD</h2>
+
+  <p>A trust boundary marks the point where <strong>control or ownership changes</strong>. The most common examples in web applications are:</p>
+
+  <ul>
+    <li>The boundary between the public internet (user-controlled) and your server (your-controlled)</li>
+    <li>The boundary between your web server and your internal database network</li>
+    <li>The boundary between your application and a third-party API you call</li>
+    <li>The boundary between an authenticated user session and an unauthenticated one</li>
+  </ul>
+
+  <p>Trust boundaries are drawn as dotted lines cutting across the data flows that cross them. The dotted line is not a wall &mdash; data does flow across it &mdash; but it is a signal to the threat modeler: <em>every data flow that crosses this line is a candidate for attack.</em> Data entering your system from the internet crosses a trust boundary. Data leaving your process and entering a database crosses a trust boundary. These crossing points are where most real-world vulnerabilities are exploited.</p>
+
+  <p>When you are new to DFDs, a practical heuristic is: draw a trust boundary wherever you would check permissions or validate input. If you are already doing input validation at a particular point, that is because some part of your team already sensed the trust boundary there, even if it was never made explicit.</p>
+
+  <!-- ─── Section 4: A Concrete Example ───────────────────────────────── -->
+
+  <h2>A concrete example: a login flow</h2>
+
+  <p>The following is a text-art DFD for a simple login flow. The notation uses <code>[ ]</code> for external entities, <code>( )</code> for processes, and <code>|| ||</code> for data stores. The trust boundary is marked explicitly.</p>
+
+  <div class="dfd-example"><span class="label">DFD: Login flow (text notation)</span>
+  [ User (Browser) ]
+        |
+        |  login request (username + password)
+        |  [crosses trust boundary: internet → server]
+        v
+- - - - - - - - - - - - - - - - (Trust Boundary: Internet / Server) - - -
+        |
+        v
+  ( Web Server / Auth Process )
+        |                    \
+        | credential query    \  session token
+        v                      v
+  ||  User DB  ||          [ User (Browser) ]
+  (password hash)
+</div>
+
+  <p>Reading this diagram, even as plain text, surfaces several security questions immediately:</p>
+  <ul>
+    <li>Is the login request sent over HTTPS? (Is the data flow encrypted?)</li>
+    <li>Is the password hashed before storage in the User DB, or stored in plaintext?</li>
+    <li>How is the session token generated &mdash; is it cryptographically random?</li>
+    <li>Can the credential query be manipulated by the web server to return rows it should not (SQL injection)?</li>
+  </ul>
+
+  <p>None of these questions required reading any code. They came directly from looking at the diagram and asking "what could go wrong at this arrow?" and "what could go wrong at this trust boundary crossing?"</p>
+
+  <!-- ─── Section 5: Assets ─────────────────────────────────────────────── -->
+
+  <h2>Assets: what are you protecting?</h2>
+
+  <p>In threat modeling, an <strong>asset</strong> is anything whose loss, exposure, or corruption causes harm. "Harm" is intentionally broad &mdash; it can be financial (fraudulent transactions), reputational (a breach headline), legal (a GDPR violation), or operational (a service outage that costs revenue).</p>
+
+  <p>Common assets in web applications include:</p>
+
+  <ul>
+    <li><strong>User credentials</strong> &mdash; usernames and passwords; if exposed, attackers can impersonate users</li>
+    <li><strong>Personally identifiable information (PII)</strong> &mdash; names, email addresses, phone numbers, home addresses; regulated in many jurisdictions</li>
+    <li><strong>Session tokens</strong> &mdash; if stolen, an attacker gains the privileges of the authenticated user without needing their password</li>
+    <li><strong>Financial data</strong> &mdash; payment card numbers, bank account details, transaction records</li>
+    <li><strong>API keys and secrets</strong> &mdash; if leaked, an attacker can impersonate your server to third-party services</li>
+    <li><strong>System availability</strong> &mdash; the ability of your service to respond to legitimate requests</li>
+  </ul>
+
+  <p>When drawing a DFD, annotate it with the assets that live in each data store and flow through each data flow. A database labeled <code>||User DB||</code> becomes more useful to a threat modeler when it is labeled <code>||User DB (credentials, PII)||</code> &mdash; the label tells you immediately what the stakes are if this component is compromised.</p>
+
+  <!-- ─── Section 6: Practical Tips ───────────────────────────────────── -->
+
+  <h2>Practical tips for junior developers</h2>
+
+  <p>The most common mistake when building a first DFD is trying to model the entire application at once. That produces a large, tangled diagram that is hard to reason about and even harder to maintain. Here is how to avoid it:</p>
+
+  <ol>
+    <li><strong>Start with a whiteboard sketch.</strong> Use sticky notes, a whiteboard, or a shared drawing tool. The goal is to think, not to produce a polished artifact. A photograph of a whiteboard is a perfectly valid DFD.</li>
+    <li><strong>Focus on one feature or one user story.</strong> Pick the most sensitive one &mdash; authentication, payment, or anything that touches user data &mdash; and model that first. A DFD covering "user login" is more useful than a DFD attempting to cover the entire application.</li>
+    <li><strong>Keep it simple.</strong> Three boxes and two arrows is enough to start threat modeling. Add detail only when you find a question you cannot answer without it.</li>
+    <li><strong>Draw the trust boundaries before you draw the components.</strong> Ask first: where does trust change in this feature? Then place your components on either side of those boundaries. This forces trust to be a first-class concern rather than an afterthought.</li>
+    <li><strong>Label assets explicitly.</strong> When you draw a data store, write the most sensitive data it holds next to its symbol. When you draw a data flow, note whether it carries credentials, tokens, or PII. This labeling makes threat identification in the next step much faster.</li>
+  </ol>
+
+  <div class="callout warning">
+    <p>Don&rsquo;t try to model your entire application in one DFD. Start with one feature or one user story. A focused, incomplete model is more useful than an exhaustive one you never finish.</p>
+  </div>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────────────────── -->
+
+  <h2>Check your understanding</h2>
+
+  <div class="quiz" id="quiz-8">
+    <h3>Quick check &mdash; 1 question</h3>
+    <p>What does a trust boundary represent in a DFD?</p>
+    <div class="quiz-options">
+      <button>A. A line showing where one microservice calls another</button>
+      <button>B. A boundary where data ownership or control changes</button>
+      <button>C. A marker indicating where encryption should begin</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Skill Exercise ────────────────────────────────────────────────── -->
+
+  <h2>Skill exercise</h2>
+
+  <div class="exercise">
+    <p>Draw a DFD in text form for a user registration flow. Use <code>&rarr;</code> for arrows, <code>[ ]</code> for external entities, <code>( )</code> for processes, and <code>|| ||</code> for data stores. Include all four components in sequence: Browser &rarr; Registration API &rarr; User Database &rarr; Email Service. Label each element with its DFD type (external entity, process, data store, or data flow), add one trust boundary in the right place, and list two assets that need protecting in this flow.</p>
+    <textarea placeholder="Example start:&#10;&#10;[Browser] --registration request--> (Registration API)&#10;&#10;Add the rest of the flow, mark the trust boundary, and list your two assets below..." aria-label="Skill exercise: DFD for user registration flow"></textarea>
+  </div>
+
+  <!-- ─── Tutor Prompt ──────────────────────────────────────────────────── -->
+
+  <div class="tutor-prompt">
+    Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+
+  <nav class="lesson-nav" aria-label="Lesson navigation">
+    <a href="0007-linddun-cvss-framework-choice.html">
+      &larr; Previous: Framework Choice
+    </a>
+    <a href="0009-identifying-threats.html" class="primary">
+      Next: Identifying Threats &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-8',
+    1,
+    'A trust boundary marks where control or ownership changes — for example, the boundary between the internet (user-controlled) and your server (your-controlled). Data crossing a trust boundary is where most threats arise.'
+  );
+</script>
+</body>
+</html>
