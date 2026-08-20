@@ -1,0 +1,17 @@
+https://owasp.org/www-project-top-10-for-large-language-model-applications/
+https://github.com/GenAI-Security-Project/GenAI-LLM-Top10
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM01_PromptInjection.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM02_InsecureOutputHandling.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM03_TrainingDataPoisoning.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM04_ModelDoS.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM05_SupplyChainVulnerabilities.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM06_SensitiveInformationDisclosure.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM07_InsecurePluginDesign.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM08_ExcessiveAgency.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM09_Overreliance.md
+https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM10_ModelTheft.md
+https://learnprompting.org/docs/prompt_hacking/injection
+https://www.promptfoo.dev/docs/red-team/
+https://developer.nvidia.com/blog/securing-llm-systems-against-prompt-injection/
+https://developers.cloudflare.com/ai-gateway/
+https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message
