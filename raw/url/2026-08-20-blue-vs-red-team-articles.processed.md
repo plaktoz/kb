@@ -1,0 +1,14 @@
+https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/
+https://www.offsec.com/blog/red-team-vs-blue-team/
+https://attack.mitre.org/
+https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html
+https://www.crowdstrike.com/cybersecurity-101/threat-hunting/
+https://www.metasploit.com/
+https://portswigger.net/burp
+https://nmap.org/
+https://www.elastic.co/security
+https://owasp.org/www-project-web-security-testing-guide/
+https://www.crowdstrike.com/cybersecurity-101/purple-teaming/
+https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/
+https://github.com/GreyDGL/PentestGPT
+https://www.microsoft.com/en-us/security/blog/2024/02/22/announcing-microsofts-open-automation-framework-to-red-team-generative-ai-systems/
