@@ -1812,3 +1812,42 @@
 | 2026-08-20 | wiki/technology/owasp-genai-llm-top10-2026.md | ingest |
 | 2026-08-20 | wiki/technology/owasp-llm06-sensitive-information-disclosure.md | ingest |
 | 2026-08-20 | wiki/technology/owasp-llm09-overreliance.md | ingest |
+
+| 2026-08-20 | 2026-08-20-news-aggregation.md | news-fetch |
+| 2026-08-20 | investopedia.com stock-market-today-dow-jones-s-and-p-500-08192026 (Markets News Aug 19) | scrape-failed |
+| 2026-08-20 | 2026-08-19-cognition-ceo-denies-report-that-spacex-tried-to-acquire-the-startup.md | scrape |
+| 2026-08-20 | 2026-08-19-openai-seeks-to-one-up-anthropic-with-new-customer-privacy-protections.md | scrape |
+| 2026-08-20 | 2026-08-19-google-packs-search-and-gemini-with-new-ai-study-tools.md | scrape |
+| 2026-08-20 | 2026-08-19-bank-of-americas-raedler-warns-of-ai-pullback.md | scrape |
+| 2026-08-20 | 2026-08-19-moderna-cancer-vaccine-results-could-herald-new-world-of-treatment.md | scrape |
+| 2026-08-20 | 2026-08-13-71-percent-of-workers-feel-pressure-to-be-always-on-is-it-worth-it.md | scrape |
+| 2026-08-20 | 2026-08-13-the-productivity-paradox-what-do-more-with-less-is-really-costing-you.md | scrape |
+| 2026-08-20 | 2026-08-17-understanding-and-managing-workplace-emotions.md | scrape |
+| 2026-08-20 | 2026-08-19-aix-weekly-ai-in-higher-education.md | scrape |
+| 2026-08-20 | 2013-11-10-rapid-skill-acquisition-the-first-20-hours.md | scrape |
+| 2026-08-20 | 2026-08-19-why-the-tortoise-doesnt-win-anymore-speed-to-skill-as-a-competitive-advantage.md | scrape |
+| 2026-08-20 | 2026-08-19-how-losing-just-an-hour-of-sleep-a-night-could-affect-your-weight.md | scrape |
+| 2026-08-20 | 2024-05-14-how-does-extreme-exercise-affect-lifespan-study-offers-new-insight.md | scrape |
+| 2026-08-20 | 2025-12-19-7-ways-to-improve-heart-health-longevity-after-cancer.md | scrape |
+| 2026-08-20 | 2026-08-19-microsoft-stock-rises-as-678-billion-backlog-supports-ai-spending.md | scrape |
+| 2026-08-20 | 2026-08-19-can-ibms-together-ai-cloud-deal-boost-its-growth-prospects.md | scrape |
+| 2026-08-20 | 2026-08-18-what-stis-record-run-doesnt-say-about-the-singapore-stock-market.md | scrape |
+| 2026-08-20 | 2026-08-20-news-aggregation.processed.md | archive |
+| 2026-08-20 | wiki/technology/cognition-ceo-denies-spacex-acquisition-report.md | ingest |
+| 2026-08-20 | wiki/technology/openai-private-safety-processing-vs-anthropic-retention.md | ingest |
+| 2026-08-20 | wiki/technology/google-search-gemini-ai-study-tools.md | ingest |
+| 2026-08-20 | wiki/finance/bank-of-america-raedler-ai-pullback-warning.md | ingest |
+| 2026-08-20 | wiki/health/moderna-melanoma-cancer-vaccine-phase3-results.md | ingest |
+| 2026-08-20 | wiki/productivity/always-on-culture-career-payoff-survey.md | ingest |
+| 2026-08-20 | wiki/productivity/do-more-with-less-manager-burnout-paradox.md | ingest |
+| 2026-08-20 | wiki/productivity/understanding-managing-workplace-emotions-5d-framework.md | ingest |
+| 2026-08-20 | wiki/learning/aix-weekly-ai-literacy-gate-higher-education.md | ingest |
+| 2026-08-20 | wiki/learning/skill-acquisition-frameworks-20-hour-rule-deliberate-practice.md (merged new info) | ingest-dupe (primary-source Kaufman article; existing note already covered the 20-Hour Rule concept) |
+| 2026-08-20 | wiki/strategy/speed-to-skill-competitive-advantage.md | ingest |
+| 2026-08-20 | wiki/health/skipping-sleep-weight-gain-study.md (merged new info) | ingest-dupe (same Columbia/Annals of Internal Medicine study as existing note; merged mechanism + expert detail) |
+| 2026-08-20 | wiki/health/extreme-exercise-elite-runners-longevity-study.md | ingest |
+| 2026-08-20 | wiki/health/heart-health-longevity-after-cancer-life-simple-7.md | ingest |
+| 2026-08-20 | wiki/finance/microsoft-azure-blowout-q4-2026-earnings.md (merged new info) | ingest-dupe (same Q4 FY2026 $678B backlog figure as existing note; merged stock-reaction detail) |
+| 2026-08-20 | wiki/finance/ibm-together-ai-nvidia-cloud-deal.md | ingest |
+| 2026-08-20 | wiki/finance/sti-record-run-bank-concentration-risk.md | ingest |
+| 2026-08-20 | daily-update/2026-08/2026-08-20.md | newsletter |

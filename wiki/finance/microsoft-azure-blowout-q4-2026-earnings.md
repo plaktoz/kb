@@ -54,3 +54,13 @@ Source: https://www.marketbeat.com/articles/no-hangover-revisiting-microsoft-one
 - **[[Constellation Energy]]** has a separate 20-year power agreement with Microsoft anchored by the restart of the Crane Clean Energy Center (nuclear), diversifying Microsoft's AI power supply across gas and nuclear sources.
 - **Free cash flow trade-off**: $19.6B in FCF, down 23% YoY, repeating the prior quarter's pattern. Microsoft still posts positive FCF (unlike Oracle, which is taking on debt for AI infrastructure, or Alphabet, which reported negative FCF), but the declining trend makes MSFT expensive on discounted-cash-flow models that weight FCF heavily.
 - The stock's 25%+ one-week move is an outlier — MSFT typically takes a month or longer to move that much — but RSI suggests it isn't yet technically overbought. At time of writing MSFT traded at $499.86 with a Moderate Buy consensus rating and $558.87 average price target.
+
+
+## Update (stock reaction to $678B backlog, 2026-08-19)
+
+Source: https://finance.yahoo.com/markets/stocks/articles/microsoft-stock-rises-678-billion-174044835.html (Khac Phu Nguyen, GuruFocus)
+
+- **Stock reaction**: MSFT gained ~0.6% to $484.30 on Aug 19 as falling Treasury yields pulled buyers back into mega-cap tech; the article frames the $678B commercial remaining performance obligations figure as the more important story than the day's small bounce.
+- **Quarterly headline numbers restated**: revenue of $90B (+18%), operating income of $40.6B (+18%), Azure/cloud-services revenue +43%, annual Azure revenue surpassing $100B for the first time.
+- **Valuation gap**: MSFT traded at $485.71 on Aug 19 versus a GF Value estimate of $577.29 — about 15.86% below GF Value — though the piece cautions this doesn't automatically make the stock cheap.
+- **Framing**: the $678B backlog represents contracted business "already waiting to become revenue," shifting the key risk from demand generation to execution — building enough AI capacity without letting depreciation and infrastructure costs erode margins.
