@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 7 &mdash; Web Application Testing</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 2 &mdash; Toolchains &rsaquo; Lesson 7 of 14
+    </div>
+    <h1>Web Application Testing &mdash; Burp Suite and OWASP WSTG</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~14 min</span>
+      <span>Module 2 &mdash; Toolchains</span>
+      <span>Lesson 7 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Sources</div>
+    <p>
+      <strong>PortSwigger &mdash; Burp Suite</strong> &mdash; Comprehensive web application security testing platform<br>
+      <a href="https://portswigger.net/burp" target="_blank" rel="noopener">
+        https://portswigger.net/burp
+      </a>
+    </p>
+    <p style="margin-bottom:0">
+      <strong>OWASP &mdash; Web Security Testing Guide (WSTG)</strong> &mdash; Premier cybersecurity testing resource for web application security<br>
+      <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank" rel="noopener">
+        https://owasp.org/www-project-web-security-testing-guide/
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Burp Suite: Capabilities and Core Tools</h2>
+
+  <p>
+    Burp Suite is a comprehensive web application security testing platform built by PortSwigger. It is used by penetration testers, AppSec teams, DevOps engineers, and bug bounty hunters to find and exploit vulnerabilities in web applications. Its capabilities span the full lifecycle of a web assessment: intercepting live traffic, running automated scans, manually probing individual requests, fuzzing parameters, and manipulating encoded data.
+  </p>
+
+  <p>
+    The platform covers a broad range of vulnerability classes out of the box: Cross-Site Scripting (XSS), SQL injection, Cross-Site Request Forgery (CSRF), XML External Entity injection (XXE), directory traversal, and Server-Side Request Forgery (SSRF). Burp also supports CI-driven Dynamic Application Security Testing (DAST), integrating into development pipelines so that security scans can run alongside automated build and test workflows.
+  </p>
+
+  <p>
+    At its core, Burp Suite is organized around a set of specialized tools, each designed for a distinct testing activity. Understanding which tool to reach for &mdash; and when &mdash; is a fundamental skill for any web application security practitioner.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>What It Does</th>
+        <th>Typical Use Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Proxy</strong></td>
+        <td>Intercepts HTTP/HTTPS traffic flowing between the tester&rsquo;s browser and the target server</td>
+        <td>Inspect, pause, and modify any request or response in real time; foundational to all manual testing</td>
+      </tr>
+      <tr>
+        <td><strong>Scanner</strong></td>
+        <td>Automated web vulnerability scanner that crawls the application and tests for common vulnerability classes</td>
+        <td>Broad, efficient coverage of XSS, SQL injection, CSRF, and more without manual effort per endpoint</td>
+      </tr>
+      <tr>
+        <td><strong>Repeater</strong></td>
+        <td>Manually replays and modifies individual HTTP requests, showing the full server response each time</td>
+        <td>Deep investigation of a single endpoint &mdash; tweak parameters, headers, or body values and observe the effect</td>
+      </tr>
+      <tr>
+        <td><strong>Intruder</strong></td>
+        <td>Automates customized attack payloads against defined insertion points in a request</td>
+        <td>Parameter fuzzing, brute-force attacks, enumeration of object identifiers (IDOR discovery)</td>
+      </tr>
+      <tr>
+        <td><strong>Decoder</strong></td>
+        <td>Encodes and decodes data across common formats: Base64, URL encoding, HTML entities, hex, and more</td>
+        <td>Decoding obfuscated payloads, crafting encoded attack strings, analyzing tokens</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    The Burp Proxy is the entry point for all manual testing. Every request the browser sends passes through it, giving the tester full visibility and control. From the Proxy history, individual requests can be sent directly to Repeater, Intruder, or Scanner for further analysis &mdash; making the Proxy the connective tissue of the entire toolchain.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Burp Suite Editions</h2>
+
+  <p>
+    Burp Suite ships in multiple editions designed for different contexts and budgets. The right choice depends on whether the primary need is free manual exploration, professional-grade pentesting, enterprise-scale DAST, or AI-assisted testing.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Edition</th>
+        <th>What Is Included</th>
+        <th>Audience</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Community Edition</strong></td>
+        <td>Free access to Burp&rsquo;s manual tools: Proxy, Repeater, Intruder (rate-limited), Decoder, and Sequencer</td>
+        <td>Students, beginners, and practitioners who need manual testing without automated scanning</td>
+      </tr>
+      <tr>
+        <td><strong>Professional</strong></td>
+        <td>The full manual toolset plus the automated vulnerability scanner; described by PortSwigger as the #1 web pentesting toolkit</td>
+        <td>Individual penetration testers and bug bounty hunters requiring deep manual and automated coverage</td>
+      </tr>
+      <tr>
+        <td><strong>Enterprise DAST</strong></td>
+        <td>Automated scanning without limits, built for integration into CI/CD pipelines and scheduled at scale</td>
+        <td>AppSec teams and DevOps engineers embedding security scanning into the development lifecycle</td>
+      </tr>
+      <tr>
+        <td><strong>Burp AT (AI-powered)</strong></td>
+        <td>AI-powered capabilities layered on top of the core platform</td>
+        <td>Teams looking to augment assessments with AI-driven analysis and automation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    The Community Edition&rsquo;s Intruder tool is rate-limited, which makes it impractical for real fuzzing campaigns. Community Edition is valuable for learning the proxy workflow and exploring Repeater, but professional engagements and bug bounty work generally require the Professional edition for full automated scanning and unrestricted Intruder use.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>OWASP WSTG: Structure and How to Read Test IDs</h2>
+
+  <p>
+    The OWASP Web Security Testing Guide (WSTG) is widely regarded as the premier cybersecurity testing resource for web application security. It is an OWASP Flagship project, released under the Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0) license. The current stable release is version 4.2, published in December 2020, with version 5.0 under active development.
+  </p>
+
+  <p>
+    The WSTG is organized into categorized test scenarios. Each scenario describes a specific security check &mdash; what to test, why it matters, how to test it, and how to evaluate the result. This structure means an assessor can work through the guide systematically, ensuring consistent coverage rather than relying on memory or ad hoc judgment about what to test next.
+  </p>
+
+  <p>
+    Every test scenario in the WSTG carries a <strong>versioned identifier</strong> using a structured format:
+  </p>
+
+  <pre><code>WSTG-&lt;CATEGORY&gt;-&lt;NUMBER&gt;
+
+Example: WSTG-INFO-02</code></pre>
+
+  <ul>
+    <li><strong>WSTG</strong> &mdash; Web Security Testing Guide (the source document)</li>
+    <li><strong>INFO</strong> &mdash; the testing category (e.g., <code>INFO</code> for Information Gathering, <code>INPV</code> for Input Validation, <code>SESS</code> for Session Management, <code>APIT</code> for API Testing)</li>
+    <li><strong>02</strong> &mdash; the sequential test number within that category</li>
+  </ul>
+
+  <p>
+    These versioned IDs are designed for precision in communication. A finding can be cited as &ldquo;WSTG-INPV-01 (Testing for Reflected Cross-Site Scripting)&rdquo; and any reader familiar with the guide immediately knows exactly which test is being referenced, what methodology was used, and what the acceptance criteria are. This makes WSTG IDs a standard citation format in penetration testing reports.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    The versioned WSTG identifier is not just a label &mdash; it is a reproducibility mechanism. By citing a WSTG ID in a report, the assessor creates a precise, vendor-neutral reference that any reader can look up to understand the test methodology independently of the report author&rsquo;s prose. This is why red teams and penetration testers include WSTG IDs in their findings rather than writing purely narrative descriptions.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>How Burp Suite and WSTG Work Together</h2>
+
+  <p>
+    Burp Suite and the OWASP WSTG play complementary roles in a structured web application assessment: the WSTG provides the <em>methodology</em> and the WSTG identifies <em>what</em> to test, while Burp Suite provides the <em>tooling</em> to execute those tests. Neither alone is sufficient for a thorough, professional-grade engagement.
+  </p>
+
+  <p>
+    In practice, an assessor typically uses the WSTG to structure the scope and sequence of the assessment. Each WSTG category &mdash; Information Gathering, Configuration and Deployment Management, Identity Management, Authentication, Session Management, Input Validation, and so on &mdash; maps to a set of test scenarios that the assessor works through methodically. Burp Suite tools are then matched to each scenario:
+  </p>
+
+  <ul>
+    <li>The <strong>Proxy</strong> is active throughout, capturing all traffic so nothing is missed.</li>
+    <li>The <strong>Scanner</strong> runs automated checks aligned to input validation and injection categories (WSTG-INPV), surfacing XSS and SQL injection candidates for manual follow-up.</li>
+    <li><strong>Repeater</strong> is used to manually confirm and deepen findings flagged by the Scanner or spotted in Proxy history &mdash; especially for logic flaws and IDOR scenarios not easily automated.</li>
+    <li><strong>Intruder</strong> handles fuzzing tasks such as enumerating object identifiers in IDOR tests or brute-forcing authentication endpoints identified in WSTG authentication categories.</li>
+    <li><strong>Decoder</strong> assists in analyzing tokens, session identifiers, and encoded payloads encountered during session management tests (WSTG-SESS).</li>
+  </ul>
+
+  <p>
+    When the assessment concludes, findings are written up with their corresponding WSTG IDs. This practice makes reports reproducible: a reader or remediation engineer can look up each WSTG ID to understand exactly what was tested, compare results across assessments over time, and verify that the correct methodology was applied. Red teams embed this practice into their standard reporting templates to ensure consistent quality across engagements.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    A structured web assessment pairs methodology with tooling: WSTG defines the test categories and acceptance criteria; Burp Suite executes those tests. Referencing WSTG IDs in the final report transforms a collection of findings into a reproducible, auditable record that can be compared against future assessments and used to track remediation progress over time.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-7">
+    <h3>Knowledge Check</h3>
+    <p>Which Burp Suite tool is designed specifically for manually replaying modified HTTP requests?</p>
+    <div class="quiz-options">
+      <button>The automated web vulnerability scanner tool</button>
+      <button>The proxy for intercepting live traffic</button>
+      <button>The Repeater for manual HTTP replay</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      For each of these 5 web vulnerability classes, identify the Burp Suite tool best suited to find or exploit it, and write one sentence explaining why that pairing works:
+    </p>
+    <ol>
+      <li>SQL injection in login forms</li>
+      <li>Cross-Site Scripting (XSS) in user input fields</li>
+      <li>Insecure Direct Object Reference (IDOR)</li>
+      <li>Cross-Site Request Forgery (CSRF) in state-changing actions</li>
+      <li>Server-Side Request Forgery (SSRF) in URL parameters</li>
+    </ol>
+    <p>Burp Suite tools to choose from: <strong>Scanner</strong> (automated), <strong>Proxy</strong> (intercept), <strong>Repeater</strong> (manual replay), <strong>Intruder</strong> (fuzzing), <strong>Decoder</strong>.</p>
+    <textarea placeholder="Write your tool-to-vulnerability pairings and explanations here..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0006-metasploit-exploitation.html">&larr; Prev: Metasploit and Exploitation</a>
+    <a href="0008-elastic-siem.html" class="primary">Next: Elastic SIEM &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-7',
+      2,
+      'Correct. Burp Repeater is the dedicated tool for manually re-sending and modifying individual HTTP requests. Unlike the automated Scanner, Repeater lets the tester control exactly what changes with each request and inspect the full server response, making it ideal for manually confirming and deepening specific findings.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

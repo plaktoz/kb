@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8 &mdash; Blue Team Detection Platform</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 2 &mdash; Toolchains &rsaquo; Lesson 8 of 14
+    </div>
+    <h1>Blue Team Detection Platform &mdash; Elastic SIEM and the Agentic SOC</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~12 min</span>
+      <span>Module 2 &mdash; Toolchains</span>
+      <span>Lesson 8 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <p style="margin-bottom:0">
+      <strong>Elastic Security</strong> &mdash; Agentic security operations platform built to secure, not to tax<br>
+      <a href="https://www.elastic.co/security" target="_blank" rel="noopener">
+        https://www.elastic.co/security
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>What Are SIEM and XDR?</h2>
+
+  <p>
+    Modern security operations rely on two foundational categories of detection platform: <strong>SIEM</strong> (Security Information and Event Management) and <strong>XDR</strong> (Extended Detection and Response). They share a common goal &mdash; giving defenders visibility into threats across the environment &mdash; but differ in scope and architecture. A third category, <strong>EDR</strong> (Endpoint Detection and Response), focuses more narrowly on individual devices and is the building block on which XDR is typically constructed.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Primary Scope</th>
+        <th>Core Capability</th>
+        <th>Key Limitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>EDR</strong></td>
+        <td>Individual endpoints (laptops, servers, workstations)</td>
+        <td>Deep process-level visibility, behavioral detection, and containment on a single host</td>
+        <td>No native correlation across network, cloud, or identity signals</td>
+      </tr>
+      <tr>
+        <td><strong>SIEM</strong></td>
+        <td>Enterprise-wide log aggregation &mdash; network, endpoint, cloud, identity, application</td>
+        <td>Correlation of events across heterogeneous sources; compliance reporting; long-term retention</td>
+        <td>Alert volume can overwhelm analysts; limited native response automation</td>
+      </tr>
+      <tr>
+        <td><strong>XDR</strong></td>
+        <td>Cross-layer detection spanning endpoints, network, cloud, and email</td>
+        <td>Unified telemetry and integrated response; reduces tool fragmentation across the security stack</td>
+        <td>Historically tied to a single vendor's ecosystem; limited open-data portability</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Elastic Security positions itself as a platform that unifies SIEM and XDR capabilities in a single system &mdash; eliminating the need to buy and integrate separate point products while retaining the depth of each discipline.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    SIEM tells you <em>what happened and where</em> by correlating logs from everywhere. XDR tells you <em>how an attack unfolded</em> by tracing activity across layers. Together they give analysts both breadth of coverage and depth of investigation &mdash; the combination Elastic targets with a single unified platform.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Elastic's Detection Rule Architecture</h2>
+
+  <p>
+    Elastic ships more than <strong>1,300 open, customizable detection rules</strong> that are published publicly on GitHub. This openness is deliberate: security teams can inspect every rule, modify thresholds to match their environment, contribute improvements back to the community, and audit exactly what logic is triggering each alert.
+  </p>
+
+  <p>
+    Detection quality depends not only on having good rules but on retrieving the right events at query time. Elastic uses a <strong>hybrid search architecture</strong> that combines BM25 (traditional keyword-based relevance scoring) with vector search (semantic similarity). This combination raises the quality of the signal surfaced to analysts &mdash; reducing the noise that exhausts SOC teams and causes alert fatigue.
+  </p>
+
+  <p>
+    Elastic unifies four categories of telemetry under a single ingestion pipeline:
+  </p>
+
+  <ul>
+    <li><strong>Logs</strong> &mdash; system, application, and security event logs from any source</li>
+    <li><strong>Infrastructure metrics</strong> &mdash; CPU, memory, network throughput, and process activity across on-premises and cloud environments</li>
+    <li><strong>Application traces</strong> &mdash; distributed tracing data that reveals how requests move through services, useful for detecting anomalous behavior in microservices</li>
+    <li><strong>Security events</strong> &mdash; endpoint telemetry, authentication records, DNS queries, and network flow data</li>
+  </ul>
+
+  <p>
+    All ingested data conforms to open community standards: the <strong>Elastic Common Schema (ECS)</strong> and the <strong>Open Cybersecurity Schema Framework (OCSF)</strong>. Using shared schemas means that detection rules written against ECS-normalized data work consistently regardless of which vendor or log source produced the original event.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Open detection rules on GitHub solve two problems at once. First, they allow any organization to understand and adapt their detections rather than treating the logic as a black box. Second, the security community can collectively improve the rule set, making the platform better for every user simultaneously.
+  </div>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    A large rule library is only as useful as the data feeding it. Detection rules that rely on log sources not yet configured in your environment will never fire &mdash; even if an attacker is actively triggering the relevant behavior. Onboarding comprehensive telemetry is a prerequisite for getting value from a SIEM's rule set.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Agentic SOC and Human-on-the-Loop</h2>
+
+  <p>
+    The traditional SOC model places a human analyst in the loop at every step: an alert fires, an analyst reads it, the analyst manually queries logs, correlates context, writes a summary, and decides on a response. This model does not scale. Alert volumes continue to grow faster than analyst headcount, and repetitive triage work drives burnout and inconsistency.
+  </p>
+
+  <p>
+    Elastic's answer is the <strong>agentic SOC</strong>: AI agents that autonomously handle the investigation and correlation work, then surface a complete, contextualized response plan for analyst review. The shift in model is captured by one phrase:
+  </p>
+
+  <blockquote style="border-left: 4px solid var(--color-accent-blue); padding: 0.5rem 1rem; margin: 1.25rem 0; font-style: italic; color: var(--color-muted);">
+    &ldquo;Human on the loop rather than human in the loop.&rdquo;
+  </blockquote>
+
+  <p>
+    In this model, AI agents do the following autonomously:
+  </p>
+
+  <ol>
+    <li><strong>Investigate</strong> &mdash; query relevant logs, endpoint telemetry, and threat intelligence to build a complete picture of the alert</li>
+    <li><strong>Correlate</strong> &mdash; link the alert to related events, identify affected assets, and map the activity to known attack patterns</li>
+    <li><strong>Draft a response plan</strong> &mdash; propose specific actions (isolate host, block IP, reset credential) with reasoning attached to each step</li>
+  </ol>
+
+  <p>
+    The analyst's role shifts from doing the investigation to <strong>reviewing, judging, and approving</strong> the AI agent's proposed plan. Humans retain full decision authority; the AI handles the time-consuming data assembly. This preserves accountability while dramatically reducing the cognitive load on analysts.
+  </p>
+
+  <p>
+    Critically, Elastic has built <strong>native workflow automation</strong> directly into the platform. A separate SOAR (Security Orchestration, Automation, and Response) product is not required. Incident response actions can be triggered from within the same interface where detection and investigation happen, reducing the tool fragmentation that slows down response times in traditional SOC architectures.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Human-on-the-loop is a governance model, not a technology choice. It means building AI systems where automated agents perform analysis and propose actions, but humans retain the authority to accept, modify, or reject every proposed response before it executes. The AI accelerates; the human judges.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Model-Agnostic AI Integration</h2>
+
+  <p>
+    Elastic's agentic capabilities are not locked to a single AI provider. The platform is explicitly <strong>model-agnostic</strong>, supporting integration with:
+  </p>
+
+  <ul>
+    <li><strong>OpenAI</strong> (GPT-4 and later models)</li>
+    <li><strong>Anthropic</strong> (Claude model family)</li>
+    <li><strong>Google</strong> (Gemini model family)</li>
+    <li><strong>On-premises models</strong> &mdash; for organizations with data sovereignty requirements or air-gapped environments</li>
+  </ul>
+
+  <p>
+    This flexibility matters for enterprise procurement: security teams can choose their preferred AI provider based on performance, cost, compliance requirements, or existing contracts &mdash; without being forced into a single vendor's model ecosystem. Full <strong>decision transparency</strong> is maintained regardless of which model is used; analysts can inspect the reasoning behind every AI recommendation.
+  </p>
+
+  <p>
+    Elastic's pricing model reinforces its positioning as a platform built for security outcomes rather than revenue maximization. Rather than charging <strong>per-endpoint fees</strong> &mdash; which penalize organizations for having comprehensive coverage &mdash; pricing is based on compute and storage consumption. There are also no penalties for accessing historical data: analysts can query old logs without &ldquo;rehydration&rdquo; costs, which is common in competing platforms and often leads teams to archive data they cannot practically retrieve.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Elastic Security Capability</th>
+        <th>What It Provides</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1,300+ detection rules (open, on GitHub)</td>
+        <td>Transparent, community-improvable threat detection logic</td>
+      </tr>
+      <tr>
+        <td>Hybrid BM25 + vector search</td>
+        <td>High-quality signal retrieval; reduces alert noise</td>
+      </tr>
+      <tr>
+        <td>Unified log/metrics/traces/events ingestion</td>
+        <td>Single pipeline for all telemetry types; no data silos</td>
+      </tr>
+      <tr>
+        <td>Native workflow automation (built-in SOAR)</td>
+        <td>Incident response without a separate orchestration tool</td>
+      </tr>
+      <tr>
+        <td>Agentic investigation with human-on-the-loop</td>
+        <td>AI drafts response plans; analysts review and approve</td>
+      </tr>
+      <tr>
+        <td>Model-agnostic AI (OpenAI, Anthropic, Gemini, on-prem)</td>
+        <td>Vendor flexibility; full decision transparency</td>
+      </tr>
+      <tr>
+        <td>No per-endpoint fees; no rehydration penalties</td>
+        <td>Pricing aligned with coverage breadth, not penalizing it</td>
+      </tr>
+      <tr>
+        <td>Open standards (ECS, OCSF)</td>
+        <td>Interoperability with any tool that shares common schemas</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    Model-agnostic AI integration shifts the selection burden to the security team. Choosing a model involves trade-offs in latency, cost, data residency, and reasoning quality for security-specific tasks. &ldquo;Agnostic&rdquo; means flexibility, not that all choices are equivalent &mdash; the wrong model configuration can produce confident-sounding but unreliable investigation summaries.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-8">
+    <h3>Knowledge Check</h3>
+    <p>What does the &ldquo;human-on-the-loop&rdquo; model mean in Elastic&rsquo;s agentic SOC?</p>
+    <div class="quiz-options">
+      <button>AI agents investigate and propose response plans while analysts review and approve</button>
+      <button>Analysts manually triage every alert and write detection rules for each incident</button>
+      <button>AI replaces all security analysts by autonomously blocking threats without human input</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      You are a SOC analyst reviewing the morning&rsquo;s alert queue. Here are 3 fictional alerts &mdash; write a triage decision for each (<strong>benign / malicious / investigate further</strong>) and a 2-sentence explanation as if you were briefing a senior analyst:
+    </p>
+    <p>
+      <strong>Alert 1:</strong> &ldquo;Port scan detected &mdash; 450 ports scanned on server DB-01 in 12 seconds from internal IP 10.0.0.55 at 2:15am&rdquo;<br>
+      <strong>Alert 2:</strong> &ldquo;Failed login attempt &mdash; 3 failed SSH logins from IP 203.45.12.8 on server WEB-03 over 10 minutes&rdquo;<br>
+      <strong>Alert 3:</strong> &ldquo;PowerShell execution &mdash; encoded PowerShell command run by user jsmith on WS-012, process spawned by Microsoft Word&rdquo;
+    </p>
+    <p>For each: state your decision, the primary reason, and what you would do next.</p>
+    <textarea placeholder="Alert 1 — Decision: ...&#10;Alert 2 — Decision: ...&#10;Alert 3 — Decision: ..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0007-burp-suite-owasp.html">&larr; Prev: Burp Suite &amp; OWASP</a>
+    <a href="0009-purple-teaming.html" class="primary">Next: Purple Teaming &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-8',
+      0,
+      'Correct. In the human-on-the-loop model, AI agents handle investigation and correlation autonomously, then draft a complete response plan with reasoning attached. The analyst reviews, judges, and approves before any action executes. Humans are removed from the repetitive triage steps but retain full decision authority over every proposed response.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

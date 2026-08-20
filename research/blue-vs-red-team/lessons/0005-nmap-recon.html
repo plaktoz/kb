@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 5 — Reconnaissance Tools: Nmap and Network Discovery</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Blue vs Red Team</a> ›
+      Module 2 — Toolchains ›
+      Lesson 5 of 14
+    </div>
+    <h1>Reconnaissance Tools — Nmap and Network Discovery</h1>
+    <div class="lesson-meta">
+      <span>Module 2 — Toolchains</span>
+      <span>Lesson 5 of 14</span>
+      <span>~11 min</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Primary Source</div>
+    <strong>Nmap Network Scanner</strong><br>
+    Free, open-source utility for network discovery and security auditing.
+    <br><a href="https://nmap.org/" target="_blank" rel="noopener">https://nmap.org/</a>
+  </div>
+
+  <!-- What is Nmap -->
+  <h2>What Is Nmap?</h2>
+
+  <p>Nmap ("Network Mapper") is a free, open-source command-line utility for network discovery and security auditing. It uses raw IP packets to determine which hosts are active on a network, what services and software versions those hosts are running, what operating systems they use, what type of packet filters or firewalls are in place, and dozens of other characteristics.</p>
+
+  <p>Nmap scales from scanning a single host to sweeping hundreds of thousands of machines. Its primary use cases include network inventory, managing service upgrade schedules, monitoring host uptime, and vulnerability assessment.</p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Nmap does not exploit vulnerabilities — it discovers and maps them. It tells you <em>what is exposed</em>; other tools (such as Metasploit) are used to act on that exposure.
+  </div>
+
+  <!-- Four core scan phases -->
+  <h2>The Four Core Scan Types</h2>
+
+  <h3>1. Host Discovery</h3>
+  <p>Before scanning ports, Nmap identifies which hosts on a given IP range are actually online. By default it sends ICMP echo requests, TCP SYN packets to port 443, TCP ACK packets to port 80, and ICMP timestamp requests. The <code>-sn</code> flag runs a ping scan only — useful when you want to map live hosts without touching any ports.</p>
+
+  <h3>2. Port Scanning</h3>
+  <p>Nmap probes TCP and UDP ports and classifies each one as <strong>open</strong>, <strong>closed</strong>, or <strong>filtered</strong>. The most common technique is the TCP SYN scan (<code>-sS</code>), sometimes called a "half-open" scan because it sends a SYN packet and reads the response without completing the three-way handshake — making it faster and less likely to be logged by the target application.</p>
+
+  <h3>3. Service and Version Detection</h3>
+  <p>Once open ports are found, Nmap can probe each one to determine what application is listening and, critically, which version of that software is running. The <code>-sV</code> flag activates this mode. Version information is what turns a port number into actionable intelligence — knowing a host runs "Apache 2.4.49" rather than just "port 80 open" lets an attacker or defender look up known CVEs for that exact version.</p>
+
+  <h3>4. OS Fingerprinting</h3>
+  <p>Nmap analyses subtle differences in how TCP/IP stacks respond to probes — such as packet TTL values, window sizes, and responses to unusual flag combinations — to infer the target's operating system and hardware type. The <code>-O</code> flag enables OS detection. Results include a confidence percentage and a list of candidate OS matches.</p>
+
+  <div class="callout warning">
+    <strong>Legal Warning</strong>
+    Running Nmap against systems you do not own or have explicit written permission to test is illegal in many jurisdictions. Always confirm scope and authorisation in writing before any scanning activity.
+  </div>
+
+  <!-- Flags table -->
+  <h2>Common Nmap Flags</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Flag</th>
+        <th>Name</th>
+        <th>What It Does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>-sn</code></td>
+        <td>Ping scan</td>
+        <td>Host discovery only — no port scanning. Identifies which hosts are online.</td>
+      </tr>
+      <tr>
+        <td><code>-sS</code></td>
+        <td>TCP SYN scan</td>
+        <td>Half-open scan; fast and stealthy. Does not complete the TCP handshake.</td>
+      </tr>
+      <tr>
+        <td><code>-sT</code></td>
+        <td>TCP connect scan</td>
+        <td>Full TCP connection. Less stealthy but works without raw-packet privileges.</td>
+      </tr>
+      <tr>
+        <td><code>-sU</code></td>
+        <td>UDP scan</td>
+        <td>Scans UDP ports. Slower than TCP scans; reveals services like DNS and SNMP.</td>
+      </tr>
+      <tr>
+        <td><code>-sV</code></td>
+        <td>Version detection</td>
+        <td>Probes open ports to identify service name and exact version string.</td>
+      </tr>
+      <tr>
+        <td><code>-O</code></td>
+        <td>OS detection</td>
+        <td>Uses TCP/IP stack fingerprinting to guess the target's operating system.</td>
+      </tr>
+      <tr>
+        <td><code>-A</code></td>
+        <td>Aggressive mode</td>
+        <td>Enables OS detection, version detection, script scanning, and traceroute.</td>
+      </tr>
+      <tr>
+        <td><code>-p &lt;range&gt;</code></td>
+        <td>Port range</td>
+        <td>Restrict the scan to specified ports. Example: <code>-p 22,80,443</code> or <code>-p 1-1024</code>.</td>
+      </tr>
+      <tr>
+        <td><code>-p-</code></td>
+        <td>All ports</td>
+        <td>Scan all 65,535 TCP ports. Thorough but slow.</td>
+      </tr>
+      <tr>
+        <td><code>--open</code></td>
+        <td>Show open only</td>
+        <td>Suppress closed and filtered ports; display only open results.</td>
+      </tr>
+      <tr>
+        <td><code>-T&lt;0–5&gt;</code></td>
+        <td>Timing template</td>
+        <td>Controls scan speed and aggressiveness. T0 = paranoid (slowest); T5 = insane (fastest, noisiest).</td>
+      </tr>
+      <tr>
+        <td><code>-oN &lt;file&gt;</code></td>
+        <td>Normal output</td>
+        <td>Save results to a human-readable text file.</td>
+      </tr>
+      <tr>
+        <td><code>-oX &lt;file&gt;</code></td>
+        <td>XML output</td>
+        <td>Save results in XML for import into other tools or databases.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Companion tools -->
+  <h2>The Nmap Companion Tools</h2>
+
+  <p>Nmap ships with four companion utilities that extend its capabilities:</p>
+
+  <ul>
+    <li><strong>Zenmap</strong> — A cross-platform graphical interface for Nmap. It provides an interactive topology map of scan results and allows beginners to build commands without memorising flags. All Zenmap operations ultimately invoke Nmap underneath.</li>
+    <li><strong>Ncat</strong> — A modern reimplementation of the classic <code>netcat</code> utility. Ncat reads and writes data across network connections using TCP or UDP. It is used for port forwarding, data transfer, proxying, and as a simple debugging tool during engagements.</li>
+    <li><strong>Ndiff</strong> — Compares two Nmap XML output files and highlights the differences. Used by blue teams to detect changes in the network attack surface between scan intervals — for example, new open ports that have appeared since the last audit.</li>
+    <li><strong>Nping</strong> — A flexible packet generation and response analysis tool. It supports TCP, UDP, ICMP, and ARP protocols and can be used to test firewall rules, generate network traffic, and perform low-level troubleshooting.</li>
+  </ul>
+
+  <!-- Red team vs blue team use cases -->
+  <h2>Red Team vs Blue Team Use Cases</h2>
+
+  <h3>Red Team — Reconnaissance Phase</h3>
+  <p>During reconnaissance, a red team uses Nmap to map the external and internal attack surface of a target environment. Typical objectives include:</p>
+  <ul>
+    <li>Identifying all live hosts in scope before selecting targets for exploitation.</li>
+    <li>Enumerating open ports to understand which services are exposed.</li>
+    <li>Collecting version strings (<code>-sV</code>) to research known CVEs for the exact software in use.</li>
+    <li>Fingerprinting operating systems (<code>-O</code>) to select appropriate exploits and payloads later in the kill chain.</li>
+    <li>Using slow timing templates (<code>-T1</code>, <code>-T2</code>) or decoys to evade intrusion detection systems during covert engagements.</li>
+  </ul>
+
+  <h3>Blue Team — Asset Inventory and Attack Surface Management</h3>
+  <p>Defenders use Nmap for ongoing network visibility, not just incident response. Typical objectives include:</p>
+  <ul>
+    <li>Building and maintaining an inventory of all networked assets, especially in large or dynamic environments.</li>
+    <li>Detecting unauthorised services — a port that was closed last week but is open today signals a misconfiguration or intrusion.</li>
+    <li>Using Ndiff to automate comparison between scheduled scans and alert on any delta.</li>
+    <li>Verifying that firewall rules and network segmentation are working as intended by scanning from different vantage points.</li>
+    <li>Supporting patch management by correlating version strings against vulnerability databases to prioritise remediation.</li>
+  </ul>
+
+  <div class="callout key">
+    <strong>Attack Surface</strong>
+    The <em>attack surface</em> of a system is the total set of entry points an attacker could potentially exploit. Every open port, service, and exposed interface is part of that surface. Reducing it — by disabling unnecessary services, closing unused ports, and patching known vulnerabilities — is one of the foundational principles of defence.
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-5">
+    <h3>Check Your Understanding</h3>
+    <p>What does the Nmap flag <code>-sV</code> do when added to a port scan command?</p>
+    <div class="quiz-options">
+      <button>It probes open ports to determine service and version information</button>
+      <button>It sends ICMP echo requests to discover live hosts online</button>
+      <button>It runs scripts against hosts to identify common security vulnerabilities</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>Write an Nmap command to discover all open TCP ports and detect service versions on a target IP (use <code>192.168.1.100</code> as the example). Then explain in one sentence what each flag in your command does.</p>
+    <p><strong>Bonus:</strong> Write a second command that performs an OS detection scan and explain why OS detection is valuable to a red team during reconnaissance.</p>
+    <textarea placeholder="Write your Nmap command(s) here and explain each flag..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0004-mitre-attack.html">&larr; Prev: MITRE ATT&amp;CK Framework</a>
+    <a href="0006-metasploit-exploitation.html" class="primary">Next: Metasploit and Exploitation &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-5', 0, 'Correct. The -sV flag instructs Nmap to probe each open port and attempt to identify the name and version of the service listening there. This version information is critical because it allows both attackers and defenders to cross-reference the software against known CVE databases.');</script>
+
+</div>
+</body>
+</html>

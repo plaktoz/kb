@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 — MITRE ATT&amp;CK</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Blue vs Red Team</a> ›
+      <a href="#">Module 1 — Foundations</a> ›
+      Lesson 4 of 14
+    </div>
+    <h1>MITRE ATT&amp;CK — The Shared Vocabulary of Attack and Defense</h1>
+    <div class="lesson-meta">
+      <span>⏱ ~13 min</span>
+      <span>Module 1 — Foundations</span>
+      <span>Lesson 4 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Primary Source</div>
+    <strong>MITRE ATT&amp;CK</strong><br>
+    A free, globally-accessible knowledge base of adversary tactics and techniques drawn from real-world incidents. Maintained by MITRE Corporation and continuously updated by the security community.<br>
+    <a href="https://attack.mitre.org/" target="_blank" rel="noopener">https://attack.mitre.org/</a>
+  </div>
+
+  <h2>What Is MITRE ATT&amp;CK?</h2>
+
+  <p>MITRE ATT&amp;CK (Adversarial Tactics, Techniques, and Common Knowledge) is a curated knowledge base that documents how real-world adversaries operate. Every entry in the framework is grounded in observed incidents — not theory. This makes it a living record of actual attack behavior, updated as the security community discovers and reports new techniques.</p>
+
+  <p>Before ATT&amp;CK existed, red teams and blue teams often lacked a common vocabulary. A red teamer might describe an action as "lateral movement via stolen credentials," while a blue teamer's detection rule might log it as an "anomalous authentication event." Both were describing the same adversary behavior, but with no shared reference to anchor the conversation. ATT&amp;CK solves this by providing stable, numbered identifiers and structured descriptions for every documented technique.</p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    ATT&amp;CK is organized around a simple principle: tactics answer <em>why</em> an attacker does something (the objective), techniques answer <em>how</em> they do it (the method), and sub-techniques provide further granularity on specific implementations. All three tiers are stable, numbered, and referenceable.
+  </div>
+
+  <h2>The Three-Tier Structure</h2>
+
+  <p>Every entry in the ATT&amp;CK matrix sits within a three-tier hierarchy. Understanding this structure is essential for using the framework correctly — whether you are mapping an attack path or assessing detection coverage.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Answers</th>
+        <th>Example</th>
+        <th>ID Format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tactic</strong></td>
+        <td>Why — the adversary's objective</td>
+        <td>Execution</td>
+        <td>No ID — column heading in matrix</td>
+      </tr>
+      <tr>
+        <td><strong>Technique</strong></td>
+        <td>How — the specific method used</td>
+        <td>Command and Scripting Interpreter</td>
+        <td><code>T1059</code></td>
+      </tr>
+      <tr>
+        <td><strong>Sub-technique</strong></td>
+        <td>How (specific variant) — a narrower implementation</td>
+        <td>PowerShell</td>
+        <td><code>T1059.001</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>ATT&amp;CK IDs are stable references that persist across framework versions. If a technique is assigned <code>T1059</code>, that identifier does not change when MITRE releases a new version of the framework. This stability is what makes ATT&amp;CK IDs safe to use in detection rules, reports, and long-term coverage tracking — you can reference <code>T1059.001</code> in a ticket written today, and it will mean the same thing when someone reads it two years from now.</p>
+
+  <h3>Two Concrete Examples</h3>
+
+  <p><strong>T1059.001 — PowerShell</strong> (sub-technique of Command and Scripting Interpreter, under the Execution tactic): An attacker uses the Windows PowerShell engine to run commands, download payloads, or interact with the operating system without writing a traditional executable to disk. PowerShell is a legitimate administrative tool, which makes this technique particularly effective for blending in with normal activity.</p>
+
+  <p><strong>T1003.001 — LSASS Memory</strong> (sub-technique of OS Credential Dumping, under the Credential Access tactic): An attacker reads the memory space of the Local Security Authority Subsystem Service (LSASS) to extract password hashes or plaintext credentials. Tools like Mimikatz use this technique. The credentials harvested here are commonly used for lateral movement — connecting T1003.001 directly to later tactics in the matrix.</p>
+
+  <h2>The 15 Enterprise Tactics</h2>
+
+  <p>The Enterprise matrix — the most widely used ATT&amp;CK matrix, covering Windows, macOS, Linux, and cloud environments — is organized into 15 tactics. These tactics represent the full arc of an adversary operation, from the earliest pre-intrusion activities through the final impact on the target organization.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tactic</th>
+        <th>Adversary Objective</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Reconnaissance</td>
+        <td>Gather information to plan future operations</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Resource Development</td>
+        <td>Establish infrastructure and capabilities before the attack</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Initial Access</td>
+        <td>Gain a foothold in the target environment</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Execution</td>
+        <td>Run malicious code on the target system</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Persistence</td>
+        <td>Maintain access across restarts and credential changes</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Privilege Escalation</td>
+        <td>Gain higher-level permissions than initially obtained</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Defense Evasion</td>
+        <td>Avoid detection and bypass security controls</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>Credential Access</td>
+        <td>Steal account credentials for further access</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Discovery</td>
+        <td>Explore the environment to understand its layout</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Lateral Movement</td>
+        <td>Move through the network to reach high-value targets</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Collection</td>
+        <td>Gather data of interest before exfiltration</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Command and Control</td>
+        <td>Communicate with compromised systems from outside</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td>Exfiltration</td>
+        <td>Transfer collected data out of the target environment</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td>Impact</td>
+        <td>Manipulate, disrupt, or destroy systems or data</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Note that not every attack traverses all 15 tactics in sequence. A ransomware operation might skip Exfiltration entirely and jump directly to Impact. A data-theft campaign might never use Execution techniques at all if the attacker gains access through legitimate credentials. ATT&amp;CK tactics describe what is possible, not what is mandatory.</p>
+
+  <div class="callout warning">
+    <strong>Common Misconception</strong>
+    ATT&amp;CK is a descriptive framework — it documents techniques that have been observed in real incidents. It is not a prescriptive playbook that says "attackers always follow this sequence." Real attacks are opportunistic and adaptive. Coverage gaps in one tactic do not protect you if an adversary bypasses that tactic entirely.
+  </div>
+
+  <h2>How Technique IDs Work</h2>
+
+  <p>Every ATT&amp;CK technique has a unique, stable identifier in the format <code>T####</code>. Sub-techniques extend the parent identifier with a three-digit suffix: <code>T####.###</code>. The ID is assigned when the technique is first documented and does not change, even if the technique's name or description is updated in a later version of the framework.</p>
+
+  <p>This stability is a deliberate design decision. Security teams write detection rules, threat-intelligence reports, and incident-response playbooks that reference ATT&amp;CK IDs. If those IDs shifted between framework versions, every downstream artifact would need to be updated. The stable ID means that a detection rule written against <code>T1059.001</code> today will still correctly describe the covered behavior five framework versions from now.</p>
+
+  <p>Sub-technique IDs also communicate the relationship between the specific variant and its parent. Seeing <code>T1059.001</code> immediately tells you that PowerShell is one implementation of the broader Command and Scripting Interpreter technique (<code>T1059</code>). Other sub-techniques under the same parent — such as <code>T1059.003</code> (Windows Command Shell) or <code>T1059.006</code> (Python) — share the parent ID but represent distinct detection and mitigation surfaces.</p>
+
+  <h2>How Red Teams Use ATT&amp;CK</h2>
+
+  <p>For a red team, ATT&amp;CK functions as a playbook for constructing realistic attack scenarios. Rather than inventing arbitrary attack paths, a red team maps their planned activity to specific ATT&amp;CK techniques before the engagement begins. This has two benefits: it ensures the simulated attack reflects real-world adversary behavior, and it creates a shared reference that allows the blue team to evaluate their detections after the fact.</p>
+
+  <p>A red team planning a credential theft and lateral movement scenario might explicitly select <code>T1003.001</code> (LSASS memory dump) for credential access, followed by <code>T1550.002</code> (Pass the Hash) for lateral movement. Each technique selection is a deliberate choice, and the red team's final report maps every action taken during the engagement back to its ATT&amp;CK ID.</p>
+
+  <h2>How Blue Teams Use ATT&amp;CK</h2>
+
+  <p>For a blue team, ATT&amp;CK provides the structure for two distinct activities: detection alignment and coverage assessment.</p>
+
+  <p><strong>Detection alignment</strong> means tagging existing detection rules with the ATT&amp;CK techniques they are designed to catch. A SIEM rule that flags unexpected PowerShell execution would be tagged <code>T1059.001</code>. An alert on suspicious LSASS access would be tagged <code>T1003.001</code>. Once detections are tagged, the ATT&amp;CK matrix becomes a visual coverage map — you can see at a glance which techniques you have detection logic for and which you do not.</p>
+
+  <p><strong>Coverage assessment</strong> uses that map to identify gaps. If your detection library covers the Execution tactic well but has almost nothing under Credential Access or Defense Evasion, that asymmetry is a measurable risk. ATT&amp;CK turns a subjective question ("do we have good coverage?") into a specific, answerable one: "which of the 196 Enterprise techniques do we currently detect?"</p>
+
+  <h2>The Shared Language in Practice</h2>
+
+  <p>The most important property of ATT&amp;CK is that both red and blue teams use exactly the same vocabulary. This makes post-engagement communication precise and actionable.</p>
+
+  <p>Without a shared framework, a red team's post-engagement report might say: "We executed PowerShell commands to download a payload, then dumped credentials from memory." The blue team's response might be: "We saw some PowerShell activity but thought it was an admin doing maintenance." Neither side can measure the gap.</p>
+
+  <p>With ATT&amp;CK, the same exchange becomes: "We successfully executed <code>T1059.001</code> and <code>T1003.001</code>. Our telemetry shows you have detection coverage for <code>T1059.001</code> via your PowerShell logging rule, but you have zero coverage for <code>T1003.001</code>." That single sentence identifies a specific, addressable gap — and both teams know exactly what it means.</p>
+
+  <div class="callout key">
+    <strong>Why This Matters</strong>
+    A statement like "we can detect T1059.001 but have no coverage for T1003.001" is precise, measurable, and immediately actionable. The blue team knows exactly which technique to address. Without ATT&amp;CK, the same conversation would be a vague exchange about log files and hunches. The shared vocabulary is what converts security exercises into measurable improvement.
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-4">
+    <h3>Check Your Understanding</h3>
+    <p>In the MITRE ATT&amp;CK framework, what does a Tactic represent?</p>
+    <div class="quiz-options">
+      <button>The specific technical method an attacker uses to do damage</button>
+      <button>A stable identifier like T1059 assigned to an individual technique</button>
+      <button>The adversary goal or objective behind a specific attack campaign</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Exercise</h3>
+    <p>Using what you have learned in this lesson about T1059.001 (PowerShell) and T1003.001 (LSASS Memory Dump), answer all three parts for each technique:</p>
+    <p>For each technique, write: (1) what an attacker does when using it, (2) one specific log event or behavioral signal that would reveal this technique to a blue team analyst, and (3) one concrete mitigation that would prevent or limit it.</p>
+    <textarea placeholder="T1059.001 — PowerShell&#10;(1) What the attacker does: ...&#10;(2) Detection signal: ...&#10;(3) Mitigation: ...&#10;&#10;T1003.001 — LSASS Memory Dump&#10;(1) What the attacker does: ...&#10;(2) Detection signal: ...&#10;(3) Mitigation: ..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0003-cyber-kill-chain.html">&larr; Prev: Cyber Kill Chain</a>
+    <a href="0005-nmap-recon.html" class="primary">Next: Nmap Recon &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-4', 2, 'Correct. In ATT&CK, tactics represent the adversary\'s objective — the "why" behind an attack. Techniques (like T1059) describe the specific method used, and sub-techniques (like T1059.001) narrow that down to a particular implementation. The ID T1059 is a stable technique identifier, not a tactic.');</script>
+
+</div>
+</body>
+</html>

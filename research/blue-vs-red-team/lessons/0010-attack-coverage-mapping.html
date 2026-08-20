@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 &mdash; ATT&amp;CK Coverage Mapping</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 3 &mdash; Overlap and Purple Teaming &rsaquo; Lesson 10 of 14
+    </div>
+    <h1>ATT&amp;CK Coverage Mapping &mdash; Quantifying the Gap</h1>
+    <div class="lesson-meta">
+      <span>Module 3 &mdash; Overlap and Purple Teaming</span>
+      <span>Lesson 10 of 14</span>
+      <span>~13 min</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <p style="margin-bottom:0"><strong>MITRE ATT&amp;CK</strong> &mdash; Enterprise Matrix and Framework Documentation<br>
+    <a href="https://attack.mitre.org/" target="_blank" rel="noopener">attack.mitre.org</a></p>
+  </div>
+
+  <h2>The Coverage Gap Problem</h2>
+
+  <p>Every red team exercise ends with a list of findings: compromised credentials, lateral movement paths, data exfiltration routes. Every blue team maintains a set of detection rules and alert policies. But without a shared reference system, those two lists describe the same attack surface in completely different languages. The red team says "we dumped credentials from memory." The blue team says "LSASS access alerts exist in our EDR policy." Do those two statements describe the same control? No one can tell.</p>
+
+  <p>This is the core problem that running exercises without ATT&CK alignment creates: findings become anecdotal. You learn that the red team succeeded at certain things, and you learn that the blue team has certain tools running, but you cannot rigorously answer the question that actually matters: <em>for each known attack technique, do we have a detection?</em></p>
+
+  <p>Without a shared taxonomy, gaps stay invisible. A red team might successfully execute a technique that the blue team believes they cover &mdash; because each side is describing it with different terminology, pointing at different tools, or simply never comparing notes at the technique level. The exercise produces a narrative report instead of a measurement.</p>
+
+  <div class="callout warning">
+    <strong>Why This Matters</strong>
+    A narrative report says "the red team evaded detection during the credential access phase." A coverage matrix says "we have no detection for T1003.001 (LSASS Memory) and partial detection for T1003.004 (LSA Secrets)." The second statement is actionable: you know exactly which detection rule to write. The first is not.
+  </div>
+
+  <h2>How Coverage Mapping Works in Practice</h2>
+
+  <p>MITRE ATT&amp;CK provides the shared reference layer that makes measurement possible. The framework is, in MITRE's own words, "a foundation for the development of specific threat models and methodologies." Its Enterprise matrix contains 15 tactics &mdash; from Reconnaissance through Impact &mdash; each with dozens of techniques and sub-techniques, each assigned a stable, unique identifier like <code>T1059.001</code> or <code>T1003.001</code>.</p>
+
+  <p>Coverage mapping works by having both teams independently catalog their work against those IDs, then comparing the two lists.</p>
+
+  <p>The red team maps each step of their attack path to an ATT&amp;CK technique ID. If they used PowerShell to run an encoded payload, they log <code>T1059.001</code>. If they dumped credentials from LSASS, they log <code>T1003.001</code>. These IDs are not labels added after the fact &mdash; they are how the red team communicates "we exercised this part of the attack surface."</p>
+
+  <p>The blue team maps their detection coverage against the same IDs. For each technique, they assess: do we have a log source that would surface this? Do we have an alert rule that would fire? Have we tested whether that rule actually works? The result is a per-technique coverage rating &mdash; typically <em>Yes</em>, <em>Partial</em>, or <em>No</em> &mdash; along with the specific log source and detection logic that supports it.</p>
+
+  <p>When both lists exist in the same format, comparison is mechanical. Techniques the red team exercised that the blue team has no coverage for are confirmed gaps. Techniques where both teams have entries are candidates for validation testing: the rule exists, but did it fire during the exercise? ATT&CK Navigator, the official browser-based visualization tool, lets teams color-code the full Enterprise matrix to make coverage and gaps immediately visible.</p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    ATT&amp;CK technique IDs are the unit of measurement for coverage. Red teams convert "we did X" into technique IDs. Blue teams convert "we detect Y" into the same IDs. The overlap is measurable coverage. The gaps are an actionable work list.
+  </div>
+
+  <h2>Sample Coverage Matrix</h2>
+
+  <p>The following table shows a partially completed coverage assessment for three techniques from the Enterprise matrix. This is the format that results from mapping both red and blue team activity to ATT&amp;CK IDs after an exercise.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Technique ID</th>
+        <th>Name</th>
+        <th>Tactic</th>
+        <th>Detected?</th>
+        <th>Primary Log Source</th>
+        <th>Key Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>T1059.001</code></td>
+        <td>PowerShell</td>
+        <td>Execution</td>
+        <td><strong style="color:#1e8449">Partial</strong></td>
+        <td>Windows Event Log (Event ID 4104 &mdash; Script Block Logging)</td>
+        <td>Encoded <code>-EncodedCommand</code> argument; download cradle patterns</td>
+      </tr>
+      <tr>
+        <td><code>T1003.001</code></td>
+        <td>LSASS Memory</td>
+        <td>Credential Access</td>
+        <td><strong style="color:#922b21">No</strong></td>
+        <td>EDR telemetry (process access events on lsass.exe)</td>
+        <td>Unexpected process opening lsass.exe with <code>PROCESS_VM_READ</code> handle</td>
+      </tr>
+      <tr>
+        <td><code>T1566.001</code></td>
+        <td>Spearphishing Attachment</td>
+        <td>Initial Access</td>
+        <td><strong style="color:#1e8449">Yes</strong></td>
+        <td>Email gateway logs; sandbox detonation reports</td>
+        <td>Macro-enabled Office document from external sender; sandbox verdict</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Even in this three-row excerpt, the gap is immediately visible: <code>T1003.001</code> has no coverage. The red team can dump credentials from LSASS, and the blue team will not know it happened. That one cell in the matrix defines the next detection engineering task.</p>
+
+  <h2>T1059.001 vs T1003.001 &mdash; A Worked Example</h2>
+
+  <p>Consider a common attack sequence: an adversary delivers a spearphishing email, the user opens the attachment, a macro runs a PowerShell download cradle, and the attacker eventually runs Mimikatz to extract credentials from LSASS memory. This sequence touches at least two ATT&amp;CK techniques: <code>T1059.001</code> (PowerShell) under the Execution tactic, and <code>T1003.001</code> (LSASS Memory) under Credential Access.</p>
+
+  <p>For <strong>T1059.001</strong>, a typical mid-size organization with Windows Event Log script block logging enabled (Event ID 4104) will capture PowerShell command content. Detection rules watching for encoded commands, download cradles (<code>IEX</code>, <code>Invoke-Expression</code>, calls to <code>Net.WebClient</code>), or known-bad patterns will fire. Coverage may be <em>Partial</em> because script block logging is not always enabled by default, and some obfuscation techniques evade string-match rules. But a detection path exists.</p>
+
+  <p>For <strong>T1003.001</strong>, the picture is different. Dumping credentials from LSASS requires opening a handle to the lsass.exe process with specific access rights. The primary log source for this is EDR telemetry &mdash; specifically, process access events that record when a process opens lsass.exe with memory-read permissions. Organizations without EDR, or with EDR configured but lacking a tuned rule for lsass.exe access, will have <em>No</em> coverage. Windows Security Event Log alone does not surface this behavior in a form easily correlated with credential theft. The gap is real and common.</p>
+
+  <p>The operational consequence is concrete: an attacker who has run PowerShell on a host has likely triggered an alert. An attacker who has dumped LSASS on that same host may have done so without any alert firing. The red team can map this as "T1003.001 exercised, no blue team detection recorded." The blue team can map this as "T1003.001: no EDR rule deployed." The gap becomes a single line item: deploy and tune an EDR rule for lsass.exe handle access.</p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    T1059.001 and T1003.001 often occur in the same attack chain, but their detection requirements are entirely different. PowerShell is surfaced by Windows Event Log with the right policy enabled. LSASS memory access requires EDR telemetry. Mapping both reveals that partial coverage of one technique does not imply coverage of the next.
+  </div>
+
+  <h2>Using Coverage Data to Prioritize Detection Work</h2>
+
+  <p>A completed coverage matrix is not an end product &mdash; it is a prioritized work queue for the blue team's detection engineering function. The question is how to rank the gaps.</p>
+
+  <p>MITRE ATT&amp;CK itself does not prescribe prioritization, but the framework's structure provides the inputs. Teams typically sort gaps by a combination of three factors: how frequently the technique appears in threat intelligence reports for their sector, how severe the downstream impact of a successful undetected execution would be, and how feasible detection is given existing log sources.</p>
+
+  <p>A technique like <code>T1003.001</code> ranks high on all three. Credential dumping from LSASS is one of the most frequently observed post-exploitation steps across ransomware, espionage, and financially motivated attack campaigns. Undetected credential access typically enables lateral movement across the entire domain. And detection is feasible with EDR telemetry &mdash; the log source already exists in most environments; the gap is a missing rule, not a missing tool.</p>
+
+  <p>By contrast, a technique that rarely appears in relevant threat intelligence, has limited impact if successful, and would require deploying an entirely new log source to detect is a lower priority. The matrix makes this comparison explicit: rather than arguing about which "area" needs work, teams point to specific cells and specific criteria.</p>
+
+  <p>The ATT&amp;CK Navigator supports this workflow directly. Teams export their coverage assessment as a layer file, color-code techniques by detection status, and share the visual with stakeholders who need to understand where investment should go. A heat map of the Enterprise matrix showing red (no coverage) concentrated in the Credential Access and Lateral Movement tactics is a more persuasive argument for detection engineering budget than a prose summary of exercise findings.</p>
+
+  <div class="callout warning">
+    <strong>Common Mistake</strong>
+    Teams sometimes mark a technique as "covered" because a log source that <em>could</em> surface it is present, without verifying that an alert rule actually exists and has been tested. During a red team exercise, if the alert does not fire, the coverage is effectively zero regardless of what the log source inventory says. Coverage assessments should reflect <em>validated</em> detection, not theoretical capability.
+  </div>
+
+  <div class="quiz" id="quiz-10">
+    <h3>Knowledge Check</h3>
+    <p>What is the primary benefit of mapping both red team findings and blue team detections to ATT&amp;CK technique IDs?</p>
+    <div class="quiz-options">
+      <button>It converts team findings into a shared measurable matrix of detected and undetected techniques</button>
+      <button>It allows red teams to automatically build and test exploits for every listed technique</button>
+      <button>It generates compliance audit reports that satisfy all regulatory requirements for enterprise security programs</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise</h3>
+    <p>Fill in a coverage assessment table for the following 5 ATT&amp;CK techniques from the Enterprise matrix. For each technique, complete all five columns: the tactic it belongs to, whether a typical mid-size organization would detect it (Yes / Partial / No), the primary log source that would surface this technique, and one specific IOC or behavioral signal that would flag it.</p>
+    <p>Use what you know from this lesson and the previous lessons to reason through each row before filling it in.</p>
+    <textarea rows="20" placeholder="T1059.001 — PowerShell&#10;  Tactic:&#10;  Detected (Yes / Partial / No):&#10;  Primary Log Source:&#10;  IOC / Behavioral Signal:&#10;&#10;T1003.001 — LSASS Memory&#10;  Tactic:&#10;  Detected (Yes / Partial / No):&#10;  Primary Log Source:&#10;  IOC / Behavioral Signal:&#10;&#10;T1566.001 — Spearphishing Attachment&#10;  Tactic:&#10;  Detected (Yes / Partial / No):&#10;  Primary Log Source:&#10;  IOC / Behavioral Signal:&#10;&#10;T1078 — Valid Accounts&#10;  Tactic:&#10;  Detected (Yes / Partial / No):&#10;  Primary Log Source:&#10;  IOC / Behavioral Signal:&#10;&#10;T1486 — Data Encrypted for Impact (ransomware)&#10;  Tactic:&#10;  Detected (Yes / Partial / No):&#10;  Primary Log Source:&#10;  IOC / Behavioral Signal:"></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0009-purple-teaming.html">&larr; Prev: Purple Teaming</a>
+    <a href="0011-ai-red-teaming.html" class="primary">Next: AI Red Teaming &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-10', 0, 'Correct. ATT&CK technique IDs give both teams a shared reference point: red teams log what they exercised by technique ID, blue teams log what they detect by the same IDs, and the overlap becomes a measurable coverage matrix. This turns a narrative exercise report into an actionable list — not just "we missed something" but "we have no detection for T1003.001." Automatically building exploits and generating compliance reports are not what ATT&CK alignment achieves.');</script>
+
+</div>
+</body>
+</html>

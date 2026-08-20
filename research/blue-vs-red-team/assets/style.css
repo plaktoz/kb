@@ -1,0 +1,436 @@
+/* Blue vs Red Team Course — Tufte-inspired stylesheet */
+
+:root {
+  --color-bg: #fffff8;
+  --color-text: #111;
+  --color-muted: #555;
+  --color-border: #ddd;
+  --color-accent: #c0392b;
+  --color-accent-blue: #2471a3;
+  --color-accent-purple: #7d3c98;
+  --color-callout-key-bg: #eaf4fb;
+  --color-callout-key-border: #2471a3;
+  --color-callout-warning-bg: #fef9e7;
+  --color-callout-warning-border: #d4ac0d;
+  --color-source-bg: #f9f9f7;
+  --color-source-border: #c0392b;
+  --color-exercise-bg: #f4f6f9;
+  --color-exercise-border: #7d3c98;
+  --color-quiz-correct: #1e8449;
+  --color-quiz-incorrect: #922b21;
+  --color-nav-primary: #2471a3;
+  --font-body: Lora, Georgia, 'Times New Roman', serif;
+  --font-mono: 'Fira Mono', 'Courier New', monospace;
+  --max-width: 720px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+/* Header */
+.lesson-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.breadcrumb a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.25rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 1.75rem 0 0.5rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+ul, ol {
+  margin: 0 0 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.35rem;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: #f0f0ec;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+pre {
+  background: #f0f0ec;
+  border-left: 3px solid var(--color-border);
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 0 0 1.25rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+.lesson-meta {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-top: 0.5rem;
+}
+
+.lesson-meta span::before {
+  margin-right: 0.3em;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 0 0 1.5rem;
+}
+
+th {
+  background: #f4f4f0;
+  text-align: left;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--color-border);
+  font-weight: 700;
+}
+
+td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background: #fafaf7;
+}
+
+/* Callouts */
+.callout {
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.callout.key {
+  background: var(--color-callout-key-bg);
+  border-left: 4px solid var(--color-callout-key-border);
+}
+
+.callout.key strong {
+  color: var(--color-callout-key-border);
+}
+
+.callout.warning {
+  background: var(--color-callout-warning-bg);
+  border-left: 4px solid var(--color-callout-warning-border);
+}
+
+.callout.warning strong {
+  color: #9a7d0a;
+}
+
+/* Source card */
+.source-card {
+  background: var(--color-source-bg);
+  border-left: 4px solid var(--color-source-border);
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+}
+
+.source-card .source-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.source-card a {
+  color: var(--color-accent-blue);
+  word-break: break-all;
+}
+
+/* Quiz */
+.quiz {
+  background: #f9f9f7;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 1.25rem 1.4rem;
+  margin: 2rem 0;
+}
+
+.quiz h3 {
+  margin-top: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.quiz p {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-options button {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.quiz-options button:hover:not(:disabled) {
+  background: #f0f0ec;
+  border-color: #aaa;
+}
+
+.quiz-options button:disabled {
+  cursor: default;
+}
+
+.quiz-options button.correct {
+  background: #eafaf1;
+  border-color: var(--color-quiz-correct);
+  color: var(--color-quiz-correct);
+  font-weight: 600;
+}
+
+.quiz-options button.incorrect {
+  background: #fdedec;
+  border-color: var(--color-quiz-incorrect);
+  color: var(--color-quiz-incorrect);
+}
+
+.quiz-feedback {
+  margin-top: 0.9rem;
+  font-size: 0.88rem;
+  display: none;
+  padding: 0.6rem 0.85rem;
+  border-radius: 4px;
+}
+
+.quiz-feedback.show {
+  display: block;
+}
+
+.quiz-feedback.correct {
+  background: #eafaf1;
+  color: var(--color-quiz-correct);
+}
+
+.quiz-feedback.incorrect {
+  background: #fdedec;
+  color: var(--color-quiz-incorrect);
+}
+
+/* Exercise */
+.exercise {
+  background: var(--color-exercise-bg);
+  border-left: 4px solid var(--color-exercise-border);
+  border-radius: 0 4px 4px 0;
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+}
+
+.exercise h3 {
+  margin-top: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-accent-purple);
+}
+
+.exercise p {
+  margin-bottom: 0.85rem;
+}
+
+.exercise textarea {
+  width: 100%;
+  min-height: 130px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  resize: vertical;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.exercise textarea:focus {
+  outline: 2px solid var(--color-accent-purple);
+  border-color: transparent;
+}
+
+/* Tutor prompt */
+.tutor-prompt {
+  margin: 2.5rem 0 1.5rem;
+  padding: 0.8rem 1.1rem;
+  background: #f4f6f9;
+  border: 1px dashed #c0cfe0;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+/* Nav */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.lesson-nav a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--color-accent-blue);
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.lesson-nav a:hover {
+  background: var(--color-accent-blue);
+  color: #fff;
+}
+
+.lesson-nav a.primary {
+  background: var(--color-accent-blue);
+  color: #fff;
+  border-color: var(--color-accent-blue);
+}
+
+.lesson-nav a.primary:hover {
+  background: #1a5276;
+  border-color: #1a5276;
+}
+
+/* Print */
+@media print {
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .lesson-nav,
+  .tutor-prompt,
+  .quiz-options button,
+  .exercise textarea {
+    display: none;
+  }
+
+  .callout,
+  .source-card,
+  .exercise,
+  .quiz {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666;
+  }
+}

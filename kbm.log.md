@@ -2,6 +2,8 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-20 | research/blue-vs-red-team/report.md | research |
+| 2026-08-20 | research/blue-vs-red-team/lessons/ | lessons |
 | 2026-08-17 | daily-update/2026-08/2026-08-17-2.md | newsletter |
 | 2026-08-17 | wiki/technology/anthropic-2t-ipo-zuck-ai-manifesto-nvidia-500b-grok.md | ingest |
 | 2026-08-17 | wiki/strategy/vivek-ramaswamy-elon-musk-david-sacks-governance-policy.md | ingest |
