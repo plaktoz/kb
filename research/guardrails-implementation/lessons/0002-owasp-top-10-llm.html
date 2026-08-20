@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Guardrails Defend Against — OWASP Top 10 for LLMs</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> / Module 1 / Lesson 2
+      </div>
+      <h1>What Guardrails Defend Against — OWASP Top 10 for LLMs</h1>
+      <div class="lesson-meta">
+        <span>~20 min</span>
+        <span>Module 1 — Foundations: What Are Guardrails?</span>
+        <span>Lesson 2 of 12</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Primary Source</strong>
+      OWASP Top 10 for LLM Applications<br>
+      <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">https://owasp.org/www-project-top-10-for-large-language-model-applications/</a>
+    </div>
+
+    <p>
+      The Open Worldwide Application Security Project (OWASP) cataloged the ten highest-risk vulnerabilities specific to LLM-based applications. Understanding these risks is the first step to understanding why guardrails exist and what they are protecting against. Each risk on this list has a direct counterpart — a guardrail type you can build into any production AI system.
+    </p>
+
+    <h2>The OWASP Top 10 for LLM Applications</h2>
+
+    <p>The ten risks below are ordered as OWASP lists them. Read each description carefully — you will use them in the exercise at the end of this lesson.</p>
+
+    <h3>1. Prompt Injection</h3>
+    <p>
+      Crafted inputs manipulate the LLM into following attacker-controlled instructions. According to OWASP, successful prompt injection can lead to "unauthorized access, data breaches, and compromised decision-making." This is the most widely exploited LLM-specific attack vector and affects both direct user inputs and indirect content the LLM reads from external sources (documents, web pages, tool outputs).
+    </p>
+
+    <h3>2. Insecure Output Handling</h3>
+    <p>
+      When an application passes LLM outputs directly to downstream systems — browsers, databases, shells — without validation, the output becomes an attack surface. OWASP notes this may cause "downstream security exploits, including code execution." An LLM asked to produce JavaScript might generate malicious scripts; an LLM writing SQL might produce injection payloads.
+    </p>
+
+    <h3>3. Training Data Poisoning</h3>
+    <p>
+      If training or fine-tuning data is tampered with, the resulting model can produce responses that "compromise security, accuracy, or ethical behavior." Attackers who can influence training datasets can embed backdoors or biases that surface only under specific conditions.
+    </p>
+
+    <h3>4. Model Denial of Service</h3>
+    <p>
+      Unusually resource-intensive inputs — extremely long prompts, recursive reasoning chains, adversarially complex queries — can exhaust compute resources, causing service disruptions and elevated costs. This mirrors classic denial-of-service attacks but exploits the LLM's compute profile rather than network bandwidth.
+    </p>
+
+    <h3>5. Supply Chain Vulnerabilities</h3>
+    <p>
+      LLM applications depend on a supply chain: pre-trained model weights, fine-tuning datasets, third-party plugins, and libraries. Compromised components anywhere in this chain can trigger system failures and data breaches. An attacker who poisons a popular open-source embedding model affects every application that downloads it.
+    </p>
+
+    <h3>6. Sensitive Information Disclosure</h3>
+    <p>
+      LLMs can inadvertently expose data from their training sets, system prompts, or retrieved context. Inadequate output filtering risks exposing protected data including personally identifiable information (PII), credentials, or confidential business information embedded in context windows.
+    </p>
+
+    <h3>7. Insecure Plugin Design</h3>
+    <p>
+      Plugins and tools that extend LLM capabilities introduce a new attack surface. OWASP warns that plugins handling untrusted inputs risk "severe exploits like remote code execution." When an LLM calls a plugin that writes files, sends emails, or queries databases, any injection in the LLM's output becomes an instruction to that plugin.
+    </p>
+
+    <h3>8. Excessive Agency</h3>
+    <p>
+      When an LLM is given too much autonomy — the ability to call APIs, execute code, send messages, or modify data without human oversight — unchecked autonomy leads to "unintended consequences, jeopardizing reliability, privacy, and trust." The LLM may take actions its users or developers never intended, either through misunderstanding or through prompt injection that redirects its tool use.
+    </p>
+
+    <h3>9. Overreliance</h3>
+    <p>
+      Systems and users that accept LLM outputs uncritically create security and decision-making vulnerabilities. When developers build pipelines that automatically act on LLM output without verification, a single confident but wrong (or manipulated) output can cascade through a system. Overreliance is partly a human-process risk, not only a technical one.
+    </p>
+
+    <h3>10. Model Theft</h3>
+    <p>
+      Unauthorized access to proprietary model weights or architectures risks competitive harm and exposure of sensitive data that may have been used in training. Attackers may use model extraction techniques — querying a model systematically to reconstruct its behavior — or directly exfiltrate model files.
+    </p>
+
+    <div class="callout key">
+      Every one of the ten OWASP LLM risks maps to at least one guardrail type. Guardrails are not abstract best-practice suggestions — they are the concrete technical defenses that correspond directly to these documented attack categories.
+    </div>
+
+    <h2>Mapping OWASP Risks to Guardrail Types</h2>
+
+    <p>
+      The table below shows how each risk connects to a guardrail type. Some risks require more than one layer of defense. The "guardrail type" column uses labels you will practice with in the exercise.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>OWASP Risk</th>
+          <th>Primary Guardrail Type</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Prompt Injection</td>
+          <td>Input filter</td>
+          <td>A secondary LLM detector or pattern-matching filter screens inputs for injection attempts before they reach the main model</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Insecure Output Handling</td>
+          <td>Output filter</td>
+          <td>Output validation guardrail checks and sanitizes LLM responses before they are passed to downstream systems</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Training Data Poisoning</td>
+          <td>Supply chain audit</td>
+          <td>Data validation and provenance checks on training/fine-tuning datasets before they are used</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Model Denial of Service</td>
+          <td>Rate limiter</td>
+          <td>Rate limiting and input-length guardrails prevent resource exhaustion from pathological queries</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Supply Chain Vulnerabilities</td>
+          <td>Supply chain audit</td>
+          <td>Integrity checks, signed artifacts, and dependency audits across model weights, plugins, and libraries</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Sensitive Information Disclosure</td>
+          <td>Output filter</td>
+          <td>PII detection and output filtering block protected data from appearing in responses</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Insecure Plugin Design</td>
+          <td>Input filter + output filter</td>
+          <td>Validate both the LLM's instructions to plugins (output filter) and plugin responses passed back to the LLM (input filter)</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Excessive Agency</td>
+          <td>Permission/scope control</td>
+          <td>Constrain which tools the LLM can invoke; add human approval gates for high-impact actions</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Overreliance</td>
+          <td>Monitoring/logging</td>
+          <td>Log LLM decisions, surface confidence signals, and add human-in-the-loop checkpoints for high-stakes outputs</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Model Theft</td>
+          <td>Rate limiter + monitoring/logging</td>
+          <td>Rate limiting on inference endpoints and anomaly detection on query patterns deter extraction attacks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      A common misconception is that prompt injection is the only LLM-specific security risk. In reality, OWASP documents nine other categories — several of which (Excessive Agency, Insecure Output Handling, Insecure Plugin Design) become more dangerous as LLMs gain tool-use and agentic capabilities. Guardrail design must cover the full list, not just the most publicized attack.
+    </div>
+
+    <h2>Why This Matters for Guardrail Design</h2>
+
+    <p>
+      The OWASP list establishes a shared vocabulary for LLM application security. When you build a guardrail, you should be able to name which risk (or risks) from this list it addresses. If you cannot point to a specific risk, the guardrail may be redundant or misdirected.
+    </p>
+
+    <p>
+      Three risks deserve special attention as AI systems move toward greater autonomy:
+    </p>
+
+    <ul>
+      <li><strong>Excessive Agency</strong> grows more dangerous as LLMs are given more tools. An LLM that can only generate text has limited blast radius; an LLM that can send emails, execute code, and call external APIs has enormous blast radius if not properly scoped.</li>
+      <li><strong>Prompt Injection</strong> scales with the amount of external content the LLM processes. Retrieval-augmented generation (RAG) systems that ingest web pages, documents, or user data are continuously exposed to indirect injection payloads embedded in that content.</li>
+      <li><strong>Insecure Output Handling</strong> is frequently overlooked because the LLM itself is not malicious — but its output can be used as an attack vector against downstream systems that trust it unconditionally.</li>
+    </ul>
+
+    <div id="quiz-2" class="quiz">
+      <h3>Check Your Understanding</h3>
+      <p class="question">Which OWASP LLM risk describes an LLM taking actions with real-world consequences beyond what the user or developer intended?</p>
+      <div class="quiz-options">
+        <button type="button">Sensitive Information Disclosure risk</button>
+        <button type="button">Excessive Agency LLM risk</button>
+        <button type="button">Prompt Injection attack risk</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <p>For each of the 10 OWASP LLM risks, write one sentence naming the guardrail type that mitigates it. Use these guardrail types as labels: <strong>input filter</strong>, <strong>output filter</strong>, <strong>rate limiter</strong>, <strong>permission/scope control</strong>, <strong>data validation</strong>, <strong>monitoring/logging</strong>, <strong>supply chain audit</strong>. Some risks may map to more than one type.</p>
+      <textarea placeholder="Example: Prompt Injection → input filter, because a secondary detector screens user inputs for injection patterns before they reach the main model.&#10;&#10;1. Prompt Injection → ...&#10;2. Insecure Output Handling → ...&#10;3. Training Data Poisoning → ...&#10;4. Model Denial of Service → ...&#10;5. Supply Chain Vulnerabilities → ...&#10;6. Sensitive Information Disclosure → ...&#10;7. Insecure Plugin Design → ...&#10;8. Excessive Agency → ...&#10;9. Overreliance → ...&#10;10. Model Theft → ..."></textarea>
+    </div>
+
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0001-guardrail-mental-model.html">&larr; Previous</a>
+      <a href="0003-adversarial-prompting.html" class="primary">Next &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-2', 1, 'Excessive Agency (risk #8) describes unchecked LLM autonomy — when an LLM takes actions with real-world consequences (calling APIs, executing code, sending messages) beyond what was intended. The guardrail is to constrain the LLM\'s tool permissions and add approval gates for high-impact actions.');</script>
+</body>
+</html>

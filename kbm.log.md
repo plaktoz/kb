@@ -2,6 +2,8 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-20 | research/guardrails-implementation/lessons/ | lessons |
+| 2026-08-20 | research/guardrails-implementation/report.md | research |
 | 2026-08-20 | research/blue-vs-red-team/report.md | research |
 | 2026-08-20 | research/blue-vs-red-team/lessons/ | lessons |
 | 2026-08-17 | daily-update/2026-08/2026-08-17-2.md | newsletter |

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeMo Guardrails and Pydantic — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 4 › Lesson 11
+      </div>
+      <h1>NeMo Guardrails and Pydantic — Programmable Rails and Boundary Validation</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~20 min</span>
+        <span>Module 4 — Tools, Libraries, and Integration</span>
+        <span>Lesson 11 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Sources</strong><br>
+      NVIDIA NeMo Guardrails &nbsp;·&nbsp;
+      <a href="https://docs.nvidia.com/nemo/guardrails/" target="_blank" rel="noopener">
+        docs.nvidia.com/nemo/guardrails/
+      </a>
+      <br>
+      Pydantic Documentation &nbsp;·&nbsp;
+      <a href="https://pydantic.dev/docs/validation/latest/get-started/" target="_blank" rel="noopener">
+        pydantic.dev/docs/validation/latest/get-started/
+      </a>
+    </div>
+
+    <!-- Section 1: NeMo Guardrails -->
+    <h2>NeMo Guardrails: Programmable Rails for LLM Applications</h2>
+
+    <p>
+      NVIDIA NeMo Guardrails is an open-source Python library for adding programmable guardrails to
+      LLM-based applications. It allows developers to block, alter, or validate unsafe, off-topic,
+      malicious, or policy-violating user inputs and model responses — without restructuring the
+      underlying application or retraining the model.
+    </p>
+
+    <p>
+      The library sits as a layer around your existing LLM calls. You define policies in configuration
+      files; NeMo intercepts requests and responses and applies those policies transparently. Your
+      application code barely changes.
+    </p>
+
+    <h3>Key Features</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>What it does</th>
+          <th>Mechanisms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Content Safety</strong></td>
+          <td>Screens inputs and outputs for unsafe content</td>
+          <td>LLM self-checking, NVIDIA safety models, community models (e.g. LlamaGuard), third-party APIs</td>
+        </tr>
+        <tr>
+          <td><strong>Jailbreak Protection</strong></td>
+          <td>Detects attempts to bypass system instructions</td>
+          <td>Heuristic detection, self-check methods, specialized NIMs</td>
+        </tr>
+        <tr>
+          <td><strong>Topic Control</strong></td>
+          <td>Keeps conversations within defined boundaries</td>
+          <td>Dialog rails and topical rails defined in Colang</td>
+        </tr>
+        <tr>
+          <td><strong>PII Detection / Masking</strong></td>
+          <td>Identifies and redacts personally identifiable information</td>
+          <td>Microsoft Presidio, Private AI, GLiNER integrations</td>
+        </tr>
+        <tr>
+          <td><strong>Agentic Security</strong></td>
+          <td>Validates tool calls in agent workflows</td>
+          <td>Multi-agent workflow support via LangGraph</td>
+        </tr>
+        <tr>
+          <td><strong>Extensibility</strong></td>
+          <td>Add custom logic and third-party integrations</td>
+          <td>Custom Python actions and third-party API hooks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>How NeMo Guardrails is Built</h3>
+
+    <p>
+      NeMo Guardrails is built around three components that work together:
+    </p>
+
+    <ol>
+      <li>
+        <strong>YAML configuration files</strong> — declare which rails are active, which models to
+        use for checking, and how to connect to external services.
+      </li>
+      <li>
+        <strong>Colang conversational flows</strong> — a domain-specific language for defining dialog
+        patterns, topic rails, and what the bot should do when a rail is triggered.
+      </li>
+      <li>
+        <strong>Python SDK</strong> — the <code>LLMRails</code> class wraps your LLM configuration
+        and exposes a <code>generate()</code> method that automatically applies all configured rails.
+      </li>
+    </ol>
+
+    <h3>The LLMRails API</h3>
+
+    <p>
+      Using NeMo Guardrails in Python requires only two lines to get started:
+    </p>
+
+    <pre><code>from nemoguardrails import LLMRails, RailsConfig
+
+# Load configuration from a directory containing config.yml and Colang flows
+config = RailsConfig.from_path("./guardrails_config")
+
+# Wrap your LLM with the configured rails
+rails = LLMRails(config)
+
+# Call generate — rails are applied automatically before and after the LLM call
+response = rails.generate(messages=[
+    {"role": "user", "content": "Tell me how to bypass authentication."}
+])
+
+print(response)</code></pre>
+
+    <p>
+      The <code>generate()</code> method accepts the same message format as OpenAI-compatible APIs.
+      Internally, NeMo intercepts the call, runs input rails (checking the user message), forwards
+      to the LLM if the input passes, then runs output rails on the response before returning it.
+    </p>
+
+    <h3>Colang Topic Rail Example</h3>
+
+    <p>
+      Topic control rails are defined using Colang conversational flow syntax. A topical rail
+      specifies what topics the bot is allowed to discuss, and what to say when a user goes
+      off-topic:
+    </p>
+
+    <pre><code># config.yml (excerpt)
+rails:
+  input:
+    flows:
+      - check off-topic
+
+---
+# flows.co (Colang)
+define flow check off-topic
+  user ask off topic
+  bot say off topic refusal
+
+define bot say off topic refusal
+  "I can only help with cooking-related questions. Please ask me about recipes, ingredients, or techniques."
+
+define user ask off topic
+  "What is the weather today?"
+  "Can you write code for me?"
+  "Who won the election?"</code></pre>
+
+    <h3>Deployment Options</h3>
+
+    <p>
+      NeMo Guardrails can run in several modes:
+    </p>
+
+    <ul>
+      <li>
+        <strong>In-process Python library</strong> — import and call directly within your
+        application. Lowest latency, no extra network hop.
+      </li>
+      <li>
+        <strong>HTTP server</strong> — deploy as a standalone service exposing OpenAI-compatible
+        endpoints. Other services call it over the network without knowing guardrails are applied.
+      </li>
+      <li>
+        <strong>Kubernetes</strong> — configurations are portable; the same YAML and Colang files
+        used in local development deploy directly to production Kubernetes clusters.
+      </li>
+    </ul>
+
+    <div class="callout key">
+      <strong>Key insight:</strong> NeMo's portability is a practical advantage. The same
+      configuration that runs locally during development deploys unchanged to production Kubernetes.
+      You are not maintaining separate rule sets for different environments.
+    </div>
+
+    <!-- Section 2: Pydantic -->
+    <h2>Pydantic: Type-Driven Boundary Validation</h2>
+
+    <p>
+      Pydantic is Python's most widely used data validation library, driven by type annotations.
+      The core idea is simple: define a class that inherits from <code>BaseModel</code>, declare
+      fields with type hints, and Pydantic handles coercion and validation automatically when data
+      enters your system.
+    </p>
+
+    <p>
+      Pydantic operates as a <strong>boundary enforcement layer</strong>. Data enters, gets validated
+      against your declared schema, and either passes through (possibly transformed to the declared
+      type) or raises a detailed <code>ValidationError</code>.
+    </p>
+
+    <h3>Defining a BaseModel</h3>
+
+    <pre><code>from pydantic import BaseModel, field_validator
+from datetime import datetime
+
+class ChatRequest(BaseModel):
+    message: str
+    user_id: str
+    session_token: str
+    timestamp: datetime          # ISO 8601 string → parsed to datetime automatically
+    max_tokens: int = 512        # field with a default value
+
+    @field_validator("message")
+    @classmethod
+    def message_must_not_be_empty(cls, v: str) -> str:
+        v = v.strip()
+        if not v:
+            raise ValueError("message must not be empty")
+        if len(v) > 2000:
+            raise ValueError("message must not exceed 2000 characters")
+        return v
+
+# Valid input — Pydantic coerces the string "128" to int 128
+req = ChatRequest(
+    message="What temperature for roasting chicken?",
+    user_id="u-42",
+    session_token="tok-abc123",
+    timestamp="2026-08-20T14:00:00Z",
+    max_tokens="128"             # string coerced to int in lax mode
+)</code></pre>
+
+    <h3>Type Coercion: Strict vs. Lax Mode</h3>
+
+    <p>
+      Pydantic supports two validation modes that control how strictly it enforces types:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Lax mode (default)</strong> — allows safe coercions. A string <code>'123'</code>
+        is coerced to <code>int</code>. Bytes keys are coerced to <code>str</code>. ISO 8601
+        strings are parsed into <code>datetime</code> objects. The value passes through transformed
+        to match the declared type.
+      </li>
+      <li>
+        <strong>Strict mode</strong> — rejects any value that does not already have the exact
+        declared type. A string <code>'123'</code> passed to an <code>int</code> field raises a
+        <code>ValidationError</code> immediately — no coercion is attempted.
+      </li>
+    </ul>
+
+    <pre><code>from pydantic import BaseModel
+
+class StrictModel(BaseModel):
+    model_config = {"strict": True}
+    count: int
+
+# This will raise a ValidationError in strict mode
+try:
+    StrictModel(count="42")     # string, not int — rejected
+except Exception as e:
+    print(e)
+# Output: 1 validation error for StrictModel
+# count
+#   Input should be a valid integer [type=int_type, ...]</code></pre>
+
+    <div class="callout key">
+      <strong>Key insight:</strong> Strict mode is the right choice at system boundaries where
+      silent coercion would mask type bugs. If upstream code is sending strings when your schema
+      expects integers, you want to know immediately — not have Pydantic quietly fix it for you.
+    </div>
+
+    <h3>ValidationError: Structured Failure Details</h3>
+
+    <p>
+      When validation fails, Pydantic raises a <code>ValidationError</code> containing structured
+      information about every field that failed — not just the first one. Each error entry includes:
+    </p>
+
+    <ul>
+      <li><strong>loc</strong> — the field location (including nested paths for nested models)</li>
+      <li><strong>type</strong> — the error type code (e.g., <code>string_too_long</code>, <code>int_type</code>)</li>
+      <li><strong>msg</strong> — a human-readable description of what failed</li>
+    </ul>
+
+    <pre><code>from pydantic import BaseModel, ValidationError
+
+class RequestModel(BaseModel):
+    user_id: str
+    max_tokens: int
+
+try:
+    RequestModel(user_id=None, max_tokens="not-a-number")
+except ValidationError as e:
+    print(e.error_count(), "errors")
+    for err in e.errors():
+        print(err["loc"], "→", err["msg"])
+
+# Output:
+# 2 errors
+# ('user_id',) → Input should be a valid string
+# ('max_tokens',) → Input should be a valid integer</code></pre>
+
+    <p>
+      Because <code>ValidationError</code> is machine-readable, you can catch it, extract the
+      structured errors, and return them directly in an API error response — giving callers precise
+      field-level feedback without writing any custom error-formatting logic.
+    </p>
+
+    <h3>Additional Pydantic Capabilities</h3>
+
+    <ul>
+      <li>
+        <strong>Custom validators</strong> — use <code>@field_validator</code> or
+        <code>@model_validator</code> to add domain-specific logic beyond built-in type checks
+        (e.g., ensuring a message is not empty, validating a token format).
+      </li>
+      <li>
+        <strong>JSON Schema emission</strong> — call <code>Model.model_json_schema()</code> to
+        generate a JSON Schema from the model definition. Useful for API documentation and
+        integrating with external tooling.
+      </li>
+      <li>
+        <strong>TypedDict and dataclass support</strong> — Pydantic can validate standard library
+        types, not just classes that inherit from <code>BaseModel</code>.
+      </li>
+    </ul>
+
+    <div class="callout warning">
+      <strong>Caveat:</strong> Pydantic validates structure and types, but it does not understand
+      intent. A message field that passes type validation may still contain a prompt injection
+      attack. Pydantic is a boundary enforcement layer — it is not a semantic guardrail. Combine
+      it with tools like NeMo Guardrails or Guardrails AI for content-level protection.
+    </div>
+
+    <!-- Section 3: When to use which tool -->
+    <h2>Choosing the Right Tool: NeMo vs. Guardrails AI vs. Pydantic</h2>
+
+    <p>
+      These three tools address different problems and work best at different layers of your system.
+      They are not mutually exclusive — in a production LLM service you will often use all three.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Primary concern</th>
+          <th>Where it operates</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>NeMo Guardrails</strong></td>
+          <td>Conversational policy enforcement</td>
+          <td>Wraps the LLM call (input + output)</td>
+          <td>Topic control, jailbreak prevention, PII masking, multi-turn dialog safety, agentic tool-call validation</td>
+        </tr>
+        <tr>
+          <td><strong>Guardrails AI</strong></td>
+          <td>Structured output validation and correction</td>
+          <td>Post-LLM output processing</td>
+          <td>Ensuring LLM outputs match a declared schema, auto-retrying malformed responses, field-level output validation</td>
+        </tr>
+        <tr>
+          <td><strong>Pydantic</strong></td>
+          <td>Data schema validation at system boundaries</td>
+          <td>API input/output, inter-service data contracts</td>
+          <td>Validating request payloads, enforcing type contracts between services, generating JSON Schema for docs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Decision Guidance</h3>
+
+    <ul>
+      <li>
+        <strong>Use Pydantic</strong> at every API boundary where structured data enters or leaves
+        your service. It is lightweight, fast, and zero-configuration for simple cases. Think of
+        it as your first line of defense against malformed requests.
+      </li>
+      <li>
+        <strong>Use Guardrails AI</strong> when your LLM must return data in a specific schema
+        and you need the library to detect deviations and optionally auto-correct or re-prompt.
+        It is output-focused.
+      </li>
+      <li>
+        <strong>Use NeMo Guardrails</strong> when you need policy-level control over what topics
+        a conversational LLM can engage with, when you need jailbreak protection, or when you are
+        building multi-agent systems where tool calls must be validated before execution.
+      </li>
+      <li>
+        <strong>Use all three together</strong> for a defense-in-depth approach: Pydantic validates
+        the incoming request structure, NeMo applies conversational rails around the LLM call, and
+        Guardrails AI validates that the LLM's output conforms to your schema before returning it
+        to the caller.
+      </li>
+    </ul>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-11" class="quiz">
+      <p class="quiz-question">
+        What does Pydantic's strict mode do that lax mode does not?
+      </p>
+      <ol class="quiz-options">
+        <li>
+          <button class="quiz-option" data-index="0">
+            Rejects types requiring any coercion
+          </button>
+        </li>
+        <li>
+          <button class="quiz-option" data-index="1">
+            Allows only string type fields
+          </button>
+        </li>
+        <li>
+          <button class="quiz-option" data-index="2">
+            Skips validation on nested models
+          </button>
+        </li>
+      </ol>
+      <div class="quiz-feedback" hidden></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h2>Exercise</h2>
+      <p>
+        Complete this two-part exercise:
+      </p>
+      <ol>
+        <li>
+          Write a Pydantic <code>BaseModel</code> for a chatbot API request with at least three
+          fields: <code>message</code> (str), <code>user_id</code> (str), and
+          <code>session_token</code> (str). Add one custom validator that checks
+          <code>message</code> is not empty and not longer than 2000 characters.
+        </li>
+        <li>
+          Sketch a NeMo YAML configuration that adds a topic rail limiting a chatbot to cooking
+          topics — show the rail name, the definition of allowed topics, and what happens to
+          off-topic messages.
+        </li>
+      </ol>
+      <textarea
+        rows="24"
+        placeholder="Write your Pydantic model and NeMo YAML configuration here…"
+        aria-label="Exercise answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0010-guardrails-ai-library.html">← Previous</a>
+      <a href="0012-end-to-end-guardrailed-service.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-11',
+      0,
+      "In strict mode, Pydantic rejects values that would require coercion — e.g., a string '123' will NOT be coerced to int; it raises a ValidationError instead. In lax mode (the default), such safe type coercions are allowed. Strict mode is useful when you want exact type enforcement at a system boundary and silent coercion would mask bugs."
+    );
+  </script>
+</body>
+</html>

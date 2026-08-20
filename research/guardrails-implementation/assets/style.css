@@ -1,0 +1,372 @@
+/* Guardrails Course — Tufte-inspired stylesheet */
+
+:root {
+  --color-bg: #fffff8;
+  --color-text: #111;
+  --color-muted: #555;
+  --color-border: #ddd;
+  --color-accent: #2a6dbd;
+  --color-accent-light: #e8f0fb;
+  --color-warning-bg: #fff8e6;
+  --color-warning-border: #f0c040;
+  --color-key-bg: #eef6ee;
+  --color-key-border: #4a9a5a;
+  --color-correct: #2e7d32;
+  --color-incorrect: #c62828;
+  --color-correct-bg: #e8f5e9;
+  --color-incorrect-bg: #ffebee;
+  --font-body: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Fira Mono', 'Courier New', monospace;
+  --max-width: 720px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 18px; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+/* Header */
+.lesson-header {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.breadcrumb {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+  font-family: sans-serif;
+}
+
+.breadcrumb a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+h1 {
+  font-size: 1.9rem;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.3rem;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.lesson-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  font-family: sans-serif;
+}
+
+/* Body typography */
+p { margin: 0.75rem 0; }
+
+a { color: var(--color-accent); }
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: #f3f3f3;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  padding: 1.25rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  white-space: pre;
+  color: inherit;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  margin: 1.25rem 0;
+}
+
+th {
+  background: #f5f5f5;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td { background: #fafafa; }
+
+/* Callouts */
+.callout {
+  border-left: 4px solid var(--color-border);
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+  border-radius: 0 4px 4px 0;
+  background: #fafafa;
+}
+
+.callout.key {
+  border-color: var(--color-key-border);
+  background: var(--color-key-bg);
+}
+
+.callout.key::before {
+  content: "Key insight";
+  display: block;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-key-border);
+  margin-bottom: 0.4rem;
+}
+
+.callout.warning {
+  border-color: var(--color-warning-border);
+  background: var(--color-warning-bg);
+}
+
+.callout.warning::before {
+  content: "Watch out";
+  display: block;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a07800;
+  margin-bottom: 0.4rem;
+}
+
+/* Source card */
+.source-card {
+  background: var(--color-accent-light);
+  border: 1px solid #b3cce8;
+  border-radius: 6px;
+  padding: 0.85rem 1.1rem;
+  margin: 1.5rem 0;
+  font-size: 0.88rem;
+  font-family: sans-serif;
+}
+
+.source-card strong { display: block; margin-bottom: 0.3rem; font-size: 0.95rem; }
+
+.source-card a { color: var(--color-accent); font-size: 0.82rem; word-break: break-all; }
+
+/* Quiz */
+.quiz {
+  background: #f9f9f9;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+}
+
+.quiz h3 { margin-top: 0; font-family: sans-serif; font-size: 1rem; }
+
+.quiz p.question { font-weight: 600; margin-bottom: 0.85rem; }
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quiz-options button {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.quiz-options button:hover:not(:disabled) {
+  background: var(--color-accent-light);
+  border-color: var(--color-accent);
+}
+
+.quiz-options button:disabled { cursor: default; }
+
+.quiz-options button.correct {
+  background: var(--color-correct-bg);
+  border-color: var(--color-correct);
+  color: var(--color-correct);
+  font-weight: 600;
+}
+
+.quiz-options button.incorrect {
+  background: var(--color-incorrect-bg);
+  border-color: var(--color-incorrect);
+  color: var(--color-incorrect);
+}
+
+.quiz-feedback {
+  display: none;
+  padding: 0.65rem 0.9rem;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  font-family: sans-serif;
+  margin-top: 0.5rem;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.correct { background: var(--color-correct-bg); color: var(--color-correct); }
+.quiz-feedback.incorrect { background: var(--color-incorrect-bg); color: var(--color-incorrect); }
+
+/* Exercise */
+.exercise {
+  background: #f5f0ff;
+  border: 1px solid #c9b8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+}
+
+.exercise::before {
+  content: "Skill exercise";
+  display: block;
+  font-size: 0.75rem;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6a3dbd;
+  margin-bottom: 0.5rem;
+}
+
+.exercise p { margin: 0 0 0.75rem; }
+
+.exercise textarea {
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid #c9b8f0;
+  border-radius: 5px;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  resize: vertical;
+  background: white;
+}
+
+/* Tutor prompt */
+.tutor-prompt {
+  background: #fffbf0;
+  border: 1px dashed #d4b060;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 2.5rem 0 1.5rem;
+  font-size: 0.85rem;
+  font-family: sans-serif;
+  color: #7a5a00;
+}
+
+/* Nav */
+.lesson-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  margin-top: 2rem;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+}
+
+.lesson-nav a {
+  color: var(--color-accent);
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 5px;
+  transition: background 0.15s;
+}
+
+.lesson-nav a:hover { background: var(--color-accent-light); }
+
+.lesson-nav a.primary {
+  background: var(--color-accent);
+  color: white;
+}
+
+.lesson-nav a.primary:hover { background: #1d5ca8; }
+
+ul, ol { padding-left: 1.4rem; margin: 0.75rem 0; }
+li { margin: 0.3rem 0; }
+
+/* Print */
+@media print {
+  body { background: white; padding: 0; font-size: 11pt; }
+  .lesson-nav, .tutor-prompt, .exercise textarea, .quiz-options button { display: none; }
+  .callout, .source-card, .quiz { border: 1px solid #ccc; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+}
+
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  h1 { font-size: 1.5rem; }
+  .lesson-nav { flex-direction: column; gap: 0.75rem; }
+}

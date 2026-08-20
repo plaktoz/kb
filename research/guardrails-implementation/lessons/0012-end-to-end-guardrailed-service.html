@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>End-to-End — Building a Guardrailed AI Backend Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 4 › Lesson 12
+      </div>
+      <h1>End-to-End — Building a Guardrailed AI Backend Service</h1>
+      <div class="lesson-meta">
+        <span>&#8987; ~30 min</span>
+        <span>Module 4 — Tools, Libraries, and Integration</span>
+        <span>Lesson 12 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      Synthesis of all course sources — Research report §5: End-to-End Implementation.
+      This lesson draws on every layer of the Guardrails Implementation course and assembles
+      them into a single coherent architecture. No single external URL; all facts are derived
+      from the sourced report synthesized across this course.
+    </div>
+
+    <!-- Section 1: Introduction — Why One Guardrail Is Not Enough -->
+    <h2>Why a Single Guardrail Is Never Enough</h2>
+
+    <p>
+      Lesson 1 introduced the mental model of <em>defense-in-depth</em>: the idea that
+      no single control can be the last line of defense, because every control has a
+      failure mode. A firewall stops known-bad traffic but cannot validate business
+      logic. A content filter catches harmful language but cannot prevent schema
+      violations. An input validator rejects malformed requests but has no visibility
+      into what the model does with a well-formed one.
+    </p>
+
+    <p>
+      This is the fundamental problem with one-guardrail architectures: each layer
+      catches a specific class of failure, and failures that fall outside that class
+      pass straight through. A system that only validates input schema is unprotected
+      against prompt injection. A system that only filters model output has already
+      sent a malicious prompt to the LLM. A system that only rate-limits is vulnerable
+      to well-paced adversarial requests that stay under the threshold.
+    </p>
+
+    <p>
+      The answer is not to make any single layer smarter — it is to stack layers so
+      that each one catches what the others miss. This lesson assembles every tool
+      and technique from this course into a complete, production-grade
+      <strong>6-layer guardrail stack</strong>.
+    </p>
+
+    <!-- Section 2: The 6-Layer Stack -->
+    <h2>The 6-Layer Guardrail Stack</h2>
+
+    <p>
+      A complete guardrailed AI backend service layers these defenses in order,
+      from the API boundary inward to the LLM call and back out again:
+    </p>
+
+    <ol>
+      <li>
+        <strong>Input Validation (Pydantic)</strong> — At the API boundary, enforce
+        schema, type-check every field, and reject malformed requests before any
+        processing begins. A request that fails here never reaches any downstream
+        system. Cost: microseconds.
+      </li>
+      <li>
+        <strong>Rate Limiting (Token Bucket)</strong> — Cap per-user and per-IP
+        request rates. Return <code>HTTP 429</code> when a caller exceeds their
+        quota. Operates on volume regardless of request content — a well-formed,
+        semantically valid flood is still a flood. Cost: microseconds.
+      </li>
+      <li>
+        <strong>LLM Input Guardrail (Guardrails AI / NeMo)</strong> — Before
+        forwarding the request to the LLM, run it through a secondary classifier
+        to detect prompt injection, off-topic content, and jailbreak attempts.
+        A request that passes schema validation but carries malicious intent is
+        caught here. Cost: ~200–800 ms (secondary LLM call — use async pattern).
+      </li>
+      <li>
+        <strong>LLM Output Guardrail (Guardrails AI / G-Eval)</strong> — After the
+        model responds, validate the structured output schema and run content checks
+        for PII, toxicity, and hallucinations. The model may produce valid-looking
+        output that is harmful or sensitive — this layer catches it before the
+        response reaches the client. Cost: ~200–800 ms (scoring call — use async
+        pattern).
+      </li>
+      <li>
+        <strong>Circuit Breaker (resilience4j / tenacity)</strong> — Wrap the LLM
+        API call. After N consecutive failures, open the circuit: subsequent calls
+        return an error immediately without attempting the upstream call. This
+        prevents a degraded or unavailable LLM API from cascading failure into the
+        rest of your service. Cost: zero on the happy path.
+      </li>
+      <li>
+        <strong>Retry with Backoff + Jitter</strong> — On transient LLM API errors
+        (<code>429</code> from the provider, brief <code>503s</code>), retry with
+        exponential backoff before surfacing the error. Jitter spreads retry timing
+        so that multiple clients do not hammer the provider simultaneously after an
+        outage. Cost: zero on the happy path.
+      </li>
+    </ol>
+
+    <!-- Visual summary table -->
+    <h2>Layer Reference Table</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Name</th>
+          <th>Tool / Library</th>
+          <th>Catches</th>
+          <th>Latency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Input Validation</td>
+          <td>Pydantic</td>
+          <td>Malformed schema, wrong types, missing required fields</td>
+          <td>Microseconds</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Rate Limiting</td>
+          <td>Token Bucket (Redis / in-process)</td>
+          <td>DoS attacks, cost overruns, request floods</td>
+          <td>Microseconds</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>LLM Input Guardrail</td>
+          <td>Guardrails AI / NeMo Guardrails</td>
+          <td>Prompt injection, off-topic requests, jailbreak attempts</td>
+          <td>~200–800 ms</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>LLM Output Guardrail</td>
+          <td>Guardrails AI / G-Eval</td>
+          <td>PII leakage, toxicity, hallucinations, schema violations in response</td>
+          <td>~200–800 ms</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Circuit Breaker</td>
+          <td>resilience4j / tenacity</td>
+          <td>LLM API unavailability — prevents cascading failure</td>
+          <td>Zero (happy path)</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Retry + Backoff + Jitter</td>
+          <td>tenacity / custom</td>
+          <td>Transient LLM API errors (rate limit 429, brief 503)</td>
+          <td>Zero (happy path)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 3: Latency Considerations -->
+    <h2>Latency Considerations</h2>
+
+    <p>
+      Not all layers carry the same latency cost, and understanding this shapes
+      how you integrate them:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Layers 1 and 2</strong> (Pydantic validation, rate limiting) add only
+        microseconds. They are in-process checks that require no network call. Run
+        them synchronously — the overhead is negligible.
+      </li>
+      <li>
+        <strong>Layers 3 and 4</strong> (LLM input and output guardrails) each involve
+        a secondary LLM call or a scoring model invocation. Each adds approximately
+        200–800 ms to the request latency. To avoid doubling or tripling your response
+        time, use an <em>async pattern</em>: run the input guardrail asynchronously
+        before dispatching to the primary LLM, and run the output guardrail
+        asynchronously on the response before returning it. Where possible, pipeline
+        these calls rather than chaining them sequentially.
+      </li>
+      <li>
+        <strong>Layers 5 and 6</strong> (circuit breaker, retry with backoff) add
+        zero latency on the happy path. They only activate on failure — and the
+        latency cost on a failure path is acceptable because the alternative is a
+        hung thread waiting on an unavailable dependency.
+      </li>
+    </ul>
+
+    <p>
+      The practical implication: your p50 latency budget is dominated by Layer 3 and
+      Layer 4. If your SLA is strict, consider whether the full G-Eval scoring pipeline
+      can be moved to an async side-channel that logs results for review rather than
+      blocking the response inline.
+    </p>
+
+    <!-- Section 4: Graceful Degradation -->
+    <h2>Graceful Degradation — When a Guardrail Itself Fails</h2>
+
+    <p>
+      Each guardrail layer is itself a piece of software, and software fails. A content
+      filter service can become unavailable. A secondary LLM call can time out. A
+      Redis-backed rate limiter can lose its connection. The question is: what does
+      your service do when a guardrail cannot do its job?
+    </p>
+
+    <p>
+      The answer is to <strong>fail safe</strong>: when a guardrail layer is
+      unavailable or throws an unexpected error, do not silently pass the unvalidated
+      content through. Instead:
+    </p>
+
+    <ol>
+      <li>Log the guardrail failure with full context (which layer, what error, which request ID).</li>
+      <li>Return a conservative fallback response to the caller — a generic refusal or a
+        service-degraded message.</li>
+      <li>Do not pass unvalidated content through to the next layer just because the
+        current layer could not validate it.</li>
+    </ol>
+
+    <p>
+      Failing open — letting requests pass through when a guardrail is down — is a common
+      and dangerous shortcut. It defeats the purpose of the layer entirely: an attacker
+      who can trigger a content filter outage gains unrestricted access. Failing safe
+      means a degraded user experience during the outage, but it preserves the
+      security contract.
+    </p>
+
+    <!-- Section 5: How the Layers Connect -->
+    <h2>How the Layers Connect — The Full Request Flow</h2>
+
+    <p>
+      A request arriving at your API travels through all six layers in sequence. Each
+      layer either passes the request forward or terminates it with an appropriate
+      error. Understanding this flow makes it clear why the ordering matters:
+    </p>
+
+    <p>
+      <strong>Layers 1–2 act at the API boundary</strong>, before the request touches
+      any business logic. Pydantic ensures the request is structurally valid — the
+      right shape, the right types. The rate limiter ensures the caller is within
+      their quota. These are cheap, stateless (or near-stateless) checks that filter
+      out the largest volume of bad requests for the lowest cost.
+    </p>
+
+    <p>
+      <strong>Layer 3 acts before the LLM call.</strong> Only requests that passed
+      structural validation and quota checks reach the input guardrail. This matters
+      because running a secondary LLM call on every request is expensive — you want
+      Layers 1 and 2 to have already eliminated malformed and flood traffic before
+      you pay for a guardrail inference.
+    </p>
+
+    <p>
+      <strong>Layer 4 acts after the LLM call.</strong> The model has produced output
+      that may contain harmful, incorrect, or sensitive content. The output guardrail
+      is the last check before the response leaves your service. It is the only layer
+      that can catch failures introduced by the model itself.
+    </p>
+
+    <p>
+      <strong>Layers 5–6 wrap the LLM API call itself.</strong> The circuit breaker
+      and retry logic sit around the actual network call to the LLM provider. They
+      handle the reality that LLM APIs are external dependencies with their own
+      availability and rate limits. These layers protect your service's internal health
+      from whatever the provider is doing.
+    </p>
+
+    <div class="callout key">
+      Each layer in the stack catches a failure mode that the other layers cannot see.
+      Pydantic cannot detect prompt injection in a valid-schema request. Rate limiting
+      cannot detect PII in a low-volume request. The circuit breaker has no knowledge
+      of whether the request was malicious or benign — it only knows whether the
+      downstream dependency is responding. This is why defense-in-depth requires all
+      six layers: together they cover the full attack and failure surface of an
+      AI-powered backend service.
+    </div>
+
+    <div class="callout warning">
+      The most common integration mistake is adding guardrail layers one at a time and
+      assuming the first layer deployed is sufficient. Teams that ship an input validator
+      without an output guardrail protect against malformed requests but remain fully
+      exposed to harmful model output. Teams that ship a content filter without a circuit
+      breaker will see their service hang under LLM API outages. Build the full stack from
+      the start — or at minimum, plan for all six layers in your architecture before
+      shipping any of them to production.
+    </div>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-12" class="quiz">
+      <p class="question">
+        Which layer in the 6-layer stack prevents cascading failure when the external LLM API becomes unavailable?
+      </p>
+      <ol class="quiz-options">
+        <li>
+          <button>Rate limiting layer</button>
+        </li>
+        <li>
+          <button>Pydantic input validation</button>
+        </li>
+        <li>
+          <button>Circuit breaker layer</button>
+        </li>
+      </ol>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Exercise — Apply the Stack to a Legal Document Summarizer</h3>
+      <p>
+        Apply the 6-layer guardrail stack to a specific scenario: a <strong>legal document
+        summarizer API</strong>. For each of the 6 layers:
+      </p>
+      <ol>
+        <li>Name the specific implementation choice (e.g., which library, which algorithm).</li>
+        <li>Give one concrete example of what that layer would catch for a legal document
+          summarizer specifically.</li>
+        <li>Describe what graceful degradation looks like if that layer's guardrail itself
+          fails.</li>
+      </ol>
+      <p>
+        Format your answer as a table with columns:
+        <strong>Layer | Implementation | What it catches | If this layer fails</strong>
+      </p>
+      <textarea
+        rows="22"
+        placeholder="Layer | Implementation | What it catches | If this layer fails
+1 — Input Validation | …
+2 — Rate Limiting | …
+3 — LLM Input Guardrail | …
+4 — LLM Output Guardrail | …
+5 — Circuit Breaker | …
+6 — Retry + Backoff | …"
+        aria-label="6-layer guardrail stack exercise answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0011-nemo-pydantic.html">&#8592; Previous</a>
+      <a href="../lessons.md">Back to Curriculum</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-12',
+      2,
+      "The circuit breaker (Layer 5) wraps the LLM API call and opens when the API is consistently failing. Once open, it returns an error immediately without attempting the call — protecting your service's threads and resources from piling up waiting on an unavailable dependency. Rate limiting and Pydantic operate earlier in the stack and don't interact with the downstream LLM availability."
+    );
+  </script>
+</body>
+</html>

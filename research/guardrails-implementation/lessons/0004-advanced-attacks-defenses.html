@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Attack Techniques and Defense Strategies — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 2 — AI/LLM Guardrails › Lesson 4 of 12
+      </div>
+      <h1>Advanced Attack Techniques and Defense Strategies</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — AI/LLM Guardrails</span>
+        <span>Lesson 4 of 12</span>
+        <span>~20 min</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Primary source</strong>
+      Lilian Weng — Adversarial Attacks on LLMs<br>
+      <a href="https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/" target="_blank" rel="noopener">https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/</a>
+    </div>
+
+    <p>The previous lesson introduced adversarial prompting as a concept. Here we go deeper — cataloguing the main families of attacks researchers use against language models, then examining the defenses that have been developed in response, and crucially, why each defense falls short on its own.</p>
+
+    <h2>Attack Taxonomy: Black-box vs. White-box</h2>
+
+    <p>The first and most important division in attack classification is whether the attacker has access to the model's internals.</p>
+
+    <ul>
+      <li><strong>Black-box attacks</strong> treat the model as an opaque system. The attacker can only observe inputs and outputs, so techniques must work without gradient information. These attacks are broadly applicable and transfer across different models.</li>
+      <li><strong>White-box attacks</strong> require full access to the model's weights and activations, allowing the attacker to compute gradients and perform optimization directly against the model's internals. These are more powerful but require privileged access.</li>
+    </ul>
+
+    <h2>Black-box Attack Techniques</h2>
+
+    <h3>Token Manipulation</h3>
+
+    <p>Token manipulation attacks replace words in an input with synonyms chosen to maximally disrupt the model's predictions while keeping the text's meaning intact to a human reader. Two prominent methods are:</p>
+
+    <ul>
+      <li><strong>TextFooler</strong> — identifies the words that most influence the model's prediction and substitutes them with semantically similar alternatives until the model changes its output.</li>
+      <li><strong>BERT-Attack</strong> — uses a masked language model (BERT) to generate contextually appropriate substitutions for high-importance tokens, producing more fluent adversarial examples than simple synonym swaps.</li>
+    </ul>
+
+    <p>Both approaches share the same core loop: rank tokens by their importance to the current prediction, then replace them one by one with candidates that preserve surface meaning while corrupting the model's output.</p>
+
+    <h3>Jailbreak Prompting</h3>
+
+    <p>Jailbreak prompts attempt to bypass a model's safety training through carefully constructed natural-language instructions. Research identifies two distinct failure modes that jailbreaks exploit:</p>
+
+    <ol>
+      <li>
+        <strong>Competing objectives</strong> — the attack creates a situation where the model's instruction-following objective conflicts with its safety objective, and instruction-following wins. Examples include:
+        <ul>
+          <li>Role-play scenarios (e.g., DAN, AIM) that ask the model to act as an unconstrained character</li>
+          <li>Prefix injection, which steers the model to begin a harmful completion</li>
+          <li>Refusal suppression, which explicitly instructs the model not to decline</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Mismatched generalization</strong> — the attack encodes its request in a format the safety training did not adequately cover. Examples include:
+        <ul>
+          <li>Base64 encoding of the harmful payload</li>
+          <li>ROT13 cipher substitution</li>
+          <li>Pig Latin transformation</li>
+          <li>Payload splitting across multiple turns or tokens</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p>Mismatched-generalization attacks are especially difficult to patch because the space of possible encodings is effectively unbounded.</p>
+
+    <h3>Human Red-Teaming</h3>
+
+    <p>Human red-teamers probe models manually, often aided by tool-assisted interfaces that surface token saliency scores. Knowing which tokens the model is attending to most helps red-teamers target their probes efficiently and surface failure modes that purely automated attacks miss.</p>
+
+    <h3>Model Red-Teaming</h3>
+
+    <p>In model red-teaming, a separate language model is tasked with generating adversarial inputs to attack a target LLM. The red-teamer model can operate under several training regimes:</p>
+
+    <ul>
+      <li><strong>Zero-shot generation</strong> — the red-teamer produces attack prompts directly from instructions alone</li>
+      <li><strong>Few-shot sampling</strong> — a small set of successful attacks is provided as examples</li>
+      <li><strong>Supervised learning</strong> — the red-teamer is fine-tuned on a dataset of known attack–response pairs</li>
+      <li><strong>RL fine-tuning</strong> — the red-teamer is optimized via reinforcement learning, rewarded when it successfully elicits a harmful response from the target</li>
+    </ul>
+
+    <h2>White-box Attack Techniques</h2>
+
+    <p>White-box attacks use gradient information to optimize adversarial inputs directly. Because gradients flow through discrete token sequences, researchers have developed specific methods to handle the non-differentiability of tokenization.</p>
+
+    <h3>GBDA (Gradient-Based Distributional Attack)</h3>
+
+    <p>GBDA uses Gumbel-Softmax relaxation to make adversarial optimization differentiable. Rather than searching over discrete token choices, it optimizes over a soft distribution over the vocabulary, then samples from that distribution to produce a discrete adversarial input.</p>
+
+    <h3>HotFlip</h3>
+
+    <p>HotFlip measures the derivative of the loss with respect to hypothetical single-token flip operations. By computing these directional derivatives efficiently, it identifies which token substitution would reduce (or maximize) the loss the most, then applies that flip.</p>
+
+    <h3>Universal Adversarial Triggers (UAT)</h3>
+
+    <p>UAT finds a short sequence of tokens — a prefix or suffix — that, when appended to any input, reliably steers the model's output in a targeted direction. Crucially, these trigger sequences are <em>input-agnostic</em>: the same trigger tokens cause the undesired behavior across many different prompts, and they often transfer to other model architectures.</p>
+
+    <h3>GCG (Greedy Coordinate Gradient)</h3>
+
+    <p>GCG is among the most effective white-box attack methods. It searches for an adversarial suffix that, appended to a harmful request, causes the model to produce an "affirmative" response — beginning with a phrase like "Sure, here is how…" rather than refusing. GCG uses greedy coordinate descent in token space, guided by gradients, to find these suffixes efficiently. GCG suffixes typically appear as garbled nonsensical text to a human reader.</p>
+
+    <div class="callout key">
+      The black-box / white-box distinction shapes which attacks are realistic in practice. Token manipulation and jailbreak prompting require no model access and can be applied to any deployed system. Gradient-based attacks like GCG are more powerful but assume the attacker has model weights — relevant for open-weight releases and insider threat scenarios.
+    </div>
+
+    <h2>Defense Strategies</h2>
+
+    <p>For each class of attack, researchers have proposed defenses. The table below summarizes the five major strategies, how they work, and where each one breaks down.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Defense</th>
+          <th>Mechanism</th>
+          <th>Limitation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Self-reminder instructions</strong></td>
+          <td>Explicitly instruct the model in its system prompt to avoid producing harmful outputs</td>
+          <td>Makes the model more conservative overall, increasing false-refusal rates on benign requests</td>
+        </tr>
+        <tr>
+          <td><strong>Adversarial training</strong></td>
+          <td>Include adversarial examples in training data so the model learns to handle them correctly</td>
+          <td>Tradeoff with general performance; the attack distribution is hard to enumerate in advance</td>
+        </tr>
+        <tr>
+          <td><strong>Perplexity filtering</strong></td>
+          <td>Reject inputs whose perplexity exceeds a threshold, catching the nonsensical token sequences produced by GCG-style attacks</td>
+          <td>Bypassable by attacks that constrain their outputs to natural-language-like text with normal perplexity scores</td>
+        </tr>
+        <tr>
+          <td><strong>Paraphrasing</strong></td>
+          <td>A secondary LLM rewrites the user's input before it reaches the main model, stripping adversarial token combinations</td>
+          <td>Minor downstream performance impact; a sufficiently strong paraphrase may lose semantic content from legitimate requests</td>
+        </tr>
+        <tr>
+          <td><strong>Retokenization</strong></td>
+          <td>BPE-dropout randomly reassigns subword boundaries, disrupting adversarial token sequences that rely on specific tokenizations</td>
+          <td>Limited effectiveness when used in isolation; robust adversarial suffixes can survive tokenization variation</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>The Saddle-Point Framing: Why Layered Defense is Necessary</h2>
+
+    <p>Robust optimization theory frames adversarial defense as a <strong>saddle-point problem</strong>: the goal is to find model parameters that minimize loss against the <em>maximally adversarial perturbation</em> that an attacker could construct. Formally, the defender is trying to minimize over parameters while the attacker is simultaneously maximizing over perturbations — a minimax game.</p>
+
+    <p>This framing has a concrete implication: any single defense can be targeted by an attacker who optimizes specifically against it. Perplexity filtering is defeated by LM-constrained attacks. Paraphrasing is defeated by attacks robust to semantic-preserving rewrites. Adversarial training is defeated by attack distributions not seen during training. No single mechanism wins the minimax game.</p>
+
+    <div class="callout warning">
+      No single defense strategy is robust against the full space of adversarial attacks. Each defense addresses a specific attack surface and creates its own bypass conditions. A production guardrails system requires multiple overlapping defense layers, each compensating for the blind spots of the others.
+    </div>
+
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-4" class="quiz">
+      <h3>Quick check</h3>
+      <p class="question">Which defense blocks nonsensical adversarial prompts but can be bypassed by attacks that constrain outputs to natural-language-like text?</p>
+      <div class="quiz-options">
+        <button>Adversarial training defense</button>
+        <button>Perplexity filtering defense</button>
+        <button>BPE retokenization defense</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <h2>Practice Exercise</h2>
+
+    <div class="exercise">
+      <p>For each of the five defense strategies in the table above (self-reminder, adversarial training, perplexity filtering, paraphrasing, retokenization), write one sentence on: (a) a scenario where you would deploy it, and (b) a scenario where you would <em>not</em> rely on it alone.</p>
+      <p>Format your answer as a 5-row table with columns: <strong>Defense | Use when | Don't rely on alone when</strong>.</p>
+      <textarea placeholder="Defense | Use when | Don't rely on alone when&#10;Self-reminder | ... | ...&#10;Adversarial training | ... | ...&#10;Perplexity filtering | ... | ...&#10;Paraphrasing | ... | ...&#10;Retokenization | ... | ..."></textarea>
+    </div>
+
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0003-adversarial-prompting.html">← Previous</a>
+      <a href="0005-input-guardrails.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-4', 1, 'Perplexity filtering blocks inputs with unusually high perplexity (nonsensical token sequences typical of GCG attacks), but it can be bypassed by attacks that are constrained to produce natural-language-like outputs, which have normal perplexity scores.');</script>
+</body>
+</html>

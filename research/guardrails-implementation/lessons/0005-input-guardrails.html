@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input Guardrails — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 2 › Lesson 5
+      </div>
+      <h1>Input Guardrails — Topical Filtering and Jailbreak Detection</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~20 min</span>
+        <span>Module 2 — AI/LLM Guardrails</span>
+        <span>Lesson 5 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      OpenAI Cookbook — How to Use Guardrails &nbsp;·&nbsp;
+      <a href="https://developers.openai.com/cookbook/examples/how_to_use_guardrails" target="_blank" rel="noopener">
+        developers.openai.com/cookbook/examples/how_to_use_guardrails
+      </a>
+    </div>
+
+    <!-- Section 1: Input vs. Output Guardrails -->
+    <h2>Two Places to Draw the Line</h2>
+
+    <p>
+      Guardrails for LLM systems fall into two broad categories based on <em>where</em> in the
+      pipeline they act.
+    </p>
+
+    <p>
+      <strong>Input guardrails</strong> intercept a user's message <em>before</em> it ever reaches
+      the main LLM. Their job is to stop problematic requests at the gate. Three primary concerns
+      live here:
+    </p>
+
+    <ul>
+      <li><strong>Topical filtering</strong> — rejecting queries that fall outside permitted subjects.</li>
+      <li><strong>Jailbreak detection</strong> — catching attempts to override system instructions or
+        extract unsafe behaviour from the model.</li>
+      <li><strong>Prompt injection prevention</strong> — blocking embedded instructions in user
+        content that try to hijack the assistant's behaviour.</li>
+    </ul>
+
+    <p>
+      <strong>Output guardrails</strong> act on the LLM's reply <em>before</em> it is delivered to
+      the user. They cover different concerns: hallucination and fact-checking, brand moderation, and
+      syntax or schema validation. Output guardrails are the subject of the next lesson.
+    </p>
+
+    <p>
+      This lesson focuses entirely on the input side — specifically the topical guardrail pattern
+      and the async execution strategy that keeps latency manageable.
+    </p>
+
+    <!-- Section 2: The Topical Guardrail Pattern -->
+    <h2>The Topical Guardrail: Secondary LLM Call</h2>
+
+    <p>
+      A topical guardrail works by sending the user's message to a <strong>secondary LLM
+      call</strong> whose sole job is to decide whether the request falls within permitted subjects.
+      This secondary call uses a purpose-built system prompt that instructs it to respond with
+      exactly one of two tokens:
+    </p>
+
+    <ul>
+      <li><code>allowed</code> — the request is on-topic; pass it through to the main LLM.</li>
+      <li><code>not_allowed</code> — the request is off-topic or violates policy; return a rejection
+        response to the user instead.</li>
+    </ul>
+
+    <p>
+      By constraining the guardrail's output to a binary schema (<code>allowed</code> /
+      <code>not_allowed</code>), the calling code can parse the result deterministically — no
+      ambiguous free-text to interpret, no risk of the guardrail itself producing unsafe content.
+    </p>
+
+    <p>
+      The secondary LLM used for the guardrail is typically a <strong>smaller, faster model</strong>
+      than the one powering the main conversation. Its task is simple enough that a smaller model
+      handles it well, and using a lighter model reduces both cost and latency.
+    </p>
+
+    <div class="callout key">
+      <strong>Core pattern:</strong> A secondary LLM call, given a tightly scoped system prompt,
+      returns <code>allowed</code> or <code>not_allowed</code>. The main LLM only runs if the
+      guardrail returns <code>allowed</code>.
+    </div>
+
+    <!-- Section 3: Async Execution -->
+    <h2>Async Execution: Hiding Latency</h2>
+
+    <p>
+      The obvious concern with adding a guardrail call is latency: a sequential pipeline (check
+      first, then call the main LLM if clear) adds the guardrail's round-trip time to every
+      interaction.
+    </p>
+
+    <p>
+      The <strong>async execution pattern</strong> solves this by firing both calls at the same
+      time:
+    </p>
+
+    <ol>
+      <li>The guardrail check is launched concurrently with the main LLM call.</li>
+      <li>Both run in parallel.</li>
+      <li>When results arrive: if the guardrail was triggered, return the guardrail's rejection
+        response. Otherwise return the main LLM's response.</li>
+    </ol>
+
+    <p>
+      As one description of the pattern puts it: <em>"If your guardrails get triggered you send
+      back their response, otherwise send back the LLM response."</em>
+    </p>
+
+    <p>
+      The total wall-clock time is roughly the <strong>slower of the two calls</strong>, not the
+      sum. In practice, the main LLM call usually dominates — meaning the guardrail check is
+      effectively free from the user's perspective.
+    </p>
+
+    <div class="callout key">
+      <strong>Async key insight:</strong> Running the guardrail and main call concurrently means
+      adding an input guardrail does not necessarily double your latency. Total wait time ≈
+      max(guardrail time, main call time).
+    </div>
+
+    <!-- Section 4: Accuracy / Latency / Cost Tradeoff -->
+    <h2>The Accuracy / Latency / Cost Tradeoff</h2>
+
+    <p>
+      No guardrail configuration is free. Choosing a model and calibrating its sensitivity involves
+      three competing factors:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>Consideration</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Accuracy</strong></td>
+          <td>Fine-tuning or adding few-shot examples to the guardrail prompt improves detection of
+            edge cases. A larger model generally makes fewer classification errors.</td>
+        </tr>
+        <tr>
+          <td><strong>Latency / Cost</strong></td>
+          <td>Smaller models reduce overhead — they respond faster and cost less per call. The async
+            pattern partially offsets latency, but cost still scales with model size.</td>
+        </tr>
+        <tr>
+          <td><strong>Threshold</strong></td>
+          <td>Setting the guardrail too aggressively increases false positives — legitimate queries
+            that get blocked. Too loosely, and harmful requests slip through.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The tension is real: a larger guardrail model is more accurate but adds latency and cost; a
+      smaller model is faster and cheaper but may miss edge cases. The async pattern mitigates
+      the latency dimension, but the accuracy/cost tradeoff remains a deliberate design decision.
+    </p>
+
+    <div class="callout warning">
+      <strong>False positive risk:</strong> Over-aggressive guardrails block legitimate user
+      requests. As the source puts it, "more false positives leads to a fractured user experience."
+      Tuning the guardrail's sensitivity is not a one-time setup — it requires ongoing evaluation
+      against real traffic patterns.
+    </div>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-5" class="quiz">
+      <p class="quiz-question">
+        What does the async execution pattern do to reduce the latency cost of adding an input
+        guardrail check?
+      </p>
+      <ol class="quiz-options">
+        <li>
+          <button class="quiz-option" data-index="0">
+            Runs guardrail and main LLM call concurrently
+          </button>
+        </li>
+        <li>
+          <button class="quiz-option" data-index="1">
+            Caches guardrail results to skip repeated checks
+          </button>
+        </li>
+        <li>
+          <button class="quiz-option" data-index="2">
+            Uses smaller model only for guardrail checks
+          </button>
+        </li>
+      </ol>
+      <div class="quiz-feedback" hidden></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h2>Exercise</h2>
+      <p>
+        Write pseudocode for an async input guardrail. Your pseudocode should show:
+      </p>
+      <ol>
+        <li>A function that calls the secondary LLM guardrail check.</li>
+        <li>A function that calls the main LLM.</li>
+        <li>An async wrapper that fires both concurrently.</li>
+        <li>Logic that returns the guardrail response if triggered, otherwise returns the main LLM
+          response.</li>
+      </ol>
+      <p>Use any language-style pseudocode you prefer.</p>
+      <textarea
+        rows="16"
+        placeholder="Write your pseudocode here…"
+        aria-label="Pseudocode answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0004-advanced-attacks-defenses.html">← Previous</a>
+      <a href="0006-output-guardrails.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-5',
+      0,
+      "The async pattern runs the guardrail check and the main LLM call at the same time (concurrently), so the total wall-clock time is roughly the slower of the two — not the sum. This means adding a guardrail doesn’t necessarily double your latency."
+    );
+  </script>
+</body>
+</html>
