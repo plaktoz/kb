@@ -1,0 +1,12 @@
+https://owasp.org/www-project-top-10-for-large-language-model-applications/
+https://www.promptingguide.ai/risks/adversarial
+https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/
+https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter
+https://developers.openai.com/cookbook/examples/how_to_use_guardrails
+https://martinfowler.com/bliki/CircuitBreaker.html
+https://builder.aws.com/content/3EumjoZascWd1oZiEgL8ORlv3qE/timeouts-retries-and-backoff-with-jitter
+https://blog.bytebytego.com/p/rate-limiting-fundamentals
+https://guardrailsai.com/
+https://github.com/guardrails-ai/guardrails
+https://docs.nvidia.com/nemo/guardrails/
+https://pydantic.dev/docs/validation/latest/get-started/

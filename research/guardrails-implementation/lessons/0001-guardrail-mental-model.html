@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Guardrail Mental Model — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 1 › Lesson 1
+      </div>
+      <h1>The Guardrail Mental Model</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~15 min</span>
+        <span>Module 1 — Foundations: What Are Guardrails?</span>
+        <span>Lesson 1 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      Research report §1 — Core concepts and mental models (synthesized foundation section; no external URL)
+    </div>
+
+    <!-- Section 1: The Funnel-and-Filter Model -->
+    <h2>The Funnel-and-Filter Model</h2>
+
+    <p>
+      A guardrail is an enforcement boundary that constrains what a system can accept as input or
+      produce as output. The clearest way to picture this is a <strong>funnel with filters at each
+      end</strong>: data enters the wide mouth of the funnel, passes through one or more validation
+      layers, and either continues toward its destination or is intercepted and stopped.
+    </p>
+
+    <p>
+      This model applies equally to two very different domains:
+    </p>
+
+    <ul>
+      <li>An <strong>LLM chatbot</strong> receiving a user message and producing a reply.</li>
+      <li>A <strong>backend REST API</strong> receiving a network request and returning a response.</li>
+    </ul>
+
+    <p>
+      In both cases the funnel has the same anatomy: data enters, a validation layer inspects it,
+      and the result either passes through or is intercepted. The nature of what is being validated
+      differs — natural-language intent in the LLM case, structured payloads and headers in the API
+      case — but the structural pattern is identical.
+    </p>
+
+    <div class="callout key">
+      Guardrails are not a single check at a single point. They are a layered series of filters
+      positioned at the input, during processing, and at the output. The funnel-and-filter model
+      captures all three positions at once.
+    </div>
+
+    <!-- Section 2: Three Unifying Principles -->
+    <h2>Three Principles That Unify All Guardrails</h2>
+
+    <p>
+      Whether you are designing safety controls for an LLM or hardening a microservice API, three
+      principles govern how guardrails should behave.
+    </p>
+
+    <h3>1. Defense in Depth</h3>
+
+    <p>
+      No single guardrail is sufficient. Effective systems layer input guardrails, processing
+      guardrails, and output guardrails so that a threat intercepted at one layer is also covered
+      by the next. A jailbreak attempt that slips past an input filter may still be caught when the
+      model's output is validated before it reaches the user. The layers are redundant by design,
+      not by accident.
+    </p>
+
+    <h3>2. Fail Safe, Not Fail Open</h3>
+
+    <p>
+      When a guardrail itself fails — for example, the content-filter service becomes unavailable —
+      the system must not silently pass unvalidated data through as though nothing happened. The
+      correct response is to degrade gracefully: log the anomaly, apply a conservative fallback
+      (such as blocking the request or returning a safe default response), and surface the failure
+      for investigation. "Fail open" — letting traffic through because the filter is down — turns
+      an infrastructure outage into a security incident.
+    </p>
+
+    <h3>3. Specificity Over Breadth</h3>
+
+    <p>
+      A guardrail that tries to block everything ends up blocking too much. The more productive
+      design is to define the permitted boundary tightly: specify what <em>is</em> allowed rather
+      than enumerating what <em>isn't</em>. This is especially important for AI systems, where the
+      space of possible inputs is unbounded and blocklists are easy to circumvent with paraphrase.
+      An allowlist of permitted intents is harder to evade than a denylist of forbidden phrases.
+    </p>
+
+    <div class="callout warning">
+      A common mistake is to treat guardrails as purely a blocking mechanism — a list of things to
+      refuse. That framing leads to brittle denylist logic. The stronger approach defines the
+      envelope of what is permitted; anything outside the envelope is rejected by default, not by
+      an ever-growing list of exceptions.
+    </div>
+
+    <!-- Section 3: Two Tracks, One Structure -->
+    <h2>Two Tracks, One Structure</h2>
+
+    <p>
+      The AI/LLM track and the software/system track share the funnel-and-filter structure but
+      differ in the nature of the threats and the implementation tools used.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Aspect</th>
+          <th>AI / LLM Track</th>
+          <th>Software / System Track</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>What enters the funnel</td>
+          <td>Natural-language prompts, conversation history</td>
+          <td>HTTP requests, JSON payloads, headers</td>
+        </tr>
+        <tr>
+          <td>Typical input guardrail</td>
+          <td>Intent classifier, prompt injection detector</td>
+          <td>Schema validator, rate limiter, auth check</td>
+        </tr>
+        <tr>
+          <td>Typical output guardrail</td>
+          <td>Content moderation, PII scrubber</td>
+          <td>Response schema check, data-leak filter</td>
+        </tr>
+        <tr>
+          <td>Fail-safe default</td>
+          <td>Return a safe refusal message</td>
+          <td>Return 503 / fail closed with an error code</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Understanding both tracks matters because modern systems combine them. An LLM-powered API
+      endpoint is simultaneously subject to software guardrails (at the HTTP layer) and AI
+      guardrails (at the model layer). Defense in depth means both tracks must be active.
+    </p>
+
+    <!-- Section 4: Putting It Together -->
+    <h2>Putting the Model to Work</h2>
+
+    <p>
+      When you examine any system for guardrail coverage, walk the funnel from entry to exit and
+      ask three questions at each layer:
+    </p>
+
+    <ol>
+      <li><strong>What is permitted here?</strong> (Specificity over breadth — define the allowable envelope.)</li>
+      <li><strong>What happens if this layer is bypassed or unavailable?</strong> (Fail safe — does the next layer catch it?)</li>
+      <li><strong>Is there at least one more layer after this one?</strong> (Defense in depth — never rely on a single check.)</li>
+    </ol>
+
+    <p>
+      These three questions translate the abstract principles into a practical audit checklist that
+      works for LLM systems and traditional APIs alike.
+    </p>
+
+    <!-- Quiz -->
+    <div id="quiz-1" class="quiz">
+      <h3>Quick check</h3>
+      <p class="question">Which principle says that when a guardrail itself fails, the system should apply a conservative fallback rather than passing data through unchecked?</p>
+      <div class="quiz-options">
+        <button>Fail safe, not fail open</button>
+        <button>Defense covers every attack vector</button>
+        <button>Specificity beats breadth every time</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Draw (or describe in text) the funnel-and-filter diagram for a system of your choice —
+        either an LLM chatbot or a REST API. Label: (1) where input enters, (2) which guardrail
+        layer is first, (3) what happens when a guardrail fails, (4) where output exits. Then
+        identify which of the three principles — defense in depth, fail-safe, or specificity —
+        applies at each layer you drew.
+      </p>
+      <textarea placeholder="Describe your diagram here…"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <span></span>
+      <a href="0002-owasp-top-10-llm.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-1',
+      0,
+      'Fail safe, not fail open means that when a guardrail itself is unavailable or broken, the system should degrade gracefully — apply a conservative fallback, log the anomaly — rather than silently passing unvalidated content through.'
+    );
+  </script>
+</body>
+</html>

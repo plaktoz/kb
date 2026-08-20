@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Output Guardrails — Filtering, Scoring, and Production Content Filters — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 2 › Lesson 6
+      </div>
+      <h1>Output Guardrails — Filtering, Scoring, and Production Content Filters</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~25 min</span>
+        <span>Module 2 — AI/LLM Guardrails</span>
+        <span>Lesson 6 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Sources</strong>
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter" target="_blank" rel="noopener">Azure AI Content Filtering System — Microsoft Learn</a></li>
+        <li><a href="https://developers.openai.com/cookbook/examples/how_to_use_guardrails" target="_blank" rel="noopener">How to Use Guardrails — OpenAI Cookbook</a></li>
+      </ul>
+    </div>
+
+    <!-- Section 1: G-Eval Output Scoring -->
+    <h2>G-Eval: Scoring LLM Responses Against Criteria</h2>
+
+    <p>
+      Before a response reaches the user, you can run it through an automated scoring pass. The
+      <strong>G-Eval pattern</strong>, documented in the OpenAI Cookbook, assigns each response a
+      numeric score from 1 to 5 against a set of criteria you define. If the score falls at or
+      above a configured threshold, the response is blocked; if it scores below the threshold it
+      proceeds to the user.
+    </p>
+
+    <p>
+      G-Eval structures its evaluation around three concepts:
+    </p>
+
+    <ul>
+      <li><strong>Domain</strong> — the application context the scorer is evaluating (e.g., customer support, medical advice).</li>
+      <li><strong>Criteria</strong> — the specific property being measured (e.g., toxicity, off-topic content, factual accuracy).</li>
+      <li><strong>Steps</strong> — the chain-of-thought instructions the evaluating model follows to arrive at a score.</li>
+    </ul>
+
+    <p>
+      This three-part structure makes G-Eval extensible: you swap in a new domain/criteria/steps
+      tuple for each quality dimension you care about, without rewriting the scoring infrastructure.
+      The scorer itself is typically a separate, cheaper LLM call that runs synchronously before the
+      response is returned.
+    </p>
+
+    <div class="callout key">
+      G-Eval turns vague quality goals ("don't be harmful") into a measurable, automatable gate:
+      score the output, compare to a threshold, block or pass. The domain/criteria/steps structure
+      keeps the policy readable and version-controlled alongside your application code.
+    </div>
+
+    <!-- Section 2: Azure Harm Category Taxonomy -->
+    <h2>Azure AI Content Filtering: Harm Category Taxonomy</h2>
+
+    <p>
+      Azure OpenAI's built-in content filtering system intercepts both prompts and completions,
+      running them through neural classifiers. Every piece of text is evaluated across
+      <strong>four harm categories</strong>, and within each category is assigned one of
+      <strong>four severity levels</strong>.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>What it covers</th>
+          <th>Severity levels</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Hate and Fairness</strong></td>
+          <td>Attacks based on race, gender, religion, nationality, and other protected attributes</td>
+          <td rowspan="4">Safe · Low · Medium · High</td>
+        </tr>
+        <tr>
+          <td><strong>Sexual</strong></td>
+          <td>Anatomical or romantic content, sexual abuse, and exploitation</td>
+        </tr>
+        <tr>
+          <td><strong>Violence</strong></td>
+          <td>Physical harm, weapons, terrorism, and glorification of violent acts</td>
+        </tr>
+        <tr>
+          <td><strong>Self-Harm</strong></td>
+          <td>Eating disorders, bullying, self-injury, and related content</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The four severity levels — <em>safe</em>, <em>low</em>, <em>medium</em>, and <em>high</em>
+      — form an ordinal scale. You configure per-category thresholds: content at or above the
+      configured severity triggers the filter action (block or annotate). A conservative deployment
+      might block anything rated <em>low</em> or above in the violence category, while a research
+      tool might allow <em>medium</em> and only block <em>high</em>.
+    </p>
+
+    <!-- Section 3: Annotate-only vs. Block -->
+    <h2>Annotate-Only vs. Block Mode</h2>
+
+    <p>
+      Azure content filters can operate in two modes for each category independently:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Block mode</strong> — content that meets or exceeds the threshold is suppressed.
+        The API returns an <strong>HTTP 400 error</strong> rather than a completion. The user
+        receives no model output for that request.
+      </li>
+      <li>
+        <strong>Annotate-only mode</strong> — content passes through to the caller, but the API
+        response is annotated with filter results. The <code>finish_reason</code> field is set to
+        <code>content_filter</code> to signal that filtering ran, and
+        <code>content_filter_results</code> contains the per-category scores. Your application
+        receives the content and can decide what to do with it.
+      </li>
+    </ul>
+
+    <p>
+      Annotate-only mode is useful during the design phase of a deployment: you collect real
+      distributions of severity scores before committing to blocking thresholds. It is also
+      appropriate when your application needs to show the user <em>why</em> content was flagged
+      rather than silently suppressing it — you read the annotations and generate a contextual
+      explanation.
+    </p>
+
+    <!-- Section 4: Special Filters -->
+    <h2>Special-Purpose Filters</h2>
+
+    <p>
+      Beyond the four harm categories, Azure provides additional filters that target structural
+      risks rather than offensive content:
+    </p>
+
+    <h3>Prompt Shields</h3>
+    <p>
+      Prompt Shields detect two specific attack vectors: direct <strong>jailbreak attempts</strong>
+      (where a user crafts a prompt designed to bypass the model's safety training) and
+      <strong>indirect prompt injection</strong> (where malicious instructions are embedded inside
+      documents or data the model is asked to process). Because these attacks arrive through the
+      input channel, Prompt Shields run on prompts as well as completions.
+    </p>
+
+    <h3>PII Detection and Masking</h3>
+    <p>
+      The PII filter detects personally identifiable information — names, addresses, identification
+      numbers, contact details — that appears in LLM output. In masking mode, the detected spans
+      are replaced before the response reaches the caller. This matters for any application that
+      processes user data and must comply with privacy regulations: the model may inadvertently
+      surface PII from its training data or from documents passed in the context window.
+    </p>
+
+    <h3>Groundedness Detection</h3>
+    <p>
+      The groundedness filter flags LLM output that is not supported by the source documents
+      provided in the prompt. This is a direct hallucination detection mechanism: if the model
+      makes a factual claim that cannot be traced back to the grounding documents, the filter
+      surfaces that divergence. It is especially relevant for retrieval-augmented generation (RAG)
+      applications where accuracy against a retrieved corpus is a hard requirement.
+    </p>
+
+    <h3>Protected Material Detection</h3>
+    <p>
+      The protected material filter detects when the model reproduces verbatim or near-verbatim
+      content from copyrighted sources — song lyrics, published articles, or licensed code. This
+      reduces intellectual property risk when the application might otherwise relay copyrighted
+      text directly to users.
+    </p>
+
+    <!-- Section 5: finish_reason Handling and Best Practices -->
+    <h2>Handling <code>finish_reason: content_filter</code></h2>
+
+    <p>
+      When the content filtering system blocks or annotates a completion, the API signals this
+      through the <code>finish_reason</code> field on the choice object. A value of
+      <code>content_filter</code> tells your application that filtering ran and affected the
+      response. Contrast this with normal completion endings: <code>stop</code> means the model
+      finished naturally, and <code>length</code> means it hit the token limit.
+    </p>
+
+    <p>
+      Reading <code>finish_reason</code> alone is not sufficient. You also need to inspect
+      <code>content_filter_results</code> to understand <em>which</em> category triggered and at
+      what severity, so your application can respond with a context-appropriate message.
+    </p>
+
+    <div class="callout warning">
+      <strong>Check whether filters actually ran.</strong> If the Azure content filter service is
+      unavailable at request time, content is <em>not</em> blocked — it passes through. However,
+      the response will contain a <code>content_filter_error</code> object rather than normal
+      <code>content_filter_results</code>. An application that only checks
+      <code>finish_reason</code> will miss this condition entirely and treat an unfiltered response
+      as a filtered-and-clean one. Always verify that <code>content_filter_results</code> is
+      present and contains no error object before trusting that filtering ran successfully.
+    </div>
+
+    <h3>Best Practices Summary</h3>
+    <ol>
+      <li>Always read <code>finish_reason</code> on every completion response.</li>
+      <li>If <code>finish_reason</code> is <code>content_filter</code>, do not surface the raw response — return a graceful fallback to the user.</li>
+      <li>Inspect <code>content_filter_results</code> for the per-category severity breakdown.</li>
+      <li>Confirm that <code>content_filter_results</code> contains no <code>content_filter_error</code> object, which would indicate the filter service itself did not run.</li>
+      <li>Define explicit fallback behavior for your use case — the right response to a blocked medical query differs from the right response to a blocked entertainment query.</li>
+    </ol>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-6" class="quiz">
+      <p class="quiz-question">What does a <code>finish_reason</code> value of <code>content_filter</code> in an Azure OpenAI response indicate?</p>
+      <div class="quiz-options">
+        <button>The model ran out of tokens</button>
+        <button>The output was blocked by filtering</button>
+        <button>The request timed out during generation</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h2>Exercise: Design an Output Guardrail Policy</h2>
+      <p>
+        You are building a medical information chatbot that answers patient questions about
+        symptoms, medications, and general health topics. Design an output guardrail policy by
+        answering the three questions below. Write 2–3 sentences per question.
+      </p>
+      <ol>
+        <li>
+          <strong>Harm categories and thresholds:</strong> Which of the four Azure harm categories
+          (hate and fairness, sexual, violence, self-harm) should be filtered, at what severity
+          threshold, and why?
+        </li>
+        <li>
+          <strong>Block vs. annotate-only:</strong> Should you use block mode or annotate-only
+          mode for this chatbot — and why?
+        </li>
+        <li>
+          <strong>Special filters:</strong> Which special filters (PII, groundedness, protected
+          material) matter most for a medical chatbot, and why?
+        </li>
+      </ol>
+      <textarea rows="12" placeholder="Write your policy here — address all three questions in order…"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0005-input-guardrails.html">← Previous</a>
+      <a href="0007-circuit-breaker.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-6', 1, 'finish_reason: content_filter means the model\'s output was intercepted and blocked by the content filtering system before being returned to you. You should check for this in your application and handle it gracefully — e.g., return a fallback message to the user.');</script>
+</body>
+</html>
