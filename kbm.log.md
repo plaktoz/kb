@@ -27,6 +27,18 @@
 | 2026-08-20 | 2026-08-04-owasp-top-10-llm-applications.md | scrape |
 | 2026-08-20 | research/guardrails-implementation/lessons/ | lessons |
 | 2026-08-20 | research/guardrails-implementation/report.md | research |
+| 2026-08-20 | wiki/technology/burp-suite-web-security-platform.md | ingest |
+| 2026-08-20 | wiki/technology/mitre-attck-enterprise-matrix.md | ingest |
+| 2026-08-20 | wiki/technology/elastic-security-agentic-soc-platform.md | ingest |
+| 2026-08-20 | wiki/technology/pentestgpt-ai-penetration-testing-framework.md | ingest |
+| 2026-08-20 | wiki/technology/metasploit-penetration-testing-framework.md | ingest |
+| 2026-08-20 | wiki/technology/cyber-kill-chain-lockheed-martin.md | ingest |
+| 2026-08-20 | wiki/technology/pyrit-microsoft-ai-red-teaming-framework.md | ingest |
+| 2026-08-20 | wiki/technology/nmap-network-mapper.md | ingest |
+| 2026-08-20 | wiki/technology/red-team-vs-blue-team-cybersecurity.md | ingest |
+| 2026-08-20 | wiki/technology/red-team-vs-blue-team-cybersecurity.md | ingest |
+| 2026-08-20 | wiki/technology/owasp-web-security-testing-guide.md | ingest |
+| 2026-08-20 | wiki/technology/introduction-to-cyber-threat-hunting.md | ingest |
 | 2026-08-20 | research/blue-vs-red-team/report.md | research |
 | 2026-08-20 | research/blue-vs-red-team/lessons/ | lessons |
 | 2026-08-17 | daily-update/2026-08/2026-08-17-2.md | newsletter |
@@ -1744,3 +1756,18 @@
 | 2026-08-19 | 2026-08-15-strategic-thinking-mental-models-first-principles.md (same topic as wiki/strategy/best-mental-models-to-master-2026.md) | ingest-dupe |
 | 2026-08-19 | daily-update/2026-08/2026-08-19.md | newsletter |
 | 2026-08-20 | wiki/technology/owasp-top-10-llm-applications.md | ingest |
+| 2026-08-20 | 2023-04-16-red-team-vs-blue-team-crowdstrike.md | scrape |
+| 2026-08-20 | 2024-12-13-red-team-vs-blue-team-offsec.md | scrape |
+| 2026-08-20 | 2026-08-20-mitre-attck-enterprise-matrix.md | scrape |
+| 2026-08-20 | 2026-08-20-cyber-kill-chain-lockheed-martin.md | scrape |
+| 2026-08-20 | 2025-03-04-introduction-to-cyber-threat-hunting.md | scrape |
+| 2026-08-20 | 2026-08-20-metasploit-penetration-testing-framework.md | scrape |
+| 2026-08-20 | 2026-08-20-burp-suite-web-security-platform.md | scrape |
+| 2026-08-20 | 2026-08-20-nmap-network-mapper.md | scrape |
+| 2026-08-20 | 2026-08-20-elastic-security-agentic-security-operations-platform.md | scrape |
+| 2026-08-20 | 2026-08-20-owasp-web-security-testing-guide.md | scrape |
+| 2026-08-20 | 2026-08-20-purple-teaming.md | scrape |
+| 2026-08-20 | 2026-08-20-googles-ai-red-team.md | scrape |
+| 2026-08-20 | 2026-08-20-pentestgpt-ai-penetration-testing-framework.md | scrape |
+| 2026-08-20 | 2024-02-22-announcing-microsofts-open-automation-framework-to-red-team-generative-ai-systems.md | scrape |
+| 2026-08-20 | 2026-08-20-blue-vs-red-team-articles.processed.md | archive |
