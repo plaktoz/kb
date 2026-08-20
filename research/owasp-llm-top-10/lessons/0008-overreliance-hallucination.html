@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overreliance &amp; Hallucination Risks — OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <nav class="breadcrumb">
+        <a href="../lessons.md">OWASP LLM Top 10</a> &rsaquo; Module 3: Output &amp; Infrastructure &rsaquo; Lesson 8
+      </nav>
+      <h1>Overreliance &amp; Hallucination Risks</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 3: Output, Trust &amp; Infrastructure</span>
+        <span>LLM09 / LLM07:2026</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Source</strong>
+      <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM09_Overreliance.md"
+         target="_blank" rel="noopener">
+        OWASP LLM09 — Overreliance
+      </a>
+      — LLMs can generate authoritative-sounding but factually incorrect content
+      (hallucination), leading to security breaches, supply chain compromise, or
+      disinformation when that output is trusted and acted upon without oversight.
+    </div>
+
+    <h2>What Hallucination Actually Is</h2>
+
+    <p>
+      The word "hallucination" is borrowed loosely from neuroscience, but in the context
+      of language models it describes something precise: the model produces output that is
+      fluent, confident, and coherent — and factually wrong. It is not a bug in the sense
+      of an exception being thrown. It is the model doing exactly what it is designed to
+      do: predicting the most plausible next token given everything in its context window.
+    </p>
+
+    <p>
+      The model has no oracle. It has no live database to query, no ability to verify
+      claims against reality, and no mechanism that signals uncertainty at inference time
+      in a way that the consumer can reliably detect. When a model generates a package
+      name, an API endpoint, a statute citation, or a clinical fact, it is doing pattern
+      completion — not retrieval from a verified source. The output looks the same whether
+      the answer is correct or fabricated.
+    </p>
+
+    <div class="callout key">
+      Hallucination is not the model "lying." It is the model pattern-completing without
+      verifiable grounding. The fluency of the output provides no signal about its
+      accuracy. High confidence and high error rate can coexist in the same response.
+    </div>
+
+    <p>
+      This matters for security because downstream systems, developers, and users often
+      treat LLM output as a reliable lookup. When an LLM is integrated into a workflow
+      that takes automatic action on its output — installing a package, filing a document,
+      executing a query — unverified hallucinations can cause real damage.
+    </p>
+
+    <h2>The Three OWASP Attack Scenarios</h2>
+
+    <p>
+      OWASP LLM09 identifies three concrete scenarios that show how overreliance on LLM
+      output translates into security incidents.
+    </p>
+
+    <h3>Scenario 1 — Disinformation at scale</h3>
+    <p>
+      A bad actor deliberately seeds misleading information into the sources used to
+      fine-tune or retrieval-augment an LLM-powered news outlet. The model synthesises
+      and publishes plausible-sounding articles that contain false claims. Because the
+      outlet has no independent fact-checking step, and because the model's output reads
+      as authoritative prose, the disinformation propagates at machine speed. The attack
+      exploits not a code vulnerability but the editorial trust placed in the model.
+    </p>
+
+    <h3>Scenario 2 — Package hallucination attack</h3>
+    <p>
+      A developer asks an LLM coding assistant for help with a task and the model
+      suggests an <code>npm</code> or <code>pip</code> package that does not exist — but
+      the name is plausible, follows naming conventions, and fits the context perfectly.
+      The developer does not verify the package before running <code>npm install</code>
+      or <code>pip install</code>. An attacker who monitors for hallucinated package
+      names (or who prompted the model specifically to elicit a fake name) has already
+      registered that package name in the public registry with malicious code inside.
+      The install succeeds, and the malicious package runs in the developer's environment.
+    </p>
+
+    <div class="callout warning">
+      Package hallucination is not a hypothetical. Researchers have demonstrated that
+      LLMs consistently suggest non-existent package names and that squatting on those
+      names is a viable supply chain attack. The gap between "the model sounds sure" and
+      "the package exists and is safe" is exactly where the attack lives.
+    </div>
+
+    <p>
+      This is why package hallucination bridges two separate risk categories: it starts
+      as LLM overreliance (LLM09) and ends as a software supply chain compromise. The
+      developer's implicit trust in the model's suggestion is the attack vector. The
+      malicious registry package is the payload.
+    </p>
+
+    <h3>Scenario 3 — AI-generated code merged without review</h3>
+    <p>
+      A development team uses an LLM assistant to generate production code and merges
+      the output without a security-focused review pass. The generated code may use
+      insecure defaults (e.g., <code>verify=False</code> in an HTTP client, a hardcoded
+      secret, or a deprecated cryptographic primitive), reference an incorrect library
+      version with a known CVE, or implement authentication logic that looks correct but
+      has a subtle flaw. Because the code is syntactically valid and passes functional
+      tests, it reaches production. The security gap is not visible until an attacker
+      finds it.
+    </p>
+
+    <h2>Why AI-Generated Code Requires Security Review</h2>
+
+    <p>
+      LLM coding assistants are trained on large corpora of public code, which includes
+      both secure and insecure patterns, deprecated APIs, and code written before
+      security best practices were established. The model cannot distinguish between a
+      secure pattern and a legacy anti-pattern by looking at code frequency in training
+      data — both appear as valid completions. As a result, LLM-generated code tends to
+      reflect the average of its training distribution rather than current security
+      standards.
+    </p>
+
+    <p>
+      Three failure modes are especially common in LLM-generated code:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Failure mode</th>
+          <th>Example</th>
+          <th>Why LLMs produce it</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Insecure defaults</td>
+          <td>TLS verification disabled, debug mode left on</td>
+          <td>Common in tutorials and quick-start examples in training data</td>
+        </tr>
+        <tr>
+          <td>Outdated patterns</td>
+          <td>MD5 for password hashing, <code>eval()</code> for parsing</td>
+          <td>Older code vastly outnumbers newer code in training corpora</td>
+        </tr>
+        <tr>
+          <td>Incorrect library versions</td>
+          <td>Pinning a version with a known CVE</td>
+          <td>Model has no live CVE feed; version knowledge is frozen at training cutoff</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      A mandatory human security review of LLM-generated code is not optional caution —
+      it is the structural control that compensates for the model's inability to
+      distinguish current best practice from historical anti-pattern.
+    </div>
+
+    <h2>The Mitigation Stack</h2>
+
+    <p>
+      OWASP LLM09 recommends a layered mitigation approach. No single control is
+      sufficient; the goal is to build independent verification steps at every layer
+      where the model's output could cause harm if it were wrong.
+    </p>
+
+    <h3>Self-consistency and voting</h3>
+    <p>
+      For any fact-sensitive query, ask the model the same question multiple times with
+      slight rephrasing and compare the answers. Genuine factual knowledge tends to
+      produce consistent responses; hallucinated details often vary across runs. Majority
+      voting across responses can surface uncertainty that a single answer hides. This
+      technique is especially useful for detecting unstable claims in generated code or
+      cited sources.
+    </p>
+
+    <h3>Chain-of-thought prompting</h3>
+    <p>
+      Asking the model to "think step by step" or to explain its reasoning before
+      giving an answer does two things: it can improve accuracy on complex tasks by
+      surfacing intermediate reasoning, and it makes the reasoning inspectable. A
+      reviewer can catch a hallucinated premise in the chain of reasoning before it
+      propagates to the conclusion. This is a mitigation for complex or multi-step
+      answers, not a substitute for external verification.
+    </p>
+
+    <h3>Mandatory human review for security-critical outputs</h3>
+    <p>
+      The human-in-the-loop control is the most reliable mitigation for high-stakes
+      outputs. Any LLM output that will be executed, deployed, published to users, or
+      used to make consequential decisions should pass through a qualified human reviewer
+      before action is taken. The reviewer is specifically looking for security issues
+      that the model cannot self-detect: insecure defaults, suspicious package names,
+      unverified claims, and logic errors in generated code.
+    </p>
+
+    <h3>Cross-checking against trusted external sources</h3>
+    <p>
+      For factual claims — package names, API signatures, regulatory citations, medical
+      facts — verify against an authoritative external source before acting. This means
+      checking <code>npmjs.com</code> or <code>pypi.org</code> before installing a
+      suggested package, querying official documentation before using a generated API
+      call, and consulting original sources before citing a statistic the model produced.
+    </p>
+
+    <h3>AI-content labeling and responsible interfaces</h3>
+    <p>
+      When LLM output is presented to end users, label it clearly as AI-generated.
+      Content filters can reduce the rate of harmful outputs, but labeling serves the
+      downstream human: it signals that independent verification is appropriate before
+      acting on the content. Interfaces that present LLM output as if it were
+      human-reviewed editorial content create the conditions for large-scale overreliance.
+    </p>
+
+    <section class="exercise">
+      <h2>Skill Exercise: LLM Coding Assistant Policy</h2>
+      <p>
+        Your dev team has adopted an LLM coding assistant for daily work. Write a brief
+        policy — 3 to 5 bullet points — covering:
+      </p>
+      <ul>
+        <li>When human security review is mandatory before merging LLM-generated code</li>
+        <li>How to verify any package name suggested by the assistant before installing it</li>
+        <li>How to handle security-sensitive suggestions (auth logic, crypto, secrets management)</li>
+      </ul>
+      <p>
+        Your policy should be specific enough that a new team member could follow it
+        without ambiguity. Avoid vague directives like "be careful" — name the specific
+        check or step required.
+      </p>
+      <textarea rows="10" placeholder="Write your 3–5 bullet policy here...&#10;&#10;Example start:&#10;• All LLM-generated code touching authentication, secrets, or crypto MUST pass a dedicated security review before merge, regardless of passing CI..."></textarea>
+    </section>
+
+    <div class="quiz" id="quiz-8">
+      <h2>Check Your Understanding</h2>
+      <p>
+        An LLM coding assistant suggests installing a package called
+        <code>secure-jwt-validator</code>. The package does not exist in any public
+        registry. Why does this represent a supply chain attack risk, specifically?
+      </p>
+      <div class="quiz-options">
+        <button>An attacker can register that package name with malicious code, exploiting developer trust in the model's suggestion to execute arbitrary code on install</button>
+        <button>The model's training data contains outdated versions, so any suggested package will have known vulnerabilities already listed in public CVE databases</button>
+        <button>The LLM lacks real-time registry access, so it cannot confirm whether the package exists and may suggest names from its expired training corpus</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your AI tutor: "How does the package
+      hallucination attack differ from typosquatting, and what does that difference imply
+      for automated dependency scanning tools?"
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0007-sensitive-information-disclosure.html">&larr; Prev</a>
+      <a href="0009-excessive-agency-plugin-design.html" class="primary">Next &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-8',
+      0,
+      'Correct. The package hallucination attack works in two steps: the LLM suggests a ' +
+      'plausible but non-existent package name, and an attacker who has registered that ' +
+      'name on a public registry delivers malicious code when the developer runs the install ' +
+      'command. The developer\'s trust in the model\'s suggestion — overreliance — is the ' +
+      'attack vector. The second and third options describe real limitations of LLMs ' +
+      '(outdated knowledge, no live registry access) but neither explains the supply chain ' +
+      'mechanism: the attacker actively squatting on the hallucinated name.'
+    );
+  </script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-20 | research/owasp-llm-top-10/lessons/ | lessons |
+| 2026-08-20 | research/owasp-llm-top-10/report.md | research |
 | 2026-08-20 | research/threat-modeling-basics/lessons/ | lessons |
 | 2026-08-20 | research/threat-modeling-basics/report.md | research |
 | 2026-08-20 | raw/url/guardrails-research.processed.md | archive |

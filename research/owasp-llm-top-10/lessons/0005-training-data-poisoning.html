@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson 5: Training Data Poisoning — OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Course index</a> / Module 2: Input-Side Attacks / Lesson 5
+    </div>
+    <h1>Training Data Poisoning</h1>
+    <div class="lesson-meta">
+      <span>LLM03 / LLM05:2026</span>
+      <span>~13 min</span>
+      <span>Module 2 of 4 — Input-Side Attacks</span>
+      <span>Lesson 5 of 13</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    OWASP Top 10 for LLM Applications — LLM03: Training Data Poisoning<br />
+    <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM03_TrainingDataPoisoning.md"
+       target="_blank" rel="noopener">
+      github.com/OWASP/www-project-top-10-for-large-language-model-applications — LLM03_TrainingDataPoisoning.md
+    </a>
+  </div>
+
+  <!-- ── Section 1 ── -->
+  <h2>What Is Training Data Poisoning?</h2>
+
+  <p>
+    Most LLM attacks happen at runtime — a malicious prompt tricks the model during a live request.
+    Training data poisoning is different. The attacker corrupts the model <em>before it ever serves a single user</em>,
+    by manipulating the data used to pre-train, fine-tune, or build the embeddings that the model learns from.
+  </p>
+
+  <p>
+    OWASP classifies this as an <strong>integrity attack</strong>. Where a prompt injection attack
+    influences one response, a poisoning attack embeds a flaw permanently into the model's weights.
+    Every future request made to that model is potentially affected — even with perfect input filtering —
+    because the corruption lives inside the model itself, not in the input stream.
+  </p>
+
+  <div class="callout key">
+    A poisoned model is not a misconfigured application. It is a compromised artifact.
+    Input validation at inference time cannot undo damage written into the weights during training.
+    The only complete fix is retraining from clean data.
+  </div>
+
+  <p>
+    Poisoning can target any phase of the pipeline:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pipeline phase</th>
+        <th>What is affected</th>
+        <th>Typical attacker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pre-training</td>
+        <td>Foundation model weights — affects all downstream users</td>
+        <td>Nation-state, competitor with long time horizon</td>
+      </tr>
+      <tr>
+        <td>Fine-tuning</td>
+        <td>Task-specific behavior — affects one product or customer segment</td>
+        <td>Insider, malicious customer, supply-chain actor</td>
+      </tr>
+      <tr>
+        <td>Embedding / RAG index</td>
+        <td>Retrieval results — affects any query that hits the poisoned document</td>
+        <td>External contributor, scraped web source</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Why external data sources are the highest-risk input</h3>
+
+  <p>
+    When a model builder trains on data they collected and curated themselves, they control the
+    integrity of every record. When they train on publicly available datasets — Common Crawl,
+    Wikipedia mirrors, GitHub, third-party document collections — they inherit the integrity
+    (or lack thereof) of those sources without being able to audit every row.
+  </p>
+
+  <p>
+    An attacker who can write to a public data source that the model builder scrapes has a
+    straightforward path to poisoning: publish content, wait for the next training run, and the
+    corruption enters the model. The model builder may not even know the source existed.
+  </p>
+
+  <div class="callout warning">
+    Fine-tuning on internal data feels safe because "we own the data." But internal fine-tuning
+    data is often user-generated — customer support tickets, chat logs, feedback forms. Those inputs
+    are written by outsiders. An attacker who is also a customer can poison the fine-tuning corpus
+    through normal product usage without ever touching the model's infrastructure.
+  </div>
+
+  <!-- ── Section 2 ── -->
+  <h2>Four Attack Scenarios from OWASP</h2>
+
+  <p>OWASP LLM03 describes four concrete poisoning scenarios. Each illustrates a different attacker
+  and a different entry point.</p>
+
+  <h3>Scenario 1 — Competitor poisons a public dataset</h3>
+  <p>
+    A foundation model team builds a pre-training corpus by crawling public websites and incorporating
+    open datasets. A competitor identifies one of those datasets and injects false or misleading
+    technical information — for example, subtly incorrect code examples or fabricated research findings.
+    When the model is trained and deployed, it confidently reproduces the false information, eroding
+    trust in the model builder without the attack being traceable to the competitor.
+  </p>
+
+  <h3>Scenario 2 — Insider contaminates fine-tuning data</h3>
+  <p>
+    An employee with access to the fine-tuning data pipeline modifies a batch of training examples
+    — perhaps adding a hidden trigger phrase that causes the model to respond differently when that
+    phrase appears in a query. This is the classic <strong>backdoor injection</strong> pattern:
+    the model behaves normally on standard inputs, but the attacker who knows the trigger can
+    reliably elicit malicious outputs. Because the model passes normal evaluations, the attack
+    survives quality review.
+  </p>
+
+  <h3>Scenario 3 — Prompt injection as a data collection mechanism</h3>
+  <p>
+    A model is continuously fine-tuned on real user interactions to improve quality. An attacker
+    sends crafted inputs during the live product phase, knowing those inputs will be collected
+    and fed back into the next fine-tuning run. The malicious inputs are not attacks on the
+    current model — they are seeds planted for the future model. The OWASP description states
+    this directly: "malicious client input used during training may become embedded in the model
+    itself." The product's feedback loop becomes the attack vector.
+  </p>
+
+  <h3>Scenario 4 — User inadvertently introduces sensitive data</h3>
+  <p>
+    A company builds a fine-tuned model using internal support ticket data, intending to improve
+    domain-specific helpfulness. The ticket data contains personally identifiable information,
+    unreleased product details, and confidential customer communications — none of which was
+    supposed to be included. The model learns this information and later surfaces fragments of it
+    in responses to unrelated users. This scenario is not malicious, but the outcome is the same
+    as an intentional attack: data that should never have entered training is now embedded in
+    the model weights.
+  </p>
+
+  <div class="callout key">
+    Scenarios 1 and 2 are adversarial. Scenarios 3 and 4 show that poisoning can happen without
+    a deliberate attacker — the training pipeline itself can be the path of least resistance for
+    data you do not want in the model.
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>Defense Strategies: Detect Before and After Training</h2>
+
+  <p>
+    Because poisoning attacks span the entire model lifecycle — from data collection through
+    deployment — the defenses must too. No single control is sufficient. OWASP recommends a
+    layered approach combining provenance tracking, statistical detection, architectural isolation,
+    and output monitoring.
+  </p>
+
+  <h3>ML-BOM: know what went into the model</h3>
+
+  <p>
+    A <strong>Machine Learning Bill of Materials</strong> (ML-BOM) is the AI equivalent of a
+    software SBOM. It is a structured document that records every component used to produce a model:
+    the data sources (including versions and checksums), the preprocessing steps applied,
+    the training parameters, the base model used for fine-tuning, and the evaluation results.
+  </p>
+
+  <p>
+    Combined with <strong>model cards</strong> — standardized documentation of a model's intended
+    use, limitations, and training data provenance — an ML-BOM creates an auditable chain of
+    custody. When a poisoning incident is suspected, the ML-BOM is the starting point for the
+    investigation: which data sources were included, and which could have been tampered with?
+  </p>
+
+  <h3>DVC: version your datasets like code</h3>
+
+  <p>
+    <a href="https://dvc.org" target="_blank" rel="noopener">Data Version Control (DVC)</a>
+    applies the discipline of code versioning to machine learning datasets. Every dataset is
+    tracked with a content hash; every change is committed with a diff. This makes unexpected
+    modifications detectable — if a dataset that should not have changed between two training
+    runs has a different hash, that discrepancy is surfaced before training begins.
+  </p>
+
+  <p>
+    DVC does not prevent a sophisticated attacker from modifying data and committing the change
+    as a legitimate update, but it eliminates silent drift and forces any modification to
+    leave a traceable record. Combined with code review requirements on data pipeline PRs,
+    this significantly raises the cost of an insider attack.
+  </p>
+
+  <h3>Statistical filtering and anomaly detection</h3>
+
+  <p>
+    Before training, input pipelines can apply statistical checks to identify outliers:
+    samples that are unusually short or long, that contain a high density of rare tokens,
+    that originate from a small number of sources, or that deviate significantly from the
+    distribution of the rest of the corpus. These checks will not catch every backdoor
+    (some are designed to be statistically indistinguishable from legitimate samples),
+    but they reduce the volume of low-effort poisoning attempts.
+  </p>
+
+  <h3>Federated learning and adversarial robustness</h3>
+
+  <p>
+    Architecturally, <strong>federated learning</strong> distributes model training across
+    multiple parties without centralizing their raw data. No single contributor can see or
+    modify the full corpus, which raises the bar for a coordinated poisoning attack significantly.
+    This is most applicable when training data genuinely comes from multiple independent
+    organizations (e.g., healthcare networks collaborating on a shared model without
+    sharing patient records).
+  </p>
+
+  <h3>Output monitoring: detecting poisoning after deployment</h3>
+
+  <p>
+    For fine-tuned production models where full data audit is not feasible, OWASP recommends
+    monitoring deployed model outputs for statistical anomalies. The key metric is
+    <strong>response skew</strong>: if the distribution of outputs shifts for certain query
+    classes, or if the model starts producing responses that were rare before a recent fine-tuning
+    run, that signal warrants investigation. Setting explicit thresholds for skewed responses —
+    and alerting when those thresholds are crossed — provides a detection layer that operates
+    even when the poisoning event is already inside the model.
+  </p>
+
+  <div class="callout warning">
+    Output monitoring detects poisoning effects, not poisoning causes. By the time monitoring
+    triggers an alert, the corrupted model is already serving users. Monitoring is a necessary
+    backstop, not a substitute for pre-training data integrity controls.
+  </div>
+
+  <h3>Red team exercises throughout the model lifecycle</h3>
+
+  <p>
+    OWASP recommends red team exercises that explicitly attempt to poison training data at each
+    phase of the pipeline. Unlike inference-time red teaming (which focuses on prompt attacks),
+    ML red teaming for poisoning tests whether the data collection, labeling, and fine-tuning
+    pipelines can be manipulated by an adversarial contributor — internal or external.
+    This is most valuable when conducted before a new data source is incorporated into training.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-5">
+    <p>What does an ML-BOM (Machine Learning Bill of Materials) primarily provide as a defense against training data poisoning?</p>
+    <div class="quiz-options">
+      <button>Audit trail covering data sources, training parameters, and model provenance</button>
+      <button>Real-time filter blocking malicious inputs before they reach the model</button>
+      <button>A network firewall protecting model checkpoints from unauthorized external access</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      You are the ML security lead for a customer support chatbot that is fine-tuned monthly
+      on the previous month's support ticket data. Identify <strong>three sources of training data</strong>
+      this pipeline uses. For each source, answer:
+    </p>
+    <ul>
+      <li><strong>(a)</strong> What is the poisoning vector — how could an attacker (or careless user) corrupt this source?</li>
+      <li><strong>(b)</strong> What is the primary defense you would apply?</li>
+      <li><strong>(c)</strong> Does that defense catch the poisoning <em>before</em> or <em>after</em> the model is trained?</li>
+    </ul>
+    <p>
+      Example sources to consider: customer-submitted support tickets, agent-written resolution notes,
+      product documentation, third-party knowledge base articles, feedback ratings on chatbot responses.
+    </p>
+    <textarea placeholder="Source 1: Customer-submitted support tickets
+  (a) Poisoning vector: A malicious customer submits tickets containing trigger phrases designed to embed backdoor behavior...
+  (b) Defense: ...
+  (c) Before / After training: ...
+
+Source 2: ...
+
+Source 3: ..."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask a tutor: "If DVC tracks dataset versions, how do I detect a poisoning attack that was
+    committed legitimately — by a malicious insider who had write access to the data repository?"
+    — or try: "What is the difference between a backdoor attack and a bias injection attack in
+    terms of how they affect model outputs?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0004-indirect-prompt-injection.html">&larr; Lesson 4: Indirect Prompt Injection</a>
+    <a href="0006-insecure-output-handling.html" class="primary">Lesson 6: Insecure Output Handling &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-5',
+    0,
+    'An ML-BOM documents everything that went into a model — data sources, processing steps, ' +
+    'training parameters, and model provenance — so you can audit exactly what changed when a ' +
+    'poisoning event is suspected. It does not filter inputs in real time or protect network ' +
+    'access to checkpoints; those are separate controls (input filtering and access control, respectively).'
+  );
+</script>
+</body>
+</html>

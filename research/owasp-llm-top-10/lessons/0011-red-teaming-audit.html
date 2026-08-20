@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red Teaming &amp; Audit Methodology — OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Course index</a> / Module 4: Building Secure LLM Apps / Lesson 11
+    </div>
+    <h1>Red Teaming &amp; Audit Methodology</h1>
+    <div class="lesson-meta">
+      <span>~14 min</span>
+      <span>Module 4 of 4 &mdash; Building Secure LLM Apps</span>
+      <span>Lesson 11 of 13</span>
+    </div>
+  </header>
+
+  <!-- ── Key concepts ── -->
+  <p>
+    <strong>Key concepts:</strong>
+    red teaming &middot; adversarial inputs &middot; CI/CD security integration &middot;
+    model-layer vs. application-layer threats &middot; promptfoo &middot; 12-item audit checklist
+  </p>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://www.promptfoo.dev/docs/red-team/">promptfoo &mdash; LLM Red Teaming Documentation</a>
+  </div>
+
+  <!-- ── Section 1 ── -->
+  <h2>What Is LLM Red Teaming?</h2>
+
+  <p>
+    Traditional penetration testing finds exploitable bugs in software. LLM red teaming does something
+    different: it systematically probes an AI system with <em>adversarial inputs</em> before deployment in
+    order to <em>quantify vulnerability risk</em>. The goal is not just to find failures, but to measure
+    how reliably the system fails under deliberate attack &mdash; and to surface that risk in terms that
+    developers and security teams can act on.
+  </p>
+
+  <p>
+    The promptfoo documentation describes the core purpose as follows: LLM red teaming gives teams a
+    structured way to stress-test prompt defenses, output filters, plugin permissions, and data access
+    controls before a system reaches real users. It shifts LLM security from a reactive posture
+    (waiting for incidents) to a proactive one (measuring attack surface before release).
+  </p>
+
+  <div class="callout key">
+    The distinguishing feature of LLM red teaming is the combination of automated adversarial input
+    generation with human creativity. Automated tools can cover known vulnerability patterns at scale;
+    human red teamers devise novel attack vectors that automation has not yet catalogued. Neither alone
+    is sufficient.
+  </div>
+
+  <p>
+    Red teaming applies across the full OWASP LLM Top 10 surface. A single exercise can probe for
+    prompt injection (LLM01), insecure output handling (LLM02), training data leakage (LLM03),
+    excessive agency (LLM08), and more &mdash; giving teams a unified view of risk rather than
+    point-in-time checks against individual vulnerabilities.
+  </p>
+
+  <!-- ── Section 2 ── -->
+  <h2>Model-Layer vs. Application-Layer Threats</h2>
+
+  <p>
+    One of the most useful distinctions in LLM red teaming is the split between threats that target
+    the <em>model itself</em> and threats that target the <em>system built around it</em>. Conflating
+    the two leads to misallocated remediation effort: hardening the model does not fix application
+    architecture flaws, and vice versa.
+  </p>
+
+  <h3>Model-layer threats</h3>
+
+  <p>
+    Model-layer attacks target intrinsic properties of the LLM. The attacker is trying to make the
+    model do something its training or alignment was designed to prevent. Examples include:
+  </p>
+
+  <ul>
+    <li><strong>Prompt injection and jailbreaks</strong> &mdash; crafted inputs that override system
+    instructions or bypass safety guidelines.</li>
+    <li><strong>Hallucination exploitation</strong> &mdash; prompts that reliably cause the model to
+    fabricate authoritative-sounding false information, used to mislead downstream consumers.</li>
+    <li><strong>Training data extraction</strong> &mdash; prompts that induce the model to reproduce
+    verbatim text from its training corpus, potentially leaking PII or proprietary content that was
+    memorised during pre-training.</li>
+  </ul>
+
+  <h3>Application-layer threats</h3>
+
+  <p>
+    Application-layer attacks target the infrastructure, integrations, and data flows wrapped around
+    the model. The model itself may behave correctly; the vulnerability lives in how the system is
+    assembled. Examples include:
+  </p>
+
+  <ul>
+    <li><strong>Indirect injection via RAG</strong> &mdash; adversarial instructions embedded in
+    retrieved documents that reach the model as &ldquo;trusted&rdquo; context (covered in Lesson 4).</li>
+    <li><strong>PII leakage via RAG</strong> &mdash; the retrieval pipeline returns private records that
+    the querying user was not authorised to see.</li>
+    <li><strong>Unauthorized tool access</strong> &mdash; the model invokes a plugin or API action that
+    exceeds its intended permission scope.</li>
+    <li><strong>Data exfiltration</strong> &mdash; an attacker manipulates the system into encoding
+    sensitive context into an outbound URL or response that the attacker controls.</li>
+  </ul>
+
+  <div class="callout warning">
+    It is tempting to treat model-layer hardening &mdash; fine-tuning, RLHF, content filters &mdash;
+    as a sufficient security strategy. Application-layer threats are not addressed by any amount of
+    model-level hardening. A model that correctly refuses a jailbreak can still exfiltrate data if
+    the application grants it unfiltered tool access and no outbound request inspection.
+  </div>
+
+  <!-- ── Section 3 ── -->
+  <h2>The Five-Step Red Team Methodology</h2>
+
+  <p>
+    The promptfoo red team documentation describes a five-step process that applies whether the
+    exercise is manual, automated, or a hybrid of both.
+  </p>
+
+  <h3>Step 1 &mdash; Define strategy and vulnerability priorities</h3>
+  <p>
+    Before generating any inputs, the team decides which vulnerabilities matter most for the specific
+    deployment. A customer-facing support bot has a different threat model than an internal code-review
+    assistant. The output of this step is a prioritised list: which OWASP categories to probe, what
+    severity thresholds will block release, and what data the model has access to.
+  </p>
+
+  <h3>Step 2 &mdash; Generate adversarial inputs</h3>
+  <p>
+    Adversarial inputs are produced in two ways: <em>automated generation</em> using tools like
+    promptfoo (which can produce thousands of variations of known attack patterns) and
+    <em>human creativity</em> (red teamers who devise novel framing, multi-turn sequences, or
+    context-specific attacks that automation has not modelled). The combination achieves both breadth
+    and depth.
+  </p>
+
+  <h3>Step 3 &mdash; Execute in a production-like environment</h3>
+  <p>
+    Red team inputs must be run against the full system stack &mdash; not against the base model in
+    isolation. That means the same system prompt, the same retrieval pipeline, the same plugins and
+    tool access, and the same output post-processors that will exist in production. Testing the model
+    in isolation gives a false sense of security because most application-layer threats only emerge
+    when the full system is assembled.
+  </p>
+
+  <h3>Step 4 &mdash; Analyze results</h3>
+  <p>
+    Results are evaluated using two complementary methods. <em>Deterministic metrics</em> check for
+    exact strings, regexes, or schema violations in outputs. <em>Model-graded metrics</em> use a
+    secondary LLM (or a specialised evaluation model) to judge whether a response was harmful,
+    compliant, or evasive. Combining the two captures both objective failures and nuanced policy
+    violations that resist simple pattern matching.
+  </p>
+
+  <h3>Step 5 &mdash; Remediate and re-test</h3>
+  <p>
+    Each identified vulnerability is mapped to a control (system prompt change, permission reduction,
+    output filter, architecture fix) and the same adversarial input is re-run to confirm the fix
+    holds. Re-testing is essential because a mitigation applied for one attack vector can introduce
+    a regression elsewhere. The cycle &mdash; attack, fix, verify &mdash; continues until risk falls
+    below the defined threshold.
+  </p>
+
+  <!-- ── Section 4 ── -->
+  <h2>The 12-Item Audit Checklist</h2>
+
+  <p>
+    The table below maps each control area to its primary OWASP LLM category. During a red team
+    exercise, each row is a testable claim: the adversarial test should confirm that the control
+    holds under deliberate attack, not merely under normal usage.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Check</th>
+        <th>OWASP Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>System prompt separated from user input; untrusted content wrapped in distinct delimiters</td>
+        <td>LLM01</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>All LLM output treated as untrusted before rendering or passing downstream</td>
+        <td>LLM02 / LLM10:2026</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Training and fine-tuning data sources vetted, versioned (DVC), and anomaly-scanned</td>
+        <td>LLM03 / LLM05:2026</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Input size limits enforced; rate limiting per user/IP at API gateway</td>
+        <td>LLM04 / LLM06:2026</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>SBOM maintained; all model dependencies and plugins pinned and signed</td>
+        <td>LLM05 / LLM04:2026</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>PII and sensitive data scrubbed from training pipelines; access-controlled in RAG</td>
+        <td>LLM06 / LLM02:2026</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>All plugins use parameterized inputs; SQL injection and SSRF protections applied</td>
+        <td>LLM07</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>LLM tools operate under least privilege; high-impact actions require human confirmation</td>
+        <td>LLM08 / LLM03:2026</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>AI outputs in decision-critical workflows have human review and source verification</td>
+        <td>LLM09 / LLM07:2026</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Model repositories are RBAC-gated; API call patterns monitored for extraction attempts</td>
+        <td>LLM10</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Red team exercises conducted pre-deploy and integrated into the CI/CD pipeline</td>
+        <td>All</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Comprehensive audit logging of all LLM requests and tool/plugin invocations</td>
+        <td>All</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Section 5 ── -->
+  <h2>Integrating Red Teaming into CI/CD</h2>
+
+  <p>
+    A one-time pre-launch red team exercise is valuable but insufficient. LLM systems change
+    continuously: prompts are updated, models are upgraded, plugins are added, and retrieval
+    corpora evolve. A vulnerability that was absent at launch can be introduced by any of these
+    changes. The solution is to treat red team tests the same way software teams treat unit tests
+    &mdash; run them automatically on every deployment.
+  </p>
+
+  <p>
+    Tools like promptfoo support this directly. A red team configuration file defines the adversarial
+    test suite: the attack categories, the prompts, and the pass/fail criteria. That file is checked
+    into source control alongside the application code. A CI/CD pipeline step runs the full suite
+    against every candidate deployment, and the build fails if the attack success rate exceeds the
+    defined threshold.
+  </p>
+
+  <pre><code># Example: promptfoo red team step in a CI pipeline (conceptual)
+npx promptfoo redteam run \
+  --config redteam.yaml \
+  --output results.json \
+  --fail-threshold 0.05   # fail build if &gt;5% of adversarial inputs succeed</code></pre>
+
+  <div class="callout key">
+    Checklist items 11 and 12 reinforce each other. Continuous red teaming (item 11) surfaces new
+    failures; comprehensive audit logging (item 12) provides the forensic trail to understand how
+    and when each failure occurred. Together they create a feedback loop: attacks are detected,
+    logged, root-caused, and re-tested in the next CI run.
+  </div>
+
+  <p>
+    CI/CD integration also enforces accountability. When red team tests are automated and their
+    results are visible in the deployment pipeline, security regressions cannot ship silently.
+    A new model version that jailbreaks more easily than its predecessor will fail the build &mdash;
+    before it ever reaches production users.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-11">
+    <p>Which statement correctly describes model-layer threats in LLM red teaming?</p>
+    <div class="quiz-options">
+      <button>Model-layer threats attack the LLM itself through jailbreaks, training data extraction, and hallucinations</button>
+      <button>Application-layer threats attack the surrounding system through RAG injection, plugin abuse, and exfiltration</button>
+      <button>Both threat categories are essentially the same when tested with standard adversarial techniques</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Using the 12-item audit checklist above, select <strong>3 items</strong> of your choice.
+      For each item, write:
+    </p>
+    <ol>
+      <li>The checklist item number and a one-sentence description of what it protects against.</li>
+      <li>One specific adversarial test input or test scenario you would use to verify the control
+      is working &mdash; concrete enough that another engineer could run it.</li>
+    </ol>
+    <p>
+      For example, for item 1 (system prompt separation), a test scenario might be:
+      <em>&ldquo;Submit a user message containing the exact text of a known delimiter tag to see whether
+      the model treats the injected closing tag as an escape from the untrusted-content wrapper.&rdquo;</em>
+    </p>
+    <textarea placeholder="Item N: [description of protection]&#10;Test scenario: [specific adversarial input or scenario]&#10;&#10;Item N: ...&#10;Test scenario: ...&#10;&#10;Item N: ...&#10;Test scenario: ..."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask a tutor: &ldquo;If my CI/CD red team suite passes with a 3% adversarial success rate, how should
+    I decide whether that threshold is acceptable &mdash; and what additional context beyond pass rate
+    matters when setting the failure threshold?&rdquo;
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0010-supply-chain-dos-theft.html">&larr; Lesson 10: Supply Chain, DoS &amp; Theft</a>
+    <a href="0012-layered-defense-architecture.html" class="primary">Lesson 12: Layered Defense Architecture &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-11',
+    0,
+    'Correct. Model-layer threats target intrinsic properties of the LLM itself — the ability to jailbreak its safety training, induce hallucinations, or extract memorised training data. Option B accurately describes application-layer threats (a separate and equally important category), but that is not what the question asks. Option C is incorrect: the two categories require different mitigations and must be tested independently. Fixing model-layer vulnerabilities through fine-tuning or RLHF does not address application-layer flaws in RAG pipelines, plugin permissions, or data exfiltration paths.'
+  );
+</script>
+</body>
+</html>
