@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 — Step 2: Identifying and Capturing Threats</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Threat Modeling Basics &rsaquo; Module 3 &mdash; The Process &rsaquo; Lesson 9 of 12
+    </div>
+    <h1>Step 2 &mdash; Identifying and Capturing Threats</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 3 &mdash; The Process</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <p>
+      <strong>Primary source: Agile Threat Modelling &mdash; Martin Fowler</strong>
+      <a href="https://martinfowler.com/articles/agile-threat-modelling.html" target="_blank" rel="noopener">
+        https://martinfowler.com/articles/agile-threat-modelling.html
+      </a><br>
+      Describes how agile teams apply STRIDE systematically to each data flow in a DFD, treating each STRIDE category as a checklist question rather than an exclusive bucket.
+    </p>
+  </div>
+
+  <div class="source-card">
+    <p>
+      <strong>Secondary source: OWASP Threat Modeling</strong>
+      <a href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+        https://owasp.org/www-community/Threat_Modeling
+      </a><br>
+      Covers multiple elicitation techniques &mdash; STRIDE, attack trees, kill chains &mdash; and emphasizes capturing threats before prioritizing them, ensuring no candidate threat is discarded prematurely.
+    </p>
+  </div>
+
+  <!-- ─── Section 1: The Goal ──────────────────────────────────────────── -->
+
+  <h2>The goal: systematically ask &ldquo;What can go wrong?&rdquo;</h2>
+
+  <p>With your DFD drawn and trust boundaries marked, you have a map. The next step is to walk that map and ask a single question at every arrow: <em>what can go wrong here?</em> The challenge is doing this systematically enough that you don&rsquo;t miss anything important, and loosely enough that you don&rsquo;t constrain your thinking too early.</p>
+
+  <p>STRIDE is the tool that provides this discipline. For every data flow arrow on your DFD, you run through all six STRIDE categories and ask whether each one applies. You are not looking for one threat per arrow &mdash; you are asking six distinct questions per arrow, and any of them can yield one or more threats. The DFD you built in Lesson 8 is your worksheet; each arrow is a row you work through in turn.</p>
+
+  <p>This is not a creative exercise in the sense of imagining novel attack scenarios from scratch. It is a structured walkthrough that ensures you cover every category for every data flow. The creativity comes in articulating the specific threat once STRIDE has pointed you at a category &mdash; &ldquo;Spoofing applies here; what exactly could an attacker spoof and how?&rdquo;</p>
+
+  <!-- ─── Section 2: STRIDE Per Element ───────────────────────────────── -->
+
+  <h2>STRIDE per element: applying the checklist to each data flow</h2>
+
+  <p>The technique is called <strong>STRIDE per element</strong>. Take each arrow in your DFD &mdash; each data flow &mdash; and step through all six STRIDE categories one at a time. For each category, ask: &ldquo;Could an attacker exploit this flow in a way that fits this category?&rdquo; If yes, write it down as a specific threat statement (more on the format in the next section). If no, move on.</p>
+
+  <p>The following table shows three examples using the user registration flow from Lesson 8:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Data Flow</th>
+        <th>STRIDE Category</th>
+        <th>Specific Threat Statement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Browser &rarr; Registration API</td>
+        <td>Spoofing</td>
+        <td>Attacker forges a legitimate user&rsquo;s registration request to create an account under their email</td>
+      </tr>
+      <tr>
+        <td>Browser &rarr; Registration API</td>
+        <td>Tampering</td>
+        <td>Attacker modifies the POST body to set their account role to &ldquo;admin&rdquo; during registration</td>
+      </tr>
+      <tr>
+        <td>Registration API &rarr; User DB</td>
+        <td>Information Disclosure</td>
+        <td>Verbose SQL error message reveals the database schema to an unauthenticated attacker</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Notice that the first two rows cover the <em>same data flow</em> with <em>different STRIDE categories</em>. This is expected and correct: a single arrow can and often does have threats in multiple &mdash; or all six &mdash; STRIDE categories. You are not assigning one category to each flow; you are asking each category as a question about each flow.</p>
+
+  <div class="callout warning">
+    <p>STRIDE categories are not mutually exclusive. A single data flow can have threats in all six categories. Applying STRIDE is a checklist to ensure you ask each question &mdash; not a constraint that limits you to one threat per flow.</p>
+  </div>
+
+  <p>Work through the DFD methodically: pick the first arrow, run all six STRIDE questions, write down any threats that apply, then move to the next arrow. Some teams use a whiteboard grid with arrows as rows and STRIDE categories as columns, marking each cell that yields a threat. Others use sticky notes, one per threat. The medium does not matter; the coverage does.</p>
+
+  <!-- ─── Section 3: Writing Good Threat Statements ────────────────────── -->
+
+  <h2>Writing good threat statements</h2>
+
+  <p>A threat statement is only useful if it is specific enough to act on. The format that works is:</p>
+
+  <p><strong>[Attacker action] + [entry point or data flow] + [target component]</strong></p>
+
+  <p>This three-part structure forces you to name what the attacker does, where they enter the system, and what they are trying to reach or damage. Without all three parts, the threat is too vague to evaluate or mitigate.</p>
+
+  <p>Compare these two phrasings of the same threat:</p>
+
+  <ul>
+    <li><strong>Vague (not useful):</strong> &ldquo;Information Disclosure&rdquo;</li>
+    <li><strong>Specific (useful):</strong> &ldquo;Attacker intercepts session token from browser to server over HTTP&rdquo;</li>
+  </ul>
+
+  <p>The first phrasing just names a STRIDE category. It tells you nothing about where the threat occurs, how an attacker would exploit it, or what the impact is. The second phrasing names the attacker action (intercepts), the entry point (the browser-to-server data flow over HTTP), and the target (the session token). A developer reading it knows immediately what to investigate: &ldquo;Is this flow over HTTP? Should it be HTTPS? If so, this threat is real and we need to fix it.&rdquo;</p>
+
+  <p>More examples of the format in practice:</p>
+
+  <ul>
+    <li>&ldquo;Attacker replays a captured registration request to the Registration API to create duplicate accounts&rdquo; (Spoofing + Tampering, Browser &rarr; Registration API)</li>
+    <li>&ldquo;Attacker sends a malformed email address to the Registration API to trigger an unhandled exception that exposes a stack trace&rdquo; (Information Disclosure, Browser &rarr; Registration API)</li>
+    <li>&ldquo;Attacker floods the Registration API with concurrent requests to exhaust the database connection pool and deny service to legitimate users&rdquo; (Denial of Service, Browser &rarr; Registration API)</li>
+  </ul>
+
+  <p>Each statement names what the attacker does, where it happens, and what the consequence or target is. That three-part specificity is the standard to aim for.</p>
+
+  <!-- ─── Section 4: Capture Everything, Filter Nothing Yet ──────────── -->
+
+  <h2>Capture everything, filter nothing yet</h2>
+
+  <p>The identification step has one rule: <strong>write everything down</strong>. This is not the step where you decide what is realistic or what is worth fixing. It is the step where you ensure that every candidate threat is visible to the team before any of them are dismissed.</p>
+
+  <p>The practical tool for this is one threat per sticky note &mdash; physical sticky notes on a whiteboard, or digital equivalents in a tool like Miro or FigJam. Each sticky note holds exactly one threat statement. The act of writing it on its own note gives it equal standing with every other threat, and makes the physical act of prioritizing (which happens in Lesson 10) a matter of sorting and grouping notes rather than editing a shared document where deletions disappear silently.</p>
+
+  <div class="callout key">
+    <p>Capture every threat you can think of before filtering any out. The prioritization step (Lesson 10) is where you decide what to fix &mdash; not here. Premature filtering causes teams to miss real threats.</p>
+  </div>
+
+  <p>The most common mistake at this stage is self-filtering: a developer thinks &ldquo;that would never happen in practice&rdquo; or &ldquo;we already do X so that&rsquo;s not a real threat,&rdquo; and never writes it down. The problem is that this judgment is made without evidence, before the team has evaluated the threat formally. If a threat is real but was never written down, it cannot be formally dismissed &mdash; it simply falls through the cracks. Write it down. If it is truly irrelevant, the prioritization step will surface that clearly and you can close it there, with a documented reason.</p>
+
+  <p>Aim for quantity at this step. A session that produces 30 threat statements &mdash; many of them low severity, some of them duplicates, a few of them highly important &mdash; is more valuable than a session that produces 8 &ldquo;curated&rdquo; threats, because the curated session has already lost the threats that seemed unimportant to whoever was filtering.</p>
+
+  <!-- ─── Section 5: Alternative Approaches ───────────────────────────── -->
+
+  <h2>Alternative approaches</h2>
+
+  <p>STRIDE is not the only technique for identifying threats. Two other approaches are worth knowing, particularly as you grow in experience.</p>
+
+  <p><strong>Kill Chains</strong> approach threat identification from the attacker&rsquo;s perspective, stepping through the sequence of actions an attacker takes from initial access to final objective. The classic formulation is reconnaissance &rarr; weaponization &rarr; delivery &rarr; exploitation &rarr; installation &rarr; command-and-control &rarr; actions on objective (Lockheed Martin&rsquo;s Cyber Kill Chain). This perspective is useful for understanding multi-step attacks where no single component appears vulnerable in isolation &mdash; the threat only becomes visible when you model the full sequence. Kill chain analysis tends to be more useful for mature teams analyzing complex systems than for beginners working through their first threat model.</p>
+
+  <p><strong>Attack Trees</strong> represent threats as hierarchical decompositions: a root node names the attacker&rsquo;s goal (e.g., &ldquo;Steal user credentials&rdquo;), and child nodes name the ways to achieve it, each of which can be further decomposed into their sub-methods. Attack trees are powerful for deep analysis of a specific high-value target &mdash; you can model AND-conditions (attacker needs X and Y) versus OR-conditions (attacker needs X or Y) and reason about which paths are most feasible. The cost is that building a thorough attack tree takes significant time, making them better suited to post-threat-model deep dives than initial identification sessions.</p>
+
+  <p>For a junior developer conducting their first threat model, STRIDE is the right starting point. It is structured enough to prevent blank-page paralysis, systematic enough to provide coverage, and lightweight enough to complete in a single working session. The alternative techniques become valuable additions to your toolkit once you are comfortable with STRIDE&rsquo;s output.</p>
+
+  <!-- ─── Section 6: Using GenAI for Brainstorming ─────────────────────── -->
+
+  <h2>Using GenAI for brainstorming</h2>
+
+  <p>Generative AI tools can serve as a useful brainstorming partner during threat identification. The basic approach: write a brief, accurate description of the system or feature you are modeling, then ask the model to produce a STRIDE-prompted threat list. A prompt like &ldquo;Here is a user registration flow: Browser sends a POST request to a Registration API, which writes to a User Database and sends a welcome email via an Email Service. List potential threats using each STRIDE category for each data flow&rdquo; will produce a reasonable starting list in seconds.</p>
+
+  <p>This is most valuable for getting unstuck &mdash; when a team has been staring at a DFD for 20 minutes and the sticky notes are still blank, a generated list gives you something to react to. Reacting to a list (&ldquo;yes, that&rsquo;s real,&rdquo; &ldquo;no, we already mitigate that with X,&rdquo; &ldquo;that&rsquo;s interesting, we hadn&rsquo;t thought of that angle&rdquo;) is cognitively easier than generating from nothing.</p>
+
+  <p>The critical constraint: <strong>every suggestion must be verified against your actual system</strong>. A language model has no knowledge of your specific architecture, your existing controls, your technology stack, or your deployment environment. It will produce threats that are generic, some of which will not apply to your system, and it will miss threats that are specific to your system&rsquo;s unusual design choices. Treat generated output as a draft checklist to react to, not as a finished threat model. The judgment &mdash; which threats are real for this system, which are already mitigated, which need investigation &mdash; must come from the team that knows the system.</p>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────────────────── -->
+
+  <h2>Check your understanding</h2>
+
+  <div class="quiz" id="quiz-9">
+    <h3>Quick check &mdash; 1 question</h3>
+    <p>What is the correct format for a useful threat statement?</p>
+    <div class="quiz-options">
+      <button>A. A STRIDE category label such as Tampering</button>
+      <button>B. Attacker action plus entry point plus target</button>
+      <button>C. A risk score of high medium low</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Skill Exercise ────────────────────────────────────────────────── -->
+
+  <h2>Skill exercise</h2>
+
+  <div class="exercise">
+    <p>Use the DFD you drew in Lesson 8 (user registration: Browser &rarr; Registration API &rarr; User Database &rarr; Email Service). Write five specific threat statements &mdash; one for each of five STRIDE categories (you may skip one). For each: name the attacker action, the data flow or entry point, and the target component. Example: &ldquo;Attacker sends malformed registration request to Registration API to trigger a 500 error exposing a stack trace (Information Disclosure).&rdquo;</p>
+    <textarea placeholder="Write one threat statement per line, one for each of five STRIDE categories:&#10;&#10;1. Spoofing: Attacker ...&#10;2. Tampering: Attacker ...&#10;3. Repudiation: Attacker ...&#10;4. Information Disclosure: Attacker ...&#10;5. Denial of Service: Attacker ..." aria-label="Skill exercise: five STRIDE threat statements for the user registration DFD"></textarea>
+  </div>
+
+  <!-- ─── Tutor Prompt ──────────────────────────────────────────────────── -->
+
+  <div class="tutor-prompt">
+    Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+
+  <nav class="lesson-nav" aria-label="Lesson navigation">
+    <a href="0008-building-a-dfd.html">
+      &larr; Previous: Building a DFD
+    </a>
+    <a href="0010-prioritizing-and-responding.html" class="primary">
+      Next: Prioritizing and Responding &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-9',
+    1,
+    'A useful threat statement names what the attacker does, where they enter the system, and what they target — giving the team enough specificity to evaluate and mitigate it. Category labels alone are too vague to act on.'
+  );
+</script>
+</body>
+</html>

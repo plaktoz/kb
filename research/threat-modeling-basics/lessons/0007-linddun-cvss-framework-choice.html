@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LINDDUN, CVSS, and Choosing the Right Framework — Threat Modeling Basics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Code&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 2 &mdash; Frameworks &rsaquo; Lesson 7 of 12
+      </div>
+      <h1>LINDDUN, CVSS, and Choosing the Right Framework</h1>
+      <div class="lesson-meta">
+        <span>Module 2 &mdash; Frameworks</span>
+        <span>Lesson 7 of 12</span>
+        <span>~12 min read</span>
+      </div>
+    </header>
+
+    <!-- Sources -->
+    <div class="source-card">
+      <p>
+        <strong>Sources</strong>
+        <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html" target="_blank" rel="noopener">
+          OWASP Threat Modeling Cheat Sheet
+        </a> &mdash; catalogue of frameworks (STRIDE, PASTA, LINDDUN, OCTAVE, VAST) with selection guidance.<br />
+        <a href="https://www.imperva.com/learn/application-security/threat-modeling/" target="_blank" rel="noopener">
+          Imperva: Application Security &mdash; Threat Modeling
+        </a> &mdash; explains CVSS numerical scoring and severity bands.<br />
+        <a href="https://www.varonis.com/blog/threat-modeling" target="_blank" rel="noopener">
+          Varonis: Threat Modeling
+        </a> &mdash; framework selection factors: industry, team maturity, resources, risk appetite, asset scope.
+      </p>
+    </div>
+
+    <!-- Introduction -->
+    <p>
+      You have already seen STRIDE and PASTA. Those two frameworks cover a lot of ground, but they were
+      designed with security threats in mind — confidentiality, integrity, availability, and the like.
+      What happens when your primary concern is <em>privacy</em>? Or when you need a single number you
+      can show to a product manager to explain why a vulnerability is urgent? That is where LINDDUN,
+      CVSS, OCTAVE, and VAST come in.
+    </p>
+    <p>
+      This lesson introduces each framework at a level of detail you need as a junior developer, then
+      gives you a practical decision guide so you can choose the right tool for the job.
+    </p>
+
+    <!-- Section 1: LINDDUN -->
+    <h2>1. LINDDUN — Privacy Threat Modeling</h2>
+
+    <p>
+      LINDDUN (pronounced <em>"lin-dun"</em>) was developed at KU Leuven to fill the gap that STRIDE
+      leaves open: it does not ask "can an attacker spoof a user?" but instead "can this system link
+      a browsing session back to a real person?" Every letter in the acronym represents a category of
+      privacy threat.
+    </p>
+
+    <h3>The seven LINDDUN threat categories</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Letter</th>
+          <th>Category</th>
+          <th>What it asks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>L</strong></td>
+          <td>Linking</td>
+          <td>Can an attacker (or the system itself) combine separate data items to build a profile of a person?</td>
+        </tr>
+        <tr>
+          <td><strong>I</strong></td>
+          <td>Identifying</td>
+          <td>Can a person be singled out — identified from supposedly anonymous data?</td>
+        </tr>
+        <tr>
+          <td><strong>N</strong></td>
+          <td>Non-repudiation</td>
+          <td>Is it impossible for a user to deny an action they performed (e.g., a log entry proves they visited a page)?</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Detecting</td>
+          <td>Can an observer detect that a person is using the system, even without seeing the content?</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Data disclosure</td>
+          <td>Can personal data leak to parties who should not have access to it?</td>
+        </tr>
+        <tr>
+          <td><strong>U</strong></td>
+          <td>Unawareness</td>
+          <td>Are users unaware of how their data is collected, stored, or shared?</td>
+        </tr>
+        <tr>
+          <td><strong>N</strong></td>
+          <td>Non-compliance</td>
+          <td>Does the system violate applicable privacy laws or regulations (e.g., GDPR, CCPA)?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>When to use LINDDUN</h3>
+
+    <p>
+      Use LINDDUN whenever your application handles personal data — names, email addresses, location,
+      browsing history, health information, financial records, or any data that can be traced back to
+      an individual. It is especially important if your users are in the EU (GDPR) or California (CCPA),
+      where failing to identify privacy threats at design time can lead to significant regulatory penalties.
+    </p>
+
+    <p>
+      LINDDUN is applied to a Data Flow Diagram in the same way as STRIDE: you walk each element of the
+      diagram and ask which of the seven threat categories could apply. The output is a list of privacy
+      threats, each mapped to a specific data flow, store, or process.
+    </p>
+
+    <div class="callout key">
+      <p>
+        If your web app collects any personal data — names, emails, location, browsing history — you
+        should run LINDDUN alongside STRIDE. STRIDE finds security threats; LINDDUN finds privacy
+        threats. They are complementary, not competing.
+      </p>
+    </div>
+
+    <!-- Section 2: CVSS -->
+    <h2>2. CVSS — Scoring Severity So Everyone Understands It</h2>
+
+    <p>
+      The Common Vulnerability Scoring System (CVSS) is not a threat-discovery framework. It is a
+      <em>scoring system</em> — a standardised method for rating the severity of a vulnerability once
+      you have already identified it. CVSS produces a number between 0 and 10 that maps onto four
+      named severity bands.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>CVSS Score</th>
+          <th>Severity Band</th>
+          <th>Typical response priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0.0</td>
+          <td>None</td>
+          <td>No action required</td>
+        </tr>
+        <tr>
+          <td>0.1 – 3.9</td>
+          <td>Low</td>
+          <td>Address in regular maintenance cycle</td>
+        </tr>
+        <tr>
+          <td>4.0 – 6.9</td>
+          <td>Medium</td>
+          <td>Plan remediation within weeks</td>
+        </tr>
+        <tr>
+          <td>7.0 – 8.9</td>
+          <td>High</td>
+          <td>Remediate urgently — within days</td>
+        </tr>
+        <tr>
+          <td>9.0 – 10.0</td>
+          <td>Critical</td>
+          <td>Immediate response required</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>What goes into a CVSS score?</h3>
+
+    <p>
+      A CVSS score is calculated from three metric groups. You do not need to memorise the formula at
+      this stage, but understanding the inputs helps you estimate severity intuitively:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Base metrics</strong> — inherent properties of the vulnerability: attack vector
+        (network vs. local), attack complexity (low vs. high), privileges required, user interaction
+        needed, and the impact on confidentiality, integrity, and availability.
+      </li>
+      <li>
+        <strong>Temporal metrics</strong> — how mature the exploit is and whether a fix exists yet.
+        A vulnerability with a public exploit and no patch scores higher than one with no known exploit.
+      </li>
+      <li>
+        <strong>Environmental metrics</strong> — how the vulnerability's impact changes in your
+        specific deployment context (for example, if the affected data is particularly sensitive).
+      </li>
+    </ul>
+
+    <h3>Why CVSS matters for junior developers</h3>
+
+    <p>
+      CVSS gives you a shared language with product managers, executives, and external auditors who
+      are not security specialists. When you say "this SQL injection scores 9.8 Critical on CVSS,"
+      everyone in the room understands the urgency without needing a security background. It is also
+      the scoring system used by the National Vulnerability Database (NVD), so you will encounter it
+      whenever you look up a CVE entry for a library dependency.
+    </p>
+
+    <div class="callout warning">
+      <p>
+        You do not need to pick one framework and use it exclusively. Most mature teams combine STRIDE
+        for design-time security threats and CVSS for scoring severity once threats are identified.
+        CVSS is not a replacement for STRIDE or LINDDUN — it is used <em>after</em> threat discovery
+        to communicate and prioritise the threats you found.
+      </p>
+    </div>
+
+    <!-- Section 3: OCTAVE -->
+    <h2>3. OCTAVE — Organisational Risk Assessment</h2>
+
+    <p>
+      OCTAVE (Operationally Critical Threat, Asset, and Vulnerability Evaluation) was developed at
+      Carnegie Mellon's Software Engineering Institute. Where STRIDE and LINDDUN focus on technical
+      threats to a specific system, OCTAVE takes a step back and asks: <em>what assets matter most
+      to the organisation, and what organisational risks threaten those assets?</em>
+    </p>
+
+    <p>
+      OCTAVE is typically run in three phases:
+    </p>
+
+    <ol>
+      <li>
+        <strong>Build asset-based threat profiles</strong> — identify critical assets (customer data,
+        intellectual property, financial systems) and describe what would happen if they were compromised.
+      </li>
+      <li>
+        <strong>Identify infrastructure vulnerabilities</strong> — assess the technical weaknesses
+        in the systems that host those assets.
+      </li>
+      <li>
+        <strong>Develop security strategy and plans</strong> — prioritise risks in business terms
+        and create a remediation roadmap.
+      </li>
+    </ol>
+
+    <p>
+      OCTAVE suits larger organisations where risk decisions are made at a business level and involve
+      multiple departments (legal, finance, IT, operations). It is less common in small web-development
+      teams because it requires significant workshop time and organisational participation. For a junior
+      developer on a product team, you are more likely to encounter OCTAVE results as input to your
+      team's security requirements than to run the process yourself.
+    </p>
+
+    <!-- Section 4: VAST -->
+    <h2>4. VAST — DevOps-Scale Threat Modeling</h2>
+
+    <p>
+      VAST (Visual, Agile, and Simple Threat modeling) was designed to solve a specific problem:
+      STRIDE and PASTA are thorough, but they are slow. Running a full STRIDE session for every
+      microservice in a continuous delivery pipeline is impractical when you are shipping multiple
+      times a day.
+    </p>
+
+    <p>
+      VAST addresses this by producing two types of threat models:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Application threat models</strong> — similar to STRIDE diagrams, focused on process
+        flows and developer concerns.
+      </li>
+      <li>
+        <strong>Operational threat models</strong> — infrastructure-focused, aimed at DevOps and
+        security operations teams.
+      </li>
+    </ul>
+
+    <p>
+      VAST integrates into CI/CD tooling so that threat models are updated automatically as code
+      changes, rather than requiring a separate workshop. It is used primarily by organisations with
+      mature DevSecOps practices and dedicated application security teams. As a junior developer you
+      are unlikely to configure VAST yourself, but you may work in a pipeline that generates VAST
+      outputs alongside your pull requests.
+    </p>
+
+    <!-- Section 5: Framework Selection -->
+    <h2>5. Choosing the Right Framework</h2>
+
+    <p>
+      No single framework is universally best. The right choice depends on four factors: what you are
+      trying to protect, how mature your team is, who needs to use the outputs, and what resources you
+      have available.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Framework</th>
+          <th>Best for</th>
+          <th>Primary audience</th>
+          <th>Complexity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>STRIDE</strong></td>
+          <td>General web application security threats; design-time analysis on DFDs</td>
+          <td>Developers, architects</td>
+          <td>Low–Medium</td>
+        </tr>
+        <tr>
+          <td><strong>LINDDUN</strong></td>
+          <td>Privacy threats in apps that handle personal data; GDPR/CCPA compliance</td>
+          <td>Developers, privacy officers</td>
+          <td>Low–Medium</td>
+        </tr>
+        <tr>
+          <td><strong>PASTA</strong></td>
+          <td>Business-risk-aligned analysis; linking threats to business impact</td>
+          <td>Executives, security architects</td>
+          <td>High</td>
+        </tr>
+        <tr>
+          <td><strong>CVSS</strong></td>
+          <td>Scoring and prioritising already-identified vulnerabilities</td>
+          <td>All stakeholders</td>
+          <td>Low</td>
+        </tr>
+        <tr>
+          <td><strong>OCTAVE</strong></td>
+          <td>Organisation-wide asset risk assessment</td>
+          <td>Management, IT leadership</td>
+          <td>High</td>
+        </tr>
+        <tr>
+          <td><strong>VAST</strong></td>
+          <td>Scalable, automated threat modeling in CI/CD pipelines</td>
+          <td>DevOps teams</td>
+          <td>Medium–High</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>A practical decision guide</h3>
+
+    <p>
+      Work through these three questions to narrow your choice:
+    </p>
+
+    <ol>
+      <li>
+        <strong>What are you trying to protect?</strong>
+        <br />
+        Functional security (authentication, authorization, data integrity) &rarr; start with
+        <strong>STRIDE</strong>. Personal data and privacy rights &rarr; add <strong>LINDDUN</strong>.
+        Both usually apply to real web applications.
+      </li>
+      <li>
+        <strong>How experienced is your team?</strong>
+        <br />
+        Beginners or first threat model &rarr; <strong>STRIDE</strong> is well documented, tool-supported,
+        and widely understood. Experienced team comfortable with risk language &rarr; consider
+        <strong>PASTA</strong> for richer business alignment.
+      </li>
+      <li>
+        <strong>Who needs to consume the output?</strong>
+        <br />
+        Developers fixing code &rarr; <strong>STRIDE</strong> produces actionable, technical mitigations.
+        Executives making investment decisions &rarr; <strong>PASTA</strong> or <strong>OCTAVE</strong>
+        frame threats in business-risk terms. Privacy and legal teams &rarr; <strong>LINDDUN</strong>
+        maps directly to regulatory categories. Everyone needs severity communicated &rarr;
+        layer <strong>CVSS</strong> scores on top of whatever framework you used.
+      </li>
+    </ol>
+
+    <p>
+      The OWASP Threat Modeling Cheat Sheet also notes that STRIDE pairs well with
+      <a href="https://attack.mitre.org/" target="_blank" rel="noopener">MITRE ATT&amp;CK</a>:
+      once you have identified a threat category with STRIDE, you can map it to known attack
+      techniques in the ATT&amp;CK matrix to make your mitigations more specific.
+    </p>
+
+    <h3>Combining frameworks in practice</h3>
+
+    <p>
+      In practice, the question is rarely "STRIDE <em>or</em> LINDDUN" — it is "STRIDE <em>and</em>
+      LINDDUN, scored with CVSS." A typical lightweight process for a small product team looks like
+      this:
+    </p>
+
+    <ol>
+      <li>Draw a Data Flow Diagram of the feature you are designing.</li>
+      <li>Apply STRIDE to find security threats on each DFD element.</li>
+      <li>Apply LINDDUN if any personal data flows through the diagram.</li>
+      <li>Assign a CVSS score to each threat to communicate severity.</li>
+      <li>Prioritise by likelihood × impact and hand off mitigations to the sprint backlog.</li>
+    </ol>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-7">
+      <h3>Quick check</h3>
+      <p>Which framework is best suited for identifying privacy threats in a web app?</p>
+      <div class="quiz-options">
+        <button type="button">A: STRIDE — it covers all web application threat categories</button>
+        <button type="button">B: LINDDUN — it focuses specifically on privacy threats</button>
+        <button type="button">C: CVSS — it scores and ranks all identified vulnerabilities</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        You are building a web app that collects users' email addresses and browsing history to
+        personalise recommendations. Which framework would you start with — STRIDE or LINDDUN —
+        and why? Write 3–5 sentences defending your choice. Consider what you are trying to protect
+        and who the output is for.
+      </p>
+      <textarea
+        placeholder="Type your answer here. There is no single correct answer — focus on reasoning clearly about what the app needs to protect and who benefits from each framework's output."
+        aria-label="Exercise answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Want feedback on your exercise answer? Copy your response and ask your AI tutor:
+      <em>"I wrote this threat-modeling framework choice argument — can you critique it?"</em>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav" aria-label="Lesson navigation">
+      <a href="0006-pasta-framework.html">&larr; Prev: PASTA Framework</a>
+      <a href="0008-building-a-dfd.html" class="primary">Next: Building a DFD &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-7',
+      1,
+      'LINDDUN was designed specifically to identify privacy threats — it asks questions about linking user data, identifying individuals, and ensuring compliance. STRIDE and CVSS are security-focused and do not cover privacy threats systematically.'
+    );
+  </script>
+</body>
+</html>

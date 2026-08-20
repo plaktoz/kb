@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRIDE in Action &mdash; Walking Through a Web App DFD &middot; Threat Modeling Basics</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 2 &mdash; Frameworks &rsaquo; Lesson 5 of 12
+      </div>
+      <h1>STRIDE in Action &mdash; Walking Through a Web App DFD</h1>
+      <div class="lesson-meta">
+        <span>Module 2 &mdash; Frameworks</span>
+        <span>Lesson 5 of 12</span>
+        <span>~15 min read</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <p>
+        <strong>Primary source</strong>
+        Microsoft Azure Security: Threat Modeling Tool Getting Started &mdash;
+        <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started" target="_blank" rel="noopener">
+          learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: A Worked Example DFD -->
+    <h2>A Worked Example DFD</h2>
+
+    <p>
+      The best way to learn STRIDE is to apply it to a concrete system rather than to abstract definitions. We will use a minimal login flow as our example &mdash; simple enough to reason about in one sitting, but representative of real-world threats.
+    </p>
+
+    <p>
+      Here is the Data Flow Diagram (DFD) for a basic login request:
+    </p>
+
+    <pre><code>[Internet User] ──login request──&gt; (Web Server) ──DB query──&gt; ||User Database||
+                    ^
+                    | TRUST BOUNDARY (internet / server zone)</code></pre>
+
+    <p>
+      The notation used above follows the standard DFD shorthand:
+    </p>
+
+    <ul>
+      <li><strong>Square brackets <code>[ ]</code></strong> &mdash; external entity. Something outside your system that initiates or receives data. You do not control it.</li>
+      <li><strong>Parentheses <code>( )</code></strong> &mdash; process. A component of your system that receives, transforms, or forwards data. You own its code.</li>
+      <li><strong>Double bars <code>|| ||</code></strong> &mdash; data store. Persistent storage: a database, a file system, a cache. Data at rest lives here.</li>
+      <li><strong>Arrows <code>──&gt;</code></strong> &mdash; data flows. Every arrow is a potential threat vector.</li>
+      <li><strong>Trust boundary</strong> &mdash; a line where data crosses from one zone of trust to another. The internet-to-server boundary is the most important one in most web apps.</li>
+    </ul>
+
+    <p>
+      The trust boundary in this diagram sits between the internet user and the web server. Data arriving from the internet has not been validated. It could have been crafted by anyone. Everything that crosses that line deserves scrutiny.
+    </p>
+
+    <!-- Section 2: Applying STRIDE to a Data Flow -->
+    <h2>Applying STRIDE to a Data Flow</h2>
+
+    <p>
+      Now apply STRIDE systematically to the data flows in the diagram above. For each flow, work through all six STRIDE categories and write a specific threat statement for any category where an attack is plausible.
+    </p>
+
+    <p>
+      The table below shows three worked examples &mdash; two threats on the <em>User &rarr; Web Server</em> flow and one on the <em>Web Server &rarr; Database</em> flow:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Data Flow</th>
+          <th>STRIDE Category</th>
+          <th>Specific Threat Statement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>User &rarr; Web Server</td>
+          <td>Spoofing</td>
+          <td>Attacker uses stolen session cookie to impersonate another logged-in user</td>
+        </tr>
+        <tr>
+          <td>User &rarr; Web Server</td>
+          <td>Tampering</td>
+          <td>Attacker modifies the login POST body to inject SQL into the username field</td>
+        </tr>
+        <tr>
+          <td>Web Server &rarr; Database</td>
+          <td>Information Disclosure</td>
+          <td>Misconfigured DB permissions expose all user records to the application service account</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Notice that each threat statement is concrete. It names an attacker action, an entry point, and a target. The next section explains why that specificity is the difference between a useful threat model and a useless one.
+    </p>
+
+    <!-- Section 3: Vague vs. Specific Threat Statements -->
+    <h2>Vague vs. Specific Threat Statements</h2>
+
+    <p>
+      The most common mistake in STRIDE exercises is writing the category label as the threat statement. &ldquo;Tampering&rdquo; is not a threat statement &mdash; it is a category. Your team cannot act on a category label. They need to know <em>what</em> is being tampered with, <em>where</em> the tamper can happen, and <em>how</em>.
+    </p>
+
+    <p>
+      A good threat statement has three parts:
+    </p>
+
+    <ol>
+      <li><strong>The attack technique</strong> &mdash; what the attacker actually does (SQL injection, session replay, path traversal).</li>
+      <li><strong>The entry point</strong> &mdash; where the attack enters the system (the login form, the <code>/api/users</code> endpoint, the <code>file</code> query parameter).</li>
+      <li><strong>The target component and implied consequence</strong> &mdash; what gets compromised as a result (the <code>users</code> table, another user&rsquo;s account, the admin dashboard).</li>
+    </ol>
+
+    <p>
+      Compare these two statements side by side:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Quality</th>
+          <th>Statement</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Vague</strong></td>
+          <td>Tampering</td>
+          <td>Names the category only. The developer does not know which input, which component, or which data.</td>
+        </tr>
+        <tr>
+          <td><strong>Specific</strong></td>
+          <td>Attacker injects SQL via the <code>username</code> field on the login form, overwriting rows in the <code>users</code> table</td>
+          <td>Names the technique (SQL injection), the entry point (username field, login form), and the target (<code>users</code> table). Actionable.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <p>A specific threat statement names the attacker action, the data flow, and the target component. &ldquo;SQL injection from internet to login form&rdquo; is actionable. &ldquo;Tampering&rdquo; is not.</p>
+    </div>
+
+    <p>
+      A useful test: could a developer read your threat statement and write a unit test or mitigation ticket without asking a follow-up question? If not, the statement is too vague.
+    </p>
+
+    <!-- Section 4: Threat Modeling as a Team Sport -->
+    <h2>Threat Modeling as a Team Sport</h2>
+
+    <p>
+      One of the most practical lessons from the Microsoft Threat Modeling Tool Getting Started guide is an observation about who spots what. Ricardo, a developer on the example team, built the DFD. He knew the system well and captured the intended flows accurately. But when Ashish, a tester on the same team, reviewed the diagram, he found gaps Ricardo had missed.
+    </p>
+
+    <p>
+      This is not a criticism of Ricardo. It is a structural feature of how developers and testers think:
+    </p>
+
+    <ul>
+      <li><strong>Developers</strong> model how the system <em>works</em>. They think about the happy path: user authenticates, query runs, response returns. Their mental model is built around correct behaviour.</li>
+      <li><strong>Testers</strong> model how the system <em>fails</em>. They think about edge cases, unexpected inputs, and boundary conditions. Their mental model is built around incorrect and adversarial behaviour.</li>
+    </ul>
+
+    <p>
+      This difference in perspective is why threat modeling is most effective as a group exercise. Bring developers who know the code, testers who probe for failure modes, and &mdash; if available &mdash; someone with a security background who knows common attack patterns. Each perspective surfaces threats the others will miss.
+    </p>
+
+    <p>
+      If you cannot assemble a group, at minimum do a second pass on your own DFD after a break, deliberately wearing a &ldquo;tester hat&rdquo;: ask yourself how each component could be made to fail, not just how it is supposed to work.
+    </p>
+
+    <!-- Section 5: Auto-generated Threats Are a Starting Point -->
+    <h2>Auto-generated Threats Are a Starting Point</h2>
+
+    <p>
+      Tools like OWASP Threat Dragon and Microsoft&rsquo;s Threat Modeling Tool (TMT) can auto-generate threat lists from your DFD. You draw the diagram, mark the element types (external entity, process, data store, data flow), and the tool produces a checklist of STRIDE threats based on those element types.
+    </p>
+
+    <p>
+      This is genuinely useful. It means you get a baseline list quickly, and you do not miss obvious threats just because you were tired or distracted. For a junior developer running their first threat model, the auto-generated list is a significant help.
+    </p>
+
+    <div class="callout warning">
+      <p>Auto-generated threats from tools like Microsoft TMT or Threat Dragon are a starting checklist &mdash; they will miss context-specific threats that only your team knows about.</p>
+    </div>
+
+    <p>
+      However, the auto-generated list is not the final answer. Tools generate threats from structural patterns: &ldquo;this element type is a data store, therefore it has these typical threats.&rdquo; They do not know:
+    </p>
+
+    <ul>
+      <li>That your particular data store holds PII subject to GDPR, raising the stakes on information disclosure threats.</li>
+      <li>That your application allows file uploads, which opens attack surface the DFD element type alone does not convey.</li>
+      <li>That your authentication flow uses a third-party OAuth provider, adding trust boundary complexity the tool cannot infer.</li>
+      <li>That a specific business rule in your app (e.g. users can set their own discount codes) creates an EoP path unique to your domain.</li>
+    </ul>
+
+    <p>
+      The right workflow is: generate the automated list, then review it together as a team, then add the context-specific threats the tool could not know. The automated list is your floor, not your ceiling.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-5">
+      <h3>Knowledge check</h3>
+      <p>Which threat statement is specific enough to act on?</p>
+      <div class="quiz-options">
+        <button>A: Tampering with the web application data flows</button>
+        <button>B: Attacker injects SQL via the login form</button>
+        <button>C: Information disclosure affecting the database layer</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Draw a simple DFD in text form for a web app feature of your choice &mdash; registration, search, or checkout. Use the following notation:
+      </p>
+      <ul>
+        <li><code>&rarr;</code> for data flow arrows</li>
+        <li><code>[ ]</code> for external entities</li>
+        <li><code>( )</code> for processes</li>
+        <li><code>|| ||</code> for data stores</li>
+      </ul>
+      <p>
+        Once you have your diagram, pick one data flow arrow and apply STRIDE to it. Write two specific threat statements for that flow. Each statement must name:
+      </p>
+      <ol>
+        <li>The attack action (what the attacker does)</li>
+        <li>The entry point (where the attack enters)</li>
+        <li>The target component (what gets compromised)</li>
+      </ol>
+      <textarea placeholder="Your DFD (text form):&#10;&#10;[  ] ──&gt; (  ) ──&gt; ||  ||&#10;&#10;Threat 1:&#10;Threat 2:"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Ask your tutor: &ldquo;Can you review my two threat statements and tell me whether they are specific enough to be actionable, and what a developer would do to mitigate each one?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0004-stride-overview.html">&larr; Prev: STRIDE &mdash; The Developer&rsquo;s Primary Threat Framework</a>
+      <a href="0006-pasta-framework.html" class="primary">Next: The PASTA Framework &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-5',
+      1,
+      'A good threat statement names the attack technique, the entry point, and implies the target. Vague category labels like Tampering do not give the team enough to act on.'
+    );
+  </script>
+</body>
+</html>

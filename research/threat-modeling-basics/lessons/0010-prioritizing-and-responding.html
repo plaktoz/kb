@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 — Step 3: Prioritizing Threats and the Four Response Strategies</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <style>
+    /* Priority matrix cell coloring */
+    .matrix-low  { background: #e8f5e9; color: #2e7d32; font-weight: 600; }
+    .matrix-med  { background: #fff8e1; color: #6d4c00; font-weight: 600; }
+    .matrix-high { background: #ffebee; color: #c62828; font-weight: 600; }
+    .matrix-label { font-weight: 700; background: #f5f5f5; }
+    /* Tighter table for the matrix */
+    table.priority-matrix td,
+    table.priority-matrix th {
+      text-align: center;
+    }
+    table.priority-matrix th:first-child,
+    table.priority-matrix td:first-child {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Threat Modeling Basics &rsaquo; Module 3 &mdash; The Process &rsaquo; Lesson 10 of 12
+    </div>
+    <h1>Step 3 &mdash; Prioritizing Threats and the Four Response Strategies</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 3 &mdash; The Process</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <p>
+      <strong>Primary source: OWASP Threat Modeling Cheat Sheet</strong>
+      <a href="https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html" target="_blank" rel="noopener">
+        cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html
+      </a><br>
+      Covers how to score and prioritize threats after identification, including likelihood and impact scoring, the four response strategies (mitigate, eliminate, transfer, accept), and how to document response decisions in a threat register.
+    </p>
+  </div>
+
+  <div class="source-card">
+    <p>
+      <strong>Supporting source: Imperva &mdash; Application Security Threat Modeling</strong>
+      <a href="https://www.imperva.com/learn/application-security/threat-modeling/" target="_blank" rel="noopener">
+        imperva.com/learn/application-security/threat-modeling/
+      </a><br>
+      Explains how prioritization fits into the broader threat modeling process, and how CVSS scoring provides a standardized alternative to homegrown likelihood-impact matrices.
+    </p>
+  </div>
+
+  <!-- ─── Section 1: Why Prioritize? ──────────────────────────────────── -->
+
+  <h2>Why prioritize?</h2>
+
+  <p>Lesson 9 produced a list of threats. This lesson answers the question that immediately follows: <em>which ones do you fix first?</em> In practice, you cannot address every identified threat in the same sprint, or even the same quarter. Engineering time is finite, and teams that try to fix everything at once usually end up fixing nothing well.</p>
+
+  <p>Prioritization is the step that transforms a raw list of threats into an <strong>actionable work queue</strong>. It assigns a relative rank to each threat based on how likely it is to be exploited and how much damage exploitation would cause. Threats that score high on both dimensions go to the top; threats that are unlikely or low-impact can be tracked but deprioritized.</p>
+
+  <p>The output of this step is not just a sorted list. It is also the point where you make an explicit <strong>response decision</strong> for each threat: will you reduce it, remove it, hand it off, or consciously accept it? Documenting those decisions is as important as making them.</p>
+
+  <!-- ─── Section 2: Likelihood × Impact Matrix ────────────────────────── -->
+
+  <h2>Likelihood &times; impact matrix</h2>
+
+  <p>The simplest scoring approach scores each threat on two dimensions, each from 1 (low) to 3 (high):</p>
+
+  <ul>
+    <li><strong>Likelihood</strong> &mdash; how probable is it that an attacker would successfully exploit this threat? Consider attacker skill required, availability of exploit tooling, and how exposed the attack surface is.</li>
+    <li><strong>Impact</strong> &mdash; how much damage would successful exploitation cause? Consider data loss, regulatory exposure, service downtime, and reputational harm.</li>
+  </ul>
+
+  <p>Multiply the two scores to get a <strong>priority score</strong> from 1 to 9. Treat 7&ndash;9 as high priority, 4&ndash;6 as medium, and 1&ndash;3 as low. This scale is intentionally coarse: its purpose is to group threats into rough tiers, not to calculate precision risk scores.</p>
+
+  <table class="priority-matrix">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Impact 1 (Low)</th>
+        <th>Impact 2 (Medium)</th>
+        <th>Impact 3 (High)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="matrix-label">Likelihood 1 (Low)</td>
+        <td class="matrix-low">1 &mdash; Low</td>
+        <td class="matrix-low">2 &mdash; Low</td>
+        <td class="matrix-med">3 &mdash; Medium</td>
+      </tr>
+      <tr>
+        <td class="matrix-label">Likelihood 2 (Medium)</td>
+        <td class="matrix-low">2 &mdash; Low</td>
+        <td class="matrix-med">4 &mdash; Medium</td>
+        <td class="matrix-med">6 &mdash; Medium</td>
+      </tr>
+      <tr>
+        <td class="matrix-label">Likelihood 3 (High)</td>
+        <td class="matrix-med">3 &mdash; Medium</td>
+        <td class="matrix-med">6 &mdash; Medium</td>
+        <td class="matrix-high">9 &mdash; High</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Reading the matrix: a threat that is very likely to be exploited (likelihood 3) and would cause serious damage (impact 3) scores 9 and demands immediate attention. A threat that requires rare, highly skilled exploitation (likelihood 1) and would have limited consequences (impact 1) scores 1 and can sit at the bottom of the backlog. The 4&ndash;6 band (medium) is where most routine threats land and where judgment about sequencing matters most.</p>
+
+  <!-- ─── Section 3: The Four Response Strategies ─────────────────────── -->
+
+  <h2>The four response strategies</h2>
+
+  <p>Once you have scored a threat, you must choose how to respond to it. There are exactly four options. Every threat on your list must get one &mdash; there is no "we'll decide later" category.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Strategy</th>
+        <th>When to use it</th>
+        <th>Web application example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mitigate</strong></td>
+        <td>When you can reduce the likelihood or impact to an acceptable level by adding a control, without removing the underlying feature.</td>
+        <td>Add authentication to an unprotected admin endpoint; enforce HTTPS to protect credentials in transit; use parameterised queries to prevent SQL injection.</td>
+      </tr>
+      <tr>
+        <td><strong>Eliminate</strong></td>
+        <td>When the feature or data that creates the threat is not strictly necessary. Removing it eliminates the risk entirely rather than managing it.</td>
+        <td>Stop storing profile photos on your own server if you don&rsquo;t need to &mdash; use a CDN. Don&rsquo;t collect date of birth if you don&rsquo;t use it downstream. Remove a debug endpoint that exposes stack traces in production.</td>
+      </tr>
+      <tr>
+        <td><strong>Transfer</strong></td>
+        <td>When a third party is better placed to manage the risk, and the responsibility and liability can be contractually shifted to them.</td>
+        <td>Use Stripe or another payment provider instead of handling raw card data yourself &mdash; PCI DSS compliance becomes their problem. Use an identity provider (Auth0, Cognito) instead of building your own credential store.</td>
+      </tr>
+      <tr>
+        <td><strong>Accept</strong></td>
+        <td>When the cost of mitigation exceeds the risk, the threat is unlikely enough given compensating controls, or the feature that creates it is business-critical and cannot be changed.</td>
+        <td>A public read endpoint returns data that is already public &mdash; the risk of information disclosure is acknowledged and judged acceptable. A low-priority admin feature lacks rate limiting but is only accessible to internal IPs &mdash; accepted with a compensating control noted.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    <p>Accepting a risk is a legitimate response &mdash; as long as it is documented and conscious. An undocumented accepted risk is just a risk no one has noticed yet.</p>
+  </div>
+
+  <div class="callout warning">
+    <p>Mitigation does not mean the threat disappears. It means you have reduced the likelihood or impact to an acceptable level. Always describe what the mitigation is and how you will verify it works.</p>
+  </div>
+
+  <!-- ─── Section 4: CVSS as Alternative Scoring ──────────────────────── -->
+
+  <h2>CVSS as an alternative scoring system</h2>
+
+  <p>The 1&ndash;3 likelihood &times; impact matrix is easy to apply in a team session, but it produces scores that are not directly comparable to how vulnerabilities are discussed outside your organization. The <strong>Common Vulnerability Scoring System (CVSS)</strong> provides a standardized alternative that is widely understood by security engineers, auditors, and tooling vendors.</p>
+
+  <p>CVSS produces a numerical score from 0 to 10 by evaluating multiple sub-factors: attack vector, attack complexity, required privileges, user interaction, and the confidentiality, integrity, and availability impact. The score maps to a severity band:</p>
+
+  <ul>
+    <li><strong>0.0</strong> &mdash; None</li>
+    <li><strong>0.1&ndash;3.9</strong> &mdash; Low</li>
+    <li><strong>4.0&ndash;6.9</strong> &mdash; Medium</li>
+    <li><strong>7.0&ndash;8.9</strong> &mdash; High</li>
+    <li><strong>9.0&ndash;10.0</strong> &mdash; Critical</li>
+  </ul>
+
+  <p>For junior developers, the practical value of CVSS is that it gives you a scoring vocabulary that connects directly to CVE databases, static analysis tool output, and dependency vulnerability advisories. When a scanner flags a dependency with CVSS 8.6, you can map that directly to a "High" triage priority without re-scoring it yourself. It also makes prioritization conversations with stakeholders easier: saying "this threat scores 9.1 on CVSS" lands differently than "we scored it 9 on our internal matrix."</p>
+
+  <p>For most small-team threat modeling sessions, the simple likelihood &times; impact matrix is faster and sufficient. CVSS becomes valuable when you need to communicate risk to external audiences or integrate threat model output with vulnerability management tooling.</p>
+
+  <!-- ─── Section 5: Documenting Responses ────────────────────────────── -->
+
+  <h2>Documenting responses</h2>
+
+  <p>Scoring and deciding are only useful if you write them down. A response decision that exists only in someone&rsquo;s memory is not a decision &mdash; it will be re-litigated every time a new team member joins or a security reviewer asks what was done about a threat.</p>
+
+  <p>For each threat, record at minimum three things:</p>
+
+  <ul>
+    <li><strong>Response strategy</strong> &mdash; one of: mitigate / eliminate / transfer / accept.</li>
+    <li><strong>One-sentence description</strong> &mdash; what the response specifically involves. For mitigate: what control was added and how it is verified. For accept: why the risk was judged acceptable and what compensating controls exist, if any.</li>
+    <li><strong>Status</strong> &mdash; Not Started / In Progress / Done. This is what makes the threat register a living document rather than a historical artifact.</li>
+  </ul>
+
+  <p>A minimal, realistic example for a user registration flow might look like this:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Threat</th>
+        <th>Score</th>
+        <th>Response</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>SQL injection via <code>email</code> field in <code>POST /api/register</code></td>
+        <td>6</td>
+        <td>Mitigate</td>
+        <td>Use parameterised queries for all database calls; verify with OWASP ASVS v4 req 5.3.4.</td>
+        <td>Not Started</td>
+      </tr>
+      <tr>
+        <td>Attacker enumerates valid emails via differing error responses on duplicate registration</td>
+        <td>4</td>
+        <td>Mitigate</td>
+        <td>Return identical response body for existing and new email addresses.</td>
+        <td>In Progress</td>
+      </tr>
+      <tr>
+        <td>Bot submits thousands of registrations to pollute user database</td>
+        <td>3</td>
+        <td>Accept</td>
+        <td>Endpoint is behind Cloudflare Bot Management; additional rate limiting deprioritized given existing control.</td>
+        <td>Done</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Notice that the "Accept" row still has a description and a status. Acceptance is not the absence of documentation &mdash; it is documented inaction with a stated reason. A future developer reading this register can see exactly why the decision was made and what compensating control justified it.</p>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────────────────── -->
+
+  <h2>Check your understanding</h2>
+
+  <div class="quiz" id="quiz-10">
+    <h3>Quick check &mdash; 1 question</h3>
+    <p>Your app uses a third-party payment provider to handle card data. Which response strategy is this?</p>
+    <div class="quiz-options">
+      <button>A. Mitigate &mdash; you reduced card data risk by adding controls</button>
+      <button>B. Transfer &mdash; you shifted card data risk to the provider</button>
+      <button>C. Accept &mdash; you documented the card data risk as acceptable</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Skill Exercise ────────────────────────────────────────────────── -->
+
+  <h2>Skill exercise</h2>
+
+  <div class="exercise">
+    <p>Take three specific threats you wrote in Lesson 9. For each threat: (1) assign a likelihood score 1&ndash;3, (2) assign an impact score 1&ndash;3, (3) compute the priority score (likelihood &times; impact), (4) choose a response strategy (mitigate / eliminate / transfer / accept), (5) write one sentence describing what that response looks like in practice.</p>
+    <textarea placeholder="Threat 1:&#10;  Likelihood: _   Impact: _   Score: _&#10;  Response: mitigate / eliminate / transfer / accept&#10;  Description: ...&#10;&#10;Threat 2:&#10;  Likelihood: _   Impact: _   Score: _&#10;  Response: mitigate / eliminate / transfer / accept&#10;  Description: ...&#10;&#10;Threat 3:&#10;  Likelihood: _   Impact: _   Score: _&#10;  Response: mitigate / eliminate / transfer / accept&#10;  Description: ..." aria-label="Skill exercise: score and respond to three threats from Lesson 9"></textarea>
+  </div>
+
+  <!-- ─── Tutor Prompt ──────────────────────────────────────────────────── -->
+
+  <div class="tutor-prompt">
+    Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+
+  <nav class="lesson-nav" aria-label="Lesson navigation">
+    <a href="0009-identifying-threats.html">
+      &larr; Previous: Identifying Threats
+    </a>
+    <a href="0011-threat-model-outputs.html" class="primary">
+      Next: Threat Model Outputs &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-10',
+    1,
+    'Using a third-party payment provider transfers the risk of handling card data — you shift that responsibility and liability to the provider rather than handling it yourself. This is a classic example of the Transfer strategy.'
+  );
+</script>
+</body>
+</html>

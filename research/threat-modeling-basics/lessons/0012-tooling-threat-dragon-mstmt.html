@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OWASP Threat Dragon and Microsoft TMT — Getting Started · Threat Modeling Basics</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 4 &mdash; Outputs and Tooling &rsaquo; Lesson 12 of 12
+      </div>
+      <h1>OWASP Threat Dragon and Microsoft TMT &mdash; Getting Started</h1>
+      <div class="lesson-meta">
+        <span>Module 4 &mdash; Outputs and Tooling</span>
+        <span>Lesson 12 of 12</span>
+        <span>~12 min read</span>
+      </div>
+    </header>
+
+    <!-- Source cards -->
+    <div class="source-card">
+      <p>
+        <strong>Primary sources</strong>
+        OWASP Threat Dragon &mdash;
+        <a href="https://owasp.org/www-project-threat-dragon/" target="_blank" rel="noopener">
+          owasp.org/www-project-threat-dragon
+        </a>
+        &nbsp;&middot;&nbsp;
+        Microsoft Azure Security: Threat Modeling Tool Getting Started &mdash;
+        <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started" target="_blank" rel="noopener">
+          learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-getting-started
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: Why dedicated tools -->
+    <h2>Why Use a Dedicated Threat Modeling Tool?</h2>
+
+    <p>
+      In the earlier lessons of this module you learned what a completed threat model looks like: a data flow diagram, a structured list of threats, a mitigation register, and an executive summary. You can produce all of those artifacts using nothing more than a whiteboard, a spreadsheet, and a word processor. Many teams do exactly that.
+    </p>
+
+    <p>
+      Dedicated threat modeling tools add one thing that no generic tool can: a <strong>rule engine</strong> that reads the element types in your DFD and auto-generates a threat checklist based on known attack patterns. Instead of asking &ldquo;have I remembered to check for Denial of Service on this data flow?&rdquo; for every arrow in the diagram, the tool generates that question for you. The result is a faster starting checklist and fewer gaps caused by human forgetfulness.
+    </p>
+
+    <p>
+      Two tools dominate the free tier: <strong>OWASP Threat Dragon</strong> and the <strong>Microsoft Threat Modeling Tool</strong> (commonly abbreviated Microsoft TMT or MSTMT). This lesson covers both in enough depth that you can open either one today and produce your first machine-assisted threat model.
+    </p>
+
+    <!-- Section 2: OWASP Threat Dragon -->
+    <h2>OWASP Threat Dragon</h2>
+
+    <h3>What It Is</h3>
+    <p>
+      OWASP Threat Dragon is a free, open-source threat modeling application maintained under the OWASP umbrella. It was created to be simple enough for a developer to use without a security background and flexible enough to support multiple threat frameworks beyond STRIDE.
+    </p>
+    <p>
+      You can access Threat Dragon in three ways, depending on your setup:
+    </p>
+    <ul>
+      <li><strong>Browser demo:</strong> Go to <a href="https://www.threatdragon.com" target="_blank" rel="noopener">threatdragon.com</a> and start a model immediately in your browser. No account or install required for local work &mdash; models are saved to your browser&rsquo;s local storage or exported as JSON files.</li>
+      <li><strong>Desktop installer:</strong> Download the Electron-based desktop app for Windows, macOS, or Linux from the OWASP GitHub releases page. The desktop app lets you save models to the local file system and integrates with GitHub for team workflows.</li>
+      <li><strong>Docker container:</strong> Run <code>docker pull owasp/threat-dragon</code> to host a local instance, useful for teams who want a shared server without relying on the public demo site.</li>
+    </ul>
+
+    <h3>The Rule Engine</h3>
+    <p>
+      The core feature of Threat Dragon is its rule engine. When you draw a DFD and label your elements &mdash; process, data store, external entity, data flow, trust boundary &mdash; the engine evaluates each element against a set of built-in rules and generates a list of candidate threats. For example, placing an unencrypted data flow between two processes will trigger Information Disclosure and Tampering threats automatically.
+    </p>
+    <p>
+      The generated threats appear in the element&rsquo;s properties panel. Each threat entry includes a title, a threat category, a description, a suggested mitigation, and a status field (&ldquo;Open,&rdquo; &ldquo;Mitigated,&rdquo; or &ldquo;Not Applicable&rdquo;). You edit and supplement these entries directly in the tool, then export the final model.
+    </p>
+
+    <h3>Supported Frameworks</h3>
+    <p>
+      Threat Dragon supports six threat frameworks, selectable at model creation time:
+    </p>
+    <ul>
+      <li><strong>STRIDE</strong> &mdash; the default, best for web apps (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege)</li>
+      <li><strong>LINDDUN</strong> &mdash; privacy-focused (Linkability, Identifiability, Non-repudiation, Detectability, Disclosure of information, Unawareness, Non-compliance)</li>
+      <li><strong>CIA</strong> &mdash; Confidentiality, Integrity, Availability</li>
+      <li><strong>DIE</strong> &mdash; Distributed, Immutable, Ephemeral (resilience-focused)</li>
+      <li><strong>PLOT4ai</strong> &mdash; AI/ML system threats</li>
+      <li><strong>STRIDE per element</strong> &mdash; a stricter variant that maps STRIDE categories to specific DFD element types</li>
+    </ul>
+
+    <h3>Output Formats</h3>
+    <p>
+      When you are done, Threat Dragon gives you two output formats:
+    </p>
+    <ul>
+      <li><strong>JSON threat model file:</strong> A structured <code>.json</code> file containing the full DFD, every element&rsquo;s properties, and all threat entries with their statuses. This file is source-control-friendly &mdash; it can be committed to your repository alongside your code, diffed between versions, and reviewed in a pull request.</li>
+      <li><strong>Printable report:</strong> An HTML or PDF rendering of the full threat model, suitable for sharing with stakeholders who do not use the tool directly.</li>
+    </ul>
+
+    <!-- Section 3: Microsoft Threat Modeling Tool -->
+    <h2>Microsoft Threat Modeling Tool</h2>
+
+    <h3>What It Is</h3>
+    <p>
+      The Microsoft Threat Modeling Tool (Microsoft TMT) is a free Windows desktop application published by Microsoft. It has been available since around 2008 and is one of the most mature free tools in the category. Microsoft describes it as &ldquo;designed for non-security experts,&rdquo; with the explicit goal of making threat modeling accessible to developers during the design phase of a project rather than as a security review after the fact.
+    </p>
+    <p>
+      Microsoft TMT is Windows-only. If you are on macOS or Linux, you will need a Windows virtual machine or switch to Threat Dragon.
+    </p>
+
+    <h3>How It Works</h3>
+    <p>
+      Like Threat Dragon, Microsoft TMT centers on a DFD editor. You drag stencils onto a canvas &mdash; processes, data stores, external entities, and data flows &mdash; and draw trust boundaries as dashed rectangles around them. The tool includes a library of pre-built stencils for common Azure services (App Service, SQL Database, Key Vault, Service Bus, and dozens more) as well as a generic template for non-Azure architectures.
+    </p>
+    <p>
+      Once the diagram is drawn, you click &ldquo;Analyze&rdquo; and the rule engine generates a STRIDE threat list based on the element types and trust boundary crossings in your diagram. The generated threats are far more granular than most manual checklists &mdash; a single diagram with a handful of elements can produce 30&ndash;60 auto-generated threats.
+    </p>
+
+    <h3>Threat Status Tracking</h3>
+    <p>
+      Each generated threat has a status that you set as you work through the list:
+    </p>
+    <ul>
+      <li><strong>Not Started</strong> &mdash; the default; no one has reviewed this threat yet</li>
+      <li><strong>Needs Investigation</strong> &mdash; flagged for further research or discussion</li>
+      <li><strong>Mitigated</strong> &mdash; a control is in place; you record what the mitigation is</li>
+      <li><strong>Not Applicable</strong> &mdash; the threat does not apply to your context; you record why</li>
+    </ul>
+    <p>
+      This status workflow maps directly to the mitigation register format described in Lesson 11. Exporting the report from Microsoft TMT gives you a formatted document with all threats and their statuses, which serves as a ready-made mitigation register.
+    </p>
+
+    <h3>Azure Templates</h3>
+    <p>
+      One of Microsoft TMT&rsquo;s strongest features is its Azure integration. If your application runs on Azure infrastructure, you can select an Azure-specific template when starting a model. The stencil library then includes cloud service shapes that carry Azure-specific threat rules &mdash; for example, a threat about misconfigured Azure Storage access policies, or a threat about missing Azure Key Vault access logging. This level of cloud-provider-specific threat generation is not matched by generic tools.
+    </p>
+
+    <!-- Section 4: Side-by-side comparison -->
+    <h2>Side-by-Side Comparison</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Threat Dragon</th>
+          <th>Microsoft TMT</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Platform</td>
+          <td>Cross-platform: browser, Docker, desktop (Windows / macOS / Linux)</td>
+          <td>Windows desktop only</td>
+        </tr>
+        <tr>
+          <td>Cost</td>
+          <td>Free, open source (Apache 2.0)</td>
+          <td>Free, closed source</td>
+        </tr>
+        <tr>
+          <td>Threat frameworks</td>
+          <td>STRIDE, LINDDUN, CIA, DIE, PLOT4ai, STRIDE per element</td>
+          <td>STRIDE (primary); limited customization</td>
+        </tr>
+        <tr>
+          <td>Rule engine</td>
+          <td>Yes &mdash; auto-generates threats from DFD elements</td>
+          <td>Yes &mdash; more granular STRIDE generation out of the box</td>
+        </tr>
+        <tr>
+          <td>Cloud templates</td>
+          <td>Generic only</td>
+          <td>Azure-specific stencil library and threat rules</td>
+        </tr>
+        <tr>
+          <td>Threat status tracking</td>
+          <td>Open / Mitigated / Not Applicable</td>
+          <td>Not Started / Needs Investigation / Mitigated / Not Applicable</td>
+        </tr>
+        <tr>
+          <td>Output formats</td>
+          <td>Printable report (HTML/PDF), JSON model file</td>
+          <td>Report export (Word/HTML), proprietary <code>.tm7</code> file</td>
+        </tr>
+        <tr>
+          <td>Source control friendly</td>
+          <td>Yes &mdash; JSON files diff cleanly</td>
+          <td>Partial &mdash; <code>.tm7</code> is XML, diffable but verbose</td>
+        </tr>
+        <tr>
+          <td>GitHub integration</td>
+          <td>Built-in OAuth to save/load models from GitHub repos</td>
+          <td>None built-in</td>
+        </tr>
+        <tr>
+          <td>Maturity</td>
+          <td>Active OWASP project; version 2.x</td>
+          <td>Mature; in use at Microsoft since &sim;2008</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      <p>Start with OWASP Threat Dragon if you are on Mac or Linux, or want a quick browser-based session. Start with Microsoft TMT if you are on Windows and want the most complete STRIDE auto-generation out of the box.</p>
+    </div>
+
+    <!-- Section 5: Auto-generated threats -->
+    <h2>How to Use Auto-Generated Threats</h2>
+
+    <p>
+      Both tools generate threats from DFD element types using pattern-matching rules. Understanding what the rule engine can and cannot do is essential to using these tools well.
+    </p>
+
+    <p>
+      The rule engine knows about structure: &ldquo;this is a data flow crossing a trust boundary, therefore it could be intercepted (Information Disclosure) or modified in transit (Tampering).&rdquo; The rule engine does not know about content: it does not know that your data flow carries medical records rather than anonymous preferences, or that your process is accessible to unauthenticated users, or that a particular trust boundary crosses an air gap between an on-premises server and a cloud service.
+    </p>
+
+    <p>
+      The right mental model is: <strong>auto-generated threats are a starting checklist, not a complete threat register.</strong> They ensure you have not forgotten to ask the obvious questions. But every generated threat needs a human review to decide whether it applies in your specific context, and every context-specific threat that the rule engine cannot derive needs to be added manually.
+    </p>
+
+    <p>
+      In practice, a good threat modeling session using one of these tools looks like this:
+    </p>
+    <ol>
+      <li>Draw your DFD. Label elements correctly &mdash; the rule engine quality depends entirely on accurate labeling.</li>
+      <li>Run analysis. Skim the generated threats quickly to remove the ones that clearly do not apply (mark them &ldquo;Not Applicable&rdquo; with a brief reason).</li>
+      <li>Work through the remaining generated threats one by one, adding mitigation notes for each.</li>
+      <li>Add manual threats for context-specific risks the tool cannot know: business logic flaws, specific data sensitivity concerns, known integration quirks, insider threat scenarios.</li>
+      <li>Export the report and review it against your acceptance criteria.</li>
+    </ol>
+
+    <div class="callout warning">
+      <p>Do not rely entirely on auto-generated threats. Tools generate threats based on DFD element types &mdash; they cannot know your specific business logic, the data your app handles, or the context that makes some threats more relevant than others.</p>
+    </div>
+
+    <!-- Section 6: Ecosystem -->
+    <h2>Other Tools Worth Knowing</h2>
+
+    <p>
+      Threat Dragon and Microsoft TMT are the two most accessible free tools, but the threat modeling tooling ecosystem is broader. The table below covers four more tools you may encounter in job listings, project documentation, or team discussions.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Type</th>
+          <th>Best for</th>
+          <th>Access</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>pytm</strong></td>
+          <td>Threat modeling as code (Python library)</td>
+          <td>Teams who want threat models checked into source control as Python scripts and generated automatically in CI</td>
+          <td>Free, open source; <code>pip install pytm</code></td>
+        </tr>
+        <tr>
+          <td><strong>draw.io</strong></td>
+          <td>Diagramming tool with threat modeling shape libraries</td>
+          <td>Teams already using draw.io for architecture diagrams who want to add threat annotations without switching tools</td>
+          <td>Free browser app at app.diagrams.net; desktop installer available</td>
+        </tr>
+        <tr>
+          <td><strong>IriusRisk</strong></td>
+          <td>Enterprise threat modeling platform</td>
+          <td>Larger teams who need a centralized tool with role-based access, compliance mapping, and ticketing integrations</td>
+          <td>Community Edition free; paid tiers for enterprise features</td>
+        </tr>
+        <tr>
+          <td><strong>Threat Composer</strong></td>
+          <td>Structured threat statement builder (AWS Labs)</td>
+          <td>Teams who want a lightweight, structured way to write well-formed threat statements without a full DFD tool</td>
+          <td>Free, open source; hosted at <a href="https://awslabs.github.io/threat-composer/" target="_blank" rel="noopener">awslabs.github.io/threat-composer</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      For the majority of junior web developers starting out, Threat Dragon or Microsoft TMT is the right choice &mdash; both have guided interfaces, auto-generation, and export. The other tools become relevant as your team&rsquo;s maturity and workflow requirements grow.
+    </p>
+
+    <!-- Section 7: Quick-start walkthrough -->
+    <h2>Getting Started: A Five-Minute Walkthrough</h2>
+
+    <h3>OWASP Threat Dragon</h3>
+    <ol>
+      <li>Open <a href="https://www.threatdragon.com" target="_blank" rel="noopener">threatdragon.com</a> in your browser. Click <strong>Local Session</strong> to start a model stored in browser local storage (no account required).</li>
+      <li>Click <strong>New Model</strong>. Give it a title, choose <strong>STRIDE</strong> as the threat framework, and click Create.</li>
+      <li>On the diagram canvas, drag a <strong>Process</strong> shape, a <strong>Data Store</strong> shape, and two <strong>External Entity</strong> shapes onto the canvas. Draw <strong>Data Flow</strong> arrows between them. Add a <strong>Trust Boundary</strong> box around the internal components.</li>
+      <li>Click any element to open its properties panel. Give it a name matching what it represents (e.g., &ldquo;Registration API&rdquo;). The <strong>Threats</strong> tab in the panel shows auto-generated threats for that element.</li>
+      <li>Review the generated threats. For each one, either add a mitigation note and mark it <strong>Mitigated</strong>, or mark it <strong>Not Applicable</strong> with a reason.</li>
+      <li>When done, click <strong>Report</strong> to download a printable HTML report, or <strong>Save</strong> to export the JSON model file.</li>
+    </ol>
+
+    <h3>Microsoft Threat Modeling Tool</h3>
+    <ol>
+      <li>Download and install the tool from the <a href="https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool" target="_blank" rel="noopener">Microsoft Learn page</a>. Windows only.</li>
+      <li>Click <strong>Create a Model</strong>. Select the <strong>SDL TM Knowledge Base</strong> template for generic apps, or the Azure-specific template if your system runs on Azure.</li>
+      <li>Draw your DFD using the stencils in the left panel. Drag elements, draw data flows, and add trust boundary rectangles.</li>
+      <li>Click <strong>View</strong> &rarr; <strong>Analysis View</strong> to run the rule engine and see the generated threat list.</li>
+      <li>Work through the threat list. Set the status of each threat (Not Started &rarr; Mitigated or Not Applicable) and add mitigation notes.</li>
+      <li>Click <strong>Reports</strong> &rarr; <strong>Create Full Report</strong> to export a Word or HTML document with the full threat model.</li>
+    </ol>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-12">
+      <h3>Knowledge check</h3>
+      <p>What is the primary advantage of OWASP Threat Dragon over Microsoft TMT?</p>
+      <div class="quiz-options">
+        <button>A: It generates more complete STRIDE threats automatically</button>
+        <button>B: It runs cross-platform including browser-based access</button>
+        <button>C: It has deeper integration with Azure cloud services</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Open OWASP Threat Dragon at <a href="https://www.threatdragon.com" target="_blank" rel="noopener">threatdragon.com</a> (or download Microsoft TMT if you are on Windows). Recreate the user registration DFD from Lesson 8: <em>Browser &rarr; Registration API &rarr; User Database &rarr; Email Service</em>, with one trust boundary around the backend components.
+      </p>
+      <p>
+        Then answer the following three questions based on what the tool auto-generated:
+      </p>
+      <ol>
+        <li>List 2&ndash;3 threats the tool auto-generated. Include the threat title and STRIDE category.</li>
+        <li>Did the tool catch any threat you had not already identified when working through Lesson 9? If so, which one?</li>
+        <li>Did the tool miss any threat you had already identified manually? If so, which one, and why do you think the rule engine did not generate it?</li>
+      </ol>
+      <textarea placeholder="1. Auto-generated threats:&#10;&#10;2. New threats the tool caught:&#10;&#10;3. Threats the tool missed:"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Ask your tutor: &ldquo;I&rsquo;ve listed the auto-generated threats from my DFD in Threat Dragon. Can you help me decide which ones are most relevant for a user registration flow and which I should add manually based on the business context?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0011-threat-model-outputs.html">&larr; Prev: Threat Model Outputs</a>
+      <a href="../lessons.md">&larr; Back to Curriculum</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-12',
+      1,
+      'OWASP Threat Dragon\'s main advantage over Microsoft TMT is that it runs cross-platform — as a browser app, Docker container, or desktop installer on Linux/macOS/Windows. Microsoft TMT is Windows-only.'
+    );
+  </script>
+</body>
+</html>

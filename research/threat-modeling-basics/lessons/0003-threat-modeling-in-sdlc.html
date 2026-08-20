@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Threat Modeling in the SDLC — When and How Often | Threat Modeling Basics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Code&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 1 &mdash; Foundations &rsaquo; Lesson 3 of 12
+      </div>
+      <h1>Threat Modeling in the SDLC — When and How Often</h1>
+      <div class="lesson-meta">
+        <span>Module 1 &mdash; Foundations</span>
+        <span>Lesson 3 of 12</span>
+        <span>~12 min read</span>
+      </div>
+    </header>
+
+    <!-- Sources -->
+    <div class="source-card">
+      <p>
+        <strong>Sources for this lesson</strong>
+        <a href="https://martinfowler.com/articles/agile-threat-modelling.html" target="_blank" rel="noopener">
+          martinfowler.com &mdash; Agile Threat Modelling
+        </a>
+        <br />
+        <a href="https://www.microsoft.com/en-us/securityengineering/sdl/threatmodeling" target="_blank" rel="noopener">
+          microsoft.com &mdash; Microsoft SDL Threat Modeling
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: Why timing matters -->
+    <h2>Why Timing Matters: The Cost Curve of Security</h2>
+
+    <p>
+      Security fixes obey the same economics as any software defect: the earlier you find a problem, the cheaper it is to correct. A threat you identify during design can be eliminated by changing an approach before a single line of code is written. A threat found during code review requires refactoring existing work. A threat discovered after deployment may demand a hotfix, user notifications, incident response, and potentially regulatory involvement.
+    </p>
+
+    <p>
+      This is not a hypothetical gradient. Studies of defect costs in software consistently show an order-of-magnitude difference between design-time and post-deployment remediation. Security is no exception. When you defer threat modeling to a late-stage audit, you are accepting that fixing whatever is found will be expensive — sometimes prohibitively so.
+    </p>
+
+    <p>
+      The practical takeaway for a web developer is direct: <strong>threat model before you write the code, not after</strong>. Identify risks during the same conversation where you sketch the feature. Adjust the design. Then build with the adjusted approach from day one.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>When threat modeling happens</th>
+          <th>Relative cost to fix findings</th>
+          <th>What you can change</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Design &amp; planning</td>
+          <td>Low</td>
+          <td>Architecture, data flows, authentication model, trust boundaries</td>
+        </tr>
+        <tr>
+          <td>Code review / pull request</td>
+          <td>Medium</td>
+          <td>Implementation details, library choices, specific code paths</td>
+        </tr>
+        <tr>
+          <td>After deployment to production</td>
+          <td>High</td>
+          <td>Mitigations only — the underlying design is usually locked in</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 2: Microsoft SDL five-step process -->
+    <h2>The Microsoft SDL Five-Step Process</h2>
+
+    <p>
+      Microsoft's Security Development Lifecycle (SDL) is one of the most widely referenced frameworks for embedding security into routine software work. Its threat modeling component is not a one-time gate but a repeating practice that fits inside each development cycle. The five steps are iterative: you do not complete them once and move on; you revisit them as the application evolves.
+    </p>
+
+    <p>
+      Here is what each step means in practice, and where it naturally lands in a two-week sprint:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>SDL Step</th>
+          <th>What you do</th>
+          <th>When in a sprint</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Define security requirements</td>
+          <td>Translate business goals and compliance needs into concrete security properties the feature must satisfy (e.g., "all user data must be encrypted in transit; authentication must use the existing SSO provider").</td>
+          <td>Sprint planning — agree requirements before stories are estimated</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Create an application diagram</td>
+          <td>Draw a simple data-flow diagram (DFD) showing how data moves through the feature: external actors, processes, data stores, and trust boundaries. Even a whiteboard sketch counts.</td>
+          <td>Design session at sprint start — usually day 1 or 2</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Identify threats</td>
+          <td>Walk through the diagram and ask what could go wrong at each element. Use a structured taxonomy such as STRIDE to avoid blind spots.</td>
+          <td>After the diagram is ready — typically day 2 or 3, or during a dedicated 30-minute session</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Mitigate threats</td>
+          <td>For each identified threat, decide on a control: accept, transfer, mitigate, or eliminate. Log mitigations as acceptance criteria on the relevant stories.</td>
+          <td>Immediately after identification; mitigations become part of the sprint backlog</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Validate mitigations</td>
+          <td>Confirm that the agreed mitigations were actually implemented. This is a check — not a new audit — that fits naturally into code review and the definition of done.</td>
+          <td>Code review and sprint review — verify before stories are closed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Notice that steps 1 through 4 happen in the first few days of the sprint, before significant code is written. Step 5 is a lightweight verification woven into your existing review process. The whole cycle adds very little ceremony while dramatically reducing the cost of late discoveries.
+    </p>
+
+    <!-- Section 3: Martin Fowler's agile three-activity loop -->
+    <h2>Martin Fowler's Agile Three-Activity Loop</h2>
+
+    <p>
+      The thoughtworks community has developed a complementary framing that fits especially well with agile teams. Rather than a linear sequence, it describes threat modeling as a short, repeating loop of three activities — each of which is conversational rather than document-heavy:
+    </p>
+
+    <h3>Activity 1 — Explain &amp; Explore</h3>
+    <p>
+      Someone — usually the developer or product owner proposing the feature — walks the rest of the group through what is being built. The goal is not a polished presentation but a shared mental model: what data does the feature handle, who interacts with it, and where does it connect to other systems? Five to ten minutes of explanation is usually sufficient.
+    </p>
+
+    <h3>Activity 2 — Identify Threats</h3>
+    <p>
+      The group, now with a shared picture of the system, asks adversarial questions. What could go wrong? Who might misuse this? Where is sensitive data exposed? This activity benefits from diverse participation: developers know implementation details that product owners do not, and product owners know business context that developers may underweight.
+    </p>
+
+    <h3>Activity 3 — Prioritise &amp; Fix</h3>
+    <p>
+      Not every identified threat needs immediate action. The group assigns rough severity and likelihood, then decides what to fix in this sprint, what to defer, and what to accept as tolerable risk. Accepted risks get a note in the design document. Mitigations get added to the sprint backlog.
+    </p>
+
+    <p>
+      The loop is designed to run in 15 to 30 minutes when used consistently. The key insight from Fowler's framing is that the loop works <em>because</em> it is short enough to run frequently. A group that threat models weekly builds intuition. A group that threat models annually builds anxiety.
+    </p>
+
+    <div class="callout key">
+      <p>A 15-minute threat modeling session during sprint planning is worth more than a day-long security workshop held once a year.</p>
+    </div>
+
+    <!-- Section 4: Little and often -->
+    <h2>The "Little and Often" Principle</h2>
+
+    <p>
+      Both the Microsoft SDL and the Fowler agile model converge on the same operational principle: threat modeling works best when it is embedded in ordinary development rhythms rather than treated as a separate event.
+    </p>
+
+    <p>
+      Annual or quarterly threat modeling workshops produce thick documents that are often stale before the ink is dry. Software changes continuously. New features introduce new attack surfaces. Refactors shift trust boundaries. Dependency updates introduce new libraries with their own vulnerabilities. A threat model from six months ago may not reflect the application you actually have today.
+    </p>
+
+    <p>
+      "Little and often" addresses this directly. Fifteen minutes at the start of every sprint keeps the threat model current with zero catch-up effort. The format can be light: a quick sketch on a whiteboard, a few bullet points in the sprint notes, a short discussion in the daily standup when a risky piece of work begins.
+    </p>
+
+    <p>
+      Think of it as continuous integration for security. Just as CI runs your tests on every commit so that broken code never accumulates, continuous threat modeling checks your security assumptions on every sprint so that blind spots never accumulate.
+    </p>
+
+    <!-- Section 5: Security as a team sport -->
+    <h2>Security as a Team Sport</h2>
+
+    <p>
+      A widespread barrier to starting threat modeling is the belief that you need a dedicated security expert in the room. This belief is understandable — security feels like a specialist domain — but it is also one of the most common reasons teams never begin.
+    </p>
+
+    <p>
+      The reality is that effective threat modeling draws on knowledge that is already distributed across your team:
+    </p>
+
+    <ul>
+      <li><strong>Developers</strong> bring deep knowledge of how the system is actually implemented — which libraries handle authentication, where database calls are made, how input is validated. This knowledge is indispensable for identifying real attack surfaces, not theoretical ones.</li>
+      <li><strong>Product owners and business analysts</strong> bring business risk context — which data is genuinely sensitive, what a breach would mean for customers, which regulatory obligations apply. A developer focused on implementation may underestimate the impact of exposing a particular field; a product owner will not.</li>
+      <li><strong>Testers and QA engineers</strong> bring a holistic usage perspective — they are practiced at thinking about edge cases, unexpected inputs, and flows that developers do not typically exercise. That adversarial mindset transfers directly to threat identification.</li>
+    </ul>
+
+    <p>
+      No single person on your team has all three of these perspectives. That is precisely why threat modeling produces better results as a brief collaborative exercise than as a solo expert review. The security specialist, when available, can add vocabulary and structure — but the knowledge required to identify what is risky about <em>your</em> specific feature is already in the room.
+    </p>
+
+    <div class="callout warning">
+      <p>You do not need a security expert in the room to start. Fresh perspectives from developers and testers often surface risks that specialists overlook.</p>
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-3">
+      <h3>Check your understanding</h3>
+      <p>When is the best time to threat model a new web app feature?</p>
+      <div class="quiz-options">
+        <button>A &mdash; After the feature ships to production users</button>
+        <button>B &mdash; During design before writing any code</button>
+        <button>C &mdash; While fixing bugs in the test suite</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Sketch a simple sprint plan: map the five Microsoft SDL threat modeling steps (define requirements, create diagram, identify threats, mitigate, validate) across a two-week sprint. Which days or ceremonies would each step naturally fit into? Write your answer as a rough timeline or bullet list.
+      </p>
+      <textarea
+        placeholder="Example: Day 1 (Sprint Planning) — define security requirements alongside story estimation…"
+        aria-label="Sprint plan exercise answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Want to talk through your sprint plan or test your understanding further? Open this lesson in Claude and ask: <em>"Review my sprint mapping for the five SDL steps"</em> or <em>"Quiz me on continuous threat modeling."</em>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0002-four-core-questions.html">&larr; Previous: The Four Core Questions</a>
+      <a href="0004-stride-overview.html" class="primary">Next: STRIDE Overview &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-3',
+      1,
+      'The earlier you threat model, the cheaper it is to fix what you find. Design time is the best opportunity — you can change the approach before any code is committed.'
+    );
+  </script>
+</body>
+</html>

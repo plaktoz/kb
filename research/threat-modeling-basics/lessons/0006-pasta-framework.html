@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PASTA &mdash; The Risk-Centric Alternative to STRIDE · Threat Modeling Basics</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lora:wght@400;700&family=Fira+Code&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        Threat Modeling Basics &rsaquo; Module 2 &mdash; Frameworks &rsaquo; Lesson 6 of 12
+      </div>
+      <h1>PASTA &mdash; The Risk-Centric Alternative to STRIDE</h1>
+      <div class="lesson-meta">
+        <span>Module 2 &mdash; Frameworks</span>
+        <span>Lesson 6 of 12</span>
+        <span>~12 min read</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <p>
+        <strong>Primary source</strong>
+        Imperva: Threat Modeling &mdash;
+        <a href="https://www.imperva.com/learn/application-security/threat-modeling/" target="_blank" rel="noopener">
+          imperva.com/learn/application-security/threat-modeling/
+        </a>
+      </p>
+    </div>
+
+    <!-- Section 1: What is PASTA -->
+    <h2>What Is PASTA?</h2>
+
+    <p>
+      PASTA stands for <strong>Process for Attack Simulation and Threat Analysis</strong>. It is a seven-stage threat modeling framework that takes a fundamentally different starting point from STRIDE. Where STRIDE asks &ldquo;what category of threat applies to this data flow element?&rdquo;, PASTA asks &ldquo;what is the business risk if an attacker succeeds against this system?&rdquo;
+    </p>
+
+    <p>
+      PASTA was introduced in 2012 by Tony UcedaV&eacute;lez and Marco Morana in their book <em>Risk Centric Threat Modeling</em>. It was designed for organisations that need to communicate security risk in the language of business value &mdash; not just technical vulnerability categories. Instead of stopping at threat identification, PASTA walks a team all the way through to simulated attack chains and quantified business risk scores.
+    </p>
+
+    <div class="callout key">
+      <p>PASTA is designed to speak the language of business risk &mdash; it produces outputs that executives and product managers can understand, not just security engineers.</p>
+    </div>
+
+    <!-- Section 2: The 7 Stages -->
+    <h2>The Seven Stages of PASTA</h2>
+
+    <p>
+      PASTA is structured as a sequential process. Each stage builds on the last, moving from business goals down to simulated attacker behaviour and back up to prioritised risk decisions. Here is what each stage means in plain language for a web developer.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Stage</th>
+          <th>Name</th>
+          <th>What you do</th>
+          <th>Output</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1</strong></td>
+          <td>Define Objectives</td>
+          <td>Identify what the business needs to protect and why it matters commercially. What are the crown jewels? What would a breach cost?</td>
+          <td>A list of business objectives and the data assets that support them.</td>
+        </tr>
+        <tr>
+          <td><strong>2</strong></td>
+          <td>Define Technical Scope</td>
+          <td>Identify all systems, components, and dependencies that are in scope for this analysis. Draw the boundary around what you are modeling.</td>
+          <td>A scope document: servers, services, APIs, third-party integrations.</td>
+        </tr>
+        <tr>
+          <td><strong>3</strong></td>
+          <td>Application Decomposition</td>
+          <td>Break the application into its parts &mdash; similar to building a Data Flow Diagram (DFD). Identify data flows, trust boundaries, entry points, and exit points.</td>
+          <td>A DFD or equivalent architecture diagram with labelled trust boundaries.</td>
+        </tr>
+        <tr>
+          <td><strong>4</strong></td>
+          <td>Threat Identification</td>
+          <td>Using threat intelligence (known attack patterns, CVE databases, threat actor profiles), identify threats relevant to the components in scope.</td>
+          <td>A mapped list of threats tied to specific components.</td>
+        </tr>
+        <tr>
+          <td><strong>5</strong></td>
+          <td>Vulnerability Analysis</td>
+          <td>Look for weaknesses in the components identified in Stage 3 that the threats from Stage 4 could exploit. This may involve static analysis, dependency scanning, or design review.</td>
+          <td>A list of vulnerabilities correlated to threats.</td>
+        </tr>
+        <tr>
+          <td><strong>6</strong></td>
+          <td>Attack Simulation</td>
+          <td>Simulate how a real attacker would chain the identified threats and vulnerabilities together into a working attack path. Think like an adversary: what is the most likely route to the business crown jewels?</td>
+          <td>Attack trees or attack chains showing realistic exploitation paths.</td>
+        </tr>
+        <tr>
+          <td><strong>7</strong></td>
+          <td>Risk Analysis</td>
+          <td>Score and prioritise each simulated attack by the business impact if it succeeded combined with the likelihood of an attacker attempting it. Produce a ranked remediation list.</td>
+          <td>A risk-ranked list of findings with recommended mitigations, suitable for a business audience.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Stage 1: Define Objectives</h3>
+    <p>
+      Before any technical work begins, PASTA anchors the exercise in business context. What does the application do commercially? What data does it hold and why does that data have value? What would a breach actually cost &mdash; in fines, customer churn, or reputational damage? These questions force collaboration between the security team and business stakeholders from the outset. For a junior developer, Stage 1 is a reminder that threat modeling is not an isolated security exercise: it is connected to the real-world consequences of shipping insecure software.
+    </p>
+
+    <h3>Stage 2: Define Technical Scope</h3>
+    <p>
+      Scope creep is a common failure mode in threat modeling. PASTA&rsquo;s Stage 2 draws a deliberate boundary around what is and is not being analyzed in this session. For a feature-level analysis, scope might mean: the new payment flow, the services it touches, and the database tables it reads and writes. Anything outside that boundary is noted as an assumption, not ignored.
+    </p>
+
+    <h3>Stage 3: Application Decomposition</h3>
+    <p>
+      This stage produces the structural map of the application &mdash; the equivalent of the DFD you learned to build in earlier lessons. Every component, data flow, trust boundary, entry point, and exit point is documented. The decomposition in PASTA serves the same purpose as in a STRIDE analysis: you cannot reason about threats against a black box. You need to see the system&rsquo;s shape before you can ask where it is vulnerable.
+    </p>
+
+    <h3>Stage 4: Threat Identification</h3>
+    <p>
+      Rather than asking six fixed questions per element (as STRIDE does), PASTA looks outward to threat intelligence sources &mdash; MITRE ATT&amp;CK, OWASP threat catalogues, CVE databases, known threat actor TTPs (tactics, techniques, and procedures) &mdash; and asks: &ldquo;which of these documented threats apply to the components we have in scope?&rdquo; The resulting list is grounded in real-world attacker behaviour, not just theoretical categories.
+    </p>
+
+    <h3>Stage 5: Vulnerability Analysis</h3>
+    <p>
+      With a map of the application (Stage 3) and a list of applicable threats (Stage 4), Stage 5 looks for the weaknesses that would allow those threats to succeed. This might involve reviewing code, running a dependency scanner (e.g. <code>npm audit</code> or Snyk), or reviewing configuration against a security baseline. The output is a correlated list: &ldquo;Threat X could succeed because of Vulnerability Y in Component Z.&rdquo;
+    </p>
+
+    <h3>Stage 6: Attack Simulation</h3>
+    <p>
+      This is the stage that most distinguishes PASTA from STRIDE. Rather than treating each threat in isolation, Stage 6 asks how an attacker would chain threats and vulnerabilities together into a complete attack path. An attacker does not exploit a single weakness and stop &mdash; they move laterally, escalate privileges, and pivot toward their objective. Attack simulation produces attack trees or attack chains that model this realistic adversarial thinking. The result is a much richer picture of actual risk than a flat list of threat categories.
+    </p>
+
+    <h3>Stage 7: Risk Analysis</h3>
+    <p>
+      The final stage scores each simulated attack by two dimensions: <em>business impact</em> (what does it cost if this attack succeeds?) and <em>likelihood</em> (how motivated and capable is a realistic attacker to execute this chain?). The resulting risk scores produce a prioritised remediation list &mdash; not &ldquo;fix everything equally&rdquo; but &ldquo;address these three attack chains first because they carry the highest business risk.&rdquo; This output can be handed directly to a product manager or executive in a form they can act on.
+    </p>
+
+    <!-- Section 3: STRIDE vs PASTA -->
+    <h2>STRIDE vs PASTA: Key Differences</h2>
+
+    <p>
+      Both frameworks help you find threats, but they approach the problem from different angles and are optimised for different contexts. The table below maps the most important differences.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>STRIDE</th>
+          <th>PASTA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Approach</strong></td>
+          <td>Design-centric &mdash; applied element by element to a DFD</td>
+          <td>Risk-centric &mdash; simulates full attacker behaviour and quantifies business impact</td>
+        </tr>
+        <tr>
+          <td><strong>Best for</strong></td>
+          <td>Developer teams doing early-design threat identification on a specific feature or data flow</td>
+          <td>Larger teams or organisations needing to report risk in business terms and model realistic attack chains</td>
+        </tr>
+        <tr>
+          <td><strong>When to apply</strong></td>
+          <td>During design (sprint planning, architecture review) &mdash; works well at the feature level</td>
+          <td>During design or pre-release, but especially when preparing risk reports for stakeholders or before a major release</td>
+        </tr>
+        <tr>
+          <td><strong>Output</strong></td>
+          <td>A list of categorised threats per DFD element, suitable for a developer&rsquo;s backlog</td>
+          <td>Ranked attack chains with business impact scores, suitable for executive or product audiences</td>
+        </tr>
+        <tr>
+          <td><strong>Limitation</strong></td>
+          <td>Does not prioritise threats by business risk; treats each threat category as equally important</td>
+          <td>Seven stages can feel heavyweight for a small team or a single feature; requires more preparation and expertise to run well</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The most important difference is the direction each framework faces. STRIDE looks <em>inward</em> at the structure of your system: &ldquo;what is this data flow, and what threats does its structure invite?&rdquo; PASTA looks <em>outward</em> at real attacker behaviour: &ldquo;how would a motivated adversary actually compromise this system, and what would that cost the business?&rdquo; Neither view is wrong &mdash; they are complementary.
+    </p>
+
+    <!-- Section 4: When to use PASTA -->
+    <h2>When to Use PASTA</h2>
+
+    <p>
+      PASTA is the stronger choice in three situations:
+    </p>
+
+    <ol>
+      <li>
+        <strong>You need to communicate risk to non-technical stakeholders.</strong> PASTA&rsquo;s final output is a ranked list of business risks with impact scores. A product manager can understand &ldquo;this attack chain would expose all customer payment data, costing an estimated $2M in fines and churn&rdquo; in a way they cannot engage with &ldquo;Tampering on the /payments data flow.&rdquo;
+      </li>
+      <li>
+        <strong>You are working on a large, complex system.</strong> When the attack surface spans multiple services, third-party integrations, and internal APIs, the chain-based simulation in PASTA surfaces cross-service attack paths that element-by-element STRIDE analysis might miss.
+      </li>
+      <li>
+        <strong>Attack simulation depth is required.</strong> Security-mature teams and red teams use PASTA&rsquo;s Stage 6 to rehearse realistic adversarial scenarios before a major release or a penetration test. The attack trees produced in Stage 6 become a structured brief for the red team.
+      </li>
+    </ol>
+
+    <p>
+      For most junior web developers, STRIDE is the right tool to start with because its six questions are learnable quickly and apply well to the feature-level scope of typical sprint work. PASTA becomes relevant when you move into senior or lead roles where you are responsible for communicating risk decisions to product and business stakeholders, or when your organisation has enough security maturity to run a full seven-stage process.
+    </p>
+
+    <div class="callout warning">
+      <p>PASTA&rsquo;s 7 stages can feel heavyweight for a small team or a single feature. For junior developers starting out, STRIDE is simpler and covers most web app threat scenarios well.</p>
+    </div>
+
+    <!-- Section 5: The relationship between the two -->
+    <h2>Using STRIDE and PASTA Together</h2>
+
+    <p>
+      In practice, the two frameworks are not mutually exclusive. A common pattern in security-mature teams is to use STRIDE during feature design (Stages 3&ndash;4 of PASTA overlap significantly with STRIDE&rsquo;s DFD-based threat identification), then layer PASTA&rsquo;s attack simulation and risk scoring on top when preparing for a release or a stakeholder risk review.
+    </p>
+
+    <p>
+      Think of it this way: STRIDE tells you <em>what kinds of threats exist</em> against your design. PASTA tells you <em>which of those threats matter most to the business</em>, and what a realistic attack using them would look like. Running STRIDE gives you the raw material &mdash; a list of categorised threats per component &mdash; that feeds directly into PASTA&rsquo;s Stages 4 and 5.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-6">
+      <h3>Knowledge check</h3>
+      <p>What makes PASTA different from STRIDE as a methodology?</p>
+      <div class="quiz-options">
+        <button>A: PASTA focuses on design-time data flow diagrams</button>
+        <button>B: PASTA simulates full attack chains for business risk</button>
+        <button>C: PASTA uses six fixed threat categories to classify</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Create a two-column comparison table (you can write it in plain text) comparing STRIDE and PASTA across three dimensions: (1) Target user / team, (2) Best phase to apply in the SDLC, (3) One key limitation. Which would you start with on your current or next project, and why?
+      </p>
+      <textarea placeholder="Dimension           | STRIDE                    | PASTA&#10;--------------------|---------------------------|---------------------------&#10;Target user / team  |                           |&#10;Best SDLC phase     |                           |&#10;One key limitation  |                           |&#10;&#10;I would start with [STRIDE / PASTA] because..."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Ask your tutor: &ldquo;Can you review my STRIDE vs PASTA comparison table and tell me whether my SDLC timing choices are accurate?&rdquo;
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0005-stride-in-action.html">&larr; Prev: STRIDE in Action</a>
+      <a href="0007-linddun-cvss-framework-choice.html" class="primary">Next: LINDDUN, CVSS &amp; Framework Choice &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-6',
+      1,
+      'PASTA is risk-centric — it simulates how an attacker would chain vulnerabilities together and quantifies risk in business terms. STRIDE is design-centric, asking “what category of threat applies to this data flow?”'
+    );
+  </script>
+</body>
+</html>

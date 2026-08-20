@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — What is Threat Modeling and Why Should Developers Care?</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Threat Modeling Basics &rsaquo; Module 1 &mdash; Foundations &rsaquo; Lesson 1 of 12
+    </div>
+    <h1>What is Threat Modeling and Why Should Developers Care?</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 1 &mdash; Foundations</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <p>
+      <strong>Primary source: OWASP Threat Modeling</strong>
+      <a href="https://owasp.org/www-community/Threat_Modeling" target="_blank" rel="noopener">
+        https://owasp.org/www-community/Threat_Modeling
+      </a><br>
+      The Open Worldwide Application Security Project (OWASP) defines threat modeling as the process of finding "threats and mitigations within the context of protecting something of value," and describes a threat model as "a structured representation of all the information that affects the security of an application."
+    </p>
+  </div>
+
+  <!-- ─── Section 1: What is Threat Modeling ──────────────────────────── -->
+
+  <h2>What is threat modeling?</h2>
+
+  <p>Threat modeling is a structured process for thinking systematically about what could go wrong with a system — and what to do about it — before you build the thing. The OWASP definition puts it plainly: it is the work of finding <strong>threats and mitigations within the context of protecting something of value</strong>.</p>
+
+  <p>The key phrase is "something of value." Every application has assets worth protecting: user credentials, personal data, financial records, the ability to process payments without interruption. Threat modeling forces a team to name those assets explicitly, then reason about who might want to harm them and how.</p>
+
+  <p>The output of a threat modeling exercise is a <strong>threat model</strong> — a structured representation of all the information that affects the security of an application. That includes the system's components, the data flowing between them, the boundaries where trust changes, the threats identified, and the mitigations chosen to address them. It is a living document, not a one-time checkbox.</p>
+
+  <div class="callout key">
+    <p>Threat modeling is not about finding bugs in code &mdash; it is about finding design flaws before code is written.</p>
+  </div>
+
+  <!-- ─── Section 2: Why it Matters ───────────────────────────────────── -->
+
+  <h2>Why does it matter?</h2>
+
+  <p>Security bugs found during the design phase of a project cost a fraction of what they cost to fix after the software has shipped. Studies cited across the industry put the ratio at roughly 30&times; — a flaw that takes one hour to correct on a whiteboard can take weeks of engineering time to patch, test, re-deploy, and communicate to users after it has reached production. That gap exists because fixing a deployed system means changing code, re-running tests, patching databases, pushing updates, and often notifying affected users. Fixing a design means erasing a line on a diagram.</p>
+
+  <p>Threat modeling also changes <em>how</em> developers think. It introduces <strong>adversarial thinking</strong>: the habit of asking not just "does this work?" but "how could someone misuse this?" A junior developer who has practiced threat modeling will naturally pause when writing a new API endpoint and ask, "What happens if someone sends unexpected input here?" or "Should this endpoint require authentication?" Those questions do not require a security expert; they require a shift in mental posture — and threat modeling trains that shift.</p>
+
+  <!-- ─── Section 3: Shift-Left Security ──────────────────────────────── -->
+
+  <h2>Shift-left security: catching problems before they ship</h2>
+
+  <p>The phrase "shift left" refers to moving security activities earlier in the software development life cycle (SDLC). On a traditional project timeline — requirements, design, development, testing, deployment — security work has historically happened near the right end: penetration testers probing a nearly finished product, or security reviews triggered by an audit. Shift-left security argues that this is backwards.</p>
+
+  <p>When security thinking happens at the requirements and design stages — the left side of the timeline — the team has full freedom to change direction. Architectural decisions are still open. Data models have not been locked in. APIs have not been published to external partners. The cost of change is near zero.</p>
+
+  <p>By the time a system reaches deployment, the cost of change is at its highest: backward compatibility constraints, live user data, production infrastructure, and organizational inertia all conspire against large architectural shifts. A serious security flaw discovered at that point — say, a decision to store passwords in plaintext because "we'll fix it later" — can require months of remediation work, a breach notification process, and lasting reputational damage.</p>
+
+  <p>Threat modeling is one of the primary tools of shift-left security. Running even a short threat modeling session at the start of a feature forces the team to confront security questions while the cost of answering them correctly is still low.</p>
+
+  <div class="callout warning">
+    <p>Threat modeling is not the same as a penetration test or code review &mdash; those find bugs in what you built; threat modeling finds design flaws in what you are building.</p>
+  </div>
+
+  <!-- ─── Section 4: What a Threat Model Is ───────────────────────────── -->
+
+  <h2>What a threat model actually contains</h2>
+
+  <p>OWASP describes a threat model as a <strong>structured representation of all the information that affects the security of an application</strong>. In practice, a threat model has four layers:</p>
+
+  <ol>
+    <li><strong>A diagram of the system</strong> — typically a data flow diagram (DFD) showing the application's components, the data that moves between them, and the trust boundaries where the level of trust changes (for example, the line between the public internet and your internal network).</li>
+    <li><strong>A list of assets</strong> — the things worth protecting: user data, authentication tokens, payment information, system availability.</li>
+    <li><strong>A list of threats</strong> — specific ways an attacker could harm those assets, organized by attacker goal or by the component under attack.</li>
+    <li><strong>A list of mitigations</strong> — the controls, design decisions, or code changes that reduce each threat to an acceptable level of risk.</li>
+  </ol>
+
+  <p>The value of putting this in writing is not bureaucratic — it is communicative. A threat model gives a team a shared vocabulary for security conversations. When a developer raises a concern during code review, pointing to a specific threat in the model turns a vague worry into a trackable work item.</p>
+
+  <!-- ─── Section 5: Vulnerability vs Threat ───────────────────────────── -->
+
+  <h2>Vulnerability versus threat: why the distinction matters</h2>
+
+  <p>Two terms come up constantly in security work, and they are often confused by developers new to the field. Getting them straight is essential for threat modeling to make sense.</p>
+
+  <p>A <strong>vulnerability</strong> is a weakness in a system — a crack in the wall. It might be a missing input validation check that allows SQL injection, or a dependency on a library with a known flaw, or a misconfigured server that exposes internal error messages. A vulnerability exists regardless of whether anyone exploits it.</p>
+
+  <p>A <strong>threat</strong> is what an attacker might do with a vulnerability, or with the system in general. It is the specific harmful action — extracting the user database, forging authentication tokens, taking the service offline. Threats describe attacker goals and attacker actions, not just system properties.</p>
+
+  <p>The practical difference is this: vulnerability scanning tools (like static analysis or dependency checkers) find weaknesses in what exists. Threat modeling finds threats before code exists — before there is anything to scan. You can run a vulnerability scanner on a finished application; you run a threat model on a design, a whiteboard sketch, or a requirements document.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Term</th>
+        <th>Definition</th>
+        <th>Example</th>
+        <th>When it applies</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Vulnerability</strong></td>
+        <td>A weakness in the system</td>
+        <td>Missing input validation on a search field</td>
+        <td>After code exists (or by design flaw)</td>
+      </tr>
+      <tr>
+        <td><strong>Threat</strong></td>
+        <td>An attacker action that exploits a weakness or targets an asset</td>
+        <td>Attacker injects SQL via the search field to dump the user table</td>
+        <td>At design time, before code is written</td>
+      </tr>
+      <tr>
+        <td><strong>Risk</strong></td>
+        <td>The combination of likelihood and impact</td>
+        <td>High likelihood &times; high impact = critical risk</td>
+        <td>Prioritization step after threats are identified</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────────────────── -->
+
+  <h2>Check your understanding</h2>
+
+  <div class="quiz" id="quiz-1">
+    <h3>Quick check &mdash; 1 question</h3>
+    <p>What does a threat model primarily help you identify?</p>
+    <div class="quiz-options">
+      <button>A. Design flaws before code is written</button>
+      <button>B. Runtime bugs that appear after deployment</button>
+      <button>C. Performance bottlenecks that emerge during testing</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Skill Exercise ────────────────────────────────────────────────── -->
+
+  <h2>Skill exercise</h2>
+
+  <div class="exercise">
+    <p>Write a one-paragraph answer to: &ldquo;Why should I, as a junior web developer, care about threat modeling?&rdquo; Write it in plain language as if explaining to a non-technical teammate. No jargon.</p>
+    <textarea placeholder="Write your paragraph here&hellip;" aria-label="Skill exercise response"></textarea>
+  </div>
+
+  <!-- ─── Tutor Prompt ──────────────────────────────────────────────────── -->
+
+  <div class="tutor-prompt">
+    Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+
+  <nav class="lesson-nav" aria-label="Lesson navigation">
+    <span></span>
+    <a href="0002-four-core-questions.html" class="primary">
+      Next: The Four Core Questions &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-1',
+    0,
+    'Threat modeling is a design-time activity — its goal is to find flaws in how the system is designed before a line of code is written, not to catch bugs in running code.'
+  );
+</script>
+</body>
+</html>
