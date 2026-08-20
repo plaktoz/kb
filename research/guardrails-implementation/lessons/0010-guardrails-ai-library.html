@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardrails AI — Guards, Validators, and the Hub — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 4 › Lesson 10
+      </div>
+      <h1>Guardrails AI — Guards, Validators, and the Hub</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~20 min</span>
+        <span>Module 4 — Tools, Libraries, and Integration</span>
+        <span>Lesson 10 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      Guardrails AI open-source library (GitHub) &nbsp;·&nbsp;
+      <a href="https://github.com/guardrails-ai/guardrails" target="_blank" rel="noopener">
+        github.com/guardrails-ai/guardrails
+      </a>
+    </div>
+
+    <!-- Section 1: Platform lifecycle -->
+    <h2>The Guardrails AI Lifecycle</h2>
+
+    <p>
+      Guardrails AI is a full-lifecycle AI reliability platform. Rather than addressing only one
+      moment in an AI system's lifespan, it covers the entire journey from initial data preparation
+      through live production enforcement. The platform organises this into three distinct phases:
+    </p>
+
+    <ol>
+      <li>
+        <strong>Synthetic data generation</strong> — the <em>Snowglobe engine</em> creates synthetic
+        datasets used to stress-test models before they ever see real users.
+      </li>
+      <li>
+        <strong>Pre-deployment evaluation</strong> — edge-case datasets are generated to probe model
+        behaviour under difficult or unusual inputs, catching problems before go-live.
+      </li>
+      <li>
+        <strong>Production runtime enforcement</strong> — live guardrail policies intercept LLM
+        inputs and outputs, catching policy violations, hallucinations, and data leakage as they occur.
+      </li>
+    </ol>
+
+    <p>
+      The runtime enforcement layer is built around the <strong>Guardrails Hub</strong> — a
+      centralised registry of deployable guardrail policies. Instead of writing every check from
+      scratch, developers pull pre-built validators from the Hub and compose them into Guards.
+    </p>
+
+    <div class="callout key">
+      The Guardrails AI platform is designed to be applied at all three phases of the model lifecycle —
+      not just at runtime. The Hub acts as a shared registry that makes the runtime phase composable
+      and reusable across projects.
+    </div>
+
+    <!-- Section 2: Validators and Guards -->
+    <h2>Validators and Guards — Core Concepts</h2>
+
+    <h3>Validators</h3>
+
+    <p>
+      A <strong>Validator</strong> is a single, pre-built risk measurement. Validators are available
+      through the Guardrails Hub and cover a wide range of concerns — detecting toxic language,
+      checking for competitor mentions, enforcing regex patterns, and more. Each Validator is a
+      self-contained check with a defined pass/fail contract.
+    </p>
+
+    <h3>Guards</h3>
+
+    <p>
+      A <strong>Guard</strong> is the container that assembles one or more Validators into a
+      deployable pipeline. The Guard exposes the <code>validate()</code> (or callable) interface
+      that application code uses, and it defines what happens when any of its Validators fails.
+      Validators are the building blocks; Guards are the assembled guardrail.
+    </p>
+
+    <p>
+      To create a Guard, you call <code>Guard().use(...)</code>, passing one or more Validators and
+      their failure-action configuration. Multiple <code>.use()</code> calls can be chained, or
+      several validators can be passed together — both approaches compose them into the same Guard.
+    </p>
+
+    <div class="callout key">
+      Think of a Validator as a single test and a Guard as a test suite. The Guard runs its
+      Validators in order and decides what to do when one fails — the Validator only knows how
+      to detect the problem, not how to respond to it.
+    </div>
+
+    <!-- Section 3: OnFailAction -->
+    <h2>OnFailAction — Controlling Failure Behaviour</h2>
+
+    <p>
+      Every Validator is configured with an <code>on_fail</code> parameter that specifies what the
+      Guard should do when that particular check fails. The <code>OnFailAction</code> enum provides
+      the available choices:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Behaviour</th>
+          <th>Typical use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>OnFailAction.EXCEPTION</code></td>
+          <td>Raises a Python exception, halting execution immediately.</td>
+          <td>Strict enforcement where any violation must be surfaced to the caller.</td>
+        </tr>
+        <tr>
+          <td><code>OnFailAction.FILTER</code></td>
+          <td>Silently removes or replaces the invalid content without raising an error.</td>
+          <td>Data pipelines where partial output is preferable to a hard failure.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Other actions also exist in the library. The choice of action is a design decision tied to
+      context: user-facing chatbots often benefit from the visibility that exceptions provide,
+      while automated data pipelines may prefer silent filtering to maintain throughput.
+    </p>
+
+    <div class="callout warning">
+      <code>OnFailAction.FILTER</code> swallows failures silently, which makes debugging harder.
+      If you use it in a data pipeline, make sure you have separate logging or metrics in place to
+      track how often content is being filtered — otherwise violations can go unnoticed for a long
+      time.
+    </div>
+
+    <!-- Section 4: Code examples -->
+    <h2>Code Examples</h2>
+
+    <h3>Basic Validation with a Single Validator</h3>
+
+    <p>
+      The example below creates a Guard that enforces a US phone number format using
+      <code>RegexMatch</code>. If the validated string does not match, the Guard raises an exception.
+    </p>
+
+<pre><code>from guardrails import Guard, OnFailAction
+from guardrails_ai.regex_match import RegexMatch
+
+guard = Guard().use(
+    RegexMatch, regex="\(?\d{3}\)?-? *\d{3}-? *-?\d{4}", on_fail=OnFailAction.EXCEPTION
+)
+
+guard.validate("123-456-7890")  # passes</code></pre>
+
+    <h3>Composing Multiple Validators</h3>
+
+    <p>
+      Guards become more powerful when multiple Validators are composed. The Guard below applies
+      two checks — competitor mention detection and toxic language detection — each configured
+      independently with its own threshold and failure action.
+    </p>
+
+<pre><code>guard = Guard().use(
+    CompetitorCheck(["Apple", "Microsoft"], on_fail=OnFailAction.EXCEPTION),
+    ToxicLanguage(threshold=0.5, on_fail=OnFailAction.EXCEPTION)
+)</code></pre>
+
+    <p>
+      Both Validators must pass for the Guard to consider the content valid. Each can be tuned
+      independently — a strict threshold for toxic language, for example, while using a more
+      permissive setting elsewhere.
+    </p>
+
+    <h3>Structured Pydantic Output</h3>
+
+    <p>
+      Guards are not limited to validating plain text strings. Using <code>Guard.for_pydantic()</code>,
+      you can enforce structured output against a Pydantic model, ensuring the LLM's response
+      conforms to a defined schema rather than returning free-form text.
+    </p>
+
+<pre><code>from pydantic import BaseModel
+
+class Pet(BaseModel):
+    pet_type: str
+    name: str
+
+guard = Guard.for_pydantic(output_class=Pet, prompt=prompt)
+raw_output, validated_output, *rest = guard(llm_api=openai.completions.create)</code></pre>
+
+    <p>
+      The Guard wraps the LLM call, parses the response, validates it against the <code>Pet</code>
+      schema, and returns both the raw output and the validated, typed object.
+    </p>
+
+    <!-- Section 5: REST service deployment -->
+    <h2>Deploying as a REST Service</h2>
+
+    <p>
+      Guardrails can be deployed not just as an in-process library but as a standalone REST service.
+      A single command starts the service:
+    </p>
+
+<pre><code>guardrails start</code></pre>
+
+    <p>
+      Once running, the service exposes an HTTP API that any application can call — decoupling the
+      guardrail logic from the application process entirely. Integration is straightforward through
+      two paths:
+    </p>
+
+    <ul>
+      <li>The <strong>Guardrails client</strong> — a purpose-built SDK that communicates with the
+        running service.</li>
+      <li>The <strong>standard OpenAI SDK</strong> — by redirecting the <code>base_url</code> to
+        point at the Guardrails service endpoint, existing OpenAI-compatible code can run through
+        Guardrails with minimal changes.</li>
+    </ul>
+
+    <p>
+      Running Guardrails as a service is particularly useful in microservice architectures where
+      multiple applications need shared guardrail policies, or when guardrail compute should be
+      isolated and scaled independently of the main application.
+    </p>
+
+    <div class="callout key">
+      The REST service deployment mode means Guardrails can act as a drop-in proxy in front of any
+      OpenAI-compatible endpoint. Redirecting <code>base_url</code> is all that is needed — no
+      changes to the rest of the application code.
+    </div>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-10" class="quiz">
+      <p class="question">
+        What is the relationship between a Validator and a Guard in the Guardrails AI library?
+      </p>
+      <div class="quiz-options">
+        <button>A Validator stores risk rules; Guards hold the data</button>
+        <button>They are the same object under two different names</button>
+        <button>A Guard combines one or more Validators together</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <p>
+        Write Python code (or detailed pseudocode) for a Guard that:
+      </p>
+      <ol>
+        <li>Checks that LLM output does not contain toxic language (threshold 0.5, raise exception on fail).</li>
+        <li>Checks that the output matches a specific regex pattern.</li>
+        <li>Is deployed as a REST service using <code>guardrails start</code>.</li>
+      </ol>
+      <p>
+        Then, in 2 sentences, describe what happens when the Guard raises an exception versus when
+        it silently filters content — and which behaviour you would prefer for a user-facing chatbot
+        versus a data pipeline, and why.
+      </p>
+      <textarea
+        rows="16"
+        placeholder="Write your code and explanation here…"
+        aria-label="Guard implementation and comparison answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0009-rate-limiting.html">← Previous</a>
+      <a href="0011-nemo-pydantic.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-10',
+      2,
+      'A Validator is a single pre-built risk check (like ToxicLanguage or RegexMatch). A Guard is the container that wraps one or more Validators into a pipeline, defines what happens on failure (OnFailAction), and exposes the validate() or call interface. Validators are the building blocks; Guards are the assembled guardrail.'
+    );
+  </script>
+</body>
+</html>

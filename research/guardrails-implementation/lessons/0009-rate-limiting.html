@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate Limiting — Guardrails Course</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Fira+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Guardrails Course</a> › Module 3 › Lesson 9
+      </div>
+      <h1>Rate Limiting — Algorithms and When to Use Each</h1>
+      <div class="lesson-meta">
+        <span>⏱ ~20 min</span>
+        <span>Module 3 — Software/System Guardrails</span>
+        <span>Lesson 9 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Source</strong>
+      ByteByteGo — Rate Limiting Fundamentals &nbsp;·&nbsp;
+      <a href="https://blog.bytebytego.com/p/rate-limiting-fundamentals" target="_blank" rel="noopener">
+        blog.bytebytego.com/p/rate-limiting-fundamentals
+      </a>
+    </div>
+
+    <!-- Section 1: Why Rate Limiting Is a Guardrail -->
+    <h2>Why Rate Limiting Is a Guardrail</h2>
+
+    <p>
+      Rate limiting controls how frequently users or services can access a resource. When
+      requests exceed defined thresholds, they get throttled or blocked. This makes rate
+      limiting one of the most versatile guardrails in a software system — it acts at the
+      infrastructure layer rather than the application layer, meaning it intercepts excess
+      load <em>early</em> in the request lifecycle before it can cause downstream harm.
+    </p>
+
+    <p>
+      There are three distinct reasons to reach for a rate limiter:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Benefit</th>
+          <th>How It Helps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Security</strong></td>
+          <td>Defends against denial-of-service (DoS) attacks by rejecting excess calls before
+            they overwhelm your servers.</td>
+        </tr>
+        <tr>
+          <td><strong>Cost Control</strong></td>
+          <td>Caps usage of paid third-party APIs — payments processors, health record systems,
+            LLM providers — so that a runaway client or bad actor cannot generate unbounded
+            charges.</td>
+        </tr>
+        <tr>
+          <td><strong>Server Health</strong></td>
+          <td>Rejects excess load early in the request lifecycle, protecting databases, queues,
+            and downstream services from saturation.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      Rate limiting is a <em>perimeter</em> guardrail: it does not fix bad requests, it simply
+      refuses to process more of them than the system can safely handle. Acting early — before
+      the request touches application logic — makes it cheap to enforce and hard to bypass.
+    </div>
+
+    <!-- Section 2: Core Concepts -->
+    <h2>Core Concepts</h2>
+
+    <h3>The Limit / Window / Identifier Triad</h3>
+
+    <p>
+      Every rate limiter is built from three elements. Understanding these is prerequisite to
+      choosing and configuring any algorithm:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Limit</strong> — the maximum number of requests allowed. This is the ceiling
+        you are enforcing (e.g., 100 requests, 1 000 tokens).
+      </li>
+      <li>
+        <strong>Window</strong> — the time period over which the limit applies: per second,
+        per minute, per hour, per day, per week. The window determines the granularity of
+        enforcement.
+      </li>
+      <li>
+        <strong>Identifier</strong> — what distinguishes one caller from another. Common
+        identifiers are a user ID (authenticated caller) or an IP address (unauthenticated
+        traffic). The identifier is what makes a rate limiter <em>per-user</em> rather than
+        global.
+      </li>
+    </ul>
+
+    <p>
+      These three values together define the policy: for example, "no single user ID may make
+      more than 60 requests per minute." Changing any one element changes the behaviour
+      substantially.
+    </p>
+
+    <h3>Response Types When the Limit Is Exceeded</h3>
+
+    <p>
+      When a caller crosses the threshold, the rate limiter can respond in one of three ways:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Blocking</strong> — the request is rejected outright with an
+        <code>HTTP 429 Too Many Requests</code> response. The caller must wait before retrying.
+      </li>
+      <li>
+        <strong>Throttling</strong> — the response is deliberately slowed down rather than
+        refused. The caller experiences degraded latency as a signal to back off.
+      </li>
+      <li>
+        <strong>Shaping</strong> — over-limit requests are deprioritised and queued rather than
+        dropped immediately. Traffic is reshaped toward an acceptable output rate.
+      </li>
+    </ul>
+
+    <p>
+      <code>HTTP 429</code> is the standard signal for blocking. Well-behaved clients should
+      honour it — and ideally read the <code>Retry-After</code> header to know how long to wait.
+    </p>
+
+    <!-- Section 3: Algorithm Comparison -->
+    <h2>The Five Main Algorithms</h2>
+
+    <p>
+      Rate limiting is not a single algorithm. Each approach makes different trade-offs between
+      memory, accuracy, and how it handles traffic bursts.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Algorithm</th>
+          <th>Mechanism</th>
+          <th>Best For</th>
+          <th>Weakness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fixed Window Counter</strong></td>
+          <td>Counts requests within a fixed, non-overlapping time slot (e.g., 12:00–12:01).
+            Counter resets at the end of each slot.</td>
+          <td>Low-complexity systems needing simple quotas, such as daily usage limits.</td>
+          <td>Burst vulnerability at window boundaries — a caller can send the full quota at
+            the end of one window and the full quota again at the start of the next.</td>
+        </tr>
+        <tr>
+          <td><strong>Sliding Window Log</strong></td>
+          <td>Stores the exact timestamp of every request. At evaluation time, timestamps
+            outside the sliding window are discarded; the count of remaining timestamps
+            determines whether the request is allowed.</td>
+          <td>Systems where precision matters and fairness is paramount.</td>
+          <td>High memory usage — every request timestamp must be stored, which is expensive
+            at scale.</td>
+        </tr>
+        <tr>
+          <td><strong>Sliding Window Counter</strong></td>
+          <td>Blends two adjacent fixed-window counters using a weighted formula to approximate
+            the count within a rolling window. No per-request timestamp storage needed.</td>
+          <td>Systems needing a balance of accuracy and memory efficiency.</td>
+          <td>Approximate — the weighted blend is not perfectly precise, so edge cases near
+            the boundary may be slightly off.</td>
+        </tr>
+        <tr>
+          <td><strong>Token Bucket</strong></td>
+          <td>Each caller holds a bucket of tokens. Tokens replenish at a steady rate. Each
+            request consumes one token. If the bucket is empty, the request is rejected.</td>
+          <td>APIs that should allow short bursts of traffic while still capping sustained
+            throughput.</td>
+          <td>Tuning complexity — bucket capacity and refill rate must be calibrated carefully
+            or the policy behaves unexpectedly.</td>
+        </tr>
+        <tr>
+          <td><strong>Leaky Bucket</strong></td>
+          <td>Requests enter a queue and drain out at a constant rate — like water leaking from
+            a bucket at a fixed drip speed. Excess requests that overflow the queue are
+            dropped.</td>
+          <td>Scenarios demanding a uniform, predictable output rate, such as streaming
+            pipelines.</td>
+          <td>Strictly drops legitimate bursts — even valid spikes are shed if the bucket
+            overflows.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      The Fixed Window Counter has a well-known boundary exploit. If the window resets at
+      the top of each minute and the limit is 100 requests, a caller can send 100 requests
+      at 12:00:59 and another 100 at 12:01:00 — 200 requests in two seconds, each window
+      technically within its limit. Sliding window approaches exist specifically to close
+      this gap.
+    </div>
+
+    <!-- Section 4: Algorithm Selection Guidance -->
+    <h2>Choosing the Right Algorithm</h2>
+
+    <p>
+      The right algorithm depends on what your system needs to protect against and how much
+      complexity you can absorb in operations:
+    </p>
+
+    <ul>
+      <li>
+        <strong>Use Fixed Window</strong> when you need simplicity above all else — daily API
+        quotas, coarse billing limits, or internal service caps where boundary exploits are not
+        a meaningful threat.
+      </li>
+      <li>
+        <strong>Use Token Bucket</strong> when callers legitimately produce bursty traffic —
+        for example, a developer's app that sends a flurry of requests when the user takes an
+        action but is quiet otherwise. Tokens accumulate during idle periods and can be spent
+        in bursts, so the algorithm tolerates natural traffic patterns while still capping
+        sustained overuse.
+      </li>
+      <li>
+        <strong>Use Leaky Bucket</strong> when the downstream system requires a smooth,
+        constant input rate — streaming ingestion pipelines, message queues with fixed
+        throughput budgets, or real-time processing stages that cannot absorb spikes.
+      </li>
+      <li>
+        <strong>Use Sliding Window</strong> (Log or Counter) when fairness matters most and
+        boundary-burst exploits are a real concern — for instance, a public API where
+        well-funded attackers might deliberately time their traffic to straddle window
+        boundaries.
+      </li>
+    </ul>
+
+    <p>
+      In practice, many production systems combine approaches: a Token Bucket per user for
+      burst tolerance, plus a Fixed Window counter for billing quotas, plus a global Leaky
+      Bucket at the ingress layer for traffic shaping. Each layer addresses a different
+      failure mode.
+    </p>
+
+    <!-- Quiz -->
+    <h2>Check Your Understanding</h2>
+
+    <div id="quiz-9" class="quiz">
+      <p class="question">
+        Which rate limiting algorithm allows short bursts of requests while still capping
+        sustained traffic over time?
+      </p>
+      <ol class="quiz-options">
+        <li>
+          <button>Fixed Window Counter</button>
+        </li>
+        <li>
+          <button>Leaky Bucket Algorithm</button>
+        </li>
+        <li>
+          <button>Token Bucket Algorithm</button>
+        </li>
+      </ol>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Exercise — Design a Rate Limiting Strategy</h3>
+      <p>
+        Design a rate limiting strategy for a public AI API with two tiers:
+      </p>
+      <ol>
+        <li>
+          <strong>Free tier</strong> — casual users who should be allowed occasional queries
+          but not sustained high-volume traffic.
+        </li>
+        <li>
+          <strong>Paid tier</strong> — developers building applications who need burst
+          tolerance but where cost control still matters.
+        </li>
+      </ol>
+      <p>For each tier, address all three questions:</p>
+      <ol type="a">
+        <li>Choose an algorithm and justify why it fits this tier's usage pattern.</li>
+        <li>
+          Specify concrete values for all three elements of the triad: the
+          <strong>limit</strong>, the <strong>window</strong>, and the
+          <strong>identifier</strong> you would use to distinguish callers.
+        </li>
+        <li>
+          Describe what happens when a user exceeds the limit — do you block, throttle, or
+          shape? What HTTP response does the caller receive?
+        </li>
+      </ol>
+      <textarea
+        rows="18"
+        placeholder="Write your rate limiting design here — one section per tier…"
+        aria-label="Rate limiting design answer"
+      ></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0008-timeouts-retries-backoff.html">← Previous</a>
+      <a href="0010-guardrails-ai-library.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-9',
+      2,
+      "Token Bucket replenishes tokens at a steady rate. A user can accumulate tokens when idle and spend them in a burst — so short spikes are allowed. But the sustained rate is capped by how fast tokens refill. This makes it ideal for APIs where occasional bursts are legitimate but chronic high traffic should be throttled."
+    );
+  </script>
+</body>
+</html>

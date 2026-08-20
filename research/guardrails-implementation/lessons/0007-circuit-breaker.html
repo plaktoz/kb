@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Circuit Breaker Pattern</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="breadcrumb">
+      <a href="../lessons.md">Guardrails Course</a>
+      <span>›</span>
+      <span>Module 3 — Lesson 7</span>
+    </nav>
+    <h1>The Circuit Breaker Pattern</h1>
+    <div class="lesson-meta">
+      <span class="time-estimate">⏱ ~20 min</span>
+      <span class="module-label">Module 3 — Software/System Guardrails · Lesson 7 of 12</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <strong>Primary source:</strong> Martin Fowler — Circuit Breaker<br>
+    <a href="https://martinfowler.com/bliki/CircuitBreaker.html" target="_blank" rel="noopener">
+      https://martinfowler.com/bliki/CircuitBreaker.html
+    </a>
+  </div>
+
+  <main>
+
+    <!-- ─── Problem ──────────────────────────────────────────────────── -->
+
+    <section id="problem">
+      <h2>The Problem: Cascading Failures</h2>
+      <p>
+        In distributed systems, services depend on other services. When a downstream dependency —
+        a database, a third-party API, a microservice — becomes slow or unresponsive, the callers
+        waiting for responses accumulate. Threads block. Connection pools exhaust. The slowdown
+        in one service cascades upward and sideways, eventually degrading the entire system.
+      </p>
+      <p>
+        The naive approach — retrying immediately on failure — often makes things worse. A
+        struggling service bombarded with retries has no opportunity to recover. What's needed is
+        a way to detect that a dependency is unhealthy and <em>stop calling it</em> until it
+        recovers. That is exactly what the circuit breaker provides.
+      </p>
+      <p>
+        The pattern wraps a protected function call in an object that monitors for failures. When
+        failures hit a configured threshold, the breaker "trips" and subsequent calls return errors
+        immediately — bypassing the failing operation entirely — giving the downstream service
+        space to recover while protecting thread pools and other limited resources in the caller.
+      </p>
+    </section>
+
+    <!-- ─── Three States ─────────────────────────────────────────────── -->
+
+    <section id="state-machine">
+      <h2>The Three-State Machine</h2>
+      <p>
+        A circuit breaker is a state machine with three distinct states. Understanding how
+        transitions occur between them is the core of the pattern.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Behavior for callers</th>
+            <th>What triggers a transition out</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Closed</strong></td>
+            <td>
+              Calls pass through to the protected operation normally. Each failure is counted.
+              A successful call resets the failure count to zero. This is the healthy, default state.
+            </td>
+            <td>
+              Failure count reaches the configured threshold → transition to <strong>Open</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Open</strong></td>
+            <td>
+              All calls fail immediately without attempting the operation. The breaker raises an
+              error (e.g., <code>CircuitBreaker::Open</code>) rather than touching the downstream
+              service. Callers receive fast failures instead of hanging indefinitely.
+            </td>
+            <td>
+              A configured reset timeout elapses → transition to <strong>Half-Open</strong>.
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Half-Open</strong></td>
+            <td>
+              Exactly one trial call is allowed through to test whether the downstream service has
+              recovered. All other simultaneous calls still fail immediately, preventing an
+              overwhelming flood of requests onto a service that may still be fragile.
+            </td>
+            <td>
+              Trial call succeeds → reset failure count, transition to <strong>Closed</strong>.<br>
+              Trial call fails → transition back to <strong>Open</strong>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Reading the State Machine</h3>
+      <p>
+        The typical lifecycle of a circuit breaker event looks like this:
+      </p>
+      <ol>
+        <li>
+          The breaker starts in <strong>Closed</strong>. Calls flow normally. Occasional failures
+          are counted but do not trip the breaker.
+        </li>
+        <li>
+          A dependency becomes unresponsive. Failures accumulate. The count crosses the threshold.
+          The breaker trips to <strong>Open</strong>.
+        </li>
+        <li>
+          Fast failures are returned to callers. The downstream service is no longer bombarded with
+          requests and has time to recover.
+        </li>
+        <li>
+          After the reset timeout, the breaker enters <strong>Half-Open</strong>. One probe call
+          is sent to the downstream service.
+        </li>
+        <li>
+          If the probe succeeds, the breaker resets to <strong>Closed</strong> and normal operation
+          resumes. If it fails, the breaker snaps back to <strong>Open</strong> and the timer restarts.
+        </li>
+      </ol>
+
+      <h3>Example (Ruby)</h3>
+      <p>
+        The structure of a circuit breaker implementation illustrates how the pattern is applied.
+        The breaker stores the protected block and checks state before each invocation:
+      </p>
+      <pre><code>cb = CircuitBreaker.new {|arg| @supplier.func arg}</code></pre>
+      <p>
+        When the breaker is Open, calling <code>cb</code> raises <code>CircuitBreaker::Open</code>
+        immediately rather than invoking <code>@supplier.func</code>. The caller can catch that
+        specific error and execute a fallback strategy.
+      </p>
+    </section>
+
+    <!-- ─── Key Insight ───────────────────────────────────────────────── -->
+
+    <div class="callout key">
+      <strong>Key insight:</strong> The circuit breaker does not fix a broken downstream service —
+      it protects the rest of the system from being dragged down while that service is broken.
+      Fast failure is a feature: callers know immediately that a dependency is unavailable and can
+      execute fallbacks, rather than exhausting resources waiting for a response that will never come.
+    </div>
+
+    <!-- ─── When to Use ───────────────────────────────────────────────── -->
+
+    <section id="when-to-use">
+      <h2>When to Use the Circuit Breaker</h2>
+      <p>
+        The pattern is most valuable wherever a call can hang or fail in ways that consume
+        limited resources:
+      </p>
+      <ul>
+        <li>
+          <strong>Remote and network calls</strong> — HTTP requests to external APIs, database
+          connections, or inter-service calls within a microservices architecture are the primary
+          use case. These calls can be slow to time out and have unpredictable failure modes.
+        </li>
+        <li>
+          <strong>Cascading failure prevention</strong> — when a single supplier going unresponsive
+          can propagate failures to all its consumers and beyond, a breaker provides a firebreak.
+        </li>
+        <li>
+          <strong>Thread pool protection</strong> — threads blocked waiting for a slow dependency
+          cannot serve other requests. A breaker that trips fast frees those threads immediately.
+        </li>
+        <li>
+          <strong>Asynchronous systems</strong> — in event-driven architectures, the circuit can
+          be tripped when a downstream queue fills up, preventing producers from overwhelming a
+          consumer that has fallen behind.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─── Operational Considerations ───────────────────────────────── -->
+
+    <section id="operations">
+      <h2>Key Operational Considerations</h2>
+
+      <h3>Monitoring</h3>
+      <p>
+        A breaker changing state is a signal, not just a safety mechanism. When the circuit trips
+        to Open, it is telling you that a downstream system is in trouble. Operations teams need
+        visibility into breaker state changes — dashboards, alerts, and logs that surface trips and
+        resets in real time. Without this, the breaker silently masks an outage that the team
+        should be investigating.
+      </p>
+
+      <h3>Manual Override</h3>
+      <p>
+        Operations staff should be able to manually trip or reset a circuit breaker. In practice
+        this means: tripping a breaker early when maintenance on a downstream service is planned
+        (rather than waiting for natural failure accumulation), and manually resetting a breaker
+        when an operator has verified that the downstream service has fully recovered, without
+        waiting for the reset timeout to expire. These manual controls are critical for production
+        operations.
+      </p>
+
+      <h3>Fallback Strategies</h3>
+      <p>
+        The value of fast failure is realized only when callers have a plan for what to do when
+        the breaker is Open. Common fallback strategies include:
+      </p>
+      <ul>
+        <li>
+          <strong>Queuing requests</strong> — store the request locally and replay it once the
+          circuit closes, appropriate when the operation is not time-sensitive.
+        </li>
+        <li>
+          <strong>Serving stale data</strong> — return a cached response from the last successful
+          call, appropriate when approximate data is better than no data.
+        </li>
+        <li>
+          <strong>Graceful degradation</strong> — return a simplified response, a default value,
+          or a user-facing message explaining that the feature is temporarily unavailable.
+        </li>
+      </ul>
+      <p>
+        The right fallback depends on the operation's semantics. The important thing is to decide
+        on the fallback at design time, not during an incident.
+      </p>
+    </section>
+
+    <!-- ─── Warning Callout ───────────────────────────────────────────── -->
+
+    <div class="callout warning">
+      <strong>Common misconception — the circuit breaker is not a retry mechanism.</strong>
+      Retries and circuit breakers serve opposite purposes: retries try harder; circuit breakers
+      stop trying. Used together without coordination, they compound problems — a retry loop
+      inside a circuit breaker inflates the failure count rapidly and can cause premature tripping.
+      Design the two mechanisms to be aware of each other: retries should be limited and
+      exponentially backed off; the circuit breaker should sit outside the retry loop, not inside it.
+    </div>
+
+    <!-- ─── LLM Application ───────────────────────────────────────────── -->
+
+    <section id="llm-application">
+      <h2>Application to LLM APIs</h2>
+      <p>
+        The circuit breaker is the foundational software guardrail for any backend service making
+        outbound calls — and it is especially important for AI applications that call external
+        LLM APIs.
+      </p>
+      <p>
+        LLM API endpoints exhibit exactly the failure modes the circuit breaker is designed for:
+        they can become slow under load as inference queues grow, they can be rate-limited or
+        throttled, and they can become temporarily unavailable during provider incidents. A
+        single slow LLM call can hold a server thread for tens of seconds; without a breaker,
+        concurrent user requests will exhaust the thread pool long before any timeout fires.
+      </p>
+      <p>
+        In practice, a circuit breaker around an LLM API call should be paired with:
+      </p>
+      <ul>
+        <li>A timeout on the individual call (so the breaker failure counter is actually incremented).</li>
+        <li>A fallback strategy — returning a cached response, routing to a secondary provider, or
+          presenting the user with a clear "service temporarily unavailable" message.</li>
+        <li>Alerting when the breaker trips, so the engineering team knows the provider is degraded.</li>
+      </ul>
+      <p>
+        Together, these practices ensure that a provider outage degrades a single feature gracefully
+        rather than causing the entire application to hang.
+      </p>
+    </section>
+
+    <!-- ─── Quiz ─────────────────────────────────────────────────────── -->
+
+    <section id="quiz-section">
+      <h2>Check Your Understanding</h2>
+
+      <div id="quiz-7" class="quiz">
+        <p class="quiz-question">
+          In which state does a circuit breaker allow exactly one trial call to test whether the
+          downstream service has recovered?
+        </p>
+        <ol class="quiz-options">
+          <li><button type="button">Closed state</button></li>
+          <li><button type="button">Open state</button></li>
+          <li><button type="button">Half-Open state</button></li>
+        </ol>
+        <div class="quiz-feedback" hidden></div>
+      </div>
+    </section>
+
+    <!-- ─── Exercise ─────────────────────────────────────────────────── -->
+
+    <section class="exercise">
+      <h2>Exercise — State Machine and Pseudocode</h2>
+      <p>
+        Complete this two-part exercise:
+      </p>
+      <ol>
+        <li>
+          Describe the state machine for a circuit breaker: list the three states, the conditions
+          that trigger each transition between states, and what happens to callers in each state.
+        </li>
+        <li>
+          Write pseudocode that wraps an LLM API call with a circuit breaker. Your circuit breaker
+          should open after 3 consecutive failures and allow a retry after a 30-second reset timeout.
+          Show the state checks and transitions.
+        </li>
+      </ol>
+      <textarea
+        rows="14"
+        placeholder="Part 1: Describe the three states and transitions…&#10;&#10;Part 2: Write your pseudocode here…"
+        aria-label="Exercise answer — circuit breaker state machine and pseudocode"
+      ></textarea>
+    </section>
+
+    <!-- ─── Tutor Prompt ──────────────────────────────────────────────── -->
+
+    <div class="tutor-prompt">
+      Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.
+    </div>
+
+    <!-- ─── Lesson Navigation ─────────────────────────────────────────── -->
+
+    <nav class="lesson-nav">
+      <a href="0006-output-guardrails.html">← Previous</a>
+      <a href="0008-timeouts-retries-backoff.html" class="primary">Next →</a>
+    </nav>
+
+  </main>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-7',
+      2,
+      'In the Half-Open state, the circuit breaker allows one trial call through. If it succeeds, the breaker resets to Closed (normal operation). If it fails, the breaker returns to Open (all calls blocked). This prevents overwhelming a service that is still recovering.'
+    );
+  </script>
+
+</body>
+</html>
