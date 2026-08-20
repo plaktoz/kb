@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10: Supply Chain, Model DoS &amp; Model Theft (LLM05 + LLM04 + LLM10)</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">OWASP LLM Top 10</a> &rsaquo; Module 3: Output &amp; Infrastructure Vulnerabilities &rsaquo; Lesson 10 of 13
+      </div>
+      <h1>Supply Chain, Model DoS &amp; Model Theft (LLM05 + LLM04 + LLM10)</h1>
+      <div class="lesson-meta">
+        <span>~16 min</span>
+        <span>Module 3: Output &amp; Infrastructure</span>
+        <span>LLM05 &middot; LLM04 &middot; LLM10</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Primary sources</strong><br>
+      <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM05_SupplyChainVulnerabilities.md">OWASP LLM Top 10 v1.1 &mdash; LLM05: Supply Chain Vulnerabilities</a><br>
+      <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM04_ModelDoS.md">OWASP LLM Top 10 v1.1 &mdash; LLM04: Model Denial of Service</a><br>
+      <a href="https://raw.githubusercontent.com/OWASP/www-project-top-10-for-large-language-model-applications/main/Archive/1_1_vulns/LLM10_ModelTheft.md">OWASP LLM Top 10 v1.1 &mdash; LLM10: Model Theft</a>
+    </div>
+
+    <h2>LLM05 &mdash; Supply Chain Vulnerabilities</h2>
+
+    <p>
+      A traditional web application has a supply chain: npm packages, OS libraries, third-party APIs. An
+      LLM application has all of that <em>plus</em> several layers unique to machine learning: pre-trained
+      model weights, fine-tuning datasets, model-hosting platforms, vector databases, and plugins that
+      extend the model&rsquo;s capabilities at runtime. Each layer is a separate attack surface that the
+      developer implicitly trusts every time the app starts up.
+    </p>
+
+    <p>
+      OWASP LLM05 defines five supply chain components that carry distinct risks:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Example</th>
+          <th>Attack vector</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Python dependencies</strong></td>
+          <td><code>transformers</code>, <code>langchain</code>, <code>openai</code></td>
+          <td>Compromised package on PyPI; typosquatting; malicious version update</td>
+        </tr>
+        <tr>
+          <td><strong>Pre-trained model weights</strong></td>
+          <td>Hugging Face model repository</td>
+          <td>Backdoored weights; hidden triggers embedded during training</td>
+        </tr>
+        <tr>
+          <td><strong>Plugins and extensions</strong></td>
+          <td>Code interpreter, browser, calendar plug-in</td>
+          <td>Malicious plugin granted access to user data or downstream actions</td>
+        </tr>
+        <tr>
+          <td><strong>Third-party APIs</strong></td>
+          <td>Embedding API, search API, translation API</td>
+          <td>API provider changes terms, leaks data, or injects content into responses</td>
+        </tr>
+        <tr>
+          <td><strong>Training datasets</strong></td>
+          <td>Web-scraped corpora, licensed datasets</td>
+          <td>Data poisoning during training; backdoor triggers that activate on specific inputs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Three Real Incidents</h3>
+
+    <p>
+      OWASP LLM05 documents three concrete incidents that illustrate how supply chain compromises reach
+      production LLM systems.
+    </p>
+
+    <p>
+      <strong>Incident 1 &mdash; Vulnerable Python library exploited in OpenAI data breach.</strong>
+      A Python package used in the OpenAI development pipeline contained a known vulnerability.
+      Attackers exploited it to breach internal systems &mdash; the first publicly attributed
+      data breach involving OpenAI. The entry point was not the LLM itself; it was an ordinary
+      dependency that happened to sit in the same environment.
+    </p>
+
+    <p>
+      <strong>Incident 2 &mdash; Poisoned PyPI package exfiltrating model developer data.</strong>
+      A malicious package was published to PyPI under a name closely resembling a legitimate ML
+      utility. Developers working on model fine-tuning installed it and inadvertently allowed it to
+      exfiltrate training data, model hyperparameters, and environment variables including API keys.
+      The attacker needed no access to the model platform &mdash; only a plausible package name.
+    </p>
+
+    <p>
+      <strong>Incident 3 &mdash; Backdoored Hugging Face model spreading misinformation.</strong>
+      A model uploaded to Hugging Face appeared to perform its advertised summarization task but
+      contained embedded backdoor behavior: specific trigger phrases in the input caused the model
+      to generate misinformation instead of accurate summaries. Downstream developers who used the
+      model via the Hub&rsquo;s one-line API inherited the backdoor without any visibility into the
+      weights they were running.
+    </p>
+
+    <div class="callout warning">
+      Insider threats apply across the entire supply chain, not just your own organization. A
+      disgruntled employee at a model hosting provider, a dataset vendor, or a plugin API company
+      can introduce a compromise that reaches your users. Terms-of-service changes are a softer
+      version of the same problem: a vendor quietly updating their T&amp;C to opt user inputs into
+      training data can expose your users&rsquo; private conversations without any code change on
+      your end.
+    </div>
+
+    <h3>LLM05 Mitigations</h3>
+
+    <p>
+      The two most structurally distinctive mitigations for LLM supply chains &mdash; ones that go
+      beyond standard software supply chain hygiene &mdash; are the SBOM and model signing.
+    </p>
+
+    <p>
+      <strong>Software Bill of Materials (SBOM).</strong> An SBOM is a machine-readable inventory
+      of every component in your application: Python packages and their versions, model identifiers
+      and checksums, plugin manifests, and API endpoint contracts. You cannot audit what you cannot
+      enumerate. An SBOM makes the full dependency graph visible so that when a vulnerability is
+      disclosed in any component you can immediately answer the question: &ldquo;Do we use this?
+      Which version? In which service?&rdquo;
+    </p>
+
+    <p>
+      <strong>Model signing.</strong> Code signing for model weights. A model registry (internal or
+      external) attaches a cryptographic signature to each model artifact at publication time. Before
+      loading weights, the inference server verifies the signature against a trusted public key. This
+      prevents a compromised artifact &mdash; whether from a storage breach, a MITM during download,
+      or a malicious contributor &mdash; from silently replacing a known-good model.
+    </p>
+
+    <div class="callout key">
+      The SBOM covers all five supply chain layers listed above. Model signing specifically addresses
+      the layer most unique to LLMs: pre-trained weights, which are opaque binary files with no
+      equivalent in traditional web development. Think of the SBOM as the inventory and model signing
+      as the tamper-evident seal.
+    </div>
+
+    <p>
+      Additional mitigations from OWASP LLM05: vet suppliers and review their privacy policies before
+      integration; apply anomaly detection on the behavior of supplied models (unexpected output
+      distributions may signal backdoor triggers); continuously monitor all third-party components for
+      newly disclosed vulnerabilities.
+    </p>
+
+    <h2>LLM04 &mdash; Model Denial of Service</h2>
+
+    <p>
+      Denial of service against a web server traditionally means flooding it with network connections
+      or HTTP requests until its bandwidth, CPU, or thread pool is exhausted. The attacker&rsquo;s
+      resource expenditure is modest; the defender&rsquo;s is large. LLM DoS shares this asymmetry
+      but exploits a completely different attack surface: the <strong>context window</strong>.
+    </p>
+
+    <p>
+      Every token processed by an LLM costs real compute, and that compute scales with context length.
+      An attacker who sends requests that force the model to process a large number of tokens &mdash;
+      whether by submitting very long inputs, by triggering recursive context expansion through clever
+      prompting, or by flooding with many concurrent requests just below the context limit &mdash;
+      inflates the provider&rsquo;s (or operator&rsquo;s) cost per request. The attacker pays for one
+      HTTP request; the operator pays for thousands of tokens of compute.
+    </p>
+
+    <div class="callout key">
+      LLM DoS is economically different from traditional server DoS. A traditional attack degrades
+      availability while costing the attacker bandwidth. An LLM DoS attack degrades both availability
+      <em>and</em> inflates the operator&rsquo;s cloud bill &mdash; silently, because cost accrual is
+      invisible until the monthly invoice. A well-designed LLM DoS campaign can cause significant
+      financial damage before any alert fires.
+    </div>
+
+    <h3>Four Attack Scenarios</h3>
+
+    <p>
+      OWASP LLM04 documents four representative attack patterns:
+    </p>
+
+    <p>
+      <strong>Scenario 1 &mdash; Automated prompt flood.</strong> A script sends a continuous stream
+      of complete, semantically valid requests. Each request is individually legitimate; the attack
+      is in the volume. Because LLM API rate limiting is often configured per-account rather than
+      per-IP, a single leaked API key can sustain the flood at high throughput.
+    </p>
+
+    <p>
+      <strong>Scenario 2 &mdash; Recursive context expansion.</strong> A crafted prompt instructs
+      the model to expand its own output repeatedly: &ldquo;For each point you make, list three
+      sub-points, and for each sub-point list three supporting examples.&rdquo; A short input
+      generates an exponentially growing response, consuming tokens in both the generation and
+      any downstream re-injection step.
+    </p>
+
+    <p>
+      <strong>Scenario 3 &mdash; Variable-length floods near the context limit.</strong> Requests
+      are constructed to be just under the model&rsquo;s maximum context length. This maximizes
+      per-request compute cost while staying within the bounds that would trigger an outright
+      rejection. Systems that enforce a hard token cap per request are largely immune; systems that
+      accept &ldquo;up to the limit&rdquo; by default are highly vulnerable.
+    </p>
+
+    <p>
+      <strong>Scenario 4 &mdash; Leaked admin token abuse.</strong> If an attacker obtains an
+      admin-level API token (via prompt injection, insider leak, or credential exposure in a public
+      repository), they can submit requests at volumes and with parameters far beyond what normal
+      users can reach. Admin tokens that bypass rate limiting are the highest-impact variant.
+    </p>
+
+    <div class="callout warning">
+      Degraded performance is not the same as outright unavailability. A model that begins
+      responding slowly, returning truncated outputs, or timing out occasionally may be under a
+      low-rate DoS that costs money and erodes user experience without triggering any availability
+      alert. Monitor token consumption per request and per user over time, not just error rates.
+    </div>
+
+    <h3>LLM04 Mitigations</h3>
+
+    <p>
+      Because the context window is the attack surface, mitigations must operate at the token level,
+      not just at the network level:
+    </p>
+
+    <ul>
+      <li><strong>Input size validation</strong> &mdash; reject or truncate requests that exceed a
+      defined token budget before the model processes them.</li>
+      <li><strong>Per-request resource caps</strong> &mdash; enforce a maximum number of tokens
+      that can be consumed in any single inference call (both input context and generated output).</li>
+      <li><strong>API rate limiting per user and per IP</strong> &mdash; prevent any single identity
+      from submitting requests at a rate that would degrade service for other users.</li>
+      <li><strong>Cap queued actions</strong> &mdash; in agentic pipelines where the model can
+      queue follow-up tasks, limit the total number of actions in flight to prevent runaway
+      expansion.</li>
+      <li><strong>Strict context window enforcement</strong> &mdash; never silently accept inputs
+      that exceed the window; always fail fast with a clear error rather than silently truncating
+      context in ways that change model behavior unpredictably.</li>
+    </ul>
+
+    <h2>LLM10 &mdash; Model Theft</h2>
+
+    <p>
+      A trained LLM represents significant intellectual property: months of compute, proprietary
+      fine-tuning data, and the accumulated engineering effort of alignment and evaluation. Model theft
+      &mdash; the unauthorized acquisition of model weights or equivalent functional knowledge &mdash;
+      is a category of attack with no direct analogue in traditional software security.
+    </p>
+
+    <p>
+      OWASP LLM10 identifies five theft vectors:
+    </p>
+
+    <p>
+      <strong>Infrastructure breach.</strong> Misconfigured cloud storage (e.g., a public S3 bucket),
+      unprotected model registries, or weak access controls on the inference server&rsquo;s file
+      system can expose weights directly. This is the highest-bandwidth exfiltration path: a single
+      download yields the complete model.
+    </p>
+
+    <p>
+      <strong>Insider threat.</strong> An engineer with legitimate access to model artifacts
+      copies them to personal storage. Unlike a code repository where diffs are visible, a binary
+      file copy may generate no audit event unless object-level logging is explicitly configured.
+    </p>
+
+    <p>
+      <strong>API extraction attack.</strong> An attacker systematically queries the model&rsquo;s
+      public API with a carefully designed set of inputs, harvests the outputs, and uses them to
+      train a &ldquo;shadow model&rdquo; that approximates the original&rsquo;s behavior. The
+      attacker never touches the weights; they reconstruct equivalent functional knowledge from
+      observable input-output pairs. This attack is unique to LLMs and scales with API accessibility.
+    </p>
+
+    <p>
+      <strong>Supply chain failure.</strong> A component in the model&rsquo;s own supply chain
+      (a fine-tuning platform, a dataset vendor, a model-hosting provider) is compromised and
+      the weights are exfiltrated through that channel.
+    </p>
+
+    <p>
+      <strong>Side-channel attack.</strong> Inference timing, power consumption, or memory access
+      patterns can leak information about model architecture and parameters to an attacker with
+      physical or low-level access to the inference hardware. Less common in cloud deployments
+      but relevant for on-premise models.
+    </p>
+
+    <div class="callout key">
+      The API extraction attack deserves particular attention because it requires <em>no
+      infrastructure access whatsoever</em>. Any model exposed via a public API is theoretically
+      extractable given sufficient query budget. The attacker&rsquo;s cost scales with the number
+      of queries needed to achieve acceptable shadow-model fidelity; the defender&rsquo;s cost is
+      the compute billed for those queries. Rate limiting is both an LLM04 and an LLM10 control.
+    </div>
+
+    <h3>Model Watermarking</h3>
+
+    <p>
+      Watermarking is the LLM10-specific detection and attribution mechanism. A watermark embeds
+      a statistical signature into the model&rsquo;s outputs &mdash; either during training (training-time
+      watermark) or at inference time (output watermark). The signature is imperceptible in
+      individual responses but detectable with a statistical test across a corpus of outputs.
+    </p>
+
+    <p>
+      If a stolen or extracted model is used commercially, the watermark persists in its outputs
+      and can be used to attribute the theft to the original model. Watermarking does not prevent
+      theft but it does two important things: it deters theft by raising the risk of attribution,
+      and it provides forensic evidence after an incident.
+    </p>
+
+    <h3>LLM10 Mitigations</h3>
+
+    <ul>
+      <li><strong>RBAC and least privilege for model repositories</strong> &mdash; only production
+      inference services should have read access to weights; developer access should require
+      explicit approval and time-limited credentials.</li>
+      <li><strong>Network restriction</strong> &mdash; model weight storage should be inaccessible
+      from the public internet; access only via private network or VPN with MFA.</li>
+      <li><strong>Centralized model registry</strong> &mdash; all model versions tracked in a
+      single inventory with checksums, access logs, and retention policies; no ad hoc copies
+      in personal cloud storage.</li>
+      <li><strong>API rate limiting and DLP</strong> &mdash; rate limiting slows extraction attacks;
+      data loss prevention tooling on API outputs can detect unusual bulk query patterns consistent
+      with systematic extraction.</li>
+      <li><strong>Model watermarking</strong> &mdash; embed statistical signatures for
+      post-incident attribution.</li>
+      <li><strong>Adversarial robustness monitoring</strong> &mdash; detect queries that look
+      like extraction probes (e.g., systematically varied inputs designed to map the model&rsquo;s
+      decision boundary) and trigger alerts or automated throttling.</li>
+      <li><strong>Audit logging</strong> &mdash; log all access to model artifacts, including
+      internal reads, with tamper-evident storage so insider exfiltration is detectable after
+      the fact.</li>
+    </ul>
+
+    <h2>Synthesis &mdash; The Infrastructure Risk Cluster</h2>
+
+    <p>
+      LLM05, LLM04, and LLM10 form a cluster of infrastructure and economic risks that are
+      distinct from the input-side and output-side vulnerabilities covered in earlier lessons.
+      They share a common thread: each exploits the gap between how the system is <em>assumed</em>
+      to be used and how it <em>can</em> be used when access controls, monitoring, and supply chain
+      hygiene are treated as secondary concerns.
+    </p>
+
+    <p>
+      Several controls address multiple risks simultaneously:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Control</th>
+          <th>LLM05 Supply Chain</th>
+          <th>LLM04 Model DoS</th>
+          <th>LLM10 Model Theft</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>API rate limiting</td>
+          <td></td>
+          <td>Primary mitigation</td>
+          <td>Slows extraction attacks</td>
+        </tr>
+        <tr>
+          <td>SBOM + model signing</td>
+          <td>Primary mitigation</td>
+          <td></td>
+          <td>Supports audit trail</td>
+        </tr>
+        <tr>
+          <td>RBAC + least privilege</td>
+          <td>Limits supplier blast radius</td>
+          <td>Prevents admin token abuse</td>
+          <td>Primary mitigation</td>
+        </tr>
+        <tr>
+          <td>Audit logging</td>
+          <td>Detects anomalous supplier behavior</td>
+          <td>Surfaces cost anomalies</td>
+          <td>Forensic evidence for insider theft</td>
+        </tr>
+        <tr>
+          <td>Monitoring and anomaly detection</td>
+          <td>Detects backdoor triggers</td>
+          <td>Detects silent cost inflation</td>
+          <td>Detects extraction probe patterns</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout key">
+      If you implement one cluster of controls, you get partial coverage across all three
+      vulnerabilities. A mature LLM security posture treats supply chain hygiene, resource
+      governance, and model asset protection as a unified infrastructure practice rather than
+      three separate checklists.
+    </div>
+
+    <h2>Knowledge Check</h2>
+
+    <div class="quiz" id="quiz-10">
+      <p>
+        According to OWASP LLM04, what makes LLM Denial of Service economically different from
+        traditional server-based Denial of Service?
+      </p>
+      <div class="quiz-options">
+        <button>LLM DoS inflates the operator&rsquo;s compute bill silently per token consumed</button>
+        <button>LLM DoS requires more attacker bandwidth than traditional network flooding</button>
+        <button>LLM DoS only affects availability and never degrades response quality</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <p>
+        <strong>Skill exercise:</strong> You are deploying a production customer-facing chatbot
+        that uses a third-party pre-trained model downloaded from Hugging Face, a Python SDK
+        (e.g., <code>transformers</code> or <code>langchain</code>), and a hosted third-party
+        embedding API.
+      </p>
+      <p>
+        List the three highest-risk supply chain components in this system and, for each one,
+        name the specific control you would apply before going to production. Be concrete:
+        name the control type (e.g., &ldquo;model signing&rdquo;, &ldquo;SBOM scan in CI&rdquo;,
+        &ldquo;API vendor privacy policy review&rdquo;) and explain in one sentence why it
+        addresses that component&rsquo;s specific risk.
+      </p>
+      <textarea placeholder="Component 1: ...&#10;Control: ...&#10;&#10;Component 2: ...&#10;Control: ...&#10;&#10;Component 3: ...&#10;Control: ..."></textarea>
+    </div>
+
+    <div class="tutor-prompt">
+      When reviewing a supply chain risk, ask: if this component were silently compromised right
+      now, how long would it take you to notice? For a backdoored model, the answer might be
+      &ldquo;never&rdquo; without behavioral anomaly detection. For a poisoned Python package,
+      the answer might be &ldquo;only after a security advisory&rdquo; without an SBOM and
+      continuous vulnerability scanning. The gap between compromise and detection is the window
+      of exposure &mdash; and each control you add narrows that window.
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0009-excessive-agency-plugin-design.html">&larr; Prev: Excessive Agency &amp; Plugin Design</a>
+      <a href="0011-red-teaming-audit.html" class="primary">Next: Red Teaming &amp; Audit &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-10',
+      0,
+      'Correct. LLM DoS exploits the context window: every token processed costs real compute and money. An attacker can inflict significant financial harm with modest traffic because the compute cost scales with input length and is billed to the operator per token. Unlike traditional DoS, which an operator experiences only as reduced availability, LLM DoS simultaneously degrades service and silently accumulates costs before any alert fires. The other options are wrong: LLM DoS requires less attacker bandwidth than a bandwidth flood, and it does degrade response quality (truncation, slow responses) as well as availability.'
+    );
+  </script>
+</body>
+</html>

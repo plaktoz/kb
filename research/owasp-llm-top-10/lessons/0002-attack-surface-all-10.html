@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Full Attack Surface — All 10 Vulnerabilities at a Glance | OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">OWASP LLM Top 10</a> &nbsp;/&nbsp; Module 1: Foundations &nbsp;/&nbsp; Lesson 2 of 13
+    </div>
+    <h1>The Full Attack Surface — All 10 Vulnerabilities at a Glance</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 1: Foundations</span>
+      <span>Lesson 2 of 13</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <strong>Sources</strong>
+    <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">OWASP Top 10 for Large Language Model Applications (v1.1)</a>
+    — the 2023 reference list, produced by 600+ contributors across 18+ countries.<br><br>
+    <a href="https://github.com/GenAI-Security-Project/GenAI-LLM-Top10">GenAI-LLM-Top10 (2026 edition)</a>
+    — restructured list that adds two new entries for agentic systems: Hidden Context Exposure and Vector &amp; Embedding Weaknesses.
+  </div>
+
+  <p>Before diving deep into any single vulnerability, it helps to see the full landscape at once. This lesson maps all ten entries in both the v1.1 and 2026 OWASP LLM lists, shows how the list shifted between editions, and introduces a three-category framework — input-side, output-side, infrastructure — that makes the list easier to reason about and defend against.</p>
+
+  <h2>The v1.1 List (2023) — All Ten Entries</h2>
+
+  <p>The v1.1 list was the first community-reviewed catalogue of LLM-specific vulnerabilities. Each entry captures a distinct way that the lack of a control/data plane separation in LLMs creates security risk.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>One-line description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>LLM01</code></td>
+        <td>Prompt Injection</td>
+        <td>Crafted inputs manipulate the LLM into ignoring instructions or producing attacker-controlled output.</td>
+      </tr>
+      <tr>
+        <td><code>LLM02</code></td>
+        <td>Insecure Output Handling</td>
+        <td>Unvalidated LLM outputs passed to downstream components trigger exploits such as XSS or SQL injection.</td>
+      </tr>
+      <tr>
+        <td><code>LLM03</code></td>
+        <td>Training Data Poisoning</td>
+        <td>Tampered training data degrades the model's security properties or embeds backdoor behaviours.</td>
+      </tr>
+      <tr>
+        <td><code>LLM04</code></td>
+        <td>Model Denial of Service</td>
+        <td>Resource-heavy operations — such as flooding the context window — overload the LLM and degrade availability.</td>
+      </tr>
+      <tr>
+        <td><code>LLM05</code></td>
+        <td>Supply Chain Vulnerabilities</td>
+        <td>Compromised third-party components — models, datasets, plugins — undermine the integrity of the deployed system.</td>
+      </tr>
+      <tr>
+        <td><code>LLM06</code></td>
+        <td>Sensitive Information Disclosure</td>
+        <td>LLM outputs leak personally identifiable data, proprietary content, or training-time secrets.</td>
+      </tr>
+      <tr>
+        <td><code>LLM07</code></td>
+        <td>Insecure Plugin Design</td>
+        <td>Plugins with insufficient input validation or overly broad permissions enable injection and privilege escalation.</td>
+      </tr>
+      <tr>
+        <td><code>LLM08</code></td>
+        <td>Excessive Agency</td>
+        <td>An LLM granted unchecked autonomy takes unintended consequential actions in connected systems.</td>
+      </tr>
+      <tr>
+        <td><code>LLM09</code></td>
+        <td>Overreliance</td>
+        <td>Uncritical acceptance of LLM outputs — including hallucinated facts or code — leads to poor decisions and downstream harm.</td>
+      </tr>
+      <tr>
+        <td><code>LLM10</code></td>
+        <td>Model Theft</td>
+        <td>Unauthorized access to a proprietary model through API extraction or direct exfiltration violates confidentiality and enables adversarial attacks.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How the List Evolved: v1.1 vs. 2026</h2>
+
+  <p>The 2026 edition re-ranks entries to reflect deployment patterns that have become mainstream since v1.1 was published. Supply Chain moves up because the ecosystem of third-party models and plugins has expanded enormously. Model DoS is reframed as <em>Unbounded Consumption</em> — broader than availability, encompassing runaway cost. Two entirely new entries appear that have no v1.1 equivalent: <strong>Hidden Context Exposure</strong> and <strong>Vector and Embedding Weaknesses</strong>, both driven by the shift toward agentic systems with persistent memory.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>v1.1 (2023)</th>
+        <th>2026 Edition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>LLM01 — Prompt Injection</td>
+        <td>LLM01 — Prompt Injection</td>
+      </tr>
+      <tr>
+        <td>LLM06 — Sensitive Information Disclosure</td>
+        <td>LLM02 — Sensitive Information Disclosure <em>(moved up)</em></td>
+      </tr>
+      <tr>
+        <td>LLM08 — Excessive Agency</td>
+        <td>LLM03 — Excessive Agency <em>(moved up; absorbs Plugin Design)</em></td>
+      </tr>
+      <tr>
+        <td>LLM05 — Supply Chain Vulnerabilities</td>
+        <td>LLM04 — Supply Chain <em>(moved up)</em></td>
+      </tr>
+      <tr>
+        <td>LLM03 — Training Data Poisoning</td>
+        <td>LLM05 — Data and Model Poisoning <em>(scope broadened)</em></td>
+      </tr>
+      <tr>
+        <td>LLM04 — Model Denial of Service</td>
+        <td>LLM06 — Unbounded Consumption <em>(reframed; cost &amp; availability)</em></td>
+      </tr>
+      <tr>
+        <td>LLM09 — Overreliance</td>
+        <td>LLM07 — Misinformation <em>(reframed around output trust)</em></td>
+      </tr>
+      <tr>
+        <td><em>— (no equivalent)</em></td>
+        <td>LLM08 — Hidden Context Exposure <em>(new for agentic systems)</em></td>
+      </tr>
+      <tr>
+        <td><em>— (no equivalent)</em></td>
+        <td>LLM09 — Vector and Embedding Weaknesses <em>(new for agentic systems)</em></td>
+      </tr>
+      <tr>
+        <td>LLM02 — Insecure Output Handling</td>
+        <td>LLM10 — Improper Output Handling <em>(moved down; renamed)</em></td>
+      </tr>
+      <tr>
+        <td>LLM07 — Insecure Plugin Design</td>
+        <td><em>Merged into LLM03 Excessive Agency</em></td>
+      </tr>
+      <tr>
+        <td>LLM10 — Model Theft</td>
+        <td><em>Removed as standalone entry</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    Prompt Injection remains <strong>LLM01 in every edition</strong> — it is the only entry that has held the top position unchanged. Its persistence reflects a fundamental structural problem: LLMs process instructions and data in the same channel, and no purely model-level mechanism currently separates them.
+  </div>
+
+  <h2>Three Categories That Span Both Lists</h2>
+
+  <p>Ten entries can feel like an arbitrary checklist. A simpler mental model is to ask <em>where the attacker enters or where the harm exits</em>. Every entry in both lists falls into one of three categories.</p>
+
+  <h3>Input-side attacks</h3>
+  <p>The attacker controls what goes <em>into</em> the model — either directly through the prompt, or indirectly through data the model processes. The model itself is weaponised against the system it sits in.</p>
+  <ul>
+    <li><strong>v1.1:</strong> Prompt Injection (LLM01), Training Data Poisoning (LLM03)</li>
+    <li><strong>2026:</strong> Prompt Injection (LLM01), Data and Model Poisoning (LLM05), Vector and Embedding Weaknesses (LLM09)</li>
+  </ul>
+
+  <h3>Output-side attacks</h3>
+  <p>The harm flows <em>out of</em> the model — either because the output is trusted too much by downstream systems, or because the model surfaces information it should not.</p>
+  <ul>
+    <li><strong>v1.1:</strong> Insecure Output Handling (LLM02), Sensitive Information Disclosure (LLM06), Overreliance (LLM09)</li>
+    <li><strong>2026:</strong> Improper Output Handling (LLM10), Sensitive Information Disclosure (LLM02), Misinformation (LLM07)</li>
+  </ul>
+
+  <h3>Infrastructure vulnerabilities</h3>
+  <p>The vulnerability lies in the <em>systems the LLM connects to or runs on</em> — its supply chain, its tools, its hosting environment. Even a perfectly prompt-safe model can be compromised here.</p>
+  <ul>
+    <li><strong>v1.1:</strong> Model DoS (LLM04), Supply Chain (LLM05), Insecure Plugin Design (LLM07), Excessive Agency (LLM08), Model Theft (LLM10)</li>
+    <li><strong>2026:</strong> Supply Chain (LLM04), Unbounded Consumption (LLM06), Excessive Agency (LLM03), Hidden Context Exposure (LLM08)</li>
+  </ul>
+
+  <div class="callout warning">
+    The 2026 list is not simply a stricter version of v1.1. It reflects a genuinely different deployment reality. In 2023, most LLMs were stateless request-response systems. By 2026, many run as agents with persistent memory, tool access, and multi-step autonomy — which creates entirely new attack surfaces that did not exist in v1.1 deployments. Mapping a 2026-edition threat model onto a v1.1-era architecture (or vice versa) will leave gaps.
+  </div>
+
+  <h2>Why Agentic Systems Expanded the Attack Surface</h2>
+
+  <p>The two new 2026 entries — Hidden Context Exposure and Vector &amp; Embedding Weaknesses — do not appear in v1.1 because the deployment pattern they describe barely existed at the time of that list's creation.</p>
+
+  <p><strong>Persistent memory</strong> means that an LLM agent can accumulate context across sessions — in a vector store, a database, or a conversation history. That stored context becomes an attack surface: an attacker who injects content into the memory store can influence future responses (Hidden Context Exposure).</p>
+
+  <p><strong>Tool access and multi-step autonomy</strong> mean that an agent can take actions — write files, call APIs, send messages — based on information retrieved from embeddings. If those embeddings are manipulated, the agent can be steered toward attacker-chosen actions without any direct prompt being sent to the current session (Vector and Embedding Weaknesses).</p>
+
+  <p>Taken together: the shift from stateless LLM to agentic LLM converted what was a request-response interface into a stateful, action-capable system. The 2026 OWASP list captures the security implications of that architectural shift.</p>
+
+  <div class="quiz" id="quiz-2">
+    <p>Hidden Context Exposure and Vector &amp; Embedding Weaknesses first appear in which edition?</p>
+    <div class="quiz-options">
+      <button>v1.1 already covered agentic threats</button>
+      <button>The 2026 edition added them</button>
+      <button>Both editions covered them equally</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <p>Using the v1.1 vs. 2026 comparison table above, categorise each of the original ten v1.1 entries as <strong>input-side</strong>, <strong>output-side</strong>, or <strong>infrastructure</strong>. Then identify which entries in the 2026 list are directly driven by the shift to agentic systems, and explain in one sentence why each of those entries would not have appeared in a purely stateless, request-response LLM deployment.</p>
+    <textarea placeholder="Example:&#10;LLM01 Prompt Injection — input-side (attacker controls the prompt channel)&#10;LLM02 Insecure Output Handling — output-side (harm exits through unvalidated output)&#10;...&#10;&#10;Agentic additions:&#10;LLM08 Hidden Context Exposure — driven by persistent memory; would not appear in stateless deployments because ...&#10;LLM09 Vector and Embedding Weaknesses — driven by retrieval-augmented agentic action; would not appear because ..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">
+    Prompt for AI tutor: "I am studying OWASP LLM Top 10. I have just categorised the v1.1 list into input-side, output-side, and infrastructure. Check my categorisation and tell me which ones I may have miscategorised and why. Then ask me one follow-up question about why the 2026 list reframed Model DoS as Unbounded Consumption."
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0001-why-llm-security-is-different.html">&larr; Lesson 1: Why LLM Security Is Different</a>
+    <a href="0003-prompt-injection-direct.html" class="primary">Lesson 3: Prompt Injection — Direct Attacks &amp; Jailbreaks &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-2',
+    1,
+    'Correct. The 2026 edition introduced both new entries — LLM08 Hidden Context Exposure and LLM09 Vector and Embedding Weaknesses — specifically to address attack surfaces created by agentic systems with persistent memory and tool access. Neither entry has an equivalent in v1.1, which was designed around stateless, request-response LLM deployments.'
+  );
+</script>
+</body>
+</html>

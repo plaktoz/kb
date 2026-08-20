@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layered Defense Architecture | OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Course index</a> / Module 4: Building Secure LLM Applications / Lesson 12
+    </div>
+    <h1>Layered Defense Architecture</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 4 of 4 — Building Secure LLM Apps</span>
+      <span>Lesson 12 of 13</span>
+    </div>
+  </header>
+
+  <!-- ── Key concepts ── -->
+  <p>
+    <strong>Key concepts:</strong>
+    5-layer defense model &middot; input validation layer &middot; trust boundary enforcement &middot;
+    output sanitization &middot; hardened service integration &middot; architectural minimalism &middot; AI Gateway
+  </p>
+
+  <!-- ── Sources ── -->
+  <div class="source-card">
+    <strong>Sources</strong>
+    <a href="https://developer.nvidia.com/blog/securing-llm-systems-against-prompt-injection/">NVIDIA Developer Blog — Securing LLM Systems Against Prompt Injection</a><br>
+    <a href="https://developers.cloudflare.com/ai-gateway/">Cloudflare AI Gateway — Developer Documentation</a>
+  </div>
+
+  <!-- ── Section 1: Why layers matter ── -->
+  <h2>Defense in Depth: Why One Control Is Never Enough</h2>
+
+  <p>
+    Every security control has failure modes. Input filters can be bypassed with obfuscated syntax.
+    System-prompt instructions can be overridden by sufficiently crafted user or document content.
+    An allowlist can be incomplete. Relying on a single line of defense means a single bypass grants
+    full access to the system's capabilities.
+  </p>
+
+  <p>
+    <em>Defense in depth</em> is the architectural answer: stack independent controls so that
+    circumventing one layer does not hand the attacker a win. In LLM systems this matters more than
+    in conventional software because the attack surface is linguistic — a model that processes
+    natural language cannot make hard syntactic distinctions between instructions and data the way
+    a SQL parser separates queries from literals. Each layer below compensates for what the layer
+    above cannot guarantee.
+  </p>
+
+  <div class="callout key">
+    Bypassing Layer 1 does not mean the attacker wins if Layers 2 through 5 are intact. Each layer
+    is designed to catch what the previous layer missed. A well-designed LLM system forces an
+    attacker to defeat all five layers simultaneously — a dramatically harder task than defeating any one.
+  </div>
+
+  <!-- ── Section 2: The 5-Layer Model ── -->
+  <h2>The NVIDIA 5-Layer Defense Model</h2>
+
+  <p>
+    NVIDIA's AI Red Team distilled their prompt-injection research into a five-layer model. The
+    layers are ordered by where in the request-response cycle each control fires — from the moment
+    input arrives to the moment an external service is called. Each layer addresses a different
+    threat category.
+  </p>
+
+  <h3>Layer 1 — Input Validation</h3>
+
+  <p>
+    The first line of defense intercepts requests <em>before they reach the model</em>. This includes
+    pattern matching for known injection templates (<code>Ignore previous instructions</code>,
+    role-play overrides, base64-encoded payloads), length and character-set enforcement, and prompt
+    structure integrity checks. Because this layer runs before the LLM, it consumes no model tokens
+    and adds minimal latency. Its limitation is that it is signature-based: novel or obfuscated
+    injections that do not match known patterns pass through.
+  </p>
+
+  <h3>Layer 2 — Trust Boundary Enforcement</h3>
+
+  <p>
+    This layer addresses a structural property of LLM context windows: they are composed of text
+    from multiple contributors — the developer-written system prompt, retrieved documents from a
+    RAG store, tool outputs, and the user's query. The LLM cannot prove which contributor is
+    trustworthy; it processes all text in the context window as a single stream.
+  </p>
+
+  <p>
+    NVIDIA's key insight here is stark:
+    <em>"Control and data planes are not separable when working with LLMs — every LLM output must
+    be treated as hostile territory."</em>
+    The correct posture is to apply the <strong>lowest privilege level</strong> across all
+    contributors. If a retrieved document could have been tampered with, the entire context window
+    must be treated as if it could have been tampered with. Trust is the minimum across contributors,
+    not the maximum.
+  </p>
+
+  <h3>Layer 3 — Output Sanitization</h3>
+
+  <p>
+    Even if injected content reaches and influences the LLM, damage can still be contained by
+    treating all model output as potentially malicious before passing it downstream. Output
+    sanitization means: stripping or escaping HTML and script tags before rendering in a browser,
+    refusing to forward LLM-generated URLs without validation, blocking model-generated commands
+    from being executed directly, and applying content-policy filters to responses before they
+    reach the user or a dependent system. This layer is the last catch before LLM output causes
+    real-world effects.
+  </p>
+
+  <h3>Layer 4 — Hardened External Service Integration</h3>
+
+  <p>
+    When an LLM calls an external API or plugin, the call should be constructed by code, not
+    assembled from LLM-generated text. NVIDIA's prescriptions: use strict parameterization (never
+    string-interpolate model output directly into API calls), apply least-privilege service
+    contexts (the API key used for a read operation should not have write permissions), and enforce
+    type and content checks on every parameter before it leaves the system. An LLM that can write
+    to a database or send emails should only ever be able to do so through a tightly constrained
+    wrapper that validates every field independently.
+  </p>
+
+  <h3>Layer 5 — Architectural Minimalism</h3>
+
+  <p>
+    The final layer is a design-time control: minimize what the LLM can reach. Every external
+    resource the model can access is both an attack surface (injection can arrive through it) and
+    a blast-radius multiplier (a successful compromise can propagate through it). NVIDIA's
+    specific guidance:
+  </p>
+
+  <ul>
+    <li>Avoid connecting LLMs to external resources when the use case does not require it.</li>
+    <li>Restrict plugins to the minimum functionality needed — a search plugin should not also
+        be able to write files.</li>
+    <li>Multi-service chains require rigorous security review at each hop.</li>
+    <li>Authorization-requiring plugins should generally not be invoked after other plugin calls
+        because cross-plugin authorization creates compounded complexity that is difficult to
+        reason about and audit.</li>
+  </ul>
+
+  <div class="callout warning">
+    A common misconception is that architectural minimalism is a "nice to have" that can be
+    addressed after the product ships. In practice, the blast radius of a successful injection is
+    determined at design time, not at runtime. A chatbot wired to five internal APIs from day one
+    is structurally more dangerous than one connected to none — and unwiring APIs after the fact
+    often requires significant rearchitecting of features users already depend on.
+  </div>
+
+  <!-- ── Section 3: Cloudflare AI Gateway ── -->
+  <h2>The Cloudflare AI Gateway: Infrastructure as a Control Plane</h2>
+
+  <p>
+    Architectural minimalism (Layer 5) is not only about reducing connections — it is also about
+    ensuring the connections that do exist are observable and controlled. The
+    <a href="https://developers.cloudflare.com/ai-gateway/">Cloudflare AI Gateway</a> is a
+    concrete implementation of this idea: a proxy that sits between your application and any
+    upstream LLM provider (OpenAI, Anthropic, Google Gemini, and others), acting as an
+    intermediary control plane.
+  </p>
+
+  <p>
+    Because all requests and responses pass through the Gateway, it can enforce security and
+    operational policies that would otherwise require instrumentation inside every application
+    component. Key capabilities:
+  </p>
+
+  <ul>
+    <li><strong>Rate limiting per user or IP</strong> — prevents denial-of-service attacks that
+        exhaust token budgets or overwhelm upstream providers. This directly addresses LLM04
+        (Model Denial of Service).</li>
+    <li><strong>Request logging</strong> — every prompt and response is logged, enabling anomaly
+        detection, incident forensics, and compliance auditing. Unusual patterns (sudden spike in
+        token usage from one user, identical prompts arriving from many IPs) become visible.</li>
+    <li><strong>Caching</strong> — repeated identical requests return a cached response, reducing
+        the number of calls that reach the upstream model and thereby shrinking the upstream
+        exposure surface.</li>
+    <li><strong>Request retry and fallback routing</strong> — if an upstream provider is
+        unavailable or returns an error, the Gateway can automatically retry or route to a
+        fallback model, maintaining availability without manual intervention.</li>
+    <li><strong>Analytics for token usage and cost</strong> — makes the cost surface visible,
+        which is also a security surface: unexpectedly high token consumption is a signal of
+        abuse or a runaway agent loop.</li>
+  </ul>
+
+  <p>
+    A practical advantage is that integrating the Cloudflare AI Gateway requires minimal code
+    changes — the application simply routes its API calls through the Gateway endpoint instead of
+    directly to the provider. The security and observability controls are activated at the
+    infrastructure layer, not scattered across application code.
+  </p>
+
+  <div class="callout key">
+    An AI Gateway does not replace application-layer controls (Layers 1–4). It provides a
+    perimeter: rate limiting, logging, and routing enforcement that sits outside the application
+    and cannot be bypassed by application-layer vulnerabilities. Think of it as the equivalent of
+    a WAF (Web Application Firewall) for LLM traffic.
+  </div>
+
+  <!-- ── Section 4: Why minimalism matters ── -->
+  <h2>Why Architectural Minimalism Is a Security Primitive</h2>
+
+  <p>
+    The principle of least privilege — give a component only the permissions it needs to do its
+    job — is foundational in conventional system security. In LLM systems, the same principle
+    applies but with a twist: the LLM's "job" is defined in natural language and can be
+    redirected by injection. This means the blast radius of a successful attack is not a property
+    of the attacker's skill; it is a property of the system's design.
+  </p>
+
+  <p>
+    Consider two RAG chatbots answering questions about a knowledge base. Bot A has read access to
+    the knowledge base only. Bot B has read access to the knowledge base, write access to the same
+    database, and the ability to send emails. Both bots are equally vulnerable to an indirect
+    injection attack in a retrieved document. But the consequences are entirely different: in Bot
+    A, the worst the attacker can do is get the bot to produce misleading answers. In Bot B, the
+    attacker can corrupt the database and exfiltrate data over email.
+  </p>
+
+  <p>
+    The difference between Bot A and Bot B was made at design time. Every capability, plugin, or
+    API connection added to an LLM application is a decision that expands the blast radius of all
+    future vulnerabilities — including vulnerabilities not yet discovered.
+  </p>
+
+  <!-- ── Section 5: Layers → OWASP mapping ── -->
+  <h2>How the Layers Map to OWASP LLM Vulnerabilities</h2>
+
+  <p>
+    Each layer of the defense model targets a distinct class of vulnerabilities from the OWASP
+    LLM Top 10. The table below shows the primary mapping. Some layers address multiple categories
+    because the same control (for example, hardened API integration) limits several different attack
+    paths.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Name</th>
+        <th>Primary Threat Addressed</th>
+        <th>OWASP Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Input Validation</td>
+        <td>Known injection patterns reaching the model before any context is built</td>
+        <td>LLM01 — Prompt Injection</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Trust Boundary Enforcement</td>
+        <td>Compromised contributor text in the context window (indirect injection via RAG, tool output, or multi-agent handoff)</td>
+        <td>LLM01 — Prompt Injection (indirect variant); LLM06 — Sensitive Information Disclosure</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Output Sanitization</td>
+        <td>Hostile or malformed content in model output that is passed to a browser, downstream system, or user without inspection</td>
+        <td>LLM02 — Insecure Output Handling</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Hardened Service Integration</td>
+        <td>Over-privileged API access; parameter injection through model-generated text assembled into API calls</td>
+        <td>LLM07 — Insecure Plugin Design; LLM08 — Excessive Agency</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Architectural Minimalism</td>
+        <td>Expanded blast radius from unnecessary resource connections; compounded cross-plugin authorization complexity</td>
+        <td>LLM08 — Excessive Agency; LLM04 — Model Denial of Service</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Notice that LLM01 (Prompt Injection) appears at both Layer 1 and Layer 2. Direct injection
+    (user-supplied) is primarily addressed by Layer 1. Indirect injection (content arriving through
+    retrieved documents, tool outputs, or agent messages) is addressed by Layer 2, because the
+    injection does not originate in the user input stream and may pass cleanly through input
+    validation.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-12">
+    <p>A RAG chatbot retrieves a document that contains hidden injection instructions. Which layer of the NVIDIA defense model specifically addresses this threat?</p>
+    <div class="quiz-options">
+      <button>Layer 1: input validation catches injection patterns before they reach the model</button>
+      <button>Layer 2: trust boundary enforcement treats every contributor as a potential attacker</button>
+      <button>Layer 3: output sanitization scrubs potentially hostile content before it passes downstream</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Draw or describe all 5 layers of the defense model applied to a simple RAG chatbot that
+      retrieves documents from an internal knowledge base and has one tool: web search.
+    </p>
+    <p>
+      For each layer, answer two questions:
+    </p>
+    <ol>
+      <li><strong>What specific threat does this layer address</strong> in this particular system? (Be concrete — "injection" is not specific enough; name the vector.)</li>
+      <li><strong>One concrete implementation step</strong> — a filter rule, an architectural constraint, a code-level control, or an infrastructure choice.</li>
+    </ol>
+    <p>
+      As a bonus: identify one place in this architecture where Layer 5 (architectural minimalism)
+      would recommend removing or restricting a capability that might seem useful on first glance.
+    </p>
+    <textarea placeholder="Layer 1 — Input Validation&#10;Threat: ...&#10;Implementation: ...&#10;&#10;Layer 2 — Trust Boundary Enforcement&#10;Threat: ...&#10;Implementation: ...&#10;&#10;Layer 3 — Output Sanitization&#10;Threat: ...&#10;Implementation: ...&#10;&#10;Layer 4 — Hardened Service Integration&#10;Threat: ...&#10;Implementation: ...&#10;&#10;Layer 5 — Architectural Minimalism&#10;Threat: ...&#10;Implementation: ...&#10;&#10;Bonus — what would Layer 5 cut or restrict?&#10;..."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask a tutor: "If I had to implement only two of the five layers due to time constraints,
+    which two would give me the most protection for this RAG-plus-web-search architecture,
+    and why?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0011-red-teaming-audit.html">&larr; Lesson 11: Red Teaming &amp; Security Audits</a>
+    <a href="0013-secure-chatbot-reference-architecture.html" class="primary">Lesson 13: Secure Chatbot Reference Architecture &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-12', 1,
+    'Correct. A retrieved document that contains injection instructions is an indirect injection attack — the malicious content arrives through the data plane, not the user input. Layer 1 (input validation) is designed for the user input stream and may not inspect retrieved document content. Layer 2 (trust boundary enforcement) addresses this directly: it treats every entity that contributed text to the context window — including retrieved documents — as a potential attacker, and mandates applying the lowest privilege level across all contributors. Layer 3 (output sanitization) fires after the model has already processed the document, catching damage on the way out rather than preventing it from entering.'
+  );
+</script>
+</body>
+</html>

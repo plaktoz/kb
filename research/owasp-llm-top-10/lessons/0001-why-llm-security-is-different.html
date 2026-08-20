@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why LLM Security Is Different — OWASP LLM Top 10</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <nav class="breadcrumb">
+        <a href="../lessons.md">OWASP LLM Top 10</a> &rsaquo; Module 1: Foundations &rsaquo; Lesson 1
+      </nav>
+      <h1>Why LLM Security Is Different</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 1: Foundations</span>
+      </div>
+    </header>
+
+    <div class="source-card">
+      <strong>Sources</strong>
+      <ul style="margin: 0.4rem 0 0; padding-left: 1.25rem;">
+        <li>
+          <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noopener">
+            OWASP Top 10 for Large Language Model Applications
+          </a>
+          — project started 2023; 600+ contributors, 18+ countries, ~8,000 community members;
+          now part of the OWASP GenAI Security Project; current release is the 2026 edition.
+        </li>
+        <li style="margin-top: 0.35rem;">
+          <a href="https://learnprompting.org/docs/prompt_hacking/injection" target="_blank" rel="noopener">
+            LearnPrompting: Prompt Injection
+          </a>
+          — "AI models process all text as a single continuous stream with no built-in trust
+          hierarchy — there is no hardware or protocol separation between developer instructions
+          and user input."
+        </li>
+      </ul>
+    </div>
+
+    <h2>The Architecture Problem No One Warned You About</h2>
+
+    <p>
+      In a traditional web application, the separation between trusted code and untrusted
+      input is enforced at multiple layers simultaneously. The server-side application logic
+      runs inside a protected OS process. User input arrives over a network socket, is parsed
+      by a framework, and is handled by code the developer controls. An OS memory protection
+      unit keeps process address spaces separate. None of this is optional — it is built into
+      the hardware and the runtime.
+    </p>
+
+    <p>
+      An LLM application has none of this. When a developer writes a system prompt and a
+      user sends a message, both are tokenised and fed into the same context window as a flat
+      sequence of tokens. The model sees one continuous stream. There is no hardware
+      boundary, no OS process separation, and no memory protection unit that can tag certain
+      tokens as "instructions" versus "data." As
+      <a href="https://learnprompting.org/docs/prompt_hacking/injection" target="_blank" rel="noopener">LearnPrompting</a>
+      states directly: <em>"there is no hardware or protocol separation between developer
+      instructions and user input."</em>
+    </p>
+
+    <p>
+      This is not a configuration gap or a missing library. It is a structural property of
+      how current language models work. The model attends over all tokens equally; it cannot
+      cryptographically verify which tokens came from the developer and which came from the
+      end-user.
+    </p>
+
+    <div class="callout key">
+      In a classic web application, the OS enforces the trust boundary between server code
+      and user input — no developer action required. In an LLM application, there is no
+      equivalent structural mechanism. Both developer instructions and user messages are just
+      tokens in the same sequence, processed by the same weights.
+    </div>
+
+    <h2>The OWASP LLM Top 10 Project</h2>
+
+    <p>
+      By 2023, AI-powered applications were being deployed rapidly in production, but the
+      security community had no shared vocabulary for the new class of vulnerabilities they
+      introduced. OWASP — the organisation behind the canonical web application security
+      standard used by developers and auditors worldwide — responded by launching the
+      <strong>OWASP Top 10 for Large Language Model Applications</strong> project to address
+      that gap.
+    </p>
+
+    <p>
+      The effort attracted significant community participation. Over <strong>600
+      contributors</strong> from more than <strong>18 countries</strong> participated, and
+      the project community has grown to roughly <strong>8,000 members</strong>. The project
+      is now part of the broader <strong>OWASP GenAI Security Project</strong>. The current
+      release is the <strong>2026 edition</strong>, which reflects the evolving threat
+      landscape as LLMs have moved from research into enterprise deployment.
+    </p>
+
+    <p>
+      The Top 10 list names the most critical security risks for LLM applications, drawing
+      on collective expertise from practitioners across industries and regions. It is
+      intended to serve the same function as the original OWASP Top 10 did for web
+      applications: provide a common language for identifying, discussing, and prioritising
+      AI security risks.
+    </p>
+
+    <div class="callout warning">
+      A well-crafted system prompt does not enforce a security boundary. A system prompt is
+      text — it sits in the same context window as user input, subject to the same token
+      processing. An attacker who can inject text into the model's context can potentially
+      override or contradict it. Treating a system prompt as an access control mechanism
+      mistakes a convention for a constraint.
+    </div>
+
+    <h2>Why This Root Problem Cascades Across the Top 10</h2>
+
+    <p>
+      The lack of a trust boundary between the control plane (developer instructions) and
+      the data plane (user input and external content) is not just one vulnerability — it is
+      the architectural condition that makes many of the other OWASP LLM Top 10 risks
+      possible or significantly worse.
+    </p>
+
+    <p>
+      When a model retrieves content from the web, reads a document, or processes an
+      email, that external content enters the same token stream. If it contains instructions,
+      the model may act on them — the risk known as indirect prompt injection. When an LLM
+      is granted tools (functions it can invoke on behalf of the user), a missing trust
+      hierarchy means that injected instructions in retrieved content can direct those tool
+      calls. When models are chained together in an agentic pipeline, contaminated output
+      from one model becomes input to the next, propagating the problem downstream.
+    </p>
+
+    <p>
+      This is why the control/data plane confusion is the foundational concept of the
+      course. Every other vulnerability in the Top 10 either depends on it directly or
+      is amplified by it. Understanding it first makes the rest of the list legible.
+    </p>
+
+    <section class="exercise">
+      <h2>Skill Exercise: Mapping the Trust Boundary</h2>
+      <p>
+        Draw two simple request-flow diagrams — either on paper or described in text below:
+      </p>
+      <ol>
+        <li>
+          <strong>Classic web request:</strong> Browser &rarr; Network &rarr; Server.
+          Label where the trust boundary sits (hint: between the network and the server
+          process, enforced by the OS).
+        </li>
+        <li>
+          <strong>LLM request:</strong> User message &rarr; [???] &rarr; LLM context window
+          &rarr; Model weights. Mark where you would expect a trust boundary to sit if one
+          existed.
+        </li>
+      </ol>
+      <p>
+        Then write 2–3 sentences explaining why the LLM diagram has no equivalent boundary:
+        what mechanism enforces the boundary in the web case, and what is absent (or
+        insufficient) in the LLM case?
+      </p>
+      <textarea rows="8" placeholder="Describe your diagrams here and explain the difference in 2–3 sentences..."></textarea>
+    </section>
+
+    <div class="quiz" id="quiz-1">
+      <h2>Check Your Understanding</h2>
+      <p>Why can't an LLM enforce a trust boundary between its system prompt and user input?</p>
+      <div class="quiz-options">
+        <button>All tokens flow through one continuous stream, so no hardware boundary separates instructions from input</button>
+        <button>The model lacks internet access, so it cannot verify whether instructions come from trusted sources</button>
+        <button>Prompts are stored in plain text files, so any attacker can read and modify them</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="tutor-prompt">
+      <strong>Want to go deeper?</strong> Ask your AI tutor: "What is the difference between
+      the control plane and the data plane in an LLM application, and why does their
+      confusion matter for security?"
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0002-attack-surface-all-10.html" class="primary">Next &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-1',
+      0,
+      'Correct. The architectural problem is that an LLM processes all input — developer ' +
+      'system prompt and user message alike — as a single continuous token stream. There is ' +
+      'no hardware boundary, no OS process separation, and no memory protection unit that ' +
+      'can tag tokens as "trusted instructions" versus "untrusted input." This is ' +
+      'structurally different from a web server, where the OS enforces separation between ' +
+      'the application process and the network input it receives.'
+    );
+  </script>
+</body>
+</html>
