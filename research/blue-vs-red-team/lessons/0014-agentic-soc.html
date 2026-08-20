@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 14 &mdash; Agentic SOC</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Blue vs Red Team</a> &rsaquo; Module 4 &mdash; LLM Security Automation &rsaquo; Lesson 14 of 14
+    </div>
+    <h1>Agentic SOC &mdash; LLM-Assisted Blue Team Automation</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~13 min</span>
+      <span>Module 4 &mdash; LLM Security Automation</span>
+      <span>Lesson 14 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <p style="margin-bottom:0">
+      <strong>Elastic Security</strong> &mdash; Agentic security operations platform built to secure, not to tax<br>
+      <a href="https://www.elastic.co/security" target="_blank" rel="noopener">
+        https://www.elastic.co/security
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Alert Triage Problem at Scale</h2>
+
+  <p>
+    A modern enterprise SIEM can generate tens of thousands of alerts per day. Each alert is a candidate incident: it may indicate a breach, a misconfiguration, normal-but-noisy behavior, or a false positive. The only way to know is to investigate &mdash; query the relevant logs, correlate events across systems, check threat intelligence, and make a judgment call.
+  </p>
+
+  <p>
+    In the traditional SOC model, every step of that investigation requires a human analyst. An alert fires; the analyst reads it; the analyst manually opens the SIEM, queries the relevant data, cross-references context from a separate threat intel feed, writes up a summary, and decides what to do next. Then the next alert arrives. Then another.
+  </p>
+
+  <p>
+    This model has two structural problems. First, <strong>alert volume grows faster than analyst headcount</strong>. Hiring cannot keep pace with the expanding attack surface driven by cloud adoption, remote work, and an increasingly sophisticated adversary ecosystem. Second, <strong>repetitive triage work drives burnout and inconsistency</strong>. Analysts doing the same investigative steps hundreds of times a day tire, make mistakes, and leave &mdash; taking institutional knowledge with them.
+  </p>
+
+  <p>
+    The result is well-documented: alert queues back up, analysts start triaging by feel rather than by process, and lower-fidelity alerts are ignored even when they contain genuine signals. The bottleneck is not detection &mdash; it is the human time required to turn a detected event into an actionable verdict.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Agentic SOC Model and the Human-on-the-Loop Principle</h2>
+
+  <p>
+    Elastic's response to this structural problem is the <strong>agentic SOC</strong>: an architecture where AI agents perform the investigation and correlation work autonomously, then surface a complete, contextualized response plan for analyst review. The analyst is no longer in the critical path of investigation; they are elevated to a decision-review role.
+  </p>
+
+  <p>
+    Elastic captures this shift in a single phrase:
+  </p>
+
+  <blockquote style="border-left: 4px solid var(--color-accent-blue); padding: 0.5rem 1rem; margin: 1.25rem 0; font-style: italic; color: var(--color-muted);">
+    &ldquo;Human on the loop rather than human in the loop.&rdquo;
+  </blockquote>
+
+  <p>
+    In the agentic model, AI agents do the following autonomously for each alert:
+  </p>
+
+  <ol>
+    <li><strong>Investigate</strong> &mdash; query the relevant logs, endpoint telemetry, and threat intelligence to build a complete picture of what happened</li>
+    <li><strong>Correlate</strong> &mdash; link the alert to related events, identify affected assets, and map the activity to known attack patterns</li>
+    <li><strong>Draft a response plan</strong> &mdash; propose specific remediation actions (isolate a host, block an IP, reset a credential) with the reasoning attached to each step</li>
+  </ol>
+
+  <p>
+    The analyst's role shifts from doing the investigative work to <strong>reviewing, judging, and approving</strong> the AI agent's proposed plan. Humans retain full decision authority over every proposed action. The AI accelerates; the human judges.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Human-on-the-loop is a governance model, not a technology choice. The AI agent handles data assembly and hypothesis generation &mdash; the work that scales poorly with human attention. The analyst handles judgment, accountability, and approval &mdash; the work that requires human authority. Neither role is eliminated; they are separated at the point where automation genuinely helps.
+  </div>
+
+  <h3>Human in the Loop vs Human on the Loop</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Human in the Loop</th>
+        <th>Human on the Loop</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Who investigates?</strong></td>
+        <td>Analyst manually queries logs and correlates events</td>
+        <td>AI agent investigates and correlates autonomously</td>
+      </tr>
+      <tr>
+        <td><strong>Who drafts the response?</strong></td>
+        <td>Analyst writes the response plan from scratch</td>
+        <td>AI agent drafts a structured plan with reasoning</td>
+      </tr>
+      <tr>
+        <td><strong>Analyst&rsquo;s primary role</strong></td>
+        <td>Perform the investigation work step by step</td>
+        <td>Review, judge, and approve the AI&rsquo;s proposed plan</td>
+      </tr>
+      <tr>
+        <td><strong>Throughput bottleneck</strong></td>
+        <td>Human attention and available analyst hours</td>
+        <td>Quality of AI reasoning and agent design</td>
+      </tr>
+      <tr>
+        <td><strong>Scales with alert volume?</strong></td>
+        <td>No &mdash; headcount must grow proportionally</td>
+        <td>Yes &mdash; compute capacity scales; analyst time does not</td>
+      </tr>
+      <tr>
+        <td><strong>Risk profile</strong></td>
+        <td>Fatigue, inconsistency, alert queue backlog</td>
+        <td>AI overconfidence or hallucinated reasoning</td>
+      </tr>
+      <tr>
+        <td><strong>Human accountability</strong></td>
+        <td>Analyst is accountable for every step taken</td>
+        <td>Analyst is accountable for every action approved</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    The human-on-the-loop model does not eliminate analyst responsibility &mdash; it concentrates it. When an analyst approves an AI-proposed response, they own that decision. Rubber-stamping AI recommendations without genuine review defeats the purpose of the governance model and can introduce a new failure mode: analyst accountability for actions they did not truly evaluate. The shift requires analysts to develop strong skills in critically reading AI-generated reasoning, not just executing it.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Model-Agnostic Architecture and Enterprise Adoption</h2>
+
+  <p>
+    Elastic's agentic SOC is deliberately <strong>model-agnostic</strong>: the AI investigation layer is not tied to a single LLM provider. The platform supports integration with OpenAI, Anthropic (Claude), Google (Gemini), and on-premises models for organizations with data sovereignty requirements or air-gapped environments.
+  </p>
+
+  <p>
+    This matters for enterprise adoption for three reasons:
+  </p>
+
+  <ul>
+    <li><strong>Procurement flexibility</strong> &mdash; security teams can choose their AI provider based on performance benchmarks, cost, existing enterprise contracts, or compliance requirements without being locked into a single vendor&rsquo;s model ecosystem</li>
+    <li><strong>Data sovereignty</strong> &mdash; organizations subject to strict regulatory regimes (financial services, defense, healthcare) can run on-premises models and ensure that security telemetry never leaves their environment</li>
+    <li><strong>Auditability</strong> &mdash; full decision transparency is maintained regardless of which model is used; analysts can inspect the reasoning behind every AI recommendation, which is a prerequisite for regulated industries where automated decisions must be explainable</li>
+  </ul>
+
+  <p>
+    Elastic reinforces this positioning with its pricing model. Rather than charging <strong>per-endpoint fees</strong> &mdash; which penalize organizations for having comprehensive coverage &mdash; the platform prices on compute and storage consumption. Historical data can be queried without &ldquo;rehydration&rdquo; penalties that are common in competing platforms and often cause teams to archive data they cannot practically retrieve when an investigation demands it.
+  </p>
+
+  <p>
+    The tagline &ldquo;<strong>built to secure, not to tax</strong>&rdquo; reflects this design intent: every pricing and architecture decision is aligned with the goal of maximizing security coverage rather than maximizing revenue from the security team&rsquo;s constraints.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The 1,300+ Detection Rules as an Agent Knowledge Base</h2>
+
+  <p>
+    Elastic ships more than <strong>1,300 open, customizable detection rules</strong> published publicly on GitHub. For a human analyst, these rules are the detection layer &mdash; each rule defines a behavioral pattern that, when matched against incoming telemetry, raises an alert. For an AI agent, they represent something additional: a structured, community-curated knowledge base of known adversary behaviors.
+  </p>
+
+  <p>
+    The openness of the rule set has direct implications for agentic architectures. When an alert fires, the agent can inspect the detection rule that triggered it &mdash; the specific conditions, the MITRE ATT&CK technique mapping, the expected data sources &mdash; and use that context to scope its investigation. Rather than approaching an alert with no prior hypothesis, the agent begins with a structured description of what was detected and what behavior it represents.
+  </p>
+
+  <p>
+    This is qualitatively different from a black-box detection system. Agents working with transparent, readable rules can reason about why a rule fired, what adjacent techniques might be in play, and what evidence would confirm or refute the initial hypothesis. The rule corpus becomes part of the agent&rsquo;s working context, not just the trigger for an alert.
+  </p>
+
+  <p>
+    To ensure high-quality signal retrieval from the underlying data, Elastic uses a <strong>hybrid BM25 + vector search</strong> architecture. BM25 provides traditional keyword-based relevance scoring &mdash; effective for matching known indicators like IP addresses, file hashes, and process names. Vector search adds semantic similarity, allowing the agent to surface related events that do not share exact keywords but are behaviorally relevant. Together, they reduce the noise that exhausts SOC teams and causes genuine signals to be buried in false positives.
+  </p>
+
+  <p>
+    Unified ingestion is the foundation that makes this possible. Elastic consolidates four categories of telemetry under a single pipeline: <strong>logs</strong> (system, application, security events), <strong>infrastructure metrics</strong> (CPU, memory, network throughput, process activity), <strong>application traces</strong> (distributed tracing data revealing how requests move through services), and <strong>security events</strong> (endpoint telemetry, authentication records, DNS queries, network flow data). An AI agent investigating a lateral movement alert can query endpoint process trees, authentication logs, and network flow data in a single pass &mdash; without bridging multiple siloed systems.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>What This Means for Building Self-Serve Security Tooling</h2>
+
+  <p>
+    The Elastic agentic SOC is not just a product &mdash; it is an architecture pattern applicable to any self-serve security tool built on top of LLMs. The lessons from its design translate directly into how you construct an alert triage agent, a detection engineering assistant, or an incident response draft generator.
+  </p>
+
+  <p>
+    Four principles are worth extracting explicitly:
+  </p>
+
+  <ol>
+    <li>
+      <strong>Scope the agent&rsquo;s authority precisely.</strong> Elastic&rsquo;s agents investigate and draft; they do not execute. Your agent design should have equally explicit boundaries. Write them into the system prompt. The agent&rsquo;s scope is part of its specification, not a runtime guardrail.
+    </li>
+    <li>
+      <strong>Structure the output for human review, not for autonomous action.</strong> If the output is a structured plan with reasoning attached, a human reviewer can evaluate it in seconds. If the output is a free-text summary, the reviewer must re-interpret and re-validate it. Structured output formats &mdash; JSON with verdict, confidence, reasoning, and next action &mdash; are a design choice that enables the human-on-the-loop model to function.
+    </li>
+    <li>
+      <strong>Feed the agent context, not just the alert.</strong> An alert without the detection rule, relevant log excerpts, affected system context, and severity level gives the agent almost no footing for investigation. Richer input context produces richer and more reliable output. The input format is as important as the model selection.
+    </li>
+    <li>
+      <strong>Prefer model-agnostic designs.</strong> Coupling your triage agent to a single model provider creates a dependency that complicates procurement, data residency compliance, and model upgrades. Abstract the model layer so that swapping providers requires changing one configuration value, not rewriting the agent.
+    </li>
+  </ol>
+
+  <p>
+    The agentic SOC pattern also demonstrates that native workflow integration is more valuable than pipeline integration. When the agent&rsquo;s proposed response can be approved and executed from the same interface where the investigation summary is displayed &mdash; without switching to a separate SOAR tool &mdash; analyst friction drops and response times improve. If you are building security tooling, designing for integration rather than handoff is a structural advantage.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-14">
+    <h3>Knowledge Check</h3>
+    <p>What distinguishes the &ldquo;human-on-the-loop&rdquo; model from the traditional &ldquo;human-in-the-loop&rdquo; approach in a SOC?</p>
+    <div class="quiz-options">
+      <button>AI agents triage alerts while analysts review every log entry manually</button>
+      <button>AI agents investigate and draft plans while analysts review and approve</button>
+      <button>Analysts manually investigate every alert without any AI assistance at all</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      Write a system prompt for a Claude-powered alert triage agent. Your system prompt should specify:
+    </p>
+    <ol>
+      <li><strong>The agent&rsquo;s role and scope</strong> &mdash; what it is and is not allowed to do</li>
+      <li><strong>The input format</strong> &mdash; what structured data it receives per alert (alert type, severity level, relevant log excerpt, affected system, timestamp)</li>
+      <li><strong>The output format</strong> &mdash; the structured JSON or markdown template it should always return, including: verdict (benign/suspicious/malicious), confidence level, reasoning in 2&ndash;3 sentences, recommended next action, and escalation flag</li>
+      <li><strong>One hard constraint</strong> &mdash; something the agent must never do autonomously</li>
+    </ol>
+    <p>Write the complete system prompt as if you were going to paste it into the Claude API today.</p>
+    <textarea placeholder="You are an alert triage agent working within a Security Operations Center (SOC)...&#10;&#10;## Role and Scope&#10;...&#10;&#10;## Input Format&#10;...&#10;&#10;## Output Format&#10;...&#10;&#10;## Hard Constraints&#10;..."></textarea>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Course Complete &mdash; What You Have Built</h2>
+
+  <p>
+    This is the final lesson of the Blue vs Red Team course. Across 14 lessons and four modules, you have built a complete picture of how modern adversarial security works &mdash; from the foundational frameworks that give both teams a shared vocabulary, through the concrete toolchains each side deploys, to the LLM-powered architectures now reshaping what both offense and defense can do at scale.
+  </p>
+
+  <p>
+    The arc of the course was intentional. You started with the Kill Chain and ATT&CK matrix because every tool, every LLM application, and every agentic architecture discussed later depends on understanding attack sequences as structured, interruptible chains. The red team tools (Nmap, Metasploit, Burp Suite) showed what the attacker&rsquo;s operational pipeline looks like in practice. The blue team platform (Elastic) showed how defenders collect, correlate, and respond at enterprise scale. Purple teaming showed how the two sides close the detection gap collaboratively.
+  </p>
+
+  <p>
+    The final module grounded all of that in build goals:
+  </p>
+
+  <ul>
+    <li><strong>Lesson 11</strong> &mdash; AI red teaming techniques specific to LLM-powered systems (prompt injection, training data extraction, adversarial examples)</li>
+    <li><strong>Lesson 12</strong> &mdash; PentestGPT&rsquo;s multi-LLM architecture for autonomous penetration testing, with the Pentesting Task Tree as the organizing structure</li>
+    <li><strong>Lesson 13</strong> &mdash; PyRIT&rsquo;s attacker + scorer + memory pattern for building self-serve red team tooling</li>
+    <li><strong>Lesson 14</strong> &mdash; Elastic&rsquo;s agentic SOC as the blueprint for LLM-assisted blue team automation, anchored by the human-on-the-loop governance principle</li>
+  </ul>
+
+  <p>
+    If you are working toward the MISSION.md success criteria for this course, the exercise above &mdash; writing a production-ready system prompt for an alert triage agent &mdash; is the capstone deliverable. It requires you to apply the input/output structuring principles from this lesson, the scope-limiting patterns from the PyRIT architecture, and the governance framing from the human-on-the-loop model. A well-written system prompt is not a long one; it is a precise one.
+  </p>
+
+  <p>
+    Return to <a href="../lessons.md">the curriculum</a> to review any lesson, or use the reference documents in <code>reference/</code> as a compact lookup index for the frameworks, tools, and architectures covered across the course.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0013-pyrit-architecture.html">&larr; Previous</a>
+    <a href="../lessons.md">Back to Curriculum</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-14',
+      1,
+      'Correct. In the human-on-the-loop model, AI agents handle the investigation and correlation work autonomously, then draft a structured response plan with reasoning attached to each proposed action. The analyst\'s role shifts from doing the investigation to reviewing, judging, and approving the AI\'s plan. Humans retain full decision authority; the AI removes them from the repetitive data-assembly steps that do not scale with analyst headcount.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

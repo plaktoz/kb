@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 &mdash; AI Red Teaming</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 4 &mdash; LLM Security Automation &rsaquo; Lesson 11 of 14
+    </div>
+    <h1>AI Red Teaming &mdash; Adversarial Techniques Against AI Systems</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~12 min</span>
+      <span>Module 4 &mdash; LLM Security Automation</span>
+      <span>Lesson 11 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <p style="margin-bottom:0">
+      <strong>Google Security Blog</strong> &mdash; Google's AI Red Team: The Ethical Hackers Making AI Safer<br>
+      <a href="https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/" target="_blank" rel="noopener">
+        https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Why AI Systems Demand Specialized Red Teaming</h2>
+
+  <p>
+    Traditional red teaming was designed for a world of networks, services, and applications with well-understood attack surfaces. When AI systems entered production environments, they introduced an entirely different class of threat &mdash; one that existing red team methodologies were not built to address. A standard penetration tester knows how to find SQL injection vulnerabilities or misconfigured cloud buckets. They are not automatically equipped to craft inputs that manipulate a language model's behavior or reason about how a model's training data could be recovered.
+  </p>
+
+  <p>
+    Google's AI Red Team was formed specifically to close this gap. The team consists of hackers who simulate the full range of adversaries a modern organization might face, from nation-state actors to individual criminals. Its foundation is traditional red teaming practice, but the team goes significantly further by layering in <strong>AI subject matter expertise</strong>. As attack complexity grows, that domain knowledge becomes essential &mdash; without it, a red team cannot accurately model the most technically demanding AI attacks or understand what a successful exploitation would actually mean for a deployed system.
+  </p>
+
+  <p>
+    The team draws on threat intelligence from across Google's security organization, including Mandiant, the Threat Analysis Group (TAG), Trust &amp; Safety, and Google DeepMind. This breadth is intentional: AI security incidents are rarely purely technical. Findings span security, privacy, and abuse disciplines simultaneously, meaning the red team must reason across all three domains when evaluating a single attack path.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Traditional red teams are a necessary starting point for AI security, but they are not sufficient on their own. As the complexity of AI attacks grows, dedicated AI subject matter expertise becomes the critical differentiator between surface-level testing and realistic adversarial simulation.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The 6 AI Attack Technique Categories</h2>
+
+  <p>
+    Google's AI Red Team has identified the techniques that constitute the most realistic adversarial threats against deployed AI systems. These are not hypothetical edge cases &mdash; they represent the methods that real adversaries would be most likely to employ against production AI. Each targets a different layer of the AI stack, from the model's input interface down to its training process and stored weights.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Technique</th>
+        <th>What It Targets</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Prompt Attacks</strong></td>
+        <td>The model's input interface and safety guardrails</td>
+        <td>Crafting instructions that convince a model to ignore its safety constraints, reveal system prompts, or perform actions outside its intended scope</td>
+      </tr>
+      <tr>
+        <td><strong>Training Data Extraction</strong></td>
+        <td>Confidential or sensitive data embedded in model weights during training</td>
+        <td>Querying a model with carefully designed prompts to recover verbatim text, personal information, or proprietary content seen during training</td>
+      </tr>
+      <tr>
+        <td><strong>Backdooring</strong></td>
+        <td>Model behavior triggered by specific hidden inputs</td>
+        <td>Embedding a hidden behavior during training or fine-tuning so the model acts normally under ordinary conditions but behaves maliciously when a specific trigger phrase or pattern is present</td>
+      </tr>
+      <tr>
+        <td><strong>Adversarial Examples</strong></td>
+        <td>The model's perception or classification logic</td>
+        <td>Adding imperceptible noise to an image so a vision model confidently misclassifies it, or modifying text in subtle ways that flip a sentiment classifier's output</td>
+      </tr>
+      <tr>
+        <td><strong>Data Poisoning</strong></td>
+        <td>The model's training data and the resulting learned behavior</td>
+        <td>Injecting malicious examples into a training dataset to degrade model accuracy, introduce bias, or embed a backdoor that activates on attacker-chosen inputs</td>
+      </tr>
+      <tr>
+        <td><strong>Model Exfiltration</strong></td>
+        <td>The model's weights, architecture, or capabilities as proprietary assets</td>
+        <td>Systematically querying a model's API to reconstruct its behavior in a local copy, effectively stealing the intellectual property without accessing the underlying system</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Prompt Attacks</h3>
+  <p>
+    Prompt attacks manipulate model inputs to bypass safeguards. Because large language models interpret natural language instructions, an attacker who controls any portion of the text flowing into a model &mdash; whether through a user-facing interface, a document being summarized, or a tool output being processed &mdash; has a potential attack surface. The objective is typically to override the model's intended behavior: extracting information it was instructed to withhold, performing actions it was instructed to refuse, or making it act as a proxy for the attacker's goals rather than the deployer's.
+  </p>
+
+  <h3>Training Data Extraction</h3>
+  <p>
+    Models encode statistical patterns from their training data directly into their weights. In practice, this means models can sometimes be prompted to reproduce verbatim text, private communications, personally identifiable information, or proprietary content that was present in training. Training data extraction attacks exploit this by issuing queries specifically designed to surface memorized content. This has direct privacy implications: a model trained on sensitive internal documents could inadvertently leak them to an adversary with API access.
+  </p>
+
+  <h3>Backdooring</h3>
+  <p>
+    A backdoored model behaves normally under routine conditions but activates a hidden malicious behavior when it encounters a specific trigger chosen by the attacker. Backdoors can be embedded during the initial training process if the attacker can influence the training data, or during a subsequent fine-tuning step if the attacker has access to a fine-tuning pipeline. Because the model appears to function correctly under evaluation, backdoors are particularly difficult to detect through standard testing.
+  </p>
+
+  <h3>Adversarial Examples</h3>
+  <p>
+    Adversarial examples are inputs carefully crafted to cause a model to produce an incorrect output with high confidence. In image classification, this often involves adding perturbations that are imperceptible to humans but cause a model to misclassify the image entirely. In text-based models, analogous techniques involve subtle word substitutions or character modifications that flip classification outputs. Adversarial examples highlight a fundamental tension between a model's learned representations and robust real-world performance.
+  </p>
+
+  <h3>Data Poisoning</h3>
+  <p>
+    Data poisoning targets the training pipeline rather than the deployed model. By injecting malicious examples into the data a model will be trained or fine-tuned on, an attacker can degrade the model's overall accuracy, introduce targeted misclassifications for specific inputs, or embed a backdoor. This attack is particularly relevant in scenarios where training data is aggregated from external sources &mdash; public datasets, web scrapes, or user-contributed content &mdash; any of which could be manipulated by a sufficiently motivated adversary.
+  </p>
+
+  <h3>Model Exfiltration</h3>
+  <p>
+    A model's weights represent substantial intellectual property and competitive advantage. Model exfiltration attacks extract this value by querying the model's public API systematically to construct a local approximation of its behavior. Because the attacker never needs direct access to the underlying infrastructure, this attack can succeed against any model exposed via an API. Beyond intellectual property theft, a locally copied model can be studied offline for additional vulnerabilities without any of the usage monitoring that would apply to the original API.
+  </p>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    Some attack findings from AI red team exercises "may not have simple fixes." Unlike a traditional vulnerability where a patch closes a specific code path, certain AI attack surfaces are architectural properties of how models are trained and deployed. Acknowledge this when scoping an engagement: the goal may be detection and mitigation rather than elimination.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Key Lessons from Google's AI Red Team</h2>
+
+  <p>
+    Beyond the six attack categories, Google's AI Red Team has surfaced several operational lessons that apply broadly to any organization deploying AI systems in production.
+  </p>
+
+  <h3>Traditional Red Teams Are a Starting Point, Not a Ceiling</h3>
+  <p>
+    An organization that already has an established red team capability is in a better position than one starting from scratch. However, applying that team directly to AI systems without additional investment in AI-specific knowledge will produce incomplete results. As attack complexity grows &mdash; particularly for techniques like data poisoning and backdooring that require reasoning about the full machine learning pipeline &mdash; teams need practitioners who understand both adversarial tradecraft and how AI systems are built.
+  </p>
+
+  <h3>Standard Security Controls Remain Highly Effective</h3>
+  <p>
+    Not every AI attack requires a novel defense. Google's team found that standard security controls can "significantly mitigate risk" even against AI-specific threats. Access controls, network segmentation, logging and monitoring, and input validation all apply to AI deployments just as they do to conventional applications. Many AI attacks are detectable via conventional security methods &mdash; they generate unusual query patterns, anomalous API call volumes, or suspicious data flows that existing monitoring infrastructure can flag.
+  </p>
+
+  <h3>Findings Feed Back into Research and Product Development</h3>
+  <p>
+    Red team findings are not purely defensive artifacts. At Google, findings from AI red team exercises inform ongoing research into model robustness, safety, and security. They also feed directly into product development cycles, shaping how deployed systems are hardened before and after release. This bidirectional feedback loop &mdash; from red team finding to research to product improvement &mdash; is what makes red teaming a durable capability rather than a one-time exercise.
+  </p>
+
+  <h3>Findings Span Multiple Disciplines Simultaneously</h3>
+  <p>
+    AI security incidents rarely fall cleanly into a single category. A prompt injection attack might simultaneously implicate security (bypassing access controls), privacy (extracting user data), and abuse (generating harmful content). This means AI red teams need to reason across security, privacy, and trust &amp; safety disciplines in a single engagement &mdash; a cross-functional scope that differs substantially from a traditional network penetration test.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Standard security controls can significantly mitigate risk from AI-specific attacks, and many AI attacks are detectable via conventional security methods. The AI threat surface is not entirely novel territory &mdash; it extends the existing security stack rather than replacing it.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-11">
+    <h3>Knowledge Check</h3>
+    <p>According to Google's AI Red Team, what key capability distinguishes AI red teaming from traditional red teaming?</p>
+    <div class="quiz-options">
+      <button>It replaces network penetration testing with social engineering techniques only</button>
+      <button>It relies purely on automated tools without human adversarial thinking</button>
+      <button>It layers AI subject matter expertise onto traditional adversarial methods</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      You are red-teaming a fictional LLM-powered customer support chatbot called "HelpBot" deployed by a healthcare company. HelpBot has access to patient FAQs and appointment scheduling. Write an attacker brief covering:
+    </p>
+    <ol>
+      <li>Which of Google's 6 AI attack techniques you would try first and why</li>
+      <li>A specific prompt or approach you would use to attempt that attack</li>
+      <li>What data or capability you are trying to extract or manipulate</li>
+      <li>One standard security control that could mitigate this specific attack</li>
+    </ol>
+    <textarea placeholder="Write your attacker brief here..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0010-attack-coverage-mapping.html">&larr; Previous: Attack Coverage Mapping</a>
+    <a href="0012-pentestgpt.html" class="primary">Next: PentestGPT &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-11',
+      2,
+      'Correct. Google\'s AI Red Team builds on traditional red teaming by adding AI subject matter expertise. As attack complexity grows, this specialized knowledge is essential for accurately simulating the most technically demanding AI attacks, such as backdooring, data poisoning, and training data extraction.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

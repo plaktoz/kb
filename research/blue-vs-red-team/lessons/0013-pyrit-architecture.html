@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 13 — PyRIT Architecture</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Blue vs Red Team</a> ›
+      <a href="../index.html#module-4">Module 4 — LLM Security Automation</a> ›
+      Lesson 13 of 14
+    </div>
+    <h1>PyRIT Architecture — The Attacker + Scorer + Memory Pattern</h1>
+    <div class="lesson-meta">
+      <span>Module 4 — LLM Security Automation</span>
+      <span>Lesson 13 of 14</span>
+      <span>~14 min</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Primary Source</div>
+    <strong>Microsoft Security Blog — Announcing PyRIT (February 2024)</strong><br>
+    PyRIT (Python Risk Identification Toolkit for generative AI) is an open-source framework released by Microsoft to help security professionals proactively identify risks in generative AI systems.<br>
+    <a href="https://www.microsoft.com/en-us/security/blog/2024/02/22/announcing-microsofts-open-automation-framework-to-red-team-generative-ai-systems/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/security/blog/2024/02/22/announcing-microsofts-open-automation-framework-to-red-team-generative-ai-systems/</a>
+  </div>
+
+  <h2>Why Red Teaming Generative AI Is Uniquely Hard</h2>
+
+  <p>Red teaming a traditional application is hard enough. Red teaming a generative AI system introduces a different class of difficulty — one that makes purely manual approaches impractical at scale.</p>
+
+  <p>Three properties of generative AI combine to create this challenge. First, GenAI systems are <strong>probabilistic</strong>: identical inputs can yield different outputs on successive runs. A prompt that triggers a harmful response today may produce a benign one tomorrow. This means a single test pass cannot rule out a vulnerability — the test must be run repeatedly and systematically across a wide space of prompt variations.</p>
+
+  <p>Second, the scope of what must be tested is <strong>broader than in traditional security</strong>. A conventional penetration test focuses on security properties — authentication, access control, injection, privilege escalation. GenAI red teaming must probe both security risks and responsible AI risks simultaneously: harmful content generation, bias amplification, safety bypass, misinformation, and manipulation. The two domains overlap but neither contains the other.</p>
+
+  <p>Third, GenAI system <strong>architectures vary widely</strong> across modalities and deployment patterns. A chatbot, a code assistant, an image generator, and a multimodal agent each present different attack surfaces and different harm profiles. No single static checklist can cover them all.</p>
+
+  <div class="callout key">
+    <strong>Key Insight</strong>
+    The combination of probabilistic outputs, dual security-and-responsibility scope, and architectural variety means that manual red teaming alone cannot achieve adequate coverage. Automation is not a shortcut — it is a prerequisite for meaningful coverage.
+  </div>
+
+  <h2>What Is PyRIT?</h2>
+
+  <p>PyRIT (Python Risk Identification Toolkit for generative AI) is an open-source framework released by Microsoft in February 2024. Its purpose is to help security professionals proactively identify risks in generative AI systems by automating the most repetitive and volume-intensive parts of the red teaming workflow.</p>
+
+  <p>The core design insight behind PyRIT is that LLMs can be turned against themselves. Rather than requiring a human to manually craft thousands of adversarial prompt variants, PyRIT uses one LLM to attack another — and uses a second LLM (or a classical classifier) to judge whether the attack succeeded. This loop compresses what might take weeks of manual work into hours of automated testing.</p>
+
+  <h2>The Five PyRIT Components</h2>
+
+  <p>PyRIT is built from five modular components that work together. Understanding each one separately makes the overall loop easier to reason about.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Purpose</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Targets</strong></td>
+        <td>Connects PyRIT to the system under test. Acts as the interface layer between the attacker logic and the model endpoint being probed.</td>
+        <td>Azure OpenAI endpoint, HuggingFace model hub, Azure ML deployment</td>
+      </tr>
+      <tr>
+        <td><strong>Datasets</strong></td>
+        <td>Provides the initial pool of prompts. Can be static lists of known harmful prompts or dynamic templates that cover multiple harm categories.</td>
+        <td>A list of jailbreak seed prompts; a template set covering hate speech, self-harm, and CSAM categories</td>
+      </tr>
+      <tr>
+        <td><strong>Scoring Engine</strong></td>
+        <td>Evaluates the target system's outputs and determines whether an attack succeeded. Supports three evaluation methods: ML classifier, LLM self-evaluation, and Azure AI Content Safety API.</td>
+        <td>An LLM judge asked "Did this response provide instructions for a harmful act?"; an Azure Content Safety call; a fine-tuned binary classifier</td>
+      </tr>
+      <tr>
+        <td><strong>Attack Strategies</strong></td>
+        <td>Defines the structure of the adversarial conversation. Supports both single-turn probes (one prompt, one response) and multi-turn adversarial conversations that build context over several exchanges.</td>
+        <td>A single harmful question; a multi-turn conversation that starts benign and escalates gradually</td>
+      </tr>
+      <tr>
+        <td><strong>Memory</strong></td>
+        <td>Stores the full interaction history between the attacker and the target. Enables post-hoc analysis and provides context that longer multi-turn conversations depend on.</td>
+        <td>A local database of every prompt sent and every response received, queryable for analysis</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How the Attacker + Scorer + Memory Loop Works</h2>
+
+  <p>The real power of PyRIT comes not from any single component but from how they connect into an adaptive loop. The framework does not just fire prompts and collect results — it changes its tactics based on what the target system returns.</p>
+
+  <p>The loop runs as follows:</p>
+
+  <ol>
+    <li><strong>Seed.</strong> The Datasets component provides an initial set of prompts — either a static list of known harmful queries or a set of dynamic templates covering specific harm categories.</li>
+    <li><strong>Expand.</strong> An Attacker LLM takes the seed prompts and generates a much larger set of adversarial variations. This is prompt expansion: from dozens of seeds, the LLM produces thousands of rewordings, indirect framings, role-play scenarios, and hypothetical constructions — covering the space of ways a real attacker might phrase the same underlying request.</li>
+    <li><strong>Send.</strong> Each expanded prompt is delivered to the Target system through the Targets interface.</li>
+    <li><strong>Score.</strong> The Scoring Engine receives the target's response and evaluates it. A response can be scored by an LLM acting as a judge (self-evaluation), a classical ML classifier, or the Azure AI Content Safety API. The score represents whether the attack goal was achieved.</li>
+    <li><strong>Store.</strong> Every prompt and its associated response and score is written to the Memory layer. Nothing is discarded.</li>
+    <li><strong>Adapt.</strong> If an attack fails, the framework does not simply move on — it uses the score and the response content to adjust its approach. It iterates, trying new tactics, until it either achieves its goal or exhausts its strategy space.</li>
+  </ol>
+
+  <p>Visually, this cycle can be represented as:</p>
+
+<pre>
+Dataset / Templates
+        |
+        v
+  Attacker LLM  ──expand──> Adversarial Prompt Variants
+        ^                              |
+        |                             v
+  Adapt tactics             Target System (via Targets)
+        |                             |
+        |                             v
+  Memory Layer <──────── Scoring Engine evaluates response
+  (stores history)         (LLM / ML / Content Safety)
+</pre>
+
+  <div class="callout key">
+    <strong>LLM as Both Attacker and Judge</strong>
+    PyRIT uses an LLM in two distinct roles simultaneously: one LLM generates the adversarial prompts (the attacker), while another — or the same one in a different prompt context — evaluates whether the target's response represents a successful attack (the scorer). This self-evaluation pattern is what makes the loop autonomous.
+  </div>
+
+  <h2>Single-Turn vs Multi-Turn Strategies</h2>
+
+  <p>Attack Strategies in PyRIT come in two forms, and the choice between them reflects what kind of vulnerability you are probing.</p>
+
+  <h3>Single-Turn Attacks</h3>
+  <p>A single-turn attack sends one prompt and evaluates one response. This is appropriate when the target's vulnerability is at the level of the individual request — for example, whether a direct harmful question can bypass the model's content filters. Single-turn strategies are fast to run and easy to analyze because each test case is independent.</p>
+
+  <h3>Multi-Turn Attacks</h3>
+  <p>A multi-turn attack builds a conversation across several exchanges. This is appropriate when the vulnerability requires context to surface — for example, a model that resists harmful requests in isolation but can be gradually escalated into producing harmful output through a sequence of seemingly innocuous steps. The Memory layer is essential here: it provides the attacker with the full conversation history so each successive prompt can be crafted as a natural continuation of the exchange.</p>
+
+  <div class="callout warning">
+    <strong>Multi-Turn Attacks Are Harder to Detect</strong>
+    Single-turn attacks are relatively easy for content filters to intercept because the harmful intent is visible in the prompt itself. Multi-turn attacks distribute intent across multiple turns, making the individual messages appear benign. This is precisely why multi-turn strategies exist in PyRIT — they model the kind of patient, context-aware manipulation that sophisticated adversaries use in practice.
+  </div>
+
+  <h2>Augmentation, Not Replacement</h2>
+
+  <p>Microsoft is explicit on a point that is easy to miss: PyRIT is positioned as an <strong>augmentation tool</strong>, not a replacement for manual red teaming. The framework automates the high-volume, repeatable parts of the workflow — generating prompt variations, sending them at scale, scoring outputs systematically. What it cannot do is anticipate blind spots that only a human tester would think to probe.</p>
+
+  <p>Manual red teaming brings domain expertise, creative adversarial thinking, and the ability to notice unexpected behaviors that fall outside any predefined harm taxonomy. A human tester encountering a strange model response might follow a completely novel path. An automated framework will only pursue strategies it has been programmed to try.</p>
+
+  <p>The practical implication is that neither approach is sufficient alone. PyRIT compresses weeks of routine coverage work into hours, freeing human red teamers to focus their limited time on the creative, exploratory work that automation cannot do. The two approaches are complements, not competitors.</p>
+
+  <div class="callout key">
+    <strong>The Division of Labor</strong>
+    PyRIT handles volume and speed: thousands of prompt variations, systematic scoring, adaptive iteration. Human red teamers handle depth and novelty: unexpected attack paths, contextual judgment, and blind spots that no dataset anticipates. Together they achieve coverage that neither can reach alone.
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz" id="quiz-13">
+    <h3>Check Your Understanding</h3>
+    <p>What is the primary purpose of PyRIT's Memory component?</p>
+    <div class="quiz-options">
+      <button>To store interaction history and enable deeper analysis and longer conversations.</button>
+      <button>To generate thousands of adversarial prompt variations from a starting seed.</button>
+      <button>To connect PyRIT to Azure OpenAI or HuggingFace model API endpoints.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- Exercise -->
+  <div class="exercise">
+    <h3>Applied Exercise</h3>
+    <p>Design a PyRIT-style architecture for a self-serve SQL injection checker. Using an ASCII diagram or labeled list, specify:</p>
+    <ol>
+      <li><strong>The Target system</strong> — what you are testing and how it is connected.</li>
+      <li><strong>The Attacker LLM's job</strong> — what dataset of prompts it starts with and how it expands them.</li>
+      <li><strong>The Scoring Engine</strong> — what criteria it uses to evaluate responses (what does "success" look like for a SQL injection attempt?).</li>
+      <li><strong>The Attack Strategy</strong> — single-turn or multi-turn, and why.</li>
+      <li><strong>The Memory layer</strong> — what interaction history it tracks and how that history informs the next round of prompts.</li>
+    </ol>
+    <textarea placeholder="Sketch your architecture here — ASCII diagram, labeled list, or prose. Be specific about what each component does in the SQL injection context."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0012-pentestgpt.html">&larr; Prev: PentestGPT</a>
+    <a href="0014-agentic-soc.html" class="primary">Next: Agentic SOC &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-13', 0, 'Correct. The Memory component stores the full interaction history between the attacker and the target system. This serves two purposes: it enables deeper post-hoc analysis of what prompts succeeded and failed, and it provides the conversation context that multi-turn attack strategies depend on — without memory, each exchange would be stateless and the attacker could not build on previous turns.');</script>
+
+</div>
+</body>
+</html>

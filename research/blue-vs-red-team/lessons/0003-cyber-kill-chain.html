@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 3 — The Cyber Kill Chain</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Blue vs Red Team</a> ›
+      Module 1 — Foundations ›
+      Lesson 3 of 14
+    </div>
+    <h1>The Cyber Kill Chain — 7 Phases as a Shared Attack/Defense Map</h1>
+    <div class="lesson-meta">
+      <span>Module 1 — Foundations</span>
+      <span>~14 min</span>
+      <span>Reconnaissance · Weaponization · Delivery · Exploitation · Installation · C2 · Actions on Objectives · APT</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Primary Source</div>
+    Lockheed Martin Cyber Kill Chain —
+    <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html" target="_blank" rel="noopener">
+      lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html
+    </a>
+    <br>
+    Framework for identifying and preventing cyber intrusions. Maps the 7 phases every adversary must complete to reach their objectives.
+  </div>
+
+  <h2>What Is the Cyber Kill Chain?</h2>
+
+  <p>
+    The Cyber Kill Chain is a framework developed by Lockheed Martin, adapted from a military concept describing the structure of an attack. It breaks any intrusion into seven sequential phases — from the attacker's first reconnaissance action all the way through to achieving their objective. The central insight is straightforward: <strong>an attacker must complete every phase to succeed</strong>. Defenders, by contrast, need to disrupt only one.
+  </p>
+
+  <p>
+    The framework was designed specifically to counter <strong>Advanced Persistent Threats (APTs)</strong> — adversaries defined by three attributes working together: <em>intent</em> (they have a specific, directed goal), <em>opportunity</em> (they identify and exploit known vulnerabilities or access paths), and <em>capability</em> (they possess the technical skills and resources to act). APT actors are methodical and patient; they may execute phases across weeks or months, deliberately staying below detection thresholds at each step.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Principle</strong>
+    The Kill Chain is a shared map for both sides. Red teams use it as an offensive roadmap, progressing phase by phase toward objectives. Blue teams use the same map to orient detection and response — every phase is a detection opportunity, and stopping the chain at any point protects the organization.
+  </div>
+
+  <h2>The 7 Phases</h2>
+
+  <p>
+    The table below summarizes each phase, what happens during it, how a red team executes it, and where a blue team has the opportunity to detect or disrupt it.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Phase</th>
+        <th>What happens</th>
+        <th>Red team does</th>
+        <th>Blue team detects</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Reconnaissance</strong></td>
+        <td>Attacker researches and selects the target. Harvests email addresses, organizational structure, internet-facing systems, and personnel information.</td>
+        <td>OSINT on public directories, LinkedIn, job postings, Shodan searches for exposed services, passive DNS enumeration.</td>
+        <td>Unusual volume of DNS lookups for internal domain names, web crawlers hitting public-facing portals, enumeration patterns in web server logs.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Weaponization</strong></td>
+        <td>Attacker pairs malware with an exploit to create a deliverable payload — for example, a trojanized document or a malicious archive ready to execute.</td>
+        <td>Selects exploits matched to the target's software stack, embeds shellcode in decoy files, builds command-and-control (C2) infrastructure.</td>
+        <td>Limited direct visibility — this phase happens entirely in attacker-controlled infrastructure. Defenders rely on threat intelligence and retroactive malware analysis.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Delivery</strong></td>
+        <td>The weapon is transmitted to the target environment via phishing email, malicious web page, compromised removable media, or a supply-chain update.</td>
+        <td>Sends spearphishing emails to specific employees, sets up watering-hole sites, embeds payloads in software updates or trusted third-party packages.</td>
+        <td>Email security gateway alerts, malicious attachment scanning, web proxy logs blocking known-bad URLs, anomalous downloads from unfamiliar domains.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>Exploitation</strong></td>
+        <td>The delivered weapon triggers — a vulnerability in software, the operating system, or human behavior is exploited and the attacker's code runs for the first time.</td>
+        <td>Triggers application, browser, or OS exploits; leverages macro execution, scripting engines, or memory corruption bugs to execute the payload.</td>
+        <td>IDS/IPS signatures, endpoint detection alerts on unusual process spawning, memory anomaly detection, script-engine execution logs (e.g., PowerShell, WScript).</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>Installation</strong></td>
+        <td>Malware or a backdoor is installed on the victim asset. The attacker establishes persistence to survive reboots and resist removal.</td>
+        <td>Drops remote access trojans (RATs), web shells, scheduled tasks, or registry run keys; may patch the exploited vulnerability to lock out other attackers.</td>
+        <td>File integrity monitoring alerts, new scheduled tasks, registry modifications in persistence locations (Run/RunOnce keys), EDR detections for known implant behaviors.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><strong>Command &amp; Control (C2)</strong></td>
+        <td>The installed malware opens a channel back to attacker-controlled infrastructure. The attacker can now remotely issue commands to the compromised host.</td>
+        <td>Uses encrypted protocols (HTTPS, DNS tunneling) to blend outbound traffic with legitimate network activity; sets low beacon frequencies to avoid detection.</td>
+        <td>Periodic outbound connection patterns (beaconing), DNS tunneling heuristics, SSL/TLS inspection for anomalous certificates, traffic to newly registered or low-reputation domains.</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><strong>Actions on Objectives</strong></td>
+        <td>The attacker achieves their stated goal — data exfiltration, credential harvesting, ransomware deployment, destructive wiper execution, or further lateral movement.</td>
+        <td>Exfiltrates targeted data, pivots to additional hosts using harvested credentials, deploys ransomware or destructive payloads, achieves the engagement's defined objective.</td>
+        <td>Large outbound data transfers, access to sensitive file shares, lateral movement indicators (unusual authentication, pass-the-hash patterns), ransomware file-extension changes.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>How Each Side Uses the Framework</h2>
+
+  <h3>Red team: offensive roadmap</h3>
+  <p>
+    A red team treats the Kill Chain as a sequential mission plan. Each phase has a concrete deliverable: completed target research, a built payload, a delivery mechanism chosen, code executed, persistence established, C2 running, objective achieved. The framework helps red teams plan engagements methodically and document which phases they completed — which in turn tells the blue team exactly where their defenses held and where they failed.
+  </p>
+
+  <h3>Blue team: detecting and disrupting at any phase</h3>
+  <p>
+    The blue team does not need to catch the attacker at Phase 7. Because each phase is a discrete action, any phase can become a detection and disruption point. A well-instrumented organization can, for example, block delivery via email filtering (Phase 3), alert on a new scheduled task (Phase 5), or identify C2 beaconing (Phase 6) — each of which stops the attacker before objectives are reached. The Kill Chain helps blue teams prioritize telemetry investment: which phases do we have good visibility into, and where are our gaps?
+  </p>
+
+  <div class="callout warning">
+    <strong>The Weaponization Blind Spot</strong>
+    Phase 2 (Weaponization) happens entirely within attacker-controlled infrastructure. No network sensor or endpoint agent sees it. This is the one phase where blue teams have no direct detection capability. Defenders compensate by building threat intelligence partnerships, analyzing recovered malware samples retroactively, and treating the absence of visibility here as a reason to invest more heavily in detection at phases 3 through 6.
+  </div>
+
+  <h2>Advanced Persistent Threats (APTs)</h2>
+
+  <p>
+    The Kill Chain was designed specifically as a response model for APT-level adversaries. An APT is not defined by a specific malware family or nation-state origin — it is defined by three converging attributes:
+  </p>
+
+  <ul>
+    <li><strong>Intent</strong> — a specific, directed mission (intellectual property theft, disruption of critical infrastructure, espionage).</li>
+    <li><strong>Opportunity</strong> — identified access paths, known vulnerabilities, or insider access that make the target reachable.</li>
+    <li><strong>Capability</strong> — technical skills, custom tooling, and operational patience to execute every Kill Chain phase without triggering defenses.</li>
+  </ul>
+
+  <p>
+    APTs are patient. An attacker may dwell in reconnaissance for months, study the target's patch cycles and monitoring gaps, and time delivery to coincide with low-attention periods (holidays, weekends). This patience is why the Kill Chain frames intrusion as a campaign with phases rather than a single event.
+  </p>
+
+  <div class="callout key">
+    <strong>The Power of "Breaking the Chain"</strong>
+    Because every phase must succeed for the attacker to reach objectives, defenders who disrupt even one phase achieve a full stop — not just a delay. A phishing email blocked at Phase 3 is equivalent, from the attacker's perspective, to defenses that caught them at Phase 6. The Kill Chain converts the blue team's goal from "catch everything" to "break the chain somewhere."
+  </div>
+
+  <h2>Knowledge Check</h2>
+
+  <div class="quiz" id="quiz-3">
+    <h3>Quiz</h3>
+    <p>In the Cyber Kill Chain, which phase describes the attacker opening a remote management channel back to their infrastructure?</p>
+    <div class="quiz-options">
+      <button>Transmitting the malicious weapon payload over email to the victim</button>
+      <button>Establishing a covert remote channel to issue commands to victim</button>
+      <button>Reaching the target data or goal after all prior phases</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <h2>Applied Exercise</h2>
+
+  <div class="exercise">
+    <h3>Exercise — SolarWinds 2020: Map the Kill Chain</h3>
+    <p>
+      The 2020 SolarWinds supply chain attack is one of the most significant breaches in history. Below is a simplified summary of what happened — six attacker actions in order. Map each action to its corresponding Kill Chain phase and write one sentence explaining why that mapping is correct.
+    </p>
+    <ol>
+      <li>Attackers first researched SolarWinds' update infrastructure over months of preparation.</li>
+      <li>They built a trojanized version of the Orion software update package.</li>
+      <li>The malicious update was distributed to approximately 18,000 customers via normal software update channels.</li>
+      <li>Once installed, the backdoor (SUNBURST) executed on victim systems.</li>
+      <li>SUNBURST established a covert C2 channel to attacker-controlled domains disguised as legitimate Orion traffic.</li>
+      <li>Attackers used their access to move laterally into high-value targets including US government agencies.</li>
+    </ol>
+    <p>
+      Note: You are mapping six actions to seven phases — one phase will be absent from this particular breach narrative. Identify which one and explain why.
+    </p>
+    <textarea placeholder="Phase 1 — Reconnaissance: Action 1 maps here because...&#10;Phase 2 — Weaponization: Action 2 maps here because...&#10;(continue for all 6 actions, then identify the missing phase)"></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor — copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0002-blue-team-role.html">&larr; Prev: The Defender's Mandate</a>
+    <a href="0004-mitre-attack.html" class="primary">Next: MITRE ATT&amp;CK &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-3',
+      1,
+      'Command and Control (C2) is Phase 6 — after malware is installed, the attacker establishes an outbound channel to remotely manipulate the compromised host. The first option describes Delivery (Phase 3), which is about transmitting the weapon to the target. The third option describes Actions on Objectives (Phase 7), where the attacker fulfills their mission goal.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

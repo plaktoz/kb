@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1 — The Adversarial Mindset</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 1 &mdash; Foundations &rsaquo; Lesson 1 of 14
+    </div>
+    <h1>The Adversarial Mindset &mdash; What Red Teams Do and Why</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~12 min</span>
+      <span>Module 1 &mdash; Foundations</span>
+      <span>Lesson 1 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Sources</div>
+    <p>
+      <strong>CrowdStrike</strong> &mdash; Red Team vs Blue Team in Cybersecurity<br>
+      <a href="https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/" target="_blank" rel="noopener">
+        https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/
+      </a>
+    </p>
+    <p style="margin-bottom:0">
+      <strong>OffSec</strong> &mdash; Red Team vs Blue Team: Key Differences<br>
+      <a href="https://www.offsec.com/blog/red-team-vs-blue-team/" target="_blank" rel="noopener">
+        https://www.offsec.com/blog/red-team-vs-blue-team/
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>What Is a Red Team?</h2>
+
+  <p>
+    A red team is a group of security professionals whose job is to think and act like real-world attackers. Rather than waiting for a breach to expose gaps in a company's defenses, a red team is deliberately tasked with finding those gaps first &mdash; using the same techniques, tactics, and procedures (TTPs) that genuine adversaries would employ.
+  </p>
+
+  <p>
+    The defining feature of red team work is <em>structured adversary simulation</em>. Engagements follow a recognized framework &mdash; most commonly the MITRE ATT&amp;CK matrix &mdash; which catalogs the full range of techniques real threat actors have been observed using in the wild. By anchoring their work to this framework, red teams can be confident they are testing against realistic attack patterns rather than theoretical edge cases.
+  </p>
+
+  <p>
+    The mandate is straightforward: <strong>find exploitable weaknesses before real attackers do.</strong> This means the red team is not simply scanning for unpatched software. It is testing the entire kill chain &mdash; from the first moment an attacker would send a phishing email to the final moment they would exfiltrate data or deploy ransomware &mdash; all while trying to remain undetected by the organization's defenders.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    TTPs stands for Tactics, Techniques, and Procedures &mdash; the specific behaviors an adversary uses at each stage of an attack. Red teams map their activities to frameworks like MITRE ATT&amp;CK so that engagements reflect real threat actor behavior rather than generic vulnerability scanning.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Engagement Lifecycle</h2>
+
+  <p>
+    A red team engagement is not an unstructured free-for-all. It follows a deliberate sequence of phases, each building on the last. According to OffSec, a typical engagement moves through the following stages:
+  </p>
+
+  <ol>
+    <li>
+      <strong>Initial Access via Phishing.</strong> The engagement almost always begins with social engineering. The red team crafts convincing phishing emails &mdash; or other deception techniques &mdash; to get an initial foothold inside the organization's network. This mirrors the most common real-world entry vector.
+    </li>
+    <li>
+      <strong>Privilege Escalation.</strong> Once inside, the team works to elevate their permissions. A standard user account has limited reach; attackers need administrator or system-level access to cause meaningful damage. Privilege escalation techniques exploit misconfigurations, vulnerable services, or credential reuse to acquire this elevated standing.
+    </li>
+    <li>
+      <strong>Lateral Movement.</strong> With elevated privileges, the team begins moving across the network &mdash; from the initially compromised machine toward higher-value targets such as domain controllers, finance systems, or intellectual property repositories. Lateral movement often involves credential theft: harvesting hashes or plaintext passwords from compromised systems to authenticate to other machines.
+    </li>
+    <li>
+      <strong>Command-and-Control (C2) Infrastructure.</strong> Red teams establish a persistent communication channel between the compromised environment and an external server they control. This mimics how real attackers maintain long-term access and issue further commands after the initial breach.
+    </li>
+    <li>
+      <strong>Data Exfiltration and Ransomware Simulation.</strong> The engagement concludes by demonstrating impact: the team shows what data could have been stolen and, where in scope, simulates a ransomware deployment to illustrate the potential for operational disruption.
+    </li>
+  </ol>
+
+  <p>
+    Running through every phase while evading detection is central to the exercise. If the blue team catches the red team early and responds effectively, that is also a valuable finding &mdash; but the goal of the red team is to test whether detection and response are actually good enough to stop a determined adversary.
+  </p>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    A red team engagement is not a penetration test. Pen tests typically focus on finding and documenting vulnerabilities within a defined scope and time window. Red team engagements go further: they emulate the full adversary lifecycle, including persistence, evasion, and impact simulation, often over weeks or months. Conflating the two leads to misaligned expectations and scoping errors.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Core TTPs: The Red Team Playbook</h2>
+
+  <p>
+    CrowdStrike identifies five core activity categories that define what a red team actually does during an engagement:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Credential Theft.</strong> Attackers rarely break through strong authentication &mdash; they steal valid credentials instead. Red teams use tools and techniques to harvest passwords, Kerberos tickets, and NTLM hashes from compromised systems, then replay them to move across the network as a legitimate-looking user.
+    </li>
+    <li>
+      <strong>Social Engineering.</strong> Technology is rarely the weakest link. Phishing emails, pretexting calls, and spear-phishing campaigns target human judgment. Social engineering tests whether employees and systems are hardened against the deception that precedes most real-world intrusions.
+    </li>
+    <li>
+      <strong>Privilege Escalation.</strong> Local user access is rarely sufficient to reach critical assets. Red teams probe for misconfigured services, weak file permissions, unquoted service paths, and kernel exploits to gain elevated operating system or domain-level privileges.
+    </li>
+    <li>
+      <strong>Lateral Movement.</strong> After gaining a foothold, the red team pivots from system to system &mdash; using legitimate remote administration tools, pass-the-hash attacks, or stolen service account credentials &mdash; to reach targets deeper in the network.
+    </li>
+    <li>
+      <strong>Data Exfiltration While Evading Detection.</strong> The final stage tests whether the organization's monitoring and data-loss-prevention controls would catch the removal of sensitive data. Red teams stage realistic exfiltration to measure how much an attacker could remove before raising an alert.
+    </li>
+  </ul>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Specialists, Deliverables, and Why It Matters</h2>
+
+  <p>
+    Red teams are not a homogeneous group. OffSec notes that engagements typically draw on three types of specialists working in concert:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Specialist</th>
+        <th>Primary Focus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Vulnerability Analysts</td>
+        <td>Identify and classify weaknesses in systems, code, and configurations before active exploitation begins</td>
+      </tr>
+      <tr>
+        <td>Ethical Hackers</td>
+        <td>Execute the hands-on attack simulation: social engineering, exploitation, post-exploitation, and evasion</td>
+      </tr>
+      <tr>
+        <td>Security Auditors</td>
+        <td>Review processes, policies, and access controls against security standards and compliance requirements</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Every engagement concludes with an <strong>after-action report</strong>. This document records which vulnerabilities were exploited, the full attack path taken from initial access to final objective, which controls failed or were bypassed, and concrete remediation recommendations. The after-action report is ultimately what transforms an expensive simulation into durable organizational improvement.
+  </p>
+
+  <p>
+    Without this structured feedback loop, a red team engagement is theater. With it, the organization gains a clear, evidence-based picture of how a real attacker would move through their environment &mdash; and what it would take to stop them.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    The engagement mandate defines the authorized scope of a red team operation: which systems are in scope, what techniques are permitted, whether the blue team is aware of the exercise, and what the red team's final objective is. A clearly written mandate protects both the organization and the red team operators throughout the engagement.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-1">
+    <h3>Knowledge Check</h3>
+    <p>Which best describes the primary mandate of a red team engagement?</p>
+    <div class="quiz-options">
+      <button>Find exploitable weaknesses before real attackers do</button>
+      <button>Train employees to avoid phishing and scams</button>
+      <button>Patch known vulnerabilities across all network systems</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      Write a 3-sentence attacker brief for a fictional e-commerce company. Your brief should state:
+    </p>
+    <ol>
+      <li>What the red team would target and why</li>
+      <li>Which TTPs they would use for initial access</li>
+      <li>What success looks like at the end of the engagement</li>
+    </ol>
+    <textarea placeholder="Write your attacker brief here..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <span style="color: #aaa; font-size: 0.9rem; font-style: italic;">&#8592; No previous lesson</span>
+    <a href="0002-blue-team-role.html" class="primary">Next: The Defensive Mindset &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-1',
+      0,
+      'Correct. The primary mandate of a red team is to find exploitable weaknesses before real attackers do, by simulating the full adversary lifecycle — from initial access through data exfiltration — while attempting to evade detection.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

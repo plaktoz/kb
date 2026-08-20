@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9 &mdash; Purple Teaming</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 3 &mdash; Overlap and Purple Teaming &rsaquo; Lesson 9 of 14
+    </div>
+    <h1>Purple Teaming &mdash; Attacking and Defending Together</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~12 min</span>
+      <span>Module 3 &mdash; Overlap and Purple Teaming</span>
+      <span>Lesson 9 of 14</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Sources</div>
+    <p>
+      <strong>CrowdStrike</strong> &mdash; Purple Teaming<br>
+      <a href="https://www.crowdstrike.com/cybersecurity-101/purple-teaming/" target="_blank" rel="noopener">
+        https://www.crowdstrike.com/cybersecurity-101/purple-teaming/
+      </a>
+    </p>
+    <p>
+      <strong>CrowdStrike</strong> &mdash; Red Team vs. Blue Team in Cybersecurity<br>
+      <a href="https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/" target="_blank" rel="noopener">
+        https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/
+      </a>
+    </p>
+    <p style="margin-bottom:0">
+      <strong>OffSec</strong> &mdash; Red Team vs. Blue Team: Key Differences<br>
+      <a href="https://www.offsec.com/blog/red-team-vs-blue-team/" target="_blank" rel="noopener">
+        https://www.offsec.com/blog/red-team-vs-blue-team/
+      </a>
+    </p>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Silo Problem &mdash; Why Purple Teaming Exists</h2>
+
+  <p>
+    Traditional red and blue team engagements follow a sequential pattern: the red team conducts an exercise, writes a report, and hands it over. The blue team receives findings weeks later and begins remediation. Each team then continues to optimize independently &mdash; red teams sharpen their attack techniques, blue teams tune their monitoring tools &mdash; but the two functions rarely converge in real time.
+  </p>
+
+  <p>
+    OffSec identifies this as the core weakness in the siloed model: without an active feedback loop between offense and defense, each team improves its own capability in isolation. Red team tactics that expose critical gaps may never inform how the blue team tunes its detection rules. Blue team detections that fire quickly may never tell red team operators which techniques they need to improve their evasion against.
+  </p>
+
+  <p>
+    CrowdStrike describes the downstream consequence: gaps identified during exercises risk being left open rather than fully addressed. A finding that passes from red team to blue team through a static report &mdash; rather than through a shared, live conversation &mdash; can sit unresolved. The two teams become complementary functions that never quite complete the improvement cycle.
+  </p>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    The problem is not that red and blue teams have different skills &mdash; that specialization is valuable. The problem arises when the separation becomes a communication barrier. If findings stay siloed inside each team's own report rather than flowing continuously between them, the organization does not get the full benefit of running both functions.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>What Purple Teaming Is</h2>
+
+  <p>
+    A purple team is not a separate, permanent team sitting between red and blue. CrowdStrike describes it as <em>members of the offensive (red) and defensive (blue) team working in unison</em> &mdash; uniting offensive and defensive professionals to simulate attacks, uncover vulnerabilities, and suggest fixes simultaneously rather than sequentially.
+  </p>
+
+  <p>
+    The purple team methodology, as defined by CrowdStrike, operates across three simultaneous activities: simulating adversarial attacks against live defenses; testing and defending organizational assets at the same time; and sharing findings in real time across both functions. The two teams do not take turns &mdash; they operate together, with intelligence flowing continuously between them throughout the exercise.
+  </p>
+
+  <p>
+    Critically, the goal of a purple team exercise is not to "win." CrowdStrike is explicit on this point: the objective is to <strong>continuously harden overall security posture</strong>, not to demonstrate that the red team can break through or that the blue team can block everything. Both outcomes &mdash; a successful attack path and a successful detection &mdash; produce equally useful findings, because both feed back into improvements.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Purple teaming is defined by real-time, bidirectional information sharing between offensive and defensive practitioners. CrowdStrike describes it as providing "continuous feedback and knowledge sharing between a united offensive and defensive team" &mdash; a structural shift from the one-way handoff model of traditional red-then-blue engagements.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Red Alone vs. Blue Alone vs. Purple &mdash; A Direct Comparison</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Aspect</th>
+        <th>Red Team Alone</th>
+        <th>Blue Team Alone</th>
+        <th>Purple Team</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Primary focus</strong></td>
+        <td>Exploiting vulnerabilities and evading detection</td>
+        <td>Detecting, containing, and remediating threats</td>
+        <td>Both simultaneously, unified under one exercise</td>
+      </tr>
+      <tr>
+        <td><strong>Findings sharing</strong></td>
+        <td>Delivered at end of engagement in a report</td>
+        <td>Reactive &mdash; shared after an incident occurs</td>
+        <td>Shared continuously and in real time during the exercise</td>
+      </tr>
+      <tr>
+        <td><strong>Team interaction</strong></td>
+        <td>Operates separately from defenders</td>
+        <td>Operates separately from attackers</td>
+        <td>Offensive and defensive professionals work in unison</td>
+      </tr>
+      <tr>
+        <td><strong>Exercise goal</strong></td>
+        <td>Demonstrate what an attacker can achieve</td>
+        <td>Demonstrate detection and response capability</td>
+        <td>Harden security posture through collaborative iteration</td>
+      </tr>
+      <tr>
+        <td><strong>Gaps addressed</strong></td>
+        <td>Documented, but remediation is separate</td>
+        <td>Addressed reactively, after a breach or alert</td>
+        <td>Identified and addressed within the exercise cycle</td>
+      </tr>
+      <tr>
+        <td><strong>Cadence</strong></td>
+        <td>Episodic &mdash; defined engagement windows</td>
+        <td>Continuous operations, but not exercise-driven</td>
+        <td>Continuous &mdash; not a one-off assessment</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>Types of Purple Team Exercises</h2>
+
+  <p>
+    CrowdStrike identifies three categories of purple team exercises. They differ in structure and realism, but all share the defining property of unified red and blue participation.
+  </p>
+
+  <h3>Tabletop Simulations</h3>
+  <p>
+    A tabletop simulation is a structured discussion exercise. Red and blue team members walk through a defined attack scenario together &mdash; the red team describes what they would do at each phase, the blue team explains what they would detect and how they would respond. No live systems are attacked; the value comes from surfacing gaps in procedure, communication, and assumed coverage before a real exercise or incident exposes them. Tabletops are lower cost and lower risk than live exercises, making them a practical starting point for teams building their purple team capability.
+  </p>
+
+  <h3>Adversary Emulation</h3>
+  <p>
+    Adversary emulation takes a specific, documented threat actor &mdash; identified using intelligence about which adversaries are most likely to target the organization's sector &mdash; and reproduces that actor's known tactics, techniques, and procedures (TTPs) against the organization's live defenses. Rather than testing generic attack paths, the exercise asks: would we detect and stop <em>this specific threat actor</em> at each stage of the kill chain? The blue team responds in real time, and both teams share what they observe as the emulation unfolds. This produces tightly scoped, threat-relevant findings rather than general vulnerability inventories.
+  </p>
+
+  <h3>Combined Red/Blue Engagements</h3>
+  <p>
+    Combined engagements are full live exercises where the red team executes an attack campaign against real systems while the blue team defends simultaneously. Unlike a traditional red team engagement, findings are not held until the end: both teams communicate throughout, surfacing what the red team did and whether the blue team's controls fired as expected. This format produces the richest set of findings because it tests both the technical controls and the communication and coordination between offense and defense under realistic conditions.
+  </p>
+
+  <!-- ────────────────────────────────────────────── -->
+  <h2>The Continuous Feedback Loop</h2>
+
+  <p>
+    OffSec identifies after-action reviews as the point where the overlap between red and blue teams is most visible. In a traditional, siloed engagement, the after-action review is a post-mortem. In a purple team model, it is woven into the exercise itself: red team tactics expose gaps in defenses, while the blue team's quick detection highlights areas of strength &mdash; and both observations become inputs to the next iteration immediately.
+  </p>
+
+  <p>
+    OffSec describes the concrete outputs of this feedback loop. Findings from the exercise directly inform three blue team activities: <strong>tool tuning</strong> (adjusting existing security tools to catch what was missed), <strong>detection rule updates</strong> (writing or refining rules to surface the specific techniques observed), and <strong>hardening priorities</strong> (determining which configurations or controls to address first based on what the red team was actually able to exploit).
+  </p>
+
+  <p>
+    CrowdStrike enumerates the organizational benefits that follow from this structure. Purple teaming identifies misconfigurations and coverage gaps that siloed exercises miss. It strengthens network security and improves response times because defenders are calibrating against realistic adversarial pressure rather than theoretical scenarios. It builds security team skills in a low-risk environment because practitioners on both sides are learning from each other's knowledge base rather than only from their own. And it aligns both teams toward common goals &mdash; a shared interest in organizational resilience rather than winning their respective half of the exercise.
+  </p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    Purple teaming is explicitly designed to be continuous rather than a one-off assessment. Each exercise cycle produces findings that directly feed the next exercise &mdash; creating a compounding improvement loop rather than a series of disconnected snapshots. CrowdStrike describes this as the mechanism by which both teams align toward "continuously hardening overall security posture."
+  </div>
+
+  <div class="callout warning">
+    <strong>Watch Out</strong>
+    A purple team exercise that ends without documented after-action findings reverts to a siloed outcome. The communication structure during the exercise matters, but so does capturing what was learned in a form that both teams can act on. Without after-action documentation, the continuous feedback loop breaks down &mdash; even if the teams collaborated well during the exercise itself.
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-9">
+    <h3>Knowledge Check</h3>
+    <p>What is the defining characteristic of a purple team compared to a traditional siloed engagement?</p>
+    <div class="quiz-options">
+      <button>Red and blue teams compete independently to maximize their own scores</button>
+      <button>Both teams share findings and collaborate toward a common security goal</button>
+      <button>A neutral third party audits red and blue team performance quarterly</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Practice Exercise</h3>
+    <p>
+      Design a 30-minute purple team tabletop exercise for a fictional fintech company called "ClearPay" that processes payment card transactions. Write:
+    </p>
+    <ol>
+      <li>
+        <strong>The attacker's scenario</strong> &mdash; 2&ndash;3 sentences describing the simulated attack: what initial access vector, what the attacker wants to achieve, and which Kill Chain phases are in scope.
+      </li>
+      <li>
+        <strong>Three detection checkpoints</strong> &mdash; for each checkpoint, state what the blue team should detect, which system or tool they would use, and how they would confirm detection in real time.
+      </li>
+      <li>
+        <strong>One after-action finding</strong> &mdash; a gap that this exercise might realistically surface.
+      </li>
+    </ol>
+    <textarea placeholder="Write your tabletop exercise design here..."></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0008-elastic-siem.html">&larr; Previous: Elastic SIEM</a>
+    <a href="0010-attack-coverage-mapping.html" class="primary">Next: ATT&amp;CK Coverage Mapping &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-9',
+      1,
+      'Correct. Purple teaming means offensive and defensive professionals work in unison, sharing findings in real time and collaborating toward the common goal of hardening the organization\'s security posture &mdash; rather than competing or optimizing independently in silos.'
+    );
+  </script>
+
+</div>
+</body>
+</html>

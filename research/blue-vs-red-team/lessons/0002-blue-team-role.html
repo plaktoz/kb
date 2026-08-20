@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 — The Defender's Mandate</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      Blue vs Red Team &rsaquo; Module 1 &mdash; Foundations &rsaquo; Lesson 2 of 14
+    </div>
+    <h1>The Defender's Mandate &mdash; What Blue Teams Do and the 1-10-60 Rule</h1>
+    <div class="lesson-meta">
+      <span>Module 1 &mdash; Foundations</span>
+      <span>Lesson 2 of 14</span>
+      <span>~10 min</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Sources</div>
+    <p><strong>CrowdStrike</strong> &mdash; Red Team vs. Blue Team<br>
+    <a href="https://www.crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/" target="_blank" rel="noopener">crowdstrike.com/cybersecurity-101/red-team-vs-blue-team/</a></p>
+    <p style="margin-bottom:0"><strong>OffSec</strong> &mdash; Red Team vs. Blue Team in Cybersecurity<br>
+    <a href="https://www.offsec.com/blog/red-team-vs-blue-team/" target="_blank" rel="noopener">offsec.com/blog/red-team-vs-blue-team/</a></p>
+  </div>
+
+  <h2>Who Is the Blue Team?</h2>
+
+  <p>If the red team plays the attacker, the blue team plays the defender. But that framing can be misleading: blue teams are not simply waiting to react. They are an active, continuous security function responsible for making sure that attacks are detected, assessed, and contained before they cause lasting damage.</p>
+
+  <p>Blue team practitioners include SOC (Security Operations Center) analysts, incident responders, and cybersecurity evaluators. According to OffSec, a critical distinction separates the blue team from its red counterpart: blue teams operate <em>continuously</em>, not just during scheduled exercises. The red team conducts a defined engagement and produces a report. The blue team never stops.</p>
+
+  <p>This permanence shapes everything about how the blue team is structured and measured. Their job is not to conduct a one-time evaluation but to maintain visibility and respond faster than attackers can move through an environment.</p>
+
+  <h2>Core Activities: What Blue Teams Actually Do</h2>
+
+  <p>CrowdStrike identifies the blue team's primary mission as detection, response, and remediation. To fulfill that mission, blue teams carry out a well-defined set of activities day-to-day.</p>
+
+  <p>On the network side, this means continuous baseline monitoring to flag anomalies and DNS analysis and hardening. Unusual DNS traffic &mdash; such as queries to unfamiliar external domains, especially at off-hours &mdash; is a classic early indicator of compromise. Blue teams configure firewalls and antivirus systems, and they enforce least-privilege access to limit what an attacker can reach if they do get in.</p>
+
+  <p>A complementary control is network microsegmentation: dividing a network into isolated zones so that a breach in one segment cannot automatically spread to others. This is architectural defense, not just monitoring.</p>
+
+  <p>OffSec extends this picture. Blue team work also includes endpoint monitoring, threat hunting (proactively searching for hidden threats rather than waiting for alerts to fire), anomaly analysis, and incident containment once a threat is confirmed. These are not episodic tasks &mdash; they are the continuous, daily work of maintaining security posture.</p>
+
+  <div class="callout key">
+    <strong>Key Concept</strong>
+    The blue team's core activities span prevention (hardening, microsegmentation, least-privilege), visibility (network and endpoint monitoring, DNS analysis), and response (threat hunting, anomaly analysis, incident containment). All three are always running in parallel.
+  </div>
+
+  <h2>The 1-10-60 Rule</h2>
+
+  <p>CrowdStrike distills the defender's time challenge into a single, memorable benchmark: the <strong>1-10-60 rule</strong>. The rule defines three sequential time targets for any security incident:</p>
+
+  <ul>
+    <li><strong>Detect in under 1 minute.</strong> The moment a suspicious event occurs, a well-instrumented environment should surface an alert. If detection takes hours or days, the attacker has already had time to move.</li>
+    <li><strong>Assess in under 10 minutes.</strong> Once an alert fires, analysts must determine quickly whether it is a true positive, what affected systems are involved, and how severe the threat is. Extended triage windows give attackers room to escalate their access.</li>
+    <li><strong>Eject in under 60 minutes.</strong> Containment and remediation &mdash; isolating compromised endpoints, blocking malicious connections, revoking stolen credentials &mdash; must happen within an hour of detection. The 60-minute window is not generous; sophisticated adversaries can move from initial access to full domain compromise in under an hour.</li>
+  </ul>
+
+  <p>The 1-10-60 rule is not a compliance checkbox. It is a way of making the defender's urgency concrete. Every minute of delay is a minute the attacker uses to move laterally, escalate privileges, or exfiltrate data.</p>
+
+  <div class="callout warning">
+    <strong>Common Mistake</strong>
+    Teams often focus on detection tooling (the "1") while underinvesting in the people and playbooks needed for rapid assessment and ejection (the "10" and "60"). A fast alert that takes 4 hours to assess still leaves the attacker with a wide operational window.
+  </div>
+
+  <h2>Always-On: Blue Teams Never Stop</h2>
+
+  <p>One of the most important concepts OffSec emphasizes is that blue team operations are not project-based. A red team runs an engagement, writes a report, and concludes. A blue team runs continuously, around the clock, 365 days a year.</p>
+
+  <p>This means the blue team must maintain durable processes, not just skilled individuals. Playbooks, runbooks, and documented escalation paths ensure that the 3:00 AM analyst working alone can follow the same decision logic as the senior responder on day shift. The 1-10-60 rule only holds if the team can act at any hour, not just when experienced staff happen to be online.</p>
+
+  <p>The always-on nature of blue team work also means that visibility infrastructure &mdash; log aggregation, SIEM alerting, endpoint detection agents &mdash; must be permanently maintained. Gaps in coverage are gaps attackers will find and exploit. An attacker who compromises a workstation at 3:00 AM and exfiltrates data before the morning shift arrives has defeated the blue team even if the team would have caught them during business hours.</p>
+
+  <h2>The People: SOC Analysts and Incident Responders</h2>
+
+  <p>The human layer of the blue team is as important as the tooling. OffSec identifies three practitioner roles at the core of blue team operations:</p>
+
+  <ul>
+    <li><strong>SOC analysts</strong> are the first line of alert triage. They review incoming alerts, investigate anomalies, and escalate confirmed threats. Senior SOC analysts develop detection rules and tune alert thresholds to reduce false positives without creating blind spots.</li>
+    <li><strong>Incident responders</strong> take over when a threat is confirmed. Their job is to contain the compromise, collect forensic evidence, determine the attacker's method of entry, and oversee remediation so that the same vector cannot be used again.</li>
+    <li><strong>Cybersecurity evaluators</strong> assess the effectiveness of the blue team's defenses, often by reviewing how the team performed against red team findings or real incidents. Their role closes the loop between offense and defense.</li>
+  </ul>
+
+  <p>Together, these practitioners execute the continuous mission OffSec describes: maintaining visibility and responding faster than attackers can move. The 1-10-60 rule is meaningless without people capable of acting within those windows.</p>
+
+  <div class="quiz" id="quiz-2">
+    <h3>Knowledge Check</h3>
+    <p>Which of the following is a core ongoing responsibility of a blue team?</p>
+    <div class="quiz-options">
+      <button>Monitoring endpoints and networks for threats</button>
+      <button>Launching simulated attacks against your network</button>
+      <button>Developing offensive exploitation tools for testing</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Exercise</h3>
+    <p>You receive the following alert at 3:14 AM:</p>
+    <blockquote style="border-left:3px solid #c0cfe0; margin:0.75rem 0 1rem; padding:0.5rem 1rem; font-style:italic; color:#444;">
+      "Unusual outbound DNS queries to an unknown domain detected at 3:14am from workstation WS-042."
+    </blockquote>
+    <p>Using the 1-10-60 rule as your framework, write what you would do in each time window:</p>
+    <ul style="margin-bottom:1rem;">
+      <li><strong>Within 1 minute (detect/confirm):</strong> What do you do to confirm this is a real alert?</li>
+      <li><strong>Within 10 minutes (assess):</strong> What do you investigate to understand scope and severity?</li>
+      <li><strong>Within 60 minutes (eject/remediate):</strong> What containment and remediation actions do you take?</li>
+    </ul>
+    <textarea placeholder="Within 1 minute:&#10;&#10;Within 10 minutes:&#10;&#10;Within 60 minutes:"></textarea>
+  </div>
+
+  <div class="tutor-prompt">Questions about this lesson? Ask your tutor &mdash; copy any sentence you want to explore deeper.</div>
+
+  <nav class="lesson-nav">
+    <a href="0001-red-team-role.html">&larr; Prev: The Adversarial Mindset</a>
+    <a href="0003-cyber-kill-chain.html" class="primary">Next: The Cyber Kill Chain &rarr;</a>
+  </nav>
+
+  <script src="../assets/quiz.js"></script>
+  <script>initQuiz('quiz-2', 0, 'Correct. Blue teams perform continuous endpoint and network monitoring as a core daily responsibility. Launching simulated attacks is the red team\'s mandate, and developing offensive exploitation tools is not a core blue team function. Blue teams focus on detection, response, and remediation — not offense.');</script>
+
+</div>
+</body>
+</html>
