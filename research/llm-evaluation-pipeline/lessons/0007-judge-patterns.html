@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Judge Patterns — Direct, Pairwise, and Reference-Based | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      <a href="../index.html#module-3">Module 3 — LLM-as-a-Judge</a> ›
+      Lesson 7 of 12
+    </div>
+    <h1>Judge Patterns — Direct, Pairwise, and Reference-Based</h1>
+    <div class="lesson-meta">
+      <span>~14 min</span>
+      <span>Module 3</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://eugeneyan.com/writing/llm-evaluators/" target="_blank" rel="noopener">
+      "LLM Evaluators" by Eugene Yan
+    </a> — eugeneyan.com
+  </div>
+
+  <h2>Three Approaches to LLM-as-a-Judge</h2>
+  <p>When you ask an LLM to evaluate a generated output, you face an immediate structural choice: evaluate one response on its own, compare two responses head-to-head, or check a response against a known-good answer. Each approach has a distinct performance profile and is better suited to different task types. Understanding the tradeoffs prevents you from applying the wrong tool and misreading the resulting scores.</p>
+  <p>LLM-human agreement currently sits at roughly 0.3–0.6 correlation, still well below human-human agreement of 0.8–0.9. LLM judges also show high sensitivity for consistent content but low recall — only 30–60% — when detecting actual defects in outputs. Selecting the right structural approach is the first lever for narrowing that gap.</p>
+
+  <h2>Direct Scoring</h2>
+  <p>Direct scoring presents the judge with a single response and asks it to assign a numeric rating, usually on a defined scale. It is the simplest and fastest pattern — one prompt, one call, one score.</p>
+  <p>Direct scoring works best for <strong>objective tasks</strong> such as factuality checking and toxicity detection, where the criteria can be stated unambiguously and the judge does not need to weigh one answer against another to form a judgment. When aggregating results, use <strong>Cohen's kappa (κ)</strong> for binary or categorical outcomes and <strong>Spearman's ρ or Kendall's τ</strong> for ordinal or ranking data. Cohen's κ adjusts for chance agreement, making it more conservative than correlation-based metrics; Spearman's ρ and Kendall's τ are higher but carry no chance adjustment. For production use, Recall and Precision tend to be the most actionable metrics.</p>
+  <p>Chain-of-Thought (CoT) prompting improves direct scoring accuracy, especially for larger models, by forcing the judge to reason through criteria before committing to a score.</p>
+
+  <h2>Pairwise Comparison</h2>
+  <p>Pairwise comparison presents two candidate responses side by side and asks the judge to choose the better one — or declare a tie. Because the judge is anchored by a concrete alternative, it is more reliable for <strong>subjective qualities</strong> such as tone, helpfulness, and persuasiveness, where no single rubric captures the difference cleanly.</p>
+  <p>Research confirms that pairwise comparison generally outperforms direct scoring for subjective tasks. The preferred agreement metric is <strong>Cohen's κ</strong>, which accounts for the chance that the judge would pick a winner at random.</p>
+  <p>The main cost of pairwise comparison is volume: evaluating <em>n</em> responses requires O(<em>n</em>²) comparisons for a full tournament. In practice, you can reduce this with a round-robin bracket or by limiting comparisons to close pairs.</p>
+
+  <h2>Reference-Based Evaluation</h2>
+  <p>Reference-based evaluation compares a model output against a <strong>gold-standard answer</strong> using sophisticated fuzzy-matching rather than exact string comparison. Unlike BLEU or ROUGE, which count token overlaps, reference-based LLM evaluation can handle paraphrase, synonym substitution, and structural variation while still assessing fidelity to the ground truth.</p>
+  <p>This pattern requires a curated reference set — an upfront cost that pays dividends in objectivity. It is particularly useful for closed-book QA, summarization faithfulness, and code correctness where an authoritative answer exists. The tradeoff is that gold standards can go stale and may not cover the long tail of real queries.</p>
+  <p>A practical note: <strong>finetuned evaluators</strong> excel on in-domain tasks but suffer catastrophic performance drops when applied to different evaluation schemes. GPT-4 offers better generalizability across diverse evaluation types, making it preferable when you need a single evaluator to cover multiple rubrics.</p>
+
+  <h2>Bias Taxonomy</h2>
+  <p>All three patterns are vulnerable to systematic biases that inflate or deflate scores in predictable ways. Knowing the taxonomy lets you design prompts and pipelines that mitigate each bias before it contaminates your results.</p>
+  <ul>
+    <li><strong>Position bias</strong> — LLMs tend to favor responses placed in certain positions (often first or last) during pairwise comparison, regardless of actual quality. Mitigation: swap positions and average the two judgments.</li>
+    <li><strong>Verbosity bias</strong> — Models show a preference for longer responses regardless of quality. A longer but vague answer can outscore a shorter but precise one. Mitigation: instruct the judge to evaluate substance, not length.</li>
+    <li><strong>Self-enhancement bias</strong> — Models favor outputs generated by themselves, giving their own completions a 10–25% higher win rate on average. Mitigation: use a different model family as judge, or cross-evaluate with multiple judges.</li>
+  </ul>
+
+  <h2>Cost Optimization: PoLL</h2>
+  <p>GPT-4-class models are accurate LLM judges, but their cost makes large-scale evaluation prohibitive. The <strong>Panel of LLM Judges (PoLL)</strong> framework answers this directly: a panel of smaller models, aggregated by majority vote or averaging, can match GPT-4 judgment quality at <strong>roughly one-seventh the cost</strong>.</p>
+  <p>PoLL also has a side benefit for bias reduction. Because self-enhancement bias is model-specific, a multi-model panel partially cancels out individual model preferences. No single model dominates the final verdict.</p>
+  <p>The practical implication: reserve GPT-4 for calibration and edge cases, and run PoLL for high-volume production evaluation.</p>
+
+  <h2>Decision Framework</h2>
+  <p>The four-cell framework below maps task type and deployment phase to the recommended evaluator pattern and metric.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Scenario</th>
+        <th>Recommended Pattern</th>
+        <th>Recommended Metric</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Objective task (factuality, toxicity)</td>
+        <td>Direct scoring</td>
+        <td>Classification metrics (Precision, Recall, F1)</td>
+      </tr>
+      <tr>
+        <td>Subjective task (tone, persuasiveness)</td>
+        <td>Pairwise comparison</td>
+        <td>Cohen's κ</td>
+      </tr>
+      <tr>
+        <td>Development / offline eval</td>
+        <td>Prompt LLM API with CoT + n-shot</td>
+        <td>Spearman's ρ or Kendall's τ</td>
+      </tr>
+      <tr>
+        <td>Production guardrail (low latency)</td>
+        <td>Finetune a specialized classifier</td>
+        <td>Recall / Precision at threshold</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>One caveat: finetuned classifiers outperform general-purpose LLMs on the specific task they were trained for, but degrade sharply when the evaluation scheme changes. Build them last, once the rubric is stable.</p>
+
+  <div class="callout key">
+    Pairwise comparison is more reliable than direct scoring for subjective qualities, but the right structural choice depends entirely on whether your task is objective or subjective — applying direct scoring to tone evaluation or pairwise comparison to factuality checking will give you noisy, misleading results.
+  </div>
+
+  <div class="callout warning">
+    A higher LLM-human correlation score does not mean the evaluator is catching defects reliably. LLM judges show high sensitivity for consistent content but only 30–60% recall on actual defects. An evaluator can look well-calibrated on aggregate while missing the specific failure modes that matter most in production.
+  </div>
+
+  <div class="quiz" id="quiz-7">
+    <h3>When should you prefer pairwise comparison over direct scoring?</h3>
+    <div class="quiz-options">
+      <button>Use pairwise comparison for subjective tasks like tone or persuasiveness</button>
+      <button>Use pairwise comparison for objective tasks like factuality or toxicity</button>
+      <button>Use pairwise comparison for reference-based tasks with gold standard answers</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Write a direct-scoring judge prompt for tone evaluation</h3>
+    <p>Using the direct scoring pattern, write a judge prompt that evaluates the <strong>tone</strong> of a customer support reply. Your prompt must include: (1) a task description, (2) a placeholder for the response to evaluate, and (3) a 1–4 scale with a labeled anchor for each value.</p>
+    <textarea rows="20" placeholder="Write your judge prompt here...">You are evaluating the tone of a customer support reply.
+
+## Task Description
+A customer support agent has responded to a customer inquiry. Your job is to
+assess the tone of the response — how professional, empathetic, and helpful it
+sounds — regardless of whether the information provided is correct.
+
+## Response to Evaluate
+[PASTE CUSTOMER SUPPORT REPLY HERE]
+
+## Scoring Scale
+1 — Inappropriate: The response is hostile, dismissive, sarcastic, or
+    unprofessional in a way that would damage the customer relationship.
+2 — Neutral: The response is polite but cold, impersonal, or purely
+    transactional. It does not make the customer feel heard or helped.
+3 — Warm: The response is friendly and empathetic. The agent clearly tries
+    to help and acknowledges the customer's situation.
+4 — Excellent: The response is warm, reassuring, and personalised. It goes
+    above the minimum and makes the customer feel genuinely supported.
+
+## Instructions
+Return only: a score (1, 2, 3, or 4) followed by a single sentence explaining
+your reasoning. Do not add any other text.</textarea>
+  </div>
+
+  <div class="tutor-prompt">
+    <strong>Want to go deeper?</strong> Ask your tutor: "How does position bias interact with self-enhancement bias when the judge model is the same model that generated one of the two responses in a pairwise comparison?" or "Walk me through how to set up a PoLL pipeline with three smaller models."
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0006-semantic-metrics.html">← Lesson 6: Semantic Metrics</a>
+    <a href="0008-judge-biases.html" class="primary">Lesson 8: Judge Biases →</a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-7',
+    0,
+    'Correct. Pairwise comparison is specifically recommended for subjective qualities like tone and persuasiveness, where it generally outperforms direct scoring. Direct scoring is the right choice for objective tasks such as factuality and toxicity, and reference-based evaluation is a separate pattern for comparing against a gold standard — neither maps to pairwise comparison.'
+  );
+</script>
+</body>
+</html>

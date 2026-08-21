@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rubric Design — Scales, Anchors, and Chain-of-Thought Scoring | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ─── Header ─────────────────────────────────────────────────────── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      LLM Evaluation Pipeline &rsaquo; Module 3 &mdash; LLM-as-a-Judge &rsaquo; Lesson 9 of 12
+    </div>
+    <h1>Rubric Design &mdash; Scales, Anchors, and Chain-of-Thought Scoring</h1>
+    <div class="lesson-meta">
+      <span>&#10003; ~14 min</span>
+      <span>Module 3 &mdash; LLM-as-a-Judge</span>
+      <span>Lesson 9 of 12</span>
+    </div>
+  </header>
+
+  <!-- ─── Source card ─────────────────────────────────────────────────── -->
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://huggingface.co/learn/cookbook/en/llm_judge" target="_blank" rel="noopener">
+      Hugging Face Cookbook &mdash; LLM Judge
+    </a>
+    <p style="margin: 0.4rem 0 0 0; color: #444;">
+      Key result: targeted prompt improvements &mdash; integer scale, explicit anchors, chain-of-thought reasoning, reference answers, and few-shot examples &mdash; raised Pearson correlation with human judgment from <strong>0.57 to 0.84</strong>, a ~30% gain through prompt design alone.
+    </p>
+  </div>
+
+  <!-- ─── Section 1: Scale selection ─────────────────────────────────── -->
+  <h2>1. Choosing the Right Scale</h2>
+
+  <p>
+    The single highest-leverage decision in rubric design is the choice of scoring scale. LLMs perform poorly when asked to evaluate outputs across continuous or wide numerical ranges. A prompt that says &ldquo;rate this from 0 to 10&rdquo; forces the model to reason about dozens of gradient distinctions it cannot reliably make. The resulting scores are noisy, poorly calibrated, and hard to reproduce.
+  </p>
+
+  <p>
+    The remedy is simple: use a <strong>small integer scale</strong>, typically 1&ndash;4 or 1&ndash;5. Fewer options mean clearer decision boundaries. The model only has to distinguish &ldquo;bad&rdquo; from &ldquo;adequate&rdquo; from &ldquo;good&rdquo; from &ldquo;excellent&rdquo; &mdash; a task much closer to how human raters naturally categorize quality.
+  </p>
+
+  <h3>Anchor labels</h3>
+
+  <p>
+    Every integer in the scale must carry an explicit anchor label &mdash; a short phrase that defines exactly what that score means. Without anchors, two evaluations of the same response may land on different numbers for unrelated reasons. A well-specified 1&ndash;4 scale looks like this:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Score</th>
+        <th>Anchor label</th>
+        <th>What it means</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>Irrelevant / wrong</td>
+        <td>Response does not address the question or contains factual errors</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Partially relevant</td>
+        <td>Response touches on the topic but is incomplete or imprecise</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Mostly correct</td>
+        <td>Response is accurate and substantially complete, minor gaps</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>Excellent / complete</td>
+        <td>Response is accurate, thorough, and concise &mdash; nothing missing</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Additive scoring for decomposable criteria</h3>
+
+  <p>
+    When the quality of a response can be broken into independent atomic criteria, additive scoring is cleaner than a holistic integer. Award one point per criterion met:
+  </p>
+  <ul>
+    <li><strong>+1</strong> for factual accuracy</li>
+    <li><strong>+1</strong> for completeness</li>
+    <li><strong>+1</strong> for conciseness</li>
+  </ul>
+  <p>
+    This approach makes scores interpretable and keeps the model&rsquo;s task concrete: evaluate one criterion at a time rather than averaging across all of them simultaneously.
+  </p>
+
+  <div class="callout warning">
+    Using a 0&ndash;10 float range &mdash; or any wide continuous scale &mdash; is the most common rubric mistake. &ldquo;LLMs suck at evaluating outputs in continuous ranges.&rdquo; Even humans struggle to apply a 10-point scale consistently. Avoid this pattern entirely.
+  </div>
+
+  <!-- ─── Section 2: Prompt structure and deliberation ────────────────── -->
+  <h2>2. Prompt Structure and Chain-of-Thought Deliberation</h2>
+
+  <p>
+    A scoring number alone is not a rubric &mdash; it is an answer without reasoning. The prompt design must encourage the model to deliberate before it commits to a score. The key technique is requiring a <strong>reasoning field before the final score</strong>.
+  </p>
+
+  <h3>Reasoning before rating</h3>
+
+  <p>
+    By asking the model to write out its reasoning first, you force it to reflect on the evidence before anchoring to a number. In practice this means specifying a JSON output format where <code>"reasoning"</code> appears before <code>"score"</code>:
+  </p>
+
+<pre><code>Return your evaluation as JSON with exactly these fields:
+{
+  "reasoning": "Step-by-step analysis of the response quality",
+  "score": &lt;integer 1–4&gt;
+}</code></pre>
+
+  <p>
+    Do not allow the model to emit the score field first. The ordering matters: a number emitted first becomes the anchor around which the reasoning is rationalized rather than genuinely derived.
+  </p>
+
+  <h3>Providing a starter answer</h3>
+
+  <p>
+    Provide &ldquo;a beginning of an answer, to take the LLM by the hand as far as we can.&rdquo; This means pre-filling the opening of the reasoning field so the model continues rather than starting cold. A partial scaffold reduces variance in how the model frames its analysis.
+  </p>
+
+  <h3>Reference answers</h3>
+
+  <p>
+    Where you have a known-good answer, include it in the prompt. Reference answers give the judge a concrete target to compare against rather than forcing it to rely on implicit world knowledge. This significantly improves grounding, particularly for domain-specific content where the model may be uncertain.
+  </p>
+
+  <h3>Few-shot examples</h3>
+
+  <p>
+    Including one labeled example per score value in the prompt dramatically stabilizes output for smaller models. The benefit is dataset-dependent: for strong frontier models, few-shot examples are less necessary. For smaller models or unusual domains, one example per score value provides clear calibration anchors and reduces the variance between evaluation runs.
+  </p>
+
+  <h3>Structured generation</h3>
+
+  <p>
+    Requiring JSON output &mdash; enforced via structured generation where available &mdash; simplifies parsing and makes scores more reliable. A free-text response that includes a score buried in a paragraph is fragile; a JSON object with a dedicated <code>"score"</code> key is not. Always specify the exact output format in the rubric prompt.
+  </p>
+
+  <!-- ─── Implementation patterns table ───────────────────────────────── -->
+  <h2>3. Implementation Patterns and Their Impact</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>vs. Baseline</th>
+        <th>Primary benefit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Small integer scale (1&ndash;4) instead of float range</td>
+        <td>Large correlation gain</td>
+        <td>Clearer decision boundaries, reduced score noise</td>
+      </tr>
+      <tr>
+        <td>Explicit anchor label per value</td>
+        <td>Moderate gain</td>
+        <td>Consistent interpretation across evaluation runs</td>
+      </tr>
+      <tr>
+        <td>Reasoning field before rating (chain-of-thought)</td>
+        <td>Moderate gain</td>
+        <td>Forces reflection; prevents score-then-rationalize</td>
+      </tr>
+      <tr>
+        <td>Reference answers in prompt</td>
+        <td>Moderate gain</td>
+        <td>Improves grounding for domain-specific content</td>
+      </tr>
+      <tr>
+        <td>Few-shot examples (one per score value)</td>
+        <td>Dataset-dependent</td>
+        <td>Stabilizes smaller models; calibrates output distribution</td>
+      </tr>
+      <tr>
+        <td>Structured JSON output</td>
+        <td>Reliability gain</td>
+        <td>Easier parsing, more consistent score extraction</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Applied together, these improvements moved Pearson correlation from approximately 0.57 to 0.84 &mdash; a meaningful shift achieved through prompt engineering without changing the judge model at all.
+  </p>
+
+  <!-- ─── Section 3: Validation workflow ──────────────────────────────── -->
+  <h2>4. Validation Workflow</h2>
+
+  <p>
+    Building a rubric without measuring its agreement with human judgment is building blind. The standard validation workflow proceeds in four steps:
+  </p>
+
+  <ol>
+    <li>
+      <strong>Collect ~30 human-labeled examples.</strong> These should span the full range of your quality scale and cover representative failure modes from your system.
+    </li>
+    <li>
+      <strong>Filter to cases where raters agree.</strong> If two independent annotators disagree on a score, that example is ambiguous and should not be used to evaluate your judge. Retain only the high-agreement subset.
+    </li>
+    <li>
+      <strong>Measure judge-to-human Pearson correlation.</strong> Run your judge on the filtered examples and compute the Pearson correlation between judge scores and the human consensus scores. This is your headline metric.
+    </li>
+    <li>
+      <strong>Use human inter-rater correlation as your performance ceiling.</strong> If two human raters correlate at 0.85, your judge cannot meaningfully exceed that ceiling. Target parity with human agreement, not perfection.
+    </li>
+  </ol>
+
+  <p>
+    This workflow turns rubric iteration into a measurable feedback loop. Each prompt change can be scored against the same held-out human labels, making it straightforward to confirm whether a refinement actually improved alignment.
+  </p>
+
+  <!-- ─── Key insight callout ──────────────────────────────────────────── -->
+  <div class="callout key">
+    Prompt design alone &mdash; switching to a small integer scale, adding anchor labels, requiring chain-of-thought reasoning before the score, and including reference answers &mdash; raised Pearson correlation from 0.57 to 0.84. No model change required.
+  </div>
+
+  <!-- ─── Quiz ─────────────────────────────────────────────────────────── -->
+  <div class="quiz" id="quiz-9">
+    <h3>Why should you avoid float ranges like 0&ndash;10 in an LLM judge rubric?</h3>
+    <div class="quiz-options">
+      <button>LLMs struggle to evaluate outputs across wide continuous float ranges</button>
+      <button>Parsing float values requires custom code that breaks automated pipelines</button>
+      <button>Human raters prefer integer scales which reduces annotator disagreement significantly</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ─── Exercise ─────────────────────────────────────────────────────── -->
+  <div class="exercise">
+    <h3>Rewrite a weak rubric</h3>
+    <p>
+      The prompt below is a poorly designed rubric. Rewrite it in the textarea using a 1&ndash;4 integer scale with explicit anchor labels, a chain-of-thought <code>"reasoning"</code> field that appears before <code>"score"</code> in the JSON output, and one few-shot example that illustrates a score of 2 (partially relevant).
+    </p>
+    <p><strong>Weak rubric to improve:</strong></p>
+<pre><code>Rate the quality of this response on a scale from 0 to 10.
+Response: {response}
+Score:</code></pre>
+    <p><em>Your rewritten rubric:</em></p>
+    <textarea placeholder="You are an evaluator. Score the response below using the following scale:
+
+1 = Irrelevant or wrong — the response does not address the question or contains errors.
+2 = Partially relevant — the response touches the topic but is incomplete or imprecise.
+3 = Mostly correct — the response is accurate and substantially complete, with minor gaps.
+4 = Excellent and complete — accurate, thorough, and concise; nothing missing.
+
+## Few-shot example
+
+Question: What is the capital of France?
+Response: France is a country in Western Europe known for the Eiffel Tower.
+{
+  &quot;reasoning&quot;: &quot;The response mentions France but does not answer the question. The capital, Paris, is never named. This is partially on-topic but fundamentally incomplete.&quot;,
+  &quot;score&quot;: 2
+}
+
+## Evaluation
+
+Question: {question}
+Response: {response}
+
+Return your evaluation as JSON with exactly these fields in this order:
+{
+  &quot;reasoning&quot;: &quot;Step-by-step analysis of the response quality against the criteria above.&quot;,
+  &quot;score&quot;: &lt;integer 1–4&gt;
+}"></textarea>
+  </div>
+
+  <!-- ─── Tutor prompt ──────────────────────────────────────────────────── -->
+  <div class="tutor-prompt">
+    <strong>Continue learning:</strong> Ask your tutor &mdash; &ldquo;Why does putting the reasoning field before the score matter?&rdquo;, &ldquo;When should I use additive scoring versus a holistic integer scale?&rdquo;, or &ldquo;How many few-shot examples should I include for a GPT-4-class model?&rdquo;
+  </div>
+
+  <!-- ─── Navigation ────────────────────────────────────────────────────── -->
+  <nav class="lesson-nav">
+    <a href="0008-judge-biases.html">&larr; Previous: Judge Biases</a>
+    <a href="0010-deepeval-and-cost.html" class="primary">Next: DeepEval and Cost &rarr;</a>
+  </nav>
+
+</div>
+
+<!-- ─── Scripts ──────────────────────────────────────────────────────────── -->
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-9',
+    0,
+    'Correct. The source states directly that "LLMs suck at evaluating outputs in continuous ranges." Wide float scales produce noisy, inconsistent scores. Small integer scales (1–4 or 1–5) with labeled anchors give the model clear decision boundaries and produce far more reliable judgments.'
+  );
+</script>
+</body>
+</html>

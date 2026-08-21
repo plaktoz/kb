@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluating Summarization and RAG with RAGAS | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 4 — Use Cases &amp; Production ›
+      Lesson 11 of 12
+    </div>
+    <h1>Evaluating Summarization and RAG with RAGAS</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 4 — Use Cases &amp; Production</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <div class="source-label">Primary sources</div>
+    <a href="https://www.langchain.com/blog/evaluating-rag-pipelines-with-ragas-langsmith" target="_blank" rel="noopener">
+      Evaluating RAG Pipelines with RAGAS + LangSmith — LangChain Blog
+    </a>
+    <div style="margin-top:0.6rem;">
+      <a href="https://www.galileo.ai/blog/mastering-rag-how-to-architect-an-enterprise-rag-system" target="_blank" rel="noopener">
+        Mastering RAG: How to Architect an Enterprise RAG System — Galileo AI Blog
+      </a>
+    </div>
+    <div style="margin-top:0.4rem;color:#444;">
+      Together these sources cover the four RAGAS metrics, why classical metrics fail for RAG,
+      retrieval ranking measures, hallucination detection via log probabilities, and
+      LangSmith-based continuous evaluation.
+    </div>
+  </div>
+
+  <!-- ── Intro ── -->
+  <p>
+    Retrieval-augmented generation (RAG) systems combine a retriever and a generator, which
+    means evaluation must cover both components — not just the final text output. This lesson
+    introduces RAGAS, a framework purpose-built for that challenge. It explains why traditional
+    automatic metrics fall short, walks through RAGAS's four core metrics, and shows how they
+    combine into a single score. It then covers production-grade retrieval ranking measures and
+    the role of log probabilities in real-time hallucination detection.
+  </p>
+
+  <!-- ── Section 1: Why ROUGE/BLEU fail ── -->
+  <h2>Why ROUGE and BLEU Fall Short for RAG</h2>
+  <p>
+    ROUGE and BLEU measure n-gram overlap between a generated output and a reference string.
+    For machine translation and extractive summarization this was a reasonable proxy — the
+    reference text and the ideal output share many of the same tokens. RAG is different.
+    A faithful, relevant answer can paraphrase the source entirely, use different word order,
+    or synthesise across multiple retrieved chunks. None of those patterns produce high overlap
+    with a fixed reference string.
+  </p>
+  <p>
+    The result is that traditional metrics like ROUGE and BLEU show <strong>poor correlation
+    with human judgment</strong> for RAG tasks. At the same time, building large annotated test
+    datasets to replace them is expensive and slow. RAGAS was designed to solve both problems:
+    it aligns more closely with human judgment while requiring <strong>little annotated data</strong>,
+    making it faster and cheaper than conventional benchmarks to deploy in practice.
+  </p>
+
+  <!-- ── Section 2: The four RAGAS metrics ── -->
+  <h2>The Four RAGAS Metrics and the Harmonic Mean Score</h2>
+  <p>
+    RAGAS decomposes RAG quality into four orthogonal dimensions — two that evaluate the
+    generated answer and two that evaluate what the retriever returned. Each metric isolates
+    a specific failure mode so that a drop in the composite score can be traced to its root cause.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>What it measures</th>
+        <th>How it is computed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Faithfulness</strong></td>
+        <td>Factual accuracy of the answer relative to the retrieved context</td>
+        <td>Extract all statements from the generated answer → verify each statement against the retrieved context → score = supported statements ÷ total statements</td>
+      </tr>
+      <tr>
+        <td><strong>Answer Relevancy</strong></td>
+        <td>Whether the response actually addresses the original question</td>
+        <td>Generate a set of probable questions the answer would satisfy → measure cosine similarity between those generated questions and the original query</td>
+      </tr>
+      <tr>
+        <td><strong>Context Precision</strong></td>
+        <td>Signal-to-noise ratio in the retrieved chunks</td>
+        <td>Identify the sentences in the retrieved context that are <em>needed</em> to answer the question → score = needed sentences ÷ total retrieved sentences</td>
+      </tr>
+      <tr>
+        <td><strong>Context Recall</strong></td>
+        <td>Coverage of ground-truth information by the retriever</td>
+        <td>Take each statement in the ground-truth answer → verify it against the retrieved context → score = statements supported by context ÷ total ground-truth statements</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <strong>Faithfulness</strong> targets the generator: does the answer stay within the bounds
+    of what the context actually says? A low faithfulness score is the clearest signal of
+    hallucination. <strong>Answer Relevancy</strong> also targets the generator but from the
+    opposite angle: even a perfectly faithful answer fails if it does not address what the
+    user asked.
+  </p>
+  <p>
+    <strong>Context Precision</strong> targets the retriever's precision: a chunk full of
+    irrelevant sentences inflates context length and introduces noise that can mislead the
+    generator. <strong>Context Recall</strong> targets the retriever's recall: if the retriever
+    fails to surface information the question requires, the generator cannot produce a complete
+    answer no matter how capable it is.
+  </p>
+  <p>
+    The <strong>RAGAS Score</strong> combines all four metrics via the <strong>harmonic mean</strong>
+    into a single performance indicator. Using the harmonic mean rather than the arithmetic mean
+    ensures that a near-zero score on any one dimension cannot be hidden by high scores on the others.
+    A pipeline that retrieves irrelevant chunks but generates fluent text will still receive a
+    low RAGAS Score — exactly the behaviour a useful composite metric should exhibit.
+  </p>
+
+  <!-- ── Section 3: Production retrieval metrics and hallucination detection ── -->
+  <h2>Production Retrieval Metrics and Hallucination Detection</h2>
+  <p>
+    The four RAGAS metrics are well suited to offline evaluation on test sets, but a production
+    RAG system also requires online monitoring that operates at query time. Two retrieval ranking
+    metrics are standard for benchmarking document ordering quality:
+  </p>
+  <ul>
+    <li>
+      <strong>Mean Reciprocal Rank (MRR):</strong> averages the reciprocal of the rank at which
+      the first relevant document appears across a set of queries. A high MRR means the most
+      relevant chunk tends to appear near the top of the retrieved list.
+    </li>
+    <li>
+      <strong>Normalized Discounted Cumulative Gain (NDCG):</strong> rewards systems that place
+      more relevant documents higher in the ranked list, applying a logarithmic discount so that
+      a relevant result at rank 1 counts more than the same result at rank 5. NDCG is particularly
+      useful when multiple documents have graded relevance rather than a binary relevant/irrelevant label.
+    </li>
+  </ul>
+  <p>
+    For generation-side quality at runtime, <strong>log probabilities</strong> from the LLM are
+    highlighted as crucial for hallucination detection. When the model assigns low probability
+    to its own tokens while generating a factual claim, that low confidence is a real-time signal
+    that the claim may not be grounded in the retrieved context. Monitoring log-prob distributions
+    enables quality checks without waiting for downstream human feedback.
+  </p>
+  <p>
+    At the system level, production monitoring covers three layers. The
+    <strong>retrieval quality</strong> layer tracks behavioural signals such as click-through
+    rate and dwell time on retrieved documents. The <strong>generation quality</strong> layer
+    collects explicit user feedback and measures task completion rates. The
+    <strong>system performance</strong> layer monitors latency and cost per query.
+    Automated rollback can be configured to trigger when retrieval relevance scores fall below
+    a threshold or when error rates spike, allowing teams to revert to a prior retriever
+    configuration without manual intervention.
+  </p>
+
+  <!-- ── LangSmith integration ── -->
+  <h2>Continuous Evaluation with LangSmith</h2>
+  <p>
+    RAGAS pairs naturally with LangSmith, which handles the dataset management and results
+    visualisation layer. LangSmith stores and manages test datasets, visualises per-example
+    evaluation results with drill-down into individual metric scores, and enables
+    <strong>continuous evaluation</strong> by pulling production logs directly into test datasets.
+    This last capability closes the offline-to-online loop: real queries and their responses
+    become evaluation examples automatically, so the test suite grows in proportion to
+    production traffic rather than requiring manual curation at every release.
+  </p>
+
+  <!-- ── Key insight ── -->
+  <div class="callout key">
+    Faithfulness is the single most actionable RAGAS metric because it directly measures
+    hallucination: a generated statement not supported by the retrieved context is, by definition,
+    invented. Computing faithfulness requires no ground-truth labels — only the answer and the
+    context — which makes it cheap to run on every production query, not just on curated test sets.
+  </div>
+
+  <!-- ── Warning ── -->
+  <div class="callout warning">
+    A high RAGAS Score does not guarantee that a RAG system is production-ready. The harmonic
+    mean suppresses catastrophic individual failures, but only across the four metrics it
+    combines. It says nothing about latency, cost per query, safety, or whether the retriever
+    is returning documents from a freshly indexed corpus. RAGAS is an evaluation framework, not
+    a deployment checklist.
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-11">
+    <h3>Which RAGAS metric checks whether the retriever surfaced all ground-truth information?</h3>
+    <div class="quiz-options">
+      <button>Context Recall checks each ground-truth statement against the retrieved context.</button>
+      <button>Context Precision measures signal to noise in the retrieved chunks.</button>
+      <button>Answer Relevancy generates candidate questions to measure response topic alignment.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <h3>Manually compute a faithfulness score</h3>
+    <p>
+      A RAG system returns the following three-sentence response to the question
+      <em>"What is RAGAS and how does it compare to traditional evaluation metrics?"</em>
+    </p>
+    <blockquote style="border-left:3px solid #ddd;margin:0.75rem 0;padding:0.5rem 1rem;font-style:italic;color:#333;">
+      RAGAS evaluates RAG pipelines using four metrics: Faithfulness, Answer Relevancy,
+      Context Precision, and Context Recall. Unlike ROUGE and BLEU, RAGAS requires large manually
+      annotated datasets and is therefore more expensive to run than traditional benchmarks.
+      The harmonic mean of the four RAGAS metrics produces a single composite performance score.
+    </blockquote>
+    <p>The retrieved source context that was passed to the generator is:</p>
+    <blockquote style="border-left:3px solid #ddd;margin:0.75rem 0;padding:0.5rem 1rem;font-style:italic;color:#333;">
+      RAGAS provides four metrics for evaluating RAG pipelines: Faithfulness, Answer Relevancy,
+      Context Precision, and Context Recall. Traditional metrics like ROUGE and BLEU show poor
+      correlation with human judgment for RAG tasks. RAGAS requires little annotated data,
+      making it faster and cheaper than conventional benchmarks. The RAGAS Score combines all
+      four metrics via the harmonic mean into a single performance indicator.
+    </blockquote>
+    <p>
+      In the textarea below, complete the following steps:
+    </p>
+    <ol>
+      <li>List each sentence in the response as a separate statement.</li>
+      <li>For each statement, mark it <strong>supported</strong> or <strong>unsupported</strong> by the context, and briefly explain why.</li>
+      <li>Calculate the faithfulness score as: <code>supported statements ÷ total statements</code>.</li>
+    </ol>
+    <textarea placeholder="Step 1 — List statements:
+S1: RAGAS evaluates RAG pipelines using four metrics: ...
+S2: Unlike ROUGE and BLEU, RAGAS requires large manually annotated datasets ...
+S3: The harmonic mean of the four RAGAS metrics produces a single composite performance score.
+
+Step 2 — Verify each statement:
+S1: SUPPORTED — context explicitly lists the same four metrics.
+S2: UNSUPPORTED — context says RAGAS requires little annotated data, the opposite claim.
+S3: SUPPORTED — context states the RAGAS Score uses the harmonic mean.
+
+Step 3 — Compute score:
+Faithfulness = 2 supported ÷ 3 total = 0.67"></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    <strong>Ask the tutor:</strong> "If Faithfulness and Context Recall both drop at the same time, how do I tell whether the root cause is a retriever problem or a generator problem?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0010-deepeval-and-cost.html">&larr; Lesson 10: DeepEval and Cost</a>
+    <a href="0012-production-pipeline.html" class="primary">Lesson 12: Production Pipeline &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-11', 0, 'Correct. Context Recall verifies each ground-truth statement against the retrieved context and scores coverage as supported statements divided by total ground-truth statements. Context Precision targets the opposite concern — noise in retrieved chunks — while Answer Relevancy evaluates whether the generated response addresses the original question.');
+</script>
+</body>
+</html>

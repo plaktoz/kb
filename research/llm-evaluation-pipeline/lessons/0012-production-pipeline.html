@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Production Eval Pipeline — Tiers, Cadence, Routing, and Drift | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================ HEADER -->
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 4 — Use Cases &amp; Production ›
+      Lesson 12 of 12
+    </p>
+    <h1>Production Eval Pipeline — Tiers, Cadence, Routing, and Drift</h1>
+    <div class="lesson-meta">
+      <span>~16 min</span>
+      <span>Module 4 — Use Cases &amp; Production</span>
+    </div>
+  </header>
+
+  <!-- =========================================================== SOURCE -->
+  <div class="source-card">
+    <div class="source-label">Primary sources</div>
+    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.25rem;">
+      <li>
+        <a href="https://hamel.dev/blog/posts/evals/" target="_blank" rel="noopener">
+          Your AI Product Needs Evals — Hamel Husain
+        </a>
+      </li>
+      <li>
+        <a href="https://www.anyscale.com/blog/a-comprehensive-guide-for-building-rag-based-llm-applications-part-1" target="_blank" rel="noopener">
+          A Comprehensive Guide for Building RAG-Based LLM Applications — Anyscale
+        </a>
+      </li>
+      <li>
+        <a href="https://eugeneyan.com/writing/llm-evaluators/" target="_blank" rel="noopener">
+          LLM Evaluators: Patterns, Pitfalls, and Best Practices — Eugene Yan
+        </a>
+      </li>
+    </ul>
+    <p style="margin: 0.75rem 0 0 0; color: #444;">
+      Synthesizes three practitioner perspectives on running evals in production: a three-tier cadence framework, a reusable <code>run_experiment()</code> pipeline with synthetic dataset bootstrapping, and guidance on combining prompted and finetuned judges while monitoring evaluator drift over time.
+    </p>
+  </div>
+
+  <!-- ======================================================== SECTION 1 -->
+  <h2>Three-Tier Cadence Architecture</h2>
+
+  <p>
+    Running evals in production is not a single decision — it is a layered system of checks operating at different frequencies and costs. Hamel Husain describes three tiers that every mature LLM product should implement, each triggered at a different moment in the development lifecycle.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Method</th>
+        <th>Cadence</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1 — Unit tests</strong></td>
+        <td>Deterministic and fast scripted checks</td>
+        <td>Every CI commit</td>
+        <td>Cheapest — no model calls</td>
+      </tr>
+      <tr>
+        <td><strong>2 — Sampled trace eval</strong></td>
+        <td>Human review or LLM judge on sampled production traces</td>
+        <td>Daily or weekly</td>
+        <td>Medium — judge API or human hours</td>
+      </tr>
+      <tr>
+        <td><strong>3 — A/B testing</strong></td>
+        <td>Live traffic split between current and candidate model</td>
+        <td>On significant changes to mature products</td>
+        <td>Most expensive — real users, engineering overhead</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The progression from tier 1 to tier 3 mirrors increasing confidence requirements: a CI gate is cheap enough to run on every push, a human or model eval on sampled traces is reserved for regular quality monitoring, and a live A/B test is warranted only when you need real-world signal before committing to a major change.
+  </p>
+
+  <p>
+    Within tier 2, Husain advocates for binary good/bad labels over granular numeric scores. Granular scores sound more informative, but they introduce inter-rater disagreement and make it harder to set action thresholds. A binary pass/fail decision is faster to make, easier to calibrate across reviewers, and directly actionable. When datasets are imbalanced — far more good outputs than bad — track model-vs-human agreement using precision and recall rather than simple accuracy, which can be misleadingly high in lopsided distributions.
+  </p>
+
+  <p>
+    One principle cuts across all three tiers: never stop looking at data. Husain is explicit that sampling should continue over time rather than be treated as a one-time exercise. Even when no systemic failure is obvious, ongoing data review surfaces edge cases, distribution shifts, and emerging failure modes that would be invisible to automated metrics alone.
+  </p>
+
+  <!-- ======================================================== SECTION 2 -->
+  <h2>Dataset Bootstrapping and the run_experiment() Pattern</h2>
+
+  <p>
+    The Anyscale guide describes a repeatable structure for running LLM evaluations: a single <code>run_experiment()</code> function that sequences three stages every time an experiment is executed.
+  </p>
+
+  <ol>
+    <li><strong>Dataset creation</strong> — assemble manually labeled or synthetically generated question-answer pairs that represent your use case.</li>
+    <li><strong>Generate responses</strong> — run the current pipeline configuration over every item in the dataset and collect the outputs.</li>
+    <li><strong>Evaluate responses</strong> — score each output by calling <code>evaluate_responses()</code> with a trusted evaluator LLM.</li>
+  </ol>
+
+  <p>
+    Wrapping these three stages in a single function makes experiments reproducible, comparable, and easy to trigger from CI. The same function runs during development, on a scheduled cadence, and as a regression gate before any configuration change ships.
+  </p>
+
+  <h3>The cold start problem: synthetic Q&amp;A bootstrapping</h3>
+
+  <p>
+    New applications rarely have labeled evaluation data at launch. The practical solution is to prompt an LLM to generate question-answer pairs directly from your existing text chunks or documents. This synthetic dataset does not replace human-labeled gold data, but it provides an immediately useful starting point that can be progressively refined as real production traces accumulate.
+  </p>
+
+  <p>
+    A key constraint governs dataset portability: evaluation results cannot be transferred between use cases. A dataset built for a technical support bot is not a valid proxy for a legal document summarizer, even if both involve retrieval-augmented generation. Domain-specific datasets are essential — evaluation quality is bounded by the specificity and coverage of the underlying test cases.
+  </p>
+
+  <h3>Sequencing system parameter changes</h3>
+
+  <p>
+    When optimizing a RAG-based pipeline, the Anyscale guide recommends evaluating system parameters in a deliberate sequence rather than simultaneously. Each change should be isolated and measured before the next one is introduced: chunking strategy, then embedding model, then number of retrieved chunks, then LLM choice, then prompt engineering, then reranking. This ordering prevents conflating the effects of multiple simultaneous changes, which makes it impossible to attribute a score change to any single decision.
+  </p>
+
+  <h3>Routing strategy: match model cost to query difficulty</h3>
+
+  <p>
+    Not every query requires the most capable — and most expensive — model. Anyscale found that GPT-4 was the most reliable evaluator, while smaller open-source models exhibited a notable bias: they scored their own outputs generously. This asymmetry motivates a routing strategy: route hard queries to GPT-4 and simple queries to a cheaper model. In the Anyscale experiments, Mixtral-8x7B approached GPT-4 quality at approximately 25 times lower cost, making it a compelling option for the bulk of straightforward requests.
+  </p>
+
+  <!-- ======================================================== SECTION 3 -->
+  <h2>Evaluator Drift and Human Calibration</h2>
+
+  <p>
+    An evaluator — whether human or model-based — is itself a component that can degrade over time. Eugene Yan calls this evaluator drift: the gradual divergence between what your judge labels as good or bad and what your human standards team would label today. Drift can occur for several reasons: the judge's underlying model is updated, the distribution of production inputs shifts, labeling guidelines evolve, or new failure modes emerge that were not covered when the evaluator was originally calibrated.
+  </p>
+
+  <p>
+    The remedy is ongoing human calibration. Periodically re-sample a fresh set of examples from production, have humans label them, and compare those labels against what the current judge produces. If agreement drops below an acceptable threshold, the judge needs retraining, prompt revision, or replacement. This process is not a one-time setup — it is a recurring maintenance task woven into the production eval cadence.
+  </p>
+
+  <h3>Prompted judges vs. finetuned judges: a practical split</h3>
+
+  <p>
+    Yan draws a clear distinction between two judge architectures that serve different roles in a production system.
+  </p>
+
+  <p>
+    <strong>Prompted LLM judges</strong> (e.g., GPT-4 with a carefully engineered rubric) offer broad generalizability across evaluation types. They can be adapted to new evaluation criteria by changing the prompt without retraining, making them well-suited for development-time evaluation where requirements shift frequently.
+  </p>
+
+  <p>
+    <strong>Finetuned evaluators</strong> excel on in-domain tasks where they were trained. However, they function as task-specific classifiers: when applied to a different evaluation scheme — even a superficially similar one — they suffer catastrophic performance drops. Their strength is speed and cost efficiency, not flexibility.
+  </p>
+
+  <p>
+    The recommended split: use prompted LLM judges during development when evaluation criteria are still evolving; deploy finetuned classifiers in latency-sensitive production guardrails where inference speed and cost matter more than flexibility. Combining both gives you adaptability where you need it and efficiency where you cannot afford to wait.
+  </p>
+
+  <!-- =========================================================== CALLOUTS -->
+  <div class="callout key">
+    Eval infrastructure is not just a quality gate — it is simultaneously a data curation engine for fine-tuning and a debugging tool for understanding where your pipeline fails. Building it as a first-class system from the start means every future improvement is grounded in real, accumulated evidence rather than intuition.
+  </div>
+
+  <div class="callout warning">
+    A common mistake is to treat evaluator calibration as a one-time setup. Teams invest effort in aligning human and model labels at launch, then assume that alignment holds indefinitely. It does not. Model updates, shifting input distributions, and evolving quality standards all erode agreement silently — you will not notice until you re-measure. Schedule periodic re-calibration from the beginning; do not wait for a visible quality drop to prompt it.
+  </div>
+
+  <!-- ============================================================== QUIZ -->
+  <div class="quiz" id="quiz-12">
+    <h3>What does Eugene Yan recommend combining for a robust evaluation strategy?</h3>
+    <div class="quiz-options">
+      <button>Prompt-based LLM judges for development evals and finetuned classifiers for production guardrails</button>
+      <button>GPT-4 prompted judges for every evaluation stage and human review for production</button>
+      <button>Finetuned LLM judges for development evals and prompted classifiers for production guardrails</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- =========================================================== EXERCISE -->
+  <div class="exercise">
+    <h3>Sketch a production eval plan for a customer support bot</h3>
+    <p>
+      Design a three-tier evaluation plan for a customer support bot that routes incoming tickets, drafts replies, and escalates when needed. Address all four parts:
+    </p>
+    <ol>
+      <li><strong>Tier assignment</strong> — specify which eval method runs at each of the three tiers (unit tests, sampled trace eval, A/B testing) and what each one checks.</li>
+      <li><strong>Cadence</strong> — for each tier, state how frequently it runs and what event triggers it.</li>
+      <li><strong>Detecting evaluator drift</strong> — describe how you would monitor for drift in your LLM judge over time and what action you would take when drift is detected.</li>
+      <li><strong>Routing rule</strong> — identify one routing rule you would apply to cut judge costs without sacrificing coverage.</li>
+    </ol>
+    <textarea spellcheck="false" rows="16">## Customer Support Bot — Production Eval Plan
+
+### Tier 1 — Unit tests (every CI commit, free)
+Checks: routing label is one of {"billing", "technical", "escalate"};
+reply JSON parses and contains required fields; response under 400 chars.
+Trigger: automated on every git push to main.
+
+### Tier 2 — Sampled trace eval (daily, medium cost)
+Sample 50 production traces per day; score via GPT-4 judge on a
+binary good/bad rubric (accurate, on-brand, not hallucinated).
+Trigger: scheduled nightly job; also on any prompt change.
+
+### Tier 3 — A/B testing (on major changes, expensive)
+Split 10% of live traffic to candidate model; measure CSAT and
+escalation rate vs. control. Trigger: before shipping a new base
+model or a significant prompt redesign.
+
+### Evaluator drift detection
+Weekly: re-sample 30 traces, have a support team member label them,
+compare against judge labels. Alert if F1 drops below 0.85.
+Action: re-prompt judge with updated rubric; re-calibrate if needed.
+
+### Routing rule (cost reduction)
+Route tickets classified as "simple FAQ" (detected by a fast
+keyword classifier) to Mixtral-8x7B judge at ~25x lower cost;
+reserve GPT-4 judge for escalation and billing categories.
+</textarea>
+  </div>
+
+  <!-- ========================================================= TUTOR PROMPT -->
+  <p class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Share your eval plan above and ask — "What failure mode in the customer support context would this plan miss? How would you extend tier 2 to catch it?"
+  </p>
+
+  <!-- ============================================================== NAV -->
+  <nav class="lesson-nav">
+    <a href="0011-ragas-summarization-rag.html">&larr; Lesson 11: RAGAS, Summarization &amp; RAG Evals</a>
+    <a href="../lessons.md" class="primary">Back to Curriculum</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-12', 0, 'Correct. Eugene Yan recommends pairing prompt-based LLM judges (like GPT-4) for development-time evaluation — where generalizability and adaptability matter — with finetuned classifiers for latency-sensitive production guardrails, where speed and cost efficiency are the priority. Finetuned models excel in-domain but suffer catastrophic performance drops when the evaluation scheme changes, so they are not suited for the exploratory, frequently-changing evaluation work done during development.');
+</script>
+</body>
+</html>
