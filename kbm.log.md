@@ -1851,3 +1851,50 @@
 | 2026-08-20 | wiki/finance/ibm-together-ai-nvidia-cloud-deal.md | ingest |
 | 2026-08-20 | wiki/finance/sti-record-run-bank-concentration-risk.md | ingest |
 | 2026-08-20 | daily-update/2026-08/2026-08-20.md | newsletter |
+
+| 2026-08-21 | 2026-08-21-news-aggregation.md | news-fetch |
+
+| 2026-08-21 | 2026-08-20-california-ai-dominance-vc-bonanza.md | scrape |
+| 2026-08-21 | 2026-08-20-anything-ai-skydive-ai-employees.md | scrape |
+| 2026-08-21 | 2026-07-29-hbr-ai-agents-broaden-knowledge-work.md | scrape |
+| 2026-08-21 | 2026-08-20-cnbc-stock-market-treasury-yields-selloff.md | scrape |
+| 2026-08-21 | 2026-08-20-fed-minutes-us-debt-40-trillion.md | scrape |
+| 2026-08-21 | 2026-08-20-investopedia-markets-news-indexes-slide.md | scrape |
+| 2026-08-21 | 2026-08-21-medium-time-management-tips-businessmen.md | scrape |
+| 2026-08-21 | 2025-06-03-insidesalesexpert-time-management-work.md | scrape |
+| 2026-08-21 | 2025-01-27-nocommutejob-time-management-remote-work.md | scrape |
+| 2026-08-21 | 2026-08-21-medium-5-rules-learning-age-of-ai.md | scrape |
+| 2026-08-21 | 2026-08-06-scotthyoung-recent-reading.md | scrape |
+| 2026-08-21 | 2026-06-29-unesco-uil-literacy-educators-digital-skills.md | scrape |
+| 2026-08-21 | 2026-08-17-mqmentalhealth-exercise-stress-negative-thinking.md | scrape |
+| 2026-08-21 | 2026-08-11-mqmentalhealth-salsa-dancing-depression.md | scrape |
+| 2026-08-21 | 2026-08-19-ama-mosquito-bites.md | scrape |
+| 2026-08-21 | 2026-08-21-stratechery-agents-over-bubbles.md | scrape |
+| 2026-08-21 | 2026-08-14-cfainstitute-cognitive-delegation-ai.md | scrape |
+| 2026-08-21 | 2026-08-19-microsoft-china-moving-on-from-windows.md | scrape |
+| 2026-08-21 | 2026-08-20-ibm-getting-attention-revenue-guidance-cut.md | scrape |
+| 2026-08-21 | 2026-08-20-singapore-stocks-fall-sti-down.md | scrape |
+| 2026-08-21 | frontiersin.org exercise-multimodal-intervention-adolescent-depression (PDF too large to extract cleanly) | scrape-failed |
+| 2026-08-21 | 2026-08-21-news-aggregation.processed.md | archive |
+
+| 2026-08-21 | wiki/technology/california-ai-dominance-vc-funding-2026.md | ingest |
+| 2026-08-21 | wiki/technology/anything-ai-skydive-ai-employees.md | ingest |
+| 2026-08-21 | wiki/technology/ai-agents-broaden-scope-knowledge-work-hbr.md | ingest |
+| 2026-08-21 | wiki/finance/us-stock-selloff-treasury-yields-aug20-2026.md | ingest |
+| 2026-08-21 | wiki/finance/us-national-debt-40-trillion-fed-minutes.md | ingest |
+| 2026-08-21 | wiki/finance/markets-aug20-2026-walmart-bitcoin-oil-earnings.md | ingest |
+| 2026-08-21 | wiki/finance/microsoft-china-windows-phaseout.md | ingest |
+| 2026-08-21 | wiki/finance/ibm-ceo-krishna-ai-strategy-defense-q2-2026.md (merged new info) | ingest-dupe (same IBM Q2 2026 revenue-guidance-cut event as existing note; merged 30-day price recovery + fair-value narrative) |
+| 2026-08-21 | wiki/finance/singapore-stocks-fall-sti-down-aug20-2026.md | ingest |
+| 2026-08-21 | wiki/productivity/pareto-principle-delegation-businessmen-time-management.md | ingest |
+| 2026-08-21 | wiki/productivity/remote-work-time-management-frameworks.md | ingest |
+| 2026-08-21 | wiki/productivity/time-management-tips-productivity-efficiency.md (no new info) | ingest-dupe (identical source_url already ingested 2026-08-03; no new content to merge) |
+| 2026-08-21 | wiki/learning/five-rules-learning-age-of-ai-scott-young.md | ingest |
+| 2026-08-21 | wiki/learning/marginalism-recent-reading-scott-young.md | ingest |
+| 2026-08-21 | wiki/learning/unesco-digital-skills-literacy-educators.md | ingest |
+| 2026-08-21 | wiki/health/exercise-mental-health-stress-negative-thinking.md | ingest |
+| 2026-08-21 | wiki/health/salsa-dancing-depression-young-adults.md | ingest |
+| 2026-08-21 | wiki/health/mosquito-bites-immune-reaction-prevention.md | ingest |
+| 2026-08-21 | wiki/strategy/agents-over-bubbles-stratechery.md | ingest |
+| 2026-08-21 | wiki/strategy/cognitive-delegation-ai-investment-judgment.md | ingest |
+| 2026-08-21 | daily-update/2026-08/2026-08-21.md | newsletter |

@@ -33,3 +33,12 @@ After IBM's worst single-day stock decline ever (-25%), CEO Arvind Krishna defen
 
 - **[[Innovator's Dilemma]]**: IBM's infrastructure business -7% is the classic incumbent displacement signal — AI clients are building new infrastructure layers that bypass IBM's legacy hardware, not just delaying purchases.
 - **[[Timing vs Structure]]**: Kavanaugh distinguishes between a timing issue (deal delays due to hardware capex surge) and a structural one (IBM being irrelevant to AI). The distinction is critical: if timing, IBM recovers; if structural, the thesis is broken. See also [[ibm-q2-2026-earnings-ai-disruption-risk]].
+
+
+## Update (2026-08-20): Market reassessment one month out
+
+A month after the earnings shock, Simply Wall St notes IBM shares are up 11.34% over the trailing 30 days — even as the stock remains down 18.64% year-to-date — suggesting the market has partially reassessed the "penalty box" reaction. Over 5 years, IBM's total shareholder return stands at 114.96%.
+
+The most-followed community fair-value narrative puts IBM's fair value at $256.08 against a last close of $237.16 (about 7.4% undervalued), framing IBM as a defensive growth technology investment transitioning into a software- and AI-led enterprise platform company — moderate topline growth offset by improving software mix, strong margins, and durable cash flows. That narrative would be challenged if IBM stumbles on AI execution or if quantum investments weigh more heavily on earnings than expected.
+
+Source: [Why International Business Machines (IBM) Is Getting Attention Today](https://simplywall.st/stocks/us/software/nyse-ibm/international-business-machines/news/why-international-business-machines-ibm-is-getting-attention) (Simply Wall St, 2026-08-20)
