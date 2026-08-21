@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semantic Metrics — BERTScore, ROUGE/BLEU, and Their Limits | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── HEADER ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      LLM Evaluation Pipeline &rsaquo;
+      Module 2 &mdash; Deterministic &amp; Semantic Evals &rsaquo;
+      Lesson 6 of 12
+    </div>
+    <h1>Semantic Metrics &mdash; BERTScore, ROUGE/BLEU, and Their Limits</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~13 min</span>
+      <span>Module 2</span>
+      <span>Lesson 6 of 12</span>
+    </div>
+  </header>
+
+  <!-- ── SOURCE CARD ── -->
+  <div class="source-card">
+    <div class="source-label">Sources</div>
+    <ul style="margin:0;padding-left:1.25rem;">
+      <li>
+        <a href="https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation"
+           target="_blank" rel="noopener">
+          DeepEval: LLM Evaluation Metrics &mdash; Everything You Need
+        </a>
+        &mdash; Confident AI
+      </li>
+      <li>
+        <a href="https://www.evidentlyai.com/llm-guide/llm-evaluation"
+           target="_blank" rel="noopener">
+          LLM Evaluation Guide
+        </a>
+        &mdash; Evidently AI
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── INTRO ── -->
+  <p>
+    In the previous lesson we saw how execution-based evals let running code be the judge.
+    But most LLM outputs are not executable: summaries, replies, explanations.
+    How do you measure quality when there is no test suite to run and no single correct answer?
+  </p>
+  <p>
+    Semantic metrics occupy the middle tier of the evaluation stack. They sit above pure
+    string matching but below the cost and complexity of an LLM judge. Used well, they
+    give fast, reproducible signal without requiring a human reviewer for every output.
+    Used carelessly, they produce numbers that correlate poorly with what humans actually care about.
+  </p>
+
+  <!-- ── SECTION 1: EMBEDDING-BASED SCORERS ── -->
+  <h2>Embedding-Based Scorers: BERTScore and MoverScore</h2>
+
+  <p>
+    The core limitation of n-gram methods (covered below) is that they are purely lexical.
+    If the model writes &ldquo;decline&rdquo; where the reference says &ldquo;reject,&rdquo;
+    every unigram comparison penalizes the output even though the intent is identical.
+    Embedding-based scorers solve this by replacing character-level or word-level equality
+    with a <em>semantic similarity check</em> using vector representations.
+  </p>
+
+  <h3>BERTScore</h3>
+  <p>
+    BERTScore encodes both the candidate and reference texts using a BERT-like pretrained
+    language model, producing one contextual embedding per token. It then computes the
+    maximum cosine similarity between each token in the candidate and every token in the
+    reference, and aggregates those similarities into precision, recall, and F1 scores.
+  </p>
+  <p>
+    Because the embeddings are contextual &mdash; the vector for &ldquo;bank&rdquo; differs
+    depending on whether it appears next to &ldquo;river&rdquo; or &ldquo;money&rdquo; &mdash;
+    BERTScore captures whether two tokens carry equivalent intent even when the surface
+    forms differ. This makes it meaningfully better than ROUGE or BLEU at handling paraphrase.
+  </p>
+
+  <h3>Cosine Similarity and Embedding Similarity More Broadly</h3>
+  <p>
+    A simpler cousin of BERTScore is plain <strong>embedding similarity</strong>: encode
+    both texts as single dense vectors (via a sentence encoder) and compute the cosine
+    similarity between the two vectors. This is faster and easier to implement, but loses
+    the token-level alignment that gives BERTScore its advantage on longer texts.
+  </p>
+  <p>
+    <strong>MoverScore</strong> extends the idea further by using Earth Mover&rsquo;s
+    Distance across the full token embedding distributions, penalizing not just mismatch
+    but also the &ldquo;transport cost&rdquo; of moving probability mass between tokens.
+    In practice BERTScore and MoverScore are used interchangeably in most pipelines; the
+    choice depends on tooling and latency budget rather than a strong empirical difference.
+  </p>
+
+  <div class="callout warning">
+    Embedding-based methods inherit the biases of the pretrained model used to produce
+    their embeddings. If the underlying model encodes certain linguistic or cultural
+    patterns as semantically closer than they are in your domain, scores will be skewed.
+    This <strong>contextual bias</strong> is the primary vulnerability of all embedding-based scorers.
+  </div>
+
+  <!-- ── SECTION 2: N-GRAM METRICS ── -->
+  <h2>N-Gram Metrics: ROUGE and BLEU</h2>
+
+  <p>
+    Before contextual embeddings became cheap, the dominant evaluation approach was to
+    count how many n-grams in the candidate text also appear in the reference. ROUGE and
+    BLEU remain the most-cited metrics in NLP papers and are still appropriate for narrow,
+    well-defined tasks &mdash; but only those tasks.
+  </p>
+
+  <h3>ROUGE</h3>
+  <p>
+    <strong>ROUGE</strong> stands for Recall-Oriented Understudy for Gisting Evaluation.
+    It measures the <em>overlap</em> between generated and reference text, with recall
+    (how much of the reference is captured) as the primary lens. Three variants matter in practice:
+  </p>
+  <ul>
+    <li>
+      <strong>ROUGE-1</strong> &mdash; unigram overlap; fastest and most common; misses
+      phrase-level patterns.
+    </li>
+    <li>
+      <strong>ROUGE-2</strong> &mdash; bigram overlap; penalizes any change in adjacent
+      word order; more sensitive than ROUGE-1 but also more brittle.
+    </li>
+    <li>
+      <strong>ROUGE-L</strong> &mdash; longest common subsequence; does not require
+      consecutive matches, so it is more robust to word-order variation than ROUGE-2.
+    </li>
+  </ul>
+  <p>
+    All three variants favor <em>lexical overlap over semantic meaning</em>. A response
+    that paraphrases every sentence in the reference while conveying identical information
+    will score near zero. For RAG tasks in particular, ROUGE and BLEU show poor correlation
+    with human judgment.
+  </p>
+
+  <h3>BLEU</h3>
+  <p>
+    <strong>BLEU</strong> measures n-gram <em>precision</em>: out of all the n-grams
+    the model produced, how many also appear in the reference? It was originally designed
+    for machine translation, where a single sentence typically has only a handful of
+    acceptable wordings. In that narrow context &mdash; short outputs, tight reference sets,
+    mostly substitution-free language &mdash; BLEU is reasonable.
+  </p>
+  <p>
+    Applied to open-ended generation (summaries, explanations, chat replies), BLEU is a
+    poor fit. Its precision framing rewards brevity and safe lexical choices over genuine
+    quality, and it provides no mechanism for giving partial credit to semantically
+    equivalent expressions.
+  </p>
+
+  <h3>The Reference-Dependence Problem</h3>
+  <p>
+    Both BLEU and ROUGE are <strong>reference-dependent</strong>: the quality of the
+    metric is constrained by the quality of the reference texts. A weak or incomplete
+    reference will penalize a correct and fluent response. A reference with idiosyncratic
+    wording will reward responses that mimic that style over responses that communicate
+    more clearly. This means that investing in high-quality reference sets is just as
+    important as selecting the metric itself.
+  </p>
+
+  <!-- ── SECTION 3: NLI AND MIDDLE-TIER PATTERN ── -->
+  <h2>NLI Classifiers and the Middle-Tier Pattern</h2>
+
+  <h3>NLI-Based Classifiers</h3>
+  <p>
+    A third class of semantic evaluator treats the relationship between two texts as a
+    classification problem. <strong>Natural Language Inference (NLI) classifiers</strong>
+    are fine-tuned to label text pairs as <em>entailment</em>, <em>neutral</em>, or
+    <em>contradiction</em>. This makes them well-suited for one specific task: checking
+    whether a generated summary contradicts the document it was drawn from.
+  </p>
+  <p>
+    The main weakness is length. NLI models struggle with lengthy texts, both because
+    input window limits force chunking and because long-range logical consistency is
+    harder to classify. They work best on short, self-contained propositions.
+  </p>
+  <p>
+    In RAG pipelines, NLI classifiers (or the related concept of
+    <strong>context faithfulness</strong>) check whether the generated text derives
+    strictly from the retrieved chunks. A response that introduces facts not present in
+    the context will be flagged, even if those facts are factually correct.
+  </p>
+
+  <h3>The Middle-Tier Pattern</h3>
+  <p>
+    Semantic metrics are most useful when <em>exact match is too strict but an LLM judge
+    would be overkill</em>. A concrete example: you have a known-good answer for a
+    classification-style question and want to check whether the model&rsquo;s response
+    conveys the same meaning, allowing for minor wording variation. Running a full LLM
+    judge on thousands of such examples is expensive. Running ROUGE will penalize any
+    legitimate paraphrase. An embedding similarity check or BERTScore gives a fast,
+    cheap proxy that is good enough for this middle ground.
+  </p>
+  <p>
+    Use traditional n-gram metrics (BLEU, ROUGE) <strong>cautiously</strong> &mdash;
+    only for translation or summarization overlap tasks where lexical fidelity genuinely
+    matters. For everything else, prefer embedding-based similarity or move directly to
+    an LLM judge.
+  </p>
+
+  <!-- ── COMPARISON TABLE ── -->
+  <h2>Metric Comparison at a Glance</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Mechanism</th>
+        <th>Best Use Case</th>
+        <th>Key Limitation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>BLEU</strong></td>
+        <td>N-gram precision vs. reference</td>
+        <td>Machine translation with tight reference sets</td>
+        <td>Poor fit for open-ended generation; penalizes all paraphrase</td>
+      </tr>
+      <tr>
+        <td><strong>ROUGE-1/2</strong></td>
+        <td>Unigram / bigram overlap vs. reference</td>
+        <td>Extractive summarization overlap</td>
+        <td>Misses paraphrases; poor correlation with human judgment on RAG tasks</td>
+      </tr>
+      <tr>
+        <td><strong>ROUGE-L</strong></td>
+        <td>Longest common subsequence</td>
+        <td>Summarization with flexible word order</td>
+        <td>Still lexical; reference quality constrains score ceiling</td>
+      </tr>
+      <tr>
+        <td><strong>Embedding similarity</strong></td>
+        <td>Cosine similarity of sentence vectors</td>
+        <td>Quick semantic match check against a known-good answer</td>
+        <td>Single vector loses token-level nuance; inherits pretrained model bias</td>
+      </tr>
+      <tr>
+        <td><strong>BERTScore</strong></td>
+        <td>Token-level contextual embedding similarity (precision, recall, F1)</td>
+        <td>Semantic similarity where paraphrase is acceptable</td>
+        <td>Contextual bias from underlying model; slower than n-gram methods</td>
+      </tr>
+      <tr>
+        <td><strong>MoverScore</strong></td>
+        <td>Earth Mover&rsquo;s Distance over token embeddings</td>
+        <td>Same as BERTScore; alternative with transport-cost penalty</td>
+        <td>Same vulnerability to pretrained model bias</td>
+      </tr>
+      <tr>
+        <td><strong>NLI classifier</strong></td>
+        <td>Entailment / contradiction classification</td>
+        <td>Faithfulness check: does summary contradict its source?</td>
+        <td>Struggles with long texts; requires chunking for RAG</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── KEY CALLOUT ── -->
+  <div class="callout key">
+    Semantic metrics occupy the middle tier of the eval stack: faster and cheaper than
+    an LLM judge, more meaning-aware than string matching. The single most important
+    decision is recognizing which tier you actually need &mdash; reach for BERTScore or
+    embedding similarity when paraphrase matters, use ROUGE/BLEU only when strict lexical
+    fidelity is the actual goal, and escalate to an LLM judge when nuanced reasoning is
+    required.
+  </div>
+
+  <!-- ── WARNING CALLOUT ── -->
+  <div class="callout warning">
+    ROUGE is routinely applied to RAG answers, chatbot replies, and open-ended explanations
+    &mdash; tasks for which it was not designed and where it shows poor correlation with
+    human judgment. The metric was built for extractive summarization, where the expected
+    output is a subset of the source text. Outside that narrow window, a low ROUGE score
+    can mean the model paraphrased elegantly, not that it failed.
+  </div>
+
+  <!-- ── QUIZ ── -->
+  <div class="quiz" id="quiz-6">
+    <h3>
+      A generated summary paraphrases its source document using different words throughout,
+      but captures all key information accurately. Which metric is most likely to score this
+      output fairly?
+    </h3>
+    <div class="quiz-options">
+      <button>BLEU, which measures n-gram precision but was designed for translation and penalizes every paraphrase equally</button>
+      <button>BERTScore, which uses contextual embeddings so it catches synonyms and paraphrases that n-grams always miss</button>
+      <button>ROUGE-1, which counts unigram overlaps quickly but fails whenever words carry equivalent but different meaning</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── EXERCISE ── -->
+  <div class="exercise">
+    <h3>Metric Selection for Three Output Types</h3>
+    <p>
+      You are evaluating three different LLM outputs. For each one, choose the single
+      semantic metric that fits best, then write one or two sentences explaining why the
+      other candidates would be weaker choices.
+    </p>
+    <ol>
+      <li>
+        <strong>One-word classification</strong> &mdash; The model must output exactly
+        one label from a fixed set (e.g., &ldquo;positive&rdquo;, &ldquo;negative&rdquo;,
+        &ldquo;neutral&rdquo;). There are reference labels for every example.
+      </li>
+      <li>
+        <strong>Paragraph summary</strong> &mdash; The model produces a 3&ndash;5 sentence
+        summary of a news article. Reference summaries exist but were written by different
+        annotators and vary in phrasing.
+      </li>
+      <li>
+        <strong>Customer support reply</strong> &mdash; The model writes a free-form reply
+        to a customer complaint. No single reference answer exists; instead, you have a set
+        of known-good replies from senior agents.
+      </li>
+    </ol>
+    <p>
+      Consider: exact match, ROUGE-1, ROUGE-L, BLEU, embedding similarity, BERTScore, and
+      NLI classifier. You do not have to use every option.
+    </p>
+    <textarea placeholder="Output 1 (classification): Best metric — [your choice]&#10;Why others are weaker: ...&#10;&#10;Output 2 (paragraph summary): Best metric — [your choice]&#10;Why others are weaker: ...&#10;&#10;Output 3 (support reply): Best metric — [your choice]&#10;Why others are weaker: ..."></textarea>
+  </div>
+
+  <!-- ── TUTOR PROMPT ── -->
+  <div class="tutor-prompt">
+    <strong>Tutor prompt &mdash;</strong> Paste one of your exercise answers into Claude
+    and ask: <em>&ldquo;Does my reasoning correctly account for reference-dependence and
+    contextual bias? What edge case might change which metric is best?&rdquo;</em>
+  </div>
+
+  <!-- ── NAV ── -->
+  <nav class="lesson-nav">
+    <a href="0005-execution-based-eval.html">&larr; Lesson 5: Execution-Based Eval</a>
+    <a href="0007-judge-patterns.html" class="primary">Lesson 7: Judge Patterns &rarr;</a>
+  </nav>
+
+</div><!-- /.container -->
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-6',
+    1,
+    'Correct. BERTScore uses contextual embeddings to compute token-level similarity between candidate and reference, so it gives credit when synonyms or paraphrases convey the same meaning. BLEU and ROUGE-1 both rely on exact n-gram overlap and will penalize any surface-form variation, scoring a well-paraphrased summary as poorly as a bad one.'
+  );
+</script>
+</body>
+</html>

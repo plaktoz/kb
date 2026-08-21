@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frameworks and Cost — DeepEval, GEval, and Cheaper Judge Strategies | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================ HEADER -->
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 3 — LLM-as-a-Judge ›
+      Lesson 10 of 12
+    </p>
+    <h1>Frameworks and Cost — DeepEval, GEval, and Cheaper Judge Strategies</h1>
+    <div class="lesson-meta">
+      <span>~15 min</span>
+      <span>Module 3 — LLM-as-a-Judge</span>
+    </div>
+  </header>
+
+  <!-- =========================================================== SOURCE -->
+  <div class="source-card">
+    <div class="source-label">Primary sources</div>
+    <a href="https://deepeval.com/docs/getting-started" target="_blank" rel="noopener">
+      DeepEval — Getting Started
+    </a>
+    &nbsp;·&nbsp;
+    <a href="https://www.databricks.com/blog/LLM-auto-eval-best-practices-RAG" target="_blank" rel="noopener">
+      LLM Auto-Eval Best Practices for RAG — Databricks
+    </a>
+    <p style="margin: 0.5rem 0 0 0; color: #444;">
+      DeepEval is an open-source pytest-native framework whose primary metric, GEval, uses an LLM judge internally to score outputs against any custom criteria. Databricks found that GPT-3.5 with one graded example per score level achieves ranking accuracy comparable to GPT-4 at one-tenth the cost and three times the speed — but is completely unusable without a rubric and examples.
+    </p>
+  </div>
+
+  <!-- ======================================================== SECTION 1 -->
+  <h2>DeepEval: An Open-Source Pytest-Native Evaluation Framework</h2>
+
+  <p>
+    DeepEval is an open-source evaluation framework that plugs directly into pytest (Python) or Vitest (TypeScript), letting you write LLM test cases alongside your regular unit tests. Because evals live in the same repository and run in the same CI pipeline as the rest of your code, there is no separate evaluation harness to maintain or synchronize.
+  </p>
+
+  <p>
+    The core primitive is the <strong>LLMTestCase</strong>. Every test case requires two mandatory fields:
+  </p>
+
+  <ul>
+    <li><code>input</code> — the prompt or query sent to the LLM</li>
+    <li><code>actual_output</code> — the response your LLM produced</li>
+  </ul>
+
+  <p>
+    Two optional fields are used in most real evaluations:
+  </p>
+
+  <ul>
+    <li><code>expected_output</code> — a reference answer for correctness comparison</li>
+    <li><code>context</code> — retrieved passages or grounding documents, essential for RAG evaluation</li>
+  </ul>
+
+  <p>
+    For multi-turn conversations, DeepEval provides a <strong>ConversationalTestCase</strong> that captures the full dialogue as a list of <code>Turn</code> objects, each carrying a <code>role</code> and <code>content</code> field — the same shape as the messages array in the Chat Completions API.
+  </p>
+
+  <h3>GEval: Define Evaluation Logic in Plain English</h3>
+
+  <p>
+    The primary metric in DeepEval is <strong>GEval</strong>, described as "a research-backed metric" that evaluates outputs "on any custom metric with human-like accuracy" using an LLM judge internally. The key design decision is that you write the evaluation criteria in plain English rather than hand-coded comparison logic — GEval translates those criteria into judge prompts automatically.
+  </p>
+
+  <p>
+    Every metric score ranges from 0 to 1. You set a <code>threshold</code> value to define the pass/fail boundary. A correctness metric with a threshold of 0.5 passes any output scoring above the midpoint and fails anything below it. The judge model is fully swappable: DeepEval integrates with OpenAI, Anthropic, Gemini, Azure OpenAI, and Ollama.
+  </p>
+
+  <p>A minimal GEval correctness metric:</p>
+
+  <pre><code>from deepeval.metrics import GEval
+from deepeval.test_case import SingleTurnParams
+
+correctness_metric = GEval(
+    name="Correctness",
+    criteria="Determine if the 'actual output' is correct based on the 'expected output'.",
+    evaluation_params=[SingleTurnParams.ACTUAL_OUTPUT, SingleTurnParams.EXPECTED_OUTPUT],
+    threshold=0.5,
+    model="gpt-4o"
+)</code></pre>
+
+  <p>
+    To execute the test suite: <code>deepeval test run test_example.py</code>
+  </p>
+
+  <h3>Agents, Traces, and Online Monitoring</h3>
+
+  <p>
+    DeepEval handles agentic workloads beyond single-turn evaluation. For agent evaluation it captures execution traces and applies <strong>TaskCompletionMetric</strong> to the full trajectory — scoring whether the agent accomplished its goal, not just whether any single output looks good. At the component level, individual spans such as retrievers, tool calls, and sub-agents can each be scored separately within a trace. For production environments, attaching a <code>metric_collection</code> to traces enables continuous online monitoring without changing your test files.
+  </p>
+
+  <!-- ======================================================== SECTION 2 -->
+  <h2>Cutting Judge Costs: How Few-Shot Calibration Makes GPT-3.5 Viable</h2>
+
+  <p>
+    Running every evaluation through GPT-4 is accurate but expensive. Databricks investigated whether a cheaper model could serve as a reliable judge for RAG pipeline evaluation, and the results were striking: <strong>GPT-3.5 with few-shot examples achieves comparable ranking accuracy to GPT-4 at 10x lower cost and 3x faster speed</strong>.
+  </p>
+
+  <p>
+    The critical qualifier is <em>with</em> examples. GPT-3.5 without a grading rubric produces "very inconsistent results and is completely unusable." The capability gap between the two models is not the problem — calibration is.
+  </p>
+
+  <h3>The One-Example-Per-Score Rule</h3>
+
+  <p>
+    Providing one graded example per score level dramatically stabilizes GPT-3.5 output. If your rubric has four levels (0–3), you supply four annotated examples — one demonstrating each level. This anchors the model's interpretation of the scale and prevents it from drifting toward arbitrary intermediate values between runs.
+  </p>
+
+  <p>
+    Databricks also recommends using <strong>low-precision integer scales</strong> — specifically 0–3 or 1–5 — rather than 0–100 or 0–10 ranges. Fine-grained scales invite inconsistency: a judge cannot reliably distinguish a 67 from a 71. Small integer scales with one anchored example per level produce far more reproducible results.
+  </p>
+
+  <h3>Human Alignment Numbers</h3>
+
+  <p>
+    LLM judges calibrated this way match human graders on more than 80% of judgments and fall within a one-point margin on more than 95%. The outlier is <strong>Comprehensiveness</strong> — the least-aligned metric across the three standard RAG dimensions, because it is the most subjective. When a question has multiple valid levels of detail, humans and LLMs disagree more than on any other quality dimension.
+  </p>
+
+  <!-- ======================================================== SECTION 3 -->
+  <h2>Composite Scoring and Routing: Maximizing Quality Within Budget</h2>
+
+  <h3>Weighted Composite Scores for RAG</h3>
+
+  <p>
+    A single scalar score rarely reveals what is wrong with an output. Databricks recommends a three-metric composite for RAG evaluation, with weights that reflect what users actually care about:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Weight</th>
+        <th>What it measures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Correctness</strong></td>
+        <td>60%</td>
+        <td>Is the answer factually accurate relative to the retrieved context?</td>
+      </tr>
+      <tr>
+        <td><strong>Comprehensiveness</strong></td>
+        <td>20%</td>
+        <td>Does the answer address all relevant aspects of the question?</td>
+      </tr>
+      <tr>
+        <td><strong>Readability</strong></td>
+        <td>20%</td>
+        <td>Is the answer clearly written and easy to understand?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Correctness dominates at 60% because factual accuracy is the dimension that breaks user trust fastest when wrong. Comprehensiveness and readability each take 20%, acknowledging their importance to user experience without letting them override the accuracy signal. Comprehensiveness is also weighted conservatively because it has the lowest human-LLM alignment — the most subjective dimension warrants the least authority in an automated score.
+  </p>
+
+  <h3>Routing Strategy: Right Model for the Right Query</h3>
+
+  <p>
+    Not every query needs GPT-4. A practical routing strategy assigns judge models based on query difficulty:
+  </p>
+
+  <ul>
+    <li><strong>GPT-4 for hard or ambiguous queries</strong> — where the correct answer is genuinely uncertain, context is complex, or edge cases are likely to matter</li>
+    <li><strong>GPT-3.5 with few-shot examples for clear-cut queries</strong> — where the rubric applies straightforwardly and a calibrated cheaper model is sufficient</li>
+  </ul>
+
+  <p>
+    This routing approach captures most of GPT-4's judgment quality where it matters while redirecting the majority of routine evaluations to the far cheaper model. The cost reduction compounds quickly at scale: if 70% of queries are clear-cut, routing them to GPT-3.5 cuts the average cost per eval by roughly 7x.
+  </p>
+
+  <!-- =========================================================== CALLOUTS -->
+  <div class="callout key">
+    GPT-3.5 with one graded example per score level matches GPT-4 ranking accuracy at one-tenth the cost and three times the speed. Without a rubric and examples it is completely unusable. The difference is not the model — it is the scaffold. Calibration, not capability, is the variable that controls cheap judge quality.
+  </div>
+
+  <div class="callout warning">
+    A common misconception is that a finer-grained numeric scale produces more precise evaluations. The opposite is true. Scales from 0–100 or 0–10 invite arbitrary scores that judges cannot reproduce consistently across runs. Use low-precision integer scales (0–3 or 1–5) with one annotated example per level. More granularity without calibration is noise, not signal.
+  </div>
+
+  <!-- ============================================================== QUIZ -->
+  <div class="quiz" id="quiz-10">
+    <h3>What does Databricks recommend to make GPT-3.5 reliable as an LLM judge?</h3>
+    <div class="quiz-options">
+      <button>Supply one graded example for each possible score on the rubric</button>
+      <button>Use a finer hundred-point scale to capture nuanced output quality differences</button>
+      <button>Ask it to grade with no examples and a free-form rubric</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- =========================================================== EXERCISE -->
+  <div class="exercise">
+    <h3>Write a DeepEval test case with a GEval correctness metric</h3>
+    <p>
+      Complete the exercise below. Your solution should:
+    </p>
+    <ol>
+      <li>Define an <code>LLMTestCase</code> with <code>input</code>, <code>actual_output</code>, and <code>expected_output</code></li>
+      <li>Create a <code>GEval</code> metric named "Correctness" with <code>criteria</code>, <code>evaluation_params</code>, and a <code>threshold</code></li>
+      <li>Call <code>assert_test</code> to run the metric against the test case</li>
+      <li>Include a <code>conftest.py</code> snippet that wires it to CI via <code>deepeval test run</code></li>
+    </ol>
+    <textarea spellcheck="false"># test_correctness.py
+
+import deepeval
+from deepeval import assert_test
+from deepeval.metrics import GEval
+from deepeval.test_case import LLMTestCase, SingleTurnParams
+
+def test_answer_correctness():
+    # 1. Define the test case
+    test_case = LLMTestCase(
+        input="What is the boiling point of water at sea level?",
+        actual_output="Water boils at 100 degrees Celsius at sea level.",
+        expected_output="100 degrees Celsius (212 degrees Fahrenheit)"
+    )
+
+    # 2. Create the GEval correctness metric
+    correctness_metric = GEval(
+        name="Correctness",
+        criteria="Determine if the 'actual output' is correct based on the 'expected output'.",
+        evaluation_params=[SingleTurnParams.ACTUAL_OUTPUT, SingleTurnParams.EXPECTED_OUTPUT],
+        threshold=0.5,
+        model="gpt-4o"
+    )
+
+    # 3. Assert — raises AssertionError if score < threshold
+    assert_test(test_case, [correctness_metric])
+
+
+# conftest.py (place at project root alongside test files)
+# ---------------------------------------------------------
+# import deepeval
+#
+# @deepeval.on_test_run_end
+# def after_test_run():
+#     print("DeepEval run complete.")
+#
+# Add to your CI pipeline (e.g., .github/workflows/evals.yml):
+#   - run: deepeval test run test_correctness.py
+</textarea>
+  </div>
+
+  <!-- ========================================================= TUTOR PROMPT -->
+  <p class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Paste your test case above and ask — "If I wanted to route this eval to GPT-3.5 with few-shot examples for cheaper CI runs, how would I change the GEval configuration, and what example outputs should I annotate for each score level?"
+  </p>
+
+  <!-- ============================================================== NAV -->
+  <nav class="lesson-nav">
+    <a href="0009-rubric-design.html">&larr; Lesson 9: Rubric Design</a>
+    <a href="0011-ragas-summarization-rag.html" class="primary">Lesson 11: RAGAS, Summarization &amp; RAG &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-10', 0, 'Correct. Databricks found that providing one graded example per score level dramatically stabilizes GPT-3.5 output and makes it match GPT-4 ranking accuracy at one-tenth the cost and three times the speed. A finer 0-100 scale is explicitly counterproductive — it invites inconsistency. Running with no examples or rubric produces results described as "completely unusable."');
+</script>
+</body>
+</html>

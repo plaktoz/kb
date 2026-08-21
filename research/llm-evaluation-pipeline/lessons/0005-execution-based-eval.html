@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Execution-Based Eval — pass@k and the Limits of Text Matching | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================ HEADER -->
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 2 — Deterministic &amp; Semantic ›
+      Lesson 5 of 12
+    </p>
+    <h1>Execution-Based Eval — pass@k and the Limits of Text Matching</h1>
+    <div class="lesson-meta">
+      <span>~13 min</span>
+      <span>Module 2 — Deterministic &amp; Semantic Evals</span>
+    </div>
+  </header>
+
+  <!-- =========================================================== SOURCE -->
+  <div class="source-card">
+    <div class="source-label">Primary sources</div>
+    <p style="margin: 0 0 0.4rem 0;">
+      <a href="https://arxiv.org/abs/2107.03374" target="_blank" rel="noopener">
+        Evaluating Large Language Models Trained on Code — Chen et al. (HumanEval, arXiv 2107.03374)
+      </a><br>
+      <span style="color: #444;">
+        Key result: Codex achieved 28.8% pass@1 but 70.2% pass@100 on HumanEval, demonstrating that repeated sampling is a highly effective strategy. BLEU scores showed no correlation with actual code correctness.
+      </span>
+    </p>
+    <p style="margin: 0.6rem 0 0 0;">
+      <a href="https://huggingface.co/blog/open-llm-leaderboard-drop" target="_blank" rel="noopener">
+        What's Going On With the Open LLM Leaderboard's DROP Score? — Hugging Face
+      </a><br>
+      <span style="color: #444;">
+        Key result: Small technical choices — stop token selection and numeric normalization bugs — caused better-performing models to score <em>lower</em> than weaker ones. Over 50% of examples required re-running after evaluation errors were identified.
+      </span>
+    </p>
+  </div>
+
+  <!-- ======================================================== SECTION 1 -->
+  <h2>What Is pass@k and Why Does It Matter?</h2>
+
+  <p>
+    Text-matching metrics like BLEU were originally designed for machine translation, where a reference human translation provides a surface to compare against. Applied to code generation, the same logic seems appealing: generate a solution, compare it word-for-word to a reference implementation, assign a score. Fast, cheap, reproducible.
+  </p>
+
+  <p>
+    The problem is that code is not text. Two functions can look completely different — different variable names, different loop structure, different algorithmic approach — and still produce identical outputs for every possible input. Conversely, two functions can share most of their tokens and diverge catastrophically on a single edge case. Lexical similarity tells you almost nothing about whether the code <em>works</em>.
+  </p>
+
+  <p>
+    The HumanEval benchmark was built to address this gap. Instead of asking "does the output look like a reference solution?", it asks "does the output <em>pass the tests</em>?" Each problem in HumanEval presents a docstring describing a function to implement. The model generates a function body. Correctness is determined by executing a suite of unit tests against the generated function — not by comparing tokens.
+  </p>
+
+  <p>
+    The metric that makes this tractable at scale is <strong>pass@k</strong>. Rather than generating a single solution and hoping it is correct, you generate <em>k</em> candidate solutions for each problem and count the problem as solved if <em>at least one</em> of those candidates passes all unit tests. This shifts evaluation from a single-shot question ("did the model get it right?") to a coverage question ("can the model get it right within k attempts?").
+  </p>
+
+  <p>
+    Formally: generate <em>k</em> samples per problem; a problem is solved if any sample passes all unit tests; pass@k is the fraction of problems solved under this rule.
+  </p>
+
+  <!-- ======================================================== SECTION 2 -->
+  <h2>HumanEval Results: What Repeated Sampling Reveals</h2>
+
+  <p>
+    The HumanEval paper evaluated Codex — an early code-generation model — and the results illustrate both the power of pass@k and the failure modes that lexical metrics would never catch.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Codex score</th>
+        <th>What it measures</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>pass@1</strong></td>
+        <td>28.8%</td>
+        <td>Probability that a single generated solution passes all tests</td>
+      </tr>
+      <tr>
+        <td><strong>pass@100</strong></td>
+        <td>70.2%</td>
+        <td>Probability that at least one of 100 solutions passes all tests</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The gap between 28.8% and 70.2% is the headline finding. <strong>Repeated sampling is a highly effective strategy for code generation.</strong> The model can produce a correct solution for most problems — it just does not always produce one on the first try. For applications where you can afford to run several candidates through tests and select the passing one, this is a substantial capability multiplier.
+  </p>
+
+  <p>
+    The paper also documented specific failure modes that no lexical metric would catch:
+  </p>
+
+  <ul>
+    <li><strong>Long chains of operations in docstrings</strong> — when a function specification requires composing several steps, models struggled to maintain correctness across the full chain. A BLEU comparison against a reference would give partial credit for getting some steps right; unit tests give no credit unless every step is correct.</li>
+    <li><strong>Binding operations to variables</strong> — models sometimes performed the correct computation but assigned the result to the wrong variable, or forgot to return it. The output text looked plausible; execution revealed the error.</li>
+  </ul>
+
+  <p>
+    These failure modes are invisible to surface-level metrics. The model produced code that resembles correct code. Only running the tests surfaces the bug. This is why the paper concluded that functional correctness via test execution is far more reliable than BLEU for code evaluation — and that BLEU showed no meaningful correlation with actual code correctness.
+  </p>
+
+  <!-- ======================================================== SECTION 3 -->
+  <h2>Benchmark Validity Pitfalls: The DROP Investigation</h2>
+
+  <p>
+    Building a reliable evaluation pipeline requires more than choosing the right metric. Every stage of the pipeline — tokenization, normalization, stop condition, scoring logic — can introduce bugs that corrupt results. The investigation into the DROP benchmark score on the Open LLM Leaderboard is a case study in how subtle implementation errors compound into misleading rankings.
+  </p>
+
+  <p>
+    DROP is a reading-comprehension benchmark that requires discrete reasoning over passages, often involving numeric answers. The Hugging Face investigation found that <strong>small technical choices could catastrophically skew results</strong>:
+  </p>
+
+  <ul>
+    <li><strong>Stop token choice (<code>.</code> vs. <code>\n</code>):</strong> Different stop conditions changed how much of a model's response was captured before scoring began. A model that generated a well-formatted multi-line answer could have that answer truncated or padded differently depending on which stop token the evaluation harness used.</li>
+    <li><strong>Numeric normalization bugs:</strong> Better models that followed prompt formatting guidelines more closely generated longer, more fully explained responses. These longer responses bypassed the normalization logic in the scoring code — which was written with shorter responses in mind — causing better models to score <em>lower</em> than weaker models.</li>
+  </ul>
+
+  <p>
+    The effect was not marginal. Over 50% of examples had to be re-run after the evaluation errors were identified. The cost of replication — in compute time and engineering attention — was substantial. And in the intervening period, published leaderboard rankings had inverted the true ordering of model quality for this benchmark.
+  </p>
+
+  <h3>What to scrutinize in every evaluation pipeline</h3>
+
+  <p>
+    The DROP case generalizes. Every pipeline stage is a potential source of silent corruption:
+  </p>
+
+  <ul>
+    <li><strong>Tokenization:</strong> How are prompts and responses tokenized? Does the model see the same format it was evaluated on?</li>
+    <li><strong>Normalization:</strong> How are answers cleaned before comparison? Numeric normalization, case folding, whitespace stripping — each rule can create unexpected interactions with model outputs.</li>
+    <li><strong>Stop conditions:</strong> Does the evaluation harness stop generation at the right point? Over- or under-truncation affects what gets scored.</li>
+    <li><strong>Scoring logic:</strong> Is the comparison function symmetric? Does it handle edge cases (empty strings, unicode, very long outputs) without silent failures?</li>
+  </ul>
+
+  <p>
+    The investigation also identified a practical early-warning technique: <strong>correlation checks</strong>. By plotting benchmark scores against an independent proxy measure — a simpler metric you trust, or human ratings on a sample — you can detect when the pipeline is producing results that diverge from ground truth before those results become published rankings.
+  </p>
+
+  <p>
+    Community-wide transparency proved essential to catching the DROP errors. When enough practitioners compared notes, the anomaly (better models scoring lower) became undeniable. Evaluation is not a solved problem you set up once; it requires ongoing scrutiny and openness about implementation details.
+  </p>
+
+  <!-- =========================================================== CALLOUTS -->
+  <div class="callout key">
+    For code generation, the only reliable ground truth is execution. pass@k operationalizes this: generate k candidates, run the tests, count problems where at least one candidate passes. Codex's jump from 28.8% pass@1 to 70.2% pass@100 shows both the value of the metric and the leverage available from repeated sampling.
+  </div>
+
+  <div class="callout warning">
+    BLEU is sometimes applied to code generation because it is fast to compute and requires no test infrastructure. This is a mistake. BLEU measures token overlap against a reference solution — but there is rarely a single correct implementation, and two syntactically similar functions can diverge completely on edge cases. The HumanEval paper found that BLEU showed no correlation with actual code correctness. A high BLEU score is neither necessary nor sufficient for a function to pass its tests.
+  </div>
+
+  <!-- ============================================================== QUIZ -->
+  <div class="quiz" id="quiz-5">
+    <h3>Why does the HumanEval paper recommend pass@k over BLEU for code evaluation?</h3>
+    <div class="quiz-options">
+      <button>BLEU measures word overlap but cannot detect functional code correctness</button>
+      <button>BLEU requires reference code that developers struggle to write well</button>
+      <button>BLEU was designed for translation and lacks any code awareness</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- =========================================================== EXERCISE -->
+  <div class="exercise">
+    <h3>Write unit tests for a pass@k evaluation of Fibonacci</h3>
+    <p>
+      You are building a pass@k evaluation for the prompt: <em>"Write a function that finds the Nth Fibonacci number."</em> Write three unit tests that would form the basis of this evaluation — one covering the happy path, one covering an edge case, and one covering a boundary condition. Each test should be a plain assertion that would pass if the function is correct and fail if it is not.
+    </p>
+    <ul>
+      <li><strong>Happy path:</strong> a typical input with a known-correct output</li>
+      <li><strong>Edge case:</strong> an input at or near zero where the sequence definition matters (e.g., fib(0) or fib(1))</li>
+      <li><strong>Boundary condition:</strong> a case that stresses the implementation — a large index, negative input handling, or type behavior</li>
+    </ul>
+    <textarea spellcheck="false"># Assume the candidate function is available as: fib(n)
+
+# 1. Happy path — typical mid-sequence value
+assert fib(7) == 13, "fib(7) should return 13"
+
+# 2. Edge case — sequence base cases at the boundary of definition
+assert fib(0) == 0, "fib(0) should return 0"
+assert fib(1) == 1, "fib(1) should return 1"
+
+# 3. Boundary condition — large index to catch off-by-one errors and recursion depth limits
+assert fib(10) == 55, "fib(10) should return 55"
+</textarea>
+  </div>
+
+  <!-- ========================================================= TUTOR PROMPT -->
+  <p class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Paste your three unit tests above and ask — "Do these tests form a valid pass@k evaluation? What failure modes would they miss, and how would you add a test to catch one of them?"
+  </p>
+
+  <!-- ============================================================== NAV -->
+  <nav class="lesson-nav">
+    <a href="0004-deterministic-evals.html">&larr; Lesson 4: Deterministic Checks</a>
+    <a href="0006-semantic-metrics.html" class="primary">Lesson 6: Semantic Metrics &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-5', 0, 'Correct. The HumanEval paper found that BLEU showed no correlation with actual code correctness — two functions can have very different token sequences and be functionally identical, or share most tokens and diverge on a single edge case. Only executing the code against unit tests reveals functional correctness. Options B and C describe plausible concerns but are not the finding from HumanEval.');
+</script>
+</body>
+</html>

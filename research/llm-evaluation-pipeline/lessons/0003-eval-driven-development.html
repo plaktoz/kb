@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eval-Driven Development — Task-Specific Over Generic | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      <a href="../index.html#module-1">Module 1 — Foundations</a> ›
+      Lesson 3 of 12
+    </div>
+    <h1>Eval-Driven Development — Task-Specific Over Generic</h1>
+    <div class="lesson-meta">
+      <span>~11 min</span>
+      <span>Module 1 — Foundations</span>
+    </div>
+  </header>
+
+  <!-- SOURCE CARD -->
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://eugeneyan.com/writing/llm-patterns/" target="_blank" rel="noopener">
+      "Patterns for Building LLM-based Systems &amp; Products" — Eugene Yan
+    </a>
+    <p style="margin: 0.5rem 0 0 0; color: #444;">
+      Key finding: GPT-4 used as a judge achieves a Spearman correlation of ~0.514 with human judgments —
+      but standard benchmarks often fail to predict real-world quality at all.
+      Task-specific eval sets are the single biggest differentiator between teams that ship
+      high-quality AI and those that don't.
+    </p>
+  </div>
+
+  <!-- SECTION 1: WHY BENCHMARKS FALL SHORT -->
+  <h2>Why Standard Benchmarks Fall Short</h2>
+
+  <p>
+    Practitioners often reach for established benchmarks — MMLU for knowledge breadth, BLEU or ROUGE
+    for text generation quality — because they are convenient and widely cited. But Eugene Yan's
+    analysis of the literature reveals three systemic problems that make these benchmarks unreliable
+    proxies for real-world performance.
+  </p>
+
+  <p>
+    <strong>Poor correlation with human judgment.</strong> A model that scores well on MMLU or ROUGE
+    may produce outputs that users find unhelpful, stilted, or simply wrong for the actual task at hand.
+    The gap between benchmark rank and user satisfaction is wide enough that optimizing for the
+    benchmark can actively mislead product decisions.
+  </p>
+
+  <p>
+    <strong>Sensitivity to implementation details.</strong> Small differences in prompt formatting,
+    tokenization choices, or decoding parameters can swing scores significantly — making it hard to
+    compare results across teams or reproduce published numbers. What looks like a model capability
+    difference may just be a setup difference.
+  </p>
+
+  <p>
+    <strong>Reproducibility failures.</strong> Multiple independent studies have failed to reproduce
+    benchmark results from published papers. When the measurement instrument itself is unreliable,
+    the engineering and research decisions built on top of it inherit that unreliability.
+  </p>
+
+  <!-- SECTION 2: EVAL-DRIVEN DEVELOPMENT -->
+  <h2>Eval-Driven Development: TDD for LLMs</h2>
+
+  <p>
+    The response to benchmark fragility is a shift in methodology. Eval-driven development asks
+    practitioners to build <em>task-specific</em> eval sets tailored to their actual use case —
+    the same discipline that test-driven development brought to software engineering, applied to
+    LLM workflows.
+  </p>
+
+  <p>
+    The logic is direct: if you are building a customer-support bot that must extract order numbers
+    and suggest refund policies, your eval set should contain exactly those kinds of inputs and
+    expected outputs — not abstract reading comprehension questions. A curated set of even 50–200
+    hand-authored test cases, drawn from real or representative examples, will tell you far more
+    about production quality than any generic leaderboard position.
+  </p>
+
+  <p>
+    This approach also creates a feedback loop that compounds over time. Each failure mode you
+    discover in production becomes a new test case. The eval set grows more predictive as the
+    product matures, rather than becoming stale like a frozen benchmark.
+  </p>
+
+  <p>
+    Beyond formal test suites, Yan notes that human "vibe checks" — practitioners watching model
+    outputs evolve during training — often surface problems that formal metrics miss entirely.
+    Quantitative evals and qualitative inspection are complements, not substitutes.
+  </p>
+
+  <!-- SECTION 3: FOUR GUARDRAIL LAYERS -->
+  <h2>The Four Guardrail Layers</h2>
+
+  <p>
+    Once you have a task-specific eval set, you need a layered strategy for enforcing quality.
+    Yan describes four distinct guardrail layers, each operating at a different point in the
+    pipeline and catching different classes of failure.
+  </p>
+
+  <h3>Layer 1 — Structural</h3>
+  <p>
+    Structural guardrails directly enforce output format by operating at the token level.
+    Techniques include token injection, constrained decoding, and grammar-based sampling that
+    prevents the model from generating tokens that would violate the required structure.
+    If you need valid JSON, this layer guarantees you get valid JSON — before any downstream
+    parsing even runs.
+  </p>
+
+  <h3>Layer 2 — Syntactic</h3>
+  <p>
+    Syntactic guardrails validate the content of structured fields after generation. This layer
+    checks that categorical choices fall within an allowed set, that numeric values lie within
+    expected ranges, that SQL queries conform to a known schema, and that generated code is
+    actually executable. These checks are deterministic: either the output satisfies the constraint
+    or it does not.
+  </p>
+
+  <h3>Layer 3 — Content Safety</h3>
+  <p>
+    Content safety guardrails screen the model's output for harmful, offensive, or policy-violating
+    content. Because the boundary between acceptable and unacceptable language is nuanced and
+    context-dependent, this layer typically combines classifiers (fast, cheap, rule-like) with
+    LLM-based evaluators (slower but capable of subtle ethical judgment). Deterministic heuristics
+    alone are insufficient here — Yan notes that "heuristics and conventional ML techniques fall
+    short" for subtle ethical judgments.
+  </p>
+
+  <h3>Layer 4 — Input Guardrails</h3>
+  <p>
+    Input guardrails act before the model even sees the user's request. They block adversarial
+    prompts (jailbreak attempts, prompt-injection payloads) and filter out inputs that are
+    inappropriate for the application — irrelevant off-topic queries, personally identifiable
+    information that should not be processed, or content that falls outside the product's scope.
+    Catching problems at the input stage is cheaper and faster than catching them after generation.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>What it checks</th>
+        <th>Enforcement style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Structural</td>
+        <td>Output format (JSON, schema shape)</td>
+        <td>Token injection, constrained decoding</td>
+      </tr>
+      <tr>
+        <td>Syntactic</td>
+        <td>Field values, ranges, SQL schema, code execution</td>
+        <td>Deterministic rule checks</td>
+      </tr>
+      <tr>
+        <td>Content safety</td>
+        <td>Harmful or policy-violating output</td>
+        <td>Classifiers + LLM evaluators</td>
+      </tr>
+      <tr>
+        <td>Input guardrails</td>
+        <td>Adversarial or inappropriate inputs</td>
+        <td>Pre-model filtering</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 4: LLM JUDGES AND THEIR BIASES -->
+  <h2>Using LLM Judges — and Their Known Biases</h2>
+
+  <p>
+    For the content safety and semantic quality layers, LLM-based evaluation has become a
+    practical option. GPT-4 used as a judge achieves a Spearman correlation of approximately
+    0.514 with human judgments when evaluating other models' outputs — a meaningful signal.
+    This makes LLM judges useful for scale: they can review hundreds of outputs per hour at
+    a cost far below human annotation.
+  </p>
+
+  <p>
+    However, LLM judges carry known, documented biases that practitioners must account for:
+  </p>
+  <ul>
+    <li>
+      <strong>Position bias</strong> — the judge assigns higher scores to responses that
+      appear in certain positions (e.g., first in a comparison), independent of actual quality.
+    </li>
+    <li>
+      <strong>Verbosity bias</strong> — longer, more elaborate responses receive higher ratings
+      even when the added content does not improve correctness or usefulness.
+    </li>
+    <li>
+      <strong>Self-enhancement bias</strong> — a model used as a judge tends to rate its own
+      outputs higher than outputs from other models.
+    </li>
+  </ul>
+
+  <p>
+    Mitigating these biases requires deliberate experimental design: randomizing presentation
+    order, calibrating judge behavior against held-out human ratings, and using multiple
+    independent judges where feasible.
+  </p>
+
+  <!-- KEY INSIGHT -->
+  <div class="callout key">
+    Combining deterministic checks for syntax and structure with LLM-based evaluation for
+    nuanced semantic and safety concerns is not optional — it is necessary. Deterministic rules
+    miss ethical subtlety; LLM judges miss format violations. A mature eval pipeline uses both,
+    at the right layer.
+  </div>
+
+  <!-- WARNING / MISCONCEPTION -->
+  <div class="callout warning">
+    Scoring well on MMLU, BLEU, or ROUGE does not mean your model will perform well on your
+    specific task. These benchmarks measure general capabilities under controlled conditions that
+    rarely match production inputs. Treating a high benchmark score as evidence of production
+    readiness is one of the most common — and costly — mistakes in applied LLM work.
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz" id="quiz-3">
+    <h3>Which guardrail layer handles SQL schema conformance and code executability checks?</h3>
+    <div class="quiz-options">
+      <button>The syntactic layer, which validates structured outputs and formats</button>
+      <button>The structural layer, which enforces output format via decoding</button>
+      <button>The content safety layer, which screens for harmful content</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- EXERCISE -->
+  <div class="exercise">
+    <h3>Design a minimal eval set for a real or hypothetical LLM application</h3>
+    <p>
+      Pick one application (e.g., a customer-support bot, a code review assistant, a recipe
+      generator). Then:
+    </p>
+    <ol>
+      <li>Define the task in one sentence.</li>
+      <li>Write 3 test cases — each with an input and an expected output (or expected quality criteria).</li>
+      <li>For each test case, identify which guardrail layer the check belongs to
+          (structural, syntactic, content safety, or input).</li>
+    </ol>
+    <textarea placeholder="Application: ...&#10;&#10;Test case 1&#10;  Input: ...&#10;  Expected output: ...&#10;  Guardrail layer: ...&#10;&#10;Test case 2&#10;  Input: ...&#10;  Expected output: ...&#10;  Guardrail layer: ...&#10;&#10;Test case 3&#10;  Input: ...&#10;  Expected output: ...&#10;  Guardrail layer: ..."></textarea>
+  </div>
+
+  <!-- TUTOR PROMPT -->
+  <div class="tutor-prompt">
+    Want to go deeper? Ask Claude: <em>"Walk me through how I would catch a verbosity bias in my
+    LLM judge, and what experimental design would help me measure it."</em>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="lesson-nav">
+    <a href="0002-eval-landscape.html">&#8592; Previous: The Eval Landscape</a>
+    <a href="0004-deterministic-evals.html" class="primary">Next: Deterministic Evals &#8594;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-3', 0, 'Correct. The syntactic layer validates categorical choices, numeric ranges, SQL schema conformance, and code executability — all deterministic rule-based checks on field content. The structural layer works earlier, enforcing output format via token injection or constrained decoding. Content safety screens for harmful material using classifiers and LLM evaluators.');
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deterministic Checks — When Exact Rules Are Enough | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ============================================================ HEADER -->
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 2 — Deterministic &amp; Semantic ›
+      Lesson 4 of 12
+    </p>
+    <h1>Deterministic Checks — When Exact Rules Are Enough</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 2 — Deterministic &amp; Semantic Evals</span>
+    </div>
+  </header>
+
+  <!-- =========================================================== SOURCE -->
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation" target="_blank" rel="noopener">
+      LLM Evaluation Metrics: Everything You Need for LLM Evaluation — Confident AI
+    </a>
+    <p style="margin: 0.5rem 0 0 0; color: #444;">
+      Key result: deterministic and statistical scorers (BLEU, ROUGE, METEOR, Levenshtein) are fast and reproducible but "hardly take any semantics into account," making them insufficient for open-ended LLM outputs. They work best as cheap first-pass filters before costlier semantic checks.
+    </p>
+  </div>
+
+  <!-- ======================================================== SECTION 1 -->
+  <h2>The Deterministic Mindset: Right vs. Wrong, Not Good vs. Bad</h2>
+
+  <p>
+    Deterministic checks answer a binary question: does the output satisfy a concrete rule? There is no scoring curve, no judgment call, and no probabilistic threshold. Either the JSON parses, the label matches, or the response is under the character limit — or it does not, does not, and is not.
+  </p>
+
+  <p>
+    This is powerful precisely because of its simplicity. A deterministic check runs in microseconds, never disagrees with itself across two identical inputs, and requires no model API call. For outputs that have a clear correct structure — a classification label, a SQL statement, a tool call payload — these checks are the most reliable signal available.
+  </p>
+
+  <p>
+    The tradeoff is hard boundaries: statistical scorers such as BLEU, ROUGE, METEOR, and Levenshtein distance "hardly take any semantics into account." Ask BLEU whether <em>"The cat sat on a mat"</em> and <em>"The feline rested on a rug"</em> convey the same idea and it returns a near-zero overlap score — even though a human reader would call them equivalent. Deterministic methods measure form, not meaning.
+  </p>
+
+  <!-- ======================================================== SECTION 2 -->
+  <h2>A Taxonomy of Common Deterministic Check Types</h2>
+
+  <p>
+    Most deterministic checks fall into a handful of recurring categories. Each maps to a specific type of structural constraint your LLM output might need to satisfy.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Check type</th>
+        <th>What it verifies</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Exact string match</strong></td>
+        <td>Output equals a known-good value character for character</td>
+        <td>Classification label is exactly <code>"positive"</code> or <code>"negative"</code></td>
+      </tr>
+      <tr>
+        <td><strong>Regex pattern match</strong></td>
+        <td>Output conforms to a structural pattern</td>
+        <td>Phone number matches <code>\d{3}-\d{3}-\d{4}</code></td>
+      </tr>
+      <tr>
+        <td><strong>JSON / XML schema parse</strong></td>
+        <td>Output is valid, parseable, and structurally correct</td>
+        <td><code>json.loads(output)</code> succeeds; required keys present; types match</td>
+      </tr>
+      <tr>
+        <td><strong>Substring presence</strong></td>
+        <td>A required keyword or phrase appears in the output</td>
+        <td>Response includes the customer's name or order ID</td>
+      </tr>
+      <tr>
+        <td><strong>Forbidden word detection</strong></td>
+        <td>A prohibited term or phrase does not appear</td>
+        <td>Support reply does not contain a competitor's brand name</td>
+      </tr>
+      <tr>
+        <td><strong>Word count</strong></td>
+        <td>Output meets a minimum or maximum word count</td>
+        <td>Summary is between 50 and 150 words</td>
+      </tr>
+      <tr>
+        <td><strong>Character count</strong></td>
+        <td>Output fits within a character limit</td>
+        <td>Tweet draft is at most 280 characters</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Schema validation deserves special attention: use a regex or a proper parser (e.g., <code>json.loads</code>, an XML DOM parser, a SQL linter) to confirm that the output is structurally well-formed. Regex alone is fragile for deeply nested structures — use it for simple patterns and a real parser for everything else.
+  </p>
+
+  <!-- ======================================================== SECTION 3 -->
+  <h2>Where Deterministic Checks Fall Short</h2>
+
+  <p>
+    Knowing when <em>not</em> to reach for a deterministic check is as important as knowing when to use one. These checks are structurally blind to meaning — they cannot tell whether a response is factually accurate, whether a summary faithfully represents its source, or whether a reply matches the requested tone.
+  </p>
+
+  <p>Deterministic checks are <strong>insufficient</strong> for:</p>
+
+  <ul>
+    <li><strong>Open-ended text generation</strong> — there is no single correct answer to compare against</li>
+    <li><strong>Tone and style assessment</strong> — "formal" vs. "casual" is a semantic judgment, not a pattern</li>
+    <li><strong>Factual accuracy of free-form text</strong> — a hallucinated fact may be syntactically indistinguishable from a true one</li>
+    <li><strong>Paraphrase detection</strong> — two responses can convey identical meaning with zero word overlap</li>
+  </ul>
+
+  <p>
+    The classic illustration: BLEU and ROUGE are n-gram overlap metrics. They will score <em>"The cat sat on a mat"</em> and <em>"The feline rested on a rug"</em> as very different outputs even though any human reader would judge them equivalent. When meaning matters, you need semantic metrics or an LLM judge — not a character counter.
+  </p>
+
+  <!-- ======================================================== SECTION 4 -->
+  <h2>The Layering Strategy: Deterministic Checks as Fast First-Pass Filters</h2>
+
+  <p>
+    The standard production pattern is to run deterministic checks <em>before</em> any expensive semantic metrics or LLM-as-judge calls. If a response fails a JSON parse check or exceeds a character limit, there is no point paying for a judge invocation — the output is already invalid by a rule you can verify for free.
+  </p>
+
+  <p>
+    Think of the pipeline as a series of gates ordered by cost:
+  </p>
+
+  <ol>
+    <li><strong>Gate 1 — Deterministic (free, instant):</strong> Does the output satisfy structural constraints? If no, fail immediately.</li>
+    <li><strong>Gate 2 — Semantic metrics (cheap, fast):</strong> Does the output semantically resemble the expected answer? Apply BERTScore or ROUGE as a rough filter.</li>
+    <li><strong>Gate 3 — LLM judge (expensive, slow):</strong> Does the output satisfy nuanced quality criteria? Invoke only for outputs that pass gates 1 and 2.</li>
+  </ol>
+
+  <p>
+    This layering keeps per-eval costs low in practice. Most structural failures are caught at gate 1, which means the costly judge call is reserved for borderline cases where the question is genuinely about quality rather than form.
+  </p>
+
+  <!-- =========================================================== CALLOUTS -->
+  <div class="callout key">
+    Run deterministic checks first — they are free, instant, and sufficient for any output that has a clear right-or-wrong structural answer. Reserve semantic metrics and LLM judges for the cases that pass structural validation but still require a quality judgment.
+  </div>
+
+  <div class="callout warning">
+    BLEU, ROUGE, and other n-gram overlap scores are often called "objective" or "automatic" metrics, which tempts teams to treat them as ground truth for all evaluation. They are not. These metrics measure surface overlap, not meaning — two outputs that say the same thing in different words will score near zero. Use them only when surface similarity is itself what you care about (e.g., testing that a template fill-in produced the expected literal string).
+  </div>
+
+  <!-- ============================================================== QUIZ -->
+  <div class="quiz" id="quiz-4">
+    <h3>Which output type is most appropriate for a deterministic exact-match check?</h3>
+    <div class="quiz-options">
+      <button>Checking if a classifier returned positive or negative</button>
+      <button>Summarizing the key points from a long document</button>
+      <button>Assessing whether a response uses the right tone</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- =========================================================== EXERCISE -->
+  <div class="exercise">
+    <h3>Write deterministic unit test assertions for an LLM output</h3>
+    <p>
+      Write three Python <code>assert</code> statements that could serve as unit tests for an LLM output. Each should test a different structural constraint:
+    </p>
+    <ol>
+      <li>A <strong>JSON schema validation</strong> check — verify the output is valid JSON and contains the expected keys with the correct types</li>
+      <li>A <strong>keyword presence</strong> check — verify a required term appears in the response</li>
+      <li>A <strong>response length constraint</strong> check — verify the output is within an acceptable character or word limit</li>
+    </ol>
+    <p>Assume <code>output</code> is a string returned by your LLM and <code>parsed</code> is the result of <code>json.loads(output)</code>.</p>
+    <textarea spellcheck="false">import json
+
+output = llm.invoke(prompt)
+
+# 1. JSON schema validation
+parsed = json.loads(output)          # raises ValueError if not valid JSON
+assert isinstance(parsed.get("label"), str), "Missing or non-string 'label' field"
+assert parsed.get("confidence") is not None, "Missing 'confidence' field"
+
+# 2. Keyword presence
+assert "order" in output.lower(), "Response must reference the customer's order"
+
+# 3. Response length constraint
+assert len(output) <= 500, f"Response too long: {len(output)} chars (max 500)"
+</textarea>
+  </div>
+
+  <!-- ========================================================= TUTOR PROMPT -->
+  <p class="tutor-prompt">
+    <strong>Ask your tutor:</strong> Paste your three assert statements above and ask — "Are there edge cases where this assertion would give a false pass? How would you make it more robust?"
+  </p>
+
+  <!-- ============================================================== NAV -->
+  <nav class="lesson-nav">
+    <a href="0003-eval-driven-development.html">&larr; Lesson 3: Eval-Driven Development</a>
+    <a href="0005-execution-based-eval.html" class="primary">Lesson 5: Execution-Based Eval &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-4', 0, 'Correct. Exact-match checks work when outputs have a finite, known-correct set of values — classification labels like "positive" or "negative" are the canonical example. Summarization requires semantic comparison against source content, and tone assessment demands a subjective judgment; neither has a single right string to match against.');
+</script>
+</body>
+</html>

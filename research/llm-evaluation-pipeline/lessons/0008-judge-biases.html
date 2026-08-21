@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bias Taxonomy — Position, Verbosity, and Self-Enhancement | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../index.html">LLM Evaluation Pipeline</a> ›
+      Module 3 — LLM-as-a-Judge ›
+      Lesson 8 of 12
+    </div>
+    <h1>Bias Taxonomy — Position, Verbosity, and Self-Enhancement</h1>
+    <div class="lesson-meta">
+      <span>~12 min</span>
+      <span>Module 3 — LLM-as-a-Judge</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://arxiv.org/abs/2306.05685" target="_blank" rel="noopener">
+      Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena — Zheng et al. (2023)
+    </a>
+    <div style="margin-top:0.4rem;color:#444;">
+      Key result: strong LLMs such as GPT-4 achieve &gt;80% agreement with human preferences,
+      a rate comparable to human-to-human agreement — making automated judging viable at scale.
+    </div>
+  </div>
+
+  <!-- ── Intro ── -->
+  <p>
+    LLM-as-a-judge offers a scalable, explainable way to approximate human preferences without
+    the cost and latency of traditional human evaluation. But scalability comes with a catch:
+    the judge itself carries systematic biases that can silently corrupt evaluation results.
+    Zheng et al. identified three primary failure modes and paired each with a concrete
+    mitigation strategy.
+  </p>
+
+  <!-- ── Bias 1: Position ── -->
+  <h2>Position Bias</h2>
+  <p>
+    When a judge model receives two candidate responses side-by-side, the order of presentation
+    matters independently of quality. <strong>Position bias</strong> is the tendency to favour
+    whichever response appears first (or in some models, second) in the prompt. Because the bias
+    is consistent and directional, it can systematically disadvantage a high-quality response
+    simply because it was placed in the less-favoured slot.
+  </p>
+  <p>
+    <strong>Mitigation:</strong> Run every pairwise comparison <em>twice</em>, swapping the
+    positions of the two responses between runs. If the judge flips its verdict when positions
+    are exchanged, the result is flagged as inconsistent and either discarded or treated as a
+    tie. Agreement across both orderings provides a much stronger signal than a single-order
+    judgment.
+  </p>
+
+  <!-- ── Bias 2: Verbosity ── -->
+  <h2>Verbosity Bias</h2>
+  <p>
+    LLM judges tend to rate longer answers higher regardless of whether the extra length adds
+    value. <strong>Verbosity bias</strong> rewards responses that pad, repeat, or over-explain,
+    distorting evaluation toward models that generate more tokens rather than better content.
+    This bias is especially dangerous when evaluating summarization or conciseness tasks where
+    brevity is a virtue.
+  </p>
+  <p>
+    <strong>Mitigation:</strong> Add explicit length constraints and quality criteria to the
+    rubric instruction. Directing the judge to evaluate completeness and accuracy per token
+    used — rather than raw coverage — counteracts the pull toward longer outputs. Rubric lines
+    such as "do not favour a response merely because it is longer" have been shown to reduce
+    this effect.
+  </p>
+
+  <!-- ── Bias 3: Self-enhancement ── -->
+  <h2>Self-Enhancement Bias</h2>
+  <p>
+    When a model is asked to judge a competition that includes its own output, it rates that
+    output roughly 10–25% higher in win rate than human raters would. This <strong>self-enhancement
+    bias</strong> likely reflects similarities in generation style and the fact that the model
+    implicitly recognises its own stylistic signatures, even without being told which response
+    it produced.
+  </p>
+  <p>
+    <strong>Mitigation:</strong> Use a judge model that is <em>different</em> from any of the
+    models being evaluated. When that is not possible — for instance, when GPT-4 is both the
+    best available judge and a system under test — results for the judge model's own outputs
+    should be interpreted with extra caution or supplemented with human spot-checks.
+  </p>
+
+  <!-- ── MT-Bench and Chatbot Arena ── -->
+  <h2>MT-Bench and Chatbot Arena as Calibration Tools</h2>
+  <p>
+    The paper introduced two complementary benchmarks to validate LLM-as-a-judge and study
+    where it succeeds or fails.
+  </p>
+  <p>
+    <strong>MT-Bench</strong> is a curated multi-turn question set designed to stress-test
+    extended dialogue. Multi-turn scenarios are harder to judge because the model must evaluate
+    coherence and context tracking across turns, not just the quality of a single reply.
+    The benchmark also revealed that LLMs show <em>limited reasoning ability</em> in complex
+    assessments — a finding that motivates the use of chain-of-thought (CoT) prompting to
+    improve judgment accuracy, especially for larger models.
+  </p>
+  <p>
+    <strong>Chatbot Arena</strong> is a crowdsourced head-to-head comparison platform. Its
+    dataset contains 30,000 conversations and 3,000 expert votes, providing a large-scale
+    human-preference signal to cross-validate automated judgments. Together, MT-Bench and
+    Chatbot Arena span both controlled and naturalistic evaluation conditions.
+  </p>
+  <p>
+    The paper validated the full pipeline against LLaMA and Vicuna model variants. A
+    multi-turn cross-examination approach within Chatbot Arena achieved recall and precision
+    around 0.8 each — a strong result that supports LLM-as-a-judge as a practical complement
+    to existing benchmarks while acknowledging that human evaluation remains the ground truth.
+  </p>
+
+  <!-- ── Key insight ── -->
+  <div class="callout key">
+    The three biases — position, verbosity, and self-enhancement — are systematic and
+    measurable, not random noise. Because they are systematic, they are also mitigable:
+    swap positions across two runs, add length-quality constraints to the rubric, and
+    appoint an external judge. Applying all three mitigations converts LLM-as-a-judge
+    from an unreliable shortcut into a defensible evaluation method.
+  </div>
+
+  <!-- ── Warning ── -->
+  <div class="callout warning">
+    The &gt;80% human-agreement figure describes overall judgment accuracy — it does not mean
+    GPT-4 judges without bias. That agreement rate is measured after averaging over many
+    comparisons; within any individual pair, position and verbosity biases can easily flip the
+    verdict. High aggregate accuracy and low per-sample bias are separate properties, and the
+    paper shows they do not always co-occur.
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-8">
+    <h3>Which mitigation directly counteracts position bias in pairwise judge evaluations?</h3>
+    <div class="quiz-options">
+      <button>Swap response order across two independent scoring runs</button>
+      <button>Add hard length caps to the rubric text</button>
+      <button>Use a judge model different from the evaluated</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <h3>Design a bias-mitigating pairwise comparison prompt</h3>
+    <p>
+      Write a pairwise comparison prompt that mitigates at least two of the three biases
+      identified by Zheng et al. For each design choice in your prompt, add an inline
+      annotation (e.g. in brackets) identifying which bias it addresses.
+    </p>
+    <p>Suggested structure:</p>
+    <ul>
+      <li>A role or context line for the judge</li>
+      <li>The two candidate responses, labelled Response A and Response B</li>
+      <li>An explicit rubric with at least one length-quality constraint</li>
+      <li>An instruction to run the comparison twice with swapped positions</li>
+      <li>A note on judge identity if applicable</li>
+    </ul>
+    <textarea placeholder="Write your prompt here. Example start:
+
+You are an impartial evaluator. [self-enhancement bias: judge is a model separate from those being evaluated]
+
+Below are two responses to the question: &quot;{question}&quot;
+
+Response A:
+{response_a}
+
+Response B:
+{response_b}
+
+Evaluate which response better answers the question. Do NOT favour a response merely because it is longer or more detailed — judge accuracy and relevance per unit of content. [verbosity bias]
+
+...
+
+Note: this prompt will be run a second time with Response A and Response B swapped. Only a verdict that is consistent across both orderings will be accepted. [position bias]"></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    <strong>Ask the tutor:</strong> "What happens when none of the available judge models are different from the models under evaluation? How do practitioners handle self-enhancement bias in closed benchmark settings?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0007-judge-patterns.html">&larr; Lesson 7: Judge Patterns</a>
+    <a href="0009-rubric-design.html" class="primary">Lesson 9: Rubric Design &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-8', 0, 'Correct. Swapping the order of responses across two independent runs is the mitigation strategy the paper prescribes specifically for position bias. Adding length constraints addresses verbosity bias, and using an external judge addresses self-enhancement bias — each strategy targets a distinct failure mode.');
+</script>
+</body>
+</html>

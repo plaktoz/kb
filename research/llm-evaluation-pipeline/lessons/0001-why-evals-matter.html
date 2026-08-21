@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why LLM Products Fail Without Evals — LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">LLM Evaluation Pipeline › Module 1 — Foundations › Lesson 1 of 12</div>
+      <h1>Why LLM Products Fail Without Evals</h1>
+      <div class="lesson-meta">
+        <span>~12 min</span>
+        <span>Module 1 — Foundations</span>
+        <span>Lesson 1 of 12</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <p><a href="https://hamel.dev/blog/posts/evals/" target="_blank" rel="noopener">hamel.dev/blog/posts/evals/</a> by Hamel Husain</p>
+      <p>Key result: unsuccessful AI products almost always stem from failing to build robust evaluation systems. Teams that treat eval infrastructure as a first-class investment — rather than an afterthought — produce better products, debug faster, and accumulate reusable training data as a side effect.</p>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>The Eval Gap: Why Most AI Products Struggle</h2>
+    <p>When LLM-powered products underperform or fail outright, a pattern emerges: the team spent most of its time on prompt tweaking and capability expansion while skipping the infrastructure needed to know whether any of it was working. Hamel Husain frames this as a misallocation across three core activities:</p>
+    <ol>
+      <li><strong>Evaluating quality</strong> — measuring how well the system is performing right now</li>
+      <li><strong>Debugging issues</strong> — understanding why failures happen and where</li>
+      <li><strong>Changing system behavior</strong> — prompting, fine-tuning, or modifying code to improve outputs</li>
+    </ol>
+    <p>Most teams over-invest in activity three (changing behavior) while neglecting activities one and two. The result is a loop of blind guessing: changes get made with no reliable signal about whether they helped, hurt, or introduced new regressions. Without an evaluation system, you cannot tell the difference between a model that improved and one that broke in a different way.</p>
+    <p>The compounding cost is significant. Every prompt tweak made without evaluation feedback may be erasing an earlier fix. Every new feature shipped without a test leaves behind a hidden regression risk. Over time, the product accumulates technical debt that is nearly invisible until something breaks in production.</p>
+
+    <!-- Section 2 -->
+    <h2>The Three Evaluation Tiers</h2>
+    <p>Husain describes a layered evaluation stack where each tier addresses a different trade-off between speed, cost, and signal quality. Using all three in combination gives you fast feedback during development and rigorous validation before and after release.</p>
+
+    <h3>Tier 1 — Unit Tests (Cheapest)</h3>
+    <p>These are assertion-based checks that run automatically on every CI/CD code change. They encode known failure modes as executable tests: if a user asks for a short summary, assert that the response is under a token limit; if an output should be valid JSON, parse and verify it. Unit tests are deterministic, fast, and free to run in bulk. They should be your first line of defence and the easiest to maintain. Critically, they should grow continuously — every time a new failure is discovered in production or during review, a test should be added to prevent regression.</p>
+
+    <h3>Tier 2 — Human and Model Evaluation (Medium Cost)</h3>
+    <p>Unit tests catch structural failures, but they cannot tell you whether an answer is actually good. Tier 2 involves inspecting model traces — the full input/output sequences — and rating them, either by a human reviewer or an LLM-as-judge calibrated against human labels. The key operational insight here is that binary good/bad labels are more manageable than granular scores. A 1–5 rubric sounds more informative, but annotators disagree on the middle values, and the aggregated signal becomes noisy. Binary labels force clarity and can be reliably aggregated. Human labels also serve a second purpose: they are gold-standard training data, which means your eval pipeline and your fine-tuning data pipeline are the same artifact.</p>
+
+    <h3>Tier 3 — A/B Testing (Most Expensive)</h3>
+    <p>A/B tests compare two system variants against real user behaviour in production. They are the highest-fidelity signal available, because they measure actual outcomes rather than proxy metrics. But they require a mature product with meaningful traffic and a clear metric to optimize, making them inappropriate for early-stage development. Husain reserves this tier for products that have already passed Tier 1 and Tier 2 gates and need to validate whether a significant change produces measurable improvement for real users.</p>
+
+    <!-- Section 3 -->
+    <h2>Eval Infrastructure as a Force Multiplier</h2>
+    <p>A well-built eval system is not just a quality gate — it is infrastructure that pays dividends across the entire product lifecycle.</p>
+    <p><strong>Data curation for fine-tuning.</strong> Every trace you label for Tier 2 evaluation is a potential training example. The act of reviewing model outputs and marking them good or bad naturally produces the labelled dataset fine-tuning requires. Teams that build eval infrastructure early find they already have a curated dataset when they reach the fine-tuning stage. Teams that skip evals must backfill this work under pressure.</p>
+    <p><strong>Debugging tool.</strong> Eval traces capture the full context of every failure: the prompt, the retrieved context, the model output, and the user intent. This makes the eval system your primary debugging surface. When a user reports a bad experience, you can pull the trace, replay it, and understand exactly what went wrong — rather than guessing from a symptom description.</p>
+    <p><strong>Continuous improvement signal.</strong> Husain describes "Eval Driven Development" as the discipline of sampling outputs continuously and never stopping looking at data. As a product matures, you sample more broadly, catch a wider range of failures, and keep adding tests. The eval system becomes a living document of everything the product has ever gotten wrong — and a guarantee that it will not get wrong again.</p>
+
+    <!-- Section 4 -->
+    <h2>What Eval Driven Development Looks Like in Practice</h2>
+    <p>Adopting Eval Driven Development means treating the evaluation pipeline as a first-class engineering artifact, not a one-off validation step. Concretely, this means:</p>
+    <ul>
+      <li>Every CI/CD pipeline runs the full Tier 1 test suite on every push</li>
+      <li>A recurring cadence of trace reviews keeps Tier 2 calibrated as the model and product evolve</li>
+      <li>New failures discovered anywhere — in reviews, in production logs, in user reports — are immediately encoded as Tier 1 tests so they can never silently regress</li>
+      <li>Human labels from Tier 2 reviews are stored in a versioned dataset that grows over time</li>
+      <li>Tier 3 A/B tests are treated as capital-intensive experiments, planned carefully and run only when the lower tiers confirm the change is ready</li>
+    </ul>
+    <p>The overall effect is compounding: the more systematically you evaluate, the faster you debug, and the more targeted your behavior-change efforts become. Teams that maintain this discipline typically spend less total time on prompt engineering — not more — because they have precise signal about what actually needs to change.</p>
+
+    <!-- Key insight callout -->
+    <div class="callout key">
+      Eval infrastructure compounds. It is simultaneously your quality gate, your debugging surface, and your data curation engine for fine-tuning. Building it early is the single highest-leverage investment in an LLM product — and the absence of it is the most common root cause of AI product failure.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      Many teams assume that standard NLP benchmarks — BLEU scores, ROUGE scores, perplexity — are sufficient for validating product quality. These metrics measure statistical properties of text overlap, not whether your product actually solves the user's problem. Product-specific failure modes are invisible to them. A chatbot that gives fluent but factually wrong answers will score well on BLEU and fail every user who relies on it.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-1">
+      <h3>Which label format does Hamel Husain recommend for Tier 2 evaluation results?</h3>
+      <div class="quiz-options">
+        <button>Binary good or bad labels</button>
+        <button>Granular scores on a scale</button>
+        <button>Detailed rubrics with many criteria</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Map the Three Tiers to a Document Q&amp;A Bot</h3>
+      <p>For a hypothetical LLM feature — a document Q&amp;A bot that answers user questions from an uploaded PDF — write one concrete test for each of the three evaluation tiers. For each test, specify:</p>
+      <ul>
+        <li><strong>What it checks</strong> — the specific behaviour or quality being measured</li>
+        <li><strong>When it runs</strong> — the trigger (every commit, weekly review, traffic-based, etc.)</li>
+        <li><strong>What failure looks like</strong> — the concrete signal that tells you something is wrong</li>
+      </ul>
+      <textarea placeholder="Tier 1 — Unit test:
+  What it checks:
+  When it runs:
+  What failure looks like:
+
+Tier 2 — Human / model eval:
+  What it checks:
+  When it runs:
+  What failure looks like:
+
+Tier 3 — A/B test:
+  What it checks:
+  When it runs:
+  What failure looks like:"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Finished the exercise? Paste your three tiers into a Claude chat and ask: "For each tier, what is one edge case my test might miss, and how would I catch it?" Use the feedback to sharpen Tier 1 before moving to the next lesson.
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <span></span>
+      <a href="0002-eval-landscape.html" class="primary">Next: The Eval Landscape &rarr;</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-1',
+      0,
+      'Correct. Binary good/bad labels are recommended because they are more manageable than granular scores. Annotators reliably agree on binary judgements, the aggregated signal stays clean, and the same labels serve as gold-standard fine-tuning data. Granular rubrics introduce annotator disagreement on middle values and become unwieldy at scale.'
+    );
+  </script>
+</body>
+</html>

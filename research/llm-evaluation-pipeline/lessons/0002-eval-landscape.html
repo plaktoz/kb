@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Eval Landscape — Three Approaches, One Decision | LLM Evaluation Pipeline</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../index.html">LLM Evaluation Pipeline</a> ›
+        <a href="../index.html#module-1">Module 1 — Foundations</a> ›
+        Lesson 2 of 12
+      </p>
+      <h1>The Eval Landscape — Three Approaches, One Decision</h1>
+      <div class="lesson-meta">
+        <span>~10 min</span>
+        <span>Module 1 — Foundations</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <div class="source-label">Sources</div>
+      <p>
+        <a href="https://www.evidentlyai.com/llm-guide/llm-evaluation" target="_blank" rel="noopener">
+          Evidently AI — LLM Evaluation Guide
+        </a><br>
+        Three primary evaluation families (deterministic, semantic, LLM-as-judge) with practical guidance on combining them; recommends limiting evaluation to ~5 metrics and supplementing automated scores with periodic manual review.
+      </p>
+      <p style="margin-bottom:0">
+        <a href="https://www.confident-ai.com/blog/llm-evaluation-metrics-everything-you-need-for-llm-evaluation" target="_blank" rel="noopener">
+          Confident AI — LLM Evaluation Metrics: Everything You Need
+        </a><br>
+        Deep dive into metric selection; notes that LLM-as-judge is "one of the most popular approaches in practice" and explains reference-based versus reference-free scoring, plus guidance on calibrating judge prompts to reduce positional bias.
+      </p>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>Approach 1 — Deterministic Evaluation</h2>
+
+    <p>Deterministic methods are rule-based checks that produce a clear pass or fail with no ambiguity. Because they require no model inference, they are fast, cheap, and precise — ideal as the first defensive layer in any pipeline.</p>
+
+    <p>The simplest form is <strong>exact match</strong>: the output must be byte-for-byte identical to an expected response. This is appropriate when there is only one correct answer, such as a category label from a fixed list or a specific code token.</p>
+
+    <p>Beyond exact match, <strong>format and regex checks</strong> validate structural correctness. A SQL generation task can be checked with a parser to confirm the output is valid SQL. A content moderation task can be checked with a regex that flags any banned term. A data extraction task can be checked by confirming the output deserializes as valid JSON with the required keys. These checks enforce hard constraints without making any judgment about quality.</p>
+
+    <p><strong>Text statistics</strong> — length, word count, sentence count — can also serve as lightweight sanity checks. An unusually short or long output often signals a prompt regression or a model change worth investigating, even when the content itself looks acceptable.</p>
+
+    <!-- Section 2 -->
+    <h2>Approach 2 — Semantic Metrics</h2>
+
+    <p>Many real tasks have no single correct answer. A customer support reply can be polite and accurate in dozens of different ways. Deterministic checks would fail every acceptable paraphrase. Semantic metrics address this by measuring <em>meaning</em> rather than <em>string identity</em>.</p>
+
+    <p><strong>Embedding-based similarity</strong> converts both the candidate output and a reference into dense vector representations and measures their cosine distance. This captures whether "we regret to inform you that your request has been declined" and "sorry, we cannot process that request" convey equivalent intent, even though they share few words. It is well-suited to summarization, rewriting, and open-ended Q&amp;A tasks where the vocabulary is expected to vary.</p>
+
+    <p><strong>N-gram overlap metrics</strong> such as BLEU and ROUGE take a different approach: they count how many word sequences in the candidate output also appear in one or more reference texts. ROUGE is standard in summarization benchmarks; BLEU originated in machine translation. Both quantify alignment at the surface level rather than at the meaning level, so they work best when the reference is relatively close in form to the expected output.</p>
+
+    <p>A practical limitation of semantic metrics is that they require a <em>reference</em> — a gold-standard output to compare against. Curating high-quality references takes time, and a poor reference will produce misleading scores regardless of the metric chosen.</p>
+
+    <!-- Section 3 -->
+    <h2>Approach 3 — LLM-as-Judge</h2>
+
+    <p>LLM-as-judge is described as "one of the most popular approaches in practice." Instead of a deterministic rule or a numeric distance, a separate language model reads the output and assigns a score based on a rubric you define. This lets you evaluate dimensions — helpfulness, coherence, tone, factual accuracy — that resist encoding as code or reference strings.</p>
+
+    <p>There are two main modes:</p>
+
+    <ul>
+      <li><strong>Reference-based</strong>: the judge receives the candidate output alongside a gold answer and scores how closely the candidate matches the expected response.</li>
+      <li><strong>Reference-free</strong>: the judge receives only the input and the candidate output, then evaluates quality on its own. This is useful when collecting gold answers is impractical, and it allows evaluation of properties like response helpfulness or harmlessness that are not captured by any single reference.</li>
+    </ul>
+
+    <p>LLM-as-judge introduces its own failure modes. The most common is <strong>positional bias</strong>: the judge tends to favor the first option when comparing two candidates, regardless of quality. Calibrating judge prompts carefully — for example, by running the same comparison twice with the candidates swapped — substantially reduces this artifact. The approach also requires periodic manual review to verify that judge scores remain aligned with human ground truth as the task or model changes.</p>
+
+    <!-- Section 4 — Comparison table -->
+    <h2>Comparing the Three Approaches</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Approach</th>
+          <th>Best for</th>
+          <th>Requires reference?</th>
+          <th>Speed</th>
+          <th>Nuance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Deterministic</strong><br><small>exact match, regex, format checks</small></td>
+          <td>Structured outputs with a single correct form (JSON, SQL, category labels)</td>
+          <td>Yes (expected value or schema)</td>
+          <td>Very fast — no model call</td>
+          <td>None — binary pass/fail only</td>
+        </tr>
+        <tr>
+          <td><strong>Semantic</strong><br><small>embeddings, BLEU, ROUGE</small></td>
+          <td>Open-ended tasks where phrasing varies but meaning should match</td>
+          <td>Yes (gold reference text)</td>
+          <td>Fast — embedding lookup or n-gram count</td>
+          <td>Low to moderate — surface or vector proximity</td>
+        </tr>
+        <tr>
+          <td><strong>LLM-as-judge</strong><br><small>rubric-based scoring</small></td>
+          <td>Subjective quality dimensions: helpfulness, tone, coherence, factual accuracy</td>
+          <td>Optional (reference-free supported)</td>
+          <td>Slow — requires a model inference call</td>
+          <td>High — can reason about context and intent</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Section 5 -->
+    <h2>Combining Approaches in Practice</h2>
+
+    <p>No single tier covers all your needs, so the practical recommendation is to layer them. A common pattern runs fast regex checks first as critical guardrails — catching format violations, banned terms, or missing required fields before any other evaluation runs. These checks are cheap, and failing them early saves the cost of running an LLM judge on clearly broken outputs.</p>
+
+    <p>LLM judges are then applied to the outputs that passed the hard checks, evaluating quality dimensions the rules cannot reach. Because judge calls are slow and expensive, they are reserved for the cases where nuanced judgment actually matters.</p>
+
+    <p>One concrete heuristic for metric selection: limit evaluation to roughly five metrics total — typically one or two use-case-specific custom metrics (e.g., "does the SQL return the correct rows?") combined with two or three architecture-driven generic ones (e.g., faithfulness, relevance, harmlessness). More metrics dilute attention and make it harder to act on results.</p>
+
+    <p>Finally, maintain a <strong>held-out dataset</strong> that you never use during prompt iteration. Using the same examples to both develop and score a prompt leads to overfitting: the prompt gets better at those specific examples while degrading on real inputs. A held-out set gives you an honest signal of generalization.</p>
+
+    <!-- Key insight callout -->
+    <div class="callout key">
+      No single evaluation approach is sufficient on its own. Fast deterministic checks enforce hard constraints cheaply; semantic metrics measure meaning alignment; LLM judges assess nuanced quality. Combining all three — with a held-out dataset to validate generalization — gives you a robust, practical eval pipeline.
+    </div>
+
+    <!-- Warning callout -->
+    <div class="callout warning">
+      A high LLM-judge score does not mean the output is correct. Judge models share the same biases and blind spots as the models they evaluate — including positional bias and susceptibility to confident-sounding but wrong answers. Always calibrate judge prompts and supplement with periodic manual review to keep automated scores grounded in human ground truth.
+    </div>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-2">
+      <h3>Which evaluation approach is described as "one of the most popular approaches in practice"?</h3>
+      <div class="quiz-options">
+        <button>LLM-as-judge, which uses a language model to score outputs</button>
+        <button>Deterministic methods using exact match or regex pattern checks</button>
+        <button>Semantic metrics using embeddings and BLEU or ROUGE scores</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Match each task to an eval approach</h3>
+      <p>For each of the three LLM tasks below, choose one evaluation approach (deterministic, semantic, or LLM-as-judge) and write a one-sentence justification for your choice.</p>
+      <ol>
+        <li><strong>Classify sentiment</strong> — label a product review as positive, negative, or neutral.</li>
+        <li><strong>Generate a SQL query</strong> — produce a SELECT statement that answers a natural-language question about a database schema.</li>
+        <li><strong>Write a product description</strong> — draft a 50-word marketing blurb for a given product name and feature list.</li>
+      </ol>
+      <textarea placeholder="1. Classify sentiment: [approach] — [justification]&#10;2. Generate SQL: [approach] — [justification]&#10;3. Product description: [approach] — [justification]"></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Want to go deeper? Ask your tutor: "When would I use both a deterministic check and an LLM judge on the same output?" or "How do I write a judge prompt that minimises positional bias?"
+    </div>
+
+    <!-- Navigation -->
+    <nav class="lesson-nav">
+      <a href="0001-why-evals-matter.html">&larr; Lesson 1: Why Evals Matter</a>
+      <a href="0003-eval-driven-development.html" class="primary">Lesson 3: Eval-Driven Development &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-2', 0, 'Correct. LLM-as-judge is explicitly described as "one of the most popular approaches in practice." It uses a language model to score outputs against a rubric, supporting both reference-based and reference-free evaluation.');
+  </script>
+</body>
+</html>
