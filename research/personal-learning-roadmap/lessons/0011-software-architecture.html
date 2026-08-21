@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 11 — Software Design and Architecture</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Personal Learning Roadmap</a> › Module 3: Technical Skills › Lesson 11 of 15
+      </div>
+      <h1>Beyond Coding — Software Design and Architecture</h1>
+      <div class="lesson-meta">
+        <span>~13 min</span>
+        <span>Module 3: Technical Skills</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Software Design and Architecture Roadmap — roadmap.sh</strong>
+      <a href="https://roadmap.sh/software-design-architecture" target="_blank" rel="noopener">roadmap.sh/software-design-architecture</a>
+      <p style="margin-top:0.5rem;margin-bottom:0;">A community-driven, industry-validated roadmap for developers moving beyond writing code toward making structural decisions — how systems are designed, maintained, and evolved over time. One of the most-starred GitHub projects globally, reflecting real-world industry consensus on the skills that separate programmers from architects.</p>
+    </div>
+
+    <!-- Section 1: Architectural Thinking -->
+    <h2>What Architectural Thinking Actually Means</h2>
+    <p>
+      Writing code that works is one skill. Designing a system that works — now and six months from now, under load, with multiple developers, across changing requirements — is a different skill entirely. That second skill is architectural thinking.
+    </p>
+    <p>
+      Architectural thinking operates at a layer above individual functions and files. It asks: How should this system be divided into components? How do those components communicate? Where are the boundaries, and why? What happens when one component fails? These questions have answers, but the answers are not found in language syntax or framework documentation. They are found by developing a structural vocabulary and applying it deliberately.
+    </p>
+    <p>
+      The roadmap.sh software design and architecture roadmap frames this transition explicitly: it is the natural next step after mastering a language. Once you can write code fluently, the bottleneck shifts. The new challenge is not "how do I implement this feature" but "how do I structure this system so that this feature — and the next ten features — fit together coherently."
+    </p>
+
+    <!-- Section 2: Design Patterns -->
+    <h2>Design Patterns and Best Practices</h2>
+    <p>
+      Design patterns are proven solutions to recurring software problems. They are not frameworks or libraries — they are concepts, named precisely enough that developers can communicate about structure without having to re-explain the problem from scratch every time.
+    </p>
+    <p>
+      A developer who knows what a Factory is, why a Singleton is often a liability, or when to reach for the Observer pattern can participate in architectural conversations that would otherwise be opaque. Patterns give structure to judgment: instead of asking "should I do it this way or that way?", you ask "which pattern fits this problem, and what are its known trade-offs?"
+    </p>
+    <p>
+      Best practices layer on top of patterns. They include principles like SOLID (five rules for maintainable object-oriented code), separation of concerns (each component should do one thing and do it well), and DRY (do not repeat yourself). These are not rules to memorize — they are lenses to apply. Learning to see your own code through these lenses is what makes a developer's design judgment improve over time.
+    </p>
+
+    <div class="callout key">
+      <p>The transition from programmer to architect is not about learning more syntax — it is about developing a new way of seeing. A systems thinker looks at a codebase and sees components, boundaries, and dependencies. A programmer sees files and functions. Both perspectives matter, but only one of them scales as systems grow in size and complexity.</p>
+    </div>
+
+    <div class="callout warning">
+      <p>A common mistake is assuming that knowing a programming language deeply enough means you can design systems well. Language mastery and architectural thinking are related but distinct skills. You can be an expert Python or JavaScript developer and still struggle to structure a system that is maintainable, scalable, or easy to extend. The roadmap exists precisely because this gap is real — and because crossing it requires deliberate study, not just more coding experience.</p>
+    </div>
+
+    <!-- Section 3: From Contributor to Systems Thinker -->
+    <h2>From Individual Contributor to Systems Thinker</h2>
+    <p>
+      The software design and architecture roadmap is explicitly structured as a career progression guide. It is designed for developers who have crossed the initial coding threshold and are ready to grow in a new direction: toward structural decision-making.
+    </p>
+    <p>
+      This progression is not just about personal capability — it reflects how teams and organizations work. Individual contributors write code within a structure someone else defined. Systems thinkers define the structure. They decide how modules are divided, where the APIs live, which services talk to which, and what the system's failure modes are. Moving into this role is what distinguishes senior engineers from developers who are technically skilled but limited in scope.
+    </p>
+    <p>
+      The roadmap is community-driven and among the most-starred projects on GitHub globally. That breadth of endorsement reflects industry consensus, not a single perspective. The skills it describes — component design, system organization, understanding how things interact and scale — are consistently cited across companies, industries, and technology stacks as the skills that define engineering leadership at every level.
+    </p>
+    <p>
+      Starting this journey does not require a senior title or a large system to design. It begins with a habit: looking at every system you encounter — apps you use, codebases you read — and asking how it is probably structured, and why.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-11">
+      <h3>Quick Check</h3>
+      <p>What is the key difference between coding skill and architectural thinking?</p>
+      <div class="quiz-options">
+        <button>Architectural skill is about selecting better libraries and writing more maintainable functions</button>
+        <button>Architectural thinking means deciding how system components connect and scale over time</button>
+        <button>Mastering a programming language alone is sufficient to make good architectural decisions</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Practice Exercise</h3>
+      <p>Think of an app or system you use daily — a messaging app, a streaming service, an e-commerce site, or anything else familiar. Sketch a simple architecture diagram for it: identify the major components you think exist, and describe how they connect to each other.</p>
+      <p><em>You do not need to know the real implementation. The goal is to practice systems thinking by reasoning about structure from the outside — this is architectural thinking applied to something familiar.</em></p>
+      <textarea placeholder="Example:
+App: A messaging app like WhatsApp
+
+Major components I can reason about:
+1. Client app (iOS/Android) — the interface users interact with
+2. Authentication service — handles login and identity
+3. Message routing server — receives messages and delivers them to recipients
+4. Message store / database — persists conversation history
+5. Push notification service — alerts users when the app is in the background
+
+How they connect:
+- The client sends a message to the routing server over the internet
+- The routing server looks up the recipient and forwards the message
+- A copy is written to the message store for history
+- If the recipient's app is closed, the push notification service sends an alert
+
+What I notice: Even a simple-looking app has at least five distinct components, each with a clear, separate responsibility. No single component tries to do everything — that separation is architectural thinking in action."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Ask your tutor: "I can write code that works, but I do not know how to think about structure at a higher level — how do I start developing architectural judgment, and what is the most useful thing to study first?"
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0010-fullstack-roadmap.html">← Previous</a>
+      <a href="0012-communication-skills.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-11', 1, 'Correct. Architectural thinking is about deciding how components connect, communicate, and scale — not about writing better functions or selecting libraries. These are structural decisions that exist at a layer above any individual piece of code, and they require a separate set of skills beyond language mastery.');
+  </script>
+</body>
+</html>

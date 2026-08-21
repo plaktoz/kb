@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10 — Full Stack Web Development</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Personal Learning Roadmap</a> › Module 3: Technical Skills › Lesson 10 of 15
+      </div>
+      <h1>Full Stack Web Development — From HTML to Deployment</h1>
+      <div class="lesson-meta">
+        <span>~15 min</span>
+        <span>Module 3: Technical Skills</span>
+      </div>
+    </header>
+
+    <!-- Source card -->
+    <div class="source-card">
+      <strong>Full Stack Developer Roadmap — roadmap.sh</strong>
+      <a href="https://roadmap.sh/full-stack" target="_blank" rel="noopener">roadmap.sh/full-stack</a>
+      <p style="margin-top:0.5rem;margin-bottom:0;">A community-driven six-stage path from front-end basics through deployment-ready professional skills. Front-end fundamentals are the non-negotiable prerequisite before any back-end or full-stack work begins.</p>
+    </div>
+
+    <!-- Section 1: The Six Stages -->
+    <h2>The Six Stages of Full Stack Development</h2>
+    <p>
+      Full stack development is not a single skill — it is an ordered sequence of capability layers, each one building on the last. The roadmap.sh community describes six stages that take a developer from a blank HTML file to a production-ready application. Understanding the sequence matters as much as mastering any individual stage, because skipping ahead creates gaps that surface as bugs and confusion later.
+    </p>
+
+    <ol>
+      <li>
+        <strong>Front-End Fundamentals</strong> — HTML, CSS, and JavaScript form the core trio for all UI work. Every visual element a user sees and interacts with runs through these three technologies. This stage is the entry point for the entire roadmap; nothing else is accessible without it.
+      </li>
+      <li>
+        <strong>UI Framework</strong> — Once you can write plain JavaScript, you add React or Vue to build modern component-based interfaces. Frameworks accelerate development by introducing reusable components and managed state, but they assume solid JavaScript underneath.
+      </li>
+      <li>
+        <strong>Back-End Development</strong> — Server-side logic requires picking a language: Python, Java, PHP, Ruby, or C# are common choices. Alternatively, you can extend your existing JavaScript knowledge with Node.js. This stage introduces concepts such as routing, request handling, and server-to-database communication.
+      </li>
+      <li>
+        <strong>Databases</strong> — Applications need to persist data. SQL covers relational databases and is the most broadly applicable choice. NoSQL options are available depending on the shape of your project's data and performance needs.
+      </li>
+      <li>
+        <strong>Full-Stack Frameworks</strong> — Tools like Next.js (JavaScript) and Django (Python) bridge front and back ends in a single cohesive project structure, accelerating real application development by handling routing, rendering, and integration concerns in one place.
+      </li>
+      <li>
+        <strong>Professional Skills</strong> — Version control with Git, RESTful API design and consumption, performance and scalability awareness, and disciplined debugging habits. Portfolio-building and continuous learning are emphasized throughout this stage, because professional readiness is as much about habits as technical knowledge.
+      </li>
+    </ol>
+
+    <!-- Section 2: Why Front-End First -->
+    <h2>Why Front-End Fundamentals Are Non-Negotiable</h2>
+    <p>
+      The roadmap is explicit: front-end basics are the prerequisite before any back-end or full-stack work. HTML defines the structure of a page, CSS controls how it looks, and JavaScript makes it interactive. Together they constitute the only language the browser understands natively. Every framework, every server-rendered page, and every deployed application ultimately produces output in this trio.
+    </p>
+    <p>
+      A developer who understands HTML, CSS, and JavaScript can read and debug any front-end code, regardless of which framework generated it. A developer who learned a framework first will struggle when the abstraction leaks — and it will leak. The browser does not know what React is; it only knows HTML, CSS, and JavaScript. Understanding the target gives you leverage over every tool that targets it.
+    </p>
+    <p>
+      The journey the roadmap describes moves in a clear direction: UI basics → UI framework → server logic → data management → full-stack integration → production readiness. Each arrow in that sequence represents a dependency, not just a suggestion.
+    </p>
+
+    <div class="callout key">
+      <p>Front-end fundamentals are not a phase you pass through — they are the floor everything else stands on. Strong HTML, CSS, and JavaScript knowledge makes every later stage faster to learn and easier to debug. There is no shortcut around Stage 1.</p>
+    </div>
+
+    <div class="callout warning">
+      <p>One of the most common mistakes new developers make is skipping front-end fundamentals to jump directly into a framework like React. Frameworks are abstractions built on top of HTML, CSS, and JavaScript. When something breaks — and it will — understanding the underlying layer is the only reliable path to a fix. Starting with React before you understand the DOM, event handling, or the CSS box model means you are building on an invisible foundation.</p>
+    </div>
+
+    <!-- Section 3: Back End to Production -->
+    <h2>From Server Logic to Production Readiness</h2>
+    <p>
+      Once the front end is solid, back-end development introduces a new set of concerns: handling HTTP requests, processing business logic on the server, validating input, and communicating with a database. The language choice at Stage 3 — Python, Node.js, Java, PHP, Ruby, or C# — is less important than understanding the concepts that all server-side code shares. Any of these languages can be learned given front-end fundamentals and basic programming literacy.
+    </p>
+    <p>
+      Databases at Stage 4 anchor the persistence layer. SQL is the most transferable skill here: once you understand relational tables, joins, and queries, you can work with PostgreSQL, MySQL, SQLite, and most cloud-hosted database services. NoSQL systems like MongoDB or Redis solve specific problems but should be understood as additions to a SQL foundation, not replacements.
+    </p>
+    <p>
+      Full-stack frameworks at Stage 5 — Next.js and Django being the most prominent — exist precisely to reduce the friction between the front and back ends. They handle server-side rendering, API routes, and project structure so that a solo developer or small team can ship complete features quickly. The value of these frameworks is fully apparent only after you have built without them.
+    </p>
+    <p>
+      The professional skills in Stage 6 complete the picture. Git is a prerequisite for collaboration and a safety net for solo work. RESTful API design is the standard interface contract between front and back ends on almost every web project. Performance awareness and debugging habits are what separate a working prototype from a maintainable production system. Portfolio work throughout all stages provides both motivation and proof of competence.
+    </p>
+
+    <!-- Quiz -->
+    <div class="quiz" id="quiz-10">
+      <h3>Quick Check</h3>
+      <p>Which stage is the required prerequisite before adding a UI framework like React or Vue?</p>
+      <div class="quiz-options">
+        <button>Back-end development, because servers are more foundational than browsers</button>
+        <button>Front-end fundamentals — mastering HTML, CSS, and core JavaScript first</button>
+        <button>Database integration, because data comes before any presentation layer</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- Exercise -->
+    <div class="exercise">
+      <h3>Practice Exercise</h3>
+      <p>Map yourself onto the six stages. Read each stage description above and identify where you would honestly place yourself right now. Then write:</p>
+      <ol>
+        <li>Which stage you are currently in (or between).</li>
+        <li>The single most important skill gap blocking your advancement to the next stage.</li>
+      </ol>
+      <p><em>Be specific: name the exact concept, technology, or habit you are missing — not just the stage name.</em></p>
+      <textarea placeholder="Example:
+Current stage: Stage 2 — I can write HTML and CSS confidently and understand basic JavaScript, but I have not yet worked through React in a real project.
+
+Biggest gap blocking Stage 3: I do not yet understand JavaScript promises, async/await, or how to fetch data from an API. Without that, I cannot handle the async patterns that React and back-end communication both require."></textarea>
+    </div>
+
+    <!-- Tutor prompt -->
+    <div class="tutor-prompt">
+      Ask your tutor: "I feel comfortable with HTML and CSS but JavaScript still trips me up — especially functions, scope, and the DOM. What is the minimum JavaScript I need to understand before React will actually make sense to me?"
+    </div>
+
+    <!-- Lesson nav -->
+    <nav class="lesson-nav">
+      <a href="0009-ai-data-science-roadmap.html">← Previous</a>
+      <a href="0011-software-architecture.html" class="primary">Next →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-10', 1, 'Correct. Front-end fundamentals — HTML, CSS, and JavaScript — are the explicit prerequisite for adding any UI framework. Frameworks are abstractions over these three technologies; without understanding the base layer, you cannot read or debug what the framework produces.');
+  </script>
+</body>
+</html>
