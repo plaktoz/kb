@@ -2,6 +2,8 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-21 | research/personal-learning-roadmap/lessons/ | lessons |
+| 2026-08-21 | research/personal-learning-roadmap/report.md | research |
 | 2026-08-20 | research/owasp-llm-top-10/lessons/ | lessons |
 | 2026-08-20 | wiki/technology/owasp-llm06-sensitive-information-disclosure.md | ingest |
 | 2026-08-20 | wiki/technology/owasp-llm01-prompt-injection.md | ingest |
