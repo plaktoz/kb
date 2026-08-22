@@ -1951,3 +1951,9 @@
 | 2026-08-22 | wiki/learning/deliberate-practice-ericsson-elements-guide.md (no new info) | ingest-dupe (identical source_url already ingested 2026-08-05; re-scraped same fs.blog article, no new content to merge) |
 | 2026-08-22 | daily-update/2026-08/2026-08-22.md | newsletter |
 | 2026-08-22 | weekly-update/2026-08/2026-W34-weekly.md | newsletter |
+| 2026-08-22 | topics/ai-agents.md | compound |
+| 2026-08-22 | topics/deep-work.md | compound |
+| 2026-08-22 | topics/learning-science.md | compound |
+| 2026-08-22 | topics/ai-in-education.md | compound |
+| 2026-08-22 | topics/ai-workplace-adoption.md | compound |
+| 2026-08-22 | topics/llm-security.md | compound |
