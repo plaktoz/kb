@@ -6,6 +6,7 @@ tags: [ai-security, prompt-injection, red-teaming, llm-vulnerabilities]
 date_consumed: 2026-08-17
 additional_sources:
   - https://www.promptfoo.dev/docs/red-team/
+  - https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/
 ---
 
 ## Summary
@@ -55,6 +56,8 @@ Jason Ross, who leads the [[OWASP]] GenAI red team initiative, argues that tradi
 | Context Window Exhaustion | Flooding context so early guardrails are forgotten |
 | Adversarial Suffixes | Token strings activating restricted-content neural pathways |
 | TAP (Tree of Attacks with Pruning) | Tree-of-thought iterative refinement; >80% jailbreak rate on leading LLMs |
+
+**Update (additional source, 2026-08-22, Google's AI Red Team blog):** Google's public AI Red Team report describes a similar dual approach at organizational scale: the team combines traditional red-team tradecraft with specialized AI expertise, drawing on threat intelligence from Mandiant, the Threat Analysis Group (TAG), and Google DeepMind, and its work supports Google's **[[Secure AI Framework (SAIF)]]**. Google's simulated attack taxonomy overlaps with Ross's (prompt attacks, adversarial examples) but adds **model backdooring**, **training data extraction**, and **data poisoning/exfiltration** as distinct categories. Google's key lessons echo the OWASP findings: traditional red teams are a useful starting point but AI attacks grow complex quickly; many findings lack a simple fix and should feed ongoing R&D rather than one-off patches; and — reinforcing the containment framing above — locking down systems via conventional security controls (not AI-specific fixes) still meaningfully reduces risk, since many AI attacks remain detectable using conventional methods.
 
 ### Case Study: Discord's Clyde AI
 

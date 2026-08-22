@@ -1902,3 +1902,52 @@
 | 2026-08-21 | wiki/strategy/agents-over-bubbles-stratechery.md | ingest |
 | 2026-08-21 | wiki/strategy/cognitive-delegation-ai-investment-judgment.md | ingest |
 | 2026-08-21 | daily-update/2026-08/2026-08-21.md | newsletter |
+
+| 2026-08-22 | 2026-08-22-news-aggregation.md | news-fetch |
+| 2026-08-22 | 2026-08-21-michael-polansky-outer-biosciences-ai-skin.md | scrape |
+| 2026-08-22 | 2026-08-21-rillet-ai-accounting-startup-100m-raise.md | scrape |
+| 2026-08-22 | 2026-08-21-nvidia-ai-agent-harness-research.md | scrape |
+| 2026-08-22 | 2026-08-19-smart-time-management-strategies-daily-productivity.md | scrape |
+| 2026-08-22 | 2026-08-21-medium-7-productivity-habits-save-time.md | scrape |
+| 2026-08-22 | 2026-04-08-goalsandprogress-deep-work-strategies-guide.md | scrape |
+| 2026-08-22 | 2021-04-05-fsblog-ultimate-deliberate-practice-guide.md | scrape |
+| 2026-08-22 | 2022-08-02-scotthyoung-practice-made-perfect.md | scrape |
+| 2026-08-22 | 2023-01-17-scotthyoung-revised-views-learning.md | scrape |
+| 2026-08-22 | 2026-07-06-healthline-cyclospora-outbreak-cdc.md | scrape |
+| 2026-08-22 | 2026-08-21-medicalnewstoday-melanoma-mrna-vaccine-trial.md | scrape |
+| 2026-08-22 | 2026-04-21-harvard-health-sleep-diet-exercise-heart-risk.md | scrape |
+| 2026-08-22 | 2022-06-20-fsblog-parenting-mental-models.md | scrape |
+| 2026-08-22 | 2026-08-21-tradingkey-msft-stock-forecast-azure-growth.md | scrape |
+| 2026-08-22 | 2026-05-28-stocktwits-ibm-quantum-computing-10b-investment.md | scrape |
+| 2026-08-22 | 2026-08-21-yahoo-finance-stock-market-today-higher-for-longer.md | scrape |
+| 2026-08-22 | 2026-08-21-tradingkey-us-stocks-close-dow-rebounds-pmi.md | scrape |
+| 2026-08-22 | 2026-08-21-tradingkey-gold-price-forecast-treasury-buybacks.md | scrape |
+| 2026-08-22 | 2026-08-21-stocktwits-bond-markets-sovereign-debt-ai-capex.md | scrape |
+| 2026-08-22 | wsj.com stock-market-today-dow-sp-500-nasdaq-08-21-2026 (blocked by fetch tool) | scrape-failed |
+| 2026-08-22 | cnbc.com index-funds-stock-market-investing (blocked by fetch tool) | scrape-failed |
+| 2026-08-22 | investors.com dow-jones-sp500-nasdaq-stock-market-sell-off-bitcoin-surges (blocked by fetch tool) | scrape-failed |
+| 2026-08-22 | stratechery.com stripe-acquiring-openrouter-aggregating-ai-flipping-the-business-model (paywalled) | scrape-failed |
+| 2026-08-22 | 2026-08-22-news-aggregation.processed.md | archive |
+| 2026-08-22 | wiki/technology/outer-biosciences-ai-living-skin-tissue-model.md | ingest |
+| 2026-08-22 | wiki/technology/rillet-ai-accounting-startup-unicorn-48-hours.md | ingest |
+| 2026-08-22 | wiki/technology/nvidia-agent-harness-more-important-than-model.md | ingest |
+| 2026-08-22 | wiki/productivity/smart-time-management-priorities-over-minutes.md | ingest |
+| 2026-08-22 | wiki/productivity/seven-productivity-habits-remove-friction.md | ingest |
+| 2026-08-22 | wiki/learning/ten-keys-optimize-practice-scott-young.md | ingest |
+| 2026-08-22 | wiki/learning/scott-young-views-on-learning-evolution.md | ingest |
+| 2026-08-22 | wiki/health/cyclosporiasis-outbreak-2026-us-produce.md | ingest |
+| 2026-08-22 | wiki/health/small-habit-upgrades-cut-heart-risk-study.md | ingest |
+| 2026-08-22 | wiki/strategy/mental-models-for-parenting-decisions.md | ingest |
+| 2026-08-22 | wiki/finance/microsoft-stock-570-target-azure-40pct-growth.md | ingest |
+| 2026-08-22 | wiki/finance/us-stocks-aug21-2026-higher-for-longer-rates.md | ingest |
+| 2026-08-22 | wiki/finance/dow-rebounds-500-points-pmi-four-year-high-aug2026.md | ingest |
+| 2026-08-22 | wiki/finance/gold-breaks-4600-treasury-buyback-dual-path.md | ingest |
+| 2026-08-22 | wiki/technology/genai-red-teaming-owasp-prompt-injection.md (merged new info) | ingest-dupe (Google AI Red Team SAIF framework + attack taxonomy merged into existing OWASP GenAI red-teaming note) |
+| 2026-08-22 | wiki/technology/red-team-vs-blue-team-cybersecurity.md (merged new info) | ingest-dupe (CrowdStrike purple-teaming benefit detail merged into existing red/blue/purple team note) |
+| 2026-08-22 | wiki/health/moderna-melanoma-cancer-vaccine-phase3-results.md (merged new info) | ingest-dupe (same Moderna/Merck Phase 3 melanoma event as existing note; merged precise risk-reduction percentages, mechanism detail, manufacturing timeline) |
+| 2026-08-22 | wiki/productivity/deep-work-techniques-daily-practice.md (merged new info) | ingest-dupe (same deep-work topic as existing living note; merged Depth Progression Framework, citations, reset protocol) |
+| 2026-08-22 | wiki/finance/ibm-quantum-foundry-trump-grant.md (merged new info) | ingest-dupe (same IBM Anderon quantum foundry event as existing note; merged $10B/5yr framing and analyst ratings) |
+| 2026-08-22 | wiki/finance/ai-financing-backstops-nvidia-broadcom-aug2026.md (merged new info) | ingest-dupe (same Nvidia/Broadcom AI financing backstops as existing note; merged $40T national debt and bond market context) |
+| 2026-08-22 | wiki/learning/deliberate-practice-ericsson-elements-guide.md (no new info) | ingest-dupe (identical source_url already ingested 2026-08-05; re-scraped same fs.blog article, no new content to merge) |
+| 2026-08-22 | daily-update/2026-08/2026-08-22.md | newsletter |
+| 2026-08-22 | weekly-update/2026-08/2026-W34-weekly.md | newsletter |

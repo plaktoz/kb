@@ -4,6 +4,10 @@ source_url: https://stocktwits.com/news-articles/markets/equity/ibm-stock-rallie
 author: Stocktwits
 tags: [ibm, quantum-computing, government-grant, holdings]
 date_consumed: 2026-07-27
+additional_sources:
+  - url: https://stocktwits.com/news-articles/markets/equity/ibm-stock-gains-amid-plan-to-invest-10-b-for-large-scale-quantum-computer-by-2029/cZgiqlxRetd
+    author: Shashank Nayar
+    date: 2026-05-28
 ---
 
 ## Summary
@@ -29,6 +33,8 @@ date_consumed: 2026-07-27
 - **Wedbush maintained Buy with a $225 price target**, about 11% below the stock's post-rally price.
 - **IBM remained down 14% YTD** despite the rally, reflecting a rough year overall for the stock.
 - **Government-backed quantum bets are spreading**: Rigetti, D-Wave, and Infleqtion also received funding and rallied.
+
+**Update (additional source, 2026-08-22, Stocktwits, reporting on the May 2026 announcement):** Frames the same Anderon $1B match within a larger **$10 billion, five-year total spending plan** covering R&D, capex, manufacturing expansion, and targeted acquisitions, aimed at a commercial fault-tolerant quantum system by 2029 capable of 100 million quantum gate operations. Confirms IBM already operates 90+ quantum installations globally. Adds analyst-rating detail at the time: of 21 analysts, 13 rated IBM "buy," 7 "hold," 1 "sell," with retail sentiment on Stocktwits "extremely bullish."
 
 ## 🧠 First Principles & Mental Models
 
