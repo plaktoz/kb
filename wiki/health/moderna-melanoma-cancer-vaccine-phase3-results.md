@@ -4,6 +4,10 @@ source_url: https://www.bostonglobe.com/2026/08/19/business/moderna-cancer-vacci
 author: Marin Wolf and Jonathan Saltzman
 tags: [moderna, cancer-vaccine, mrna, melanoma]
 date_consumed: 2026-08-20
+additional_sources:
+  - url: https://www.medicalnewstoday.com/articles/novel-mrna-cancer-vaccine-plus-immunotherapy-reduces-melanoma-relapse-phase-3-trial
+    author: Corrie Pelc
+    date: 2026-08-21
 ---
 
 ## Summary
@@ -26,6 +30,8 @@ date_consumed: 2026-08-20
 - **Trials are underway** in non-small cell lung cancer, bladder cancer, and renal cell carcinoma to test generalizability.
 - **Manufacturing customization remains a cost/complexity challenge**, though experts expect the process to get faster as adoption scales.
 - **Moderna could win FDA approval and start marketing** the melanoma therapy next year, per an analyst estimate, though replication in other cancers is not yet proven.
+
+**Update (additional source, 2026-08-22, Medical News Today):** Adds precision to the Phase 3 (INTerpath-001) results after 5-year follow-up: a **49% reduction in risk of recurrence or death** and a **59% lower risk of distant metastasis or death**, versus Keytruda alone. Explains the mechanism in more detail — the vaccine is built from a patient's own resected-tumor DNA mutations, described by one oncologist as a "custom-built wanted poster" that trains the immune system to hunt down matching cancer cells as ongoing surveillance. Side effects were reported as similar to Keytruda alone. Adds a practical adoption constraint: manufacturing a personalized vaccine currently takes roughly six weeks from sample receipt per Moderna's stated target, though independent estimates run two to four months — meaning turnaround time, cost, and insurance coverage will matter for real-world access. Experts interviewed characterized the result as a major step but "not yet standard treatment," pending longer-term data and larger patient follow-up.
 
 ## 🃏 Review Questions
 

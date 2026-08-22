@@ -8,6 +8,9 @@ additional_sources:
   - url: https://www.offsec.com/blog/red-team-vs-blue-team/
     author: Sara Jelen
     date: 2024-12-13
+  - url: https://www.crowdstrike.com/cybersecurity-101/purple-teaming/
+    author: Janani Nagarajan
+    date: 2023-02-22
 ---
 
 ## Summary
@@ -37,6 +40,8 @@ Red and blue teams are complementary roles in cybersecurity simulations modeled 
 - **Blue Team Burnout**: Constant vigilance and repetitive monitoring tasks are a known retention risk.
 - **Simulation Example**: A spear-phishing ransomware drill lets blue team practice isolating affected systems while the debrief surfaces concrete defense improvements.
 - **Mutual Outcomes**: Faster incident response, stronger inter-team trust, continuously evolving defenses, and increased organizational resilience.
+
+**Update (additional source, 2026-08-22, CrowdStrike "Purple Teaming Explained"):** Adds a more granular benefit breakdown for purple teaming beyond the standard red/blue advantages (misconfiguration discovery, stronger detection, cross-team cooperation, human-vulnerability awareness, low-risk skill building): **enhanced protection through continuous feedback and knowledge sharing**, **greater consistency through ongoing (not one-off) engagement**, and **shared goals between offensive and defensive personnel** — reframing purple teaming as an ongoing operating model rather than a single joint exercise.
 
 ## 🧠 First Principles & Mental Models
 
