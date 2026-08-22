@@ -1950,3 +1950,4 @@
 | 2026-08-22 | wiki/finance/ai-financing-backstops-nvidia-broadcom-aug2026.md (merged new info) | ingest-dupe (same Nvidia/Broadcom AI financing backstops as existing note; merged $40T national debt and bond market context) |
 | 2026-08-22 | wiki/learning/deliberate-practice-ericsson-elements-guide.md (no new info) | ingest-dupe (identical source_url already ingested 2026-08-05; re-scraped same fs.blog article, no new content to merge) |
 | 2026-08-22 | daily-update/2026-08/2026-08-22.md | newsletter |
+| 2026-08-22 | weekly-update/2026-08/2026-W34-weekly.md | newsletter |
