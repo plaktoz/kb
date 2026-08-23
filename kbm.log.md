@@ -1957,3 +1957,45 @@
 | 2026-08-22 | topics/ai-in-education.md | compound |
 | 2026-08-22 | topics/ai-workplace-adoption.md | compound |
 | 2026-08-22 | topics/llm-security.md | compound |
+| 2026-08-23 | 2026-08-23-news-aggregation.md | news-fetch |
+| 2026-08-23 | 2026-08-22-spacexai-launches-grok-bot.md | scrape |
+| 2026-08-23 | 2026-08-22-nvidia-beat-raise-quarter-financing-deals.md | scrape |
+| 2026-08-23 | 2026-08-21-openai-narrows-anthropic-business-lead-ramp-data.md | scrape |
+| 2026-08-23 | 2026-08-21-wolfe-research-sp500-earnings-momentum.md | scrape |
+| 2026-08-23 | 2026-08-22-dow-rallies-500-points-weekly-losing-streak.md | scrape |
+| 2026-08-23 | 2026-08-21-watching-warsh-jackson-hole-market-outlook.md | scrape |
+| 2026-08-23 | 2026-08-20-seven-productivity-tips-sound-wrong-but-work.md | scrape |
+| 2026-08-23 | 2026-08-17-how-to-stop-procrastinating-homework.md | scrape |
+| 2026-08-23 | 2025-04-30-how-ai-increases-efficiency-in-the-workplace.md | scrape |
+| 2026-08-23 | 2026-08-10-instructional-designers-keep-up-with-new-technology.md | scrape |
+| 2026-08-23 | 2026-08-17-5-ways-ai-can-strengthen-your-teaching-this-school-year.md | scrape |
+| 2026-08-23 | 2026-08-18-study-smarter-not-harder-productivity-tips.md | scrape |
+| 2026-08-23 | 2026-08-19-daily-sugary-drink-doubles-stomach-cancer-risk.md | scrape |
+| 2026-08-23 | 2026-08-10-gout-and-heart-disease-connection.md | scrape |
+| 2026-08-23 | 2026-08-20-psychologists-secret-to-better-health-wellness-stacking.md | scrape |
+| 2026-08-23 | 2026-08-17-microsofts-ai-chip-mystery-power-problem.md | scrape |
+| 2026-08-23 | 2026-08-20-why-ibm-is-getting-attention-today.md | scrape |
+| 2026-08-23 | 2026-08-21-sp500-stock-worth-investigating-momentum.md | scrape |
+| 2026-08-23 | seekingalpha.com bessent-doubled-buybacks-yields-went-higher-headache-for-warsh (paywalled, no body text) | scrape-failed |
+| 2026-08-23 | investors.com dow-jones-futures-market-rally-nvidia-crowdstrike-warsh (subscription stub, no body text) | scrape-failed |
+| 2026-08-23 | hbr.org how-much-time-do-your-employees-spend-botsitting (paywalled, summary only) | scrape-failed |
+| 2026-08-23 | 2026-08-23-news-aggregation.processed.md | archive |
+| 2026-08-23 | wiki/technology/spacexai-grok-bot-always-on-ai-agent.md | ingest |
+| 2026-08-23 | wiki/finance/nvidia-q2-2027-earnings-preview-financing-deals.md | ingest |
+| 2026-08-23 | wiki/technology/openai-narrows-anthropic-business-lead-ramp-aug2026.md | ingest |
+| 2026-08-23 | wiki/finance/wolfe-research-sp500-earnings-momentum-aug2026.md | ingest |
+| 2026-08-23 | wiki/finance/standard-chartered-ai-capex-forecast-jackson-hole-aug2026.md | ingest |
+| 2026-08-23 | wiki/productivity/seven-productivity-tips-sound-wrong-sylwia.md | ingest |
+| 2026-08-23 | wiki/productivity/ai-increases-workplace-efficiency-stats.md | ingest |
+| 2026-08-23 | wiki/learning/instructional-designers-ai-technology-2026.md | ingest |
+| 2026-08-23 | wiki/learning/five-ways-ai-strengthens-teaching-2026-27.md | ingest |
+| 2026-08-23 | wiki/learning/study-smarter-not-harder-uncf.md | ingest |
+| 2026-08-23 | wiki/health/sugary-drinks-stomach-cancer-risk-study.md | ingest |
+| 2026-08-23 | wiki/health/gout-heart-disease-connection.md | ingest |
+| 2026-08-23 | wiki/health/wellness-stacking-habit-sequencing.md | ingest |
+| 2026-08-23 | wiki/finance/sp500-momentum-stock-picks-lennox-delta-hp-aug2026.md | ingest |
+| 2026-08-23 | wiki/finance/dow-rebounds-500-points-pmi-four-year-high-aug2026.md (merged new info) | ingest-dupe (same Aug 21 rally session; merged healthcare/crypto sector detail and weekly-close context) |
+| 2026-08-23 | wiki/finance/microsoft-ai-chip-count-dispute-aug2026.md (merged new info) | ingest-dupe (same Guardian MSFT chip-count investigation; merged Nadella's direct quote and competitive framing) |
+| 2026-08-23 | wiki/productivity/what-procrastination-really-is-how-to-stop.md (merged new info) | ingest-dupe (same procrastination topic; merged Two-Minute Rule framing) |
+| 2026-08-23 | wiki/finance/ibm-ceo-krishna-ai-strategy-defense-q2-2026.md (no new info) | ingest-dupe (identical Simply Wall St source already merged into this note on 2026-08-20; no new content) |
+| 2026-08-23 | daily-update/2026-08/2026-08-23.md | newsletter |
