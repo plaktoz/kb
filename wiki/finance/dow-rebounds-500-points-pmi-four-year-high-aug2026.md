@@ -34,3 +34,13 @@ US stocks rebounded on August 21, 2026 (Dow +0.98%, Nasdaq +0.43%, S&P 500 +0.43
 
 **Q3**: How does Ray Dalio's gold-allocation recommendation connect to the day's broader macro narrative?
 **A**: Dalio's call to shift 10–15% of a portfolio into gold as a hedge against a feared US debt crisis aligns with the same day's gold rally driven by Treasury buyback news — both reflect growing market unease about long-term US fiscal sustainability.
+
+## Update (2026-08-23, zylostar.com — sector and crypto detail)
+
+A second wrap of the same Aug 21 session adds sector- and stock-level detail not covered above:
+
+- **Healthcare led the Dow**: Merck and Johnson & Johnson were called out as the specific stocks driving the Dow's outperformance among the three indexes.
+- **Crypto-adjacent stocks rallied hard**: Robinhood +14% and Coinbase +8% as bitcoin posted a 22% weekly gain; materials stocks rose 2% in the same session.
+- **Weekly context reaffirmed**: despite the Friday bounce, the S&P 500 (-1.4%), Nasdaq (-2%), and Dow (-0.9%) all closed the week lower, ending three-week winning streaks for the S&P 500 and Nasdaq; the MSCI All Country World Index fell nearly 1% for the week, underscoring the pullback wasn't US-only.
+
+Source: [Dow Rallies 500 Points Friday, but Weekly Losing Streak Continues](https://news.zylostar.com/news/dow-rallies-500-points-friday-but-weekly-losing-streak-continues) (2026-08-22)

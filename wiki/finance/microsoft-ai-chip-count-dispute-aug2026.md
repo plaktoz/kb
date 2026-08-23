@@ -33,3 +33,9 @@ date_consumed: 2026-08-19
 
 **Q3**: What's the practical takeaway for evaluating this kind of story?
 **A**: Nadella's own explanation (chips sitting idle due to unfinished facilities/power, not chip scarcity) and JPMorgan's unchanged bullish stance suggest the stock drop may reflect sentiment overshoot on an unverified proxy metric rather than a confirmed capacity crisis.
+
+## Update (2026-08-23, Inside Telecom — Nadella's direct quote)
+
+A second outlet covering the same Guardian investigation adds Nadella's exact framing of the bottleneck, spoken on the *All Things AI* podcast: "If you can't do that, you may actually have a bunch of chips sitting in inventory that I can't plug in. In fact, that is my problem today. It's not a supply issue of chips. It's the fact that I don't have warm shells to plug into." The piece also frames the broader competitive angle: suppliers whose hardware fits available power/cooling limits may appeal to customers over raw chip speed, giving Nvidia AI-chip competitors a possible opening if Big Tech's power buildout can't keep pace with silicon orders.
+
+Source: [Microsoft's AI Chip Mystery May Become a Power Problem](https://insidetelecom.com/microsoft-ai-computing-chips-anchored-by-power) (Inside Telecom, 2026-08-17)

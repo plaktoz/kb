@@ -47,3 +47,12 @@ A complementary research-backed guide adds concrete frameworks on top of the moo
 - New habits take a median of 66 days to become automatic (range 18-254 days), per Lally et al. (2010).
 
 Roughly 20% of adults are chronic procrastinators (Joseph Ferrari) — reinforcing this note's original framing that procrastination is an emotion-regulation problem, not a character flaw.
+
+## Update (2026-08-23, MyStudyLife — Two-Minute Rule and student-facing framing)
+
+A student-oriented guide reframes the same core interventions with one specifically named addition:
+
+- **[[Two-Minute Rule]]**: commit to just two minutes of work — small enough to slip past the brain's resistance before dread kicks in; functionally similar to the Five-Minute Rule above but framed around beating the *anticipation* of a task, which is "almost always worse than the task itself."
+- Restates the Pomodoro Technique (25 min work / 5 min break) as a complementary time-boxing tool alongside task decomposition, distraction removal, real deadlines with stakes, and self-forgiveness after a lapse — all consistent with the mood-regulation model already documented above.
+
+Source: [How to Stop Procrastinating on Homework: 7 Strategies That Work](https://mystudylife.com/how-to-stop-procrastinating-homework) (2026-08-17)
