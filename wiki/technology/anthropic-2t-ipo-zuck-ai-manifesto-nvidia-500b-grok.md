@@ -44,3 +44,8 @@ The All-In podcast covers four major AI-industry developments: Anthropic's antic
 
 **Q3**: Why does Gavin Baker think Grok is underappreciated by investors?
 **A**: Grok 4.6 has reached near-frontier quality at significantly lower cost in roughly six months, yet most investors ignore it entirely when evaluating SpaceX and xAI's portfolio.
+
+
+## Update (2026-08-25, additional source: Yahoo Finance — public filing timeline)
+
+Anthropic is preparing to publicly file its IPO paperwork as soon as the end of August 2026, per Bloomberg — a concrete timeline update on top of the confidential filing already on record here. If it sticks to that schedule, Anthropic would beat [[OpenAI]] to market (OpenAI is expected to IPO later in 2026 or early 2027) and would be angling to match or surpass [[SpaceX]]'s record-setting $75B June 2026 IPO. The filing will give the outside world its first look at Anthropic's actual financials — quarterly revenue growth and business-segment breakdown — rather than the banker-estimated figures cited in the original coverage here.
