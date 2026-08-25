@@ -1999,3 +1999,46 @@
 | 2026-08-23 | wiki/productivity/what-procrastination-really-is-how-to-stop.md (merged new info) | ingest-dupe (same procrastination topic; merged Two-Minute Rule framing) |
 | 2026-08-23 | wiki/finance/ibm-ceo-krishna-ai-strategy-defense-q2-2026.md (no new info) | ingest-dupe (identical Simply Wall St source already merged into this note on 2026-08-20; no new content) |
 | 2026-08-23 | daily-update/2026-08/2026-08-23.md | newsletter |
+| 2026-08-25 | 2026-08-25-news-aggregation.md | news-fetch |
+| 2026-08-25 | 2026-08-25-nvidia-perplexity-investment-talks-30b-valuation.md | scrape |
+| 2026-08-25 | 2026-08-24-anthropic-ipo-paperwork-this-month.md | scrape |
+| 2026-08-25 | 2026-08-24-nvidia-poolside-7-billion-open-weight-deal.md | scrape |
+| 2026-08-25 | 2026-08-24-nvidia-earnings-week-biggest-market-catalyst.md | scrape |
+| 2026-08-25 | 2026-08-24-stocks-slip-bessent-iran-sanctions-campaign.md | scrape |
+| 2026-08-25 | 2026-08-24-nasdaq-sp500-close-lower-oil-drops-iran-sanctions.md | scrape |
+| 2026-08-25 | 2026-08-25-mastering-deep-work-techniques-focus.md | scrape |
+| 2026-08-25 | 2026-08-25-30-productivity-tips-to-keep-in-mind.md | scrape |
+| 2026-08-25 | 2024-03-12-time-management-strategies-maximizing-efficiency.md | scrape |
+| 2026-08-25 | 2026-08-25-build-your-ld-edge-skills-strategies-connections.md | scrape |
+| 2026-08-25 | 2026-08-23-how-big-tech-captured-american-schools.md | scrape |
+| 2026-08-25 | 2026-08-24-born-digital-librarians-reflection-digital-tools.md | scrape |
+| 2026-08-25 | 2026-08-25-mediterranean-diet-reduces-perceived-stress.md | scrape |
+| 2026-08-25 | 2026-08-25-diet-before-age-2-may-shape-brain-health.md | scrape |
+| 2026-08-25 | 2026-08-24-daily-health-brief-8-24-2026.md | scrape |
+| 2026-08-25 | 2026-08-22-charlie-munger-lattice-of-mental-models.md | scrape |
+| 2026-08-25 | 2026-08-25-effective-decision-making-frameworks-corporate-leaders.md | scrape |
+| 2026-08-25 | 2026-08-24-microsoft-msft-steadies-markets-cloud-ai-demand.md | scrape |
+| 2026-08-25 | 2026-08-24-ibm-dual-architecture-processor-ibm-z-linuxone.md | scrape |
+| 2026-08-25 | 2026-08-25-spmo-tech-heavy-momentum-market-crossroads.md | scrape |
+| 2026-08-25 | 2026-08-25-news-aggregation.processed.md | archive |
+| 2026-08-25 | wiki/technology/nvidia-perplexity-investment-talks-30b-valuation.md | ingest |
+| 2026-08-25 | wiki/technology/nvidia-poolside-7-billion-open-weight-deal.md | ingest |
+| 2026-08-25 | wiki/finance/stocks-slip-bessent-iran-sanctions-campaign.md | ingest |
+| 2026-08-25 | wiki/finance/nasdaq-sp500-close-lower-oil-drops-iran-sanctions.md | ingest |
+| 2026-08-25 | wiki/finance/microsoft-msft-steadies-markets-cloud-ai-demand.md | ingest |
+| 2026-08-25 | wiki/finance/ibm-dual-architecture-processor-ibm-z-linuxone.md | ingest |
+| 2026-08-25 | wiki/learning/build-your-ld-edge-skills-strategies-connections.md | ingest |
+| 2026-08-25 | wiki/learning/how-big-tech-captured-american-schools.md | ingest |
+| 2026-08-25 | wiki/learning/born-digital-librarians-reflection-digital-tools.md | ingest |
+| 2026-08-25 | wiki/health/mediterranean-diet-reduces-perceived-stress.md | ingest |
+| 2026-08-25 | wiki/health/diet-before-age-2-may-shape-brain-health.md | ingest |
+| 2026-08-25 | wiki/health/daily-health-brief-8-24-2026.md | ingest |
+| 2026-08-25 | wiki/strategy/effective-decision-making-frameworks-corporate-leaders.md | ingest |
+| 2026-08-25 | wiki/strategy/charlie-munger-lattice-of-mental-models.md (merged new info) | ingest-dupe (same Munger latticework topic; merged 3 new model applications from solopreneur rewrite) |
+| 2026-08-25 | wiki/finance/nvidia-q2-2027-earnings-preview-financing-deals.md (merged new info) | ingest-dupe (same Aug 26 Nvidia earnings topic; merged Seema Shah catalyst framing, prediction-market odds, Huang quotes) |
+| 2026-08-25 | wiki/finance/spmo-momentum-etf-2026-standout.md (merged new info) | ingest-dupe (same SPMO topic; merged current holdings weights and structural outlook) |
+| 2026-08-25 | wiki/technology/anthropic-2t-ipo-zuck-ai-manifesto-nvidia-500b-grok.md (merged new info) | ingest-dupe (same Anthropic IPO topic; merged concrete public-filing timeline) |
+| 2026-08-25 | 2026-08-25-mastering-deep-work-techniques-focus.md (no new info) | ingest-dupe (deep work/focus-block content already exhaustively covered in wiki/productivity/deep-work-techniques-daily-practice.md; no new content) |
+| 2026-08-25 | 2026-08-25-30-productivity-tips-to-keep-in-mind.md (no new info) | ingest-dupe (Pomodoro/productive-hours content already covered in wiki/productivity/pomodoro-technique-25-minute-work-blocks.md; no new content) |
+| 2026-08-25 | 2024-03-12-time-management-strategies-maximizing-efficiency.md (no new info) | ingest-dupe (time-blocking/distraction content already covered in wiki/productivity/time-management-tips-productivity-efficiency.md; no new content) |
+| 2026-08-25 | daily-update/2026-08/2026-08-25.md | newsletter |

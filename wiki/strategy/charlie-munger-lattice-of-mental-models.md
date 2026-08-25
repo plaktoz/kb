@@ -41,3 +41,12 @@ Charlie Munger's "latticework of mental models" combines roughly 129 ideas acros
 
 **Q3**: How does the "Rule of 3" practice operationalize the latticework day-to-day?
 **A**: For one real decision, deliberately select at least three mental models from different categories, write a sentence on how each reframes the decision, and only then decide — forcing multidisciplinary thinking instead of a single default heuristic.
+
+
+## Update (2026-08-25, additional source: 1 Hour Guide — solopreneur rewrite of the latticework)
+
+A solopreneur-focused rewrite of the 129-model latticework adds three model applications not previously captured here:
+
+- **[[Technology as Friend vs. Competitor]]**: AI tools either accelerate your output or replace it, depending on where you sit in the value chain — at the level of pure execution, AI competes with you; at the level of judgment and strategy, it assists you. Position your work accordingly rather than treating "AI risk" as uniform.
+- **[[Lean Operations]]**: A solo operation with clean processes and no fixed overhead is structurally more agile than a small agency carrying coordination overhead — that agility is itself a durable competitive asset, not just a cost advantage.
+- **[[Cancer-Surgery Formula]]**: Sometimes removing a significant but toxic element — a difficult client, an unprofitable service line, a distracting side project — is necessary to protect the health of the broader business, even when that element still generates some revenue.

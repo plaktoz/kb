@@ -37,3 +37,13 @@ Ahead of its Aug. 26 fiscal Q2 2027 earnings, Wall Street broadly expects Nvidia
 
 **Q3**: How should an investor weigh the earnings beat against the financing risk?
 **A**: Per the article, strong fundamentals (valuation, margins, Rubin ramp) support the bull case, but investors should temper return expectations and watch management's commentary on financing-deal risk rather than treating a headline beat as the whole story.
+
+
+## Update (2026-08-25, additional source: 247wallst.com — Seema Shah market-catalyst framing)
+
+Principal Asset Management's chief global strategist Seema Shah frames Nvidia's Aug. 26 print as this week's single biggest market catalyst — the test of whether the AI capex cycle can start showing profitable returns, not just whether Nvidia beats. Adds detail not in the original financing-deal framing:
+
+- **Q1 actuals for context**: Nvidia's prior quarter posted $82B in revenue, up 85% YoY, against Q2 guidance of $91B (excluding China data center compute).
+- **Prediction-market pricing**: Markets assign 96% odds of a headline beat but only 43% odds NVDA closes above $220 after the report — a beat is priced in; the stock reaction is not.
+- **[[Jensen Huang]] framing**: Huang has argued "Compute is revenue. Compute is profit" and "Tokens are now profitable," positioning Nvidia's platform economics (not just chip sales) as the monetization proof point Shah says investors now demand.
+- **Losing streak**: NVDA fell for seven straight sessions into the print, giving back much of its July 29–Aug 18 rally, which raises the stakes on guidance credibility given the financing-deal concerns already on record here.
