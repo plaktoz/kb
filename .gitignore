@@ -7,3 +7,6 @@
 .trash/
 .DS_Store
 Thumbs.db
+
+# Ignore local git worktree checkouts (feature branches checked out via `git worktree add .worktrees/<name>`)
+.worktrees/

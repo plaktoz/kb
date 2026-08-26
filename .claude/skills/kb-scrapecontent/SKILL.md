@@ -24,7 +24,7 @@ If the same URL appears more than once, process it only once.
 
 ### 2. Skip if already scraped
 
-Before fetching, check whether a file for this article already exists in `/raw/` or `/raw/processed/` by scanning for a matching `source_url` in existing file headers. If found, skip it.
+Before fetching, run a fast exact-match check: `grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null` (this covers `raw/`, `raw/processed/`, and any `wiki/` note the URL may already have been ingested into). If any match is found, this article has already been scraped and/or ingested — skip it without fetching.
 
 ### 3. Fetch and clean
 

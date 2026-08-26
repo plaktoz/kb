@@ -42,6 +42,29 @@ Never include articles from the following domains. If a URL from any of these do
 - reuters.com
 - www.reuters.com
 
+### Known-unfetchable in Cowork sessions
+
+The following domains have returned a blocked/`permission_error` response from the Cowork web-fetch tool in prior runs. If running in a Cowork session, treat them the same as blacklisted domains and pick an alternative source instead. (They may work fine in Claude Code sessions with different fetch tooling — do not blacklist them there.)
+
+- investopedia.com / www.investopedia.com
+- timesofindia.indiatimes.com
+- africa.businessinsider.com
+
+### Live-blog / JS-rendered pages
+
+Avoid URLs that look like live blogs or rolling-update pages (path containing `live-updates`, `/live/`, or `liveblog`) — these are typically client-side rendered and return empty content when scraped, even when the domain itself isn't blocked. Prefer a static recap or analysis article covering the same story instead.
+
+## Viability pre-check
+
+Before finalizing the output file, verify each candidate URL is actually fetchable and contains extractable article text — a quick test-fetch is enough, you don't need the full clean/parse pass `/kb-scrapecontent` will do later. For any candidate that returns a blocked/permission error, returns empty or near-empty content, or is a live-blog page per the guidance above: search for one replacement candidate in the same category and re-check it. If the replacement also fails, try once more; if you still can't find a working replacement after two attempts, drop the slot and note the shortfall explicitly in that category's section of the output file, e.g.:
+
+```
+## 📈 My Holdings
+(2 of 3 — one candidate was unscrapable and no working replacement was found)
+```
+
+Do not save a URL to the output file that you have not verified is fetchable — this avoids `/kb-scrapecontent` discovering dead URLs later and having to backfill after the fact.
+
 ## Output file
 
 Save the results to `/raw/url/YYYY-MM-DD-news-aggregation.md` (use today's date).

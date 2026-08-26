@@ -7,7 +7,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `glossary.md` — canonical vocabulary (personal reference only, do not read or rely on during tasks)
 - `kbm.log.md` — activity log; append a row after every pipeline action
 - `raw/` — source material at different pipeline stages
-  - `url/` — URL lists waiting to be scraped (consumed and deleted by the scrape step)
+  - `url/` — URL lists waiting to be scraped (consumed and renamed to `.processed.md` by the scrape step, not deleted — tracked in git alongside the other pipeline outputs)
   - `*.md` — scraped articles awaiting ingest
   - `processed/` — post-ingest archive; articles moved here after wiki notes are created
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
@@ -51,6 +51,8 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
 
+> In sessions without the Workflow tool (e.g. Cowork, which cannot run `.claude/workflows/*.js`), `kb-scrapecontent-parallel` and `kb-ingest-parallel` automatically fall back to batched general-purpose Agent/Task calls instead — see each skill's `SKILL.md` for the exact fallback procedure. `/kb-daily` and `/kb-daily-autocommit` work unattended in either environment.
+
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
 2. Transform it into structured notes that are concise, atomic, and link-rich.
@@ -79,7 +81,10 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`
+Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`
+
+- `ingest`: a new wiki note was created, or an existing note was updated with genuinely new information. These rows are what `/kb-newsletter` picks up for the day's digest.
+- `ingest-dupe`: a raw file's `source_url` (or topic) already existed in `wiki/` with nothing new to add. Logged for audit trail only — File column should point to the *existing* note, not a new file — and intentionally excluded from the newsletter.
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.
