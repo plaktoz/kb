@@ -12,7 +12,7 @@ Run the following steps in order. Stop only if a git operation fails — pipelin
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ raw/processed/ kbm.log.md
+git status --porcelain wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 Filter the output for lines beginning with `??`. If any exist, **stop immediately** and print:
@@ -48,7 +48,7 @@ Collect the end-of-run summary produced by that pipeline. You will need these co
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ raw/processed/ kbm.log.md
+git status --porcelain wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 If the output is empty (nothing changed), do the following and then stop:
@@ -62,7 +62,7 @@ If the output is empty (nothing changed), do the following and then stop:
 Stage only the pipeline output paths:
 
 ```bash
-git add wiki/ daily-update/ raw/processed/ kbm.log.md
+git add wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 Build the commit message using the counts from Step 2 in this format:

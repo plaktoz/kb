@@ -19,7 +19,20 @@ Place the file into exactly one category. Read `data/wiki-categories.md` for the
 
 ### 2. Check for existing notes
 
-Before writing, search `wiki/<category>/` for an existing note on the same topic. If one exists, update it with new information rather than creating a duplicate.
+First, run an exact-duplicate check on the raw file's `source_url`: `grep -rl "source_url: {URL}" wiki/`. If this returns a match, the article has already been ingested — go to step 2a and do not write any new content.
+
+If no exact match is found, do a topical scan: search `wiki/<category>/` (and skim adjacent categories if the topic could straddle two) for an existing note covering the same underlying story or concept from a different source. If one exists, treat it as a near-duplicate and also go to step 2a.
+
+If neither check finds a match, this is a genuinely new topic — continue to step 3.
+
+#### 2a. Duplicate / near-duplicate handling
+
+Read the matched note and compare it against the new raw file.
+
+- **No new information** — the raw file adds nothing beyond what the existing note already covers: do not modify the note. Move the raw file to `raw/processed/` per the usual post-processing step, then log it with activity value `ingest-dupe`, using the *existing note's* path as the File column plus a short parenthetical reason, e.g. `wiki/productivity/seven-productivity-habits-remove-friction.md (identical source_url, no new info)`.
+- **New information** — e.g. a follow-up development, updated figures, a deal completion: merge it into the existing note (update the relevant section(s), bump `date_consumed` to today) rather than creating a second note. Move the raw file to `raw/processed/` as usual, then log it with activity value `ingest` — this counts as a real ingest and will surface in the next newsletter — using the note's path plus a note like `(merged update)`.
+
+Either way, this file is done — skip steps 3–11 and the "After processing each file" section below (their move/log already happened here).
 
 ### 3. Create output directory if missing
 
@@ -110,6 +123,8 @@ Each answer should be 1–2 sentences, drawn only from the article.
 - Do not output any chat meta-text. Start directly with the YAML frontmatter.
 
 ## After processing each file
+
+(Applies only to files that resulted in a brand-new note. Duplicate/near-duplicate files already moved their raw file and logged their row in step 2a — do not repeat this section for them.)
 
 1. Move the source file from `/raw/` to `/raw/processed/`
 2. Append a row to `kbm.log.md`:

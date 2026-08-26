@@ -15,13 +15,13 @@ If this step fails, note the error and continue to Step 2.
 
 ## Step 2: Scrape Content
 
-Run the Workflow tool with `name: "kb-scrapecontent-parallel"`. Wait for the workflow to complete, then note how many articles were scraped and how many failed.
+Invoke the `/kb-scrapecontent-parallel` skill and execute it (it uses the Workflow tool where available, and falls back to batched Agent/Task calls otherwise — see its `SKILL.md`). Note how many articles were scraped and how many failed.
 
 If this step fails, note the error and continue to Step 3.
 
 ## Step 3: Ingest
 
-Run the Workflow tool with `name: "kb-ingest-parallel"`. Wait for the workflow to complete, then note how many files were ingested.
+Invoke the `/kb-ingest-parallel` skill and execute it (same fallback behavior as Step 2). Note how many files were ingested as new/merged notes (`ingest`) versus flagged as duplicates (`ingest-dupe`).
 
 If this step fails, note the error and continue to Step 4.
 
