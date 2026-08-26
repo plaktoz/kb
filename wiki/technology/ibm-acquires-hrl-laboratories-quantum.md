@@ -8,7 +8,9 @@ date_consumed: 2026-08-03
 
 ## Summary
 
-IBM has agreed to acquire HRL Laboratories — a Boeing/General Motors-owned R&D institution — adding silicon-spin qubit and quantum sensing expertise to its superconducting-qubit-based quantum computing roadmap. The deal extends IBM's push toward large-scale, fault-tolerant quantum computers (Starling by 2029, Blue Jay in the mid-2030s) and complements Anderon, the quantum wafer foundry IBM announced in May 2026 with U.S. Department of Commerce backing.
+IBM has completed its acquisition of HRL Laboratories — a Boeing/General Motors-owned R&D institution — adding silicon-spin qubit and quantum sensing expertise to its superconducting-qubit-based quantum computing roadmap. The deal, announced in July 2026 and closed August 26, 2026, extends IBM's push toward large-scale, fault-tolerant quantum computers (Starling by 2029, Blue Jay in the mid-2030s) and complements Anderon, the quantum wafer foundry IBM announced in May 2026 with U.S. Department of Commerce backing.
+
+**Update (2026-08-26):** IBM confirmed the acquisition has officially closed. Financial terms remain undisclosed. Boeing and General Motors, HRL's former co-owners, will continue partnering with IBM and HRL on quantum applications and advanced technology development going forward.
 
 ## Core Concepts
 
@@ -24,7 +26,8 @@ IBM has agreed to acquire HRL Laboratories — a Boeing/General Motors-owned R&D
 - **The deal is R&D-and-IP driven**, not primarily financial — terms were undisclosed, and Boeing/GM continue partnering with IBM post-acquisition.
 - **HRL adds commercial breadth**: quantum sensing, advanced manufacturing, and materials science capabilities extend beyond quantum computing into navigation, defense, and life-sciences applications.
 - **Connects to IBM's broader quantum manufacturing strategy**: potential integration with Anderon (the quantum foundry) could let IBM scale spin-qubit production alongside superconducting qubits.
-- **Deal expected to close by end of Q3 2026**, subject to standard regulatory approval.
+- **Deal officially closed on August 26, 2026**, ahead of the original end-of-Q3 2026 target, with financial terms undisclosed.
+- **Boeing and General Motors remain ongoing partners**, continuing joint quantum-application work with IBM and HRL post-close.
 
 ## 🧠 First Principles & Mental Models
 

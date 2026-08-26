@@ -2042,3 +2042,41 @@
 | 2026-08-25 | 2026-08-25-30-productivity-tips-to-keep-in-mind.md (no new info) | ingest-dupe (Pomodoro/productive-hours content already covered in wiki/productivity/pomodoro-technique-25-minute-work-blocks.md; no new content) |
 | 2026-08-25 | 2024-03-12-time-management-strategies-maximizing-efficiency.md (no new info) | ingest-dupe (time-blocking/distraction content already covered in wiki/productivity/time-management-tips-productivity-efficiency.md; no new content) |
 | 2026-08-25 | daily-update/2026-08/2026-08-25.md | newsletter |
+| 2026-08-26 | 2026-08-26-news-aggregation.md | news-fetch |
+| 2026-08-26 | 2026-08-25-stability-ai-stable-diffusion-76-million-funding.md | scrape |
+| 2026-08-26 | 2026-08-26-legato-hearing-tech-startup-ai-hearing-glasses.md | scrape |
+| 2026-08-26 | 2026-08-22-inherent-deepmind-alumni-ai-outperforms-anthropic-openai.md | scrape |
+| 2026-08-26 | 2026-08-26-stock-market-news-aug-26-2026-zacks.md | scrape |
+| 2026-08-26 | 2026-08-26-sp500-today-holds-near-7683-nvidia-earnings.md | scrape |
+| 2026-08-26 | 2026-08-26-pce-ticks-higher-nvidia-reports-after-close.md | scrape |
+| 2026-08-26 | 2026-08-25-microsoft-ripped-28-percent-msft-stock-600.md | scrape |
+| 2026-08-26 | 2026-08-26-ibm-completes-acquisition-hrl-laboratories-quantum.md | scrape |
+| 2026-08-26 | 2016-09-14-on-deep-breaks-cal-newport.md | scrape |
+| 2026-08-26 | 2026-08-21-seven-productivity-habits-save-time.md | scrape |
+| 2026-08-26 | 2026-08-19-smart-time-management-strategies-daily-productivity.md | scrape |
+| 2026-08-26 | 2013-06-20-beginners-and-masters-learning-strategies.md | scrape |
+| 2026-08-26 | 2021-05-09-ten-essential-strategies-deeper-learning.md | scrape |
+| 2026-08-26 | 2026-08-24-building-culture-continuous-learning-strategies.md | scrape |
+| 2026-08-26 | 2026-08-26-metabolism-mental-health-keto-schizophrenia.md | scrape |
+| 2026-08-26 | 2021-01-08-nutrition-and-mental-health-link.md | scrape |
+| 2026-08-26 | 2025-06-07-low-calorie-diets-may-increase-depression.md | scrape |
+| 2026-08-26 | CNBC momentum-stocks URL (live-blog, no extractable article text) | scrape-failed |
+| 2026-08-26 | 2026-08-26-news-aggregation.processed.md | archive |
+| 2026-08-26 | wiki/technology/stability-ai-stable-diffusion-76-million-funding.md | ingest |
+| 2026-08-26 | wiki/technology/legato-hearing-tech-ai-hearing-glasses.md | ingest |
+| 2026-08-26 | wiki/technology/inherent-deepmind-alumni-outperforms-anthropic-openai.md | ingest |
+| 2026-08-26 | wiki/finance/stock-market-news-aug-26-2026-zacks.md | ingest |
+| 2026-08-26 | wiki/finance/sp500-today-holds-near-7683-nvidia-earnings.md | ingest |
+| 2026-08-26 | wiki/finance/pce-ticks-higher-nvidia-reports-after-close.md | ingest |
+| 2026-08-26 | wiki/finance/microsoft-28-percent-rally-msft-600-target.md | ingest |
+| 2026-08-26 | wiki/technology/ibm-acquires-hrl-laboratories-quantum.md (merged new info) | ingest-dupe (same HRL Laboratories acquisition topic; merged deal-completion confirmation dated Aug 26, 2026 into existing July announcement note) |
+| 2026-08-26 | wiki/productivity/on-deep-breaks-cal-newport.md | ingest |
+| 2026-08-26 | wiki/productivity/seven-productivity-habits-remove-friction.md (no new info) | ingest-dupe (identical source_url to already-ingested note; no new content) |
+| 2026-08-26 | wiki/productivity/smart-time-management-priorities-over-minutes.md (no new info) | ingest-dupe (identical source_url to already-ingested note; no new content) |
+| 2026-08-26 | wiki/learning/beginner-vs-expert-learning-strategies.md (no new info) | ingest-dupe (same Scott Young beginners-and-masters article already ingested; no new content) |
+| 2026-08-26 | wiki/learning/10-essential-strategies-deeper-learning.md (no new info) | ingest-dupe (identical source_url to already-ingested note; no new content) |
+| 2026-08-26 | wiki/learning/building-culture-continuous-learning.md | ingest |
+| 2026-08-26 | wiki/others/metabolism-mental-health-keto-schizophrenia.md | ingest |
+| 2026-08-26 | wiki/others/nutrition-and-mental-health-link.md | ingest |
+| 2026-08-26 | wiki/others/low-calorie-diets-may-increase-depression.md | ingest |
+| 2026-08-26 | daily-update/2026-08/2026-08-26.md | newsletter |
