@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.fool.com/investing/2026/08/08/the-best-etf-for-the-investor-who-wants-to-beat-th
 author: Keith Speights
 tags: [momentum-factor, etf, vanguard, sp500]
-date_consumed: 2026-08-15
+date_consumed: 2026-08-28
 ---
 
 ## Summary
@@ -19,10 +19,11 @@ The Vanguard U.S. Momentum Factor ETF (VFMO) has outperformed the S&P 500 in fou
 
 ## Key Takeaways
 
-- **Track record**: Outperformed the S&P 500 in 4 of the last 7 years, roughly tied in another.
-- **Fund stats**: $2.0B AUM, 0.60% dividend yield, 0.13% expense ratio.
-- **Top holdings**: KLAC (1.24%), AMAT (1.22%), MU (1.22%) — semiconductor-equipment heavy as of August 2026.
-- **Risk**: No guarantee of annual outperformance; the fund can decline more steeply than the S&P 500 in downturns.
+- **Track record**: Outperformed the S&P 500 in 4 of the last 7 years, roughly tied in another; since its 2018 launch VFMO has delivered a 14.8% compound annual return versus 14.1% for the S&P 500, holding up through the 2020 COVID crash, the 2022 inflation surge and 2025 tariff volatility.
+- **2026 YTD update**: as of early August 2026, VFMO is up 17% year-to-date versus 9.4% for the S&P 500.
+- **Fund stats**: ~$1.8-2.0B AUM, ~0.61% dividend yield, 0.13% expense ratio (four times Vanguard's passive S&P 500 funds at 0.03%).
+- **Top holdings (Aug 2026)**: Applied Materials, Sandisk and Advanced Micro Devices lead the portfolio, all AI data-center-chip beneficiaries; GE Vernova and Caterpillar are top-20 holdings on AI-driven electricity demand — a shift from the KLAC/AMAT/MU semiconductor-equipment lineup seen earlier in 2026, illustrating the fund's near-100% annual turnover in action.
+- **Risk**: No guarantee of annual outperformance; momentum is often fleeting — even Nvidia has fallen out of the fund's holdings in 2026 as it underperformed the S&P 500.
 - **Account fit**: High turnover (99.9%) makes tax-advantaged accounts (IRA, 401k) preferable to taxable accounts.
 
 ## 🃏 Review Questions
