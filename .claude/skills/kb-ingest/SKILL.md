@@ -27,10 +27,13 @@ If neither check finds a match, this is a genuinely new topic — continue to st
 
 #### 2a. Duplicate / near-duplicate handling
 
+This applies whether the matched note is a pre-existing wiki note or one written earlier in the *same* ingest run (e.g. two raw files from different outlets covering the same story) — run the same topical scan and apply the same rules either way.
+
 Read the matched note and compare it against the new raw file.
 
-- **No new information** — the raw file adds nothing beyond what the existing note already covers: do not modify the note. Move the raw file to `raw/processed/` per the usual post-processing step, then log it with activity value `ingest-dupe`, using the *existing note's* path as the File column plus a short parenthetical reason, e.g. `wiki/productivity/seven-productivity-habits-remove-friction.md (identical source_url, no new info)`.
-- **New information** — e.g. a follow-up development, updated figures, a deal completion: merge it into the existing note (update the relevant section(s), bump `date_consumed` to today) rather than creating a second note. Move the raw file to `raw/processed/` as usual, then log it with activity value `ingest` — this counts as a real ingest and will surface in the next newsletter — using the note's path plus a note like `(merged update)`.
+- **Same event, different outlet's independent coverage** — e.g. two outlets both filing their own recap of the same day's market selloff, Fed commentary, or breaking event, each with distinct framing, quotes, or sourcing: this is *not* a duplicate. Treat it as a genuinely new topic and continue to step 3 — the vault already has precedent for multiple standalone notes covering the same underlying event from different sources.
+- **No new information** — the raw file adds nothing beyond what the existing note already covers (including the "different outlet, same facts, no new framing" case): do not modify the note. Move the raw file to `raw/processed/` per the usual post-processing step, then log it with activity value `ingest-dupe`, using the *existing note's* path as the File column plus a short parenthetical reason, e.g. `wiki/productivity/seven-productivity-habits-remove-friction.md (identical source_url, no new info)`.
+- **New information about the same underlying entity/story** — e.g. a follow-up development, updated figures, a deal completion (not just a second outlet's take on the same news cycle): merge it into the existing note (update the relevant section(s), bump `date_consumed` to today) rather than creating a second note. Move the raw file to `raw/processed/` as usual, then log it with activity value `ingest` — this counts as a real ingest and will surface in the next newsletter — using the note's path plus a note like `(merged update)`.
 
 Either way, this file is done — skip steps 3–11 and the "After processing each file" section below (their move/log already happened here).
 

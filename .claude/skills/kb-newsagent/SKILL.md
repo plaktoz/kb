@@ -17,9 +17,11 @@ Open `data/investments.md` and load the holdings table. For each row:
 
 Open `kbm.log.md` and collect all filenames that have ever been logged (any activity). Do not return any news story whose URL matches a source already represented in the log.
 
+Filenames alone are a weak signal — before finalizing your candidate list, run a `source_url` grep check against the vault itself for each candidate: `grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null`. If any match is found, the article is already in the vault — drop it and pick a replacement. Do this as the last step before saving the output file, so it catches anything a filename comparison would miss (e.g. articles ingested in an earlier run under a differently-named raw file).
+
 ## Search strategy
 
-Wiki categories are defined in `data/wiki-categories.md`. The search categories below align with those, plus Health (fetched as news but filed under `others/` in the wiki).
+Wiki categories are defined in `data/wiki-categories.md`. The search categories below align with those, including Health, which has its own `wiki/health/` subdirectory.
 
 **If the Tavily MCP tool (`tavily-search` or `mcp_tavily_tavily-search`) is available, use it as the primary method** to find articles for each category. Use targeted search queries like:
 - Technology: `"AI OR software OR startup site:techcrunch.com OR site:news.ycombinator.com"`
@@ -49,6 +51,8 @@ The following domains have returned a blocked/`permission_error` response from t
 - investopedia.com / www.investopedia.com
 - timesofindia.indiatimes.com
 - africa.businessinsider.com
+- cnbc.com / www.cnbc.com
+- investing.com/analysis/ (other investing.com paths may still work — only the `/analysis/` path has failed so far)
 
 ### Live-blog / JS-rendered pages
 
@@ -56,7 +60,7 @@ Avoid URLs that look like live blogs or rolling-update pages (path containing `l
 
 ## Viability pre-check
 
-Before finalizing the output file, verify each candidate URL is actually fetchable and contains extractable article text — a quick test-fetch is enough, you don't need the full clean/parse pass `/kb-scrapecontent` will do later. For any candidate that returns a blocked/permission error, returns empty or near-empty content, or is a live-blog page per the guidance above: search for one replacement candidate in the same category and re-check it. If the replacement also fails, try once more; if you still can't find a working replacement after two attempts, drop the slot and note the shortfall explicitly in that category's section of the output file, e.g.:
+Before finalizing the output file, verify each candidate URL is actually fetchable and contains extractable article text — a quick test-fetch is enough, you don't need the full clean/parse pass `/kb-scrapecontent` will do later. For any candidate that returns a blocked/permission error, returns empty or near-empty content, returns a response so large it gets truncated or offloaded to a side file with no visible article text near the top (usually a sign of navigation-menu bloat rather than real content), or is a live-blog page per the guidance above: search for one replacement candidate in the same category and re-check it. If the replacement also fails, try once more; if you still can't find a working replacement after two attempts, drop the slot and note the shortfall explicitly in that category's section of the output file, e.g.:
 
 ```
 ## 📈 My Holdings

@@ -45,7 +45,7 @@ If a URL fails to fetch (404, paywall, timeout, or any error), log the failure t
 
 Save to `/raw/YYYY-MM-DD-slug.md` where:
 
-- `YYYY-MM-DD` is the article's own publication date (extract from the URL path or article metadata)
+- `YYYY-MM-DD` is the article's own publication date (extract from the URL path or article metadata). If no reliable publish date can be found in either place, use today's scrape date instead of guessing — do not invent or approximate a date.
 - `slug` is the article title converted to lowercase kebab-case
 
 File format:

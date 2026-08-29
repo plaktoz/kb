@@ -12,8 +12,6 @@ Canonical subdirectories for notes in `wiki/`. Claude reads this before filing a
 | `strategy/` | Decision frameworks, mental models, competitive strategy, first-principles thinking | 🎯 Strategy | 2 |
 | `others/` | Staging area for uncategorized notes — revisit with /kb-reorg | 🗂️ Other | — |
 
-> **Note:** The 🩺 Health category is fetched as news and filed under `others/` in the wiki — it has no dedicated wiki subdirectory.
-
 ## Fallback sources
 
 Used by the news agent when Tavily is unavailable. Find exactly the number of articles in the table above per category.
