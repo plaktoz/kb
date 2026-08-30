@@ -2325,3 +2325,10 @@
 | 2026-08-30 | 2026-08-27-billionaire-bill-ackman-is-buying-microsoft-stock.md | scrape |
 | 2026-08-30 | 2026-08-30-history-says-amazon-stock-s-2-worst-years-of-the-past-15-ended-in-net-losses-and-both-rebounds-were-huge.md | scrape |
 | 2026-08-30 | 2026-08-30-news-aggregation.processed.md | archive |
+| 2026-08-30 | topics/ai-agents.md | compound |
+| 2026-08-30 | topics/deep-work.md | compound |
+| 2026-08-30 | topics/learning-science.md | compound |
+| 2026-08-30 | topics/llm-security.md | compound |
+| 2026-08-30 | topics/mental-models.md | compound |
+| 2026-08-30 | topics/diet-mental-health.md | compound |
+| 2026-08-30 | weekly-update/2026-08/2026-W35-weekly.md | newsletter |
