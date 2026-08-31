@@ -2,7 +2,26 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-08-31 | wiki/strategy/nvidias-risky-business-ai-infrastructure-financing.md (identical source_url, no new info) | ingest-dupe |
+| 2026-08-31 | wiki/finance/oracle-vs-microsoft-ai-cloud-investment-comparison.md | ingest |
+| 2026-08-31 | wiki/finance/prediction-market-insider-trading-cftc-kalshi.md | ingest |
+| 2026-08-31 | wiki/finance/ibm-dual-architecture-processor-ibm-z-linuxone.md (merged update) | ingest |
 | 2026-08-30 | daily-update/2026-08/2026-08-30.md | newsletter |
+| 2026-08-31 | wiki/finance/blackrock-bitcoin-portfolio-diversifier-recommendation.md | ingest |
+| 2026-08-31 | wiki/technology/vectorized-thinking-python-numpy.md | ingest |
+| 2026-08-31 | wiki/strategy/meta-zuckerberg-strategy-script-thompson.md | ingest |
+| 2026-08-31 | wiki/technology/human-work-after-automation-every-thesis-statements.md | ingest |
+| 2026-08-31 | wiki/health/perimenopause-signs-symptoms-expert-qa.md | ingest |
+| 2026-08-31 | wiki/health/coffee-research-daily-intake-heart-liver-health.md | ingest |
+| 2026-08-31 | wiki/technology/continuous-diffusion-language-models.md | ingest |
+| 2026-08-31 | wiki/technology/has-ai-gone-rogue-newport-agentic-architecture.md | ingest |
+| 2026-08-31 | wiki/technology/decathlon-demand-forecasting-chronos-2.md | ingest |
+| 2026-08-31 | wiki/finance/sp500-microsoft-nvidia-market-concentration-q2-2026.md | ingest |
+| 2026-08-31 | wiki/technology/caterpillar-ai-deployment-mining-automation.md | ingest |
+| 2026-08-31 | wiki/technology/sony-warner-sue-anthropic-music-copyright.md | ingest |
+| 2026-08-31 | wiki/finance/apple-buffett-dividend-stock-buyback-growth.md | ingest |
+| 2026-08-31 | wiki/health/workout-or-nap-offset-sleepless-night-memory.md | ingest |
+| 2026-08-31 | wiki/technology/every-context-window-our-agents-ourselves.md | ingest |
 | 2026-08-30 | 2026-08-30-news-aggregation.md | news-fetch |
 | 2026-08-30 | wiki/productivity/good-culture-biggest-productivity-hack-not-ai.md | ingest |
 | 2026-08-30 | wiki/strategy/autonomy-innovation-ai-disruption-stratechery.md | ingest |
@@ -2332,3 +2351,27 @@
 | 2026-08-30 | topics/mental-models.md | compound |
 | 2026-08-30 | topics/diet-mental-health.md | compound |
 | 2026-08-30 | weekly-update/2026-08/2026-W35-weekly.md | newsletter |
+| 2026-08-31 | 2026-08-31-news-aggregation.md | news-fetch |
+| 2026-08-31 | daily-update/2026-08/2026-08-31.md | newsletter |
+| 2026-08-31 | 2026-08-17-learn-vectorized-thinking-in-python-through-examples.md | scrape |
+| 2026-08-31 | 2026-08-24-continuous-diffusion-language-models.md | scrape |
+| 2026-08-31 | 2026-08-30-caterpillar-is-bringing-to-ai-deployment-what-it-learned-from-automating-mining.md | scrape |
+| 2026-08-31 | 2026-08-29-sony-music-warner-sue-anthropic-alleging-a-brazen-campaign-of-intellectual-property-theft.md | scrape |
+| 2026-08-31 | 2026-08-30-according-to-blackrock-bitcoin-is-still-a-great-portfolio-diversifier.md | scrape |
+| 2026-08-31 | 2026-08-31-ex-white-house-teleprompter-operator-fined-for-prediction-market-insider-trading.md | scrape |
+| 2026-08-31 | 2026-08-30-1-top-warren-buffett-stock-for-dividend-investors.md | scrape |
+| 2026-08-31 | 2026-08-24-has-ai-gone-rogue.md | scrape |
+| 2026-08-31 | 2026-08-30-our-agents-ourselves.md | scrape |
+| 2026-08-31 | 2026-08-18-what-does-human-work-look-like-after-automation.md | scrape |
+| 2026-08-31 | 2026-02-17-i-dont-want-a-learning-dashboard-for-my-child.md | scrape-failed |
+| 2026-08-31 | 2026-08-28-how-decathlon-runs-demand-forecasting-at-scale-with-chronos-2.md | scrape |
+| 2026-08-31 | 2026-08-30-workout-or-nap-may-offset-effects-sleepless-night.md | scrape |
+| 2026-08-31 | 2026-08-29-coffee-what-the-research-says-about-your-daily-coffee-intake.md | scrape |
+| 2026-08-31 | 2026-08-23-perimenopause-signs-symptoms-expert-q-a.md | scrape |
+| 2026-08-31 | 2026-08-11-nvidias-risky-business.md | scrape |
+| 2026-08-31 | 2026-07-07-a-script-for-mark-zuckerberg.md | scrape |
+| 2026-08-31 | 2026-08-29-ibm-introduces-mainframe-processor-combining-its-own-tech-with-arm-architecture.md | scrape |
+| 2026-08-31 | 2026-08-30-s-p-500-keeps-hitting-highs-microsoft-nvidia.md | scrape |
+| 2026-08-31 | 2026-08-30-oracle-vs-microsoft-big-tech-ai-cloud-battle.md | scrape |
+| 2026-08-31 | raw/url/2026-08-31-news-aggregation.processed.md | archive |
+| 2026-08-31 | 2026-08-28-how-decathlon-runs-demand-forecasting-at-scale-with-chronos-2.md | scrape |
