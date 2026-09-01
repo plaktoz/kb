@@ -2,7 +2,18 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-09-01 | wiki/technology/apple-former-employee-chang-liu-openai-data-theft.md | ingest |
+| 2026-09-01 | wiki/technology/ftc-amazon-secret-ad-surcharge-lawsuit.md | ingest |
+| 2026-09-01 | wiki/technology/did-openais-new-model-go-rogue.md (merged update) | ingest |
+| 2026-09-01 | wiki/technology/combining-llm-embeddings-tabular-features-scikit-learn-pipeline.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-01 | wiki/finance/wall-street-aug31-close-oil-surge-monthly-gains.md | ingest |
+| 2026-09-01 | wiki/finance/alphabet-supply-constrained-anthropic-5gw-tpu-deal.md | ingest |
+| 2026-09-01 | wiki/health/mad-honey-grayanotoxin-cardiac-risk-online-sales.md | ingest |
+| 2026-09-01 | wiki/finance/ai-infrastructure-copper-bottleneck-frank-holmes.md (identical source_url, no new info) | ingest-dupe |
+| 2026-08-31 | wiki/health/pcos-pmos-name-change-diagnosis-hope.md | ingest |
+| 2026-09-01 | wiki/learning/ariely-procrastination-deadlines-study-fraud.md | ingest |
 | 2026-08-31 | wiki/strategy/nvidias-risky-business-ai-infrastructure-financing.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-01 | wiki/technology/a16z-brockman-ltf-data-center-ads-midterms.md | ingest |
 | 2026-08-31 | wiki/finance/oracle-vs-microsoft-ai-cloud-investment-comparison.md | ingest |
 | 2026-08-31 | wiki/finance/prediction-market-insider-trading-cftc-kalshi.md | ingest |
 | 2026-08-31 | wiki/finance/ibm-dual-architecture-processor-ibm-z-linuxone.md (merged update) | ingest |
@@ -2375,3 +2386,39 @@
 | 2026-08-31 | 2026-08-30-oracle-vs-microsoft-big-tech-ai-cloud-battle.md | scrape |
 | 2026-08-31 | raw/url/2026-08-31-news-aggregation.processed.md | archive |
 | 2026-08-31 | 2026-08-28-how-decathlon-runs-demand-forecasting-at-scale-with-chronos-2.md | scrape |
+| 2026-09-01 | raw/url/2026-09-01-news-aggregation.md | news-fetch |
+| 2026-08-31 | 2026-08-31-apple-former-employee-openai-data-theft.md | scrape |
+| 2026-08-31 | 2026-08-31-ftc-amazon-secret-ad-surcharge-lawsuit.md | scrape |
+| 2026-08-31 | 2026-08-31-amd-expands-global-ai-footprint-saudi-arabia.md | scrape |
+| 2026-08-31 | 2026-08-31-polymarket-reportedly-raises-300-million-from-donald-trump-jr-s-investment-fund.md | scrape |
+| 2026-08-31 | 2026-08-31-sundar-pichai-says-alphabet-cant-build-ai-capacity-fast-enough-anthropic-secured-5-gigawatts.md | scrape |
+| 2026-08-31 | 2026-08-31-wall-street-closes-lower-as-oil-prices-jump-indexes-notch-monthly-gains.md | scrape |
+| 2026-08-31 | 2026-08-31-are-we-at-war-with-ai-agent-civilizations.md | scrape |
+| 2026-08-31 | 2026-08-31-artificial-deadlines-evidence-of-fraud-procrastination.md | scrape |
+| 2026-08-31 | 2026-08-31-what-we-learned-from-15-hours-anthropic-certification.md | scrape |
+| 2026-08-31 | 2026-08-31-combining-llm-embeddings-tabular-features-scikit-learn-pipeline.md | scrape |
+| 2026-08-31 | 2026-08-31-pcos-pmos-name-change-diagnosis-hope.md | scrape |
+| 2026-08-31 | 2026-08-31-best-diet-lower-alzheimers-risk.md | scrape |
+| 2026-08-31 | 2026-08-31-mad-honey-heart-sold-online.md | scrape |
+| 2026-08-31 | 2026-08-31-andreessen-horowitz-brockman-data-center-ads-midterms.md | scrape |
+| 2026-08-31 | 2026-08-31-nvidia-500-billion-copper-constraint.md | scrape |
+| 2026-08-31 | 2026-08-31-nvidia-stock-flashes-unusual-signal.md | scrape |
+| 2026-08-31 | 2026-08-31-msft-stock-compound-way-higher.md | scrape |
+| 2026-08-31 | https://finance.yahoo.com/technology/ai/articles/microsoft-msft-brings-arabic-210536821.html | scrape-failed |
+| 2026-09-01 | raw/url/2026-09-01-news-aggregation.processed.md | archive |
+| 2026-09-01 | wiki/technology/a16z-brockman-ltf-data-center-ads-midterms.md | ingest |
+| 2026-09-01 | wiki/learning/ariely-procrastination-deadlines-study-fraud.md | ingest |
+| 2026-09-01 | wiki/technology/combining-llm-embeddings-tabular-features-scikit-learn-pipeline.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-01 | wiki/technology/did-openais-new-model-go-rogue.md | ingest |
+| 2026-09-01 | wiki/finance/msft-stock-compounding-valuation-3-lever-model.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-01 | wiki/health/diet-alzheimers-risk-personalized-approach.md | ingest |
+| 2026-09-01 | wiki/finance/nvidia-sox-decoupling-unusual-correlation-signal.md | ingest |
+| 2026-09-01 | wiki/finance/ai-infrastructure-copper-bottleneck-frank-holmes.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-01 | wiki/health/mad-honey-grayanotoxin-cardiac-risk-online-sales.md | ingest |
+| 2026-08-31 | wiki/learning/anthropic-certification-15-hours-review.md | ingest |
+| 2026-09-01 | wiki/finance/alphabet-supply-constrained-anthropic-5gw-tpu-deal.md | ingest |
+| 2026-08-31 | wiki/health/pcos-pmos-name-change-diagnosis-hope.md | ingest |
+| 2026-08-31 | wiki/finance/polymarket-300m-raise-1789-capital-trump-jr.md | ingest |
+| 2026-09-01 | wiki/finance/wall-street-aug31-close-oil-surge-monthly-gains.md | ingest |
+| 2026-09-01 | wiki/technology/amd-humain-saudi-ai-platform-mi355x.md | ingest |
+| 2026-09-01 | daily-update/2026-09/2026-09-01.md | newsletter |
