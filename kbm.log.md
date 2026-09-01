@@ -2,6 +2,13 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-09-01 | wiki/technology/amazon-frontier-engineering-five-habits-ai-native.md | ingest |
+| 2026-09-01 | wiki/technology/how-anthropic-builds-mike-krieger-ai-native-labs.md | ingest |
+| 2026-09-01 | wiki/productivity/nine-systems-successful-people-organize-lives.md | ingest |
+| 2026-09-01 | wiki/technology/jason-liu-openai-codex-ai-workflow-personal-monorepo.md | ingest |
+| 2026-09-01 | wiki/technology/no-vibes-solving-hard-problems-complex-codebases-dex-horthy.md | ingest |
+| 2026-09-01 | wiki/technology/jeff-dean-1percent-rule-ai-founders-context-engineering.md | ingest |
+| 2026-09-01 | wiki/strategy/systems-thinking-twenty-tools-complete-course.md | ingest |
 | 2026-09-01 | wiki/technology/apple-former-employee-chang-liu-openai-data-theft.md | ingest |
 | 2026-09-01 | wiki/technology/ftc-amazon-secret-ad-surcharge-lawsuit.md | ingest |
 | 2026-09-01 | wiki/technology/did-openais-new-model-go-rogue.md (merged update) | ingest |
