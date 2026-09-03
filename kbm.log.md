@@ -2,6 +2,10 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-09-02 | daily-update/2026-09/2026-09-02.md | newsletter |
+| 2026-09-02 | raw/url/2026-09-02-news-aggregation.md | news-fetch |
+| 2026-09-02 | wiki/finance/dell-stock-surges-record-ai-server-orders-q2-2027.md | ingest |
+| 2026-09-03 | wiki/technology/deft-distribution-fine-tuning-ai-writing.md | ingest |
 | 2026-09-01 | wiki/technology/amazon-frontier-engineering-five-habits-ai-native.md | ingest |
 | 2026-09-01 | wiki/technology/how-anthropic-builds-mike-krieger-ai-native-labs.md | ingest |
 | 2026-09-01 | wiki/productivity/nine-systems-successful-people-organize-lives.md | ingest |
@@ -48,6 +52,24 @@
 | 2026-08-30 | wiki/technology/integrating-agentic-ai-with-ml-pipelines.md | ingest |
 | 2026-08-30 | wiki/finance/microsoft-fy2026-earnings-multiple-compression.md | ingest |
 | 2026-08-30 | wiki/technology/ai-assisted-code-migrations.md | ingest |
+| 2026-09-02 | wiki/technology/afterquery-yc-fastest-unicorn-3-2b.md | ingest |
+| 2026-09-03 | wiki/technology/deft-distribution-fine-tuning-ai-writing.md | ingest |
+| 2026-09-02 | wiki/health/ckm-syndrome-young-adults-cardiovascular-kidney-metabolic.md | ingest |
+| 2026-09-03 | wiki/strategy/9-harsh-truths-about-success-sahil-bloom.md | ingest |
+| 2026-09-02 | wiki/learning/chinas-keju-examination-hell-east-asian-education.md | ingest |
+| 2026-09-02 | wiki/technology/atlas-world-model-spatial-intelligence.md | ingest |
+| 2026-09-02 | wiki/health/bmi-vs-waist-circumference-mortality-predictor-older-adults.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-02 | wiki/health/fda-recalls-iv-saline-fluids-fiberglass-stainless-steel-contaminants.md | ingest |
+| 2026-09-02 | wiki/technology/vibe-check-fable-5-1-anthropic-is-so-back.md | ingest |
+| 2026-09-02 | wiki/technology/openai-astra-model-security-pause.md | ingest |
+| 2026-09-02 | wiki/finance/ibm-slumps-21-ytd-claude-code-disruption-risk.md | ingest |
+| 2026-09-02 | wiki/finance/credit-card-delinquencies-small-banks-q2-2026.md | ingest |
+| 2026-09-02 | wiki/finance/retail-investors-ai-stocks-ibm-alphabet-long-term.md | ingest |
+| 2026-09-02 | wiki/finance/dell-stock-surges-record-ai-server-orders-q2-2027.md | ingest |
+| 2026-09-02 | wiki/strategy/ed-zitron-ai-skeptic-prediction-accuracy.md | ingest |
+| 2026-09-02 | wiki/strategy/hcltech-ceo-pivoting-for-ai-era.md | ingest |
+| 2026-09-02 | wiki/finance/coreweave-stock-august-2026-gain.md | ingest |
+| 2026-09-02 | wiki/finance/investing-in-overvalued-market-case-for-staying-the-course.md | ingest |
 | 2026-08-30 | wiki/health/dementia-risk-diet-timing-midlife-factors.md | ingest |
 | 2026-08-30 | wiki/technology/interpretable-text-classification-scikit-llm-embedding-spaces.md | ingest |
 | 2026-08-30 | wiki/technology/chatgpt-openclaw-guides-overhaul-infrastructure-matters.md | ingest |
@@ -64,6 +86,24 @@
 | 2026-08-29 | wiki/strategy/corporate-growth-investment-capital-allocation-framework.md | ingest |
 | 2026-08-29 | wiki/finance/sp500-100-monthly-investing-compounding-20-years.md | ingest |
 | 2026-08-29 | wiki/strategy/ai-revolutionizing-strategic-decision-making.md | ingest |
+| 2026-09-02 | wiki/technology/afterquery-yc-fastest-unicorn-3-2b.md | ingest |
+| 2026-09-03 | wiki/technology/deft-distribution-fine-tuning-ai-writing.md | ingest |
+| 2026-09-02 | wiki/health/ckm-syndrome-young-adults-cardiovascular-kidney-metabolic.md | ingest |
+| 2026-09-03 | wiki/strategy/9-harsh-truths-about-success-sahil-bloom.md | ingest |
+| 2026-09-02 | wiki/learning/chinas-keju-examination-hell-east-asian-education.md | ingest |
+| 2026-09-02 | wiki/technology/atlas-world-model-spatial-intelligence.md | ingest |
+| 2026-09-02 | wiki/health/bmi-vs-waist-circumference-mortality-predictor-older-adults.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-02 | wiki/health/fda-recalls-iv-saline-fluids-fiberglass-stainless-steel-contaminants.md | ingest |
+| 2026-09-02 | wiki/technology/vibe-check-fable-5-1-anthropic-is-so-back.md | ingest |
+| 2026-09-02 | wiki/technology/openai-astra-model-security-pause.md | ingest |
+| 2026-09-02 | wiki/finance/ibm-slumps-21-ytd-claude-code-disruption-risk.md | ingest |
+| 2026-09-02 | wiki/finance/credit-card-delinquencies-small-banks-q2-2026.md | ingest |
+| 2026-09-02 | wiki/finance/retail-investors-ai-stocks-ibm-alphabet-long-term.md | ingest |
+| 2026-09-02 | wiki/finance/dell-stock-surges-record-ai-server-orders-q2-2027.md | ingest |
+| 2026-09-02 | wiki/strategy/ed-zitron-ai-skeptic-prediction-accuracy.md | ingest |
+| 2026-09-02 | wiki/strategy/hcltech-ceo-pivoting-for-ai-era.md | ingest |
+| 2026-09-02 | wiki/finance/coreweave-stock-august-2026-gain.md | ingest |
+| 2026-09-02 | wiki/finance/investing-in-overvalued-market-case-for-staying-the-course.md | ingest |
 | 2026-08-29 | wiki/technology/anthropic-automated-alignment-researcher-self-improving-ai.md | ingest |
 | 2026-08-29 | wiki/finance/nebius-group-ai-infrastructure-stock-analysis.md | ingest |
 | 2026-08-29 | wiki/finance/stock-market-news-aug-28-2026.md | ingest |
@@ -2429,3 +2469,24 @@
 | 2026-09-01 | wiki/finance/wall-street-aug31-close-oil-surge-monthly-gains.md | ingest |
 | 2026-09-01 | wiki/technology/amd-humain-saudi-ai-platform-mi355x.md | ingest |
 | 2026-09-01 | daily-update/2026-09/2026-09-01.md | newsletter |
+| 2026-09-02 | 2026-09-01-atlas-a-world-model-for-spatial-intelligence.md | scrape |
+| 2026-09-02 | 2026-09-01-openais-astra-model-is-on-the-way-and-very-good-at-breaking-into-computer-systems.md | scrape |
+| 2026-09-02 | 2026-09-01-afterquery-reportedly-becomes-y-combinators-fastest-ever-unicorn-now-valued-at-3-2b.md | scrape |
+| 2026-09-02 | 2026-09-02-the-stock-market-is-historically-expensive-right-now.md | scrape |
+| 2026-09-02 | 2026-09-02-why-coreweave-stock-gained-18-in-august.md | scrape |
+| 2026-09-02 | 2026-09-02-credit-card-delinquencies-run-64-at-small-banks-and-29-across-all-of-them.md | scrape |
+| 2026-09-03 | 2026-08-24-i-tried-the-ai-model-built-to-fix-ai-writing.md | scrape |
+| 2026-09-03 | 2026-09-01-vibe-check-fable-5-1-anthropic-is-so-back-again.md | scrape |
+| 2026-09-03 | https://hbr.org/2026/09/research-roundup-ai-on-org-charts-job-hoppers-skillsets-elite-board-seats-and-more | scrape-failed |
+| 2026-09-02 | 2026-09-01-book-review-chinas-examination-hell.md | scrape |
+| 2026-09-02 | 2026-09-01-9-harsh-truths-nobody-told-you-about-success.md | scrape |
+| 2026-09-02 | 2026-09-02-how-accurate-have-ed-zitrons-ai-skeptic-predictions-been.md | scrape |
+| 2026-09-02 | 2026-09-02-the-ceo-of-hcltech-on-pivoting-for-the-ai-era.md | scrape |
+| 2026-09-02 | 2026-07-27-ride-the-wave.md | scrape-failed |
+| 2026-09-02 | 2026-09-01-fda-recalls-iv-saline-fluids-fiberglass-stainless-steel-contaminants.md | scrape |
+| 2026-09-02 | 2026-09-01-79-of-young-adults-show-signs-of-cardiovascular-kidney-metabolic-issues.md | scrape |
+| 2026-09-02 | 2026-09-01-bmi-vs-waist-size-belly-fat-matters-more-than-weight-for-death-risk.md | scrape |
+| 2026-09-02 | 2026-09-01-ibm-slumps-21-ytd-time-to-reassess-the-stock-in-your-portfolio.md | scrape |
+| 2026-09-02 | 2026-09-02-retail-investors-2-favorite-ai-stocks-long-term-alphabet-ibm.md | scrape |
+| 2026-09-02 | 2026-09-02-dell-stock-surges-on-record-ai-server-orders.md | scrape |
+| 2026-09-03 | raw/url/2026-09-02-news-aggregation.processed.md | archive |
