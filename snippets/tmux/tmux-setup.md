@@ -85,11 +85,3 @@ Save and close the file.
 
 * No accidental leaks: You can safely share your installer script, your ~/.four-panes.tmux layout, or upload your entire project to a public GitHub repository.
 * Safe configuration: Your main code files only say "look for a file called ~/.env.tmux". As long as you never upload your personal ~/.env.tmux file to the internet, your secrets stay 100% safe inside your local machine.
-
-If you would like, let me know:
-
-* Do you want to try adding a custom design/theme color to the bottom bar of your Tmux session using the installer?
-* Do you want your Zsh history to sync up smoothly across all 4 panes when you run commands?
-
-I can add those refinements directly to your setup files!
-
