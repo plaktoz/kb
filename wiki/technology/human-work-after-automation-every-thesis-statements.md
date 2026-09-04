@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://every.to/on-every/what-does-human-work-look-like-after-automation
 author: Dan Shipper
 tags: [ai-automation, future-of-work, predictions, knowledge-work]
-date_consumed: 2026-08-31
+date_consumed: 2026-09-04
 ---
 
 ## Summary
@@ -13,6 +13,7 @@ date_consumed: 2026-08-31
 ## Core Concepts
 
 - **[[Thesis Statements Initiative]]**: Every's project collecting specific, falsifiable predictions from 100 AI practitioners about the future of human work — designed to be publicly revisited to track which predictions hold, fail, or evolve over time.
+- **[[Thesis 2027 Conference]]**: One-day companion conference on November 5, 2026, at [[Pioneer Works]] in Red Hook, Brooklyn. Application-based in-person attendance; free livestream available. Format includes talks, demos, working sessions, office hours, and small-group conversations. Speakers include Ivan Zhao ([[Notion]]), Andrew Ambrosino ([[OpenAI]] Codex), Cat de Jong ([[Anthropic]]), Nick Thompson (The Atlantic), Josh Miller ([[The Browser Company]]), Cristobal Valenzuela ([[Runway]]), and Sahil Lavingia ([[Gumroad]]).
 - **[[Managers of Models]]**: Every's framing that [[Knowledge Workers]] in an AI era shift from direct execution to orchestrating and directing AI models — a role analogous to managing people but at machine scale.
 - **[[Intelligence Abundance]]**: The condition where AI makes cognitive output cheap and plentiful, shifting scarcity from answers and execution to questions, taste, and judgment.
 - **[[Computational Thinking]]**: Contributor Yash Tekriwal (Clay) predicts this skill will reshape jobs as workers must reason about systems, loops, and data pipelines rather than rote tasks.
@@ -29,7 +30,9 @@ date_consumed: 2026-08-31
 - **Question > Answer**: Anne-Laure Le Cunff: formulating the right question matters more than finding answers.
 - **Computational Thinking**: Yash Tekriwal: systems/pipeline reasoning will become a core job skill.
 - **Track Record**: The project creates a public record — predictions will be revisited, not forgotten.
-- **Human Conference**: A companion Thesis conference will test ideas and explore building a post-automation world.
+- **Thesis 2027 Conference**: One-day event Nov 5, 2026, Pioneer Works Brooklyn; application-based; free livestream.
+- **Speaker Lineup**: Ivan Zhao (Notion), Andrew Ambrosino (OpenAI Codex), Cat de Jong (Anthropic), Cristobal Valenzuela (Runway), Sahil Lavingia (Gumroad), Josh Miller (The Browser Company).
+- **Target Audience**: Builders and operators already using AI for ambitious work — living the future, not speculating about it.
 
 ## 🧠 First Principles & Mental Models
 
