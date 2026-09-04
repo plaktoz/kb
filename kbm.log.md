@@ -2,6 +2,33 @@
 
 | Date | File | Activity |
 |------|------|----------|
+| 2026-09-03 | daily-update/2026-09/2026-09-03.md | newsletter |
+| 2026-09-03 | 2026-09-03-news-aggregation.md | news-fetch |
+| 2026-09-03 | wiki/health/mounjaro-heart-health-type-2-diabetes.md | ingest |
+| 2026-09-03 | wiki/strategy/curveball-questions-surface-insight.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/finance/amazon-stock-ftc-lawsuit-capex-concerns-2026.md | ingest |
+| 2026-09-03 | wiki/strategy/why-you-need-a-side-quest-in-life.md | ingest |
+| 2026-09-03 | wiki/productivity/ai-autopilot-cognitive-outsourcing.md | ingest |
+| 2026-09-03 | wiki/productivity/claude-code-for-product-managers.md (identical source_url, already ingested today, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/productivity/ai-autopilot-cognitive-outsourcing.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/productivity/why-some-ai-workflows-stick-and-others-dont.md | ingest |
+| 2026-09-03 | wiki/strategy/hidden-debt-of-convenience.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/strategy/vasa-effect-subtract-bias.md | ingest |
+| 2026-09-03 | wiki/productivity/katie-parrott-compound-writing-ai-system.md | ingest |
+| 2026-09-03 | wiki/strategy/curveball-questions-surface-insight.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/technology/manufactured-sources-ai-search-citations-perplexity.md | ingest |
+| 2026-09-03 | wiki/technology/google-gemini-38-flash-and-flash-cyber.md | ingest |
+| 2026-09-03 | wiki/finance/ai-stock-investor-peak-cycle-fears-sep2026.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/finance/ibm-stock-cash-secured-put-options-8-8-yield.md | ingest |
+| 2026-09-03 | wiki/finance/ai-stock-investor-peak-cycle-fears-sep2026.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/technology/openai-recurrent-depth-cot-monitorability.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/finance/3-ai-stocks-up-500-percent-sandisk-micron-lumentum.md | ingest-dupe |
+| 2026-09-03 | wiki/health/mounjaro-heart-health-type-2-diabetes.md | ingest |
+| 2026-09-03 | wiki/health/xylitol-cardiovascular-risk-study-2026.md | ingest |
+| 2026-09-03 | wiki/finance/goldman-sachs-lower-returns-2026-headwinds.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/technology/manufactured-sources-ai-search-citations-perplexity.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-03 | wiki/health/shingles-vaccine-linked-to-lower-cardiovascular-burden.md | ingest |
+| 2026-09-03 | wiki/technology/google-gemini-38-flash-and-flash-cyber.md (identical source_url, no new info) | ingest-dupe |
 | 2026-09-02 | daily-update/2026-09/2026-09-02.md | newsletter |
 | 2026-09-02 | raw/url/2026-09-02-news-aggregation.md | news-fetch |
 | 2026-09-02 | wiki/finance/dell-stock-surges-record-ai-server-orders-q2-2027.md | ingest |
@@ -2490,3 +2517,22 @@
 | 2026-09-02 | 2026-09-02-retail-investors-2-favorite-ai-stocks-long-term-alphabet-ibm.md | scrape |
 | 2026-09-02 | 2026-09-02-dell-stock-surges-on-record-ai-server-orders.md | scrape |
 | 2026-09-03 | raw/url/2026-09-02-news-aggregation.processed.md | archive |
+| 2026-09-03 | 2026-09-02-gemini-3-8-flash-and-3-8-flash-cyber.md | scrape |
+| 2026-09-03 | 2026-09-02-openai-reasoning-technique-alarms-ai-safety-experts.md | scrape |
+| 2026-09-03 | 2026-09-02-manufactured-sources-behind-ai-recommendations.md | scrape |
+| 2026-09-03 | 2026-09-03-goldman-sachs-lower-returns-next-year.md | scrape |
+| 2026-09-03 | 2026-09-02-amazon-stock-danger-zone.md | scrape |
+| 2026-09-03 | 2026-09-03-3-ai-stocks-up-500-percent.md | scrape |
+| 2026-09-03 | 2026-08-25-the-hidden-debt-of-convenience.md | scrape |
+| 2026-09-03 | 2026-07-20-why-some-ai-workflows-stick-and-others-dont.md | scrape |
+| 2026-09-03 | 2026-04-20-how-i-escaped-ai-autopilot.md | scrape |
+| 2026-09-03 | 2026-09-02-every-staff-writer-compound-writing.md | scrape |
+| 2026-09-03 | 2026-08-18-why-you-need-a-side-quest-in-life.md | scrape |
+| 2026-09-03 | 2026-05-01-claude-code-for-product-managers.md | scrape |
+| 2026-09-03 | 2026-09-03-fda-approves-mounjaro-tirzepatide-cardiovascular-risk-reduction.md | scrape |
+| 2026-09-03 | 2026-09-03-common-sweetener-xylitol-higher-risk-heart-attack-stroke.md | scrape |
+| 2026-09-03 | 2026-09-03-shingles-vaccine-linked-to-9-lower-cardiovascular-burden.md | scrape |
+| 2026-09-03 | 2026-08-20-why-you-need-to-subtract-the-vasa-effect.md | scrape |
+| 2026-09-03 | 2026-09-02-research-how-curveball-questions-can-surface-insight.md | scrape |
+| 2026-09-03 | 2026-09-03-bank-america-resets-microsoft-stock.md | scrape |
+| 2026-09-03 | raw/url/2026-09-03-news-aggregation.processed.md | archive |
