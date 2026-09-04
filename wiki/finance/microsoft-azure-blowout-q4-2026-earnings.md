@@ -64,3 +64,17 @@ Source: https://finance.yahoo.com/markets/stocks/articles/microsoft-stock-rises-
 - **Quarterly headline numbers restated**: revenue of $90B (+18%), operating income of $40.6B (+18%), Azure/cloud-services revenue +43%, annual Azure revenue surpassing $100B for the first time.
 - **Valuation gap**: MSFT traded at $485.71 on Aug 19 versus a GF Value estimate of $577.29 — about 15.86% below GF Value — though the piece cautions this doesn't automatically make the stock cheap.
 - **Framing**: the $678B backlog represents contracted business "already waiting to become revenue," shifting the key risk from demand generation to execution — building enough AI capacity without letting depreciation and infrastructure costs erode margins.
+
+
+## Update (Azure revenue first formal disclosure + segment restructuring, 2026-09-03)
+
+Source: https://finance.yahoo.com/technology/ai/articles/microsoft-drops-101-9-billion-023300050.html (Faizan Farooque)
+
+- **Explicit Azure revenue disclosed for the first time**: $29.4B in Q4 FY2026, $101.9B for the full fiscal year ended June 30 — the first time Microsoft has broken out standalone Azure figures; prior disclosures used "Azure and other cloud services."
+- **Competitive context**: AWS generated $42.2B in its latest quarter ($128.7B on a calendar-2025 annual basis); Google Cloud generated $24.8B quarterly ($85.8B annual) — Azure sits between the two at $85.8B annual but still below AWS.
+- **Reporting segment restructuring**: Microsoft is collapsing from three reporting segments to two:
+  - **"Agents and Infra"** — combines cloud computing, AI software, and conventional business software (formerly separate Intelligent Cloud and Productivity & Business Processes segments)
+  - **"Devices and Consumer"** — groups Windows, Xbox, Bing advertising, and LinkedIn advertising
+- **CEO framing**: Satya Nadella stated AI is "blurring the boundaries between our products and reshaping our business models," explaining why disparate products now make more sense under unified reporting.
+- **Azure guidance note**: the slight revenue-forecast revision was a reclassification of certain GitHub sales into Microsoft 365 Cloud businesses, not a demand signal.
+- **Margin pressure**: Cloud gross margin percentages declined YoY due to mix shift toward Azure and sustained AI infrastructure investment; the key test is whether AI-driven revenue growth outpaces infrastructure costs.
