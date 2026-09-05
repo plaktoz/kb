@@ -1,6 +1,7 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-05 | research/ai-software-factory/report.md | research |
 |------|------|----------|
 | 2026-09-04 | wiki/technology/human-work-after-automation-every-thesis-statements.md | ingest |
 | 2026-09-04 | wiki/finance/microsoft-azure-blowout-q4-2026-earnings.md | ingest |
