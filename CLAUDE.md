@@ -42,6 +42,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
 | `/kb-canvas <topic>` | Builds an Obsidian canvas for the given topic — finds related wiki notes, reasons about relationships, and saves a versioned `.canvas` file to `canvases/<topic-slug>/` |
 | `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
+| `/kb-run-issues` | Fetches open GitHub issues labelled "run skills", parses skill names from each body, runs them in order, comments results, and closes the issue |
 
 ### Parallel skills (opt-in)
 
