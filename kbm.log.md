@@ -2626,3 +2626,10 @@
 | 2026-09-04 | wiki/technology/gpt-6-astra-vibe-check.md | ingest |
 | 2026-09-04 | daily-update/2026-09/2026-09-04.md | newsletter |
 | 2026-09-05 | 2026-09-05-news-aggregation.md | news-fetch |
+| 2026-09-05 | topics/ai-agents.md | compound |
+| 2026-09-05 | topics/ai-workplace-adoption.md | compound |
+| 2026-09-05 | topics/llm-security.md | compound |
+| 2026-09-05 | topics/mental-models.md | compound |
+| 2026-09-05 | topics/cardiovascular-health.md | compound |
+| 2026-09-05 | topics/womens-hormonal-health.md | compound |
+| 2026-09-05 | weekly-update/2026-09/2026-W36-weekly.md | newsletter |
