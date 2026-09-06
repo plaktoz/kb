@@ -1,6 +1,27 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-06 | wiki/finance/bear-market-do-nothing-buy-hold-50-year-history.md | ingest |
+| 2026-09-06 | wiki/strategy/product-strategy-2026-humans-and-ai-agents.md | ingest |
+| 2026-09-06 | wiki/learning/apa-edtech-engagement-vs-learning-report-2026.md | ingest |
+| 2026-09-06 | wiki/finance/buffett-stock-market-church-casino-gambling-mentality.md | ingest |
+| 2026-09-06 | wiki/technology/openai-wiki-incident-misalignment-disclosure-framework.md | ingest |
+| 2026-09-06 | wiki/learning/remote-work-hidden-cost-tacit-learning-young-workers.md | ingest |
+| 2026-09-06 | wiki/technology/korea-physical-ai-manufacturing-advantage.md | ingest |
+| 2026-09-06 | wiki/finance/stifel-lifts-microsoft-target-530-hold-rating.md | ingest |
+| 2026-09-06 | wiki/technology/enterprise-ai-agents-adoption-statistics-2026.md | ingest |
+| 2026-09-06 | wiki/health/liggins-institute-25m-campaign-health-breakthroughs.md | ingest |
+| 2026-09-06 | wiki/productivity/remote-work-energy-variability-and-productivity.md | ingest |
+| 2026-09-06 | wiki/technology/ibm-ai-summit-korea-2026-operational-capability.md | ingest |
+| 2026-09-06 | wiki/health/smartphone-memory-tests-alzheimers-brain-changes.md | ingest |
+| 2026-09-06 | wiki/technology/ibm-openai-enterprise-partnership.md | ingest |
+| 2026-09-06 | wiki/technology/agentic-ai-multi-agent-systems-autonomous-workflows-2026.md | ingest |
+| 2026-09-06 | wiki/finance/big-tech-ai-bond-splurge-crowding-out-weak-borrowers.md | ingest |
+| 2026-09-06 | wiki/learning/ai-higher-education-survey-2026-student-faculty-adoption-gap.md | ingest |
+| 2026-09-06 | wiki/health/vitamin-b12-folate-parental-preconception-birth-defect-risk.md | ingest |
+| 2026-09-06 | wiki/finance/september-market-weakness-setup-has-teeth.md | ingest |
+| 2026-09-06 | wiki/finance/ibm-slumps-21-ytd-claude-code-disruption-risk.md (same Zacks report, different outlet, no new info) | ingest-dupe |
+| 2026-09-06 | 2026-09-06-news-aggregation.md | news-fetch |
 | 2026-09-05 | research/ai-software-factory/report.md | research |
 | 2026-09-05 | 2026-09-05-news-aggregation.md | news-fetch |
 | 2026-09-05 | 2026-09-05-ai-in-software-development-2026-data.md | scrape |
@@ -2633,3 +2654,25 @@
 | 2026-09-05 | topics/cardiovascular-health.md | compound |
 | 2026-09-05 | topics/womens-hormonal-health.md | compound |
 | 2026-09-05 | weekly-update/2026-09/2026-W36-weekly.md | newsletter |
+| 2026-09-06 | 2026-09-05-openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure.md | scrape |
+| 2026-09-06 | 2026-09-06-korea-bets-its-physical-ai-advantage-on-manufacturing-depth.md | scrape |
+| 2026-09-06 | 2026-09-06-enterprise-ai-agents-adoption-statistics-2026.md | scrape |
+| 2026-09-06 | 2026-09-05-warren-buffett-stock-market-church-casino-attached.md | scrape |
+| 2026-09-06 | 2026-09-06-september-market-weakness-the-setup-has-teeth.md | scrape |
+| 2026-09-06 | 2026-09-05-big-techs-ai-bond-splurge-squeezing-out-weaker-corporate-borrowers.md | scrape |
+| 2026-09-06 | 2026-09-02-are-remote-workers-more-or-less-productive.md | scrape |
+| 2026-09-06 | 2026-09-06-agentic-ai-multi-agent-systems-autonomous-workflows-in-2026.md | scrape |
+| 2026-09-06 | 2026-09-06-what-the-partnership-of-ibm-and-openai-means-for-enterprise-ai.md | scrape |
+| 2026-09-06 | 2026-09-03-with-education-technology-engagement-is-not-the-same-as-learning.md | scrape |
+| 2026-09-06 | 2026-07-09-ai-in-higher-education-survey-2026-student-ai-use-hits-88-faculty-lag.md | scrape |
+| 2026-09-06 | 2026-09-01-remote-work-offers-flexibility-but-at-the-cost-of-learning-opportunities-for-young-workers.md | scrape |
+| 2026-09-06 | 2026-09-05-smartphone-memory-tests-picked-up-subtle-differences-linked-to-alzheimers-brain-changes.md | scrape |
+| 2026-09-06 | 2026-08-31-higher-vitamin-b12-levels-in-both-parents-associated-with-a-lower-risk-of-birth-defects.md | scrape |
+| 2026-09-06 | 2026-09-05-liggins-institute-launches-campaign-to-fast-track-health-breakthroughs.md | scrape |
+| 2026-09-06 | 2026-09-06-product-strategy-2026-building-for-humans-and-ai-agents.md | scrape |
+| 2026-09-06 | 2026-09-01-ibm-korea-ai-summit-2026-operational-capability-not-models.md | scrape |
+| 2026-09-06 | 2026-09-06-stifel-lifts-microsoft-target-530-hold-rating.md | scrape |
+| 2026-09-06 | 2026-09-06-ibm-slumps-21-ytd-time-to-reassess-the-stock-in-your-portfolio.md | scrape |
+| 2026-09-06 | 2026-09-05-if-a-downturn-is-coming-50-years-of-market-history-says-this-is-the-single-best-response.md | scrape |
+| 2026-09-06 | raw/url/2026-09-06-news-aggregation.processed.md | archive |
+| 2026-09-06 | daily-update/2026-09/2026-09-06.md | newsletter |
