@@ -1,6 +1,14 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-09 | daily-update/2026-09/2026-09-09.md | newsletter |
+| 2026-09-09 | wiki/strategy/gut-decision-matrix-instinct-vs-intuition.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-09 | wiki/strategy/omnipotence-dilemma-ai-decision-paralysis.md | ingest |
+| 2026-09-08 | wiki/health/fda-approves-updated-covid-19-vaccines-xfg-variant.md | ingest |
+| 2026-09-08 | wiki/technology/ai-data-center-footprint-triple-2030.md | ingest |
+| 2026-09-09 | wiki/finance/sp500-record-highs-history-stay-invested-fidelity.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-09 | wiki/technology/google-jail-independent-wikis.md | ingest |
+| 2026-09-08 | raw/url/2026-09-08-news-aggregation.md | news-fetch |
 | 2026-09-07 | wiki/strategy/hohenbruck-subscription-program-case-study.md | ingest |
 | 2026-09-07 | wiki/finance/jensen-huang-gigawatt-data-center-valuation-neocloud.md | ingest |
 | 2026-09-07 | wiki/health/tailored-exercise-intervention-reduces-afib-recurrence.md | ingest |
@@ -2717,3 +2725,43 @@
 | 2026-09-07 | 2026-09-07-arista-networks-vs-ibm-comparing-quarterly-revenue-trends.md | scrape |
 | 2026-09-07 | 2026-09-06-3-great-quality-stocks-own.md | scrape |
 | 2026-09-07 | raw/url/2026-09-07-news-aggregation.processed.md | archive |
+| 2026-09-08 | 2026-09-07-artificial-intelligence-definition-glossary-hallucinations-guide-to-common-ai-terms.md | scrape |
+| 2026-09-08 | 2026-09-07-ive-factored-the-rsa-keys-of-a-certificate-authority.md | scrape |
+| 2026-09-08 | 2026-09-08-stoke-space-raises-another-billion-to-rival-spacex-at-re-flying-rockets.md | scrape |
+| 2026-09-08 | 2026-09-08-if-a-stock-market-crash-is-coming-history-says-youll-survive-if-you-make-this-move.md | scrape |
+| 2026-09-08 | 2026-09-08-1-glorious-growth-stock-down-78-to-buy-on-the-dip-in-september.md | scrape |
+| 2026-09-08 | https://www.fool.com/investing/2026/09/08/unitedhealth-group-stock-is-up-394-in-the-last-6-m/ | scrape-failed |
+| 2026-09-09 | 2026-09-08-write-things-down.md | scrape |
+| 2026-09-09 | 2026-09-09-gut-decision-matrix.md | scrape |
+| 2026-09-09 | 2026-09-09-omnipotence-dilemma.md | scrape |
+| 2026-09-09 | 2026-09-09-illusion-of-clarity.md | scrape |
+| 2026-09-09 | 2026-09-04-building-students-scientific-skills-through-observation.md | scrape |
+| 2026-09-09 | 2026-09-03-using-novelty-to-boost-student-engagement.md | scrape |
+| 2026-09-08 | 2026-09-07-fda-approves-updated-covid-19-vaccines-targeting-xfg-variant.md | scrape |
+| 2026-09-08 | 2026-09-04-shingles-vaccine-shingrix-cardiovascular-disease-lower-risk.md | scrape |
+| 2026-09-08 | 2026-09-07-memory-decline-may-begin-as-early-as-middle-age.md | scrape |
+| 2026-09-09 | 2026-09-09-how-universities-should-prepare-founders.md | scrape |
+| 2026-09-09 | 2026-08-17-theres-a-new-google-jail-for-independent-wikis.md | scrape |
+| 2026-09-09 | 2026-09-04-satya-nadella-has-delivered-a-more-than-10x-return.md | scrape |
+| 2026-09-08 | 2026-09-08-ai-could-nearly-triple-americas-data-center-footprint-by-2030.md | scrape |
+| 2026-09-08 | 2026-09-08-sp-500-at-record-highs-history-points-to-1-clear-move.md | scrape |
+| 2026-09-09 | raw/url/2026-09-08-news-aggregation.processed.md | archive |
+| 2026-09-09 | wiki/health/shingrix-cardiovascular-risk-reduction-expert-perspectives.md | ingest |
+| 2026-09-09 | wiki/learning/novelty-techniques-boost-student-engagement.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-09 | wiki/technology/google-jail-independent-wikis.md | ingest |
+| 2026-09-09 | wiki/finance/satya-nadella-microsoft-10x-shareholder-return.md | ingest |
+| 2026-09-09 | wiki/technology/ai-terminology-glossary-llm-era.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-08 | wiki/health/memory-decline-begins-middle-age-hippocampus-study.md | ingest |
+| 2026-09-09 | wiki/learning/building-scientific-skills-through-observation.md | ingest |
+| 2026-09-08 | wiki/technology/rsa-key-factoring-historical-certificate-authority.md | ingest |
+| 2026-09-08 | wiki/finance/docusign-iam-platform-growth-stock-dip-sep2026.md | ingest |
+| 2026-09-09 | wiki/finance/sp500-record-highs-history-stay-invested-fidelity.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-08 | wiki/health/fda-approves-updated-covid-19-vaccines-xfg-variant.md | ingest |
+| 2026-09-09 | wiki/finance/stock-market-crash-long-term-bonds-hedge-tlt.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-08 | wiki/technology/stoke-space-raises-billion-series-e-nova-pathfinder.md | ingest |
+| 2026-09-09 | wiki/strategy/how-universities-should-prepare-founders.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-09 | wiki/strategy/gut-decision-matrix-instinct-vs-intuition.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-08 | wiki/technology/ai-data-center-footprint-triple-2030.md | ingest |
+| 2026-09-09 | wiki/strategy/omnipotence-dilemma-ai-decision-paralysis.md | ingest |
+| 2026-09-09 | wiki/learning/illusion-of-clarity-testing-understanding.md | ingest |
+| 2026-09-08 | wiki/strategy/write-things-down-thompson-llm-volition.md | ingest |
