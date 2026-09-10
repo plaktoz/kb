@@ -1,6 +1,34 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-10 | wiki/technology/microsoft-cfo-amy-hood-ai-stack-azure-efficiency.md | ingest |
+| 2026-09-10 | wiki/health/stamina-program-prostate-cancer-adt-quality-of-life.md | ingest |
+| 2026-09-10 | wiki/finance/ibm-lightwell-ltm-partnership-ai-security.md | ingest |
+| 2026-09-10 | wiki/technology/single-agent-vs-multi-agent-when-complexity-is-worth-it.md | ingest |
+| 2026-09-10 | wiki/technology/listen-labs-scrubs-funding-for-salesforce-acquisition-talks.md | ingest |
+| 2026-09-10 | 2026-09-09-openai-adds-a-prominent-ai-doomer-to-its-board-of-directors.md | scrape |
+| 2026-09-10 | 2026-09-09-tailwind-labs-is-joining-shopify.md | scrape |
+| 2026-09-10 | 2026-09-09-ai-research-startup-listen-labs-scrubbed-a-1-5b-funding-round-for-salesforce-talks.md | scrape |
+| 2026-09-10 | 2026-09-10-meta-says-interest-ai-agent-blown-way-past-expectations.md | scrape |
+| 2026-09-10 | 2026-09-10-how-much-oracle-stock-expected-move-after-earnings.md | scrape |
+| 2026-09-10 | 2026-09-10-why-experts-think-stocks-could-face-a-reality-check.md | scrape |
+| 2026-09-10 | 2026-07-13-how-i-polish-software-that-agents-built.md | scrape |
+| 2026-09-10 | 2026-08-10-i-vibe-coded-a-security-risk.md | scrape |
+| 2026-09-10 | 2026-09-08-to-read-or-not-to-read-the-code.md | scrape |
+| 2026-09-10 | 2026-09-09-chain-of-thought-vs-tree-of-thoughts-which-is-best-for-ai-agents.md | scrape |
+| 2026-09-10 | 2026-09-03-single-agent-vs-multi-agent-systems-when-the-complexity-is-worth-it.md | scrape |
+| 2026-09-10 | 2026-09-02-ai-agent-memory-design-what-works-and-what-doesnt.md | scrape |
+| 2026-09-10 | 2026-09-09-healthy-diet-fitness-program-improves-prostate-cancer-outcomes.md | scrape |
+| 2026-09-10 | 2026-09-08-medical-groups-issue-independent-flu-covid-rsv-vaccine-guidance.md | scrape |
+| 2026-09-10 | 2026-09-08-drinking-alcohol-raises-cancer-risk.md | scrape |
+| 2026-09-10 | https://hbr.org/2026/09/welcome-to-ai-autumn | scrape-failed |
+| 2026-09-10 | 2026-09-09-anthropic-just-threatened-to-kill-billions-of-people-this-is-not-okay.md | scrape |
+| 2026-09-10 | 2026-09-10-microsoft-cfo-touts-ai-stack.md | scrape |
+| 2026-09-10 | 2026-09-10-ibm-slips-5-billion-ai-security-bet-finds-builder.md | scrape |
+| 2026-09-10 | 2026-09-10-can-microsoft-stock-keep-earning.md | scrape |
+| 2026-09-10 | daily-update/2026-09/2026-09-10.md | newsletter |
+| 2026-09-10 | raw/url/2026-09-10-news-aggregation.md | news-fetch |
+| 2026-09-10 | raw/url/2026-09-10-news-aggregation.processed.md | archive |
 | 2026-09-09 | daily-update/2026-09/2026-09-09.md | newsletter |
 | 2026-09-09 | wiki/strategy/gut-decision-matrix-instinct-vs-intuition.md (identical source_url, no new info) | ingest-dupe |
 | 2026-09-09 | wiki/strategy/omnipotence-dilemma-ai-decision-paralysis.md | ingest |
@@ -2765,3 +2793,17 @@
 | 2026-09-09 | wiki/strategy/omnipotence-dilemma-ai-decision-paralysis.md | ingest |
 | 2026-09-09 | wiki/learning/illusion-of-clarity-testing-understanding.md | ingest |
 | 2026-09-08 | wiki/strategy/write-things-down-thompson-llm-volition.md | ingest |
+| 2026-09-10 | wiki/technology/polishing-agent-built-software-klaassen.md | ingest |
+| 2026-09-10 | wiki/technology/vibe-coding-security-risk-mcp.md | ingest |
+| 2026-09-10 | wiki/technology/ai-agent-memory-design-patterns.md | ingest |
+| 2026-09-10 | wiki/health/alcohol-cancer-risk-no-safe-level.md | ingest |
+| 2026-09-10 | wiki/health/medical-groups-independent-flu-covid-rsv-vaccine-guidance.md | ingest |
+| 2026-09-10 | wiki/technology/openai-paul-christiano-board-ai-safety.md | ingest |
+| 2026-09-10 | wiki/technology/reading-code-human-oversight-ai-agents.md | ingest |
+| 2026-09-10 | wiki/technology/newport-anthropic-superintelligence-extinction-risk-critique.md | ingest |
+| 2026-09-10 | wiki/technology/chain-of-thought-vs-tree-of-thoughts-ai-agents.md | ingest |
+| 2026-09-10 | wiki/technology/tailwind-labs-joining-shopify.md | ingest |
+| 2026-09-10 | wiki/finance/stocks-reality-check-expert-warnings-sep2026.md | ingest |
+| 2026-09-10 | wiki/finance/microsoft-msft-peak-margin-sustainability-sep2026.md | ingest |
+| 2026-09-10 | wiki/technology/meta-muse-ai-agent-stock-rally-expectations.md | ingest |
+| 2026-09-10 | wiki/finance/oracle-orcl-earnings-preview-q1-fy2027.md | ingest |
