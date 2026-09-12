@@ -1,6 +1,8 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-12 | daily-update/2026-09/2026-09-12-2.md | newsletter |
+| 2026-09-12 | wiki/health/hot-drinks-esophageal-cancer-risk.md | ingest |
 | 2026-09-12 | weekly-update/2026-09/2026-W37-weekly.md | newsletter |
 | 2026-09-12 | topics/ai-safety.md | compound |
 | 2026-09-12 | topics/ai-infrastructure.md | compound |
@@ -2887,3 +2889,5 @@
 | 2026-09-12 | 2026-09-12-microsoft-stock-flat-2026-rally.md | scrape |
 | 2026-09-12 | 2026-09-12-ibm-quantum-innovation-hub-eth-zurich.md | scrape |
 | 2026-09-12 | raw/url/2026-09-12-news-aggregation.processed.md | archive |
+| 2026-09-12 | wiki/health/daraxonrasib-treatment-resistant-nsclc-ras-trial.md | ingest |
+| 2026-09-12 | wiki/health/updated-guidelines-migraine-prevention.md | ingest |
