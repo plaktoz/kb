@@ -1,8 +1,8 @@
 # 2 Stocks Cathie Wood Is Snapping Up at a Discount Right Now
 
-**Author:** John Ballard
-**Date:** September 11, 2026
-**Source:** https://www.fool.com/investing/2026/09/11/2-stocks-cathie-wood-snapping-up-discount/
+source_url: https://www.fool.com/investing/2026/09/11/2-stocks-cathie-wood-snapping-up-discount/
+author: John Ballard
+date: 2026-09-11
 
 ---
 

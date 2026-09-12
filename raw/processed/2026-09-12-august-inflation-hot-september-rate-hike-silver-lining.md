@@ -1,8 +1,8 @@
 # August Inflation Came in Hot, and the Odds of a September Rate Hike Are Now 85%
 
-**Author:** Bram Berkowitz
-**Date:** September 11, 2026
-**Source:** https://www.fool.com/investing/2026/09/11/august-inflation-came-in-hot-and-the-odds-of-a-september-rate-hike-are-now-85-but-there-s-a-silver-lining-driving-stocks-higher/
+source_url: https://www.fool.com/investing/2026/09/11/august-inflation-came-in-hot-and-the-odds-of-a-september-rate-hike-are-now-85-but-there-s-a-silver-lining-driving-stocks-higher/
+author: Bram Berkowitz
+date: 2026-09-11
 
 ---
 

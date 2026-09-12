@@ -18,6 +18,14 @@
 | 2026-09-12 | wiki/finance/microsoft-stock-flat-2026-rally-timing.md | ingest |
 | 2026-09-12 | wiki/technology/hbr-ai-autumn-coverage-initiative.md | ingest |
 | 2026-09-12 | wiki/technology/google-ads-bot-farm-app-installs.md | ingest |
+| 2026-09-12 | wiki/technology/genai-red-teaming-owasp-prompt-injection.md (source already merged as additional_source with update block; no new info) | ingest-dupe |
+| 2026-09-12 | wiki/technology/red-team-vs-blue-team-cybersecurity.md (source_url already in additional_sources, content merged in prior run) | ingest-dupe |
+| 2026-09-12 | wiki/technology/garry-tan-us-open-weight-ai-distillation-regime.md | ingest |
+| 2026-09-12 | wiki/technology/mecka-ai-500m-valuation-sequoia-robot-training-data.md | ingest |
+| 2026-09-12 | wiki/technology/openai-feud-with-mathematicians-escalating.md | ingest |
+| 2026-09-12 | wiki/finance/august-cpi-2026-rate-hike-odds-85-stock-rally.md | ingest |
+| 2026-09-12 | wiki/finance/adobe-q3-2026-earnings-freemium-strategy.md | ingest |
+| 2026-09-12 | wiki/finance/cathie-wood-meta-rocket-lab-discount.md | ingest |
 | 2026-09-12 | wiki/productivity/ai-coding-discontents-cal-newport.md (identical source_url, no new info) | ingest-dupe |
 | 2026-09-12 | wiki/technology/nscale-fidji-simo-board-ipo.md | ingest |
 | 2026-09-12 | 2026-09-12-news-aggregation.md | news-fetch |

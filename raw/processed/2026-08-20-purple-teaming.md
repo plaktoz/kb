@@ -1,8 +1,8 @@
 # Purple Teaming Explained
 
-**By Janani Nagarajan | February 22, 2023**
-
-Source: https://www.crowdstrike.com/cybersecurity-101/purple-teaming/
+source_url: https://www.crowdstrike.com/cybersecurity-101/purple-teaming/
+author: Janani Nagarajan
+date: 2023-02-22
 
 ## What is a Purple Team?
 
