@@ -1,8 +1,8 @@
 ---
 type: topic-file
 topic: cardiovascular-health
-sources: [modifiable-risk-factors-coronary-plaque-heart-attack, exercise-volume-heart-protection-study, ckm-syndrome-young-adults-cardiovascular-kidney-metabolic, mounjaro-heart-health-type-2-diabetes, xylitol-cardiovascular-risk-study-2026, shingles-vaccine-linked-to-lower-cardiovascular-burden, coffee-research-daily-intake-heart-liver-health, early-menopause-linked-to-high-blood-pressure]
-last_updated: 2026-09-05
+sources: [modifiable-risk-factors-coronary-plaque-heart-attack, exercise-volume-heart-protection-study, ckm-syndrome-young-adults-cardiovascular-kidney-metabolic, mounjaro-heart-health-type-2-diabetes, xylitol-cardiovascular-risk-study-2026, shingles-vaccine-linked-to-lower-cardiovascular-burden, coffee-research-daily-intake-heart-liver-health, early-menopause-linked-to-high-blood-pressure, nighttime-light-exposure-cardiovascular-disease-risk, tailored-exercise-intervention-reduces-afib-recurrence, walk-pace-step-count-mortality-risk]
+last_updated: 2026-09-12
 ---
 
 # Cardiovascular Health
@@ -13,9 +13,13 @@ Cardiovascular health research has shifted from treating heart disease as an eve
 
 The most actionable finding in atherosclerosis research is that modifiable risk factors — dyslipidemia, hypertension, diabetes, obesity, and smoking — drive plaque *vulnerability* (the likelihood of rupture triggering a heart attack), while non-modifiable factors like age and genetics primarily drive plaque *accumulation* [[modifiable-risk-factors-coronary-plaque-heart-attack]]. This distinction matters because it targets the right intervention: reducing rupture risk requires managing all five modifiable factors collectively, not simply detecting plaque presence. The dose-response is strong — at four or more modifiable risk factors, half of all visible plaques across all three major coronary arteries are high-risk thin-cap fibroatheromas, with vascular inflammation identified as the shared mechanism. The [[ckm-syndrome-young-adults-cardiovascular-kidney-metabolic]] data reinforces how early this process begins: roughly 79% of adults in their 20s already show signs of cardiovascular-kidney-metabolic syndrome, with carotid artery wall thickening — a marker typically associated with much older patients — detectable in higher CKM stages. Intervention windows open far earlier than previously assumed, and the CKM framework connects obesity, diabetes, kidney disease, and cardiovascular risk as a coupled system rather than independent conditions — making integrated treatment systematically superior to siloed management.
 
-## Exercise: Guideline Floor vs. Substantial Protection
+## Exercise: Guideline Floor, Dose-Response, and AFib Treatment
 
 The standard 150-minute-per-week exercise recommendation provides only an 8–9% cardiovascular risk reduction; "substantial protection" — a greater than 30% reduction — requires roughly 560–610 minutes per week, which only 12% of study participants achieved [[exercise-volume-heart-protection-study]]. This reframes public health guidelines as a safety floor rather than a target: meeting the recommendation meaningfully reduces risk, but most available cardiovascular benefit sits above that threshold. The dose-response also interacts with baseline fitness: less-fit individuals need more minutes to achieve the same proportional risk reduction as more-fit individuals, suggesting that improving cardiorespiratory fitness over time is itself a form of leverage — each increase in fitness reduces the exercise volume needed for a given benefit level.
+
+For atrial fibrillation specifically, the NEXAF trial provides the strongest evidence to date that individualized exercise is a primary treatment option alongside medication [[tailored-exercise-intervention-reduces-afib-recurrence]]. A one-year phased protocol — 8 supervised high-intensity sessions followed by home-based exercise with continuous cardiac monitoring — reduced time spent in abnormal rhythm by 45% (from 7.1% to 3.9%) and cut AFib-related hospitalizations by 46%, a magnitude that experts suggest may qualify structured exercise as a primary medical treatment. The individualization constraint is critical: unsupervised starts risk discouraging patients, and the protocol's effectiveness required medical oversight and personalized intensity targets.
+
+Research into walking adds a behavioral flexibility insight: pace can substitute for volume when higher step counts aren't feasible [[walk-pace-step-count-mortality-risk]]. Across 103,684 UK Biobank adults tracked over eight years, brisk walking (80+ steps per minute) at fewer than 5,000 steps per day yielded comparable mortality risk to 5,000–7,500 steps at a slower pace — measured objectively via "peak 30-min cadence," not self-report. Cardiologists note the largest mortality gains come from the sedentary-to-active transition rather than from optimizing already-active routines, making this finding most actionable for the population with the highest absolute risk reduction to capture.
 
 ## Diet and Beverage Choices
 
@@ -29,7 +33,14 @@ The FDA's August 2026 approval of Mounjaro (tirzepatide) for cardiovascular risk
 
 Women who experience menopause before age 45 — and especially before age 40 — face elevated hypertension risk developing years or decades later [[early-menopause-linked-to-high-blood-pressure]]. Estrogen supports vascular health through nitric oxide production and arterial flexibility; withdrawing it early removes those protections ahead of the typical timeline and compounds through indirect effects — sleep disruption, weight gain, worsened insulin sensitivity — each carrying independent cardiovascular burden. This finding establishes early menopause as an inflection point for long-term cardiovascular trajectory, making proactive blood pressure monitoring and cardiovascular risk-factor management particularly important for this subgroup rather than waiting for the conventional age-related screening windows.
 
+## Environmental and Circadian Risk Factors
+
+Nighttime light exposure — even at levels as low as 3 lux, roughly the brightness of a dim nightlight — is associated with structural cardiac remodeling including thicker heart walls and reduced heart flexibility [[nighttime-light-exposure-cardiovascular-disease-risk]]. A UK Biobank study of 11,000+ participants linking wrist-worn light monitor data to cardiac MRIs found 2.4% greater left ventricular mass, 1.5% thicker heart walls, and 1.9% lower myocardial contraction fraction in the high-exposure group; a 2025 JAMA Network Open study found nighttime light correlated with 32–56% higher risks of various cardiovascular conditions. Sleep disruption mediates 24–49% of the light-cardiac relationship, implicating circadian rhythm disruption as the primary pathway: nighttime light impairs blood pressure regulation and metabolism by misaligning the body's internal timing system rather than by damaging cardiac tissue directly. Practical mitigations — blackout curtains, phones face-down, dim warm-toned nightlights — require minimal behavior change, and morning sunlight exposure reinforces the circadian rhythm to partially offset overnight disruption. This finding connects to the vault's running theme: vascular inflammation and autonomic dysregulation, not direct tissue damage, are the common mechanistic thread linking diverse environmental inputs to cardiac outcomes.
+
 ## Weekly Updates
 
 ### 2026-W36
 - Added: [[modifiable-risk-factors-coronary-plaque-heart-attack]], [[exercise-volume-heart-protection-study]], [[ckm-syndrome-young-adults-cardiovascular-kidney-metabolic]], [[mounjaro-heart-health-type-2-diabetes]], [[xylitol-cardiovascular-risk-study-2026]], [[shingles-vaccine-linked-to-lower-cardiovascular-burden]], [[coffee-research-daily-intake-heart-liver-health]], [[early-menopause-linked-to-high-blood-pressure]]
+
+### 2026-W37
+- Added: [[nighttime-light-exposure-cardiovascular-disease-risk]], [[tailored-exercise-intervention-reduces-afib-recurrence]], [[walk-pace-step-count-mortality-risk]]
