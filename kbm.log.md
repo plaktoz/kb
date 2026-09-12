@@ -1,6 +1,12 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-12 | weekly-update/2026-09/2026-W37-weekly.md | newsletter |
+| 2026-09-12 | topics/ai-safety.md | compound |
+| 2026-09-12 | topics/ai-infrastructure.md | compound |
+| 2026-09-12 | topics/cardiovascular-health.md | compound |
+| 2026-09-12 | topics/llm-security.md | compound |
+| 2026-09-12 | topics/ai-agents.md | compound |
 | 2026-09-12 | daily-update/2026-09/2026-09-12.md | newsletter |
 | 2026-09-12 | wiki/technology/design-space-async-await.md | ingest |
 | 2026-09-12 | wiki/technology/ibm-quantum-innovation-hub-eth-zurich.md | ingest |
