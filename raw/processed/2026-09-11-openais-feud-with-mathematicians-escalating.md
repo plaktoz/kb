@@ -1,8 +1,8 @@
 # OpenAI's Feud with Mathematicians Is Only Escalating
 
-*Published September 11, 2026 | By Tim Fernholz*
-
-Source: https://techcrunch.com/2026/09/11/openais-feud-with-mathematicians-is-only-escalating/
+source_url: https://techcrunch.com/2026/09/11/openais-feud-with-mathematicians-is-only-escalating/
+author: Tim Fernholz
+date: 2026-09-11
 
 ---
 

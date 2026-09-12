@@ -1,8 +1,8 @@
 # Adobe Just Reported Earnings. Here's What Investors Need to Know.
 
-**Author:** Patrick Sanders
-**Date:** September 11, 2026
-**Source:** https://www.fool.com/investing/2026/09/11/adobe-just-reported-earnings-heres-what-investors-need-to-know/
+source_url: https://www.fool.com/investing/2026/09/11/adobe-just-reported-earnings-heres-what-investors-need-to-know/
+author: Patrick Sanders
+date: 2026-09-11
 
 ---
 

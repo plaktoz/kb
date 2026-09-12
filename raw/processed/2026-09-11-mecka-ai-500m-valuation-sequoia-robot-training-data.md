@@ -1,8 +1,8 @@
 # Mecka AI Nears $500M Valuation in Sequoia-Led Deal Amid Rush for Robot Training Data
 
-*Published September 11, 2026 | By Marina Temkin*
-
-Source: https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/
+source_url: https://techcrunch.com/2026/09/11/mecka-ai-nears-500m-valuation-in-sequoia-led-deal-amid-rush-for-robot-training-data/
+author: Marina Temkin
+date: 2026-09-11
 
 ---
 

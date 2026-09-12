@@ -1,8 +1,8 @@
 # Y Combinator's Garry Tan Wants US Open-Weight AI Labs to 'Distill' Frontier Models, Too
 
-*Published September 11, 2026 | By Julie Bort*
-
-Source: https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/
+source_url: https://techcrunch.com/2026/09/11/y-combinators-garry-tan-wants-u-s-open-weight-ai-labs-to-distill-frontier-models-too/
+author: Julie Bort
+date: 2026-09-11
 
 ---
 

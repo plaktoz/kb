@@ -1,8 +1,8 @@
 # Google's AI Red Team: The Ethical Hackers Making AI Safer
 
-*Published July 19, 2023 | By Daniel Fabian, Head of Google Red Teams*
-
-Source: https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/
+source_url: https://blog.google/technology/safety-security/googles-ai-red-team-the-ethical-hackers-making-ai-safer/
+author: Daniel Fabian
+date: 2023-07-19
 
 ---
 
