@@ -1,6 +1,18 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-12 | daily-update/2026-09/2026-09-12.md | newsletter |
+| 2026-09-12 | wiki/technology/design-space-async-await.md | ingest |
+| 2026-09-12 | wiki/technology/ibm-quantum-innovation-hub-eth-zurich.md | ingest |
+| 2026-09-12 | wiki/technology/openai-agents-rubygems-attack.md | ingest |
+| 2026-09-12 | wiki/technology/ai-researchers-recursive-self-improvement-debate.md | ingest |
+| 2026-09-12 | wiki/technology/matt-mullenweg-automattic-ceo-ouster.md | ingest |
+| 2026-09-12 | wiki/finance/microsoft-stock-flat-2026-rally-timing.md | ingest |
+| 2026-09-12 | wiki/technology/hbr-ai-autumn-coverage-initiative.md | ingest |
+| 2026-09-12 | wiki/technology/google-ads-bot-farm-app-installs.md | ingest |
+| 2026-09-12 | wiki/productivity/ai-coding-discontents-cal-newport.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-12 | wiki/technology/nscale-fidji-simo-board-ipo.md | ingest |
+| 2026-09-12 | 2026-09-12-news-aggregation.md | news-fetch |
 | 2026-09-11 | daily-update/2026-09/2026-09-11.md | newsletter |
 | 2026-09-10 | wiki/health/nighttime-light-exposure-cardiovascular-disease-risk.md | ingest |
 | 2026-09-11 | wiki/technology/versioning-tracking-scikit-llm-experiments-mlflow.md | ingest |
@@ -2849,3 +2861,23 @@
 | 2026-09-10 | wiki/finance/jensen-huang-nvidia-70-percent-growth-thesis-goldman-sachs-2026.md | ingest |
 | 2026-09-11 | wiki/technology/microsoft-data-center-38gw-2032-expansion.md | ingest |
 | 2026-09-11 | wiki/finance/micron-stock-decline-macro-pressures-sep2026.md | ingest |
+| 2026-09-12 | 2026-09-11-openais-feud-with-mathematicians-escalating.md | scrape |
+| 2026-09-12 | 2026-09-11-garry-tan-us-open-weight-ai-distillation.md | scrape |
+| 2026-09-12 | 2026-09-11-mecka-ai-500m-valuation-sequoia-robot-training-data.md | scrape |
+| 2026-09-12 | 2026-09-12-august-inflation-hot-september-rate-hike-silver-lining.md | scrape |
+| 2026-09-12 | 2026-09-12-adobe-q3-earnings-investors-need-to-know.md | scrape |
+| 2026-09-12 | 2026-09-12-cathie-wood-meta-rocket-lab-discount.md | scrape |
+| 2026-09-12 | 2026-09-12-on-ai-coding-and-its-discontents.md | scrape |
+| 2026-09-12 | 2026-09-12-google-ads-bot-farm.md | scrape |
+| 2026-09-12 | 2026-09-12-matt-mullenweg-automattic-ceo-ouster.md | scrape |
+| 2026-09-12 | 2026-09-12-ai-researchers-recursive-self-improvement.md | scrape |
+| 2026-09-12 | 2026-09-12-design-space-async-await.md | scrape |
+| 2026-09-12 | 2026-09-12-welcome-to-ai-autumn.md | scrape |
+| 2026-09-12 | 2026-09-12-pancreatic-cancer-drug-treatment-resistant-lung-cancer.md | scrape |
+| 2026-09-12 | 2026-09-12-hot-drinks-esophagus-cancer-risk.md | scrape |
+| 2026-09-12 | 2026-09-12-updated-guidelines-migraine-prevention.md | scrape |
+| 2026-09-12 | 2026-09-12-openai-agents-rubygems-attack.md | scrape |
+| 2026-09-12 | 2026-09-12-nscale-fidji-simo-board-ipo.md | scrape |
+| 2026-09-12 | 2026-09-12-microsoft-stock-flat-2026-rally.md | scrape |
+| 2026-09-12 | 2026-09-12-ibm-quantum-innovation-hub-eth-zurich.md | scrape |
+| 2026-09-12 | raw/url/2026-09-12-news-aggregation.processed.md | archive |
