@@ -66,6 +66,15 @@ Source: https://finance.yahoo.com/markets/stocks/articles/microsoft-stock-rises-
 - **Framing**: the $678B backlog represents contracted business "already waiting to become revenue," shifting the key risk from demand generation to execution — building enough AI capacity without letting depreciation and infrastructure costs erode margins.
 
 
+## Update (segment revenue projections + valuation framing, 2026-09-15)
+
+Source: https://finance.yahoo.com/markets/stocks/articles/microsoft-just-made-move-could-230137006.html (David Jagielski, CPA — The Motley Fool)
+
+- **Per-segment Q1 FY2027 revenue projections**: "Agents and Infra" (AI, cloud, enterprise software) is guided to exceed **$75B** in Q1 FY2027; "Devices and Consumer" (Windows, Xbox, Bing/LinkedIn advertising) is guided to approximately **$15B** — making the AI-oriented segment roughly 5x the size of the devices business.
+- **Reporting transparency as a confidence signal**: Microsoft will now disclose actual Azure dollar revenue (not just growth rates). The author frames this as management signaling: companies typically don't highlight numbers they're uncomfortable with.
+- **Valuation relative context**: MSFT trades at roughly **28x trailing earnings** versus Apple's ~38x — characterised as "not all that expensive" among large-cap tech peers, with Azure performance as the primary stock-price driver.
+- **Investment thesis**: AI investment appears to be gaining momentum; the reporting restructure signals management confidence; stock viewed as an attractive long-term hold despite recent gains.
+
 ## Update (Azure revenue first formal disclosure + segment restructuring, 2026-09-03)
 
 Source: https://finance.yahoo.com/technology/ai/articles/microsoft-drops-101-9-billion-023300050.html (Faizan Farooque)
