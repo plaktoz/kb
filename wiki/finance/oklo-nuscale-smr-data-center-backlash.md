@@ -3,12 +3,14 @@ type: literature-note
 source_url: https://www.fool.com/investing/2026/08/30/are-oklo-and-nuscale-power-still-a-buy-after-data/
 author: Ryan Vanzo
 tags: [nuclear-energy, smr, data-centers, investing]
-date_consumed: 2026-08-30
+date_consumed: 2026-09-16
 ---
 
 ## Summary
 
 Public opposition to data centers is rising — roughly 70% of Americans oppose local construction — threatening the investment thesis for nuclear [[Small Modular Reactor]] (SMR) stocks [[Oklo]] (OKLO) and [[NuScale Power]] (SMR). SMRs were positioned as fast-deploy power solutions for AI infrastructure, but backlash may slow data center expansion timelines, reducing demand urgency. Competing energy sources like natural gas and conventional large-scale nuclear plants from firms like Alphabet further undercut the SMR value case.
+
+**Update (2026-09-16):** The [[European Investment Bank]] (EIB) announced a €40 million loan to Finland-based SMR developer [[Steady Energy]] — described as the first in a pipeline of EIB SMR investments — providing an indirect tailwind for Oklo and NuScale by creating proof points that could help them secure revenue-generating contracts. Over 80 SMR projects are now in development globally, driven by AI companies' urgent need for stable baseload power, though meaningful operating SMR systems may still require a decade or more to emerge.
 
 ## Core Concepts
 
@@ -17,6 +19,9 @@ Public opposition to data centers is rising — roughly 70% of Americans oppose 
 - **[[NuScale Power]]**: SMR company whose design is not yet commercialized; only two SMR systems have been built globally.
 - **Data Center Backlash**: Gallup polling shows ~70% of Americans oppose local data center construction due to excessive energy and water use.
 - **[[AI Infrastructure]] Demand**: McKinsey projects global data center spending could reach $7 trillion by 2030.
+- **[[European Investment Bank]] (EIB) SMR Funding**: EIB issued a €40M loan to Finland's [[Steady Energy]]; described as the first in a planned SMR investment pipeline — government backing raises odds more projects reach financial commitment.
+- **Global SMR Pipeline**: Over 80 SMR projects now in development worldwide, spurred by AI firms seeking stable baseload power.
+- **Proof-Point Problem**: The main barrier is converting pipeline projects to firm financial commitments; real-world operational SMRs would unlock downstream contracts for Oklo and NuScale.
 - **Natural Gas Competition**: [[SpaceX]] is investing heavily in natural gas for compute power, including building its own pipeline, potentially bridging demand until conventional nuclear scales.
 - **Conventional Nuclear**: [[Alphabet]] plans three large conventional nuclear plants (600+ MW each), competing with SMR on longer timelines but with established regulatory paths.
 
@@ -30,6 +35,9 @@ Public opposition to data centers is rising — roughly 70% of Americans oppose 
 - **Regulatory Risk**: Oklo lacks U.S. construction approval; NuScale hasn't commercialized its design.
 - **Limited Precedent**: Only two SMR systems have been built globally to date.
 - **Big Tech Pivoting**: Alphabet chose conventional nuclear (600+ MW plants) over SMRs.
+- **European Tailwind**: EIB's €40M loan to Steady Energy is the first of planned SMR investments; indirect benefit to NuScale/Oklo if proof points emerge.
+- **80+ Global Projects**: AI-driven demand has pushed global SMR project count above 80, but firm financial commitments remain the bottleneck.
+- **Long Time Horizon**: Meaningful operating SMR systems from current government support likely "a decade or more" away.
 
 ## 🧠 First Principles & Mental Models
 

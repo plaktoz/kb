@@ -1,6 +1,51 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-16 | wiki/health/whole-grains-daily-servings-cardiovascular-risk-reduction.md | ingest |
+| 2026-09-16 | wiki/technology/ai-assisted-genealogy-family-tree.md | ingest |
+| 2026-09-16 | wiki/technology/are-we-at-war-with-ai-agent-civilizations.md | ingest |
+| 2026-09-16 | wiki/technology/microsoft-ai-code-of-conduct-models-safety.md | ingest |
+| 2026-09-16 | wiki/technology/tailscale-aperture-ai-agent-access-audit.md | ingest |
+| 2026-09-16 | wiki/technology/ai-agent-whistleblowing-hotlines.md | ingest |
+| 2026-09-16 | wiki/health/reading-habit-cognitive-health-alzheimers-risk.md | ingest |
+| 2026-09-16 | wiki/health/dairy-prostate-cancer-risk-awareness-gap.md | ingest |
+| 2026-09-16 | wiki/strategy/three-types-of-failure-sahil-bloom.md | ingest |
+| 2026-09-16 | wiki/technology/gemini-38-live-and-extended-thinking.md | ingest |
+| 2026-09-16 | wiki/finance/oklo-nuscale-smr-data-center-backlash.md | ingest |
+| 2026-09-16 | wiki/finance/nvidia-portfolio-spacex-second-largest-holding-2026.md | ingest |
+| 2026-09-16 | wiki/finance/rocket-lab-iridium-acquisition-equity-offering.md | ingest |
+| 2026-09-16 | wiki/technology/typesafe-ai-system-one-models-jev.md | ingest |
+| 2026-09-16 | wiki/technology/ai-data-center-community-opposition-philadelphia.md | ingest |
+| 2026-09-16 | wiki/technology/ai-computer-use-everyday-delegation-every.md | ingest |
+| 2026-09-16 | wiki/finance/spacex-share-unlock-schedule-sept-dec-2026.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-16 | wiki/technology/nvidia-jensen-huang-ai-regulation-dreamforce.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-16 | wiki/technology/ai-assisted-genealogy-family-tree.md | ingest |
+| 2026-09-16 | wiki/technology/ai-data-center-community-opposition-philadelphia.md | ingest |
+| 2026-09-16 | wiki/technology/typesafe-ai-system-one-models-jev.md | ingest |
+| 2026-09-16 | wiki/technology/ai-agent-whistleblowing-hotlines.md | ingest |
+| 2026-09-16 | 2026-09-16-news-aggregation.processed.md | archive |
+| 2026-09-16 | 2026-09-15-introducing-system-one-models-and-jev.md | scrape |
+| 2026-09-16 | 2026-09-15-introducing-gemini-3-8-live-and-3-8-live-extended-thinking.md | scrape |
+| 2026-09-16 | 2026-09-15-the-ai-data-center-boom-is-colliding-with-cities-scarred-by-big-industry.md | scrape |
+| 2026-09-15 | 2026-09-15-europe-bets-big-on-small-modular-reactors-heres-how-nuscale-power-and-oklo-will-benefit.md | scrape |
+| 2026-09-15 | 2026-09-15-nvidia-just-reshuffled-its-99-billion-portfolio-and-1-stock-moved-up-the-ranks.md | scrape |
+| 2026-09-15 | 2026-09-15-rocket-lab-raises-funds-to-prepare-for-closing-of-iridium-acquisition.md | scrape |
+| 2026-09-16 | /Users/tianhonglee/Developer/kb/raw/processed/2026-09-14-what-playing-with-ai-taught-me-about-my-work.md | scrape-failed |
+| 2026-09-16 | 2026-08-31-are-we-at-war-with-ai-agent-civilizations.md | scrape |
+| 2026-09-16 | 2026-09-15-ai-agents-now-have-a-place-to-snitch.md | scrape |
+| 2026-09-16 | 2026-09-15-you-re-probably-sleeping-on-computer-use.md | scrape |
+| 2026-09-16 | 2026-09-15-how-to-audit-what-your-ai-agents-are-accessing.md | scrape |
+| 2026-09-16 | 2026-09-04-how-i-used-ai-to-trace-12-generations-of-my-family-tree.md | scrape |
+| 2026-09-16 | 2026-09-15-book-habit-may-lower-alzheimers-risk.md | scrape |
+| 2026-09-16 | 2026-09-15-most-men-unaware-dairy-may-increase-prostate-cancer-risk.md | scrape |
+| 2026-09-16 | 2026-09-15-4-to-6-servings-whole-grains-daily-lower-body-weight-support-heart-health.md | scrape |
+| 2026-09-16 | https://stratechery.com/2026/openai-ads-amazon-ads-in-chatgpt-walmart-to-accept-apple-pay/ | scrape-failed |
+| 2026-09-16 | 2026-09-15-i-think-i-need-to-talk-about-failure.md | scrape |
+| 2026-09-16 | 2026-09-14-microsofts-new-ai-code-of-conduct-tells-models-not-to-hack-systems-or-trick-humans.md | scrape |
+| 2026-09-16 | 2026-09-15-we-dont-need-ai-regulation-leave-safety-to-us-nvidias-jensen-huang-says.md | scrape |
+| 2026-09-16 | 2026-09-15-spacexs-next-share-unlock-is-coming-history-says-this-is-what-happens-next.md | scrape |
+| 2026-09-16 | 2026-09-16-news-aggregation.md | news-fetch |
+| 2026-09-16 | daily-update/2026-09/2026-09-16.md | newsletter |
 | 2026-09-15 | wiki/finance/10-year-treasury-yield-tops-5-percent-sep2026.md | ingest |
 | 2026-09-15 | wiki/finance/ibm-nasa-lunar-model-ai-strategy-investment-narrative.md | ingest |
 | 2026-09-15 | wiki/health/tame-trial-metformin-aging-longevity.md | ingest |
