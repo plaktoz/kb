@@ -1,6 +1,23 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-17 | wiki/productivity/13-beliefs-about-ai-writing-mike-taylor.md | ingest |
+| 2026-09-17 | wiki/technology/training-4b-model-81-percent-faster-query-plans-postgres.md | ingest |
+| 2026-09-17 | wiki/technology/backup-strategy-3-2-1-borg-restic.md | ingest |
+| 2026-09-17 | wiki/technology/breaking-the-1-58-bit-barrier-for-ternary-llms.md | ingest |
+| 2026-09-17 | wiki/productivity/leader-team-overload-work-absorption-trap.md | ingest |
+| 2026-09-16 | wiki/technology/ai-labs-auditing-vs-network-security-lethal-trifecta.md | ingest |
+| 2026-09-16 | wiki/health/diet-quality-vs-calorie-counting-weight-loss.md | ingest |
+| 2026-09-16 | wiki/health/indigo-light-myopia-suppression.md | ingest |
+| 2026-09-16 | wiki/health/menopausal-hormone-therapy-early-timing-heart-disease-risk.md | ingest |
+| 2026-09-16 | wiki/finance/fed-rate-hike-sep2026-ai-stocks-self-funding-edge.md | ingest |
+| 2026-09-17 | wiki/technology/cuda-rust-gpu-kernels-two-tracks.md | ingest |
+| 2026-09-17 | wiki/strategy/geo-brand-management-ai-marketing.md | ingest |
+| 2026-09-17 | wiki/productivity/show-us-your-folders-tuin-erf-ai-workspace.md | ingest |
+| 2026-09-17 | wiki/finance/amazon-project-mercury-same-day-fulfillment-expansion.md | ingest |
+| 2026-09-16 | wiki/finance/warsh-timelier-return-fomc-dot-plot-ai-sep2026.md | ingest |
+| 2026-09-16 | wiki/finance/fed-12-0-rate-hike-3-75-percent-housing-stocks-sep2026.md | ingest |
+| 2026-09-17 | wiki/technology/anthropic-claude-chat-cowork-unified-interface.md | ingest |
 | 2026-09-16 | wiki/health/whole-grains-daily-servings-cardiovascular-risk-reduction.md | ingest |
 | 2026-09-16 | wiki/technology/ai-assisted-genealogy-family-tree.md | ingest |
 | 2026-09-16 | wiki/technology/are-we-at-war-with-ai-agent-civilizations.md | ingest |
@@ -46,6 +63,7 @@
 | 2026-09-16 | 2026-09-15-spacexs-next-share-unlock-is-coming-history-says-this-is-what-happens-next.md | scrape |
 | 2026-09-16 | 2026-09-16-news-aggregation.md | news-fetch |
 | 2026-09-16 | daily-update/2026-09/2026-09-16.md | newsletter |
+| 2026-09-17 | 2026-09-17-news-aggregation.md | news-fetch |
 | 2026-09-15 | wiki/finance/10-year-treasury-yield-tops-5-percent-sep2026.md | ingest |
 | 2026-09-15 | wiki/finance/ibm-nasa-lunar-model-ai-strategy-investment-narrative.md | ingest |
 | 2026-09-15 | wiki/health/tame-trial-metformin-aging-longevity.md | ingest |
@@ -3036,3 +3054,23 @@
 | 2026-09-15 | wiki/finance/arm-holdings-stock-down-40-valuation-sidelines.md | ingest |
 | 2026-09-15 | wiki/technology/openai-acquires-glass-imaging-300-million.md | ingest |
 | 2026-09-15 | wiki/health/tame-trial-metformin-aging-longevity.md | ingest |
+| 2026-09-16 | 2026-09-16-anthropic-merges-claude-chat-and-cowork-in-one-interface.md | scrape |
+| 2026-09-16 | 2026-09-08-introducing-cuda-rust-two-tracks-for-writing-gpu-kernels.md | scrape |
+| 2026-09-16 | 2026-09-16-ai-labs-want-in-house-auditors-but-maybe-they-should-shut-the-front-door-first.md | scrape |
+| 2026-09-16 | 2026-09-16-fed-voted-12-0-raise-interest-rates-first-time-3-years-fed-funds-rate-impacts-housing-stocks.md | scrape |
+| 2026-09-16 | 2026-09-16-fed-hiked-interest-rates-first-time-3-years-are-ai-stocks-in-trouble.md | scrape |
+| 2026-09-16 | 2026-09-16-2-words-fed-chair-kevin-warsh-sunk-dow-sp500-nasdaq-put-wall-street-on-notice.md | scrape |
+| 2026-09-16 | 2026-09-16-when-theres-more-work-than-your-team-can-handle.md | scrape |
+| 2026-09-16 | 2026-09-16-show-us-your-folders.md | scrape |
+| 2026-09-16 | 2026-09-16-backups-arent-simple.md | scrape |
+| 2026-09-16 | 2026-09-14-breaking-the-1-58-bit-barrier-for-ternary-llms.md | scrape |
+| 2026-09-16 | 2026-09-16-training-a-4b-model-to-produce-81-percent-faster-query-plans-than-postgres.md | scrape |
+| 2026-09-16 | 2026-09-16-13-beliefs-about-ai-writing.md | scrape |
+| 2026-09-17 | 2026-09-16-diet-quality-vs-counting-calories-is-one-better-for-weight-loss.md | scrape |
+| 2026-09-17 | 2026-09-16-start-menopausal-hormone-therapy-early-for-a-lower-heart-disease-risk.md | scrape |
+| 2026-09-17 | 2026-09-15-could-indigo-light-help-fight-the-growing-myopia-boom.md | scrape |
+| 2026-09-17 | https://stratechery.com/2026/salesforce-ai-force-agents-as-ui-the-race-to-headless/ | scrape-failed |
+| 2026-09-17 | 2026-09-15-how-geo-is-changing-the-role-of-brand-manager.md | scrape |
+| 2026-09-17 | 2026-09-16-this-latest-move-by-amazon-could-be-a-game-changer.md | scrape |
+| 2026-09-17 | raw/url/2026-09-17-news-aggregation.processed.md | archive |
+| 2026-09-17 | daily-update/2026-09/2026-09-17.md | newsletter |
