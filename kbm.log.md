@@ -1,8 +1,11 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-18 | wiki/finance/arm-holdings-agi-cpu-2b-revenue-guidance-stock-pop.md (identical source_url, no new info) | ingest-dupe |
+| 2026-09-18 | wiki/technology/ai-agent-monitoring-watcher-silico-rogue-oversight.md | ingest |
 | 2026-09-17 | wiki/productivity/13-beliefs-about-ai-writing-mike-taylor.md | ingest |
 | 2026-09-17 | wiki/technology/training-4b-model-81-percent-faster-query-plans-postgres.md | ingest |
+| 2026-09-18 | wiki/finance/anthropic-ipo-ai-infrastructure-beneficiaries-gev-pwr-etn.md | ingest |
 | 2026-09-17 | wiki/technology/backup-strategy-3-2-1-borg-restic.md | ingest |
 | 2026-09-17 | wiki/technology/breaking-the-1-58-bit-barrier-for-ternary-llms.md | ingest |
 | 2026-09-17 | wiki/productivity/leader-team-overload-work-absorption-trap.md | ingest |
@@ -3074,3 +3077,36 @@
 | 2026-09-17 | 2026-09-16-this-latest-move-by-amazon-could-be-a-game-changer.md | scrape |
 | 2026-09-17 | raw/url/2026-09-17-news-aggregation.processed.md | archive |
 | 2026-09-17 | daily-update/2026-09/2026-09-17.md | newsletter |
+| 2026-09-18 | 2026-09-18-news-aggregation.md | news-fetch |
+| 2026-09-16 | 2026-09-15-mini-vibe-check-typesafe-s-jev.md | scrape |
+| 2026-09-16 | 2026-09-17-why-you-should-burn-more-tokens.md | scrape |
+| 2026-09-16 | 2023-03-09-why-write.md | scrape |
+| 2026-09-18 | 2026-09-10-is-your-strategic-plan-too-ambitious-or-not-ambitious-enough.md | scrape-failed |
+| 2026-09-18 | 2026-09-14-the-most-important-product-decision-is-what-you-dont-build.md | scrape |
+| 2026-09-18 | 2026-09-17-introducing-bonsai-2-27b-near-lossless-compression-in-a-9x-smaller-footprint.md | scrape |
+| 2026-09-16 | 2026-09-17-google-deepmind-launches-institute-to-widen-the-agi-debate.md | scrape |
+| 2026-09-16 | 2026-09-17-is-the-ai-safety-debate-about-safety-or-control.md | scrape |
+| 2026-09-16 | 2026-09-17-openai-caught-its-models-leaving-notes-to-successors-to-hide-bad-behavior.md | scrape |
+| 2026-09-16 | 2026-09-17-the-fix-for-rogue-ai-agents-could-be-more-ai.md | scrape |
+| 2026-09-16 | 2026-09-17-payment-giant-visa-is-doubling-down-on-stablecoins.md | scrape |
+| 2026-09-16 | 2026-09-17-the-anthropic-ipo-is-coming-soon-these-3-industria.md | scrape |
+| 2026-09-18 | 2026-09-17-wall-street-is-flashing-warning-signs-5-etfs-to-buy-on-a-market-pullback.md | scrape |
+| 2026-09-18 | 2026-09-17-why-arm-stock-popped-today.md | scrape |
+| 2026-09-18 | nighttime-light-exposure-cardiovascular-disease-risk.md | scrape-failed |
+| 2026-09-18 | 2026-09-17-women-young-adults-experience-fatigue-more-often-cdc-says.md | scrape |
+| 2026-09-18 | 2026-09-14-tame-trial-common-diabetes-drug-extend-human-life-span-aging.md | scrape-failed |
+| 2026-09-18 | 2026-09-14-stop-forgetting-what-you-read.md | scrape-failed |
+| 2026-09-18 | raw/url/2026-09-18-news-aggregation.processed.md | archive |
+| 2026-09-18 | wiki/technology/typesafe-jev-mini-vibe-check.md | ingest |
+| 2026-09-18 | wiki/technology/ai-safety-debate-safety-or-control.md | ingest |
+| 2026-09-18 | wiki/technology/google-deepmind-institute-agi-debate.md | ingest |
+| 2026-09-18 | wiki/technology/bonsai-2-27b-near-lossless-ternary-model.md | ingest |
+| 2026-09-18 | wiki/technology/openai-models-leaving-hidden-notes-successors-misalignment.md | ingest |
+| 2026-09-18 | wiki/learning/writing-as-thinking-tool-ai-world.md | ingest |
+| 2026-09-18 | wiki/health/cdc-fatigue-women-young-adults.md | ingest |
+| 2026-09-18 | wiki/finance/visa-stablecoin-platform-doubling-down-2026.md | ingest |
+| 2026-09-18 | wiki/finance/market-warning-signs-5-etfs-pullback-2026.md | ingest |
+| 2026-09-18 | wiki/productivity/burn-more-tokens-every-team-ai-experimentation.md | ingest |
+| 2026-09-18 | wiki/strategy/what-you-dont-build-most-important-product-decision.md | ingest |
+| 2026-09-18 | wiki/finance/arm-holdings-agi-cpu-2b-revenue-guidance-stock-pop.md | ingest |
+| 2026-09-18 | daily-update/2026-09/2026-09-18.md | newsletter |
