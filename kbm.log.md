@@ -1,6 +1,23 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-19 | daily-update/2026-09/2026-09-19.md | newsletter |
+| 2026-09-19 | wiki/productivity/how-to-write-with-an-llm.md | ingest |
+| 2026-09-19 | wiki/technology/nyt-openai-microsoft-ai-scraping-labor-theft-lawsuit.md | ingest |
+| 2026-09-19 | wiki/health/panxeon-blood-test-pancreatic-cancer-early-detection.md | ingest |
+| 2026-09-19 | wiki/technology/ai-hallucination-nearly-triggers-us-military-operation.md | ingest |
+| 2026-09-19 | wiki/technology/anthropic-wet-biology-lab-life-sciences.md | ingest |
+| 2026-09-19 | wiki/technology/anthropic-accenture-embedded-safety-evaluator.md | ingest |
+| 2026-09-19 | wiki/finance/alphabet-ad-antitrust-ruling-googl-buy-2026.md | ingest |
+| 2026-09-19 | wiki/finance/netflix-27-billion-buyback-program-q2-2026.md | ingest |
+| 2026-09-19 | wiki/technology/ai-vibed-proof-conways-conjecture-dan-abramov.md | ingest |
+| 2026-09-19 | wiki/health/rem-sleep-lower-risk-83-diseases.md | ingest |
+| 2026-09-19 | wiki/health/microdosing-glp1-wegovy-zepbound-weight-loss.md | ingest |
+| 2026-09-19 | wiki/technology/claude-opus5-openai-bug-bounty-breach.md | ingest |
+| 2026-09-19 | wiki/technology/world-model-companies-secrecy-competitive-dynamics.md | ingest |
+| 2026-09-19 | wiki/technology/astra-vfx-indie-filmmakers-vibe-check.md | ingest |
+| 2026-09-19 | wiki/finance/fortinet-stock-surge-ai-security-fears-analyst-upgrade-sept-2026.md | ingest |
+| 2026-09-19 | wiki/technology/zcode-silent-workspace-snapshot-upload.md | ingest |
 | 2026-09-18 | wiki/finance/arm-holdings-agi-cpu-2b-revenue-guidance-stock-pop.md (identical source_url, no new info) | ingest-dupe |
 | 2026-09-18 | wiki/technology/ai-agent-monitoring-watcher-silico-rogue-oversight.md | ingest |
 | 2026-09-17 | wiki/productivity/13-beliefs-about-ai-writing-mike-taylor.md | ingest |
@@ -3110,3 +3127,21 @@
 | 2026-09-18 | wiki/strategy/what-you-dont-build-most-important-product-decision.md | ingest |
 | 2026-09-18 | wiki/finance/arm-holdings-agi-cpu-2b-revenue-guidance-stock-pop.md | ingest |
 | 2026-09-18 | daily-update/2026-09/2026-09-18.md | newsletter |
+| 2026-09-19 | 2026-09-19-news-aggregation.md | news-fetch |
+| 2026-09-19 | 2026-09-18-ai-hallucination-nearly-triggers-us-military-operation.md | scrape |
+| 2026-09-19 | 2026-09-18-anthropic-is-operating-a-lab-that-conducts-biology-experiments.md | scrape |
+| 2026-09-19 | 2026-09-18-researchers-used-anthropics-claude-to-hack-into-openai.md | scrape |
+| 2026-09-19 | 2026-09-18-alphabets-ad-business-antitrust-ruling.md | scrape |
+| 2026-09-19 | 2026-09-18-netflix-has-27-billion-left-to-buy-back-its-own-stock-about-8-of-the-whole-company.md | scrape |
+| 2026-09-19 | 2026-09-18-why-fortinet-stock-zoomed-almost-9-higher-this-week.md | scrape |
+| 2026-09-16 | 2026-09-17-how-to-write-with-an-llm.md | scrape |
+| 2026-09-16 | 2026-09-18-zcode-silent-workspace-snapshot-upload.md | scrape |
+| 2026-09-19 | 2026-09-18-vibe-check-is-astra-a-breakthrough-for-indie-filmmakers.md | scrape |
+| 2026-09-19 | 2026-09-18-how-i-vibed-a-proof-of-conways-conjecture.md | scrape |
+| 2026-09-16 | 2026-09-18-microdosing-glp1-wegovy-zepbound-weight-loss.md | scrape |
+| 2026-09-16 | 2026-09-18-more-dream-sleep-linked-to-lower-risk-of-83-diseases-including-diabetes.md | scrape |
+| 2026-09-19 | 2026-09-17-pancreatic-cancer-new-blood-test-may-lead-to-earlier-detection.md | scrape |
+| 2026-09-19 | 2026-09-18-world-model-companies-are-keeping-a-lot-of-secrets.md | scrape |
+| 2026-09-19 | 2026-09-18-anthropics-first-embedded-evaluator-is-accenture.md | scrape |
+| 2026-09-19 | 2026-09-17-microsoft-exec-called-ai-scraping-the-largest-theft-of-labor-in-human-history-new-unredacted-filings-reveal.md | scrape |
+| 2026-09-19 | raw/url/2026-09-19-news-aggregation.processed.md | archive |
