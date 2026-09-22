@@ -1,6 +1,27 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-21 | wiki/health/maria-shriver-womens-alzheimers-movement-brain-health.md | ingest |
+| 2026-09-22 | wiki/learning/care-less-about-practical-advice-scott-young.md | ingest |
+| 2026-09-22 | wiki/technology/transformer-architecture-gpt2-visually-explained.md | ingest |
+| 2026-09-22 | wiki/technology/advisory-group-mathematics-artificial-intelligence-agmai.md | ingest |
+| 2026-09-22 | wiki/finance/buffett-30-year-lessons-temperament-enough-business-owner.md | ingest |
+| 2026-09-22 | wiki/finance/spacex-1000-investment-projection-2031.md | ingest |
+| 2026-09-22 | wiki/productivity/authentic-writing-vs-ai-generation-breck.md | ingest |
+| 2026-09-22 | wiki/health/simone-biles-eczema-atopic-seborrheic-dermatitis.md | ingest |
+| 2026-09-21 | wiki/strategy/what-sun-got-wrong-operational-execution.md | ingest |
+| 2026-09-22 | wiki/technology/openai-math-advisory-group-100-open-problems.md | ingest |
+| 2026-09-22 | wiki/technology/meta-muse-mobile-launch-outpaces-chatgpt.md | ingest |
+| 2026-09-22 | wiki/health/aerobic-exercise-cancer-recurrence-survival-meta-analysis.md | ingest |
+| 2026-09-22 | wiki/productivity/attention-algorithmic-web-intentional-internet.md | ingest |
+| 2026-09-22 | wiki/technology/kairos-power-samsung-google-nuclear-reactor.md | ingest |
+| 2026-09-21 | wiki/finance/intel-arm-amd-chip-stocks-agentic-ai-cpu-rally-sep2026.md | ingest |
+| 2026-09-22 | wiki/finance/oura-ipo-2-2b-shareholder-payday.md | ingest |
+| 2026-09-22 | wiki/technology/ai-coding-ci-bottleneck-linear-rework.md | ingest |
+| 2026-09-21 | wiki/finance/intel-arm-amd-chip-stocks-agentic-ai-cpu-rally-sep2026.md | ingest |
+| 2026-09-22 | wiki/technology/ai-coding-ci-bottleneck-linear-rework.md | ingest |
+| 2026-09-22 | wiki/finance/spacex-1000-investment-projection-2031.md | ingest |
+| 2026-09-22 | 2026-09-22-news-aggregation.md | news-fetch |
 | 2026-09-21 | daily-update/2026-09/2026-09-21.md | newsletter |
 | 2026-09-21 | wiki/technology/samsung-hbm4-output-doubling-2027.md | ingest |
 | 2026-09-21 | wiki/productivity/michael-abrashoff-leadership-its-your-ship.md | ingest |
@@ -31,6 +52,24 @@
 | 2026-09-18 | wiki/finance/arm-holdings-agi-cpu-2b-revenue-guidance-stock-pop.md (identical source_url, no new info) | ingest-dupe |
 | 2026-09-18 | wiki/technology/ai-agent-monitoring-watcher-silico-rogue-oversight.md | ingest |
 | 2026-09-17 | wiki/productivity/13-beliefs-about-ai-writing-mike-taylor.md | ingest |
+| 2026-09-22 | 2026-09-21-attention-is-all-you-have.md | scrape |
+| 2026-09-22 | 2026-09-20-what-sun-got-wrong.md | scrape |
+| 2026-09-22 | 2026-09-20-i-dont-want-to-read-what-you-didnt-write.md | scrape |
+| 2026-09-22 | 2026-09-21-ci-bottleneck-reworked.md | scrape |
+| 2026-09-22 | 2026-09-22-transformer-explainer-llm-visually-explained.md | scrape |
+| 2026-09-22 | 2026-09-21-kairos-power-samsung-nuclear-reactor-google.md | scrape |
+| 2026-09-21 | 2026-09-21-metas-muse-is-outpacing-chatgpts-early-mobile-launch.md | scrape |
+| 2026-09-21 | 2026-09-21-openai-forms-math-advisory-group-as-its-ai-resolves-more-than-100-open-problems.md | scrape |
+| 2026-09-21 | 2026-09-21-ouras-2-2b-ipo-is-mostly-a-payday-for-existing-shareholders.md | scrape |
+| 2026-09-21 | 2026-09-21-advisory-group-on-mathematics-and-artificial-intelligence.md | scrape |
+| 2026-09-21 | 2026-09-21-3-lessons-i-learned-from-watching-warren-buffett-for-30-years.md | scrape |
+| 2026-09-21 | 2026-09-21-prediction-heres-what-a-1000-investment-in-spacex.md | scrape |
+| 2026-09-21 | 2026-09-21-why-intel-arm-amd-ai-chip-stocks-soared-today.md | scrape |
+| 2026-09-21 | 2026-09-20-maria-shriver-alzheimers-disease-awareness.md | scrape |
+| 2026-09-21 | 2026-09-21-simone-biles-routine-manage-eczema.md | scrape |
+| 2026-09-21 | 2026-09-21-aerobic-exercise-could-help-improve-outlook-after-cancer-treatment.md | scrape |
+| 2026-09-21 | 2026-09-21-you-should-care-less-about-practical-advice.md | scrape |
+| 2026-09-22 | raw/url/2026-09-22-news-aggregation.processed.md | archive |
 | 2026-09-17 | wiki/technology/training-4b-model-81-percent-faster-query-plans-postgres.md | ingest |
 | 2026-09-18 | wiki/finance/anthropic-ipo-ai-infrastructure-beneficiaries-gev-pwr-etn.md | ingest |
 | 2026-09-17 | wiki/technology/backup-strategy-3-2-1-borg-restic.md | ingest |
@@ -3191,3 +3230,4 @@
 | 2026-09-21 | wiki/learning/singapore-readsg-gamification-reading-rewards.md | ingest |
 | 2026-09-21 | wiki/technology/ax-agentic-task-runtime-google.md | ingest |
 | 2026-09-21 | wiki/finance/tesla-free-cash-flow-negative-cash-cushion.md | ingest |
+| 2026-09-22 | daily-update/2026-09/2026-09-22.md | newsletter |
