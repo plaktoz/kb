@@ -1,8 +1,8 @@
 ---
 type: topic-file
 topic: ai-infrastructure
-sources: [ai-data-center-footprint-triple-2030, jensen-huang-gigawatt-data-center-valuation-neocloud, microsoft-data-center-38gw-2032-expansion, ibm-quantum-innovation-hub-eth-zurich, nscale-fidji-simo-board-ipo]
-last_updated: 2026-09-12
+sources: [ai-data-center-footprint-triple-2030, jensen-huang-gigawatt-data-center-valuation-neocloud, microsoft-data-center-38gw-2032-expansion, ibm-quantum-innovation-hub-eth-zurich, nscale-fidji-simo-board-ipo, oklo-nuscale-smr-data-center-backlash, ai-data-center-community-opposition-philadelphia, anthropic-ipo-ai-infrastructure-beneficiaries-gev-pwr-etn, cornelis-ai-infrastructure-205m-funding-nvidia-alternative]
+last_updated: 2026-09-22
 ---
 
 # AI Infrastructure
@@ -16,6 +16,20 @@ U.S. large-scale data centers could nearly triple by 2030 driven by AI demand fr
 ## Power as the Binding Constraint
 
 Power availability — not chip supply — is emerging as the primary constraint on AI expansion, with "infrastructure starting to matter almost as much as the chips themselves" [[ai-data-center-footprint-triple-2030]]. The bottleneck principle applies: as chip supply constraints ease, the next binding resource becomes reliable electricity, grid connections, and cooling systems — each requiring multi-year procurement and construction timelines that dwarf hardware lead times. Regulatory headwinds compound the supply constraint: governors in Texas and New York have moved to halt new data center construction over energy and land-use concerns, introducing political risk into capacity planning that technical roadmaps alone cannot model [[microsoft-data-center-38gw-2032-expansion]]. The strategic implication is that securing energy — not algorithmic edge — may determine which companies can sustain frontier AI development in the late 2020s.
+
+The nuclear energy route is gaining capital but facing reality constraints. Alphabet, Google's parent, has committed to ~500 MW of nuclear capacity by 2035 via a Kairos Power deal (Samsung C&T investing up to $100M), while SpaceX is bridging with natural gas and the EIB has made its first planned SMR investment (€40M to Steady Energy). But the practical SMR timeline is still "a decade or more" away for meaningful commercial deployment — with NRC approvals still pending for Oklo and NuScale not yet commercialized [[oklo-nuscale-smr-data-center-backlash]]. The 80+ global SMR projects in development and the AI-infrastructure-to-energy-supply-chain integration pattern (compute demand vertically integrating straight to power source) are real structural signals, but current AI buildout must still rely on conventional grid power supplemented by natural gas and wind/solar in the interim.
+
+## Social License and Community Opposition
+
+Community opposition to data center siting has emerged as a structural constraint the industry underestimated. Environmental justice groups are opposing data centers in already-burdened neighborhoods — the Grays Ferry/Philadelphia case documents coordinated opposition to centers sited in communities with existing pollution loads — and moratoriums have been enacted in Denver, Indianapolis, Asheville, Charlotte, Reno, and New York [[ai-data-center-community-opposition-philadelphia]]. BloombergNEF projects that U.S. data centers may use more gas than Germany and Japan combined by 2035, and diesel backup generator pollution during grid outages has become a specific flashpoint beyond the operational power draw alone. Governor Hochul's "consent-based siting" framework signals that political accommodation — not just NIMBY resistance — is being institutionalized: future data center expansion will require demonstrable community benefit agreements, not merely FAA and zoning approval. The 70% American opposition to local data centers documented in the SMR context ([[oklo-nuscale-smr-data-center-backlash]]) reflects the same dynamic: the infrastructure that AI requires is sited in someone's neighborhood, and that someone is increasingly organized, litigious, and politically connected. Taken together, the social license problem is distinct from and compounds the regulatory risk: permitting can be technically obtained while political opposition makes timelines and costs unpredictable.
+
+## Infrastructure Investment Ecosystem: Picks and Shovels
+
+The AI infrastructure buildout has created a durable "picks-and-shovels" investment thesis in the companies supplying power, switching, and construction rather than the hyperscalers themselves. GE Vernova reported $5B+ in U.S. data center orders year-to-date through mid-2026 — more than double full-year 2025 — with data center orders representing 25% of total orders as of Q2 2026 [[anthropic-ipo-ai-infrastructure-beneficiaries-gev-pwr-etn]]. Quanta Services reported a $53.4B backlog of electrical infrastructure projects, and Eaton posted Q2 2026 sales of $8.5B (+21% year-over-year). These three names — grid-scale power (GE Vernova), electrical construction (Quanta), and power management hardware (Eaton) — represent the layer between the electrical grid and data center walls: every GPU cluster must be wired, cooled, and power-managed, creating recurring infrastructure demand that does not require any single AI application to succeed. This layer is more diversified than hyperscaler bets and is already generating cash flows, making it attractive under the Morgan Stanley "mature AI phase" framing ([[fed-rate-hike-sep2026-ai-stocks-self-funding-edge]]) that favors infrastructure players with positive cash flow over AI firms dependent on capital markets.
+
+## Compute Hardware Competition and GPU Alternatives
+
+Nvidia's dominance of AI compute hardware faces emerging architectural competition. Cornelis Networks raised $205M (September 2026) and is commercializing its Active Compute Fabric — a network architecture that eliminates GPU idle time by enabling simultaneous processing and transmission, attacking the 30–50% idle-time inefficiency in conventional GPU cluster networking [[cornelis-ai-infrastructure-205m-funding-nvidia-alternative]]. As an Intel spin-out (2020) building open architecture versus Nvidia's proprietary interconnect lock-in, Cornelis represents the "AI infrastructure unbundling" pattern: specialized components from non-Nvidia vendors outperforming Nvidia's bundled stack on specific dimensions (interconnect efficiency, power per flop, open interoperability). The competitive dynamic mirrors the history of CPU architecture competition: Nvidia's CUDA ecosystem moat is deep, but it is sustained primarily by switching costs and toolchain inertia rather than fundamental performance advantages on all workloads. At data-center scale — where interconnect efficiency at 30% of workload cost translates directly to CapEx and OpEx — the economics of open alternatives improve as cluster sizes grow, which is exactly the direction the infrastructure arms race is heading.
 
 ## Neocloud Economics and Valuation
 
@@ -33,3 +47,6 @@ IBM's quantum innovation hub at ETH Zurich represents a qualitatively different 
 
 ### 2026-W37
 - Added: [[ai-data-center-footprint-triple-2030]], [[jensen-huang-gigawatt-data-center-valuation-neocloud]], [[microsoft-data-center-38gw-2032-expansion]], [[ibm-quantum-innovation-hub-eth-zurich]], [[nscale-fidji-simo-board-ipo]]
+
+### 2026-W38
+- Added: [[oklo-nuscale-smr-data-center-backlash]], [[ai-data-center-community-opposition-philadelphia]], [[anthropic-ipo-ai-infrastructure-beneficiaries-gev-pwr-etn]], [[cornelis-ai-infrastructure-205m-funding-nvidia-alternative]]
