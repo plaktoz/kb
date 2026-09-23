@@ -1,0 +1,39 @@
+---
+type: topic-file
+topic: ai-writing-with-llms
+sources: [how-to-write-with-an-llm, writing-as-thinking-tool-ai-world, 13-beliefs-about-ai-writing-mike-taylor, authentic-writing-vs-ai-generation-breck, katie-parrott-compound-writing-ai-system]
+last_updated: 2026-09-22
+---
+
+# AI Writing With LLMs
+
+Using LLMs as writing partners is a practice built on tension: AI can accelerate drafting and editing significantly, but the most common integration patterns — generating full prose from prompts, accepting AI phrasing wholesale — erode the cognitive process that makes writing valuable in the first place.
+
+## Writing as Thinking, Not Text Production
+
+The foundational argument for why AI writing assistance requires care is that writing's value is not primarily the output — it is the cognitive act of compression, discovery, and gap-exposure that writing forces [[writing-as-thinking-tool-ai-world]]. Shane Parrish's formulation: good writers find new things in the process of writing, not before it; compressing ideas while preserving meaning *is* the thinking, not a description of thinking. This means that outsourcing the drafting step outsources the primary cognitive benefit — you receive text, but you haven't done the thinking that would have made the text meaningfully yours. As AI floods communication channels with verbose generic content, original clear thinking becomes rarer and more valuable, making writing fluency a premium skill precisely because AI tools cannot develop that fluency for you. The practical implication follows: AI should be deployed against the mechanical layers of writing (flagging passive voice, finding filler words, structuring what you've already thought through), not as a substitute for the discovery process.
+
+## Preserving Voice and Avoiding Homogenization
+
+The most acute risk in LLM-assisted editing is homogenization: frontier models tend toward polished, headline-y uniformity, and even phrasing you subjectively prefer subtly pushes prose toward processed blandness [[how-to-write-with-an-llm]]. Thomas Ptacek's two-rule framework addresses this structurally: (1) any specific phrasing the model offers is disqualified outright, even if you like it — you cannot reliably detect all the subtle ways it redirects your voice; (2) explicitly suppress model encouragement — sycophancy short-circuits genuine revision by reinforcing first-draft instincts. The operational use case is flagging, not fixing: ask the model to identify overuse of passive voice, filler words ("very," "actually," repeated phrasing), and misplaced paragraphs, then rewrite every flagged section yourself. A fresh model instance (without the editing context) evaluates old vs. new drafts for comparison — avoiding the sycophancy trap of a model that remembers and favors the version it helped create. The Goodhart's Law framing captures the structural risk precisely: optimizing for "sounding good to an LLM" produces writing for the model's aesthetic rather than your own.
+
+## Idea Ownership as the Publishability Standard
+
+Mike Taylor's 13-principle framework for AI-assisted publishing centers on a single test: can you defend every idea in conversation if a reader pushes back? If yes, the piece is publishable regardless of how the prose was drafted [[13-beliefs-about-ai-writing-mike-taylor]]. This redirects the debate from "did AI write it" to "are the ideas genuinely yours" — a more tractable and intellectually honest standard. The input-output ratio principle operationalizes this: prompts should be larger than the desired output, loaded with the author's own raw material (observations, firsthand experiments, data not yet in training sets), to constrain the AI to the author's ideas rather than inventing new ones. Originality is preserved not by writing manually but by writing from firsthand experience that the model hasn't yet processed — the boundary that guarantees genuine distinctiveness. Taylor's contract note — his O'Reilly book was written without AI per contract, described as his last such project — illustrates the institutional lag: publishing contracts are catching up to a practice that individual writers have already normalized.
+
+## The Contextless Scaffolding Problem
+
+Colin Breck's survey data makes the cost of AI prose substitution concrete: 78% of readers abandon writing they suspect was AI-generated, and 98% prefer the author's imperfect voice over polished AI prose [[authentic-writing-vs-ai-generation-breck]]. The mechanism is not aesthetic — it is informational: AI-generated design docs, PRs, and tickets are technically complete but contextless, because the scaffolding that explains *why* (the constraints, the trade-offs, the rejected alternatives) lives in the prompter's head and never reaches the output. The practical rule that holds across contexts: AI for mechanics (fact-checking, citations, abstracts, structural flagging), never for substantive paragraphs. This is a stricter boundary than "AI for first drafts" — it preserves the compression and discovery process for the content that carries meaning, while delegating the parts that don't require original thought.
+
+## Context-First Systems as the Durable Architecture
+
+Katie Parrott's Compound Writing system represents the structural alternative to prompt-based AI writing: rather than relying on clever prompts that vary by session, the system pre-loads AI with rich foundational context — audience personas, brand positioning, competitive data, editorial frameworks — so every subsequent task leverages accumulated foundation rather than starting from scratch [[katie-parrott-compound-writing-ai-system]]. The "compound" framing is precise: each piece of foundational context added to the system yields disproportionate improvements in all future outputs, exactly as compound interest accretes non-linearly over time. The separation of concerns is the design insight — the context layer (who am I writing for, what's the brand, what's the competitive landscape) is managed independently from the prompt layer (write this specific piece), and this division is what makes outputs consistently high quality rather than prompt-dependent. The equity implication Parrott raises is worth noting: AI writing productivity gains may concentrate among writers with time and resources to build these systems, rather than distributing to all writers equally — making system design and equitable access as important as individual tool selection.
+
+## The Integrated Framework
+
+Across these five sources, a coherent approach emerges: (1) use writing for the thinking, not just the text — the discovery process is the value, not the draft; (2) deploy AI against mechanical layers only (flagging, fact-checking, structure critique) to protect voice and compression; (3) keep ideas genuinely yours by loading prompts with firsthand material and applying the defend-the-ideas test before publishing; (4) build context-first systems that accumulate foundational knowledge rather than relying on clever one-shot prompts; and (5) treat AI phrasing as structurally disqualified from your output — not because it's necessarily wrong, but because you cannot reliably detect all the ways it redirects your voice before it's too late. As AI floods communication channels with generic text, these disciplines are what separate writing that builds durable authority from writing that merely exists.
+
+## Weekly Updates
+
+### 2026-W38
+- Added: [[how-to-write-with-an-llm]], [[writing-as-thinking-tool-ai-world]], [[13-beliefs-about-ai-writing-mike-taylor]], [[authentic-writing-vs-ai-generation-breck]], [[katie-parrott-compound-writing-ai-system]]

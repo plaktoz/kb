@@ -3231,3 +3231,13 @@
 | 2026-09-21 | wiki/technology/ax-agentic-task-runtime-google.md | ingest |
 | 2026-09-21 | wiki/finance/tesla-free-cash-flow-negative-cash-cushion.md | ingest |
 | 2026-09-22 | daily-update/2026-09/2026-09-22.md | newsletter |
+| 2026-09-22 | topics/ai-safety.md | compound |
+| 2026-09-22 | topics/ai-agents.md | compound |
+| 2026-09-22 | topics/ai-infrastructure.md | compound |
+| 2026-09-22 | topics/ai-workplace-adoption.md | compound |
+| 2026-09-22 | topics/cardiovascular-health.md | compound |
+| 2026-09-22 | topics/learning-science.md | compound |
+| 2026-09-22 | topics/llm-security.md | compound |
+| 2026-09-22 | topics/federal-reserve-monetary-policy.md | compound |
+| 2026-09-22 | topics/ai-writing-with-llms.md | compound |
+| 2026-09-22 | weekly-update/2026-09/2026-W38-weekly.md | newsletter |
