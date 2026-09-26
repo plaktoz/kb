@@ -1,8 +1,8 @@
 ---
 type: topic-file
 topic: ai-workplace-adoption
-sources: [gallup-ai-adoption-q2-2026-productivity-gains, gallup-manager-support-ai-adoption-2026, gen-ai-wont-make-your-employees-experts, ai-productivity-paradox-pc-revolution-parallel, ai-agents-broaden-scope-knowledge-work-hbr, anything-ai-skydive-ai-employees, cognitive-delegation-ai-investment-judgment, agents-over-bubbles-stratechery, ai-coding-discontents-cal-newport, human-work-after-automation-every-thesis-statements, ai-autopilot-cognitive-outsourcing, why-some-ai-workflows-stick-and-others-dont, katie-parrott-compound-writing-ai-system, amazon-frontier-engineering-five-habits-ai-native, how-anthropic-builds-mike-krieger-ai-native-labs, burn-more-tokens-every-team-ai-experimentation, leader-team-overload-work-absorption-trap, ai-play-work-lessons-katie-parrott]
-last_updated: 2026-09-22
+sources: [gallup-ai-adoption-q2-2026-productivity-gains, gallup-manager-support-ai-adoption-2026, gen-ai-wont-make-your-employees-experts, ai-productivity-paradox-pc-revolution-parallel, ai-agents-broaden-scope-knowledge-work-hbr, anything-ai-skydive-ai-employees, cognitive-delegation-ai-investment-judgment, agents-over-bubbles-stratechery, ai-coding-discontents-cal-newport, human-work-after-automation-every-thesis-statements, ai-autopilot-cognitive-outsourcing, why-some-ai-workflows-stick-and-others-dont, katie-parrott-compound-writing-ai-system, amazon-frontier-engineering-five-habits-ai-native, how-anthropic-builds-mike-krieger-ai-native-labs, burn-more-tokens-every-team-ai-experimentation, leader-team-overload-work-absorption-trap, ai-play-work-lessons-katie-parrott, why-evals-are-mainstream-in-ai-2026, plan-mode-is-dead, every-copy-our-homework-ai-workflows]
+last_updated: 2026-09-26
 ---
 
 # AI Workplace Adoption
@@ -47,6 +47,12 @@ AI workflows fail for predictable, preventable reasons. Katie Parrott's analysis
 
 Parrott's later exploration of AI as a *play partner* adds a complementary insight: the "Is This Anything?" meta-skill — feeding AI a session summary plus current priorities and asking for ≤3 lessons, with explicit annotation of organic vs. AI-suggested insights — surfaces accidental learnings that structured workflows systematically miss [[ai-play-work-lessons-katie-parrott]]. Productive play with AI (asking questions for its own sake, exploring prompts outside the delivery workflow) reliably produces organic insight: Parrott discovered a structural gap in her Compound Writing system through play-mode exploration rather than analytical audit. The selective carry-forward principle applies: playful sessions generate raw material, but only deliberately chosen insights compound into the durable foundational context layer. This connects the workflow persistence and experimentation threads: organizations that route all AI interaction through structured workflows optimize for throughput at the expense of the exploratory margin that generates the next structural improvement.
 
+## AI Evaluation as an Organizational Capability
+
+As frontier models reach performance parity on common tasks, AI evaluation — measuring how well a model handles specific, idiosyncratic workflows — has become the primary tool for differentiating on speed, cost, and task-fit rather than raw intelligence [[why-evals-are-mainstream-in-ai-2026]]. By mid-2026, roughly 50% of product manager job listings explicitly require eval experience, and teams are running thousands of eval checks monthly that previously ran near zero. The underlying driver is model commoditization: when multiple models handle writing, research, and summarization at comparable quality, public benchmarks cease to predict real-world performance on any specific organizational task — only task-specific evaluation reveals which model (often a smaller, cheaper one) genuinely outperforms. This connects directly to the personal AI evals finding in the ai-agents topic: organizations optimizing model selection on public benchmarks are solving the wrong problem, because the discriminating signal for their workflows is not in the benchmark dataset.
+
+The evolution of developer workflow mirrors the broader adoption pattern. Nadeem's Nuanced experiment shows that formalized "plan mode" artifacts — pre-coding specification documents — have become obsolete not because planning is unnecessary but because better models absorb planning into the execution loop [[plan-mode-is-dead]]. The replacement pattern (understand → act → inspect → clarify → adjust → act) embeds continuous planning within iteration rather than front-loading it before action, representing the same "goal expression over task-delegation" shift documented at Anthropic Labs and the same iterative workflow design principle that separates high-performing AI teams from those who merely added tools to existing processes. The open problem Nadeem surfaces — how workers maintain coherent mental models of rapidly changing systems when parallel agents act simultaneously — is the agentic cognition challenge at the workflow level, and the organizations that solve it will likely define the next generation of AI-native productivity practices.
+
 ## Weekly Updates
 
 ### 2026-W31
@@ -60,3 +66,6 @@ Parrott's later exploration of AI as a *play partner* adds a complementary insig
 
 ### 2026-W38
 - Added: [[burn-more-tokens-every-team-ai-experimentation]], [[leader-team-overload-work-absorption-trap]], [[ai-play-work-lessons-katie-parrott]]
+
+### 2026-W39
+- Added: [[why-evals-are-mainstream-in-ai-2026]], [[plan-mode-is-dead]], [[every-copy-our-homework-ai-workflows]]

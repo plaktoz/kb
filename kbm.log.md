@@ -3413,3 +3413,12 @@
 | 2026-09-26 | wiki/health/mini-strokes-tia-dementia-risk-34-percent.md | ingest |
 | 2026-09-26 | wiki/finance/microsoft-msft-near-record-buy-case-sep2026.md | ingest |
 | 2026-09-26 | wiki/technology/what-even-is-an-os-now-ai-software-generation.md | ingest |
+| 2026-09-26 | topics/ai-agents.md | compound |
+| 2026-09-26 | topics/ai-infrastructure.md | compound |
+| 2026-09-26 | topics/ai-safety.md | compound |
+| 2026-09-26 | topics/ai-writing-with-llms.md | compound |
+| 2026-09-26 | topics/ai-workplace-adoption.md | compound |
+| 2026-09-26 | topics/cardiovascular-health.md | compound |
+| 2026-09-26 | topics/microsoft.md | compound |
+| 2026-09-26 | topics/ai-chips.md | compound |
+| 2026-09-26 | weekly-update/2026-09/2026-W39-weekly.md | newsletter |
