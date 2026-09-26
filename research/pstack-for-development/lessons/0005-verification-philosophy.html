@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verification Philosophy — Prove It Works | pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">pstack for Development</a> ›
+        Module 2 — Core Interface › Lesson 5 of 12
+      </div>
+      <h1>Verification Philosophy — Prove It Works</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — Core Interface</span>
+        <span>·</span>
+        <span>Lesson 5 of 12</span>
+        <span>·</span>
+        <span>~15 min</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Source</strong>
+      <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/poteto-mode/SKILL.md"
+         target="_blank" rel="noopener">
+        github.com/michael-denyer/pstack-claude — poteto-mode SKILL.md
+      </a><br />
+      The "Prove It Works" principle is one of 21 enforced by poteto-mode.
+    </div>
+
+    <!-- ── Introduction ── -->
+    <h2>Why "the build passed" is not enough</h2>
+
+    <p>
+      Every developer has shipped a change where the build was green, the tests passed, and
+      lint reported nothing — and still broken behaviour reached production. The problem is
+      not that CI lied. The problem is that CI was never asked the right question.
+    </p>
+
+    <p>
+      pstack enforces a simple rule: <strong>verification must match what changed</strong>.
+      A passing build tells you the compiler is happy. It does not tell you that the new
+      CLI flag behaves correctly, that the refactored UI flow still works end-to-end, or
+      that the database value you wrote can actually be read back. Those questions require
+      different evidence.
+    </p>
+
+    <!-- ── Key insight callout ── -->
+    <div class="callout key">
+      "The build passed" is a statement about compilation, not about correctness.
+      Real verification runs or inspects the actual artifact that changed — not a
+      proxy for it.
+    </div>
+
+    <!-- ── Verification hierarchy diagram ── -->
+    <pre class="diagram">PSTACK VERIFICATION HIERARCHY
+──────────────────────────────────────────────────────────────────
+  ❌ Insufficient proof:
+     "The build passed"
+     "Tests are green"
+     "Lint is clean"
+
+  ✓ Required proof (match what changed):
+     CLI change      → run the real command
+     UI change       → walk the changed flow
+     Performance     → compare actual traces (before/after)
+     Storage change  → read the value back from storage
+     Behavior change → demonstrate against real artifact
+
+  HOW TO WRITE A DONE CONDITION:
+  ──────────────────────────────────────────────────────────────
+  /poteto-mode &lt;what you observed or want&gt;
+  Done means &lt;something the agent can run or inspect&gt;.
+  Keep &lt;existing behavior that must not change&gt;.
+  ──────────────────────────────────────────────────────────────</pre>
+
+    <!-- ── Insufficient proof section ── -->
+    <h2>Insufficient proof: the three familiar lies</h2>
+
+    <p>
+      pstack explicitly rejects three phrases as sufficient evidence that a change is
+      correct:
+    </p>
+
+    <ul>
+      <li><strong>"The build passed"</strong> — proves compilation succeeded, nothing more.</li>
+      <li><strong>"Tests are green"</strong> — proves the existing test suite did not regress,
+          but says nothing about behaviour the tests do not cover.</li>
+      <li><strong>"Lint is clean"</strong> — proves style conformance, not correctness.</li>
+    </ul>
+
+    <p>
+      None of these statements answers the question: <em>does the changed thing actually
+      do what it is supposed to do?</em> That question requires running or inspecting the
+      changed artifact directly.
+    </p>
+
+    <!-- ── Warning callout ── -->
+    <div class="callout warning">
+      It is tempting to treat a broad test suite as a verification substitute. Tests are
+      valuable — but they verify what the test author anticipated. Change-type matching
+      requires verifying what <em>you</em> just changed, which the existing suite was
+      written before your change existed.
+    </div>
+
+    <!-- ── Required proof section ── -->
+    <h2>Required proof: match the verification to the change</h2>
+
+    <p>
+      The correct verification step depends on the kind of change made. Each change type
+      has a natural form of evidence:
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Change type</th>
+          <th>Required verification</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CLI change</td>
+          <td>Run the real command and observe the output.</td>
+        </tr>
+        <tr>
+          <td>UI change</td>
+          <td>Walk the changed flow from start to finish.</td>
+        </tr>
+        <tr>
+          <td>Performance change</td>
+          <td>Compare actual traces before and after the change.</td>
+        </tr>
+        <tr>
+          <td>Storage change</td>
+          <td>Read the value back from storage after writing it.</td>
+        </tr>
+        <tr>
+          <td>Behavior change</td>
+          <td>Demonstrate the new behavior against the real artifact.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      The pattern is consistent: go to the real place the change lives, and exercise it.
+      Do not accept a report from a system that was not designed to observe your specific
+      change.
+    </p>
+
+    <!-- ── Done condition format section ── -->
+    <h2>Writing a done condition</h2>
+
+    <p>
+      pstack formalises verification through the <strong>done condition</strong> — a
+      concrete, inspectable statement of what the agent must demonstrate before the task
+      is considered complete. The format has three parts:
+    </p>
+
+    <pre><code>/poteto-mode &lt;what you observed or want&gt;
+Done means &lt;something the agent can run or inspect&gt;.
+Keep &lt;existing behavior that must not change&gt;.</code></pre>
+
+    <p>
+      The <code>Done means</code> clause is where the verification philosophy becomes
+      operational. It must name something the agent can actually run or inspect — not a
+      feeling, not a build status, not a test summary. A well-written done condition rules
+      out ambiguity before the work begins.
+    </p>
+
+    <h3>A concrete example</h3>
+
+    <p>
+      For an autonomous refactoring run that removes an old API, a correct done condition
+      reads:
+    </p>
+
+    <pre><code>Done means zero old callers, every parser fixture passes,
+and the old API is deleted.</code></pre>
+
+    <p>
+      This is verifiable: the agent can grep for old callers, run the parser fixtures, and
+      confirm the deleted file is absent. None of those checks reduce to "the build passed".
+    </p>
+
+    <!-- ── Autonomy extension section ── -->
+    <h2>Autonomy, reversibility, and when to pause</h2>
+
+    <p>
+      pstack's verification philosophy connects directly to how autonomy is granted. The
+      rule is:
+    </p>
+
+    <ul>
+      <li><strong>Reversible work</strong> proceeds without asking — the agent acts and
+          verifies against the done condition.</li>
+      <li><strong>Irreversible or high-impact actions</strong> always pause: force-pushes
+          to shared branches, deploys, data deletion, and customer messages.</li>
+    </ul>
+
+    <p>
+      Session overrides like <em>"going to bed"</em> or <em>"run until done"</em> extend
+      autonomy for the session — but they do not remove the pause requirement for the
+      destructive categories above. Verification is the agent's permission to proceed; a
+      done condition that cannot be checked forces a pause.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-5">
+      <h3>Check your understanding</h3>
+      <p>A teammate changes a CLI flag. What counts as required proof the change works?</p>
+      <div class="quiz-options">
+        <button>Run the real command and observe output</button>
+        <button>Confirm the build passed with no errors</button>
+        <button>Note that tests and linting are green</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <p>
+        Think of three past tasks where you (or an agent) accepted "tests are green"
+        as sufficient proof. For each:
+      </p>
+      <ol>
+        <li>Name the change type (CLI / UI / performance / storage / behavior).</li>
+        <li>Write the correct verification step that would have caught a real regression.</li>
+      </ol>
+      <p>
+        Then pick one of the three tasks and write a complete <code>/poteto-mode</code>
+        prompt for it, including a <code>Done means</code> clause and a
+        <code>Keep</code> clause.
+      </p>
+      <textarea placeholder="Task 1 — change type: …&#10;Correct verification: …&#10;&#10;Task 2 — change type: …&#10;Correct verification: …&#10;&#10;Task 3 — change type: …&#10;Correct verification: …&#10;&#10;/poteto-mode …&#10;Done means …&#10;Keep …"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      Paste your three verification steps and your <code>/poteto-mode</code> prompt
+      into a new Claude conversation and ask: "Does my Done means clause name something
+      you can actually run or inspect, or is it still a proxy?"
+    </div>
+
+    <!-- ── Lesson nav ── -->
+    <nav class="lesson-nav">
+      <a href="0004-how-and-why.html">← Prev: Investigation Primitives — /how and /why</a>
+      <a href="0006-arena-multi-model-competition.html" class="primary">Next: Arena — Multi-Model Competition →</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-5',
+      0,
+      'Correct. For a CLI change, required proof is running the real command and observing its output. "Build passed" and "tests are green" are explicitly listed as insufficient — they are proxies, not direct evidence that the changed flag behaves correctly.'
+    );
+  </script>
+</body>
+</html>

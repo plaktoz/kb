@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Runs — Overnight Execution — pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> &rsaquo;
+      Module 4 &mdash; Autonomous Runs and Continuous Improvement &rsaquo; Lesson 10 of 12
+    </div>
+    <h1>Autonomous Runs &mdash; Overnight Execution</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~20 min</span>
+      <span>autonomous-run playbook &middot; done condition design &middot; decision log &middot; session overrides &middot; rollback guards &middot; when to pause vs proceed</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/poteto-mode/SKILL.md" target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude &mdash; poteto-mode SKILL.md
+    </a>
+    &mdash; the canonical autonomy contract for <code>/poteto-mode</code>: what proceeds automatically,
+    what always stops, and how session overrides like &ldquo;going to bed&rdquo; extend that contract
+    for overnight runs.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    Most agent tasks take minutes. Autonomous runs are different: you hand the agent a goal,
+    set the conditions, and walk away for hours. That shift in time horizon demands a different
+    kind of contract between you and the agent &mdash; one that is precise enough to let work
+    proceed without interruption, but principled enough to stop before anything irreversible
+    goes wrong.
+  </p>
+  <p>
+    <code>/poteto-mode</code> ships with exactly that contract. This lesson dissects it:
+    the autonomy rules that govern each action, the pause triggers that override everything
+    else, the session overrides that extend autonomy, and the done condition structure that
+    tells the agent unambiguously when to stop.
+  </p>
+
+  <!-- ── Key callout ── -->
+  <div class="callout key">
+    The autonomous run contract is not a trust setting &mdash; it is a decision protocol.
+    The agent does not ask whether it <em>can</em> proceed; it evaluates whether the action
+    is reversible and whether it hits a known pause trigger. Everything else runs
+    automatically. The protocol replaces constant check-ins with one upfront, well-formed
+    prompt.
+  </div>
+
+  <!-- ── Section 1: The Autonomy Rules ── -->
+  <h2>The Autonomy Rules</h2>
+
+  <p>
+    <code>poteto-mode</code> applies a simple two-part test to every action it considers:
+  </p>
+  <ol>
+    <li>
+      <strong>Is the action reversible?</strong> Reversible work &mdash; edits, commits,
+      branch creation, refactoring inside a fresh worktree &mdash; proceeds automatically.
+      External actions that can also be reversed proceed the same way. No confirmation needed.
+    </li>
+    <li>
+      <strong>Does it hit a pause trigger?</strong> Four categories always stop the agent
+      regardless of any session override: force-pushes to shared branches, deploys,
+      data deletion, and customer messages. These are not configurable. They are hard stops.
+    </li>
+  </ol>
+  <p>
+    Outside those four categories, the agent does not ask. It decides, acts, logs the
+    decision, and moves on.
+  </p>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    A common misconception is that &ldquo;full autonomy&rdquo; means the agent never stops.
+    It does not. Session overrides like &ldquo;going to bed&rdquo; or &ldquo;run until done&rdquo;
+    extend autonomy for reversible work, but the four pause triggers &mdash; force-push,
+    deploy, data deletion, customer message &mdash; remain hard stops even under the most
+    permissive session override. Autonomy is selective, not total.
+  </div>
+
+  <!-- ── Section 2: Session Overrides ── -->
+  <h2>Session Overrides</h2>
+
+  <p>
+    By default, <code>poteto-mode</code> may surface clarifying questions mid-task.
+    Session overrides suppress that behaviour for the duration of the run.
+    Two canonical phrases extend autonomy:
+  </p>
+  <ul>
+    <li><strong>&ldquo;I am going to bed.&rdquo;</strong> &mdash; signals that no human
+        is available to answer questions; the agent must make all reversible decisions
+        independently.</li>
+    <li><strong>&ldquo;Run until done.&rdquo;</strong> &mdash; removes the pause
+        checkpoints for reversible steps; the agent runs the full task without surfacing
+        intermediate status requests.</li>
+  </ul>
+  <p>
+    These overrides appear directly in the prompt, not as configuration flags. They are
+    part of the autonomous run contract you author, not a system setting you toggle.
+  </p>
+  <p>
+    Alongside the override, you pair <code>/loop until done</code> &mdash; which keeps
+    re-invoking the task until the done condition is satisfied, or until the agent reaches
+    a genuine dead end and stops to explain it.
+  </p>
+
+  <!-- ── Section 3: Done Condition Design ── -->
+  <h2>Done Condition Design</h2>
+
+  <p>
+    A done condition is what replaces you as the judge of completion. For an autonomous
+    run it must be something the agent can <em>run or inspect</em> without asking &mdash;
+    not a qualitative judgment, not a human review step.
+  </p>
+
+  <p>The canonical format is:</p>
+
+  <pre><code>/poteto-mode &lt;what you observed or want&gt;
+Done means &lt;something the agent can run or inspect&gt;.
+Keep &lt;existing behaviour that must not change&gt;.</code></pre>
+
+  <p>
+    Each clause does specific work:
+  </p>
+  <ul>
+    <li><strong><code>/poteto-mode &lt;goal&gt;</code></strong> &mdash; states the observable
+        starting condition or the end-state you want, plainly.</li>
+    <li><strong><code>Done means</code></strong> &mdash; a verifiable criterion the agent can
+        evaluate autonomously. It must be runnable or inspectable: a test suite output, a
+        grep result, a file count, a lint pass. Not &ldquo;the code looks clean.&rdquo;</li>
+    <li><strong><code>Keep</code></strong> &mdash; invariants the agent is explicitly forbidden
+        from breaking. These act as a rollback guard: if the keep clause is violated, the change
+        is not done.</li>
+  </ul>
+
+  <!-- ── Section 4: The Decision Log ── -->
+  <h2>The Decision Log</h2>
+
+  <p>
+    When working autonomously, the agent makes choices you were not present for. The
+    decision log is how you review those choices after the fact.
+  </p>
+  <p>
+    You request it in the prompt: <strong>&ldquo;Keep a decision log.&rdquo;</strong>
+    The agent then commits a record of each non-trivial choice alongside the code changes
+    it made &mdash; what it decided, what alternatives it considered, and why it chose
+    as it did.
+  </p>
+  <p>
+    This is not a courtesy &mdash; it is the review mechanism. Because the owner reviews
+    every subagent diff independently, the decision log is what makes that review meaningful
+    rather than purely reactive.
+  </p>
+
+  <!-- ── Section 5: Rollback Guards ── -->
+  <h2>Rollback Guards</h2>
+
+  <p>
+    A rollback guard is a specific, inspectable condition you embed in the <code>Keep</code>
+    clause or as an explicit instruction that, if violated, tells the agent (and you) that
+    the run went wrong and the changes should be reverted.
+  </p>
+  <p>
+    Rollback guards work because autonomous runs operate in a fresh worktree. All work is
+    reversible until it is pushed to a shared branch &mdash; which is a pause trigger and
+    therefore never happens automatically. The worktree isolation means the worst outcome
+    of a bad autonomous run is a branch you delete, not a corrupted main.
+  </p>
+  <p>
+    A useful rollback guard names a concrete invariant you can check: an integration test
+    suite, a particular fixture, an API contract. If the guard fails, the done condition
+    cannot be met, and the agent stops and explains rather than force-completing.
+  </p>
+
+  <!-- ── Section 6: Candor Over Agreement ── -->
+  <h2>Candor Over Agreement</h2>
+
+  <p>
+    One principle governs what the agent does when it genuinely cannot proceed: &ldquo;No
+    is an acceptable answer.&rdquo; This is explicitly part of the <code>poteto-mode</code>
+    contract. The agent is expected to stop and explain a real dead end rather than push
+    through with a degraded or incorrect solution just to report completion.
+  </p>
+  <p>
+    This matters especially for autonomous runs because you are not present to catch a
+    wrong-direction decision early. An agent that candidly reports a dead end saves you from
+    a large, broken diff to unpick. An agent optimising for apparent completion hands you
+    that diff silently.
+  </p>
+
+  <!-- ── Section 7: Example Autonomous Run ── -->
+  <h2>Anatomy of a Complete Autonomous Run Prompt</h2>
+
+  <p>
+    The following is the canonical example from the <code>poteto-mode</code> skill:
+  </p>
+
+  <pre><code>/poteto-mode I am going to bed. Migrate every caller to the new parser in a fresh worktree.
+Done means zero old callers, every parser fixture passes, and the old API is deleted.
+Keep a decision log. Do not ask before committing.
+/loop until done. If you reach a real dead end, stop and explain it.</code></pre>
+
+  <p>Breaking it down line by line:</p>
+  <ul>
+    <li><strong>Line 1</strong> &mdash; session override (&ldquo;going to bed&rdquo;) plus
+        the goal stated as a migration scope. &ldquo;Fresh worktree&rdquo; is the rollback
+        guarantee.</li>
+    <li><strong>Line 2</strong> &mdash; three-part done condition: zero old callers (grep
+        verifiable), fixture suite pass (runnable), old API deleted (file check). All
+        inspectable without human judgment.</li>
+    <li><strong>Line 3</strong> &mdash; decision log requested; confirmation for commits
+        explicitly waived.</li>
+    <li><strong>Line 4</strong> &mdash; loop instruction with explicit dead-end
+        handling: the agent may stop, but only to explain, not to silently stall.</li>
+  </ul>
+
+  <!-- ── Diagram ── -->
+  <h2>Autonomous Run Structure</h2>
+
+<pre class="diagram">
+AUTONOMOUS RUN STRUCTURE
+────────────────────────────────────────────────────────
+  /poteto-mode &lt;goal&gt;
+  Done means &lt;verifiable condition&gt;.
+  Keep &lt;invariants&gt;.
+  Decision log: yes.
+       │
+       ▼
+  poteto-mode evaluates each action:
+       │
+  Reversible?  ──── YES ────► Proceed automatically
+       │                           │
+       NO                          ▼
+       │                     Commit with decision log
+       ▼
+  Is it a pause trigger?
+  (force-push / deploy / data deletion / customer msg)
+       │
+       YES ──────────────────► STOP and explain
+       │
+       NO ──────────────────► Never happens in this path
+       │
+       ▼
+  Repeat until Done means condition is satisfied
+  or agent hits a real dead end → stops and explains
+────────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Section 8: Not Included in pstack ── -->
+  <h2>What Is Not in pstack</h2>
+
+  <p>
+    The <code>poteto-mode</code> skill ships with pstack-claude. Some tools referenced in
+    broader pstack documentation &mdash; <code>/deslop</code>, <code>control-cli</code>,
+    and <code>control-ui</code> &mdash; come from a separate package (cursor-team-kit) and
+    are not included in pstack-claude. Advanced shipping playbooks also assume GitHub and
+    Graphite as the delivery stack; teams without those tools will need to adapt those
+    playbooks.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-10">
+    <h3>Quick check</h3>
+    <p>Which action will <em>always</em> pause a <code>poteto-mode</code> autonomous run, even when &ldquo;going to bed&rdquo; is set?</p>
+    <div class="quiz-options">
+      <button>Force-pushing to a shared branch</button>
+      <button>Committing code in a worktree</button>
+      <button>Running the full test suite</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      <strong>Skill exercise &mdash; write a complete autonomous run prompt.</strong>
+      Pick a real refactoring task you could hand to an agent tonight. Write a full
+      autonomous run prompt that includes all five parts below. Then, in the final line,
+      identify which specific action in your task would trigger a pause even under full
+      autonomy.
+    </p>
+    <ol>
+      <li><strong>Goal</strong> &mdash; the scope of the refactoring, stated as an observable
+          starting condition or desired end-state.</li>
+      <li><strong><code>Done means</code> clause</strong> &mdash; a verifiable condition
+          the agent can run or inspect without asking you. Name the exact artifact or
+          command.</li>
+      <li><strong><code>Keep</code> clause</strong> &mdash; at least one invariant the
+          agent must not break. This is your rollback guard.</li>
+      <li><strong>Decision log instruction</strong> &mdash; explicitly request the log
+          so you can review choices made while you were away.</li>
+      <li><strong>Pause trigger identification</strong> &mdash; state which single action
+          in this task would cause a hard stop even with a full session override active.</li>
+    </ol>
+    <textarea rows="10" placeholder="/poteto-mode I am going to bed. [describe your refactoring scope] in a fresh worktree.
+Done means [runnable or inspectable criterion — e.g. zero usages of old function, suite passes].
+Keep [specific invariant — e.g. all existing integration tests green, public API contract unchanged].
+Keep a decision log. Do not ask before committing.
+/loop until done. If you reach a real dead end, stop and explain it.
+
+Pause trigger in this task: [name the specific action that would trigger a hard stop — e.g. deleting production data, deploying to staging, messaging a customer]"></textarea>
+
+    <p style="margin-top: 1rem; font-size: 0.9rem; color: #555;">
+      Once written, check: can the agent verify your &ldquo;Done means&rdquo; clause without
+      asking you? If it requires your judgment, rewrite it as something runnable or
+      file-inspectable. That gap is the most common mistake in first-draft autonomous run
+      prompts.
+    </p>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your AI tutor: &ldquo;For the refactoring task I described, is my <code>Done means</code>
+    clause something you could evaluate without asking me &mdash; and does my rollback guard
+    cover the most likely failure mode?&rdquo;
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0009-agentic-architecture-patterns.html">
+      &larr; Prev: Agentic Architecture Patterns
+    </a>
+    <a href="0011-reflect-continuous-improvement.html" class="primary">
+      Next: Reflect &mdash; Continuous Improvement &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-10',
+    0,
+    'Correct. Force-pushing to a shared branch is one of the four hard pause triggers in poteto-mode. These stops are not overridden by session phrases like "going to bed" or "run until done" — they are always stops. Committing in a worktree and running the test suite are reversible actions that proceed automatically under full autonomy.'
+  );
+</script>
+</body>
+</html>

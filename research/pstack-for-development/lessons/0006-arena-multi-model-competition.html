@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arena — Multi-Model Competition | pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> /
+      Module 3 — Quality Multipliers / Lesson 6 of 12
+    </div>
+    <h1>Arena — Multi-Model Competition</h1>
+    <div class="lesson-meta">
+      <span>Module 3 of 4</span>
+      <span>~25 min</span>
+      <span>Lesson 6 / 12</span>
+    </div>
+  </header>
+
+  <!-- ── Source ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/arena/SKILL.md"
+       target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude — plugins/pstack/skills/arena/SKILL.md
+    </a>
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    Arena is pstack's answer to a specific class of decision risk: the moment when a single attempt at a
+    non-trivial artifact would lock in the wrong shape. Rather than hoping one model produces the best
+    design, Arena spawns multiple independent candidates in parallel, scores them against a shared rubric,
+    and synthesises the winner with the best ideas from the losers.
+  </p>
+  <p>
+    It is triggered by <code>/arena</code>, <strong>"arena this,"</strong> or
+    <strong>"throw it in the arena."</strong>
+  </p>
+
+  <div class="callout key">
+    Pick the base candidate by extensibility, not by feel. A candidate that scores lower overall but has
+    a cleaner extension seam is often the stronger foundation — the graft step will import the missing
+    ideas from the other candidates anyway.
+  </div>
+
+  <!-- ── When to use / When to avoid ── -->
+  <h2>When to Use Arena</h2>
+  <p>
+    Arena is the right tool when <em>one attempt at a non-trivial artifact would lock in the wrong shape.</em>
+    Typical cases include API contracts, data-model designs, architectural decision records, and any artifact
+    where two developers with different instincts might reach meaningfully different — and both defensible —
+    answers.
+  </p>
+  <p>
+    <strong>When to avoid it:</strong> if the work is purely generation-bound (writing a large body of text
+    that is already well-specified), spawning the same model multiple times produces equivalent diversity at
+    lower cost. Arena earns its overhead only when <em>model family differences</em> are likely to surface
+    distinct structural approaches.
+  </p>
+
+  <div class="callout warning">
+    Arena is not a solution for an under-specified brief. If candidates produce wildly divergent outputs,
+    that is a signal that Phase 1 (Frame) was not precise enough — the correct response is to reframe and
+    re-run, not to average the outputs together. Averaging divergent proposals produces an incoherent hybrid
+    that inherits the weaknesses of all candidates and the strengths of none.
+  </div>
+
+  <!-- ── Six phases ── -->
+  <h2>The Six-Phase Competition Pattern</h2>
+
+  <pre class="diagram">ARENA: 6-PHASE COMPETITION PATTERN
+──────────────────────────────────────────────────────────────
+  Frame: define artifact + 3-6 criterion rubric
+      │
+      ▼
+  Fan Out: spawn N candidates simultaneously (opus/fable/sonnet)
+  ┌──────┬──────┬──────┐
+  │ C-1  │ C-2  │ C-3  │   (each: artifact + rationale)
+  └──┬───┴──┬───┴──┬───┘
+     │      │      │
+     └──────┼──────┘
+            ▼
+  Cross-Judge: readonly judge (different model family)
+  scores each candidate against rubric
+            │
+            ▼
+  Pick: strongest base (by extensibility, not feel)
+            │
+            ▼
+  Graft: walk losers → pick 1-2 ideas each → integrate
+            │
+            ▼
+  Verify: test synthesized result
+  ┌─────────┴────────────┐
+  PASS                 FAIL
+  Ship it           Re-frame or
+                    fix missed graft
+──────────────────────────────────────────────────────────────
+  Convergence → ship. Divergence → reframe the brief.
+──────────────────────────────────────────────────────────────</pre>
+
+  <h3>Phase 1 — Frame</h3>
+  <p>
+    Define exactly what artifact is being produced. Build a rubric of <strong>3–6 criteria</strong> — these
+    must be concrete enough that an independent judge can score against them without consulting the author.
+    Assign runners (the competing models) and give each a separate output path so their work cannot
+    cross-contaminate.
+  </p>
+
+  <h3>Phase 2 — Fan Out</h3>
+  <p>
+    Spawn all subagents <strong>simultaneously</strong> using <code>run_in_background: true</code>. Each
+    candidate produces two things: the artifact itself and a rationale explaining the key design decisions.
+    The default model pool is <code>opus</code>, <code>fable</code>, and <code>sonnet</code>.
+  </p>
+
+  <h3>Phase 3 — Cross-Judge</h3>
+  <p>
+    Spawn a separate, <strong>readonly</strong> judge model — from a different model family where possible —
+    to score each candidate against the rubric. The judge sees the rubric and the artifacts but does not
+    know which model produced which candidate. This removes the bias that comes from self-evaluation.
+  </p>
+
+  <h3>Phase 4 — Pick</h3>
+  <p>
+    Score criterion-by-criterion and compare your assessment against the cross-judge's scores. Select the
+    base candidate on <strong>extensibility</strong>: which one is easiest to build on if you need to add
+    or change one thing later? A candidate that scores lower overall but has a cleaner foundation is often
+    the stronger choice.
+  </p>
+
+  <h3>Phase 5 — Graft</h3>
+  <p>
+    Walk each losing candidate and identify <strong>one or two ideas per candidate</strong> that are worth
+    porting into the winner. Integrate them <em>manually</em>, not by paste — copy-pasting tends to carry
+    implicit assumptions that do not fit the base candidate's structure. The synthesis note must name the
+    base, every grafted idea, what was rejected and why, and the verification result.
+  </p>
+
+  <h3>Phase 6 — Verify</h3>
+  <p>
+    Test the synthesized result as you would any artifact. If it fails, the correct response is either to
+    re-frame the Frame phase (if the rubric was missing a criterion) or to fix the graft that was missed.
+    A passing Verify step ends the run; the artifact and synthesis note together constitute the output.
+  </p>
+
+  <!-- ── Convergence / Divergence ── -->
+  <h2>Reading the Convergence Signal</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Signal</th>
+        <th>Meaning</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Convergence</strong> — candidates agree on shape</td>
+        <td>The brief was well-specified; all reasonable approaches reach the same structure</td>
+        <td>Ship — no grafting needed</td>
+      </tr>
+      <tr>
+        <td><strong>Divergence</strong> — candidates wildly disagree</td>
+        <td>Phase 1 (Frame) was under-specified; the problem was ambiguous</td>
+        <td>Reframe the brief; do not average the outputs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Convergence is a quality signal, not a failure. When three models from different families all reach the
+    same structural answer, you have strong evidence that the shape is correct. Skip grafting and ship.
+  </p>
+
+  <!-- ── Arena vs Swarm ── -->
+  <h2>Arena vs Swarm</h2>
+  <p>
+    Arena and Swarm are both multi-agent patterns but they solve different problems. Arena optimises for
+    <strong>quality on a single artifact</strong>: the output is one thing, improved by competition.
+    Swarm optimises for <strong>coverage across an aggregated report</strong>: the output is many parallel
+    findings combined into one document.
+  </p>
+  <p>
+    Use Arena when the <em>shape</em> of a single artifact is uncertain. Use Swarm when you need to cover
+    a large surface area that no single agent context can hold.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-6">
+    <h3>Check your understanding</h3>
+    <p>When Arena candidates wildly diverge, what should you do?</p>
+    <div class="quiz-options">
+      <button>Average all candidates and merge them</button>
+      <button>Reframe the brief then re-run it</button>
+      <button>Pick the best candidate by feel</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Design an Arena run for a real pending decision in your codebase. Write out all four components below.
+    </p>
+    <ol>
+      <li><strong>Artifact definition</strong> — what exactly is being produced? Be specific enough that a model you have never talked to would know what to build.</li>
+      <li><strong>4-criterion rubric</strong> — one criterion per line; each must be scoreable by an independent judge without additional context.</li>
+      <li><strong>Model assignment</strong> — which models would you use as runners, and which model (from a different family) would you assign as cross-judge?</li>
+      <li><strong>Verify step</strong> — what does passing verification look like for this specific artifact? Be precise enough that "tests are green" would not qualify.</li>
+    </ol>
+    <textarea placeholder="1. Artifact definition:&#10;&#10;2. Rubric (4 criteria):&#10;  a.&#10;  b.&#10;  c.&#10;  d.&#10;&#10;3. Model assignment:&#10;  Runners:&#10;  Cross-judge:&#10;&#10;4. Verify step:"></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Paste your exercise answer into a new Claude chat and ask: "Review my Arena design — is my rubric
+    specific enough for a cross-judge to score without context, and does my Verify step go beyond
+    'tests pass'?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0005-verification-philosophy.html">&larr; Prev: Verification Philosophy</a>
+    <a href="0007-swarm-parallel-coverage.html" class="primary">Next: Swarm — Parallel Coverage &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-6',
+    1,
+    'Correct. Wildly divergent candidates signal that the Frame phase was under-specified. The fix is to reframe the brief and re-run — not to average the outputs, which produces an incoherent hybrid, and not to pick by feel, which the rubric-and-cross-judge process is specifically designed to prevent.'
+  );
+</script>
+</body>
+</html>
