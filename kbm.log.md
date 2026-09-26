@@ -1,6 +1,30 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-09-26 | raw/2026-09-10-the-bitterest-lesson.md | scrape |
+| 2026-09-26 | raw/ai-too-good-to-be-true-too-bad-to-be-useful-typesafe-ai | scrape-failed |
+| 2026-09-26 | raw/2026-09-26-typesafe-ai-docs-introduction.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-ai-quickstart.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-ai-ml-primer.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-system-one-concepts.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-confidence-scores.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-patterns.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-sdk-python.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-sdk-javascript.md | scrape |
+| 2026-09-26 | raw/2026-09-26-typesafe-agent-skills.md | scrape |
+| 2026-09-26 | raw/url/2026-09-26-jev-ai-research.processed.md | archive |
+| 2026-09-26 | wiki/strategy/typesafe-bitterest-lesson-ml-hierarchy.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-ai-system-one-models-jev.md (merged update: atomic questions, context-rot, input modality, workflow steps) | ingest |
+| 2026-09-26 | wiki/technology/typesafe-jev-quickstart-guide.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-jev-rlcd-machine-native-intelligence.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-ai-system-one-models-jev.md (merged update: input type limitation, typical workflow steps) | ingest-dupe |
+| 2026-09-26 | wiki/technology/typesafe-jev-confidence-scores.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-jev-architectural-patterns.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-sdk-python-reference.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-sdk-javascript-reference.md | ingest |
+| 2026-09-26 | wiki/technology/typesafe-agent-skills.md | ingest |
+| 2026-09-26 | research/jev-ai/lessons/ | lessons |
+| 2026-09-26 | research/jev-ai/report.md | research |
 | 2026-09-24 | wiki/health/ultra-processed-foods-disease-risk-meta-analysis.md | ingest |
 | 2026-09-25 | wiki/technology/ai-labs-funding-historical-research.md | ingest |
 | 2026-09-26 | wiki/finance/tech-stocks-gain-trump-xi-dinner-sep2026.md | ingest |

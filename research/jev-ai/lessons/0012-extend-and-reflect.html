@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extend and Reflect | Jev AI Course</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Jev AI Course</a> &rsaquo; Module 4 &mdash; Weekend Project &rsaquo; Lesson 12 of 12
+    </div>
+    <h1>Extend and Reflect</h1>
+    <div class="lesson-meta">
+      <span>Module 4 &middot; Lesson 12 of 12</span>
+      <span>~30 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    Apply at least one extension pattern &mdash; JSON output, stdin input, escalation logic, or LLM comparison &mdash; to your ticket router, and consolidate your mental model of when Jev is the right tool by reviewing its real strengths and limits.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener">
+      Introducing System One Models and Jev &mdash; TypeSafe AI Blog
+    </a>
+  </div>
+
+  <h2>Four Ways to Extend Your Router</h2>
+
+  <p>Your ticket router from Lessons 10 and 11 is already a working System One pipeline. The four extensions below each add a distinct capability. Pick at least one and implement it &mdash; the skill exercise at the bottom asks you to write a short retrospective on what you learned.</p>
+
+  <h3>1. JSON Output</h3>
+
+  <p>Instead of printing results to the terminal, accumulate them into a list and write a structured JSON file. This makes your router output consumable by downstream services without any parsing.</p>
+
+  <pre><code>import json
+
+results = []
+
+# Inside the loop, replace the print statement:
+results.append({
+    "ticket": ticket,
+    "department": dept.choice,
+    "confidence": dept.confidence,
+    "urgency": response.answers["urgency"].score,
+    "action": action,
+})
+
+with open("results.json", "w") as f:
+    json.dump(results, f, indent=2)</code></pre>
+
+  <p>The resulting file can be read directly into a database, a dashboard, or a downstream routing queue &mdash; the router is now a service component, not just a script.</p>
+
+  <h3>2. stdin Input</h3>
+
+  <p>Accept a single ticket from the command line so you can test routing decisions without editing the source file. This turns the router into an interactive tool.</p>
+
+  <pre><code>import sys
+
+ticket = sys.argv[1] if len(sys.argv) > 1 else input("Enter ticket: ")</code></pre>
+
+  <p>Run it as <code>python router.py "My payment failed twice"</code> to get an instant routing decision, or run with no arguments to be prompted interactively.</p>
+
+  <h3>3. Escalation Logic</h3>
+
+  <p>Combine the urgency score and the department confidence to trigger automatic escalation. This is a concrete example of decision-gating: rather than acting on the raw model output, you build a rule that fires when confidence and urgency pull in opposite directions.</p>
+
+  <pre><code>urgency_score = response.answers["urgency"].score
+
+if urgency_score >= 4 and dept.confidence < 0.7:
+    action = "🚨 ESCALATE — high urgency, uncertain routing"</code></pre>
+
+  <p>This pattern &mdash; <em>act confidently above the threshold, escalate below it</em> &mdash; is the core idiom for integrating Jev into production workflows where human oversight is still required.</p>
+
+  <h3>4. LLM Comparison with system-one-adapter-python</h3>
+
+  <p>The <code>system-one-adapter-python</code> package lets you run the exact same router code against a frontier LLM instead of Jev by swapping a single import. This is the cleanest way to benchmark accuracy and cost side by side.</p>
+
+  <pre><code>pip install system-one-adapter-python</code></pre>
+
+  <pre><code># Change this one line to route through an LLM instead of Jev:
+from system_one_adapter import TypeSafeClient  # instead of typesafe_sdk</code></pre>
+
+  <p>Everything else &mdash; your questions, your response parsing, your escalation logic &mdash; stays identical. Run both versions on the same batch of tickets and compare the outputs. The accuracy difference (and cost difference) is your empirical trade-off data.</p>
+
+  <h2>What Jev Is Good At vs. Bad At</h2>
+
+  <p>Jev&rsquo;s design makes it exceptionally fast and cheap for a well-defined subset of AI tasks. Outside that subset, it is the wrong tool. The table below is a practical decision boundary.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Well-suited for Jev</th>
+        <th>Not suited for Jev</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Classification and routing</td>
+        <td>Reasoning and multi-step planning</td>
+      </tr>
+      <tr>
+        <td>Scoring and confidence ranking</td>
+        <td>Code generation</td>
+      </tr>
+      <tr>
+        <td>Extracting structured values from unstructured text</td>
+        <td>Explanations and justifications</td>
+      </tr>
+      <tr>
+        <td>AI-powered &ldquo;smart if-statements&rdquo;</td>
+        <td>Free-form text generation</td>
+      </tr>
+      <tr>
+        <td>Map-reduce over large datasets</td>
+        <td>Creative tasks</td>
+      </tr>
+      <tr>
+        <td>Real-time sub-100ms applications</td>
+        <td>Open-ended dialogue</td>
+      </tr>
+      <tr>
+        <td>LLM guardrailing and judging</td>
+        <td>Any task requiring a natural-language reply</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Two real-world demos illustrate the extremes of Jev&rsquo;s range. The <strong>Doom bot</strong> runs at roughly 10 queries per second against live game state &mdash; continuously classifying enemy positions, health levels, and movement choices &mdash; at an operating cost of approximately $7 per hour. The <strong>Wikiracing demo</strong> uses high-cardinality selection to navigate Wikipedia by choosing the most relevant link at each page, demonstrating that Jev handles large choice sets efficiently, even when the answer space is wide-open.</p>
+
+  <h2>When to Choose Jev Over an LLM</h2>
+
+  <p>Use this decision guide before reaching for either tool on a new task.</p>
+
+  <p><strong>Choose Jev when all of the following are true:</strong></p>
+  <ul>
+    <li>The output is a typed value &mdash; a category, a score, a boolean, a ranked choice &mdash; not a paragraph of text.</li>
+    <li>Calibrated confidence matters: you need to know not just <em>what</em> the answer is, but <em>how sure</em> the model is.</li>
+    <li>The task will run at high volume, in real time, or inside a tight cost budget.</li>
+    <li>The decision is well-defined enough to write a clear question schema for.</li>
+  </ul>
+
+  <p><strong>Choose an LLM when any of the following is true:</strong></p>
+  <ul>
+    <li>The output must be a natural-language explanation, a code snippet, or creative content.</li>
+    <li>The task requires chaining multiple reasoning steps before arriving at a conclusion.</li>
+    <li>The question schema cannot be specified in advance because the output shape varies per input.</li>
+  </ul>
+
+  <p><strong>Use both together when:</strong> an LLM generates an answer that then passes through a Jev guardrail &mdash; e.g. the LLM drafts a support reply and Jev scores it for policy compliance before it is sent. This is the most powerful hybrid pattern: System Two reasoning paired with System One gating.</p>
+
+  <div class="callout key">
+    <strong>Jevons Paradox in practice:</strong> Do not think of Jev as replacing LLM costs. Think of it as enabling automation use cases that were previously too expensive to exist. The Doom bot, the Wikiracing navigator, inline guardrailing at every token &mdash; none of these were economically viable at LLM pricing. A 444&times; cost reduction does not merely save money; it expands the surface of what is worth automating at all.
+  </div>
+
+  <div class="callout warning">
+    Always validate Jev&rsquo;s accuracy on your specific use case before deploying. The accuracy/cost trade-off is real: Jev is not a lossless substitute for an LLM on structured tasks &mdash; it trades some accuracy headroom for massive speed and cost gains. Use <code>system-one-adapter-python</code> to run a direct comparison on your own data before committing to either tool in production.
+  </div>
+
+  <h2>What You&rsquo;ve Built</h2>
+
+  <div class="callout">
+    You made it. Across twelve lessons you went from understanding why LLM reliability is a hard problem to shipping a working System One pipeline with calibrated routing, multi-question fan-out, confidence-gated escalation, and structured output. That is not a toy &mdash; it is the same architecture that powers production automation at scale.
+  </div>
+
+  <p>Here is a summary of the artefacts you have built over this course:</p>
+
+  <ul>
+    <li><strong>A mental model of the LLM reliability problem</strong> &mdash; and why typed probabilistic outputs are a cleaner foundation for automation than prompted text.</li>
+    <li><strong>A working Jev client</strong> that sends structured question schemas and receives typed, confidence-scored responses.</li>
+    <li><strong>A multi-question call</strong> using the three primitives &mdash; Choice, Score, and Tag &mdash; packed into a single parallel query.</li>
+    <li><strong>A ticket router</strong> that classifies department, scores urgency, extracts sentiment, and applies decision-gating logic in under 100 ms.</li>
+    <li><strong>An extended router</strong> with at least one production-ready enhancement: persistent output, CLI input, escalation logic, or an LLM benchmark.</li>
+  </ul>
+
+  <div class="quiz" id="quiz-12">
+    <h3>Check your understanding</h3>
+    <p>What does Speculative Fan-Out allow you to do?</p>
+    <div class="quiz-options">
+      <button>Add extra questions at near-zero marginal cost</button>
+      <button>Replace Jev with a frontier LLM seamlessly</button>
+      <button>Generate free-form text on complex reasoning tasks</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>Choose one of the four extensions above &mdash; JSON output, stdin input, escalation logic, or LLM comparison &mdash; and implement it in your ticket router from Lesson 11. Then write a one-paragraph retrospective in the text area below.</p>
+    <p><strong>Prompt:</strong> What surprised you about working with Jev? What task outside of ticket routing would you most want to apply it to next?</p>
+    <textarea placeholder="E.g.:&#10;&#10;I implemented the escalation logic and was surprised by how often high urgency and low confidence coincided — roughly 20% of my test tickets triggered the escalation path. This suggests the schema for the &#39;department&#39; question might need tighter options. Next I&#39;d want to apply Jev to content moderation: scoring user-submitted text for policy violations at the volume our platform generates would be prohibitively expensive with an LLM, but the 444x cost reduction makes it worth piloting."></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>You built a full System One pipeline end to end: from understanding the reliability problem in Lesson 1, through the three primitives, to a working multi-question ticket router with confidence-gated escalation.</li>
+      <li>Jev excels at classification, scoring, structured extraction, and real-time decision-gating &mdash; and is the wrong tool for reasoning, code generation, or any task requiring natural-language output.</li>
+      <li>Speculative Fan-Out lets you add extra questions to an existing call at near-zero marginal cost, because the parallel sampler answers all questions in a single query.</li>
+      <li><code>system-one-adapter-python</code> lets you swap Jev for a frontier LLM by changing one import line, making empirical accuracy benchmarking straightforward.</li>
+      <li>Jevons Paradox is the right frame for Jev&rsquo;s impact: cheaper AI intelligence does not just lower existing costs &mdash; it creates new automation use cases that were previously uneconomical, expanding the total surface of what machines can decide.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Want to go deeper? Ask an AI tutor: &ldquo;What are the failure modes of confidence-gated escalation in production, and how do teams calibrate the threshold?&rdquo; or &ldquo;How would you architect a hybrid pipeline where Jev guards every LLM call in a customer-facing product?&rdquo;
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0011-ticket-router-part2.html">&larr; Lesson 11: Ticket Router Part 2</a>
+    <a href="../lessons.md" class="primary">Back to Curriculum</a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-12', 0, 'Speculative Fan-Out lets you add extra questions to an existing Jev call at near-zero additional cost. Because the parallel sampler generates all answers in a single query, packing in more questions costs almost nothing &mdash; there is no per-question latency or per-token output charge.');
+</script>
+</body>
+</html>

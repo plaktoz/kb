@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2: The Bitterest Lesson — Picking the Right Task · Jev AI Course</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <p class="breadcrumb"><a href="../lessons.md">Jev AI Course</a> › Module 1 — Why Jev Exists › Lesson 2</p>
+    <h1>The Bitterest Lesson — Picking the Right Task</h1>
+    <div class="lesson-meta">
+      <span>Module 1 — Why Jev Exists</span>
+      <span>Lesson 2 of 12</span>
+      <span>~12 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    After this lesson you will be able to articulate why task selection sits above data, compute, and algorithms in the ML hierarchy. You will also be able to explain what the InstructGPT result reveals about optimization objectives — and why getting the task wrong is a problem no amount of scale can fix.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://typesafe.ai/blog/bitterest-lesson" target="_blank" rel="noopener">typesafe.ai/blog/bitterest-lesson</a>
+    — "The Bitterest Lesson in ML" by TypeSafe AI. Extends Rich Sutton's bitter lesson into a fuller hierarchy of what actually drives capability: task selection first, then data, compute, and finally algorithms.
+  </div>
+
+  <h2>Sutton's Bitter Lesson — and a Harder One</h2>
+  <p>
+    Rich Sutton's 2019 essay "The Bitter Lesson" made a sharp empirical claim: general methods that leverage compute consistently outperform hand-crafted, domain-specific approaches. Scale beats algorithms. The lesson is bitter because the sophisticated techniques researchers spent decades refining were repeatedly obsoleted by throwing more compute at simpler methods.
+  </p>
+  <p>
+    The TypeSafe AI essay extends this into something harder to accept: compute beating algorithms is only the <em>second</em> bitterest lesson. The bitterest is that the most consequential decision in building an ML system has nothing to do with ML at all — it is deciding what the system is actually asked to do in the first place.
+  </p>
+  <p>
+    The core principle: you get what you optimize for. Improve scale, data quality, and architecture all you like — if the objective is wrong, you are compounding a mistake, not approaching a solution.
+  </p>
+
+  <h2>The ML Hierarchy</h2>
+  <p>
+    Four levers are available to any ML practitioner. The hierarchy below orders them by leverage — by how much choosing correctly (or incorrectly) at each layer shapes the system's ultimate capability. Most research and engineering effort flows toward the bottom of this list. The bitterest lesson is that the highest-leverage decisions sit at the top.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Priority</th>
+        <th>Layer</th>
+        <th>The question that matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1 — highest</strong></td>
+        <td>Task</td>
+        <td>What exactly is the system being asked to optimize for?</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>Data</td>
+        <td>Does the training distribution match real-world usage?</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>Compute</td>
+        <td>Are we scaling the right objective at the right stage?</td>
+      </tr>
+      <tr>
+        <td><strong>4 — lowest</strong></td>
+        <td>Algorithms</td>
+        <td>Which architecture, loss function, or hyperparameters to use?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The hierarchy does not mean compute and algorithms are unimportant. Once task and data are correctly defined, scale remains enormously powerful — Sutton's original lesson still holds. The error is treating scale as a <em>substitute</em> for getting those earlier layers right, rather than a multiplier that comes after them.
+  </p>
+
+  <div class="callout key">
+    "You get what you optimize for and the bitterest lesson in ML is that the most important part of it isn't ML at all." Task selection requires stepping outside ML entirely — understanding users, products, and real-world systems before writing a single line of training code.
+  </div>
+
+  <h2>The InstructGPT Case Study</h2>
+  <p>
+    GPT-3 was trained on the standard pretraining objective: given a sequence of text, predict the next token. It was very good at that task. But "predict the next token over internet text" is not the same task as "follow a human instruction helpfully." GPT-3 was optimized for the wrong thing relative to that goal — not because it lacked capacity, but because it was never asked to do it.
+  </p>
+  <p>
+    When OpenAI trained InstructGPT — models at roughly GPT-2 scale, meaning <strong>100× or more fewer parameters than GPT-3</strong> — on an instruction-following objective using human feedback, those far smaller models outperformed GPT-3 on the instruction-following task. The defining variable was the objective, not the scale.
+  </p>
+  <p>
+    The implication is striking: to close the same capability gap through pretraining scale alone, you would have needed to reach roughly <strong>GPT-7 level</strong> of compute. Choosing the right optimization target was worth several generations of scaling hardware.
+  </p>
+
+  <div class="callout warning">
+    When a model consistently underperforms on your target metric, the instinct is to train longer or use a bigger model. That instinct is often wrong. If the task is badly defined, scaling optimizes the wrong objective harder — it does not fix the mismatch. Audit what you are actually asking the model to do before reaching for more compute.
+  </div>
+
+  <h2>Task Selection Is a Product Problem, Not an ML Problem</h2>
+  <p>
+    Identifying the right optimization objective requires understanding what users actually need, how a system will be used in production, and which failure modes carry real consequences. These are product, systems, and domain questions. They cannot be answered by reading loss curves.
+  </p>
+  <p>
+    This is one of the core motivations behind Jev's design. By requiring the developer to define explicit primitives — Choice, Score, Noul — the system forces a concrete articulation of the optimization objective before any inference happens. You cannot pass a vague prompt string and hope the model infers the right task; you have to specify it. That friction is intentional. It surfaces the decision that the hierarchy says matters most.
+  </p>
+
+  <div class="quiz" id="quiz-2">
+    <h3>Check your understanding</h3>
+    <p>In the ML hierarchy, what sits at the top?</p>
+    <div class="quiz-options">
+      <button>Scale of training compute</button>
+      <button>Choosing the right task</button>
+      <button>Quality of training data</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>
+      For each layer of the ML hierarchy — task, data, compute, algorithms — write one sentence explaining what "getting it wrong" looks like in a real system you've built or used. Focus on concrete failure modes, not abstract definitions.
+    </p>
+    <textarea placeholder="Task: ...&#10;Data: ...&#10;Compute: ...&#10;Algorithms: ..."></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>Rich Sutton's bitter lesson (scale beats hand-crafted algorithms) has a harder extension: task selection beats everything else in the hierarchy.</li>
+      <li>The ML hierarchy in order of leverage: task &gt; data &gt; compute &gt; algorithms — yet most engineering effort flows toward the bottom two layers.</li>
+      <li>The InstructGPT result: a GPT-2-scale model (100×+ fewer parameters) trained on instruction-following outperformed GPT-3 on that same task.</li>
+      <li>Achieving the equivalent capability gap through pretraining scale alone would have required roughly GPT-7-level compute.</li>
+      <li>Task selection is not an ML problem — it requires product thinking, user understanding, and clarity about real-world failure modes before training begins.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Want to go deeper? Ask your AI tutor: "What is the actual task my system is optimizing for — and how would I know if that's the wrong objective?"
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0001-llm-reliability-problem.html">← Lesson 1: The LLM Reliability Problem</a>
+    <a href="0003-system-one-models.html" class="primary">Lesson 3: System One Models →</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>initQuiz('quiz-2', 1, 'Right. Task selection sits at the top of the hierarchy. The InstructGPT example shows that a model 100× smaller, trained on the right objective, outperformed GPT-3 — because the larger model was optimizing for the wrong task entirely. Getting the task right was worth several generations of scaling compute.');</script>
+</body>
+</html>

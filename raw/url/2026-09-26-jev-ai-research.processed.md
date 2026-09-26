@@ -1,0 +1,14 @@
+# Jev AI Research URLs
+- https://typesafe.ai/
+- https://typesafe.ai/blog/introducing-system-one-models-and-jev
+- https://typesafe.ai/blog/bitterest-lesson
+- https://typesafe.ai/blog/ai-too-good-to-be-true-too-bad-to-be-useful-typesafe-ai
+- https://docs.typesafe.ai/
+- https://docs.typesafe.ai/introduction/quickstart
+- https://docs.typesafe.ai/introduction/machine-learning-primer
+- https://docs.typesafe.ai/concepts/system-one
+- https://docs.typesafe.ai/confidence
+- https://docs.typesafe.ai/patterns
+- https://github.com/typesafe-ai/typesafe-sdk-python
+- https://github.com/typesafe-ai/typesafe-sdk-js
+- https://github.com/typesafe-ai/skills

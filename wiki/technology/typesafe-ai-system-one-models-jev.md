@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://typesafe.ai/blog/introducing-system-one-models-and-jev
 author: Diogo Almeida
 tags: [ai-models, structured-outputs, reinforcement-learning, inference-speed]
-date_consumed: 2026-09-16
+date_consumed: 2026-09-26
 ---
 
 ## Summary
@@ -19,6 +19,10 @@ TypeSafe AI is introducing **System One Models**, a new class of frontier AI des
 - **[[Diogo Almeida]]** — founder and former OpenAI researcher who contributed to ChatGPT's instruction-following work
 - **Parallel sampling** — Jev generates outputs in parallel rather than sequentially token-by-token, enabling sub-100ms latency
 - **Workflow evals** — TypeSafe's benchmark methodology using large external models ([[GPT-6 Astra]], [[Fable 5.1]]) as reference probability distributions rather than fixed ground-truth labels
+- **Atomic question design** — questions should each be gut-check judgments a knowledgeable person could make in seconds; complex questions are decomposed into multiple independent ones combined with code logic
+- **Context-rot avoidance** — adding questions to a single Jev call has minimal latency impact (all evaluated in parallel and in isolation), unlike LLMs where more context degrades performance
+- **Input modality** — currently accepts text only (strings, JSON objects, arrays); no image, audio, or video support yet
+- **Typical workflow**: (1) build state with relevant context, (2) ask multiple independent questions simultaneously, (3) combine typed answers with deterministic code logic, (4) route based on results + confidence
 
 ## Key Takeaways
 

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 5: Your First API Call — Python Quickstart · Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">Jev AI Course</a> › Module 2 — The Jev API › Lesson 5 of 12
+      </p>
+      <h1>Your First API Call — Python Quickstart</h1>
+      <div class="lesson-meta">
+        <span>Module 2 — The Jev API</span>
+        <span>Lesson 5 of 12</span>
+        <span>~20 min</span>
+      </div>
+    </header>
+
+    <div class="learning-objective">
+      <strong>Learning objective</strong>
+      Install the Python SDK, authenticate with an environment variable, and make your first <code>system_one()</code> call — then read the typed answer back from the response object.
+    </div>
+
+    <div class="source-card">
+      <div class="source-label">Sources</div>
+      <ul>
+        <li><a href="https://docs.typesafe.ai/introduction/quickstart" target="_blank" rel="noopener">docs.typesafe.ai/introduction/quickstart</a> — official Python quickstart guide</li>
+        <li><a href="https://github.com/typesafe-ai/typesafe-sdk-python" target="_blank" rel="noopener">github.com/typesafe-ai/typesafe-sdk-python</a> — SDK source and full examples</li>
+      </ul>
+    </div>
+
+    <h2>Setup &amp; Authentication</h2>
+
+    <p>Before you can call the Jev API you need the SDK installed and your key available to the process. The client reads the key from the environment automatically, so you never embed a secret in source code.</p>
+
+    <ol>
+      <li><strong>Check your Python version.</strong> The SDK requires Python 3.10 or higher. Run <code>python --version</code> to confirm before proceeding.</li>
+      <li><strong>Install the SDK.</strong> Use pip or uv — whichever you prefer:
+        <pre><code>pip install typesafe-sdk
+# — or —
+uv add typesafe-sdk</code></pre>
+      </li>
+      <li><strong>Get an API key.</strong> Sign in at <a href="https://console.typesafe.ai/keys" target="_blank" rel="noopener">console.typesafe.ai/keys</a> and create a new key. Copy it before closing the page — it is not shown again.</li>
+      <li><strong>Export the key.</strong> Set the environment variable in your shell session (or add it to <code>.env</code> and load it with <code>python-dotenv</code>):
+        <pre><code>export TYPESAFE_API_KEY="your-key-here"</code></pre>
+      </li>
+      <li><strong>Try the playground (optional).</strong> <a href="https://console.typesafe.ai/playground" target="_blank" rel="noopener">console.typesafe.ai/playground</a> lets you prototype questions and see responses without writing any code — useful for testing criteria before you commit them to a script.</li>
+    </ol>
+
+    <div class="callout warning">
+      The SDK requires Python <strong>3.10 or higher</strong>. If you are on an older Python the import will fail immediately with a <code>SyntaxError</code> or <code>ImportError</code>. Run <code>python --version</code> and upgrade before proceeding.
+    </div>
+
+    <h2>The SDK API Surface</h2>
+
+    <p>The SDK exposes four public names you will use in almost every script:</p>
+
+    <table>
+      <thead>
+        <tr><th>Name</th><th>Kind</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>TypeSafeClient</code></td><td>class</td><td>Manages the HTTP connection and authentication; use as a context manager</td></tr>
+        <tr><td><code>Choice</code></td><td>question type</td><td>Asks the model to select one label from a fixed set of criteria</td></tr>
+        <tr><td><code>Score</code></td><td>question type</td><td>Asks the model for a numeric value on a scale you define</td></tr>
+        <tr><td><code>Noul</code></td><td>question type</td><td>Asks the model for a yes / no / unknown answer</td></tr>
+      </tbody>
+    </table>
+
+    <p>One import line brings in all four:</p>
+
+    <pre><code>from typesafe_sdk import Choice, Score, Noul, TypeSafeClient</code></pre>
+
+    <p>The main method is <code>client.system_one()</code>. It accepts two keyword arguments:</p>
+
+    <ul>
+      <li><code>state</code> — a dict containing your document or context. The canonical key is <code>"document"</code>, though you may include any keys your questions reference.</li>
+      <li><code>questions</code> — a dict mapping answer keys (strings you choose) to question objects (<code>Choice</code>, <code>Score</code>, or <code>Noul</code>). All questions are evaluated in parallel in a single API round-trip.</li>
+    </ul>
+
+    <p>Under the hood, <code>system_one()</code> POSTs to <code>https://api.typesafe.ai/v1/systemone</code> using the model <code>jev-latest</code>.</p>
+
+    <div class="callout key">
+      Using <code>TypeSafeClient</code> as a context manager (<code>with TypeSafeClient() as client:</code>) ensures the underlying HTTP session is closed cleanly when the block exits — even on exceptions. And because the client reads <code>TYPESAFE_API_KEY</code> from the environment automatically, you never have to pass a secret to a constructor, store it in a config object, or risk accidentally printing it in a traceback.
+    </div>
+
+    <h2>Full Working Example</h2>
+
+    <p>The script below submits a support message to Jev and asks three questions in a single call: what category the ticket belongs to, how urgent it is, and whether it needs immediate escalation.</p>
+
+    <pre><code>from typesafe_sdk import Choice, Score, Noul, TypeSafeClient
+
+with TypeSafeClient() as client:
+    response = client.system_one(
+        state={"document": "I was charged twice. Please fix this ASAP."},
+        questions={
+            "category": Choice(
+                instructions="What is this ticket about?",
+                criteria={"billing": None, "technical": None, "other": None},
+            ),
+            "urgency": Score(
+                instructions="How urgent is this? 0=low, 5=critical",
+                criteria=["0: no time pressure", "3: customer frustrated", "5: data loss"],
+            ),
+            "needs_escalation": Noul(instructions="Does this need immediate escalation?"),
+        },
+    )
+    dept = response.answers["category"]
+    print(f"Department: {dept.choice} (confidence: {dept.confidence:.2f})")
+    print(f"Urgency: {response.answers['urgency'].score:.1f}/5")</code></pre>
+
+    <p>Notice that all three questions are submitted in a <em>single</em> API call. Jev evaluates them in parallel, so adding more questions costs almost no extra latency.</p>
+
+    <h2>Reading the Response</h2>
+
+    <p>The return value of <code>system_one()</code> has an <code>answers</code> dict. Each value is a typed answer object whose attributes depend on the question type used:</p>
+
+    <table>
+      <thead>
+        <tr><th>Question type</th><th>Attribute</th><th>Python type</th><th>What it contains</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>Choice</code></td><td><code>.choice</code></td><td><code>str</code></td><td>The winning label from your <code>criteria</code> dict</td></tr>
+        <tr><td><code>Choice</code></td><td><code>.confidence</code></td><td><code>float</code></td><td>Calibrated probability that <code>.choice</code> is correct (0.0–1.0)</td></tr>
+        <tr><td><code>Score</code></td><td><code>.score</code></td><td><code>float</code></td><td>Numeric value on the scale you defined in <code>criteria</code></td></tr>
+        <tr><td><code>Score</code></td><td><code>.confidence</code></td><td><code>float</code></td><td>Calibrated confidence in the score estimate</td></tr>
+        <tr><td><code>Noul</code></td><td><code>.noul</code></td><td><code>str</code></td><td><code>"yes"</code>, <code>"no"</code>, or <code>"unknown"</code></td></tr>
+        <tr><td><code>Noul</code></td><td><code>.confidence</code></td><td><code>float</code></td><td>Calibrated confidence in the noul answer</td></tr>
+      </tbody>
+    </table>
+
+    <p>The pattern <code>response.answers["key"].choice</code> is the most common idiom. For a <code>Score</code> answer use <code>.score</code>; for a <code>Noul</code> answer use <code>.noul</code>. All three answer types also expose <code>.confidence</code>, which you will rely on heavily once you reach Module 3.</p>
+
+    <div class="quiz" id="quiz-5">
+      <h3>Quick check</h3>
+      <p>How does <code>TypeSafeClient</code> find your API key?</p>
+      <div class="quiz-options">
+        <button>Reads TYPESAFE_API_KEY from the environment automatically</button>
+        <button>You pass it to the constructor</button>
+        <button>It loads a YAML credentials file</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <h3>Skill exercise — ~20 min</h3>
+      <p>Write (but don't run) a complete Python script that classifies a support message into <strong>billing</strong>, <strong>technical</strong>, or <strong>account</strong> categories and prints the result with its confidence score. Your script should:</p>
+      <ul>
+        <li>Import the correct names from <code>typesafe_sdk</code></li>
+        <li>Use <code>TypeSafeClient</code> as a context manager</li>
+        <li>Define a <code>Choice</code> question with three criteria: <code>billing</code>, <code>technical</code>, <code>account</code></li>
+        <li>Pass a sample support message as the document</li>
+        <li>Print the chosen category and its confidence score formatted to two decimal places</li>
+      </ul>
+      <textarea rows="22" placeholder="Write your Python script here…"></textarea>
+    </div>
+
+    <div class="lesson-summary">
+      <strong>Lesson summary</strong>
+      <ul>
+        <li>Install the SDK with <code>pip install typesafe-sdk</code> or <code>uv add typesafe-sdk</code> — Python 3.10 or higher is required.</li>
+        <li>Set <code>TYPESAFE_API_KEY</code> as an environment variable; <code>TypeSafeClient</code> reads it automatically so secrets never appear in source code.</li>
+        <li>Use <code>TypeSafeClient</code> as a context manager and call <code>client.system_one(state=…, questions=…)</code> to evaluate all questions in a single API round-trip.</li>
+        <li>Read answers via <code>response.answers["key"]</code> and access <code>.choice</code>, <code>.score</code>, <code>.noul</code>, or <code>.confidence</code> depending on the question type.</li>
+        <li>The playground at <code>console.typesafe.ai/playground</code> is the fastest way to prototype question criteria before writing code.</li>
+      </ul>
+    </div>
+
+    <div class="tutor-prompt">
+      Ask your tutor: "Walk me through what happens at the network level when I call <code>client.system_one()</code> — what does the HTTP request and response look like?"
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0004-three-primitives.html">&#8592; Lesson 4: The Three Primitives</a>
+      <a href="0006-javascript-sdk.html" class="primary">Lesson 6: The JavaScript/TypeScript SDK &#8594;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-5', 0, 'Correct. TypeSafeClient reads TYPESAFE_API_KEY from the environment automatically — you never pass the key in code, which keeps secrets out of source files and tracebacks.');
+  </script>
+</body>
+</html>

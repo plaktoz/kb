@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 10: Build the Support Ticket Router — Part 1: Classify — Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      Jev AI &rsaquo; Module 4 &mdash; Weekend Project &rsaquo; Lesson 10 of 12
+    </p>
+    <h1>Build the Support Ticket Router &mdash; Part 1: Classify</h1>
+    <div class="lesson-meta">
+      <span>Module 4</span>
+      <span>Lesson 10 of 12</span>
+      <span>~45 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    After this lesson, you will have a working support ticket classifier that calls
+    <code>system_one</code> with all three output types &mdash; <code>Choice</code>,
+    <code>Score</code>, and <code>Noul</code> &mdash; in a single request, and you will
+    be able to read the structured response to drive routing decisions based on
+    confidence.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://github.com/typesafe-ai/typesafe-sdk-python"
+       target="_blank" rel="noopener">
+      typesafe-sdk-python &mdash; Typesafe AI on GitHub
+    </a>
+  </div>
+
+  <h2>Step 1 &mdash; Sign Up &amp; Get Your API Key</h2>
+
+  <p>
+    Before writing any code, you need a Typesafe API key. The key is the only
+    credential the SDK needs; everything else is configured in code.
+  </p>
+  <ol>
+    <li>Go to <strong>console.typesafe.ai</strong> and create an account.</li>
+    <li>Navigate to <strong>/keys</strong> in the console and generate a new key.</li>
+    <li>
+      Export it as an environment variable so the SDK can pick it up automatically:
+      <pre><code>export TYPESAFE_API_KEY="your-key-here"</code></pre>
+    </li>
+    <li>
+      To make this permanent across terminal sessions, add the same line to your
+      <code>~/.zshrc</code> (or <code>~/.bashrc</code>) and reload:
+      <pre><code>echo 'export TYPESAFE_API_KEY="your-key-here"' >> ~/.zshrc
+source ~/.zshrc</code></pre>
+    </li>
+  </ol>
+
+  <div class="callout warning">
+    Never paste your API key directly into source code or commit it to a repository.
+    The SDK reads <code>TYPESAFE_API_KEY</code> from the environment automatically
+    &mdash; you only need to set the variable once and the key stays out of your
+    codebase entirely.
+  </div>
+
+  <h2>Step 2 &mdash; Install the SDK</h2>
+
+  <p>
+    The Typesafe SDK requires Python 3.10 or later. Install it with pip:
+  </p>
+  <pre><code>pip install typesafe-sdk</code></pre>
+  <p>
+    Verify the install by importing the three types you will use in this lesson:
+  </p>
+  <pre><code>python -c "from typesafe_sdk import Choice, Score, Noul; print('OK')"</code></pre>
+  <p>
+    If you see <code>OK</code> printed, you are ready to build the classifier.
+  </p>
+
+  <h2>Step 3 &mdash; The Complete Classifier Code</h2>
+
+  <p>
+    Create a file called <code>router.py</code> and paste in the following. This is the
+    complete, working classifier &mdash; no placeholders, no stubs.
+  </p>
+
+  <pre><code>import os
+from typesafe_sdk import Choice, Score, Noul, TypeSafeClient
+
+TICKETS = [
+    "I was charged twice for my subscription last month.",
+    "The app crashes when I try to upload a file larger than 10MB.",
+    "How do I change my username?",
+    "I need to cancel my account immediately, this is urgent!",
+]
+
+with TypeSafeClient() as client:
+    for ticket in TICKETS:
+        response = client.system_one(
+            state={"message": ticket},
+            questions={
+                "department": Choice(
+                    instructions="Which department should handle this ticket?",
+                    criteria={
+                        "billing": "Payment issues, charges, refunds, subscriptions",
+                        "technical": "Bugs, crashes, errors, performance problems",
+                        "account": "Account settings, passwords, cancellations",
+                        "general": "General questions and inquiries",
+                    },
+                ),
+                "urgency": Score(
+                    instructions="How urgent is this ticket? (0 = not urgent, 5 = critical)",
+                    criteria=["0: routine question", "3: frustrated customer", "5: data loss or billing emergency"],
+                ),
+                "is_vip": Noul(
+                    instructions="Does this ticket suggest a high-value or long-term customer?",
+                ),
+            },
+        )
+
+        dept = response.answers["department"]
+        urgency = response.answers["urgency"]
+
+        if dept.confidence > 0.8:
+            action = f"AUTO-ROUTE → {dept.choice.upper()}"
+        else:
+            action = f"HUMAN REVIEW (confidence: {dept.confidence:.2f})"
+
+        print(f"\nTicket: {ticket[:60]}...")
+        print(f"  Department : {dept.choice} (confidence: {dept.confidence:.2f})")
+        print(f"  Urgency    : {urgency.score:.1f}/5")
+        print(f"  VIP signal : {response.answers['is_vip'].noul:.2f}")
+        print(f"  Action     : {action}")</code></pre>
+
+  <p>Run it with:</p>
+  <pre><code>python router.py</code></pre>
+
+  <h2>Step 4 &mdash; Understanding the Code</h2>
+
+  <h3>State design</h3>
+  <p>
+    The <code>state</code> argument is a plain Python dict passed to
+    <code>system_one</code>. In this example it holds a single key,
+    <code>"message"</code>, but it can hold anything &mdash; user metadata,
+    account tier, previous ticket history. Packing everything into one dict means
+    Jev receives the full context in a single structured object, with no need for
+    long prose preambles in the instructions.
+  </p>
+
+  <h3>Question design</h3>
+  <p>
+    The <code>questions</code> dict defines three independent outputs in one call:
+  </p>
+  <ul>
+    <li>
+      <strong>Choice</strong> (<code>"department"</code>) &mdash; asks Jev to select
+      one key from a labelled dict of options. Each key maps to a short description
+      that provides grounding for the decision.
+    </li>
+    <li>
+      <strong>Score</strong> (<code>"urgency"</code>) &mdash; asks Jev to return a
+      numeric value, calibrated by the <code>criteria</code> list. The anchor examples
+      (0, 3, 5) give the model a concrete scale to reason against.
+    </li>
+    <li>
+      <strong>Noul</strong> (<code>"is_vip"</code>) &mdash; returns a float between 0
+      and 1. It is the simplest output type: no discrete choices, no numeric scale,
+      just a continuous signal representing how strongly the answer is &ldquo;yes.&rdquo;
+    </li>
+  </ul>
+  <p>
+    All three questions are resolved in a single network call. There is no need to
+    call the API once per output type.
+  </p>
+
+  <h3>Reading answers</h3>
+  <p>
+    Answers come back under <code>response.answers</code>, keyed by the same names
+    you used in <code>questions</code>. For a <code>Choice</code> answer, the two
+    fields you will use most are <code>.choice</code> (the selected key as a string)
+    and <code>.confidence</code> (a float from 0 to 1). For a <code>Score</code>
+    answer, the value is at <code>.score</code>. For a <code>Noul</code> answer,
+    the value is at <code>.noul</code>.
+  </p>
+
+  <h3>Confidence check</h3>
+  <p>
+    The line <code>if dept.confidence &gt; 0.8</code> is the routing gate. When Jev
+    is highly confident about the department, the ticket flows straight to that team
+    without human involvement. When confidence falls below the threshold, the ticket
+    is flagged for human review rather than silently misrouted. This single check
+    converts a classification result into an actionable, auditable decision.
+  </p>
+
+  <div class="callout key">
+    Pass structured JSON to <code>state=</code> so Jev has all context in one object.
+    A dict is easier to extend later than a long freeform instructions string &mdash;
+    add fields like <code>"account_age"</code> or <code>"plan_tier"</code> without
+    rewriting your question definitions.
+  </div>
+
+  <h2>What to Expect</h2>
+
+  <p>
+    When you run <code>python router.py</code> against the four bundled tickets, you
+    should see output that looks roughly like this:
+  </p>
+
+  <pre>
+Ticket: I was charged twice for my subscription last month....
+  Department : billing (confidence: 0.97)
+  Urgency    : 4.0/5
+  VIP signal : 0.31
+  Action     : AUTO-ROUTE → BILLING
+
+Ticket: The app crashes when I try to upload a file larger than...
+  Department : technical (confidence: 0.95)
+  Urgency    : 3.2/5
+  VIP signal : 0.18
+  Action     : AUTO-ROUTE → TECHNICAL
+
+Ticket: How do I change my username?...
+  Department : account (confidence: 0.92)
+  Urgency    : 0.8/5
+  VIP signal : 0.09
+  Action     : AUTO-ROUTE → ACCOUNT
+
+Ticket: I need to cancel my account immediately, this is urgent!...
+  Department : account (confidence: 0.88)
+  Urgency    : 4.5/5
+  VIP signal : 0.44
+  Action     : AUTO-ROUTE → ACCOUNT</pre>
+
+  <p>
+    Exact numbers will vary between runs &mdash; Jev&rsquo;s outputs are not perfectly
+    deterministic &mdash; but the department assignments and relative urgency scores
+    should be consistent. A ticket that is genuinely ambiguous may drop below the 0.8
+    threshold and trigger the <code>HUMAN REVIEW</code> branch instead of auto-routing.
+  </p>
+
+  <div class="quiz" id="quiz-10">
+    <h3>Check your understanding</h3>
+    <p>In this router, what determines whether a ticket is auto-routed or sent to human review?</p>
+    <div class="quiz-options">
+      <button>The urgency score returned for that ticket</button>
+      <button>The department choice confidence above eighty percent</button>
+      <button>The VIP signal value returned for classification</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>
+      Set up the project, add your API key, and run the classifier against at least
+      4 test tickets &mdash; you can use the bundled ones or substitute tickets of your
+      own. Paste the full terminal output below. Did any tickets fall below the 0.8
+      confidence threshold and trigger human review? What patterns did you notice in
+      the urgency scores?
+    </p>
+    <textarea placeholder="Paste your terminal output here. Example:
+
+Ticket: I was charged twice for my subscription last month....
+  Department : billing (confidence: 0.97)
+  Urgency    : 4.0/5
+  VIP signal : 0.31
+  Action     : AUTO-ROUTE → BILLING
+
+What did you notice? Did any tickets get routed to human review?"></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>The Typesafe SDK is installed with <code>pip install typesafe-sdk</code>; your
+          API key is read from the <code>TYPESAFE_API_KEY</code> environment variable
+          automatically.</li>
+      <li><code>system_one</code> accepts a <code>state</code> dict and a
+          <code>questions</code> dict, resolving all output types &mdash;
+          <code>Choice</code>, <code>Score</code>, and <code>Noul</code> &mdash; in a
+          single API call.</li>
+      <li>Packing context into <code>state=</code> as structured JSON keeps question
+          definitions clean and makes the schema easy to extend without rewriting
+          instructions.</li>
+      <li>Each answer type exposes a purpose-built attribute: <code>.choice</code> and
+          <code>.confidence</code> for <code>Choice</code>, <code>.score</code> for
+          <code>Score</code>, and <code>.noul</code> for <code>Noul</code>.</li>
+      <li>A single confidence threshold (<code>dept.confidence &gt; 0.8</code>) converts
+          the classification result into an auto-route or human-review decision without
+          any additional logic.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Stuck or curious? Ask: &ldquo;What happens if I lower the confidence threshold to
+    0.6?&rdquo; or &ldquo;How would I add a fourth output type to capture customer
+    sentiment?&rdquo; &mdash; both questions set up exactly what Part 2 builds on.
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0009-jev-vs-llm.html">&larr; Prev: Jev vs. the LLM</a>
+    <a href="0011-ticket-router-part2.html" class="primary">
+      Next: Ticket Router Part 2 &rarr;
+    </a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-10',
+    1,
+    'Correct. The code checks dept.confidence > 0.8 — only when the Choice answer clears that threshold does the ticket auto-route. Urgency and the VIP signal are recorded in the output but do not control the routing branch in this version of the classifier.'
+  );
+</script>
+</body>
+</html>

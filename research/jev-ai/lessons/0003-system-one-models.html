@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>System One Models — A New Category | Jev AI Course</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Jev AI Course</a> &rsaquo; Module 1 &mdash; Why Jev Exists &rsaquo; Lesson 3 of 12
+    </div>
+    <h1>System One Models &mdash; A New Category</h1>
+    <div class="lesson-meta">
+      <span>Module 1 &middot; Lesson 3 of 12</span>
+      <span>~15 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    Understand what distinguishes System One models from generative LLMs, including the new RLCD training paradigm and the parallel sampler that drives its efficiency. Recognize why TypeSafe bets that machine-to-machine intelligence is the primary growth frontier for AI automation.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener">
+      Introducing System One Models and Jev &mdash; TypeSafe AI Blog
+    </a>
+  </div>
+
+  <h2>Kahneman&rsquo;s Framework Applied to AI</h2>
+
+  <p>In his 2011 book <em>Thinking, Fast and Slow</em>, psychologist Daniel Kahneman described two modes of human cognition. <strong>System 1</strong> is fast, automatic, and intuitive &mdash; the mental shortcut that lets you recognise a face or drive a familiar route without conscious effort. <strong>System 2</strong> is slow, deliberate, and effortful &mdash; the mode you engage when working through a multi-step maths problem or weighing a complex decision.</p>
+
+  <p>Today&rsquo;s large language models are, in Kahneman&rsquo;s terms, System 2 machines. They generate text token by token, expending significant compute on every output regardless of whether the task requires deep reasoning or just a fast, structured judgment. For many real-world automation tasks &mdash; routing, scoring, classification &mdash; this is severe over-engineering.</p>
+
+  <p>TypeSafe AI&rsquo;s insight is that most of what production automation pipelines <em>actually</em> need is System 1 cognition: fast, typed judgments on well-defined questions. Jev is their first System One model, described as &ldquo;a frontier-intelligence function call: unstructured state in, typed probabilistic decisions out.&rdquo;</p>
+
+  <h2>RLCD &mdash; A New Training Paradigm</h2>
+
+  <p>How a model is trained determines what it optimises for. Understanding the training paradigm is the fastest way to understand why a model behaves the way it does.</p>
+
+  <p><strong>RLHF</strong> (Reinforcement Learning from Human Feedback) trains models to produce outputs that humans prefer. It is responsible for the conversational fluency of chat models, but it optimises for <em>perceived quality</em> rather than <em>decision accuracy</em>. The result is models that are confident-sounding even when they should not be.</p>
+
+  <p><strong>RLVR</strong> (Reinforcement Learning with Verifiable Rewards) trains models against problems that have objectively checkable answers &mdash; maths proofs, code that compiles, logic puzzles. It improves reasoning but is limited to domains where ground truth is easy to verify.</p>
+
+  <p><strong>RLCD</strong> (Reinforcement Learning for Calibrated Decisions) is TypeSafe&rsquo;s approach. Rather than optimising for human preference or verifiable reasoning, RLCD targets <em>calibrated probability outputs on structured tasks</em>. A well-calibrated model&rsquo;s stated 80% confidence should be right roughly 80% of the time. This is the property that makes automated decision-gating trustworthy: you can set a threshold, act confidently above it, and escalate below it.</p>
+
+  <p>The other major efficiency lever is the <strong>parallel sampler</strong>. Standard LLMs generate outputs sequentially, token by token. Jev generates all outputs in a single query. This architectural difference is the core driver behind its performance: <strong>193.6&times; faster</strong> and <strong>444.6&times; cheaper</strong> than frontier LLMs on automation tasks. Pricing is $42 per billion input tokens &mdash; output tokens are free.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Frontier LLM</th>
+        <th>System One Model (Jev)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Output type</strong></td>
+        <td>Free-form text (tokens)</td>
+        <td>Typed probabilistic decisions</td>
+      </tr>
+      <tr>
+        <td><strong>Optimisation target</strong></td>
+        <td>Human preference (RLHF)</td>
+        <td>Calibrated probabilities (RLCD)</td>
+      </tr>
+      <tr>
+        <td><strong>Uncertainty</strong></td>
+        <td>Buried in narrative prose</td>
+        <td>Explicit confidence score</td>
+      </tr>
+      <tr>
+        <td><strong>Generation method</strong></td>
+        <td>Token-by-token (sequential)</td>
+        <td>Parallel sampler (single query)</td>
+      </tr>
+      <tr>
+        <td><strong>Speed</strong></td>
+        <td>Baseline</td>
+        <td>193.6&times; faster</td>
+      </tr>
+      <tr>
+        <td><strong>Cost</strong></td>
+        <td>Baseline</td>
+        <td>444.6&times; cheaper; output free</td>
+      </tr>
+      <tr>
+        <td><strong>Primary interface</strong></td>
+        <td>Chat / prompt engineering</td>
+        <td>Structured function call</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    Jev is not a faster chat model &mdash; it is a <em>different kind of model</em>. RLCD trains for calibrated probability, not fluency or reasoning. The parallel sampler generates all decisions in one shot rather than token by token. Together, these produce something with no direct predecessor: a model whose outputs are typed, probabilistic, and fast enough to run at every decision point in a large pipeline.
+  </div>
+
+  <div class="callout warning">
+    <strong>Common misconception:</strong> Jev is not just a smaller or distilled LLM. A smaller LLM still generates free-form text token by token and still optimises for human-sounding output. Jev was trained end-to-end on a different objective (calibrated decisions), uses a different generation architecture (parallel sampler), and returns a different output type (typed probabilities). Treating it as &ldquo;GPT-4o mini&rdquo; misses what makes it useful.
+  </div>
+
+  <h2>The Jevons Paradox and the 99% Bet</h2>
+
+  <p>Jev takes its name from the 19th-century economist <strong>William Stanley Jevons</strong>, who observed a counterintuitive effect in 1865: as steam engines became more fuel-efficient, total coal consumption <em>increased</em> rather than fell. Cheaper, more efficient energy expanded the number of economically viable use cases, more than offsetting the savings at each use site. This is now called <strong>Jevons Paradox</strong>.</p>
+
+  <p>TypeSafe applies the same logic to AI intelligence. When inference costs fall by 400&times;, the rational response is not to run the same workflows more cheaply &mdash; it is to instrument every decision point that was previously too expensive to automate. Workflows that relied on heuristics or human rules can now route through a real model. Edge cases that were batched and deferred can be evaluated in real time. The cheaper AI intelligence gets, the more of the system it can touch.</p>
+
+  <p>This framing underpins TypeSafe&rsquo;s core bet: <strong>approximately 99% of large-scale AI automation will be machine-to-machine</strong>, not human-facing chat. The conversation between a user and a chatbot is the visible tip of the iceberg. Beneath it lies a vast surface of structured decisions &mdash; classification, routing, scoring, guardrailing &mdash; that never requires a natural-language reply. System One models are built for this invisible majority.</p>
+
+  <p>Use cases TypeSafe identifies include: workflow automation, map-reduce over large datasets, real-time applications, and LLM output guardrailing and scoring. In the guardrailing case, Jev is fast enough to sit inline between an LLM and the user, scoring every output before it is returned.</p>
+
+  <div class="quiz" id="quiz-3">
+    <h3>Check your understanding</h3>
+    <p>What does RLCD specifically optimise for, unlike RLHF?</p>
+    <div class="quiz-options">
+      <button>Human preference alignment signals</button>
+      <button>Calibrated probability on decisions</button>
+      <button>Verifiable reward from rules</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>Draw (on paper or in this text area) a diagram of a workflow you know well &mdash; a customer support flow, a content moderation pipeline, a code review process, or anything with branching decisions. For each decision point, label it as either <strong>System One</strong> (fast, typed judgment: does this match a category? is the score above a threshold?) or <strong>System Two</strong> (reasoning needed: why did this fail? what should the next step be?).</p>
+    <p>Notice the ratio. Most workflows are dominated by System One decisions that happen to be bottlenecked on LLM latency or cost today.</p>
+    <textarea placeholder="E.g.:&#10;&#10;Incoming support ticket&#10;  → [S1] Is this billing, technical, or account? (Choice)&#10;  → [S1] Urgency score 0–1? (Score)&#10;  → if urgency > 0.8: escalate to human [S1 gate]&#10;  → else: auto-route to queue&#10;  → [S2] Agent reads ticket and drafts response (LLM)&#10;  → [S1] Does draft contain PII? (Jev guardrail)&#10;  → send or flag for review"></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>System One models are named after Kahneman&rsquo;s fast, intuitive cognitive mode &mdash; they are designed for quick, typed judgments rather than open-ended generation.</li>
+      <li>RLCD (Reinforcement Learning for Calibrated Decisions) trains for calibrated probability on structured tasks, contrasting with RLHF (human preference) and RLVR (verifiable reasoning).</li>
+      <li>The parallel sampler generates all outputs in a single query, making Jev 193.6&times; faster and 444.6&times; cheaper than frontier LLMs on automation tasks; output tokens are free.</li>
+      <li>Jevons Paradox predicts that cheaper AI intelligence expands total use &mdash; TypeSafe bets ~99% of large-scale automation is machine-to-machine, not human-facing chat.</li>
+      <li>Primary use cases: workflow automation, map-reduce over large datasets, real-time decision pipelines, and inline guardrailing of LLM outputs.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Want to go deeper? Ask an AI tutor: &ldquo;How does RLCD calibration compare to temperature scaling in LLMs?&rdquo; or &ldquo;Give me a concrete example of Jevons Paradox playing out in cloud computing costs.&rdquo;
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0002-bitterest-lesson-ml-hierarchy.html">&larr; Lesson 2: The Bitterest Lesson</a>
+    <a href="0004-three-primitives.html" class="primary">Lesson 4: The Three Primitives &rarr;</a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-3', 1, 'RLCD (Reinforcement Learning for Calibrated Decisions) optimises for calibrated probability outputs on structured tasks. RLHF optimises for human preference signals, and RLVR uses verifiable rewards from rule-based checks.');
+</script>
+</body>
+</html>
