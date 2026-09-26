@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>/automate-me — Building Your Personal Mode | pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> /
+      Module 4 — Autonomous Runs and Continuous Improvement / Lesson 12 of 12
+    </div>
+    <h1>/automate-me — Building Your Personal Mode</h1>
+    <div class="lesson-meta">
+      <span>Module 4 of 4</span>
+      <span>~20 min</span>
+      <span>Lesson 12 / 12</span>
+    </div>
+  </header>
+
+  <!-- ── Source ── -->
+  <div class="source-card">
+    <strong>Primary sources</strong>
+    <a href="https://flaviocopes.com/pstack/" target="_blank" rel="noopener">
+      flaviocopes.com/pstack
+    </a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/docs/reference.md"
+       target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude — docs/reference.md
+    </a>
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    pstack exposes two distinct tools for making the skill system smarter over time: <code>/reflect</code>,
+    which mines your recent session for improvements to <em>shared</em> org skills, and
+    <code>/automate-me</code>, which reads your transcripts and drafts a <em>personal mode</em> skill
+    tailored to your specific recurring patterns. They improve different layers of the stack and are
+    designed to be used at different moments.
+  </p>
+  <p>
+    This lesson covers both tools, the approval loop that keeps skill changes safe, the discipline of
+    distinguishing a durable pattern from a one-off preference, and the full continuous improvement
+    system that connects individual sessions to a better-behaved future org.
+  </p>
+
+  <div class="callout key">
+    Skill changes affect every future agent in the org. A change that looks right in isolation can
+    silently degrade unrelated workflows once it is live. This is why neither <code>/reflect</code>
+    nor <code>/automate-me</code> apply changes automatically — every proposed change requires human
+    approval before it reaches the shared skill set.
+  </div>
+
+  <!-- ── /automate-me ── -->
+  <h2>/automate-me</h2>
+  <p>
+    <code>/automate-me</code> reads your recent transcripts, identifies patterns that are specific to
+    how <em>you</em> work, and drafts a personal mode skill based on those observations. The output
+    is a candidate skill definition that you then review. You approve it, adjust it, or discard it —
+    nothing is applied without that step.
+  </p>
+  <p>
+    The pstack-claude reference describes it as: <em>"Draft a personal skill from recent transcripts."</em>
+    That framing is deliberate — it is a draft, not a deployment. The human review step is where you
+    decide whether the pattern is genuinely reusable or merely a coincidence across a few sessions.
+  </p>
+  <p>
+    New skills that survive review are created through <code>plugin-dev:skill-development</code>, the
+    dedicated skill authoring workflow. You do not bypass that process just because the origin was
+    an automated transcript analysis.
+  </p>
+
+  <!-- ── /reflect ── -->
+  <h2>/reflect — Improving Shared Org Skills</h2>
+  <p>
+    <code>/reflect</code> operates at a different scope. After a difficult or particularly instructive
+    task, it proposes improvements to the shared skills that every agent in the org uses. Like
+    <code>/automate-me</code>, it requires approval before any change is applied.
+  </p>
+  <p>
+    The reflect loop produces three categories of proposals:
+  </p>
+  <ul>
+    <li><strong>Accepted</strong> — small edits that apply directly once approved.</li>
+    <li><strong>Rejected</strong> — patterns that did not hold up under review.</li>
+    <li><strong>Backlog</strong> — substantive changes that require the full
+        <code>plugin-dev:skill-development</code> draft-test-iterate cycle before they are ready
+        to ship.</li>
+  </ul>
+  <p>
+    Each conversation can seed the loop: reviewers surface patterns, a synthesizer filters signal
+    from noise, a human approves the survivors, the relevant skills update, and every future agent
+    in the org behaves accordingly.
+  </p>
+
+  <div class="callout warning">
+    <code>/reflect</code> does not auto-apply any change, even one that looks unambiguously correct.
+    The rule is firm: skill changes affect every future agent in the org. A reflex to skip approval
+    for "obviously safe" edits is precisely the mistake the approval gate is designed to prevent.
+    One-offs are not learnings — a pattern that appeared in a single session may evaporate in the
+    next, and encoding it as a shared skill would degrade all future sessions that do not match that
+    one-time context.
+  </div>
+
+  <!-- ── Diagram ── -->
+  <h2>The Full Continuous Improvement System</h2>
+
+  <pre class="diagram">pstack CONTINUOUS IMPROVEMENT SYSTEM
+────────────────────────────────────────────────────────────────────
+  Your work session
+        │
+        ▼
+  /reflect ──────────────► mines transcripts (3 lenses)
+        │                        │
+        │                        ▼
+        │                   Accepted / Rejected / Backlog
+        │                        │
+        │                        ▼
+        │                   Human approval
+        │                        │
+        │              ┌─────────┴──────────┐
+        │              ▼                    ▼
+        │         Small edit          Substantive
+        │         applies now         plugin-dev loop
+        │
+        ▼
+  /automate-me ──────────► reads transcripts
+                                │
+                                ▼
+                         Identifies YOUR patterns
+                                │
+                                ▼
+                         Drafts personal mode skill
+                                │
+                                ▼
+                         You review → approve → encode
+                                │
+                                ▼
+                    Personal skill active in future sessions
+────────────────────────────────────────────────────────────────────
+  Both tools improve different layers:
+  /reflect → improves shared org skills
+  /automate-me → improves your personal workflow
+────────────────────────────────────────────────────────────────────</pre>
+
+  <!-- ── Skill vs Preference ── -->
+  <h2>Skill vs Preference — What Is Worth Encoding</h2>
+  <p>
+    The hardest judgement in personal skill authoring is separating a durable, reusable pattern from
+    a one-off preference. The <code>/reflect</code> skill makes this explicit: <em>"One-offs are not
+    learnings."</em> That principle applies equally to personal mode authoring.
+  </p>
+  <p>
+    A useful test before encoding a pattern:
+  </p>
+  <ul>
+    <li><strong>Frequency:</strong> has this pattern appeared across multiple independent sessions,
+        or only once?</li>
+    <li><strong>Generality:</strong> would this pattern apply to the next ten tasks of this type,
+        or only to a specific one-time context?</li>
+    <li><strong>Stability:</strong> would you still want this behaviour six months from now, or
+        is it shaped by a current project constraint that will change?</li>
+  </ul>
+  <p>
+    If a pattern fails any of these tests, note it but do not encode it. The skill set works because
+    it is a curated signal. Noise in the skill set means every future agent starts from a noisier
+    baseline.
+  </p>
+
+  <!-- ── pstack scale ── -->
+  <h2>What the Skill System Contains</h2>
+  <p>
+    To calibrate what belongs in a skill, it helps to understand the scope of what already exists.
+    pstack (Lauren Tan's original) contains <strong>23 workflow skills</strong>,
+    <strong>21 engineering principles</strong>, and <strong>22 task playbooks</strong>.
+    pstack-claude exposes <strong>31 public slash commands</strong> across <strong>54 skill
+    directories</strong>.
+  </p>
+  <p>
+    That is a large, deliberate collection built up over time. A personal skill you author should
+    complement the existing structure — it should encode something about how <em>you</em> work that
+    the shared skills do not already cover.
+  </p>
+
+  <!-- ── When personalisation is durable ── -->
+  <h2>When Personalisation Is Durable</h2>
+  <p>
+    A personal skill is durable when it encodes a constraint or preference that is genuinely stable
+    across your work — not a reaction to one project, one deadline, or one difficult task. Examples
+    of durable personal patterns include: a consistent ordering preference for how you want research
+    summarised, a domain-specific terminology convention you enforce in every codebase you touch, or
+    a verification habit you run at the end of every session regardless of context.
+  </p>
+  <p>
+    Examples that are <em>not</em> durable: a scratchpad location you used during one sprint,
+    a verbosity level you wanted for one particular deliverable, or a workaround for a tool
+    limitation that may be fixed in the next version.
+  </p>
+
+  <!-- ── Common mistakes ── -->
+  <h2>Common Mistakes to Avoid</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Mistake</th>
+        <th>Why it fails</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Listing skills instead of stating goals and constraints</td>
+        <td>Agents work best from intent, not from a prescribed tool list — listing skills locks
+            in a method rather than an outcome.</td>
+      </tr>
+      <tr>
+        <td>Vague finish conditions for autonomous runs</td>
+        <td>An agent with no clear stopping criterion will continue past the intended scope or
+            halt at the wrong point.</td>
+      </tr>
+      <tr>
+        <td>Parallel writers sharing one working directory</td>
+        <td>Concurrent writes to the same path produce collisions that corrupt both outputs.</td>
+      </tr>
+      <tr>
+        <td>Accepting a green build as behavioural proof</td>
+        <td>Tests passing confirms compilation and existing assertions — it does not confirm that
+            the agent behaved as intended on new inputs.</td>
+      </tr>
+      <tr>
+        <td>Using Orchestrate for tasks one agent can finish in a session</td>
+        <td>Orchestration adds coordination overhead; single-agent tasks run faster and with fewer
+            failure modes when handled directly.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Authoring a personal skill ── -->
+  <h2>Authoring a Personal Skill via plugin-dev</h2>
+  <p>
+    When a pattern clears the durable/reusable bar and human review approves it, the creation path
+    runs through <code>plugin-dev:skill-development</code>. That workflow follows the same
+    draft-test-iterate loop used for all new skills: draft the <code>SKILL.md</code>, test it
+    against real sessions, iterate on the trigger and behaviour definitions, then promote it.
+  </p>
+  <p>
+    A <code>SKILL.md</code> has three essential fields:
+  </p>
+  <ul>
+    <li><strong>name</strong> — the slash command that invokes the skill.</li>
+    <li><strong>trigger</strong> — the condition or phrase that activates it.</li>
+    <li><strong>behaviour</strong> — what the agent does when triggered, expressed as a goal
+        or constraint, not as a step list.</li>
+  </ul>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-12">
+    <h3>Check your understanding</h3>
+    <p>What does <code>/automate-me</code> produce when you run it?</p>
+    <div class="quiz-options">
+      <button>A personal skill draft for your review</button>
+      <button>A live update to all shared skills</button>
+      <button>A completed promotion deployed without human review</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Think about your own recent agent usage. Identify three recurring patterns — things you find
+      yourself asking for or adjusting repeatedly across sessions.
+    </p>
+    <ol>
+      <li>For each pattern, decide: is this a <strong>durable, reusable pattern</strong> worth
+          encoding, or a <strong>one-off preference</strong> that should be skipped?</li>
+      <li>For the strongest candidate, draft the <code>SKILL.md</code> frontmatter:
+          <ul>
+            <li><strong>name</strong> — the slash command</li>
+            <li><strong>trigger</strong> — the condition or phrase that activates it</li>
+            <li><strong>behaviour</strong> — what the agent does, expressed as a goal or constraint</li>
+          </ul>
+      </li>
+    </ol>
+    <textarea placeholder="Pattern 1: [describe the pattern]
+  Durable or one-off? [your decision and why]
+
+Pattern 2: [describe the pattern]
+  Durable or one-off? [your decision and why]
+
+Pattern 3: [describe the pattern]
+  Durable or one-off? [your decision and why]
+
+---
+SKILL.md draft for the strongest candidate:
+
+name: /[your-command-name]
+trigger: [the condition or phrase]
+behaviour: [what the agent does — goal, not step list]"></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Paste your three patterns and your SKILL.md draft into a new Claude chat and ask:
+    "Apply the one-offs-are-not-learnings test to each pattern. For the one I drafted a SKILL.md
+    for, is the trigger specific enough to fire reliably and is the behaviour expressed as a goal
+    rather than a step list?"
+  </div>
+
+  <!-- ── Navigation ── -->
+  <nav class="lesson-nav">
+    <a href="0011-reflect-continuous-improvement.html">&larr; Prev: /reflect — Continuous Improvement</a>
+    <a href="../lessons.md" class="primary">Back to Curriculum</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-12',
+    0,
+    'Correct. /automate-me reads your transcripts and drafts a personal mode skill — it produces a draft for your review, not a live deployment. Every proposed change requires human approval before it is applied; neither /automate-me nor /reflect auto-apply changes because skill changes affect every future agent in the org.'
+  );
+</script>
+</body>
+</html>

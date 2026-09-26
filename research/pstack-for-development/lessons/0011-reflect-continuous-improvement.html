@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The /reflect Loop — Making Agents Better Over Time | pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">pstack for Development</a> ›
+        Module 4 — Autonomous Runs and Continuous Improvement › Lesson 11 of 12
+      </div>
+      <h1>The /reflect Loop — Making Agents Better Over Time</h1>
+      <div class="lesson-meta">
+        <span>Module 4 — Autonomous Runs and Continuous Improvement</span>
+        <span>·</span>
+        <span>Lesson 11 of 12</span>
+        <span>·</span>
+        <span>~25 min</span>
+      </div>
+    </header>
+
+    <!-- ── Source card ── -->
+    <div class="source-card">
+      <strong>Source</strong>
+      <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/reflect/SKILL.md"
+         target="_blank" rel="noopener">
+        github.com/michael-denyer/pstack-claude — reflect SKILL.md
+      </a><br />
+      The <code>/reflect</code> skill mines conversations for durable learnings and routes
+      them into concrete skill edits, closing the feedback loop that makes the agent system
+      improve over time.
+    </div>
+
+    <!-- ── Introduction ── -->
+    <h2>What /reflect does — and why it matters</h2>
+
+    <p>
+      Every conversation an agent has is a data point. A tool call that required three
+      retries, a judgment call that produced a suboptimal branch, an entire approach that
+      was never considered — these are the raw material of improvement. Left unexamined,
+      they repeat. Examined systematically, they become skill edits that make every
+      future agent in the organisation behave better.
+    </p>
+
+    <p>
+      <code>/reflect</code> is pstack's mechanism for doing that work. It mines the
+      conversation transcript through three independent review lenses, synthesises
+      findings into structured categories, performs a structural check, and then — only
+      with explicit human approval — routes accepted learnings into the appropriate part
+      of the skill system.
+    </p>
+
+    <!-- ── Key insight callout ── -->
+    <div class="callout key">
+      /reflect creates a feedback loop: each conversation can surface patterns, the
+      synthesiser filters signal from noise, the human approves what is worth keeping,
+      and skills update — so future agents behave better in exactly the situations where
+      past agents struggled.
+    </div>
+
+    <!-- ── When it triggers ── -->
+    <h2>When /reflect triggers — and when it skips</h2>
+
+    <p>
+      <code>/reflect</code> is triggered when the user says <code>reflect</code> or
+      <code>/reflect</code>. It is not triggered automatically at the end of every
+      session. This is intentional: the skill skips trivial conversations and topics
+      that were already handled correctly.
+    </p>
+
+    <p>
+      The most important filter is this: <strong>one-offs are not learnings.</strong>
+      A single unusual incident does not warrant a skill edit. Patterns that recur across
+      conversations, or gaps that would affect any future agent tackling the same kind of
+      work, are the candidates worth filing.
+    </p>
+
+    <div class="callout warning">
+      It is tempting to treat every suboptimal moment in a conversation as a learning to
+      encode. The skill explicitly rejects this. Filing a one-time quirk as a rule creates
+      brittle, over-fitted skills that constrain agents in situations the rule was never
+      designed for. Durable learnings generalise — one-offs do not.
+    </div>
+
+    <!-- ── Diagram ── -->
+    <h2>The six-step loop</h2>
+
+    <p>
+      When <code>/reflect</code> runs, it executes six steps in sequence. Steps two and
+      three involve parallel subagents; all other steps are performed by the parent agent
+      or a single synthesiser agent.
+    </p>
+
+<pre class="diagram">THE REFLECT CONTINUOUS IMPROVEMENT LOOP
+────────────────────────────────────────────────────────────────────
+  Conversation ends
+        │
+        ▼ (triggered by /reflect)
+  Locate session transcript
+        │
+        ▼
+  3 parallel reviewers (simultaneously)
+  ┌──────────┬──────────┬────────────┐
+  │ Judgment │ Tooling  │ Divergent  │
+  │ lens     │ lens     │ lens       │
+  └────┬─────┴────┬─────┴────┬───────┘
+       └──────────┼──────────┘
+                  ▼
+          Synthesize findings
+          Accepted / Rejected / Backlog
+                  │
+                  ▼
+          Structural check:
+          Can this be a lint rule/script?
+          YES → Backlog  NO → proceed
+                  │
+                  ▼
+          Human approval ← REQUIRED
+          (no auto-apply)
+                  │
+          ┌───────┴────────────┐
+          ▼                    ▼
+     Small edit           Substantive change
+     Parent applies       plugin-dev:skill-development
+                          draft → test → iterate
+                  │
+                  ▼
+          Skills updated → future agents behave better
+          ↑_____________________________________________↑
+                  (loop repeats each session)
+────────────────────────────────────────────────────────────────────</pre>
+
+    <!-- ── Step 1: Locate ── -->
+    <h2>Step 1 — Locate the transcript</h2>
+
+    <p>
+      Before any review can happen, the parent agent must find its own session transcript.
+      It does this using a dedicated finder script rather than relying on the user to
+      supply the transcript manually. This makes the process reliable and removes a
+      friction point that might otherwise cause the reflect step to be skipped.
+    </p>
+
+    <!-- ── Step 2: 3-lens review ── -->
+    <h2>Step 2 — Three-lens parallel review</h2>
+
+    <p>
+      Three subagents run simultaneously, each examining the transcript through a
+      distinct lens. Running them in parallel means the review takes no longer than
+      the slowest single lens rather than the sum of all three.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Lens</th>
+          <th>What it examines</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Judgment</strong></td>
+          <td>Decision quality — where did the agent choose a suboptimal branch, misread context, or apply the wrong heuristic?</td>
+        </tr>
+        <tr>
+          <td><strong>Tooling</strong></td>
+          <td>Tool usage patterns — which tool calls were inefficient, redundant, or called in the wrong order?</td>
+        </tr>
+        <tr>
+          <td><strong>Divergent</strong></td>
+          <td>Alternative approaches — what entirely different strategy was never considered, and would it have been better?</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Each lens produces its own set of candidate findings. Findings from all three feed
+      forward to the synthesiser in step 3.
+    </p>
+
+    <!-- ── Step 3: Synthesise ── -->
+    <h2>Step 3 — Synthesise: Accepted, Rejected, Backlog</h2>
+
+    <p>
+      A fourth agent consolidates the three sets of findings and sorts them into three
+      categories. The synthesiser also spot-verifies citations — checking that each
+      finding actually corresponds to something that occurred in the transcript rather
+      than a hallucinated reference.
+    </p>
+
+    <ul>
+      <li><strong>Accepted</strong> — a durable learning worth encoding as a skill edit.
+          It generalises beyond this conversation and would improve future agent behaviour
+          in similar situations.</li>
+      <li><strong>Rejected</strong> — a finding that does not hold up under scrutiny:
+          it is a one-off, it contradicts existing guidance, or the citation does not
+          check out.</li>
+      <li><strong>Backlog</strong> — worth preserving but not yet ready to become a skill
+          edit. Either the pattern needs more evidence, or the finding belongs in the
+          structural track (see step 4).</li>
+    </ul>
+
+    <!-- ── Step 4: Structural check ── -->
+    <h2>Step 4 — Structural check</h2>
+
+    <p>
+      Before any Accepted finding moves toward a skill edit, the skill asks a clarifying
+      question: could this learning be enforced via a lint rule, a script, or a flag
+      rather than natural-language guidance in a skill file?
+    </p>
+
+    <p>
+      If the answer is yes, the finding moves to <strong>Backlog</strong> rather than
+      becoming a skill edit. This matters because a machine-enforceable rule is more
+      reliable than prose guidance — it fires every time the condition is met, regardless
+      of whether the agent remembered to read the relevant skill section. Skill prose is
+      reserved for guidance that genuinely requires judgment.
+    </p>
+
+    <!-- ── Step 5: Human approval ── -->
+    <h2>Step 5 — Human approval (required, no exceptions)</h2>
+
+    <p>
+      The most critical guardrail in the entire reflect process: <strong>skill changes
+      are never auto-applied.</strong> The user explicitly approves which changes to
+      implement. The rationale is stated directly in the skill: skill changes affect
+      every future agent in the organisation.
+    </p>
+
+    <p>
+      Once the user approves, routing depends on the scale of the change:
+    </p>
+
+    <ul>
+      <li><strong>Small edits</strong> — the parent agent applies them directly to the
+          relevant skill file.</li>
+      <li><strong>Substantive changes</strong> — routed to
+          <code>plugin-dev:skill-development</code> for a full draft, test, and iterate
+          loop before the change lands.</li>
+      <li><strong>New skills</strong> — always created via
+          <code>plugin-dev:skill-development</code>, never written ad hoc by the parent
+          agent.</li>
+    </ul>
+
+    <!-- ── Step 6: Summary ── -->
+    <h2>Step 6 — Summary</h2>
+
+    <p>
+      After the approved changes are applied, <code>/reflect</code> produces a summary
+      covering three things: what changed and where, what was filed to backlog and why,
+      and what was dropped along with the reasons for rejection. This summary is the
+      audit trail that makes the feedback loop legible over time.
+    </p>
+
+    <!-- ── Why the loop works ── -->
+    <h2>Why this creates genuine continuous improvement</h2>
+
+    <p>
+      The loop is effective because each stage removes a different category of noise
+      before anything reaches a skill file. The three-lens review surfaces what a single
+      pass would miss. The synthesiser filters the lens outputs for signal. The structural
+      check moves machine-enforceable rules out of natural-language skill prose. Human
+      approval prevents any single conversation's edge cases from distorting org-wide
+      behaviour. And the routing logic ensures that larger changes go through the same
+      deliberate process as new skill development — not a shortcut.
+    </p>
+
+    <p>
+      The result is a system where the agent organisation can genuinely learn — not by
+      accumulating undifferentiated instructions, but by improving in targeted, verified,
+      human-approved increments.
+    </p>
+
+    <!-- ── Quiz ── -->
+    <div class="quiz" id="quiz-11">
+      <h3>Check your understanding</h3>
+      <p>Why does /reflect require human approval before applying any skill changes?</p>
+      <div class="quiz-options">
+        <button>Skill changes affect every future agent in the org</button>
+        <button>The system cannot automatically determine which changes are correct</button>
+        <button>Automated skill updates could create infinite loops in agents</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <!-- ── Exercise ── -->
+    <div class="exercise">
+      <p>
+        Read a recent agent conversation transcript — or recall one from memory. Apply
+        the three-lens review manually:
+      </p>
+      <ol>
+        <li><strong>Judgment lens</strong> — what decisions were suboptimal? Where did
+            the agent choose the wrong branch or misread context?</li>
+        <li><strong>Tooling lens</strong> — what tool calls were inefficient, redundant,
+            or called in the wrong sequence?</li>
+        <li><strong>Divergent lens</strong> — what alternative approach was never
+            considered? Would it have been better?</li>
+      </ol>
+      <p>
+        From your findings, write one <strong>Accepted</strong> learning — a pattern
+        that generalises and would improve future agents in similar situations. Then
+        write one thing that belongs in <strong>Backlog</strong> instead, and explain
+        why it is not ready to become a skill edit yet.
+      </p>
+      <textarea placeholder="Judgment lens — suboptimal decision: …&#10;&#10;Tooling lens — inefficient tool call: …&#10;&#10;Divergent lens — alternative never considered: …&#10;&#10;Accepted learning: …&#10;(why it generalises: …)&#10;&#10;Backlog item: …&#10;(why not a skill edit yet: …)"></textarea>
+    </div>
+
+    <!-- ── Tutor prompt ── -->
+    <div class="tutor-prompt">
+      Paste your three lens findings and your Accepted learning into a new Claude
+      conversation and ask: "Does this generalise beyond the single conversation I
+      reviewed, or is it a one-off? If it is a one-off, what would need to be true
+      for it to become a durable learning?"
+    </div>
+
+    <!-- ── Lesson nav ── -->
+    <nav class="lesson-nav">
+      <a href="0010-autonomous-runs.html">← Prev: Autonomous Runs</a>
+      <a href="0012-automate-me-personal-mode.html" class="primary">Next: Automate Me — Personal Mode →</a>
+    </nav>
+
+  </div><!-- /.container -->
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-11',
+      0,
+      'Correct. The skill states this explicitly: "Skill changes affect every future agent in the org. Do not auto-apply." The human approval guardrail exists because a skill edit is not scoped to one conversation — it changes behaviour for every agent that reads the skill going forward.'
+    );
+  </script>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installing pstack for Claude Code — pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> /
+      Module 1 — Foundations / Lesson 2 of 12
+    </div>
+    <h1>Installing pstack for Claude Code</h1>
+    <div class="lesson-meta">
+      <span>Module 1 — Foundations</span>
+      <span>Lesson 2 of 12</span>
+      <span>~10 min</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude" target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude
+    </a>
+    — 54 shared skill directories, 31 public slash commands, automatic routing via SessionStart hook.
+    An unofficial port of Lauren Tan's Cursor-native pstack, adapted for Claude Code, Codex, OpenCode, and Gemini CLI.
+  </div>
+
+  <!-- ── Key insight ── -->
+  <div class="callout key">
+    The SessionStart hook is the single most important addition in the Claude Code port. It watches every
+    incoming task and routes automatically to <code>/poteto-mode</code> whenever the task spans multiple
+    files, touches architecture, or involves a bug with unknown cause — without any extra invocation from
+    you. Understanding when and why this hook fires explains most of pstack-claude's day-to-day behaviour.
+  </div>
+
+  <!-- ── What is pstack-claude ── -->
+  <h2>What is pstack-claude?</h2>
+
+  <p>
+    pstack-claude is an unofficial port of Lauren Tan's Cursor-native pstack, adapted for Claude Code,
+    Codex, OpenCode, and Gemini CLI. It preserves pstack's playbooks and principles while translating
+    Cursor-specific primitives to the conventions of other harnesses.
+  </p>
+
+  <p>
+    The repo ships 54 skill directories, of which 31 are exposed as public slash commands. Its directory
+    layout follows a clear convention:
+  </p>
+
+  <pre><code>plugins/pstack/skills/   — individual skill definitions
+agents/                  — sub-agent definitions
+hooks/                   — lifecycle event handlers (incl. SessionStart)
+tools/                   — shared utilities</code></pre>
+
+  <!-- ── Warning ── -->
+  <div class="callout warning">
+    pstack-claude is not a Cursor extension and has no dependency on Cursor's UI or IDE automations.
+    Skills such as <code>deslop</code>, <code>control-cli</code>, and <code>control-ui</code> are
+    Cursor-specific and are intentionally not ported. If you encounter references to those in the
+    original pstack docs, they do not apply to the Claude Code installation.
+  </div>
+
+  <!-- ── Installation ── -->
+  <h2>Installation</h2>
+
+  <p>
+    Installing pstack-claude is a two-step process: first register the plugin source from the marketplace,
+    then install the plugin into the current Claude Code session.
+  </p>
+
+  <h3>Step 1 — Register the plugin source</h3>
+  <pre><code>/plugin marketplace add michael-denyer/pstack-claude</code></pre>
+  <p>
+    This tells Claude Code's plugin system to fetch the repository from
+    <code>michael-denyer/pstack-claude</code> on GitHub and register it as an available source.
+    No skills are active yet.
+  </p>
+
+  <h3>Step 2 — Install the plugin</h3>
+  <pre><code>/plugin install pstack@pstack-claude</code></pre>
+  <p>
+    This installs the <code>pstack</code> plugin from the registered <code>pstack-claude</code>
+    source into your Claude Code environment. After this step, all 31 public slash commands
+    become available, and the SessionStart hook is wired into the session lifecycle.
+  </p>
+
+  <!-- ── Model configuration ── -->
+  <h2>Configuring Model Defaults</h2>
+
+  <p>
+    After installation, run <code>setup-pstack</code> to configure model defaults and reasoning effort
+    per role. This command writes the configuration to <code>~/.claude/pstack-models.md</code>.
+  </p>
+
+  <pre><code>setup-pstack</code></pre>
+
+  <p>The default model assignments are:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Role / task type</th>
+        <th>Model</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Feature development, refactoring</td>
+        <td><code>opus</code></td>
+      </tr>
+      <tr>
+        <td>Bug fix, performance, hillclimb</td>
+        <td><code>fable</code></td>
+      </tr>
+      <tr>
+        <td>Judgment and prose</td>
+        <td><code>opus</code></td>
+      </tr>
+      <tr>
+        <td>Strongest judgment</td>
+        <td><code>fable</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Reasoning effort is optional and appended after the model name, for example
+    <code>"opus @xhigh"</code>. Valid levels run from <code>low</code> through <code>max</code>.
+  </p>
+
+  <p>
+    To verify the current model assignment for any role — including the <code>fable</code>
+    strongest-judgment role — open the models sheet directly:
+  </p>
+
+  <pre><code>cat ~/.claude/pstack-models.md</code></pre>
+
+  <!-- ── SessionStart hook ── -->
+  <h2>The SessionStart Hook</h2>
+
+  <p>
+    The Claude Code port's defining addition is automatic routing via a SessionStart hook.
+    When a session starts, the hook checks each incoming task against three thresholds:
+  </p>
+
+  <ul>
+    <li>The task touches more than one file</li>
+    <li>The task involves architecture</li>
+    <li>The task concerns a bug with unknown cause</li>
+  </ul>
+
+  <p>
+    If any threshold is met, the hook triggers <code>/poteto-mode</code> automatically. Tasks that
+    fall below all three thresholds are routed directly to the appropriate skill without going through
+    the poteto-mode router.
+  </p>
+
+  <h3>Disabling the hook</h3>
+
+  <p>
+    If you want to route tasks manually at all times, the hook can be disabled in two ways:
+    run <code>setup-pstack</code> and turn off the session hook interactively, or add
+    <code>session hook: off</code> to the models sheet at <code>~/.claude/pstack-models.md</code>.
+  </p>
+
+  <!-- ── Key dependencies ── -->
+  <h2>Key Dependencies</h2>
+
+  <p>
+    Several pstack-claude skills depend on external CLI tools. Ensure these are present before
+    running the full skill set:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>Used for</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>gh</code></td>
+        <td>GitHub CLI — PR monitoring</td>
+      </tr>
+      <tr>
+        <td><code>bun</code></td>
+        <td>Watch and orchestration scripts</td>
+      </tr>
+      <tr>
+        <td><code>graphite</code></td>
+        <td>Stack frontier (shipping playbook)</td>
+      </tr>
+      <tr>
+        <td><code>jq</code></td>
+        <td>Audit column queries</td>
+      </tr>
+      <tr>
+        <td><code>rg</code> (ripgrep)</td>
+        <td>Audit column searches</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Architecture diagram ── -->
+  <h2>Internal Architecture</h2>
+
+  <p>
+    The diagram below shows how pstack-claude routes a task from session start through to a
+    finished, verified output. The SessionStart hook is the first decision point; everything
+    downstream depends on whether the routing threshold is met.
+  </p>
+
+<pre class="diagram">
+pstack INTERNAL ARCHITECTURE
+────────────────────────────────────────────────────
+  User task
+      │
+      ▼
+  SessionStart hook ──► (auto-routing trigger check)
+      │                      │
+      │                      ▼
+      │              Meets threshold?
+      │                 Yes │  No
+      │                     │
+      ▼                     ▼
+  /poteto-mode          Direct skill
+      │
+      ▼
+  Playbook Router
+      │
+   ┌──┼──────────────┐
+   ▼  ▼              ▼
+  how  architect   swarm / arena
+   │       │           │
+   ▼       ▼           ▼
+  Explorer  Design   N parallel
+  subagents  check   workers
+   │       │           │
+   └───────┴───────────┘
+           │
+           ▼
+       Synthesis / Verification
+           │
+           ▼
+       Finished, verified output
+────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Skill discovery ── -->
+  <h2>Skill Discovery</h2>
+
+  <p>
+    Once installed, all 31 public slash commands are available in Claude Code. Because the skills
+    live under <code>plugins/pstack/skills/</code>, you can browse them directly in the repository
+    or list them via Claude Code's plugin command introspection. The 54 skill directories include
+    both public commands and internal skills used by the playbook router.
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-2">
+    <h3>Check your understanding</h3>
+    <p>How many public slash commands does the pstack-claude repo expose?</p>
+    <div class="quiz-options">
+      <button>Twenty-one public slash commands</button>
+      <button>Thirty-one public slash commands</button>
+      <button>Fifty-four public slash commands</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Write the exact commands to (1) install pstack-claude, (2) enable or verify the session hook,
+      and (3) verify which model is assigned to the <code>fable</code> strongest-judgment role.
+      Annotate each command with a one-sentence explanation of what it does.
+    </p>
+    <textarea placeholder="# Command 1 — register the plugin source&#10;/plugin marketplace add michael-denyer/pstack-claude&#10;# Adds the pstack-claude GitHub repo as an available plugin source.&#10;&#10;# Command 2 — install the plugin&#10;...&#10;&#10;# Command 3 — verify model assignment&#10;..."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your tutor: "Walk me through what happens in a fresh Claude Code session after pstack-claude is
+    installed — step by step, from session start to first skill invocation."
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0001-problem-pstack-solves.html">&larr; Prev: The Problem pstack Solves</a>
+    <a href="0003-poteto-mode-router.html" class="primary">Next: poteto-mode — The Central Router &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-2', 1, 'Correct. pstack-claude exposes 31 public slash commands. The 54 skill directories include both public commands and internal skills used by the playbook router — the two numbers are often confused but refer to different things.');
+</script>
+</body>
+</html>

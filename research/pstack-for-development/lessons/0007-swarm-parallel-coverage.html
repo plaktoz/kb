@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swarm — Parallel Coverage — pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> &rsaquo;
+      Module 3 &mdash; Quality Multipliers &rsaquo; Lesson 7 of 12
+    </div>
+    <h1>Swarm &mdash; Parallel Coverage</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~20 min</span>
+      <span>partition / race / mixed shapes &middot; self-contained briefs &middot; PASS/ISSUES/BLOCKED &middot; gap handling &middot; isolation via worktrees</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/swarm/SKILL.md" target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude &mdash; swarm/SKILL.md
+    </a>
+    &mdash; the canonical swarm skill definition: triggers, four-phase protocol,
+    three shapes, worker reporting format, gap-handling rules, and the arena/swarm distinction.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    Some problems are too large for one agent in one pass. A codebase has hundreds of
+    API endpoints. A refactor touches a dozen subsystems. A security audit needs to probe
+    every authentication boundary. Running these tasks sequentially is slow &mdash; and a
+    single agent scoping its own work is the definition of incomplete coverage.
+  </p>
+  <p>
+    Swarm is pstack&rsquo;s answer: a four-phase protocol that fans N workers out across a
+    problem simultaneously, collects structured results, and produces a single consolidated
+    report. Trigger it with <code>/swarm</code>, &ldquo;swarm this,&rdquo; or similar
+    phrasing.
+  </p>
+
+  <!-- ── Section 1: When to Use Swarm ── -->
+  <h2>When to Use Swarm</h2>
+
+  <p>
+    Swarm is built for four use cases: <strong>parallel coverage</strong> (divide a large
+    surface and audit all of it), <strong>races</strong> (several workers attack the same
+    problem independently to see who finds more), <strong>gauntlets</strong> (a fixed set
+    of checks every worker must pass), and <strong>exploration</strong> (fan out across an
+    unknown space and surface what each slice contains).
+  </p>
+  <p>
+    The common thread is breadth. Where a single agent would have to choose what to skip,
+    swarm assigns every slice to a dedicated worker and combines the results.
+  </p>
+
+  <!-- ── Diagram ── -->
+  <h2>The Four-Phase Pattern</h2>
+
+<pre class="diagram">
+SWARM: 4-PHASE COVERAGE PATTERN
+──────────────────────────────────────────────────────────────
+  Frame: done predicate + shape (partition/race/mixed) + N workers
+      │
+      ▼
+  Fan Out: N workers simultaneously (general-purpose subagents)
+  ┌──────┬──────┬──────┬──────┐
+  │ W-1  │ W-2  │ W-3  │ W-N  │  (each: self-contained brief)
+  └──┬───┴──┬───┴──┬───┴──┬───┘
+     │      │      │      │
+     ▼      ▼      ▼      ▼
+   PASS  ISSUES BLOCKED  PASS
+     │      │      │      │
+     └──────┼──────┘      │
+            ▼             ▼
+       Aggregate:      Missing SHA?
+       result table    Rerun once →
+       issue list      Gap (≠ pass)
+            │
+            ▼
+       Report: table + issues + gaps + race rule
+──────────────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Section 2: Phase A — Frame ── -->
+  <h2>Phase A &mdash; Frame</h2>
+
+  <p>
+    Before spawning a single worker, Frame defines the entire swarm structure. Four
+    decisions are made here:
+  </p>
+  <ol>
+    <li><strong>Done predicate</strong> &mdash; what does &ldquo;coverage complete&rdquo;
+        look like? This must be an inspectable or runnable criterion, not just
+        &ldquo;workers finished.&rdquo;</li>
+    <li><strong>Expected artifact</strong> &mdash; what each worker must produce
+        (e.g. a report section with specific SHA hashes, a findings list with
+        line references).</li>
+    <li><strong>Shape</strong> &mdash; partition, race, or mixed (described below).</li>
+    <li><strong>N workers and slice assignments</strong> &mdash; how many workers and
+        exactly which slice of the problem each one owns.</li>
+  </ol>
+  <p>
+    Frame is design work. Rushing past it produces workers that overlap, leave gaps,
+    or produce incomparable outputs that cannot be aggregated.
+  </p>
+
+  <!-- ── Section 3: Phase B — Fan Out ── -->
+  <h2>Phase B &mdash; Fan Out</h2>
+
+  <p>
+    All N workers are spawned <strong>simultaneously</strong> using
+    <code>subagent_type: "general-purpose"</code> with <code>run_in_background: true</code>.
+    The key discipline here is the brief: every worker&rsquo;s brief must be
+    <strong>fully self-contained</strong>.
+  </p>
+  <p>
+    A self-contained brief includes: the goal, the scope, the slice this worker owns,
+    the verification method, and the reporting format. The worker cannot ask questions
+    mid-run &mdash; it must have everything it needs to start and finish without the
+    coordinator&rsquo;s involvement.
+  </p>
+  <p>
+    Workers report one of three outcomes:
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Status</th>
+        <th>Meaning</th>
+        <th>Evidence required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>PASS</code></td>
+        <td>No issues found in this slice</td>
+        <td>SHA or method confirming the check was performed</td>
+      </tr>
+      <tr>
+        <td><code>ISSUES</code></td>
+        <td>One or more defects found</td>
+        <td>Every issue the worker can prove, not only the first one</td>
+      </tr>
+      <tr>
+        <td><code>BLOCKED</code></td>
+        <td>Worker could not complete its slice</td>
+        <td>Specific reason &mdash; missing access, ambiguous scope, dependency failure</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Key callout ── -->
+  <div class="callout key">
+    A worker that can prove a defect reports ISSUES and lists every issue it can prove,
+    not only the first. Stopping at the first finding is incomplete coverage &mdash; the
+    swarm pattern exists precisely to exhaust a slice, not to sample it.
+  </div>
+
+  <!-- ── Section 4: Three Shapes ── -->
+  <h2>Three Shapes</h2>
+
+  <p>
+    The shape determines how work is distributed and how results are combined.
+  </p>
+  <ul>
+    <li><strong>Partition</strong> &mdash; each worker owns a distinct, non-overlapping
+        slice of the problem. Results are additive: the full picture is the union of all
+        worker reports. Use when the work can be cleanly divided (e.g. API endpoints by
+        module, files by directory).</li>
+    <li><strong>Race</strong> &mdash; all workers receive identical briefs and attack the
+        same problem independently. The Aggregate phase applies the declared race rule:
+        first pass, rank all, or best-of. Use when you want independent confirmation
+        or to discover which approach finds the most.</li>
+    <li><strong>Mixed</strong> &mdash; a combination. Typical pattern: partition the surface
+        into major slices, then race two workers within each slice to reduce the chance
+        that any single worker&rsquo;s blind spot hides a defect.</li>
+  </ul>
+
+  <!-- ── Section 5: Phase C — Aggregate ── -->
+  <h2>Phase C &mdash; Aggregate</h2>
+
+  <p>
+    The Aggregate phase collects all worker responses and applies two rules before
+    building the result table.
+  </p>
+  <p>
+    <strong>Gap handling.</strong> If a worker&rsquo;s result is missing its required
+    SHA or verification method, the coordinator drops it and reruns that worker once.
+    If the rerun also fails to produce the required artifact, the result is recorded
+    as a <em>gap</em>. Gaps never count as passes. A swarm with gaps has incomplete
+    coverage &mdash; the final report must say so explicitly.
+  </p>
+  <p>
+    <strong>Race rule.</strong> For race-shape swarms, the declared rule is applied at
+    this phase: first pass (stop at the first worker to pass), rank all (order workers
+    by quality), or best-of (select the single strongest result). The rule must have
+    been declared in Frame &mdash; it cannot be chosen after seeing the results.
+  </p>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    A gap is not a pass. If a worker fails to produce its required artifact &mdash; even
+    after one rerun &mdash; that slice of coverage is absent, not green. Treating a missing
+    result as implicit success defeats the whole purpose of the swarm pattern.
+  </div>
+
+  <!-- ── Section 6: Phase D — Report ── -->
+  <h2>Phase D &mdash; Report</h2>
+
+  <p>
+    The coordinator produces one consolidated in-chat report containing four elements:
+  </p>
+  <ol>
+    <li><strong>Result table</strong> &mdash; one row per worker: worker ID, slice, status
+        (PASS / ISSUES / BLOCKED), and evidence reference.</li>
+    <li><strong>Issue one-liners</strong> &mdash; every defect surfaced across all ISSUES
+        workers, deduplicated and grouped by slice.</li>
+    <li><strong>Gaps and dropouts</strong> &mdash; any slices with missing artifacts,
+        with the reason recorded.</li>
+    <li><strong>Race rule used</strong> &mdash; for race-shape swarms, which rule was
+        applied and why.</li>
+  </ol>
+  <p>
+    The Report phase is the delivery contract. A consumer of the swarm output should be
+    able to read the consolidated report without tracing back through individual worker
+    threads.
+  </p>
+
+  <!-- ── Section 7: Isolation ── -->
+  <h2>Isolation via Worktrees</h2>
+
+  <p>
+    Because all swarm subagents run on the same machine, isolation is achieved through
+    <strong>assigned worktrees and output directories</strong> &mdash; not remote
+    environments. Each worker writes to its own designated path. This prevents one
+    worker&rsquo;s writes from contaminating another worker&rsquo;s reads and keeps
+    outputs addressable in the Aggregate phase.
+  </p>
+  <p>
+    The isolation is file-system level, not process level. Workers share the same machine
+    but do not share output paths &mdash; provided the Frame phase assigned distinct
+    writable outputs to each one.
+  </p>
+
+  <!-- ── Section 8: Arena vs Swarm ── -->
+  <h2>Arena vs Swarm</h2>
+
+  <p>
+    Swarm and Arena are related but distinct. The difference is in what they optimize for
+    and what they produce.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th>Swarm</th>
+        <th>Arena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Optimizes for</td>
+        <td>Coverage</td>
+        <td>Quality</td>
+      </tr>
+      <tr>
+        <td>Output</td>
+        <td>Aggregated report</td>
+        <td>Single synthesized artifact</td>
+      </tr>
+      <tr>
+        <td>Worker briefs</td>
+        <td>Sliced (partition/race/mixed)</td>
+        <td>Identical competing attempts</td>
+      </tr>
+      <tr>
+        <td>Done means</td>
+        <td>Full surface covered, gaps documented</td>
+        <td>Best artifact selected</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Choose swarm when the question is &ldquo;did we check everything?&rdquo; Choose arena
+    when the question is &ldquo;which version is best?&rdquo;
+  </p>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-7">
+    <h3>Quick check</h3>
+    <p>When a worker&rsquo;s result is missing its required SHA, what does the Aggregate phase do?</p>
+    <div class="quiz-options">
+      <button>Reruns the worker once, then records it as a gap</button>
+      <button>Marks it BLOCKED and excludes it from the final report</button>
+      <button>Counts the result as a pass and continues to report</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      <strong>Part 1 &mdash; Write a swarm brief.</strong> Design a swarm for the following
+      audit task: <em>&ldquo;Check all API endpoints for missing auth guards.&rdquo;</em>
+    </p>
+    <p>
+      Specify all of the following in your brief:
+    </p>
+    <ul>
+      <li><strong>Shape</strong> &mdash; partition, race, or mixed, and why</li>
+      <li><strong>N workers</strong> &mdash; how many, and what determines that number</li>
+      <li><strong>Slice assignment</strong> &mdash; exactly which slice each worker owns</li>
+      <li><strong>Done predicate</strong> &mdash; what does &ldquo;coverage complete&rdquo; look like?</li>
+      <li><strong>Reporting format</strong> &mdash; what each worker must include in its result</li>
+    </ul>
+    <textarea placeholder="Example start:&#10;Shape: partition&#10;N workers: 4&#10;Slice assignment:&#10;  W-1: /api/users/* endpoints&#10;  W-2: /api/payments/* endpoints&#10;  W-3: /api/admin/* endpoints&#10;  W-4: /api/public/* endpoints&#10;Done predicate: every endpoint has been checked for an auth middleware call; result includes the handler file path and line number of the auth check (or its absence)&#10;Reporting format: PASS/ISSUES/BLOCKED + list of endpoints checked + SHA of the last commit read per file"></textarea>
+
+    <p style="margin-top: 1.25rem;">
+      <strong>Part 2 &mdash; Write a BLOCKED response.</strong> Write what a realistic
+      BLOCKED response from W-3 (the <code>/api/admin/*</code> worker) would look like.
+      A BLOCKED response must include the specific reason the worker could not complete
+      its slice.
+    </p>
+    <textarea placeholder="Example:&#10;Status: BLOCKED&#10;Worker: W-3 (/api/admin/* endpoints)&#10;Reason: The /api/admin/ directory does not exist at the expected path. Found /src/routes/admin/ instead, but the worker brief specified /api/admin/ — unclear whether these are the same routes or different surfaces. Cannot complete slice without clarification on the correct path.&#10;Action required: Coordinator should reissue brief with the correct directory path."></textarea>
+
+    <p style="margin-top: 1rem; font-size: 0.9rem; color: #555;">
+      Compare the two parts. The brief forces you to make four structural decisions before
+      any worker runs. The BLOCKED response forces the worker to name the specific blocker
+      &mdash; not just say it could not finish.
+    </p>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your AI tutor: &ldquo;Take the swarm brief I just wrote and tell me what the
+    Aggregate phase would need to check to decide whether each worker&rsquo;s result
+    counts as a valid PASS.&rdquo;
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0006-arena-multi-model-competition.html">
+      &larr; Prev: Arena &mdash; Multi-Model Competition
+    </a>
+    <a href="0008-arena-vs-swarm.html" class="primary">
+      Next: Arena vs Swarm &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-7',
+    0,
+    'Correct. When a result is missing its required SHA or method, the Aggregate phase drops it and reruns the worker once. If the rerun also fails to produce the required artifact, the result is recorded as a gap. Gaps never count as passes — the final report must document them as absent coverage.'
+  );
+</script>
+</body>
+</html>

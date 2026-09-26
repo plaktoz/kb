@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>poteto-mode — The Central Router | pstack</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a>
+      &rsaquo; Module 2 &mdash; Core Interface
+      &rsaquo; Lesson 3 of 12
+    </div>
+    <h1>poteto-mode &mdash; The Central Router</h1>
+    <div class="lesson-meta">
+      <span>Module 2</span>
+      <span>&middot;</span>
+      <span>Lesson 3 of 12</span>
+      <span>&middot;</span>
+      <span>~20 min</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/poteto-mode/SKILL.md"
+       target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude &mdash; poteto-mode/SKILL.md
+    </a>
+  </div>
+
+  <!-- ── Key insight ── -->
+  <div class="callout key">
+    poteto-mode is not a task executor. It is a dispatcher. Every incoming task is evaluated against a routing table of signals, then handed off to the playbook or sub-skill that owns that type of work. The quality of that routing decision determines the quality of the entire run.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <h2>What poteto-mode does</h2>
+
+  <p>poteto-mode is the central router for pstack. When a task arrives, poteto-mode reads it, identifies the dominant signal, and dispatches to the matching playbook or sub-skill. It does not try to do the work itself. Its job is to make the right routing decision and then get out of the way.</p>
+
+  <p>The routing table has two layers. The first layer maps <em>signals</em> to specific sub-skills that activate immediately when a pattern is detected. The second layer maps <em>task types</em> to the playbook that owns that class of work. A single incoming task may trigger a signal match first; if no signal fires, the task type determines the playbook.</p>
+
+  <!-- ── Routing table diagram ── -->
+  <h2>The routing table</h2>
+
+<pre class="diagram">
+POTETO-MODE ROUTING TABLE
+─────────────────────────────────────────────────────────────────────────
+  Signal detected                        →   Routes to
+  ────────────────────────────────────────────────────────────────────
+  Nontrivial change or architecture       →   /how skill
+  Empirical question (behavior, timing)   →   Prototype playbook
+  Code crossing function boundaries       →   /architect skill
+  Parallel fan-out needed                 →   /swarm skill
+  Contested design choice                 →   /interrogate skill
+  Any prose surface                       →   /unslop skill
+  PR status request                       →   Babysit playbook
+  Landing a green stack                   →   Shipping playbook
+  ────────────────────────────────────────────────────────────────────
+  Task type             →   Playbook
+  ────────────────────────────────────────────────────────────────────
+  Read-only question    →   investigation.md
+  Reported defect       →   bug-fix.md
+  Measured slowness     →   perf-issue.md
+  New behavior          →   feature.md
+  Structure refactor    →   refactoring.md
+  Throwaway sketch      →   prototype.md
+  Long autonomous task  →   autonomous-run.md
+  Multi-day program     →   orchestrate.md
+─────────────────────────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Signal routing ── -->
+  <h2>Signal routing: eight fast dispatches</h2>
+
+  <p>Signal routing fires before task-type routing. These eight patterns short-circuit the classification process when a distinctive marker is present.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Signal</th>
+        <th>Destination</th>
+        <th>Why it fires first</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nontrivial change or architecture</td>
+        <td><code>/how</code> skill</td>
+        <td>High-risk changes need a plan before any code moves</td>
+      </tr>
+      <tr>
+        <td>Empirical question (behavior, timing)</td>
+        <td>Prototype playbook</td>
+        <td>Uncertainty about runtime behavior requires measurement, not reasoning</td>
+      </tr>
+      <tr>
+        <td>Code crossing function boundaries</td>
+        <td><code>/architect</code> skill</td>
+        <td>Cross-boundary changes need structural coordination</td>
+      </tr>
+      <tr>
+        <td>Parallel fan-out needed</td>
+        <td><code>/swarm</code> skill</td>
+        <td>Fan-out work should not be serialized</td>
+      </tr>
+      <tr>
+        <td>Contested design choice</td>
+        <td><code>/interrogate</code> skill</td>
+        <td>Unresolved trade-offs need structured challenge before commitment</td>
+      </tr>
+      <tr>
+        <td>Any prose surface</td>
+        <td><code>/unslop</code> skill</td>
+        <td>All written output benefits from the unslop pass</td>
+      </tr>
+      <tr>
+        <td>PR status request</td>
+        <td>Babysit playbook</td>
+        <td>PR monitoring is a distinct workflow with its own polling loop</td>
+      </tr>
+      <tr>
+        <td>Landing a green stack</td>
+        <td>Shipping playbook</td>
+        <td>Merging and deploying a passing build is a discrete procedure</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Task-type routing ── -->
+  <h2>Task-type routing: eight playbooks</h2>
+
+  <p>When no signal fires, poteto-mode classifies the task by type and selects the matching playbook. Each playbook contains the full procedure for that class of work, including which model to use by default.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Task type</th>
+        <th>Playbook</th>
+        <th>Model default</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Read-only question</td>
+        <td><code>investigation.md</code></td>
+        <td>--</td>
+      </tr>
+      <tr>
+        <td>Reported defect</td>
+        <td><code>bug-fix.md</code></td>
+        <td>fable</td>
+      </tr>
+      <tr>
+        <td>Measured slowness</td>
+        <td><code>perf-issue.md</code></td>
+        <td>fable</td>
+      </tr>
+      <tr>
+        <td>New behavior</td>
+        <td><code>feature.md</code></td>
+        <td>opus</td>
+      </tr>
+      <tr>
+        <td>Structure refactor</td>
+        <td><code>refactoring.md</code></td>
+        <td>opus</td>
+      </tr>
+      <tr>
+        <td>Throwaway sketch</td>
+        <td><code>prototype.md</code></td>
+        <td>--</td>
+      </tr>
+      <tr>
+        <td>Long autonomous task</td>
+        <td><code>autonomous-run.md</code></td>
+        <td>--</td>
+      </tr>
+      <tr>
+        <td>Multi-day program</td>
+        <td><code>orchestrate.md</code></td>
+        <td>--</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Feature work and refactoring default to <code>opus</code> because they require the most judgment. Bug fixes and performance issues default to <code>fable</code>, which handles targeted, high-precision changes. The hardest individual changes also go to <code>fable</code>.</p>
+
+  <!-- ── Autonomy rules ── -->
+  <h2>Autonomy rules</h2>
+
+  <p>poteto-mode enforces a clear autonomy boundary. Reversible work and external read actions proceed without asking. Four categories always require a pause:</p>
+
+  <ul>
+    <li>Force-pushes to shared branches</li>
+    <li>Deploys</li>
+    <li>Data deletion</li>
+    <li>Customer messages</li>
+  </ul>
+
+  <p>This boundary can be extended during a session. When a developer says "going to bed" or "run until done," poteto-mode treats that as an explicit grant to proceed through the full run without interruption.</p>
+
+  <!-- ── 21 Principles ── -->
+  <h2>Enforced principles</h2>
+
+  <p>poteto-mode enforces 21 operating principles. Six are essential to understand before using the system:</p>
+
+  <h3>Laziness Protocol</h3>
+  <p>Bias toward deletion and the smallest viable change. More code is a liability. The right answer is usually less.</p>
+
+  <h3>Prove It Works</h3>
+  <p>Verify real artifacts, not proxies. A passing test is not the same as observed behavior in the running system.</p>
+
+  <h3>Guard the Context Window</h3>
+  <p>Route bulk work to subagents. The main context window is a scarce resource. Long file reads, multi-file operations, and sweeping searches belong in subagent calls, not the primary thread.</p>
+
+  <h3>Never Block on the Human</h3>
+  <p>Proceed on reversible work and present results. Do not stop to ask questions that the work itself will answer.</p>
+
+  <h3>Attack the Premise</h3>
+  <p>When repeated fixes fail, challenge the shared assumption. The bug may not be where everyone believes it is.</p>
+
+  <h3>Foundational Thinking</h3>
+  <p>Define types and structures before writing logic. Code built on unclear data models accumulates the wrong complexity.</p>
+
+  <!-- ── Subagents ── -->
+  <h2>Subagent configuration</h2>
+
+  <p>When poteto-mode delegates to subagents, it passes <code>subagent_type: "pstack:poteto-agent"</code>. Subagents run in background by default. Context is passed as file pointers, not inlined content. This keeps the main context window clean and preserves its capacity for the work that actually requires reasoning.</p>
+
+  <!-- ── Reply rules ── -->
+  <h2>Reply rules</h2>
+
+  <p>poteto-mode's outputs follow four rules that apply to every response:</p>
+  <ul>
+    <li>Short declarative sentences</li>
+    <li>No long-dash characters</li>
+    <li>Frame impact for the end user and the next maintainer before discussing implementation details</li>
+    <li>Every claim carries evidence or an explicit label: measured, inferred, or guess</li>
+  </ul>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    poteto-mode is not a catch-all for anything unclear. If you hand it an underspecified task, it will still route it somewhere based on the closest signal match. Vague tasks produce routing decisions that may be technically correct but practically wrong. Sharpen the task description before invoking poteto-mode, not after.
+  </div>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-3">
+    <h3>Check your understanding</h3>
+    <p>Which signal in the routing table routes a task to the <code>/swarm</code> skill?</p>
+    <div class="quiz-options">
+      <button>Parallel fan-out work needed</button>
+      <button>Contested design choice found</button>
+      <button>Empirical question about behavior</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>For each task description below, identify the correct routing destination (playbook or sub-skill) using the routing table. Then write one sentence explaining the specific signal that drove your routing decision.</p>
+
+    <ol>
+      <li>"Why is the checkout page re-rendering on every keystroke?"</li>
+      <li>"Add a CSV export button to the reports table"</li>
+      <li>"I think the auth middleware is causing latency but I'm not sure"</li>
+      <li>"We need to rename UserProfile to AccountHolder across the entire codebase"</li>
+      <li>"Review my PR before I merge it"</li>
+    </ol>
+
+    <textarea placeholder="Write your classifications here. For each task, name the destination and the signal.
+
+Example format:
+1. Routes to: [playbook or skill]
+   Signal: [the pattern that triggered the routing decision]
+
+2. ..."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Paste this lesson into a Claude session and ask: "Walk me through the routing decision for task 3 step by step, referencing the exact signal in the table."
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0002-installing-pstack-claude.html">&larr; Prev: Installing pstack-claude</a>
+    <a href="0004-how-and-why.html" class="primary">Next: /how and /why &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-3',
+    0,
+    'The routing table maps "parallel fan-out needed" to the /swarm skill. Contested design choices route to /interrogate, and empirical questions about behavior route to the Prototype playbook.'
+  );
+</script>
+</body>
+</html>

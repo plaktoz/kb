@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4: Investigation Primitives — /how and /why | pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../reference/pstack-overview.html">pstack for Development</a> &rsaquo;
+      Module 2 — Core Interface &rsaquo;
+      Lesson 4 of 12
+    </div>
+    <h1>Investigation Primitives — /how and /why</h1>
+    <div class="lesson-meta">
+      <span>Module 2 — Core Interface</span>
+      <span>&middot;</span>
+      <span>Lesson 4 of 12</span>
+      <span>&middot;</span>
+      <span>~15 min</span>
+    </div>
+  </header>
+
+  <div class="source-card">
+    <strong>Primary Source</strong>
+    <a href="https://github.com/michael-denyer/pstack-claude/blob/main/plugins/pstack/skills/how/SKILL.md" target="_blank" rel="noopener">
+      github.com/michael-denyer/pstack-claude &mdash; plugins/pstack/skills/how/SKILL.md
+    </a>
+  </div>
+
+  <p>
+    Every non-trivial codebase investigation starts with one of two questions: <em>how does this work?</em> or <em>why was it built this way?</em> pstack treats these as fundamentally different queries that warrant different strategies. <code>/how</code> is the skill for mechanical understanding &mdash; code walkthroughs, subsystem explanations, and ownership queries such as "where should this live?" <code>/why</code> is the skill for historical reasoning &mdash; searching Git history, tickets, documentation, and team chat to surface the original intent behind a decision.
+  </p>
+  <p>
+    This lesson focuses on <code>/how</code>: how it classifies question complexity, what it does differently for simple versus complex questions, how it structures its output, and when to hand off to <code>/why</code> instead.
+  </p>
+
+  <div class="callout key">
+    For complex questions, <code>/how</code> does not hand your question to a single agent. It first decomposes the question into 2&ndash;4 distinct angles, then launches parallel read-only explorer subagents &mdash; one per angle &mdash; before a synthesis agent consolidates their findings into a single structured output. Simple questions skip all of this and go straight to a single-pass explanation.
+  </div>
+
+  <h2>Decision Tree</h2>
+
+<pre class="diagram">
+/how DECISION TREE
+──────────────────────────────────────────
+  /how "how does X work?"
+         │
+         ▼
+    Complexity check
+    ┌────┴────┐
+  Simple   Complex
+    │         │
+    ▼         ▼
+  1 agent   Decompose → 2-4 angles
+    │         │
+    ▼         ▼
+  Explain   Parallel explorer
+    │       subagents (opus)
+    │         │
+    │         ▼
+    │       Synthesis agent
+    │         │
+    └────┬────┘
+         ▼
+    Output: Overview → Key Concepts
+    → How It Works → Where Things Live
+    → Gotchas
+──────────────────────────────────────────
+</pre>
+
+  <h2>Complexity Classification</h2>
+
+  <p>
+    Before any exploration begins, <code>/how</code> classifies the question into one of two tiers. The classification is intentionally conservative: <strong>when in doubt, take the simple path.</strong>
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Trigger</th>
+        <th>Approach</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Simple</strong></td>
+        <td>Single module or narrow question</td>
+        <td>One read-only subagent handles both exploration and explanation in a single pass</td>
+      </tr>
+      <tr>
+        <td><strong>Complex</strong></td>
+        <td>Multi-file subsystem or cross-cutting feature</td>
+        <td>Decompose into 2&ndash;4 angles &rarr; parallel read-only subagents (model: opus) &rarr; synthesis agent (model: opus)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Simple path</h3>
+  <p>
+    One read-only subagent handles both exploration and explanation in a single pass. This is the default: efficient and sufficient for any question that fits within a single module or a well-bounded narrow scope. The output already arrives structured into the standard sections &mdash; it is not a raw dump of notes.
+  </p>
+
+  <h3>Complex path</h3>
+  <p>
+    The question is first decomposed into 2&ndash;4 distinct angles (for example: data flow, state management, public interface, error handling). Each angle becomes the brief for a separate read-only explorer subagent, all running simultaneously using the <code>opus</code> model. When all explorers complete, a dedicated synthesis subagent &mdash; also running on <code>opus</code> &mdash; consolidates their findings into a single coherent explanation.
+  </p>
+  <p>
+    Output is delivered with light edits only. Substantial rewrites of the explorers' findings are explicitly prohibited. The synthesis agent's job is integration and coherence, not reinterpretation.
+  </p>
+  <p>
+    The result is an explanation fit for a senior engineer building a mental model, not line-by-line annotation of every function.
+  </p>
+
+  <h2>Output Sections</h2>
+
+  <p>
+    Regardless of which path is taken, <code>/how</code> structures its response into up to five named sections. Sections that do not apply to the specific question are dropped rather than left empty.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Section</th>
+        <th>Answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Overview</strong></td>
+        <td>What is this? A one-paragraph orientation for someone new to the subsystem.</td>
+      </tr>
+      <tr>
+        <td><strong>Key Concepts</strong></td>
+        <td>What are the important abstractions, terms, or invariants you need to hold in mind?</td>
+      </tr>
+      <tr>
+        <td><strong>How It Works</strong></td>
+        <td>Walkthrough of the mechanics &mdash; data flow, control flow, state changes.</td>
+      </tr>
+      <tr>
+        <td><strong>Where Things Live</strong></td>
+        <td>Which files, directories, or modules own which responsibilities? (Also answers ownership queries: "where should this live?")</td>
+      </tr>
+      <tr>
+        <td><strong>Gotchas</strong></td>
+        <td>Non-obvious behaviours, edge cases, or common mistakes for this subsystem.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Knowing the section structure helps you write better prompts. If your real question is an ownership query &mdash; "where should this new feature live?" &mdash; you can direct <code>/how</code> to focus on <em>Where Things Live</em>. If you want to understand a subtle bug, target <em>Gotchas</em>.
+  </p>
+
+  <h2>/how vs /why vs /teach</h2>
+
+  <p>
+    The three commands address distinct question types and draw on entirely different evidence bases.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>Question type</th>
+        <th>Evidence sources</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/how</code></td>
+        <td>"How does X work?" / "Where should this live?"</td>
+        <td>Current codebase &mdash; files, modules, call graphs</td>
+      </tr>
+      <tr>
+        <td><code>/why</code></td>
+        <td>"Why was this built this way?" / "What problem does this solve?"</td>
+        <td>Git history, tickets, documentation, team chat</td>
+      </tr>
+      <tr>
+        <td><code>/teach</code></td>
+        <td>"Help me deeply understand X"</td>
+        <td>Both: mechanics from <code>/how</code> combined with history from <code>/why</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Motivation questions &mdash; "why was this built?" &mdash; are explicitly redirected by <code>/how</code> to <code>/why</code>. This is intentional: the current codebase contains what was built, not the reasoning behind the choices that shaped it.
+  </p>
+
+  <div class="callout warning">
+    <code>/how</code> cannot explain historical intent. If you ask "why does this use Redis instead of Postgres?", <code>/how</code> will redirect you to <code>/why</code>. The codebase reflects the outcome of past decisions &mdash; not the trade-offs, constraints, or alternatives that were weighed at the time. Use <code>/why</code> when your real question is about motivation; use <code>/teach</code> when you want both mechanics and history in a single run.
+  </div>
+
+  <div class="quiz" id="quiz-4">
+    <h3>Check Your Understanding</h3>
+    <p>On the complex path, which model does <code>/how</code> assign to the parallel explorer subagents?</p>
+    <div class="quiz-options">
+      <button>Opus, per the skill spec</button>
+      <button>Sonnet, per the skill spec</button>
+      <button>Haiku, per the skill spec</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <p>
+      Pick a subsystem you actively work on. In the text area below, write two prompts:
+    </p>
+    <ol>
+      <li>A <code>/how</code> prompt for that subsystem (e.g. "how does the retry pipeline handle dead letters?").</li>
+      <li>A <code>/why</code> prompt for a design decision within it (e.g. "why does the retry system use exponential backoff?").</li>
+    </ol>
+    <p>
+      For each prompt, predict which complexity path <code>/how</code> would take and explain your reasoning. Then identify which output section (Overview / Key Concepts / How It Works / Where Things Live / Gotchas) would most directly answer your actual question.
+    </p>
+    <textarea placeholder="Example:
+
+/how: 'How does the order-processing pipeline handle retries?'
+Path prediction: Complex — this spans RetryQueue, OrderProcessor, and DeadLetterHandler across multiple files.
+Most useful section: How It Works — I want the control flow, not just the file list.
+
+/why: 'Why does the retry system use exponential backoff instead of a fixed interval?'
+This is a motivation question (historical trade-off), so /why is the right command, not /how."></textarea>
+  </div>
+
+  <div class="tutor-prompt">
+    Ask Claude: <em>"I wrote a /how prompt for [your subsystem]. Can you predict whether it will take the simple or complex path, and which output section I should read first for my actual question?"</em>
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0003-poteto-mode-router.html">&larr; Prev: poteto-mode &mdash; The Central Router</a>
+    <a href="0005-verification-philosophy.html" class="primary">Next: Verification Philosophy &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-4',
+    0,
+    'Correct. The /how skill explicitly assigns model: opus to both the parallel explorer subagents and the synthesis subagent on the complex path. This reflects the depth of reasoning required to explore and consolidate a multi-file question.'
+  );
+</script>
+</body>
+</html>

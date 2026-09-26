@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Problem pstack Solves — pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> &rsaquo;
+      Module 1 — Foundations &rsaquo; Lesson 1 of 12
+    </div>
+    <h1>The Problem pstack Solves</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~15 min</span>
+      <span>context amnesia &middot; green build fallacy &middot; agent-as-engineer framing &middot; done conditions</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://flaviocopes.com/pstack/" target="_blank" rel="noopener">
+      flaviocopes.com/pstack/
+    </a> — pstack exists because agents &ldquo;keep forgetting&rdquo; guidance on investigation,
+    design, testing, and communication; the fix is structured, durable skill files.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    You ask an AI agent to fix a bug. It makes changes, runs the tests, reports back:
+    &ldquo;All tests are passing.&rdquo; You merge the pull request. Three hours later a colleague
+    tells you a core feature is broken. The tests were green — but the change was wrong.
+  </p>
+  <p>
+    This is not a one-off. It is the default mode of AI-assisted development, and it
+    has a name: the <strong>green build fallacy</strong>. pstack is the structured skill
+    system built to break that pattern.
+  </p>
+
+  <!-- ── Section 1: Context Amnesia ── -->
+  <h2>Context Amnesia — the Root Problem</h2>
+
+  <p>
+    Every time you start a new agent session — or cross a context window boundary in a long
+    one — the agent loses the accumulated guidance you gave it. How to investigate
+    unfamiliar code. How to design cleanly. How to test thoroughly. How to communicate
+    findings. That knowledge evaporates.
+  </p>
+  <p>
+    Agents <em>keep forgetting</em> this guidance. And without it they fall back on surface
+    heuristics: make the diff small, make the tests pass, report done. The result is a
+    stream of plausible-looking, low-quality outputs — each individually defensible, none
+    collectively trustworthy.
+  </p>
+  <p>
+    pstack solves this with <strong>durable skill files</strong> — structured
+    <code>SKILL.md</code> definitions that load guidance into the agent at the moment a
+    task begins, so the agent never has to remember what it was told last session.
+    pstack is a Cursor plugin for rigorous AI agent work created by Lauren Tan
+    (<code>@poteto</code>), and it works in Claude Code, Codex, and other coding agents
+    via these SKILL.md files.
+  </p>
+
+  <!-- ── Key callout ── -->
+  <div class="callout key">
+    The core problem pstack solves is not a capability gap — it is a memory gap.
+    Agents are capable of rigorous investigation, careful design, and real verification.
+    They just keep forgetting to do it. Durable skill files make forgetting structurally
+    impossible.
+  </div>
+
+  <!-- ── Section 2: The Green Build Fallacy ── -->
+  <h2>The Green Build Fallacy</h2>
+
+  <p>
+    The green build fallacy is the mistake of accepting &ldquo;tests are green&rdquo; as
+    sufficient proof that a change works. It is the most common failure mode in
+    AI-assisted development because it is the natural stopping point for an agent optimising
+    for task completion.
+  </p>
+  <p>
+    A green build tells you that the code compiles and that the assertions in your test
+    suite pass. It says nothing about whether the change is complete, whether it preserves
+    existing behaviour, or whether the tests themselves are adequate evidence for the goal
+    you had in mind.
+  </p>
+  <p>
+    pstack's answer is the <strong>done condition</strong>: an explicit, agent-runnable
+    statement of what &ldquo;finished&rdquo; looks like that you write before work begins.
+    Done conditions force you to name the real evidence you want — and force the agent to
+    produce it.
+  </p>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    Green tests do not equal a working change. An agent can make all existing tests pass
+    by deleting behaviour those tests don't cover, stubbing dependencies, or leaving the
+    root cause untouched. pstack demands evidence the agent can actually run or inspect —
+    not just a test summary.
+  </div>
+
+  <!-- ── Section 3: Agent-as-Engineer Framing ── -->
+  <h2>Agent-as-Engineer Framing</h2>
+
+  <p>
+    pstack's philosophy is &ldquo;less code, higher quality, and verification.&rdquo; That
+    phrase captures a deliberate shift: the agent is not a fast typist executing your
+    instructions — it is an engineer accountable for producing finished, verified work.
+  </p>
+  <p>
+    This reframing changes what you ask for. Instead of &ldquo;add a retry mechanism to
+    the fetch call,&rdquo; you write a goal with an explicit done condition and a list of
+    behaviours that must survive the change. The agent is then responsible for the full
+    engineering loop: investigation, design, implementation, and verification.
+  </p>
+  <p>
+    pstack ships 23 workflow skills, 21 engineering principles, 22 task playbooks, and
+    2 specialised subagents — all oriented around this framing. The primary entry point,
+    <code>/poteto-mode</code>, acts as a router: it reads your goal, selects the right
+    playbook, creates a task list, delegates to appropriate models, and demands evidence
+    before reporting success.
+  </p>
+
+  <!-- ── Section 4: Done Conditions ── -->
+  <h2>Done Conditions</h2>
+
+  <p>
+    A done condition is the core primitive that makes the agent-as-engineer framing
+    operational. The format is:
+  </p>
+
+  <pre><code>/poteto-mode &lt;goal&gt; / Done means &lt;something agent can run or inspect&gt; / Keep &lt;existing behaviour that must not change&gt;</code></pre>
+
+  <p>
+    Each part has a specific role:
+  </p>
+  <ul>
+    <li><strong>goal</strong> — what you want the agent to accomplish, stated plainly.</li>
+    <li><strong><code>Done means</code></strong> — a concrete, inspectable or runnable
+        criterion the agent must satisfy before declaring success. Not &ldquo;tests
+        pass&rdquo; — something with real evidence value.</li>
+    <li><strong><code>Keep</code></strong> — existing behaviour the agent is explicitly
+        forbidden from breaking. A guard against silent regressions.</li>
+  </ul>
+  <p>
+    Investing thirty seconds in a done condition before starting a task eliminates the
+    most common failure mode: an agent that reports success because it has no way to
+    measure failure.
+  </p>
+
+  <!-- ── When to use / skip ── -->
+  <h2>When to Use pstack — and When to Skip It</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Use pstack</th>
+        <th>Skip pstack</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Multi-file changes</td>
+        <td>Single-line typo fix</td>
+      </tr>
+      <tr>
+        <td>Unknown-cause bugs</td>
+        <td>Small config edits</td>
+      </tr>
+      <tr>
+        <td>Architecture decisions</td>
+        <td>Correcting text</td>
+      </tr>
+      <tr>
+        <td>Runtime forensics</td>
+        <td>Routine generation tasks</td>
+      </tr>
+      <tr>
+        <td>Overnight autonomous runs</td>
+        <td>Tasks one agent finishes quickly</td>
+      </tr>
+      <tr>
+        <td>Deep investigation or audit</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Diagram ── -->
+  <h2>The Flow in One Diagram</h2>
+
+<pre class="diagram">
+THE CORE PROBLEM pstack SOLVES
+─────────────────────────────────────────────────────
+  Traditional AI agent use:           pstack approach:
+
+  You → Agent → Code                  You → /poteto-mode → Playbook Router
+         ↓                                          ↓
+    (forgets context)              Selects correct workflow by signal type
+         ↓                                          ↓
+    Accepts green build           Demands real artifact verification
+    as proof                              ↓
+                                  Routes to subagents with explicit models
+                                          ↓
+                                  Returns finished, verified work
+─────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-1">
+    <h3>Quick check</h3>
+    <p>What does the green build fallacy describe?</p>
+    <div class="quiz-options">
+      <button>Treating passing tests as complete proof of correctness</button>
+      <button>Believing agents never forget context across long sessions</button>
+      <button>Assuming more playbooks always means higher code quality</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      <strong>Part 1 — the bad prompt.</strong> Write a vague, instruction-style task
+      prompt you might currently give an AI agent. Keep it to one or two sentences. Do not
+      include a done condition or a guard on existing behaviour.
+    </p>
+    <textarea placeholder="Bad prompt: e.g. 'Add retry logic to the API fetch function.'"></textarea>
+
+    <p style="margin-top: 1.25rem;">
+      <strong>Part 2 — the pstack rewrite.</strong> Rewrite that same task using the
+      <code>/poteto-mode</code> structure:
+      <code>/poteto-mode &lt;goal&gt; / Done means &lt;something runnable&gt; / Keep &lt;existing behaviour&gt;</code>.
+    </p>
+    <textarea placeholder="/poteto-mode Add exponential-backoff retry to fetchUserData() / Done means the integration test suite passes and a manual curl to a 503-returning stub shows three retries in the log / Keep the existing timeout behaviour and the error boundary in App.tsx"></textarea>
+
+    <p style="margin-top: 1rem; font-size: 0.9rem; color: #555;">
+      Compare the two. The first leaves the agent to decide what &ldquo;done&rdquo; means.
+      The second gives it a runnable criterion and a guard — that is the structural shift
+      pstack is built around.
+    </p>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your AI tutor: &ldquo;What is one done condition I could write for a feature I am
+    working on right now?&rdquo; — then check whether it names something the agent can
+    actually run or inspect.
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <span></span>
+    <a href="0002-installing-pstack-claude.html" class="primary">
+      Next: Installing pstack in Claude Code &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-1',
+    0,
+    'Correct. The green build fallacy is treating a passing test suite as sufficient proof that a change is complete and correct. pstack breaks this pattern by requiring a done condition — something the agent can run or inspect that constitutes real evidence of a finished, working change.'
+  );
+</script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic Architecture Patterns Mapped to pstack — pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> &rsaquo;
+      Module 3 &mdash; Quality Multipliers &rsaquo; Lesson 9 of 12
+    </div>
+    <h1>Agentic Architecture Patterns Mapped to pstack</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~20 min</span>
+      <span>prompt chaining &middot; orchestrator-workers &middot; evaluator-optimizer &middot; parallelization/voting &middot; ACI &middot; tool design principles</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary source</strong>
+    <a href="https://anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener">
+      anthropic.com/engineering/building-effective-agents
+    </a> &mdash; Anthropic&rsquo;s engineering guide to building effective agents: four architectural
+    patterns, why coding agents work well, ACI principles for tool design, format guidance,
+    and a framework caution.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    Not all agentic work is shaped the same way. Some tasks decompose into a fixed sequence of
+    predictable steps. Others fan out across an unpredictable surface area. Still others
+    demand iterative refinement against a measurable quality bar. Using the wrong architecture
+    for the shape of the problem is one of the most common reasons agents produce mediocre
+    results even when the underlying model is capable.
+  </p>
+  <p>
+    Anthropic&rsquo;s engineering team has identified four architectural patterns that cover
+    most agentic work. Each maps directly to a pstack primitive. This lesson explains the
+    patterns, maps them, and then examines the tool-design discipline &mdash; called the
+    Agent-Computer Interface &mdash; that determines whether any architecture actually
+    performs.
+  </p>
+
+  <!-- ── Section 1: The Four Patterns ── -->
+  <h2>The Four Architectural Patterns</h2>
+
+  <h3>1. Prompt Chaining</h3>
+  <p>
+    Prompt chaining decomposes a task into a fixed sequence of steps, where each LLM call
+    consumes the output of the previous one. It is the right choice when the subtasks are
+    known in advance and trading higher latency for better accuracy on each step is
+    worthwhile. The tradeoff is explicit: you give up speed in exchange for determinism
+    and auditability at every stage of the chain.
+  </p>
+  <p>
+    In pstack terms, this maps directly to a <strong>Playbook</strong> &mdash; the
+    bug-fix playbook, the feature playbook, and the other named workflows are each a prompt
+    chain with a fixed set of obligatory steps.
+  </p>
+
+  <h3>2. Orchestrator-Workers</h3>
+  <p>
+    In this pattern a central LLM dynamically breaks down a task and delegates subtasks to
+    worker LLMs. The orchestrator decides at runtime how many workers to spin up and what
+    each one is responsible for. Anthropic recommends this when the scope of the problem
+    cannot be predicted upfront &mdash; their canonical example is situations where
+    &ldquo;the number of files that need to be changed&rdquo; is unknown before investigation
+    begins.
+  </p>
+  <p>
+    In pstack this is <code>/swarm</code>: the coordinator analyses the task surface, slices
+    it into independent units, and fans out to worker agents in parallel.
+  </p>
+
+  <h3>3. Evaluator-Optimizer</h3>
+  <p>
+    One LLM generates an artifact; a second LLM evaluates it and returns feedback; the
+    first LLM revises. This loop continues until the evaluator is satisfied or a maximum
+    iteration count is reached. It is effective when iterative refinement yields measurable
+    quality gains &mdash; that is, when you have a clear rubric the evaluator can apply
+    consistently.
+  </p>
+  <p>
+    In pstack this is <code>/arena</code>: a single artifact is repeatedly improved through
+    a generate-evaluate-revise cycle.
+  </p>
+
+  <h3>4. Parallelization (Sectioning and Voting)</h3>
+  <p>
+    Parallelization covers two distinct shapes. <strong>Sectioning</strong> runs independent
+    subtasks simultaneously to reduce wall-clock time. <strong>Voting</strong> runs the same
+    task multiple times with the same or different models and uses agreement across outputs
+    as a confidence signal &mdash; the result you trust is the one multiple independent runs
+    converge on. Voting is particularly valuable when a single run could plausibly produce
+    a subtly wrong answer that looks correct.
+  </p>
+  <p>
+    In pstack this is <code>/swarm</code> in its race shape: N candidates compete on the
+    same task and the strongest result wins by agreement.
+  </p>
+
+  <!-- ── Diagram ── -->
+  <h2>Pattern Map</h2>
+
+<pre class="diagram">
+AGENTIC ARCHITECTURE PATTERNS (Anthropic) MAPPED TO pstack
+────────────────────────────────────────────────────────────────────────
+  Pattern              pstack equivalent     When to use
+  ─────────────────────────────────────────────────────────────────
+  Prompt chaining       Playbook (bug-fix,   Fixed, predictable subtasks
+                        feature, etc.)
+  Orchestrator-Workers  /swarm               Open surface area, N slices
+  Evaluator-Optimizer   /arena               Single artifact, iterative
+                                             quality improvement
+  Parallelization       /swarm (race shape)  Same task, N candidates,
+  (voting)                                   confidence via agreement
+────────────────────────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Section 2: Why Coding Agents Work Well ── -->
+  <h2>Why Coding Agents Work Especially Well</h2>
+
+  <p>
+    Coding tasks are a natural fit for agentic architectures for one structural reason:
+    solutions are verifiable via automated tests. The agent can run the test suite after
+    every change and use the results as direct feedback. This closes the loop that most
+    other domains leave open. Output quality is objectively measurable, and the agent can
+    iterate against that measurement without human intervention at each step.
+  </p>
+  <p>
+    This is why the Evaluator-Optimizer pattern works particularly well in coding contexts:
+    the evaluator does not need to make a subjective judgment. It runs the tests and reads
+    the results. The feedback signal is clear and consistent.
+  </p>
+
+  <!-- ── Section 3: ACI ── -->
+  <h2>ACI &mdash; Agent-Computer Interface</h2>
+
+  <p>
+    Architecture determines the shape of the work. The quality of individual tool
+    definitions determines whether agents can execute within that shape without making
+    avoidable errors. Anthropic calls this discipline the <strong>Agent-Computer
+    Interface</strong> &mdash; by analogy to the Human-Computer Interface, it is the
+    layer where the agent and its computational environment meet.
+  </p>
+  <p>
+    The Anthropic team building a SWE-bench coding agent reported that they
+    <em>spent more time optimizing their tools than the overall prompt</em>. That inversion
+    of priorities is the central lesson of ACI: getting the tool layer right matters more
+    than getting the system prompt right.
+  </p>
+
+  <h3>The Three ACI Principles</h3>
+
+  <p><strong>1. Write tool descriptions like a great docstring for a junior developer.</strong></p>
+  <p>
+    The model reads your tool descriptions the same way a junior developer reads
+    documentation: if the description is vague, examples are absent, and edge cases are
+    unaddressed, the model will misuse the tool in exactly the ways a junior developer would.
+    Include example usage, the expected input format, and the edge cases the caller is
+    responsible for handling. Treat every tool definition as documentation that will be
+    read by someone with no other context.
+  </p>
+
+  <p><strong>2. Poka-yoke your arguments.</strong></p>
+  <p>
+    Poka-yoke is a manufacturing concept meaning &ldquo;mistake-proof.&rdquo; Applied to
+    tool design, it means designing the argument surface so that mistakes are structurally
+    harder to make. If a function could be called with ambiguous or invalid combinations of
+    arguments, redesign the interface so those combinations are impossible or immediately
+    obvious as errors. Do not rely on the model to choose correctly when the interface
+    itself invites incorrect choices.
+  </p>
+
+  <p><strong>3. Require absolute filepaths.</strong></p>
+  <p>
+    When an agent changes its working directory during a task &mdash; which coding agents
+    do routinely &mdash; relative filepaths silently resolve to different locations. The
+    tool call succeeds; the file it touches is not the one you intended. Requiring absolute
+    filepaths eliminates this class of error entirely. Test tools extensively with varied
+    inputs, observe failure modes, and iterate on the definition until the common failure
+    modes are gone.
+  </p>
+
+  <!-- ── Key callout ── -->
+  <div class="callout key">
+    The Anthropic team building a SWE-bench agent spent more time optimizing their tools
+    than the overall prompt. ACI &mdash; the quality of tool definitions &mdash; is where
+    most of the leverage in an agentic system lives, not in the system prompt.
+  </div>
+
+  <!-- ── Section 4: Format and Framework Guidance ── -->
+  <h2>Format and Framework Guidance</h2>
+
+  <p>
+    Output format choices affect how reliably a model can produce correct output. Anthropic
+    offers three concrete guidelines:
+  </p>
+  <ul>
+    <li>Keep formats close to what models have seen in natural text. The further a format
+        deviates from the training distribution, the more likely the model is to produce
+        subtle errors.</li>
+    <li>Avoid formats that require accurate counting. Token and character counting is
+        unreliable; if correctness depends on counting, redesign the format.</li>
+    <li>Prefer markdown over JSON for code. Code embedded in JSON requires escaping that
+        adds error surface. Markdown is closer to what models have seen and produces fewer
+        formatting mistakes.</li>
+  </ul>
+  <p>
+    On the question of frameworks: extra abstraction layers obscure prompts and responses,
+    making it harder to observe what the model is actually receiving and producing.
+    Anthropic recommends preferring direct API usage and reducing abstraction layers before
+    moving to production. The cost of abstraction is debugging opacity; pay that cost
+    consciously, not by default.
+  </p>
+  <p>
+    There is also a token-level consideration: give the model enough tokens to reason before
+    committing to an output. Forcing a conclusion before reasoning is complete produces
+    lower-quality outputs than allowing the model to work through the problem first.
+  </p>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    Using an agentic framework does not make your system more reliable. Extra abstraction
+    layers hide what prompts the model is actually seeing and what responses it is producing,
+    which makes debugging significantly harder. Frameworks are a convenience for development;
+    they are a liability for production observability. Prefer direct API usage and remove
+    abstraction layers before shipping.
+  </div>
+
+  <!-- ── Section 5: Three Core Principles ── -->
+  <h2>Three Core Principles</h2>
+
+  <p>
+    Anthropic distills their agent-building guidance into three principles that apply
+    regardless of which architecture you choose:
+  </p>
+  <ol>
+    <li><strong>Simplicity.</strong> The simplest architecture that solves the problem is
+        almost always the right one. Complexity has a compounding cost in debugging,
+        observability, and failure diagnosis.</li>
+    <li><strong>Transparency.</strong> Show planning steps explicitly. An agent that
+        reasons internally and then produces an output is harder to debug than one that
+        externalises its reasoning at each step.</li>
+    <li><strong>Thorough ACI.</strong> Tool design is the primary leverage point. Invest
+        disproportionately in descriptions, argument ergonomics, and testing with varied
+        inputs before assuming the architecture is the bottleneck.</li>
+  </ol>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-9">
+    <h3>Quick check</h3>
+    <p>According to Anthropic, why should agent tools require absolute filepaths?</p>
+    <div class="quiz-options">
+      <button>To prevent errors when an agent changes its working directory</button>
+      <button>To make tool arguments more verbose and easier to document</button>
+      <button>To ensure paths get cached and reused across agent sessions</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      Pick one tool you have built or used in an agent workflow &mdash; a file-editing tool,
+      a shell-runner, a search function, anything. Apply all three ACI principles from the
+      Anthropic article:
+    </p>
+    <ol>
+      <li>Write the description as you would a great docstring for a junior developer &mdash;
+          include example usage, edge cases, and input format requirements.</li>
+      <li>Identify one argument that could be misused or passed ambiguously, and describe
+          how you would poka-yoke it.</li>
+      <li>If the tool accepts any path argument, confirm it requires an absolute filepath.
+          If it does not, rewrite the argument contract so that it does.</li>
+    </ol>
+    <textarea placeholder="Tool name: e.g. write_file(path, content)&#10;&#10;Before:&#10;  path — the file to write&#10;&#10;After (ACI-improved):&#10;  path (str) — Absolute path to the target file. Must start with /. Relative paths are&#10;  rejected. Example: /home/user/project/src/auth.ts&#10;&#10;  content (str) — Full file content to write. The file is overwritten; partial writes are&#10;  not supported. To append, read the file first and pass the merged content.&#10;&#10;Edge cases:&#10;  - If the directory does not exist, raises FileNotFoundError (caller must create it first).&#10;  - Empty string for content is valid and produces an empty file.&#10;  - Binary content is not supported; pass text only.&#10;&#10;Poka-yoke change:&#10;  Added an explicit path validator that raises ValueError immediately if path does not&#10;  begin with /, rather than silently resolving relative to the agent's current directory."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your AI tutor: &ldquo;I have a tool that does X. Which of the three ACI principles
+    would improve it most, and what would the improved description look like?&rdquo; &mdash;
+    then compare the tutor&rsquo;s description against what you wrote in the exercise.
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0008-arena-vs-swarm.html">&larr; Prev: Arena vs Swarm</a>
+    <a href="0010-autonomous-runs.html" class="primary">Next: Autonomous Runs &rarr;</a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-9',
+    0,
+    'Correct. Anthropic recommends requiring absolute filepaths because coding agents change their working directory during a task. When that happens, relative filepaths silently resolve to different locations, causing the tool to operate on the wrong file without raising any error. Absolute filepaths eliminate this class of mistake entirely.'
+  );
+</script>
+</body>
+</html>

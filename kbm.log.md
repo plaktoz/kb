@@ -27,6 +27,8 @@
 | 2026-09-26 | research/jev-ai/report.md | research |
 | 2026-09-24 | wiki/health/ultra-processed-foods-disease-risk-meta-analysis.md | ingest |
 | 2026-09-25 | wiki/technology/ai-labs-funding-historical-research.md | ingest |
+| 2026-09-26 | research/pstack-for-development/report.md | research |
+| 2026-09-26 | research/pstack-for-development/lessons/ | lessons |
 | 2026-09-26 | wiki/finance/tech-stocks-gain-trump-xi-dinner-sep2026.md | ingest |
 | 2026-09-26 | wiki/finance/nvidia-7-trillion-market-cap-broadcom-comparison-valuation.md | ingest |
 | 2026-09-26 | wiki/others/gravity-holographic-principle-reality.md | ingest |

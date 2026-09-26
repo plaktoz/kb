@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arena vs Swarm — Choosing the Right Tool &mdash; pstack for Development</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">pstack for Development</a> &rsaquo;
+      Module 3 &mdash; Quality Multipliers &rsaquo; Lesson 8 of 12
+    </div>
+    <h1>Arena vs Swarm &mdash; Choosing the Right Tool</h1>
+    <div class="lesson-meta">
+      <span>&#128337; ~15 min</span>
+      <span>coverage vs quality &middot; single artifact vs aggregated report &middot; when shape matters &middot; Anthropic pattern mapping</span>
+    </div>
+  </header>
+
+  <!-- ── Source card ── -->
+  <div class="source-card">
+    <strong>Primary sources</strong>
+    <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">
+      anthropic.com/research/building-effective-agents
+    </a> &mdash; Anthropic&rsquo;s four agentic architecture patterns and the principle to start simple.
+    Arena and Swarm SKILL.md files &mdash; canonical definitions of purpose, shape, output, and use conditions
+    for each subagent.
+  </div>
+
+  <!-- ── Introduction ── -->
+  <p>
+    pstack ships two multi-agent power tools: <code>/arena</code> and <code>/swarm</code>.
+    Used correctly, they are force multipliers. Used interchangeably, they produce noise.
+    The question &ldquo;should I use arena or swarm here?&rdquo; has a precise answer &mdash;
+    and it turns entirely on one axis: are you trying to achieve <strong>quality</strong>
+    on a single artifact, or <strong>coverage</strong> across a large surface area?
+  </p>
+  <p>
+    This lesson makes that axis concrete, maps both tools to Anthropic&rsquo;s published
+    agentic architecture patterns, and gives you five scenarios to practise the decision
+    yourself before the next lesson builds on it.
+  </p>
+
+  <!-- ── Section 1: Arena ── -->
+  <h2>Arena &mdash; Purpose: Quality</h2>
+
+  <p>
+    Arena runs the same task <em>N</em> different ways simultaneously, then synthesises
+    the results into one final artifact. Its shape is <strong>Competition + Graft</strong>:
+    multiple candidate agents race to produce their best version, a judge evaluates
+    them, and the winning shape is grafted &mdash; not averaged &mdash; into the output.
+  </p>
+  <p>
+    The result is two things: a single synthesised artifact, and a synthesis note
+    explaining which candidate won and why. Arena is the right tool when the cost of
+    getting the shape wrong is high and you want the best possible version of one thing.
+  </p>
+
+  <ul>
+    <li><strong>Purpose:</strong> Quality</li>
+    <li><strong>Shape:</strong> Competition + Graft</li>
+    <li><strong>Candidates:</strong> Same task, <em>N</em> ways</li>
+    <li><strong>Output:</strong> 1 synthesised artifact</li>
+    <li><strong>Result:</strong> Winner + synthesis note</li>
+    <li><strong>Use when:</strong> Single artifact where wrong shape would be costly</li>
+  </ul>
+
+  <p>
+    Two special cases matter. When candidates <strong>converge</strong> (they agree on
+    shape), that agreement is itself a signal: ship the artifact, no grafting needed.
+    When candidates <strong>wildly diverge</strong>, that is a different signal: reframe
+    the brief before proceeding. Averaging divergent outputs does not produce quality
+    &mdash; it produces incoherence.
+  </p>
+  <p>
+    One important constraint: arena is <em>not</em> for work that is purely
+    generation-bound. If the bottleneck is simply generating more text and any instance
+    of the same model would produce equivalent output, running the same model <em>N</em>
+    times adds cost without adding quality. Arena earns its overhead when the shape of
+    the solution genuinely varies across candidates.
+  </p>
+
+  <!-- ── Section 2: Swarm ── -->
+  <h2>Swarm &mdash; Purpose: Coverage</h2>
+
+  <p>
+    Swarm partitions a large surface area across independent workers running in parallel.
+    Its shape can be <strong>Partition</strong> (divide the work, each worker takes a
+    slice), <strong>Race</strong> (same task to all workers, accept the first satisfactory
+    result), or <strong>Mixed</strong> (a combination of both).
+  </p>
+  <p>
+    Workers are independent: they do not share state and they report back individually.
+    The output is an <strong>aggregated report</strong>. The result is one of three
+    statuses: <code>PASS</code>, <code>ISSUES</code>, or <code>BLOCKED</code>. Swarm
+    is the right tool when the problem is too wide for a single agent to cover thoroughly
+    and the unit of work is naturally divisible into independent slices.
+  </p>
+
+  <ul>
+    <li><strong>Purpose:</strong> Coverage</li>
+    <li><strong>Shape:</strong> Partition / Race / Mixed</li>
+    <li><strong>Workers:</strong> Independent slices</li>
+    <li><strong>Output:</strong> Aggregated report</li>
+    <li><strong>Result:</strong> <code>PASS</code> / <code>ISSUES</code> / <code>BLOCKED</code></li>
+    <li><strong>Use when:</strong> Large surface area to cover in parallel</li>
+  </ul>
+
+  <!-- ── Key callout ── -->
+  <div class="callout key">
+    Arena and Swarm solve fundamentally different problems. Arena improves the
+    <em>quality</em> of one thing. Swarm improves the <em>breadth of coverage</em>
+    across many things. The decision is not about which tool is more powerful &mdash;
+    it is about which dimension your task actually lives on.
+  </div>
+
+  <!-- ── Section 3: Anthropic pattern mapping ── -->
+  <h2>Anthropic Pattern Mapping</h2>
+
+  <p>
+    Anthropic identifies four recurring agentic architecture patterns in their research
+    on building effective agents. Each maps cleanly to a pstack primitive:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Anthropic pattern</th>
+        <th>pstack equivalent</th>
+        <th>When it applies</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Prompt chaining</td>
+        <td>Playbook (bug-fix, feature, etc.)</td>
+        <td>Fixed, predictable subtasks</td>
+      </tr>
+      <tr>
+        <td>Orchestrator-Workers</td>
+        <td><code>/swarm</code></td>
+        <td>Open surface area, <em>N</em> slices</td>
+      </tr>
+      <tr>
+        <td>Evaluator-Optimizer</td>
+        <td><code>/arena</code></td>
+        <td>Single artifact, iterative quality improvement</td>
+      </tr>
+      <tr>
+        <td>Parallelization (voting)</td>
+        <td><code>/swarm</code> (race shape)</td>
+        <td>Same task, <em>N</em> candidates, confidence via agreement</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    The Evaluator-Optimizer mapping is worth pausing on. Anthropic&rsquo;s pattern
+    describes an LLM generating a response and a separate evaluator looping to refine it.
+    Arena operationalises this at the multi-agent level: candidates are the generators,
+    the judge is the evaluator, and grafting is the optimisation step.
+  </p>
+  <p>
+    The voting variant of parallelization maps to swarm&rsquo;s race shape: the same
+    task is sent to <em>N</em> workers and confidence is derived from agreement. When
+    independent agents converge on the same answer, that convergence is evidence &mdash;
+    not just the answer itself.
+  </p>
+  <p>
+    Anthropic&rsquo;s broader principle applies here: &ldquo;Start simple. Add complexity
+    only when it demonstrably improves outcomes.&rdquo; A well-written playbook covering
+    a predictable sequence of steps will outperform an arena run where the candidates all
+    agree anyway. The most successful teams, Anthropic notes, &ldquo;use composable
+    patterns, not complex frameworks.&rdquo;
+  </p>
+
+  <!-- ── Warning callout ── -->
+  <div class="callout warning">
+    Arena is not a universal quality booster. Running arena on generation-bound work
+    &mdash; tasks where any instance of the same model produces roughly equivalent output
+    &mdash; adds cost without adding quality. Arena earns its overhead only when candidate
+    outputs genuinely differ in shape and the cost of choosing the wrong shape is high.
+    If you find yourself running arena and the candidates always agree, the task belongs
+    in a playbook, not a competition.
+  </div>
+
+  <!-- ── Section 4: Decision heuristic ── -->
+  <h2>The Decision Heuristic</h2>
+
+  <p>
+    Before reaching for arena or swarm, ask two questions:
+  </p>
+  <ol>
+    <li>
+      <strong>Is the output one artifact or many reports?</strong> If you need a single
+      finished thing &mdash; a data model, an architecture doc, a component design &mdash;
+      arena is the candidate. If you need to know the state of a large surface area,
+      swarm is the candidate.
+    </li>
+    <li>
+      <strong>Is the work naturally divisible into independent slices?</strong> Swarm
+      requires slices that do not depend on each other. If the slices are tightly
+      coupled, swarm cannot parallelise safely and a playbook or a single-agent run
+      is the right choice.
+    </li>
+  </ol>
+  <p>
+    If neither tool fits, reach for a playbook. Anthropic&rsquo;s principle &mdash; start
+    simple &mdash; means the burden of proof is on arena and swarm, not on simpler
+    approaches.
+  </p>
+
+  <!-- ── Diagram ── -->
+  <h2>Visual Summary</h2>
+
+<pre class="diagram">
+SWARM vs ARENA: WHEN TO USE WHICH
+──────────────────────────────────────────────────────────
+  SWARM                         ARENA
+  ─────────────────────         ──────────────────────────
+  Purpose: Coverage             Purpose: Quality
+  Shape: Partition/Race/Mixed   Shape: Competition + Graft
+  Workers: Independent slices   Candidates: Same task, N ways
+  Output: Aggregated report     Output: 1 synthesized artifact
+  Result: PASS/ISSUES/BLOCKED   Result: Winner + synthesis note
+  Use when: large surface area  Use when: single artifact where
+  to cover in parallel          wrong shape would be costly
+
+ANTHROPIC PATTERN MAPPING
+──────────────────────────────────────────────────────────
+  Prompt chaining    →  Playbook        (predictable steps)
+  Orch-Workers       →  /swarm          (open surface area)
+  Eval-Optimizer     →  /arena          (iterative quality)
+  Voting             →  /swarm (race)   (confidence via N)
+──────────────────────────────────────────────────────────
+</pre>
+
+  <!-- ── Quiz ── -->
+  <div class="quiz" id="quiz-8">
+    <h3>Quick check</h3>
+    <p>You need to check 30 independent config files for a security property. Which tool fits?</p>
+    <div class="quiz-options">
+      <button>/swarm &mdash; it splits coverage across many independent parallel workers</button>
+      <button>/arena &mdash; it generates competing candidates and grafts the winner</button>
+      <button>/playbook &mdash; it chains predictable steps together for sequential tasks</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <!-- ── Exercise ── -->
+  <div class="exercise">
+    <p>
+      For each of the five scenarios below, decide whether to use <code>/arena</code>,
+      <code>/swarm</code>, a single playbook, or nothing (a plain agent run). Write one
+      sentence justifying each choice. Use only the criteria from this lesson &mdash; do
+      not introduce new frameworks.
+    </p>
+    <ol>
+      <li>&ldquo;Audit all 40 API routes for missing rate limiting&rdquo;</li>
+      <li>&ldquo;Design the data model for a new billing feature&rdquo;</li>
+      <li>&ldquo;Fix a null pointer exception in the user login flow&rdquo;</li>
+      <li>&ldquo;Choose between three proposed approaches for the caching layer&rdquo;</li>
+      <li>&ldquo;Check 6 independent microservices for hardcoded credentials&rdquo;</li>
+    </ol>
+    <textarea placeholder="1. /swarm — 40 routes are independent slices that can be audited in parallel, so coverage breadth is the bottleneck.&#10;2. /arena — a data model is a single artifact where wrong shape is costly, so competition and grafting earns its overhead.&#10;3. Playbook — a bug-fix is a predictable sequence of steps (investigate, patch, verify) that maps to prompt chaining.&#10;4. /arena — evaluating three candidate approaches to produce one recommended design is the Evaluator-Optimizer pattern.&#10;5. /swarm — 6 independent microservices are naturally divisible slices; coverage across all of them is the goal."></textarea>
+  </div>
+
+  <!-- ── Tutor prompt ── -->
+  <div class="tutor-prompt">
+    Ask your AI tutor: &ldquo;For a task I have right now, which axis does it live on
+    &mdash; quality of one artifact, or coverage of a large surface area &mdash; and
+    which tool does that suggest?&rdquo;
+  </div>
+
+  <!-- ── Lesson nav ── -->
+  <nav class="lesson-nav">
+    <a href="0007-swarm-parallel-coverage.html">
+      &larr; Prev: Swarm &amp; Parallel Coverage
+    </a>
+    <a href="0009-agentic-architecture-patterns.html" class="primary">
+      Next: Agentic Architecture Patterns &rarr;
+    </a>
+  </nav>
+
+</div>
+
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-8',
+    0,
+    'Correct. Thirty independent config files is a large surface area with naturally divisible slices — the definition of a swarm use case. The goal is coverage breadth (find any file that fails the check), not improving the quality of a single artifact. /arena would be the wrong tool here: there is no single artifact to synthesise and no competing shape to adjudicate.'
+  );
+</script>
+</body>
+</html>
