@@ -1,5 +1,30 @@
 {
   "permissions": {
-    "allow": []
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:*)",
+      "mcp__ide__getDiagnostics",
+      "Read(//Users/tianhonglee/**)",
+      "Read(//opt/homebrew/**)",
+      "Skill(update-config)",
+      "Skill(claude-api)",
+      "Skill(opsx:propose)",
+      "Workflow(kb-ingest-parallel)",
+      "Workflow(kb-ingest-transcript)",
+      "Workflow(kb-scrapecontent-parallel)",
+      "Bash(git *)",
+      "Bash(gh *)",
+      "Bash(npm *)",
+      "Bash(npx *)",
+      "Bash(node *)",
+      "Bash(python3 *)",
+      "Bash(brew *)",
+      "Bash(openspec *)",
+      "Bash(awk *)",
+      "Bash(xargs *)",
+      "Bash(echo *)",
+      "Bash(date *)",
+      "Bash(mkdir -p *)"
+    ]
   }
 }
