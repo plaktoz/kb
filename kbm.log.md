@@ -3448,3 +3448,4 @@
 | 2026-09-26 | topics/microsoft.md | compound |
 | 2026-09-26 | topics/ai-chips.md | compound |
 | 2026-09-26 | weekly-update/2026-09/2026-W39-weekly.md | newsletter |
+| 2026-09-26 | research/noodle-vs-mattpocock-skills/report.md | research |
