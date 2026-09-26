@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 4 — The Three Primitives: Choice, Score, Noul</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">Jev AI Course</a> &rsaquo;
+        Module 2 — The Jev API &rsaquo;
+        Lesson 4 of 12
+      </p>
+      <h1>The Three Primitives — Choice, Score, Noul</h1>
+      <p class="lesson-meta">
+        <span>Module 2 — The Jev API</span>
+        <span>Lesson 4 of 12</span>
+        <span>~15 min</span>
+      </p>
+    </header>
+
+    <div class="learning-objective">
+      <strong>Learning objective</strong>
+      Understand the three question types the Jev API supports — Choice, Score, and Noul — and learn how to design atomic, well-scoped questions that take full advantage of parallel, isolated evaluation.
+    </div>
+
+    <h2>Meet the Three Primitives</h2>
+
+    <p>
+      Every call to Jev is built from three primitives. Each one represents a different shape of
+      judgment: selecting from a list, rating on a scale, or making a binary determination.
+      Together they cover the vast majority of classification, routing, and scoring decisions
+      found in production pipelines.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Returns</th>
+          <th>Includes Confidence?</th>
+          <th>Best for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Choice</strong></td>
+          <td>Chosen label, probabilities per option</td>
+          <td>Yes</td>
+          <td>Routing, classification, category selection</td>
+        </tr>
+        <tr>
+          <td><strong>Score</strong></td>
+          <td>Numeric rating, probabilities per level</td>
+          <td>Yes</td>
+          <td>Urgency, severity, quality assessment</td>
+        </tr>
+        <tr>
+          <td><strong>Noul</strong></td>
+          <td>Float between 0 and 1</td>
+          <td>No</td>
+          <td>Binary signals, presence/absence checks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      Choice supports cardinality up to 255 using a two-stage system: Jev first scores all
+      candidates, then selects from the top scorers. Score takes a rubric — a plain-language
+      description of what each numeric level means. Noul is the simplest primitive: it returns a
+      0–1 float expressing the probability that something is true. It is also the only primitive
+      that does <em>not</em> return a confidence score alongside the answer.
+    </p>
+
+    <div class="source-card">
+      <p class="source-label">Source</p>
+      <p>
+        <a href="https://docs.typesafe.ai/" target="_blank" rel="noopener">docs.typesafe.ai</a> —
+        Jev API reference: primitives, parallel evaluation, and question design guidelines.
+      </p>
+    </div>
+
+    <h2>Code Examples</h2>
+
+    <h3>Choice — select from a list</h3>
+
+    <p>
+      Pass a list of candidate labels. Jev returns the best match, the full probability
+      distribution across all options, and a confidence score.
+    </p>
+
+<pre><code>result = jev.ask(
+    state="User reported a billing error on account #1234.",
+    questions=[
+        Choice(
+            "What is the primary issue category?",
+            choices=["billing", "technical", "account-access", "other"]
+        )
+    ]
+)
+
+# result.answer        → "billing"
+# result.probabilities → {"billing": 0.91, "technical": 0.05, ...}
+# result.confidence    → 0.87</code></pre>
+
+    <h3>Score — rate against a rubric</h3>
+
+    <p>
+      Provide a rubric that anchors each numeric level in plain language. Jev returns the most
+      likely score, the probability distribution across all levels, and a confidence score.
+    </p>
+
+<pre><code>result = jev.ask(
+    state="I've been a customer for five years and this is unacceptable.",
+    questions=[
+        Score(
+            "How urgent is this ticket?",
+            rubric="1 = routine inquiry, 5 = severe account-impacting issue"
+        )
+    ]
+)
+
+# result.answer        → 4
+# result.probabilities → {1: 0.02, 2: 0.05, 3: 0.12, 4: 0.64, 5: 0.17}
+# result.confidence    → 0.71</code></pre>
+
+    <h3>Noul — true/false as a float</h3>
+
+    <p>
+      Noul asks a yes/no question and returns the probability of "yes" as a float between 0 and 1.
+      Unlike Choice and Score, no confidence score is returned.
+    </p>
+
+<pre><code>result = jev.ask(
+    state="I was charged twice and my account is locked.",
+    questions=[
+        Noul("Is the customer expressing frustration or urgency?")
+    ]
+)
+
+# result.answer → 0.94  (0–1 float; no confidence score)</code></pre>
+
+    <h3>Mixing all three in one call</h3>
+
+    <p>
+      All three primitives can be combined in a single API call. Jev evaluates each question
+      in parallel and in isolation against the same state — a key property explained in the
+      next section.
+    </p>
+
+<pre><code>result = jev.ask(
+    state="I was charged twice and my account is locked.",
+    questions=[
+        Choice(
+            "What is the primary issue?",
+            choices=["billing", "account-access", "technical", "other"]
+        ),
+        Score(
+            "How urgent is this ticket?",
+            rubric="1 = low priority, 5 = critical, needs immediate action"
+        ),
+        Noul("Is the customer expressing frustration or urgency?")
+    ]
+)
+
+# results[0].answer → "billing"    (+ probabilities + confidence)
+# results[1].answer → 4            (+ probabilities + confidence)
+# results[2].answer → 0.94         (float only; no confidence)</code></pre>
+
+    <h2>Parallel Evaluation and Context-Rot</h2>
+
+    <p>
+      When you bundle multiple questions into one call, Jev evaluates each question independently
+      and in parallel against the same state. The questions do not "see" each other — there is no
+      cascading context where an earlier answer influences a later one.
+    </p>
+
+    <p>
+      This is the opposite of how LLMs handle multi-part prompts. With an LLM, every additional
+      instruction or question extends the context window and can subtly degrade performance — a
+      phenomenon sometimes called <em>context-rot</em>. With Jev, adding questions has minimal
+      latency impact because each is scored independently rather than sequentially. The state
+      itself can be a plain string, a JSON object, or an array, so you can pass in whatever
+      structured context your questions require.
+    </p>
+
+    <div class="callout key">
+      Design each question as an atomic gut-check: a judgment a knowledgeable person could make
+      in seconds without weighing other factors. The more isolated and well-scoped each question
+      is, the more reliable and interpretable the result — and the more freely you can add or
+      remove questions without affecting the others.
+    </div>
+
+    <div class="callout warning">
+      Combining multiple concerns into one question — for example, "Is this ticket urgent <em>and</em>
+      related to billing <em>and</em> from a high-value customer?" — undermines both accuracy and
+      interpretability. Ask each concern separately, then combine the answers with logic in your
+      own code. When priorities shift, change a coefficient in your code rather than rewriting a
+      question.
+    </div>
+
+    <h2>Atomic Question Design in Practice</h2>
+
+    <p>
+      The discipline of atomic question design follows a single rule: one question, one concern.
+      If you find yourself using "and", "or", or "given that" inside a question, that is a signal
+      to decompose. Complex multi-factor decisions should be broken into separate questions whose
+      answers are combined with your own logic.
+    </p>
+
+    <p>
+      For example, a question like "Is this ticket both urgent and from a premium subscriber?"
+      mixes urgency with account tier. Split it into two:
+    </p>
+
+    <ul>
+      <li><code>Noul("Is this ticket urgent?")</code></li>
+      <li><code>Noul("Is the customer on a premium plan?")</code></li>
+    </ul>
+
+    <p>
+      Your code then combines the results — and because the combining logic lives in code rather
+      than inside a question, changing priorities is a matter of updating a condition or
+      coefficient, not reprompting and re-testing the model. This separation also makes the
+      system easier to audit: you can inspect what Jev returned for each individual signal before
+      understanding how the routing decision was made.
+    </p>
+
+    <div class="quiz" id="quiz-4">
+      <h3>Check your understanding</h3>
+      <p>Which Jev primitive does not include a confidence score in its response?</p>
+      <div class="quiz-options">
+        <button>Choice, which returns a probability distribution</button>
+        <button>Score, which rates against a rubric</button>
+        <button>Noul, which returns a float value</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <h3>Skill exercise</h3>
+      <p>
+        A support ticket arrives: <em>"I was charged twice and my account is locked."</em>
+        Write three questions you would ask Jev to help route and prioritize this ticket —
+        one Choice, one Score, and one Noul. For each question include:
+      </p>
+      <ul>
+        <li>The question text</li>
+        <li>The choices or rubric (for Choice and Score)</li>
+        <li>A brief note on why you scoped the question the way you did</li>
+      </ul>
+      <textarea placeholder="Choice question:&#10;  Text: ...&#10;  Choices: [...]&#10;  Why: ...&#10;&#10;Score question:&#10;  Text: ...&#10;  Rubric: 1 = ..., 5 = ...&#10;  Why: ...&#10;&#10;Noul question:&#10;  Text: ...&#10;  Why: ..."></textarea>
+    </div>
+
+    <div class="lesson-summary">
+      <strong>Lesson summary</strong>
+      <ul>
+        <li><strong>Choice</strong> selects from a list of up to 255 options and returns the chosen label, a probability distribution, and a confidence score.</li>
+        <li><strong>Score</strong> rates state against a plain-language rubric and returns a numeric answer, a probability distribution, and a confidence score.</li>
+        <li><strong>Noul</strong> answers a yes/no question as a 0–1 float; it is the only primitive that does <em>not</em> return a confidence score.</li>
+        <li>All three can be mixed in one API call and are evaluated in parallel and in isolation — adding questions has minimal latency impact and avoids context-rot.</li>
+        <li>Design questions atomically: one concern per question. Combine answers with logic in your own code so that shifting priorities means changing a coefficient, not rewriting a question.</li>
+      </ul>
+    </div>
+
+    <div class="tutor-prompt">
+      Paste your exercise answers into Claude or another AI tutor and ask: "Review my Jev question design — are these truly atomic? What would you split or reword?"
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0003-system-one-models.html">&larr; Prev: System One Models</a>
+      <a href="0005-python-quickstart.html" class="primary">Next: Python Quickstart &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-4', 2, 'Correct. Noul returns only a 0–1 float. Only Choice and Score include a confidence score alongside their answer.');
+  </script>
+</body>
+</html>

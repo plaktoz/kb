@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build the Support Ticket Router &mdash; Part 2: Confidence Gates | Jev AI Course</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Jev AI Course</a> &rsaquo; Module 4 &mdash; Weekend Project &rsaquo; Lesson 11 of 12
+    </div>
+    <h1>Build the Support Ticket Router &mdash; Part 2: Confidence Gates</h1>
+    <div class="lesson-meta">
+      <span>Module 4 &middot; Lesson 11 of 12</span>
+      <span>~45 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    Learn to wrap a ticket classifier in a three-tier confidence gate and understand why the position of each threshold encodes your business&rsquo;s risk tolerance rather than any property of the model. Discover how ambiguous tickets reveal themselves through lower confidence scores, and practice tuning thresholds across three values to observe the trade-offs.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Source</div>
+    <a href="https://docs.typesafe.ai/confidence" target="_blank" rel="noopener">
+      Confidence Thresholds &mdash; TypeSafe AI Documentation
+    </a>
+  </div>
+
+  <h2>Why Thresholds Matter</h2>
+
+  <p>In Part 1 you built a router that classifies every ticket and surfaces a confidence score alongside each department assignment. A confidence score sitting in a variable is not yet useful &mdash; you need to decide what to <em>do</em> with it. That decision is your threshold.</p>
+
+  <p>A threshold is the line you draw: above it you trust the model and act automatically; below it you pause and involve a human. The position of that line is not a technical question. It is a product and business question about how much risk your team is willing to accept. A misrouted billing inquiry that sends a customer to the wrong queue wastes a few minutes. A misrouted cancellation request that triggers the wrong downstream action can destroy a customer relationship. These outcomes are not equivalent, and your thresholds should reflect that asymmetry.</p>
+
+  <p>The TypeSafe guidance captures this in a simple rule: <strong>read-only actions can tolerate lower thresholds (0.5 and above)</strong>, because the worst outcome of a misclassification is a mildly suboptimal but harmless response. <strong>Destructive or irreversible actions need higher thresholds (0.9 and above)</strong>, because an error that executes cannot be walked back. The same codebase should use different thresholds for different action classes.</p>
+
+  <h2>The Three-Tier Routing Code</h2>
+
+  <p>The code below extends the Part 1 router with a decision gate. Two constants &mdash; <code>HIGH_THRESHOLD</code> and <code>MID_THRESHOLD</code> &mdash; divide the confidence range into three tiers. These are the only values you will change during the experiment in the exercise below.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th>Confidence range</th>
+        <th>Action taken</th>
+        <th>Typical use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>&#x1F7E2; Auto-route</td>
+        <td>&ge; HIGH_THRESHOLD</td>
+        <td>Execute automatically</td>
+        <td>Model is sure; acting without oversight is acceptable</td>
+      </tr>
+      <tr>
+        <td>&#x1F7E1; Flag for review</td>
+        <td>&ge; MID_THRESHOLD</td>
+        <td>Queue for human check</td>
+        <td>Moderate confidence; worth a second look before acting</td>
+      </tr>
+      <tr>
+        <td>&#x1F534; Escalate</td>
+        <td>&lt; MID_THRESHOLD</td>
+        <td>Route to human immediately</td>
+        <td>Model is genuinely uncertain; do not act automatically</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <pre><code>import os
+from typesafe_sdk import Choice, Score, Noul, TypeSafeClient
+
+TICKETS = [
+    "I was charged twice for my subscription last month.",
+    "The app crashes when I try to upload a file larger than 10MB.",
+    "How do I change my username?",
+    "I need to cancel my account immediately, this is urgent!",
+    "Your service is terrible, I want a refund NOW",      # edge case: billing or general?
+    "Can you explain what the premium plan includes?",    # edge case: general, low urgency
+]
+
+HIGH_THRESHOLD = 0.8   # change this to experiment: 0.6, 0.8, 0.95
+MID_THRESHOLD  = 0.5
+
+with TypeSafeClient() as client:
+    for ticket in TICKETS:
+        response = client.system_one(
+            state={"message": ticket},
+            questions={
+                "department": Choice(
+                    instructions="Which department should handle this ticket?",
+                    criteria={
+                        "billing": "Payment issues, charges, refunds, subscriptions",
+                        "technical": "Bugs, crashes, errors, performance problems",
+                        "account": "Account settings, passwords, cancellations",
+                        "general": "General questions and inquiries",
+                    },
+                ),
+                "urgency": Score(
+                    instructions="How urgent? 0=routine, 5=critical",
+                    criteria=["0: routine", "3: frustrated", "5: emergency"],
+                ),
+            },
+        )
+
+        dept = response.answers["department"]
+        conf = dept.confidence
+
+        if conf >= HIGH_THRESHOLD:
+            tier = "&#x1F7E2; AUTO-ROUTE"
+        elif conf >= MID_THRESHOLD:
+            tier = "&#x1F7E1; FLAG FOR REVIEW"
+        else:
+            tier = "&#x1F534; ESCALATE TO HUMAN"
+
+        print(f"\n{ticket[:55]}...")
+        print(f"  Dept: {dept.choice:10s} conf={conf:.2f}  urgency={response.answers['urgency'].score:.1f}  -&gt; {tier}")</code></pre>
+
+  <h2>The Threshold Experiment</h2>
+
+  <p>Change <code>HIGH_THRESHOLD</code> to each of the three values below and run the script. Observe which tickets shift tiers and why.</p>
+
+  <p><strong>At 0.6 (permissive):</strong> Almost every ticket auto-routes. The model&rsquo;s department predictions are usually plausible, and with a low bar most confidence scores clear it. You gain throughput and reduce human review load, but you accept that a meaningful fraction of borderline calls will execute without oversight. This setting is appropriate for low-stakes workflows where the cost of a wrong route is minimal and easy to correct.</p>
+
+  <p><strong>At 0.8 (balanced):</strong> Clear-cut tickets &mdash; the double charge, the 10 MB crash, the username change &mdash; continue to auto-route. Ambiguous tickets start flipping to the middle tier. The &ldquo;cancel my account&rdquo; ticket is likely to land here: it genuinely overlaps account management and billing depending on how your business handles cancellations. You get automation where the model is confident and oversight where it is not. This is the default starting point for most production routers.</p>
+
+  <p><strong>At 0.95 (conservative):</strong> Very few tickets auto-route. You are asking for near-certainty before trusting the model. The flag-for-review tier fills up significantly. This is appropriate when every misroute has serious consequences &mdash; a financial institution, a healthcare provider, or any workflow where the action downstream of a classification is irreversible. The trade-off is a substantially higher human review workload.</p>
+
+  <h2>Edge Cases &mdash; Ambiguous Tickets</h2>
+
+  <p>The confidence formula is: <code>(n &times; largest_probability &minus; 1) / (n &minus; 1)</code>. When the model&rsquo;s probability mass is spread across multiple categories, the largest individual probability is small, the formula yields a low result, and confidence drops. A flat distribution across four options produces a confidence of exactly 0. This is not a failure &mdash; it is the system correctly reporting that the input is genuinely ambiguous.</p>
+
+  <p>Two tickets in the test set are designed to expose this behaviour:</p>
+
+  <p><strong>&ldquo;Your service is terrible, I want a refund NOW&rdquo;</strong> &mdash; This could be classified as billing (a refund request) or general (frustrated venting). The model will split probability between the two departments, producing lower confidence than a clean billing inquiry. At threshold 0.8 it will likely land in the review tier even though a human reading it would probably act on it quickly.</p>
+
+  <p><strong>&ldquo;I need to cancel my account immediately, this is urgent!&rdquo;</strong> &mdash; Account cancellation sits squarely between the account and billing departments. Is cancellation an account settings operation, or does it implicate subscription billing? Both criteria descriptions partially apply. The model hedges, confidence is lower than for the crash report, and the urgency score is high &mdash; a combination that illustrates exactly why ambiguous high-urgency tickets deserve a human reviewer rather than an automated action.</p>
+
+  <p>By contrast, <strong>&ldquo;The app crashes when I try to upload a file larger than 10 MB&rdquo;</strong> matches the technical department criteria precisely, with little signal pointing anywhere else. Probability mass concentrates on a single category, the largest probability is high, and confidence is high. This ticket auto-routes cleanly at any reasonable threshold.</p>
+
+  <p>Raw probabilities are always available on the response object if you need logic beyond the three-tier pattern. You can inspect the full probability distribution across departments &mdash; for example, treating a ticket differently when two departments each hold 40% probability versus when one holds 80% and three share the remaining 20%.</p>
+
+  <div class="callout key">
+    Tuning thresholds is a product decision, not a model decision. The model reports what it knows; the threshold encodes how much uncertainty your business process can tolerate before requiring a human in the loop. Two teams running identical code on identical data might correctly choose different thresholds if their downstream actions &mdash; and their cost of errors &mdash; differ.
+  </div>
+
+  <h2>Choosing Thresholds for Production</h2>
+
+  <p>The recommended process is to start conservative and adjust based on observed data:</p>
+
+  <ol>
+    <li><strong>Start high.</strong> Begin at 0.9 for any action with real-world consequences. This produces a high human-review rate initially but catches edge cases before they cause harm.</li>
+    <li><strong>Collect labelled data.</strong> Run the router on a sample of real tickets and record the confidence distribution. Look at the tickets in the 0.7&ndash;0.9 band &mdash; are most of them actually classified correctly? If so, you have evidence to lower your threshold.</li>
+    <li><strong>Differentiate by action type.</strong> Read-only lookups (fetching account details, surfacing a plan summary) can use a lower threshold than write operations. Assign each action class its own threshold rather than applying one value uniformly.</li>
+    <li><strong>Re-evaluate after distribution shifts.</strong> If the mix of tickets you receive changes &mdash; new product features, seasonal support spikes, a viral complaint thread &mdash; the confidence distribution will shift. Thresholds tuned on last quarter&rsquo;s data may be miscalibrated for this quarter&rsquo;s reality.</li>
+  </ol>
+
+  <div class="callout warning">
+    <strong>Do not skip real-data testing.</strong> Never deploy a threshold chosen by intuition or tuned only against a synthetic test set. Your specific domain, customer vocabulary, and ticket distribution will produce a confidence profile that differs from any generic benchmark. Test your thresholds against a labelled sample of real tickets from your own system before going live.
+  </div>
+
+  <div class="quiz" id="quiz-11">
+    <h3>Check your understanding</h3>
+    <p>What is the main reason destructive actions require a higher confidence threshold?</p>
+    <div class="quiz-options">
+      <button>Mistakes on those actions simply cannot be reversed</button>
+      <button>The model is naturally less accurate on them</button>
+      <button>Higher thresholds keep total ticket volume in check</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>Run the code at all three threshold values (0.6, 0.8, 0.95). Record which tickets flip between tiers at each setting. Why does &ldquo;cancel my account immediately&rdquo; produce lower confidence than &ldquo;the app crashes when I try to upload a file&rdquo;? What does that tell you about how to handle high-urgency, ambiguous tickets in a production router?</p>
+    <textarea placeholder="E.g.:&#10;&#10;At 0.6: all 6 tickets auto-route&#10;At 0.8: 'cancel my account' and 'refund NOW' flip to FLAG FOR REVIEW&#10;At 0.95: 4 of 6 tickets in FLAG FOR REVIEW; crash ticket still auto-routes&#10;&#10;'Cancel my account' is lower confidence because 'account' and 'billing' both match — the model splits probability. 'App crashes' maps precisely to 'technical' with little competing signal, so probability concentrates and confidence is high.&#10;&#10;For high-urgency ambiguous tickets: could combine urgency score with tier — anything urgency >= 4 that lands in review tier gets fast-tracked to a senior agent."></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>Three-tier routing &mdash; auto-route, flag for review, escalate &mdash; converts a raw confidence score into an operational decision by comparing it against two threshold constants.</li>
+      <li>Thresholds should scale with the reversibility of the downstream action: read-only operations can use 0.5+, destructive or irreversible operations need 0.9+.</li>
+      <li>The confidence formula <code>(n &times; largest_probability &minus; 1) / (n &minus; 1)</code> naturally produces low scores when a ticket is genuinely ambiguous across multiple departments &mdash; this is correct signal, not noise.</li>
+      <li>Tuning thresholds is a product decision that encodes your risk tolerance; two teams with different error costs should set different thresholds on identical code.</li>
+      <li>Always validate thresholds against labelled real-world data from your specific domain before deploying, and re-evaluate whenever your ticket distribution shifts.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Want to go deeper? Ask an AI tutor: &ldquo;How would I design a confidence threshold strategy for a multi-step workflow where each step has a different risk level?&rdquo; or &ldquo;What does a well-calibrated confidence distribution look like across a large real-world ticket sample, and how would I test for it?&rdquo;
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0010-ticket-router-part1.html">&larr; Lesson 10: Ticket Router &mdash; Part 1</a>
+    <a href="0012-extend-and-reflect.html" class="primary">Lesson 12: Extend and Reflect &rarr;</a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz('quiz-11', 0, 'Destructive or irreversible actions — like cancelling an account or processing a refund — have an asymmetric error cost. If the model routes incorrectly and the action executes, there is no recovery path. Read-only actions fail safely because nothing permanent changes. Thresholds should be set to reflect that asymmetry in risk, not any property of the model itself.');
+</script>
+</body>
+</html>

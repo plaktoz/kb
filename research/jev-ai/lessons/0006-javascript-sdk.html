@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 6: The JavaScript/TypeScript SDK — Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <div class="breadcrumb">
+        <a href="../lessons.md">Jev AI Course</a> &rsaquo; Module 2 &mdash; The Jev API &rsaquo; Lesson 6 of 12
+      </div>
+      <h1>The JavaScript/TypeScript SDK</h1>
+      <div class="lesson-meta">
+        <span>Module 2</span>
+        <span>Lesson 6 of 12</span>
+        <span>~15 min</span>
+      </div>
+    </header>
+
+    <div class="learning-objective">
+      <strong>Learning objective</strong>
+      Install and use the <code>@typesafe-ai/sdk</code> package to call the Jev API from TypeScript, and understand how the helper functions <code>choice()</code>, <code>score()</code>, and <code>noul()</code> differ from their Python counterparts.
+    </div>
+
+    <div class="source-card">
+      <div class="source-label">Source</div>
+      <a href="https://github.com/typesafe-ai/typesafe-sdk-js" target="_blank" rel="noopener">github.com/typesafe-ai/typesafe-sdk-js</a>
+      &mdash; Official JavaScript/TypeScript SDK repository with full examples, ESM/CJS builds, and TypeScript declarations.
+    </div>
+
+    <h2>Setup</h2>
+
+    <div class="callout warning">
+      The <code>@typesafe-ai/sdk</code> package requires <strong>Node.js version 20 or higher</strong>. If you are running an earlier Node version, upgrade before installing &mdash; the package ships modern ESM and may fail silently on older runtimes.
+    </div>
+
+    <p>Install the package from npm:</p>
+
+    <pre><code>npm install @typesafe-ai/sdk</code></pre>
+
+    <p>Set your API key as an environment variable. The client reads it automatically &mdash; no need to pass it explicitly:</p>
+
+    <pre><code>export TYPESAFE_API_KEY="your-api-key-here"</code></pre>
+
+    <p>Unlike the Python SDK, the JavaScript client does not use a context manager. Instantiate it once and reuse it freely across your application:</p>
+
+    <pre><code>import { choice, score, noul, TypeSafeClient } from "@typesafe-ai/sdk";
+
+const client = new TypeSafeClient();</code></pre>
+
+    <p>The package ships as ESM, CommonJS, and TypeScript declarations, so it works with any modern Node.js module system &mdash; whether you use <code>import</code>, <code>require</code>, or <code>ts-node</code>.</p>
+
+    <h2>The Helper Functions</h2>
+
+    <p>The JS/TS SDK defines questions using three <em>helper functions</em> &mdash; <code>choice()</code>, <code>score()</code>, and <code>noul()</code> &mdash; rather than class constructors. The names mirror the Python classes but are lowercase, consistent with JavaScript convention:</p>
+
+    <ul>
+      <li><code>choice(prompt, options)</code> &mdash; asks the model to pick one of the provided keys. Pass an object with each candidate key mapped to <code>null</code>.</li>
+      <li><code>score(prompt, { min, max })</code> &mdash; asks for a numeric rating on a defined scale.</li>
+      <li><code>noul(prompt)</code> &mdash; asks for a yes/no/unclear judgment. The name stands for <strong>N</strong>o, <strong>U</strong>nclear, <strong>L</strong>ikely.</li>
+    </ul>
+
+    <div class="callout key">
+      TypeScript infers the answer type directly from your question definition. Define <code>choice()</code> with keys <code>billing</code>, <code>technical</code>, and <code>other</code>, and the compiler automatically types <code>response.answers.category.choice</code> as <code>"billing" | "technical" | "other"</code> &mdash; no manual annotation needed. A misspelled answer key becomes a compile-time error before the code ever runs.
+    </div>
+
+    <h2>Full TypeScript Example</h2>
+
+    <p>The following script classifies a support ticket by category and urgency, then checks whether it needs immediate escalation:</p>
+
+    <pre><code>import { choice, score, noul, TypeSafeClient } from "@typesafe-ai/sdk";
+
+const client = new TypeSafeClient();
+const response = await client.systemOne({
+  state: { document: "I was charged twice. Please fix this ASAP." },
+  questions: {
+    category: choice("What is this ticket about?", {
+      billing: null,
+      technical: null,
+      other: null,
+    }),
+    urgency: score("How urgent? 0=low, 5=critical", { min: 0, max: 5 }),
+    needsEscalation: noul("Does this need immediate escalation?"),
+  },
+});
+
+// TypeScript knows this is "billing" | "technical" | "other"
+console.log(response.answers.category.choice);
+console.log(response.answers.urgency.score);</code></pre>
+
+    <p>Answers are accessed with dot notation: <code>response.answers.&lt;key&gt;.&lt;primitive&gt;</code>. The response object is fully typed &mdash; your IDE will autocomplete answer keys and primitive field names.</p>
+
+    <h2>Python vs JavaScript &mdash; Side by Side</h2>
+
+    <p>The same API call looks slightly different in each SDK. The table below maps every major syntax difference, one row per operation:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Operation</th>
+          <th>Python SDK</th>
+          <th>JS/TS SDK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Import</td>
+          <td><code>from typesafe_sdk import TypeSafeClient, Choice</code></td>
+          <td><code>import { TypeSafeClient, choice } from "@typesafe-ai/sdk"</code></td>
+        </tr>
+        <tr>
+          <td>Instantiate</td>
+          <td><code>with TypeSafeClient() as client:</code> &mdash; context manager required</td>
+          <td><code>const client = new TypeSafeClient();</code> &mdash; no context manager</td>
+        </tr>
+        <tr>
+          <td>Call method</td>
+          <td><code>client.system_one({...})</code> &mdash; snake_case, synchronous</td>
+          <td><code>await client.systemOne({...})</code> &mdash; camelCase, async</td>
+        </tr>
+        <tr>
+          <td>Choice question</td>
+          <td><code>Choice("prompt", {"a": None, "b": None})</code> &mdash; class constructor</td>
+          <td><code>choice("prompt", { a: null, b: null })</code> &mdash; helper function</td>
+        </tr>
+        <tr>
+          <td>Answer access</td>
+          <td><code>response.answers["category"].choice</code> &mdash; bracket notation</td>
+          <td><code>response.answers.category.choice</code> &mdash; dot notation, typed</td>
+        </tr>
+        <tr>
+          <td>Async handling</td>
+          <td>Synchronous call &mdash; blocks until complete</td>
+          <td><code>await</code> required &mdash; the method is always async</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="quiz" id="quiz-6">
+      <h3>Quick check</h3>
+      <p>How do you define a choice question in the JavaScript SDK?</p>
+      <div class="quiz-options">
+        <button>Using the choice() helper function</button>
+        <button>Using the Choice class constructor</button>
+        <button>Using the makeChoice() factory method</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <h3>Skill exercise</h3>
+      <p>Rewrite your Lesson 5 Python script as TypeScript. Once you have a working version, list the syntax differences you noticed &mdash; aim for at least four. Focus on the camelCase method name, helper functions vs. class constructors, async/await, and how TypeScript inferred your answer types without any manual annotations.</p>
+      <textarea placeholder="1. systemOne() instead of system_one() — camelCase convention&#10;2. choice() is a helper function, not a Choice class constructor&#10;3. await is required — the call is always async&#10;4. TypeScript inferred category.choice as &quot;billing&quot; | &quot;technical&quot; | &quot;other&quot; automatically&#10;..."></textarea>
+    </div>
+
+    <div class="lesson-summary">
+      <strong>Lesson summary</strong>
+      <ul>
+        <li>Install with <code>npm install @typesafe-ai/sdk</code>; Node.js 20 or higher is required.</li>
+        <li>Set <code>TYPESAFE_API_KEY</code> as an environment variable &mdash; no context manager is needed, unlike Python.</li>
+        <li>Questions are defined with lowercase helper functions &mdash; <code>choice()</code>, <code>score()</code>, <code>noul()</code> &mdash; rather than class constructors.</li>
+        <li>TypeScript infers answer union types from <code>choice()</code> key definitions automatically, giving compile-time type safety at no extra cost.</li>
+        <li>The package ships as ESM, CommonJS, and TypeScript declarations and works in any modern Node.js module system.</li>
+      </ul>
+    </div>
+
+    <div class="tutor-prompt">
+      Want to go deeper? Ask your AI tutor: "Can you walk me through how TypeScript infers union types from the choice() definition?" or "What happens if I run this SDK on Node.js 18?"
+    </div>
+
+    <nav class="lesson-nav">
+      <a href="0005-python-quickstart.html">&larr; Lesson 5: Python Quickstart</a>
+      <a href="0007-confidence-scores.html" class="primary">Lesson 7: Confidence Scores &rarr;</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz('quiz-6', 0, 'Correct. The JS SDK uses helper functions — choice(), score(), and noul() — not class constructors. In Python the equivalents are Choice(), Score(), and Noul() with an uppercase first letter.');
+  </script>
+</body>
+</html>

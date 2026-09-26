@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 7: Confidence Scores — The Killer Feature · Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="lesson-header">
+      <p class="breadcrumb">
+        <a href="../lessons.md">Jev AI</a> › Module 3 — Reliability and Patterns › Lesson 7 of 12
+      </p>
+      <h1>Confidence Scores — The Killer Feature</h1>
+      <div class="lesson-meta">
+        <span>Module 3</span>
+        <span>Lesson 7 of 12</span>
+        <span>~20 min</span>
+      </div>
+    </header>
+
+    <div class="learning-objective">
+      <strong>Learning objective</strong>
+      Understand how Jev computes confidence scores and what they express about the model's certainty. Apply risk-scaled thresholds to route decisions automatically, cautiously, or to a human reviewer.
+    </div>
+
+    <div class="source-card">
+      <div class="source-label">Primary source</div>
+      <a href="https://docs.typesafe.ai/confidence" target="_blank" rel="noopener">docs.typesafe.ai/confidence</a>
+    </div>
+
+    <h2>What Is Confidence?</h2>
+    <p>Every <code>Choice</code> and <code>Score</code> answer returned by Jev carries a <strong>confidence</strong> value between 0 and 1. It measures how concentrated the model's probability distribution is across the available options — in plain terms, how certain the model is that it has picked the right answer.</p>
+    <p>A confidence near <strong>1.0</strong> means probability mass is almost entirely on one option: the model has a clear read. A confidence near <strong>0.0</strong> means probabilities are spread evenly across all options: the model sees no compelling distinction between them.</p>
+    <p>This is the mechanism for epistemic honesty. As the Jev documentation puts it: <em>"A system unable to express honest uncertainty cannot be trusted."</em> Confidence gives your application a principled way to act on uncertainty rather than ignore it.</p>
+
+    <div class="callout warning">
+      <code>Noul</code> answers do not carry a confidence score. Confidence is only available on <code>Choice</code> and <code>Score</code> answers, because only those have a finite set of options from which a probability distribution can be derived.
+    </div>
+
+    <h2>The Formula Explained</h2>
+    <p>Confidence is computed from the shape of the probability distribution over all answer options:</p>
+    <pre><code>confidence = (n × largest_probability − 1) / (n − 1)</code></pre>
+    <p>Where <code>n</code> is the number of options and <code>largest_probability</code> is the highest probability assigned to any single option.</p>
+    <p>Two boundary cases make the intuition concrete:</p>
+    <ul>
+      <li><strong>Perfectly concentrated:</strong> one option gets probability 1.0, all others get 0. The formula returns <code>(n × 1 − 1) / (n − 1) = 1.0</code>.</li>
+      <li><strong>Perfectly flat:</strong> every option gets probability <code>1/n</code>. The formula returns <code>(n × (1/n) − 1) / (n − 1) = 0.0</code>.</li>
+    </ul>
+    <p>The normalisation by <code>(n − 1)</code> ensures the result always falls in [0, 1] regardless of how many options there are, making confidence values comparable across questions with different numbers of choices.</p>
+
+    <h2>Three Behavioral Tiers</h2>
+    <p>A practical starting framework divides the 0–1 range into three tiers, each calling for a different automated behavior:</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Range</th>
+          <th>Meaning</th>
+          <th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>High</strong> (e.g. &gt; 0.8)</td>
+          <td>Distribution is concentrated; model has a clear read</td>
+          <td>Act automatically — trust the answer</td>
+        </tr>
+        <tr>
+          <td><strong>Medium</strong> (e.g. 0.5 – 0.8)</td>
+          <td>Model leans toward an answer but holds genuine uncertainty</td>
+          <td>Proceed cautiously — confirm with user or flag for review</td>
+        </tr>
+        <tr>
+          <td><strong>Low</strong> (e.g. &lt; 0.5)</td>
+          <td>Distribution is flat; no option stands out</td>
+          <td>Route to a human or request clarification</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>These are starting points, not universal constants. The right cutoffs depend entirely on what each decision costs when it goes wrong.</p>
+
+    <h2>Thresholds Scale With Risk</h2>
+    <p>The most important design principle: <strong>threshold values should match consequence severity</strong>. A read-only action carries little downside if it is occasionally wrong. A destructive, irreversible operation demands much higher certainty before it executes without human confirmation.</p>
+    <p>The code example from the Jev documentation makes this concrete:</p>
+    <pre><code>action = response.answers["action"]
+confidence = action.confidence
+
+if confidence &lt; 0.5:
+    route_to_human(user_message)
+elif action.choice == "check_balance":
+    show_balance(account_id)        # read-only: low threshold ok
+elif action.choice == "approve_transfer":
+    if confidence &gt; 0.9:            # destructive: strict threshold
+        confirm_then_execute(account_id)
+    else:
+        ask_user_to_confirm(account_id)</code></pre>
+    <p>The first branch handles the universal low-confidence case regardless of action type. From there, thresholds diverge: <code>check_balance</code> proceeds once confidence clears 0.5; <code>approve_transfer</code> demands 0.9 before it executes without asking the user first.</p>
+    <p>The Jev documentation recommends starting with conservative thresholds, running them against your own real data, and adjusting based on observed results. What passes in testing may behave differently against the distribution of inputs your users actually send.</p>
+
+    <div class="callout key">
+      Your code encodes the risk tolerance, not the model. Jev tells you <em>how confident</em> it is; it is your responsibility to decide <em>what to do</em> with that confidence at each risk level. There is no single correct threshold.
+    </div>
+
+    <h2>Using Raw Probabilities</h2>
+    <p>The single confidence number is convenient, but sometimes you need finer-grained information. The full probability distribution across every option is always accessible:</p>
+    <pre><code>probs = response.answers["action"].probabilities
+# {"check_balance": 0.72, "approve_transfer": 0.18, "cancel_subscription": 0.10}</code></pre>
+    <p>Raw probabilities let you build custom measures. For example, you might detect when the model is split between exactly two top options (close probabilities at the top) versus genuinely confused across all options (everything roughly equal). You can use this to design richer routing logic — different responses to a near-tie versus a scattered guess — that a single confidence threshold cannot express.</p>
+
+    <div class="quiz" id="quiz-7">
+      <h3>Quick check</h3>
+      <p>In the confidence formula <code>(n × max_prob − 1) / (n − 1)</code>, what does <code>n</code> represent?</p>
+      <div class="quiz-options">
+        <button>The number of answer options available</button>
+        <button>The model's raw probability distribution size</button>
+        <button>The total tokens used per request</button>
+      </div>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="exercise">
+      <h3>Skill exercise</h3>
+      <p>Return to the support-ticket classifier you built in Lessons 5 and 6. Write pseudocode that implements <strong>three confidence tiers</strong> for the classifier's output: <em>auto-route</em> (high confidence), <em>flag for review</em> (medium), and <em>reject / route to human</em> (low). Choose specific threshold numbers for each boundary and briefly justify each choice — why is that the right cutoff for a support-ticket context?</p>
+      <textarea placeholder="Write your three-tier pseudocode and threshold justifications here…"></textarea>
+    </div>
+
+    <div class="lesson-summary">
+      <strong>Lesson summary</strong>
+      <ul>
+        <li>Confidence is a 0–1 value on every <code>Choice</code> and <code>Score</code> answer; it does <em>not</em> exist on <code>Noul</code> answers.</li>
+        <li>The formula <code>(n × largest_probability − 1) / (n − 1)</code> returns 1.0 for a perfectly concentrated distribution and 0.0 for a perfectly flat one.</li>
+        <li>Three behavioral tiers — act automatically (high), proceed cautiously or flag (medium), route to human (low) — provide a practical starting framework.</li>
+        <li>Thresholds must scale with consequence severity: read-only actions can tolerate lower confidence than destructive or irreversible ones.</li>
+        <li>Raw probabilities (<code>response.answers["key"].probabilities</code>) are always available for custom routing logic that goes beyond what a single number can express.</li>
+      </ul>
+    </div>
+
+    <p class="tutor-prompt">Ask your tutor: "Walk me through a case where medium confidence should trigger a confirmation prompt rather than outright rejection." or "When would I use raw probabilities instead of the confidence score?"</p>
+
+    <nav class="lesson-nav">
+      <a href="0006-javascript-sdk.html">← Lesson 6: The JavaScript/TypeScript SDK</a>
+      <a href="0008-architectural-patterns.html" class="primary">Lesson 8: Architectural Patterns →</a>
+    </nav>
+
+  </div>
+
+  <script src="../assets/quiz.js"></script>
+  <script>
+    initQuiz(
+      'quiz-7',
+      0,
+      'n is the number of answer options. The formula normalises by (n − 1) so the result always falls in [0, 1] regardless of how many options a question has.'
+    );
+  </script>
+</body>
+</html>

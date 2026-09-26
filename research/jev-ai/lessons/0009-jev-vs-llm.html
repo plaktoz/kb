@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 9: Jev vs. LLM Structured Outputs — Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      Jev AI &rsaquo; Module 3 &mdash; Reliability and Patterns &rsaquo; Lesson 9 of 12
+    </p>
+    <h1>Jev vs. LLM Structured Outputs</h1>
+    <div class="lesson-meta">
+      <span>Module 3</span>
+      <span>Lesson 9 of 12</span>
+      <span>~15 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    After this lesson, you will be able to explain why LLM structured outputs &mdash; JSON
+    mode and function calling &mdash; do not fix latency, overconfidence, or mode dropping,
+    and articulate the architectural property that makes Jev fundamentally different from
+    every format-constraining approach.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+       target="_blank" rel="noopener">
+      Introducing System One Models and Jev &mdash; TypeSafe AI
+    </a>
+  </div>
+
+  <h2>The Key Difference</h2>
+
+  <p>
+    When an LLM produces structured output &mdash; whether through JSON mode,
+    function calling, or tool use &mdash; it still runs a full token-by-token language
+    model under the hood. Structured output modes constrain the <em>shape</em> of what
+    the model is allowed to emit; they do not change <em>how</em> the model generates
+    that output. The entire generative process &mdash; sampling over a learned probability
+    distribution, one token at a time &mdash; runs exactly as it does for ordinary
+    free-form text.
+  </p>
+  <p>
+    This matters because the three failure modes identified in Module 1 &mdash; mode
+    dropping, overconfidence, and hallucination &mdash; are properties of that generative
+    process, not of the output shape. A schema wrapper cannot prevent a model from being
+    overconfident in a field it fills with the wrong value. A grammar constraint cannot
+    prevent it from collapsing to a narrow mode. Requiring valid JSON does not change what
+    the model was optimized to maximize.
+  </p>
+  <p>
+    Jev&rsquo;s architecture starts from a different premise. Its parallel sampler generates
+    all candidate outputs in a <strong>single query</strong>, not sequentially token
+    by token. Crucially, the full set of possible outputs is defined in advance. Because
+    only pre-specified outputs can ever appear, there is no path by which an unexpected
+    type can arrive at runtime &mdash; type errors are architecturally excluded before any
+    generation occurs, not caught after.
+  </p>
+
+  <div class="callout key">
+    LLM structured outputs constrain the FORMAT of what gets emitted. Jev constrains
+    the GENERATION PROCESS itself: possible outputs are enumerated upfront, so a type
+    error cannot occur &mdash; not because it gets caught, but because it has no path
+    into existence.
+  </div>
+
+  <h2>Speed and Cost</h2>
+
+  <p>
+    The architectural difference shows up directly in measured performance. Frontier
+    LLMs running structured-output pipelines take <strong>3&ndash;329 seconds</strong>
+    end-to-end. Jev completes the same class of tasks in
+    <strong>70&thinsp;ms&ndash;500&thinsp;ms</strong> &mdash; a 40&ndash;200&times;
+    improvement in practice.
+  </p>
+  <p>
+    The cost gap is similarly large. LLM input tokens run
+    <strong>$0.20&ndash;$10 per million tokens</strong>, with output tokens priced at
+    roughly five times the input rate. Jev charges
+    <strong>$0.042 per million input tokens</strong>, and output tokens are free.
+  </p>
+  <p>
+    The following table compares the four most common structured-output approaches across
+    the dimensions that matter for production automation:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Approach</th>
+        <th>Generation</th>
+        <th>Typical latency</th>
+        <th>Typical cost</th>
+        <th>Type safety</th>
+        <th>Confidence support</th>
+        <th>Best use case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Jev</strong></td>
+        <td>Parallel sampler; all outputs in one query; no token-by-token LM</td>
+        <td>70&thinsp;ms&ndash;500&thinsp;ms</td>
+        <td>$0.042/MTok input; output free</td>
+        <td>Architecturally guaranteed &mdash; outputs defined upfront</td>
+        <td>Yes, native</td>
+        <td>Classification, extraction, routing, structured prediction</td>
+      </tr>
+      <tr>
+        <td><strong>OpenAI JSON mode</strong></td>
+        <td>Token-by-token LM; format constrained by sampling grammar</td>
+        <td>3&ndash;329 s</td>
+        <td>$0.20&ndash;$10/MTok input; output ~5&times; more</td>
+        <td>Schema validated post-generation; type errors possible at runtime</td>
+        <td>No &mdash; requires additional prompting or calibration</td>
+        <td>Free-form generation tasks that need a JSON wrapper</td>
+      </tr>
+      <tr>
+        <td><strong>OpenAI function calling</strong></td>
+        <td>Token-by-token LM; arguments generated as structured text</td>
+        <td>3&ndash;329 s</td>
+        <td>$0.20&ndash;$10/MTok input; output ~5&times; more</td>
+        <td>Schema enforced on arguments; errors caught post-generation</td>
+        <td>No &mdash; requires custom prompting</td>
+        <td>Tool dispatch in agentic pipelines that require LLM reasoning</td>
+      </tr>
+      <tr>
+        <td><strong>Claude tool use</strong></td>
+        <td>Token-by-token LM; tool inputs generated as structured text</td>
+        <td>3&ndash;329 s</td>
+        <td>$0.20&ndash;$10/MTok input; output ~5&times; more</td>
+        <td>Schema enforced on tool inputs; errors caught post-generation</td>
+        <td>No &mdash; requires custom prompting</td>
+        <td>Agentic workflows combining reasoning and tool execution</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>When to Use Jev vs. an LLM</h2>
+
+  <p>
+    The speed and cost advantages are real, but they apply only to the class of tasks
+    Jev was designed for. The parallel sampler excels at tasks where the answer space can
+    be enumerated: <strong>classification</strong>, <strong>entity extraction</strong>,
+    <strong>intent routing</strong>, and <strong>structured prediction</strong> over a
+    fixed schema.
+  </p>
+  <p>
+    LLMs remain the right tool whenever the task requires open-ended output: writing,
+    reasoning over novel evidence, code generation, multi-step planning, or explanation.
+    These tasks cannot be specified as a finite set of possible outputs, so Jev&rsquo;s
+    architecture does not apply.
+  </p>
+  <p>
+    A practical heuristic: if you can write down every valid output before the query
+    runs, Jev is a candidate. If the output space is open-ended or the task requires
+    generating novel text, you need an LLM.
+  </p>
+
+  <div class="callout warning">
+    Do not use Jev for reasoning, multi-step planning, explanation, code generation,
+    or any task that requires generating novel text. These tasks require an LLM. Forcing
+    them into Jev&rsquo;s fixed-output architecture will produce silently wrong answers
+    with false confidence.
+  </div>
+
+  <h2>Benchmark Caveats</h2>
+
+  <p>
+    TypeSafe AI&rsquo;s published benchmarks show Jev as <strong>193.6&times;
+    faster</strong> and <strong>444.6&times; cheaper</strong> than comparable LLM
+    structured-output pipelines. TypeSafe AI itself characterizes these figures as
+    &ldquo;on the higher end of real-world gains.&rdquo; Before treating the headline
+    numbers as representative, three specific caveats deserve attention.
+  </p>
+  <p>
+    First, the benchmark workflows were created by TypeSafe AI&rsquo;s own team. The
+    tasks chosen may be better suited to Jev&rsquo;s strengths than a random sample of
+    real-world automation work would be.
+  </p>
+  <p>
+    Second, the LLM baselines were tested through TypeSafe AI&rsquo;s own
+    structured-output wrapper rather than the native APIs. A wrapper adds latency and
+    cost, which inflates the measured gap.
+  </p>
+  <p>
+    Third, the reference answers used to score accuracy skew toward OpenAI and Anthropic
+    outputs. Tasks where those models are known to perform well may favor the framing of
+    Jev as an alternative rather than a complement.
+  </p>
+  <p>
+    None of this invalidates the architectural case for Jev on appropriate tasks &mdash;
+    the 40&ndash;200&times; real-world speed range is still a substantial gain. But
+    the benchmark headline should be treated as an upper bound, not a guarantee.
+  </p>
+
+  <h2>The Adapter for Comparison</h2>
+
+  <p>
+    TypeSafe AI publishes
+    <a href="https://github.com/typesafe-ai/system-one-adapter-python" target="_blank"
+       rel="noopener"><code>system-one-adapter-python</code></a>, a drop-in replacement
+    for <code>TypeSafeClient</code> backed by LLM APIs. The adapter lets you write System
+    One&ndash;style code once and run it against either Jev or an LLM backend without
+    changing application logic.
+  </p>
+  <p>
+    This is the most reliable way to measure the gap on your own tasks. Rather than
+    relying on published benchmarks, you wire the adapter to your actual workload and
+    compare latency, cost, and accuracy with real production traffic. The architectural
+    claims in this lesson become testable claims about your specific pipeline.
+  </p>
+
+  <div class="quiz" id="quiz-9">
+    <h3>Check your understanding</h3>
+    <p>What is the key architectural property that makes type errors impossible in Jev?</p>
+    <div class="quiz-options">
+      <button>Possible outputs are enumerated in advance of any generation step.</button>
+      <button>Strict JSON schemas are validated after token generation completes fully.</button>
+      <button>Output tokens are constrained via logit masking at inference time.</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>
+      Without referring back to the lesson table, write a <strong>3-row comparison</strong>
+      from memory: <em>Jev</em> vs. <em>OpenAI function calling</em> vs.
+      <em>Claude tool use</em>. Include these four columns:
+      <strong>latency</strong>, <strong>cost</strong>,
+      <strong>confidence support</strong>, and <strong>type safety</strong>.
+      Use a markdown table. When you&rsquo;re done, compare it with the lesson table
+      and note anything you missed or got wrong.
+    </p>
+    <textarea placeholder="| Approach                | Latency | Cost | Confidence support | Type safety |
+|-------------------------|---------|------|--------------------|-------------|
+| Jev                     |         |      |                    |             |
+| OpenAI function calling |         |      |                    |             |
+| Claude tool use         |         |      |                    |             |"></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>LLM structured outputs &mdash; JSON mode, function calling, tool use &mdash;
+          constrain the <em>format</em> of the output; the full token-by-token language
+          model still runs, so mode dropping, overconfidence, and latency are
+          unchanged.</li>
+      <li>Jev&rsquo;s parallel sampler defines all possible outputs upfront and generates
+          them in a single query; because no unexpected output can appear, type errors are
+          architecturally impossible rather than just caught.</li>
+      <li>Real-world performance: Jev runs in 70&thinsp;ms&ndash;500&thinsp;ms vs.
+          3&ndash;329 s for frontier LLMs, and costs $0.042/MTok input with free output
+          vs. $0.20&ndash;$10/MTok for LLMs.</li>
+      <li>Published benchmark gains (193.6&times; faster, 444.6&times; cheaper) are
+          self-reported upper bounds; caveats include in-house test design, a slower
+          LLM wrapper as the baseline, and reference answers biased toward OpenAI and
+          Anthropic.</li>
+      <li>Use <code>system-one-adapter-python</code> to route the same System One code
+          at either Jev or an LLM backend and measure the real gap on your own tasks.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Stuck or want to go deeper? Ask: &ldquo;When exactly does OpenAI function calling
+    outperform Jev?&rdquo; or &ldquo;How does the parallel sampler avoid overconfidence
+    if the outputs are fixed in advance?&rdquo; &mdash; those questions lead directly
+    into the confidence-threshold patterns in Lesson 10.
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0008-architectural-patterns.html">&larr; Prev: Architectural Patterns</a>
+    <a href="0010-ticket-router-part1.html" class="primary">
+      Next: Ticket Router Part 1 &rarr;
+    </a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-9',
+    0,
+    'Correct. Jev defines the full set of possible outputs before any generation occurs. Because no token-by-token LM runs, there is no path by which an unexpected type can appear — it is architecturally excluded. Options B and C describe format-constraining techniques used in LLM pipelines; they restrict output shape after or during token generation, but do not eliminate the underlying LM\'s latency, overconfidence, or mode-dropping tendencies.'
+  );
+</script>
+</body>
+</html>

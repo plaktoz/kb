@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 1: The LLM Reliability Problem — Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <p class="breadcrumb">
+      Jev AI &rsaquo; Module 1 &mdash; Why Jev Exists &rsaquo; Lesson 1 of 12
+    </p>
+    <h1>The LLM Reliability Problem</h1>
+    <div class="lesson-meta">
+      <span>Module 1</span>
+      <span>Lesson 1 of 12</span>
+      <span>~15 min</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    After this lesson, you will be able to name the three RLHF failure modes that
+    make large language models unreliable for production automation, and explain why
+    each one forces a human into the loop — turning a promised efficiency gain into
+    a supervision bottleneck.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://typesafe.ai/blog/ai-too-good-to-be-true-too-bad-to-be-useful-typesafe-ai"
+       target="_blank" rel="noopener">
+      AI: Too Good to Be True, Too Bad to Be Useful &mdash; Typesafe AI
+    </a>
+  </div>
+
+  <h2>What RLHF Does — and Why It Creates a Problem</h2>
+
+  <p>
+    Most frontier LLMs are fine-tuned using <strong>Reinforcement Learning from Human
+    Feedback (RLHF)</strong>. Human raters score model outputs and those scores become
+    the training signal. The model learns to produce whatever humans rate highly.
+  </p>
+  <p>
+    This works well when the goal is conversational quality: helpfulness, clarity,
+    a pleasant tone. It becomes a liability when the goal is <em>reliability</em> — the
+    property you need before you can remove a human from the loop entirely. RLHF
+    optimizes for approval, not accuracy, and those two objectives frequently diverge.
+  </p>
+  <p>
+    The result is a class of models that, as Typesafe AI put it,
+    &ldquo;simultaneously overpromise (general intelligence) and underdeliver
+    (unreliable for production automation).&rdquo;
+  </p>
+
+  <h2>The Three RLHF Failure Modes</h2>
+
+  <p>
+    Typesafe AI identifies three distinct ways that RLHF optimization breaks down
+    for automation:
+  </p>
+
+  <h3>1. Mode Dropping</h3>
+  <p>
+    RLHF pushes a model toward the responses that score highest with human raters.
+    Over time this narrows the model&rsquo;s output distribution: it gravitates toward
+    a preferred style and suppresses valid but lower-rated alternatives. The analogy
+    is GAN <em>mode collapse</em>, where a generative network learns to produce only
+    the small subset of outputs the discriminator rewards, ignoring the rest of the
+    true distribution.
+  </p>
+  <p>
+    For automation, mode dropping means the model may never surface an answer that
+    would be correct but unconventional. Diversity in outputs &mdash; the kind that
+    lets a system try multiple strategies and pick the best &mdash; is traded away for
+    a narrow band of &ldquo;approved&rdquo; responses.
+  </p>
+
+  <h3>2. Overconfidence</h3>
+  <p>
+    Human raters reward responses that <em>sound</em> certain. A model that hedges
+    with &ldquo;I&rsquo;m not sure, but&hellip;&rdquo; scores lower than one that
+    states the same information as established fact. RLHF training therefore pushes
+    models to adopt a confident register regardless of whether that confidence is
+    calibrated to actual correctness.
+  </p>
+  <p>
+    Typesafe AI frames the consequence precisely: a model that succeeds 95&thinsp;%
+    of the time but <strong>cannot identify the failing 5&thinsp;%</strong>
+    &ldquo;can&rsquo;t automate that task.&rdquo; The failure is not accuracy itself
+    but the model&rsquo;s inability to flag its own uncertainty. Without that signal,
+    there is no safe trigger for escalation or rejection.
+  </p>
+
+  <h3>3. Hallucination</h3>
+  <p>
+    RLHF rewards responses that are compelling to a person &mdash; responses that
+    flow well, cite apparent facts, and feel authoritative. It does not directly
+    reward responses that are <em>true</em>. The model learns that fabricated but
+    plausible content passes the filter just as well as accurate content, and
+    sometimes better.
+  </p>
+  <p>
+    The key distinction for automation: &ldquo;an output can be compelling to a
+    person without being reliable enough for unattended automation.&rdquo; A human
+    reader catches obvious hallucinations; an automated downstream system does not.
+  </p>
+
+  <h2>The Human-in-the-Loop Bottleneck</h2>
+
+  <p>
+    Each failure mode above is individually manageable in a supervised setting.
+    A person can notice when a response sounds wrong, catch a fabricated citation,
+    or request a different approach when the first answer misses the mark. Humans
+    become the error-correction layer that compensates for RLHF&rsquo;s weaknesses.
+  </p>
+  <p>
+    The bottleneck emerges when you try to scale. If every LLM output requires
+    a human review before it can be acted on, then throughput is capped by human
+    attention — not by the model. The efficiency gain you expected from automation
+    is largely consumed by supervision overhead.
+  </p>
+  <p>
+    This is the core argument behind Jev: the RLHF failure modes are not bugs that
+    can be patched with better prompts. They are a consequence of the training
+    objective itself. Solving the reliability problem for automation requires a
+    different training objective entirely.
+  </p>
+
+  <div class="callout key">
+    A model with 95&thinsp;% accuracy is not 95&thinsp;% automatable. If the model
+    cannot identify which responses belong to the failing 5&thinsp;%, every output
+    must be verified &mdash; and you are back to full human oversight.
+  </div>
+
+  <div class="callout warning">
+    <strong>Common misconception:</strong> &ldquo;Better prompting will fix
+    reliability.&rdquo; It will not. Mode dropping, overconfidence, and hallucination
+    are products of the RLHF training objective, not of prompt wording. Elaborate
+    system prompts may reduce the symptom frequency, but they cannot change what
+    the model was optimized to maximize.
+  </div>
+
+  <div class="quiz" id="quiz-1">
+    <h3>Check your understanding</h3>
+    <p>What makes RLHF-trained models unreliable for unattended automation?</p>
+    <div class="quiz-options">
+      <button>Models optimize for human approval, not factual accuracy</button>
+      <button>Models lack enough training data for edge cases</button>
+      <button>Models need larger context windows to avoid errors</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>
+      Think of <strong>3 real automation tasks</strong> you have wanted to automate
+      (e.g., triaging support emails, extracting data from invoices, flagging policy
+      violations in user content). For each task, identify which RLHF failure mode
+      &mdash; <em>overconfidence</em>, <em>mode dropping</em>, or
+      <em>hallucination</em> &mdash; would most likely cause it to fail in
+      unattended production, and briefly explain why.
+    </p>
+    <textarea placeholder="Task 1: [describe the task] — failure mode: [overconfidence / mode dropping / hallucination] — because: [your reasoning]
+
+Task 2: …
+
+Task 3: …"></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li>RLHF fine-tunes LLMs by rewarding outputs that earn high scores from human
+          raters, optimizing for approval rather than accuracy.</li>
+      <li><strong>Mode dropping</strong> narrows the output distribution toward
+          preferred styles, suppressing valid alternatives — analogous to GAN mode
+          collapse.</li>
+      <li><strong>Overconfidence</strong> means models trained to sound certain cannot
+          signal when they are wrong, eliminating the escalation trigger automation
+          requires.</li>
+      <li><strong>Hallucination</strong> arises because RLHF rewards compelling
+          responses; plausible-but-fabricated content passes human review as well as
+          accurate content does.</li>
+      <li>All three failure modes force a human into the verification loop, capping
+          throughput by human attention and defeating the purpose of automation.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Stuck or want to go deeper? Ask: &ldquo;Why can&rsquo;t I just add a confidence
+    threshold to an RLHF model?&rdquo; or &ldquo;What would a training objective
+    that actually optimizes for calibration look like?&rdquo; &mdash; those questions
+    lead directly into Lesson 3.
+  </div>
+
+  <nav class="lesson-nav">
+    <span></span>
+    <a href="0002-bitterest-lesson-ml-hierarchy.html" class="primary">
+      Next: The Bitterest Lesson &rarr;
+    </a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>
+  initQuiz(
+    'quiz-1',
+    0,
+    'Correct. RLHF rewards whatever earns human approval — confident-sounding, compelling responses — regardless of whether they are factually correct. The other options describe real ML challenges, but neither is the mechanism Typesafe AI identifies as the root cause of automation unreliability.'
+  );
+</script>
+</body>
+</html>

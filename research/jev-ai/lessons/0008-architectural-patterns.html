@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 8: The Four Architectural Patterns — Jev AI</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="container">
+
+  <header class="lesson-header">
+    <div class="breadcrumb">
+      <a href="../lessons.md">Jev AI Course</a> &rsaquo;
+      Module 3 — Reliability and Patterns &rsaquo;
+      Lesson 8 of 12
+    </div>
+    <h1>The Four Architectural Patterns</h1>
+    <div class="lesson-meta">
+      <span>Module 3</span>
+      <span>~20 min</span>
+      <span>Lesson 8 of 12</span>
+    </div>
+  </header>
+
+  <div class="learning-objective">
+    <strong>Learning objective</strong>
+    Identify and apply Jev's four architectural patterns — Speculative Fan-Out, Confidence-Gated Routing, Composite Scoring, and Intent Routing — and understand how each pattern composes atomic decisions into reliable system behavior.
+  </div>
+
+  <div class="source-card">
+    <div class="source-label">Primary source</div>
+    <a href="https://docs.typesafe.ai/patterns" target="_blank" rel="noopener">docs.typesafe.ai/patterns</a>
+    — TypeSafe AI documentation on the four production architectural patterns.
+  </div>
+
+  <p>In the previous lesson you learned how confidence scores give you a second axis of information beyond the answer itself. This lesson shows you what to <em>do</em> with that axis. TypeSafe documents four named patterns that cover the most common ways engineers compose Jev's primitives into production systems.</p>
+
+  <p>The underlying principle is simple: rather than asking one large, multi-factor question, you decompose your decision into discrete atomic questions and let code determine how those answers combine. Complex system behavior emerges from simple, composable pieces.</p>
+
+  <h2>1. Speculative Fan-Out</h2>
+
+  <p><strong>Core idea:</strong> Send all the questions you might need — including speculative ones you are not sure you will use — in a single API call. After the call returns, write code that decides which answers to act on based on what other answers say.</p>
+
+  <p><strong>When to use it:</strong> Anytime the questions you need depend on preliminary answers, or when you want to save a round-trip by anticipating the next branch. It is especially useful when the cost of extra questions is marginal.</p>
+
+  <p><strong>Benefits: Cost, Speed.</strong> Because all questions are evaluated in parallel and in isolation, extra questions cost almost nothing. You pay for context once and get all answers back together.</p>
+
+  <pre><code># Send the main question plus speculative follow-ups in one call
+result = client.system_one(
+    context=ticket,
+    questions=[
+        choice("category",    ["billing", "technical", "account"]),
+        choice("billing_sub", ["duplicate_charge", "wrong_amount", "missing_refund"]),
+        choice("tech_sub",    ["login", "performance", "data_loss"]),
+    ]
+)
+
+# Code decides which sub-answer to use — not the model
+if result.answers["category"].value == "billing":
+    sub = result.answers["billing_sub"].value
+elif result.answers["category"].value == "technical":
+    sub = result.answers["tech_sub"].value
+else:
+    sub = None</code></pre>
+
+  <p>The speculative questions (<code>billing_sub</code>, <code>tech_sub</code>) are always evaluated but only consulted when the routing answer makes them relevant. This avoids a second round-trip to ask the follow-up after you know the category.</p>
+
+  <h2>2. Confidence-Gated Routing</h2>
+
+  <p><strong>Core idea:</strong> Use confidence as a <em>second decision axis</em> alongside the answer value. The answer tells you <em>what</em>; the confidence tells you <em>how certain</em>. Route high-confidence results to automated action and low-confidence results to a human.</p>
+
+  <p><strong>When to use it:</strong> Anytime the cost of acting on a wrong answer is asymmetric — meaning some mistakes are more expensive than others. This is the safety pattern.</p>
+
+  <p><strong>Benefits: Reliability, Safety.</strong> You get autonomous throughput on the easy cases while preserving human oversight for the genuinely ambiguous ones.</p>
+
+  <pre><code>result = client.system_one(context=message, questions=[
+    choice("intent", ["refund", "upgrade", "cancel", "other"]),
+])
+
+answer = result.answers["intent"]
+
+if answer.confidence >= 0.92:
+    # High confidence — act autonomously
+    auto_route(answer.value)
+elif answer.confidence >= 0.70:
+    # Medium confidence — flag for review with suggested action
+    queue_for_review(answer.value, answer.confidence)
+else:
+    # Low confidence — escalate without a suggestion
+    escalate_to_human(message)</code></pre>
+
+  <p>The thresholds are plain code constants. You tune them by running your system against a labeled sample and observing where errors concentrate — no prompt rewriting required.</p>
+
+  <h2>3. Composite Scoring</h2>
+
+  <p><strong>Core idea:</strong> Ask several independent Score questions, each measuring a different dimension, then combine them in code with custom weights to produce a single decision score.</p>
+
+  <p><strong>When to use it:</strong> Decisions that have multiple contributing factors that are genuinely independent — for example, urgency, sentiment, and complexity might each affect how you prioritize a ticket without being the same underlying thing.</p>
+
+  <p><strong>Benefits: Cost, Reliability, Speed.</strong> Each dimension is a clean, focused question. The weights live in code as numeric coefficients, so adjusting priorities means changing a number — not rewriting a prompt.</p>
+
+  <pre><code>result = client.system_one(
+    context=ticket,
+    questions=[
+        score("urgency",    "How time-sensitive is this issue? (0 = none, 1 = critical)"),
+        score("sentiment",  "How negative is the customer's tone? (0 = neutral, 1 = very negative)"),
+        score("complexity", "How technically complex is this issue? (0 = simple, 1 = complex)"),
+    ]
+)
+
+a = result.answers
+priority_score = (
+    0.5 * a["urgency"].value +
+    0.3 * a["sentiment"].value +
+    0.2 * a["complexity"].value
+)
+
+# Weights are a one-line change — no prompt edit needed
+tier = "P1" if priority_score > 0.75 else "P2" if priority_score > 0.45 else "P3"</code></pre>
+
+  <p>The key discipline here is that each Score question must measure exactly one thing. If you find yourself writing criteria that mention two factors, split it into two questions.</p>
+
+  <h2>4. Intent Routing</h2>
+
+  <p><strong>Core idea:</strong> Classify the user's intent first, then direct traffic to the appropriate downstream handler. Each handler only deals with one intent type, making it simpler and easier to test.</p>
+
+  <p><strong>When to use it:</strong> Almost always — this is the most common pattern and a natural starting point for any new Jev-based system. It maps directly onto the routing tables most engineers already think in.</p>
+
+  <p><strong>Benefits: Cost, Speed.</strong> Handlers stay simple because they receive pre-classified input. The routing question is cheap and fast.</p>
+
+  <pre><code>result = client.system_one(
+    context=user_message,
+    questions=[
+        choice("intent", ["search", "create", "update", "delete", "help"]),
+    ]
+)
+
+handlers = {
+    "search": handle_search,
+    "create": handle_create,
+    "update": handle_update,
+    "delete": handle_delete,
+    "help":   handle_help,
+}
+
+handler = handlers[result.answers["intent"].value]
+handler(user_message)</code></pre>
+
+  <p>Intent Routing is often combined with Confidence-Gated Routing for production safety: route with high-confidence intents automatically, and send low-confidence ones to a disambiguation step or human review before the handler runs.</p>
+
+  <h2>Pattern Summary</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Pattern</th>
+        <th>Core idea</th>
+        <th>Primary benefits</th>
+        <th>Best combined with</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Speculative Fan-Out</strong></td>
+        <td>Ask all questions upfront; code picks which answers to use</td>
+        <td>Cost, Speed</td>
+        <td>Intent Routing (send sub-questions alongside intent)</td>
+      </tr>
+      <tr>
+        <td><strong>Confidence-Gated Routing</strong></td>
+        <td>Use confidence as a second axis to gate autonomous action</td>
+        <td>Reliability, Safety</td>
+        <td>Intent Routing (safety wrapper around any routing decision)</td>
+      </tr>
+      <tr>
+        <td><strong>Composite Scoring</strong></td>
+        <td>Combine independent dimension scores with code-side weights</td>
+        <td>Cost, Reliability, Speed</td>
+        <td>Confidence-Gated Routing (gate on composite confidence)</td>
+      </tr>
+      <tr>
+        <td><strong>Intent Routing</strong></td>
+        <td>Classify intent first; dispatch to a dedicated handler</td>
+        <td>Cost, Speed</td>
+        <td>Confidence-Gated Routing (add safety to the dispatch step)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout key">
+    Complex system behavior from simple atomic decisions. Each pattern is built from the same primitives — Choice, Score, Noul — composed by ordinary code. You never need a more complex prompt; you need a better decomposition. The intelligence of your system lives in how you combine answers, not in asking the model to hold multiple factors in mind at once.
+  </div>
+
+  <div class="callout warning">
+    Do not try to ask one complex multi-factor question. A question like "Is this message urgent, negative, and complex?" conflates three independent signals into one answer, making the result uninterpretable and impossible to weight. Decompose every multi-factor judgment into separate atomic questions and combine the answers in code where you can inspect, test, and tune each factor independently.
+  </div>
+
+  <div class="quiz" id="quiz-8">
+    <h3>Quick check</h3>
+    <p>Which pattern is described as "the most common" and maps naturally onto dispatch tables engineers already think in?</p>
+    <div class="quiz-options">
+      <button>Speculative Fan-Out pattern for parallel question batching</button>
+      <button>Intent Routing pattern for handler-based dispatch</button>
+      <button>Composite Scoring pattern for multi-dimensional priority ranking</button>
+    </div>
+    <div class="quiz-feedback"></div>
+  </div>
+
+  <div class="exercise">
+    <h3>Skill exercise</h3>
+    <p>Pick <strong>one</strong> of the four patterns and sketch a mini-system design that uses it. Write your design in plain text or ASCII diagram form. Include all four components:</p>
+    <ul>
+      <li><strong>State</strong> — what data object are you working with?</li>
+      <li><strong>Questions</strong> — what does your Jev call ask? (question type, text, options/criteria)</li>
+      <li><strong>Confidence threshold</strong> — where do you draw the line between auto-action and escalation?</li>
+      <li><strong>Routing logic</strong> — what happens at each branch of your decision?</li>
+    </ul>
+    <textarea placeholder="Example: Pattern chosen: Confidence-Gated Routing&#10;State: incoming customer email object (subject, body, sender)&#10;Questions: choice('intent', ['complaint', 'inquiry', 'praise'])&#10;Threshold: >= 0.88 auto-route, 0.65–0.88 flag, < 0.65 escalate&#10;Routing logic: complaint + high confidence → create P1 ticket; inquiry + high confidence → send FAQ link; all low-confidence → human inbox"></textarea>
+  </div>
+
+  <div class="lesson-summary">
+    <strong>Lesson summary</strong>
+    <ul>
+      <li><strong>Speculative Fan-Out</strong> sends all questions — including speculative follow-ups — in one call and lets code decide which answers to use, saving round-trips at near-zero extra cost.</li>
+      <li><strong>Confidence-Gated Routing</strong> adds a safety layer by using confidence as a second decision axis, enabling autonomous action on high-confidence answers while escalating uncertain ones to humans.</li>
+      <li><strong>Composite Scoring</strong> measures each relevant dimension as a separate Score question and combines them with numeric weights in code, making the weighting transparent and tunable without prompt changes.</li>
+      <li><strong>Intent Routing</strong> is the most common pattern: classify intent first, then dispatch to a dedicated handler — often paired with Confidence-Gated Routing for production safety.</li>
+      <li>All four patterns share the same design principle: decompose complex decisions into discrete atomic questions and compose their answers in code.</li>
+    </ul>
+  </div>
+
+  <div class="tutor-prompt">
+    Ask your tutor: "Can you walk me through combining Intent Routing with Confidence-Gated Routing for my use case?" or "How do I choose weights in Composite Scoring?"
+  </div>
+
+  <nav class="lesson-nav">
+    <a href="0007-confidence-scores.html">&larr; Lesson 7: Confidence Scores</a>
+    <a href="0009-jev-vs-llm.html" class="primary">Lesson 9: Jev vs. LLM Structured Outputs &rarr;</a>
+  </nav>
+
+</div>
+<script src="../assets/quiz.js"></script>
+<script>initQuiz('quiz-8', 1, 'Intent Routing is the most common pattern — it classifies the user\'s intent first and dispatches to the appropriate handler, mapping directly onto the routing tables engineers already think in.');</script>
+</body>
+</html>
