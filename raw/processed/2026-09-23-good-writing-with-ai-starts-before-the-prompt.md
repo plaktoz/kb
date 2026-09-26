@@ -6,18 +6,22 @@ date: 2026-09-23
 
 # Good Writing With AI Starts Before the Prompt
 
-Mike Taylor, head of evals at Every, outlines a 12-step writing workflow that combines AI tools with substantial human judgment. He reports cutting a 1,200-word piece from a full day's work down to under two hours while maintaining reader engagement.
+Mike Taylor shares a refined writing workflow that pairs human judgment with AI drafting assistance. Key stages include:
 
-## Key workflow stages
+## Before Prompting
 
-**Pre-writing** – Title first, then source collection, skeleton outline, and voice recording via the Monologue app.
+Write a compelling title first, gather sources, build a structural skeleton, and record a spoken monologue of raw thoughts.
 
-**AI drafting** – Feeding context plus a personal style guide to multiple models (Claude, Fable, GPT-6 Astra), then assembling the best parts.
+## Generating Drafts
 
-**Human refinement** – Full read-throughs, self-editing (~20–30% of draft changes), and crafting the conclusion, which he notes Claude's version is rarely adequate for.
+Feed context plus a personal style guide to multiple models (Claude, Fable, GPT-6 Astra), then combine the best elements.
 
-**Editorial collaboration** – Accepting most grammar/style notes while defending edits that dilute voice or weaken ideas.
+## After Drafting
 
-## Core argument
+Read end-to-end repeatedly, self-edit (expecting ~20–30% changes), write a resonant conclusion, and submit to editors.
 
-AI compresses drafting time, but the surrounding work — finding ideas, gathering material, deciding if a draft delivers — remains human. As Taylor puts it: "I still have to bring something worth saying and care enough to get it right."
+He notes that conclusions are the hardest part: "Claude's conclusion usually isn't good enough" — aiming instead for something emotionally resonant that readers will remember.
+
+On working with editors, he advises accepting most grammar feedback readily, but defending edits that dilute your core idea or voice.
+
+The throughline: AI compresses drafting time, but the human work on both ends — finding ideas, gathering material, and caring about quality — remains essential. His reported result: a 1,200-word piece cut from a full day down to under two hours, with no decline in reader engagement.
