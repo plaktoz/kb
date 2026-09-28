@@ -3500,3 +3500,43 @@
 | 2026-09-27 | wiki/technology/ai-coding-tip-skill-description-three-sentences.md | ingest |
 | 2026-09-27 | wiki/finance/ibm-z17-marist-university-ai-classroom.md | ingest |
 | 2026-09-27 | wiki/technology/tool-calling-vs-code-execution-ai-agents.md | ingest |
+| 2026-09-28 | 2026-09-28-news-aggregation.md | news-fetch |
+| 2026-09-27 | 2026-09-27-anthropics-ceo-is-about-to-have-dinner-with-president-trump.md | scrape |
+| 2026-09-25 | 2026-09-25-astra-and-opus-just-passed-turings-other-test.md | scrape |
+| 2026-09-27 | 2026-09-27-can-muse-overcome-metas-trust-issues.md | scrape |
+| 2026-09-28 | 2026-09-28-3-etfs-that-could-include-anthropic-after-its-ipo-in-october.md | scrape |
+| 2026-09-28 | 2026-09-28-bitcoin-is-soaring-again-will-it-hit-100000-by-the-end-of-2026.md | scrape |
+| 2026-09-28 | 2026-09-28-dells-ai-server-backlog-has-ballooned-to-95-billion.md | scrape |
+| 2026-09-28 | 2026-09-19-my-productivity-system-in-2026.md | scrape |
+| 2026-09-28 | 2026-05-18-the-dark-side-of-the-jevons-paradox.md | scrape |
+| 2026-09-28 | 2026-09-24-vibe-coding-developer-productivity-tools.md | scrape |
+| 2025-12-03 | 2025-12-03-stop-saying-boredom-is-good-for-kids.md | scrape |
+| 2026-09-28 | 2026-09-16-estrogen-only-hormone-therapy-tied-to-lower-dementia-risk.md | scrape |
+| 2026-09-28 | 2026-09-16-stair-climbing-may-significantly-lower-cardiovascular-risks.md | scrape |
+| 2026-09-28 | 2026-09-17-shingrix-shingles-vaccine-linked-with-lower-heart-disease-risks.md | scrape |
+| 2026-09-28 | 2026-09-28-apps-agents-and-aggregation.md | scrape |
+| 2026-09-28 | https://fs.blog/winners-edge/ (already scraped as raw/archived/2026-07-27-the-winners-edge.md and ingested into wiki/learning/the-winners-edge-calibrated-confidence.md, wiki/strategy/the-winners-edge-confidence-risk-asymmetry.md — skipped, no fetch performed) | scrape-dupe |
+| 2026-09-28 | 2026-09-28-microsoft-rolls-out-refreshed-copilot-app-as-stock-lags-megacap-peers.md | scrape |
+| 2026-09-28 | 2026-09-28-ibms-dividend-survived-the-old-ibm-can-it-survive-the-new-one.md | scrape |
+| 2026-09-28 | 2026-09-28-3-sp-500-stocks-we-think-twice-about.md | scrape |
+| 2026-09-28 | raw/url/2026-09-28-news-aggregation.processed.md | archive |
+| 2026-09-28 | https://www.fast.ai/posts/2026-02-17-education/index.html (already scraped as raw/processed/2026-02-17-i-dont-want-a-learning-dashboard-for-my-child.md and ingested into wiki/learning/i-dont-want-a-learning-dashboard-for-my-child.md — skipped, no fetch performed) | scrape-dupe |
+| 2026-09-28 | https://www.fast.ai/posts/2026-01-21-reading-LLMs/index.html (already scraped as raw/processed/2026-01-21-how-to-use-ai-for-close-reading.md and ingested into wiki/learning/how-to-use-ai-for-close-reading.md — skipped, no fetch performed) | scrape-dupe |
+| 2026-09-28 | wiki/learning/stop-saying-boredom-is-good-for-kids.md | ingest |
+| 2026-09-28 | wiki/strategy/jevons-paradox-dark-side-ai-labor-market.md | ingest |
+| 2026-09-28 | wiki/health/estrogen-only-hormone-therapy-lower-dementia-risk.md | ingest |
+| 2026-09-28 | wiki/health/climbing-stairs-lowers-heart-disease-death-risk.md | ingest-dupe |
+| 2026-09-28 | wiki/health/shingles-vaccine-linked-to-lower-cardiovascular-burden.md (identical underlying study/stats as Harvard Health source, no new info) | ingest-dupe |
+| 2026-09-28 | wiki/productivity/goose-ai-agent-gtd-productivity-system.md | ingest |
+| 2026-09-28 | wiki/technology/agentide-vibe-coding-personal-developer-tools.md | ingest |
+| 2026-09-28 | wiki/technology/astra-opus-decode-enigma-messages.md | ingest |
+| 2026-09-28 | wiki/technology/dario-amodei-trump-white-house-dinner.md | ingest |
+| 2026-09-28 | wiki/technology/meta-muse-trust-issues-advertising-business-model.md | ingest |
+| 2026-09-28 | wiki/finance/anthropic-ipo-etf-inclusion-qqq-iwf-fpx.md | ingest |
+| 2026-09-28 | wiki/finance/sp500-weak-stocks-dollar-general-ibm-equifax-sep2026.md | ingest |
+| 2026-09-28 | wiki/strategy/apps-agents-and-aggregation-stratechery.md | ingest |
+| 2026-09-28 | wiki/finance/bitcoin-100k-rally-safe-haven-skepticism.md | ingest |
+| 2026-09-28 | wiki/finance/dell-stock-surges-record-ai-server-orders-q2-2027.md | ingest |
+| 2026-09-28 | wiki/finance/ibm-summer-contradictions-quantum-patent-dividend.md | ingest |
+| 2026-09-28 | wiki/finance/microsoft-copilot-refresh-stock-lag-megacaps.md | ingest |
+| 2026-09-28 | daily-update/2026-09/2026-09-28.md | newsletter |
