@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://thirdspacelearning.com/blog/ai-tutoring-evidence
 author: Tom Hooper
 tags: [ai-tutoring, edtech-evidence, cognitive-load, learning-outcomes]
-date_consumed: 2026-07-28
+date_consumed: 2026-09-29
 ---
 
 ## Summary
@@ -16,6 +16,7 @@ A review of AI tutoring evidence finds generic tools like ChatGPT can harm learn
 - **[[Cognitive Outsourcing]]** — Oakley and Sejnowski's term (Memory Paradox, 2025) for when AI thinks for students and no learning takes place
 - **[[Education Endowment Foundation]]** — establishes one-to-one tutoring's average five-month progress benchmark
 - **[[Randomized Controlled Trials in Education]]** — Bastani et al. (2025) ChatGPT RCT and Kestin et al. (2025) physics AI tutor RCT are key evidence points
+- **Harvard [[Physical Sciences 2]] AI Tutor Study** — a 194-student crossover RCT led by Harvard lecturers [[Gregory Kestin]] and [[Kelly Miller]], first reported by the Harvard Gazette in September 2024; each group alternated weekly between an instructor-led active-learning lesson and a custom AI tutor used at home, with pre/post tests plus engagement, enjoyment, motivation, and growth-mindset surveys
 - **[[Khanmigo]]** — Khan Academy's AI tutor; qualitative evaluation found it did not tailor tasks to individual needs or support metacognitive skills
 - **[[LearnLM]]** — Eedi and Google DeepMind Socratic AI tutor; human tutors approved 82.3% of AI responses but required unsustainable oversight levels
 - **[[Third Space Learning]]** — publisher and maker of the AI maths tutor Skye; Educate Ventures Research evaluated 9,320 student sessions
@@ -25,6 +26,9 @@ A review of AI tutoring evidence finds generic tools like ChatGPT can harm learn
 
 - **ChatGPT study use**: 50% better practice performance, 17% worse exam results.
 - **Purpose-built AI tutor RCT** (Kestin et al.): effect sizes 0.73–1.3 SD, doubling active learning gains.
+- **Harvard PS2 study design**: 194 life-sciences majors switched weekly between an instructor-led active-learning session and a custom GPT API–based AI tutor; learning gains in the AI-tutored group were about double the classroom group's, and students also reported greater engagement and motivation — "It was shocking, and super exciting" (Miller).
+- **Mechanism, per the researchers**: personalised feedback and self-paced learning let faster students move ahead and struggling students linger — the same two levers the broader evidence base credits for effective AI tutoring.
+- **Not a teacher replacement**: Kestin cautioned AI can strengthen or undermine learning depending on use; the goal is to build critical thinking, not let AI "think" for students. Harvard was piloting the approach in a multivariable calculus course and other large intro courses via the Derek Bok Center for Teaching and Learning as of the report.
 - **Skye tutor**: students improved from 34% to 92% accuracy in one session across 9,320 sessions.
 - **Khanmigo shortfall**: did not tailor tasks or support metacognitive learning (Vanacore et al., 2026).
 - **Effective AI tutoring must scaffold reasoning**, not supply direct answers.
