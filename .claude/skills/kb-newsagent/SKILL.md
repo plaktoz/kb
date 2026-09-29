@@ -23,7 +23,7 @@ Filenames alone are a weak signal — before finalizing your candidate list, run
 
 Wiki categories are defined in `data/wiki-categories.md`. The search categories below align with those, including Health, which has its own `wiki/health/` subdirectory.
 
-**If the Tavily MCP tool (`tavily-search` or `mcp_tavily_tavily-search`) is available, use it as the primary method** to find articles for each category. Use targeted search queries like:
+**Use the Tavily MCP tool (`tavily-search`) as the primary search method** to find articles for each category. If Tavily errors or returns no MCP connection, fall back to the Serper MCP tool (`google_search`) before falling back further to the static source list below. Use targeted search queries like:
 - Technology: `"AI OR software OR startup site:techcrunch.com OR site:news.ycombinator.com"`
 - Finance: `"stock market OR investing OR economy news today"`
 - Productivity: `"productivity tips OR time management OR deep work"`
@@ -31,7 +31,7 @@ Wiki categories are defined in `data/wiki-categories.md`. The search categories 
 - Health: `"health research OR wellness OR nutrition OR mental health news today"`
 - My Holdings: generate one query per holding using the ticker (Stock) or theme (ETF) strategy described above; pick the 3 best results across all queries
 
-If Tavily is not available, fall back to fetching the source URLs listed below.
+If neither Tavily nor Serper is available, fall back to fetching the source URLs listed below.
 
 ## Categories, sources, and article count
 
