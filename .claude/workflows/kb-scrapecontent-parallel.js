@@ -27,36 +27,112 @@ const WORKER_SCHEMA = {
   required: ['log_rows'],
 }
 
-// Phase 1: Discover URLs and load skill prompt in parallel
+// Inlined from .claude/skills/kb-scrapecontent/SKILL.md — keep in sync if that file changes.
+// Inlining avoids paying an agent to read-and-echo a static file on every run (was costing
+// ~3 min on the critical path, and previously pointed at a stale path that never resolved).
+const SKILL_CONTENT = `---
+name: kb-scrapecontent
+description: Scrape URLs from /raw/url/ files, save clean articles to /raw/, and log activity to kbm.log.md. Use when the user wants to ingest URLs into the knowledge base.
+---
+
+# Scrape Content Prompt
+
+You are a web scraping agent with file access. Your job is to extract URL content and save each article as a clean raw markdown file for later processing by the Karpathy-Ingest pipeline.
+
+## Input
+
+Read \`.md\` files from \`/raw/url/\`, **excluding any file whose name ends in \`.processed.md\`**. Two supported formats:
+
+- **Search result / aggregation file** — a structured file with many URLs embedded in the content (e.g. a news aggregation with titles, URLs, and descriptions)
+- **Simple URL list** — a plain \`.md\` file with one URL per line
+
+Extract every URL found across all input files.
+
+## Per-URL Instructions
+
+### 1. Deduplicate
+
+If the same URL appears more than once, process it only once.
+
+### 2. Skip if already scraped
+
+Before fetching, run a fast exact-match check: \`grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null\` (this covers \`raw/\`, \`raw/processed/\`, and any \`wiki/\` note the URL may already have been ingested into). If any match is found, this article has already been scraped and/or ingested — skip it without fetching.
+
+### 3. Fetch and clean
+
+Fetch the URL and extract only:
+
+- Article title
+- Byline (author, if present)
+- Publication date
+- Article body text
+
+Strip everything else: navigation, ads, footers, related articles, cookie banners, comment sections.
+
+### 4. Handle failures
+
+If a URL fails to fetch (404, paywall, timeout, or any error), log the failure to \`kbm.log.md\` and continue to the next URL. Do not create a file for failed fetches.
+
+### 5. Save the file
+
+Save to \`/raw/YYYY-MM-DD-slug.md\` where:
+
+- \`YYYY-MM-DD\` is the article's own publication date (extract from the URL path or article metadata). If no reliable publish date can be found in either place, use today's scrape date instead of guessing — do not invent or approximate a date.
+- \`slug\` is the article title converted to lowercase kebab-case
+
+File format:
+
+\`\`\`md
+---
+source_url: {URL}
+author: {Author or "Unknown"}
+date: {YYYY-MM-DD}
+---
+
+# {Article Title}
+
+{Clean article body}
+\`\`\`
+
+### 6. Log each scraped file
+
+Append a row to \`kbm.log.md\` for each successfully saved file:
+
+\`\`\`md
+| YYYY-MM-DD | filename.md | scrape |
+\`\`\`
+
+## After all URLs in a file are processed
+
+1. Rename the source file in \`/raw/url/\` by inserting \`.processed\` before \`.md\` — e.g. \`news.md\` → \`news.processed.md\`. Do not delete the file.
+2. Append a cleanup row to \`kbm.log.md\`:
+
+\`\`\`md
+| YYYY-MM-DD | source-filename.processed.md | archive |
+\`\`\`
+
+## Expected outcome
+
+1 URL = 1 file in \`/raw/YYYY-MM-DD-slug.md\`
+`
+
+// Phase 1: Discover URLs
 phase('Discover')
 
-const [discovery, skillLoad] = await parallel([
-  () => agent(
-    'Read all .md files in raw/url/, skipping any file whose name ends in .processed.md. Extract every URL found across all files. Deduplicate. Return: urls (array of unique URLs), sourceFiles (array of file paths that were read, relative to repo root).',
-    {
-      label: 'discover-urls',
-      schema: {
-        type: 'object',
-        properties: {
-          urls: { type: 'array', items: { type: 'string' } },
-          sourceFiles: { type: 'array', items: { type: 'string' } },
-        },
-        required: ['urls', 'sourceFiles'],
+const discovery = await agent(
+  'Read all .md files in raw/url/, skipping any file whose name ends in .processed.md. Extract every URL found across all files. Deduplicate. Return: urls (array of unique URLs), sourceFiles (array of file paths that were read, relative to repo root).',
+  {
+    label: 'discover-urls',
+    schema: {
+      type: 'object',
+      properties: {
+        urls: { type: 'array', items: { type: 'string' } },
+        sourceFiles: { type: 'array', items: { type: 'string' } },
       },
-    }
-  ),
-  () => agent(
-    'Read the file skills/Scrape-content-prompt.md and return its complete text content.',
-    {
-      label: 'load-skill',
-      schema: {
-        type: 'object',
-        properties: { content: { type: 'string' } },
-        required: ['content'],
-      },
-    }
-  ),
-])
+      required: ['urls', 'sourceFiles'],
+    },
+  }
+)
 
 if (!discovery || !discovery.urls || discovery.urls.length === 0) {
   log('No URLs found in raw/url/ — nothing to scrape.')
@@ -73,7 +149,7 @@ for (let i = 0; i < urls.length; i += batchSize) {
   batches.push(urls.slice(i, i + batchSize))
 }
 
-const skillContent = skillLoad ? skillLoad.content : 'Fetch each URL. Extract article title, author, date, and body. Save to raw/YYYY-MM-DD-slug.md with a source_url: header.'
+const skillContent = SKILL_CONTENT
 
 // Phase 2: Scrape in parallel — up to 8 agents
 phase('Scrape')
