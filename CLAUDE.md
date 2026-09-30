@@ -48,11 +48,12 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 
 | Workflow script | Slash command | Purpose |
 |----------------|---------------|---------|
+| `.claude/workflows/kb-newsagent-parallel.js` | `/kb-newsagent-parallel` | Same as kb-newsagent but fans out one concurrent agent per category (~6); collector merges sections and writes the file + log |
 | `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out up to 8 concurrent scrape agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
 
-> In sessions without the Workflow tool (e.g. Cowork, which cannot run `.claude/workflows/*.js`), `kb-scrapecontent-parallel` and `kb-ingest-parallel` automatically fall back to batched general-purpose Agent/Task calls instead — see each skill's `SKILL.md` for the exact fallback procedure. `/kb-daily` and `/kb-daily-autocommit` work unattended in either environment.
+> In sessions without the Workflow tool (e.g. Cowork, which cannot run `.claude/workflows/*.js`), `kb-newsagent-parallel`, `kb-scrapecontent-parallel` and `kb-ingest-parallel` automatically fall back to batched general-purpose Agent/Task calls instead — see each skill's `SKILL.md` for the exact fallback procedure. `/kb-daily` and `/kb-daily-autocommit` work unattended in either environment.
 
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
@@ -104,6 +105,18 @@ Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `news
 - Update an existing note when a strong match already exists.
 - Keep the knowledge graph coherent by linking related notes thoughtfully.
 - When asked to create a new artifact, use the matching slash command and save output in the expected location.
+
+## Notifications
+When you need the user's attention and they may not be watching the session, send a Telegram notification:
+
+```
+~/.claude/channels/telegram/notify.sh "<message>"
+```
+
+- Use this **only** when the user must act: a decision/choice is required to continue, or a process/pipeline has hung, stalled, or stopped unexpectedly and needs manual intervention.
+- Do not use it for routine progress updates, step completions, or anything that doesn't need immediate attention — one unnecessary notification is worse than none. When in doubt, don't send it.
+- At most one notification per incident — don't send a follow-up unless the situation materially changes.
+- Keep the message under Telegram's 4,096 UTF-8 character limit; summarize rather than paste full logs.
 
 ## Do not
 - Modify `skills-lock.json` or anything in `.obsidian/`.

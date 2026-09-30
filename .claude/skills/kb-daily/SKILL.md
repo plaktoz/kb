@@ -9,7 +9,7 @@ Run the full daily knowledge pipeline in this exact sequence. After each step, c
 
 ## Step 1: News Agent
 
-Invoke the `/kb-newsagent` skill and execute it.
+Invoke the `/kb-newsagent-parallel` skill and execute it (it uses the Workflow tool where available, and falls back to batched Agent/Task calls otherwise — see its `SKILL.md`).
 
 If this step fails, note the error and continue to Step 2.
 
