@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.medicalnewstoday.com/articles/cutting-added-sugar-before-age-2-linked-lower-dementia-alzheimers-depression-risk-later-life
 author: Corrie Pelc
 tags: [nutrition, dementia, alzheimers, early-life-development]
-date_consumed: 2026-08-05
+date_consumed: 2026-09-29
 ---
 
 ## Summary
@@ -67,3 +67,18 @@ A MedPage Today writeup of what appears to be the same UK Biobank sugar-rationin
 **Zheng's caveat**: the findings do not support restricting overall calories or essential nutrients during pregnancy or infancy — rather, they suggest guideline-consistent reductions in *added and free* sugars during the first 1,000 days may have long-term brain-health benefits. As an observational natural-experiment study, causal claims require further research.
 
 Source: https://www.medpagetoday.com/neurology/dementia/122400
+
+
+## Update (2026-09-29, HealthDay — Translational Psychiatry study zeroes in on anxiety)
+
+A HealthDay report on a study published in *Translational Psychiatry* (lead author Hana Navratilova, who led the work while at the University of Surrey and is now at IPB University, Indonesia; senior author Nophar Geifman, University of Surrey) adds anxiety-specific detail to this same sugar-rationing natural-experiment line of research:
+
+- Analyzed data from **more than 46,000 people** born in the UK during and after World War II sugar rationing.
+- Those exposed to **longer periods of rationing** in utero through age 2 had a **lower risk of developing anxiety** as adults; those with **no or only limited sugar restriction** as babies were **more likely to develop anxiety** with age.
+- Participants with the **longest rationing exposure** also reported a **lower preference for sweet foods** as adults — suggesting rationing durably shifted food preference alongside mental-health risk.
+- MRI brain scans of **nearly 6,000 participants** found gray matter volume differences across **11 brain regions**, including the **cerebellum** — a region increasingly implicated in mental health beyond its traditional motor role.
+- Geifman: "Early nutritional environments appear to have lasting relevance for mental health." Researchers recommend future studies incorporate genetics to better understand the mechanism.
+
+This corroborates and extends the anxiety-risk finding already logged above (20% lower anxiety risk) with underlying cohort size, brain-imaging detail, and a new food-preference finding.
+
+Source: https://www.usnews.com/news/health-news/articles/2026-09-24/sugar-exposure-in-early-life-linked-to-anxiety-risk-in-adulthood
