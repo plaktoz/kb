@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  :root {
+    --ink: #1b1f24;
+    --muted: #5b6572;
+    --line: #d9dee3;
+    --bg: #ffffff;
+    --bg-alt: #f5f7f9;
+    --accent: #2f5fb3;
+    --ok: #1a7f4e;
+    --bad: #b3261e;
+    --warn: #8a5a00;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-alt);
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+  }
+  header h1 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+  nav#nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  nav#nav a {
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px 6px 0 0;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+  }
+  nav#nav a.active {
+    color: var(--accent);
+    border-color: var(--line);
+    background: var(--bg);
+    font-weight: 600;
+  }
+  #io-controls {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  #io-controls button, #io-controls .file-label {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    cursor: pointer;
+  }
+  .file-label input[type="file"] { display: none; }
+  #slice-controls {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  #slice-controls select {
+    font: inherit;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+  }
+  #storage-warning {
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    background: #fff3e0;
+    border: 1px solid #e0a95c;
+    color: var(--warn);
+    font-size: 0.85rem;
+  }
+  main#app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 4rem;
+  }
+  h2 { margin-top: 0; }
+  .empty, .muted { color: var(--muted); }
+  .hidden { display: none !important; }
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+  button.secondary {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  textarea, input[type="search"] {
+    font: inherit;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  fieldset {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin: 0.75rem 0;
+  }
+  label { display: block; margin: 0.3rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+  thead th { background: var(--bg-alt); }
+  tr.source-row { cursor: pointer; }
+  tr.source-row:hover { background: var(--bg-alt); }
+  tr.detail-row td { background: var(--bg-alt); }
+  .correct-choice { color: var(--ok); font-weight: 600; }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: #eee;
+    color: #444;
+  }
+  .badge.severity-high, .badge.severity-critical { background: #fdecea; color: var(--bad); }
+  .badge.severity-medium { background: #fff3e0; color: var(--warn); }
+  .citations { padding-left: 1.1rem; }
+  .diagnosis-option {
+    border-bottom: 1px solid var(--line);
+    padding: 0.3rem 0;
+  }
+  .pending-attempt {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  ul.diagnosis-history { padding-left: 1.1rem; }
+  .changed-condition { color: var(--accent); }
+  .reveal { border-top: 1px dashed var(--line); margin-top: 0.75rem; padding-top: 0.75rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="app-title"></h1>
+  <div id="slice-controls" class="hidden">
+    <label for="slice-select">Slice</label>
+    <select id="slice-select"></select>
+  </div>
+  <nav id="nav">
+    <a href="#learn" data-route="learn">Learn</a>
+    <a href="#compare" data-route="compare">Compare</a>
+    <a href="#practice" data-route="practice">Practice</a>
+    <a href="#diagnose" data-route="diagnose">Diagnose</a>
+    <a href="#sources" data-route="sources">Explore Sources</a>
+  </nav>
+  <div id="io-controls">
+    <button id="export-btn" type="button">Export progress</button>
+    <label class="file-label">Import progress
+      <input type="file" id="import-input" accept="application/json">
+    </label>
+  </div>
+  <div id="storage-warning" class="hidden" role="alert"></div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 1, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-cloudfront", "exam": "aws-sysops", "facet": {"key": "service", "value": "cloudfront"}, "schemaVersion": 1}, "sourceQuestions": [{"id": "awssysops-p1-q014", "status": "active", "disputed": false, "stem": "You have a web application leveraging an Elastic Load Balancer (ELB) in front of the web servers deployed using an Auto Scaling Group. Your database is running on Relational Database Service (RDS). The application serves out technical articles and responses to them; in general there are more views of an article than there are responses to the article. On occasion, an article on the site becomes extremely popular resulting in significant traffic increases that causes the site to go down.\n\nWhat could you do to help alleviate the pressure on the infrastructure while maintaining availability during these events? (Choose three.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Leverage CloudFront for the delivery of the articles."}, {"letter": "B", "text": "Add RDS read-replicas for the read traffic going to your relational database"}, {"letter": "C", "text": "Leverage ElastiCache for caching the most frequently used data."}, {"letter": "D", "text": "Use SQS to queue up the requests for the technical posts and deliver them out of the queue."}, {"letter": "E", "text": "Use Route53 health checks to fail over to an S3 bucket for an error page."}], "correct_answer": ["A", "B", "C"], "source_correct_answer": ["A", "B", "C"], "correct_answer_override": null, "explanation": "This is a classic flash-traffic-on-read-heavy-content scaling pattern: CloudFront caches and serves the article content at the edge so a traffic spike doesn't hit your origin at all (A), RDS read replicas absorb the read traffic when it does reach the database tier (B), and ElastiCache caches the hottest data in front of RDS to cut database load further (C). Queuing requests through SQS (D) doesn't fit a read-heavy 'serve an article' workload -- that pattern suits asynchronous write/processing workloads, not synchronous page reads -- and failing over to a static S3 error page (E) sidesteps the availability problem rather than solving the underlying capacity pressure.", "facets": {"service": ["CloudFront", "RDS", "ElastiCache"], "concern": ["scaling", "performance", "availability"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P1.pdf", "page": 21, "question_number": 14}, "fingerprint": "3f218ddacfdf4e82e4b2c8e14bc611cde105e45811f32ec340557eb97fe93810"}, {"id": "awssysops-p1-q051", "status": "active", "disputed": false, "stem": "Your company is moving towards tracking web page users with a small tracking image loaded on each page. Currently you are serving this image out of US-East, but are starting to get concerned about the time it takes to load the image for users on the west coast.\n\nWhat are the two best ways to speed up serving this image? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Use Route 53's Latency Based Routing and serve the image out of US-West-2 as well as US-East-1"}, {"letter": "B", "text": "Serve the image out through CloudFront"}, {"letter": "C", "text": "Serve the image out of S3 so that it isn't being served off of your web application tier"}, {"letter": "D", "text": "Use EBS PIOPS to serve the image faster out of your EC2 instances"}], "correct_answer": ["A", "B"], "source_correct_answer": ["A", "B"], "correct_answer_override": null, "explanation": "Correct answers: A and B. CloudFront caches the tracking image at edge locations close to end users everywhere, including the west coast, directly addressing the latency problem regardless of where the origin lives. Route 53 latency-based routing lets you additionally serve the image from a second origin in US-West-2 and have DNS route each user to whichever regional endpoint is fastest for them. C (moving the image to S3) removes load from the web app tier but doesn't by itself reduce latency for west-coast users, since a single S3 bucket is still region-bound. D (EBS PIOPS) speeds up disk I/O on the EC2 instances, which isn't the bottleneck here -- the issue is network distance, not disk throughput.", "facets": {"service": ["CloudFront", "Route 53"], "concern": ["performance", "cdn"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P1.pdf", "page": 71, "question_number": 51}, "fingerprint": "4b48001528db4c247a2ae83e1960fb1fe026d10cf9c6ffb0db125dd15f7aec63"}, {"id": "awssysops-p2-q321", "status": "active", "disputed": false, "stem": "You have private video content in S3 that you want to serve to subscribed users on the Internet. User IDs, credentials, and subscriptions are stored in an Amazon RDS database. Which configuration will allow you to securely serve private content to your users?", "choice_type": "single", "choices": [{"letter": "A", "text": "Generate pre-signed URLs for each user as they request access to protected S3 content"}, {"letter": "B", "text": "Create an IAM user for each subscribed user and assign the GetObject permission to each IAM user"}, {"letter": "C", "text": "Create an S3 bucket policy that limits access to your private content to only your subscribed users' credentials"}, {"letter": "D", "text": "Create a CloudFront Origin Identity user for your subscribed users and assign the GetObject permission to this user"}], "correct_answer": ["A"], "source_correct_answer": ["A"], "correct_answer_override": null, "explanation": "Correct answer: A. No formatted community vote is present, but every comment agrees. Since subscriptions and credentials already live in an app-managed RDS database (not IAM), generating a time-limited pre-signed S3 URL per authenticated request is the natural fit -- the application itself checks the subscription in RDS, then hands out a temporary signed URL scoped to that content. B is impractical and doesn't scale -- creating a real IAM user per subscriber conflates application-level subscribers with AWS-account-level IAM principals. C invents a bucket-policy mechanism that can't actually key off of app-level subscriber credentials stored in RDS (bucket policies evaluate AWS principals/conditions, not arbitrary app credentials). D (CloudFront Origin Access Identity) controls access from CloudFront to the S3 origin, but doesn't by itself solve per-user authorization -- one comment (karmaah) notes D says nothing about pairing it with signed URLs/cookies, so on its own it would leave the content open to everyone once fronted by CloudFront.", "facets": {"service": ["S3", "CloudFront"], "concern": ["pre-signed-url-private-content"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 23, "question_number": 321}, "fingerprint": "5fa4f351e8a2c485a2b4ae6857b539bbb42249f195d13b6014f11fcad6151230"}, {"id": "awssysops-p2-q388", "status": "active", "disputed": false, "stem": "Amazon CloudFront is a ________.", "choice_type": "single", "choices": [{"letter": "A", "text": "persistent block level storage volume"}, {"letter": "B", "text": "content delivery network service"}, {"letter": "C", "text": "fully managed desktop computing service in the cloud"}, {"letter": "D", "text": "task coordination and state management service for cloud applications"}], "correct_answer": ["B"], "source_correct_answer": ["B"], "correct_answer_override": null, "explanation": "CloudFront is a content delivery network (CDN) service that integrates with other AWS services to distribute content to end users with low latency, high transfer speeds, and no minimum usage commitments. See http://aws.amazon.com/cloudfront/.", "facets": {"service": ["CloudFront"], "concern": ["cloudfront-service-description"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 77, "question_number": 388}, "fingerprint": "3827e1eebafee34efa09e09b321e4f1c32ab5d52e98b7d8d21405af00aa78cc5"}, {"id": "awssysops-p2-q461", "status": "active", "disputed": false, "stem": "What is Amazon CloudFront?", "choice_type": "single", "choices": [{"letter": "A", "text": "A global Content Delivery Network"}, {"letter": "B", "text": "An encrypted endpoint to upload files to the Cloud"}, {"letter": "C", "text": "A web service to schedule regular data movement"}, {"letter": "D", "text": "A development front-end to Amazon Web Services"}], "correct_answer": ["A"], "source_correct_answer": ["A"], "correct_answer_override": null, "explanation": "CloudFront is AWS's global content delivery network (CDN) service, accelerating delivery of websites, APIs, video, and other web assets via edge caching. See https://aws.amazon.com/cloudfront/.", "facets": {"service": ["CloudFront"], "concern": ["cloudfront-service-description"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 141, "question_number": 461}, "fingerprint": "2a31d1072acd7de2c16c9e20097b1ab00e943045271be0d3370c99b3053f3401"}, {"id": "awssysops-p2-q490", "status": "active", "disputed": false, "stem": "In Amazon CloudFront, if you have chosen On for Logging, the access logs are stored in _______________.", "choice_type": "single", "choices": [{"letter": "A", "text": "Amazon S3 bucket."}, {"letter": "B", "text": "Amazon EBS."}, {"letter": "C", "text": "Amazon Edge locations."}, {"letter": "D", "text": "Amazon EC2 instance."}], "correct_answer": ["A"], "source_correct_answer": ["A"], "correct_answer_override": null, "explanation": "When CloudFront logging is enabled, access logs recording per-request information are delivered to the Amazon S3 bucket you specify. See https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesLoggingOnOff.", "facets": {"service": ["CloudFront", "S3"], "concern": ["cloudfront-access-log-storage-location"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 166, "question_number": 490}, "fingerprint": "fb996125d4daa40bd365cc7e2ab6d02e3d6bd303203a17f27288fd1a65afba9c"}, {"id": "awssysops-p2-q508", "status": "active", "disputed": false, "stem": "You can configure Amazon CloudFront to deliver access logs per ________ to an Amazon S3 bucket of your choice.", "choice_type": "single", "choices": [{"letter": "A", "text": "Edge location"}, {"letter": "B", "text": "Distribution"}, {"letter": "C", "text": "Geo restriction"}, {"letter": "D", "text": "Request"}], "correct_answer": ["B"], "source_correct_answer": ["B"], "correct_answer_override": null, "explanation": "CloudFront delivers access logs per distribution to an S3 bucket of your choice — each distribution's logs are generated and stored independently. See https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html. Community vote distribution was unanimous at B (100%).", "facets": {"service": ["CloudFront", "S3"], "concern": ["cloudfront-access-log-granularity"]}, "source": {"file": "papers/aws-sysops/AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 182, "question_number": 508}, "fingerprint": "a1f48ed7a6efa655c5de6f3406e4f9b9073719696d7930fc2ed0b2b5d4a9608e"}, {"id": "awssysops-p2-q524", "status": "active", "disputed": false, "stem": "A company website hosts patches for software that is sold globally. The website runs in AWS and performs well until a large software patch is released. The flood of downloads puts a strain on the web servers and leads to a poor customer experience.\nWhat can the SysOps Administrator propose to enhance customer experience, create a more available web platform, and keep costs low?", "choice_type": "single", "choices": [{"letter": "A", "text": "Use an Amazon CloudFront distribution to cache static content, including software patches"}, {"letter": "B", "text": "Increase the size of the NAT instance to improve throughput"}, {"letter": "C", "text": "Scale out of web servers in advance of patch releases to reduce Auto Scaling delays"}, {"letter": "D", "text": "Move the content to IO1 and provision additional IOPS to the volume that contains the software patches"}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "CloudFront caches the static patch files at edge locations globally, absorbing the download spike away from the origin web servers entirely. This directly improves customer experience (lower latency, higher throughput at the edge), improves availability (origin load drops), and keeps cost low relative to over-provisioning EC2/EBS or NAT capacity for a bursty, predictable event. Community vote is unanimous for A.", "facets": {"service": ["CloudFront"], "concern": ["static-content-caching", "traffic-spike-mitigation"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 198, "question_number": 524}, "fingerprint": "c3de61141dfeaed6d4bc242efbc197eed77941c6c32a13843e7fb1e6cbee12ea"}, {"id": "awssysops-p2-q552", "status": "active", "disputed": true, "stem": "Malicious traffic is reaching company web servers from a single IP address located in another country. The SysOps Administrator is tasked with blocking this IP address.\nHow should the Administrator implement the restriction?", "choice_type": "single", "choices": [{"letter": "A", "text": "Edit the security group for the web servers and add a deny entry for the IP address"}, {"letter": "B", "text": "Edit the network access control list for the web server subnet and add a deny entry for the IP address"}, {"letter": "C", "text": "Edit the VPC route table to route the malicious IP address to a black hole"}, {"letter": "D", "text": "Use Amazon CloudFront's geo restriction feature to block traffic from the IP address"}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "Network ACLs operate at the subnet level and can deny traffic from a specific IP address (or CIDR) directly — the precise, surgical block this scenario calls for. CloudFront's geo-restriction feature (the boxed answer) can only block or allow traffic by country, not by a single IP, so using it here would block every visitor from that country to stop just one address. The recorded vote is unanimous (100%) for B, directly contradicting the boxed answer D, backed by clear reasoning that geo-restriction operates at the wrong granularity for a single-IP block. Security groups (A) only apply to the instances they're attached to and can't blanket the whole subnet the way this restriction implies.", "facets": {"service": ["VPC Network ACLs", "CloudFront"], "concern": ["ip-blocking", "geo-restriction-limitation"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 238, "question_number": 552}, "fingerprint": "1b59ff32fa68f6e02317b0428229886b1fad3ca3792414804c4c927054b14a3e"}, {"id": "awssysops-p2-q569", "status": "active", "disputed": true, "stem": "A photo-sharing site delivers content worldwide from a library on Amazon S3 using Amazon CloudFront. Users are trying to access photos that either do not exist or they are not authorized to view. What should be monitored to better understand the extent of this issue?", "choice_type": "single", "choices": [{"letter": "A", "text": "GetRequests S3 metric on Amazon CloudWatch"}, {"letter": "B", "text": "4XXErrorRate CloudFront metric on CloudWatch"}, {"letter": "C", "text": "5XXErrorRate CloudFront metric on CloudWatch"}, {"letter": "D", "text": "PostRequests S3 metric on CloudWatch"}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "Requests for photos that 'do not exist' (404) or aren't authorized (403) are both client-error responses in the 4xx range, and since CloudFront is the edge layer users actually hit, its 4XXErrorRate metric directly measures the rate of exactly these failures. The boxed answer's GetRequests S3 metric (A) is a raw request count with no breakdown by response/error code at all, so it can't distinguish successful requests from the failures in question. Community vote is unanimous (100%) for B, directly contradicting the boxed answer A, backed by extensive, heavily-upvoted commentary.", "facets": {"service": ["CloudFront", "CloudWatch"], "concern": ["4xx-error-monitoring", "access-and-existence-errors"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 261, "question_number": 569}, "fingerprint": "5cefb82e9fc9697b62d2086697a5bc54a035dcd33bcc41b272dbbda34a5eac86"}, {"id": "awssysops-p2-q573", "status": "active", "disputed": false, "stem": "A SysOps Administrator is reviewing AWS Trusted Advisor warnings and encounters a warning for an S3 bucket policy that has open access permissions. While discussing the issue the bucket owner, the Administrator realizes the S3 bucket is an origin for an Amazon CloudFront web distribution. Which action should the Administrator take to ensure that users access objects in Amazon S3 by using only CloudFront URLs?", "choice_type": "single", "choices": [{"letter": "A", "text": "Encrypt the S3 bucket content with Server-Side Encryption with Amazon S3-Managed Keys (SSE-S3)"}, {"letter": "B", "text": "Create an origin access identity and grant it permissions to read objects in the S3 bucket"}, {"letter": "C", "text": "Assign an IAM user to the CloudFront distribution and whitelist the IAM user in the S3 bucket policy"}, {"letter": "D", "text": "Assign an IAM role to the CloudFront distribution and whitelist the IAM role in the S3 bucket policy"}], "correct_answer": ["B"], "source_correct_answer": "B", "correct_answer_override": null, "explanation": "An Origin Access Identity (OAI) is a special CloudFront principal that can be granted read access in the S3 bucket policy while all other (public) access is removed, forcing users to go through CloudFront URLs to reach the content. Neither an IAM user nor an IAM role can be 'assigned to a CloudFront distribution' (C, D aren't real CloudFront constructs), and SSE-S3 encryption (A) controls data-at-rest protection, not who can request objects. Community vote is unanimous for B, matching the AWS documentation cited directly in the source.", "facets": {"service": ["CloudFront", "S3"], "concern": ["origin-access-identity", "restricting-direct-s3-access"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 266, "question_number": 573}, "fingerprint": "abd9aac30b19e1a0bca71d16dabb68963fc3dc3a0d8c96b38ff7496018f4ef49"}, {"id": "awssysops-p3-1-q611", "status": "active", "disputed": false, "stem": "A company's customers are reporting increased latency while accessing static web content from Amazon S3. A SysOps Administrator observed a\nvery high rate of read operations on a particular S3 bucket.\nWhat will minimize latency by reducing load on the S3 bucket?", "choice_type": "single", "choices": [{"letter": "A", "text": "Migrate the S3 bucket to a region that is closer to end users' geographic locations."}, {"letter": "B", "text": "Use cross-region replication to replicate all of the data to another region."}, {"letter": "C", "text": "Create an Amazon CloudFront distribution with the S3 bucket as the origin."}, {"letter": "D", "text": "Use Amazon ElastiCache to cache data being served from Amazon S3."}], "correct_answer": ["C"], "source_correct_answer": "C", "correct_answer_override": null, "explanation": "Amazon CloudFront caches static content at edge locations, so repeat reads for the same objects are served from the CDN cache instead of hitting the origin S3 bucket directly, reducing both load on the bucket and latency for end users. Migrating the bucket to a closer region (A) only helps users near that one new region and doesn't reduce request volume; cross-region replication (B) duplicates the data but doesn't offload read traffic away from S3 itself; and ElastiCache (D) is designed to cache results in front of a database like RDS, not object-storage reads — a dissenting comment explores D but a rebuttal clarifies ElastiCache targets RDS-style workloads, not S3. Community discussion converges on C.", "facets": {"service": ["CloudFront", "S3"], "concern": ["read-heavy-caching", "static-content-latency"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 19, "question_number": 611}, "fingerprint": "2a10d29ecd908047b4615926f3ca7066f2f3ec97a7980ca88cb0bfc7ee9dc16d"}, {"id": "awssysops-p3-1-q641", "status": "active", "disputed": true, "stem": "A website uses Elastic Load Balancing (ELB) in front of several Amazon EC2 instances backed by an Amazon RDS database. The content is\ndynamically generated for visitors of a webpage based on their geographic location. and is updated daily. Some of the generated objects are large\nin size and are taking longer to download than they should, resulting in a poor user experience.\nWhich approach will improve the user experience?", "choice_type": "single", "choices": [{"letter": "A", "text": "Implement Amazon ElastiCache to cache the content and reduce the load on the database."}, {"letter": "B", "text": "Enable an Amazon CloudFront distribution with Elastic Load Balancing as a custom origin."}, {"letter": "C", "text": "Use Amazon S3 to store and deliver the content."}, {"letter": "D", "text": "Enable Auto Scaling for the EC2 instances so that they can scale automatically."}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "The core complaint is that large, dynamically-generated objects are slow to download — a latency/throughput problem best solved by caching those objects at edge locations physically closer to visitors worldwide, which is exactly what fronting the existing ELB with a CloudFront distribution (using the ELB as a custom origin) provides, directly addressing both the geographic-distribution angle and the large-object download-speed complaint. The boxed answer (A), adding ElastiCache in front of the RDS database, only reduces database read latency and query load — it does nothing to speed up the actual transfer of large generated objects to end users' browsers, which was the stated problem. Storing content directly in S3 (C) doesn't fit dynamically-generated, per-visitor content, and Auto Scaling the EC2 instances (D) addresses compute capacity, not per-object download speed. Community vote is unanimous (100%) for B, directly contradicting the boxed answer A, with several comments explicitly making the same ElastiCache-vs-CloudFront distinction.", "facets": {"service": ["CloudFront"], "concern": ["large-object-download-latency", "geo-distributed-caching"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 70, "question_number": 641}, "fingerprint": "ef6bc6d33aae157560d110f720da73d004ea0b0f3601de293bbc55a96d2f97ee"}, {"id": "awssysops-p3-1-q649", "status": "active", "disputed": false, "stem": "A SysOps Administrator is receiving multiple reports from customers that they are unable to connect to the company's website. which is being\nserved through\nAmazon CloudFront. Customers are receiving HTTP response codes for both 4XX and 5XX errors.\nWhich metric can the Administrator use to monitor the elevated error rates in CloudFront?", "choice_type": "single", "choices": [{"letter": "A", "text": "TotalErrorRate"}, {"letter": "B", "text": "RejectedConnectionCount"}, {"letter": "C", "text": "NetworkTransmitThroughput"}, {"letter": "D", "text": "HealthyHostCount"}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "CloudFront's TotalErrorRate metric reports the percentage of all viewer requests that returned a 4xx or 5xx HTTP status code, directly matching what the Administrator needs to monitor. RejectedConnectionCount and HealthyHostCount are Elastic Load Balancing metrics, not CloudFront metrics, and NetworkTransmitThroughput is unrelated to error rates. Community vote is unanimous (100%) for A, backed by direct AWS CloudFront CloudWatch metrics documentation.", "facets": {"service": ["CloudFront"], "concern": ["total-error-rate-metric"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 84, "question_number": 649}, "fingerprint": "0504d46a8a9d5d0a885093695ea829a3132bb3ee4297a445940fdf5a7e284b0d"}, {"id": "awssysops-p3-1-q687", "status": "active", "disputed": false, "stem": "A SysOps Administrator noticed that the cache hit ratio for an Amazon CloudFront distribution is less than 10%.\nWhich collection of configuration changes will increase the cache hit ratio for the distribution? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Ensure that only required cookies, query strings, and headers are forwarded in the Cache Behavior Settings"}, {"letter": "B", "text": "Change the Viewer Protocol Policy to use HTTPS only"}, {"letter": "C", "text": "Configure the distribution to use presigned cookies and URLs to restrict access to the distribution"}, {"letter": "D", "text": "Enable automatic compression of objects in the Cache Behavior Settings"}, {"letter": "E", "text": "Increase the CloudFront time to live (TTL) settings in the Cache Behavior Settings"}], "correct_answer": ["A", "E"], "source_correct_answer": "A,E", "correct_answer_override": null, "explanation": "Forwarding only the cookies, query strings, and headers actually required by the origin eliminates unnecessary request variation that would otherwise be treated as cache-key differences, and increasing the cache behavior's TTL keeps objects cached longer before re-validating against the origin — both directly increase the proportion of requests served from cache. Switching the Viewer Protocol Policy to HTTPS-only (B) affects transport security, not caching behavior; presigned cookies/URLs (C) control access restriction, not cache efficiency; and enabling automatic compression (D) reduces transferred object size but doesn't change whether a request is a cache hit or miss. Community vote is unanimous (100%) for A & E, backed directly by the AWS CloudFront cache-hit-ratio and object-expiration documentation.", "facets": {"service": ["CloudFront"], "concern": ["cache-hit-ratio-optimization", "ttl-and-forwarded-parameters"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 150, "question_number": 687}, "fingerprint": "5f848aa98259947dab2dca839753de2960f2f6ef5bfc0ec55000355565bebca7"}, {"id": "awssysops-p3-1-q712", "status": "active", "disputed": false, "stem": "A company website hosts patches for software that is sold globally. The website runs in AWS and performs well until a large software patch is released. The flood of downloads puts a strain on the web servers and leads to a poor customer experience.\nWhat can the Sysops Administrator propose to enhance customer experience, create a more available web platform, and keep costs low?", "choice_type": "single", "choices": [{"letter": "A", "text": "Use an Amazon CloudFront distribution to cache static content, including software patches."}, {"letter": "B", "text": "Increase the size of the NAT instance to improve throughput."}, {"letter": "C", "text": "Scale out the web servers in advance of patch releases to reduce Auto Scaling delays."}, {"letter": "D", "text": "Move the content to IO1 and provision additional IOPS to the volume that contains the software patches."}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "Caching the software patch files at CloudFront edge locations offloads the repeated download traffic away from the origin web servers entirely, directly relieving the strain during a release spike while keeping costs low relative to over-provisioning compute or storage. A NAT instance (B) handles outbound traffic translation and has nothing to do with serving downloads to external users; pre-emptively scaling out web servers (C) means paying for capacity that sits idle outside of patch-release windows; and provisioning additional IOPS on the underlying volume (D) addresses storage I/O, not the network/serving bottleneck a global download spike creates. Community consensus supports A, matching the boxed answer, as the standard CDN-caching fix for this exact pattern.", "facets": {"service": ["CloudFront"], "concern": ["static-content-caching-for-download-spikes"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 187, "question_number": 712}, "fingerprint": "deb94908c8334149ec62a706be90c7bcb20a535ea2a0c9bb08eba93ded6cafca"}, {"id": "awssysops-p3-1-q736", "status": "active", "disputed": false, "stem": "A SysOps Administrator is deploying a website with dynamic content. Company policy requires that users from certain countries or regions cannot access the web content and should receive an error page.\nWhich of the following can be used to implement this policy? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Amazon CloudFront geo-restriction"}, {"letter": "B", "text": "Amazon GuardDuty geo-blocking"}, {"letter": "C", "text": "Amazon Route 53 geolocation routing"}, {"letter": "D", "text": "AWS Shield geo-restriction"}, {"letter": "E", "text": "Network access control list (NACL) restriction"}], "correct_answer": ["A", "C"], "source_correct_answer": "A,C", "correct_answer_override": null, "explanation": "CloudFront geo-restriction lets a distribution allow-list or block-list specific countries and return a custom error page to blocked requesters, and Route 53 geolocation routing can route requests from restricted regions to a different endpoint (such as an error page), giving two distinct AWS-native ways to implement country-based blocking, as the referenced CloudFront FAQ and Route 53 routing-policy documentation confirm. GuardDuty (B) is a threat-detection service with no geo-blocking feature, and AWS Shield (D) is a DDoS-protection service with no geo-restriction capability — both are fabricated capabilities for these services. A NACL (E) filters by IP address/CIDR ranges only, with no concept of country/region, making country-level blocking impractical at that layer. Community consensus, including a directly-cited AWS geo-restriction doc, supports A & C, matching the boxed answer.", "facets": {"service": ["CloudFront", "Route 53"], "concern": ["country-based-access-restriction"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 229, "question_number": 736}, "fingerprint": "569b28fa48fd4852d52710f899c563a71178e590d49b9b407f93a4633c2a2ad0"}, {"id": "awssysops-p3-1-q757", "status": "active", "disputed": true, "stem": "A SysOps Administrator is maintaining a web application using an Amazon CloudFront web distribution, an Application Load Balancer (ALB), Amazon RDS, and Amazon EC2 in a VPC. All services have logging enabled. The Administrator needs to investigate HTTP Layer 7 status codes from the web application.\nWhich log sources contain the status codes? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "VPC Flow Logs"}, {"letter": "B", "text": "AWS CloudTrail logs"}, {"letter": "C", "text": "ALB access logs"}, {"letter": "D", "text": "CloudFront access logs"}, {"letter": "E", "text": "RDS logs"}], "correct_answer": ["B", "D"], "source_correct_answer": "B,D", "correct_answer_override": null, "explanation": "ALB access logs and CloudFront access logs both operate at the application (Layer 7) level and record each request's HTTP status code directly, exactly matching what's needed to investigate Layer 7 status codes, per the referenced CloudFront access-logs format documentation (which explicitly lists a status-code column) and unanimous community consensus. CloudTrail logs (the boxed answer, B) record AWS API/management-plane activity (who called which AWS API), not end-user HTTP requests to the web application, so they contain no Layer 7 status codes at all. VPC Flow Logs (A) operate at Layer 3/4 (IP/port/packet metadata) with no visibility into HTTP-level status codes, and RDS logs (E) capture database engine activity, unrelated to HTTP traffic. Community vote is unanimous (100%) for C & D, directly contradicting the boxed answer's B, and is heavily corroborated (22+ upvotes on the top comment) with a direct citation of the AWS CloudFront log-format documentation. Flagged disputed for triage, while keeping the boxed answer B & D per the ingestion policy.", "facets": {"service": ["ALB", "CloudFront"], "concern": ["http-layer7-status-code-log-sources"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 258, "question_number": 757}, "fingerprint": "db290a82c16afcdf66ee73daa639130172102158dd91bdc7b0d9aeff6001baf7"}, {"id": "awssysops-p3-1-q826", "status": "active", "disputed": true, "stem": "A company has an existing web application that runs on two Amazon EC2 instances behind an Application Load Balancer (ALB) across two Availability Zones.\nThe application uses an Amazon RDS Multi-AZ DB Instance. Amazon Route 53 record sets route requests for dynamic content to the load balancer and requests for static content to an Amazon S3 bucket. Site visitors are reporting extremely long loading times.\nWhich actions should be taken to improve the performance of the website? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Add Amazon CloudFront caching for static content."}, {"letter": "B", "text": "Change the load balancer listener from HTTPS to TCP."}, {"letter": "C", "text": "Enable Amazon Route 53 latency-based routing."}, {"letter": "D", "text": "Implement Amazon EC2 Auto Scaling for the web servers."}, {"letter": "E", "text": "Move the static content from Amazon S3 to the web servers."}], "correct_answer": ["C", "D"], "source_correct_answer": "C,D", "correct_answer_override": null, "explanation": "CloudFront caches static content at edge locations closer to visitors, directly cutting load time for the static assets served from S3 (A), and EC2 Auto Scaling lets the web-server fleet grow to handle load spikes that would otherwise slow down dynamic-content generation (D) — both concretely address the reported slowness, per the detailed reasoning corroborated heavily (31+ upvotes on the top comment) throughout the discussion. The boxed answer's C, Route 53 latency-based routing, is a no-op here: with only a single ALB in a single region, every request already resolves to that same one load balancer regardless of any latency-based routing policy, so enabling it changes nothing about where traffic goes or how fast it's served — latency-based routing only has an effect when multiple regional endpoints exist to route between. An ALB listener also can't be changed to TCP (B) since ALBs operate at the application layer (HTTP/HTTPS) and TCP listeners are an NLB-only feature, and moving static content onto the web servers (E) would add load to the same instances already implicated in the slowness rather than relieving it. Community vote is unanimous (100%) for A & D, directly contradicting the boxed answer's C, and is heavily corroborated with detailed reasoning about the single-ALB/single-region routing no-op. Flagged disputed for triage, while keeping the boxed answer C & D per the ingestion policy.", "facets": {"service": ["CloudFront", "Route 53", "Auto Scaling"], "concern": ["single-region-latency-routing-no-op"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 378, "question_number": 826}, "fingerprint": "28bb64dedc4a2885b7f7663d290f17f68e674b1027ddde879c8ac4614948a1c2"}, {"id": "awssysops-p3-1-q881", "status": "active", "disputed": true, "stem": "A company is managing a website with a global user base hosted on Amazon EC2 with an Application Load Balancer (ALB). To reduce the load on the web servers, a SysOps administrator configures an Amazon CloudFront distribution with the ALB as the origin. After a week of monitoring the solution, the administrator notices that requests are still being served by the ALB and there is no change in the web server load.\nWhat are possible causes for this problem? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "CloudFront does not have the ALB configured as the origin access identity."}, {"letter": "B", "text": "The DNS is still pointing to the ALB instead of the CloudFront distribution."}, {"letter": "C", "text": "The ALB security group is not permitting inbound traffic from CloudFront."}, {"letter": "D", "text": "The default, minimum, and maximum Time to Live (TTL) are set to 0 seconds on the CloudFront distribution."}, {"letter": "E", "text": "The target groups associated with the ALB are configured for sticky sessions."}], "correct_answer": ["A", "B"], "source_correct_answer": "A,B", "correct_answer_override": null, "explanation": "If client DNS still resolves directly to the ALB instead of the CloudFront distribution's domain (B, shared with the boxed answer), traffic bypasses CloudFront entirely and the ALB continues to see the full unreduced load — this cause is undisputed across every comment. The raw discussion carries an informal embedded vote tally split evenly between BD and BE for the second cause: TTLs set to 0 seconds (D) effectively disable CloudFront caching, forwarding every request straight through to the ALB, while sticky sessions on the ALB's target groups (E) can force session affinity that undermines the caching/offload benefit CloudFront is meant to provide. The boxed answer's A is a further category error: 'origin access identity' is an S3-specific access-control mechanism used to restrict direct public access to an S3 bucket so only CloudFront can reach it — it has no applicable meaning for an ALB origin at all, and no comment anywhere in the discussion votes for A. Given the boxed answer's A receives zero community support and is technically inapplicable to this origin type, and the second cause remains a genuine 50/50 split between D and E, this question is flagged disputed for triage, while keeping the boxed answer A & B per the ingestion policy.", "facets": {"service": ["CloudFront"], "concern": ["origin-access-identity-not-applicable-to-alb-origin"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 458, "question_number": 881}, "fingerprint": "fe9aa5bbe55a2e300285246c7e5fd250d5f8557ef51a86da7610fddf2c3ab8b3"}, {"id": "awssysops-p3-1-q886", "status": "active", "disputed": true, "stem": "A company has a three-tier stateful web application. The application is served through an Amazon CloudFront distribution with default configuration options and an Application Load Balancer (ALB) as the origin. Logged-in users get intermittently logged out and see inconsistent content.\nWhich action should the company take to ensure a stable user experience during a session?", "choice_type": "single", "choices": [{"letter": "A", "text": "Enable session affinity (sticky sessions) on the ALB. Configure CloudFront to forward all cookies to the origin."}, {"letter": "B", "text": "Restrict viewer access to signed cookies in CloudFront. Enable session affinity (sticky sessions) on the ALB."}, {"letter": "C", "text": "Switch from duration-based session affinity (sticky sessions) to application-controlled session affinity (sticky sessions) on the ALB."}, {"letter": "D", "text": "Configure the CloudFront TTL to be equal to or less than the ALB session duration."}], "correct_answer": ["C"], "source_correct_answer": "C", "correct_answer_override": null, "explanation": "With CloudFront's default configuration, cookies are not forwarded to the origin at all, so even if the ALB's session cookie is set, CloudFront strips it from subsequent requests — meaning the ALB never sees the returning session cookie and can't route the user back to the same target, producing exactly the symptoms described (intermittent logouts, inconsistent content). Enabling ALB sticky sessions together with configuring CloudFront to forward all cookies to the origin (the community's answer, A) fixes both halves of the actual root cause, per the ALB listener-authentication documentation quoted directly and corroborated (majority of comments). The boxed answer's C only changes which of two ALB-side sticky-session mechanisms is used — it does nothing about CloudFront's default cookie-stripping behavior, which is the layer actually responsible for the session cookie never reaching the ALB in the first place. Community vote is unanimous (100%) for A, directly contradicting the boxed answer C. Flagged disputed for triage, while keeping the boxed answer C per the ingestion policy.", "facets": {"service": ["CloudFront", "ALB"], "concern": ["cookie-forwarding-for-sticky-session-cookie"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 465, "question_number": 886}, "fingerprint": "3b95378db632ae2ef067a8248aa715fcdb26c4fe385c3dea1ebb36c47f4f3ac7"}, {"id": "awssysops-p3-1-q907", "status": "active", "disputed": true, "stem": "A streaming company is using AWS resources in the us-east-1 Region for its production environment. The web tier of the streaming site runs on Amazon EC2 instances behind an Application Load Balancer (ALB). The instances run in an EC2 Auto Scaling group across multiple Availability Zones. The Auto Scaling group is configured to scale when the CPU utilization of the instances is greater than 75%. The user database is hosted on an Amazon RDS MySQL cluster, and video content is stored within an Amazon S3 bucket. Amazon CloudWatch metrics show that the RDS MySQL Multi-AZ DB instance has around 16 GB of memory free and an average CPU utilization of 70%. It is taking users in Asia several seconds longer to access the streaming website.\nWhich combination of actions will improve the access load times? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "Configure RDS MySQL Multi-AZ to reduce RDS CPU and RAM utilization and distribute queries to multiple Availability Zones."}, {"letter": "B", "text": "Modify the EC2 Auto Scaling group so it will scale horizontally when CPU utilization is 50%."}, {"letter": "C", "text": "Provision a second production environment in the Asia Pacific Region and use an ALB to distribute cross-Region access."}, {"letter": "D", "text": "Provision a second production environment in the Asia Pacific Region and use Amazon Route 53 latency-based routing."}, {"letter": "E", "text": "Set up an Amazon CloudFront distribution to handle static content for users accessing it from different geographic locations."}], "correct_answer": ["B", "C"], "source_correct_answer": "B,C", "correct_answer_override": null, "explanation": "The reported symptom is geographic latency for Asia-based users, which is best addressed by a combination of moving content closer to users (Amazon CloudFront caching static content at edge locations near them) and routing users to the geographically nearest full production environment (Route 53 latency-based routing to a second environment in the Asia Pacific Region) — matching the community's D, E, corroborated across the discussion. The boxed answer's C is a technical impossibility: an Application Load Balancer is a Regional resource and cannot distribute traffic across two separate AWS Regions at all, a point raised directly and repeatedly ('eliminated because ALB cannot span cross region', 'when did the ALB support cross-region', 'ELB cannot do Cross region... for anything cross region you need R53') — cross-Region routing is Route 53's job, not the ALB's. The boxed answer's B also targets the wrong metric entirely: CloudWatch shows the bottleneck (70% CPU) is on the RDS instance, not the EC2 web tier, so tuning the EC2 Auto Scaling group's scaling threshold has no bearing on the described symptom, and even if it did, it wouldn't address a geography-based latency gap. Since the boxed answer's own C rests on a capability ALB doesn't have, this question is flagged disputed for triage, while keeping the boxed answer B, C per the ingestion policy.", "facets": {"service": ["Route 53", "CloudFront"], "concern": ["cross-region-latency-reduction-alb-cannot-span-regions"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 489, "question_number": 907}, "fingerprint": "923d2870b75b0d039f2c847b95045eadc79a43ffdc223b165432df3dd8f555b7"}], "claims": [{"claim_type": "fact", "confidence": "high", "id": "cl-0-0", "source_question_ids": ["awssysops-p1-q014", "awssysops-p2-q524", "awssysops-p3-1-q611", "awssysops-p3-1-q712", "awssysops-p3-1-q826", "awssysops-p3-1-q907"], "statement": "Amazon CloudFront caches content (static assets, images, software patches, articles) at globally distributed edge locations, so repeat requests are served from the cache instead of hitting the origin, reducing origin load and lowering latency for end users during traffic spikes.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-1", "source_question_ids": ["awssysops-p1-q014"], "statement": "Adding Amazon RDS read replicas offloads read-only query traffic from the primary database instance, helping the database tier handle read-heavy traffic spikes.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-2", "source_question_ids": ["awssysops-p1-q014"], "statement": "Amazon ElastiCache caches the most frequently accessed data in front of a relational database, reducing the number of queries that reach the database and thus its load.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-3", "source_question_ids": ["awssysops-p1-q014"], "statement": "SQS-based request queuing is designed for asynchronous write/processing workloads, not for synchronous, read-heavy page-view traffic such as serving article content.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-4", "source_question_ids": ["awssysops-p1-q014"], "statement": "Using Route 53 health checks to fail over to a static S3 error page addresses availability optics but does not solve the underlying capacity/scaling pressure on the infrastructure.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-5", "source_question_ids": ["awssysops-p1-q051"], "statement": "Serving content through CloudFront reduces latency for end users everywhere, including regions far from the origin, because edge locations cache content close to each user regardless of where the origin lives.", "status": "supported"}, {"claim_type": "rule", "conditions": ["only one regional origin/endpoint exists"], "confidence": "high", "id": "cl-0-6", "source_question_ids": ["awssysops-p1-q051", "awssysops-p3-1-q826", "awssysops-p3-1-q907"], "statement": "Route 53 latency-based routing only changes anything when multiple regional endpoints/origins exist to route between; with a single origin/endpoint in one region, enabling latency-based routing is a no-op.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-7", "source_question_ids": ["awssysops-p1-q051"], "statement": "Route 53 latency-based routing lets you serve content from multiple regional origins (e.g., US-East-1 and US-West-2) and have DNS route each user to whichever regional endpoint is fastest for them.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-8", "source_question_ids": ["awssysops-p1-q051"], "statement": "Moving a file to S3 removes load from the web application tier, but does not by itself reduce latency for geographically distant users, because a single S3 bucket is still bound to one region.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-9", "source_question_ids": ["awssysops-p1-q051"], "statement": "EBS Provisioned IOPS (PIOPS) improves disk I/O throughput on EC2 instances, which does not help when the bottleneck is network distance/latency rather than disk performance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["subscriptions/credentials are managed by the application, not by IAM"], "confidence": "high", "id": "cl-0-10", "source_question_ids": ["awssysops-p2-q321"], "statement": "When user credentials and subscriptions are managed by the application in a database (e.g. RDS) rather than in IAM, generating per-request, time-limited S3 pre-signed URLs after the application checks the subscription is the correct way to serve private S3 content securely.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-11", "source_question_ids": ["awssysops-p2-q321"], "statement": "Creating an individual IAM user for every application subscriber does not scale and incorrectly conflates application-level subscribers with AWS-account-level IAM principals.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-0-12", "source_question_ids": ["awssysops-p2-q321"], "statement": "S3 bucket policies evaluate AWS principals and IAM-style conditions; they cannot key access decisions off arbitrary application-level subscriber credentials stored in an external database like RDS.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-13", "source_question_ids": ["awssysops-p2-q321"], "statement": "A CloudFront Origin Access Identity (OAI) restricts access from CloudFront to the S3 origin, but by itself does not provide per-user authorization — it must be paired with mechanisms like signed URLs or signed cookies, otherwise content is open to everyone once fronted by CloudFront.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-14", "source_question_ids": ["awssysops-p2-q388", "awssysops-p2-q461"], "statement": "Amazon CloudFront is a content delivery network (CDN) service that distributes content to end users with low latency and high transfer speeds via edge locations.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-15", "source_question_ids": ["awssysops-p2-q490"], "statement": "When access logging is enabled on a CloudFront distribution, the access logs are delivered to an Amazon S3 bucket specified by the distribution owner.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-16", "source_question_ids": ["awssysops-p2-q508"], "statement": "CloudFront delivers access logs per distribution — each distribution's logs are generated and stored independently in the configured S3 bucket.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-17", "source_question_ids": ["awssysops-p2-q524", "awssysops-p3-1-q712"], "statement": "Fronting a website's downloadable software patches with a CloudFront distribution caches those static files at edge locations, absorbing flash-download-spike traffic away from the origin web servers and keeping cost low relative to over-provisioning compute or storage.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-18", "source_question_ids": ["awssysops-p2-q524", "awssysops-p3-1-q712"], "statement": "Increasing NAT instance size improves outbound traffic translation throughput and has no effect on strain caused by external users downloading files (inbound-served content).", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-19", "source_question_ids": ["awssysops-p2-q524", "awssysops-p3-1-q712"], "statement": "Scaling out web servers in advance of a known patch release avoids Auto Scaling lag but means paying for idle capacity outside the release window, making it a costlier option than edge caching.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-20", "source_question_ids": ["awssysops-p2-q524", "awssysops-p3-1-q712"], "statement": "Provisioning additional IOPS (IO1) on the EBS volume holding downloadable content addresses storage I/O performance, not the network/serving bottleneck created by a global download spike.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-21", "source_question_ids": ["awssysops-p2-q552"], "statement": "A network ACL operates at the subnet level and can add a deny rule for a specific IP address or CIDR range, providing precise, surgical blocking of a single malicious IP.", "status": "supported"}, {"claim_type": "exception", "conditions": ["target is a single IP address rather than an entire country"], "confidence": "high", "id": "cl-0-22", "source_question_ids": ["awssysops-p2-q552", "awssysops-p3-1-q736"], "statement": "CloudFront's geo-restriction feature can only allow or block traffic by country, not by an individual IP address; using it to block a single malicious IP would incorrectly block every visitor from that IP's entire country.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-23", "source_question_ids": ["awssysops-p2-q552"], "statement": "Security groups only apply to the instances they are attached to; they cannot be used to blanket-block traffic at the subnet level the way a NACL can.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-24", "source_question_ids": ["awssysops-p2-q552"], "statement": "For blocking malicious traffic from a single IP address, the source's boxed/labeled answer is CloudFront geo-restriction, but community consensus (and the underlying technical reasoning about per-IP vs per-country granularity) unanimously favors a network ACL deny rule instead.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-25", "source_question_ids": ["awssysops-p2-q569"], "statement": "CloudFront's 4XXErrorRate CloudWatch metric measures the rate of client-error responses (e.g., 404 not found, 403 unauthorized), directly indicating how often users are requesting content that doesn't exist or that they aren't authorized to view.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-26", "source_question_ids": ["awssysops-p2-q569"], "statement": "The S3 GetRequests CloudWatch metric is a raw count of GET requests with no breakdown by response or error code, so it cannot distinguish successful requests from 404/403 failures.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-27", "source_question_ids": ["awssysops-p2-q569"], "statement": "For diagnosing photos that don't exist or aren't authorized behind a CloudFront distribution, the source's boxed/labeled answer is the S3 GetRequests metric, but unanimous community consensus favors the CloudFront 4XXErrorRate metric instead, since it directly measures the client-error responses in question.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0-28", "source_question_ids": ["awssysops-p2-q573"], "statement": "Creating a CloudFront Origin Access Identity (OAI) and granting it read permission in the S3 bucket policy, while removing other public access, ensures users can only access bucket objects through CloudFront URLs.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-29", "source_question_ids": ["awssysops-p2-q573"], "statement": "Neither an IAM user nor an IAM role can be 'assigned' to a CloudFront distribution — this is not a real CloudFront construct.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-30", "source_question_ids": ["awssysops-p2-q573"], "statement": "Server-Side Encryption with Amazon S3-managed keys (SSE-S3) protects data at rest; it does not control who is allowed to request/access objects.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-31", "source_question_ids": ["awssysops-p3-1-q611"], "statement": "Fronting a high-read-rate S3 bucket with a CloudFront distribution serves repeat reads for the same static objects from the CDN cache rather than the origin bucket, reducing both origin load and latency.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-32", "source_question_ids": ["awssysops-p3-1-q611"], "statement": "Migrating an S3 bucket to a region closer to end users only helps users near that new region and does not reduce overall request volume/load on the bucket.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-33", "source_question_ids": ["awssysops-p3-1-q611"], "statement": "S3 cross-region replication duplicates data into another region but does not by itself offload read traffic away from the original bucket unless clients are redirected to the replica.", "status": "supported"}, {"claim_type": "exception", "conditions": ["caching database query results vs. caching object-storage reads"], "confidence": "medium", "id": "cl-0-34", "source_question_ids": ["awssysops-p3-1-q611", "awssysops-p3-1-q641"], "statement": "Amazon ElastiCache is designed to cache results in front of a database (like RDS), not to cache object-storage reads from S3.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-0-35", "source_question_ids": ["awssysops-p3-1-q641"], "statement": "A CloudFront distribution can use an Elastic Load Balancer as a custom origin, caching large dynamically-generated, per-visitor objects at edge locations and directly speeding up their download for geographically distributed visitors.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-36", "source_question_ids": ["awssysops-p3-1-q641"], "statement": "For slow downloads of large, dynamically-generated, geographically-targeted content, the source's boxed/labeled answer is adding ElastiCache in front of RDS, but community consensus unanimously favors fronting the existing ELB with a CloudFront distribution instead, since ElastiCache only reduces database query load and does nothing to speed the actual transfer of large objects to browsers.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-37", "source_question_ids": ["awssysops-p3-1-q641"], "statement": "Storing content directly in S3 does not fit content that is dynamically generated per visitor (e.g., based on geographic location) and updated daily.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-38", "source_question_ids": ["awssysops-p3-1-q641"], "statement": "Enabling Auto Scaling for EC2 instances addresses compute capacity to handle load, not the per-object download speed experienced by an individual visitor.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-39", "source_question_ids": ["awssysops-p3-1-q649"], "statement": "CloudFront's TotalErrorRate CloudWatch metric reports the percentage of all viewer requests that returned any 4xx or 5xx HTTP status code, making it the metric to monitor for elevated error rates spanning both categories.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-40", "source_question_ids": ["awssysops-p3-1-q649"], "statement": "RejectedConnectionCount and HealthyHostCount are Elastic Load Balancing metrics, not CloudFront metrics, and are irrelevant to monitoring CloudFront error rates.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0-41", "source_question_ids": ["awssysops-p3-1-q687"], "statement": "Ensuring only the cookies, query strings, and headers actually required by the origin are forwarded in a CloudFront cache behavior eliminates unnecessary cache-key variation, increasing the cache hit ratio.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0-42", "source_question_ids": ["awssysops-p3-1-q687"], "statement": "Increasing the CloudFront TTL settings (default/min/max) in a cache behavior keeps objects cached longer before re-validating against the origin, increasing the cache hit ratio.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-43", "source_question_ids": ["awssysops-p3-1-q687"], "statement": "Changing a CloudFront distribution's Viewer Protocol Policy to HTTPS-only affects transport security, not caching behavior, and does not change the cache hit ratio.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-44", "source_question_ids": ["awssysops-p3-1-q687"], "statement": "Configuring a CloudFront distribution to require presigned cookies/URLs controls access restriction, not cache efficiency, and does not affect the cache hit ratio.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-45", "source_question_ids": ["awssysops-p3-1-q687"], "statement": "Enabling automatic compression of objects in CloudFront cache behavior settings reduces the size of transferred objects but does not change whether a given request is a cache hit or miss.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-46", "source_question_ids": ["awssysops-p3-1-q736"], "statement": "CloudFront geo-restriction lets a distribution allow-list or block-list specific countries and return a custom error page to requesters from blocked countries.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-47", "source_question_ids": ["awssysops-p3-1-q736"], "statement": "Amazon Route 53 geolocation routing can route requests originating from specific geographic regions to a different endpoint, such as one serving an error page, providing a second AWS-native way to implement country-based access blocking.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-48", "source_question_ids": ["awssysops-p3-1-q736"], "statement": "Amazon GuardDuty is a threat-detection service; it has no geo-blocking or geo-restriction feature.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-49", "source_question_ids": ["awssysops-p3-1-q736"], "statement": "AWS Shield is a DDoS-protection service; it has no geo-restriction capability.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-50", "source_question_ids": ["awssysops-p3-1-q736"], "statement": "A network ACL filters traffic by IP address/CIDR ranges only and has no concept of country or region, making country-level blocking impractical at the NACL layer.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-51", "source_question_ids": ["awssysops-p3-1-q757"], "statement": "Both ALB access logs and CloudFront access logs operate at the application (Layer 7) level and record each request's HTTP status code.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-0-52", "source_question_ids": ["awssysops-p3-1-q757"], "statement": "AWS CloudTrail logs record AWS API/management-plane activity (who called which AWS API), not end-user HTTP requests to a web application, so they contain no Layer 7 HTTP status codes.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-53", "source_question_ids": ["awssysops-p3-1-q757"], "statement": "VPC Flow Logs operate at Layer 3/4 (IP/port/packet metadata) and have no visibility into HTTP-level (Layer 7) status codes.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-54", "source_question_ids": ["awssysops-p3-1-q757"], "statement": "RDS logs capture database engine activity and are unrelated to HTTP traffic or HTTP status codes.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-55", "source_question_ids": ["awssysops-p3-1-q757"], "statement": "For investigating Layer 7 HTTP status codes, the source's boxed/labeled answer pairs CloudTrail logs with CloudFront access logs, but community consensus unanimously favors pairing ALB access logs with CloudFront access logs instead, since CloudTrail contains no HTTP status codes at all.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["single ALB in a single region"], "confidence": "high", "id": "cl-0-56", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "With only a single ALB in a single region, enabling Route 53 latency-based routing is a no-op — every request already resolves to that same one load balancer regardless of the routing policy, since latency-based routing only has an effect when multiple regional endpoints exist.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-0-57", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Implementing EC2 Auto Scaling for web servers lets the fleet grow to handle load spikes that would otherwise slow down dynamic content generation.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-0-58", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "An Application Load Balancer's listener cannot be changed to TCP, because ALBs operate only at the application layer (HTTP/HTTPS); TCP listeners are an NLB-only feature.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0-59", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Moving static content off S3 onto the web servers adds load to the same instances already implicated in the site's slowness, rather than relieving it.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-60", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "For improving performance of a slow single-region website, the source's boxed/labeled answer includes Route 53 latency-based routing (paired with Auto Scaling), but community consensus unanimously favors pairing CloudFront caching of static content with Auto Scaling instead, since latency-based routing is a no-op with only one ALB in one region.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["default/min/max TTL set to 0 seconds"], "confidence": "high", "id": "cl-0-61", "source_question_ids": ["awssysops-p3-1-q881"], "statement": "Setting the default, minimum, and maximum Time to Live (TTL) to 0 seconds on a CloudFront distribution effectively disables caching, forwarding every request straight through to the origin.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-62", "source_question_ids": ["awssysops-p3-1-q881"], "statement": "If client DNS still resolves directly to an ALB instead of to the CloudFront distribution's domain name, traffic bypasses CloudFront entirely and the ALB continues to see the full unreduced load.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-63", "source_question_ids": ["awssysops-p3-1-q881"], "statement": "Origin Access Identity is an S3-specific access-control mechanism used to restrict direct public access to an S3 bucket origin; it has no applicable meaning when the CloudFront origin is an ALB.", "status": "supported"}, {"claim_type": "default", "confidence": "low", "id": "cl-0-64", "source_question_ids": ["awssysops-p3-1-q881"], "statement": "Sticky sessions (session affinity) configured on an ALB's target groups can force session affinity that undermines the caching/offload benefit a fronting CloudFront distribution is meant to provide.", "status": "needs-review"}, {"claim_type": "exception", "confidence": "low", "id": "cl-0-65", "source_question_ids": ["awssysops-p3-1-q881"], "statement": "For why a CloudFront-fronted ALB still sees unreduced load, besides DNS bypass, the second cause is disputed within the community itself: TTLs set to 0 seconds (which disables caching) and ALB sticky sessions (which undermines caching) are each cited by roughly half of commenters, with no clear consensus.", "status": "conflicted"}, {"claim_type": "default", "conditions": ["CloudFront distribution using default cache behavior configuration"], "confidence": "high", "id": "cl-0-66", "source_question_ids": ["awssysops-p3-1-q886"], "statement": "With CloudFront's default configuration, cookies are not forwarded to the origin at all, so an origin's session cookie (e.g., set by an ALB for sticky sessions) never reaches the origin on subsequent requests unless CloudFront is explicitly configured to forward it.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0-67", "source_question_ids": ["awssysops-p3-1-q886"], "statement": "For a stateful application behind CloudFront and an ALB, enabling ALB session affinity (sticky sessions) together with configuring CloudFront to forward all cookies to the origin fixes intermittent logout / inconsistent content issues, since it addresses both the ALB-side routing and the CloudFront-side cookie-stripping causes.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-68", "source_question_ids": ["awssysops-p3-1-q886"], "statement": "For fixing intermittent logouts on a CloudFront-fronted stateful ALB application, the source's boxed/labeled answer is switching from duration-based to application-controlled ALB sticky sessions, but this does nothing about CloudFront's default cookie-stripping behavior, which community consensus unanimously identifies as the actual root cause requiring cookie forwarding plus sticky sessions.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0-69", "source_question_ids": ["awssysops-p3-1-q907"], "statement": "Geographic access latency for users far from a single-region deployment is best addressed by combining edge caching of static content (CloudFront) with routing users to a second, geographically nearer full production environment (via Route 53 latency-based routing).", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0-70", "source_question_ids": ["awssysops-p3-1-q907"], "statement": "An Application Load Balancer is a Regional resource and cannot distribute traffic across two separate AWS Regions; cross-Region routing must be done by Route 53, not the ALB.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-71", "source_question_ids": ["awssysops-p3-1-q907"], "statement": "Tuning the EC2 Auto Scaling group's CPU scaling threshold has no effect on a reported performance issue when CloudWatch shows the actual bottleneck is on a different tier (e.g., the RDS instance at 70% CPU, not the EC2 web tier), and would not address a geography-based latency gap in any case.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-0-72", "source_question_ids": ["awssysops-p3-1-q907"], "statement": "For fixing geographic latency for Asia-based users of a single-region production environment, the source's boxed/labeled answer proposes provisioning a second Asia Pacific environment fronted by a single cross-Region ALB, but this is a technical impossibility since ALBs cannot span AWS Regions; community consensus instead favors Route 53 latency-based routing to the second environment plus CloudFront for static content.", "status": "conflicted"}], "mentalModel": {"id": "aws-sysops-service-cloudfront--mm-cloudfront-edge-cache", "title": "CloudFront is an in-path edge cache that serves cacheable content from a location near each user", "purpose": "Reach for CloudFront when the problem is (a) latency for users geographically far from a single origin/region, and/or (b) origin load from repeated reads of the same content during a traffic or download spike. It solves both at once by caching content at globally distributed edge locations so repeat requests never reach the origin and are answered close to the user, regardless of where the origin lives.", "mechanism": "A viewer request resolves to the nearest CloudFront edge location. If the requested object is present in that edge's cache and its TTL has not expired, CloudFront returns it directly -- no origin round-trip, low latency, and the origin sees no load. On a cache miss (or expired TTL), the edge fetches the object from the configured origin (an S3 bucket, or a custom origin such as an ELB/ALB), stores it under a cache key, and serves it; subsequent identical requests are hits. The cache key is built from the request path plus whichever cookies, query strings, and headers the cache behavior is configured to forward -- so every forwarded element that varies splits the cache into more entries and lowers the hit ratio. Two levers govern hit ratio: TTL (default/min/max -- higher means objects stay cached longer before re-validating; setting all three to 0 disables caching and forwards every request to the origin) and cache-key minimization (forward only what the origin truly needs). Critically, CloudFront only does anything if traffic actually flows through it: client DNS must resolve to the CloudFront distribution's domain name, or requests bypass it and hit the origin (e.g. the ALB) at full unreduced load.", "invariants": ["Edge caching reduces latency for distant users AND offloads repeat reads from the origin at the same time, independent of the origin's region (cl-0-0, cl-0-5, cl-0-31).", "Only cacheable content benefits; whether a given request is a hit or a miss is decided entirely by the cache key (path + forwarded cookies/headers/query strings) (cl-0-41).", "Cache hit ratio rises when TTL is longer and when fewer cache-key elements are forwarded (cl-0-41, cl-0-42).", "CloudFront can only offload/accelerate traffic that is actually routed through it -- DNS must point at the distribution's domain (cl-0-62)."], "limits": ["TTL of 0 (default/min/max) effectively disables caching -- every request goes straight to the origin (cl-0-61).", "By default CloudFront forwards no cookies to the origin, so origin-set session/sticky cookies never return unless forwarding is explicitly configured (cl-0-66); a stateful app needs cookie forwarding plus ALB session affinity (cl-0-67).", "It does not reduce database read load -- that is ElastiCache or RDS read replicas, which act on the DB tier, not on object transfer (cl-0-2, cl-0-34).", "OAI only restricts the S3 origin to CloudFront; it provides no per-user authorization (that needs signed URLs/cookies) and is meaningless when the origin is an ALB (cl-0-13, cl-0-28, cl-0-63).", "Geo-restriction is country-granular only -- it cannot allow/deny an individual IP (cl-0-22, cl-0-46)."], "cues": ["\"reduce latency for users far from the origin/region\" or \"users worldwide\"", "\"absorb a flash download / traffic spike\" or \"patch release hammering the web servers\"", "\"reduce load on the origin / S3 bucket / web tier from repeat reads of the same static objects\"", "\"increase the cache hit ratio\" or tuning TTL / forwarded headers/cookies/query strings", "\"serve static assets, images, patches, or articles globally at low cost\""], "limits_note": null, "predict_prompt": "A single-region web app serves the same images from an S3 origin and is slow for users in Asia; during spikes the origin is hammered by repeat reads. The team adds a CloudFront distribution, but latency for distant users is unchanged and the origin still sees the full load. Give two distinct configuration reasons this can happen, and for each say what CloudFront was supposed to do if configured correctly.", "claim_ids": ["cl-0-0", "cl-0-5", "cl-0-14", "cl-0-17", "cl-0-31", "cl-0-35", "cl-0-41", "cl-0-42", "cl-0-61", "cl-0-62", "cl-0-66"]}, "contrastSet": {"id": "aws-sysops-service-cloudfront--cs-cloudfront-vs-elasticache-vs-route53-latency", "subjects": ["Amazon CloudFront (edge caching)", "Amazon ElastiCache", "Route 53 latency-based routing"], "dimensions": ["What it caches / acts on", "Which bottleneck it relieves", "Effect on latency for far-away users", "Precondition to have any effect"], "matrix": {"What it caches / acts on": {"Amazon CloudFront (edge caching)": "Cacheable HTTP objects (static assets, images, patches, articles; or a custom ELB/ALB origin) held at edge locations worldwide (cl-0-0, cl-0-17, cl-0-31, cl-0-35)", "Amazon ElastiCache": "Frequently-accessed database query results, in memory, in one region, in front of a relational DB such as RDS (cl-0-2, cl-0-34)", "Route 53 latency-based routing": "Nothing -- it is DNS routing that picks the fastest among existing regional endpoints, it caches no content (cl-0-6, cl-0-7)"}, "Which bottleneck it relieves": {"Amazon CloudFront (edge caching)": "Origin load from repeat reads AND network distance to users -- both at once (cl-0-0, cl-0-31)", "Amazon ElastiCache": "Database read query load hitting the RDS primary (cl-0-2, cl-0-34)", "Route 53 latency-based routing": "Steers each user to whichever regional deployment is nearest/fastest (cl-0-7, cl-0-69)"}, "Effect on latency for far-away users": {"Amazon CloudFront (edge caching)": "Directly reduces it -- content is served from a nearby edge regardless of origin region (cl-0-5)", "Amazon ElastiCache": "None -- still one region; it only shortens DB query time, not object transfer to distant browsers (cl-0-34, cl-0-36)", "Route 53 latency-based routing": "Reduces it only if a second, nearer full regional deployment actually exists to route to (cl-0-7, cl-0-69)"}, "Precondition to have any effect": {"Amazon CloudFront (edge caching)": "Content must be cacheable, TTL > 0, and DNS must resolve to the CloudFront domain (cl-0-61, cl-0-62)", "Amazon ElastiCache": "There must be a relational DB whose read queries repeat (cl-0-2, cl-0-34)", "Route 53 latency-based routing": "Two or more regional origins/endpoints must exist -- it is a no-op with a single origin in one region (cl-0-6, cl-0-56)"}}, "decision_rule": "Flip on WHAT is actually slow or overloaded and WHERE. If the thing to speed up is delivering cacheable content over network distance and/or offloading repeat reads from the origin -> CloudFront. If it is the database read-query load on RDS -> ElastiCache (or read replicas). If it is steering users among multiple already-existing regional deployments -> Route 53 latency-based routing. CloudFront is correct precisely when the bottleneck is content transfer/repeat reads, not DB load and not multi-region endpoint selection.", "boundary_flip": "Start: single-region site, slow static-content downloads for distant users and repeat reads hammering the origin -> CloudFront. Change the stated bottleneck to 'RDS is at high read load under a read-heavy spike' (content transfer is fine) -> the correct choice flips to ElastiCache / RDS read replicas. Alternatively, add a second full production deployment in a nearer region and ask how to send users to the closest one -> the correct choice flips to Route 53 latency-based routing, which was a pure no-op while only one regional origin existed.", "shared_traits": ["All three are pitched as latency/performance improvements and are commonly offered together as answer choices.", "All aim to keep users from waiting on a distant or overloaded backend."], "exceptions": ["With only a single ALB/origin in one region, enabling Route 53 latency-based routing changes nothing -- every request already resolves to that one endpoint (cl-0-56, cl-0-60).", "ElastiCache caches DB query results, not object-storage/S3 reads, so it cannot offload an S3 read spike or speed large object downloads (cl-0-34, cl-0-36)."], "strongest_distractor_failure": "Route 53 latency-based routing is the strongest distractor: it sounds like it 'reduces latency,' so it gets paired with Auto Scaling as a fix for a slow single-region site -- but with only one ALB in one region it routes to the same endpoint no matter what and does nothing. The community-favored fix is CloudFront caching of static content plus Auto Scaling instead (cl-0-6, cl-0-56, cl-0-60, cl-0-72).", "claim_ids": ["cl-0-0", "cl-0-2", "cl-0-5", "cl-0-6", "cl-0-7", "cl-0-31", "cl-0-34", "cl-0-35", "cl-0-36", "cl-0-56", "cl-0-60", "cl-0-69", "cl-0-72"]}, "scenarioFamily": {"id": "aws-sysops-service-cloudfront--aws-sysops-service-cloudfront--sf-cloudfront-ttl-dns-misconfig", "canonical": {"variant_type": "canonical", "prompt": "A retailer runs a single-region web app behind an ALB, with product images stored in one S3 bucket. Asia-based users report slow image loads, and every flash sale drives a wave of repeat requests for the same handful of images that hammers the S3 origin. The team creates a CloudFront distribution using that S3 bucket as its origin, but (1) leaves the distribution's default, minimum, and maximum TTL all at 0 seconds, and (2) never updates the app's DNS record, which still resolves directly to the S3 bucket's endpoint rather than to the CloudFront distribution's domain name. After the change ships, Asia-based users see no latency improvement and the origin is hammered just as hard during the next flash sale. Name the two distinct misconfigurations at fault, and for each say what CloudFront would have done for the corresponding bottleneck (distant-user latency vs. origin load) if it had been configured correctly.", "expected_answer": ["TTL 0 across default/min/max disables caching outright, so even though CloudFront is in front of S3, every single request -- from any user, from any region -- is forwarded straight through to the origin instead of being served from cache; with a nonzero TTL, edge locations would serve repeat image requests from cache during the flash sale, keeping load off the S3 origin.", "DNS still resolves to the S3 bucket's own endpoint, not the CloudFront distribution's domain name, so traffic never enters CloudFront's edge network at all; pointing DNS at the distribution's domain would let the nearest edge location answer Asia-based users' requests locally, cutting their latency regardless of the origin's region."], "reasoning": "The mechanism only helps if the object is actually cached (TTL>0) and the request actually reaches an edge location (DNS resolves to the distribution). cl-0-61 states TTL=0 on default/min/max disables caching and forwards every request to the origin. cl-0-62 states that if DNS still resolves to the origin (here, S3) rather than the distribution domain, traffic bypasses CloudFront and the origin sees full unreduced load. cl-0-0/cl-0-31 establish that correctly functioning edge caching offloads repeat reads from the origin, and cl-0-5 establishes it independently cuts latency for geographically distant users. Both failures are necessary and independent: fixing only one leaves the other bottleneck (either the latency symptom or the origin-load symptom) unresolved.", "claim_ids": ["cl-0-0", "cl-0-5", "cl-0-31", "cl-0-61", "cl-0-62"], "difficulty": "medium", "importance": "high", "distractor_analysis": "The natural error is to treat this as one bug with one fix -- e.g. 'just point DNS at CloudFront' -- and stop there, missing that TTL=0 would still send every request past the (now correctly reached) edge straight to the origin, so the flash-sale origin-load symptom would persist even after the DNS fix. Symmetrically, fixing only the TTL leaves DNS resolving straight to S3, so nothing ever reaches an edge location and Asia latency is untouched. Also a plausible misdiagnosis blames CloudFront itself as 'not caching S3 content correctly' rather than two independent, ordinary configuration knobs."}, "variants": [{"variant_type": "boundary", "changed_condition": "Both original misconfigurations are fixed -- TTL is set to a nonzero value and DNS now correctly resolves to the CloudFront distribution's domain -- but the cache behavior is left configured to forward every cookie, header, and query string to the origin.", "prompt": "Same setup as before, except the team has since fixed both problems: TTL is now set to a sensible nonzero value, and DNS correctly points at the CloudFront distribution's domain name. However, the cache behavior for the image path is still configured to forward all cookies, all headers, and all query strings to the origin. Asia-based users now see somewhat better latency, but the origin is still hit far more often than expected during flash sales, and the hit ratio in the CloudFront reports stays low. What's the remaining misconfiguration, and what's the fix?", "expected_answer": ["The cache key is built from the request path plus every forwarded cookie/header/query string; forwarding all of them means near-identical image requests get treated as distinct cache keys, so most requests miss and are re-fetched from the origin even though the underlying object is the same. This is a different failure mode than TTL=0 or DNS bypass -- caching is active and traffic is reaching CloudFront, but the cache key is needlessly fragmented.", "The fix is cache-key minimization: reconfigure the cache behavior to forward only the cookies, headers, and query strings the origin actually needs for this path (ideally none, for static images), which collapses requests for the same object back onto the same cache key and raises the hit ratio."], "reasoning": "This flips the diagnosis relative to the canonical scenario: once TTL and DNS are no longer the problem, the invariant that cache hit ratio rises when fewer cache-key elements are forwarded (cl-0-41) becomes the operative one, since cl-0-41 also states the cache key is built from path plus whatever cookies/headers/query strings are forwarded, and every forwarded element that varies splits the cache into more entries. This is a genuine boundary: right at the edge between 'broken because caching/routing is off' and 'working but inefficient,' the root cause and remedy change even though the surface symptom (origin still overloaded) looks similar.", "claim_ids": ["cl-0-41"], "difficulty": "hard", "importance": "medium", "distractor_analysis": "A test-taker who over-anchors on the canonical scenario may keep hunting for a TTL or DNS problem and miss that both are already fixed here; the actual lever is cache-key composition, not TTL or reachability."}, {"variant_type": "irrelevant-detail", "changed_condition": "The team also switches the distribution's Viewer Protocol Policy to HTTPS-only and enables automatic compression of objects, on top of the original TTL=0 and DNS-bypass misconfigurations.", "prompt": "Same setup as the canonical scenario (TTL 0 on default/min/max, DNS still pointing at the S3 endpoint instead of the CloudFront domain). While making the change, the team also flips the distribution's Viewer Protocol Policy to HTTPS-only and enables automatic compression of served objects. After deployment, Asia-based users still see no latency improvement and the origin is still hammered during flash sales. What explains the unchanged behavior, and do the HTTPS-only and compression changes play any role?", "expected_answer": ["TTL 0 across default/min/max still disables caching entirely, so every request is forwarded straight to the S3 origin instead of being served from cache -- unrelated to the protocol or compression settings.", "DNS still resolving to the S3 endpoint instead of the CloudFront distribution's domain still means traffic never reaches an edge location -- also unrelated to those settings.", "The Viewer Protocol Policy (HTTPS-only) and automatic compression play no role in the problem: HTTPS-only affects transport security, not caching, and compression affects transferred object size, not whether a request is a cache hit or miss -- neither changes the hit ratio, so neither explains or fixes the symptoms."], "reasoning": "cl-0-43 states that changing Viewer Protocol Policy to HTTPS-only affects transport security, not caching behavior, and does not change the cache hit ratio; cl-0-45 states enabling compression changes object size, not whether a request is a hit or miss. Neither claim bears on the actual causes, which remain cl-0-61 (TTL 0 disables caching) and cl-0-62 (DNS bypass). The expected answer is unchanged from canonical because these two added settings are causally inert with respect to the observed symptoms.", "claim_ids": ["cl-0-43", "cl-0-45", "cl-0-61", "cl-0-62"], "difficulty": "easy", "importance": "medium", "distractor_analysis": "A test-taker might assume any protocol/security-adjacent CloudFront setting could plausibly be 'the missing piece' and spend effort investigating HTTPS or compression settings, when both are explicitly orthogonal to caching and unrelated to the reported symptoms."}, {"variant_type": "adversarial-distractor", "changed_condition": "Instead of fixing the CloudFront TTL/DNS misconfiguration, a teammate proposes adding ElastiCache in front of the S3 origin and enabling Route 53 latency-based routing as the fix.", "prompt": "Same canonical setup (TTL 0 on default/min/max, DNS still pointing at the S3 endpoint instead of the CloudFront distribution). A teammate proposes leaving the CloudFront configuration as-is and instead: (a) adding an ElastiCache cluster in front of the S3 bucket to cut origin load, and (b) enabling Route 53 latency-based routing to fix the Asia-based latency complaint. Would either of these actually fix the reported problems? Why or why not, and what's still actually broken?", "expected_answer": ["Neither proposal fixes anything: ElastiCache is designed to cache database query results in front of a relational database like RDS, not object-storage reads from S3, so it cannot offload the repeat S3 image reads at all.", "Route 53 latency-based routing only changes behavior when multiple regional endpoints/origins exist to route between; with a single-region deployment (one S3 origin, one region), it is a no-op -- there is nothing else to route Asia-based users to.", "The actual causes are unchanged and untouched by either proposal: TTL 0 on the CloudFront distribution still disables caching (forwarding every request to the S3 origin), and DNS still resolving to the S3 endpoint instead of the CloudFront domain still means traffic never reaches an edge location. Both must still be fixed."], "reasoning": "This tests whether the model correctly rejects two plausible-sounding but inapplicable AWS services. cl-0-34 establishes ElastiCache fronts a relational database's query results, not S3 object reads -- so it can't touch this bottleneck. cl-0-6 and cl-0-56 establish Route 53 latency-based routing requires multiple regional endpoints to have any effect at all; with only one region it is a no-op. Because the underlying causes are untouched, the expected answer necessarily still includes the same two root causes as canonical (cl-0-61, cl-0-62), now with the added burden of explaining why the distractor fixes fail.", "claim_ids": ["cl-0-34", "cl-0-6", "cl-0-56", "cl-0-61", "cl-0-62"], "difficulty": "hard", "importance": "high", "distractor_analysis": "Both proposed fixes are the classic distractor pattern from this claim set: ElastiCache and Route 53 latency-based routing are both real, legitimate AWS latency/load tools, which makes them tempting even though neither applies here -- ElastiCache targets DB reads, and single-region deployments make latency-based routing vacuous. The strongest failure mode is accepting either as sufficient without checking its precondition (a DB workload for ElastiCache; multiple regions for Route 53 LBR)."}, {"variant_type": "transfer", "changed_condition": "The origin is now the company's own web-server fleet behind an ALB (a custom origin, not S3), and the cached content is downloadable software patches rather than images, with the same underlying spike-plus-distance failure mode; DNS still points at the ALB instead of the CloudFront domain, and TTL is still 0.", "prompt": "A software vendor distributes installer patches from its own web servers behind an ALB (no S3 involved). Whenever a patch ships, download traffic spikes and hammers the ALB/web tier, and users far from the deployment region see slow downloads. The team fronts the ALB with a CloudFront distribution, configured with the ALB as a custom origin, but leaves TTL at 0 on default/min/max and never updates the download links, which still point at the ALB's own DNS name rather than the CloudFront distribution's domain. After the next patch release, distant users still see the same slow downloads and the ALB is hammered just as hard. What's wrong, and does it matter that the origin here is an ALB rather than S3?", "expected_answer": ["It doesn't matter that the origin is an ALB rather than S3 -- CloudFront can use a custom origin such as an ELB/ALB just as it can use S3, and the same two failure modes apply: TTL 0 on default/min/max still disables caching, forwarding every download request straight to the ALB instead of serving repeat requests for the same patch file from an edge cache.", "The download links still pointing at the ALB's own DNS name rather than the CloudFront distribution's domain means requests never enter CloudFront's edge network at all, so distant users get no latency benefit and the ALB continues to absorb the full, unreduced spike."], "reasoning": "This transfers the canonical mechanism to a different but structurally identical setting. cl-0-35 establishes CloudFront can front a custom origin like an ELB/ALB, not just S3. cl-0-17 establishes that fronting downloadable software patches with CloudFront absorbs flash-download-spike traffic by caching those static files at the edge. The same two root causes from canonical -- TTL 0 disabling caching (cl-0-61) and DNS not resolving to the CloudFront domain, so traffic bypasses it and the origin sees full load (cl-0-62) -- apply unchanged, since neither depends on origin type (S3 vs. ALB) or content type (images vs. patches).", "claim_ids": ["cl-0-17", "cl-0-35", "cl-0-61", "cl-0-62"], "difficulty": "medium", "importance": "medium", "distractor_analysis": "A test-taker might think the fix differs because the origin is now an ALB instead of S3 (e.g., reaching for Origin Access Identity, which is S3-specific per cl-0-63, or assuming CloudFront can't front a load balancer at all), when in fact the origin type is irrelevant to these two particular misconfigurations and the same TTL/DNS fixes apply."}]}, "issues": [{"type": "contradiction", "severity": "medium", "description": "cl-0-35 claims CloudFront (with an ELB custom origin) 'caches large dynamically-generated, per-visitor objects at edge locations and directly speeds up their download' — and this claim is carried into both the mental model (listed in its claim_ids; the mechanism cites 'a custom origin such as an ELB/ALB') and the contrast set matrix ('What it caches / acts on' for CloudFront). This contradicts the mental model's own invariant that 'Only cacheable content benefits; whether a given request is a hit or a miss is decided entirely by the cache key (path + forwarded cookies/headers/query strings)' and cl-0-41 (per-request cache-key variation lowers the hit ratio). cl-0-37 (from the same q641) describes the content as 'dynamically generated per visitor ... and updated daily.' If content genuinely varies per visitor, edge caching produces near-zero hits, so it cannot 'directly speed up download' via caching; CloudFront's real benefit for such dynamic content is connection/AWS-backbone optimization, a mechanism the material never states and instead misattributes to 'caching.' The result is an internally inconsistent and technically dubious generation that could teach a wrong model of when CloudFront caching helps.", "related_entity_ids": ["cl-0-35", "cl-0-37", "cl-0-41", "aws-sysops-service-cloudfront--mm-cloudfront-edge-cache", "aws-sysops-service-cloudfront--cs-cloudfront-vs-elasticache-vs-route53-latency"]}, {"type": "quality", "severity": "low", "description": "cl-0-25 gives '403 unauthorized' as an example of a client-error response. HTTP 403 is 'Forbidden'; 401 is 'Unauthorized.' The 401-vs-403 distinction is a real, testable point for a SysOps exam, so labeling 403 as 'unauthorized' is an imprecision in the study material, even though the surrounding claim (4xxErrorRate measures client-error responses) is correct.", "related_entity_ids": ["cl-0-25"]}]}]}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam: a future fetch-based loader only ever
+  // needs to replace these two bodies. ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: (s.sourceQuestions || []).length };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`<ul class="citations">${raw(claims.map(function (c) {
+      return safe`<li>${c.statement} <span class="muted">(${c.status || 'status unknown'})</span></li>`;
+    }).join(''))}</ul>`;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private/incognito mode?) '
+        + '-- progress will NOT be saved after this tab closes. Export your progress before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose">${model.purpose || ''}</p>
+        <div class="predict-block">
+          <label for="predict-input"><strong>Predict first</strong></label>
+          <p class="prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="2" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<button id="reveal-model-btn" type="button">Reveal mechanism</button>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          <h3>Supporting claims</h3>
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <table class="contrast-table">
+          <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+          <tbody>${raw(rows)}</tbody>
+        </table>
+        <h3>Decision rule</h3>
+        <p>${cs.decision_rule || ''}</p>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        <h3>Supporting claims</h3>
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <p class="summary">Session complete: ${correctCount}/${attempted.length} correct.</p>
+          <button id="practice-restart" type="button">Restart queue</button>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices">${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"> ${c.letter}. ${c.text}</label>`;
+        }).join(''))}</fieldset>`
+      : safe`<textarea id="predict-freeform" rows="2" placeholder="Type your prediction..."></textarea>`;
+    var metaLine = (item.difficulty || item.importance)
+      ? safe`<p class="muted">Difficulty: ${item.difficulty || 'n/a'} &middot; Importance: ${item.importance || 'n/a'}</p>`
+      : '';
+    var changedCondition = item.changed_condition
+      ? safe`<p class="changed-condition"><strong>Changed condition:</strong> ${item.changed_condition}</p>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice (${practiceIndex + 1} / ${items.length}) &mdash; ${item.variant_type || 'item'}</h2>
+        ${raw(changedCondition)}
+        ${raw(metaLine)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence (optional)</legend>
+          ${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"> ${c}</label>`; }).join(''))}
+        </fieldset>
+        <button id="reveal-practice-btn" type="button">Reveal</button>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedAnswerText = Array.isArray(item.expected_answer) ? item.expected_answer.join(', ') : (item.expected_answer || '');
+    var distractors = item.distractor_analysis
+      ? safe`<p class="distractors"><strong>Why other options fail:</strong> ${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <p><strong>Expected answer:</strong> ${expectedAnswerText}</p>
+      <p>${item.reasoning || ''}</p>
+      ${raw(distractors)}
+      <h4>Supporting claims</h4>
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="${raw(isMulti ? 'hidden' : '')}">
+        <p>Self-assess:</p>
+        <button type="button" id="self-correct">I got it right</button>
+        <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+      </div>
+      <button id="practice-next-btn" type="button" disabled>Next</button>`;
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      revealBox.querySelector('#practice-next-btn').removeAttribute('disabled');
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"> <strong>${c.label}</strong> &mdash; ${c.hint}</label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="muted">Your answer: ${predictedText}</p>
+              <fieldset>${raw(radios)}</fieldset>
+              <button type="button" class="submit-diagnosis">Submit diagnosis</button>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">No pending diagnoses &mdash; nice work.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = (item ? (item.prompt || item.stem || '') : a.itemId).slice(0, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="muted">${when}</span> &mdash; <strong>${label}</strong> &mdash; ${excerpt}</li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis (${pending.length})</h3>
+        ${raw(pendingHtml)}
+        <h3>History (${history.length})</h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) return;
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`<ul class="issues">${raw(issues.map(function (i) {
+      return safe`<li><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span> <strong>${i.type || 'issue'}</strong>: ${i.description || ''}</li>`;
+    }).join(''))}</ul>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var cls = (q.correct_answer || []).indexOf(c.letter) !== -1 ? 'correct-choice' : '';
+        return safe`<li class="${cls}">${c.letter}. ${c.text}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul>${raw(citing.map(function (c) { return safe`<li>${c.statement}</li>`; }).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="4">
+            <p>${q.stem}</p>
+            <ul>${raw(choiceItems)}</ul>
+            <p><strong>Explanation:</strong> ${q.explanation || ''}</p>
+            <p class="muted">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+            <h4>Cited by (${citing.length})</h4>
+            ${raw(citedList)}
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge">disputed</span>' : '';
+    return safe`
+      <tr class="source-row" data-id="${q.id}">
+        <td>${q.id}</td>
+        <td>${q.status || ''}${raw(disputedBadge)}</td>
+        <td>${(q.stem || '').slice(0, 90)}</td>
+        <td>${(q.correct_answer || []).join(', ')}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  function renderSources() {
+    var questions = CURRENT.sourceQuestions || [];
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        <h3>Issues (${(CURRENT.issues || []).length})</h3>
+        ${raw(issuesHtml())}
+        <input type="search" id="sources-search" placeholder="Search stem, choices, explanation...">
+        <p class="muted" id="sources-count"></p>
+        <table class="sources-table">
+          <thead><tr><th>ID</th><th>Status</th><th>Stem</th><th>Correct</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </section>`;
+    var fragment = fromHTML(html);
+    var section = fragment.firstElementChild;
+    var input = section.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      section.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = section.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.map(sourceRowHtml).join('');
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function () {
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+    return fragment;
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      document.getElementById('app-title').textContent =
+        CURRENT.contentSet.exam + ' — ' + CURRENT.contentSet.facet.key + ': ' + CURRENT.contentSet.facet.value;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  window.addEventListener('hashchange', navigate);
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>

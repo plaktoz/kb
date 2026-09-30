@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  :root {
+    --ink: #1b1f24;
+    --muted: #5b6572;
+    --line: #d9dee3;
+    --bg: #ffffff;
+    --bg-alt: #f5f7f9;
+    --accent: #2f5fb3;
+    --ok: #1a7f4e;
+    --bad: #b3261e;
+    --warn: #8a5a00;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    margin: 0;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-alt);
+    padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+  }
+  header h1 {
+    font-size: 1.05rem;
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+  nav#nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  nav#nav a {
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px 6px 0 0;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+  }
+  nav#nav a.active {
+    color: var(--accent);
+    border-color: var(--line);
+    background: var(--bg);
+    font-weight: 600;
+  }
+  #io-controls {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  #io-controls button, #io-controls .file-label {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    cursor: pointer;
+  }
+  .file-label input[type="file"] { display: none; }
+  #slice-controls {
+    margin-top: 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  #slice-controls select {
+    font: inherit;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+  }
+  #storage-warning {
+    margin-top: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 6px;
+    background: #fff3e0;
+    border: 1px solid #e0a95c;
+    color: var(--warn);
+    font-size: 0.85rem;
+  }
+  main#app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem 4rem;
+  }
+  h2 { margin-top: 0; }
+  .empty, .muted { color: var(--muted); }
+  .hidden { display: none !important; }
+  button {
+    font: inherit;
+    cursor: pointer;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+  }
+  button:disabled { opacity: 0.5; cursor: default; }
+  button.secondary {
+    background: var(--bg);
+    color: var(--accent);
+  }
+  textarea, input[type="search"] {
+    font: inherit;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+  }
+  fieldset {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    margin: 0.75rem 0;
+  }
+  label { display: block; margin: 0.3rem 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+  }
+  th, td {
+    border: 1px solid var(--line);
+    padding: 0.45rem 0.6rem;
+    text-align: left;
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+  thead th { background: var(--bg-alt); }
+  tr.source-row { cursor: pointer; }
+  tr.source-row:hover { background: var(--bg-alt); }
+  tr.detail-row td { background: var(--bg-alt); }
+  .correct-choice { color: var(--ok); font-weight: 600; }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: #eee;
+    color: #444;
+  }
+  .badge.severity-high, .badge.severity-critical { background: #fdecea; color: var(--bad); }
+  .badge.severity-medium { background: #fff3e0; color: var(--warn); }
+  .citations { padding-left: 1.1rem; }
+  .diagnosis-option {
+    border-bottom: 1px solid var(--line);
+    padding: 0.3rem 0;
+  }
+  .pending-attempt {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  ul.diagnosis-history { padding-left: 1.1rem; }
+  .changed-condition { color: var(--accent); }
+  .reveal { border-top: 1px dashed var(--line); margin-top: 0.75rem; padding-top: 0.75rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="app-title"></h1>
+  <div id="slice-controls" class="hidden">
+    <label for="slice-select">Slice</label>
+    <select id="slice-select"></select>
+  </div>
+  <nav id="nav">
+    <a href="#learn" data-route="learn">Learn</a>
+    <a href="#compare" data-route="compare">Compare</a>
+    <a href="#practice" data-route="practice">Practice</a>
+    <a href="#diagnose" data-route="diagnose">Diagnose</a>
+    <a href="#sources" data-route="sources">Explore Sources</a>
+  </nav>
+  <div id="io-controls">
+    <button id="export-btn" type="button">Export progress</button>
+    <label class="file-label">Import progress
+      <input type="file" id="import-input" accept="application/json">
+    </label>
+  </div>
+  <div id="storage-warning" class="hidden" role="alert"></div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 1, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-lambda", "exam": "aws-sysops", "facet": {"key": "service", "value": "lambda"}, "schemaVersion": 1}, "sourceQuestions": [{"id": "awssysops-p2-q558", "status": "active", "disputed": true, "stem": "A SysOps Administrator has an AWS Lambda function that stops all Amazon EC2 instances in a test environment at night and on the weekend. Stopping instances causes some servers to become corrupt due to the nature of the applications running on them. What can the SysOps Administrator use to identify these EC2 instances?", "choice_type": "single", "choices": [{"letter": "A", "text": "AWS Config"}, {"letter": "B", "text": "Amazon EC2 termination protection"}, {"letter": "C", "text": "Resource tagging"}, {"letter": "D", "text": "Amazon CloudWatch"}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "The Lambda function needs a programmatic way to determine which specific instances to exclude from its nightly stop routine — that means attaching a distinguishing resource tag to the sensitive instances and having the function filter on it. CloudWatch (the boxed answer) provides metrics and monitoring but gives the function no mechanism for deciding which instances to skip; AWS Config tracks configuration history rather than acting as a live selection filter. Community vote is unanimous (100%) for C (resource tagging), directly contradicting the boxed answer D, and is backed by detailed reasoning across the top comments about how Lambda would actually make the stop/skip decision.", "facets": {"service": ["Lambda", "EC2"], "concern": ["resource-tagging", "selective-instance-targeting"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 247, "question_number": 558}, "fingerprint": "b1b876b2cf5c05ef258ea3540bad993f4dfb48876cd55d0f1594f95f07f8a704"}, {"id": "awssysops-p2-q563", "status": "active", "disputed": false, "stem": "An application running on Amazon EC2 allows users to launch batch jobs for data analysis. The jobs are run asynchronously, and the user is notified when they are complete. While multiple jobs can run concurrently, a user's request need not be fulfilled for up to 24 hours. To run a job, the application launches an additional EC2 instance that performs all the analytics calculations. A job takes between 75 and 110 minutes to complete and cannot be interrupted. What is the MOST cost-effective way to run this workload?", "choice_type": "single", "choices": [{"letter": "A", "text": "Run the application on On-Demand EC2 instances. Run the jobs on Spot Instances with a specified duration."}, {"letter": "B", "text": "Run the application on Reserved Instance EC2 instances. Run the jobs on AWS Lambda."}, {"letter": "C", "text": "Run the application on On-Demand EC2 instances. Run the jobs on On-Demand EC2 instances."}, {"letter": "D", "text": "Run the application on Reserved Instance EC2 instances. Run the jobs on Spot Instances with a specified duration."}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "Spot Instances with a specified duration ('Spot blocks') could run for a fixed period (up to 6 hours) without early interruption at a flat, discounted hourly rate — a direct fit for a 75-110 minute job that cannot be interrupted. Pairing that with Reserved Instances for the always-on application tier (which runs continuously, unlike the on-demand-launched job instances) stacks both discount mechanisms for the most cost-effective combination. Lambda (B) is ruled out by its 15-minute maximum execution time, far short of the 75-110 minute job length. Community vote is unanimous (100%) for D, matching the boxed answer, despite extensive comment-thread debate about interruption risk. Note for currency: Spot Instances with a specified duration were deprecated for new customers starting July 2021 (support for existing users continued through December 2022) — in a present-day environment, On-Demand (C) would be the safe non-interruptible choice, per a more recent commenter.", "facets": {"service": ["EC2", "Lambda"], "concern": ["spot-block-duration", "cost-optimization", "non-interruptible-workload"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 254, "question_number": 563}, "fingerprint": "3bf15457ed502738401900156be13d2eac5fb75830d4831beba28139cdc4fe59"}, {"id": "awssysops-p2-q590", "status": "active", "disputed": false, "stem": "A Developer created an AWS Lambda function and has asked the SysOps Administrator to make this function run every 15 minutes. What is the MOST efficient way to accomplish this request?", "choice_type": "single", "choices": [{"letter": "A", "text": "Create an Amazon EC2 instance and schedule a cron to invoke the Lambda function."}, {"letter": "B", "text": "Create a Repeat Time variable inside the Lambda function to invoke the Lambda function."}, {"letter": "C", "text": "Create a second Lambda function to monitor and invoke the first Lambda function."}, {"letter": "D", "text": "Create an Amazon CloudWatch scheduled event to invoke the Lambda function."}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "A CloudWatch (now EventBridge) scheduled event can invoke a Lambda function on a cron or rate expression with no additional infrastructure, making it the most efficient option — versus standing up an EC2 instance just to run a cron job (A), or the other two choices, which don't correspond to any real Lambda mechanism at all ('Repeat Time variable' and a self-monitoring second function aren't things Lambda supports). Community vote is unanimous for D; several comments note the service has since been rebranded to Amazon EventBridge.", "facets": {"service": ["Lambda", "CloudWatch"], "concern": ["scheduled-invocation", "cron-rate-expressions"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopics P2.pdf", "page": 290, "question_number": 590}, "fingerprint": "3381c5c20cb5e1d004a34209631d7759785374334a4ae159a0c4b2183d47386c"}, {"id": "awssysops-p3-1-q693", "status": "active", "disputed": false, "stem": "A SysOps Administrator has written an AWS Lambda function to launch new Amazon EC2 instances and deployed it in the us-east-1 region. The Administrator tested it by launching a new t2.nano instance in the us-east-1 region and it performed as expected. However, when the region name was updated in the Lambda function to launch an EC2 instance in the us-west-1 region, it failed.\nWhat is causing this error?", "choice_type": "single", "choices": [{"letter": "A", "text": "The AMI ID must be updated for the us-west-1 region in the Lambda function as well"}, {"letter": "B", "text": "The Lambda function can only launch EC2 instances in the same region where it is deployed"}, {"letter": "C", "text": "The Lambda function does not have the necessary IAM permission to launch more than one EC2 instance"}, {"letter": "D", "text": "The instance type defined in the Lambda function is not available in the us-west-1 region"}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "AMI IDs are unique per region — an AMI ID valid in us-east-1 has no meaning (or doesn't exist) in us-west-1 — so simply changing the region parameter in the Lambda function without also updating the hardcoded AMI ID to a valid one for us-west-1 causes the launch to fail. A Lambda function can call AWS APIs targeting any region by specifying the region on its SDK client, so B's claim that it's restricted to its deployment region is incorrect; the scenario gives no indication of an IAM permissions problem limiting instance count (C); and t2.nano is broadly available across regions, making an unavailable instance type (D) an unlikely cause. Community vote is unanimous (100%) for A, backed by AWS documentation confirming AMI IDs are region-specific, cited across numerous highly-upvoted comments (20, 9, 13).", "facets": {"service": ["Lambda"], "concern": ["ami-id-region-scoping", "cross-region-ec2-launch"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 159, "question_number": 693}, "fingerprint": "71594c4dce0874f163c602cba5627e8fd1e14e480fbb47fa784349c2baaa2042"}, {"id": "awssysops-p3-1-q714", "status": "active", "disputed": true, "stem": "A SysOps Administrator is managing an AWS account where Developers are authorized to launch Amazon EC2 instances to test new code. To limit costs, the Administrator must ensure that the EC2 instances in the account are terminated 24 hours after launch.\nHow should the Administrator meet these requirements?", "choice_type": "single", "choices": [{"letter": "A", "text": "Create an Amazon CloudWatch alarm based on the CPUUtilization metric. When the metric is 0% for 24 hours, trigger an action to terminate the EC2 instance when the alarm is triggered."}, {"letter": "B", "text": "Create an AWS Lambda function to check all EC2 instances and terminate instances running more than 24 hours. Trigger the function with an Amazon CloudWatch Events event every 15 minutes."}, {"letter": "C", "text": "Add an action to AWS Trusted Advisor to turn off EC2 instances based on the Low Utilization Amazon EC2 Instances check, terminating instances identified by Trusted Advisor as running for more than 24 hours."}, {"letter": "D", "text": "Install the unified Amazon CloudWatch agent on every EC2 instance. Configure the agent to terminate instances after they have been running for 24 hours."}], "correct_answer": ["C"], "source_correct_answer": "C", "correct_answer_override": null, "explanation": "A scheduled Lambda function, triggered every 15 minutes by a CloudWatch Events rule, can directly inspect each EC2 instance's launch time and terminate any instance older than 24 hours, giving precise, reliable, low-latency enforcement of the 24-hour limit regardless of the instance's actual CPU activity. The boxed answer (C), Trusted Advisor's Low Utilization check, is explicitly a monitoring/recommendation feature without a built-in automated termination action, and multiple comments note it targets idle-cost optimization, not age-based termination, so it doesn't reliably catch an actively-used test instance that's simply been running too long. A CPUUtilization-based alarm (A) would fail to terminate any instance that's actually busy at the 24-hour mark, since it depends on the instance being idle, not merely old; and the unified CloudWatch agent (D) has no built-in self-termination configuration option — that behavior doesn't exist in the agent, so D describes a nonexistent capability. Community vote is unanimous (100%) for B, directly contradicting the boxed answer C, backed by extensive corroborating commentary explaining why C and D don't actually work as described (10, 5 upvotes and detailed technical rebuttals).", "facets": {"service": ["Lambda"], "concern": ["scheduled-instance-age-cleanup"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 190, "question_number": 714}, "fingerprint": "0324a462847361fba57c537b9de2f22b2642e8f5d3bf3eab6cf068ed19b4cd81"}, {"id": "awssysops-p3-1-q723", "status": "active", "disputed": true, "stem": "A company is running multiple AWS Lambda functions in a non-VPC environment. Most of the functions are application-specific; an operational function is invoked synchronously every hour.\nRecently, the Applications team deployed new functions that are triggered based on an Amazon S3 event to process multiple files that are uploaded to an S3 bucket simultaneously. The SysOps Administrator notices that the operational function occasionally fails to execute due to throttling.\nWhat step should the Administrator take to make sure that the operational function executes?", "choice_type": "single", "choices": [{"letter": "A", "text": "Redeploy the operational function to a VPC."}, {"letter": "B", "text": "Increase the operational function timeout."}, {"letter": "C", "text": "Set the operational function concurrency to 1."}, {"letter": "D", "text": "Increase the operational function memory."}], "correct_answer": ["B"], "source_correct_answer": "B", "correct_answer_override": null, "explanation": "The S3-triggered functions burst-consuming the account's shared concurrency pool is what starves the operational function of an execution slot, so guaranteeing the operational function a slot of its own — for example by setting its (reserved) concurrency to a value of at least 1, per the AWS Lambda throttling-troubleshooting guide's explicit guidance that a function throttles when it has zero reserved concurrency and needs that value raised above zero — is the documented fix for this exact failure pattern. The boxed answer (B), increasing the function's timeout, controls how long a single invocation is allowed to run once it starts, and has no effect on whether an invocation can start at all when the account-level concurrency pool is exhausted. The community is genuinely split three ways: several detailed, well-upvoted comments argue D (more memory means faster execution, indirectly reducing concurrent duration) using the same official troubleshooting doc, while others argue C using the literal 'reserved concurrency must be greater than zero' guidance, and the recorded vote is 100% for D. This is flagged disputed for triage given the real, credible three-way split among C, D, and the boxed B in the comments, while keeping the boxed answer B per the ingestion policy.", "facets": {"service": ["Lambda"], "concern": ["reserved-concurrency-throttling"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 206, "question_number": 723}, "fingerprint": "d15c7f484e657dde9eaf19caf1f41ad52dc1f2e137c1cff888d5b6dcdf8bd11d"}, {"id": "awssysops-p3-1-q786", "status": "active", "disputed": true, "stem": "A serverless application running on AWS Lambda is expected to receive a significant increase in traffic. A SysOps Administrator needs to ensure that the Lambda function is configured to scale so the application can process the increased traffic.\nWhat should the Administrator do to accomplish this?", "choice_type": "single", "choices": [{"letter": "A", "text": "Attach additional elastic network interfaces to the Lambda function"}, {"letter": "B", "text": "Configure AWS Application Auto Scaling based on the Amazon CloudWatch Lambda metric for the number of invocations"}, {"letter": "C", "text": "Ensure the concurrency limit for the Lambda function is higher than the expected simultaneous function executions"}, {"letter": "D", "text": "Increase the memory available to the Lambda function"}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "Lambda scales automatically by launching new concurrent execution environments per incoming invocation, up to the account or function's concurrency limit — so the actual scaling lever the Administrator controls is ensuring that limit is set higher than the expected number of simultaneous invocations, per the referenced Lambda concurrency and invocation-scaling documentation cited throughout the discussion. The boxed answer (A), attaching additional elastic network interfaces, addresses networking capacity for VPC-attached Lambda functions, not the function's invocation concurrency — and ENI count isn't something manually 'attached' per function in the way this implies; it's a capped, automatically-managed VPC resource. Application Auto Scaling (B) doesn't apply to Lambda's request-driven concurrency model (there's no fleet of instances to scale), and increasing memory (D) affects a single invocation's performance and cost, not how many invocations can run in parallel. Community vote is unanimous (100%) for C, directly contradicting the boxed answer A, and is heavily corroborated (10+ upvotes on the top comment) with direct citations of the Lambda concurrency documentation. Flagged disputed for triage, while keeping the boxed answer A per the ingestion policy.", "facets": {"service": ["Lambda"], "concern": ["concurrency-limit-scaling"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 316, "question_number": 786}, "fingerprint": "70971e227f2f32501399d51a9f8c8d29403ae630a045769bec3beca6b01f26db"}, {"id": "awssysops-p3-1-q840", "status": "active", "disputed": true, "stem": "A sysops administrator created an AWS Lambda function within a VPC with no access to the Internet. The Lambda function pulls messages from an Amazon SQS queue and stores them in an Amazon RDS instance in the same VPC. After executing the Lambda function, the data is not showing up on the RDS instance.\nWhich of the following are possible causes for this? (Choose two.)", "choice_type": "multi", "choices": [{"letter": "A", "text": "A VPC endpoint has not been created for Amazon RDS"}, {"letter": "B", "text": "A VPC endpoint has not been created for Amazon SQS"}, {"letter": "C", "text": "The RDS security group is not allowing connections from the Lambda function"}, {"letter": "D", "text": "The subnet associated with the Lambda function does not have an internet gateway attached"}, {"letter": "E", "text": "The subnet associated with the Lambda function has a NAT gateway"}], "correct_answer": ["B", "E"], "source_correct_answer": "B,E", "correct_answer_override": null, "explanation": "SQS is reached over its public API endpoint, so a Lambda function in a VPC with no internet access needs an SQS VPC interface endpoint to reach the queue at all (B), and even once the messages are pulled, the RDS instance's own security group must explicitly allow inbound connections from the Lambda function's security group/ENI, or the write to RDS will silently fail (C) — both are genuine, independently sufficient causes, per the detailed reasoning corroborated heavily (11+ and 5+ upvotes on the top two comments) throughout the discussion. Lambda and RDS being in the same VPC (as stated in the scenario) means no VPC endpoint is needed for RDS traffic in the first place, ruling out A. Since Lambda and RDS communicate entirely within the VPC and Lambda never needs outbound internet access for this workflow, neither a missing internet gateway (D) nor the mere presence of a NAT gateway (the boxed answer's E) has any bearing on whether data reaches RDS — a NAT gateway's presence or absence doesn't affect intra-VPC connectivity to RDS at all, making E a non-cause on its face. Community vote is unanimous (100%) for B & C, directly contradicting the boxed answer's E, and is heavily corroborated with detailed reasoning distinguishing the SQS-endpoint and RDS-security-group causes from the irrelevant NAT/internet-gateway options. Flagged disputed for triage, while keeping the boxed answer B & E per the ingestion policy.", "facets": {"service": ["Lambda", "SQS", "RDS"], "concern": ["vpc-endpoint-and-security-group-connectivity-failure"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 399, "question_number": 840}, "fingerprint": "8e520c99d58ecbb61f20a30493969ebe3dcc2bfdc8bd8fe0642a65b05d51289a"}, {"id": "awssysops-p3-1-q849", "status": "active", "disputed": false, "stem": "A company runs an image-processing application on a serverless infrastructure. Each processing job runs in a single AWS Lambda execution. A sysops administrator is tasked with ensuring there is enough capacity to run 500 simultaneous jobs even if other Lambda functions are being run for other applications.\nThe administrator has already increased service limits within the Region.\nWhich action should be taken?", "choice_type": "single", "choices": [{"letter": "A", "text": "Configure a dead-letter queue to retry any throttled executions"}, {"letter": "B", "text": "Modify the memory settings on the Lambda function to allow for 500 parallel executions"}, {"letter": "C", "text": "Move the image-processing logic to AWS Step Functions"}, {"letter": "D", "text": "Set the reserved concurrency for the image-processing Lambda function to 500"}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "Reserved concurrency carves out a dedicated pool of concurrent executions that only the image-processing function can use, guaranteeing capacity for 500 simultaneous jobs regardless of how much concurrency other Lambda functions in the account consume, per the invocation-scaling documentation cited and corroborated (12+ upvotes) throughout the discussion. A dead-letter queue (A) only captures failed/throttled invocations after the fact, it doesn't reserve capacity to prevent throttling in the first place; memory settings (B) control per-invocation compute/memory allocation, not the number of concurrent executions; and moving the logic to Step Functions (C) doesn't change Lambda's account-wide concurrency-sharing behavior at all. Community consensus is unanimous for D, matching the boxed answer.", "facets": {"service": ["Lambda"], "concern": ["reserved-concurrency-guarantee"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 414, "question_number": 849}, "fingerprint": "32c0a41cb47fc3692324c3c185e5e650862e802d15703203cb5d260f6b468ff6"}, {"id": "awssysops-p3-1-q850", "status": "active", "disputed": false, "stem": "A sysops administrator has an AWS Lambda function that performs maintenance on various AWS resources. This function must be run nightly.\nWhich is the MOST cost-effective solution?", "choice_type": "single", "choices": [{"letter": "A", "text": "Launch a single t2.nano Amazon EC2 instance and create a Linux cron job to invoke the Lambda function at the same time every night."}, {"letter": "B", "text": "Set up an Amazon CloudWatch metrics alarm to invoke the Lambda function at the same time every night."}, {"letter": "C", "text": "Schedule an Amazon EventBridge (Amazon CloudWatch Events) rule to invoke the Lambda function at the same time every night."}, {"letter": "D", "text": "Implement a Chef recipe in AWS OpsWorks stack to invoke the Lambda function at the same time every night."}], "correct_answer": ["C"], "source_correct_answer": "C", "correct_answer_override": null, "explanation": "An EventBridge (CloudWatch Events) scheduled rule invokes a Lambda function on a cron-style schedule with zero standing infrastructure and no additional cost beyond the rule itself, per the RunLambdaSchedule documentation cited and matching community consensus. Running a dedicated EC2 instance just to fire a cron job (A) or provisioning an OpsWorks stack with a Chef recipe (D) both introduce ongoing compute costs and operational overhead solely to trigger a function on a timer, and a CloudWatch metrics alarm (B) is designed to fire on threshold breaches, not on a fixed nightly schedule. Community consensus is unanimous for C, matching the boxed answer.", "facets": {"service": ["EventBridge", "Lambda"], "concern": ["scheduled-invocation"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 415, "question_number": 850}, "fingerprint": "63e5941032c5283ce01d1a6521884c45750324a40c9bd2422696a0db3e7f38f9"}, {"id": "awssysops-p3-1-q879", "status": "active", "disputed": true, "stem": "An image processing system runs asynchronously on AWS Lambda. A SysOps administrator is configuring a Lambda function to notify developers when an image fails to process after three attempts. The SysOps administrator has created an Amazon Simple Notification Service (Amazon SNS) topic to notify the developers.\nWhich additional action should the SysOps administrator take to meet this requirement?", "choice_type": "single", "choices": [{"letter": "A", "text": "Configure an Amazon CloudWatch alarm for errors from the Lambda function, which notifies the Amazon SNS topic."}, {"letter": "B", "text": "Implement a dead-letter queue targeting the Amazon SNS topic."}, {"letter": "C", "text": "Modify the Lambda function code to publish failed orders to the Amazon SNS topic before exiting."}, {"letter": "D", "text": "Subscribe to Lambda function error notifications from the AWS Personal Health Dashboard."}], "correct_answer": ["A"], "source_correct_answer": "A", "correct_answer_override": null, "explanation": "An asynchronously invoked Lambda function automatically retries a failed invocation twice by default (one initial attempt plus two retries equals three total attempts), and only after those retries are exhausted does the function's dead-letter queue receive the failed event — precisely matching the 'after three attempts' condition in the requirement, so wiring the DLQ directly to the existing SNS topic notifies developers at exactly that point with no additional code, per the Lambda asynchronous-invocation documentation cited and corroborated in the discussion. The boxed answer's CloudWatch alarm on Lambda errors (A) fires on any individual error occurrence rather than specifically once the three-attempt retry budget is exhausted for a given image, and doesn't align as precisely with the stated condition. Modifying the function code (C) would require custom logic to track attempt count and only Lambda's own retry mechanism actually knows when attempts are exhausted, and the Personal Health Dashboard (D) reports AWS service health events, not application-level Lambda invocation failures. Community vote is unanimous (100%) for B, directly contradicting the boxed answer A. Flagged disputed for triage, while keeping the boxed answer A per the ingestion policy.", "facets": {"service": ["Lambda"], "concern": ["dead-letter-queue-after-exhausted-async-retries"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 456, "question_number": 879}, "fingerprint": "028e25adc467fa95698be40aaa6411a7b8c40807b100511a7fe7a7d2d2f555c2"}, {"id": "awssysops-p3-1-q889", "status": "active", "disputed": true, "stem": "A SysOps administrator is re-architecting an application. The SysOps administrator has moved the database from a public subnet, where the database used a public endpoint, into a private subnet to restrict access from the public network. After this change, an AWS Lambda function that requires read access to the database cannot connect to the database. The SysOps administrator must resolve this issue without compromising security.\nWhich solution meets these requirements?", "choice_type": "single", "choices": [{"letter": "A", "text": "Create an AWS PrivateLink interface endpoint for the Lambda function. Connect to the database using its private endpoint."}, {"letter": "B", "text": "Connect the Lambda function to the database VPC. Connect to the database using its private endpoint."}, {"letter": "C", "text": "Attach an IAM role to the Lambda function with read permissions to the database."}, {"letter": "D", "text": "Move the database to a public subnet. Use security groups for secure access."}], "correct_answer": ["D"], "source_correct_answer": "D", "correct_answer_override": null, "explanation": "The boxed answer's D fails the stem's own explicit constraint outright: moving the database back to a public subnet is precisely the security regression the re-architecture was meant to fix, directly violating 'without compromising security.' The standard, documented pattern for a Lambda function that needs to reach a resource sitting inside a VPC's private subnet is to attach the Lambda function itself to that VPC (giving it an elastic network interface that can route to the private subnet), which is choice B — a point made directly in the discussion (sapien45, raychen) refuting the community's other leading choice, A: AWS PrivateLink interface endpoints let other callers invoke a Lambda function privately, or let a Lambda function reach other AWS service endpoints (like S3 or DynamoDB) privately — they are not a mechanism for a Lambda function to reach an arbitrary private database that isn't itself an AWS-service endpoint. An IAM role (C) only grants permissions to call AWS APIs; it has no bearing on network-level connectivity to a database at all. Given the boxed answer directly contradicts the stem's own security requirement and the informal community tally is split evenly between A and B with credible technical grounds favoring B specifically, this question is flagged disputed for triage, while keeping the boxed answer D per the ingestion policy.", "facets": {"service": ["Lambda", "VPC"], "concern": ["lambda-vpc-attachment-vs-privatelink-misdirection"]}, "source": {"file": "AWS-SysOps Exam - Free Exam Q&As, Page 1 _ ExamTopicsP3-1.pdf", "page": 469, "question_number": 889}, "fingerprint": "e290497fdd91fd03f72f0bc7ec8958b05da9a01a661dddfe0aad52ad7d798fa3"}], "claims": [{"claim_type": "rule", "confidence": "high", "id": "cl-ecd138648e72", "source_question_ids": ["awssysops-p2-q558"], "statement": "Resource tagging lets automation (e.g., a Lambda function that stops EC2 instances nightly) identify and exclude specific instances from an action by filtering on the tag.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-9ca0fd33a41d", "source_question_ids": ["awssysops-p2-q558"], "statement": "Amazon CloudWatch provides metrics and monitoring but offers no mechanism for a Lambda function to decide which specific EC2 instances to exclude from an automated action.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-e5ff853f85f3", "source_question_ids": ["awssysops-p2-q558"], "statement": "AWS Config tracks resource configuration history rather than acting as a live selection filter for automation decisions.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-0d4b5c37c295", "source_question_ids": ["awssysops-p2-q563"], "statement": "Spot Instances with a specified duration (\"Spot blocks\") could run for a fixed period of up to 6 hours without early interruption, at a flat discounted hourly rate.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-1b82f17f2117", "source_question_ids": ["awssysops-p2-q563"], "statement": "AWS Lambda functions have a maximum execution time of 15 minutes per invocation.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-d3a9a2257212", "source_question_ids": ["awssysops-p2-q563"], "statement": "Reserved Instances are the cost-effective choice for an always-on application tier that runs continuously, as distinct from instances launched on demand only for the duration of a job.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-a14ac8c042bc", "source_question_ids": ["awssysops-p2-q563"], "statement": "Spot Instances with a specified duration (\"Spot blocks\") were deprecated for new customers starting July 2021, with support for existing users continuing through December 2022.", "status": "supported"}, {"claim_type": "default", "confidence": "medium", "id": "cl-ccf8d7523a75", "source_question_ids": ["awssysops-p2-q563"], "statement": "In a present-day environment where Spot blocks are no longer available, On-Demand Instances are the safe non-interruptible choice for a job that cannot be interrupted.", "status": "needs-review"}, {"claim_type": "rule", "confidence": "high", "id": "cl-664d7e9ea9dc", "source_question_ids": ["awssysops-p2-q590", "awssysops-p3-1-q850"], "statement": "A CloudWatch (now Amazon EventBridge) scheduled event can invoke a Lambda function on a cron or rate expression without requiring any additional infrastructure.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-55261824367b", "source_question_ids": ["awssysops-p2-q590", "awssysops-p3-1-q850"], "statement": "Amazon CloudWatch Events, the service used for Lambda scheduled invocations, has since been rebranded as Amazon EventBridge.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-866b07ab4945", "source_question_ids": ["awssysops-p2-q590"], "statement": "AWS Lambda does not support a \"Repeat Time variable\" configured inside a function to make that function invoke itself on a recurring schedule; no such mechanism exists.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-971df35b7513", "source_question_ids": ["awssysops-p2-q590", "awssysops-p3-1-q850"], "statement": "Provisioning a dedicated EC2 instance solely to run a cron job that invokes a Lambda function introduces ongoing compute cost and operational overhead just to trigger the function on a timer.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-235ab8c5a57b", "source_question_ids": ["awssysops-p3-1-q693"], "statement": "Amazon Machine Image (AMI) IDs are unique per AWS region; an AMI ID valid in one region has no meaning, or does not exist, in another region.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-f2deb7a7471c", "source_question_ids": ["awssysops-p3-1-q693"], "statement": "A Lambda function can call AWS APIs targeting any AWS region by specifying that region on its SDK client; it is not restricted to acting only in the region where it is deployed.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-1ae5d9c16c2e", "source_question_ids": ["awssysops-p3-1-q693"], "statement": "It is a plausible but incorrect belief that a Lambda function can only launch EC2 instances in the same region where the function itself is deployed.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-ebaa709b1528", "source_question_ids": ["awssysops-p3-1-q693"], "statement": "The t2.nano instance type is broadly available across AWS regions, making unavailability an unlikely cause of an EC2 launch failure.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-a27d7f90ef7b", "source_question_ids": ["awssysops-p3-1-q714"], "statement": "A Lambda function triggered every 15 minutes by a CloudWatch Events rule can directly inspect each EC2 instance's launch time and terminate any instance older than a fixed age threshold (e.g., 24 hours), giving precise, low-latency age-based enforcement regardless of the instance's activity level.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-dcdfc7875035", "source_question_ids": ["awssysops-p3-1-q714"], "statement": "AWS Trusted Advisor's Low Utilization Amazon EC2 Instances check is a monitoring/recommendation feature and has no built-in automated termination action; it targets idle-cost optimization, not age-based termination.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-9e66c3e8d511", "source_question_ids": ["awssysops-p3-1-q714"], "statement": "A CloudWatch alarm based on the CPUUtilization metric would fail to terminate an instance that is actively busy at the 24-hour mark, because it depends on the instance being idle rather than merely old.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-bc4931b47574", "source_question_ids": ["awssysops-p3-1-q714"], "statement": "The unified Amazon CloudWatch agent has no built-in configuration option to make an EC2 instance terminate itself after running for a set period of time; this capability does not exist in the agent.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-4566d49f416a", "source_question_ids": ["awssysops-p3-1-q723"], "statement": "Lambda functions triggered by S3 events processing many simultaneously uploaded files can burst-consume an AWS account's shared concurrency pool, starving other functions of execution slots and causing them to throttle.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-184fc9effa5b", "source_question_ids": ["awssysops-p3-1-q723"], "statement": "Per AWS's Lambda throttling-troubleshooting guidance, a function throttles when it has zero reserved concurrency, and setting its reserved concurrency to a value of at least 1 guarantees it an execution slot.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-08cdc15a2f00", "source_question_ids": ["awssysops-p3-1-q723"], "statement": "Increasing a Lambda function's timeout controls how long a single invocation is allowed to run once it starts, but has no effect on whether an invocation can start at all when the account-level concurrency pool is exhausted.", "status": "supported"}, {"claim_type": "distractor", "confidence": "low", "id": "cl-b36b6371b589", "source_question_ids": ["awssysops-p3-1-q723"], "statement": "Increasing a Lambda function's allocated memory can make execution faster, indirectly reducing the concurrent duration of executions, per one reading of the AWS Lambda troubleshooting documentation.", "status": "needs-review"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0c850204c75d", "source_question_ids": ["awssysops-p3-1-q723", "awssysops-p3-1-q786", "awssysops-p3-1-q840", "awssysops-p3-1-q879", "awssysops-p3-1-q889"], "statement": "When a question's community vote credibly and substantially contradicts or splits from the given boxed answer, the question is flagged as disputed for triage while the boxed answer is nonetheless retained per the ingestion policy.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-5352fd07f5d9", "source_question_ids": ["awssysops-p3-1-q786"], "statement": "Lambda scales automatically by launching new concurrent execution environments per incoming invocation, up to the account's or function's concurrency limit.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-1f150b3b52a4", "source_question_ids": ["awssysops-p3-1-q786"], "statement": "Ensuring a Lambda function's concurrency limit is set higher than the expected number of simultaneous invocations is the documented way to guarantee the function can scale to handle increased traffic.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-afbe40400b2b", "source_question_ids": ["awssysops-p3-1-q786"], "statement": "Attaching elastic network interfaces to a Lambda function relates to networking capacity for VPC-attached functions, not to invocation concurrency, and ENI count is an automatically-managed, capped VPC resource rather than something manually attached per function.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-54a70f1e8472", "source_question_ids": ["awssysops-p3-1-q786"], "statement": "AWS Application Auto Scaling does not apply to Lambda's request-driven concurrency model, because there is no fleet of instances to scale.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-b5c552ea2e9b", "source_question_ids": ["awssysops-p3-1-q786"], "statement": "Increasing a Lambda function's memory affects a single invocation's performance and cost, not how many invocations can run in parallel.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-036c4f066762", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "Amazon SQS is reached over its public API endpoint, so a Lambda function running in a VPC with no internet access needs an SQS VPC interface endpoint to reach a queue at all.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-eabfc6c47e91", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "An RDS instance's security group must explicitly allow inbound connections from the Lambda function's security group or elastic network interface, or writes from Lambda to RDS will silently fail.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-59ac86f401fe", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "When a Lambda function and an RDS instance are located in the same VPC, no VPC endpoint is needed for the RDS traffic between them.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-f34aafa5d9c0", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A NAT gateway's presence or absence has no bearing on intra-VPC connectivity between a Lambda function and an RDS instance in the same VPC.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-b273a9a19c4b", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A missing internet gateway on a Lambda function's subnet has no bearing on data reaching RDS when the Lambda-to-RDS workflow occurs entirely within the VPC and requires no outbound internet access.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-9b5104b62a56", "source_question_ids": ["awssysops-p3-1-q849"], "statement": "Setting reserved concurrency for a Lambda function carves out a dedicated pool of concurrent executions usable only by that function, guaranteeing capacity for a target number of simultaneous jobs regardless of how much concurrency other functions in the account consume.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-b80907d8a1eb", "source_question_ids": ["awssysops-p3-1-q849"], "statement": "A dead-letter queue only captures failed or throttled invocations after the fact; it does not reserve capacity to prevent throttling in the first place.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-8466a5a80301", "source_question_ids": ["awssysops-p3-1-q849"], "statement": "Moving Lambda execution logic into AWS Step Functions does not change Lambda's account-wide concurrency-sharing behavior.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-f916139eacca", "source_question_ids": ["awssysops-p3-1-q849"], "statement": "Modifying a Lambda function's memory settings controls per-invocation compute allocation, not the number of concurrent executions available to the function.", "status": "supported"}, {"claim_type": "rule", "confidence": "high", "id": "cl-ce77bed09b9c", "source_question_ids": ["awssysops-p3-1-q850"], "statement": "An EventBridge (CloudWatch Events) scheduled rule invokes a Lambda function on a cron-style schedule with zero standing infrastructure and no additional cost beyond the rule itself.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-5e69be053fb2", "source_question_ids": ["awssysops-p3-1-q850"], "statement": "A CloudWatch metrics alarm is designed to fire on threshold breaches, not on a fixed nightly (or other calendar-based) schedule.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-8efc43b126e0", "source_question_ids": ["awssysops-p3-1-q850"], "statement": "Provisioning an AWS OpsWorks stack with a Chef recipe solely to invoke a Lambda function on a timer introduces ongoing operational overhead beyond what a scheduled rule requires.", "status": "supported"}, {"claim_type": "default", "confidence": "high", "id": "cl-895363ee0665", "source_question_ids": ["awssysops-p3-1-q879"], "statement": "An asynchronously invoked Lambda function automatically retries a failed invocation twice by default, meaning one initial attempt plus two retries equals three total attempts.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-c8c2528f10f1", "source_question_ids": ["awssysops-p3-1-q879"], "statement": "Only after an asynchronous Lambda function's default retries are exhausted does the failed event get sent to the function's configured dead-letter queue.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-c9a9d45d9f66", "source_question_ids": ["awssysops-p3-1-q879"], "statement": "A CloudWatch alarm on Lambda errors fires on any individual error occurrence rather than specifically once a multi-attempt retry budget has been exhausted for a given invocation.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-894d1a884464", "source_question_ids": ["awssysops-p3-1-q879"], "statement": "The AWS Personal Health Dashboard reports AWS service health events, not application-level Lambda invocation failures.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-c20695bbf972", "source_question_ids": ["awssysops-p3-1-q889"], "statement": "Moving a database from a private subnet back to a public subnet to restore Lambda connectivity reintroduces the exact security exposure that the original re-architecture (moving the database off a public endpoint) was meant to eliminate.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-156eaaffce2e", "source_question_ids": ["awssysops-p3-1-q889"], "statement": "Attaching a Lambda function to the same VPC as a private-subnet database, then connecting via the database's private endpoint, is the standard documented pattern for a VPC-attached Lambda function to reach VPC-internal resources.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-595d53f35953", "source_question_ids": ["awssysops-p3-1-q889"], "statement": "An AWS PrivateLink interface endpoint lets other callers invoke a Lambda function privately, or lets a Lambda function reach AWS-service endpoints (such as S3 or DynamoDB) privately, but it is not a mechanism for a Lambda function to reach an arbitrary private database that is not itself an AWS-service endpoint.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-35740b3ad868", "source_question_ids": ["awssysops-p3-1-q889"], "statement": "Attaching an IAM role to a Lambda function only grants permissions to call AWS APIs; it has no bearing on network-level connectivity to a database.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-lambda--m-1", "title": "Lambda as a triggered, slot-limited, per-invocation compute unit: match the symptom to the lever", "purpose": "Most Lambda SysOps questions describe a symptom (it never runs, it throttles, it can't reach the database, it fails silently) and offer levers that each control a different stage of an invocation's life. Knowing which stage each lever acts on lets you eliminate the plausible-but-wrong options.", "mechanism": "A Lambda function does nothing on its own. Something outside it has to start each invocation: an EventBridge (CloudWatch Events) scheduled rule, an S3 event, or an async invoke. Once triggered, the invocation needs a concurrency slot from the account's shared pool, and Lambda scales by starting one execution environment per concurrent invocation until the account or function limit is reached. With no free slot, the invocation is throttled before it starts. Reserved concurrency sets aside slots only that function can use. Once running, the invocation is governed by per-invocation settings: memory sets how much compute it gets and what it costs, and timeout (max 15 minutes) sets how long it can run. Neither changes how many invocations run in parallel. From there it reaches other resources along two separate paths: the network (attach it to the VPC, allow its security group in the target's security group, add a VPC interface endpoint for public-API services like SQS when there's no internet path) and IAM (the role grants permission to call AWS APIs, not network reachability). Through the SDK it can call any region, where region-scoped IDs such as AMI IDs must be valid. When an async invocation fails, Lambda retries it (two retries by default), and only after the retries are used up does the event go to a dead-letter queue.", "predict_prompt": "An S3-triggered function processing a burst of uploads is causing a second, unrelated function to throttle. Before looking at the options, name the stage of the invocation lifecycle where the second function is failing, and the single setting that acts on that stage.", "invariants": ["Lambda is never self-scheduling: a recurring run needs an external trigger, and an EventBridge scheduled rule does it with no standing infrastructure.", "Concurrency (how many invocations run in parallel) and memory/timeout (how one invocation runs) are independent controls.", "Reserved concurrency guarantees a function capacity no matter what other functions in the account use.", "A DLQ acts after the fact. It captures events that failed or were throttled and never prevents throttling.", "Network reachability (VPC attachment, security groups, endpoints) and permission (IAM role) are separate requirements, and fixing one never fixes the other.", "One invocation can run for at most 15 minutes."], "limits": ["The model covers Lambda-specific levers. Surrounding choices in these questions, such as EC2 pricing models (Reserved, On-Demand, Spot blocks), are outside it.", "Some claims in this slice are conflicted or need review (for example, exact reserved-concurrency throttling behaviour and default async retry counts), so check the specific numbers against current AWS docs.", "EC2 instance-type availability and AMI region-scoping explain launch failures from a Lambda, but they belong to EC2 behaviour, not Lambda's."], "cues": ["'every night' / 'every 15 minutes' / 'on a schedule': the answer is an EventBridge scheduled rule, not an EC2 cron host, OpsWorks, a metric alarm, or an in-function repeat variable.", "'throttled' / 'other functions starved' / 'guarantee N simultaneous jobs': the answer is reserved concurrency, not memory, timeout, DLQ, ENIs, or Application Auto Scaling.", "'writes to RDS silently fail' / 'database in a private subnet': attach the Lambda to the VPC and fix the security group rules, not a NAT, IGW, IAM role, PrivateLink, or making the DB public.", "'runs longer than 15 minutes': this is not a Lambda job.", "'works in one region, fails in another when launching EC2': the AMI ID is region-specific. Lambda itself can target any region."], "claim_ids": ["cl-664d7e9ea9dc", "cl-ce77bed09b9c", "cl-866b07ab4945", "cl-971df35b7513", "cl-a27d7f90ef7b", "cl-1b82f17f2117", "cl-5352fd07f5d9", "cl-4566d49f416a", "cl-9b5104b62a56", "cl-08cdc15a2f00", "cl-b5c552ea2e9b", "cl-f916139eacca", "cl-b80907d8a1eb", "cl-895363ee0665", "cl-c8c2528f10f1", "cl-156eaaffce2e", "cl-eabfc6c47e91", "cl-036c4f066762", "cl-59ac86f401fe", "cl-35740b3ad868", "cl-f2deb7a7471c", "cl-235ab8c5a57b"]}, "contrastSet": {"id": "aws-sysops-service-lambda--cs-1", "subjects": ["Reserved concurrency", "Memory setting", "Timeout setting", "Dead-letter queue"], "dimensions": ["What it controls", "Lifecycle stage it acts on", "Stops throttling when the shared pool is exhausted?", "Correct answer when the question says"], "shared_traits": ["All four are per-function Lambda settings you set on the function itself.", "All four show up as answer options in questions about throttling, scaling, or failed Lambda work."], "matrix": {"What it controls": {"Reserved concurrency": "Number of concurrent slots set aside for this function only", "Memory setting": "Compute allocation and cost of a single invocation", "Timeout setting": "How long one started invocation may run (max 15 min)", "Dead-letter queue": "Where failed or throttled events land after retries"}, "Lifecycle stage it acts on": {"Reserved concurrency": "Before start: getting a slot", "Memory setting": "During one invocation", "Timeout setting": "During one invocation", "Dead-letter queue": "After failure, once retries are used up"}, "Stops throttling when the shared pool is exhausted?": {"Reserved concurrency": "Yes, it guarantees capacity", "Memory setting": "No, parallelism is unchanged", "Timeout setting": "No, it only matters once started", "Dead-letter queue": "No, it only records what happened"}, "Correct answer when the question says": {"Reserved concurrency": "Function throttled / starved / must run N jobs at once", "Memory setting": "Single invocation too slow or resource-bound", "Timeout setting": "Invocation cut off before finishing (under 15 min)", "Dead-letter queue": "Keep events that still fail after retries"}}, "decision_rule": "Ask whether the invocation fails to start or starts and then misbehaves. If it can't get an execution slot (throttled because the account's shared concurrency pool is used up), the only fix is reserved concurrency. Memory and timeout apply only after the invocation has started, and a DLQ only records failures afterwards.", "boundary_flip": "In the q723/q849 scenario, a burst of S3-triggered invocations uses up the account pool and another function throttles, so the answer is reserved concurrency. Change the symptom so the function does get a slot but is killed partway through a long job that takes under 15 minutes, and the answer becomes the timeout setting. Change it so the invocations run but some events still fail after the async retries, and the requirement is to keep those events, and the answer becomes a dead-letter queue.", "strongest_distractor_failure": "Increasing memory is the most tempting wrong answer, because faster runs can shorten how long each invocation holds a slot (one low-confidence reading of the docs). But memory only sets per-invocation compute. It doesn't reserve or add parallel slots, so a function whose pool is being drained by another function's burst still throttles.", "exceptions": ["Reserved concurrency set to 0 is the reverse case: the function throttles on every invocation. It needs a value of at least 1 before it's guaranteed a slot (this claim is conflicted in the source).", "Whether 'set the concurrency limit higher than expected simultaneous invocations' counts as the documented scaling guarantee is disputed in the source (q786), and the question is flagged for triage.", "Other levers that look like concurrency controls don't control it either: ENIs are managed VPC networking capacity, and Application Auto Scaling has no instance fleet to scale for Lambda."], "claim_ids": ["cl-4566d49f416a", "cl-184fc9effa5b", "cl-9b5104b62a56", "cl-1f150b3b52a4", "cl-5352fd07f5d9", "cl-08cdc15a2f00", "cl-b36b6371b589", "cl-b5c552ea2e9b", "cl-f916139eacca", "cl-b80907d8a1eb", "cl-1b82f17f2117", "cl-895363ee0665", "cl-c8c2528f10f1", "cl-afbe40400b2b", "cl-54a70f1e8472", "cl-8466a5a80301"]}, "scenarioFamily": {"id": "aws-sysops-service-lambda--sf-1", "canonical": {"prompt": "A company runs two independent Lambda functions in the same AWS account: OrderProcessor (business-critical, processes customer orders) and ThumbnailGenerator (triggered by S3 PUT events, resizes uploaded images). Neither function has reserved concurrency configured. During a marketing campaign, thousands of images are uploaded within a few minutes, so ThumbnailGenerator's S3-triggered invocations burst-consume the account's shared concurrency pool. Shortly after, OrderProcessor starts throttling and dropping orders even though its own invocation rate hasn't changed. A SysOps administrator needs to guarantee that OrderProcessor always has execution capacity, no matter how much concurrency ThumbnailGenerator consumes. What should the administrator configure on OrderProcessor?", "expected_answer": ["Set reserved concurrency on OrderProcessor, sized to at least the number of simultaneous invocations it needs; this carves out execution slots from the account's shared pool that only OrderProcessor can use, regardless of how much concurrency ThumbnailGenerator consumes."], "reasoning": "ThumbnailGenerator's S3-triggered burst is draining the account's shared concurrency pool, which is exactly the failure mode described for Lambda functions processing many simultaneously uploaded files (cl-4566d49f416a). Reserved concurrency is the setting that carves out a dedicated pool of slots usable only by one function, guaranteeing it capacity regardless of what other functions in the account consume (cl-9b5104b62a56). The other per-function settings act on a different stage of the lifecycle and don't help here: timeout only governs how long an already-started invocation may run, not whether it can start when the pool is exhausted (cl-08cdc15a2f00); memory affects a single invocation's performance and cost, not how many invocations run in parallel (cl-b5c552ea2e9b, cl-f916139eacca); and a dead-letter queue only captures failed or throttled events after the fact, it never reserves capacity to prevent throttling (cl-b80907d8a1eb).", "distractor_analysis": "Memory and timeout changes are tempting because they are the two Lambda settings most SysOps admins reach for first, but both only govern a single already-running invocation, not the ability to obtain an execution slot when the shared pool is exhausted (cl-08cdc15a2f00, cl-b5c552ea2e9b, cl-f916139eacca). A DLQ is also tempting because it looks like a 'reliability' fix, but it only records events after they've already failed or been throttled; it does not prevent throttling (cl-b80907d8a1eb).", "claim_ids": ["cl-4566d49f416a", "cl-9b5104b62a56", "cl-08cdc15a2f00", "cl-b5c552ea2e9b", "cl-f916139eacca", "cl-b80907d8a1eb"], "difficulty": "medium", "importance": "high"}, "variants": [{"variant_type": "boundary", "changed_condition": "OrderProcessor's reserved concurrency is already explicitly set to 0 (instead of being left unset), so it throttles on nearly every invocation even while ThumbnailGenerator is completely idle and the shared pool is otherwise free.", "prompt": "OrderProcessor's reserved concurrency is currently set to 0, and it throttles on nearly every invocation even when ThumbnailGenerator is completely idle and the account's shared concurrency pool has plenty of free capacity. What must change about OrderProcessor's reserved concurrency setting to restore its ability to run?", "expected_answer": ["Raise OrderProcessor's reserved concurrency from 0 to at least 1 (sized to its expected simultaneous invocations); at a reserved-concurrency value of 0 the function is guaranteed zero execution slots and throttles on every invocation no matter how much free capacity exists in the account's shared pool."], "reasoning": "This is the reverse edge of the same setting: per the throttling-troubleshooting rule, a function throttles when its reserved concurrency is 0, and setting it to at least 1 guarantees the function an execution slot (cl-184fc9effa5b). This is the boundary case of the mechanism in the canonical scenario (cl-9b5104b62a56) -- there, the fix was to add reserved concurrency to protect against another function's burst; here, the function's own reserved concurrency is already set, but pinned at the boundary value of 0, which blocks it regardless of what else is happening in the account.", "distractor_analysis": "Nothing about ThumbnailGenerator or the shared pool is relevant here since the pool has free capacity; the constraint is self-inflicted by OrderProcessor's own reserved-concurrency value sitting at the 0 boundary.", "claim_ids": ["cl-184fc9effa5b", "cl-9b5104b62a56"], "difficulty": "medium", "importance": "medium"}, {"variant_type": "irrelevant-detail", "changed_condition": "Before the campaign, an engineer had already increased OrderProcessor's memory allocation to make each invocation run faster.", "prompt": "Same scenario as the canonical one, except an engineer had already increased OrderProcessor's memory allocation last week, purely to make each order-processing invocation run faster. ThumbnailGenerator's S3-triggered burst still drains the account's shared concurrency pool, and OrderProcessor still throttles and drops orders. What should the administrator configure on OrderProcessor to guarantee it always has execution capacity, regardless of ThumbnailGenerator's concurrent invocations?", "expected_answer": ["Set reserved concurrency on OrderProcessor, sized to at least the number of simultaneous invocations it needs; this carves out execution slots from the account's shared pool that only OrderProcessor can use, regardless of how much concurrency ThumbnailGenerator consumes."], "reasoning": "The prior memory increase is a red herring: memory affects a single invocation's performance and cost, not how many invocations can run in parallel (cl-b5c552ea2e9b, cl-f916139eacca), so it has no bearing on whether OrderProcessor can obtain an execution slot from the shared pool. The pool is still being drained by ThumbnailGenerator's burst (cl-4566d49f416a), so the fix is unchanged: reserved concurrency on OrderProcessor (cl-9b5104b62a56).", "claim_ids": ["cl-b5c552ea2e9b", "cl-f916139eacca", "cl-4566d49f416a", "cl-9b5104b62a56"], "difficulty": "medium", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "The administrator proposes a specific alternative fix instead of asking open-endedly: 'Let's just increase OrderProcessor's memory allocation -- a faster-running invocation should free its execution slot sooner and relieve the throttling.'", "prompt": "The administrator proposes: 'Let's just increase OrderProcessor's memory allocation -- a faster-running invocation should free its execution slot sooner and relieve the throttling, without needing to touch reserved concurrency.' Will increasing OrderProcessor's memory allocation, by itself, stop it from throttling while ThumbnailGenerator's burst is consuming the account's shared concurrency pool? What should the administrator configure instead?", "expected_answer": ["Set reserved concurrency on OrderProcessor, sized to at least the number of simultaneous invocations it needs; this carves out execution slots from the account's shared pool that only OrderProcessor can use, regardless of how much concurrency ThumbnailGenerator consumes."], "reasoning": "Increasing memory is the strongest distractor here because, per one lower-confidence reading of the AWS Lambda troubleshooting documentation, faster execution can indirectly reduce concurrent duration (cl-b36b6371b589). But the well-supported claims are that memory only sets per-invocation compute allocation and cost, and does not change how many invocations run in parallel (cl-b5c552ea2e9b, cl-f916139eacca). OrderProcessor's problem is that it cannot obtain a slot at all while ThumbnailGenerator's burst holds most of the shared pool (cl-4566d49f416a), and only reserved concurrency carves out slots that only OrderProcessor can use, independent of what ThumbnailGenerator consumes (cl-9b5104b62a56).", "distractor_analysis": "Faster invocations (from more memory) would release slots slightly sooner, but as long as ThumbnailGenerator keeps consuming the pool as fast as OrderProcessor's invocations free slots, the shared pool stays exhausted and OrderProcessor keeps throttling -- memory changes nothing about slot allocation itself (cl-b5c552ea2e9b, cl-f916139eacca).", "claim_ids": ["cl-b36b6371b589", "cl-b5c552ea2e9b", "cl-f916139eacca", "cl-4566d49f416a", "cl-9b5104b62a56"], "difficulty": "hard", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The 'noisy neighbor' consuming the shared concurrency pool is no longer ThumbnailGenerator reacting to S3 uploads -- it's a different, unrelated Lambda function that a client application is invoking directly and heavily during a sudden traffic spike.", "prompt": "OrderProcessor again needs guaranteed execution capacity, but this time the noisy neighbor isn't ThumbnailGenerator -- it's a separate, unrelated Lambda function that a client application is invoking directly and heavily during a sudden traffic spike, and that is what's consuming most of the account's shared concurrency pool. OrderProcessor again starts throttling. What should the administrator configure on OrderProcessor to guarantee it keeps execution capacity, regardless of what is triggering the other function's invocations?", "expected_answer": ["Set reserved concurrency on OrderProcessor, sized to at least the number of simultaneous invocations it needs; this carves out execution slots from the account's shared pool that only OrderProcessor can use, regardless of how much concurrency ThumbnailGenerator consumes."], "reasoning": "The mechanism doesn't depend on what triggers the other function: any function's invocations draw from the same account-level concurrency pool, and increasing another setting on OrderProcessor has no effect on whether the account-level pool is exhausted (cl-08cdc15a2f00). Reserved concurrency guarantees OrderProcessor capacity regardless of how much concurrency other functions in the account consume, which is stated generally and not tied to any one trigger type (cl-9b5104b62a56). Memory changes still only affect a single invocation's performance, not parallelism (cl-b5c552ea2e9b, cl-f916139eacca), so the fix transfers unchanged from the S3-triggered case to this directly-invoked case.", "claim_ids": ["cl-9b5104b62a56", "cl-08cdc15a2f00", "cl-b5c552ea2e9b", "cl-f916139eacca"], "difficulty": "medium", "importance": "medium"}]}, "issues": [{"type": "contradiction", "severity": "high", "description": "The whole VPC/networking cluster rests on conflicted claims from q840 and q889, both of which cl-0c850204c75d lists as disputed. The conflicted claims are cl-156eaaffce2e (attach to VPC), cl-eabfc6c47e91 (RDS SG must allow Lambda), cl-036c4f066762 (SQS interface endpoint), cl-f34aafa5d9c0 (NAT irrelevant), cl-b273a9a19c4b (IGW irrelevant), cl-c20695bbf972 (don't make DB public) and cl-595d53f35953 (PrivateLink not applicable). The mental model's mechanism, invariant 5 and cue 3 still present this answer pattern as settled ('attach the Lambda to the VPC and fix the security group rules, not a NAT, IGW, IAM role, PrivateLink, or making the DB public'). Its limits section flags only reserved-concurrency and retry-count uncertainty and says nothing about networking. The source dispute is unresolved and should be surfaced, not silently resolved.", "related_entity_ids": ["cl-156eaaffce2e", "cl-eabfc6c47e91", "cl-036c4f066762", "cl-f34aafa5d9c0", "cl-b273a9a19c4b", "cl-c20695bbf972", "cl-595d53f35953", "cl-0c850204c75d", "aws-sysops-service-lambda--m-1"]}, {"type": "contradiction", "severity": "high", "description": "The contrast set's anchor scenario (q723, S3 burst starving another function) is disputed. q723 appears in the disputed list of cl-0c850204c75d, its reserved-concurrency rule cl-184fc9effa5b is conflicted, and its memory reading cl-b36b6371b589 is needs-review. Even so, the boundary_flip ('the answer is reserved concurrency'), the decision_rule ('the only fix is reserved concurrency'), the predict_prompt ('the single setting') and strongest_distractor_failure all treat reserved concurrency as the settled answer and dismiss the memory reading outright. They lean on q849 (cl-9b5104b62a56) to settle q723, which resolves a source dispute by weight of other questions instead of flagging it. Invariant 2 ('concurrency and memory/timeout are independent controls') and the matrix cell 'Memory setting: No, parallelism is unchanged' also flatly contradict cl-b36b6371b589: concurrency consumed is roughly request rate times duration, so shorter runs do reduce slot usage.", "related_entity_ids": ["cl-184fc9effa5b", "cl-b36b6371b589", "cl-4566d49f416a", "cl-9b5104b62a56", "cl-b5c552ea2e9b", "cl-f916139eacca", "cl-0c850204c75d", "aws-sysops-service-lambda--cs-1", "aws-sysops-service-lambda--m-1"]}, {"type": "stale-risk", "severity": "high", "description": "cl-54a70f1e8472 says AWS Application Auto Scaling 'does not apply to Lambda' because 'there is no fleet of instances to scale'. That is factually incorrect today: Application Auto Scaling supports Lambda provisioned concurrency (scalable dimension lambda:function:ProvisionedConcurrency). The false rationale is repeated in the cs-1 exceptions ('Application Auto Scaling has no instance fleet to scale for Lambda') and in m-1 cue 2. Its source question q786 is disputed (cl-0c850204c75d), and the competing concurrency-limit claim cl-1f150b3b52a4 is conflicted, so the synthesis may be dismissing a plausibly correct alternative answer using an invented reason.", "related_entity_ids": ["cl-54a70f1e8472", "cl-1f150b3b52a4", "cl-0c850204c75d", "aws-sysops-service-lambda--cs-1", "aws-sysops-service-lambda--m-1"]}, {"type": "contradiction", "severity": "medium", "description": "Both async-retry claims from q879 are conflicted: cl-895363ee0665 (two retries by default) and cl-c8c2528f10f1 (the DLQ only receives the event after retries are exhausted). q879 is also on the disputed list in cl-0c850204c75d. The mental model mechanism states 'two retries by default' and 'only after the retries are used up does the event go to a dead-letter queue' as fact. The cs-1 matrix ('After failure, once retries are used up') and boundary_flip repeat it. The limits section hedges only the retry count and never the DLQ-after-retries ordering, so part of the dispute is presented as settled.", "related_entity_ids": ["cl-895363ee0665", "cl-c8c2528f10f1", "cl-0c850204c75d", "aws-sysops-service-lambda--m-1", "aws-sysops-service-lambda--cs-1"]}, {"type": "contradiction", "severity": "medium", "description": "The scheduling guidance rests on two unflagged conflicted claims: cl-866b07ab4945 (no in-function 'Repeat Time variable', from q590) and cl-a27d7f90ef7b (a 15-minute-scheduled Lambda enforcing instance age, from q714). m-1 cites both and presents invariant 1 ('Lambda is never self-scheduling') and cue 1 ('every 15 minutes ... not ... an in-function repeat variable') as settled. cl-a27d7f90ef7b also overclaims 'precise, low-latency age-based enforcement': a 15-minute polling schedule can let an instance run up to about 15 minutes past the 24-hour threshold.", "related_entity_ids": ["cl-866b07ab4945", "cl-a27d7f90ef7b", "aws-sysops-service-lambda--m-1"]}, {"type": "contradiction", "severity": "medium", "description": "The q693 claims disagree with each other. cl-f2deb7a7471c ('Lambda can call any region') is supported, but cl-1ae5d9c16c2e (the matching distractor, 'Lambda can only launch EC2 in its own region') is conflicted. That signals the source disagrees on whether the AMI-region answer or the Lambda-region answer is correct. m-1 cue 5 ('the AMI ID is region-specific. Lambda itself can target any region') presents it as settled without flagging the conflict.", "related_entity_ids": ["cl-1ae5d9c16c2e", "cl-f2deb7a7471c", "cl-235ab8c5a57b", "aws-sysops-service-lambda--m-1"]}, {"type": "ambiguity", "severity": "medium", "description": "cl-184fc9effa5b says 'a function throttles when it has zero reserved concurrency'. That wording mixes up two cases. With no reserved concurrency configured (the default), a function uses the unreserved pool and does not throttle for that reason. Only reserved concurrency explicitly set to 0 throttles every invocation. Read literally, the claim implies every function without reserved concurrency throttles. The cs-1 exception rewords it more safely ('set to 0'), but the underlying claim should be disambiguated.", "related_entity_ids": ["cl-184fc9effa5b", "aws-sysops-service-lambda--cs-1"]}, {"type": "ambiguity", "severity": "medium", "description": "cl-036c4f066762 (a VPC Lambda without internet access 'needs an SQS VPC interface endpoint to reach a queue at all') holds only when the function code calls the SQS API itself. When SQS triggers the function through an event source mapping, the Lambda service does the polling and the function needs no endpoint. That may be why the claim is conflicted. Separately, the mechanism correctly says the endpoint is needed 'when there's no internet path', which implies a NAT gateway is a valid alternative for reaching SQS. Cue 3 nonetheless tells learners to reject NAT outright, generalizing cl-f34aafa5d9c0 (NAT is irrelevant only to intra-VPC Lambda-to-RDS traffic) beyond its scope.", "related_entity_ids": ["cl-036c4f066762", "cl-f34aafa5d9c0", "aws-sysops-service-lambda--m-1"]}, {"type": "unsupported-generation", "severity": "medium", "description": "cs-1's decision_rule says 'the only fix is reserved concurrency' when the account pool is exhausted. No claim supports that exclusivity. Other fixes exist: requesting a higher account concurrency quota, or setting reserved concurrency on the bursting S3-triggered function to cap it. The rule also leaves unclear which function should receive reserved concurrency. The matrix ('Number of concurrent slots set aside for this function only') and the cue 'must run N jobs at once' leave out that reserved concurrency is also a hard maximum, so the function still throttles above its reserved value.", "related_entity_ids": ["aws-sysops-service-lambda--cs-1", "cl-9b5104b62a56", "cl-4566d49f416a"]}, {"type": "quality", "severity": "medium", "description": "cl-595d53f35953 overstates what PrivateLink cannot do. A VPC endpoint service fronted by a Network Load Balancer can expose an arbitrary private TCP service, including a database in another VPC or account, so PrivateLink is a mechanism for reaching a non-AWS-service private endpoint. It is just not the simplest answer in a same-VPC scenario. m-1 cue 3 repeats the absolute dismissal, and the claim is also conflicted in its source (q889).", "related_entity_ids": ["cl-595d53f35953", "aws-sysops-service-lambda--m-1"]}, {"type": "stale-risk", "severity": "low", "description": "cl-ebaa709b1528 claims t2.nano is 'broadly available across AWS regions, making unavailability an unlikely cause of an EC2 launch failure.' T2 is a previous-generation family that is not offered in several newer regions, so instance-type unavailability can plausibly cause a cross-region launch failure. The claim is medium confidence and should be verified against the current regional instance-type list.", "related_entity_ids": ["cl-ebaa709b1528"]}, {"type": "stale-risk", "severity": "low", "description": "q563's answer depends on Spot blocks (cl-0d4b5c37c295), which have been discontinued (cl-a14ac8c042bc). The present-day substitute claim cl-ccf8d7523a75 (use On-Demand for non-interruptible jobs) is still needs-review. Until it is verified, this question's answer is stale for current AWS.", "related_entity_ids": ["cl-0d4b5c37c295", "cl-a14ac8c042bc", "cl-ccf8d7523a75"]}, {"type": "contradiction", "severity": "low", "description": "cl-ecd138648e72 (tag-based exclusion for automation, from q558) is marked conflicted, and nothing in the slice explains or resolves the conflict. It is not used in the synthesis, but the source disagreement for q558 remains open.", "related_entity_ids": ["cl-ecd138648e72"]}, {"type": "quality", "severity": "low", "description": "cl-0c850204c75d is not exam knowledge. It restates the ingestion pipeline's dispute-flagging policy ('the boxed answer is nonetheless retained per the ingestion policy') as a high-confidence 'rule' tied to five Lambda questions. It is a metadata artifact misclassified as a knowledge claim and should not appear among the slice's claims.", "related_entity_ids": ["cl-0c850204c75d"]}, {"type": "quality", "severity": "low", "description": "Two claims disagree on how CloudWatch alarms fire. cl-c9a9d45d9f66 says an alarm on Lambda errors 'fires on any individual error occurrence'. cl-5e69be053fb2 says alarms fire on threshold breaches. Alarms evaluate an aggregated metric over periods against a threshold, and the Lambda Errors metric counts each failed attempt, retries included. The distractor rationale in cl-c9a9d45d9f66 is therefore imprecise.", "related_entity_ids": ["cl-c9a9d45d9f66", "cl-5e69be053fb2"]}, {"type": "quality", "severity": "low", "description": "m-1's cues cite distractor content from claims missing from its claim_ids: NAT (cl-f34aafa5d9c0), IGW (cl-b273a9a19c4b), PrivateLink (cl-595d53f35953), public DB (cl-c20695bbf972), OpsWorks (cl-8efc43b126e0), metric alarm (cl-5e69be053fb2), ENIs (cl-afbe40400b2b) and Application Auto Scaling (cl-54a70f1e8472). This traceability gap hides the fact that four of these (cl-f34aafa5d9c0, cl-b273a9a19c4b, cl-595d53f35953, cl-c20695bbf972) are conflicted.", "related_entity_ids": ["aws-sysops-service-lambda--m-1", "cl-f34aafa5d9c0", "cl-b273a9a19c4b", "cl-595d53f35953", "cl-c20695bbf972", "cl-8efc43b126e0", "cl-5e69be053fb2", "cl-afbe40400b2b", "cl-54a70f1e8472"]}]}]}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam: a future fetch-based loader only ever
+  // needs to replace these two bodies. ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: (s.sourceQuestions || []).length };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`<ul class="citations">${raw(claims.map(function (c) {
+      return safe`<li>${c.statement} <span class="muted">(${c.status || 'status unknown'})</span></li>`;
+    }).join(''))}</ul>`;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private/incognito mode?) '
+        + '-- progress will NOT be saved after this tab closes. Export your progress before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose">${model.purpose || ''}</p>
+        <div class="predict-block">
+          <label for="predict-input"><strong>Predict first</strong></label>
+          <p class="prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="2" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<button id="reveal-model-btn" type="button">Reveal mechanism</button>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          <h3>Supporting claims</h3>
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <table class="contrast-table">
+          <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+          <tbody>${raw(rows)}</tbody>
+        </table>
+        <h3>Decision rule</h3>
+        <p>${cs.decision_rule || ''}</p>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        <h3>Supporting claims</h3>
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <p class="summary">Session complete: ${correctCount}/${attempted.length} correct.</p>
+          <button id="practice-restart" type="button">Restart queue</button>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices">${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"> ${c.letter}. ${c.text}</label>`;
+        }).join(''))}</fieldset>`
+      : safe`<textarea id="predict-freeform" rows="2" placeholder="Type your prediction..."></textarea>`;
+    var metaLine = (item.difficulty || item.importance)
+      ? safe`<p class="muted">Difficulty: ${item.difficulty || 'n/a'} &middot; Importance: ${item.importance || 'n/a'}</p>`
+      : '';
+    var changedCondition = item.changed_condition
+      ? safe`<p class="changed-condition"><strong>Changed condition:</strong> ${item.changed_condition}</p>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice (${practiceIndex + 1} / ${items.length}) &mdash; ${item.variant_type || 'item'}</h2>
+        ${raw(changedCondition)}
+        ${raw(metaLine)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence (optional)</legend>
+          ${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"> ${c}</label>`; }).join(''))}
+        </fieldset>
+        <button id="reveal-practice-btn" type="button">Reveal</button>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedAnswerText = Array.isArray(item.expected_answer) ? item.expected_answer.join(', ') : (item.expected_answer || '');
+    var distractors = item.distractor_analysis
+      ? safe`<p class="distractors"><strong>Why other options fail:</strong> ${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <p><strong>Expected answer:</strong> ${expectedAnswerText}</p>
+      <p>${item.reasoning || ''}</p>
+      ${raw(distractors)}
+      <h4>Supporting claims</h4>
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="${raw(isMulti ? 'hidden' : '')}">
+        <p>Self-assess:</p>
+        <button type="button" id="self-correct">I got it right</button>
+        <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+      </div>
+      <button id="practice-next-btn" type="button" disabled>Next</button>`;
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      revealBox.querySelector('#practice-next-btn').removeAttribute('disabled');
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"> <strong>${c.label}</strong> &mdash; ${c.hint}</label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="muted">Your answer: ${predictedText}</p>
+              <fieldset>${raw(radios)}</fieldset>
+              <button type="button" class="submit-diagnosis">Submit diagnosis</button>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">No pending diagnoses &mdash; nice work.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = (item ? (item.prompt || item.stem || '') : a.itemId).slice(0, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="muted">${when}</span> &mdash; <strong>${label}</strong> &mdash; ${excerpt}</li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis (${pending.length})</h3>
+        ${raw(pendingHtml)}
+        <h3>History (${history.length})</h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) return;
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`<ul class="issues">${raw(issues.map(function (i) {
+      return safe`<li><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span> <strong>${i.type || 'issue'}</strong>: ${i.description || ''}</li>`;
+    }).join(''))}</ul>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var cls = (q.correct_answer || []).indexOf(c.letter) !== -1 ? 'correct-choice' : '';
+        return safe`<li class="${cls}">${c.letter}. ${c.text}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul>${raw(citing.map(function (c) { return safe`<li>${c.statement}</li>`; }).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="4">
+            <p>${q.stem}</p>
+            <ul>${raw(choiceItems)}</ul>
+            <p><strong>Explanation:</strong> ${q.explanation || ''}</p>
+            <p class="muted">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+            <h4>Cited by (${citing.length})</h4>
+            ${raw(citedList)}
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge">disputed</span>' : '';
+    return safe`
+      <tr class="source-row" data-id="${q.id}">
+        <td>${q.id}</td>
+        <td>${q.status || ''}${raw(disputedBadge)}</td>
+        <td>${(q.stem || '').slice(0, 90)}</td>
+        <td>${(q.correct_answer || []).join(', ')}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  function renderSources() {
+    var questions = CURRENT.sourceQuestions || [];
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        <h3>Issues (${(CURRENT.issues || []).length})</h3>
+        ${raw(issuesHtml())}
+        <input type="search" id="sources-search" placeholder="Search stem, choices, explanation...">
+        <p class="muted" id="sources-count"></p>
+        <table class="sources-table">
+          <thead><tr><th>ID</th><th>Status</th><th>Stem</th><th>Correct</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </section>`;
+    var fragment = fromHTML(html);
+    var section = fragment.firstElementChild;
+    var input = section.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      section.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = section.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.map(sourceRowHtml).join('');
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function () {
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+    return fragment;
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      document.getElementById('app-title').textContent =
+        CURRENT.contentSet.exam + ' — ' + CURRENT.contentSet.facet.key + ': ' + CURRENT.contentSet.facet.value;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  window.addEventListener('hashchange', navigate);
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>
