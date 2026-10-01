@@ -36,9 +36,11 @@ immediately rather than retrying Tavily repeatedly.
 
 ## Dedup — required before finalizing your candidate list
 
-For each candidate URL, run: grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null
-If any match is found, the article is already in the vault — drop it and pick a replacement.
-Do not try to read kbm.log.md in full (it can be ~300KB) — this grep check is the authoritative signal.
+Check all your candidate URLs in one call:
+python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL1 URL2 ...
+Drop every URL listed under inVault (already in the vault) or failedBefore (a past scrape failed) and
+pick replacements; only "fresh" URLs may go in your section. Check replacements the same way.
+Do not try to read kbm.log.md in full (it can be ~300KB) — this check is the authoritative signal.
 
 ## Blacklisted domains — never include
 

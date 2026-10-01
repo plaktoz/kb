@@ -15,9 +15,13 @@ Open `data/investments.md` and load the holdings table. For each row:
 
 ## Deduplication
 
-Open `kbm.log.md` and collect all filenames that have ever been logged (any activity). Do not return any news story whose URL matches a source already represented in the log.
+As the last step before saving the output file, check every candidate URL in one call:
 
-Filenames alone are a weak signal — before finalizing your candidate list, run a `source_url` grep check against the vault itself for each candidate: `grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null`. If any match is found, the article is already in the vault — drop it and pick a replacement. Do this as the last step before saving the output file, so it catches anything a filename comparison would miss (e.g. articles ingested in an earlier run under a differently-named raw file).
+```bash
+python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL1 URL2 ...
+```
+
+It returns `inVault` (the URL is a `source_url` somewhere in `raw/` or `wiki/`), `failedBefore` (the URL appears in `kbm.log.md`, usually as `scrape-failed`) and `fresh`, in under a second. Drop everything that is not `fresh` and pick replacements, then check the replacements the same way. Do not read `kbm.log.md` yourself; it is over 300 KB.
 
 ## Search strategy
 

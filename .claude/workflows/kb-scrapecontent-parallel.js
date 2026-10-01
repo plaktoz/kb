@@ -1,183 +1,106 @@
 export const meta = {
   name: 'kb-scrapecontent-parallel',
-  description: 'Parallel scrape: fans out up to 8 agents over URLs from raw/url/, collector writes log',
+  description: 'Parallel scrape: one agent per probed URL; the skill runs scrape_queue.py discover before and finalize after',
   phases: [
-    { title: 'Discover', detail: 'Extract and deduplicate all URLs from raw/url/' },
-    { title: 'Scrape', detail: 'Parallel fetch — up to 8 concurrent agents' },
-    { title: 'Finalize', detail: 'Write log rows and delete source URL files' },
+    { title: 'Scrape', detail: 'One agent per URL; the probe verdict decides which tool it may use' },
   ],
 }
 
-const WORKER_SCHEMA = {
+// args: { date, items } — copied from the queue file `scrape_queue.py discover` writes.
+// Workflow scripts have no filesystem access, so
+// discovery, dedup, logging and archiving stay in that script rather than in extra agents.
+
+const ROW_SCHEMA = {
   type: 'object',
   properties: {
-    log_rows: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          date: { type: 'string' },
-          filename: { type: 'string' },
-          activity: { type: 'string' },
-        },
-        required: ['date', 'filename', 'activity'],
-      },
-    },
+    filename: { type: 'string' },
+    activity: { type: 'string', enum: ['scrape', 'scrape-failed'] },
+    reason: { type: 'string' },
   },
-  required: ['log_rows'],
+  required: ['filename', 'activity'],
 }
 
-// Inlined from .claude/skills/kb-scrapecontent/SKILL.md — keep in sync if that file changes.
-// Inlining avoids paying an agent to read-and-echo a static file on every run (was costing
-// ~3 min on the critical path, and previously pointed at a stale path that never resolved).
-const SKILL_CONTENT = `---
-name: kb-scrapecontent
-description: Scrape URLs from /raw/url/ files, save clean articles to /raw/, and log activity to kbm.log.md. Use when the user wants to ingest URLs into the knowledge base.
+const FILE_RULES = `Save to raw/YYYY-MM-DD-slug.md where YYYY-MM-DD is the article's own publication date
+(from the metadata, the URL path, or the text; if none is reliable, use today's date, {date} — never guess)
+and slug is the article title in lowercase kebab-case. If that filename already exists for a different
+URL, append -2. File format:
+
 ---
-
-# Scrape Content Prompt
-
-You are a web scraping agent with file access. Your job is to extract URL content and save each article as a clean raw markdown file for later processing by the Karpathy-Ingest pipeline.
-
-## Input
-
-Read \`.md\` files from \`/raw/url/\`, **excluding any file whose name ends in \`.processed.md\`**. Two supported formats:
-
-- **Search result / aggregation file** — a structured file with many URLs embedded in the content (e.g. a news aggregation with titles, URLs, and descriptions)
-- **Simple URL list** — a plain \`.md\` file with one URL per line
-
-Extract every URL found across all input files.
-
-## Per-URL Instructions
-
-### 1. Deduplicate
-
-If the same URL appears more than once, process it only once.
-
-### 2. Skip if already scraped
-
-Before fetching, run a fast exact-match check: \`grep -rl "source_url: {URL}" raw/ wiki/ 2>/dev/null\` (this covers \`raw/\`, \`raw/processed/\`, and any \`wiki/\` note the URL may already have been ingested into). If any match is found, this article has already been scraped and/or ingested — skip it without fetching.
-
-### 3. Fetch and clean
-
-Fetch the URL and extract only:
-
-- Article title
-- Byline (author, if present)
-- Publication date
-- Article body text
-
-Strip everything else: navigation, ads, footers, related articles, cookie banners, comment sections.
-
-### 4. Handle failures
-
-If a URL fails to fetch (404, paywall, timeout, or any error), log the failure to \`kbm.log.md\` and continue to the next URL. Do not create a file for failed fetches.
-
-### 5. Save the file
-
-Save to \`/raw/YYYY-MM-DD-slug.md\` where:
-
-- \`YYYY-MM-DD\` is the article's own publication date (extract from the URL path or article metadata). If no reliable publish date can be found in either place, use today's scrape date instead of guessing — do not invent or approximate a date.
-- \`slug\` is the article title converted to lowercase kebab-case
-
-File format:
-
-\`\`\`md
----
-source_url: {URL}
+source_url: {url}
 author: {Author or "Unknown"}
 date: {YYYY-MM-DD}
 ---
 
 # {Article Title}
 
-{Clean article body}
-\`\`\`
+{Clean article body: keep the article's own paragraphs and headings in order. Drop navigation, ads,
+promo banners, newsletter signups, "most popular"/related-article lists, author bios, comments.
+Do not summarize or add anything that is not in the source.}
 
-### 6. Log each scraped file
+Do not write to kbm.log.md and do not touch raw/url/ — the coordinator does both.`
 
-Append a row to \`kbm.log.md\` for each successfully saved file:
+const IDEMPOTENT = `First run: grep -rl "source_url: {url}" raw/ 2>/dev/null
+If it matches, an earlier attempt already saved this article: return activity "scrape" with that file's
+name and stop.`
 
-\`\`\`md
-| YYYY-MM-DD | filename.md | scrape |
-\`\`\`
+const FALLBACK = `Make exactly one mcp__tavily__tavily_extract call for this URL. If it returns the article body
+(several paragraphs of real prose, not a teaser, subscribe prompt, or challenge page), use it. Otherwise
+stop and return activity "scrape-failed" with a short reason. Do not try WebFetch, curl, other MCP
+scrapers, search engines, or archive sites — the probe already established that direct access fails,
+and every extra attempt costs minutes.`
 
-## After all URLs in a file are processed
-
-1. Rename the source file in \`/raw/url/\` by inserting \`.processed\` before \`.md\` — e.g. \`news.md\` → \`news.processed.md\`. Do not delete the file.
-2. Append a cleanup row to \`kbm.log.md\`:
-
-\`\`\`md
-| YYYY-MM-DD | source-filename.processed.md | archive |
-\`\`\`
-
-## Expected outcome
-
-1 URL = 1 file in \`/raw/YYYY-MM-DD-slug.md\`
-`
-
-// Phase 1: Discover URLs
-phase('Discover')
-
-const discovery = await agent(
-  'Read all .md files in raw/url/, skipping any file whose name ends in .processed.md. Extract every URL found across all files. Deduplicate. Return: urls (array of unique URLs), sourceFiles (array of file paths that were read, relative to repo root).',
-  {
-    label: 'discover-urls',
-    schema: {
-      type: 'object',
-      properties: {
-        urls: { type: 'array', items: { type: 'string' } },
-        sourceFiles: { type: 'array', items: { type: 'string' } },
-      },
-      required: ['urls', 'sourceFiles'],
-    },
-  }
-)
-
-if (!discovery || !discovery.urls || discovery.urls.length === 0) {
-  log('No URLs found in raw/url/ — nothing to scrape.')
-  return { scraped: 0, failed: 0, log_rows: [] }
+function prompt(item, date) {
+  const known = [
+    item.title && `title: ${item.title}`,
+    item.author && `author: ${item.author}`,
+    item.published && `published: ${item.published}`,
+  ].filter(Boolean).join('\n')
+  const source = item.verdict === 'ok'
+    ? `The page was already fetched. Its extracted text is in ${item.text_path} — read that file and do
+not fetch the URL. The text may still contain leftover promo or link-list lines; clean those out.
+If the file is clearly not the article (an index page, cookie wall, or a few stray lines), fall back:
+${FALLBACK}`
+    : `A probe could not get the article directly: ${item.verdict} (${item.reason}).
+${FALLBACK}`
+  return [
+    `Scrape one article into the knowledge vault. Today is ${date}.`,
+    `URL: ${item.url}`,
+    known && `Probe metadata (prefer it over guesses):\n${known}`,
+    IDEMPOTENT.replaceAll('{url}', item.url),
+    source,
+    FILE_RULES.replaceAll('{url}', item.url).replaceAll('{date}', date),
+    'Return filename (just the basename, e.g. 2026-09-28-some-title.md) for a save, or for a failure the URL; activity; and reason.',
+  ].filter(Boolean).join('\n\n')
 }
 
-log(`Found ${discovery.urls.length} URL(s) across ${discovery.sourceFiles.length} file(s). Splitting into up to 8 batches.`)
-
-const urls = discovery.urls
-const agentCount = Math.min(8, urls.length)
-const batchSize = Math.ceil(urls.length / agentCount)
-const batches = []
-for (let i = 0; i < urls.length; i += batchSize) {
-  batches.push(urls.slice(i, i + batchSize))
+const items = (args && args.items) || []
+const date = (args && args.date) || ''
+if (!items.length) {
+  log('No URLs in the queue — nothing to scrape.')
+  return { scraped: 0, failed: 0, rows: [] }
 }
 
-const skillContent = SKILL_CONTENT
-
-// Phase 2: Scrape in parallel — up to 8 agents
 phase('Scrape')
+const dead = items.filter(i => i.verdict === 'dead')
+const live = items.filter(i => i.verdict !== 'dead')
+log(`${items.length} URL(s): ${live.filter(i => i.verdict === 'ok').length} fetched by the probe, ` +
+  `${live.filter(i => i.verdict !== 'ok').length} need the one-shot fallback, ${dead.length} dead (no agent).`)
 
-const results = await parallel(
-  batches.map((batch, i) => () =>
-    agent(
-      `You are a web scraping agent. Scrape these ${batch.length} URL(s):\n${batch.join('\n')}\n\nFollow these per-URL instructions exactly:\n${skillContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT delete files from raw/url/ — the coordinator handles that.\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n- Return one log_row per URL attempted: date (YYYY-MM-DD, today's date), filename (e.g. 2026-07-28-article-slug.md or the url file if failed), activity ("scrape" for success, "scrape-failed" for failure).`,
-      { label: `scrape-batch-${i + 1}`, schema: WORKER_SCHEMA }
-    )
-  )
-)
+const results = await parallel(live.map(item => () =>
+  agent(prompt(item, date), { label: `scrape:${item.url.replace(/^https?:\/\//, '').split('/')[0]}`, schema: ROW_SCHEMA })
+))
 
-// Phase 3: Finalize — coordinator writes all log rows and cleans up
-phase('Finalize')
-
-const allLogRows = results.filter(Boolean).flatMap(r => r.log_rows)
-const scraped = allLogRows.filter(r => r.activity === 'scrape').length
-const failed = allLogRows.filter(r => r.activity === 'scrape-failed').length
-
-log(`${scraped} scraped, ${failed} failed. Writing log and deleting source URL files.`)
-
-const logLines = allLogRows.map(r => `| ${r.date} | ${r.filename} | ${r.activity} |`).join('\n')
-const deleteList = discovery.sourceFiles.join(', ')
-
-await agent(
-  `Perform these cleanup tasks in order:\n1. Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}\n2. Rename each of these source URL files by inserting .processed before .md (e.g. news.md → news.processed.md): ${deleteList}\n3. For each renamed file, append a row to kbm.log.md: | YYYY-MM-DD | <new-filename> | archive | (use today's date)`,
-  { label: 'finalize' }
-)
-
-return { scraped, failed, log_rows: allLogRows }
+const failedRow = (item, reason) => ({ filename: `${item.url} (${reason})`, activity: 'scrape-failed' })
+const rows = [
+  ...live.map((item, i) => {
+    const r = results[i]
+    if (!r) return failedRow(item, 'agent stalled or errored')
+    return r.activity === 'scrape'
+      ? { filename: r.filename, activity: 'scrape' }
+      : failedRow(item, r.reason || `${item.verdict}: ${item.reason}`)
+  }),
+  ...dead.map(item => failedRow(item, `dead: ${item.reason}`)),
+]
+const scraped = rows.filter(r => r.activity === 'scrape').length
+log(`${scraped} scraped, ${rows.length - scraped} failed.`)
+return { scraped, failed: rows.length - scraped, rows }
