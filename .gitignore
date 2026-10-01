@@ -13,3 +13,6 @@ Thumbs.db
 
 # Secrets
 .env
+
+# Python bytecode from running skill scripts/tests
+__pycache__/

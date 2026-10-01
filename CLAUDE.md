@@ -49,7 +49,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | Workflow script | Slash command | Purpose |
 |----------------|---------------|---------|
 | `.claude/workflows/kb-newsagent-parallel.js` | `/kb-newsagent-parallel` | Same as kb-newsagent but fans out one concurrent agent per category (~6); collector merges sections and writes the file + log |
-| `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out up to 8 concurrent scrape agents; log written by coordinator |
+| `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out one agent per URL (8 at a time); discovery, blocker detection and logging run in `scrape_queue.py`, not agents |
 | `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
 
