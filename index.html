@@ -18,9 +18,31 @@
       --card-bg: #fafaf6;
       --tag-bg: #f0f4ff;
       --tag-text: #2a5caa;
+      --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .course-card {
+        opacity: 0;
+        animation: card-in 0.5s ease-out forwards;
+      }
+      .course-card:nth-of-type(n+9) { animation-delay: 0.4s; }
+      .course-card:nth-of-type(1) { animation-delay: 0.02s; }
+      .course-card:nth-of-type(2) { animation-delay: 0.06s; }
+      .course-card:nth-of-type(3) { animation-delay: 0.10s; }
+      .course-card:nth-of-type(4) { animation-delay: 0.14s; }
+      .course-card:nth-of-type(5) { animation-delay: 0.18s; }
+      .course-card:nth-of-type(6) { animation-delay: 0.22s; }
+      .course-card:nth-of-type(7) { animation-delay: 0.26s; }
+      .course-card:nth-of-type(8) { animation-delay: 0.30s; }
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
     html { font-size: 18px; }
 
@@ -55,6 +77,53 @@
       font-style: italic;
     }
 
+    .filter-bar {
+      margin-bottom: 2rem;
+    }
+
+    .filter-label {
+      font-family: var(--font-ui);
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-input {
+      font-family: var(--font-ui);
+      width: 100%;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.9rem;
+      transition: border-color 0.15s;
+    }
+
+    .filter-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .filter-status {
+      font-family: var(--font-ui);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    .filter-empty {
+      font-family: var(--font-ui);
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 2rem 0;
+      text-align: center;
+    }
+
     .course-grid {
       display: flex;
       flex-direction: column;
@@ -66,7 +135,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 1.5rem 1.75rem;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
       text-decoration: none;
       color: inherit;
       display: block;
@@ -75,7 +144,10 @@
     .course-card:hover {
       border-color: var(--accent);
       box-shadow: 0 2px 12px rgba(42, 92, 170, 0.08);
+      transform: translateY(-2px);
     }
+
+    .course-card[hidden] { display: none; }
 
     .course-card-header {
       display: flex;
@@ -97,13 +169,14 @@
     }
 
     .lesson-count {
-      font-size: 0.75rem;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--muted);
       white-space: nowrap;
-      padding-top: 0.15rem;
+      padding-top: 0.2rem;
     }
 
     .course-card p {
@@ -117,10 +190,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
     }
 
     .tag {
+      font-family: var(--font-ui);
       display: inline-block;
       background: var(--tag-bg);
       color: var(--tag-text);
@@ -130,13 +205,40 @@
       letter-spacing: 0.06em;
       padding: 0.2rem 0.6rem;
       border-radius: 4px;
+      white-space: nowrap;
     }
 
     .start-link {
+      font-family: var(--font-ui);
       font-size: 0.82rem;
       color: var(--accent);
       font-weight: 600;
-      white-space: nowrap;
+    }
+
+    .module-links {
+      font-family: var(--font-ui);
+      font-size: 0.82rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .module-links a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .module-links a:hover {
+      color: var(--accent-hover);
+      text-decoration: underline;
+    }
+
+    .module-links a:not(:last-child)::after {
+      content: "·";
+      color: var(--muted);
+      font-weight: 400;
+      margin-left: 0.4rem;
     }
 
     .course-card:hover .start-link {
@@ -161,7 +263,13 @@
     <p>Personal knowledge base — interactive lesson courses built from research reports.</p>
   </header>
 
-  <div class="course-grid">
+  <div class="filter-bar">
+    <label class="filter-label" for="filter-input">Filter courses</label>
+    <input class="filter-input" type="search" id="filter-input" placeholder="Search by title, topic, or tag…" autocomplete="off">
+    <p class="filter-status" id="filter-status" aria-live="polite">Showing all 20 courses</p>
+  </div>
+
+  <div class="course-grid" id="course-grid">
 
     <a class="course-card" href="research/jev-ai/index.html">
       <div class="course-card-header">
@@ -415,12 +523,71 @@
       </div>
     </a>
 
+    <div class="course-card">
+      <div class="course-card-header">
+        <h2>AWS SysOps — Service Scenario Drills</h2>
+        <span class="lesson-count">5 modules</span>
+      </div>
+      <p>Self-contained scenario-quiz apps for AWS SysOps Associate prep, one per service — matching exam symptoms to the right lever: CloudFormation's all-or-nothing stack lifecycle, CloudFront's in-path edge caching, EBS's three nested scopes (instance store, volume, snapshot), Lambda's triggered and slot-limited compute model, and RDS's three failure-scoped copies.</p>
+      <div class="course-footer">
+        <span class="tag">AWS &amp; Cloud Ops</span>
+        <nav class="module-links" aria-label="AWS SysOps service drills">
+          <a href="research/aws-sysops/aws-sysops-service-cloudformation-wawb.html">CloudFormation</a>
+          <a href="research/aws-sysops/aws-sysops-service-cloudfront-kpk2.html">CloudFront</a>
+          <a href="research/aws-sysops/aws-sysops-service-ebs-95cx.html">EBS</a>
+          <a href="research/aws-sysops/aws-sysops-service-lambda-37sx.html">Lambda</a>
+          <a href="research/aws-sysops/aws-sysops-service-rds-s3rs.html">RDS</a>
+        </nav>
+      </div>
+    </div>
+
   </div>
 
+  <p class="filter-empty" id="filter-empty" hidden>No courses match "<span id="filter-empty-term"></span>".</p>
+
   <footer>
-    20 courses · 271 lessons total · Open any lesson in a browser — no server required.
+    22 courses · 288 lessons total · Open any lesson in a browser — no server required.
   </footer>
 
 </div>
+
+<script>
+  (function () {
+    var input = document.getElementById('filter-input');
+    var status = document.getElementById('filter-status');
+    var empty = document.getElementById('filter-empty');
+    var emptyTerm = document.getElementById('filter-empty-term');
+    var cards = Array.prototype.slice.call(document.querySelectorAll('.course-card'));
+    var total = cards.length;
+
+    cards.forEach(function (card) {
+      card.dataset.search = card.textContent.toLowerCase();
+    });
+
+    input.addEventListener('input', function () {
+      var query = input.value.trim().toLowerCase();
+      var visible = 0;
+
+      cards.forEach(function (card) {
+        var match = card.dataset.search.indexOf(query) !== -1;
+        card.hidden = !match;
+        if (match) visible += 1;
+      });
+
+      if (!query) {
+        status.textContent = 'Showing all ' + total + ' courses';
+      } else {
+        status.textContent = 'Showing ' + visible + ' of ' + total + ' courses';
+      }
+
+      if (visible === 0) {
+        empty.hidden = false;
+        emptyTerm.textContent = input.value.trim();
+      } else {
+        empty.hidden = true;
+      }
+    });
+  })();
+</script>
 </body>
 </html>
