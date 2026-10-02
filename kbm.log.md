@@ -3680,6 +3680,38 @@
 | 2026-09-30 | wiki/learning/cs50-duck-ai-tutor-malan-interview.md | ingest |
 | 2026-09-30 | wiki/finance/ibm-fair-value-narratives-ytd-loss-sep2026.md | ingest |
 | 2026-09-30 | daily-update/2026-09/2026-09-30.md | newsletter |
+| 2026-10-02 | 2026-10-02-news-aggregation.md | news-fetch |
+| 2026-10-02 | 2026-10-01-openai-cuts-ties-with-3-safety-researchers-wsj-reports.md | scrape |
+| 2026-10-02 | 2026-10-01-finance-ai-tops-out-at-51-on-due-diligence-startup-raises-30m-to-fix-it.md | scrape |
+| 2026-10-02 | https://www.calcalistech.com/ctechnews/article/ryurpyo5fl (Direct probe unreachable (no response in 10s); tavily_extract failed with Unauthorized: missing or invalid API key.) | scrape-failed |
+| 2026-10-02 | https://apnews.com/article/stock-markets-inflation-oil-war-cc56b71699c74950fb1bd9564bee74cc (The direct probe hit a bot challenge page. The single allowed tavily_extract call then failed with "Unauthorized: missing or invalid API key", so it returned no content.) | scrape-failed |
+| 2026-10-02 | 2026-10-01-bond-market-bust-a-key-rate-just-blew-through-another-decades-old-record.md | scrape |
+| 2026-10-02 | 2026-10-01-the-forces-driving-bond-yields-higher-may-be-here-to-stay.md | scrape |
+| 2026-10-02 | 2026-10-01-companies-struggle-to-turn-ai-productivity-gains-into-profits-ey.md | scrape |
+| 2026-10-02 | 2026-10-02-what-is-time-blocking-a-guide-for-teams.md | scrape |
+| 2026-10-02 | 2026-09-30-why-you-still-do-work-you-should-have-handed-off.md | scrape |
+| 2026-10-02 | 2026-10-01-preply-study-finds-ai-is-expanding-learning-but-not-real-world-mastery.md | scrape |
+| 2026-10-02 | https://executiveeducation.wharton.upenn.edu/thought-leadership/wharton-at-work/2026/10/executives-lead-ai-transformation/ (Direct access was blocked (http 403), and the single allowed tavily_extract call failed with "Unauthorized: missing or invalid API key", so no article body was retrieved.) | scrape-failed |
+| 2026-10-02 | 2026-10-01-in-the-ai-era-he-must-still-strengthen-human-connection.md | scrape |
+| 2026-10-02 | 2026-09-30-could-quitting-ultra-processed-food-boost-your-mental-health.md | scrape |
+| 2026-10-02 | 2026-10-01-scientists-studied-1300-cancer-patients-then-found-a-pattern-in-the-gut.md | scrape |
+| 2026-10-02 | 2026-10-01-ibm-introduces-self-hosted-deployment-for-ibm-bob-to-help-enterprises-advance-ai-sovereignty-and-governance.md | scrape |
+| 2026-10-02 | 2026-10-01-sp-500-alarm-bells-are-starting-to-go-off.md | scrape |
+| 2026-10-02 | 2026-10-02-news-aggregation.processed.md | archive |
+| 2026-10-02 | wiki/health/ultra-processed-food-reduction-depression-ucsf-pilot.md | ingest |
+| 2026-10-02 | wiki/productivity/delegation-prompt-time-squander-audit-outsourcing.md | ingest |
+| 2026-10-02 | wiki/finance/10-year-treasury-yield-highest-since-2002-bond-selloff-oct2026.md | ingest |
+| 2026-10-02 | wiki/strategy/ey-ceo-outlook-ai-productivity-gains-not-profits.md | ingest |
+| 2026-10-02 | wiki/technology/halluminate-finance-rl-environments-30m-series-a.md | ingest |
+| 2026-10-02 | wiki/technology/ibm-bob-self-hosted-deployment-ai-sovereignty.md | ingest |
+| 2026-10-02 | wiki/learning/ai-era-higher-education-human-connection-ubuntu.md | ingest |
+| 2026-10-02 | wiki/technology/openai-cuts-ties-three-safety-researchers-wsj.md | ingest |
+| 2026-10-02 | wiki/learning/preply-progress-report-ai-learning-progress-gap.md | ingest |
+| 2026-10-02 | wiki/health/mayo-clinic-gut-microbiome-cancer-signatures-1300-patients.md | ingest |
+| 2026-10-02 | wiki/finance/sp500-market-breadth-deteriorating-oct2026.md | ingest |
+| 2026-10-02 | wiki/finance/bond-yields-higher-for-longer-structural-forces-oct2026.md | ingest |
+| 2026-10-02 | wiki/productivity/time-blocking-guide-for-teams-slack.md | ingest |
+| 2026-10-02 | daily-update/2026-10/2026-10-02.md | newsletter |
 | 2026-10-01 | 2026-10-01-news-aggregation.md | news-fetch |
 | 2026-10-01 | 2026-09-30-theres-a-new-no-1-on-the-geekwire-200-as-ai-and-hardware-reshape-our-pacific-nw-startup-index.md | scrape |
 | 2026-10-01 | 2026-09-30-openai-takes-on-microsoft-and-google-with-office-productivity-push.md | scrape |
