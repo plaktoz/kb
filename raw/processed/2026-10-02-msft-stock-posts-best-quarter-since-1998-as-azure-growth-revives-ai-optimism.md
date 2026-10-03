@@ -1,0 +1,49 @@
+---
+source_url: https://finance.yahoo.com/markets/stocks/articles/msft-stock-posts-best-quarter-084616308.html
+author: Yuvraj Malik
+date: 2026-10-02
+---
+
+# MSFT Stock Posts Best Quarter Since 1998 As Azure Growth Revives AI Optimism
+
+- Azure growth accelerated to 43% in Microsoft's fiscal fourth quarter, while the company guided to 45% growth for Q1 2027.
+- OpenAI's Dots launch provided another positive read-through for Microsoft.
+- Microsoft now trades at roughly 26 times forward earnings, below Amazon and Apple but above Nvidia, Meta Platforms and Alphabet.
+
+Microsoft Corp. (MSFT) shares surged 37.7% from July to September, marking the stock's strongest quarterly performance since 1998 as investors returned to the software giant on renewed confidence in its AI and cloud businesses.
+
+The rally marks a sharp turnaround for Microsoft after the stock fell 22.5% in the first half of the year, its worst half-yearly performance since 2022.
+
+The rally makes Microsoft the strongest performer in the Magnificent Seven during the third quarter, ahead of Meta Platforms' (META) 28.7% gain. Apple (AAPL) rose 15.1%, while Nvidia (NVDA) advanced 14.1% and Amazon (AMZN) gained 4.5%. Alphabet (GOOGL) and Tesla (TSLA), meanwhile, fell 3.7% and 15.6%, respectively, over the period.
+
+## Azure Growth Reignites Microsoft Stock
+
+Microsoft's stock gained significant momentum after its fiscal fourth-quarter results in July showed Azure growth accelerating to 43% year over year.
+
+Revenue rose 18% to $90 billion, while adjusted earnings came in at $4.74 per share. Microsoft also forecast 45% Azure growth for the first quarter of fiscal 2027 on a constant-currency basis, reinforcing expectations that its massive AI infrastructure spending is beginning to translate into revenue.
+
+MSFT shares jumped roughly 15% on the day following the results.
+
+Microsoft has spent months pitching Azure and Copilot as key vehicles for monetizing its AI investments. The company said in the earnings call that Microsoft 365 Copilot had surpassed 30 million paid seats, while Agent 365 had nearly 40 million agents registered across tens of thousands of companies.
+
+Last week, Microsoft announced new Copilot capabilities designed to connect different tools and allow customers to build, customize and scale AI across workflows.
+
+## OpenAI's 'Dots' Adds To AI Tailwind
+
+The latest boost came from OpenAI's launch of Dots at its Developer Day event this week.
+
+Piper Sandler analyst Billy Fitzsimmons said one of the few positive read-throughs for Microsoft from the announcement was that Dots will integrate with Microsoft Agent 365, its control plane for AI agents designed for IT and security administrators.
+
+"We think one of the few positive read-throughs was MSFT, given Dots will integrate with Microsoft Agent 365," Fitzsimmons said in a research note, with Piper Sandler raising its Microsoft price target to $610 from $550.
+
+StoneX analyst Yi Fu Lee also told MarketWatch that Microsoft has benefited from an investor "flight to quality," with investors increasingly favoring technology companies that have a clearer path to monetizing AI.
+
+## Analyst View Remains Upbeat
+
+Wall Street remains broadly bullish on Microsoft's growth prospects. Currently, 53 out of 55 analysts have a 'Buy' or higher rating on MSFT and two rate it 'Hold,' per Koyfin data. Their average price target of $578.90 implies a 13% upside from the stock's closing price on Thursday.
+
+At around 26 times forward earnings, Microsoft's valuation sits in the middle of the Magnificent Seven pack. The stock trades at a premium to Nvidia at 19.1 times and Meta Platforms at 22.6 times, but below Amazon at 27.3 times and well below Apple at 35.9 times.
+
+Alphabet, meanwhile, trades at 24.5 times forward earnings, putting Microsoft slightly above its Google parent.
+
+On Stocktwits, the message volume for MSFT increased 55% and watcher count rose 2.4%, signaling increasing interest in the stock among retail traders. On Friday, the stock carried a 'neutral' sentiment.
