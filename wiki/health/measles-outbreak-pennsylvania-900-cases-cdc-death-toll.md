@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.cidrap.umn.edu/measles/measles-cases-top-900-pennsylvania-cdc-confirms-2nd-death
 author: Stephanie Soucheray, MA
 tags: [measles, outbreak, vaccination, cdc]
-date_consumed: 2026-10-01
+date_consumed: 2026-10-03
 ---
 
 ## Summary
@@ -33,3 +33,17 @@ Pennsylvania's measles outbreak has surpassed 900 cases, the largest and fastest
 
 **Q3**: What tension does this reveal about federal versus state public health reporting?
 **A**: The CDC's dashboard recognizes only two 2026 measles deaths nationally, conflicting with Pennsylvania's own count of four, prompting a public dispute between state officials and CDC/HHS leadership over death-count recognition.
+
+
+## Update (2026-10-02, STAT — fifth death and the outbreak's unknowable true size)
+
+STAT's Helen Branswell reports a fifth measles death in Pennsylvania. She argues that the full scope of the outbreak, in the state and nationally, "isn't known or even knowable":
+
+- **Updated count**: 943 confirmed cases in Pennsylvania as of Wednesday, up from the 903 logged above and about a quarter of the 2026 national total.
+- **Fifth death**: Pennsylvania's toll rose to five, up from the four state-reported deaths above.
+- **Confirmed-only reporting**: Official tallies count only confirmed cases. About 20% of infected people need hospital care and some others see a doctor, but some never come to the attention of public health.
+- **[[Amish]] communities**: Several Pennsylvania counties have large Amish populations that interact little with the wider world. Low measles vaccination rates, large families, and a tendency to seek care only when illness becomes severe make undercounting especially likely there. The same was true of last year's outbreak in Mennonite colonies in Texas.
+- **Modeling still to come**: Researchers are expected to produce modeling estimates of the outbreak's true size eventually. For now, confirmed counts show only "a portion of the iceberg."
+- **[[Paul Offit]]** (director, Vaccine Education Center, Children's Hospital of Philadelphia): "It is much worse than is being claimed... I think we don't know how bad."
+
+Source: https://www.statnews.com/2026/10/02/health-news-how-big-is-pennsylvania-measles-outbreak/

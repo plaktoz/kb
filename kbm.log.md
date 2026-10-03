@@ -3749,3 +3749,38 @@
 | 2026-10-01 | wiki/productivity/work-meetings-productivity-norway-study.md | ingest |
 | 2026-10-01 | wiki/learning/virtual-training-transforming-skill-development.md | ingest |
 | 2026-10-01 | daily-update/2026-10/2026-10-01.md | newsletter |
+| 2026-10-03 | 2026-10-03-news-aggregation.md | news-fetch |
+| 2026-10-03 | 2026-10-02-the-biggest-unresolved-question-in-ai-right-now-and-more-takeaways-from-madronas-ia40-summit.md | scrape |
+| 2026-10-03 | https://moneywise.com/news/top-stories/vinod-khosla-factory-ai-startup-unethical-investor (Probe hit a bot challenge page. The one allowed Tavily extract call failed with an Unauthorized error (missing or invalid API key), so no article body was retrieved.) | scrape-failed |
+| 2026-10-03 | 2026-10-01-the-pulse-ror-creator-sparks-new-death-of-coding-by-hand-debate.md | scrape |
+| 2026-10-03 | 2026-10-02-markets-news-oct-2-2026-indexes-rise-friday-after-weak-jobs-report-nasdaq-hits-new-high-dow-s-p-500-book-weekly-losses.md | scrape |
+| 2026-10-03 | 2026-10-02-labor-market-faltered-in-september-as-jobs-increased-by-just-29000-unemployment-rate-rose-to-42.md | scrape |
+| 2026-10-03 | 2026-10-02-rising-yields-are-wreaking-havoc-on-stocks.md | scrape |
+| 2026-10-03 | 2026-10-02-your-empty-calendar-is-making-you-less-productive.md | scrape |
+| 2026-10-03 | 2026-10-03-itoki-builds-ai-productivity-model-from-854-workers-with-matsuo-institute.md | scrape |
+| 2026-10-03 | 2026-10-01-when-productivity-hides-depression-how-to-tell-drive-from-overfunctioning.md | scrape |
+| 2026-10-03 | 2026-10-02-higher-education-needs-ai-literacy-when-integrating-such-technology-article-argues.md | scrape |
+| 2026-10-03 | https://upcea.edu/the-workforce-is-going-back-to-school-for-good/ (The direct probe was blocked with HTTP 403. The single allowed tavily_extract call also failed because the Tavily API key is missing or invalid.) | scrape-failed |
+| 2026-10-03 | 2026-10-02-gen-z-sees-ai-tutors-and-virtual-classrooms-shaping-future-of-education.md | scrape |
+| 2026-10-03 | 2026-09-30-nearly-6-in-10-people-with-high-blood-pressure-dont-know-they-have-it.md | scrape |
+| 2026-10-03 | 2026-09-29-scientists-may-have-found-a-unifying-theory-of-chronic-fatigue.md | scrape |
+| 2026-10-03 | 2026-10-02-how-big-is-pennsylvanias-measles-outbreak.md | scrape |
+| 2026-10-03 | 2026-10-02-msft-stock-posts-best-quarter-since-1998-as-azure-growth-revives-ai-optimism.md | scrape |
+| 2026-10-03 | 2026-10-02-ibm-ibm-stock-could-be-18-undervalued-following-z-shortfall-scrutiny.md | scrape |
+| 2026-10-03 | 2026-10-03-news-aggregation.processed.md | archive |
+| 2026-10-03 | wiki/health/unifying-theory-chronic-fatigue-shared-biological-networks.md | ingest |
+| 2026-10-03 | wiki/health/undiagnosed-hypertension-england-our-future-health.md | ingest |
+| 2026-10-03 | wiki/technology/dhh-37signals-death-of-coding-by-hand.md | ingest |
+| 2026-10-03 | wiki/health/productivity-hides-depression-overfunctioning.md | ingest |
+| 2026-10-03 | wiki/learning/gen-z-ai-tutors-virtual-classrooms-kaspersky-survey.md | ingest |
+| 2026-10-03 | wiki/learning/ai-literacy-fallacies-kamperman-graff-higher-education.md | ingest |
+| 2026-10-03 | wiki/health/measles-outbreak-pennsylvania-900-cases-cdc-death-toll.md (merged update) | ingest |
+| 2026-10-03 | wiki/finance/ibm-dcf-18-percent-undervalued-ibm-z-shortfall-oct2026.md | ingest |
+| 2026-10-03 | wiki/finance/september-jobs-report-29000-payrolls-unemployment-4-2-percent.md | ingest |
+| 2026-10-03 | wiki/finance/indexes-rise-weak-jobs-report-nasdaq-high-stock-market-today-oct2-2026.md | ingest |
+| 2026-10-03 | wiki/finance/msft-best-quarter-since-1998-azure-ai-optimism-q3-2026.md | ingest |
+| 2026-10-03 | wiki/finance/rising-yields-hidden-stock-market-pain-five-charts-oct2026.md | ingest |
+| 2026-10-03 | wiki/technology/madrona-ia40-summit-who-owns-customer-ai-agents.md | ingest |
+| 2026-10-03 | wiki/productivity/empty-calendar-fake-work-constraints.md | ingest |
+| 2026-10-03 | wiki/productivity/itoki-matsuo-ai-productivity-model-meeting-frequency.md | ingest |
+| 2026-10-03 | daily-update/2026-10/2026-10-03.md | newsletter |
