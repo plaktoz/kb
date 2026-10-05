@@ -3838,3 +3838,28 @@
 | 2026-10-05 | wiki/learning/social-studies-instruction-reading-comprehension.md | ingest |
 | 2026-10-05 | wiki/finance/week-ahead-q3-earnings-season-delta-pepsi-fed-minutes-oct2026.md | ingest |
 | 2026-10-05 | daily-update/2026-10/2026-10-05-2.md | newsletter |
+| 2026-10-05 | 2026-10-05-news-aggregation.md | news-fetch |
+| 2026-10-05 | 2026-10-04-president-donald-trump-announces-creation-of-super-intelligence-force-ai-task-force.md | scrape |
+| 2026-10-05 | 2026-10-04-should-ai-be-regulated-city-by-city-new-york-should-think-carefully-before-answering.md | scrape |
+| 2026-10-05 | 2026-10-04-taiwan-widens-314m-ai-fund-to-back-offshore-startups-with-roots-at-home.md | scrape |
+| 2026-10-05 | 2026-10-04-the-market-has-had-every-reason-to-sell-off-and-it-hasnt.md | scrape |
+| 2026-10-05 | https://www.usatoday.com/story/money/personal-finance/2026/10/04/stock-market-correction-ai-bubble-sp500/92059994007/ (Direct probe blocked (HTTP 403); the single allowed tavily_extract call failed with "Unauthorized: missing or invalid API key", so no article body was retrieved. Nothing saved.) | scrape-failed |
+| 2026-10-05 | 2026-10-04-this-nyc-startup-requires-4-days-in-office-but-just-let-everyone-work-remote-for-a-whole-month.md | scrape |
+| 2026-10-05 | 2026-10-04-i-was-disorganised-and-overwhelmed-could-a-daily-to-do-list-turn-my-life-around.md | scrape |
+| 2026-10-05 | https://japantoday.com/category/features/opinions/using-an-ai-chatbot-to-practice-new-languages-can-be-helpful-but-it-doesn%E2%80%99t-replace-speaking-with-an-actual-person (Probe hit a bot challenge page (Access Denied). The one allowed tavily_extract call also failed because the Tavily API key is missing or invalid. No earlier saved copy exists in raw/.) | scrape-failed |
+| 2026-10-05 | 2026-09-18-ai-skills-studio-preparing-talent-for-the-future-of-work.md | scrape |
+| 2026-10-05 | 2026-10-05-new-study-to-investigate-diet-lifestyle-and-the-rise-of-bowel-cancer-in-under-50s.md | scrape |
+| 2026-10-05 | 2026-10-04-silent-heart-threat-found-in-adults-under-30-with-no-known-cardiovascular-disease.md | scrape |
+| 2026-10-05 | 2026-10-01-ibm-introduces-self-hosted-deployment-for-ibm-bob-to-help-enterprises-advance-ai-sovereignty-and-governance-uk.md | scrape |
+| 2026-10-05 | 2026-10-05-news-aggregation.processed.md | archive |
+| 2026-10-05 | wiki/learning/handshake-ai-skills-studio-project-based-ai-badges.md | ingest |
+| 2026-10-05 | wiki/technology/ibm-bob-self-hosted-deployment-ai-sovereignty.md (UK newsroom copy of same press release, no new info) | ingest-dupe |
+| 2026-10-05 | wiki/productivity/daily-to-do-list-experiment-overwhelm-control.md | ingest |
+| 2026-10-05 | wiki/technology/trump-super-intelligence-force-ai-task-force.md | ingest |
+| 2026-10-05 | wiki/technology/nyc-council-ai-regulation-bill-package-menin.md | ingest |
+| 2026-10-05 | wiki/health/silent-atherosclerosis-young-adults-react-study.md | ingest |
+| 2026-10-05 | wiki/technology/taiwan-ndf-ai-fund-offshore-startups.md | ingest |
+| 2026-10-05 | wiki/finance/market-every-reason-to-sell-off-resilience-yields-oct2026.md | ingest |
+| 2026-10-05 | wiki/productivity/solcomms-work-from-anywhere-august-remote-month.md | ingest |
+| 2026-10-05 | wiki/health/prospect-uk-study-early-onset-bowel-cancer-diet-lifestyle.md | ingest |
+| 2026-10-05 | daily-update/2026-10/2026-10-05.md | newsletter |
