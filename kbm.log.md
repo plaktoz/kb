@@ -3807,3 +3807,34 @@
 | 2026-10-03 | topics/openai.md | compound |
 | 2026-10-03 | topics/cancer-early-detection.md | compound |
 | 2026-10-03 | weekly-update/2026-10/2026-W40-weekly.md | newsletter |
+| 2026-10-05 | 2026-10-05-news-aggregation-2.md | news-fetch |
+| 2026-10-05 | 2026-10-04-trump-unveils-his-new-super-intelligence-force.md | scrape |
+| 2026-10-05 | 2026-10-04-google-gemini-free-tier-cut-to-1-model-oct-9-2026.md | scrape |
+| 2026-10-05 | 2026-10-03-nvidias-dgx-spark-gets-a-64gb-model-at-4999-and-two-can-pool-to-128gb.md | scrape |
+| 2026-10-05 | https://www.usatoday.com/story/money/personal-finance/2026/10/04/stock-market-correction-ai-bubble-sp500/92059994007/ (Direct probe blocked (HTTP 403); the single allowed tavily_extract call failed with an Unauthorized (missing or invalid API key) error, so no article body was retrieved.) | scrape-failed |
+| 2026-10-05 | 2026-10-04-economic-week-ahead-october-5-9.md | scrape |
+| 2026-10-05 | 2026-10-04-asian-stocks-to-rise-as-hike-bets-ease-oil-climbs.md | scrape |
+| 2026-10-05 | 2026-10-04-i-stopped-managing-my-time-i-started-managing-my-energy.md | scrape |
+| 2026-10-05 | 2026-10-04-productivity-vs-efficiency-key-differences-and-examples.md | scrape |
+| 2026-10-05 | https://practicebusiness.co.uk/the-fight-for-focus (Direct probe blocked (HTTP 403); the single allowed tavily_extract call failed with "Unauthorized: missing or invalid API key", so no article body was retrieved.) | scrape-failed |
+| 2026-10-05 | 2026-10-05-history-geography-and-better-reading.md | scrape |
+| 2026-10-05 | 2026-10-04-keeping-the-learning-real-in-the-ai-age-requires-coordination-and-open-communication.md | scrape |
+| 2026-10-05 | 2026-10-04-escape-room-learning-helps-nursing-students-with-adhd-but-hurts-those-with-language-difficulties.md | scrape |
+| 2026-10-05 | https://medicalxpress.com/news/2026-10-health-adults-link-based-grocery.html (Direct probe blocked (http 403 challenge page); the single allowed tavily_extract call failed with 'Unauthorized: missing or invalid API key', so no article body was retrieved.) | scrape-failed |
+| 2026-10-05 | https://medicalxpress.com/news/2026-10-climate-affects-indigenous-children-health.html (Direct probe blocked (HTTP 403, Cloudflare challenge page "Checking your connection"); the single allowed tavily_extract call failed with "Unauthorized: missing or invalid API key".) | scrape-failed |
+| 2026-10-05 | https://medicalxpress.com/news/2026-09-brain-scans-depression-treatment-distinct.html (Probe was blocked (http 403, challenge page). The one allowed tavily_extract call failed with "Unauthorized: missing or invalid API key", so no article body was retrieved.) | scrape-failed |
+| 2026-10-05 | https://www.gurufocus.com/news/9108862/technology-stocks-surge-amid-rising-yields-microsoft-msft-shows-modest-undervaluation (The probe hit a bot challenge page, and the single allowed Tavily extract call failed with an Unauthorized error (missing or invalid API key).) | scrape-failed |
+| 2026-10-05 | 2026-10-04-what-to-expect-in-markets-this-week-investors-prep-for-earnings-season-delta-pepsi-report.md | scrape |
+| 2026-10-05 | 2026-10-05-news-aggregation-2.processed.md | archive |
+| 2026-10-05 | wiki/technology/nvidia-dgx-spark-64gb-4999-cluster-128gb.md | ingest |
+| 2026-10-05 | wiki/learning/escape-room-gamification-nursing-adhd-language-difficulties.md | ingest |
+| 2026-10-05 | wiki/finance/asian-stocks-rise-hike-bets-ease-brent-103-oct5-2026.md | ingest |
+| 2026-10-05 | wiki/finance/yardeni-economic-week-ahead-fomc-minutes-oct5-9-2026.md | ingest |
+| 2026-10-05 | wiki/productivity/productivity-vs-efficiency-key-differences-examples.md | ingest |
+| 2026-10-05 | wiki/productivity/manage-energy-not-time-allie-dunin.md | ingest |
+| 2026-10-05 | wiki/technology/google-gemini-free-tier-flash-lite-only-oct-2026.md | ingest |
+| 2026-10-05 | wiki/learning/keeping-the-learning-real-academic-integrity-ai-coherence.md | ingest |
+| 2026-10-05 | wiki/technology/trump-super-intelligence-force-clayton-task-force.md | ingest |
+| 2026-10-05 | wiki/learning/social-studies-instruction-reading-comprehension.md | ingest |
+| 2026-10-05 | wiki/finance/week-ahead-q3-earnings-season-delta-pepsi-fed-minutes-oct2026.md | ingest |
+| 2026-10-05 | daily-update/2026-10/2026-10-05-2.md | newsletter |
