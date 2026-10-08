@@ -1,5 +1,5 @@
 ---
-source_url: https://www.barchart.com/story/news/4990684/dear-microsoft-stock-fans-mark-your-calendars-for-october-7
+source_url: https://finance.yahoo.com/markets/stocks/articles/dear-microsoft-stock-fans-mark-185539705.html
 author: Ebube Jones
 date: 2026-10-06
 ---
