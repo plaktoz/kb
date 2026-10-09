@@ -1,6 +1,7 @@
 # KBM Activity Log
 
 | Date | File | Activity |
+| 2026-10-10 | 2026-10-10-news-aggregation.md | news-fetch |
 | 2026-09-27 | wiki/finance/sp500-dow-nasdaq-week-higher-chipmaker-oil-sep26-2026.md | ingest |
 | 2026-09-27 | wiki/finance/ibm-z17-marist-university-ai-classroom.md | ingest |
 | 2026-09-27 | wiki/finance/nvidia-anthropic-ipo-10-billion-circular-demand.md | ingest |
@@ -3979,3 +3980,38 @@
 | 2026-10-08 | wiki/finance/stocks-fall-bond-yields-oil-fed-minutes-halt-record-rally-oct7-2026.md | ingest |
 | 2026-10-08 | wiki/technology/anthropic-claude-startups-program-50000-perks-expansion.md | ingest |
 | 2026-10-08 | daily-update/2026-10/2026-10-08.md | newsletter |
+| 2026-10-10 | 2026-10-08-agentcorruption-aws-agentcore-flaws-let-one-prompt-hijack-all-agents.md | scrape |
+| 2026-10-10 | 2026-10-08-introducing-the-anthropic-cyber-mission.md | scrape |
+| 2026-10-10 | 2026-10-08-usa-today-sues-openai-over-copyrighted-news-content-in-ai-training.md | scrape |
+| 2026-10-10 | 2026-10-09-us-stocks-rise-near-their-record-after-the-latest-jobs-report-eases-worries-about-inflation.md | scrape |
+| 2026-10-10 | 2026-10-09-wall-st-week-ahead-bank-earnings-cpi-headline-busy-markets-week-as-sp-500-hovers-near-records.md | scrape |
+| 2026-10-10 | 2026-10-09-cramers-week-ahead-earnings-kick-off-as-banks-and-chipmakers-face-big-tests.md | scrape |
+| 2026-10-10 | 2026-10-08-new-vitality-research-reveals-u-s-employees-lose-63-productive-workdays-each-year-due-to-poor-health.md | scrape |
+| 2026-10-10 | 2026-10-07-worktimes-2026-productivity-study-featured-on-msn.md | scrape |
+| 2026-10-10 | 2026-10-10-want-employees-to-embrace-ai-stop-selling-it-as-a-productivity-tool.md | scrape |
+| 2026-10-10 | 2026-10-10-whats-new-in-game-based-learning-october-2026.md | scrape |
+| 2026-10-10 | 2026-09-29-4-research-backed-insights-on-learning-ai-affordability-and-student-success.md | scrape |
+| 2026-10-10 | https://www.sciencedirect.com/science/article/abs/pii/S0040162526002611 (Tavily extract returned only ScienceDirect's free preview (abstract + introduction) plus truncated "Section snippets" teasers for Data sources/Results/Conclusions (each cut off mid-sentence) and the reference list; "Purchase PDF"/"View full text" links confirm the full article body is paywalled, so no real full-text article was retrieved.) | scrape-failed |
+| 2026-10-10 | 2026-10-08-exposure-to-gun-violence-can-accelerate-biological-age-study-finds.md | scrape |
+| 2026-10-10 | https://www.washingtonpost.com/wellness/2026/10/05/study-finds-whole-grain-sweet-spot-heart-health (Tavily extract returned only a two-paragraph teaser plus newsletter signup/footer boilerplate — the full article is behind the Washington Post paywall and was not retrievable.) | scrape-failed |
+| 2026-10-10 | 2026-10-05-dont-have-time-to-work-out-this-study-has-good-news.md | scrape |
+| 2026-10-10 | 2026-10-05-ibm-bets-on-sovereign-tech-and-tokenized-deposits-while-shares-sit-deep-in-the-red.md | scrape |
+| 2026-10-10 | 2026-10-09-daily-market-snapshot.md | scrape |
+| 2026-10-10 | https://www.morningstar.com/news/marketwatch/20261009166/microsoft-is-nearing-a-big-milestone-that-solidifies-its-revival (dead: http 404) | scrape-failed |
+| 2026-10-10 | 2026-10-10-news-aggregation.processed.md | archive |
+| 2026-10-10 | wiki/learning/learning-solutions-affordability-student-success-huron-report.md | ingest |
+| 2026-10-10 | wiki/finance/ibm-logiq-acquisition-legal-investigation-oct2026.md | ingest |
+| 2026-10-10 | wiki/health/exercise-intensity-beats-duration-disease-risk-study.md | ingest |
+| 2026-10-10 | wiki/technology/agentcorruption-aws-agentcore-prompt-hijack.md | ingest |
+| 2026-10-10 | wiki/health/gun-violence-exposure-accelerates-biological-aging.md | ingest |
+| 2026-10-10 | wiki/productivity/worktime-meeting-overload-productivity-study.md | ingest |
+| 2026-10-10 | wiki/technology/anthropic-cyber-mission-critical-infrastructure-oss-scanner.md | ingest |
+| 2026-10-10 | wiki/finance/cramer-week-ahead-bank-chip-earnings-oct2026.md | ingest |
+| 2026-10-10 | wiki/technology/usa-today-sues-openai-copyright-training-data.md | ingest |
+| 2026-10-10 | wiki/finance/daily-market-snapshot-record-highs-10yr-yield-oct2026.md | ingest |
+| 2026-10-10 | wiki/productivity/ai-job-enrichment-framing-vs-productivity-tool-karunakaran.md | ingest |
+| 2026-10-10 | wiki/productivity/vitality-workforce-health-productivity-index-2026.md | ingest |
+| 2026-10-10 | wiki/learning/whats-new-in-game-based-learning-october-2026.md | ingest |
+| 2026-10-10 | wiki/finance/wall-st-week-ahead-bank-earnings-cpi-sp500-record-oct9-2026.md | ingest |
+| 2026-10-10 | wiki/finance/us-stocks-near-record-jobs-report-tesla-nvidia-nike-oct9-2026.md | ingest |
+| 2026-10-10 | daily-update/2026-10/2026-10-10.md | newsletter |
