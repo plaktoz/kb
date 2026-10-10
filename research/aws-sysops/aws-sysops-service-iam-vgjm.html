@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- script-src allows any https: origin because a sources sibling file can be hosted remotely, at an origin chosen at view-time via ?sourcesBaseUrl and unknown when this file is generated. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self' https:; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  /* Theme follows prefers-color-scheme. One accent (--accent); ok/bad/warn
+     carry state only. Shape rule: --radius on every control and panel,
+     full pill on badges and tallies. z-index: header 10, nothing else. */
+  :root {
+    color-scheme: light dark;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 8px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --measure: 68ch;
+
+    --bg: #f6f7f9;
+    --surface: #fdfdfe;
+    --sunk: #eceff3;
+    --ink: #15181c;
+    --ink-2: #39414b;
+    --muted: #5a6370;
+    --line: #dce0e6;
+    --line-strong: #c3c9d1;
+    --accent: #2a5caa;
+    --accent-hover: #1f4a8c;
+    --accent-ink: #fdfdfe;
+    --accent-soft: #e7edf7;
+    --ok: #1b7348;
+    --ok-soft: #e3f2ea;
+    --bad: #ae3328;
+    --bad-soft: #fbe9e7;
+    --warn: #845400;
+    --warn-soft: #fbf0db;
+    --shadow: 0 1px 2px rgb(21 24 28 / 0.05), 0 4px 16px rgb(21 24 28 / 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --surface: #181b1f;
+      --sunk: #20242a;
+      --ink: #e6e9ed;
+      --ink-2: #c1c7cf;
+      --muted: #939ba6;
+      --line: #282d33;
+      --line-strong: #3a4047;
+      --accent: #8db0ea;
+      --accent-hover: #a9c4f0;
+      --accent-ink: #0d1829;
+      --accent-soft: #1a2639;
+      --ok: #6ccb96;
+      --ok-soft: #13271c;
+      --bad: #ef8a7e;
+      --bad-soft: #301817;
+      --warn: #e2b25a;
+      --warn-soft: #2b2212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover { color: var(--accent-hover); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem 0;
+  }
+  .header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+  }
+  header h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .title-exam { color: var(--muted); font-weight: 500; }
+  .title-sep { color: var(--line-strong); }
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #slice-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  nav#nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav#nav::-webkit-scrollbar { display: none; }
+  nav#nav a {
+    flex: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 transparent;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  nav#nav a:hover { color: var(--ink); background: var(--sunk); }
+  nav#nav a:focus-visible { outline-offset: -2px; }
+  nav#nav a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+  #storage-warning {
+    margin: 0.6rem 0 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- controls ---------- */
+  button, .button-link, .file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 550;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.1s var(--ease);
+  }
+  button:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  button:active:not(:disabled), .button-link:active, .file-label:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.secondary, .button-link, .file-label {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.secondary:hover:not(:disabled), .button-link:hover, .file-label:hover {
+    border-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .header-actions button, .header-actions .file-label { padding: 0.4rem 0.75rem; font-size: 0.84rem; }
+  .file-label { position: relative; }
+  .file-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .file-label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .field-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  textarea, input[type="search"], input[type="password"], select {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea, input[type="search"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  select { padding: 0.35rem 0.6rem; font-size: 0.84rem; }
+  textarea:focus, input[type="search"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  textarea:disabled { background: var(--sunk); color: var(--ink-2); cursor: not-allowed; }
+  ::placeholder { color: var(--muted); opacity: 1; }
+  fieldset { min-width: 0; margin: 1.5rem 0 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.94rem; font-weight: 600; }
+  input[type="checkbox"], input[type="radio"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.3rem 0 0;
+    accent-color: var(--accent);
+  }
+  .field-error { margin: 0.75rem 0 0; color: var(--bad); font-size: 0.9rem; font-weight: 500; }
+
+  /* ---------- page + type ---------- */
+  main#app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.9rem);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 2.25rem 0 0.6rem;
+    font-size: 1.06rem;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  p, li { max-width: var(--measure); text-wrap: pretty; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin: 0.45rem 0; padding-left: 0.2rem; }
+  li::marker { color: var(--muted); }
+  .muted { color: var(--muted); }
+  .lead { color: var(--ink-2); font-size: 1.125rem; }
+  .empty {
+    max-width: none;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+  }
+  .panel {
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .panel > :last-child { margin-bottom: 0; }
+  .panel textarea { background: var(--bg); }
+  .panel h3:first-child { margin-top: 0; }
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .callout h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 0.98rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .step { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tally {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    vertical-align: 0.1em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  .badge.tone-accent { background: var(--accent-soft); color: var(--accent); }
+  .badge.tone-ok, .badge.status-supported { background: var(--ok-soft); color: var(--ok); }
+  .badge.tone-bad, .badge.status-conflicted,
+  .badge.severity-high, .badge.severity-critical { background: var(--bad-soft); color: var(--bad); }
+  .badge.tone-warn, .badge.status-needs-review, .badge.severity-medium { background: var(--warn-soft); color: var(--warn); }
+  .next-link { margin-top: 2.5rem; font-weight: 550; }
+  .back-link { margin: -0.25rem 0 1.25rem; font-size: 0.92rem; }
+
+  /* ---------- supporting claims ---------- */
+  details.claims, details.issues-panel {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  details > summary {
+    width: fit-content;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  details > summary::marker { color: var(--muted); }
+  details > summary:hover { color: var(--ink); }
+  ul.citations, ul.issues {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.citations li {
+    display: grid;
+    grid-template-columns: 6.75rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.94rem;
+  }
+  ul.citations .badge { justify-self: start; }
+
+  /* ---------- confidence marks ---------- */
+  .mark-control { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .mark-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+  .mark-dot:hover:not(:disabled) { opacity: 0.85; }
+  .mark-dot:active:not(:disabled) { transform: none; }
+  .mark-dot.mark-low { background: var(--ok); border-color: var(--ok); }
+  .mark-dot.mark-medium { background: var(--warn); border-color: var(--warn); }
+  .mark-dot.mark-high { background: var(--bad); border-color: var(--bad); }
+  .mark-dot.is-active { opacity: 1; border-color: var(--ink); }
+  .cell-mark { white-space: nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 1.25rem 0 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  th, td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .contrast-table { min-width: 44rem; }
+  .contrast-table th + td, .contrast-table td + td,
+  .contrast-table thead th + th { border-left: 1px solid var(--line); }
+  .contrast-table tbody th { width: 11rem; font-weight: 600; }
+  .sources-table { min-width: 38rem; }
+  tr.source-row { cursor: pointer; transition: background-color 0.15s; }
+  tr.source-row:hover { background: var(--sunk); }
+  tr.source-row.is-open { background: var(--accent-soft); }
+  tr.source-row.is-open > td { border-bottom-color: transparent; }
+  tr.detail-row > td { background: var(--accent-soft); }
+  .cell-id { white-space: nowrap; }
+  .cell-answer { font-family: var(--font-mono); font-size: 0.86rem; }
+  .row-toggle {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .row-toggle:hover:not(:disabled) { background: none; color: var(--accent-hover); text-decoration: underline; }
+  .row-toggle:active:not(:disabled) { transform: none; }
+  .empty-cell { padding: 1.5rem; color: var(--muted); text-align: center; }
+  .source-detail { max-width: var(--measure); padding: 0.25rem 0 0.5rem; }
+  .source-detail ul { list-style: none; padding: 0; }
+  .source-detail h4 { margin: 1.25rem 0 0.4rem; font-size: 0.94rem; }
+  .source-meta { font-size: 0.86rem; }
+  .choice-letter { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .correct-choice { color: var(--ok); font-weight: 550; }
+
+  /* ---------- learn ---------- */
+  .predict-block { margin: 1.75rem 0 0; }
+  .predict-block .prompt { margin: 0 0 0.9rem; color: var(--ink-2); }
+  .mechanism { margin-top: 2.25rem; }
+  .mechanism > h3:first-child { margin-top: 0; }
+
+  /* ---------- practice ---------- */
+  .item-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .practice > .prompt { margin-top: 1.5rem; font-size: 1.0625rem; }
+  .practice > .callout + .prompt { margin-top: 1.5rem; }
+  .answer-field { margin-top: 1.5rem; }
+  .choices label, .diagnosis-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choices label:hover, .diagnosis-option:hover { border-color: var(--line-strong); }
+  .choices label:has(input:checked), .diagnosis-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .choices label.is-expected { border-color: var(--ok); background: var(--ok-soft); }
+  .choices label.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .segmented {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .segmented label {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-left: 1px solid var(--line-strong);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .segmented label:first-child { border-left: 0; }
+  .segmented label:hover { background: var(--sunk); }
+  .segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .segmented label:has(input:disabled) { cursor: not-allowed; }
+  .reveal { margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .answer p:last-child { margin-bottom: 0; }
+  .self-report {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--sunk);
+  }
+  .self-report p { margin: 0; color: var(--ink-2); }
+  .self-report .actions { margin-top: 0.75rem; }
+  .result { margin: 2rem 0 0; font-weight: 550; }
+  .result.result-ok { color: var(--ok); }
+  .result.result-bad { color: var(--bad); }
+  .result a { color: inherit; }
+  .summary-label { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.94rem; font-weight: 600; }
+  .score { margin: 0; color: var(--ink-2); font-size: 1.06rem; }
+  .score strong {
+    margin-right: 0.15rem;
+    color: var(--ink);
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- diagnose ---------- */
+  .pending-attempt { margin: 0 0 1.25rem; }
+  .pending-attempt .prompt { color: var(--ink); }
+  .your-answer { color: var(--ink-2); }
+  .your-answer .field-label { margin-bottom: 0.15rem; color: var(--muted); font-size: 0.84rem; }
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.5rem;
+  }
+  .diagnosis-option { margin: 0; }
+  .diagnosis-option .hint {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .panel .diagnosis-option { background: var(--bg); }
+  ul.diagnosis-history { margin: 0; padding: 0; list-style: none; }
+  ul.diagnosis-history li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  ul.diagnosis-history li:last-child { border-bottom: 0; }
+  ul.diagnosis-history time { font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sources ---------- */
+  .issue-head { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem; }
+  ul.issues li { max-width: none; margin: 0; padding: 0; font-size: 0.94rem; }
+  ul.issues li > p:last-child { margin-bottom: 0; }
+  .search-field { margin-top: 2rem; }
+  #sources-count { margin: 0.5rem 0 0; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .sources-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1rem 0 0; font-size: 0.88rem; }
+  .sources-lock button { padding: 0.3rem 0.7rem; font-size: 0.84rem; }
+
+  /* ---------- motion: state transitions only ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .mechanism:not(.hidden), .reveal:not(.hidden) { animation: rise 0.35s var(--ease) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    header { position: static; }
+    .header-inner { padding: 0.75rem 1rem 0; }
+    main#app { padding: 1.5rem 1rem 4rem; }
+    .panel { padding: 1rem; }
+    .lead { font-size: 1.06rem; }
+    ul.citations li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history .badge { justify-self: start; }
+    .segmented { display: flex; }
+    .segmented label { flex: 1; text-align: center; }
+    .sources-table { min-width: 0; }
+    .sources-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .sources-table tr.source-row {
+      display: grid;
+      grid-template-areas: "id answer" "stem stem" "status mark";
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sources-table tr.source-row > td { padding: 0; border: 0; }
+    .sources-table .cell-id { grid-area: id; }
+    .sources-table .cell-answer { grid-area: answer; }
+    .sources-table .cell-stem { grid-area: stem; }
+    .sources-table .cell-status { grid-area: status; color: var(--muted); font-size: 0.86rem; }
+    .sources-table .cell-mark { grid-area: mark; justify-self: end; }
+    .sources-table tr.detail-row, .sources-table tr.detail-row > td { display: block; }
+    .sources-table tbody tr:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-row">
+      <h1 id="app-title">EKD Workspace</h1>
+      <div class="header-actions">
+        <div id="slice-controls" class="hidden">
+          <label for="slice-select">Slice</label>
+          <select id="slice-select"></select>
+        </div>
+        <button id="export-btn" class="secondary" type="button">Export progress</button>
+        <button id="export-revision-btn" class="secondary" type="button">Export for revision</button>
+        <label class="file-label">Import progress
+          <input type="file" id="import-input" accept="application/json">
+        </label>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Study modes">
+      <a href="#learn" data-route="learn">Learn</a>
+      <a href="#compare" data-route="compare">Compare</a>
+      <a href="#practice" data-route="practice">Practice</a>
+      <a href="#diagnose" data-route="diagnose">Diagnose</a>
+      <a href="#sources" data-route="sources">Explore Sources</a>
+    </nav>
+    <div id="storage-warning" class="hidden" role="alert"></div>
+  </div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 2, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-iam", "exam": "aws-sysops", "facet": {"key": "service", "value": "iam"}, "schemaVersion": 1}, "sourceQuestions": [], "claims": [{"claim_type": "rule", "conditions": ["instances need to call the CloudWatch PutMetricData API"], "confidence": "high", "id": "cl-75ab3e8821db", "source_question_ids": ["awssysops-p1-q012"], "statement": "Attaching an IAM role to an Auto Scaling launch configuration is the AWS-recommended way to let instances authenticate CloudWatch PutMetricData calls, because credentials are automatically rotated and delivered via the instance metadata service.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6c0e7c9cf67b", "source_question_ids": ["awssysops-p1-q012"], "statement": "Creating an IAM user and injecting its credentials into instance User Data or a private repository means distributing and rotating static long-lived secrets by hand, which is not the recommended authentication approach for instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-81c2f9cee3ef", "source_question_ids": ["awssysops-p1-q012"], "statement": "CloudWatch has no metric-level resource policy that can grant PutMetricData permission to instances from an Auto Scaling group.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c6dbb9badd60", "source_question_ids": ["awssysops-p1-q018"], "statement": "AWS API access credentials evaluated in a security audit include console passwords, access keys, and X.509 signing certificates.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-223c96228fca", "source_question_ids": ["awssysops-p1-q018"], "statement": "EC2 key pairs authenticate SSH/RDP logins into EC2 instances, not calls to the AWS API itself, so they are not considered an AWS API access credential.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-0228115032b0", "source_question_ids": ["awssysops-p1-q018"], "statement": "Security group membership is a network access control construct, not a type of AWS credential.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-270fd100a40b", "source_question_ids": ["awssysops-p1-q027"], "statement": "In an S3 bucket policy statement with Effect Allow, a Condition combining IpAddress for a CIDR range with NotIpAddress excluding one specific address within that range grants access to every address in the range except the excluded one.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fce6a7069012", "source_question_ids": ["awssysops-p1-q027"], "statement": "A policy statement with Effect Allow only ever grants access; it never produces an explicit deny.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-a2501324f971", "source_question_ids": ["awssysops-p1-q027"], "statement": "Because S3 access is default-deny, an address excluded from an Allow condition via NotIpAddress ends up with no matching grant and effectively loses access, even though no explicit Deny statement exists.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-803ba56bc4c0", "source_question_ids": ["awssysops-p1-q040"], "statement": "Enabling multi-factor authentication (MFA) for privileged IAM users supplies a one-time code alongside the standard password on every login, satisfying a 'one-time credential in addition to username/password' security requirement.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-83ff1f3dc92f", "source_question_ids": ["awssysops-p1-q040"], "statement": "Federating an organization's identity provider with AWS via the IAM Security Token Service (STS) issues temporary, automatically-rotating credentials, which can satisfy a 'frequently rotated or one-time credentials' security policy requirement.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-6556d9d4cf8d", "source_question_ids": ["awssysops-p1-q040"], "statement": "Simply creating IAM users for privileged accounts does not, by itself, enforce any password rotation or one-time-credential requirement.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-27b344c4428c", "source_question_ids": ["awssysops-p1-q055"], "statement": "Every IAM user within a single AWS account must have a unique login/user name; AWS does not support giving multiple IAM users the same shared login ID with different passwords.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-48a0a8b957ca", "source_question_ids": ["awssysops-p1-q058"], "statement": "IAM groups let an administrator attach a policy once to the group so that every member user inherits it, meaning a policy change made at the group level automatically applies to all member users without touching individual user policy attachments.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-994c952cc69d", "source_question_ids": ["awssysops-p1-q058"], "statement": "IAM roles are assumed by AWS services or federated identities to obtain temporary credentials; they are not a mechanism for organizing or granting policies to a set of IAM users the way IAM groups are.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-de918035cefd", "source_question_ids": ["awssysops-p1-q069"], "statement": "The s3:ListBucket action is a bucket-level action and requires a bucket-level resource ARN (e.g., arn:aws:s3:::bucketname) to take effect, not an object-level resource ARN.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2e6f11a4dfd2", "source_question_ids": ["awssysops-p1-q069"], "statement": "An S3 bucket policy whose Resource ARN is scoped to a pattern like arn:aws:s3:::bucket/*.jpg only covers objects matching that pattern, not the bucket itself or other objects.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-22bc6e89d2d8", "source_question_ids": ["awssysops-p1-q088"], "statement": "The account-wide IAM password policy (set under IAM account settings) is where an administrator enables the option allowing IAM users to change their own password; once enabled account-wide, no separate per-user password policy is needed to grant that permission.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-aebb76f8a890", "source_question_ids": ["awssysops-p1-q088"], "statement": "An IAM user's ability to change their own password is governed independently from their access keys, so enabling self-service password changes in the account password policy does not grant or affect the ability to change access keys.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-821b7e1a059f", "source_question_ids": ["awssysops-p1-q088"], "statement": "By default, IAM users cannot change their own password; self-service password change must be explicitly enabled in the account's password policy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2e0fb4ab644f", "source_question_ids": ["awssysops-p1-q094"], "statement": "Every IAM user within a given AWS account signs in to the AWS Management Console using the same fixed URL based on the 12-digit account ID (https://<account-id>.signin.aws.amazon.com/console/) or the account alias if one is set; this sign-in URL does not vary by which IAM group a user belongs to.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-c19fe632dec5", "source_question_ids": ["awssysops-p1-q126", "awssysops-p1-q255"], "statement": "In an IAM policy, the ${aws:username} policy variable used in a Resource ARN resolves at request time to the identity of whichever user is making the request, scoping the grant to that requesting user's own IAM resource rather than to all IAM users in the account.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-9b4cadd86acf", "source_question_ids": ["awssysops-p1-q126"], "statement": "For a policy whose Resource ARN uses ${aws:username}, the source's boxed answer and the community's reasoning directly conflict over whether the policy grants rights over 'all IAM users'' credentials (boxed) or only the requesting user's own credentials (community), given the self-scoping Resource ARN.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6baee04a4093", "source_question_ids": ["awssysops-p1-q139"], "statement": "AWS Consolidated Billing lets multiple separate AWS accounts be billed together from one paying account while still producing a detailed, itemized cost report for each individual account, enabling cost separation by account.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-f4bc36e8ede4", "source_question_ids": ["awssysops-p1-q139"], "statement": "IAM cross-account roles are a mechanism for delegating access between AWS accounts, not a billing or cost-separation mechanism.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-ab947da4766c", "source_question_ids": ["awssysops-p1-q148"], "statement": "Organizing a large number of IAM users into IAM groups mapped to organizational departments, with policies defined once per group, is a standard best practice for managing access at scale (e.g., 1000+ employees).", "status": "supported"}, {"claim_type": "rule", "conditions": ["organization already has an existing corporate directory or SSO system"], "confidence": "medium", "id": "cl-39d8ca271fc8", "source_question_ids": ["awssysops-p1-q148"], "statement": "Attaching an IAM role to an organization's own identity/authentication service (identity federation) to authorize users for AWS services is an AWS-recommended pattern specifically when the organization already has an existing corporate directory or SSO system to reuse.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-b17544cc3a16", "source_question_ids": ["awssysops-p1-q155"], "statement": "IAM policies are attached to IAM identities (users, groups, or roles) to grant permissions on AWS services; they cannot be attached directly to an RDS instance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0294b798e14c", "source_question_ids": ["awssysops-p1-q155"], "statement": "RDS database-level access (authenticating to the database engine itself) is a separate concern from IAM permissions to manage RDS through the AWS API.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-833e36233d41", "source_question_ids": ["awssysops-p1-q155"], "statement": "To grant a user access to RDS, the root account owner should create an IAM user and attach a policy granting that IAM user access to RDS management actions.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-24cb589e2463", "source_question_ids": ["awssysops-p1-q180"], "statement": "An S3 bucket policy statement granting an object-level action like s3:GetObjectAcl must use an object-scoped resource ARN (e.g., arn:aws:s3:::bucket/*) rather than a bucket-level ARN (arn:aws:s3:::bucket), or AWS rejects the policy with an 'Action does not apply to any resource(s) in statement' error.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3b60daa7fccc", "source_question_ids": ["awssysops-p1-q182"], "statement": "An IAM policy statement granting only the iam:AddUserToGroup, iam:RemoveUserFromGroup, and iam:GetGroup actions scoped to a specific IAM group's ARN allows a user to add/remove members and view membership of that one named group, but does not allow deleting the group or joining arbitrary groups.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-76ba80e97899", "source_question_ids": ["awssysops-p1-q189"], "statement": "An IAM/bucket policy statement with Effect Deny, Action \"*\", Resource \"*\", and a NotIpAddress condition on aws:SourceIp against a set of CIDR ranges denies all actions for any request originating outside those IP ranges, which is a way to restrict IAM/AWS console access to a specific corporate network.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a1f64ac3f046", "source_question_ids": ["awssysops-p1-q189"], "statement": "Security groups control network traffic to EC2 instances; they do not control or restrict access to the IAM/AWS Management Console itself.", "status": "supported"}, {"claim_type": "fact", "conditions": ["policy contains exactly these three Allow statements with no elasticloadbalancing action"], "confidence": "high", "id": "cl-0f0d7c0cf397", "source_question_ids": ["awssysops-p1-q190"], "statement": "An IAM policy granting only ec2:Describe*, a set of CloudWatch read actions (ListMetrics, GetMetricStatistics, Describe*), and autoscaling:Describe* grants read-only access across EC2, CloudWatch, and Auto Scaling, but grants no access to Elastic Load Balancing since no elasticloadbalancing action appears in the policy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8f2a11ab7c45", "source_question_ids": ["awssysops-p1-q190"], "statement": "EBS volumes are covered by the ec2:Describe* IAM action, since EBS is part of the EC2 API namespace, rather than being excluded from it.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0d69ea04c5de", "source_question_ids": ["awssysops-p1-q198"], "statement": "An IAM policy statement with Effect \"Allow\", Action \"*\", and Resource \"*\" grants unrestricted full access to every action on every AWS resource/service.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-033da3105a54", "source_question_ids": ["awssysops-p1-q198"], "statement": "IAM users automatically inherit the permissions granted by every IAM group they are a member of.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-fad7ade99c77", "source_question_ids": ["awssysops-p1-q220"], "statement": "S3 bucket ACLs can only grant permissions to AWS accounts or predefined S3 groups; they have no mechanism to target an individual IAM user within an account.", "status": "supported"}, {"claim_type": "rule", "conditions": ["IAM user has CloudWatch permissions but not EC2 permissions"], "confidence": "high", "id": "cl-ef09eb226222", "source_question_ids": ["awssysops-p1-q230"], "statement": "An IAM user with only CloudWatch permissions can still create a CloudWatch alarm and configure an EC2 stop/terminate action on it, since CloudWatch permissions are sufficient for the configuration step.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2ce09a2de24f", "source_question_ids": ["awssysops-p1-q230"], "statement": "When a CloudWatch alarm fires, executing a configured EC2 action (such as stopping an instance) requires the triggering IAM user/role to have the relevant EC2 permissions.", "status": "supported"}, {"claim_type": "fact", "conditions": ["IAM user has CloudWatch permissions but not EC2 permissions"], "confidence": "high", "id": "cl-783561b8b04f", "source_question_ids": ["awssysops-p1-q230"], "statement": "If the IAM user lacks EC2 permissions, a CloudWatch alarm's configured EC2 action silently fails to execute when the alarm fires, even though the alarm and action were successfully configured beforehand.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-bf8c5a59c953", "source_question_ids": ["awssysops-p1-q232"], "statement": "Best practice for a mobile application that calls AWS services directly is to avoid embedding any long-lived IAM user or root account credentials in the app, and instead use an IAM role with web identity federation, authenticating end users through an external identity provider (e.g., Google, Amazon, Facebook) to obtain short-lived temporary security credentials.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-84fd71d859c1", "source_question_ids": ["awssysops-p1-q232"], "statement": "Embedding an AWS root account's access key and secret access key directly inside a mobile application is a security anti-pattern.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-4255e3ab33bd", "source_question_ids": ["awssysops-p1-q254"], "statement": "For an application running on an EC2 instance that needs to call another AWS service (e.g. DynamoDB), AWS best practice is to attach an IAM role with the needed permissions to the EC2 instance rather than embedding IAM user credentials in the application.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f75bacb9b7a3", "source_question_ids": ["awssysops-p1-q254"], "statement": "An EC2 instance with an attached IAM role automatically receives temporary security credentials for that role, removing the need to embed static credentials in application code.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-37bdb307fb47", "source_question_ids": ["awssysops-p1-q254"], "statement": "Creating an IAM user and distributing its credentials within an application for AWS service access is a less secure practice than attaching an instance IAM role.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-827554316d65", "source_question_ids": ["awssysops-p1-q254"], "statement": "Attaching an IAM role that grants only EC2 access to an instance does not provide the DynamoDB permissions an application needs to call the DynamoDB API; a role's permissions must match the service actually being called.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-8c00c68ae6a5", "source_question_ids": ["awssysops-p1-q255"], "statement": "In this question, every listed answer choice assumes the policy grants access to 'all IAM users'' credentials, but the policy's Resource ARN containing ${aws:username} actually scopes the grant to only the calling user's own credentials, which multiple community comments flag as invalidating every listed choice.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1800b72eac65", "source_question_ids": ["awssysops-p1-q264"], "statement": "An IAM policy can scope ec2:* actions to only resources matching a given tag by using a Condition block with StringEquals on an ec2:ResourceTag/<TagKey> condition key, e.g. ec2:ResourceTag/InstanceType.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-e252aaefdb8b", "source_question_ids": ["awssysops-p1-q264"], "statement": "Tagging EC2 instances (e.g. as Test vs. Production) and referencing that tag in an IAM policy condition lets an organization restrict a group of IAM users to only the tagged subset of instances, without hardcoding instance IDs or regions.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-14bc9c223b5f", "source_question_ids": ["awssysops-p1-q264"], "statement": "Restricting IAM access by launching instances in separate regions, or by hardcoding instance IDs in a policy, both require ongoing manual upkeep as instances are added or removed, unlike tag-based conditions.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-851d4a2ca538", "source_question_ids": ["awssysops-p1-q268"], "statement": "Valid IAM user, group, role, and instance-profile names may contain only letters, digits, and the characters plus (+), equal (=), comma (,), period (.), at sign (@), underscore (_), and hyphen (-); the character '#' is not permitted in IAM names.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1dd9b346dc53", "source_question_ids": ["awssysops-p1-q275"], "statement": "The IAM policy action aws-portal:ViewUsage, granted with Resource \"*\", specifically allows a user to view the AWS usage report page.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c08ecb9a3312", "source_question_ids": ["awssysops-p1-q275"], "statement": "The IAM policy action aws-portal:ViewBilling controls access to the billing page, which is distinct from the AWS usage report page.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-090b846933dc", "source_question_ids": ["awssysops-p1-q276"], "statement": "Amazon DynamoDB has no concept of a separate per-user 'database'; it only has tables.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-f263c32d9b98", "source_question_ids": ["awssysops-p1-q276"], "statement": "A single IAM group-level policy can grant each member user access to a differently-named DynamoDB table by naming each table after the corresponding IAM username and using the ${aws:username} policy variable in the Resource ARN (e.g., arn:aws:dynamodb:*:*:table/${aws:username}), scoping the one shared policy per-user automatically at request time.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "low", "id": "cl-33aaba1b1261", "source_question_ids": ["awssysops-p1-q283"], "statement": "At the time this question was authored, the stated default IAM limits were up to 100 groups per AWS account, up to 5000 IAM users per account, up to 250 roles per account, and up to 10 groups per IAM user.", "status": "needs-review"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-effd8ced9cb8", "source_question_ids": ["awssysops-p2-q313"], "statement": "Configuring MFA on the root account and on privileged IAM users, together with assigning IAM users/groups least-privilege policies, are IAM best practices specifically aimed at hardening an AWS account's security posture ahead of a security assessment.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e7be4e7d74a9", "source_question_ids": ["awssysops-p2-q313"], "statement": "Creating individual IAM users for everyone in an organization is a general IAM user-management practice, and is not strictly necessary when an organization federates identity through an external directory such as LDAP/AD.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2bbd19b17318", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, patch management of the guest operating system on an EC2 instance is the customer's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-265b902de8ca", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, choosing whether to encrypt EBS volumes is the customer's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-6cd4c4a80e86", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, lifecycle management of IAM credentials is the customer's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d9a4d865fe90", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, configuring Security Group and Network ACL settings is the customer's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-a2b3d8260ae9", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, controlling physical access to compute resources and underlying hardware is AWS's responsibility, not the customer's.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d8bb0a066c77", "source_question_ids": ["awssysops-p2-q322"], "statement": "Under the AWS Shared Responsibility Model, decommissioning retired physical storage devices is AWS's responsibility, not the customer's, since customers never have physical or hardware-level access.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-f31f2112bc46", "source_question_ids": ["awssysops-p2-q333", "awssysops-p2-q483"], "statement": "In IAM and S3 bucket policy evaluation, an explicit Deny statement always overrides a matching Allow statement, even when another attached policy or statement grants the same action.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e7acc0fced5f", "source_question_ids": ["awssysops-p2-q333"], "statement": "A Deny statement with a Condition using StringNotLike on aws:userID against a trusted account's ID is a policy pattern for denying an action to everyone except that trusted principal.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": ["a separate Deny statement with a broad Action also matches the blocked action"], "confidence": "medium", "id": "cl-f2613b08406b", "source_question_ids": ["awssysops-p2-q333"], "statement": "Narrowing an Allow statement's Action (for example from s3:* to s3:PutObject) does not fix a blocked write if the actual blocker is a separate Deny statement whose Action is still scoped broadly enough to cover that same action.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-61564b0e94ae", "source_question_ids": ["awssysops-p2-q334"], "statement": "EC2 instance operating system updates are the customer's responsibility under the AWS Shared Responsibility Model, since the customer controls the guest OS.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-723c4219b128", "source_question_ids": ["awssysops-p2-q334"], "statement": "IAM user password policy configuration is the customer's responsibility under the AWS Shared Responsibility Model, since the customer controls their own IAM configuration.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-57118cc168c6", "source_question_ids": ["awssysops-p2-q334"], "statement": "AWS API endpoint SSL certificates are AWS's own responsibility to manage and rotate, not the customer's.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-69d423daef1c", "source_question_ids": ["awssysops-p2-q334"], "statement": "EBS encryption-at-rest algorithms and the underlying AWS Hypervisor software are implemented and maintained by AWS itself, even though the customer chooses whether to enable EBS encryption.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-babeb3d26661", "source_question_ids": ["awssysops-p2-q341"], "statement": "Under the AWS Shared Responsibility Model, guest operating system, network, and firewall configuration are the customer's responsibility.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-25859de42ea8", "source_question_ids": ["awssysops-p2-q341"], "statement": "Under the AWS Shared Responsibility Model, client-side data encryption and data integrity authentication are the customer's responsibility.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fc6c30f69db6", "source_question_ids": ["awssysops-p2-q341"], "statement": "Under the AWS Shared Responsibility Model, AWS data center access logs, hypervisor updates/configuration, and physical media destruction are AWS's responsibility, not the customer's, because the customer never has physical or hypervisor-level access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fdbbd5266274", "source_question_ids": ["awssysops-p2-q465"], "statement": "In an IAM resource-based policy, the entity specifying who is allowed to access the resource (an IAM user, role, AWS account, or federated user) is called the principal.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9f80090d8111", "source_question_ids": ["awssysops-p2-q465"], "statement": "\"Permission\", \"role\", and \"license\" are distractor terms for the IAM concept that names who is allowed to access a resource; the correct term is \"principal\".", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c7a39f5a2edc", "source_question_ids": ["awssysops-p2-q469"], "statement": "When configuring a virtual MFA device on a smartphone for an IAM user, physical access to that smartphone is required during the setup wizard itself, to scan the QR code or enter the secret key into the authenticator app.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-7b65cddf5f08", "source_question_ids": ["awssysops-p2-q469"], "statement": "Virtual MFA setup for an IAM user cannot be completed on one device and have the smartphone used later for authentication; the smartphone must be present during the wizard.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-526673e4cd12", "source_question_ids": ["awssysops-p2-q470"], "statement": "IAM can be used to grant access to Amazon DynamoDB resources and API actions by writing an IAM policy listing the permissions and attaching it to a user or role.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ab6974a49f7b", "source_question_ids": ["awssysops-p2-q473"], "statement": "Each individual statement inside the Statement array of an AWS IAM policy is a JSON block enclosed in braces.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f23d17c69bbb", "source_question_ids": ["awssysops-p2-q475", "awssysops-p2-q504"], "statement": "IAM stands for Identity and Access Management, where \"identity\" covers authentication (who is the user) and \"access\" covers authorization (what they are allowed to do).", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3e0dacfa0a59", "source_question_ids": ["awssysops-p2-q475"], "statement": "\"Amazon Identity and Authentication Mechanism\" and \"Amazon Integrated Access Management\" are plausible-but-wrong expansions of the IAM acronym.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5352c9d24aa5", "source_question_ids": ["awssysops-p2-q476"], "statement": "AWS IAM can be used to assign permissions determining who can manage or modify RDS resources, such as creating, describing, modifying, deleting, or tagging RDS DB instances and security groups.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0830dafb6b89", "source_question_ids": ["awssysops-p2-q482"], "statement": "AWS Security Token Service (STS) APIs are used within IAM to grant users temporary access to AWS resources via time-limited credentials.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-99abeff57f96", "source_question_ids": ["awssysops-p2-q482"], "statement": "\"AWS Security Transport Service\", \"AWS Security Tree Service\", and \"AWS Security Task Service\" are not real AWS service names; they are plausible-but-wrong expansions of the STS acronym, distinct from the real \"AWS Security Token Service\".", "status": "supported"}, {"claim_type": "rule", "conditions": ["user has two attached policies, one allowing and one explicitly denying the same action"], "confidence": "high", "id": "cl-6b01212444b0", "source_question_ids": ["awssysops-p2-q483"], "statement": "When an IAM user has one attached policy that allows an action and another attached policy that explicitly denies the same action, the explicit deny wins and the request is denied, regardless of which group the user accesses through.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-d67fc94a596f", "source_question_ids": ["awssysops-p2-q483"], "statement": "IAM policy evaluation logic denies by default, and an explicit Allow statement overrides that default (unless overridden in turn by an explicit Deny).", "status": "supported"}, {"claim_type": "rule", "conditions": ["resource churn is frequent", "group membership is stable"], "confidence": "high", "id": "cl-0faade9dc8f7", "source_question_ids": ["awssysops-p2-q484"], "statement": "When IAM group membership is stable but the underlying resources churn, the efficient IAM policy design tags resources and users by role and conditions the policy on that tag, rather than on instance ID or instance size.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-7228a9267a5e", "source_question_ids": ["awssysops-p2-q484"], "statement": "Conditioning an IAM policy on instance size or on instance ID requires constant policy updates as instances are deleted and replaced, making it inefficient for a frequently-churning fleet.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-19a5c6160efc", "source_question_ids": ["awssysops-p2-q484"], "statement": "Launching production and test instances in separate regions does not by itself address group-based IAM access control.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e2033cb0b988", "source_question_ids": ["awssysops-p2-q485"], "statement": "A virtual MFA device for an IAM user generates six-digit authentication codes compatible with the time-based one-time password (TOTP) standard.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-05fd47f6d5df", "source_question_ids": ["awssysops-p2-q486", "awssysops-p2-q518"], "statement": "The Action element of an IAM policy statement (or its complement NotAction) describes the specific action or actions that the statement allows or denies.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b03dc47f1be4", "source_question_ids": ["awssysops-p2-q489"], "statement": "A single CloudFormation template can create an IAM user, an S3 bucket, and the IAM policy binding them together so that the bucket is accessible only by that specific IAM user.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-fce8686e6bff", "source_question_ids": ["awssysops-p2-q493"], "statement": "Best practice for an EC2-hosted application calling AWS APIs (e.g., DynamoDB) is to attach an IAM role to the EC2 instance rather than embedding IAM user credentials in the application.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-8d2d25adfa8d", "source_question_ids": ["awssysops-p2-q493"], "statement": "An IAM role attached to an EC2 instance supplies temporary security credentials automatically, avoiding the credential storage and rotation risk of long-lived IAM user credentials.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-b125f0f80fa3", "source_question_ids": ["awssysops-p2-q494"], "statement": "A newly created IAM user has no password and no access key enabled by default; no credential type is auto-enabled for a new user.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-f966e77068b5", "source_question_ids": ["awssysops-p2-q494"], "statement": "An administrator must explicitly create a console password and/or an access key for an IAM user before that user has any usable credentials.", "status": "supported"}, {"claim_type": "exception", "conditions": ["creating an IAM user via the AWS console wizard"], "confidence": "medium", "id": "cl-c89deaf62bbf", "source_question_ids": ["awssysops-p2-q494"], "statement": "The AWS console's IAM user creation wizard forces an administrator to pick at least one credential type during the creation flow, but this UX requirement does not mean AWS auto-enables a credential type by default.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-71ce85890328", "source_question_ids": ["awssysops-p2-q496"], "statement": "The AWS Account IAM entity is the primary billing/ownership entity under which everything, including the root user, exists; the Unix \"root/superuser\" analogy applies to the root user, a distinct IAM concept from the account itself.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-ef6d410f3c45", "source_question_ids": ["awssysops-p2-q496"], "statement": "For the question of what the IAM \"AWS Account\" entity is similar to, community vote was unanimous for the option describing it as the primary billing entity, directly contradicting the sourced boxed answer that it is like a Unix root/superuser; this question is marked disputed.", "status": "conflicted"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-7cfbf7df16fa", "source_question_ids": ["awssysops-p2-q498"], "statement": "An IAM user cannot change their own password by default; an administrator must grant that permission via the password policy or an IAM policy statement.", "status": "supported"}, {"claim_type": "fact", "conditions": ["IAM user has been granted password-change permission"], "confidence": "high", "id": "cl-59643cebb1b3", "source_question_ids": ["awssysops-p2-q498"], "statement": "Once an IAM user has been granted permission to change their own password, they can do so from either the AWS console or the CLI/API, not just one of those interfaces.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-26ae446d3e61", "source_question_ids": ["awssysops-p2-q499"], "statement": "An AWS account alias must be globally unique and maps to exactly one AWS account ID, so the same alias (and therefore the same IAM sign-in URL) cannot be shared across multiple separate AWS accounts.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-cd822ba06a7c", "source_question_ids": ["awssysops-p2-q499"], "statement": "Consolidated billing does not merge AWS account IDs or IAM sign-in URLs across accounts, so it cannot be used to give multiple AWS accounts the same IAM login URL.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d8b422462288", "source_question_ids": ["awssysops-p2-q500"], "statement": "Among AWS Direct Connect's IAM policy condition keys, aws:CurrentTime is used for date/time conditions.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-49c88855c20f", "source_question_ids": ["awssysops-p2-q500"], "statement": "Among AWS Direct Connect's IAM policy condition keys, aws:SecureTransport is used for SSL-boolean conditions, aws:SourceIp is used for IP-address conditions, and aws:UserAgent is used for client-string conditions.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-01d13d166c33", "source_question_ids": ["awssysops-p2-q502"], "statement": "Password management permissions in IAM can be delegated by adding a user to a group whose attached policy grants permission to modify other users' IAM passwords, letting that user change another user's password without being an administrator.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a5adf66adce7", "source_question_ids": ["awssysops-p2-q503"], "statement": "IAM-based access control for AWS Billing and Cost Management can restrict access to invoices, detailed information about charges and account activity, budgets, payment methods, and credits — a broader set of controllable items than payment methods alone, invoices alone, or charge/activity information alone.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-63216c7fbbdf", "source_question_ids": ["awssysops-p2-q504"], "statement": "IAM's core purpose is to provide a mechanism to authenticate users and authorize what they can do when accessing AWS resources, not to integrate on-premises authentication protocols with the cloud.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f7c6f92d6a4d", "source_question_ids": ["awssysops-p2-q505"], "statement": "An IAM group is a collection of IAM users; assigning permissions at the group level manages access for all members at once instead of per-user.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-93f211582fe3", "source_question_ids": ["awssysops-p2-q506"], "statement": "An IAM user can belong to up to 10 groups by default, a quota that can be raised via a service quota increase request.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8e93d0ed2e04", "source_question_ids": ["awssysops-p2-q509"], "statement": "The IAM console sign-in URL format is https://<AWS_Account_ID>.signin.aws.amazon.com/console/ (or with an account alias substituted for the account ID), with the account identifier placed as a subdomain.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-de5f8deb26a0", "source_question_ids": ["awssysops-p2-q510"], "statement": "AWS IAM permissions can be assigned in two ways: as identity-based (attached to a user, group, or role) or as resource-based (attached directly to a resource such as an S3 bucket, Glacier vault, SNS topic, SQS queue, or KMS key).", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-21a70f021e6d", "source_question_ids": ["awssysops-p2-q512"], "statement": "Amazon RDS integrates with AWS IAM, a service that lets an organization create users and groups and assign unique security credentials to each user.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0b2d285cfa21", "source_question_ids": ["awssysops-p2-q513"], "statement": "The information within an IAM policy is described through a series of elements, including Version, Id, Statement, Sid, Effect, Principal, NotPrincipal, Action, NotAction, Resource, NotResource, and Condition.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-3812e5485c4b", "source_question_ids": ["awssysops-p2-q515"], "statement": "You can attach more than one inline policy to a single IAM user, role, or group; there is no one-policy cap and no region or VPC/GovCloud restriction on doing so.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-4eac6cb57db9", "source_question_ids": ["awssysops-p2-q515"], "statement": "The only constraint on attaching multiple inline policies to an IAM entity is a total aggregate character-size limit per entity: 2,048 characters for users, 10,240 for roles, and 5,120 for groups.", "status": "supported"}, {"claim_type": "rule", "conditions": ["policy has multiple condition operators, or multiple keys on one condition operator"], "confidence": "high", "id": "cl-0a3afce89cdc", "source_question_ids": ["awssysops-p2-q517"], "statement": "When an IAM policy has multiple condition operators, or multiple keys attached to a single condition operator, the conditions are evaluated with a logical AND — all must resolve to true to trigger the policy's Allow/Deny effect.", "status": "supported"}, {"claim_type": "exception", "conditions": ["single condition operator has multiple values for one key"], "confidence": "medium", "id": "cl-40a7e3f22b15", "source_question_ids": ["awssysops-p2-q517"], "statement": "A single IAM condition operator with multiple values for one key is evaluated with a logical OR, which is a different scenario from multiple condition operators or multiple keys (which use AND).", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3ebe914fa656", "source_question_ids": ["awssysops-p2-q518"], "statement": "A policy statement in an IAM policy document is built from the Effect, Action, Resource, and optionally Condition elements; \"Key\" is not itself a statement-level element but a nested field inside a Condition block.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bffa660d8950", "source_question_ids": ["awssysops-p2-q519"], "statement": "IAM roles can be assumed by external users authenticated via an identity provider compatible with SAML 2.0, enabling federated single sign-on into AWS.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-cb88f9355f7d", "source_question_ids": ["awssysops-p2-q520"], "statement": "AWS best practice is to avoid creating or using access keys for the root account.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f52e9d43a12f", "source_question_ids": ["awssysops-p2-q520"], "statement": "AWS best practice is to rotate IAM security credentials at regular intervals.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4aa643eaa4c1", "source_question_ids": ["awssysops-p2-q520"], "statement": "AWS best practice is to create individual IAM users rather than sharing credentials.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-52e3b55c2264", "source_question_ids": ["awssysops-p2-q520"], "statement": "AWS best practice is to enable MFA for privileged IAM users.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ac49172a2cc9", "source_question_ids": ["awssysops-p2-q520"], "statement": "Creating an access key and secret access key attached to the root account is not a secure credential-management practice.", "status": "supported"}, {"claim_type": "rule", "conditions": ["mobile application users need secure access to their own content in a shared S3 bucket"], "confidence": "high", "id": "cl-ab5724cc3fe6", "source_question_ids": ["awssysops-p2-q527"], "statement": "Amazon Cognito authenticates mobile application end users, directly or via federated identity providers, and vends temporary credentials tied to an IAM role, which scopes exactly what each user can access in a shared S3 bucket, typically via per-user prefixes.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-0f19e99dea2a", "source_question_ids": ["awssysops-p2-q527"], "statement": "AWS Organizations manages multi-account governance and plays no role in authenticating individual mobile application end users for S3 access.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-259136ebf6fe", "source_question_ids": ["awssysops-p2-q565"], "statement": "The iam:PassRole permission allows a user to attach a specified IAM role to a resource they create (such as an EC2 instance), letting that resource run with the role's permissions; it does not let the user themselves assume or switch into that role.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-c23f2e24f3fe", "source_question_ids": ["awssysops-p2-q565"], "statement": "AssumeRole is a distinct IAM mechanism from PassRole: AssumeRole lets a principal temporarily switch to and operate as a role, which is a different capability than what an iam:PassRole permission grants.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0094447aef70", "source_question_ids": ["awssysops-p2-q565"], "statement": "An IAM policy combining ec2:* (full EC2 access) with iam:PassRole scoped to a role-name prefix (e.g., arn:aws:iam::ACCOUNT:role/InfraTeam*) lets a user launch an EC2 instance and attach any role matching that prefix to it.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-deab9a53d3fe", "source_question_ids": ["awssysops-p2-q565"], "statement": "For a policy granting ec2:* plus iam:PassRole scoped to a role-name prefix, the question's boxed answer (describing restricted role-switching, i.e., AssumeRole semantics) conflicts with a unanimous community vote favoring a different answer, reflecting a documented PassRole/AssumeRole confusion in the source discussion.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-bebe136a0c96", "source_question_ids": ["awssysops-p2-q566"], "statement": "The s3:ListBucket action applies to the S3 bucket resource itself, not to individual objects, so granting it on an object-level ARN (ending in /*) does not actually grant permission to list the bucket's contents.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-3337a47ae979", "source_question_ids": ["awssysops-p2-q566"], "statement": "An S3 bucket policy statement must scope its Resource to the bucket-level ARN (without a trailing /*) in order to grant list-bucket permissions.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-79c6229c3086", "source_question_ids": ["awssysops-p2-q566"], "statement": "A bucket policy that grants read access only to the bucket resource itself, rather than to its objects, allows listing bucket contents but does not grant permission to read the actual object bytes.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a30320d35f30", "source_question_ids": ["awssysops-p2-q567"], "statement": "AWS CloudTrail records API activity across an AWS account, including changes made to resources.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-62648cb17958", "source_question_ids": ["awssysops-p2-q567"], "statement": "CloudTrail logs delivered to an S3 bucket can be shared with an external auditor via a scoped IAM policy granting read access, without granting broader account access such as Administrator permissions.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-f977a0a6e76c", "source_question_ids": ["awssysops-p2-q567"], "statement": "AWS Artifact provides access to compliance reports, not a history of account changes, so it is not suited to auditing unauthorized changes.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a87cb9ef7395", "source_question_ids": ["awssysops-p2-q567"], "statement": "Amazon Inspector surfaces vulnerability findings, not a change history, so it is not suited to auditing unauthorized changes.", "status": "supported"}, {"claim_type": "fact", "conditions": ["IAM policy denies API calls lacking MFA authentication"], "confidence": "high", "id": "cl-3a01fea028c7", "source_question_ids": ["awssysops-p3-1-q602"], "statement": "An IAM policy that denies API calls not authenticated with MFA relies on the aws:MultiFactorAuthPresent condition key.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fab912fba1f5", "source_question_ids": ["awssysops-p3-1-q602"], "statement": "API calls signed with a user's long-term IAM access keys carry no MFA information, so they never satisfy an aws:MultiFactorAuthPresent condition.", "status": "supported"}, {"claim_type": "rule", "conditions": ["temporary credentials obtained via sts:get-session-token with a valid MFA code"], "confidence": "high", "id": "cl-fdf721679d4d", "source_question_ids": ["awssysops-p3-1-q602"], "statement": "Temporary credentials obtained via sts:get-session-token while supplying a valid MFA code carry the aws:MultiFactorAuthPresent condition key, satisfying MFA-required policies for CLI/API calls.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f5656d78603b", "source_question_ids": ["awssysops-p3-1-q602"], "statement": "Logging into the AWS Management Console with MFA has no effect on whether separately-signed CLI API calls are considered MFA-authenticated.", "status": "supported"}, {"claim_type": "exception", "conditions": ["using temporary session credentials from sts:get-session-token"], "confidence": "high", "id": "cl-548f1439988e", "source_question_ids": ["awssysops-p3-1-q602"], "statement": "MFA is supported for AWS CLI use via temporary session credentials obtained with sts:get-session-token.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d6d0954978ea", "source_question_ids": ["awssysops-p3-1-q609"], "statement": "Granting cross-account access to specific resources is accomplished by creating an IAM role in the target account that trusts the source account, and letting the source account's IAM users assume that role via sts:AssumeRole.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-d641181778fa", "source_question_ids": ["awssysops-p3-1-q609"], "statement": "Referencing another account's resource ARNs directly in an IAM policy in the source account does not by itself grant cross-account access, because the target account's own trust/resource policies still gate it.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-eafcf1185507", "source_question_ids": ["awssysops-p3-1-q609"], "statement": "On-premises Active Directory federation and Amazon Cognito Federated Identities are external-identity federation mechanisms and are not the standard pattern for granting access between two AWS accounts.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-242e412f3db9", "source_question_ids": ["awssysops-p3-1-q637", "awssysops-p3-1-q760", "awssysops-p3-1-q800"], "statement": "Attaching an IAM role to EC2 instances at launch (or to already-running instances) provides an application with temporary, automatically-rotated credentials scoped to only the needed permissions, with no long-lived secret stored on the instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-81fe9b62c21a", "source_question_ids": ["awssysops-p3-1-q637", "awssysops-p3-1-q800"], "statement": "Embedding a static IAM user access key directly in application code or in an AMI creates a long-lived credential that can leak and does not rotate automatically.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-95924dcc0c03", "source_question_ids": ["awssysops-p3-1-q637"], "statement": "AWS Shield is a DDoS-protection service and has no bearing on securing file transfers between EC2 and S3.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2039d4f60b98", "source_question_ids": ["awssysops-p3-1-q661"], "statement": "Configuring SAML 2.0 federated access to AWS requires creating an IAM role whose trust policy lists the SAML provider as the principal.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-e2bd523539b5", "source_question_ids": ["awssysops-p3-1-q661"], "statement": "Configuring SAML 2.0 federated access to AWS requires defining, in the identity provider, assertions that map IdP users/groups to IAM roles.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b3443c7d7873", "source_question_ids": ["awssysops-p3-1-q661"], "statement": "SAML federation to AWS does not require creating individual IAM users for each federated identity provider user, since federation issues temporary role credentials instead.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-454834273b49", "source_question_ids": ["awssysops-p3-1-q696"], "statement": "In IAM policy evaluation, an explicit Deny always overrides an Allow for the same action and resource.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Deny statement uses a NotAction element"], "confidence": "high", "id": "cl-6c19aed0fc30", "source_question_ids": ["awssysops-p3-1-q696"], "statement": "A Deny statement that uses NotAction with a list of actions denies every action except the ones listed in that NotAction element.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-3bd9df2b8fbe", "source_question_ids": ["awssysops-p3-1-q696"], "statement": "An action not granted by any applicable Allow statement is denied by default via implicit deny.", "status": "supported"}, {"claim_type": "fact", "conditions": ["policy includes Allow rds:Describe*, Allow ec2:* conditioned on region, and Deny NotAction[ec2:*, s3:GetObject]"], "confidence": "medium", "id": "cl-1615c290d580", "source_question_ids": ["awssysops-p3-1-q696"], "statement": "In a policy containing Allow rds:Describe*, Allow ec2:* conditioned on region, and an unconditional Deny with NotAction[ec2:*, s3:GetObject], the rds:DescribeDBInstances action is actually denied overall because it falls within that NotAction Deny, which overrides the earlier Allow.", "status": "conflicted"}, {"claim_type": "fact", "conditions": ["policy includes Allow rds:Describe*, Allow ec2:* conditioned on region, and Deny NotAction[ec2:*, s3:GetObject]"], "confidence": "medium", "id": "cl-6630e640095d", "source_question_ids": ["awssysops-p3-1-q696"], "statement": "In a policy containing Allow rds:Describe*, Allow ec2:* conditioned on region us-east-1, and an unconditional Deny with NotAction[ec2:*, s3:GetObject], the ec2:DescribeInstances action in us-east-1 is allowed because it is granted by the region-conditioned ec2:* Allow and is exempt from the NotAction Deny since it is an ec2:* action.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a2eb0f7372fc", "source_question_ids": ["awssysops-p3-1-q704"], "statement": "Federating an on-premises LDAP directory with IAM via SAML lets users authenticate with existing LDAP credentials and assume IAM roles mapped from their LDAP group membership, without duplicating identities in AWS.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3091b2a7afc3", "source_question_ids": ["awssysops-p3-1-q704"], "statement": "Replicating an on-premises LDAP directory into a new AWS Directory Service Simple AD duplicates identity management rather than reusing existing credentials.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-bd914d4b6ea2", "source_question_ids": ["awssysops-p3-1-q704"], "statement": "Using a Lambda function to read LDAP groups and automate creation of IAM users creates and maintains separate AWS-native credentials instead of federating existing LDAP credentials.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9783a10117b2", "source_question_ids": ["awssysops-p3-1-q704"], "statement": "AWS Direct Connect provides network connectivity and does not address authentication or authorization.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-9f7dcea5909b", "source_question_ids": ["awssysops-p3-1-q758"], "statement": "An IAM account password policy can enforce password expiration, forcing IAM users to rotate their passwords on a defined schedule.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-4a921dca519f", "source_question_ids": ["awssysops-p3-1-q758"], "statement": "Enabling MFA for IAM users has no effect on password rotation.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c2d297c3e12f", "source_question_ids": ["awssysops-p3-1-q758"], "statement": "Deactivating and re-creating IAM users, or re-creating identity federation, every time credential rotation is required is a disruptive, manual substitute for a password policy's built-in expiration setting.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ce8c9952278f", "source_question_ids": ["awssysops-p3-1-q760"], "statement": "An IAM policy is a permissions document that must be attached to a principal such as a user, group, or role; it is not itself a principal that an application can be independently granted.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-023a3696ef2d", "source_question_ids": ["awssysops-p3-1-q760"], "statement": "An IAM group is intended for organizing human IAM users, not for granting permissions to a compute resource such as an application running on EC2.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a054eb08e121", "source_question_ids": ["awssysops-p3-1-q760"], "statement": "Creating a long-lived IAM user for an application reintroduces static, rotation-prone credential management that role-based EC2 access is designed to avoid.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-a95cd11a1f71", "source_question_ids": ["awssysops-p3-1-q763"], "statement": "In AWS SAML federation to the Management Console, the role attribute in the SAML assertion is mapped to an IAM role, and that role's attached IAM policies determine the federated user's access to AWS resources.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-50182e640d3e", "source_question_ids": ["awssysops-p3-1-q763"], "statement": "AWS has no native mechanism to map a SAML assertion attribute directly to an IAM group, an IAM policy, or an individual IAM user for console federation purposes.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-5e411c6cd24e", "source_question_ids": ["awssysops-p3-1-q800"], "statement": "An S3 bucket policy that grants access to all EC2 instances in general is too broad and not scoped to a specific application's needs.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-9f550bb37420", "source_question_ids": ["awssysops-p3-1-q804"], "statement": "Under the AWS shared responsibility model, the customer is responsible for creating IAM policies and attaching them to IAM roles ('security in the cloud'), while AWS is responsible for the underlying IAM service infrastructure ('security of the cloud').", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4c2b20ac136c", "source_question_ids": ["awssysops-p3-1-q821"], "statement": "The s3:GetObject permission allows downloading an object, and the s3:DeleteObject permission allows deleting an object; both are object-level actions scoped to a bucket's object ARN.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d30f1aa53360", "source_question_ids": ["awssysops-p3-1-q821"], "statement": "Getting an S3 bucket's region requires the s3:GetBucketLocation permission, which is distinct from the object-level actions s3:GetObject, s3:GetObjectVersion, s3:PutObject, and s3:DeleteObject.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-1f07ef411609", "source_question_ids": ["awssysops-p3-1-q821"], "statement": "Deleting an S3 bucket itself requires the s3:DeleteBucket permission scoped to the bucket-level ARN (without the /* object suffix), which is distinct from and not implied by having s3:DeleteObject on the bucket's objects.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bf176dbf0506", "source_question_ids": ["awssysops-p3-1-q821"], "statement": "Listing all S3 buckets in an account requires the account-wide s3:ListAllMyBuckets permission, which is distinct from object-level or single-bucket permissions.", "status": "supported"}, {"claim_type": "rule", "conditions": ["instances already have specific tags applied"], "confidence": "medium", "id": "cl-bd808fa45485", "source_question_ids": ["awssysops-p3-1-q845"], "statement": "An IAM policy with a Condition element keyed on an EC2 instance tag, attached to the relevant IAM users or groups, implements tag-scoped control over which users can access which tagged instances via AWS Systems Manager Session Manager.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e613b67ee3dc", "source_question_ids": ["awssysops-p3-1-q845"], "statement": "An IAM role attached to EC2 instances is an operational prerequisite that grants the SSM agent its baseline permissions, required for AWS Systems Manager Session Manager to function at all, but by itself does not implement tag-scoped control over which users can access which instances.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-29ed46b3aff1", "source_question_ids": ["awssysops-p3-1-q878"], "statement": "The standard pattern for cross-account role assumption places the trust policy on the IAM role being assumed, in the target account, naming the source account's principal (such as a group) as a trusted entity.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-3bfd43aaaa8b", "source_question_ids": ["awssysops-p3-1-q878"], "statement": "The standard pattern for cross-account role assumption grants the sts:AssumeRole permission via a permission policy attached to the calling principal in the source account, not on the role being assumed in the target account.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-aa717ae6e171", "source_question_ids": ["awssysops-p3-1-q878"], "statement": "sts:PassRole is not the permission used to grant a principal the ability to assume a role in another account.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-03999c5dde72", "source_question_ids": ["awssysops-p3-1-q912"], "statement": "sts:AssumeRoleWithSAML is the STS API call that exchanges a SAML 2.0 assertion for temporary AWS credentials, enabling federated programmatic access such as AWS CLI usage.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-711dbcf67d37", "source_question_ids": ["awssysops-p3-1-q912"], "statement": "sts:AssumeRole requires the caller to already hold valid AWS credentials for another IAM principal; it cannot accept a SAML assertion directly.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-3d92f251a4fe", "source_question_ids": ["awssysops-p3-1-q912"], "statement": "sts:AssumeRoleWithWebIdentity is for OIDC/web-identity providers such as Google, Facebook, or Amazon Cognito, not for SAML assertions.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9aea187cf794", "source_question_ids": ["awssysops-p3-1-q912"], "statement": "sts:GetFederationToken is a legacy, less-capable federation mechanism unrelated to SAML assertions.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-9c3eb028c430", "source_question_ids": ["awssysops-p3-1-q931"], "statement": "An EC2 instance profile can only be associated with an IAM role, never directly with an IAM user.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4b6dfe03ddd5", "source_question_ids": ["awssysops-p3-1-q931"], "statement": "To let the CloudWatch Logs agent on an EC2 instance deliver logs, create an IAM role with the needed CloudWatch Logs permissions, wrap it in an instance profile, and associate that instance profile with the EC2 instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-32359e49c3dd", "source_question_ids": ["awssysops-p3-1-q931"], "statement": "Security group or network ACL rules allowing inbound traffic on port 80 affect inbound web traffic to an instance, not the CloudWatch Logs agent's own outbound API calls to the CloudWatch Logs service.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-iam--m-1", "title": "Every AWS API call is a signed request from a principal, evaluated against policies, default-deny", "purpose": "Answer IAM questions by asking two things in order: (1) who is the caller and how did it get credentials (long-lived IAM user secrets vs temporary role credentials from STS), and (2) given those credentials, do the attached policies produce an Allow without any matching explicit Deny?", "mechanism": "Authentication: a caller presents credentials. IAM users hold long-lived secrets (console password, access keys) that an administrator must explicitly create and that must be rotated by hand. Roles hold no secrets of their own; a principal obtains short-lived, automatically rotated credentials from STS by assuming the role: an EC2 instance through its instance profile (delivered via instance metadata), a mobile app user through web identity / Cognito, a corporate user through SAML (AssumeRoleWithSAML), or another account's user through sts:AssumeRole against the role's trust policy. Authorization: the request starts at implicit deny; an Allow in an identity-based policy (attached to a user, group, or role; groups pass their policies down to every member) or a resource-based policy (bucket policy etc., naming a Principal) can grant it, but any matching explicit Deny overrides every Allow. Each statement only matches when its Action applies to the Resource ARN type (bucket-level vs object-level for S3) and all of its Conditions are true (AND across keys/operators, OR across values of one key).", "predict_prompt": "An application on an EC2 instance needs to write to DynamoDB, and a teammate proposes creating an IAM user and putting its access keys in the AMI. Before reading on: what should you do instead, and which two separate things must be true for the DynamoDB write to succeed?", "invariants": ["Workloads (EC2 apps, Auto Scaling instances, mobile apps, federated or cross-account users) get permissions through a role and temporary STS credentials, never through embedded IAM user or root keys.", "An instance profile can only wrap an IAM role, never an IAM user.", "A role's permissions must cover the service actually being called; an EC2-only role gives no DynamoDB access.", "Explicit Deny beats any Allow; anything not explicitly allowed is implicitly denied.", "A group is a container for IAM users only; it cannot be assumed and cannot be attached to a compute resource.", "A new IAM user has no password and no access keys until an administrator creates them."], "limits": ["This model does not cover database-engine authentication inside RDS, which is separate from IAM permissions to manage RDS.", "S3 bucket ACLs can only grant to AWS accounts or predefined groups, not to individual IAM users.", "Some source questions here are disputed (the ${aws:username} credential-scope questions and the PassRole vs AssumeRole question); answer from the mechanism, not the boxed key."], "cues": ["'application on EC2', 'instances in an Auto Scaling group', 'without storing credentials' -> IAM role via instance profile", "'mobile app users', 'Google/Facebook/Amazon login' -> web identity federation / Cognito with a role", "'existing corporate directory', 'LDAP/AD', 'SAML' -> federation into a role, no per-user IAM users", "'another AWS account' -> role in the target account with a trust policy, caller uses sts:AssumeRole", "'many employees by department' -> IAM users organized in IAM groups", "'one Allow and one Deny' -> explicit Deny wins"], "claim_ids": ["cl-75ab3e8821db", "cl-6c0e7c9cf67b", "cl-4255e3ab33bd", "cl-f75bacb9b7a3", "cl-827554316d65", "cl-242e412f3db9", "cl-9c3eb028c430", "cl-4b6dfe03ddd5", "cl-bf8c5a59c953", "cl-ab5724cc3fe6", "cl-bffa660d8950", "cl-03999c5dde72", "cl-d6d0954978ea", "cl-0830dafb6b89", "cl-b125f0f80fa3", "cl-f966e77068b5", "cl-de5f8deb26a0", "cl-033da3105a54", "cl-f7c6f92d6a4d", "cl-f31f2112bc46", "cl-454834273b49", "cl-3bd9df2b8fbe", "cl-d67fc94a596f", "cl-6b01212444b0", "cl-0a3afce89cdc", "cl-40a7e3f22b15", "cl-de918035cefd", "cl-24cb589e2463", "cl-0294b798e14c", "cl-fad7ade99c77", "cl-9b4cadd86acf", "cl-deab9a53d3fe"]}, "contrastSet": {"id": "aws-sysops-service-iam--cs-1", "subjects": ["IAM role (temporary STS credentials)", "IAM user with access keys", "IAM group"], "dimensions": ["Who it represents", "Credentials it carries", "Rotation", "Can be attached to an EC2 instance", "Typical correct use"], "shared_traits": ["All three can carry identity-based IAM policies.", "All are evaluated with the same default-deny and explicit-Deny-wins logic."], "matrix": {"Who it represents": {"IAM role (temporary STS credentials)": "Whoever assumes it: EC2 instance, federated, web-identity, or cross-account user", "IAM user with access keys": "One specific person or app identity in this account", "IAM group": "A set of IAM users; not a principal itself"}, "Credentials it carries": {"IAM role (temporary STS credentials)": "None stored; short-lived credentials issued by STS on assume", "IAM user with access keys": "Long-lived password and/or access keys, created by an admin", "IAM group": "None; members use their own user credentials"}, "Rotation": {"IAM role (temporary STS credentials)": "Automatic", "IAM user with access keys": "Manual; keys leak if embedded in code, AMIs, or User Data", "IAM group": "Not applicable"}, "Can be attached to an EC2 instance": {"IAM role (temporary STS credentials)": "Yes, via an instance profile", "IAM user with access keys": "No; only its keys can be copied onto the instance", "IAM group": "No"}, "Typical correct use": {"IAM role (temporary STS credentials)": "Apps on EC2/ASG, mobile apps, SAML/LDAP federation, cross-account access", "IAM user with access keys": "Individual humans signing in to this account", "IAM group": "Grant one policy to many users, e.g. by department"}}, "decision_rule": "Ask whether the caller is a named human who signs in directly to this account, or anything else (a workload on AWS compute, an app's end users, a corporate or web identity, or another account). Named humans in this account: IAM user, with permissions managed through an IAM group. Anything else: IAM role with temporary STS credentials.", "boundary_flip": "If 'grant 50 developers in the Engineering department the same S3 permissions' becomes 'grant the application those 50 developers deploy to EC2 the same S3 permissions', the answer flips from IAM group to IAM role attached through an instance profile. If those same developers already sign in through the company's SAML/LDAP directory, it flips to a federated role and no IAM users are needed.", "strongest_distractor_failure": "Create an IAM user and put its access keys in the application, AMI, or User Data. It does work, but it plants long-lived static secrets that have to be rotated by hand and can leak. A role gives the same permissions with temporary, automatically rotated credentials and nothing stored on the instance.", "exceptions": ["An instance role is still needed for SSM Session Manager to work, but tag-scoped control over which users can open sessions comes from IAM user/group policies with tag conditions.", "iam:PassRole lets a user attach a role to a resource they launch; it does not let the user assume the role (that is sts:AssumeRole)."], "claim_ids": ["cl-4255e3ab33bd", "cl-fce8686e6bff", "cl-8d2d25adfa8d", "cl-242e412f3db9", "cl-81fe9b62c21a", "cl-37bdb307fb47", "cl-a054eb08e121", "cl-6c0e7c9cf67b", "cl-9c3eb028c430", "cl-994c952cc69d", "cl-023a3696ef2d", "cl-48a0a8b957ca", "cl-ab947da4766c", "cl-f7c6f92d6a4d", "cl-39d8ca271fc8", "cl-b3443c7d7873", "cl-a2eb0f7372fc", "cl-d6d0954978ea", "cl-bf8c5a59c953", "cl-b125f0f80fa3", "cl-e613b67ee3dc", "cl-bd808fa45485", "cl-259136ebf6fe", "cl-c23f2e24f3fe"]}, "scenarioFamily": {"id": "aws-sysops-service-iam--sf-1", "canonical": {"prompt": "An application running on an EC2 instance needs to write records to a DynamoDB table. The instance currently has no IAM role attached, and a teammate suggests creating an IAM user, generating an access key, and baking that access key into the AMI the instances launch from. What should you do instead, and why?", "expected_answer": ["Create an IAM role that grants the DynamoDB permissions the application needs, and attach that role to the EC2 instance (via an instance profile) instead of embedding IAM user credentials."], "reasoning": "Workloads on EC2 should get permissions through a role rather than through embedded IAM user credentials. Attaching a role to the instance gives the application temporary, automatically-rotated credentials delivered via the instance metadata service, with no long-lived secret stored on the instance, and that role's permissions must actually cover DynamoDB for the write to succeed.", "distractor_analysis": "Creating an IAM user and baking its access key into the AMI does work mechanically -- the app can authenticate -- but it plants a long-lived static secret that must be rotated by hand and can leak if the AMI or code is exposed, which is exactly the anti-pattern the role-based approach avoids.", "claim_ids": ["cl-4255e3ab33bd", "cl-f75bacb9b7a3", "cl-37bdb307fb47", "cl-9c3eb028c430"], "difficulty": "easy", "importance": "high"}, "variants": [{"variant_type": "boundary", "changed_condition": "The EC2 instance already has an IAM role attached via an instance profile, but that role's policy only grants ec2:* actions -- it has no DynamoDB permissions at all.", "prompt": "The same EC2-hosted application already has an IAM role attached through an instance profile, and that role's only policy grants ec2:* actions. The application still fails every time it tries to write to DynamoDB. What is wrong, and what must change?", "expected_answer": ["The write still fails: an EC2-only role gives no DynamoDB access, so the role's policy must be updated to also grant the needed DynamoDB permissions (e.g. dynamodb:PutItem) before the write will succeed."], "reasoning": "Having a role attached is necessary but not sufficient -- the role's permissions must cover the service actually being called. An ec2:*-only policy grants nothing on DynamoDB, so the write keeps failing until DynamoDB permissions are added to that same role; no new role or user is needed.", "claim_ids": ["cl-827554316d65", "cl-4255e3ab33bd"], "difficulty": "medium", "importance": "high"}, {"variant_type": "irrelevant-detail", "changed_condition": "The instance also sits in a public subnet with a public IP address and belongs to a security group that allows outbound HTTPS to 0.0.0.0/0; the DynamoDB-write requirement is otherwise unchanged.", "prompt": "Same EC2-hosted application needing to write to DynamoDB, still with no IAM role attached and the teammate's AMI-embedded-access-key suggestion on the table. The instance happens to live in a public subnet with a public IP and a security group permitting outbound HTTPS to anywhere. Does that change what you should do?", "expected_answer": ["Create an IAM role that grants the DynamoDB permissions the application needs, and attach that role to the EC2 instance (via an instance profile) instead of embedding IAM user credentials."], "reasoning": "Public IP, subnet placement, and outbound security group rules only affect network reachability; they say nothing about how the instance authenticates to the DynamoDB API. The authentication choice is unchanged: a role attached via an instance profile, not an embedded IAM user access key.", "claim_ids": ["cl-4255e3ab33bd", "cl-f75bacb9b7a3", "cl-37bdb307fb47"], "difficulty": "easy", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "The teammate pushes back, pointing out that the IAM-user-with-embedded-access-key approach is already implemented and does successfully let the application write to DynamoDB today, and asks why that isn't good enough to just ship.", "prompt": "The teammate has already wired up an IAM user and embedded its access key in the AMI, and confirms the application is successfully writing to DynamoDB right now with that setup. They argue it works, so there's no need to change it. How do you respond?", "expected_answer": ["Create an IAM role that grants the DynamoDB permissions the application needs, and attach that role to the EC2 instance (via an instance profile) instead of embedding IAM user credentials."], "reasoning": "That it currently works is not the deciding factor: embedding a static IAM user access key in the AMI is a long-lived secret that must be rotated by hand and can leak, which is a strictly less secure practice than attaching a role. The recommendation to move to an instance role is unchanged regardless of whether the insecure approach happens to function today.", "distractor_analysis": "\"It already works\" is a strong-sounding but irrelevant justification -- functioning today says nothing about rotation risk or leak exposure, which is the actual axis the role-based recommendation is evaluated on.", "claim_ids": ["cl-37bdb307fb47", "cl-4255e3ab33bd", "cl-f75bacb9b7a3"], "difficulty": "medium", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The compute is now a fleet of instances in an Auto Scaling group (not a single EC2 instance), and the service being called is CloudWatch's PutMetricData API instead of DynamoDB.", "prompt": "Instances launched by an Auto Scaling group need to call the CloudWatch PutMetricData API to publish custom metrics. A teammate again proposes creating an IAM user and distributing its access key to each instance via User Data. What is the AWS-recommended approach here?", "expected_answer": ["Attach an IAM role (with the needed CloudWatch PutMetricData permission) to the Auto Scaling group's launch configuration, instead of distributing IAM user credentials to the instances."], "reasoning": "The same role-over-embedded-credentials pattern transfers from a single EC2 instance calling DynamoDB to a whole Auto Scaling group calling CloudWatch: attaching an IAM role to the launch configuration lets every instance in the group authenticate with credentials that are automatically rotated and delivered via the instance metadata service, instead of distributing and manually rotating a shared IAM user's static secret.", "claim_ids": ["cl-75ab3e8821db", "cl-6c0e7c9cf67b", "cl-81c2f9cee3ef"], "difficulty": "medium", "importance": "medium"}]}, "issues": [{"type": "unsupported-generation", "severity": "high", "description": "The contrast set's first exception states as settled fact that an instance role is a prerequisite for SSM Session Manager while tag-scoped control comes from IAM user/group policies with tag conditions. Both claims it rests on (cl-e613b67ee3dc, cl-bd808fa45485, from awssysops-p3-1-q845) are marked 'conflicted', so the source disagrees on which mechanism is the answer. The synthesis settles the dispute silently and does not flag it.", "related_entity_ids": ["aws-sysops-service-iam--cs-1", "cl-bd808fa45485", "cl-e613b67ee3dc"]}, {"type": "contradiction", "severity": "high", "description": "PassRole vs AssumeRole (awssysops-p2-q565): cl-deab9a53d3fe records that the boxed answer (restricted role-switching, i.e. AssumeRole semantics) conflicts with a unanimous community vote. Yet cl-259136ebf6fe, cl-c23f2e24f3fe and cl-0094447aef70 from the same question are marked 'supported', and they assert the community reading. The contrast set's second exception then presents 'iam:PassRole ... does not let the user assume the role' as settled, with no dispute flag. The same source question supports opposite answers, and the dispute should be flagged rather than settled.", "related_entity_ids": ["aws-sysops-service-iam--cs-1", "cl-deab9a53d3fe", "cl-259136ebf6fe", "cl-c23f2e24f3fe", "cl-0094447aef70"]}, {"type": "contradiction", "severity": "high", "description": "${aws:username} scoping (awssysops-p1-q126, awssysops-p1-q255): cl-c19fe632dec5 is marked 'supported' and cites both questions for the self-scoping reading. But cl-9b4cadd86acf (conflicted) records that q126's boxed answer says the policy grants rights over all IAM users' credentials. cl-8c00c68ae6a5 (needs-review) records that every answer choice in q255 assumes the 'all IAM users' reading. So the source questions disagree with the claim cited as supported by them.", "related_entity_ids": ["cl-c19fe632dec5", "cl-9b4cadd86acf", "cl-8c00c68ae6a5", "aws-sysops-service-iam--m-1"]}, {"type": "ambiguity", "severity": "medium", "description": "The mental model's limits tell the learner to 'answer from the mechanism, not the boxed key' for the disputed ${aws:username} and PassRole/AssumeRole questions. That resolves the source disputes by fiat instead of leaving them flagged as unresolved, so the learner cannot tell which answer the exam key expects.", "related_entity_ids": ["aws-sysops-service-iam--m-1", "cl-9b4cadd86acf", "cl-deab9a53d3fe"]}, {"type": "contradiction", "severity": "medium", "description": "Cross-account role assumption (awssysops-p3-1-q878): cl-29ed46b3aff1 (trust policy on the target-account role), cl-3bfd43aaaa8b (sts:AssumeRole permission on the source-account principal) and cl-aa717ae6e171 are all 'conflicted'. The mental model's mechanism and its cue \"'another AWS account' -> role in the target account with a trust policy, caller uses sts:AssumeRole\" state this pattern as settled, using only q609 (cl-d6d0954978ea). Neither mentions the q878 dispute in limits.", "related_entity_ids": ["aws-sysops-service-iam--m-1", "cl-29ed46b3aff1", "cl-3bfd43aaaa8b", "cl-aa717ae6e171", "cl-d6d0954978ea"]}, {"type": "contradiction", "severity": "medium", "description": "NotAction Deny evaluation (awssysops-p3-1-q696): cl-1615c290d580 (rds:DescribeDBInstances denied by the NotAction Deny) and cl-6630e640095d (ec2:DescribeInstances allowed in us-east-1) are 'conflicted', so the source answer disagrees with the explicit-Deny-wins reading. Meanwhile cl-454834273b49, cl-6c19aed0fc30 and cl-3bd9df2b8fbe from the same question are 'supported', and the mental model's 'Explicit Deny beats any Allow' invariant leaves this dispute unflagged.", "related_entity_ids": ["cl-1615c290d580", "cl-6630e640095d", "cl-454834273b49", "cl-6c19aed0fc30", "aws-sysops-service-iam--m-1"]}, {"type": "contradiction", "severity": "medium", "description": "Deny-with-condition troubleshooting (awssysops-p2-q333): cl-e7acc0fced5f (Deny with StringNotLike on aws:userID) and cl-f2613b08406b (narrowing the Allow does not fix the block) are 'conflicted'. But cl-f31f2112bc46 cites q333 alongside q483 as 'supported'. The source question disagrees on its answer, and that dispute is not reflected on the supported claim it feeds.", "related_entity_ids": ["cl-e7acc0fced5f", "cl-f2613b08406b", "cl-f31f2112bc46"]}, {"type": "contradiction", "severity": "medium", "description": "Shared responsibility (awssysops-p2-q334): cl-723c4219b128 (IAM password policy configuration is the customer's responsibility) is 'conflicted', which means the source answer for q334 disagrees. Other claims from the same question (cl-61564b0e94ae, cl-57118cc168c6, cl-69d423daef1c) and related claims from q322/q804 (cl-6cd4c4a80e86, cl-9f550bb37420) are 'supported' and imply the same customer-side reading. The dispute is unresolved.", "related_entity_ids": ["cl-723c4219b128", "cl-6cd4c4a80e86", "cl-9f550bb37420"]}, {"type": "contradiction", "severity": "medium", "description": "'AWS Account' entity analogy (awssysops-p2-q496): cl-ef6d410f3c45 records that a unanimous community vote contradicts the boxed answer (Unix root/superuser). cl-71ce85890328 then asserts the community reading (primary billing entity) as a fact. Both are 'conflicted', and the question is unresolved. Separately, cl-ef6d410f3c45 is typed 'distractor' but is a meta-statement about vote shares, not a distractor.", "related_entity_ids": ["cl-71ce85890328", "cl-ef6d410f3c45"]}, {"type": "unsupported-generation", "severity": "medium", "description": "cl-93f211582fe3 says the 10-groups-per-IAM-user quota 'can be raised via a service quota increase request'. AWS documents groups-per-user (10) as a fixed, non-adjustable IAM quota, and nothing in the claim set supports the increase part.", "related_entity_ids": ["cl-93f211582fe3"]}, {"type": "stale-risk", "severity": "medium", "description": "cl-33aaba1b1261 states the IAM limits as of when the question was written: 100 groups per account and 250 roles per account. Current AWS defaults are higher (e.g., 300 groups and 1,000 roles per account, both adjustable), so the figures are stale. The claim is already marked needs-review.", "related_entity_ids": ["cl-33aaba1b1261"]}, {"type": "ambiguity", "severity": "low", "description": "cl-821b7e1a059f says self-service password change 'must be explicitly enabled in the account's password policy', which implies that is the only route. cl-7cfbf7df16fa says it can be granted via the password policy or an IAM policy statement (iam:ChangePassword). The two defaults disagree on whether the password policy is the only mechanism.", "related_entity_ids": ["cl-821b7e1a059f", "cl-7cfbf7df16fa", "cl-22bc6e89d2d8"]}, {"type": "stale-risk", "severity": "low", "description": "cl-c89deaf62bbf says the console's IAM user creation wizard forces the administrator to pick at least one credential type. The current console lets you create a user with no console access and no access keys, so this UI behavior may be out of date.", "related_entity_ids": ["cl-c89deaf62bbf"]}], "sourceQuestionCount": 85}], "sources": {"kind": "locked", "file": "aws-sysops-service-iam-vgjm.sources.enc.js"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam. The slice bodies (mental model, claims,
+  // etc.) ride inline in BUNDLE; only sourceQuestions live in sibling files,
+  // loaded on demand via injected <script> tags (fetch/XHR can't read a
+  // sibling under file:// -- each file:// resource is its own origin). ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: s.sourceQuestionCount || 0 };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function claimListItemHtml(c) {
+    var status = c.status || 'status unknown';
+    return safe`<li><span class="badge status-${status.replace(/\s+/g, '-')}">${status.replace(/-/g, ' ')}</span><span>${c.statement}</span>${raw(markControlHtml('claim:' + c.id))}</li>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`
+      <details class="claims">
+        <summary>Supporting claims <span class="tally">${claims.length}</span></summary>
+        <ul class="citations">${raw(claims.map(claimListItemHtml).join(''))}</ul>
+      </details>`;
+  }
+  function truncate(text, max) {
+    text = text || '';
+    return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, marks: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        marks: parsed.marks && typeof parsed.marks === 'object' ? parsed.marks : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  // ---------- confidence marks: the learner's own "flag this for review"
+  // priority on a claim or source question -- distinct from a claim's
+  // generated `confidence` field and Practice's self-reported `confidence`
+  // radio, so this one is named `marks` to avoid colliding with either. ----------
+  var MARK_LEVELS = ['low', 'medium', 'high'];
+
+  function markControlHtml(key) {
+    var active = STATE.marks[key];
+    return safe`<span class="mark-control" data-mark-key="${key}">${raw(MARK_LEVELS.map(function (level) {
+      var isActive = active === level;
+      return safe`<button type="button" class="mark-dot mark-${level}${raw(isActive ? ' is-active' : '')}" data-mark-value="${level}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Mark ${level} priority"></button>`;
+    }).join(''))}</span>`;
+  }
+
+  function handleMarkClick(event) {
+    var dot = event.target.closest('.mark-dot');
+    if (!dot) return;
+    var key = dot.closest('.mark-control').getAttribute('data-mark-key');
+    var value = dot.getAttribute('data-mark-value');
+    if (STATE.marks[key] === value) delete STATE.marks[key];
+    else STATE.marks[key] = value;
+    saveState();
+    navigate();
+  }
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private or incognito mode?). '
+        + 'Progress will not be saved after this tab closes, so export it before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- one-way revision export: groups everything currently marked
+  // by level (low, then medium, then high) into a Markdown file. Never
+  // re-imported, unlike exportProgress's JSON. ----------
+  function exportRevisionNotes() {
+    var questions = (SOURCES.status === 'ready' ? SOURCES.bySlice : {})[CURRENT.contentSet.id] || [];
+    var claimsById = {};
+    (CURRENT.claims || []).forEach(function (c) { claimsById[c.id] = c; });
+
+    var byLevel = { low: [], medium: [], high: [] };
+    Object.keys(STATE.marks).forEach(function (key) {
+      var level = STATE.marks[key];
+      if (byLevel[level]) byLevel[level].push(key);
+    });
+
+    var lines = ['# Revision notes: ' + CURRENT.contentSet.facet.value, ''];
+    MARK_LEVELS.forEach(function (level) {
+      var keys = byLevel[level];
+      if (!keys.length) return;
+      lines.push('## ' + level.charAt(0).toUpperCase() + level.slice(1) + ' priority', '');
+      keys.forEach(function (key) {
+        var sepIndex = key.indexOf(':');
+        var kind = key.slice(0, sepIndex);
+        var id = key.slice(sepIndex + 1);
+        if (kind === 'claim') {
+          var claim = claimsById[id];
+          lines.push('- ' + (claim ? claim.statement : '(claim ' + id + ' no longer available)'), '');
+        } else if (kind === 'question') {
+          var q = questions.find(function (item) { return item.id === id; });
+          if (!q) {
+            lines.push('### ' + id, '', '(question details unavailable -- open Explore Sources to load question data)', '');
+            return;
+          }
+          lines.push('### ' + q.id, '', q.stem || '', '');
+          (q.choices || []).forEach(function (c) {
+            var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+            lines.push('- ' + c.letter + '. ' + c.text + (isCorrect ? ' (correct)' : ''));
+          });
+          lines.push('', '**Correct answer:** ' + (q.correct_answer || []).join(', '), '', '**Explanation:** ' + (q.explanation || ''), '');
+        }
+      });
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-revision-' + Date.now() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+      if (payload.learnerState.marks !== undefined && !isPlainObject(payload.learnerState.marks)) {
+        errors.push('learnerState.marks is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    var marks = {};
+    if (isPlainObject(rawState.marks)) {
+      Object.keys(rawState.marks).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.marks[key];
+        if (MARK_LEVELS.indexOf(v) !== -1) marks[key] = v;
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      marks: marks,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+        Object.keys(incoming.marks).forEach(function (key) { STATE.marks[key] = incoming.marks[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose lead">${model.purpose || ''}</p>
+        <div class="predict-block panel">
+          <label class="field-label" for="predict-input">${progress.revealed ? 'Your prediction' : 'Predict first'}</label>
+          <p class="prompt" id="predict-prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="3" aria-describedby="predict-prompt" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<div class="actions"><button id="reveal-model-btn" type="button">Reveal mechanism</button></div>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table">
+          <table class="contrast-table">
+            <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+            <tbody>${raw(rows)}</tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <h3>Decision rule</h3>
+          <p>${cs.decision_rule || ''}</p>
+        </div>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var pendingCount = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; }).length;
+      var diagnoseLink = pendingCount
+        ? safe`<a class="button-link" href="${sliceHref('diagnose')}">Diagnose ${pendingCount} ${pendingCount === 1 ? 'miss' : 'misses'}</a>`
+        : '';
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <div class="panel summary">
+            <p class="summary-label">Queue complete</p>
+            <p class="score"><strong>${correctCount}</strong> of ${attempted.length} attempts correct</p>
+            <div class="actions">
+              <button id="practice-restart" type="button">Restart queue</button>
+              ${raw(diagnoseLink)}
+            </div>
+          </div>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices"><legend>Your answer</legend>${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"><span><span class="choice-letter">${c.letter}.</span> ${c.text}</span></label>`;
+        }).join(''))}</fieldset>`
+      : safe`<div class="answer-field"><label class="field-label" for="predict-freeform">Your answer</label><textarea id="predict-freeform" rows="4" placeholder="The setting or action you would choose, and why"></textarea></div>`;
+    var metaBadges = [safe`<span class="badge tone-accent">${String(item.variant_type || 'item').replace(/-/g, ' ')}</span>`];
+    if (item.difficulty) metaBadges.push(safe`<span class="badge">Difficulty ${item.difficulty}</span>`);
+    if (item.importance) metaBadges.push(safe`<span class="badge">Importance ${item.importance}</span>`);
+    var changedCondition = item.changed_condition
+      ? safe`<div class="callout changed-condition"><h3>Changed condition</h3><p>${item.changed_condition}</p></div>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice <span class="step">${practiceIndex + 1} of ${items.length}</span></h2>
+        <div class="item-meta">${raw(metaBadges.join(''))}</div>
+        ${raw(changedCondition)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence <span class="muted">(optional)</span></legend>
+          <div class="segmented">${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"><span>${c}</span></label>`; }).join(''))}</div>
+        </fieldset>
+        <div class="actions"><button id="reveal-practice-btn" type="button">Reveal answer</button></div>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var isLast = practiceIndex + 1 === items.length;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti, isLast);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti, isLast) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    section.querySelectorAll('textarea, input').forEach(function (el) { el.disabled = true; });
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedList = Array.isArray(item.expected_answer) ? item.expected_answer : [item.expected_answer].filter(Boolean);
+    var expectedAnswerHtml = expectedList.length > 1
+      ? safe`<ul>${raw(expectedList.map(function (e) { return safe`<li>${e}</li>`; }).join(''))}</ul>`
+      : safe`<p>${expectedList[0] || ''}</p>`;
+    var reasoning = item.reasoning ? safe`<h3>Reasoning</h3><p>${item.reasoning}</p>` : '';
+    var distractors = item.distractor_analysis
+      ? safe`<h3>Why other options fail</h3><p class="distractors">${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <div class="panel answer">
+        <h3>Expected answer</h3>
+        ${raw(expectedAnswerHtml)}
+      </div>
+      ${raw(reasoning)}
+      ${raw(distractors)}
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="self-report ${raw(isMulti ? 'hidden' : '')}">
+        <p>Compare your answer with the expected answer, then mark it.</p>
+        <div class="actions">
+          <button type="button" class="secondary" id="self-correct">I got it right</button>
+          <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+        </div>
+      </div>
+      <p id="practice-result" class="result hidden" role="status"></p>
+      <div class="actions"><button id="practice-next-btn" type="button" disabled>${isLast ? 'Finish queue' : 'Next item'}</button></div>`;
+
+    if (isMulti) {
+      section.querySelectorAll('.choices label').forEach(function (label) {
+        var value = label.querySelector('input').value;
+        if (expected.indexOf(value) !== -1) label.classList.add('is-expected');
+        else if (predicted.indexOf(value) !== -1) label.classList.add('is-wrong');
+      });
+    }
+
+    function showResult(isCorrect) {
+      var el = revealBox.querySelector('#practice-result');
+      var lead = isMulti ? (isCorrect ? 'Correct.' : 'Not quite.') : (isCorrect ? 'Marked correct.' : 'Marked wrong.');
+      el.innerHTML = isCorrect
+        ? safe`${lead}`
+        : safe`${lead} Logged for <a href="${sliceHref('diagnose')}">Diagnose</a>.`;
+      el.classList.remove('hidden');
+      el.classList.add(isCorrect ? 'result-ok' : 'result-bad');
+    }
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      showResult(isCorrect);
+      var nextBtn = revealBox.querySelector('#practice-next-btn');
+      nextBtn.removeAttribute('disabled');
+      if (!isMulti) nextBtn.focus({ preventScroll: true });
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"><span><strong>${c.label}</strong><span class="hint">${c.hint}</span></span></label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt panel" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="your-answer"><span class="field-label">Your answer</span>${predictedText}</p>
+              <fieldset>
+                <legend>What went wrong?</legend>
+                <div class="diagnosis-grid">${raw(radios)}</div>
+              </fieldset>
+              <p class="field-error hidden" role="alert">Pick the category that best explains the miss.</p>
+              <div class="actions"><button type="button" class="submit-diagnosis">Submit diagnosis</button></div>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">Nothing to diagnose. Items you mark wrong in Practice show up here.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = truncate(item ? (item.prompt || item.stem || '') : a.itemId, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="badge">${label}</span><span>${excerpt}</span><time class="muted" datetime="${a.timestamp || ''}">${when}</time></li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p class="back-link"><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis <span class="tally">${pending.length}</span></h3>
+        ${raw(pendingHtml)}
+        <h3>History <span class="tally">${history.length}</span></h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      var error = el.querySelector('.field-error');
+      el.addEventListener('change', function () { error.classList.add('hidden'); });
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) { error.classList.remove('hidden'); return; }
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+  // Page-level: the sibling file covers every slice, so this is NOT reset in
+  // activateSlice the way the two per-slice vars above are. One value, the
+  // status discriminating which fields exist:
+  //   {status:'idle'} | {status:'loading'}
+  //   {status:'locked', envelope, notice: null | 'wrong-password' | 'forgotten-key'}
+  //   {status:'unlocking', envelope, via: 'cache' | 'password'}
+  //   {status:'ready', bySlice, lock: null | {envelope, expiresAt: number | null}}   lock is null on a clear page
+  //   {status:'unavailable', reason: 'no-sources' | 'load-failed' | 'bad-envelope'}
+  var SOURCES = { status: 'idle' };
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`
+      <details class="issues-panel">
+        <summary>Issues <span class="tally">${issues.length}</span></summary>
+        <ul class="issues">${raw(issues.map(function (i) {
+          return safe`<li><p class="issue-head"><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span><strong>${i.type || 'issue'}</strong></p><p>${i.description || ''}</p></li>`;
+        }).join(''))}</ul>
+      </details>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+        return safe`<li class="${isCorrect ? 'correct-choice' : ''}"><span class="choice-letter">${c.letter}.</span> ${c.text}${raw(isCorrect ? ' <span class="badge tone-ok">correct</span>' : '')}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul class="citations">${raw(citing.map(claimListItemHtml).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="5">
+            <div class="source-detail">
+              <p>${q.stem}</p>
+              <ul>${raw(choiceItems)}</ul>
+              <h4>Explanation</h4>
+              <p>${q.explanation || ''}</p>
+              <p class="muted source-meta">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+              <h4>Cited by <span class="tally">${citing.length}</span></h4>
+              ${raw(citedList)}
+            </div>
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge tone-warn">disputed</span>' : '';
+    return safe`
+      <tr class="source-row${raw(isOpen ? ' is-open' : '')}" data-id="${q.id}">
+        <td class="cell-id"><button type="button" class="row-toggle" aria-expanded="${isOpen ? 'true' : 'false'}">${q.id}</button></td>
+        <td class="cell-status">${q.status || ''}${raw(disputedBadge)}</td>
+        <td class="cell-stem">${truncate(q.stem, 90)}</td>
+        <td class="cell-answer">${(q.correct_answer || []).join(', ')}</td>
+        <td class="cell-mark">${raw(markControlHtml('question:' + q.id))}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  // BUNDLE.sources names the one sibling this page may load. A locked page's
+  // bundle has no field that could name the clear file.
+  var SOURCE_GLOBAL = { clear: '__EKD_SOURCES_CLEAR__', locked: '__EKD_SOURCES_ENC__' };
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.onload = function () { el.remove(); resolve(); };
+      el.onerror = function () { el.remove(); reject(new Error('failed to load ' + src)); };
+      document.body.appendChild(el);
+    });
+  }
+
+  function urlSourcesBaseUrl() {
+    try { return new URLSearchParams(location.search).get('sourcesBaseUrl'); } catch (e) { return null; }
+  }
+
+  function sourcesScriptUrl(name) {
+    var base = urlSourcesBaseUrl();
+    return base ? new URL(name, base).toString() : name;
+  }
+
+  function base64UrlToBytes(text) {
+    var padded = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (padded.length % 4) padded += '=';
+    var bin = atob(padded);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function bytesToBase64Url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  // Envelope v2 (scripts/ekd/sources_crypto.py), checked once here so the
+  // crypto calls below can trust its fields.
+  function parseEnvelope(raw) {
+    try {
+      var ok = raw && raw.v === 2 && raw.kdf && raw.kdf.name === 'PBKDF2' && raw.kdf.hash === 'SHA-256'
+        && Number.isInteger(raw.kdf.iterations) && raw.kdf.iterations > 0
+        && raw.cipher && raw.cipher.name === 'AES-GCM' && typeof raw.ciphertext === 'string';
+      if (!ok) return null;
+      return {
+        salt: raw.kdf.salt,
+        saltBytes: base64UrlToBytes(raw.kdf.salt),
+        iterations: raw.kdf.iterations,
+        iv: base64UrlToBytes(raw.cipher.iv),
+        ciphertext: base64UrlToBytes(raw.ciphertext),
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The raw AES key bits, never the password, are what a page can remember.
+  function deriveKey(envelope, password) {
+    var secret = new TextEncoder().encode(password.normalize('NFC'));
+    return crypto.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', hash: 'SHA-256', salt: envelope.saltBytes, iterations: envelope.iterations }, base, 256);
+    }).then(function (bits) { return new Uint8Array(bits); });
+  }
+
+  function decryptSources(envelope, rawKey) {
+    return crypto.subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['decrypt']).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: envelope.iv }, key, envelope.ciphertext);
+    }).then(function (plainBuf) {
+      var data = JSON.parse(new TextDecoder().decode(plainBuf));
+      if (!data || typeof data !== 'object') throw new Error('decrypted sources are not an object');
+      return data;
+    });
+  }
+
+  // Remembered keys, one localStorage entry per sealing, keyed by its salt.
+  // Chrome shares one localStorage across every file:// page, and each
+  // reseal draws a fresh salt, so two Workspaces never share an entry and a
+  // resealed file never matches a key remembered for its old sealing.
+  // Entry: {"v":1, "key":"<b64url 32-byte AES key>", "expiresAt":<ms>}, 7
+  // days from when the password was entered, never extended.
+  var KEY_PREFIX = 'ekd:sources-key:';
+  var KEY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function parseKeyRecord(text, now) {
+    try {
+      var rec = JSON.parse(text);
+      if (!rec || rec.v !== 1 || typeof rec.key !== 'string' || !Number.isFinite(rec.expiresAt)) return null;
+      if (now >= rec.expiresAt) return null;
+      var key = base64UrlToBytes(rec.key);
+      return key.length === 32 ? { key: key, expiresAt: rec.expiresAt } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var KeyCache = {
+    get: function (salt, now) {
+      try {
+        var text = localStorage.getItem(KEY_PREFIX + salt);
+        if (text === null) return null;
+        var rec = parseKeyRecord(text, now);
+        if (!rec) localStorage.removeItem(KEY_PREFIX + salt);
+        return rec;
+      } catch (e) {
+        return null;
+      }
+    },
+    // The expiry, or null when storage refuses the write (the page still unlocks).
+    put: function (salt, rawKey, now) {
+      var expiresAt = now + KEY_TTL_MS;
+      try {
+        localStorage.setItem(KEY_PREFIX + salt, JSON.stringify({ v: 1, key: bytesToBase64Url(rawKey), expiresAt: expiresAt }));
+        return expiresAt;
+      } catch (e) {
+        return null;
+      }
+    },
+    forget: function (salt) {
+      try { localStorage.removeItem(KEY_PREFIX + salt); } catch (e) {}
+    },
+    // Removes expired or malformed entries, including those of sealings no
+    // page will ask for again because their file was resealed.
+    sweep: function (now) {
+      try {
+        var stale = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var name = localStorage.key(i);
+          if (name && name.indexOf(KEY_PREFIX) === 0 && !parseKeyRecord(localStorage.getItem(name), now)) stale.push(name);
+        }
+        stale.forEach(function (name) { localStorage.removeItem(name); });
+      } catch (e) {}
+    },
+  };
+
+  // Pure. A (state, event) pair not listed leaves the state unchanged, which
+  // is also what drops a late async result that no longer applies.
+  function transition(s, e) {
+    switch (s.status + ' ' + e.type) {
+      case 'idle open':
+        return BUNDLE.sources ? { status: 'loading' } : { status: 'unavailable', reason: 'no-sources' };
+      case 'loading loaded-clear':
+        return { status: 'ready', bySlice: e.bySlice, lock: null };
+      case 'loading loaded-envelope':
+        return e.cached
+          ? { status: 'unlocking', envelope: e.envelope, via: 'cache' }
+          : { status: 'locked', envelope: e.envelope, notice: null };
+      case 'loading load-failed':
+        return { status: 'unavailable', reason: e.reason };
+      case 'locked submit':
+        return { status: 'unlocking', envelope: s.envelope, via: 'password' };
+      case 'unlocking decrypted':
+        return { status: 'ready', bySlice: e.bySlice, lock: { envelope: s.envelope, expiresAt: e.expiresAt } };
+      case 'unlocking decrypt-failed':
+        return { status: 'locked', envelope: s.envelope, notice: s.via === 'cache' ? 'forgotten-key' : 'wrong-password' };
+      case 'ready lock':
+        return s.lock ? { status: 'locked', envelope: s.lock.envelope, notice: null } : s;
+      default:
+        return s;
+    }
+  }
+
+  function dispatch(e) {
+    var next = transition(SOURCES, e);
+    if (next === SOURCES) return;
+    SOURCES = next;
+    startEffect(next, e);
+    var body = document.getElementById('sources-body');
+    if (body) paintSources(body);
+  }
+
+  function startEffect(s, e) {
+    if (s.status === 'loading') {
+      var kind = BUNDLE.sources.kind;
+      var globalName = SOURCE_GLOBAL[kind];
+      window[globalName] = undefined;
+      loadScript(sourcesScriptUrl(BUNDLE.sources.file)).then(function () {
+        var loaded = window[globalName];
+        window[globalName] = undefined;
+        if (kind === 'clear') {
+          if (loaded && typeof loaded === 'object') dispatch({ type: 'loaded-clear', bySlice: loaded });
+          else dispatch({ type: 'load-failed', reason: 'load-failed' });
+          return;
+        }
+        var envelope = parseEnvelope(loaded);
+        if (!envelope) { dispatch({ type: 'load-failed', reason: 'bad-envelope' }); return; }
+        dispatch({ type: 'loaded-envelope', envelope: envelope, cached: KeyCache.get(envelope.salt, Date.now()) });
+      }, function () {
+        dispatch({ type: 'load-failed', reason: 'load-failed' });
+      });
+      return;
+    }
+    if (s.status === 'unlocking') {
+      var envelope = s.envelope;
+      var fromCache = s.via === 'cache';
+      var keyReady = fromCache ? Promise.resolve(e.cached.key) : deriveKey(envelope, e.password);
+      keyReady.then(function (rawKey) {
+        return decryptSources(envelope, rawKey).then(function (bySlice) { return { rawKey: rawKey, bySlice: bySlice }; });
+      }).then(function (opened) {
+        var expiresAt = fromCache ? e.cached.expiresAt : KeyCache.put(envelope.salt, opened.rawKey, Date.now());
+        dispatch({ type: 'decrypted', bySlice: opened.bySlice, expiresAt: expiresAt });
+      }, function () {
+        if (fromCache) KeyCache.forget(envelope.salt);
+        dispatch({ type: 'decrypt-failed' });
+      });
+    }
+  }
+
+  var UNAVAILABLE_TEXT = {
+    'no-sources': 'No source data is bundled with this Workspace.',
+    'load-failed': 'The sources file could not be loaded.',
+    'bad-envelope': 'The encrypted sources file is not in a format this page can read.',
+  };
+  var LOCKED_NOTICE_TEXT = {
+    'wrong-password': 'Incorrect password',
+    'forgotten-key': 'The key remembered on this browser no longer opens this file. Enter the current password.',
+  };
+
+  function renderSources() {
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        ${raw(issuesHtml())}
+        <div id="sources-body"></div>
+      </section>`;
+    var fragment = fromHTML(html);
+    if (SOURCES.status === 'idle') dispatch({ type: 'open' });
+    paintSources(fragment.querySelector('#sources-body'));
+    return fragment;
+  }
+
+  function passwordFormHtml(notice, busy) {
+    var noticeBlock = notice ? safe`<p><span class="badge severity-high">${LOCKED_NOTICE_TEXT[notice]}</span></p>` : '';
+    return safe`
+      ${raw(noticeBlock)}
+      <p class="muted">These source questions are encrypted. Enter this Workspace's password to unlock them.</p>
+      <label class="field-label" for="sources-password">Password</label>
+      <input type="password" id="sources-password" autocomplete="off" spellcheck="false"${raw(busy ? ' disabled' : '')}>
+      <p><button type="button" id="sources-unlock"${raw(busy ? ' disabled' : '')}>${busy ? 'Unlocking…' : 'Unlock sources'}</button></p>`;
+  }
+
+  function paintSources(body) {
+    var s = SOURCES;
+    if (s.status === 'idle' || s.status === 'loading') {
+      body.innerHTML = '<p class="muted">Loading sources&hellip;</p>';
+    } else if (s.status === 'unavailable') {
+      body.innerHTML = safe`<p class="empty">${UNAVAILABLE_TEXT[s.reason]}</p>`;
+    } else if (s.status === 'unlocking') {
+      body.innerHTML = s.via === 'cache' ? '<p class="muted">Unlocking sources&hellip;</p>' : passwordFormHtml(null, true);
+    } else if (s.status === 'locked') {
+      body.innerHTML = passwordFormHtml(s.notice, false);
+      var input = body.querySelector('#sources-password');
+      var submit = function () {
+        if (input.value) dispatch({ type: 'submit', password: input.value });
+      };
+      body.querySelector('#sources-unlock').addEventListener('click', submit);
+      input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') submit(); });
+      if (s.notice === 'wrong-password') input.focus();
+    } else if (s.status === 'ready') {
+      renderSourcesTable(body);
+      if (s.lock) {
+        body.insertAdjacentHTML('afterbegin', lockBarHtml(s.lock));
+        body.querySelector('#sources-lock').addEventListener('click', function () {
+          KeyCache.forget(s.lock.envelope.salt);
+          dispatch({ type: 'lock' });
+        });
+      }
+    }
+  }
+
+  function lockBarHtml(lock) {
+    var remembered = lock.expiresAt === null
+      ? 'Not remembered (storage unavailable)'
+      : 'Remembered on this browser until '
+        + new Date(lock.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return safe`<p class="sources-lock"><span class="muted" id="sources-remembered">${remembered}</span><button type="button" class="secondary" id="sources-lock">Lock</button></p>`;
+  }
+
+  function renderSourcesTable(body) {
+    var questions = SOURCES.bySlice[CURRENT.contentSet.id] || [];
+    body.innerHTML = safe`
+      <div class="search-field">
+        <label class="field-label" for="sources-search">Search questions</label>
+        <input type="search" id="sources-search" placeholder="Stem, choices, or explanation">
+        <p class="muted" id="sources-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Source questions">
+        <table class="sources-table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Status</th><th scope="col">Stem</th><th scope="col">Correct</th><th scope="col">Mark</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </div>`;
+    var input = body.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      body.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = body.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.length
+        ? filtered.map(sourceRowHtml).join('')
+        : safe`<tr><td colspan="5" class="empty-cell">No questions match "${sourcesSearchTerm}".</td></tr>`;
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function (event) {
+          if (event.target.closest('.mark-control')) return;
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+          var toggle = tbody.querySelector('.source-row[data-id="' + CSS.escape(id) + '"] .row-toggle');
+          if (toggle) toggle.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      var cs = CURRENT.contentSet;
+      document.getElementById('app-title').innerHTML = safe`<span class="title-exam">${cs.exam}</span><span class="title-sep" aria-hidden="true">/</span><span class="title-facet"><span class="visually-hidden">${cs.facet.key}: </span>${cs.facet.value}</span>`;
+      document.title = cs.facet.value + ' · ' + cs.exam;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+        if (mode === target.mode) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('export-revision-btn').addEventListener('click', exportRevisionNotes);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  document.getElementById('app').addEventListener('click', handleMarkClick);
+  window.addEventListener('hashchange', navigate);
+  KeyCache.sweep(Date.now());
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>

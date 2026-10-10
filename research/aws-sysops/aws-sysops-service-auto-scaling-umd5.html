@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- script-src allows any https: origin because a sources sibling file can be hosted remotely, at an origin chosen at view-time via ?sourcesBaseUrl and unknown when this file is generated. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self' https:; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  /* Theme follows prefers-color-scheme. One accent (--accent); ok/bad/warn
+     carry state only. Shape rule: --radius on every control and panel,
+     full pill on badges and tallies. z-index: header 10, nothing else. */
+  :root {
+    color-scheme: light dark;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 8px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --measure: 68ch;
+
+    --bg: #f6f7f9;
+    --surface: #fdfdfe;
+    --sunk: #eceff3;
+    --ink: #15181c;
+    --ink-2: #39414b;
+    --muted: #5a6370;
+    --line: #dce0e6;
+    --line-strong: #c3c9d1;
+    --accent: #2a5caa;
+    --accent-hover: #1f4a8c;
+    --accent-ink: #fdfdfe;
+    --accent-soft: #e7edf7;
+    --ok: #1b7348;
+    --ok-soft: #e3f2ea;
+    --bad: #ae3328;
+    --bad-soft: #fbe9e7;
+    --warn: #845400;
+    --warn-soft: #fbf0db;
+    --shadow: 0 1px 2px rgb(21 24 28 / 0.05), 0 4px 16px rgb(21 24 28 / 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --surface: #181b1f;
+      --sunk: #20242a;
+      --ink: #e6e9ed;
+      --ink-2: #c1c7cf;
+      --muted: #939ba6;
+      --line: #282d33;
+      --line-strong: #3a4047;
+      --accent: #8db0ea;
+      --accent-hover: #a9c4f0;
+      --accent-ink: #0d1829;
+      --accent-soft: #1a2639;
+      --ok: #6ccb96;
+      --ok-soft: #13271c;
+      --bad: #ef8a7e;
+      --bad-soft: #301817;
+      --warn: #e2b25a;
+      --warn-soft: #2b2212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover { color: var(--accent-hover); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem 0;
+  }
+  .header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+  }
+  header h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .title-exam { color: var(--muted); font-weight: 500; }
+  .title-sep { color: var(--line-strong); }
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #slice-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  nav#nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav#nav::-webkit-scrollbar { display: none; }
+  nav#nav a {
+    flex: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 transparent;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  nav#nav a:hover { color: var(--ink); background: var(--sunk); }
+  nav#nav a:focus-visible { outline-offset: -2px; }
+  nav#nav a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+  #storage-warning {
+    margin: 0.6rem 0 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- controls ---------- */
+  button, .button-link, .file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 550;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.1s var(--ease);
+  }
+  button:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  button:active:not(:disabled), .button-link:active, .file-label:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.secondary, .button-link, .file-label {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.secondary:hover:not(:disabled), .button-link:hover, .file-label:hover {
+    border-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .header-actions button, .header-actions .file-label { padding: 0.4rem 0.75rem; font-size: 0.84rem; }
+  .file-label { position: relative; }
+  .file-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .file-label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .field-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  textarea, input[type="search"], input[type="password"], select {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea, input[type="search"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  select { padding: 0.35rem 0.6rem; font-size: 0.84rem; }
+  textarea:focus, input[type="search"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  textarea:disabled { background: var(--sunk); color: var(--ink-2); cursor: not-allowed; }
+  ::placeholder { color: var(--muted); opacity: 1; }
+  fieldset { min-width: 0; margin: 1.5rem 0 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.94rem; font-weight: 600; }
+  input[type="checkbox"], input[type="radio"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.3rem 0 0;
+    accent-color: var(--accent);
+  }
+  .field-error { margin: 0.75rem 0 0; color: var(--bad); font-size: 0.9rem; font-weight: 500; }
+
+  /* ---------- page + type ---------- */
+  main#app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.9rem);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 2.25rem 0 0.6rem;
+    font-size: 1.06rem;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  p, li { max-width: var(--measure); text-wrap: pretty; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin: 0.45rem 0; padding-left: 0.2rem; }
+  li::marker { color: var(--muted); }
+  .muted { color: var(--muted); }
+  .lead { color: var(--ink-2); font-size: 1.125rem; }
+  .empty {
+    max-width: none;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+  }
+  .panel {
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .panel > :last-child { margin-bottom: 0; }
+  .panel textarea { background: var(--bg); }
+  .panel h3:first-child { margin-top: 0; }
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .callout h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 0.98rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .step { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tally {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    vertical-align: 0.1em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  .badge.tone-accent { background: var(--accent-soft); color: var(--accent); }
+  .badge.tone-ok, .badge.status-supported { background: var(--ok-soft); color: var(--ok); }
+  .badge.tone-bad, .badge.status-conflicted,
+  .badge.severity-high, .badge.severity-critical { background: var(--bad-soft); color: var(--bad); }
+  .badge.tone-warn, .badge.status-needs-review, .badge.severity-medium { background: var(--warn-soft); color: var(--warn); }
+  .next-link { margin-top: 2.5rem; font-weight: 550; }
+  .back-link { margin: -0.25rem 0 1.25rem; font-size: 0.92rem; }
+
+  /* ---------- supporting claims ---------- */
+  details.claims, details.issues-panel {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  details > summary {
+    width: fit-content;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  details > summary::marker { color: var(--muted); }
+  details > summary:hover { color: var(--ink); }
+  ul.citations, ul.issues {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.citations li {
+    display: grid;
+    grid-template-columns: 6.75rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.94rem;
+  }
+  ul.citations .badge { justify-self: start; }
+
+  /* ---------- confidence marks ---------- */
+  .mark-control { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .mark-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+  .mark-dot:hover:not(:disabled) { opacity: 0.85; }
+  .mark-dot:active:not(:disabled) { transform: none; }
+  .mark-dot.mark-low { background: var(--ok); border-color: var(--ok); }
+  .mark-dot.mark-medium { background: var(--warn); border-color: var(--warn); }
+  .mark-dot.mark-high { background: var(--bad); border-color: var(--bad); }
+  .mark-dot.is-active { opacity: 1; border-color: var(--ink); }
+  .cell-mark { white-space: nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 1.25rem 0 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  th, td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .contrast-table { min-width: 44rem; }
+  .contrast-table th + td, .contrast-table td + td,
+  .contrast-table thead th + th { border-left: 1px solid var(--line); }
+  .contrast-table tbody th { width: 11rem; font-weight: 600; }
+  .sources-table { min-width: 38rem; }
+  tr.source-row { cursor: pointer; transition: background-color 0.15s; }
+  tr.source-row:hover { background: var(--sunk); }
+  tr.source-row.is-open { background: var(--accent-soft); }
+  tr.source-row.is-open > td { border-bottom-color: transparent; }
+  tr.detail-row > td { background: var(--accent-soft); }
+  .cell-id { white-space: nowrap; }
+  .cell-answer { font-family: var(--font-mono); font-size: 0.86rem; }
+  .row-toggle {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .row-toggle:hover:not(:disabled) { background: none; color: var(--accent-hover); text-decoration: underline; }
+  .row-toggle:active:not(:disabled) { transform: none; }
+  .empty-cell { padding: 1.5rem; color: var(--muted); text-align: center; }
+  .source-detail { max-width: var(--measure); padding: 0.25rem 0 0.5rem; }
+  .source-detail ul { list-style: none; padding: 0; }
+  .source-detail h4 { margin: 1.25rem 0 0.4rem; font-size: 0.94rem; }
+  .source-meta { font-size: 0.86rem; }
+  .choice-letter { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .correct-choice { color: var(--ok); font-weight: 550; }
+
+  /* ---------- learn ---------- */
+  .predict-block { margin: 1.75rem 0 0; }
+  .predict-block .prompt { margin: 0 0 0.9rem; color: var(--ink-2); }
+  .mechanism { margin-top: 2.25rem; }
+  .mechanism > h3:first-child { margin-top: 0; }
+
+  /* ---------- practice ---------- */
+  .item-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .practice > .prompt { margin-top: 1.5rem; font-size: 1.0625rem; }
+  .practice > .callout + .prompt { margin-top: 1.5rem; }
+  .answer-field { margin-top: 1.5rem; }
+  .choices label, .diagnosis-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choices label:hover, .diagnosis-option:hover { border-color: var(--line-strong); }
+  .choices label:has(input:checked), .diagnosis-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .choices label.is-expected { border-color: var(--ok); background: var(--ok-soft); }
+  .choices label.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .segmented {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .segmented label {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-left: 1px solid var(--line-strong);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .segmented label:first-child { border-left: 0; }
+  .segmented label:hover { background: var(--sunk); }
+  .segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .segmented label:has(input:disabled) { cursor: not-allowed; }
+  .reveal { margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .answer p:last-child { margin-bottom: 0; }
+  .self-report {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--sunk);
+  }
+  .self-report p { margin: 0; color: var(--ink-2); }
+  .self-report .actions { margin-top: 0.75rem; }
+  .result { margin: 2rem 0 0; font-weight: 550; }
+  .result.result-ok { color: var(--ok); }
+  .result.result-bad { color: var(--bad); }
+  .result a { color: inherit; }
+  .summary-label { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.94rem; font-weight: 600; }
+  .score { margin: 0; color: var(--ink-2); font-size: 1.06rem; }
+  .score strong {
+    margin-right: 0.15rem;
+    color: var(--ink);
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- diagnose ---------- */
+  .pending-attempt { margin: 0 0 1.25rem; }
+  .pending-attempt .prompt { color: var(--ink); }
+  .your-answer { color: var(--ink-2); }
+  .your-answer .field-label { margin-bottom: 0.15rem; color: var(--muted); font-size: 0.84rem; }
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.5rem;
+  }
+  .diagnosis-option { margin: 0; }
+  .diagnosis-option .hint {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .panel .diagnosis-option { background: var(--bg); }
+  ul.diagnosis-history { margin: 0; padding: 0; list-style: none; }
+  ul.diagnosis-history li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  ul.diagnosis-history li:last-child { border-bottom: 0; }
+  ul.diagnosis-history time { font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sources ---------- */
+  .issue-head { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem; }
+  ul.issues li { max-width: none; margin: 0; padding: 0; font-size: 0.94rem; }
+  ul.issues li > p:last-child { margin-bottom: 0; }
+  .search-field { margin-top: 2rem; }
+  #sources-count { margin: 0.5rem 0 0; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .sources-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1rem 0 0; font-size: 0.88rem; }
+  .sources-lock button { padding: 0.3rem 0.7rem; font-size: 0.84rem; }
+
+  /* ---------- motion: state transitions only ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .mechanism:not(.hidden), .reveal:not(.hidden) { animation: rise 0.35s var(--ease) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    header { position: static; }
+    .header-inner { padding: 0.75rem 1rem 0; }
+    main#app { padding: 1.5rem 1rem 4rem; }
+    .panel { padding: 1rem; }
+    .lead { font-size: 1.06rem; }
+    ul.citations li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history .badge { justify-self: start; }
+    .segmented { display: flex; }
+    .segmented label { flex: 1; text-align: center; }
+    .sources-table { min-width: 0; }
+    .sources-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .sources-table tr.source-row {
+      display: grid;
+      grid-template-areas: "id answer" "stem stem" "status mark";
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sources-table tr.source-row > td { padding: 0; border: 0; }
+    .sources-table .cell-id { grid-area: id; }
+    .sources-table .cell-answer { grid-area: answer; }
+    .sources-table .cell-stem { grid-area: stem; }
+    .sources-table .cell-status { grid-area: status; color: var(--muted); font-size: 0.86rem; }
+    .sources-table .cell-mark { grid-area: mark; justify-self: end; }
+    .sources-table tr.detail-row, .sources-table tr.detail-row > td { display: block; }
+    .sources-table tbody tr:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-row">
+      <h1 id="app-title">EKD Workspace</h1>
+      <div class="header-actions">
+        <div id="slice-controls" class="hidden">
+          <label for="slice-select">Slice</label>
+          <select id="slice-select"></select>
+        </div>
+        <button id="export-btn" class="secondary" type="button">Export progress</button>
+        <button id="export-revision-btn" class="secondary" type="button">Export for revision</button>
+        <label class="file-label">Import progress
+          <input type="file" id="import-input" accept="application/json">
+        </label>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Study modes">
+      <a href="#learn" data-route="learn">Learn</a>
+      <a href="#compare" data-route="compare">Compare</a>
+      <a href="#practice" data-route="practice">Practice</a>
+      <a href="#diagnose" data-route="diagnose">Diagnose</a>
+      <a href="#sources" data-route="sources">Explore Sources</a>
+    </nav>
+    <div id="storage-warning" class="hidden" role="alert"></div>
+  </div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 2, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-auto-scaling", "exam": "aws-sysops", "facet": {"key": "service", "value": "auto-scaling"}, "schemaVersion": 1}, "sourceQuestions": [], "claims": [{"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-74d0b20479f9", "source_question_ids": ["awssysops-p1-q003"], "statement": "An Auto Scaling group only launches instances into the Availability Zones (subnets) it is configured to use.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4454d72198a1", "source_question_ids": ["awssysops-p1-q003"], "statement": "Attaching an ELB to an Auto Scaling group does not change which Availability Zones the group launches instances into.", "status": "supported"}, {"claim_type": "rule", "conditions": ["ELB shows healthy instances concentrated in one AZ and none in another, with zero unhealthy instances"], "confidence": "high", "id": "cl-89c29e54fd36", "source_question_ids": ["awssysops-p1-q003"], "statement": "To balance Auto Scaling instances across Availability Zones when one AZ has zero instances and none are unhealthy, configure the Auto Scaling group with subnets in both AZs.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9a38986587f3", "source_question_ids": ["awssysops-p1-q003"], "statement": "Raising an Auto Scaling group's maximum size does not force new instance launches into an underused Availability Zone.", "status": "supported"}, {"claim_type": "rule", "conditions": ["application needs very high message throughput to/from SQS"], "confidence": "high", "id": "cl-c719bdb2fd5e", "source_question_ids": ["awssysops-p1-q004"], "statement": "Scaling the consumer/producer EC2 fleet (via an Auto Scaling group with triggers watching queue depth, e.g. ApproximateNumberOfMessagesVisible) is the most scalable way to raise aggregate throughput between EC2 and SQS.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ddb93ea39149", "source_question_ids": ["awssysops-p1-q004"], "statement": "An Elastic Load Balancer does not improve throughput between EC2 instances and SQS, because there is no inbound traffic to SQS for an ELB to distribute.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-18e92d1fc8a0", "source_question_ids": ["awssysops-p1-q004"], "statement": "EBS-optimized instances improve EBS disk I/O, not throughput to the SQS API endpoint.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-692ae06ed096", "source_question_ids": ["awssysops-p1-q004"], "statement": "Enabling a public IP address on an instance affects internet reachability, not throughput to the SQS API endpoint.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-6492a4c28d0c", "source_question_ids": ["awssysops-p1-q007"], "statement": "AWS guidance reserves ELB pre-warming for sudden flash-traffic spikes, not for a gradual, forecastable ramp in traffic over multiple weeks.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-96ecd2c3b395", "source_question_ids": ["awssysops-p1-q007"], "statement": "AWS Trusted Advisor can check service limits, such as the number of EC2 instances allowed per region, which may need to be raised ahead of a planned large increase in required capacity.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["Auto Scaling group's health check type is set to EC2 only"], "confidence": "high", "id": "cl-f3096f50a1b8", "source_question_ids": ["awssysops-p1-q008"], "statement": "An Auto Scaling group can be configured to use simple EC2 status checks only, or combined EC2-plus-ELB health checks; if only EC2 checks are used, the Auto Scaling group ignores ELB 'unhealthy' verdicts entirely.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["Auto Scaling group's health check type includes ELB"], "confidence": "high", "id": "cl-9021c6e1d856", "source_question_ids": ["awssysops-p1-q008"], "statement": "Adding the ELB health check type to an Auto Scaling group's health check configuration is what makes the group terminate and replace instances that the ELB has marked unhealthy.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": ["Auto Scaling group's health check type is set to EC2 only"], "confidence": "medium", "id": "cl-158e9339e5f7", "source_question_ids": ["awssysops-p1-q008"], "statement": "Changing an Auto Scaling group's health check thresholds, changing the ELB health check interval, or switching the ELB's check protocol does not fix an Auto Scaling group ignoring ELB health-check verdicts when its health check type is set to EC2 only.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bb168dcb42b2", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Internet Gateway (IGW) is inherently redundant/highly available at the VPC level, so adding a second IGW does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-364df7c366b0", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Elastic Load Balancer automatically spans multiple Availability Zones, so adding a second ELB does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5b3aa5da8e2c", "source_question_ids": ["awssysops-p1-q010"], "statement": "A multi-AZ RDS instance already fails over automatically to a standby in a second Availability Zone, so it is not itself a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1360dcf4efc7", "source_question_ids": ["awssysops-p1-q010"], "statement": "In an architecture that already uses an IGW, an ELB spanning multiple AZs, and a multi-AZ RDS instance, there is no remaining single point of failure that needs to be fixed.", "status": "supported"}, {"claim_type": "rule", "conditions": ["instances need to call the CloudWatch PutMetricData API"], "confidence": "high", "id": "cl-75ab3e8821db", "source_question_ids": ["awssysops-p1-q012"], "statement": "Attaching an IAM role to an Auto Scaling launch configuration is the AWS-recommended way to let instances authenticate CloudWatch PutMetricData calls, because credentials are automatically rotated and delivered via the instance metadata service.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6c0e7c9cf67b", "source_question_ids": ["awssysops-p1-q012"], "statement": "Creating an IAM user and injecting its credentials into instance User Data or a private repository means distributing and rotating static long-lived secrets by hand, which is not the recommended authentication approach for instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-81c2f9cee3ef", "source_question_ids": ["awssysops-p1-q012"], "statement": "CloudWatch has no metric-level resource policy that can grant PutMetricData permission to instances from an Auto Scaling group.", "status": "supported"}, {"claim_type": "rule", "conditions": ["bastion host must be highly available without human intervention"], "confidence": "high", "id": "cl-9051dabb6b29", "source_question_ids": ["awssysops-p1-q026"], "statement": "An Auto Scaling group with min-size=1 and max-size=1 spanning multiple Availability Zones gives a bastion host self-healing high availability with zero human intervention, because the ASG's health checks detect failure and automatically launch a replacement in a healthy AZ.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-6665232bed16", "source_question_ids": ["awssysops-p1-q026"], "statement": "Running two static bastion instances, or keeping a pre-built standby AMI ready, both still require a human to notice the failure and act, so neither achieves high availability without human intervention.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-59f08028b5d8", "source_question_ids": ["awssysops-p1-q026"], "statement": "An ELB load-balances traffic across healthy targets but does not itself replace a failed bastion instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["capacity is needed continuously, every day"], "confidence": "high", "id": "cl-0507e975b571", "source_question_ids": ["awssysops-p1-q029"], "statement": "Baseline server capacity needed every day of the year is most cost-effectively covered by Reserved Instances (heavy utilization).", "status": "supported"}, {"claim_type": "rule", "conditions": ["capacity is needed frequently but not every single day"], "confidence": "high", "id": "cl-f03278a6db54", "source_question_ids": ["awssysops-p1-q029"], "statement": "Capacity needed on most days but not every day is reasonably covered by On-Demand Instances, since it is used too often to leave unreserved but not continuously enough to justify another year-long Reserved Instance commitment.", "status": "supported"}, {"claim_type": "rule", "conditions": ["capacity is needed only a few days per year"], "confidence": "high", "id": "cl-2263c52153ff", "source_question_ids": ["awssysops-p1-q029"], "statement": "Capacity needed only a handful of days per year is best covered by Spot Instances, since reserving it would commit to a year of cost for rarely-used capacity.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c8a1f8029bbf", "source_question_ids": ["awssysops-p1-q029"], "statement": "Using Spot Instances to cover capacity that is needed on most days risks interruption for capacity the application actually needs regularly, which undermines availability.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-654beee23c3c", "source_question_ids": ["awssysops-p1-q036"], "statement": "The instance type an Auto Scaling group launches is defined in its launch configuration (or launch template), not in the Auto Scaling group itself.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a6f1fb95acf8", "source_question_ids": ["awssysops-p1-q036"], "statement": "The Auto Scaling group itself only references a launch configuration and manages capacity/AZ distribution; scaling policies control when to scale; tags are just metadata -- none of these define instance type.", "status": "supported"}, {"claim_type": "rule", "conditions": ["need to change the instance type used by an Auto Scaling group"], "confidence": "high", "id": "cl-bbd91e393133", "source_question_ids": ["awssysops-p1-q036"], "statement": "To change the instance type an Auto Scaling group launches, you create a new launch configuration with the new instance type and point the ASG at it.", "status": "supported"}, {"claim_type": "rule", "conditions": ["sticky sessions enabled on the ELB"], "confidence": "high", "id": "cl-1081779c8879", "source_question_ids": ["awssysops-p1-q053"], "statement": "When sticky sessions are enabled on an ELB, requests from a given user's session are pinned to one specific backend instance for the life of the session, so newly launched Auto Scaling instances receive no traffic from already-connected users.", "status": "supported"}, {"claim_type": "fact", "conditions": ["application uses long-lived connections such as long polling, Comet, or WebSockets"], "confidence": "high", "id": "cl-46b76b34dfff", "source_question_ids": ["awssysops-p1-q053"], "statement": "Long-lived connections such as long polling, Comet, or WebSockets stay pinned to whichever instance accepted them, so existing instances keep serving open connections instead of shedding load to newly launched instances.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-56fc13d41b2b", "source_question_ids": ["awssysops-p1-q053"], "statement": "An ELB's default, non-sticky behavior distributes requests across backend instances without pinning requests from a given user to one specific instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b90af849796b", "source_question_ids": ["awssysops-p1-q053"], "statement": "A browser failing to honor the TTL of an ELB's DNS name is a DNS-level failover issue, not a cause of load imbalance across already-resolved backend instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-519525b65bcf", "source_question_ids": ["awssysops-p1-q061"], "statement": "A CloudWatch alarm can trigger an Auto Scaling policy that scales an Auto Scaling group up or down.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f07f1b1c5929", "source_question_ids": ["awssysops-p1-q061"], "statement": "A CloudWatch alarm can send an SNS notification, including an SMS message.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9871fd8b11de", "source_question_ids": ["awssysops-p1-q061"], "statement": "A CloudWatch alarm can directly stop, terminate, reboot, or recover an EC2 instance as an alarm action.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-b9de0f2dd9eb", "source_question_ids": ["awssysops-p1-q061"], "statement": "A CloudWatch alarm cannot target an Auto Scaling launch configuration or launch template directly, because a launch configuration is only a blueprint used when a group scales, not an addressable target for an alarm action.", "status": "supported"}, {"claim_type": "rule", "conditions": ["deleting an Auto Scaling group via the CLI"], "confidence": "high", "id": "cl-e0c6f229fec3", "source_question_ids": ["awssysops-p1-q062"], "statement": "Deleting an Auto Scaling group via the CLI requires first setting the group's minimum size and desired capacity to 0, since Auto Scaling refuses to delete a group otherwise.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d05469f44b96", "source_question_ids": ["awssysops-p1-q062"], "statement": "The AWS Management Console automatically sets an Auto Scaling group's minimum size and desired capacity to 0 before deletion, but the CLI delete command does not perform this step automatically.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-d6856ec294e6", "source_question_ids": ["awssysops-p1-q062"], "statement": "Manually terminating instances via EC2 or Auto Scaling terminate commands before deleting an Auto Scaling group fights the group's own instance-replacement behavior rather than cleanly draining it.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-73776fc51cc2", "source_question_ids": ["awssysops-p1-q065"], "statement": "Auto Scaling scheduled actions let a group scale up and down automatically at predictable, recurring times without manual effort or a separate batch process.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-ac15c6f1195d", "source_question_ids": ["awssysops-p1-q065"], "statement": "Scheduling an Auto Scaling policy to scale up and down every single day wastes capacity on days when traffic is not actually elevated, compared to scheduling only the specific days that need it.", "status": "supported"}, {"claim_type": "rule", "conditions": ["configuring a recurring Auto Scaling scheduled action"], "confidence": "medium", "id": "cl-b363d301375d", "source_question_ids": ["awssysops-p1-q067"], "statement": "A recurring Auto Scaling scheduled action requires specifying the Auto Scaling group name and a recurrence (cron) expression.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["configuring an Auto Scaling scheduled action"], "confidence": "medium", "id": "cl-ac88b48f624b", "source_question_ids": ["awssysops-p1-q067"], "statement": "An Auto Scaling scheduled action requires at least one of MinSize, MaxSize, or DesiredCapacity, so Maximum size alone is not strictly required if Min size or Desired capacity is supplied instead.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["configuring an Auto Scaling scheduled action"], "confidence": "medium", "id": "cl-0f3415e8737a", "source_question_ids": ["awssysops-p1-q067"], "statement": "End time is an explicitly optional parameter for an Auto Scaling scheduled action; it only bounds when a recurring schedule stops.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-75ad36ae1f72", "source_question_ids": ["awssysops-p1-q070"], "statement": "An Auto Scaling launch configuration is only a template/blueprint; AWS never charges for the launch configuration object itself.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-68102fad0835", "source_question_ids": ["awssysops-p1-q070"], "statement": "Deleting or keeping an Auto Scaling launch configuration around after its instances are terminated has no effect on the AWS bill.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-56db4374f2f1", "source_question_ids": ["awssysops-p1-q070"], "statement": "Unattached or unused EBS volumes continue to be billed, so deleting them once no longer needed reduces cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6b92c595ea49", "source_question_ids": ["awssysops-p1-q070"], "statement": "An Elastic IP address that is allocated but not attached to a running instance is billed, so releasing it when not required reduces cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ea1886242af2", "source_question_ids": ["awssysops-p1-q070"], "statement": "An idle Elastic Load Balancer with no instances behind it is still billed, so deleting it reduces cost.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-5f86d011edf5", "source_question_ids": ["awssysops-p1-q075"], "statement": "Setting an Auto Scaling group's minimum capacity causes the group's desired capacity to be set to at least that minimum immediately, so Auto Scaling launches that many instances right away without waiting for a scaling trigger.", "status": "supported"}, {"claim_type": "fact", "conditions": ["instances launched via the same Auto Scaling group"], "confidence": "medium", "id": "cl-ef7191e97bf8", "source_question_ids": ["awssysops-p1-q078"], "statement": "CloudWatch can aggregate statistics across every instance in an Auto Scaling group directly through built-in cross-instance statistics, without a separate analysis tool.", "status": "needs-review"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-f655ae18068f", "source_question_ids": ["awssysops-p1-q078"], "statement": "It is false that average CPU utilization across instances launched from the same AMI cannot be viewed in CloudWatch merely because each instance has a different instance ID.", "status": "needs-review"}, {"claim_type": "default", "conditions": [], "confidence": "low", "id": "cl-8f9722483bb1", "source_question_ids": ["awssysops-p1-q080"], "statement": "Auto Scaling group-level metrics default to 5-minute (basic) granularity, and enabling detailed monitoring on the Auto Scaling group increases that to 1-minute granularity at an extra charge.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3d12dc34fa47", "source_question_ids": ["awssysops-p1-q093"], "statement": "Increasing an Auto Scaling group's desired capacity immediately triggers new instance launches up to that new desired count, and those instances register automatically with an attached ELB.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6727af50fbec", "source_question_ids": ["awssysops-p1-q093"], "statement": "Increasing an Auto Scaling group's maximum size only raises the ceiling the group is allowed to scale to; it does not by itself launch any new instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-becc00624e32", "source_question_ids": ["awssysops-p1-q093"], "statement": "Manually launching an instance and registering it with an ELB outside of Auto Scaling works operationally but is not using Auto Scaling to add the instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c7852471ee79", "source_question_ids": ["awssysops-p1-q093"], "statement": "Decreasing an Auto Scaling group's minimum limit allows the group to shrink rather than provisioning additional instances ahead of anticipated load.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "low", "id": "cl-6f199e65b744", "source_question_ids": ["awssysops-p1-q098"], "statement": "Route 53 DNS failover can provide redundancy for an ELB endpoint by failing over to a second, independent endpoint.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-403da5e71dca", "source_question_ids": ["awssysops-p1-q098"], "statement": "An ELB is already inherently highly available across multiple Availability Zones within a single region without any additional service.", "status": "needs-review"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-4084632746a0", "source_question_ids": ["awssysops-p1-q098"], "statement": "Auto Scaling is a plausible but incorrect answer for providing redundancy specifically to an ELB itself, as distinct from providing availability to the instances behind it.", "status": "needs-review"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-12ac1c977ad1", "source_question_ids": ["awssysops-p1-q122"], "statement": "A CloudWatch alarm watching the CPU Utilization metric can be configured to notify an Auto Scaling group directly when utilization drops below a threshold, triggering a scale-in policy on that group to remove an instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-83f38ae36e2b", "source_question_ids": ["awssysops-p1-q122"], "statement": "Using an SNS email notification plus manually adjusting Auto Scaling desired capacity can remove an instance on low CPU utilization, but requires a human in the loop rather than automatic scale-in.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a525de4e88f6", "source_question_ids": ["awssysops-p1-q122"], "statement": "Auto Scaling scheduled actions trigger on a fixed schedule, not dynamically in response to a CloudWatch metric like CPU utilization.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-6b027616c185", "source_question_ids": ["awssysops-p1-q122"], "statement": "An Auto Scaling launch configuration is only an instance template; it cannot receive CloudWatch alarm notifications or execute scaling policies, since only the Auto Scaling group itself can.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c41565840f04", "source_question_ids": ["awssysops-p1-q123"], "statement": "The CloudWatch Auto Scaling metric GroupTotalInstances reports the combined count of all instances in the group regardless of state (pending, running, and terminating are all rolled into this single number).", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-71eaab3ffcf8", "source_question_ids": ["awssysops-p1-q123"], "statement": "GroupSumInstances is not a real CloudWatch Auto Scaling metric name.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f35aa2f0dd3d", "source_question_ids": ["awssysops-p1-q123"], "statement": "GroupInstancesCount is not a real CloudWatch Auto Scaling metric name.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d33bebe23f93", "source_question_ids": ["awssysops-p1-q132"], "statement": "The suspendable Auto Scaling process list includes Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, and AddToLoadBalancer.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ae40c300e36f", "source_question_ids": ["awssysops-p1-q132"], "statement": "Rebooting an instance is not an Auto Scaling process.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-7dafe088c316", "source_question_ids": ["awssysops-p1-q132"], "statement": "When Auto Scaling needs to remove an unhealthy or excess instance, it terminates the instance (launching a fresh one when scaling back up) rather than rebooting the existing instance in place.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-c8b5e85c09c5", "source_question_ids": ["awssysops-p1-q143"], "statement": "A scheduled Auto Scaling action must have a unique start time.", "status": "supported"}, {"claim_type": "rule", "conditions": ["new scheduled action's time coincides with an existing scheduled action"], "confidence": "high", "id": "cl-9a286596181c", "source_question_ids": ["awssysops-p1-q143"], "statement": "If a new scheduled Auto Scaling action is submitted for a start time that coincides with an already-scheduled action, the API call is rejected outright with a conflict error rather than being queued, merged, or run alongside the existing one.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "low", "id": "cl-24862e599ba7", "source_question_ids": ["awssysops-p1-q144"], "statement": "Auto Scaling scheduled actions historically could only be created up to one month in advance, which was the reasoning for waiting until late November to schedule a Christmas scale-up.", "status": "needs-review"}, {"claim_type": "exception", "conditions": [], "confidence": "low", "id": "cl-902f4c30d792", "source_question_ids": ["awssysops-p1-q144"], "statement": "Some practitioners report that the one-month-ahead limit on scheduling Auto Scaling actions has since been lifted, allowing scheduled actions to be created more than a month in advance.", "status": "needs-review"}, {"claim_type": "rule", "conditions": ["group has no running instances", "fails to launch an instance for more than 24 hours"], "confidence": "high", "id": "cl-58ce9d3b3af3", "source_question_ids": ["awssysops-p1-q174"], "statement": "When an Auto Scaling group has no running instances and repeatedly fails to launch an instance for more than 24 hours, AWS automatically applies an administrative suspension that pauses the group's scaling processes.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ef2e9c2dae7a", "source_question_ids": ["awssysops-p1-q174"], "statement": "Auto Scaling does not retry launching a failed instance for a fixed 72-hour window; that is not how the launch-failure handling works.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e2fc320ce8c3", "source_question_ids": ["awssysops-p1-q174"], "statement": "An Auto Scaling group is not automatically terminated when it repeatedly fails to launch instances; only its scaling processes are suspended, and it can be resumed once the underlying issue is fixed.", "status": "supported"}, {"claim_type": "rule", "conditions": ["EC2 status check reports 'impaired' or a status other than 'running'"], "confidence": "medium", "id": "cl-9031af5dded4", "source_question_ids": ["awssysops-p1-q176"], "statement": "When an Auto Scaling group's EC2 status check reports a status other than 'running' or reports 'impaired,' Auto Scaling marks the instance unhealthy and replaces it by terminating it and launching a new one.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["health check mechanism is an ELB health check rather than an EC2 status check"], "confidence": "medium", "id": "cl-aca8badc08d7", "source_question_ids": ["awssysops-p1-q176"], "statement": "When ELB health checks (rather than EC2 status checks) are in play, the ELB itself stops routing traffic to an unhealthy instance, which is a distinct mechanism from the EC2 status-check 'impaired' state.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6be46031aa97", "source_question_ids": ["awssysops-p1-q178"], "statement": "There is no dedicated 'join' or 'merge' command for Auto Scaling groups.", "status": "supported"}, {"claim_type": "rule", "conditions": ["two separate Auto Scaling groups each configured in a single Availability Zone need to be merged into one multi-zone group"], "confidence": "high", "id": "cl-8c9b5471b4c5", "source_question_ids": ["awssysops-p1-q178"], "statement": "To merge two single-Availability-Zone Auto Scaling groups into one group spanning multiple zones, the documented approach is to update one group's Availability Zones and min/max/desired capacity to span the needed zones, then delete the now-redundant second group.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-af0ecd7278f1", "source_question_ids": ["awssysops-p1-q178"], "statement": "Commands such as as-join-auto-scaling-group, as-copy-auto-scaling-group, and as-merge-auto-scaling-group do not exist in the Auto Scaling API/CLI.", "status": "supported"}, {"claim_type": "default", "conditions": ["Auto Scaling launch configuration created via CLI or SDK"], "confidence": "high", "id": "cl-dd08dfc6260c", "source_question_ids": ["awssysops-p1-q193"], "statement": "When an Auto Scaling launch configuration is created via the CLI or an SDK, its InstanceMonitoring.Enabled flag defaults to true, meaning detailed (1-minute) CloudWatch monitoring is already enabled for every instance the group launches.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-94014e3c41fc", "source_question_ids": ["awssysops-p1-q193"], "statement": "Basic (5-minute) EC2 monitoring would only be in effect for an Auto Scaling group's instances if detailed monitoring had been explicitly disabled.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AlarmNotification process type is suspended"], "confidence": "high", "id": "cl-693cc12d9a5c", "source_question_ids": ["awssysops-p1-q203"], "statement": "Suspending the Auto Scaling AlarmNotification process type does not stop CloudWatch from sending alarms to Auto Scaling; it only stops Auto Scaling from executing the associated scaling policy in response to those alarms.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9816740f40ef", "source_question_ids": ["awssysops-p1-q203"], "statement": "AlarmNotification is one of the individually suspendable Auto Scaling process types.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-472e6a92f1dd", "source_question_ids": ["awssysops-p1-q221"], "statement": "Auto Scaling lets a user suspend one or more scaling processes on a group, which is the documented way to pause scaling activity temporarily (e.g., while investigating a configuration problem or memory leak) without losing the group's configuration.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f8e4555d4d95", "source_question_ids": ["awssysops-p1-q221"], "statement": "A paused Auto Scaling group can later resume normal scaling operation once the root cause of the issue being investigated is resolved.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Availability Zone rebalancing is occurring", "group is at or near its maximum capacity"], "confidence": "high", "id": "cl-bfeb8c26c1b0", "source_question_ids": ["awssysops-p1-q231", "awssysops-p2-q399"], "statement": "During Availability Zone rebalancing, Auto Scaling can temporarily exceed a group's specified maximum capacity by a margin of 10 percent or 1 instance, whichever is greater, so that new instances can launch before old ones terminate.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Terminate process is suspended", "Launch process remains active"], "confidence": "high", "id": "cl-fbde3f0ec3e3", "source_question_ids": ["awssysops-p1-q231"], "statement": "If a user suspends only the Auto Scaling Terminate process while leaving Launch active, AZRebalance stays active and keeps launching new instances for rebalancing but cannot terminate old instances, which can grow the group up to 10 percent larger than its configured maximum size until Terminate is resumed.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-893f9fb5bf2d", "source_question_ids": ["awssysops-p1-q231"], "statement": "Suspending only the Terminate process while keeping Launch active is a supported configuration; it is not true that Launch and Terminate must always be suspended together.", "status": "supported"}, {"claim_type": "rule", "conditions": ["--no-decrement-desired-capacity flag is used"], "confidence": "high", "id": "cl-bae6c544f074", "source_question_ids": ["awssysops-p1-q241"], "statement": "Running as-terminate-instance-in-auto-scaling-group with --no-decrement-desired-capacity terminates the specified instance but keeps the group's desired capacity unchanged, causing Auto Scaling to launch a replacement instance (which picks up the current launch configuration, e.g. a new AMI).", "status": "supported"}, {"claim_type": "rule", "conditions": ["--decrement-desired-capacity flag is used", "resulting desired capacity would not fall below the group's configured minimum size"], "confidence": "high", "id": "cl-8bf2d5ffbb8a", "source_question_ids": ["awssysops-p1-q241", "awssysops-p1-q265"], "statement": "Running as-terminate-instance-in-auto-scaling-group with --decrement-desired-capacity terminates the specified instance and shrinks the group's desired capacity by one, rather than triggering a replacement instance, as long as the resulting desired capacity does not fall below the group's minimum size.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-8e5b52b633e5", "source_question_ids": ["awssysops-p1-q241"], "statement": "as-delete-instance-in-auto-scaling-group is not a real Auto Scaling CLI command name.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-e794ed3ab61e", "source_question_ids": ["awssysops-p1-q241"], "statement": "--update-desired-capacity is not a real flag of as-terminate-instance-in-auto-scaling-group.", "status": "supported"}, {"claim_type": "default", "conditions": ["Auto Scaling launch configuration created via CLI or SDK versus via console or launch template"], "confidence": "medium", "id": "cl-97e717875fc1", "source_question_ids": ["awssysops-p1-q250"], "statement": "Per AWS documentation, detailed (1-minute) CloudWatch monitoring for an Auto Scaling group defaults to enabled when its launch configuration is created via the AWS CLI or an SDK, whereas basic monitoring is the default when created via a launch template or the AWS console.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-3e598101cf0b", "source_question_ids": ["awssysops-p1-q250"], "statement": "Setting a CloudWatch alarm on an Auto Scaling group does not automatically enable detailed monitoring for that group.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-4a2dd224053a", "source_question_ids": ["awssysops-p1-q250"], "statement": "Auto Scaling does support detailed monitoring; the claim that it does not is incorrect.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-ddbe26d31e0b", "source_question_ids": ["awssysops-p1-q258"], "statement": "The Auto Scaling ReplaceUnhealthy process first terminates the unhealthy instance and then launches a new instance, rather than launching the replacement before terminating the unhealthy one.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["--decrement-desired-capacity flag is used", "group's desired capacity equals its configured minimum size"], "confidence": "high", "id": "cl-5e6c8a661a1f", "source_question_ids": ["awssysops-p1-q265"], "statement": "If a user runs as-terminate-instance-in-auto-scaling-group with --decrement-desired-capacity on a group whose desired capacity equals its configured minimum size, Auto Scaling refuses to let desired capacity drop below that minimum and throws an error instead of partially applying the command.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-aba2774b345d", "source_question_ids": ["awssysops-p1-q281"], "statement": "Once an Auto Scaling instance is marked unhealthy, it is scheduled for near-immediate replacement and does not automatically recover back to healthy on its own.", "status": "supported"}, {"claim_type": "rule", "conditions": ["instance has not already begun terminating"], "confidence": "high", "id": "cl-bd9ced375d31", "source_question_ids": ["awssysops-p1-q281"], "statement": "An admin can manually override an Auto Scaling instance's health status back to healthy (e.g., via SetInstanceHealth or the set-instance-health CLI command), which stops the pending replacement, provided the instance has not already begun terminating.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b8556b3f4af6", "source_question_ids": ["awssysops-p1-q281"], "statement": "There is no Auto Scaling setting to make the group ignore an instance reboot event to prevent replacement.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3f5982ae6a0c", "source_question_ids": ["awssysops-p1-q284", "awssysops-p2-q417"], "statement": "Auto Scaling supports scheduled scaling actions for predictable, time-of-day-based capacity needs, such as scaling up at a fixed time each morning and scaling down each evening.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AddToLoadBalancer process is suspended"], "confidence": "high", "id": "cl-5e5941c8e2a4", "source_question_ids": ["awssysops-p1-q287"], "statement": "Suspending the Auto Scaling AddToLoadBalancer process does not stop Auto Scaling from launching instances; it only stops newly-launched instances from being automatically registered with the attached ELB.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AddToLoadBalancer process was suspended when the instance launched"], "confidence": "high", "id": "cl-a24664b6506a", "source_question_ids": ["awssysops-p1-q287"], "statement": "Resuming the AddToLoadBalancer process only affects instances launched afterward; instances launched during the suspension period must be registered with the ELB manually.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d2868a6f609f", "source_question_ids": ["awssysops-p1-q297"], "statement": "Launch configurations are immutable after creation; fields such as InstanceMonitoring.Enabled cannot be edited in place via the console or CLI.", "status": "supported"}, {"claim_type": "rule", "conditions": ["launch configuration currently has detailed monitoring disabled"], "confidence": "high", "id": "cl-35061a2ee1ca", "source_question_ids": ["awssysops-p1-q297"], "statement": "To enable detailed monitoring for an Auto Scaling group whose launch configuration currently has it disabled, the user must create a new launch configuration with detailed monitoring enabled and then update the Auto Scaling group to use that new launch configuration.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-45e8baace60b", "source_question_ids": ["awssysops-p1-q297"], "statement": "A claim that an existing launch configuration's InstanceMonitoring flag can be updated directly via the CLI is incorrect, since launch configurations are immutable.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f777ebb0182b", "source_question_ids": ["awssysops-p1-q297"], "statement": "A claim that detailed monitoring can be enabled by changing a setting on the Auto Scaling group itself from the console is incorrect; the monitoring setting lives on the launch configuration, not the group.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e6c0eebcc61e", "source_question_ids": ["awssysops-p2-q368"], "statement": "Auto Scaling delivers cost optimization by launching EC2 instances automatically only when needed and terminating them when they are no longer needed, so capacity is paid for only while required.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2562eb8c6d6c", "source_question_ids": ["awssysops-p2-q397"], "statement": "A single Auto Scaling group can have multiple load balancers attached to it.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d169a5435f6e", "source_question_ids": ["awssysops-p2-q397"], "statement": "When a load balancer is attached to an Auto Scaling group, it automatically registers the group's instances and distributes traffic across them, without requiring Amazon AppStream or Amazon Redshift configuration.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-71c508c64bed", "source_question_ids": ["awssysops-p2-q399"], "statement": "The temporary capacity-exceeding margin allowed during Availability Zone rebalancing applies only while the group is at or near maximum capacity and needs rebalancing, and lasts only as long as needed (typically a few minutes).", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f8df9e1cf201", "source_question_ids": ["awssysops-p2-q403"], "statement": "An Auto Scaling group is a logical grouping of EC2 instances that share similar characteristics, treated as a unit for the purposes of scaling and management.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-39cb34348377", "source_question_ids": ["awssysops-p2-q403"], "statement": "An Auto Scaling group is not a group of ELBs, nor a collection of launch configurations, nor a group of launch configurations for ELBs.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8883ead16d07", "source_question_ids": ["awssysops-p2-q404"], "statement": "Auto Scaling's core offered service is automatically scaling EC2 compute capacity up or down, not storage, ECS capacity, or elastic IP addresses.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e6f0423c9548", "source_question_ids": ["awssysops-p2-q405"], "statement": "Auto Scaling supports three types of scaling: manual scaling, scaling based on a condition such as CPU utilization, and scaling based on a schedule/time.", "status": "conflicted"}, {"claim_type": "exception", "conditions": [], "confidence": "low", "id": "cl-5e2f8334d6d2", "source_question_ids": ["awssysops-p2-q405"], "statement": "Whether manual scaling counts as truly 'supported' by Auto Scaling, versus just being the user directly setting capacity rather than Auto Scaling automating anything, is a disputed semantic point among practitioners.", "status": "needs-review"}, {"claim_type": "rule", "conditions": ["instance is found unhealthy"], "confidence": "high", "id": "cl-911cd34160e9", "source_question_ids": ["awssysops-p2-q408"], "statement": "When an instance launched by Auto Scaling becomes unhealthy, Auto Scaling terminates that instance and launches a replacement, keeping the group at its configured desired capacity.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-41f2f1f1a637", "source_question_ids": ["awssysops-p2-q413"], "statement": "An Auto Scaling group can span multiple Availability Zones within a single region but cannot span multiple regions; each group is region-specific.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c7184a29d40f", "source_question_ids": ["awssysops-p2-q414"], "statement": "Auto Scaling policies adjust instance count (scaling up/out and down/in) and maintain the desired instance level via health checks and replacement, but they never change an existing instance's type; changing instance type requires a separate manual action.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1c650bf7ebab", "source_question_ids": ["awssysops-p2-q417"], "statement": "Auto Scaling is well suited both for applications with stable demand patterns and for applications that experience hourly, daily, or weekly variability in usage; it is not restricted to only one of those patterns.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-14c36497e830", "source_question_ids": ["awssysops-p2-q421"], "statement": "A CloudWatch alarm can trigger an Auto Scaling policy action.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bf6a74a531b2", "source_question_ids": ["awssysops-p2-q421"], "statement": "A CloudWatch alarm can notify an SNS endpoint.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-5f9cc3ab9c43", "source_question_ids": ["awssysops-p2-q421"], "statement": "EBS, RDS, and ELB metrics (e.g. volume latency, DB CPU/connections, ELB request/latency) can be monitored by CloudWatch alarms, but in that relationship the service is being observed by CloudWatch rather than itself receiving and acting on an alert the way Auto Scaling does.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1b81d200236a", "source_question_ids": ["awssysops-p2-q422"], "statement": "Users can assign custom key/value tags (e.g., environment=Prod) to an Auto Scaling group to organize and manage it.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-12887d73218b", "source_question_ids": ["awssysops-p2-q422"], "statement": "By default, EC2 instances launched into an Auto Scaling group are automatically tagged with the key \"aws:autoscaling:groupName\".", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-1860af5d0f70", "source_question_ids": ["awssysops-p2-q422"], "statement": "Tagging instances launched by an Auto Scaling group is not restricted to configuring tags only at the launch configuration with a 300-character maximum.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c15c819c188b", "source_question_ids": ["awssysops-p2-q422"], "statement": "Auto Scaling group tagging has no requirement that tags be confined to a single Availability Zone or that tag names be uppercase.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cbe5d6ce4755", "source_question_ids": ["awssysops-p2-q423"], "statement": "Auto Scaling groups publish 8 CloudWatch metrics, all under a single dimension, AutoScalingGroupName.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-454978dcc7e9", "source_question_ids": ["awssysops-p2-q423"], "statement": "The 8 CloudWatch metrics published by an Auto Scaling group are GroupMinSize, GroupMaxSize, GroupDesiredCapacity, GroupInServiceInstances, GroupPendingInstances, GroupStandbyInstances, GroupTerminatingInstances, and GroupTotalInstances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-a1f086af1ef5", "source_question_ids": ["awssysops-p2-q423"], "statement": "A claim that Auto Scaling publishes 7 CloudWatch metrics across 5 dimensions is incorrect; it publishes 8 metrics under 1 dimension.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-e3f0d9fc4fa4", "source_question_ids": ["awssysops-p2-q424"], "statement": "A user can suspend one or more Auto Scaling processes at any time, such as during a known temporary event like a large download, and resume them afterward.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-118daed3b9ce", "source_question_ids": ["awssysops-p2-q424"], "statement": "Suspending Auto Scaling processes prevents the Auto Scaling group from reacting to scaling triggers during the suspension window.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-1d630cb80679", "source_question_ids": ["awssysops-p2-q434"], "statement": "An Auto Scaling cooldown period blocks additional scaling activities triggered by CloudWatch alarms until the cooldown period from the prior scaling activity has elapsed.", "status": "supported"}, {"claim_type": "fact", "conditions": ["cooldown period = 5 minutes", "second trigger arrives 2 minutes after the first", "desired capacity starts at 5"], "confidence": "medium", "id": "cl-beb84489a165", "source_question_ids": ["awssysops-p2-q434"], "statement": "Given a 5-minute cooldown period, if an Auto Scaling group at desired capacity 5 receives a trigger to increase capacity by 1 (bringing it to 6 and starting the cooldown), and a second trigger to decrease capacity by 1 arrives 2 minutes later (still inside the cooldown window), the second trigger is ignored and the instance count remains 6 at the 4-minute mark.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ca8b66cfb55b", "source_question_ids": ["awssysops-p2-q434"], "statement": "A claim that no scaling activity occurs at all when a conflicting trigger arrives inside the cooldown window (so the instance count stays at the original desired capacity) is incorrect; it overlooks that the first trigger's scale-out had already started and completed before cooldown blocked the second trigger.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c22ef7c2ef11", "source_question_ids": ["awssysops-p2-q436"], "statement": "A launch configuration is a template that an Auto Scaling group uses to launch EC2 instances, specifying the AMI, instance type, key pair, security groups, and block device mapping.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-73f2a2e44e9f", "source_question_ids": ["awssysops-p2-q436"], "statement": "A launch configuration does not define an Auto Scaling group's minimum/maximum instance count or its scaling schedules; those are configured on the Auto Scaling group and its scaling policies instead.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ee7931c80f1a", "source_question_ids": ["awssysops-p2-q452"], "statement": "Availability Zones for an Auto Scaling deployment are selected when creating the Auto Scaling group itself, not the launch configuration or a scaling policy.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-ecaceaee1705", "source_question_ids": ["awssysops-p2-q456"], "statement": "A launch configuration must exist before an Auto Scaling group can be created, since the group uses it as the launch template for its instances.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-8d13f95a7d0d", "source_question_ids": ["awssysops-p2-q458"], "statement": "When deleting Auto Scaling infrastructure, deleting the associated launch configuration is optional, not mandatory -- it can be kept around for later reuse.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-da14017eef8b", "source_question_ids": ["awssysops-p2-q459"], "statement": "Requests sent to the general, region-less autoscaling.amazonaws.com endpoint are routed to the us-east-1 (US East, N. Virginia) region by default.", "status": "supported"}, {"claim_type": "exception", "conditions": ["Terminate process suspended", "AZRebalance process active"], "confidence": "high", "id": "cl-28a54d0afafe", "source_question_ids": ["awssysops-p2-q460"], "statement": "If the Auto Scaling Terminate process is suspended while the AZRebalance process remains active, AZRebalance can still launch new instances to rebalance across Availability Zones but cannot terminate the old ones, allowing the group to temporarily exceed its configured maximum size by roughly 10% until Terminate is resumed.", "status": "supported"}, {"claim_type": "rule", "conditions": ["instance scale-in protection is enabled", "termination trigger is unrelated to Spot bid price"], "confidence": "medium", "id": "cl-8b2da1a67646", "source_question_ids": ["awssysops-p2-q463"], "statement": "Instance scale-in protection on an Auto Scaling group blocks Auto Scaling from terminating a protected instance during ordinary scale-in activity triggered by something other than Spot bid price.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["Auto Scaling group instances are Spot Instances"], "confidence": "low", "id": "cl-ab6543e2d344", "source_question_ids": ["awssysops-p2-q463"], "statement": "AWS documentation states that termination protection cannot be enabled for Spot Instances, which creates ambiguity about whether group-level scale-in protection still applies when the Auto Scaling group consists of Spot Instances.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["fast time-to-operational is the deployment priority"], "confidence": "high", "id": "cl-fde730baa7cf", "source_question_ids": ["awssysops-p2-q528"], "statement": "When fast instance operational time (boot speed) is the deployment priority, dependencies should be pre-baked into a \"golden image\" AMI rather than installed at launch via user-data scripts, Lambda functions, or configuration-management tooling run on each boot.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-587004bf8193", "source_question_ids": ["awssysops-p2-q528"], "statement": "Pairing golden-image AMIs with a new Auto Scaling group and a blue/green deployment enables a fast, safely rollback-able application rollout.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-d330fd95c310", "source_question_ids": ["awssysops-p2-q528"], "statement": "Installing dependencies at boot time via user-data scripts, Lambda functions, or OpsWorks scripts on each instance slows down time to operational readiness compared to using pre-baked AMIs.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-97f63fb0dc91", "source_question_ids": ["awssysops-p2-q530"], "statement": "An SQS dead-letter queue (DLQ) only receives messages that failed processing past the max-receive threshold, so its depth does not reflect current processing backlog.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-97ad3db92899", "source_question_ids": ["awssysops-p2-q530"], "statement": "Scaling EC2 instances based on dead-letter queue depth does not address variable SQS message processing time caused by backlog.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-14ebbcdc4696", "source_question_ids": ["awssysops-p2-q530"], "statement": "An Auto Scaling policy attaches to an Auto Scaling group, not directly to an SQS queue.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d3017bf37441", "source_question_ids": ["awssysops-p2-q530"], "statement": "The documented AWS pattern for cost-effectively scaling an EC2 fleet that polls an SQS queue is an Auto Scaling group with a CloudWatch alarm on the ApproximateNumberOfMessagesVisible metric.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2235856eee83", "source_question_ids": ["awssysops-p2-q531"], "statement": "Amazon CloudWatch has no built-in memory-utilization metric for EC2 instances, because the hypervisor cannot see guest-OS memory usage.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-80f8008f2d10", "source_question_ids": ["awssysops-p2-q531"], "statement": "An Auto Scaling group's scaling policy can only react to a metric it can observe; without a memory metric published to CloudWatch, a scaling policy cannot react to memory pressure.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-57776b837f9c", "source_question_ids": ["awssysops-p2-q531"], "statement": "Deploying an Application Load Balancer to redistribute traffic does not create a memory metric for CloudWatch and does not change what an Auto Scaling group's scaling policy can act on, so it does not resolve Auto Scaling group scaling triggered by memory pressure.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-aa90c5fb2de0", "source_question_ids": ["awssysops-p2-q550"], "statement": "An ELB SpilloverCount metric greater than zero indicates requests have overflowed the load balancer's surge queue and are receiving 5xx errors.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ee932b379dc1", "source_question_ids": ["awssysops-p2-q550"], "statement": "The Classic ELB SurgeQueueLength metric measures how many requests are queued waiting for a healthy backend instance, with a maximum queue size of 1024 requests.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2bd98c3d8ad4", "source_question_ids": ["awssysops-p2-q550"], "statement": "Triggering Auto Scaling actions based on the ELB SurgeQueueLength metric lets new instances come online before the surge queue overflows, preventing SpilloverCount-related 5xx errors.", "status": "supported"}, {"claim_type": "default", "conditions": ["Auto Scaling group with step scaling and an instance warm-up period configured"], "confidence": "high", "id": "cl-325242cc31fe", "source_question_ids": ["awssysops-p2-q556"], "statement": "Until a newly-launched Auto Scaling group instance's specified warm-up time has expired, that instance is not counted toward the group's aggregated CloudWatch metrics.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b1be7748d3c4", "source_question_ids": ["awssysops-p2-q556"], "statement": "An instance missing from aggregated Auto Scaling group metrics because it was never attached to the group is a different and unrelated misconfiguration from the warm-up-period cause.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["application is memory-heavy"], "confidence": "medium", "id": "cl-d3f78161c259", "source_question_ids": ["awssysops-p2-q572"], "statement": "CPUUtilization is a poor metric to scale on when an application's actual bottleneck is memory rather than CPU.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-7121b04afdc1", "source_question_ids": ["awssysops-p2-q572"], "statement": "MemoryUtilization is not a CloudWatch built-in metric for EC2 instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-7672c65f43ed", "source_question_ids": ["awssysops-p2-q572"], "statement": "RequestCountPerTarget is a built-in Application Load Balancer target-tracking metric that measures load per instance regardless of whether CPU or memory is the actual constrained resource.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["traffic surge recurs predictably"], "confidence": "high", "id": "cl-0b152212b6ba", "source_question_ids": ["awssysops-p3-1-q614"], "statement": "A scheduled scaling action can proactively scale an Auto Scaling group up ahead of a predictable, recurring traffic surge (such as the start of each business day), avoiding the lag inherent in purely reactive, metric-triggered scaling.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-96e1b3870c45", "source_question_ids": ["awssysops-p3-1-q614"], "statement": "Switching an Auto Scaling group to scale on CPU utilization, or using larger EC2 instance types, does not resolve a scaling-lag problem for a queue-depth-driven email-confirmation workload.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-c8d528b33cea", "source_question_ids": ["awssysops-p3-1-q620", "awssysops-p3-1-q925"], "statement": "True high availability for an application behind a load balancer requires at least two running instances at all times (minimum = desired = maximum = 2) spread across multiple Availability Zones, so losing one instance or AZ still leaves a healthy instance serving traffic.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-715fe867a821", "source_question_ids": ["awssysops-p3-1-q620"], "statement": "An Auto Scaling group configured with minimum = desired = maximum = 1 instance provides fault tolerance (the application recovers after a brief gap) but not true zero-downtime high availability, since there is a service gap until Auto Scaling replaces the single failed instance.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8f805a605025", "source_question_ids": ["awssysops-p3-1-q620", "awssysops-p3-1-q925"], "statement": "An Auto Scaling group is a Regional construct and cannot span multiple AWS Regions.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-f6e6f2e50fe5", "source_question_ids": ["awssysops-p3-1-q636"], "statement": "If an Auto Scaling group's maximum size is already at or below its current running instance count, the group cannot launch additional instances no matter how high CPU utilization climbs or how long a scale-out alarm stays in ALARM state.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-14595401f3a5", "source_question_ids": ["awssysops-p3-1-q636"], "statement": "A missing scheduled scaling action is not the cause of failed scale-out when the Auto Scaling group's trigger is a CPU metric alarm rather than a schedule.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-0de8392a9821", "source_question_ids": ["awssysops-p3-1-q636"], "statement": "Suspending the ReplaceUnhealthy Auto Scaling process only stops replacement of unhealthy instances; it does not prevent scale-out in response to high CPU utilization.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-99d3f39122e9", "source_question_ids": ["awssysops-p3-1-q636"], "statement": "A Health Check Grace Period shorter than 300 seconds affects how soon a newly launched instance is marked healthy, not whether new instances get launched in response to a scaling alarm.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-326f17080e14", "source_question_ids": ["awssysops-p3-1-q678"], "statement": "Suspending an Auto Scaling group's launch and terminate scaling processes freezes scale-out and scale-in activity, allowing an administrator to troubleshoot instances in place without the group launching new instances or replacing the ones being examined.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3806c77a8fd0", "source_question_ids": ["awssysops-p3-1-q678"], "statement": "Removing impacted instances from an Application Load Balancer stops routing traffic to them but does not stop the Auto Scaling group's own scaling actions driven by CPUUtilization.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-94533f105047", "source_question_ids": ["awssysops-p3-1-q698"], "statement": "By default, an Auto Scaling group's health check type is EC2 instance status checks, which detect only hardware/instance-level failures and are unaware of ALB target-group health check results.", "status": "supported"}, {"claim_type": "exception", "conditions": ["ASG health check type is EC2 instance status"], "confidence": "high", "id": "cl-ebdcf8b7e105", "source_question_ids": ["awssysops-p3-1-q698"], "statement": "An EC2 instance can appear Healthy in the Auto Scaling console while the Application Load Balancer marks the same instance unhealthy, when the Auto Scaling group's health check type is EC2 instance status rather than ELB health checks.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-ac0d2f92a80c", "source_question_ids": ["awssysops-p3-1-q698"], "statement": "Setting an Auto Scaling group's health check type to ELB makes the group defer to the same health signal the load balancer uses, resolving a healthy/unhealthy mismatch between the Auto Scaling and ALB target-group consoles.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-0d0c262cc2c9", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Scaling a worker fleet on CPU utilization alone does not reliably track SQS queue backlog, because a workload can be CPU-light yet slow to process, letting the queue grow unbounded even while CPU looks fine.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-c5666c0c7929", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Scaling an Auto Scaling group's policy based on the number of messages in its SQS queue directly ties worker capacity to the actual backlog depth.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ab72a6be117f", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Increasing the retention period of an SQS queue only extends how long unprocessed messages are kept before being discarded; it does not increase processing throughput and does not fix a growing message backlog.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-3cb2d04162d3", "source_question_ids": ["awssysops-p3-1-q759"], "statement": "An EC2 Auto Scaling lifecycle hook can pause an instance in the Terminating:Wait state after it has been marked unhealthy and removed from service, giving time to analyze the instance before it is actually terminated.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-cb8cf9380981", "source_question_ids": ["awssysops-p3-1-q759"], "statement": "An ALB health check has no capability to restart an unhealthy instance; it only reports health status for the Auto Scaling group to act on.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c13f9fc9d02b", "source_question_ids": ["awssysops-p3-1-q795"], "statement": "RequestCountPerTarget is a built-in, zero-instrumentation Application Load Balancer metric that can be used in a target tracking scaling policy to scale an Auto Scaling group on per-instance request load with the least administrative effort.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-8d6984b7e4d2", "source_question_ids": ["awssysops-p3-1-q795"], "statement": "A custom CloudWatch metric that measures average active requests across EC2 instances requires an administrator to build, publish, and maintain their own instrumentation, which is more effort than using an AWS-provided built-in metric.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ccdc72a1f35d", "source_question_ids": ["awssysops-p3-1-q795"], "statement": "The ALB ActiveConnectionCount metric measures raw TCP connection counts rather than request volume.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c6bacb87d7ca", "source_question_ids": ["awssysops-p3-1-q795"], "statement": "The Auto Scaling group GroupDesiredCapacity metric is a state metric describing the group's own target size, not a load signal to scale from.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-aa9aa216e4a2", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Amazon CloudFront caches content (static assets, images, software patches, articles) at globally distributed edge locations, so repeat requests are served from the cache instead of hitting the origin, reducing origin load and lowering latency for end users during traffic spikes.", "status": "supported"}, {"claim_type": "rule", "conditions": ["only one regional origin/endpoint exists"], "confidence": "high", "id": "cl-c130c98dd118", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Route 53 latency-based routing only changes anything when multiple regional endpoints/origins exist to route between; with a single origin/endpoint in one region, enabling latency-based routing is a no-op.", "status": "supported"}, {"claim_type": "exception", "conditions": ["single ALB in a single region"], "confidence": "high", "id": "cl-6e2168b5d516", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "With only a single ALB in a single region, enabling Route 53 latency-based routing is a no-op — every request already resolves to that same one load balancer regardless of the routing policy, since latency-based routing only has an effect when multiple regional endpoints exist.", "status": "supported"}, {"claim_type": "fact", "confidence": "medium", "id": "cl-f5e012055e26", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Implementing EC2 Auto Scaling for web servers lets the fleet grow to handle load spikes that would otherwise slow down dynamic content generation.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-07b6c66f4ffd", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "An Application Load Balancer's listener cannot be changed to TCP, because ALBs operate only at the application layer (HTTP/HTTPS); TCP listeners are an NLB-only feature.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-4f15257bb6d2", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "Moving static content off S3 onto the web servers adds load to the same instances already implicated in the site's slowness, rather than relieving it.", "status": "supported"}, {"claim_type": "exception", "confidence": "medium", "id": "cl-1c868159145a", "source_question_ids": ["awssysops-p3-1-q826"], "statement": "For improving performance of a slow single-region website, the source's boxed/labeled answer includes Route 53 latency-based routing (paired with Auto Scaling), but community consensus unanimously favors pairing CloudFront caching of static content with Auto Scaling instead, since latency-based routing is a no-op with only one ALB in one region.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-b529f354039f", "source_question_ids": ["awssysops-p3-1-q834"], "statement": "HTTP 5xx errors that correlate with sustained high CPU utilization on backend EC2 instances indicate a capacity shortage, which is resolved by adding instances via an Auto Scaling group.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-6da5aeb8d269", "source_question_ids": ["awssysops-p3-1-q834"], "statement": "Configuring more frequent ALB target group health checks only changes how quickly unhealthy instances are pulled from rotation; it does not add capacity or reduce the CPU load causing 5xx errors.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-18e6da85b6d3", "source_question_ids": ["awssysops-p3-1-q834"], "statement": "Enabling sticky sessions on an Application Load Balancer only helps when load is unevenly distributed across instances, not when overall CPU demand across the fleet is too high.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-236035c03c32", "source_question_ids": ["awssysops-p3-1-q834"], "statement": "Increasing an Application Load Balancer's idle timeout setting affects how long idle client connections are held open and is unrelated to a CPU-driven capacity shortage causing 5xx errors.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9f019281e39d", "source_question_ids": ["awssysops-p3-1-q859"], "statement": "VPC Flow Logs capture network traffic metadata (source/destination IPs, ports, byte and packet counts) and never capture application log file contents.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-9c7235220e45", "source_question_ids": ["awssysops-p3-1-q859"], "statement": "The unified CloudWatch agent can stream application log files continuously to CloudWatch Logs as they are written, so the logs are durably captured well before an unhealthy instance is terminated.", "status": "supported"}, {"claim_type": "exception", "conditions": ["log transfer attempted after instance has already reached terminated state"], "confidence": "medium", "id": "cl-5db38b31fe9b", "source_question_ids": ["awssysops-p3-1-q859"], "statement": "An EventBridge rule that reacts to an EC2 instance's transition to the terminated state risks a timing gap, because the instance's EBS volume and in-memory log access may no longer be reliably reachable by the time the rule fires.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-47239174e5a5", "source_question_ids": ["awssysops-p3-1-q859"], "statement": "Changing EC2 storage from EBS to instance store makes logs less durable, not more, since instance store data is lost on instance termination.", "status": "supported"}, {"claim_type": "rule", "conditions": ["EC2 instances are managed by an Auto Scaling group created via a CloudFormation template", "the template defines an AutoScalingRollingUpdate policy"], "confidence": "high", "id": "cl-73d68fe0310e", "source_question_ids": ["awssysops-p3-1-q887"], "statement": "An AutoScalingRollingUpdate policy set in a CloudFormation template lets the Auto Scaling group's instances be replaced in controlled batches during a stack update (e.g., to roll out a patched AMI) while enforcing a minimum number of instances in service throughout the update.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-a7ef883ff502", "source_question_ids": ["awssysops-p3-1-q887"], "statement": "Updating a CloudFormation template with a new AMI ID and then rebooting the existing EC2 instances does not apply the new AMI to those instances, because rebooting does not re-launch an instance from a different image.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-7edd9bef5fa7", "source_question_ids": ["awssysops-p3-1-q887"], "statement": "Running aws cloudformation update-stack with the --rollback-configuration option only controls rollback and monitoring behavior if the stack update fails; it does not control the instance-replacement strategy used during the update.", "status": "supported"}, {"claim_type": "rule", "conditions": ["template defines an AutoScalingReplacingUpdate policy on the Auto Scaling group resource"], "confidence": "high", "id": "cl-9b80ec8afb44", "source_question_ids": ["awssysops-p3-1-q897"], "statement": "A CloudFormation AutoScalingReplacingUpdate policy replaces an Auto Scaling group's instances with an entirely new group during a stack update, and can immediately roll the stack back without failure if the new version has problems, all while keeping the same load balancer and without requiring any DNS change.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-be297650d674", "source_question_ids": ["awssysops-p3-1-q897"], "statement": "Auto Scaling group lifecycle hooks let new instances complete custom actions before entering service, but they provide no documented rollback mechanism of their own if the new application version has problems.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-08c1df183e09", "source_question_ids": ["awssysops-p3-1-q897"], "statement": "Manually creating a new AMI and launch configuration and updating the Auto Scaling group to use it has no built-in rollback mechanism if the new version has problems.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-cd831e1c7e00", "source_question_ids": ["awssysops-p3-1-q897"], "statement": "Deploying a second CloudFormation stack with a new Application Load Balancer and cutting over to it requires a DNS change to redirect traffic to the new load balancer, which violates a requirement to avoid DNS changes during deployment.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-661e5631875f", "source_question_ids": ["awssysops-p3-1-q897"], "statement": "For the question about deploying a new application release without DNS changes and with rollback support, the source's boxed correct answer is using Auto Scaling lifecycle hooks, but community vote is unanimous for using an AutoScalingReplacingUpdate policy instead, since lifecycle hooks have no documented rollback mechanism; the question is flagged disputed.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-988395e180f0", "source_question_ids": ["awssysops-p3-1-q914"], "statement": "A termination lifecycle hook puts an EC2 instance into a wait state before it is actually terminated, giving a defined window to complete a custom action, such as delivering logs to an external system, before termination proceeds.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b12f014853a0", "source_question_ids": ["awssysops-p3-1-q914"], "statement": "Enabling Auto Scaling scale-in protection and then manually detaching the instance removes it from the Auto Scaling group but provides no wait-state or hook for confirming an action like log delivery before the instance is terminated.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-42092a1a17e2", "source_question_ids": ["awssysops-p3-1-q914"], "statement": "A fixed response configured on an Application Load Balancer only affects how the load balancer answers incoming requests; it has no bearing on log delivery before instance termination.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-auto-scaling--m-1", "title": "Auto Scaling as a desired-capacity control loop", "purpose": "Predict what an Auto Scaling group will do (launch, terminate, replace, or nothing) and which object you must change to alter that behavior.", "mechanism": "An Auto Scaling group is a Regional control loop that keeps the number of in-service EC2 instances equal to its desired capacity, bounded by min and max, inside only the AZs/subnets configured on the group. The group itself owns the 'where and how many' (AZs, min/max/desired, health check type, attached load balancers, tags). The launch configuration/template owns the 'what' (AMI, instance type, key pair, security groups, detailed monitoring); it is an immutable, free blueprint, so changing it means creating a new one and pointing the group at it, and only newly launched instances pick it up. Inputs change desired capacity: manual edits, CloudWatch alarms executing scaling policies on the group (never on the launch configuration), and scheduled actions. Raising desired (or min) launches instances immediately; raising max only lifts the ceiling. Health checks (EC2 status by default, ELB only if added) mark instances unhealthy, and the loop terminates and replaces them rather than rebooting. Every action runs through a named, individually suspendable process (Launch, Terminate, HealthCheck, ReplaceUnhealthy, AZRebalance, AlarmNotification, ScheduledActions, AddToLoadBalancer), and cooldowns, warm-up, and lifecycle hooks gate or pause these actions. A load balancer only routes traffic to whatever the loop has registered; it never launches, places, or replaces instances.", "predict_prompt": "An ASG has min=2, desired=2, max=2 in subnets in us-east-1a only, health check type EC2. The ALB marks one instance unhealthy and you raise max to 6. How many instances run, in which AZs, and is the unhealthy one replaced?", "invariants": ["Instances launch only into the AZs/subnets configured on the group; attaching an ELB does not change placement.", "Raising desired capacity (or min above current) launches instances immediately; raising max alone launches nothing.", "Launch configurations are immutable; to change instance type, AMI, or monitoring, create a new one and update the group.", "Alarms and scaling policies target the Auto Scaling group, never the launch configuration.", "Unhealthy instances are terminated and replaced, not rebooted, and do not recover on their own unless health is manually set back.", "With health check type EC2 only, the group ignores ELB 'unhealthy' verdicts.", "A group can span multiple AZs but never multiple Regions."], "limits": ["During AZ rebalancing (or with Terminate suspended while AZRebalance runs) the group can temporarily exceed max by 10% or 1 instance, whichever is greater.", "A scaling policy can only react to a metric CloudWatch can observe; there is no built-in memory metric.", "After more than 24 hours of failed launches with no running instances, AWS administratively suspends the group's processes instead of deleting it.", "Some sourced claims (health-check type behavior, scheduled-action parameters, monitoring defaults) are marked conflicted or needs-review."], "cues": ["'instances only in one AZ, none unhealthy' -> add subnets in the other AZ to the group", "'change instance type / enable detailed monitoring' -> new launch configuration", "'ALB says unhealthy but ASG says healthy' -> set health check type to ELB", "'scale out never happens despite alarm' -> check max size", "'pause scaling to troubleshoot' -> suspend processes", "'analyze or ship logs before termination' -> lifecycle hook"], "claim_ids": ["cl-74d0b20479f9", "cl-4454d72198a1", "cl-89c29e54fd36", "cl-654beee23c3c", "cl-bbd91e393133", "cl-d2868a6f609f", "cl-35061a2ee1ca", "cl-c22ef7c2ef11", "cl-73f2a2e44e9f", "cl-ee7931c80f1a", "cl-75ad36ae1f72", "cl-6b027616c185", "cl-b9de0f2dd9eb", "cl-12ac1c977ad1", "cl-5f86d011edf5", "cl-3d12dc34fa47", "cl-6727af50fbec", "cl-f6e6f2e50fe5", "cl-94533f105047", "cl-f3096f50a1b8", "cl-9021c6e1d856", "cl-ac0d2f92a80c", "cl-911cd34160e9", "cl-7dafe088c316", "cl-aba2774b345d", "cl-bd9ced375d31", "cl-d33bebe23f93", "cl-472e6a92f1dd", "cl-326f17080e14", "cl-1d630cb80679", "cl-325242cc31fe", "cl-3cb2d04162d3", "cl-a7ef883ff502", "cl-bfeb8c26c1b0", "cl-28a54d0afafe", "cl-80f8008f2d10", "cl-58ce9d3b3af3", "cl-41f2f1f1a637", "cl-73776fc51cc2"]}, "contrastSet": {"id": "aws-sysops-service-auto-scaling--cs-1", "subjects": ["Auto Scaling group", "Elastic Load Balancer", "Launch configuration"], "dimensions": ["What it controls", "Replaces failed instances", "Decides AZ placement", "Can be an alarm/scaling-policy target", "How to change it", "Billed"], "shared_traits": ["All three appear together in a standard scalable web tier.", "New ASG instances register automatically with an attached load balancer and are built from the launch configuration."], "matrix": {"What it controls": {"Auto Scaling group": "How many instances and where (min/max/desired, AZs, health type)", "Elastic Load Balancer": "Where incoming requests go among registered healthy targets", "Launch configuration": "What each instance is (AMI, type, SGs, key, monitoring)"}, "Replaces failed instances": {"Auto Scaling group": "Yes: terminates and launches a replacement", "Elastic Load Balancer": "No: only stops routing to it", "Launch configuration": "No: passive blueprint"}, "Decides AZ placement": {"Auto Scaling group": "Yes: only its configured subnets", "Elastic Load Balancer": "No: attaching it does not change placement", "Launch configuration": "No: AZs are chosen on the group"}, "Can be an alarm/scaling-policy target": {"Auto Scaling group": "Yes", "Elastic Load Balancer": "No: it is observed, its metrics feed alarms", "Launch configuration": "No"}, "How to change it": {"Auto Scaling group": "Update group settings in place", "Elastic Load Balancer": "Update listeners, health checks, stickiness", "Launch configuration": "Immutable: create new one, repoint group"}, "Billed": {"Auto Scaling group": "Instances it runs are billed", "Elastic Load Balancer": "Yes, even when idle", "Launch configuration": "Never"}}, "decision_rule": "Ask what the fix must change: instance count, placement, or lifecycle (launch, replace, terminate, AZ spread) -> Auto Scaling group; distribution of incoming requests across already-running instances -> load balancer; properties of each instance (type, AMI, monitoring) -> a new launch configuration.", "boundary_flip": "With healthy instances all in one AZ and zero unhealthy, the fix is the Auto Scaling group (add a subnet in the second AZ), not the ELB. Change the problem to 'the new instances should be a larger instance type' and the answer flips to creating a new launch configuration. Change it to 'one already-running instance gets all the traffic because of sticky sessions' and it flips to the load balancer setting.", "strongest_distractor_failure": "Adding or reconfiguring an ELB looks like a high-availability or throughput fix, but an ELB never launches, places, or replaces instances. It does not fix one-AZ placement, does not replace a failed bastion, does not stop the group's scaling when you deregister instances, does not raise EC2-to-SQS throughput, and it cannot restart an unhealthy instance.", "exceptions": ["The load balancer's verdict does drive replacement once the group's health check type includes ELB; with EC2-only checks it is ignored.", "Sticky sessions and long-lived connections on the load balancer can keep new Auto Scaling instances idle even though the group launched them correctly.", "Suspending AddToLoadBalancer keeps launches going but stops registration; instances launched during the suspension must be registered manually."], "claim_ids": ["cl-74d0b20479f9", "cl-4454d72198a1", "cl-89c29e54fd36", "cl-59f08028b5d8", "cl-ddb93ea39149", "cl-3806c77a8fd0", "cl-cb8cf9380981", "cl-9051dabb6b29", "cl-911cd34160e9", "cl-654beee23c3c", "cl-bbd91e393133", "cl-d2868a6f609f", "cl-c22ef7c2ef11", "cl-ee7931c80f1a", "cl-6b027616c185", "cl-b9de0f2dd9eb", "cl-5f9cc3ab9c43", "cl-75ad36ae1f72", "cl-ea1886242af2", "cl-d169a5435f6e", "cl-1081779c8879", "cl-46b76b34dfff", "cl-f3096f50a1b8", "cl-ac0d2f92a80c", "cl-5e5941c8e2a4", "cl-a24664b6506a"]}, "scenarioFamily": {"id": "aws-sysops-service-auto-scaling--sf-1", "canonical": {"prompt": "An Auto Scaling group is configured with min=2, desired=2, max=2, using subnets only in us-east-1a, and its health check type is set to EC2 only (not ELB). The attached ALB marks one of the two running instances unhealthy because its application stopped responding, even though the EC2 status check still reports the instance as running. An administrator then raises the group's maximum size to 6, hoping this fixes the imbalance. What happens to the group's instance count, its Availability Zone distribution, and the ALB-flagged unhealthy instance?", "expected_answer": ["Desired capacity stays at 2, so the group still runs exactly 2 instances; raising max alone does not by itself launch any new instances.", "Both instances remain in us-east-1a only, since the group was never configured with subnets in another AZ, and raising max does not change where it launches instances.", "The ALB-flagged unhealthy instance is not terminated or replaced, because the group's health check type is EC2 only, so it ignores the ALB's unhealthy verdict entirely."], "reasoning": "Raising a group's maximum size only lifts the ceiling it is allowed to scale to -- it does not itself launch instances or force launches into an underused AZ, since desired capacity (not max) is what drives launches, and an Auto Scaling group only launches instances into the AZs/subnets it is configured to use. Because the health check type is set to EC2 only, the group ignores ELB 'unhealthy' verdicts entirely, so the ALB flagging an instance unhealthy has no effect on that instance's fate while this health check type is in force.", "distractor_analysis": "A tempting but wrong read is that raising max to 6 triggers scale-out to balance the AZs, confusing the ceiling (max) with the trigger for launching (desired capacity). An equally tempting wrong read is that the ALB's unhealthy verdict gets the instance replaced, which ignores that EC2-only health check type makes the group deaf to ELB verdicts.", "claim_ids": ["cl-6727af50fbec", "cl-74d0b20479f9", "cl-f3096f50a1b8"], "difficulty": "medium", "importance": "high"}, "variants": [{"variant_type": "boundary", "changed_condition": "The Auto Scaling group's health check type now includes ELB (instead of EC2 only); everything else in the canonical scenario is unchanged.", "prompt": "Same setup as before -- min=2, desired=2, max=2, subnets only in us-east-1a -- but now the group's health check type includes ELB, not just EC2 status checks. The ALB marks one of the two instances unhealthy. The administrator again raises max to 6. What happens to the instance count, AZ distribution, and the unhealthy instance?", "expected_answer": ["The group still ends up running 2 instances once replacement completes; raising max to 6 still does not by itself add extra instances beyond desired capacity.", "Instances remain in us-east-1a only; the health check type change does not affect AZ placement.", "The ALB-flagged unhealthy instance IS now terminated and replaced with a new instance, because adding ELB to the health check type is what makes the group act on, rather than ignore, the ALB's unhealthy verdict."], "reasoning": "Adding the ELB health check type is exactly what makes the Auto Scaling group terminate and replace instances the ELB has marked unhealthy; when it is removed from service it is terminated and a fresh instance is launched rather than rebooted in place. This flips only the fate of the unhealthy instance relative to the canonical scenario -- the instance-count and AZ-placement conclusions are unchanged because those are governed by desired capacity and configured subnets, not by health check type.", "claim_ids": ["cl-9021c6e1d856", "cl-7dafe088c316", "cl-74d0b20479f9", "cl-6727af50fbec"], "difficulty": "medium", "importance": "high"}, {"variant_type": "irrelevant-detail", "changed_condition": "The scenario now explicitly states the group's launch configuration specifies t2.micro instances with detailed monitoring enabled; health check type is still EC2 only.", "prompt": "Same setup as the canonical scenario -- min=2, desired=2, max=2, subnets only in us-east-1a, health check type EC2 only, ALB marks one instance unhealthy, administrator raises max to 6 -- except now you're also told the group's launch configuration specifies t2.micro instances with detailed monitoring enabled. Does this change the instance count, AZ distribution, or the fate of the unhealthy instance?", "expected_answer": ["Desired capacity stays at 2, so the group still runs exactly 2 instances; raising max alone does not by itself launch any new instances.", "Both instances remain in us-east-1a only, since the group was never configured with subnets in another AZ, and raising max does not change where it launches instances.", "The ALB-flagged unhealthy instance is not terminated or replaced, because the group's health check type is EC2 only, so it ignores the ALB's unhealthy verdict entirely."], "reasoning": "The instance type an Auto Scaling group launches is defined on its launch configuration, not the group itself, and the launch configuration has no bearing on desired capacity, AZ placement, or health check behavior. Stating the launch configuration's instance type and monitoring setting is extra detail that doesn't change any of the three conclusions reached in the canonical scenario.", "claim_ids": ["cl-654beee23c3c", "cl-6727af50fbec", "cl-74d0b20479f9", "cl-f3096f50a1b8"], "difficulty": "medium", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "Instead of raising max size, the administrator attaches a second ELB to the group, believing this will spread the instances into us-east-1b and get the unhealthy instance replaced.", "prompt": "Same canonical setup -- min=2, desired=2, max=2, subnets only in us-east-1a, health check type EC2 only, one instance flagged unhealthy by the ALB -- but instead of raising max size, the administrator attaches a second ELB to the group, believing this will spread instances into us-east-1b and get the unhealthy instance replaced. What actually happens?", "expected_answer": ["The group still runs exactly 2 instances in us-east-1a only; attaching another ELB does not change which Availability Zones the group launches instances into.", "The ALB-flagged unhealthy instance is still not replaced, because the group's health check type remains EC2 only and ignores ELB unhealthy verdicts; attaching a second ELB doesn't change the health check type.", "Attaching a second ELB does not remove a single point of failure or force rebalancing by itself, since an ELB already spans multiple Availability Zones on its own; it never decides where the Auto Scaling group places instances."], "reasoning": "This is the group's strongest distractor pattern: adding or reconfiguring a load balancer looks like it should fix availability or placement problems, but a load balancer only routes traffic to whatever the Auto Scaling group has already launched -- it never launches, places, or replaces instances. Attaching an ELB does not change which AZs the group uses, and a second ELB does not remove a single point of failure since an ELB is already highly available across AZs on its own.", "distractor_analysis": "The administrator's belief that attaching an ELB will rebalance AZs or replace the unhealthy instance is the exact failure mode the mental model warns about: load balancers never control instance count, placement, or replacement.", "claim_ids": ["cl-4454d72198a1", "cl-364df7c366b0", "cl-f3096f50a1b8"], "difficulty": "hard", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The domain shifts from instance-count/AZ/health-check control for a web tier to scaling an EC2 fleet's throughput against an SQS queue; the question asks which knob actually raises throughput, applying the same 'the Auto Scaling group is what you scale' principle.", "prompt": "A team runs an EC2 fleet in an Auto Scaling group that produces and consumes messages from an SQS queue, and they need to raise the aggregate message throughput between the fleet and SQS. One engineer proposes attaching an ELB in front of the fleet, another proposes switching to EBS-optimized instances, and a third proposes assigning each instance a public IP address. Applying the same principle that it is the Auto Scaling group -- not a load balancer or an instance-level setting -- that controls scaling, what is actually the most scalable way to raise throughput, and are any of the three proposals correct?", "expected_answer": ["Scale the Auto Scaling group itself: configure a CloudWatch alarm/scaling policy watching a queue-depth metric such as ApproximateNumberOfMessagesVisible so the group launches more producer/consumer instances as the backlog grows, raising aggregate throughput.", "None of the three proposals help: an ELB does not improve throughput between EC2 and SQS, because there is no inbound traffic to SQS for an ELB to distribute.", "EBS-optimized instances improve EBS disk I/O, not throughput to the SQS API endpoint, so that proposal doesn't help either.", "Enabling a public IP address affects internet reachability, not throughput to the SQS API endpoint, so that proposal doesn't help either."], "reasoning": "The same core idea from the canonical scenario -- that the Auto Scaling group, not a load balancer or an instance-level setting, is the thing that actually controls scaling -- transfers directly to this SQS throughput problem: the scalable fix is an Auto Scaling group with triggers watching queue depth, while the ELB, EBS-optimization, and public-IP proposals each target something unrelated to the EC2-to-SQS throughput bottleneck.", "claim_ids": ["cl-c719bdb2fd5e", "cl-ddb93ea39149", "cl-18e92d1fc8a0", "cl-692ae06ed096"], "difficulty": "medium", "importance": "medium"}]}, "issues": [{"type": "contradiction", "severity": "high", "description": "The bastion claim (q026) says an ASG with min=max=1 across multiple AZs gives 'self-healing high availability with zero human intervention'. The q620 claims say a min=desired=max=1 group gives only fault tolerance, not true high availability, and that HA needs at least two running instances. Both sources treat the same configuration as the right or wrong answer to a high-availability requirement. The q620/q925 claims are marked conflicted. The disagreement is unresolved, and the contrast set uses cl-9051dabb6b29 as if it were settled.", "related_entity_ids": ["cl-9051dabb6b29", "cl-715fe867a821", "cl-c8d528b33cea", "aws-sysops-service-auto-scaling--cs-1"]}, {"type": "contradiction", "severity": "medium", "description": "The defaults for detailed monitoring disagree. cl-94014e3c41fc (q193) says basic 5-minute monitoring applies only when detailed monitoring has been explicitly disabled. cl-97e717875fc1 (q250, conflicted) says basic monitoring is the default when the launch configuration or template is created through the console. cl-8f9722483bb1 (q080, needs-review) says the 5-minute vs 1-minute choice is a group-level metric setting enabled on the Auto Scaling group at extra charge. That contradicts cl-f777ebb0182b, which says the monitoring setting lives on the launch configuration, not the group. The mental model states that the launch configuration owns monitoring without resolving any of this.", "related_entity_ids": ["cl-dd08dfc6260c", "cl-94014e3c41fc", "cl-97e717875fc1", "cl-8f9722483bb1", "cl-f777ebb0182b", "cl-35061a2ee1ca", "aws-sysops-service-auto-scaling--m-1"]}, {"type": "contradiction", "severity": "medium", "description": "Sticky sessions are described in opposite ways. cl-1081779c8879 (q053) says sticky sessions cause load imbalance by pinning users to existing instances, so new instances get no traffic. cl-18e6da85b6d3 (q834) says enabling sticky sessions 'only helps when load is unevenly distributed', which presents stickiness as a fix for uneven distribution. These two claims disagree on what sticky sessions do to load distribution.", "related_entity_ids": ["cl-1081779c8879", "cl-18e6da85b6d3", "aws-sysops-service-auto-scaling--cs-1"]}, {"type": "contradiction", "severity": "low", "description": "The size of the overshoot above max capacity is stated inconsistently. cl-bfeb8c26c1b0 says '10 percent or 1 instance, whichever is greater'. cl-fbde3f0ec3e3 says 'up to 10 percent larger', and cl-28a54d0afafe says 'roughly 10%'. cl-71c508c64bed says the overshoot lasts only a few minutes. The Terminate-suspended claims say it lasts until Terminate is resumed. The mental model's limits combine the two scenarios under the 'whichever is greater' wording.", "related_entity_ids": ["cl-bfeb8c26c1b0", "cl-fbde3f0ec3e3", "cl-28a54d0afafe", "cl-71c508c64bed", "aws-sysops-service-auto-scaling--m-1"]}, {"type": "contradiction", "severity": "medium", "description": "For q826 the source's labeled answer (Route 53 latency-based routing plus Auto Scaling) disagrees with the community consensus (CloudFront plus Auto Scaling). For q897 the source's boxed answer (lifecycle hooks) disagrees with the community vote (AutoScalingReplacingUpdate). The claims record the community answer as the supported rule (cl-9b80ec8afb44, cl-be297650d674, cl-c130c98dd118, cl-6e2168b5d516) even though the source key disagrees. That resolves the dispute instead of flagging it.", "related_entity_ids": ["cl-1c868159145a", "cl-661e5631875f", "cl-9b80ec8afb44", "cl-be297650d674", "cl-c130c98dd118", "cl-6e2168b5d516"]}, {"type": "unsupported-generation", "severity": "medium", "description": "Two mental-model invariants are stated without qualification ('With health check type EC2 only, the group ignores ELB unhealthy verdicts'), and the contrast-set exception about the ELB verdict driving replacement is also unqualified. Both rest on cl-f3096f50a1b8 and cl-9021c6e1d856, which are marked conflicted. Related replacement behavior (cl-9031af5dded4, and the terminate-then-launch order in cl-ddbe26d31e0b) is also conflicted. The limits only acknowledge this in general terms.", "related_entity_ids": ["cl-f3096f50a1b8", "cl-9021c6e1d856", "cl-158e9339e5f7", "cl-9031af5dded4", "cl-aca8badc08d7", "cl-ddbe26d31e0b", "aws-sysops-service-auto-scaling--m-1", "aws-sysops-service-auto-scaling--cs-1"]}, {"type": "ambiguity", "severity": "medium", "description": "The source questions disagree on how to scale a memory-bound application. q531 says that without a published memory metric a policy cannot react, which implies a custom memory metric. Its ALB distractor is conflicted. q572 offers RequestCountPerTarget as a load proxy whatever the constrained resource is (conflicted). q795 calls RequestCountPerTarget the least-effort option and rejects custom metrics (conflicted). The right answer for memory pressure is unresolved.", "related_entity_ids": ["cl-80f8008f2d10", "cl-57776b837f9c", "cl-d3f78161c259", "cl-7672c65f43ed", "cl-c13f9fc9d02b", "cl-8d6984b7e4d2"]}, {"type": "ambiguity", "severity": "medium", "description": "The required parameters for a scheduled action (q067) are conflicted. One claim says group name and recurrence are required. Another says MaxSize alone is not strictly required because any one of Min, Max, or Desired is enough. A third says End time is optional. It is unclear which option set the source treats as correct.", "related_entity_ids": ["cl-b363d301375d", "cl-ac88b48f624b", "cl-0f3415e8737a"]}, {"type": "stale-risk", "severity": "medium", "description": "For q144 the claims disagree on whether scheduled actions can be created only up to one month in advance or whether that limit has been lifted. Both are needs-review, so the dated rule may be stale. q007's reasoning about ELB pre-warming (conflicted) is a legacy Classic ELB practice and carries a similar staleness risk.", "related_entity_ids": ["cl-24862e599ba7", "cl-902f4c30d792", "cl-6492a4c28d0c", "cl-96ecd2c3b395"]}, {"type": "ambiguity", "severity": "low", "description": "For q098 the claims disagree on whether an ELB needs extra redundancy. cl-6f199e65b744 says Route 53 failover provides it. cl-403da5e71dca says the ELB is already highly available. cl-364df7c366b0 (q010) supports the latter. All q098 claims are needs-review, so the intended answer is unclear.", "related_entity_ids": ["cl-6f199e65b744", "cl-403da5e71dca", "cl-4084632746a0", "cl-364df7c366b0"]}, {"type": "ambiguity", "severity": "low", "description": "Several claims are marked conflicted, or are disputed among practitioners, with no resolution recorded. These include whether scale-in protection applies to Spot-instance groups (q463), whether manual scaling counts as a supported scaling type (q405), the scale-in-protection-plus-detach distractor (q914), scheduled scaling for the recurring surge (q614), and the q750 SQS backlog claims. The q750 claims agree with the supported q530 and q004 claims, so it is unclear why they are marked conflicted.", "related_entity_ids": ["cl-8b2da1a67646", "cl-ab6543e2d344", "cl-e6f0423c9548", "cl-5e2f8334d6d2", "cl-b12f014853a0", "cl-0b152212b6ba", "cl-0d0c262cc2c9", "cl-c5666c0c7929", "cl-ab72a6be117f"]}, {"type": "quality", "severity": "low", "description": "cl-f655ae18068f is phrased as a confusing double negative ('It is false that ... cannot be viewed ... merely because'), and both q078 claims are needs-review. The cross-instance aggregation claim (cl-ef7191e97bf8) is also vague about which statistics or dimension it relies on.", "related_entity_ids": ["cl-f655ae18068f", "cl-ef7191e97bf8"]}, {"type": "unsupported-generation", "severity": "low", "description": "Two matrix cells in the contrast set have no supporting claim. One is 'Elastic Load Balancer / How to change it: Update listeners, health checks, stickiness'. The other is 'Auto Scaling group / How to change it: Update group settings in place', which is only partly supported. Separately, the exception that sticky sessions 'keep new Auto Scaling instances idle' goes beyond cl-1081779c8879, which only says new instances get no traffic from already-connected users.", "related_entity_ids": ["aws-sysops-service-auto-scaling--cs-1", "cl-1081779c8879", "cl-46b76b34dfff"]}], "sourceQuestionCount": 83}], "sources": {"kind": "locked", "file": "aws-sysops-service-auto-scaling-umd5.sources.enc.js"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam. The slice bodies (mental model, claims,
+  // etc.) ride inline in BUNDLE; only sourceQuestions live in sibling files,
+  // loaded on demand via injected <script> tags (fetch/XHR can't read a
+  // sibling under file:// -- each file:// resource is its own origin). ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: s.sourceQuestionCount || 0 };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function claimListItemHtml(c) {
+    var status = c.status || 'status unknown';
+    return safe`<li><span class="badge status-${status.replace(/\s+/g, '-')}">${status.replace(/-/g, ' ')}</span><span>${c.statement}</span>${raw(markControlHtml('claim:' + c.id))}</li>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`
+      <details class="claims">
+        <summary>Supporting claims <span class="tally">${claims.length}</span></summary>
+        <ul class="citations">${raw(claims.map(claimListItemHtml).join(''))}</ul>
+      </details>`;
+  }
+  function truncate(text, max) {
+    text = text || '';
+    return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, marks: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        marks: parsed.marks && typeof parsed.marks === 'object' ? parsed.marks : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  // ---------- confidence marks: the learner's own "flag this for review"
+  // priority on a claim or source question -- distinct from a claim's
+  // generated `confidence` field and Practice's self-reported `confidence`
+  // radio, so this one is named `marks` to avoid colliding with either. ----------
+  var MARK_LEVELS = ['low', 'medium', 'high'];
+
+  function markControlHtml(key) {
+    var active = STATE.marks[key];
+    return safe`<span class="mark-control" data-mark-key="${key}">${raw(MARK_LEVELS.map(function (level) {
+      var isActive = active === level;
+      return safe`<button type="button" class="mark-dot mark-${level}${raw(isActive ? ' is-active' : '')}" data-mark-value="${level}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Mark ${level} priority"></button>`;
+    }).join(''))}</span>`;
+  }
+
+  function handleMarkClick(event) {
+    var dot = event.target.closest('.mark-dot');
+    if (!dot) return;
+    var key = dot.closest('.mark-control').getAttribute('data-mark-key');
+    var value = dot.getAttribute('data-mark-value');
+    if (STATE.marks[key] === value) delete STATE.marks[key];
+    else STATE.marks[key] = value;
+    saveState();
+    navigate();
+  }
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private or incognito mode?). '
+        + 'Progress will not be saved after this tab closes, so export it before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- one-way revision export: groups everything currently marked
+  // by level (low, then medium, then high) into a Markdown file. Never
+  // re-imported, unlike exportProgress's JSON. ----------
+  function exportRevisionNotes() {
+    var questions = (SOURCES.status === 'ready' ? SOURCES.bySlice : {})[CURRENT.contentSet.id] || [];
+    var claimsById = {};
+    (CURRENT.claims || []).forEach(function (c) { claimsById[c.id] = c; });
+
+    var byLevel = { low: [], medium: [], high: [] };
+    Object.keys(STATE.marks).forEach(function (key) {
+      var level = STATE.marks[key];
+      if (byLevel[level]) byLevel[level].push(key);
+    });
+
+    var lines = ['# Revision notes: ' + CURRENT.contentSet.facet.value, ''];
+    MARK_LEVELS.forEach(function (level) {
+      var keys = byLevel[level];
+      if (!keys.length) return;
+      lines.push('## ' + level.charAt(0).toUpperCase() + level.slice(1) + ' priority', '');
+      keys.forEach(function (key) {
+        var sepIndex = key.indexOf(':');
+        var kind = key.slice(0, sepIndex);
+        var id = key.slice(sepIndex + 1);
+        if (kind === 'claim') {
+          var claim = claimsById[id];
+          lines.push('- ' + (claim ? claim.statement : '(claim ' + id + ' no longer available)'), '');
+        } else if (kind === 'question') {
+          var q = questions.find(function (item) { return item.id === id; });
+          if (!q) {
+            lines.push('### ' + id, '', '(question details unavailable -- open Explore Sources to load question data)', '');
+            return;
+          }
+          lines.push('### ' + q.id, '', q.stem || '', '');
+          (q.choices || []).forEach(function (c) {
+            var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+            lines.push('- ' + c.letter + '. ' + c.text + (isCorrect ? ' (correct)' : ''));
+          });
+          lines.push('', '**Correct answer:** ' + (q.correct_answer || []).join(', '), '', '**Explanation:** ' + (q.explanation || ''), '');
+        }
+      });
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-revision-' + Date.now() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+      if (payload.learnerState.marks !== undefined && !isPlainObject(payload.learnerState.marks)) {
+        errors.push('learnerState.marks is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    var marks = {};
+    if (isPlainObject(rawState.marks)) {
+      Object.keys(rawState.marks).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.marks[key];
+        if (MARK_LEVELS.indexOf(v) !== -1) marks[key] = v;
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      marks: marks,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+        Object.keys(incoming.marks).forEach(function (key) { STATE.marks[key] = incoming.marks[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose lead">${model.purpose || ''}</p>
+        <div class="predict-block panel">
+          <label class="field-label" for="predict-input">${progress.revealed ? 'Your prediction' : 'Predict first'}</label>
+          <p class="prompt" id="predict-prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="3" aria-describedby="predict-prompt" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<div class="actions"><button id="reveal-model-btn" type="button">Reveal mechanism</button></div>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table">
+          <table class="contrast-table">
+            <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+            <tbody>${raw(rows)}</tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <h3>Decision rule</h3>
+          <p>${cs.decision_rule || ''}</p>
+        </div>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var pendingCount = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; }).length;
+      var diagnoseLink = pendingCount
+        ? safe`<a class="button-link" href="${sliceHref('diagnose')}">Diagnose ${pendingCount} ${pendingCount === 1 ? 'miss' : 'misses'}</a>`
+        : '';
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <div class="panel summary">
+            <p class="summary-label">Queue complete</p>
+            <p class="score"><strong>${correctCount}</strong> of ${attempted.length} attempts correct</p>
+            <div class="actions">
+              <button id="practice-restart" type="button">Restart queue</button>
+              ${raw(diagnoseLink)}
+            </div>
+          </div>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices"><legend>Your answer</legend>${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"><span><span class="choice-letter">${c.letter}.</span> ${c.text}</span></label>`;
+        }).join(''))}</fieldset>`
+      : safe`<div class="answer-field"><label class="field-label" for="predict-freeform">Your answer</label><textarea id="predict-freeform" rows="4" placeholder="The setting or action you would choose, and why"></textarea></div>`;
+    var metaBadges = [safe`<span class="badge tone-accent">${String(item.variant_type || 'item').replace(/-/g, ' ')}</span>`];
+    if (item.difficulty) metaBadges.push(safe`<span class="badge">Difficulty ${item.difficulty}</span>`);
+    if (item.importance) metaBadges.push(safe`<span class="badge">Importance ${item.importance}</span>`);
+    var changedCondition = item.changed_condition
+      ? safe`<div class="callout changed-condition"><h3>Changed condition</h3><p>${item.changed_condition}</p></div>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice <span class="step">${practiceIndex + 1} of ${items.length}</span></h2>
+        <div class="item-meta">${raw(metaBadges.join(''))}</div>
+        ${raw(changedCondition)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence <span class="muted">(optional)</span></legend>
+          <div class="segmented">${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"><span>${c}</span></label>`; }).join(''))}</div>
+        </fieldset>
+        <div class="actions"><button id="reveal-practice-btn" type="button">Reveal answer</button></div>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var isLast = practiceIndex + 1 === items.length;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti, isLast);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti, isLast) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    section.querySelectorAll('textarea, input').forEach(function (el) { el.disabled = true; });
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedList = Array.isArray(item.expected_answer) ? item.expected_answer : [item.expected_answer].filter(Boolean);
+    var expectedAnswerHtml = expectedList.length > 1
+      ? safe`<ul>${raw(expectedList.map(function (e) { return safe`<li>${e}</li>`; }).join(''))}</ul>`
+      : safe`<p>${expectedList[0] || ''}</p>`;
+    var reasoning = item.reasoning ? safe`<h3>Reasoning</h3><p>${item.reasoning}</p>` : '';
+    var distractors = item.distractor_analysis
+      ? safe`<h3>Why other options fail</h3><p class="distractors">${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <div class="panel answer">
+        <h3>Expected answer</h3>
+        ${raw(expectedAnswerHtml)}
+      </div>
+      ${raw(reasoning)}
+      ${raw(distractors)}
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="self-report ${raw(isMulti ? 'hidden' : '')}">
+        <p>Compare your answer with the expected answer, then mark it.</p>
+        <div class="actions">
+          <button type="button" class="secondary" id="self-correct">I got it right</button>
+          <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+        </div>
+      </div>
+      <p id="practice-result" class="result hidden" role="status"></p>
+      <div class="actions"><button id="practice-next-btn" type="button" disabled>${isLast ? 'Finish queue' : 'Next item'}</button></div>`;
+
+    if (isMulti) {
+      section.querySelectorAll('.choices label').forEach(function (label) {
+        var value = label.querySelector('input').value;
+        if (expected.indexOf(value) !== -1) label.classList.add('is-expected');
+        else if (predicted.indexOf(value) !== -1) label.classList.add('is-wrong');
+      });
+    }
+
+    function showResult(isCorrect) {
+      var el = revealBox.querySelector('#practice-result');
+      var lead = isMulti ? (isCorrect ? 'Correct.' : 'Not quite.') : (isCorrect ? 'Marked correct.' : 'Marked wrong.');
+      el.innerHTML = isCorrect
+        ? safe`${lead}`
+        : safe`${lead} Logged for <a href="${sliceHref('diagnose')}">Diagnose</a>.`;
+      el.classList.remove('hidden');
+      el.classList.add(isCorrect ? 'result-ok' : 'result-bad');
+    }
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      showResult(isCorrect);
+      var nextBtn = revealBox.querySelector('#practice-next-btn');
+      nextBtn.removeAttribute('disabled');
+      if (!isMulti) nextBtn.focus({ preventScroll: true });
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"><span><strong>${c.label}</strong><span class="hint">${c.hint}</span></span></label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt panel" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="your-answer"><span class="field-label">Your answer</span>${predictedText}</p>
+              <fieldset>
+                <legend>What went wrong?</legend>
+                <div class="diagnosis-grid">${raw(radios)}</div>
+              </fieldset>
+              <p class="field-error hidden" role="alert">Pick the category that best explains the miss.</p>
+              <div class="actions"><button type="button" class="submit-diagnosis">Submit diagnosis</button></div>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">Nothing to diagnose. Items you mark wrong in Practice show up here.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = truncate(item ? (item.prompt || item.stem || '') : a.itemId, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="badge">${label}</span><span>${excerpt}</span><time class="muted" datetime="${a.timestamp || ''}">${when}</time></li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p class="back-link"><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis <span class="tally">${pending.length}</span></h3>
+        ${raw(pendingHtml)}
+        <h3>History <span class="tally">${history.length}</span></h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      var error = el.querySelector('.field-error');
+      el.addEventListener('change', function () { error.classList.add('hidden'); });
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) { error.classList.remove('hidden'); return; }
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+  // Page-level: the sibling file covers every slice, so this is NOT reset in
+  // activateSlice the way the two per-slice vars above are. One value, the
+  // status discriminating which fields exist:
+  //   {status:'idle'} | {status:'loading'}
+  //   {status:'locked', envelope, notice: null | 'wrong-password' | 'forgotten-key'}
+  //   {status:'unlocking', envelope, via: 'cache' | 'password'}
+  //   {status:'ready', bySlice, lock: null | {envelope, expiresAt: number | null}}   lock is null on a clear page
+  //   {status:'unavailable', reason: 'no-sources' | 'load-failed' | 'bad-envelope'}
+  var SOURCES = { status: 'idle' };
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`
+      <details class="issues-panel">
+        <summary>Issues <span class="tally">${issues.length}</span></summary>
+        <ul class="issues">${raw(issues.map(function (i) {
+          return safe`<li><p class="issue-head"><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span><strong>${i.type || 'issue'}</strong></p><p>${i.description || ''}</p></li>`;
+        }).join(''))}</ul>
+      </details>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+        return safe`<li class="${isCorrect ? 'correct-choice' : ''}"><span class="choice-letter">${c.letter}.</span> ${c.text}${raw(isCorrect ? ' <span class="badge tone-ok">correct</span>' : '')}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul class="citations">${raw(citing.map(claimListItemHtml).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="5">
+            <div class="source-detail">
+              <p>${q.stem}</p>
+              <ul>${raw(choiceItems)}</ul>
+              <h4>Explanation</h4>
+              <p>${q.explanation || ''}</p>
+              <p class="muted source-meta">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+              <h4>Cited by <span class="tally">${citing.length}</span></h4>
+              ${raw(citedList)}
+            </div>
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge tone-warn">disputed</span>' : '';
+    return safe`
+      <tr class="source-row${raw(isOpen ? ' is-open' : '')}" data-id="${q.id}">
+        <td class="cell-id"><button type="button" class="row-toggle" aria-expanded="${isOpen ? 'true' : 'false'}">${q.id}</button></td>
+        <td class="cell-status">${q.status || ''}${raw(disputedBadge)}</td>
+        <td class="cell-stem">${truncate(q.stem, 90)}</td>
+        <td class="cell-answer">${(q.correct_answer || []).join(', ')}</td>
+        <td class="cell-mark">${raw(markControlHtml('question:' + q.id))}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  // BUNDLE.sources names the one sibling this page may load. A locked page's
+  // bundle has no field that could name the clear file.
+  var SOURCE_GLOBAL = { clear: '__EKD_SOURCES_CLEAR__', locked: '__EKD_SOURCES_ENC__' };
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.onload = function () { el.remove(); resolve(); };
+      el.onerror = function () { el.remove(); reject(new Error('failed to load ' + src)); };
+      document.body.appendChild(el);
+    });
+  }
+
+  function urlSourcesBaseUrl() {
+    try { return new URLSearchParams(location.search).get('sourcesBaseUrl'); } catch (e) { return null; }
+  }
+
+  function sourcesScriptUrl(name) {
+    var base = urlSourcesBaseUrl();
+    return base ? new URL(name, base).toString() : name;
+  }
+
+  function base64UrlToBytes(text) {
+    var padded = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (padded.length % 4) padded += '=';
+    var bin = atob(padded);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function bytesToBase64Url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  // Envelope v2 (scripts/ekd/sources_crypto.py), checked once here so the
+  // crypto calls below can trust its fields.
+  function parseEnvelope(raw) {
+    try {
+      var ok = raw && raw.v === 2 && raw.kdf && raw.kdf.name === 'PBKDF2' && raw.kdf.hash === 'SHA-256'
+        && Number.isInteger(raw.kdf.iterations) && raw.kdf.iterations > 0
+        && raw.cipher && raw.cipher.name === 'AES-GCM' && typeof raw.ciphertext === 'string';
+      if (!ok) return null;
+      return {
+        salt: raw.kdf.salt,
+        saltBytes: base64UrlToBytes(raw.kdf.salt),
+        iterations: raw.kdf.iterations,
+        iv: base64UrlToBytes(raw.cipher.iv),
+        ciphertext: base64UrlToBytes(raw.ciphertext),
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The raw AES key bits, never the password, are what a page can remember.
+  function deriveKey(envelope, password) {
+    var secret = new TextEncoder().encode(password.normalize('NFC'));
+    return crypto.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', hash: 'SHA-256', salt: envelope.saltBytes, iterations: envelope.iterations }, base, 256);
+    }).then(function (bits) { return new Uint8Array(bits); });
+  }
+
+  function decryptSources(envelope, rawKey) {
+    return crypto.subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['decrypt']).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: envelope.iv }, key, envelope.ciphertext);
+    }).then(function (plainBuf) {
+      var data = JSON.parse(new TextDecoder().decode(plainBuf));
+      if (!data || typeof data !== 'object') throw new Error('decrypted sources are not an object');
+      return data;
+    });
+  }
+
+  // Remembered keys, one localStorage entry per sealing, keyed by its salt.
+  // Chrome shares one localStorage across every file:// page, and each
+  // reseal draws a fresh salt, so two Workspaces never share an entry and a
+  // resealed file never matches a key remembered for its old sealing.
+  // Entry: {"v":1, "key":"<b64url 32-byte AES key>", "expiresAt":<ms>}, 7
+  // days from when the password was entered, never extended.
+  var KEY_PREFIX = 'ekd:sources-key:';
+  var KEY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function parseKeyRecord(text, now) {
+    try {
+      var rec = JSON.parse(text);
+      if (!rec || rec.v !== 1 || typeof rec.key !== 'string' || !Number.isFinite(rec.expiresAt)) return null;
+      if (now >= rec.expiresAt) return null;
+      var key = base64UrlToBytes(rec.key);
+      return key.length === 32 ? { key: key, expiresAt: rec.expiresAt } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var KeyCache = {
+    get: function (salt, now) {
+      try {
+        var text = localStorage.getItem(KEY_PREFIX + salt);
+        if (text === null) return null;
+        var rec = parseKeyRecord(text, now);
+        if (!rec) localStorage.removeItem(KEY_PREFIX + salt);
+        return rec;
+      } catch (e) {
+        return null;
+      }
+    },
+    // The expiry, or null when storage refuses the write (the page still unlocks).
+    put: function (salt, rawKey, now) {
+      var expiresAt = now + KEY_TTL_MS;
+      try {
+        localStorage.setItem(KEY_PREFIX + salt, JSON.stringify({ v: 1, key: bytesToBase64Url(rawKey), expiresAt: expiresAt }));
+        return expiresAt;
+      } catch (e) {
+        return null;
+      }
+    },
+    forget: function (salt) {
+      try { localStorage.removeItem(KEY_PREFIX + salt); } catch (e) {}
+    },
+    // Removes expired or malformed entries, including those of sealings no
+    // page will ask for again because their file was resealed.
+    sweep: function (now) {
+      try {
+        var stale = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var name = localStorage.key(i);
+          if (name && name.indexOf(KEY_PREFIX) === 0 && !parseKeyRecord(localStorage.getItem(name), now)) stale.push(name);
+        }
+        stale.forEach(function (name) { localStorage.removeItem(name); });
+      } catch (e) {}
+    },
+  };
+
+  // Pure. A (state, event) pair not listed leaves the state unchanged, which
+  // is also what drops a late async result that no longer applies.
+  function transition(s, e) {
+    switch (s.status + ' ' + e.type) {
+      case 'idle open':
+        return BUNDLE.sources ? { status: 'loading' } : { status: 'unavailable', reason: 'no-sources' };
+      case 'loading loaded-clear':
+        return { status: 'ready', bySlice: e.bySlice, lock: null };
+      case 'loading loaded-envelope':
+        return e.cached
+          ? { status: 'unlocking', envelope: e.envelope, via: 'cache' }
+          : { status: 'locked', envelope: e.envelope, notice: null };
+      case 'loading load-failed':
+        return { status: 'unavailable', reason: e.reason };
+      case 'locked submit':
+        return { status: 'unlocking', envelope: s.envelope, via: 'password' };
+      case 'unlocking decrypted':
+        return { status: 'ready', bySlice: e.bySlice, lock: { envelope: s.envelope, expiresAt: e.expiresAt } };
+      case 'unlocking decrypt-failed':
+        return { status: 'locked', envelope: s.envelope, notice: s.via === 'cache' ? 'forgotten-key' : 'wrong-password' };
+      case 'ready lock':
+        return s.lock ? { status: 'locked', envelope: s.lock.envelope, notice: null } : s;
+      default:
+        return s;
+    }
+  }
+
+  function dispatch(e) {
+    var next = transition(SOURCES, e);
+    if (next === SOURCES) return;
+    SOURCES = next;
+    startEffect(next, e);
+    var body = document.getElementById('sources-body');
+    if (body) paintSources(body);
+  }
+
+  function startEffect(s, e) {
+    if (s.status === 'loading') {
+      var kind = BUNDLE.sources.kind;
+      var globalName = SOURCE_GLOBAL[kind];
+      window[globalName] = undefined;
+      loadScript(sourcesScriptUrl(BUNDLE.sources.file)).then(function () {
+        var loaded = window[globalName];
+        window[globalName] = undefined;
+        if (kind === 'clear') {
+          if (loaded && typeof loaded === 'object') dispatch({ type: 'loaded-clear', bySlice: loaded });
+          else dispatch({ type: 'load-failed', reason: 'load-failed' });
+          return;
+        }
+        var envelope = parseEnvelope(loaded);
+        if (!envelope) { dispatch({ type: 'load-failed', reason: 'bad-envelope' }); return; }
+        dispatch({ type: 'loaded-envelope', envelope: envelope, cached: KeyCache.get(envelope.salt, Date.now()) });
+      }, function () {
+        dispatch({ type: 'load-failed', reason: 'load-failed' });
+      });
+      return;
+    }
+    if (s.status === 'unlocking') {
+      var envelope = s.envelope;
+      var fromCache = s.via === 'cache';
+      var keyReady = fromCache ? Promise.resolve(e.cached.key) : deriveKey(envelope, e.password);
+      keyReady.then(function (rawKey) {
+        return decryptSources(envelope, rawKey).then(function (bySlice) { return { rawKey: rawKey, bySlice: bySlice }; });
+      }).then(function (opened) {
+        var expiresAt = fromCache ? e.cached.expiresAt : KeyCache.put(envelope.salt, opened.rawKey, Date.now());
+        dispatch({ type: 'decrypted', bySlice: opened.bySlice, expiresAt: expiresAt });
+      }, function () {
+        if (fromCache) KeyCache.forget(envelope.salt);
+        dispatch({ type: 'decrypt-failed' });
+      });
+    }
+  }
+
+  var UNAVAILABLE_TEXT = {
+    'no-sources': 'No source data is bundled with this Workspace.',
+    'load-failed': 'The sources file could not be loaded.',
+    'bad-envelope': 'The encrypted sources file is not in a format this page can read.',
+  };
+  var LOCKED_NOTICE_TEXT = {
+    'wrong-password': 'Incorrect password',
+    'forgotten-key': 'The key remembered on this browser no longer opens this file. Enter the current password.',
+  };
+
+  function renderSources() {
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        ${raw(issuesHtml())}
+        <div id="sources-body"></div>
+      </section>`;
+    var fragment = fromHTML(html);
+    if (SOURCES.status === 'idle') dispatch({ type: 'open' });
+    paintSources(fragment.querySelector('#sources-body'));
+    return fragment;
+  }
+
+  function passwordFormHtml(notice, busy) {
+    var noticeBlock = notice ? safe`<p><span class="badge severity-high">${LOCKED_NOTICE_TEXT[notice]}</span></p>` : '';
+    return safe`
+      ${raw(noticeBlock)}
+      <p class="muted">These source questions are encrypted. Enter this Workspace's password to unlock them.</p>
+      <label class="field-label" for="sources-password">Password</label>
+      <input type="password" id="sources-password" autocomplete="off" spellcheck="false"${raw(busy ? ' disabled' : '')}>
+      <p><button type="button" id="sources-unlock"${raw(busy ? ' disabled' : '')}>${busy ? 'Unlocking…' : 'Unlock sources'}</button></p>`;
+  }
+
+  function paintSources(body) {
+    var s = SOURCES;
+    if (s.status === 'idle' || s.status === 'loading') {
+      body.innerHTML = '<p class="muted">Loading sources&hellip;</p>';
+    } else if (s.status === 'unavailable') {
+      body.innerHTML = safe`<p class="empty">${UNAVAILABLE_TEXT[s.reason]}</p>`;
+    } else if (s.status === 'unlocking') {
+      body.innerHTML = s.via === 'cache' ? '<p class="muted">Unlocking sources&hellip;</p>' : passwordFormHtml(null, true);
+    } else if (s.status === 'locked') {
+      body.innerHTML = passwordFormHtml(s.notice, false);
+      var input = body.querySelector('#sources-password');
+      var submit = function () {
+        if (input.value) dispatch({ type: 'submit', password: input.value });
+      };
+      body.querySelector('#sources-unlock').addEventListener('click', submit);
+      input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') submit(); });
+      if (s.notice === 'wrong-password') input.focus();
+    } else if (s.status === 'ready') {
+      renderSourcesTable(body);
+      if (s.lock) {
+        body.insertAdjacentHTML('afterbegin', lockBarHtml(s.lock));
+        body.querySelector('#sources-lock').addEventListener('click', function () {
+          KeyCache.forget(s.lock.envelope.salt);
+          dispatch({ type: 'lock' });
+        });
+      }
+    }
+  }
+
+  function lockBarHtml(lock) {
+    var remembered = lock.expiresAt === null
+      ? 'Not remembered (storage unavailable)'
+      : 'Remembered on this browser until '
+        + new Date(lock.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return safe`<p class="sources-lock"><span class="muted" id="sources-remembered">${remembered}</span><button type="button" class="secondary" id="sources-lock">Lock</button></p>`;
+  }
+
+  function renderSourcesTable(body) {
+    var questions = SOURCES.bySlice[CURRENT.contentSet.id] || [];
+    body.innerHTML = safe`
+      <div class="search-field">
+        <label class="field-label" for="sources-search">Search questions</label>
+        <input type="search" id="sources-search" placeholder="Stem, choices, or explanation">
+        <p class="muted" id="sources-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Source questions">
+        <table class="sources-table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Status</th><th scope="col">Stem</th><th scope="col">Correct</th><th scope="col">Mark</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </div>`;
+    var input = body.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      body.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = body.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.length
+        ? filtered.map(sourceRowHtml).join('')
+        : safe`<tr><td colspan="5" class="empty-cell">No questions match "${sourcesSearchTerm}".</td></tr>`;
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function (event) {
+          if (event.target.closest('.mark-control')) return;
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+          var toggle = tbody.querySelector('.source-row[data-id="' + CSS.escape(id) + '"] .row-toggle');
+          if (toggle) toggle.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      var cs = CURRENT.contentSet;
+      document.getElementById('app-title').innerHTML = safe`<span class="title-exam">${cs.exam}</span><span class="title-sep" aria-hidden="true">/</span><span class="title-facet"><span class="visually-hidden">${cs.facet.key}: </span>${cs.facet.value}</span>`;
+      document.title = cs.facet.value + ' · ' + cs.exam;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+        if (mode === target.mode) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('export-revision-btn').addEventListener('click', exportRevisionNotes);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  document.getElementById('app').addEventListener('click', handleMarkClick);
+  window.addEventListener('hashchange', navigate);
+  KeyCache.sweep(Date.now());
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>
