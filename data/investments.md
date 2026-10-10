@@ -3,6 +3,7 @@
 | Ticker | Name | Category |
 |--------|------|----------|
 | MSFT | Microsoft Corporation | Stock |
+| GOOGL | Google | Stock |
 | IBM | International Business Machines | Stock |
 | CSPX | iShares Core S&P 500 UCITS ETF | ETF |
 | ES3 | SPDR Straits Times Index ETF | ETF |
