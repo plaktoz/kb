@@ -63,9 +63,17 @@ Derive all content from the report — do not invent.
 
 ### Step 3 — Generate lessons.md curriculum plan
 
-Analyse the report and design a lesson curriculum. Rules:
+First, read `.claude/skills/kb-trunk-branch-extractor/SKILL.md` and apply its method to the full report, asking for the **full tree**. Don't save the tree as a separate file; it is the skeleton for the curriculum:
+
+- **Trunk principles set the module order.** Teach the principles other principles depend on first. Each module is built around one or two trunk principles, which become its "why this module" line.
+- **Branches become lessons and exercises.** A branch is a concrete framework, tactic, or tool, so it is what the learner practises. Each lesson teaches one or more branches of its module's principles.
+- **Orphans are gaps.** List them under `## Gaps` in lessons.md (see below) instead of building lessons on them. They are tactics the report doesn't ground in a principle.
+- *(implied)* **principles** can frame a module, but they can't be a lesson's citation anchor on their own, because the report never states them.
+- **Model names** come from `data/mental-models.md`: look each one up with one distinctive word (`grep -i '<word>' data/mental-models.md`) and use the name in the **Model** column when a row matches.
+
+Then design the curriculum. Rules:
 - Target **8–15 lessons** total. Justify in a comment if outside this range.
-- Group lessons into **3–4 modules** that follow a logical learning arc (foundations → architecture → advanced → evaluation is a common pattern, but adapt to the report's structure).
+- Group lessons into **3–4 modules** ordered by the trunk principles they rest on, foundations first.
 - Each lesson must map to **one source paper or concept cluster** from the report — no lesson without a citation anchor.
 - Each lesson must have a **skill exercise** (something the learner actively does, not just reads).
 
@@ -79,7 +87,15 @@ Write `<research-dir>/lessons.md` using this structure:
 
 ---
 
+## Core Principles
+
+**T1. {Principle}** — {stated as an invariant} · *model:* [[Model Name]]
+**T2. …**
+
+---
+
 ## Module N — {Module Title}
+*Builds on:* T1, T2
 *One sentence on why this module comes here in the sequence.*
 
 ### Lesson N: {Title}
@@ -95,7 +111,15 @@ Write `<research-dir>/lessons.md` using this structure:
 
 ## Suggested Teaching Order
 
-[brief note on sequencing logic]
+[brief note on sequencing logic: which principles depend on which]
+
+---
+
+## Gaps
+
+- {Orphan branch} — {why the report doesn't ground it in a principle}
+
+[Omit this section if the extractor found no orphans.]
 
 ---
 

@@ -1,0 +1,318 @@
+# Excluded model names
+
+Names used as mental-model links in wiki notes that were reviewed and judged not to be established mental models, usually labels coined for one article. `/kb-librarian` skips these when it collects unlisted names. Listed models are in `mental-models.md`.
+
+- Absence of Signal as Signal
+- Access as a Force Multiplier
+- Accountability Effect
+- Accountability Gap
+- Accountability Systems
+- Adaptation vs. Optimization
+- Adaptive Systems
+- Adjacency Expansion
+- Algebraic Data Types
+- Amortization
+- Amplification Not Replacement
+- Anti-Inflammatory as Aging Lever
+- Appeal to Authority vs. Evidence
+- Astroturfing vs. Grassroots
+- Asymmetric Growth
+- Asymmetric Rules
+- Attention as a Muscle
+- Attention as the Bottleneck
+- Authority Inheritance
+- Automation as Force Multiplier
+- Automation as Scale Enabler
+- Automation Hierarchy
+- Automation of Expertise
+- Automation of the Scientific Method
+- Automation Substitution
+- Autonomy Paradox
+- Autonomy-Oversight Tradeoff
+- Backward Compatibility as a Design Constraint
+- Backward Compatibility as a First-Class Constraint
+- Bad News Is Good News
+- Batch Processing vs. Stream Processing
+- Benchmarking as Proxy
+- Beta-to-GA Rollout
+- Bidirectional Causality
+- Black Box Probing
+- Burn Rate vs. Runway
+- Calibration
+- Canary in the Coal Mine
+- Capability–Control Gap
+- Capability–Expectation Gap
+- Capacity Ahead of Demand
+- Capacity vs. Utilization
+- Capex as a Moat Signal
+- Catalyst Risk
+- Category-Defining IPO Effect
+- Cheapest-First Diagnosis
+- Checklists as Protocols
+- Chop Wood Carry Water
+- Circular Dependency
+- Circular Reference Risk
+- Cocktail Effect
+- Cognitive Leverage
+- Commitment Under Uncertainty
+- Commons vs. Enclosure
+- Competition as Quality Driver
+- Competitive Destruction
+- Competitive Differentiation via Constraints
+- Competitive Moat via Financial Structure
+- Competitive Moat via Resource Acquisition
+- Competitive Moat vs. Disruption
+- Compiler as Feedback Loop
+- Complementarity Principle
+- Complementary Strengths
+- Complexity as a Liability
+- Complexity Ceiling
+- Complexity Tax
+- Compounding Cost of Delay
+- Compounding Errors
+- Compressing the Discovery Funnel
+- Compression
+- Compression as Understanding
+- Concentrated Risk via Vendor Lock-in
+- Consistency Principle
+- Constraint Design
+- Constraint Relaxation
+- Constraint Removal
+- Constraint Satisfaction
+- Constraints as Creative Catalyst
+- Constraints as Enablers
+- Context Dependency
+- Context-Dependent Optimization
+- Convergent Evidence
+- Conviction Investing
+- Correlated Risk
+- Cost-capability frontier
+- Craftsman Approach to Tool Selection
+- Credibility as Capital
+- Credibility Through Independence
+- Cumulative Impact
+- Cyclicality vs. Durability
+- Decoupling Dividend
+- Defensive Acquisition
+- Delegation Depth
+- Delegation Ladder
+- Delegation Principle
+- Delegation Spectrum
+- Democratization of tools
+- Democratization via Abstraction
+- Dependency Confusion Attack
+- Depth vs. Breadth Trade-off
+- Diminishing Returns vs Breadth
+- Discount Rate Effect
+- Discounting Mechanism
+- Distribution as Moat
+- Distribution vs. Product
+- Divergence as Signal
+- Divergent Reaction to Shared Conditions
+- Diversification as Optionality
+- Doing vs. Knowing
+- Drug Repurposing
+- Dual Outcome Framing
+- Dual-Track Economy
+- Earnings Asymmetry
+- Effect Size vs. Mechanism
+- Ego Depletion and Decentralized Systems
+- Emotional Safety as a Prerequisite
+- Empathic Listening
+- Encoding vs. Retrieval Failure
+- Energy Management vs. Time Management
+- Engagement Decay
+- Enough (Sufficiency Mindset)
+- Equilibrium Thinking
+- Euler's Graph Abstraction
+- Evaluator-Generator Pattern
+- Expectation Anchoring
+- Expectations vs Reality Gap
+- Explicit vs. Implicit Contracts
+- Exploiting Asymmetry
+- Fear and Greed Cycle
+- Feedback as Information
+- First-Principles Problem Selection
+- Fixed vs. Variable Cost Framing
+- Follow the Value Chain
+- Founder DNA
+- Frankfurt's Bullshit
+- Friction
+- Frontier Push
+- Grand Gesture
+- Greedy Approximation
+- Heterogeneity in Meta-Analysis
+- Identity vs. Achievement
+- Identity-Performance Gap
+- Immediate Reinforcement
+- Impermanence
+- Implementation Gap
+- Inbox Zero for Agents
+- Incentive Asymmetry
+- Incentive Systems Shape Culture
+- Independent Verification
+- Index Illusion
+- Individual Variation
+- Individual Variation Principle
+- Information Advantage
+- Information Diet
+- Information vs Behavior Gap
+- Infrastructure Analogy
+- Infrastructure as Governance
+- Infrastructure Financing Cycle
+- Inner Loop / Outer Loop
+- Interoperability as Adoption Lever
+- Iterate Don't Predict
+- Iterative vs. Waterfall Thinking
+- Last-Mile Advantage
+- Layered Architecture
+- Lazy Evaluation / Reuse Principle
+- Legitimacy Without Authority
+- Leverage and Volatility
+- Leverage Stacking
+- Leverage Through Multiplier Effects
+- Liability Aggregation
+- Liability Management
+- Long-term vs. Short-term Thinking
+- Loss Aversion via Momentum
+- Macro Asset Convergence
+- Market Breadth as Leading Indicator
+- Measurement Matters
+- Message Passing
+- Minimal Footprint Principle
+- Minimum Viable Context
+- Minimum Viable Information
+- Modeling (Organizational Learning)
+- Monopoly Economics
+- Monopoly Pricing Power
+- Moonshot Thinking
+- Namespace Pollution
+- Narrative Framing
+- Narrative Shift
+- Off-by-One Error
+- One-Size-Fits-All Fallacy
+- Opportunity Cost of Cognitive Outsourcing
+- Optimization Target Specificity
+- Organizational Clarity
+- Overhang Effect
+- Pair Programming
+- Parallel Search Heuristic
+- Parallelism as Default
+- Pattern Interruption
+- Personalization at Scale
+- Personalization Principle
+- Pipeline Discount
+- Pivot as Strategy
+- Plans Are Not Strategies
+- Platform Bundling
+- Platform Defense
+- Platform Gravity
+- Platform Leverage
+- Platform Risk and Monetization Lag
+- Platform vs. Product
+- Portfolio Diversification Paradox
+- Post-Mortem Learning
+- Pre-emptive Product Development
+- Precedent Effect
+- Prediction Markets Logic
+- Premature Optimization vs. Readability Tradeoff
+- Prepared Mind Principle
+- Prerequisite Graph Thinking
+- Prevention Window
+- Price-Performance Tradeoff
+- Price/Sales as a Growth Tax
+- Pricing Power as a Moat
+- Proactive Problem Framing
+- Product Mix Shift
+- Progressive Automation
+- Progressive Tool Adoption
+- Proximity to Power
+- Rate of Learning
+- Redundant Representation
+- Reframing
+- Regime Change
+- Regulatory Capture vs. Domain Expertise
+- Regulatory Lag
+- Regulatory Risk
+- Regulatory Risk as Moat Destroyer
+- Regulatory Vacuum
+- Repurposing Existing Drugs
+- Reputational Asymmetry
+- Resource Conservation
+- Resource Exhaustion Principle
+- Right Tool for the Job
+- Risk Premium Repricing
+- Risk-Adjusted Timing
+- Risk-Reward Calibration
+- Safety as Differentiator
+- SALT Treaties
+- Satiety Signaling
+- Scarcity Moat
+- Sector Rotation Signaling
+- Sentiment Anchor
+- Sentiment as a Contrarian Indicator
+- Sentiment as a Short-Term Driver
+- Separation of Interface from Implementation
+- Separation of Memory and Reasoning
+- Separation of Schema and Code
+- Serendipity by Design
+- Setup-Conflict-Resolution Framework
+- Shared Language
+- Signal Corruption vs. Signal Loss
+- Signaling vs. Reality
+- Simulation as Assessment
+- Single Task Owner
+- Skill Decomposition
+- Skill Pyramid Inversion
+- Skill Stack Complementarity
+- Skill vs. Knowledge Bottleneck
+- Small Sample Bias
+- Specialization Advantage
+- Specialization Trade-off
+- Specialization via Constraints
+- Specialization vs Generalization
+- Specificity of Effect
+- Stage-Gate Thinking
+- Stakeholder Tradeoff
+- Standardization as Infrastructure
+- Stigma as a healthcare barrier
+- Strategic Resource Theory
+- Strategy vs. Execution Gap
+- Structure over Character
+- Supplier Lock-in via Equity
+- Supply Constraint Moat
+- Symptom Attribution Bias
+- Symptom Burden vs Physical Capacity
+- Systematic vs. Discretionary Decision-Making
+- Talent as Moat
+- Targeted Therapy vs Broad-Spectrum Attack
+- Taxonomy as Leverage
+- Technical Moats via Novel Manufacturing
+- Technological Revival Cycle
+- Technological Salvation Ideology
+- Technology Portfolio Hedging
+- The Dichotomy of Leadership
+- Threat Model Inversion
+- Threshold Decision Rules
+- Threshold Effect
+- Time Horizon as Risk Reducer
+- Time-Value of Investment
+- Timing as Strategy
+- Timing vs Structure
+- Token Economics
+- Tool Fit vs Feature Count
+- Translation Gap
+- Transparency by Design
+- Triage Heuristic
+- Trickle-Down Capital Fallacy
+- Trust as Infrastructure
+- Two-Language Problem
+- Unification as Leverage
+- Usage-Based Pricing
+- Variance vs. Mean Thinking
+- Version Control as a First-Class Citizen
+- Voting Control as Strategic Asset
+- Wide Moat vs. Wide Uncertainty
+- Window of Opportunity
+- Working Memory
+- Writing as Thinking

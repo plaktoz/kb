@@ -41,6 +41,12 @@ Read `.claude/skills/kb-investment-digest/SKILL.md`. Execute Steps 1–4 from th
 
 If no finance notes are found for this week, skip the Portfolio Pulse section entirely — no placeholder.
 
+## Step 3.6 — Gather this week's core principles
+
+From `kbm.log.md`, take this week's `ingest` rows (the Monday–Sunday range) and the `compound` rows for topic files. Read the `## 🧠 Core Principles` section of each of those notes and topic files, if it has one. Older notes may only have the earlier `## 🧠 First Principles & Mental Models` section; skip those.
+
+Group principles that state the same invariant, even if they're worded differently or named with different models. A principle that appears in several notes this week, or in a topic file `/kb-compound` updated this week, is the strongest candidate for **One Lesson to Keep**.
+
 ## Step 4 — Synthesize and write
 
 Generate a short, tight newsletter using exactly this structure:
@@ -69,7 +75,7 @@ Generate a short, tight newsletter using exactly this structure:
 [Omit this section entirely if no finance notes were found for the week.]
 
 ## 🧱 One Lesson to Keep
-[Single sentence. The most durable, actionable takeaway from this week — something worth carrying forward regardless of what next week brings.]
+[Single sentence. The most durable, actionable takeaway from this week — something worth carrying forward regardless of what next week brings. Build it from the strongest principle found in Step 3.6, and cite the notes or topic file it comes from. If Step 3.6 found no principles, choose the takeaway from the digests as before.]
 ```
 
 ## Tone & style

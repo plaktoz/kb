@@ -16,3 +16,6 @@ Thumbs.db
 
 # Python bytecode from running skill scripts/tests
 __pycache__/
+
+# Scratch output from skill test runs
+.scratch/

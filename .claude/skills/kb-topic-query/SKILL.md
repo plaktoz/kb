@@ -40,6 +40,7 @@ Read all matched files. For each note, extract:
 - Key frameworks, models, or named concepts
 - Statistics, data points, or named studies
 - Existing Obsidian `[[links]]` to related notes
+- Any `## 🧠 Core Principles` section, kept with its `→ explains:` lines
 
 ## Step 4 — Synthesize and output
 
@@ -56,6 +57,10 @@ Output in this exact order, with no preamble:
 - [Second finding] `[[note-slug]]`
 - ... (max 8 bullets)
 
+**What it rests on**
+- **[Principle]** — [stated as an invariant, 1 sentence] `[[note-slug]]`, `[[note-slug]]`
+- ... (max 3 bullets)
+
 **Gaps**
 [1–2 sentences on what the vault does NOT cover well. Suggest `/kb-research-topic` if there are obvious holes worth filling.]
 
@@ -63,6 +68,7 @@ Output in this exact order, with no preamble:
 
 ## Notes
 
+- For **What it rests on**, read `.claude/skills/kb-trunk-branch-extractor/SKILL.md` and apply its method to the notes you read, asking for the **trunk only** output. Start from the notes' own Core Principles sections where they exist. Cite the notes each principle comes from, and leave the section out if nothing qualifies.
 - Every claim must trace to a vault note. Do not add facts from your own training data.
 - If two notes conflict on the same point, surface the tension: "note-a says X, note-b says Y."
 - Keep the summary tight — this is a recall tool, not a report.

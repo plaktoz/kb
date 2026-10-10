@@ -47,11 +47,13 @@ For each article, craft exactly **1 question**. Match the question type to the a
 | Named framework or model | Application — "How would you apply X to Y?" |
 | Comparison or contrast | Synthesis — "What distinguishes X from Y?" |
 | Causal argument | Explanation — "Why does the author argue X leads to Y?" |
+| Note has a `## 🧠 Core Principles` section | Principle — "Which underlying principle explains [Key Takeaway]?" or "Where else would [principle] predict the same outcome?" |
 
 Rules:
 - Questions must require genuine thinking, not trivial lookup.
 - Do not use multiple choice — open recall is harder and more durable.
 - One question per article. No follow-ups unless the user requests a deeper dive.
+- Ask a **Principle** question for about a third of the articles that have a Core Principles section, so the quiz mixes durable ideas with specific facts. Grade it against the principle and the Key Takeaways listed after its `→ explains:`.
 
 ## Step 5 — Run the quiz interactively
 

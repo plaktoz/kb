@@ -62,6 +62,8 @@ For qualifying notes, synthesize from the note's own content:
 
 Only propose impact bullets that are genuinely non-obvious. If a vault note directly supports an impact claim, cite it; otherwise no citation is required for these sections.
 
+**Section upgrade check:** If the target note has the older `## 🧠 First Principles & Mental Models` section, prepare a replacement `## 🧠 Core Principles` section. Follow `/kb-ingest` step 9 exactly (`.claude/skills/kb-ingest/SKILL.md`): its extractor call, its bar, its format, and its model-name lookup in `data/mental-models.md`. Apply it to the original article if it's still in `raw/processed/` (`grep -rl "source_url: <url>" raw/processed/`); otherwise apply it to the note's own text. If no principle clears the bar, don't propose an upgrade, and leave the old section as it is.
+
 ## Step 4 — Propose additions
 
 Present the proposed additions to the user before touching the file. Use this format:
@@ -86,6 +88,10 @@ Present the proposed additions to the user before touching the file. Use this fo
 - [downstream effect flowing from the first-order consequences]
 - ...
 
+**Section upgrade:** *(only when the section upgrade check produced one)*
+- Replace `## 🧠 First Principles & Mental Models` with:
+  [the new `## 🧠 Core Principles` section, in full]
+
 **Contradictions / updates:**
 - [existing claim in target note] may be outdated — `[[source-note]]` says [newer finding]
 
@@ -109,7 +115,8 @@ On confirmation, update the target note:
    - If they do not exist, insert both sections after `## Key Takeaways` and before `## Review Questions` (or at the end if no Review Questions section exists)
 4. If contradictions were found, add a `## Notes` section (or append to it if it exists) documenting the tension:
    > As of [date], `[[source-note]]` reports [newer finding] — may supersede the claim above.
-5. Do NOT modify `## Summary`, frontmatter, or any existing content — additions only
+5. If a section upgrade was approved, replace the `## 🧠 First Principles & Mental Models` section with the new `## 🧠 Core Principles` section in the same position. This is the only change allowed to existing content.
+6. Do NOT modify `## Summary`, frontmatter, or any other existing content — additions only
 
 Do not log to `kbm.log.md` — this is a vault enrichment, not a new ingest.
 

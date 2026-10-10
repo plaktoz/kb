@@ -78,27 +78,34 @@ Example:
 - **Architectural Shifts**: The transition from centralized databases to [[Decentralized Systems]].
 - **Performance Metrics**: A 40% reduction in token consumption using active semantic filtering.
 
-### 9. First Principles & Mental Models section (conditional)
+### 9. Core Principles section (conditional)
 
-**Only include this section if** a named mental model maps cleanly enough that a thoughtful reader would independently reach the same connection. If the link requires stretching, omit the section entirely — an absent section is better than a forced one.
+Read `.claude/skills/kb-trunk-branch-extractor/SKILL.md` and apply its method to the raw article's text. Ask for the **trunk with evidence** output, embedded at level 2 with the title `🧠 Core Principles`. Format model names as Obsidian WikiLinks (`[[Model Name]]`), and list the bold labels of the Key Takeaways that each principle explains after `→ explains:`.
+
+**Use the canonical model name from `data/mental-models.md`.** Look the model up using one distinctive word from its name:
+
+```bash
+grep -i '<word>' data/mental-models.md
+```
+
+If a row's Model or Aliases column names the same model, link the name in the **Model** column. For example, write `[[Signaling Theory]]` for costly signaling, and `[[Switching Costs]]` rather than `[[Switching Cost]]`. If no row names it, use the model's standard name. Don't edit the list yourself: `/kb-librarian` reviews unlisted names.
+
+**Only include a principle the article itself argues, explains, or tests.** Principles the article only assumes as background don't count, even if they're true and the text depends on them. For example, a market recap that says stocks rose because yields fell relies on "lower yields lift stock prices", but it doesn't argue it. If no principle clears this bar, omit the section entirely. An absent section is better than a forced one.
 
 When the bar is met, add this section after `## Key Takeaways`:
 
 ```markdown
-## 🧠 First Principles & Mental Models
+## 🧠 Core Principles
 
-- **[[Mental Model Name]]**: [1 sentence — why this model applies and what it explains about the article's core claim]
+**T1. [Principle]** — [stated as an invariant, 1–2 sentences] · *model:* [[Model Name]]
+→ explains: [Key Takeaway label], [Key Takeaway label]
 ```
 
-Use WikiLinks for every model name so they connect across the vault. Include 1–3 entries maximum. Each entry must cover both a named model AND the first-principles reasoning it illuminates — not just a label.
-
-Example (from an article on AI productivity claims):
-- **[[Goodhart's Law]]**: When productivity becomes the target metric, workers optimize for its proxies rather than actual output — exactly the dynamic Newport documents with AI tool adoption.
-- **[[Availability Bias]]**: The vividness of individual AI wins makes the aggregate productivity stagnation invisible — people generalize from memorable examples, not base rates.
+A single article usually gives 1–3 principles. Leave out `· *model:*` when no established model names the principle exactly.
 
 ### 10. Review Questions section
 
-Create a `## 🃏 Review Questions` section at the end of the note (after First Principles & Mental Models, or after Key Takeaways if that section was omitted).
+Create a `## 🃏 Review Questions` section at the end of the note (after Core Principles, or after Key Takeaways if that section was omitted).
 
 Generate exactly 3 Q&A pairs. Cover these angles in order:
 1. The article's **core claim** — what is the central argument or finding?
