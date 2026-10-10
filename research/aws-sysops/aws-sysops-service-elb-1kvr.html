@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- script-src allows any https: origin because a sources sibling file can be hosted remotely, at an origin chosen at view-time via ?sourcesBaseUrl and unknown when this file is generated. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self' https:; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  /* Theme follows prefers-color-scheme. One accent (--accent); ok/bad/warn
+     carry state only. Shape rule: --radius on every control and panel,
+     full pill on badges and tallies. z-index: header 10, nothing else. */
+  :root {
+    color-scheme: light dark;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 8px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --measure: 68ch;
+
+    --bg: #f6f7f9;
+    --surface: #fdfdfe;
+    --sunk: #eceff3;
+    --ink: #15181c;
+    --ink-2: #39414b;
+    --muted: #5a6370;
+    --line: #dce0e6;
+    --line-strong: #c3c9d1;
+    --accent: #2a5caa;
+    --accent-hover: #1f4a8c;
+    --accent-ink: #fdfdfe;
+    --accent-soft: #e7edf7;
+    --ok: #1b7348;
+    --ok-soft: #e3f2ea;
+    --bad: #ae3328;
+    --bad-soft: #fbe9e7;
+    --warn: #845400;
+    --warn-soft: #fbf0db;
+    --shadow: 0 1px 2px rgb(21 24 28 / 0.05), 0 4px 16px rgb(21 24 28 / 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --surface: #181b1f;
+      --sunk: #20242a;
+      --ink: #e6e9ed;
+      --ink-2: #c1c7cf;
+      --muted: #939ba6;
+      --line: #282d33;
+      --line-strong: #3a4047;
+      --accent: #8db0ea;
+      --accent-hover: #a9c4f0;
+      --accent-ink: #0d1829;
+      --accent-soft: #1a2639;
+      --ok: #6ccb96;
+      --ok-soft: #13271c;
+      --bad: #ef8a7e;
+      --bad-soft: #301817;
+      --warn: #e2b25a;
+      --warn-soft: #2b2212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover { color: var(--accent-hover); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem 0;
+  }
+  .header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+  }
+  header h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .title-exam { color: var(--muted); font-weight: 500; }
+  .title-sep { color: var(--line-strong); }
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #slice-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  nav#nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav#nav::-webkit-scrollbar { display: none; }
+  nav#nav a {
+    flex: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 transparent;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  nav#nav a:hover { color: var(--ink); background: var(--sunk); }
+  nav#nav a:focus-visible { outline-offset: -2px; }
+  nav#nav a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+  #storage-warning {
+    margin: 0.6rem 0 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- controls ---------- */
+  button, .button-link, .file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 550;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.1s var(--ease);
+  }
+  button:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  button:active:not(:disabled), .button-link:active, .file-label:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.secondary, .button-link, .file-label {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.secondary:hover:not(:disabled), .button-link:hover, .file-label:hover {
+    border-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .header-actions button, .header-actions .file-label { padding: 0.4rem 0.75rem; font-size: 0.84rem; }
+  .file-label { position: relative; }
+  .file-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .file-label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .field-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  textarea, input[type="search"], input[type="password"], select {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea, input[type="search"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  select { padding: 0.35rem 0.6rem; font-size: 0.84rem; }
+  textarea:focus, input[type="search"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  textarea:disabled { background: var(--sunk); color: var(--ink-2); cursor: not-allowed; }
+  ::placeholder { color: var(--muted); opacity: 1; }
+  fieldset { min-width: 0; margin: 1.5rem 0 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.94rem; font-weight: 600; }
+  input[type="checkbox"], input[type="radio"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.3rem 0 0;
+    accent-color: var(--accent);
+  }
+  .field-error { margin: 0.75rem 0 0; color: var(--bad); font-size: 0.9rem; font-weight: 500; }
+
+  /* ---------- page + type ---------- */
+  main#app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.9rem);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 2.25rem 0 0.6rem;
+    font-size: 1.06rem;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  p, li { max-width: var(--measure); text-wrap: pretty; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin: 0.45rem 0; padding-left: 0.2rem; }
+  li::marker { color: var(--muted); }
+  .muted { color: var(--muted); }
+  .lead { color: var(--ink-2); font-size: 1.125rem; }
+  .empty {
+    max-width: none;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+  }
+  .panel {
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .panel > :last-child { margin-bottom: 0; }
+  .panel textarea { background: var(--bg); }
+  .panel h3:first-child { margin-top: 0; }
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .callout h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 0.98rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .step { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tally {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    vertical-align: 0.1em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  .badge.tone-accent { background: var(--accent-soft); color: var(--accent); }
+  .badge.tone-ok, .badge.status-supported { background: var(--ok-soft); color: var(--ok); }
+  .badge.tone-bad, .badge.status-conflicted,
+  .badge.severity-high, .badge.severity-critical { background: var(--bad-soft); color: var(--bad); }
+  .badge.tone-warn, .badge.status-needs-review, .badge.severity-medium { background: var(--warn-soft); color: var(--warn); }
+  .next-link { margin-top: 2.5rem; font-weight: 550; }
+  .back-link { margin: -0.25rem 0 1.25rem; font-size: 0.92rem; }
+
+  /* ---------- supporting claims ---------- */
+  details.claims, details.issues-panel {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  details > summary {
+    width: fit-content;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  details > summary::marker { color: var(--muted); }
+  details > summary:hover { color: var(--ink); }
+  ul.citations, ul.issues {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.citations li {
+    display: grid;
+    grid-template-columns: 6.75rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.94rem;
+  }
+  ul.citations .badge { justify-self: start; }
+
+  /* ---------- confidence marks ---------- */
+  .mark-control { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .mark-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+  .mark-dot:hover:not(:disabled) { opacity: 0.85; }
+  .mark-dot:active:not(:disabled) { transform: none; }
+  .mark-dot.mark-low { background: var(--ok); border-color: var(--ok); }
+  .mark-dot.mark-medium { background: var(--warn); border-color: var(--warn); }
+  .mark-dot.mark-high { background: var(--bad); border-color: var(--bad); }
+  .mark-dot.is-active { opacity: 1; border-color: var(--ink); }
+  .cell-mark { white-space: nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 1.25rem 0 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  th, td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .contrast-table { min-width: 44rem; }
+  .contrast-table th + td, .contrast-table td + td,
+  .contrast-table thead th + th { border-left: 1px solid var(--line); }
+  .contrast-table tbody th { width: 11rem; font-weight: 600; }
+  .sources-table { min-width: 38rem; }
+  tr.source-row { cursor: pointer; transition: background-color 0.15s; }
+  tr.source-row:hover { background: var(--sunk); }
+  tr.source-row.is-open { background: var(--accent-soft); }
+  tr.source-row.is-open > td { border-bottom-color: transparent; }
+  tr.detail-row > td { background: var(--accent-soft); }
+  .cell-id { white-space: nowrap; }
+  .cell-answer { font-family: var(--font-mono); font-size: 0.86rem; }
+  .row-toggle {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .row-toggle:hover:not(:disabled) { background: none; color: var(--accent-hover); text-decoration: underline; }
+  .row-toggle:active:not(:disabled) { transform: none; }
+  .empty-cell { padding: 1.5rem; color: var(--muted); text-align: center; }
+  .source-detail { max-width: var(--measure); padding: 0.25rem 0 0.5rem; }
+  .source-detail ul { list-style: none; padding: 0; }
+  .source-detail h4 { margin: 1.25rem 0 0.4rem; font-size: 0.94rem; }
+  .source-meta { font-size: 0.86rem; }
+  .choice-letter { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .correct-choice { color: var(--ok); font-weight: 550; }
+
+  /* ---------- learn ---------- */
+  .predict-block { margin: 1.75rem 0 0; }
+  .predict-block .prompt { margin: 0 0 0.9rem; color: var(--ink-2); }
+  .mechanism { margin-top: 2.25rem; }
+  .mechanism > h3:first-child { margin-top: 0; }
+
+  /* ---------- practice ---------- */
+  .item-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .practice > .prompt { margin-top: 1.5rem; font-size: 1.0625rem; }
+  .practice > .callout + .prompt { margin-top: 1.5rem; }
+  .answer-field { margin-top: 1.5rem; }
+  .choices label, .diagnosis-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choices label:hover, .diagnosis-option:hover { border-color: var(--line-strong); }
+  .choices label:has(input:checked), .diagnosis-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .choices label.is-expected { border-color: var(--ok); background: var(--ok-soft); }
+  .choices label.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .segmented {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .segmented label {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-left: 1px solid var(--line-strong);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .segmented label:first-child { border-left: 0; }
+  .segmented label:hover { background: var(--sunk); }
+  .segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .segmented label:has(input:disabled) { cursor: not-allowed; }
+  .reveal { margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .answer p:last-child { margin-bottom: 0; }
+  .self-report {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--sunk);
+  }
+  .self-report p { margin: 0; color: var(--ink-2); }
+  .self-report .actions { margin-top: 0.75rem; }
+  .result { margin: 2rem 0 0; font-weight: 550; }
+  .result.result-ok { color: var(--ok); }
+  .result.result-bad { color: var(--bad); }
+  .result a { color: inherit; }
+  .summary-label { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.94rem; font-weight: 600; }
+  .score { margin: 0; color: var(--ink-2); font-size: 1.06rem; }
+  .score strong {
+    margin-right: 0.15rem;
+    color: var(--ink);
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- diagnose ---------- */
+  .pending-attempt { margin: 0 0 1.25rem; }
+  .pending-attempt .prompt { color: var(--ink); }
+  .your-answer { color: var(--ink-2); }
+  .your-answer .field-label { margin-bottom: 0.15rem; color: var(--muted); font-size: 0.84rem; }
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.5rem;
+  }
+  .diagnosis-option { margin: 0; }
+  .diagnosis-option .hint {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .panel .diagnosis-option { background: var(--bg); }
+  ul.diagnosis-history { margin: 0; padding: 0; list-style: none; }
+  ul.diagnosis-history li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  ul.diagnosis-history li:last-child { border-bottom: 0; }
+  ul.diagnosis-history time { font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sources ---------- */
+  .issue-head { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem; }
+  ul.issues li { max-width: none; margin: 0; padding: 0; font-size: 0.94rem; }
+  ul.issues li > p:last-child { margin-bottom: 0; }
+  .search-field { margin-top: 2rem; }
+  #sources-count { margin: 0.5rem 0 0; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .sources-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1rem 0 0; font-size: 0.88rem; }
+  .sources-lock button { padding: 0.3rem 0.7rem; font-size: 0.84rem; }
+
+  /* ---------- motion: state transitions only ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .mechanism:not(.hidden), .reveal:not(.hidden) { animation: rise 0.35s var(--ease) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    header { position: static; }
+    .header-inner { padding: 0.75rem 1rem 0; }
+    main#app { padding: 1.5rem 1rem 4rem; }
+    .panel { padding: 1rem; }
+    .lead { font-size: 1.06rem; }
+    ul.citations li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history .badge { justify-self: start; }
+    .segmented { display: flex; }
+    .segmented label { flex: 1; text-align: center; }
+    .sources-table { min-width: 0; }
+    .sources-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .sources-table tr.source-row {
+      display: grid;
+      grid-template-areas: "id answer" "stem stem" "status mark";
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sources-table tr.source-row > td { padding: 0; border: 0; }
+    .sources-table .cell-id { grid-area: id; }
+    .sources-table .cell-answer { grid-area: answer; }
+    .sources-table .cell-stem { grid-area: stem; }
+    .sources-table .cell-status { grid-area: status; color: var(--muted); font-size: 0.86rem; }
+    .sources-table .cell-mark { grid-area: mark; justify-self: end; }
+    .sources-table tr.detail-row, .sources-table tr.detail-row > td { display: block; }
+    .sources-table tbody tr:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-row">
+      <h1 id="app-title">EKD Workspace</h1>
+      <div class="header-actions">
+        <div id="slice-controls" class="hidden">
+          <label for="slice-select">Slice</label>
+          <select id="slice-select"></select>
+        </div>
+        <button id="export-btn" class="secondary" type="button">Export progress</button>
+        <button id="export-revision-btn" class="secondary" type="button">Export for revision</button>
+        <label class="file-label">Import progress
+          <input type="file" id="import-input" accept="application/json">
+        </label>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Study modes">
+      <a href="#learn" data-route="learn">Learn</a>
+      <a href="#compare" data-route="compare">Compare</a>
+      <a href="#practice" data-route="practice">Practice</a>
+      <a href="#diagnose" data-route="diagnose">Diagnose</a>
+      <a href="#sources" data-route="sources">Explore Sources</a>
+    </nav>
+    <div id="storage-warning" class="hidden" role="alert"></div>
+  </div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 2, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-elb", "exam": "aws-sysops", "facet": {"key": "service", "value": "elb"}, "schemaVersion": 1}, "sourceQuestions": [], "claims": [{"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-74d0b20479f9", "source_question_ids": ["awssysops-p1-q003"], "statement": "An Auto Scaling group only launches instances into the Availability Zones (subnets) it is configured to use.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4454d72198a1", "source_question_ids": ["awssysops-p1-q003"], "statement": "Attaching an ELB to an Auto Scaling group does not change which Availability Zones the group launches instances into.", "status": "supported"}, {"claim_type": "rule", "conditions": ["ELB shows healthy instances concentrated in one AZ and none in another, with zero unhealthy instances"], "confidence": "high", "id": "cl-89c29e54fd36", "source_question_ids": ["awssysops-p1-q003"], "statement": "To balance Auto Scaling instances across Availability Zones when one AZ has zero instances and none are unhealthy, configure the Auto Scaling group with subnets in both AZs.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9a38986587f3", "source_question_ids": ["awssysops-p1-q003"], "statement": "Raising an Auto Scaling group's maximum size does not force new instance launches into an underused Availability Zone.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-6492a4c28d0c", "source_question_ids": ["awssysops-p1-q007"], "statement": "AWS guidance reserves ELB pre-warming for sudden flash-traffic spikes, not for a gradual, forecastable ramp in traffic over multiple weeks.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-96ecd2c3b395", "source_question_ids": ["awssysops-p1-q007"], "statement": "AWS Trusted Advisor can check service limits, such as the number of EC2 instances allowed per region, which may need to be raised ahead of a planned large increase in required capacity.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["Auto Scaling group's health check type is set to EC2 only"], "confidence": "high", "id": "cl-f3096f50a1b8", "source_question_ids": ["awssysops-p1-q008"], "statement": "An Auto Scaling group can be configured to use simple EC2 status checks only, or combined EC2-plus-ELB health checks; if only EC2 checks are used, the Auto Scaling group ignores ELB 'unhealthy' verdicts entirely.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["Auto Scaling group's health check type includes ELB"], "confidence": "high", "id": "cl-9021c6e1d856", "source_question_ids": ["awssysops-p1-q008"], "statement": "Adding the ELB health check type to an Auto Scaling group's health check configuration is what makes the group terminate and replace instances that the ELB has marked unhealthy.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": ["Auto Scaling group's health check type is set to EC2 only"], "confidence": "medium", "id": "cl-158e9339e5f7", "source_question_ids": ["awssysops-p1-q008"], "statement": "Changing an Auto Scaling group's health check thresholds, changing the ELB health check interval, or switching the ELB's check protocol does not fix an Auto Scaling group ignoring ELB health-check verdicts when its health check type is set to EC2 only.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bb168dcb42b2", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Internet Gateway (IGW) is inherently redundant/highly available at the VPC level, so adding a second IGW does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-364df7c366b0", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Elastic Load Balancer automatically spans multiple Availability Zones, so adding a second ELB does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5b3aa5da8e2c", "source_question_ids": ["awssysops-p1-q010"], "statement": "A multi-AZ RDS instance already fails over automatically to a standby in a second Availability Zone, so it is not itself a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1360dcf4efc7", "source_question_ids": ["awssysops-p1-q010"], "statement": "In an architecture that already uses an IGW, an ELB spanning multiple AZs, and a multi-AZ RDS instance, there is no remaining single point of failure that needs to be fixed.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-1fa7a765b651", "source_question_ids": ["awssysops-p1-q016"], "statement": "Subnets cannot span multiple Availability Zones; achieving coverage across N Availability Zones for a resource requires provisioning one subnet per AZ.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-33fbf0096616", "source_question_ids": ["awssysops-p1-q016"], "statement": "An ELB that must be distributed across multiple Availability Zones needs a subnet registered in each of those AZs, so an ELB distributed over 2 AZs requires two public subnets (one per AZ).", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-6de4b10a3185", "source_question_ids": ["awssysops-p1-q016"], "statement": "RDS database instances should be placed in private subnets rather than public subnets so the database is not reachable from the internet.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-707b0eca29cb", "source_question_ids": ["awssysops-p1-q016"], "statement": "In a tiered VPC design with a public-facing ELB and a private database tier, the web/application servers should also be placed in private subnets rather than a public subnet.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-89952f0a9ba0", "source_question_ids": ["awssysops-p1-q016"], "statement": "Whether a single public subnet is sufficient for an ELB distributed over 2 Availability Zones (versus requiring one public subnet per AZ) is disputed among exam commenters, since some argue a single ELB can already span multiple AZs from one subnet.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["web tier is stateless and CPU/memory-bound", "data tier is already well-provisioned and consistently fast"], "confidence": "high", "id": "cl-1e0ca1f2007d", "source_question_ids": ["awssysops-p1-q024"], "statement": "When a stateless, CPU/memory-bound web tier is the bottleneck and the data tier is already well-provisioned and fast, the fix is to horizontally scale the web tier (add instances behind an ELB) rather than changing the data tier.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-5b410fab982c", "source_question_ids": ["awssysops-p1-q024"], "statement": "DynamoDB is a managed, multi-AZ service, so there is no single Availability Zone to co-locate an EC2 instance with for latency benefits.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-73c60b053b9e", "source_question_ids": ["awssysops-p1-q024"], "statement": "Caching database responses or migrating the database engine does not address a compute-bound application bottleneck when the data tier is already fast.", "status": "supported"}, {"claim_type": "rule", "conditions": ["sticky sessions enabled on the ELB"], "confidence": "high", "id": "cl-1081779c8879", "source_question_ids": ["awssysops-p1-q053"], "statement": "When sticky sessions are enabled on an ELB, requests from a given user's session are pinned to one specific backend instance for the life of the session, so newly launched Auto Scaling instances receive no traffic from already-connected users.", "status": "supported"}, {"claim_type": "fact", "conditions": ["application uses long-lived connections such as long polling, Comet, or WebSockets"], "confidence": "high", "id": "cl-46b76b34dfff", "source_question_ids": ["awssysops-p1-q053"], "statement": "Long-lived connections such as long polling, Comet, or WebSockets stay pinned to whichever instance accepted them, so existing instances keep serving open connections instead of shedding load to newly launched instances.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-56fc13d41b2b", "source_question_ids": ["awssysops-p1-q053"], "statement": "An ELB's default, non-sticky behavior distributes requests across backend instances without pinning requests from a given user to one specific instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b90af849796b", "source_question_ids": ["awssysops-p1-q053"], "statement": "A browser failing to honor the TTL of an ELB's DNS name is a DNS-level failover issue, not a cause of load imbalance across already-resolved backend instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4bb8b4b60a62", "source_question_ids": ["awssysops-p1-q054"], "statement": "A zone apex (bare/root domain, e.g. example.com with no subdomain) cannot use a standard CNAME record, per the DNS specification, which permits only record types such as A, AAAA, NS, MX, and SOA at the zone apex.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-15ab26080946", "source_question_ids": ["awssysops-p1-q054"], "statement": "A plain A record is not a viable way to point a zone apex at an Elastic Load Balancer because the ELB's underlying IP addresses are not static.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2c5699aa5be8", "source_question_ids": ["awssysops-p1-q054"], "statement": "A Route 53 Alias record behaves like a CNAME, pointing to another DNS name such as an ELB's DNS name, while remaining legal at the zone apex and resolving to the ELB's current underlying IP addresses at query time, at no extra cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-75ad36ae1f72", "source_question_ids": ["awssysops-p1-q070"], "statement": "An Auto Scaling launch configuration is only a template/blueprint; AWS never charges for the launch configuration object itself.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-68102fad0835", "source_question_ids": ["awssysops-p1-q070"], "statement": "Deleting or keeping an Auto Scaling launch configuration around after its instances are terminated has no effect on the AWS bill.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-56db4374f2f1", "source_question_ids": ["awssysops-p1-q070"], "statement": "Unattached or unused EBS volumes continue to be billed, so deleting them once no longer needed reduces cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6b92c595ea49", "source_question_ids": ["awssysops-p1-q070"], "statement": "An Elastic IP address that is allocated but not attached to a running instance is billed, so releasing it when not required reduces cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ea1886242af2", "source_question_ids": ["awssysops-p1-q070"], "statement": "An idle Elastic Load Balancer with no instances behind it is still billed, so deleting it reduces cost.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-98bd42dd341a", "source_question_ids": ["awssysops-p1-q076"], "statement": "ELB access logs, CloudWatch metrics, and CloudTrail API-call logging all capture observability information about load balancer activity, such as traffic patterns, request counts/latency, and configuration API calls.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-cc4f5ee6c1a7", "source_question_ids": ["awssysops-p1-q076"], "statement": "ELB health checks are an internal mechanism the load balancer uses to decide which registered targets are healthy; they are an input to ELB's routing behavior, not an observability output for monitoring overall ELB activity.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-18dbf6e5f388", "source_question_ids": ["awssysops-p1-q084"], "statement": "ELB connection draining can be toggled on or off at any time via either the EC2/ELB console or the CLI/API.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9d0d56d04579", "source_question_ids": ["awssysops-p1-q084"], "statement": "Disabling ELB connection draining does not require stopping any instances first.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-fac4cf181f0f", "source_question_ids": ["awssysops-p1-q087"], "statement": "The source material's boxed answer states that creating an ELB with instances results in 2 default security groups being created, though community consensus and AWS documentation instead describe exactly one default security group per account (e.g. default_elb_id) that is reused by subsequent load balancers in the default VPC.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3d12dc34fa47", "source_question_ids": ["awssysops-p1-q093"], "statement": "Increasing an Auto Scaling group's desired capacity immediately triggers new instance launches up to that new desired count, and those instances register automatically with an attached ELB.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6727af50fbec", "source_question_ids": ["awssysops-p1-q093"], "statement": "Increasing an Auto Scaling group's maximum size only raises the ceiling the group is allowed to scale to; it does not by itself launch any new instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-becc00624e32", "source_question_ids": ["awssysops-p1-q093"], "statement": "Manually launching an instance and registering it with an ELB outside of Auto Scaling works operationally but is not using Auto Scaling to add the instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c7852471ee79", "source_question_ids": ["awssysops-p1-q093"], "statement": "Decreasing an Auto Scaling group's minimum limit allows the group to shrink rather than provisioning additional instances ahead of anticipated load.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-c908ed5db479", "source_question_ids": ["awssysops-p1-q095"], "statement": "When no custom connection draining timeout is configured on an ELB, connection draining defaults to allowing in-flight requests to continue for 300 seconds before forcibly closing connections to the deregistering instance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8b89068e84e8", "source_question_ids": ["awssysops-p1-q095"], "statement": "3600 seconds is only the maximum connection draining timeout a user can configure for an ELB, not the default value.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-872a2168447d", "source_question_ids": ["awssysops-p1-q097", "awssysops-p2-q412", "awssysops-p1-q256"], "statement": "ELB sticky session (session affinity) pins a user's subsequent requests to the same backend EC2 instance where their session was first created; the first request is routed by the normal load-balancing algorithm and every later request from that user goes to the same instance for the life of the session.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-90f3ad800360", "source_question_ids": ["awssysops-p1-q097"], "statement": "ELB cross-zone load balancing only affects how traffic is distributed across Availability Zones; it does not provide per-user session affinity.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3ad2063477cb", "source_question_ids": ["awssysops-p1-q097"], "statement": "'Cookie setup' describes an implementation detail that sticky sessions rely on (an application- or ELB-generated cookie), not the name of the sticky-session feature's enablement toggle itself.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-40d4cee63788", "source_question_ids": ["awssysops-p1-q097", "awssysops-p1-q146"], "statement": "ELB connection draining governs graceful instance deregistration behavior and is unrelated to session affinity (sticky sessions).", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "low", "id": "cl-6f199e65b744", "source_question_ids": ["awssysops-p1-q098"], "statement": "Route 53 DNS failover can provide redundancy for an ELB endpoint by failing over to a second, independent endpoint.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-403da5e71dca", "source_question_ids": ["awssysops-p1-q098"], "statement": "An ELB is already inherently highly available across multiple Availability Zones within a single region without any additional service.", "status": "needs-review"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-4084632746a0", "source_question_ids": ["awssysops-p1-q098"], "statement": "Auto Scaling is a plausible but incorrect answer for providing redundancy specifically to an ELB itself, as distinct from providing availability to the instances behind it.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-19b4553d03c7", "source_question_ids": ["awssysops-p1-q100"], "statement": "Deleting an ELB only deregisters its target instances and has no effect on the instances themselves; they keep running (and continue to incur their own EC2 charges) until separately stopped or terminated.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-8c5c683aea9b", "source_question_ids": ["awssysops-p1-q100"], "statement": "Deleting a load balancer does not block on, prompt about, or terminate the instances registered with it.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-4a5569ec42ea", "source_question_ids": ["awssysops-p1-q118"], "statement": "A user can enable or disable Availability Zones/subnets for an existing load balancer at any time directly from the AWS console, 'on the fly', without needing to pre-create instances in the new zone or take the ELB offline.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-06a05311aa44", "source_question_ids": ["awssysops-p1-q118"], "statement": "For the question 'how can a user add more zones to an existing ELB', the source-boxed answer is 'launch instances in different zones and add to ELB', even though the recorded community vote and AWS's own ELB documentation point to the AZ-enablement console action ('add zones on the fly') as the more technically direct answer.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e452f2f837e1", "source_question_ids": ["awssysops-p1-q119"], "statement": "Elastic Load Balancing sends its full set of pre-selected metrics to CloudWatch at one-minute frequency for no additional charge, unlike EC2 instances, where the same one-minute frequency is called Detailed Monitoring and costs extra.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-3a09fbad56e5", "source_question_ids": ["awssysops-p1-q120"], "statement": "ELB's DNS supports clients connecting over both IPv4 and IPv6 via a dualstack-prefixed DNS name.", "status": "needs-review"}, {"claim_type": "fact", "conditions": ["classic/application load balancer generation, pre-2020 NLB IPv6-backend feature"], "confidence": "low", "id": "cl-b02a54a81243", "source_question_ids": ["awssysops-p1-q120"], "statement": "For the classic/application load balancer generation, communication between the load balancer and back-end instances is always over IPv4; this changed with a 2020 Network Load Balancer feature that added IPv6 support for backend communication.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f9ea9a110fcb", "source_question_ids": ["awssysops-p1-q128", "awssysops-p1-q252"], "statement": "An ELB Security Policy is made up of exactly three components: the set of allowed SSL Protocols, the set of allowed SSL Ciphers, and the Server Order Preference option.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-93960ae077f4", "source_question_ids": ["awssysops-p1-q128"], "statement": "'Client Order Preference' is not a real, independently configurable component of an ELB security policy; it is simply the default behavior that occurs when Server Order Preference is left disabled.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-3ca7a80a7347", "source_question_ids": ["awssysops-p1-q146", "awssysops-p1-q185"], "statement": "ELB connection draining stops sending new request traffic to an EC2 instance that is being deregistered (or has failed a health check) while allowing in-flight requests already sent to that instance to complete normally, up to a configurable timeout.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-2b6e04601ccf", "source_question_ids": ["awssysops-p1-q146"], "statement": "'Deregistration check' and 'auto registration Off' are not real ELB features.", "status": "supported"}, {"claim_type": "default", "conditions": ["SSL/TCP listener configured end-to-end"], "confidence": "high", "id": "cl-9fa83e4827d5", "source_question_ids": ["awssysops-p1-q163"], "statement": "When an SSL/TCP listener is configured on both the ELB front end and the back-end instances, ELB passes the request through to the back-end instance without modifying its headers, unless Proxy Protocol is explicitly enabled.", "status": "supported"}, {"claim_type": "exception", "conditions": ["SSL/TCP listener (not HTTP/HTTPS)"], "confidence": "high", "id": "cl-b1b3befeb64f", "source_question_ids": ["awssysops-p1-q163"], "statement": "SSL/TCP listeners on ELB do not support ELB-managed sticky sessions, because sticky sessions are an HTTP/HTTPS-listener feature.", "status": "supported"}, {"claim_type": "rule", "conditions": ["EC2 status check reports 'impaired' or a status other than 'running'"], "confidence": "medium", "id": "cl-9031af5dded4", "source_question_ids": ["awssysops-p1-q176"], "statement": "When an Auto Scaling group's EC2 status check reports a status other than 'running' or reports 'impaired,' Auto Scaling marks the instance unhealthy and replaces it by terminating it and launching a new one.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["health check mechanism is an ELB health check rather than an EC2 status check"], "confidence": "medium", "id": "cl-aca8badc08d7", "source_question_ids": ["awssysops-p1-q176"], "statement": "When ELB health checks (rather than EC2 status checks) are in play, the ELB itself stops routing traffic to an unhealthy instance, which is a distinct mechanism from the EC2 status-check 'impaired' state.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2fdf7cd060d4", "source_question_ids": ["awssysops-p1-q183"], "statement": "AWS Classic Load Balancer (ELB) automatically re-registers EC2 back-end instances when they are stopped and later restarted, with no manual re-registration step needed, resuming routing once the instance is healthy again.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-022cae5152b2", "source_question_ids": ["awssysops-p1-q183"], "statement": "ELB tracks registered back-end instances by instance ID, not by IP address.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-96a0dc47a67a", "source_question_ids": ["awssysops-p1-q183"], "statement": "There is no Elastic-IP-matching mechanism for ELB registration -- an instance getting the same Elastic IP back after a reboot is not what causes it to be registered with ELB.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-8f003cefa5a4", "source_question_ids": ["awssysops-p1-q185"], "statement": "The maximum configurable timeout for ELB connection draining is 3,600 seconds (1 hour); there is no way to configure a longer draining period, even if the application's own session timeout is longer.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1b507ec3f30c", "source_question_ids": ["awssysops-p1-q187"], "statement": "ELB access log filenames follow the pattern {Bucket}/{Prefix}/AWSLogs/{AccountID}/elasticloadbalancing/{Region}/{Year}/{Month}/{Day}/{AccountID}_elasticloadbalancing_{Region}_{LoadBalancerName}_{EndTime}_{LoadBalancerIP}_{RandomString}.log, which includes the load balancer's IP, the S3 bucket name as path prefix, and a random string, but never the IP of any individual back-end EC2 instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["application-controlled (not ELB-managed) cookie stickiness"], "confidence": "high", "id": "cl-0a2349c1623b", "source_question_ids": ["awssysops-p1-q191"], "statement": "When application-managed (not ELB-managed) cookie stickiness is used and the bound instance crashes or becomes unhealthy, ELB stops routing to it and the session stops being sticky until the application issues a fresh cookie on a subsequent response, at which point ELB begins tracking stickiness to the new instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["application-controlled (not ELB-managed) cookie stickiness"], "confidence": "medium", "id": "cl-4cb29a8fa34d", "source_question_ids": ["awssysops-p1-q191"], "statement": "ELB does not throw an error when a sticky-session cookie's bound instance is unavailable, and ELB never replicates application-generated cookies across instances -- with app-controlled stickiness the cookie's lifetime is entirely the application's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": ["end-user request already passes through a Proxy-Protocol-enabled upstream proxy"], "confidence": "high", "id": "cl-9106111f2bf9", "source_question_ids": ["awssysops-p1-q195"], "statement": "If an end user's request already comes through a Proxy-Protocol-enabled upstream proxy server, enabling Proxy Protocol on ELB as well causes ELB to append a second header on top of the one the upstream proxy already added, which can cause errors; the ELB admin should leave Proxy Protocol disabled on ELB in that case.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e3613dd92662", "source_question_ids": ["awssysops-p1-q195"], "statement": "ELB does support Proxy Protocol on TCP/SSL listeners configured on both the load balancer and the back-end instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-31674d9f3bc7", "source_question_ids": ["awssysops-p1-q195"], "statement": "Proxy Protocol on ELB is enabled via a real ELB policy (ProxyProtocolPolicyType), not via a config flag named 'isproxy'.", "status": "supported"}, {"claim_type": "fact", "conditions": ["as documented at time of writing; superseded by later predefined policy versions"], "confidence": "low", "id": "cl-2015d4e04c59", "source_question_ids": ["awssysops-p1-q202"], "statement": "ELBSecurityPolicy-2014-01 was, at the time this content was written, the named predefined ELB security policy documented as supporting Server Order Preference; AWS's predefined policies have since moved on to newer versions (e.g. ELBSecurityPolicy-2016-08 and later), so the specific policy name that currently supports Server Order Preference has shifted since this question was written.", "status": "needs-review"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a37a18a1d610", "source_question_ids": ["awssysops-p1-q202"], "statement": "ELBSecurityPolicy-2011-08, ELBDefaultNegotiationPolicy, and ELBSample-OpenSSLDefaultCipherPolicy are real predefined ELB security policies, but none of them are documented as supporting Server Order Preference.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Server Order Preference enabled"], "confidence": "high", "id": "cl-6dcd077d047b", "source_question_ids": ["awssysops-p1-q202", "awssysops-p1-q252"], "statement": "When Server Order Preference is enabled on an ELB security policy, the load balancer selects the first cipher in its own list that also appears in the client's list, meaning the load balancer's cipher ordering (not the client's) determines the cipher used for the SSL connection.", "status": "supported"}, {"claim_type": "fact", "conditions": ["Classic Load Balancer security policies"], "confidence": "high", "id": "cl-b95a3d8046b9", "source_question_ids": ["awssysops-p1-q207"], "statement": "ELB's (Classic Load Balancer) documented security policies support TLS 1.2, TLS 1.1, TLS 1.0, SSL 3.0, and SSL 2.0, but do not support TLS 1.3.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-472e6a92f1dd", "source_question_ids": ["awssysops-p1-q221"], "statement": "Auto Scaling lets a user suspend one or more scaling processes on a group, which is the documented way to pause scaling activity temporarily (e.g., while investigating a configuration problem or memory leak) without losing the group's configuration.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f8e4555d4d95", "source_question_ids": ["awssysops-p1-q221"], "statement": "A paused Auto Scaling group can later resume normal scaling operation once the root cause of the issue being investigated is resolved.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Availability Zone rebalancing is occurring", "group is at or near its maximum capacity"], "confidence": "high", "id": "cl-bfeb8c26c1b0", "source_question_ids": ["awssysops-p1-q231"], "statement": "During Availability Zone rebalancing, Auto Scaling can temporarily exceed a group's specified maximum capacity by a margin of 10 percent or 1 instance, whichever is greater, so that new instances can launch before old ones terminate.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Terminate process is suspended", "Launch process remains active"], "confidence": "high", "id": "cl-fbde3f0ec3e3", "source_question_ids": ["awssysops-p1-q231"], "statement": "If a user suspends only the Auto Scaling Terminate process while leaving Launch active, AZRebalance stays active and keeps launching new instances for rebalancing but cannot terminate old instances, which can grow the group up to 10 percent larger than its configured maximum size until Terminate is resumed.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-893f9fb5bf2d", "source_question_ids": ["awssysops-p1-q231"], "statement": "Suspending only the Terminate process while keeping Launch active is a supported configuration; it is not true that Launch and Terminate must always be suspended together.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-acd1d19a2043", "source_question_ids": ["awssysops-p1-q245"], "statement": "ELB supports exactly two SSL security policy types: Predefined Security Policy (a ready-made bundle of ciphers/protocols) and Custom Security Policy (user-configured).", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-743b60ed14d6", "source_question_ids": ["awssysops-p1-q245"], "statement": "'Dynamic Security Policy' and 'Default Security Policy' are not real ELB security policy type names.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-912a746556dd", "source_question_ids": ["awssysops-p1-q247"], "statement": "The ELB CloudWatch metric HTTPCode_Backend_5XX reflects HTTP responses indicating back-end server-side errors from the registered instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-addbdabd122c", "source_question_ids": ["awssysops-p1-q247"], "statement": "The ELB CloudWatch metrics HTTPCode_Backend_2XX, HTTPCode_Backend_3XX, and HTTPCode_Backend_4XX represent successful, redirect/user-agent-action-required, and client-error responses respectively -- none reflect a back-end server-side problem.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3ed6c4bc3822", "source_question_ids": ["awssysops-p1-q252"], "statement": "'Cipher Protocol', 'Client Configuration Preference', and 'Load Balancer Preference' are not real ELB security policy settings.", "status": "supported"}, {"claim_type": "rule", "conditions": ["cookie not present in request"], "confidence": "high", "id": "cl-8a6f536a34a5", "source_question_ids": ["awssysops-p1-q256"], "statement": "The ELB sticky-session algorithm checks for a cookie in the incoming request first; if no cookie is found, ELB chooses an instance via its load-balancing algorithm and then inserts a new cookie in the response (sequence: check, not-found, choose-instance, insert-cookie).", "status": "supported"}, {"claim_type": "rule", "conditions": ["cookie present in request"], "confidence": "high", "id": "cl-8e209f60d20a", "source_question_ids": ["awssysops-p1-q256"], "statement": "The ELB sticky-session algorithm checks for a cookie in the incoming request first; if a cookie is found, ELB routes the request straight to the instance named in the cookie, with no new cookie insertion needed (sequence: check, found, route-to-instance).", "status": "supported"}, {"claim_type": "default", "conditions": ["HTTPS/SSL listener created without an explicit security policy"], "confidence": "high", "id": "cl-7e99c0bc349c", "source_question_ids": ["awssysops-p1-q277"], "statement": "When an HTTPS/SSL listener is created on ELB without an explicitly associated security policy, ELB automatically associates the latest version of the ELBSecurityPolicy-YYYY-MM policy, not the earliest version, and ELB creation does not fail nor skip having a policy altogether.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-7b0848a332c3", "source_question_ids": ["awssysops-p1-q282"], "statement": "The CLI command to add/enable new Availability Zones for an existing ELB is elb-enable-zones-for-lb (classic CLI naming) / enable-availability-zones-for-load-balancer (modern AWS CLI); 'elb-add-zones-for-lb' and 'elb-configure-zones-for-lb' are not real commands.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["AddToLoadBalancer process is suspended"], "confidence": "high", "id": "cl-5e5941c8e2a4", "source_question_ids": ["awssysops-p1-q287"], "statement": "Suspending the Auto Scaling AddToLoadBalancer process does not stop Auto Scaling from launching instances; it only stops newly-launched instances from being automatically registered with the attached ELB.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AddToLoadBalancer process was suspended when the instance launched"], "confidence": "high", "id": "cl-a24664b6506a", "source_question_ids": ["awssysops-p1-q287"], "statement": "Resuming the AddToLoadBalancer process only affects instances launched afterward; instances launched during the suspension period must be registered with the ELB manually.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "low", "id": "cl-aa7c6919770a", "source_question_ids": ["awssysops-p1-q288"], "statement": "ELB access logs capture three timing fields: request processing time, backend processing time, and response processing time; 'front end processing time' is not one of the documented fields captured by ELB access logs.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-798336de128b", "source_question_ids": ["awssysops-p2-q305"], "statement": "AWS Elastic Beanstalk provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-49a2a4f2a510", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon EMR provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-21cd90768c4c", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon ElastiCache, Amazon RDS, and Elastic Load Balancing are fully managed services that give customers no direct access to the underlying compute instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-68490be234e9", "source_question_ids": ["awssysops-p2-q305"], "statement": "A claim that RDS lets customers 'retain administrative privileges' on its underlying EC2 instances is technically unsupported, since RDS is fully managed and customers get only a database endpoint rather than OS-level or root access to the host; this claim appeared in a dissenting minority vote.", "status": "conflicted"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-44845599197f", "source_question_ids": ["awssysops-p2-q318"], "statement": "Security groups allow all outbound traffic by default.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e61769123b58", "source_question_ids": ["awssysops-p2-q318"], "statement": "When a load balancer such as an ELB sits in front of web servers, security groups attached directly to the web servers see the load balancer's IP address as the traffic source, not the original client's IP address, unless the X-Forwarded-For header is used to recover and filter on the real client IP.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-53bf427147f8", "source_question_ids": ["awssysops-p2-q318"], "statement": "Configuring web server security groups to allow only customers' predefined IP addresses, together with configuring the web servers to filter traffic based on the ELB's X-Forwarded-For header, are two valid options for restricting a web application to accept traffic only from predefined customer IPs.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6d1856a4f4aa", "source_question_ids": ["awssysops-p2-q318"], "statement": "Because security groups are stateful, return traffic is automatically permitted regardless of outbound rules, making a security-group rule like \"deny all outbound\" effectively harmless to legitimate response traffic.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-079f0a682262", "source_question_ids": ["awssysops-p2-q318"], "statement": "Because network ACLs are stateless, an explicit \"deny all outbound\" rule on a NACL would actually block legitimate response traffic back to the client, unlike the equivalent rule on a stateful security group.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Evaluate Target Health set to true on a latency-based alias record"], "confidence": "low", "id": "cl-ab93efc4f10b", "source_question_ids": ["awssysops-p2-q327"], "statement": "On a Route 53 Latency Based Routing Record Set, setting the Evaluate Target Health flag to true makes Route 53 check for healthy resources in a region before routing traffic there, falling back to another region's healthy resources if the preferred region's resources are not healthy; per-ELB health checks alone, without this flag, do not wire that health signal into the latency routing decision.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d8342fd91257", "source_question_ids": ["awssysops-p2-q342", "awssysops-p2-q419", "awssysops-p2-q440", "awssysops-p2-q386"], "statement": "Elastic Load Balancing (ELB) distributes incoming traffic across multiple EC2 instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-41158e95ca0a", "source_question_ids": ["awssysops-p2-q342"], "statement": "RDS, an EC2 instance family name (e.g. M3), and a generic 'DB' target are not what Elastic Load Balancing distributes traffic across; ELB load-balances specifically across EC2 instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ceadae644519", "source_question_ids": ["awssysops-p2-q386", "awssysops-p2-q342"], "statement": "ELB acts as a single point of contact for clients and lets EC2 instances be added to or removed from it without disrupting the flow of requests.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4ac1cc0d40be", "source_question_ids": ["awssysops-p2-q386"], "statement": "EC2 instances can be added to or removed from an existing ELB at any time via the API, CLI, or AWS Management Console, without stopping the load balancer or editing any configuration file; there is no fixed maximum number of instances (such as five) that an ELB can hold.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2562eb8c6d6c", "source_question_ids": ["awssysops-p2-q397"], "statement": "A single Auto Scaling group can have multiple load balancers attached to it.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d169a5435f6e", "source_question_ids": ["awssysops-p2-q397"], "statement": "When a load balancer is attached to an Auto Scaling group, it automatically registers the group's instances and distributes traffic across them, without requiring Amazon AppStream or Amazon Redshift configuration.", "status": "supported"}, {"claim_type": "default", "conditions": ["sticky sessions not enabled"], "confidence": "high", "id": "cl-2cccfbd8e1b3", "source_question_ids": ["awssysops-p2-q412"], "statement": "By default, without sticky sessions enabled, ELB routes each request to whichever registered instance has the smallest load, rather than binding a user's requests to one specific instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-cbfeadf69a2e", "source_question_ids": ["awssysops-p2-q412"], "statement": "Enabling a sticky session with ELB binds a user's session to one specific backend instance; it does not send that user's requests to multiple instances and does not route all requests to a single DNS name or provide one ELB DNS per IP address.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-3a9186dec647", "source_question_ids": ["awssysops-p2-q419"], "statement": "ELB distributes incoming traffic across EC2 instances that may be registered across multiple Availability Zones; it is not restricted to distributing traffic exclusively within a single Availability Zone or exclusively across different Availability Zones.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-18956fa43f24", "source_question_ids": ["awssysops-p2-q440"], "statement": "'ELB' stands for 'Elastic Load Balancing', not 'Elastic Linux Box', 'Encrypted Load Balancing', or 'Encrypted Linux Box'.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-05fd47f6d5df", "source_question_ids": ["awssysops-p2-q518"], "statement": "The Action element of an IAM policy statement (or its complement NotAction) describes the specific action or actions that the statement allows or denies.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-3ebe914fa656", "source_question_ids": ["awssysops-p2-q518"], "statement": "A policy statement in an IAM policy document is built from the Effect, Action, Resource, and optionally Condition elements; \"Key\" is not itself a statement-level element but a nested field inside a Condition block.", "status": "supported"}, {"claim_type": "fact", "conditions": ["clients must whitelist fixed public IP addresses"], "confidence": "medium", "id": "cl-6075e8bb1cc6", "source_question_ids": ["awssysops-p2-q546"], "statement": "Only a Network Load Balancer can be assigned static (Elastic) IP addresses per Availability Zone that never change; an Application Load Balancer's DNS name resolves to a rotating set of IPs and cannot be pinned to a static address, which matters when external clients need to whitelist fixed IPs in their firewalls.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-aa90c5fb2de0", "source_question_ids": ["awssysops-p2-q550"], "statement": "An ELB SpilloverCount metric greater than zero indicates requests have overflowed the load balancer's surge queue and are receiving 5xx errors.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ee932b379dc1", "source_question_ids": ["awssysops-p2-q550"], "statement": "The Classic ELB SurgeQueueLength metric measures how many requests are queued waiting for a healthy backend instance, with a maximum queue size of 1024 requests.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2bd98c3d8ad4", "source_question_ids": ["awssysops-p2-q550"], "statement": "Triggering Auto Scaling actions based on the ELB SurgeQueueLength metric lets new instances come online before the surge queue overflows, preventing SpilloverCount-related 5xx errors.", "status": "supported"}, {"claim_type": "fact", "conditions": ["ELB access logging is enabled"], "confidence": "high", "id": "cl-2c46ab1bb655", "source_question_ids": ["awssysops-p2-q559"], "statement": "Elastic Load Balancing access logs, once enabled, are delivered to a specified S3 bucket and record per-request details including client IP address, timestamp, and HTTP status code.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-d8958da8c367", "source_question_ids": ["awssysops-p2-q559"], "statement": "Amazon S3 does not automatically keep a backup of application logs generated by EC2 instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-899eb03633ae", "source_question_ids": ["awssysops-p2-q559"], "statement": "AWS Trusted Advisor cannot be used to retrieve ELB access logs.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3617e2297249", "source_question_ids": ["awssysops-p2-q559"], "statement": "AWS Support cannot recover application logs from EC2 instances that have already been deleted.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bfd46963cb61", "source_question_ids": ["awssysops-p2-q562"], "statement": "A CNAME record cannot be set at a DNS zone apex (a bare domain like company.com) because the apex must also hold SOA/NS records, which cannot coexist with a CNAME record at the same name.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cbd3c67fad4a", "source_question_ids": ["awssysops-p2-q562"], "statement": "Route 53's ALIAS record is an AWS-proprietary record type that resolves like a CNAME but, unlike CNAME, is legal to use at a zone apex.", "status": "supported"}, {"claim_type": "rule", "conditions": ["target domain is a zone apex", "target is an AWS resource like an ALB"], "confidence": "high", "id": "cl-f865178e979a", "source_question_ids": ["awssysops-p2-q562"], "statement": "To point an apex domain (e.g., company.com) at an Application Load Balancer in Route 53, an ALIAS record should be used instead of a CNAME record.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-8cd4b525f441", "source_question_ids": ["awssysops-p2-q562"], "statement": "SOA and TXT record types are not valid ways to point a domain name at an Application Load Balancer.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["application is memory-heavy"], "confidence": "medium", "id": "cl-d3f78161c259", "source_question_ids": ["awssysops-p2-q572"], "statement": "CPUUtilization is a poor metric to scale on when an application's actual bottleneck is memory rather than CPU.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-7121b04afdc1", "source_question_ids": ["awssysops-p2-q572"], "statement": "MemoryUtilization is not a CloudWatch built-in metric for EC2 instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-7672c65f43ed", "source_question_ids": ["awssysops-p2-q572"], "statement": "RequestCountPerTarget is a built-in Application Load Balancer target-tracking metric that measures load per instance regardless of whether CPU or memory is the actual constrained resource.", "status": "conflicted"}, {"claim_type": "fact", "conditions": ["load balancer is a Classic Load Balancer"], "confidence": "high", "id": "cl-b81edd8f16f8", "source_question_ids": ["awssysops-p2-q584"], "statement": "The AWS CLI command `aws elb set-load-balancer-listener-ssl-certificate` attaches or updates the SSL certificate on a Classic Load Balancer's HTTPS listener.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-21b7a2b73517", "source_question_ids": ["awssysops-p2-q584"], "statement": "AWS KMS has no 'modify-listener' API action, so it cannot be used to deploy a certificate to a load balancer listener.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-d1fab8b959a5", "source_question_ids": ["awssysops-p2-q584"], "statement": "The EC2 API has no 'put-ssl-certificate' action, so it cannot be used to deploy a certificate to a load balancer listener.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-49080638cb96", "source_question_ids": ["awssysops-p2-q584"], "statement": "AWS Certificate Manager (ACM) manages certificates themselves but has no 'put-ssl-certificate' action for configuring a load balancer listener.", "status": "supported"}, {"claim_type": "rule", "conditions": ["application authenticates users at the individual instance level"], "confidence": "high", "id": "cl-80d2e3edcd2d", "source_question_ids": ["awssysops-p3-1-q701"], "statement": "ELB sticky sessions (session affinity) bind a user's session to a specific backend instance so that all subsequent requests from that authenticated user are routed to the same instance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-27c2c2ce7197", "source_question_ids": ["awssysops-p3-1-q701"], "statement": "ELB sticky sessions maintain affinity using either the load balancer's own AWSELB cookie or an application-generated session cookie.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9548b5e624e5", "source_question_ids": ["awssysops-p3-1-q701"], "statement": "ELB TCP listeners operate at the connection level and provide no session-aware routing, so they cannot pin a user to the same backend instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9a5dcc5f1e8f", "source_question_ids": ["awssysops-p3-1-q701"], "statement": "ELB connection draining only manages in-flight requests during instance deregistration; it does not provide session affinity for new requests.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-185d3c5999ee", "source_question_ids": ["awssysops-p3-1-q701"], "statement": "ELB cross-zone load balancing evenly distributes traffic across Availability Zones but does not pin a user's requests to a specific instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["enabling ELB access logging to an S3 bucket"], "confidence": "high", "id": "cl-533cfe4116d2", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "An S3 bucket used to store Elastic Load Balancing access logs must be located in the same AWS Region as the load balancer.", "status": "supported"}, {"claim_type": "rule", "conditions": ["enabling ELB access logging to an S3 bucket"], "confidence": "high", "id": "cl-4262741e8fb2", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "An S3 bucket used to store Elastic Load Balancing access logs must have a bucket policy granting the Elastic Load Balancing service principal permission to write the log objects to the bucket.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-7e52bfb0b6dd", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "Elastic Load Balancing access log objects are automatically encrypted with SSE-S3 regardless of the destination bucket's own encryption configuration.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-cfa1103ebb15", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "Enabling encryption on the destination S3 bucket itself is not a mandatory requirement for ELB access logging to function, since the log objects are already automatically SSE-S3 encrypted.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-591ed27c8c0c", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "Lifecycle policies on the S3 bucket used for ELB access logs are good hygiene but are not a documented mandatory prerequisite for access logging to function.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-5f61ac61e6c4", "source_question_ids": ["awssysops-p3-1-q799"], "statement": "Disabling public access on the S3 bucket used for ELB access logs is good hygiene but is not a documented mandatory prerequisite for access logging to function.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-ea2901c2e382", "source_question_ids": ["awssysops-p3-1-q799", "awssysops-p3-1-q805"], "statement": "Application Load Balancers and Network Load Balancers are both load balancer types belonging to the single Elastic Load Balancing (ELB) service, so ELB-wide bucket-policy and access-log requirements apply to both.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2af9d4754f30", "source_question_ids": ["awssysops-p3-1-q805"], "statement": "Elastic Load Balancing access logs record each request's client IP address and the specific target (e.g., EC2 instance) that processed it, along with timing and response details.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-aa88ca3607d2", "source_question_ids": ["awssysops-p3-1-q805"], "statement": "Amazon CloudWatch provides aggregate metrics and does not record per-request client IP and target instance detail.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-accb812c0a40", "source_question_ids": ["awssysops-p3-1-q805"], "statement": "AWS CloudTrail logs AWS management-plane API activity, not application-layer HTTP request details.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-531139300dc1", "source_question_ids": ["awssysops-p3-1-q805"], "statement": "VPC Flow Logs capture network-layer IP/port metadata but do not record which specific instance's application code handled a given request behind a load balancer.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-3e2686b448f6", "source_question_ids": ["awssysops-p3-1-q915"], "statement": "Exposing a Network Load Balancer as a VPC endpoint service (for PrivateLink) is an optional feature unrelated to the prerequisites for registering targets by IP address.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["registering targets by IP address"], "confidence": "medium", "id": "cl-54f5cb2ab20b", "source_question_ids": ["awssysops-p3-1-q915"], "statement": "To register a target by IP address with a load balancer's target group, the IP address must fall within the target group's VPC subnets or one of the private CIDR ranges 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, or 192.168.0.0/16.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-db6b369dc35a", "source_question_ids": ["awssysops-p3-1-q915"], "statement": "Listener security policies (e.g., ELBSecurityPolicy-TLS-1-2-Ext-2018-06) govern TLS negotiation on HTTPS/TLS listeners and have no bearing on whether an IP address is eligible for target registration.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-614e9788a648", "source_question_ids": ["awssysops-p3-1-q915"], "statement": "The health check Matcher setting defines which HTTP response codes count as healthy and has no bearing on whether an IP address is eligible for target registration.", "status": "supported"}, {"claim_type": "rule", "conditions": ["ALB health check uses a custom ping path", "ping path is missing on one backend server"], "confidence": "medium", "id": "cl-defc82c2ce20", "source_question_ids": ["awssysops-p3-1-q917"], "statement": "If an Application Load Balancer's health check uses a custom ping path that does not exist on one of its backend servers, the ALB marks that server unhealthy and stops routing traffic to it, which can make traffic appear to go to only one server.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-834eea6c1196", "source_question_ids": ["awssysops-p3-1-q917"], "statement": "A server returning HTTP 200 responses to health checks is considered healthy and kept in service, so 'removed from service for returning success codes' is a self-contradictory explanation for traffic imbalance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-a85dee4696d6", "source_question_ids": ["awssysops-p3-1-q917"], "statement": "ALB sticky sessions are configured at the target group level, not per individual backend server, so they cannot explain why only one specific server stops receiving traffic.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-8a60d4d10b32", "source_question_ids": ["awssysops-p3-1-q917"], "statement": "HTTP/2 connections from web clients are terminated at the Application Load Balancer, which is normal, expected behavior with no bearing on backend traffic distribution.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-elb--m-1", "title": "ELB routing: first who is eligible, then who is chosen", "purpose": "Explain where any given request ends up behind an ELB, so you can diagnose traffic imbalance, pick the right feature (sticky sessions, connection draining, health-check type), and reject options that act on the wrong stage.", "mechanism": "An ELB keeps a pool of registered back-end EC2 instances, tracked by instance ID (not IP), and spreads incoming requests across them. Routing for each request happens in two stages. Stage 1, eligibility: an instance can only receive traffic if it is registered, sits in an AZ/subnet the load balancer serves, and passes the ELB health check. An Auto Scaling group only launches into the subnets it is configured with, and attaching an ELB does not change that, so an AZ with zero instances is a subnet-configuration problem. A failed ELB health check makes the ELB stop routing to the instance, but Auto Scaling only terminates and replaces it if the group's health check type includes ELB. Stage 2, choice: with no stickiness, each request goes to the least-loaded eligible instance. With sticky sessions on (HTTP/HTTPS listeners only), the ELB looks for a cookie first. If it finds one, the request goes to the instance named in the cookie. If not, the ELB picks an instance by load and inserts a cookie. Long-lived connections (WebSockets, long polling) also stay on the instance that accepted them. So pinned traffic never moves to newly launched instances. When an instance leaves the pool (deregistered or unhealthy), connection draining stops sending it new requests but lets in-flight requests finish, up to a timeout: 300 s by default, 3600 s at most.", "predict_prompt": "An Auto Scaling group behind an ELB scales out from 2 to 6 instances during a spike, but the 4 new instances get almost no requests while the original 2 stay overloaded. The ELB shows all 6 healthy. Before reading on, predict which stage of the routing pipeline is responsible, and what setting is probably on.", "invariants": ["ELB tracks registered instances by instance ID, so a stopped-then-restarted instance is re-registered automatically, whatever its IP.", "An Auto Scaling group launches only into its own configured subnets/AZs; attaching an ELB or raising max size does not add an AZ.", "ELB health checks control routing. Auto Scaling replacement follows ELB health only when the group's health check type includes ELB.", "With sticky sessions, a request carrying a cookie goes straight to the instance named in the cookie. Without a cookie, the ELB chooses by load and inserts one.", "Connection draining only affects instances leaving the pool: no new requests, in-flight requests finish within the timeout (default 300 s, max 3600 s)."], "limits": ["ELB-managed sticky sessions apply only to HTTP/HTTPS listeners; SSL/TCP listeners route at the connection level and cannot do session affinity.", "With application-controlled cookie stickiness, if the bound instance fails, the session stays unpinned until the application issues a fresh cookie; the ELB does not copy cookies across instances.", "If AddToLoadBalancer is suspended, Auto Scaling still launches instances but does not register them, so they never become eligible. Instances launched during the suspension must be registered manually."], "cues": ["'New instances get no traffic' or 'users stay on the same server' -> stickiness or long-lived connections (stage 2).", "'One AZ has zero instances, none unhealthy' -> the Auto Scaling group's subnet list (stage 1).", "'ELB marks it unhealthy but Auto Scaling never replaces it' -> the health check type is EC2-only.", "'Finish in-flight requests before removing an instance' -> connection draining.", "'Only one server gets traffic after a health-check change' -> a server failing the check (e.g. missing ping path) has dropped out of the eligible pool."], "claim_ids": ["cl-d8342fd91257", "cl-022cae5152b2", "cl-2fdf7cd060d4", "cl-74d0b20479f9", "cl-4454d72198a1", "cl-89c29e54fd36", "cl-9a38986587f3", "cl-aca8badc08d7", "cl-9021c6e1d856", "cl-f3096f50a1b8", "cl-defc82c2ce20", "cl-2cccfbd8e1b3", "cl-8a6f536a34a5", "cl-8e209f60d20a", "cl-1081779c8879", "cl-46b76b34dfff", "cl-3ca7a80a7347", "cl-c908ed5db479", "cl-8f003cefa5a4", "cl-b1b3befeb64f", "cl-0a2349c1623b", "cl-4cb29a8fa34d", "cl-5e5941c8e2a4", "cl-a24664b6506a"]}, "contrastSet": {"id": "aws-sysops-service-elb--cs-1", "subjects": ["Sticky sessions", "Connection draining", "Cross-zone load balancing"], "dimensions": ["What it controls", "When it acts", "Unit it pins or protects", "Listener / config constraints", "Typical exam trigger"], "shared_traits": ["All three are ELB-level settings that change how requests reach back-end instances.", "All three appear as answer options to each other's questions, because each one 'affects traffic distribution'."], "matrix": {"What it controls": {"Sticky sessions": "Which instance a returning user's requests go to (session affinity)", "Connection draining": "What happens to in-flight requests on an instance leaving the pool", "Cross-zone load balancing": "How traffic is spread across Availability Zones"}, "When it acts": {"Sticky sessions": "On every request: cookie found -> route to that instance; none -> choose by load and insert a cookie", "Connection draining": "Only while an instance is deregistering or failing a health check", "Cross-zone load balancing": "Continuously, when distributing across AZs"}, "Unit it pins or protects": {"Sticky sessions": "One user's session -> one instance", "Connection draining": "Requests already in flight to the leaving instance", "Cross-zone load balancing": "Nothing is pinned; load is evened out across AZs"}, "Listener / config constraints": {"Sticky sessions": "HTTP/HTTPS listeners only; uses an AWSELB cookie or an app-generated cookie", "Connection draining": "Timeout defaults to 300 s, max 3600 s; can be toggled any time", "Cross-zone load balancing": "Has no per-user affinity"}, "Typical exam trigger": {"Sticky sessions": "'Keep each user on the same instance' / 'session state is stored on the instance'", "Connection draining": "'Let in-flight requests finish before removing an instance'", "Cross-zone load balancing": "'Distribute evenly across AZs'"}}, "decision_rule": "Ask what the requirement is about. Same user's future requests landing on the same instance means sticky sessions. Requests already in flight on an instance that is being removed means connection draining. Balancing load across AZs, with no regard to user identity, means cross-zone load balancing.", "boundary_flip": "The requirement 'users who log in on one instance must keep hitting that instance' points to sticky sessions. Change it to 'when an instance is scaled in, users mid-request must not get errors' and the answer flips to connection draining. Change it to 'one AZ's instances are overloaded while another AZ's are idle' and it flips to cross-zone load balancing.", "strongest_distractor_failure": "Connection draining is the most tempting wrong answer for session-affinity questions, because it sounds like it 'keeps users connected'. But it only protects requests already in flight to an instance that is being deregistered. It never routes a user's new requests anywhere in particular.", "exceptions": ["On an SSL/TCP listener, ELB-managed sticky sessions are unavailable, so a TCP listener cannot give session-aware routing.", "Long-lived connections (WebSockets, long polling) stay on one instance even without sticky sessions, which mimics stickiness."], "claim_ids": ["cl-872a2168447d", "cl-80d2e3edcd2d", "cl-27c2c2ce7197", "cl-8a6f536a34a5", "cl-8e209f60d20a", "cl-40d4cee63788", "cl-9a5dcc5f1e8f", "cl-3ca7a80a7347", "cl-c908ed5db479", "cl-8f003cefa5a4", "cl-18dbf6e5f388", "cl-185d3c5999ee", "cl-90f3ad800360", "cl-b1b3befeb64f", "cl-9548b5e624e5", "cl-46b76b34dfff", "cl-cbfeadf69a2e"]}, "scenarioFamily": {"id": "aws-sysops-service-elb--sf-1", "canonical": {"prompt": "An Auto Scaling group sits behind an ELB with sticky sessions enabled. Under a traffic spike it scales out from 2 instances to 6. The ELB console shows all 6 instances healthy, but the 4 newly launched instances receive almost no requests while the original 2 stay saturated. What is the most likely explanation, and what should the on-call engineer check first?", "expected_answer": ["Existing clients remain pinned to the original 2 instances for reasons unrelated to health, not because the new instances are unhealthy or misconfigured; the engineer should check whether sticky sessions are enabled, since they bind each already-connected user's requests to the specific instance where their session started for the life of the session, so new users (not new instances) are the ones that would reach the 4 new instances."], "reasoning": "This is a stage-2 (choice) problem, not a stage-1 (eligibility) problem: all 6 instances are healthy and presumably in valid subnets, so they are all eligible to receive traffic. With sticky sessions enabled, the ELB checks every incoming request for a session cookie; a request carrying a cookie is routed straight to the instance named in that cookie, and only cookie-less requests are chosen by load and get a fresh cookie. Because the 2 original instances already hold cookies for every pre-existing user, those users keep hitting the same 2 instances no matter how many healthy instances are added -- the 4 new instances only pick up brand-new sessions. This matches the default-vs-sticky contrast: without stickiness the ELB would send each request to whichever instance has the smallest load, which would naturally even out across all 6 instances.", "distractor_analysis": "An engineer might first suspect the new instances are unhealthy or sit in the wrong AZ, but the prompt rules that out by stating all 6 are healthy -- that would be a stage-1 (eligibility) issue, not what's happening here. The actual cause is a stage-2 routing behavior: sticky sessions pin already-connected users to their original instance regardless of how many additional healthy instances exist.", "claim_ids": ["cl-1081779c8879", "cl-872a2168447d", "cl-2cccfbd8e1b3", "cl-56fc13d41b2b"], "difficulty": "medium", "importance": "high"}, "variants": [{"variant_type": "irrelevant-detail", "changed_condition": "The scenario additionally notes that ELB access logging is enabled, delivering per-request client IP, timestamp, and status-code logs to an S3 bucket, and the team has been reviewing those logs out of habit.", "prompt": "An Auto Scaling group sits behind an ELB with sticky sessions enabled, and ELB access logging is also turned on, delivering per-request client IP, timestamp, and status-code logs to an S3 bucket. Under a traffic spike the group scales out from 2 instances to 6. The ELB console shows all 6 instances healthy, but the 4 newly launched instances receive almost no requests while the original 2 stay saturated. What is the most likely explanation?", "expected_answer": ["Existing clients remain pinned to the original 2 instances for reasons unrelated to health, not because the new instances are unhealthy or misconfigured; the engineer should check whether sticky sessions are enabled, since they bind each already-connected user's requests to the specific instance where their session started for the life of the session, so new users (not new instances) are the ones that would reach the 4 new instances."], "reasoning": "Access logging only records observability data (client IP, timestamp, status code) about requests after they are routed; it has no effect on how the ELB decides which instance a request goes to. The diagnosis is unchanged: sticky sessions keep pre-existing users pinned to the original 2 instances, so the 4 new instances only ever receive brand-new sessions.", "claim_ids": ["cl-1081779c8879", "cl-872a2168447d", "cl-2cccfbd8e1b3", "cl-98bd42dd341a"], "difficulty": "medium", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "Right before the spike, someone also raised the Auto Scaling group's maximum size, and the on-call engineer initially assumes that change is what's causing the traffic imbalance.", "prompt": "An Auto Scaling group sits behind an ELB with sticky sessions enabled. Shortly before a traffic spike, an engineer raised the group's maximum size. During the spike the group scales out from 2 instances to 6, all reported healthy, but the 4 new instances get almost no traffic while the original 2 stay saturated. The on-call engineer suspects the maximum-size change is the cause. Is that the right diagnosis?", "expected_answer": ["Existing clients remain pinned to the original 2 instances for reasons unrelated to health, not because the new instances are unhealthy or misconfigured; the engineer should check whether sticky sessions are enabled, since they bind each already-connected user's requests to the specific instance where their session started for the life of the session, so new users (not new instances) are the ones that would reach the 4 new instances."], "distractor_analysis": "Raising the maximum size only raises the ceiling the group is allowed to scale to -- it does not by itself launch any instances and has no bearing on how traffic is distributed once instances exist. The actual launches came from the desired-capacity increase triggered by the spike, and the traffic imbalance those new instances see is explained by sticky sessions pinning existing users to the original 2 instances, not by the earlier maximum-size change.", "reasoning": "The maximum-size change is a red herring: it affects only the group's scaling ceiling, not instance launches or request routing. The real mechanism is unchanged from the canonical case -- sticky sessions keep already-connected users on the original 2 instances, so the 4 new instances only receive brand-new sessions regardless of unrelated capacity settings changed earlier.", "claim_ids": ["cl-1081779c8879", "cl-872a2168447d", "cl-2cccfbd8e1b3", "cl-6727af50fbec", "cl-3d12dc34fa47"], "difficulty": "hard", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The application is a real-time dashboard that keeps long-lived WebSocket connections open to each client, and sticky sessions are explicitly disabled on the ELB (there is no session cookie at all).", "prompt": "A real-time dashboard application keeps long-lived WebSocket connections open between each client and a backend instance. Sticky sessions are explicitly disabled on the ELB. An Auto Scaling group behind the ELB scales out from 2 instances to 6 during a spike. The ELB shows all 6 instances healthy, but the 4 new instances receive almost no connections while the original 2 stay saturated. What is the most likely explanation?", "expected_answer": ["Existing clients remain pinned to the original 2 instances for reasons unrelated to health, not because the new instances are unhealthy or misconfigured; the engineer should check whether sticky sessions are enabled, since they bind each already-connected user's requests to the specific instance where their session started for the life of the session, so new users (not new instances) are the ones that would reach the 4 new instances."], "reasoning": "Even with sticky sessions off, long-lived connections such as WebSockets, long polling, or Comet stay pinned to whichever instance accepted them for the life of the connection, mimicking stickiness without a cookie. Pre-existing clients' open WebSocket connections never move to the 4 new instances; only brand-new connection attempts can land there, which is the same underlying 'already-connected clients stay pinned, new instances only pick up new clients' pattern as the canonical cookie-based case.", "claim_ids": ["cl-46b76b34dfff", "cl-872a2168447d", "cl-2cccfbd8e1b3"], "difficulty": "medium", "importance": "medium"}, {"variant_type": "boundary", "changed_condition": "Sticky sessions are disabled (ruled out as the cause), and instead the 4 new instances all land in a single Availability Zone while the other AZ -- which held the original 2 instances -- now shows zero instances, with the ELB reporting zero unhealthy instances overall.", "prompt": "An Auto Scaling group behind an ELB has sticky sessions disabled. During a spike it scales out from 2 instances to 6. The ELB shows zero unhealthy instances, but all traffic concentrates on one Availability Zone while the other Availability Zone -- which held the original 2 instances -- now shows no instances running at all. What should the engineer check?", "expected_answer": ["This is a stage-1 eligibility problem, not stickiness: with sticky sessions off and nothing unhealthy, the imbalance means the Auto Scaling group's subnet configuration doesn't cover both Availability Zones. The engineer should reconfigure the Auto Scaling group with subnets in both Availability Zones so it can launch and keep instances in the currently empty AZ -- attaching the ELB or raising the group's maximum size would not fix this, since the group only ever launches into the AZs/subnets it is configured to use."], "reasoning": "Because sticky sessions are off and no instance is marked unhealthy, the stage-2 'who gets chosen' mechanisms (stickiness, long-lived connections) are ruled out, and the symptom (one AZ has zero instances, none unhealthy) is exactly the signature of a stage-1 eligibility problem: the Auto Scaling group simply isn't configured to launch into that AZ's subnet. Attaching an ELB to the group does not change which AZs it launches into, and raising the group's maximum size would not force new launches into the empty AZ either -- only adding that AZ's subnet to the group's configuration fixes it. This flips the diagnosis from a routing-choice issue to a launch-eligibility issue, so the fix (and expected answer) changes accordingly.", "distractor_analysis": "Suspecting sticky sessions or long-lived connections would be wrong here because the condition explicitly disables stickiness and the symptom is about AZ coverage, not request pinning. Raising the group's maximum size is also a tempting but incorrect fix: it only raises the ceiling the group may scale to and does not force launches into an underused AZ.", "claim_ids": ["cl-74d0b20479f9", "cl-4454d72198a1", "cl-89c29e54fd36", "cl-9a38986587f3"], "difficulty": "medium", "importance": "high"}]}, "issues": [{"type": "contradiction", "severity": "high", "description": "The mental model states the Auto Scaling health-check-type rule as a settled invariant ('Auto Scaling replacement follows ELB health only when the group's health check type includes ELB') and as a cue, but every underlying claim from awssysops-p1-q008 is marked conflicted, meaning the source question's answer/votes disagree. The synthesis silently resolves a flagged dispute instead of surfacing it.", "related_entity_ids": ["aws-sysops-service-elb--m-1", "cl-f3096f50a1b8", "cl-9021c6e1d856", "cl-158e9339e5f7"]}, {"type": "contradiction", "severity": "medium", "description": "The mental model cue 'Only one server gets traffic after a health-check change -> missing ping path' rests on cl-defc82c2ce20, which is conflicted (awssysops-p1-q917 source disagrees), and also cites cl-aca8badc08d7 (needs-review) for ELB-health-check routing behavior. Disputed claims are presented as reliable diagnostic cues.", "related_entity_ids": ["aws-sysops-service-elb--m-1", "cl-defc82c2ce20", "cl-aca8badc08d7"]}, {"type": "contradiction", "severity": "high", "description": "Two claims from awssysops-p2-q318 contradict each other. cl-e61769123b58 says web-server security groups behind an ELB see the load balancer's IP, not the client IP. cl-53bf427147f8 says restricting the web-server security groups to customers' predefined IPs is a valid way to allow only those customers. If the first is true, the second rule would block all ELB-forwarded traffic. cl-e61769123b58 also implies security groups can filter on X-Forwarded-For, which they cannot, since that is an HTTP header.", "related_entity_ids": ["cl-e61769123b58", "cl-53bf427147f8"]}, {"type": "contradiction", "severity": "medium", "description": "cl-33fbf0096616 is marked supported, stating an ELB over 2 AZs requires two public subnets. cl-89952f0a9ba0, from the same question awssysops-p1-q016, is marked conflicted and says the same point is disputed among commenters. One question yields both a settled rule and a disputed counter-claim, and the dispute was not carried onto the rule.", "related_entity_ids": ["cl-33fbf0096616", "cl-89952f0a9ba0", "cl-1fa7a765b651"]}, {"type": "contradiction", "severity": "medium", "description": "For awssysops-p1-q118 the source's boxed answer ('launch instances in different zones and add to ELB') disagrees with the community vote and AWS docs ('add zones on the fly'). Both cl-4a5569ec42ea and cl-06a05311aa44 are conflicted, so the correct answer to this question is unresolved.", "related_entity_ids": ["cl-4a5569ec42ea", "cl-06a05311aa44", "cl-7b0848a332c3"]}, {"type": "contradiction", "severity": "medium", "description": "For awssysops-p1-q087 the source's boxed answer (2 default security groups created) disagrees with community consensus and AWS docs (one reusable default ELB security group). This is unresolved (needs-review).", "related_entity_ids": ["cl-fac4cf181f0f"]}, {"type": "ambiguity", "severity": "medium", "description": "For awssysops-p1-q098 it is unresolved what provides redundancy for an ELB: Route 53 DNS failover (cl-6f199e65b744), the ELB being inherently multi-AZ (cl-403da5e71dca), or Auto Scaling being rejected (cl-4084632746a0). All are needs-review. cl-6f199e65b744 also sits in tension with cl-364df7c366b0, which says a second ELB adds no redundancy because one ELB already spans AZs.", "related_entity_ids": ["cl-6f199e65b744", "cl-403da5e71dca", "cl-4084632746a0", "cl-364df7c366b0"]}, {"type": "ambiguity", "severity": "medium", "description": "Several claims are marked conflicted, meaning their source questions disagree on the answer, and no resolution is recorded: q007 pre-warming vs Trusted Advisor limits (cl-6492a4c28d0c, cl-96ecd2c3b395), q119 free 1-minute ELB metrics (cl-e452f2f837e1), q176 EC2 status-check replacement (cl-9031af5dded4), q282 CLI command names (cl-7b0848a332c3), q288 access-log timing fields (cl-aa7c6919770a), q305 RDS admin privileges (cl-68490be234e9), q327 Evaluate Target Health (cl-ab93efc4f10b), q546 static IPs only on NLB (cl-6075e8bb1cc6, which ignores ALB static IPs via Global Accelerator), q572 scaling metric choice (cl-d3f78161c259, cl-7672c65f43ed), and q915 IP-target prerequisites (cl-3e2686b448f6, cl-54f5cb2ab20b).", "related_entity_ids": ["cl-6492a4c28d0c", "cl-96ecd2c3b395", "cl-e452f2f837e1", "cl-9031af5dded4", "cl-7b0848a332c3", "cl-aa7c6919770a", "cl-68490be234e9", "cl-ab93efc4f10b", "cl-6075e8bb1cc6", "cl-d3f78161c259", "cl-7672c65f43ed", "cl-3e2686b448f6", "cl-54f5cb2ab20b"]}, {"type": "unsupported-generation", "severity": "medium", "description": "The mental model says that without stickiness 'each request goes to the least-loaded eligible instance', which generalizes cl-2cccfbd8e1b3 to all ELBs. In fact the algorithm depends on load balancer type and listener: Classic uses least-outstanding-requests for HTTP/HTTPS and round robin for TCP, and ALB defaults to round robin. The model also says pinned traffic 'never' moves to new instances, which ignores cookie expiry and the instance-failure case in cl-0a2349c1623b.", "related_entity_ids": ["aws-sysops-service-elb--m-1", "cl-2cccfbd8e1b3", "cl-0a2349c1623b"]}, {"type": "unsupported-generation", "severity": "medium", "description": "The contrast set's cross-zone load balancing column has no supporting claim beyond two distractor claims (cl-185d3c5999ee, cl-90f3ad800360). Its boundary_flip ('one AZ's instances overloaded while another AZ's are idle' -> cross-zone) is a generated scenario. It is easy to confuse with the slice's supported q003 rule, where an imbalanced AZ is fixed by adding subnets to the Auto Scaling group (cl-89c29e54fd36). It also says cross-zone spreads traffic 'across AZs', when it actually spreads traffic evenly across all registered instances regardless of AZ. Its 'Listener / config constraints' cell ('Has no per-user affinity') is not a constraint.", "related_entity_ids": ["aws-sysops-service-elb--cs-1", "cl-185d3c5999ee", "cl-90f3ad800360", "cl-89c29e54fd36"]}, {"type": "unsupported-generation", "severity": "low", "description": "cl-ea2901c2e382 says ELB-wide access-log and bucket-policy requirements apply equally to ALB and NLB. NLB access logs differ: they exist only for TLS listeners, use a different log-delivery principal, and allow SSE-KMS. This also undercuts cl-7e52bfb0b6dd's 'always SSE-S3' claim when applied to NLB.", "related_entity_ids": ["cl-ea2901c2e382", "cl-7e52bfb0b6dd", "cl-4262741e8fb2"]}, {"type": "quality", "severity": "low", "description": "cl-6d1856a4f4aa calls 'deny all outbound' a security-group rule, but security groups support only allow rules. The contrast with the NACL claim cl-079f0a682262 is right in spirit but technically misstated.", "related_entity_ids": ["cl-6d1856a4f4aa", "cl-079f0a682262"]}, {"type": "quality", "severity": "low", "description": "cl-fbde3f0ec3e3 says the group can grow 'up to 10 percent larger' than max. cl-bfeb8c26c1b0, from the same question q231, gives the margin as '10 percent or 1 instance, whichever is greater'. The two claims state inconsistent bounds.", "related_entity_ids": ["cl-fbde3f0ec3e3", "cl-bfeb8c26c1b0"]}, {"type": "stale-risk", "severity": "medium", "description": "Version- and date-dependent claims may be stale. cl-2015d4e04c59 names ELBSecurityPolicy-2014-01 for Server Order Preference. cl-7e99c0bc349c says the 'latest' policy is auto-associated, while current CLB docs name ELBSecurityPolicy-2016-08 as the default. cl-b95a3d8046b9 lists CLB protocol support. cl-3a09fbad56e5 and cl-b02a54a81243 cover IPv6 front end and back end; the latter has muddled conditions mixing CLB/ALB with a 2020 NLB feature and is needs-review. cl-ee932b379dc1 and cl-aa90c5fb2de0 cover CLB-only surge-queue metrics.", "related_entity_ids": ["cl-2015d4e04c59", "cl-7e99c0bc349c", "cl-b95a3d8046b9", "cl-3a09fbad56e5", "cl-b02a54a81243"]}, {"type": "stale-risk", "severity": "low", "description": "The mental model invariant 'ELB tracks registered instances by instance ID, so a stopped-then-restarted instance is re-registered automatically' drops the Classic Load Balancer scope that cl-2fdf7cd060d4 states explicitly, and applies the claim to every ELB type.", "related_entity_ids": ["aws-sysops-service-elb--m-1", "cl-2fdf7cd060d4", "cl-022cae5152b2"]}], "sourceQuestionCount": 62}], "sources": {"kind": "locked", "file": "aws-sysops-service-elb-1kvr.sources.enc.js"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam. The slice bodies (mental model, claims,
+  // etc.) ride inline in BUNDLE; only sourceQuestions live in sibling files,
+  // loaded on demand via injected <script> tags (fetch/XHR can't read a
+  // sibling under file:// -- each file:// resource is its own origin). ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: s.sourceQuestionCount || 0 };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function claimListItemHtml(c) {
+    var status = c.status || 'status unknown';
+    return safe`<li><span class="badge status-${status.replace(/\s+/g, '-')}">${status.replace(/-/g, ' ')}</span><span>${c.statement}</span>${raw(markControlHtml('claim:' + c.id))}</li>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`
+      <details class="claims">
+        <summary>Supporting claims <span class="tally">${claims.length}</span></summary>
+        <ul class="citations">${raw(claims.map(claimListItemHtml).join(''))}</ul>
+      </details>`;
+  }
+  function truncate(text, max) {
+    text = text || '';
+    return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, marks: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        marks: parsed.marks && typeof parsed.marks === 'object' ? parsed.marks : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  // ---------- confidence marks: the learner's own "flag this for review"
+  // priority on a claim or source question -- distinct from a claim's
+  // generated `confidence` field and Practice's self-reported `confidence`
+  // radio, so this one is named `marks` to avoid colliding with either. ----------
+  var MARK_LEVELS = ['low', 'medium', 'high'];
+
+  function markControlHtml(key) {
+    var active = STATE.marks[key];
+    return safe`<span class="mark-control" data-mark-key="${key}">${raw(MARK_LEVELS.map(function (level) {
+      var isActive = active === level;
+      return safe`<button type="button" class="mark-dot mark-${level}${raw(isActive ? ' is-active' : '')}" data-mark-value="${level}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Mark ${level} priority"></button>`;
+    }).join(''))}</span>`;
+  }
+
+  function handleMarkClick(event) {
+    var dot = event.target.closest('.mark-dot');
+    if (!dot) return;
+    var key = dot.closest('.mark-control').getAttribute('data-mark-key');
+    var value = dot.getAttribute('data-mark-value');
+    if (STATE.marks[key] === value) delete STATE.marks[key];
+    else STATE.marks[key] = value;
+    saveState();
+    navigate();
+  }
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private or incognito mode?). '
+        + 'Progress will not be saved after this tab closes, so export it before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- one-way revision export: groups everything currently marked
+  // by level (low, then medium, then high) into a Markdown file. Never
+  // re-imported, unlike exportProgress's JSON. ----------
+  function exportRevisionNotes() {
+    var questions = (SOURCES.status === 'ready' ? SOURCES.bySlice : {})[CURRENT.contentSet.id] || [];
+    var claimsById = {};
+    (CURRENT.claims || []).forEach(function (c) { claimsById[c.id] = c; });
+
+    var byLevel = { low: [], medium: [], high: [] };
+    Object.keys(STATE.marks).forEach(function (key) {
+      var level = STATE.marks[key];
+      if (byLevel[level]) byLevel[level].push(key);
+    });
+
+    var lines = ['# Revision notes: ' + CURRENT.contentSet.facet.value, ''];
+    MARK_LEVELS.forEach(function (level) {
+      var keys = byLevel[level];
+      if (!keys.length) return;
+      lines.push('## ' + level.charAt(0).toUpperCase() + level.slice(1) + ' priority', '');
+      keys.forEach(function (key) {
+        var sepIndex = key.indexOf(':');
+        var kind = key.slice(0, sepIndex);
+        var id = key.slice(sepIndex + 1);
+        if (kind === 'claim') {
+          var claim = claimsById[id];
+          lines.push('- ' + (claim ? claim.statement : '(claim ' + id + ' no longer available)'), '');
+        } else if (kind === 'question') {
+          var q = questions.find(function (item) { return item.id === id; });
+          if (!q) {
+            lines.push('### ' + id, '', '(question details unavailable -- open Explore Sources to load question data)', '');
+            return;
+          }
+          lines.push('### ' + q.id, '', q.stem || '', '');
+          (q.choices || []).forEach(function (c) {
+            var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+            lines.push('- ' + c.letter + '. ' + c.text + (isCorrect ? ' (correct)' : ''));
+          });
+          lines.push('', '**Correct answer:** ' + (q.correct_answer || []).join(', '), '', '**Explanation:** ' + (q.explanation || ''), '');
+        }
+      });
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-revision-' + Date.now() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+      if (payload.learnerState.marks !== undefined && !isPlainObject(payload.learnerState.marks)) {
+        errors.push('learnerState.marks is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    var marks = {};
+    if (isPlainObject(rawState.marks)) {
+      Object.keys(rawState.marks).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.marks[key];
+        if (MARK_LEVELS.indexOf(v) !== -1) marks[key] = v;
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      marks: marks,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+        Object.keys(incoming.marks).forEach(function (key) { STATE.marks[key] = incoming.marks[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose lead">${model.purpose || ''}</p>
+        <div class="predict-block panel">
+          <label class="field-label" for="predict-input">${progress.revealed ? 'Your prediction' : 'Predict first'}</label>
+          <p class="prompt" id="predict-prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="3" aria-describedby="predict-prompt" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<div class="actions"><button id="reveal-model-btn" type="button">Reveal mechanism</button></div>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table">
+          <table class="contrast-table">
+            <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+            <tbody>${raw(rows)}</tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <h3>Decision rule</h3>
+          <p>${cs.decision_rule || ''}</p>
+        </div>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var pendingCount = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; }).length;
+      var diagnoseLink = pendingCount
+        ? safe`<a class="button-link" href="${sliceHref('diagnose')}">Diagnose ${pendingCount} ${pendingCount === 1 ? 'miss' : 'misses'}</a>`
+        : '';
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <div class="panel summary">
+            <p class="summary-label">Queue complete</p>
+            <p class="score"><strong>${correctCount}</strong> of ${attempted.length} attempts correct</p>
+            <div class="actions">
+              <button id="practice-restart" type="button">Restart queue</button>
+              ${raw(diagnoseLink)}
+            </div>
+          </div>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices"><legend>Your answer</legend>${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"><span><span class="choice-letter">${c.letter}.</span> ${c.text}</span></label>`;
+        }).join(''))}</fieldset>`
+      : safe`<div class="answer-field"><label class="field-label" for="predict-freeform">Your answer</label><textarea id="predict-freeform" rows="4" placeholder="The setting or action you would choose, and why"></textarea></div>`;
+    var metaBadges = [safe`<span class="badge tone-accent">${String(item.variant_type || 'item').replace(/-/g, ' ')}</span>`];
+    if (item.difficulty) metaBadges.push(safe`<span class="badge">Difficulty ${item.difficulty}</span>`);
+    if (item.importance) metaBadges.push(safe`<span class="badge">Importance ${item.importance}</span>`);
+    var changedCondition = item.changed_condition
+      ? safe`<div class="callout changed-condition"><h3>Changed condition</h3><p>${item.changed_condition}</p></div>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice <span class="step">${practiceIndex + 1} of ${items.length}</span></h2>
+        <div class="item-meta">${raw(metaBadges.join(''))}</div>
+        ${raw(changedCondition)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence <span class="muted">(optional)</span></legend>
+          <div class="segmented">${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"><span>${c}</span></label>`; }).join(''))}</div>
+        </fieldset>
+        <div class="actions"><button id="reveal-practice-btn" type="button">Reveal answer</button></div>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var isLast = practiceIndex + 1 === items.length;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti, isLast);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti, isLast) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    section.querySelectorAll('textarea, input').forEach(function (el) { el.disabled = true; });
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedList = Array.isArray(item.expected_answer) ? item.expected_answer : [item.expected_answer].filter(Boolean);
+    var expectedAnswerHtml = expectedList.length > 1
+      ? safe`<ul>${raw(expectedList.map(function (e) { return safe`<li>${e}</li>`; }).join(''))}</ul>`
+      : safe`<p>${expectedList[0] || ''}</p>`;
+    var reasoning = item.reasoning ? safe`<h3>Reasoning</h3><p>${item.reasoning}</p>` : '';
+    var distractors = item.distractor_analysis
+      ? safe`<h3>Why other options fail</h3><p class="distractors">${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <div class="panel answer">
+        <h3>Expected answer</h3>
+        ${raw(expectedAnswerHtml)}
+      </div>
+      ${raw(reasoning)}
+      ${raw(distractors)}
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="self-report ${raw(isMulti ? 'hidden' : '')}">
+        <p>Compare your answer with the expected answer, then mark it.</p>
+        <div class="actions">
+          <button type="button" class="secondary" id="self-correct">I got it right</button>
+          <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+        </div>
+      </div>
+      <p id="practice-result" class="result hidden" role="status"></p>
+      <div class="actions"><button id="practice-next-btn" type="button" disabled>${isLast ? 'Finish queue' : 'Next item'}</button></div>`;
+
+    if (isMulti) {
+      section.querySelectorAll('.choices label').forEach(function (label) {
+        var value = label.querySelector('input').value;
+        if (expected.indexOf(value) !== -1) label.classList.add('is-expected');
+        else if (predicted.indexOf(value) !== -1) label.classList.add('is-wrong');
+      });
+    }
+
+    function showResult(isCorrect) {
+      var el = revealBox.querySelector('#practice-result');
+      var lead = isMulti ? (isCorrect ? 'Correct.' : 'Not quite.') : (isCorrect ? 'Marked correct.' : 'Marked wrong.');
+      el.innerHTML = isCorrect
+        ? safe`${lead}`
+        : safe`${lead} Logged for <a href="${sliceHref('diagnose')}">Diagnose</a>.`;
+      el.classList.remove('hidden');
+      el.classList.add(isCorrect ? 'result-ok' : 'result-bad');
+    }
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      showResult(isCorrect);
+      var nextBtn = revealBox.querySelector('#practice-next-btn');
+      nextBtn.removeAttribute('disabled');
+      if (!isMulti) nextBtn.focus({ preventScroll: true });
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"><span><strong>${c.label}</strong><span class="hint">${c.hint}</span></span></label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt panel" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="your-answer"><span class="field-label">Your answer</span>${predictedText}</p>
+              <fieldset>
+                <legend>What went wrong?</legend>
+                <div class="diagnosis-grid">${raw(radios)}</div>
+              </fieldset>
+              <p class="field-error hidden" role="alert">Pick the category that best explains the miss.</p>
+              <div class="actions"><button type="button" class="submit-diagnosis">Submit diagnosis</button></div>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">Nothing to diagnose. Items you mark wrong in Practice show up here.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = truncate(item ? (item.prompt || item.stem || '') : a.itemId, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="badge">${label}</span><span>${excerpt}</span><time class="muted" datetime="${a.timestamp || ''}">${when}</time></li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p class="back-link"><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis <span class="tally">${pending.length}</span></h3>
+        ${raw(pendingHtml)}
+        <h3>History <span class="tally">${history.length}</span></h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      var error = el.querySelector('.field-error');
+      el.addEventListener('change', function () { error.classList.add('hidden'); });
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) { error.classList.remove('hidden'); return; }
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+  // Page-level: the sibling file covers every slice, so this is NOT reset in
+  // activateSlice the way the two per-slice vars above are. One value, the
+  // status discriminating which fields exist:
+  //   {status:'idle'} | {status:'loading'}
+  //   {status:'locked', envelope, notice: null | 'wrong-password' | 'forgotten-key'}
+  //   {status:'unlocking', envelope, via: 'cache' | 'password'}
+  //   {status:'ready', bySlice, lock: null | {envelope, expiresAt: number | null}}   lock is null on a clear page
+  //   {status:'unavailable', reason: 'no-sources' | 'load-failed' | 'bad-envelope'}
+  var SOURCES = { status: 'idle' };
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`
+      <details class="issues-panel">
+        <summary>Issues <span class="tally">${issues.length}</span></summary>
+        <ul class="issues">${raw(issues.map(function (i) {
+          return safe`<li><p class="issue-head"><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span><strong>${i.type || 'issue'}</strong></p><p>${i.description || ''}</p></li>`;
+        }).join(''))}</ul>
+      </details>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+        return safe`<li class="${isCorrect ? 'correct-choice' : ''}"><span class="choice-letter">${c.letter}.</span> ${c.text}${raw(isCorrect ? ' <span class="badge tone-ok">correct</span>' : '')}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul class="citations">${raw(citing.map(claimListItemHtml).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="5">
+            <div class="source-detail">
+              <p>${q.stem}</p>
+              <ul>${raw(choiceItems)}</ul>
+              <h4>Explanation</h4>
+              <p>${q.explanation || ''}</p>
+              <p class="muted source-meta">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+              <h4>Cited by <span class="tally">${citing.length}</span></h4>
+              ${raw(citedList)}
+            </div>
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge tone-warn">disputed</span>' : '';
+    return safe`
+      <tr class="source-row${raw(isOpen ? ' is-open' : '')}" data-id="${q.id}">
+        <td class="cell-id"><button type="button" class="row-toggle" aria-expanded="${isOpen ? 'true' : 'false'}">${q.id}</button></td>
+        <td class="cell-status">${q.status || ''}${raw(disputedBadge)}</td>
+        <td class="cell-stem">${truncate(q.stem, 90)}</td>
+        <td class="cell-answer">${(q.correct_answer || []).join(', ')}</td>
+        <td class="cell-mark">${raw(markControlHtml('question:' + q.id))}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  // BUNDLE.sources names the one sibling this page may load. A locked page's
+  // bundle has no field that could name the clear file.
+  var SOURCE_GLOBAL = { clear: '__EKD_SOURCES_CLEAR__', locked: '__EKD_SOURCES_ENC__' };
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.onload = function () { el.remove(); resolve(); };
+      el.onerror = function () { el.remove(); reject(new Error('failed to load ' + src)); };
+      document.body.appendChild(el);
+    });
+  }
+
+  function urlSourcesBaseUrl() {
+    try { return new URLSearchParams(location.search).get('sourcesBaseUrl'); } catch (e) { return null; }
+  }
+
+  function sourcesScriptUrl(name) {
+    var base = urlSourcesBaseUrl();
+    return base ? new URL(name, base).toString() : name;
+  }
+
+  function base64UrlToBytes(text) {
+    var padded = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (padded.length % 4) padded += '=';
+    var bin = atob(padded);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function bytesToBase64Url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  // Envelope v2 (scripts/ekd/sources_crypto.py), checked once here so the
+  // crypto calls below can trust its fields.
+  function parseEnvelope(raw) {
+    try {
+      var ok = raw && raw.v === 2 && raw.kdf && raw.kdf.name === 'PBKDF2' && raw.kdf.hash === 'SHA-256'
+        && Number.isInteger(raw.kdf.iterations) && raw.kdf.iterations > 0
+        && raw.cipher && raw.cipher.name === 'AES-GCM' && typeof raw.ciphertext === 'string';
+      if (!ok) return null;
+      return {
+        salt: raw.kdf.salt,
+        saltBytes: base64UrlToBytes(raw.kdf.salt),
+        iterations: raw.kdf.iterations,
+        iv: base64UrlToBytes(raw.cipher.iv),
+        ciphertext: base64UrlToBytes(raw.ciphertext),
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The raw AES key bits, never the password, are what a page can remember.
+  function deriveKey(envelope, password) {
+    var secret = new TextEncoder().encode(password.normalize('NFC'));
+    return crypto.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', hash: 'SHA-256', salt: envelope.saltBytes, iterations: envelope.iterations }, base, 256);
+    }).then(function (bits) { return new Uint8Array(bits); });
+  }
+
+  function decryptSources(envelope, rawKey) {
+    return crypto.subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['decrypt']).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: envelope.iv }, key, envelope.ciphertext);
+    }).then(function (plainBuf) {
+      var data = JSON.parse(new TextDecoder().decode(plainBuf));
+      if (!data || typeof data !== 'object') throw new Error('decrypted sources are not an object');
+      return data;
+    });
+  }
+
+  // Remembered keys, one localStorage entry per sealing, keyed by its salt.
+  // Chrome shares one localStorage across every file:// page, and each
+  // reseal draws a fresh salt, so two Workspaces never share an entry and a
+  // resealed file never matches a key remembered for its old sealing.
+  // Entry: {"v":1, "key":"<b64url 32-byte AES key>", "expiresAt":<ms>}, 7
+  // days from when the password was entered, never extended.
+  var KEY_PREFIX = 'ekd:sources-key:';
+  var KEY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function parseKeyRecord(text, now) {
+    try {
+      var rec = JSON.parse(text);
+      if (!rec || rec.v !== 1 || typeof rec.key !== 'string' || !Number.isFinite(rec.expiresAt)) return null;
+      if (now >= rec.expiresAt) return null;
+      var key = base64UrlToBytes(rec.key);
+      return key.length === 32 ? { key: key, expiresAt: rec.expiresAt } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var KeyCache = {
+    get: function (salt, now) {
+      try {
+        var text = localStorage.getItem(KEY_PREFIX + salt);
+        if (text === null) return null;
+        var rec = parseKeyRecord(text, now);
+        if (!rec) localStorage.removeItem(KEY_PREFIX + salt);
+        return rec;
+      } catch (e) {
+        return null;
+      }
+    },
+    // The expiry, or null when storage refuses the write (the page still unlocks).
+    put: function (salt, rawKey, now) {
+      var expiresAt = now + KEY_TTL_MS;
+      try {
+        localStorage.setItem(KEY_PREFIX + salt, JSON.stringify({ v: 1, key: bytesToBase64Url(rawKey), expiresAt: expiresAt }));
+        return expiresAt;
+      } catch (e) {
+        return null;
+      }
+    },
+    forget: function (salt) {
+      try { localStorage.removeItem(KEY_PREFIX + salt); } catch (e) {}
+    },
+    // Removes expired or malformed entries, including those of sealings no
+    // page will ask for again because their file was resealed.
+    sweep: function (now) {
+      try {
+        var stale = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var name = localStorage.key(i);
+          if (name && name.indexOf(KEY_PREFIX) === 0 && !parseKeyRecord(localStorage.getItem(name), now)) stale.push(name);
+        }
+        stale.forEach(function (name) { localStorage.removeItem(name); });
+      } catch (e) {}
+    },
+  };
+
+  // Pure. A (state, event) pair not listed leaves the state unchanged, which
+  // is also what drops a late async result that no longer applies.
+  function transition(s, e) {
+    switch (s.status + ' ' + e.type) {
+      case 'idle open':
+        return BUNDLE.sources ? { status: 'loading' } : { status: 'unavailable', reason: 'no-sources' };
+      case 'loading loaded-clear':
+        return { status: 'ready', bySlice: e.bySlice, lock: null };
+      case 'loading loaded-envelope':
+        return e.cached
+          ? { status: 'unlocking', envelope: e.envelope, via: 'cache' }
+          : { status: 'locked', envelope: e.envelope, notice: null };
+      case 'loading load-failed':
+        return { status: 'unavailable', reason: e.reason };
+      case 'locked submit':
+        return { status: 'unlocking', envelope: s.envelope, via: 'password' };
+      case 'unlocking decrypted':
+        return { status: 'ready', bySlice: e.bySlice, lock: { envelope: s.envelope, expiresAt: e.expiresAt } };
+      case 'unlocking decrypt-failed':
+        return { status: 'locked', envelope: s.envelope, notice: s.via === 'cache' ? 'forgotten-key' : 'wrong-password' };
+      case 'ready lock':
+        return s.lock ? { status: 'locked', envelope: s.lock.envelope, notice: null } : s;
+      default:
+        return s;
+    }
+  }
+
+  function dispatch(e) {
+    var next = transition(SOURCES, e);
+    if (next === SOURCES) return;
+    SOURCES = next;
+    startEffect(next, e);
+    var body = document.getElementById('sources-body');
+    if (body) paintSources(body);
+  }
+
+  function startEffect(s, e) {
+    if (s.status === 'loading') {
+      var kind = BUNDLE.sources.kind;
+      var globalName = SOURCE_GLOBAL[kind];
+      window[globalName] = undefined;
+      loadScript(sourcesScriptUrl(BUNDLE.sources.file)).then(function () {
+        var loaded = window[globalName];
+        window[globalName] = undefined;
+        if (kind === 'clear') {
+          if (loaded && typeof loaded === 'object') dispatch({ type: 'loaded-clear', bySlice: loaded });
+          else dispatch({ type: 'load-failed', reason: 'load-failed' });
+          return;
+        }
+        var envelope = parseEnvelope(loaded);
+        if (!envelope) { dispatch({ type: 'load-failed', reason: 'bad-envelope' }); return; }
+        dispatch({ type: 'loaded-envelope', envelope: envelope, cached: KeyCache.get(envelope.salt, Date.now()) });
+      }, function () {
+        dispatch({ type: 'load-failed', reason: 'load-failed' });
+      });
+      return;
+    }
+    if (s.status === 'unlocking') {
+      var envelope = s.envelope;
+      var fromCache = s.via === 'cache';
+      var keyReady = fromCache ? Promise.resolve(e.cached.key) : deriveKey(envelope, e.password);
+      keyReady.then(function (rawKey) {
+        return decryptSources(envelope, rawKey).then(function (bySlice) { return { rawKey: rawKey, bySlice: bySlice }; });
+      }).then(function (opened) {
+        var expiresAt = fromCache ? e.cached.expiresAt : KeyCache.put(envelope.salt, opened.rawKey, Date.now());
+        dispatch({ type: 'decrypted', bySlice: opened.bySlice, expiresAt: expiresAt });
+      }, function () {
+        if (fromCache) KeyCache.forget(envelope.salt);
+        dispatch({ type: 'decrypt-failed' });
+      });
+    }
+  }
+
+  var UNAVAILABLE_TEXT = {
+    'no-sources': 'No source data is bundled with this Workspace.',
+    'load-failed': 'The sources file could not be loaded.',
+    'bad-envelope': 'The encrypted sources file is not in a format this page can read.',
+  };
+  var LOCKED_NOTICE_TEXT = {
+    'wrong-password': 'Incorrect password',
+    'forgotten-key': 'The key remembered on this browser no longer opens this file. Enter the current password.',
+  };
+
+  function renderSources() {
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        ${raw(issuesHtml())}
+        <div id="sources-body"></div>
+      </section>`;
+    var fragment = fromHTML(html);
+    if (SOURCES.status === 'idle') dispatch({ type: 'open' });
+    paintSources(fragment.querySelector('#sources-body'));
+    return fragment;
+  }
+
+  function passwordFormHtml(notice, busy) {
+    var noticeBlock = notice ? safe`<p><span class="badge severity-high">${LOCKED_NOTICE_TEXT[notice]}</span></p>` : '';
+    return safe`
+      ${raw(noticeBlock)}
+      <p class="muted">These source questions are encrypted. Enter this Workspace's password to unlock them.</p>
+      <label class="field-label" for="sources-password">Password</label>
+      <input type="password" id="sources-password" autocomplete="off" spellcheck="false"${raw(busy ? ' disabled' : '')}>
+      <p><button type="button" id="sources-unlock"${raw(busy ? ' disabled' : '')}>${busy ? 'Unlocking…' : 'Unlock sources'}</button></p>`;
+  }
+
+  function paintSources(body) {
+    var s = SOURCES;
+    if (s.status === 'idle' || s.status === 'loading') {
+      body.innerHTML = '<p class="muted">Loading sources&hellip;</p>';
+    } else if (s.status === 'unavailable') {
+      body.innerHTML = safe`<p class="empty">${UNAVAILABLE_TEXT[s.reason]}</p>`;
+    } else if (s.status === 'unlocking') {
+      body.innerHTML = s.via === 'cache' ? '<p class="muted">Unlocking sources&hellip;</p>' : passwordFormHtml(null, true);
+    } else if (s.status === 'locked') {
+      body.innerHTML = passwordFormHtml(s.notice, false);
+      var input = body.querySelector('#sources-password');
+      var submit = function () {
+        if (input.value) dispatch({ type: 'submit', password: input.value });
+      };
+      body.querySelector('#sources-unlock').addEventListener('click', submit);
+      input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') submit(); });
+      if (s.notice === 'wrong-password') input.focus();
+    } else if (s.status === 'ready') {
+      renderSourcesTable(body);
+      if (s.lock) {
+        body.insertAdjacentHTML('afterbegin', lockBarHtml(s.lock));
+        body.querySelector('#sources-lock').addEventListener('click', function () {
+          KeyCache.forget(s.lock.envelope.salt);
+          dispatch({ type: 'lock' });
+        });
+      }
+    }
+  }
+
+  function lockBarHtml(lock) {
+    var remembered = lock.expiresAt === null
+      ? 'Not remembered (storage unavailable)'
+      : 'Remembered on this browser until '
+        + new Date(lock.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return safe`<p class="sources-lock"><span class="muted" id="sources-remembered">${remembered}</span><button type="button" class="secondary" id="sources-lock">Lock</button></p>`;
+  }
+
+  function renderSourcesTable(body) {
+    var questions = SOURCES.bySlice[CURRENT.contentSet.id] || [];
+    body.innerHTML = safe`
+      <div class="search-field">
+        <label class="field-label" for="sources-search">Search questions</label>
+        <input type="search" id="sources-search" placeholder="Stem, choices, or explanation">
+        <p class="muted" id="sources-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Source questions">
+        <table class="sources-table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Status</th><th scope="col">Stem</th><th scope="col">Correct</th><th scope="col">Mark</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </div>`;
+    var input = body.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      body.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = body.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.length
+        ? filtered.map(sourceRowHtml).join('')
+        : safe`<tr><td colspan="5" class="empty-cell">No questions match "${sourcesSearchTerm}".</td></tr>`;
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function (event) {
+          if (event.target.closest('.mark-control')) return;
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+          var toggle = tbody.querySelector('.source-row[data-id="' + CSS.escape(id) + '"] .row-toggle');
+          if (toggle) toggle.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      var cs = CURRENT.contentSet;
+      document.getElementById('app-title').innerHTML = safe`<span class="title-exam">${cs.exam}</span><span class="title-sep" aria-hidden="true">/</span><span class="title-facet"><span class="visually-hidden">${cs.facet.key}: </span>${cs.facet.value}</span>`;
+      document.title = cs.facet.value + ' · ' + cs.exam;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+        if (mode === target.mode) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('export-revision-btn').addEventListener('click', exportRevisionNotes);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  document.getElementById('app').addEventListener('click', handleMarkClick);
+  window.addEventListener('hashchange', navigate);
+  KeyCache.sweep(Date.now());
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>

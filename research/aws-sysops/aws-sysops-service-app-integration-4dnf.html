@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- script-src allows any https: origin because a sources sibling file can be hosted remotely, at an origin chosen at view-time via ?sourcesBaseUrl and unknown when this file is generated. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self' https:; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  /* Theme follows prefers-color-scheme. One accent (--accent); ok/bad/warn
+     carry state only. Shape rule: --radius on every control and panel,
+     full pill on badges and tallies. z-index: header 10, nothing else. */
+  :root {
+    color-scheme: light dark;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 8px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --measure: 68ch;
+
+    --bg: #f6f7f9;
+    --surface: #fdfdfe;
+    --sunk: #eceff3;
+    --ink: #15181c;
+    --ink-2: #39414b;
+    --muted: #5a6370;
+    --line: #dce0e6;
+    --line-strong: #c3c9d1;
+    --accent: #2a5caa;
+    --accent-hover: #1f4a8c;
+    --accent-ink: #fdfdfe;
+    --accent-soft: #e7edf7;
+    --ok: #1b7348;
+    --ok-soft: #e3f2ea;
+    --bad: #ae3328;
+    --bad-soft: #fbe9e7;
+    --warn: #845400;
+    --warn-soft: #fbf0db;
+    --shadow: 0 1px 2px rgb(21 24 28 / 0.05), 0 4px 16px rgb(21 24 28 / 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --surface: #181b1f;
+      --sunk: #20242a;
+      --ink: #e6e9ed;
+      --ink-2: #c1c7cf;
+      --muted: #939ba6;
+      --line: #282d33;
+      --line-strong: #3a4047;
+      --accent: #8db0ea;
+      --accent-hover: #a9c4f0;
+      --accent-ink: #0d1829;
+      --accent-soft: #1a2639;
+      --ok: #6ccb96;
+      --ok-soft: #13271c;
+      --bad: #ef8a7e;
+      --bad-soft: #301817;
+      --warn: #e2b25a;
+      --warn-soft: #2b2212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover { color: var(--accent-hover); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem 0;
+  }
+  .header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+  }
+  header h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .title-exam { color: var(--muted); font-weight: 500; }
+  .title-sep { color: var(--line-strong); }
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #slice-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  nav#nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav#nav::-webkit-scrollbar { display: none; }
+  nav#nav a {
+    flex: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 transparent;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  nav#nav a:hover { color: var(--ink); background: var(--sunk); }
+  nav#nav a:focus-visible { outline-offset: -2px; }
+  nav#nav a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+  #storage-warning {
+    margin: 0.6rem 0 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- controls ---------- */
+  button, .button-link, .file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 550;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.1s var(--ease);
+  }
+  button:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  button:active:not(:disabled), .button-link:active, .file-label:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.secondary, .button-link, .file-label {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.secondary:hover:not(:disabled), .button-link:hover, .file-label:hover {
+    border-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .header-actions button, .header-actions .file-label { padding: 0.4rem 0.75rem; font-size: 0.84rem; }
+  .file-label { position: relative; }
+  .file-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .file-label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .field-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  textarea, input[type="search"], input[type="password"], select {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea, input[type="search"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  select { padding: 0.35rem 0.6rem; font-size: 0.84rem; }
+  textarea:focus, input[type="search"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  textarea:disabled { background: var(--sunk); color: var(--ink-2); cursor: not-allowed; }
+  ::placeholder { color: var(--muted); opacity: 1; }
+  fieldset { min-width: 0; margin: 1.5rem 0 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.94rem; font-weight: 600; }
+  input[type="checkbox"], input[type="radio"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.3rem 0 0;
+    accent-color: var(--accent);
+  }
+  .field-error { margin: 0.75rem 0 0; color: var(--bad); font-size: 0.9rem; font-weight: 500; }
+
+  /* ---------- page + type ---------- */
+  main#app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.9rem);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 2.25rem 0 0.6rem;
+    font-size: 1.06rem;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  p, li { max-width: var(--measure); text-wrap: pretty; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin: 0.45rem 0; padding-left: 0.2rem; }
+  li::marker { color: var(--muted); }
+  .muted { color: var(--muted); }
+  .lead { color: var(--ink-2); font-size: 1.125rem; }
+  .empty {
+    max-width: none;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+  }
+  .panel {
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .panel > :last-child { margin-bottom: 0; }
+  .panel textarea { background: var(--bg); }
+  .panel h3:first-child { margin-top: 0; }
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .callout h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 0.98rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .step { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tally {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    vertical-align: 0.1em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  .badge.tone-accent { background: var(--accent-soft); color: var(--accent); }
+  .badge.tone-ok, .badge.status-supported { background: var(--ok-soft); color: var(--ok); }
+  .badge.tone-bad, .badge.status-conflicted,
+  .badge.severity-high, .badge.severity-critical { background: var(--bad-soft); color: var(--bad); }
+  .badge.tone-warn, .badge.status-needs-review, .badge.severity-medium { background: var(--warn-soft); color: var(--warn); }
+  .next-link { margin-top: 2.5rem; font-weight: 550; }
+  .back-link { margin: -0.25rem 0 1.25rem; font-size: 0.92rem; }
+
+  /* ---------- supporting claims ---------- */
+  details.claims, details.issues-panel {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  details > summary {
+    width: fit-content;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  details > summary::marker { color: var(--muted); }
+  details > summary:hover { color: var(--ink); }
+  ul.citations, ul.issues {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.citations li {
+    display: grid;
+    grid-template-columns: 6.75rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.94rem;
+  }
+  ul.citations .badge { justify-self: start; }
+
+  /* ---------- confidence marks ---------- */
+  .mark-control { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .mark-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+  .mark-dot:hover:not(:disabled) { opacity: 0.85; }
+  .mark-dot:active:not(:disabled) { transform: none; }
+  .mark-dot.mark-low { background: var(--ok); border-color: var(--ok); }
+  .mark-dot.mark-medium { background: var(--warn); border-color: var(--warn); }
+  .mark-dot.mark-high { background: var(--bad); border-color: var(--bad); }
+  .mark-dot.is-active { opacity: 1; border-color: var(--ink); }
+  .cell-mark { white-space: nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 1.25rem 0 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  th, td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .contrast-table { min-width: 44rem; }
+  .contrast-table th + td, .contrast-table td + td,
+  .contrast-table thead th + th { border-left: 1px solid var(--line); }
+  .contrast-table tbody th { width: 11rem; font-weight: 600; }
+  .sources-table { min-width: 38rem; }
+  tr.source-row { cursor: pointer; transition: background-color 0.15s; }
+  tr.source-row:hover { background: var(--sunk); }
+  tr.source-row.is-open { background: var(--accent-soft); }
+  tr.source-row.is-open > td { border-bottom-color: transparent; }
+  tr.detail-row > td { background: var(--accent-soft); }
+  .cell-id { white-space: nowrap; }
+  .cell-answer { font-family: var(--font-mono); font-size: 0.86rem; }
+  .row-toggle {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .row-toggle:hover:not(:disabled) { background: none; color: var(--accent-hover); text-decoration: underline; }
+  .row-toggle:active:not(:disabled) { transform: none; }
+  .empty-cell { padding: 1.5rem; color: var(--muted); text-align: center; }
+  .source-detail { max-width: var(--measure); padding: 0.25rem 0 0.5rem; }
+  .source-detail ul { list-style: none; padding: 0; }
+  .source-detail h4 { margin: 1.25rem 0 0.4rem; font-size: 0.94rem; }
+  .source-meta { font-size: 0.86rem; }
+  .choice-letter { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .correct-choice { color: var(--ok); font-weight: 550; }
+
+  /* ---------- learn ---------- */
+  .predict-block { margin: 1.75rem 0 0; }
+  .predict-block .prompt { margin: 0 0 0.9rem; color: var(--ink-2); }
+  .mechanism { margin-top: 2.25rem; }
+  .mechanism > h3:first-child { margin-top: 0; }
+
+  /* ---------- practice ---------- */
+  .item-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .practice > .prompt { margin-top: 1.5rem; font-size: 1.0625rem; }
+  .practice > .callout + .prompt { margin-top: 1.5rem; }
+  .answer-field { margin-top: 1.5rem; }
+  .choices label, .diagnosis-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choices label:hover, .diagnosis-option:hover { border-color: var(--line-strong); }
+  .choices label:has(input:checked), .diagnosis-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .choices label.is-expected { border-color: var(--ok); background: var(--ok-soft); }
+  .choices label.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .segmented {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .segmented label {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-left: 1px solid var(--line-strong);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .segmented label:first-child { border-left: 0; }
+  .segmented label:hover { background: var(--sunk); }
+  .segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .segmented label:has(input:disabled) { cursor: not-allowed; }
+  .reveal { margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .answer p:last-child { margin-bottom: 0; }
+  .self-report {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--sunk);
+  }
+  .self-report p { margin: 0; color: var(--ink-2); }
+  .self-report .actions { margin-top: 0.75rem; }
+  .result { margin: 2rem 0 0; font-weight: 550; }
+  .result.result-ok { color: var(--ok); }
+  .result.result-bad { color: var(--bad); }
+  .result a { color: inherit; }
+  .summary-label { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.94rem; font-weight: 600; }
+  .score { margin: 0; color: var(--ink-2); font-size: 1.06rem; }
+  .score strong {
+    margin-right: 0.15rem;
+    color: var(--ink);
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- diagnose ---------- */
+  .pending-attempt { margin: 0 0 1.25rem; }
+  .pending-attempt .prompt { color: var(--ink); }
+  .your-answer { color: var(--ink-2); }
+  .your-answer .field-label { margin-bottom: 0.15rem; color: var(--muted); font-size: 0.84rem; }
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.5rem;
+  }
+  .diagnosis-option { margin: 0; }
+  .diagnosis-option .hint {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .panel .diagnosis-option { background: var(--bg); }
+  ul.diagnosis-history { margin: 0; padding: 0; list-style: none; }
+  ul.diagnosis-history li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  ul.diagnosis-history li:last-child { border-bottom: 0; }
+  ul.diagnosis-history time { font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sources ---------- */
+  .issue-head { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem; }
+  ul.issues li { max-width: none; margin: 0; padding: 0; font-size: 0.94rem; }
+  ul.issues li > p:last-child { margin-bottom: 0; }
+  .search-field { margin-top: 2rem; }
+  #sources-count { margin: 0.5rem 0 0; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .sources-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1rem 0 0; font-size: 0.88rem; }
+  .sources-lock button { padding: 0.3rem 0.7rem; font-size: 0.84rem; }
+
+  /* ---------- motion: state transitions only ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .mechanism:not(.hidden), .reveal:not(.hidden) { animation: rise 0.35s var(--ease) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    header { position: static; }
+    .header-inner { padding: 0.75rem 1rem 0; }
+    main#app { padding: 1.5rem 1rem 4rem; }
+    .panel { padding: 1rem; }
+    .lead { font-size: 1.06rem; }
+    ul.citations li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history .badge { justify-self: start; }
+    .segmented { display: flex; }
+    .segmented label { flex: 1; text-align: center; }
+    .sources-table { min-width: 0; }
+    .sources-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .sources-table tr.source-row {
+      display: grid;
+      grid-template-areas: "id answer" "stem stem" "status mark";
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sources-table tr.source-row > td { padding: 0; border: 0; }
+    .sources-table .cell-id { grid-area: id; }
+    .sources-table .cell-answer { grid-area: answer; }
+    .sources-table .cell-stem { grid-area: stem; }
+    .sources-table .cell-status { grid-area: status; color: var(--muted); font-size: 0.86rem; }
+    .sources-table .cell-mark { grid-area: mark; justify-self: end; }
+    .sources-table tr.detail-row, .sources-table tr.detail-row > td { display: block; }
+    .sources-table tbody tr:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-row">
+      <h1 id="app-title">EKD Workspace</h1>
+      <div class="header-actions">
+        <div id="slice-controls" class="hidden">
+          <label for="slice-select">Slice</label>
+          <select id="slice-select"></select>
+        </div>
+        <button id="export-btn" class="secondary" type="button">Export progress</button>
+        <button id="export-revision-btn" class="secondary" type="button">Export for revision</button>
+        <label class="file-label">Import progress
+          <input type="file" id="import-input" accept="application/json">
+        </label>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Study modes">
+      <a href="#learn" data-route="learn">Learn</a>
+      <a href="#compare" data-route="compare">Compare</a>
+      <a href="#practice" data-route="practice">Practice</a>
+      <a href="#diagnose" data-route="diagnose">Diagnose</a>
+      <a href="#sources" data-route="sources">Explore Sources</a>
+    </nav>
+    <div id="storage-warning" class="hidden" role="alert"></div>
+  </div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 2, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-app-integration-deployment", "exam": "aws-sysops", "facet": {"key": "service", "value": "App integration & deployment", "grouped": true, "group_index": 1, "group_count": 1, "grouped_values": ["SQS", "SNS", "SES", "SWF", "Elastic Beanstalk", "EC2 Spot", "EC2 Placement Groups", "EC2 AMI", "EC2 User Data", "EC2Rescue", "CodeCommit", "CodePipeline", "WorkSpaces"], "group": "app-integration"}, "schemaVersion": 1}, "sourceQuestions": [], "claims": [{"claim_type": "rule", "conditions": ["application needs very high message throughput to/from SQS"], "confidence": "high", "id": "cl-c719bdb2fd5e", "source_question_ids": ["awssysops-p1-q004"], "statement": "Scaling the consumer/producer EC2 fleet (via an Auto Scaling group with triggers watching queue depth, e.g. ApproximateNumberOfMessagesVisible) is the most scalable way to raise aggregate throughput between EC2 and SQS.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ddb93ea39149", "source_question_ids": ["awssysops-p1-q004"], "statement": "An Elastic Load Balancer does not improve throughput between EC2 instances and SQS, because there is no inbound traffic to SQS for an ELB to distribute.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-18e92d1fc8a0", "source_question_ids": ["awssysops-p1-q004"], "statement": "EBS-optimized instances improve EBS disk I/O, not throughput to the SQS API endpoint.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-692ae06ed096", "source_question_ids": ["awssysops-p1-q004"], "statement": "Enabling a public IP address on an instance affects internet reachability, not throughput to the SQS API endpoint.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9075d6ea71d3", "source_question_ids": ["awssysops-p1-q023"], "statement": "Amazon Elastic MapReduce (EMR) provisions EC2 instances that remain fully accessible to the customer, including SSH/root access to the underlying instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cf03412056a5", "source_question_ids": ["awssysops-p1-q023"], "statement": "AWS Elastic Beanstalk provisions EC2 instances that remain fully accessible to the customer, including SSH/administrator access to the underlying instances.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-0617477fec9c", "source_question_ids": ["awssysops-p1-q023"], "statement": "Elastic Load Balancing, Amazon ElastiCache, and standard Amazon RDS do not expose an underlying instance the customer can log into; Amazon RDS Custom is the exception, giving OS-level access to the database host.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-344468ff8290", "source_question_ids": ["awssysops-p1-q057", "awssysops-p1-q089"], "statement": "Amazon SQS lets a producer enqueue a message and immediately continue processing without waiting for the downstream consumer (e.g. a database write) to acknowledge it, decoupling producer and consumer.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-93d10e9decf0", "source_question_ids": ["awssysops-p1-q057", "awssysops-p1-q089"], "statement": "Amazon SNS is a pub/sub fan-out notification service, not a durable work queue, so it does not hold messages for a consumer to pull and delete on completion the way SQS does.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-3d10642b4bd6", "source_question_ids": ["awssysops-p1-q057"], "statement": "Amazon Simple Workflow (SWF) orchestrates multi-step, stateful workflows rather than providing simple fire-and-forget decoupling of a producer from a consumer.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ee923d943805", "source_question_ids": ["awssysops-p1-q057"], "statement": "\"AWS Simple Query Service\" is not a real AWS service.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a9916619370b", "source_question_ids": ["awssysops-p1-q064"], "statement": "Amazon SNS is reachable over its public Publish API from any caller, including an on-premises or private-cloud monitoring tool, regardless of whether the monitored workload itself runs on AWS.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d3b5040eefd1", "source_question_ids": ["awssysops-p1-q064"], "statement": "Amazon SNS can deliver a notification as an SMS text message to a subscriber.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6a380afe2659", "source_question_ids": ["awssysops-p1-q064"], "statement": "Amazon SES sends and receives email, not SMS text messages.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ab56ca17ba8c", "source_question_ids": ["awssysops-p1-q064"], "statement": "\"AWS SMS\" is not the name of an AWS notification service; the acronym belonged to the now-discontinued AWS Server Migration Service, so it is the wrong choice for sending SMS alerts, which Amazon SNS handles.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-816b482b9c7c", "source_question_ids": ["awssysops-p1-q072"], "statement": "AWS CloudFormation can provision an ordered, dependency-aware collection of AWS resources (e.g. EC2 instances, an ELB) referencing a software installable hosted in S3, all from one declarative template.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-533b9ea8c9d6", "source_question_ids": ["awssysops-p1-q072"], "statement": "AWS CloudFront is a content delivery network (CDN) and is not used for provisioning infrastructure such as a LAMP stack.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-a6d85cf3bdd9", "source_question_ids": ["awssysops-p1-q072"], "statement": "\"AWS DevOps\" is not an actual AWS service name.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["community discussion on the source question remains split between Elastic Beanstalk and CloudFormation as the intended answer"], "confidence": "low", "id": "cl-352ac93517a8", "source_question_ids": ["awssysops-p1-q072"], "statement": "AWS Elastic Beanstalk can also provision a full LAMP environment including an ELB, and is itself built on CloudFormation under the hood, making it a plausible alternative answer to CloudFormation for a question about orderly deployment of infrastructure that downloads an installable from S3.", "status": "needs-review"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-fb020a2db02e", "source_question_ids": ["awssysops-p1-q079"], "statement": "Amazon SNS can deliver to HTTP/HTTPS, Email, Email-JSON, Amazon SQS, SMS, AWS Lambda, mobile push (platform application) endpoints, and Amazon Data Firehose; Amazon SES is not a subscription endpoint.", "status": "conflicted"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-69111824da16", "source_question_ids": ["awssysops-p1-q079"], "statement": "Amazon SES is not a supported Amazon SNS subscription endpoint type; SNS cannot push a notification directly to SES as a subscriber.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-a02416f3f953", "source_question_ids": ["awssysops-p1-q079"], "statement": "Amazon SES can publish into Amazon SNS, for example to deliver bounce/complaint notifications, which is the reverse direction of SES subscribing to SNS.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-958bcecd774d", "source_question_ids": ["awssysops-p1-q081", "awssysops-p1-q142"], "statement": "RDS event notifications are delivered through Amazon SNS: RDS publishes to an SNS topic when a supported event occurs, and users subscribe endpoints such as email, SMS, HTTP, or an SQS queue to that topic.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6764aa9c27d9", "source_question_ids": ["awssysops-p1-q081"], "statement": "Amazon CloudWatch monitors metrics and logs and can alarm on thresholds, but it is not RDS's native event-notification transport mechanism.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-d1e3f1c5aee9", "source_question_ids": ["awssysops-p1-q081"], "statement": "AWS CloudTrail records API calls and management events rather than RDS operational events, so it is not used for RDS event notifications.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-557ec82bd0f0", "source_question_ids": ["awssysops-p1-q081"], "statement": "AWS SES only sends email and is not RDS's event notification transport.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-9068100aee08", "source_question_ids": ["awssysops-p1-q082"], "statement": "Amazon SQS standard queues make a best effort to preserve message order but do not guarantee it; messages can be delivered out of order by default.", "status": "supported"}, {"claim_type": "rule", "conditions": ["strict in-order processing is required", "an SQS FIFO queue is not offered as an option"], "confidence": "high", "id": "cl-42a5fa322bc7", "source_question_ids": ["awssysops-p1-q082"], "statement": "When strict in-order message processing is required and an SQS FIFO queue is not available as an option, placing sequencing information on each message lets the consumer reorder messages on receipt.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-6ab63d0d4462", "source_question_ids": ["awssysops-p1-q082"], "statement": "AWS Simple Workflow (SWF) is not required to enforce in-order message delivery when using Amazon SQS.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-730dff57344f", "source_question_ids": ["awssysops-p1-q089"], "statement": "Amazon SQS decouples a frontend application tier from a backend processing tier, letting the two tiers scale independently because the frontend enqueues a message instead of blocking on backend processing latency.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-4fb75a3f9eda", "source_question_ids": ["awssysops-p1-q089"], "statement": "Amazon Glacier is archival cold storage and is unrelated to decoupling or scaling request-handling workloads.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-ff69cbb99907", "source_question_ids": ["awssysops-p1-q089"], "statement": "Amazon Elastic Transcoder (discontinued November 13, 2025; successor AWS Elemental MediaConvert) was built for video and audio transcoding, not image editing, so it does not decouple a photo-processing workload.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-26a496b56151", "source_question_ids": ["awssysops-p1-q108"], "statement": "An Amazon SQS queue can be deleted at any time regardless of whether it still holds undelivered messages; there is no requirement to drain or empty the queue first.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d427abb02930", "source_question_ids": ["awssysops-p1-q131"], "statement": "An Amazon SQS queue URL follows the pattern http(s)://sqs.<region>.amazonaws.com/<account-id>/<queue-name>, with the region immediately after the service name and the account ID and queue name forming the path.", "status": "supported"}, {"claim_type": "rule", "conditions": ["an HTTP-reachable physical device/endpoint exists to receive the SNS notification"], "confidence": "low", "id": "cl-ace019c49d97", "source_question_ids": ["awssysops-p1-q137"], "statement": "A CloudWatch alarm on EC2 CPU utilization can publish to an SNS topic, which can deliver to an HTTP endpoint that a home-automation/IoT device could use to physically switch on a light.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6bc13202bbf9", "source_question_ids": ["awssysops-p1-q142"], "statement": "RDS event notification subscriptions can be scoped to a source category such as 'DB security group,' and subscribing to its Configuration Change category delivers a notification whenever that security group is modified.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c0a1c4cac06a", "source_question_ids": ["awssysops-p1-q142"], "statement": "Manually configuring SNS to monitor DB security group changes works but is less direct than using RDS's built-in event notification subscription for the DB security group source category.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-1aaea230f356", "source_question_ids": ["awssysops-p1-q142"], "statement": "A CloudWatch alarm on an RDS DB instance does not observe DB security group configuration changes.", "status": "supported"}, {"claim_type": "rule", "conditions": ["target resource is outside AWS, e.g. an on-premises/private data center"], "confidence": "high", "id": "cl-8075cf682ebf", "source_question_ids": ["awssysops-p1-q186"], "statement": "A CloudWatch alarm on the StatusCheckFailed metric can publish to an SNS topic that delivers to an HTTP endpoint running in an on-premises data center, which can trigger launching a new instance there.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-02415a0c52c2", "source_question_ids": ["awssysops-p1-q186"], "statement": "AWS Auto Scaling, ELB, VPC, and CloudFormation are AWS-native mechanisms that only operate on AWS-hosted resources and cannot reach into an on-premises/private data center environment.", "status": "supported"}, {"claim_type": "default", "conditions": [], "confidence": "high", "id": "cl-2a2a261ab538", "source_question_ids": ["awssysops-p1-q188"], "statement": "Amazon SQS retains messages for 4 days by default, configurable up to 14 days.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-b97c7e688747", "source_question_ids": ["awssysops-p1-q188"], "statement": "An Amazon SQS message stays in the queue until a consumer retrieves and deletes it, or until it ages out past the configured retention period.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-16b452b6a690", "source_question_ids": ["awssysops-p1-q188"], "statement": "Any consumer that polls an Amazon SQS queue while a message is still present can receive that message; messages are not targeted at only whichever consumer happened to be available at send time.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-7bf5ff1f5df2", "source_question_ids": ["awssysops-p1-q188"], "statement": "A standard Amazon SQS queue delivers each message to, in practice, one consumer rather than broadcasting it to every consumer, so a message is not retained until it has been delivered to all consumers.", "status": "supported"}, {"claim_type": "fact", "conditions": ["as originally documented, before January 2021"], "confidence": "medium", "id": "cl-d13dab4cfb76", "source_question_ids": ["awssysops-p1-q226"], "statement": "Historically, per the original reference passage, AWS SNS only sent CloudWatch data every 5 minutes (basic monitoring only), with no detailed-monitoring option available.", "status": "conflicted"}, {"claim_type": "fact", "conditions": ["current AWS behavior, since the January 2021 change"], "confidence": "medium", "id": "cl-697df4971aec", "source_question_ids": ["awssysops-p1-q226"], "statement": "As of January 2021, AWS made 1-minute CloudWatch metrics the default for SNS, so SNS now provides every-minute granularity automatically with no separate 'enable detailed monitoring' step required.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-2d531b559aaf", "source_question_ids": ["awssysops-p1-q226"], "statement": "CloudWatch has always supported at least basic monitoring for SNS, regardless of era, so a claim that CloudWatch does not support monitoring for SNS at all is wrong.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e77c926066a5", "source_question_ids": ["awssysops-p1-q234"], "statement": "RDS event notifications can be temporarily turned off without deleting the underlying subscription by setting the 'Enabled' toggle to No in the console, or the Enabled parameter to false via CLI/API.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-e708da264a12", "source_question_ids": ["awssysops-p1-q234"], "statement": "The RDS console does not have a 'Disable' button set to 'Yes' for notifications; the actual control is an 'Enabled' toggle that is set to No to disable.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-c81f2a55d27e", "source_question_ids": ["awssysops-p1-q234"], "statement": "There is no 'send mail flag' parameter for RDS DB event notifications.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-48f46ffef047", "source_question_ids": ["awssysops-p1-q234"], "statement": "Deleting the notification subscription is not the only way to stop receiving RDS event notifications, since disabling the subscription is also supported.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cae9889f6e42", "source_question_ids": ["awssysops-p1-q240"], "statement": "Amazon SQS's documented operation set includes CreateQueue, ListQueues, DeleteQueue, SendMessage, SendMessageBatch, ReceiveMessage, DeleteMessage, DeleteMessageBatch, ChangeMessageVisibility, ChangeMessageVisibilityBatch, SetQueueAttributes, GetQueueAttributes, GetQueueUrl, AddPermission, and RemovePermission.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ca90605961d1", "source_question_ids": ["awssysops-p1-q240"], "statement": "\"DeleteMessageQueue\" is not a real Amazon SQS API operation; the actual operation for removing a queue is DeleteQueue.", "status": "supported"}, {"claim_type": "rule", "conditions": ["30 consecutive days with none of the core operations called on the queue"], "confidence": "high", "id": "cl-44708e37f20d", "source_question_ids": ["awssysops-p1-q280"], "statement": "Amazon SQS reserves the right to delete a queue silently, without any notification, after 30 consecutive days during which none of its core operations (SendMessage, ReceiveMessage, DeleteMessage, GetQueueAttributes, SetQueueAttributes, AddPermission, RemovePermission) have been called on it.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-a0539ed14472", "source_question_ids": ["awssysops-p1-q280"], "statement": "Amazon SQS does not send a notification before deleting a queue left inactive for 30 consecutive days, and it does not first mark the queue with an intermediate 'inactive' state.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-798336de128b", "source_question_ids": ["awssysops-p2-q305"], "statement": "AWS Elastic Beanstalk provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-49a2a4f2a510", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon EMR provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-21cd90768c4c", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon ElastiCache, Amazon RDS, and Elastic Load Balancing are fully managed services that give customers no direct access to the underlying compute instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-68490be234e9", "source_question_ids": ["awssysops-p2-q305"], "statement": "A claim that RDS lets customers 'retain administrative privileges' on its underlying EC2 instances is technically unsupported, since RDS is fully managed and customers get only a database endpoint rather than OS-level or root access to the host; this claim appeared in a dissenting minority vote.", "status": "conflicted"}, {"claim_type": "default", "conditions": [], "confidence": "medium", "id": "cl-b4bea39cfd03", "source_question_ids": ["awssysops-p2-q324"], "statement": "Elastic Beanstalk's log file rotation to S3 is a native configuration feature that works automatically across autoscaling events, unlike a manually configured per-instance scheduled task.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["Elastic Beanstalk platform is Windows Server (e.g., running a .NET application)"], "confidence": "medium", "id": "cl-50ae6b4244af", "source_question_ids": ["awssysops-p2-q324"], "statement": "Elastic Beanstalk Windows Server platforms do not support bundle logs, which may limit the automatic log-rotation-to-S3 feature specifically for .NET/Windows environments.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": ["infrastructure scales up and down via autoscaling"], "confidence": "medium", "id": "cl-6510be27c057", "source_question_ids": ["awssysops-p2-q324"], "statement": "Manually connecting to each Elastic Beanstalk instance to create a scheduled task for log rotation does not survive autoscaling, because newly launched instances will not have that task configured.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-233eeb8f8587", "source_question_ids": ["awssysops-p2-q343"], "statement": "Amazon Simple Workflow (SWF) is a task coordination and state management service for cloud applications, letting applications offload tracking of task state and execution order instead of hand-rolling glue code.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-88ebb9740582", "source_question_ids": ["awssysops-p2-q343", "awssysops-p2-q355"], "statement": "Amazon FPS was a discontinued AWS payments service and is unrelated to pub/sub or queuing messaging.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-912a35def657", "source_question_ids": ["awssysops-p2-q347"], "statement": "Amazon SQS is a fast, reliable, scalable, fully managed message queuing service used to decouple application components via durable queues.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-90602540b427", "source_question_ids": ["awssysops-p2-q347"], "statement": "AWS Data Pipeline orchestrates data movement and ETL, not message queuing.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-839a312f5ad2", "source_question_ids": ["awssysops-p2-q355"], "statement": "Amazon SNS is a fast, flexible, fully managed pub/sub push-messaging service that fans out to mobile devices and other distributed subscribers.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-bd3b5156cd07", "source_question_ids": ["awssysops-p2-q355"], "statement": "Amazon SQS is pull-based (consumers poll the queue) rather than a push/fan-out pub/sub service.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-db6222b182f1", "source_question_ids": ["awssysops-p2-q369"], "statement": "Amazon SWF stands for Simple Workflow Service, which coordinates the tasks and dependencies across the distributed components of an application.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e0ff6c316f23", "source_question_ids": ["awssysops-p2-q378"], "statement": "Amazon WorkSpaces is a fully managed desktop computing service in the AWS cloud, letting end-users access documents, applications, and resources from the device of their choice.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-b0c2889bde8e", "source_question_ids": ["awssysops-p2-q378"], "statement": "Amazon WorkSpaces offers multiple bundles, such as Value, Standard, Performance, Power, PowerPro, General Purpose, and GPU-enabled Graphics bundles (e.g. Graphics.g4dn), each with a different mix of vCPU, GPU, memory, and storage.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-64da50920151", "source_question_ids": ["awssysops-p2-q382", "awssysops-p2-q384"], "statement": "Amazon SES (Simple Email Service) is a scalable, cost-effective platform for both sending and receiving email using your own addresses and domains, covering marketing, transactional, and newsletter use cases as well as inbound mail automation such as auto-responders and support-ticket generation.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f52136bce440", "source_question_ids": ["awssysops-p2-q384"], "statement": "Amazon SES stands for Simple Email Service.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-094545b083f9", "source_question_ids": ["awssysops-p2-q387"], "statement": "AWS Elastic Beanstalk provides platforms for Java SE, Tomcat, PHP, .NET (Windows and Linux), Node.js, Python, Ruby, Go, and Docker; Perl has no native platform and runs only in a custom Docker container.", "status": "conflicted"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-f85ea37322dc", "source_question_ids": ["awssysops-p2-q387"], "statement": "Perl is not one of the programming languages/platforms supported by AWS Elastic Beanstalk.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e3baf4f327b5", "source_question_ids": ["awssysops-p2-q402"], "statement": "Elasticity, as a benefit of Elastic Beanstalk, is the streamlining of resource acquisition and release so that infrastructure can rapidly scale in and scale out as demand fluctuates.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2632f870aa8b", "source_question_ids": ["awssysops-p2-q479"], "statement": "AWS CodeCommit uses the repository ID as the AWS KMS encryption context for its encrypt/decrypt operations.", "status": "supported"}, {"claim_type": "rule", "conditions": ["determining which KMS key operations applied to a specific AWS CodeCommit repository"], "confidence": "high", "id": "cl-90d700484d79", "source_question_ids": ["awssysops-p2-q479"], "statement": "AWS CloudTrail logs record KMS API calls tagged with their encryption context, so searching CloudTrail for an AWS CodeCommit repository ID surfaces which key operations (encrypt/decrypt) were performed for that repository.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-97f63fb0dc91", "source_question_ids": ["awssysops-p2-q530"], "statement": "An SQS dead-letter queue (DLQ) only receives messages that failed processing past the max-receive threshold, so its depth does not reflect current processing backlog.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-97ad3db92899", "source_question_ids": ["awssysops-p2-q530"], "statement": "Scaling EC2 instances based on dead-letter queue depth does not address variable SQS message processing time caused by backlog.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-14ebbcdc4696", "source_question_ids": ["awssysops-p2-q530"], "statement": "An Auto Scaling policy attaches to an Auto Scaling group, not directly to an SQS queue.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-d3017bf37441", "source_question_ids": ["awssysops-p2-q530"], "statement": "The documented AWS pattern for cost-effectively scaling an EC2 fleet that polls an SQS queue is an Auto Scaling group with a CloudWatch alarm on the ApproximateNumberOfMessagesVisible metric.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-eefa87629c91", "source_question_ids": ["awssysops-p3-1-q666"], "statement": "EC2 Spot blocks (defined-duration Spot Instances of 1-6 hours) once reserved discounted Spot capacity without mid-run interruption, but they were retired after December 31, 2022 and are no longer available.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2bc000277e81", "source_question_ids": ["awssysops-p3-1-q666"], "statement": "Amazon EC2 Reserved Instances require a 1- or 3-year commitment and are priced for continuous or long-running usage rather than a strictly time-bounded nightly batch job.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9cf30a9dc54e", "source_question_ids": ["awssysops-p3-1-q666"], "statement": "A plain On-Demand/Spot Instance mix or a one-time (non-block) Spot Instance request both remain exposed to Spot interruption risk, which is unacceptable for a job that must restart from the beginning on any interruption.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "low", "id": "cl-97fb5c495e0b", "source_question_ids": ["awssysops-p3-1-q666"], "statement": "For this cost-optimization scenario (a restart-from-scratch nightly job just under 2 hours), the question's community vote and the AWS official SysOps sample exam answer key both point to a Spot block as the most cost-effective choice, conflicting with the question's boxed answer of Reserved Instances.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-08bafd72520c", "source_question_ids": ["awssysops-p3-1-q667"], "statement": "An Amazon Machine Image (AMI) is a Region-scoped resource, so sharing an AMI with another AWS account only makes it available within the Region the AMI already exists in.", "status": "supported"}, {"claim_type": "rule", "conditions": ["moving an application to a new AWS Region in another AWS account via an AMI"], "confidence": "medium", "id": "cl-e18c96aaefe4", "source_question_ids": ["awssysops-p3-1-q667"], "statement": "AMIs are Regional, so to launch from an AMI in another Region and account the AMI must exist in the target Region: either copy it there and share it with the other account, or share it and have the other account copy it to the target Region.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-605d2ac83c50", "source_question_ids": ["awssysops-p3-1-q667"], "statement": "Making an AMI or an EBS snapshot public exposes it to any AWS account rather than only an intended recipient account, undermining a requirement to maintain the security of the application being moved.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "low", "id": "cl-37f0b348f8c1", "source_question_ids": ["awssysops-p3-1-q667"], "statement": "The question's community vote (and AWS's AMI-sharing documentation, which states AMIs are regional and must be copied to a Region before being shared there) conflicts with this question's boxed answer, which skips the copy-to-new-region step.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0db90d658973", "source_question_ids": ["awssysops-p3-1-q685"], "statement": "EC2Rescue (for Windows) is purpose-built to collect operating-system-level logs for diagnosing RDP/connectivity failures and boot problems on an EC2 instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["the target EC2 instance is unreachable via RDP"], "confidence": "medium", "id": "cl-5c709ed16e42", "source_question_ids": ["awssysops-p3-1-q685"], "statement": "When an EC2 instance is unreachable via RDP so EC2Rescue cannot be run directly on it, EC2Rescue can still be used by detaching the affected EBS volume and attaching it to a working instance, or by running it offline via an SSM document.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-5813db96bc00", "source_question_ids": ["awssysops-p3-1-q685"], "statement": "VPC Flow Logs record only network-interface accept/reject traffic metadata, not operating-system log content, so they cannot be used to gather OS log files for analysis.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-1598db5eb0d5", "source_question_ids": ["awssysops-p3-1-q685"], "statement": "AWS Trusted Advisor and Amazon Inspector are unrelated to collecting operating-system log files from an EC2 instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["the application is small and updated frequently", "the application must be deployed automatically onto new EC2 instances"], "confidence": "high", "id": "cl-52887be696e9", "source_question_ids": ["awssysops-p3-1-q686"], "statement": "An EC2 user data script that downloads and installs an application at boot is the standard, zero-touch way to bootstrap a small, frequently-updated application onto every newly launched EC2 instance without maintaining a pre-baked AMI.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-eeabaaccf5c5", "source_question_ids": ["awssysops-p3-1-q686"], "statement": "For a small, frequently updated application that only needs installing on each new EC2 instance at boot, an EC2 user data script is simpler than building an AWS CodePipeline/CodeDeploy release pipeline, which orchestrates deployments of code changes.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-261fc9d63dac", "source_question_ids": ["awssysops-p3-1-q686"], "statement": "Baking an application into a custom AMI (e.g. via AWS Systems Manager) requires the golden image to be kept in sync with a frequently-updated application, unlike a user-data script that always fetches the latest version at instance launch.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e421c064d937", "source_question_ids": ["awssysops-p3-1-q700"], "statement": "A cluster placement group packs EC2 instances close together within a single Availability Zone on the underlying AWS infrastructure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f764b37b5db9", "source_question_ids": ["awssysops-p3-1-q700"], "statement": "A cluster placement group delivers low-latency, high-throughput networking between the instances placed in it.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f095b9d3d966", "source_question_ids": ["awssysops-p3-1-q700"], "statement": "Launching instances in a dedicated VPC does not reduce inter-instance network latency, because it does not change the physical proximity of the underlying hosts.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-2997bae31979", "source_question_ids": ["awssysops-p3-1-q700"], "statement": "Launching instances in a single subnet within a VPC does not reduce inter-instance network latency, because it does not change the physical proximity of the underlying hosts.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-984272185e6c", "source_question_ids": ["awssysops-p3-1-q700"], "statement": "Launching instances in a single Availability Zone without a placement group does not guarantee the same low-latency clustered placement that a cluster placement group provides.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-2bd3c4b03f47", "source_question_ids": ["awssysops-p3-1-q715"], "statement": "AWS CodePipeline requires its artifact S3 bucket to reside in the same AWS region as the pipeline itself.", "status": "supported"}, {"claim_type": "fact", "conditions": ["artifact S3 bucket region differs from the pipeline's region"], "confidence": "high", "id": "cl-4d0f8532e997", "source_question_ids": ["awssysops-p3-1-q715"], "statement": "When a CodePipeline pipeline's artifact S3 bucket is in a different region than the pipeline, the pipeline fails to download the artifact, producing an InternalError with code JobFailed.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-79513a19d946", "source_question_ids": ["awssysops-p3-1-q715"], "statement": "S3 Transfer Acceleration speeds up uploads over long distances but is not required for, and is unrelated to, CodePipeline's region-mismatch InternalError/JobFailed error.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-0ba887389016", "source_question_ids": ["awssysops-p3-1-q715"], "statement": "S3 bucket throttling typically produces a rate-limit-specific error rather than the generic InternalError/JobFailed CodePipeline raises for a region mismatch.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-5ca9e53fb44a", "source_question_ids": ["awssysops-p3-1-q715"], "statement": "Insufficient permissions on an S3 artifact can cause CodePipeline failures, but that failure mode is distinct from the documented region-mismatch InternalError/JobFailed signature.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-0d0c262cc2c9", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Scaling a worker fleet on CPU utilization alone does not reliably track SQS queue backlog, because a workload can be CPU-light yet slow to process, letting the queue grow unbounded even while CPU looks fine.", "status": "conflicted"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-c5666c0c7929", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Scaling an Auto Scaling group's policy based on the number of messages in its SQS queue directly ties worker capacity to the actual backlog depth.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ab72a6be117f", "source_question_ids": ["awssysops-p3-1-q750"], "statement": "Increasing the retention period of an SQS queue only extends how long unprocessed messages are kept before being discarded; it does not increase processing throughput and does not fix a growing message backlog.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-036c4f066762", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "Amazon SQS is reached over its public API endpoint, so a Lambda function running in a VPC with no internet access needs an SQS VPC interface endpoint to reach a queue at all.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-eabfc6c47e91", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "An RDS instance's security group must explicitly allow inbound connections from the Lambda function's security group or elastic network interface, or writes from Lambda to RDS will silently fail.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-59ac86f401fe", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "When a Lambda function and an RDS instance are located in the same VPC, no VPC endpoint is needed for the RDS traffic between them.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-f34aafa5d9c0", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A NAT gateway's presence or absence has no bearing on intra-VPC connectivity between a Lambda function and an RDS instance in the same VPC.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-b273a9a19c4b", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A missing internet gateway on a Lambda function's subnet has no bearing on data reaching RDS when the Lambda-to-RDS workflow occurs entirely within the VPC and requires no outbound internet access.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0c850204c75d", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "When a question's community vote credibly and substantially contradicts or splits from the given boxed answer, the question is flagged as disputed for triage while the boxed answer is nonetheless retained per the ingestion policy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-6f7913cd4d98", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "Spot blocks, retired after December 31, 2022, carried a price premium over regular Spot pricing in exchange for a guaranteed uninterrupted run of 1-6 hours.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-a2333e51d02a", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "A one-time Spot Instance request was priced lower than the now-retired Spot block because it offered no fixed-duration guarantee.", "status": "conflicted"}, {"claim_type": "default", "conditions": ["job can be completed at any time", "job can be restarted from the beginning if it fails or is interrupted"], "confidence": "medium", "id": "cl-7affb7d1cb02", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "A job that can run at any time and can be restarted from the beginning if interrupted is well suited to regular Spot Instances rather than a Spot block.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-a594dc1f98e4", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "Reserved Instances require a long-term commitment, making them ill-suited for intermittent, short-duration job runs.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["workload tolerates interruption entirely"], "confidence": "medium", "id": "cl-078622d12978", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "Mixing On-Demand and Spot Instances for a flexible, interruption-tolerant workload pays full price for the On-Demand portion unnecessarily.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-89d7943d0fa5", "source_question_ids": ["awssysops-p3-1-q877"], "statement": "Spot blocks (defined-duration Spot Instances) stopped accepting new customers on July 1, 2021 and were retired for all customers after December 31, 2022.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-329557271989", "source_question_ids": ["awssysops-p3-1-q898"], "statement": "A cluster placement group packs instances physically close together within a single Availability Zone specifically to minimize inter-instance network latency.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cf4c058d03bb", "source_question_ids": ["awssysops-p3-1-q898"], "statement": "Enhanced networking provides higher packet-per-second performance and lower network jitter/latency at the instance level.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-80cf23c5ba1d", "source_question_ids": ["awssysops-p3-1-q898"], "statement": "Launching instances in different VPCs connected by a VPN tunnel or VPC peering adds network hops between them, working against a lowest-possible-latency goal.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-9cf762a8eccc", "source_question_ids": ["awssysops-p3-1-q898"], "statement": "A spread placement group deliberately places instances on distinct underlying hardware to reduce simultaneous failure risk, the opposite of the physical proximity needed for minimizing latency.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-143136e6a8eb", "source_question_ids": ["awssysops-p3-1-q929"], "statement": "AWS now marks the lowestPrice Spot Fleet allocation strategy as not recommended because it has the highest interruption risk and recommends priceCapacityOptimized for cost savings and capacity availability; older documentation recommended lowestPrice with InstancePoolsToUseCount for cost optimization.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-18cecd65745c", "source_question_ids": ["awssysops-p3-1-q929"], "statement": "Specifying a Spot Fleet target capacity and how much of it must be On-Demand guarantees a minimum baseline of capacity for availability and reliability, not for cost optimization.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-1b370fc84525", "source_question_ids": ["awssysops-p3-1-q929"], "statement": "The capacityOptimized Spot Fleet allocation strategy prioritizes pools with the most stable spare capacity to minimize interruptions, which is a reliability optimization rather than a cost optimization.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-2d6f485b8b80", "source_question_ids": ["awssysops-p3-1-q929"], "statement": "Launching instances up to the Spot Fleet target capacity or maximum acceptable price is basic Spot Fleet behavior, not itself a cost-optimization lever.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-app-integration-deployment--m-1", "title": "Who holds the message, and who moves it: SQS pull-queue vs SNS push-fan-out (with SES and SWF at the edges)", "purpose": "Pick the right AWS application-integration service (and its correct operational behavior) by asking where a message lives after it is sent and whether the receiver pulls it or has it pushed to them.", "mechanism": "Amazon SQS is a durable buffer: a producer calls SendMessage and immediately continues, and the message sits in the queue (4 days by default, up to 14) until some consumer polls ReceiveMessage, processes it, and calls DeleteMessage. Because the queue absorbs the gap, the frontend and backend tiers scale independently, and any polling consumer can take a message (in practice one consumer per message, not a broadcast). Throughput and backlog are therefore fixed by adding consumers: an Auto Scaling group driven by a CloudWatch alarm on ApproximateNumberOfMessagesVisible, not by CPU, an ELB, DLQ depth, or longer retention. Amazon SNS is the opposite shape: nothing waits in a queue; a publisher (any caller of the public Publish API, even on-premises, or an AWS service such as RDS event notifications or a CloudWatch alarm) pushes to a topic and SNS immediately fans the message out to every subscribed endpoint (HTTP/S, email, SMS, SQS, Lambda, mobile push). Amazon SES is only email sending/receiving: it is not an SMS service and not an SNS subscription endpoint (it can publish into SNS, not subscribe to it). Amazon SWF is neither a buffer nor a notifier: it tracks state and ordering across multi-step distributed tasks.", "predict_prompt": "An RDS DB security group is modified and the ops team must get a text message. Which service carries the notification, and why would SQS or SES be wrong?", "invariants": ["An SQS message persists until a consumer deletes it or the retention period expires; SNS does not hold messages for a later pull.", "SQS is pull-based (consumers poll); SNS is push-based (fan-out to all subscribers).", "Scale SQS workers on queue depth (ApproximateNumberOfMessagesVisible) via an Auto Scaling group, since the policy attaches to the group, not the queue.", "RDS event notifications and CloudWatch alarm actions are delivered through SNS topics.", "SES handles email only and cannot be an SNS subscriber."], "limits": ["SQS standard queues do not guarantee ordering; without a FIFO queue, put sequencing data in each message and reorder in the consumer (SWF is not needed for this).", "SQS can silently delete a queue after 30 consecutive days with no core operations, with no warning or intermediate inactive state.", "A queue can be deleted with DeleteQueue (not 'DeleteMessageQueue') even while it still holds messages.", "A VPC-bound caller with no internet path needs an SQS interface VPC endpoint to reach the public SQS API."], "cues": ["'decouple', 'continue without waiting', 'backend processes at its own pace', 'retain until processed' -> SQS", "'notify', 'SMS', 'fan out', 'push to HTTP endpoint', 'RDS event notification', 'on-premises tool sends alerts' -> SNS", "'send/receive email', 'bounce/complaint handling' -> SES", "'coordinate tasks', 'track task state and execution order' -> SWF", "'queue backlog growing' -> scale the ASG on ApproximateNumberOfMessagesVisible"], "claim_ids": ["cl-344468ff8290", "cl-730dff57344f", "cl-912a35def657", "cl-2a2a261ab538", "cl-b97c7e688747", "cl-16b452b6a690", "cl-7bf5ff1f5df2", "cl-bd3b5156cd07", "cl-c719bdb2fd5e", "cl-d3017bf37441", "cl-14ebbcdc4696", "cl-97f63fb0dc91", "cl-ab72a6be117f", "cl-0d0c262cc2c9", "cl-839a312f5ad2", "cl-93d10e9decf0", "cl-a9916619370b", "cl-d3b5040eefd1", "cl-fb020a2db02e", "cl-958bcecd774d", "cl-8075cf682ebf", "cl-6a380afe2659", "cl-69111824da16", "cl-a02416f3f953", "cl-64da50920151", "cl-233eeb8f8587", "cl-db6222b182f1", "cl-9068100aee08", "cl-42a5fa322bc7", "cl-6ab63d0d4462", "cl-44708e37f20d", "cl-a0539ed14472", "cl-26a496b56151", "cl-ca90605961d1", "cl-036c4f066762"]}, "contrastSet": {"id": "aws-sysops-service-app-integration-deployment--cs-1", "subjects": ["Amazon SQS", "Amazon SNS", "Amazon SES", "Amazon SWF"], "dimensions": ["delivery model", "message persistence", "recipients", "typical exam cue"], "shared_traits": ["Fully managed AWS application-integration services reached over public AWS APIs", "All appear as 'Simple ... Service' acronyms, which is why they are swapped as distractors"], "matrix": {"delivery model": {"Amazon SQS": "Pull: consumers poll ReceiveMessage", "Amazon SNS": "Push: topic fans out to subscribers", "Amazon SES": "Sends/receives email", "Amazon SWF": "Coordinates task execution order"}, "message persistence": {"Amazon SQS": "Held until deleted or retention expires (4 days default, max 14)", "Amazon SNS": "Not held for later pull; delivered on publish", "Amazon SES": "Email delivery, not a work queue", "Amazon SWF": "Tracks workflow/task state, not messages"}, "recipients": {"Amazon SQS": "Effectively one consumer per message", "Amazon SNS": "Every subscriber: HTTP/S, email, SMS, SQS, Lambda, mobile push", "Amazon SES": "Email addresses only; not an SNS subscriber", "Amazon SWF": "Workers/deciders in a multi-step workflow"}, "typical exam cue": {"Amazon SQS": "Decouple tiers, buffer work, scale on queue depth", "Amazon SNS": "Notify/alert, SMS, RDS event notifications, CloudWatch alarm action", "Amazon SES": "Marketing/transactional email, inbound mail", "Amazon SWF": "Stateful multi-step task coordination"}}, "decision_rule": "Ask whether the message must wait durably for a receiver to pull it when ready (SQS) or be pushed immediately to every interested endpoint (SNS); only if the channel is specifically email (SES) or the need is tracking state across ordered multi-step tasks (SWF) does the answer leave that SQS/SNS axis.", "boundary_flip": "A web tier must hand photo-processing jobs to a backend fleet that works at its own pace -> SQS. Change the requirement to 'text the on-call engineer the moment an RDS security group changes or a CPU alarm fires' -> the answer flips to SNS (an RDS event subscription or CloudWatch alarm publishing to an SNS topic with an SMS subscriber).", "strongest_distractor_failure": "Choosing SNS for decoupling fails because SNS is a pub/sub push service that does not hold a message for a consumer to pull and delete on completion; if the backend is busy or down, nothing buffers the work the way an SQS queue does.", "exceptions": ["SNS can deliver into an SQS queue, so a fan-out-then-buffer design uses both; the question's requirement decides which one is the answer.", "SES can publish into SNS (e.g. bounce/complaint notifications) even though it cannot subscribe to an SNS topic.", "Strict ordering without a FIFO queue is handled by per-message sequence numbers in SQS, not by switching to SWF."], "claim_ids": ["cl-344468ff8290", "cl-730dff57344f", "cl-912a35def657", "cl-2a2a261ab538", "cl-b97c7e688747", "cl-7bf5ff1f5df2", "cl-bd3b5156cd07", "cl-839a312f5ad2", "cl-93d10e9decf0", "cl-d3b5040eefd1", "cl-fb020a2db02e", "cl-958bcecd774d", "cl-6bc13202bbf9", "cl-ace019c49d97", "cl-6a380afe2659", "cl-557ec82bd0f0", "cl-69111824da16", "cl-a02416f3f953", "cl-64da50920151", "cl-3d10642b4bd6", "cl-233eeb8f8587", "cl-db6222b182f1", "cl-6ab63d0d4462", "cl-42a5fa322bc7"]}, "scenarioFamily": {"id": "aws-sysops-service-app-integration-deployment--sf-1", "canonical": {"prompt": "A photo-sharing web application's frontend tier accepts user uploads and must respond to the user immediately, without waiting for a backend image-processing fleet to finish each job. The backend fleet's workload is variable and bursty, and the team wants the backend to add or remove capacity automatically to match the amount of pending work, while keeping the frontend and backend tiers able to scale independently of each other. Which AWS service should sit between the two tiers, and how should the backend fleet's capacity be scaled?", "expected_answer": ["Put Amazon SQS between the frontend and backend tiers so the frontend can enqueue a job and continue immediately; scale the backend Auto Scaling group with a CloudWatch alarm on the queue's ApproximateNumberOfMessagesVisible metric."], "reasoning": "SQS lets a producer enqueue a message and continue without waiting for the consumer to acknowledge it (cl-344468ff8290), and this decouples the frontend tier from the backend tier so each can scale independently (cl-730dff57344f). To track aggregate throughput/backlog automatically, the documented pattern is an Auto Scaling group whose policy watches ApproximateNumberOfMessagesVisible (cl-c719bdb2fd5e, cl-d3017bf37441); the scaling policy attaches to the Auto Scaling group itself, not directly to the SQS queue (cl-14ebbcdc4696).", "distractor_analysis": "Amazon SNS is a pub/sub push service, not a durable queue, so it would not hold jobs for the backend to pull and delete on completion if the backend falls behind (cl-93d10e9decf0). Amazon Glacier is archival cold storage and unrelated to decoupling a live processing workload (cl-4fb75a3f9eda). Amazon Elastic Transcoder/its successor is for audio/video transcoding, not a general decoupling or image-editing mechanism (cl-ff69cbb99907). Watching the dead-letter queue's depth would not reflect current processing backlog, since a DLQ only receives messages that exceeded the max-receive threshold (cl-97f63fb0dc91). Scaling on CPU utilization alone is unreliable because a CPU-light workload can still leave the queue growing unbounded (cl-0d0c262cc2c9).", "claim_ids": ["cl-344468ff8290", "cl-730dff57344f", "cl-c719bdb2fd5e", "cl-d3017bf37441", "cl-14ebbcdc4696", "cl-93d10e9decf0", "cl-4fb75a3f9eda", "cl-ff69cbb99907", "cl-97f63fb0dc91", "cl-0d0c262cc2c9"], "difficulty": "medium", "importance": "high"}, "variants": [{"variant_type": "boundary", "changed_condition": "The requirement is no longer to autoscale the backend fleet's capacity — instead, the business now requires that the on-call engineer receive an SMS text message the moment the pending backlog exceeds a threshold, with no infrastructure scaling implied.", "prompt": "The team still has the frontend enqueueing jobs for the backend to process at its own pace, but the new requirement is: when the pending backlog crosses a threshold, the on-call engineer must get a text message alert. There is no requirement to add backend capacity automatically. Which AWS service delivers the alert, and how?", "expected_answer": ["Put a CloudWatch alarm on the queue's backlog metric and have it publish to an Amazon SNS topic with an SMS subscription for the on-call engineer; SQS itself is still used to hold the jobs, but SNS is the service that pushes the actual text alert."], "reasoning": "Because the ask changed from 'scale capacity to backlog' to 'notify a person when backlog crosses a threshold,' the answer moves off the SQS-scaling axis and onto the notification axis: a CloudWatch alarm can publish to an SNS topic that delivers to a subscriber (cl-ace019c49d97 shows this alarm-to-SNS-to-endpoint pattern), and SNS can deliver that notification as an SMS text message (cl-d3b5040eefd1). This is a boundary flip from the canonical scenario because the underlying goal (what should happen when backlog grows) changed from 'scale workers' to 'alert a human.'", "distractor_analysis": "SNS could not be the answer to the canonical scaling question because it does not hold jobs for a consumer to pull (cl-93d10e9decf0), but here that is irrelevant since SNS is not being asked to buffer work — only to push an alert. Amazon SES only sends/receives email, not SMS text messages, so it is the wrong channel for this alert (cl-6a380afe2659).", "claim_ids": ["cl-ace019c49d97", "cl-d3b5040eefd1", "cl-93d10e9decf0", "cl-6a380afe2659"], "difficulty": "medium", "importance": "high"}, {"variant_type": "irrelevant-detail", "changed_condition": "The backend fleet instances are EBS-optimized and have public IP addresses enabled, and uploads from users are served through an Elastic Load Balancer in front of the frontend tier.", "prompt": "Same decoupling and autoscaling need as before: the frontend must respond immediately and the backend's capacity must track pending work. This time, the backend instances are EBS-optimized and have public IPs assigned, and the frontend sits behind an Elastic Load Balancer. Does any of that change which service connects the tiers or how the backend should be scaled?", "expected_answer": ["No — still use Amazon SQS between the tiers and scale the backend Auto Scaling group on a CloudWatch alarm watching ApproximateNumberOfMessagesVisible; the EBS optimization, public IPs, and the frontend's ELB are irrelevant to that choice."], "reasoning": "EBS-optimized instances improve EBS disk I/O, not throughput to the SQS API endpoint, so it has no bearing on the queue/scaling design (cl-18e92d1fc8a0). A public IP address affects general internet reachability of an instance, not throughput to the SQS API endpoint (cl-692ae06ed096). An ELB in front of the frontend tier distributes inbound HTTP traffic to the frontend; it does not improve throughput between EC2 and SQS, because there is no inbound traffic to SQS for an ELB to distribute (cl-ddb93ea39149). None of these details touch the mechanism that actually matters: SQS decoupling plus ASG scaling on queue depth, exactly as in the canonical scenario.", "claim_ids": ["cl-18e92d1fc8a0", "cl-692ae06ed096", "cl-ddb93ea39149", "cl-c719bdb2fd5e", "cl-d3017bf37441"], "difficulty": "easy", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "Before implementing, the team debates just scaling the backend Auto Scaling group on CPU utilization instead, reasoning that CPU usage already seems to trend with how much photo-processing work is happening.", "prompt": "A teammate proposes skipping the queue-depth metric entirely and instead scaling the backend Auto Scaling group purely on average CPU utilization, since CPU appears to rise and fall with processing load in their informal testing. Is this an acceptable substitute for the canonical approach, and why or why not?", "expected_answer": ["No — still scale the backend Auto Scaling group on a CloudWatch alarm watching the queue's ApproximateNumberOfMessagesVisible metric, not on CPU utilization alone."], "reasoning": "Scaling on CPU utilization alone does not reliably track the SQS queue's actual backlog, because the workload can be CPU-light yet slow to process, letting the queue grow unbounded even while CPU looks fine (cl-0d0c262cc2c9). The documented, cost-effective pattern remains an Auto Scaling group whose policy is driven by ApproximateNumberOfMessagesVisible (cl-d3017bf37441), with the scaling policy attached to the group, not the queue (cl-14ebbcdc4696).", "distractor_analysis": "CPU-based scaling is the adversarial distractor here: it sounds plausible because CPU often does correlate with load, which is exactly why it tempts teams away from the correct backlog-based metric, but it fails whenever processing time and CPU usage decouple (cl-0d0c262cc2c9).", "claim_ids": ["cl-0d0c262cc2c9", "cl-d3017bf37441", "cl-14ebbcdc4696"], "difficulty": "hard", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The pipeline now moves video-encoding jobs instead of photo-editing jobs between the same frontend and backend tiers; everything else about the decoupling and autoscaling need stays the same.", "prompt": "The same frontend/backend split is now needed for a video-encoding farm instead of a photo-editing service: the frontend must respond immediately, and the backend's capacity must track pending work. A teammate suggests Amazon Elastic Transcoder's successor service might be the piece that connects the tiers, since the workload is now video. Does switching the workload to video change which service connects the tiers or how backend capacity should be scaled?", "expected_answer": ["No — still use Amazon SQS between the tiers and scale the backend Auto Scaling group on a CloudWatch alarm watching ApproximateNumberOfMessagesVisible; a transcoding service does the encoding work itself, not the decoupling or scaling."], "reasoning": "The decoupling mechanism (SQS, with the producer continuing immediately after SendMessage) and the independent-scaling benefit it gives the two tiers (cl-730dff57344f) do not depend on what the backend fleet actually computes; the same ApproximateNumberOfMessagesVisible-driven Auto Scaling pattern (cl-c719bdb2fd5e, cl-d3017bf37441) carries over unchanged from photo processing to video encoding.", "distractor_analysis": "Amazon Elastic Transcoder (now succeeded by AWS Elemental MediaConvert) is a transcoding engine, not a queueing or scaling mechanism, so renaming the workload to video does not make it the answer to how the tiers are connected or scaled (cl-ff69cbb99907).", "claim_ids": ["cl-730dff57344f", "cl-c719bdb2fd5e", "cl-d3017bf37441", "cl-ff69cbb99907"], "difficulty": "medium", "importance": "medium"}]}, "issues": [{"type": "contradiction", "severity": "high", "description": "Source questions disagree on Spot suitability for restart-from-scratch jobs. q666 claims a one-time Spot request is 'unacceptable for a job that must restart from the beginning on any interruption' (cl-9cf30a9dc54e), while q877 claims a job that 'can be restarted from the beginning if interrupted' is well suited to regular Spot (cl-7affb7d1cb02). The run-at-any-time condition only partly separates the two scenarios, and the dispute is left unresolved.", "related_entity_ids": ["cl-9cf30a9dc54e", "cl-7affb7d1cb02", "cl-eefa87629c91", "cl-6f7913cd4d98", "cl-a2333e51d02a"]}, {"type": "contradiction", "severity": "high", "description": "q666's boxed answer (Reserved Instances) conflicts with the slice's own claims. Those claims say RIs need a 1- or 3-year commitment and are ill-suited to short time-bounded jobs (cl-2bc000277e81, cl-a594dc1f98e4), and that the community vote and AWS sample exam key point to a Spot block (cl-97fb5c495e0b). The correct answer for this question is unresolved.", "related_entity_ids": ["cl-97fb5c495e0b", "cl-2bc000277e81", "cl-a594dc1f98e4", "cl-eefa87629c91"]}, {"type": "stale-risk", "severity": "medium", "description": "q666 and q877 hinge on EC2 Spot blocks (defined-duration Spot), which stopped accepting new customers in July 2021 and were retired after December 31, 2022. Answers keyed on Spot blocks no longer reflect a purchasable option.", "related_entity_ids": ["cl-eefa87629c91", "cl-6f7913cd4d98", "cl-a2333e51d02a", "cl-89d7943d0fa5", "cl-97fb5c495e0b"]}, {"type": "contradiction", "severity": "high", "description": "q667's boxed answer skips the copy-the-AMI-to-the-new-Region step. The community vote and AWS AMI documentation (AMIs are Regional and must be copied before they can be used in another Region) contradict it, and the dispute is unresolved.", "related_entity_ids": ["cl-37f0b348f8c1", "cl-e18c96aaefe4", "cl-08bafd72520c"]}, {"type": "contradiction", "severity": "medium", "description": "Two sources disagree on RDS host access. q023 says RDS Custom is an exception that gives OS-level access to the database host (cl-0617477fec9c). q305 says categorically that RDS gives customers no direct access to the underlying instances (cl-21cd90768c4c) and calls administrative privileges on RDS hosts unsupported (cl-68490be234e9). Neither is qualified to reconcile the RDS Custom case.", "related_entity_ids": ["cl-0617477fec9c", "cl-21cd90768c4c", "cl-68490be234e9"]}, {"type": "ambiguity", "severity": "medium", "description": "q072's intended answer is split between CloudFormation and Elastic Beanstalk (cl-352ac93517a8, needs-review). The slice also states CloudFormation as the answer with high confidence (cl-816b482b9c7c), with no acknowledgment that this answer is disputed.", "related_entity_ids": ["cl-352ac93517a8", "cl-816b482b9c7c"]}, {"type": "ambiguity", "severity": "medium", "description": "q324's Elastic Beanstalk log-rotation answer (cl-b4bea39cfd03) is conflicted. The exception cl-50ae6b4244af notes that Windows Server platforms do not support bundle logs, which may undercut the automatic rotate-to-S3 answer for the question's .NET application. This is unresolved.", "related_entity_ids": ["cl-b4bea39cfd03", "cl-50ae6b4244af", "cl-6510be27c057"]}, {"type": "unsupported-generation", "severity": "medium", "description": "The mental model states some claims with status 'conflicted' as settled fact. The mechanism's 'not by CPU ... or longer retention' rests on cl-0d0c262cc2c9 and cl-ab72a6be117f (q750, conflicted). The limit that a queue can be deleted while it still holds messages rests on cl-26a496b56151 (conflicted). The limit that a VPC-bound caller needs an SQS interface endpoint rests on cl-036c4f066762 (conflicted). None of these carry a caveat.", "related_entity_ids": ["aws-sysops-service-app-integration-deployment--m-1", "cl-0d0c262cc2c9", "cl-ab72a6be117f", "cl-c5666c0c7929", "cl-26a496b56151", "cl-036c4f066762"]}, {"type": "unsupported-generation", "severity": "medium", "description": "Mental model invariant 'RDS event notifications and CloudWatch alarm actions are delivered through SNS topics' overgeneralizes. CloudWatch alarm actions also include Auto Scaling policy and EC2 actions that bypass SNS, which the same model relies on when it scales an ASG from an ApproximateNumberOfMessagesVisible alarm (cl-d3017bf37441). The source claims (cl-958bcecd774d, cl-8075cf682ebf) support SNS as one alarm action, not as the only delivery path.", "related_entity_ids": ["aws-sysops-service-app-integration-deployment--m-1", "cl-958bcecd774d", "cl-8075cf682ebf", "cl-d3017bf37441"]}, {"type": "unsupported-generation", "severity": "low", "description": "The contrast set cites cl-ace019c49d97 (low confidence, conflicted) for its CPU-alarm boundary flip. The SNS endpoint list in both the mental model and the contrast set rests on cl-fb020a2db02e (conflicted), and the contrast set's list also leaves out Data Firehose, which that claim includes.", "related_entity_ids": ["aws-sysops-service-app-integration-deployment--cs-1", "aws-sysops-service-app-integration-deployment--m-1", "cl-ace019c49d97", "cl-fb020a2db02e"]}, {"type": "unsupported-generation", "severity": "medium", "description": "cl-02415a0c52c2 claims with high confidence that ELB and CloudFormation cannot reach on-premises resources. This overgeneralizes: ALB and NLB can register on-premises IP targets over VPN or Direct Connect, and CloudFormation custom resources can act outside AWS. The q186 source only supports these not being the right answer in that scenario.", "related_entity_ids": ["cl-02415a0c52c2"]}, {"type": "stale-risk", "severity": "medium", "description": "q226 has era-dependent answers. One claim says SNS sent CloudWatch metrics only every 5 minutes (cl-d13dab4cfb76). Another says 1-minute metrics became the default in January 2021 (cl-697df4971aec). Both are conflicted, so the correct exam answer depends on which era is assumed and is unresolved.", "related_entity_ids": ["cl-d13dab4cfb76", "cl-697df4971aec", "cl-2d531b559aaf"]}, {"type": "stale-risk", "severity": "medium", "description": "q929's Spot Fleet allocation claims are conflicted. Older documentation recommended lowestPrice with InstancePoolsToUseCount for cost; AWS now marks lowestPrice as not recommended and recommends priceCapacityOptimized. The cost-optimization answer depends on the documentation era.", "related_entity_ids": ["cl-143136e6a8eb", "cl-18cecd65745c", "cl-1b370fc84525"]}, {"type": "stale-risk", "severity": "low", "description": "q142 and the mental model's predict prompt rely on RDS 'DB security groups'. These were an EC2-Classic construct, and EC2-Classic has been retired; current RDS uses VPC security groups.", "related_entity_ids": ["cl-6bc13202bbf9", "aws-sysops-service-app-integration-deployment--m-1"]}, {"type": "quality", "severity": "low", "description": "cl-0c850204c75d is an ingestion-policy meta-statement about how disputed questions are triaged, not exam knowledge about Lambda, SQS, or RDS. It should not be a claim. Its presence also signals that q840's boxed answer is disputed, which leaves the other q840 claims (cl-036c4f066762, cl-eabfc6c47e91, cl-f34aafa5d9c0, cl-b273a9a19c4b) unresolved.", "related_entity_ids": ["cl-0c850204c75d", "cl-036c4f066762", "cl-eabfc6c47e91", "cl-f34aafa5d9c0", "cl-b273a9a19c4b"]}, {"type": "stale-risk", "severity": "low", "description": "Several claims depend on product-lifecycle facts that are conflicted or time-sensitive: Elastic Transcoder discontinuation (cl-ff69cbb99907), AWS Server Migration Service retirement (cl-ab56ca17ba8c), the WorkSpaces bundle list (cl-b0c2889bde8e) and the Elastic Beanstalk platform list (cl-094545b083f9).", "related_entity_ids": ["cl-ff69cbb99907", "cl-ab56ca17ba8c", "cl-b0c2889bde8e", "cl-094545b083f9"]}], "sourceQuestionCount": 43}], "sources": {"kind": "locked", "file": "aws-sysops-service-app-integration-4dnf.sources.enc.js"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam. The slice bodies (mental model, claims,
+  // etc.) ride inline in BUNDLE; only sourceQuestions live in sibling files,
+  // loaded on demand via injected <script> tags (fetch/XHR can't read a
+  // sibling under file:// -- each file:// resource is its own origin). ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: s.sourceQuestionCount || 0 };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function claimListItemHtml(c) {
+    var status = c.status || 'status unknown';
+    return safe`<li><span class="badge status-${status.replace(/\s+/g, '-')}">${status.replace(/-/g, ' ')}</span><span>${c.statement}</span>${raw(markControlHtml('claim:' + c.id))}</li>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`
+      <details class="claims">
+        <summary>Supporting claims <span class="tally">${claims.length}</span></summary>
+        <ul class="citations">${raw(claims.map(claimListItemHtml).join(''))}</ul>
+      </details>`;
+  }
+  function truncate(text, max) {
+    text = text || '';
+    return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, marks: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        marks: parsed.marks && typeof parsed.marks === 'object' ? parsed.marks : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  // ---------- confidence marks: the learner's own "flag this for review"
+  // priority on a claim or source question -- distinct from a claim's
+  // generated `confidence` field and Practice's self-reported `confidence`
+  // radio, so this one is named `marks` to avoid colliding with either. ----------
+  var MARK_LEVELS = ['low', 'medium', 'high'];
+
+  function markControlHtml(key) {
+    var active = STATE.marks[key];
+    return safe`<span class="mark-control" data-mark-key="${key}">${raw(MARK_LEVELS.map(function (level) {
+      var isActive = active === level;
+      return safe`<button type="button" class="mark-dot mark-${level}${raw(isActive ? ' is-active' : '')}" data-mark-value="${level}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Mark ${level} priority"></button>`;
+    }).join(''))}</span>`;
+  }
+
+  function handleMarkClick(event) {
+    var dot = event.target.closest('.mark-dot');
+    if (!dot) return;
+    var key = dot.closest('.mark-control').getAttribute('data-mark-key');
+    var value = dot.getAttribute('data-mark-value');
+    if (STATE.marks[key] === value) delete STATE.marks[key];
+    else STATE.marks[key] = value;
+    saveState();
+    navigate();
+  }
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private or incognito mode?). '
+        + 'Progress will not be saved after this tab closes, so export it before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- one-way revision export: groups everything currently marked
+  // by level (low, then medium, then high) into a Markdown file. Never
+  // re-imported, unlike exportProgress's JSON. ----------
+  function exportRevisionNotes() {
+    var questions = (SOURCES.status === 'ready' ? SOURCES.bySlice : {})[CURRENT.contentSet.id] || [];
+    var claimsById = {};
+    (CURRENT.claims || []).forEach(function (c) { claimsById[c.id] = c; });
+
+    var byLevel = { low: [], medium: [], high: [] };
+    Object.keys(STATE.marks).forEach(function (key) {
+      var level = STATE.marks[key];
+      if (byLevel[level]) byLevel[level].push(key);
+    });
+
+    var lines = ['# Revision notes: ' + CURRENT.contentSet.facet.value, ''];
+    MARK_LEVELS.forEach(function (level) {
+      var keys = byLevel[level];
+      if (!keys.length) return;
+      lines.push('## ' + level.charAt(0).toUpperCase() + level.slice(1) + ' priority', '');
+      keys.forEach(function (key) {
+        var sepIndex = key.indexOf(':');
+        var kind = key.slice(0, sepIndex);
+        var id = key.slice(sepIndex + 1);
+        if (kind === 'claim') {
+          var claim = claimsById[id];
+          lines.push('- ' + (claim ? claim.statement : '(claim ' + id + ' no longer available)'), '');
+        } else if (kind === 'question') {
+          var q = questions.find(function (item) { return item.id === id; });
+          if (!q) {
+            lines.push('### ' + id, '', '(question details unavailable -- open Explore Sources to load question data)', '');
+            return;
+          }
+          lines.push('### ' + q.id, '', q.stem || '', '');
+          (q.choices || []).forEach(function (c) {
+            var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+            lines.push('- ' + c.letter + '. ' + c.text + (isCorrect ? ' (correct)' : ''));
+          });
+          lines.push('', '**Correct answer:** ' + (q.correct_answer || []).join(', '), '', '**Explanation:** ' + (q.explanation || ''), '');
+        }
+      });
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-revision-' + Date.now() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+      if (payload.learnerState.marks !== undefined && !isPlainObject(payload.learnerState.marks)) {
+        errors.push('learnerState.marks is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    var marks = {};
+    if (isPlainObject(rawState.marks)) {
+      Object.keys(rawState.marks).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.marks[key];
+        if (MARK_LEVELS.indexOf(v) !== -1) marks[key] = v;
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      marks: marks,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+        Object.keys(incoming.marks).forEach(function (key) { STATE.marks[key] = incoming.marks[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose lead">${model.purpose || ''}</p>
+        <div class="predict-block panel">
+          <label class="field-label" for="predict-input">${progress.revealed ? 'Your prediction' : 'Predict first'}</label>
+          <p class="prompt" id="predict-prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="3" aria-describedby="predict-prompt" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<div class="actions"><button id="reveal-model-btn" type="button">Reveal mechanism</button></div>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table">
+          <table class="contrast-table">
+            <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+            <tbody>${raw(rows)}</tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <h3>Decision rule</h3>
+          <p>${cs.decision_rule || ''}</p>
+        </div>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var pendingCount = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; }).length;
+      var diagnoseLink = pendingCount
+        ? safe`<a class="button-link" href="${sliceHref('diagnose')}">Diagnose ${pendingCount} ${pendingCount === 1 ? 'miss' : 'misses'}</a>`
+        : '';
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <div class="panel summary">
+            <p class="summary-label">Queue complete</p>
+            <p class="score"><strong>${correctCount}</strong> of ${attempted.length} attempts correct</p>
+            <div class="actions">
+              <button id="practice-restart" type="button">Restart queue</button>
+              ${raw(diagnoseLink)}
+            </div>
+          </div>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices"><legend>Your answer</legend>${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"><span><span class="choice-letter">${c.letter}.</span> ${c.text}</span></label>`;
+        }).join(''))}</fieldset>`
+      : safe`<div class="answer-field"><label class="field-label" for="predict-freeform">Your answer</label><textarea id="predict-freeform" rows="4" placeholder="The setting or action you would choose, and why"></textarea></div>`;
+    var metaBadges = [safe`<span class="badge tone-accent">${String(item.variant_type || 'item').replace(/-/g, ' ')}</span>`];
+    if (item.difficulty) metaBadges.push(safe`<span class="badge">Difficulty ${item.difficulty}</span>`);
+    if (item.importance) metaBadges.push(safe`<span class="badge">Importance ${item.importance}</span>`);
+    var changedCondition = item.changed_condition
+      ? safe`<div class="callout changed-condition"><h3>Changed condition</h3><p>${item.changed_condition}</p></div>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice <span class="step">${practiceIndex + 1} of ${items.length}</span></h2>
+        <div class="item-meta">${raw(metaBadges.join(''))}</div>
+        ${raw(changedCondition)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence <span class="muted">(optional)</span></legend>
+          <div class="segmented">${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"><span>${c}</span></label>`; }).join(''))}</div>
+        </fieldset>
+        <div class="actions"><button id="reveal-practice-btn" type="button">Reveal answer</button></div>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var isLast = practiceIndex + 1 === items.length;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti, isLast);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti, isLast) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    section.querySelectorAll('textarea, input').forEach(function (el) { el.disabled = true; });
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedList = Array.isArray(item.expected_answer) ? item.expected_answer : [item.expected_answer].filter(Boolean);
+    var expectedAnswerHtml = expectedList.length > 1
+      ? safe`<ul>${raw(expectedList.map(function (e) { return safe`<li>${e}</li>`; }).join(''))}</ul>`
+      : safe`<p>${expectedList[0] || ''}</p>`;
+    var reasoning = item.reasoning ? safe`<h3>Reasoning</h3><p>${item.reasoning}</p>` : '';
+    var distractors = item.distractor_analysis
+      ? safe`<h3>Why other options fail</h3><p class="distractors">${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <div class="panel answer">
+        <h3>Expected answer</h3>
+        ${raw(expectedAnswerHtml)}
+      </div>
+      ${raw(reasoning)}
+      ${raw(distractors)}
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="self-report ${raw(isMulti ? 'hidden' : '')}">
+        <p>Compare your answer with the expected answer, then mark it.</p>
+        <div class="actions">
+          <button type="button" class="secondary" id="self-correct">I got it right</button>
+          <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+        </div>
+      </div>
+      <p id="practice-result" class="result hidden" role="status"></p>
+      <div class="actions"><button id="practice-next-btn" type="button" disabled>${isLast ? 'Finish queue' : 'Next item'}</button></div>`;
+
+    if (isMulti) {
+      section.querySelectorAll('.choices label').forEach(function (label) {
+        var value = label.querySelector('input').value;
+        if (expected.indexOf(value) !== -1) label.classList.add('is-expected');
+        else if (predicted.indexOf(value) !== -1) label.classList.add('is-wrong');
+      });
+    }
+
+    function showResult(isCorrect) {
+      var el = revealBox.querySelector('#practice-result');
+      var lead = isMulti ? (isCorrect ? 'Correct.' : 'Not quite.') : (isCorrect ? 'Marked correct.' : 'Marked wrong.');
+      el.innerHTML = isCorrect
+        ? safe`${lead}`
+        : safe`${lead} Logged for <a href="${sliceHref('diagnose')}">Diagnose</a>.`;
+      el.classList.remove('hidden');
+      el.classList.add(isCorrect ? 'result-ok' : 'result-bad');
+    }
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      showResult(isCorrect);
+      var nextBtn = revealBox.querySelector('#practice-next-btn');
+      nextBtn.removeAttribute('disabled');
+      if (!isMulti) nextBtn.focus({ preventScroll: true });
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"><span><strong>${c.label}</strong><span class="hint">${c.hint}</span></span></label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt panel" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="your-answer"><span class="field-label">Your answer</span>${predictedText}</p>
+              <fieldset>
+                <legend>What went wrong?</legend>
+                <div class="diagnosis-grid">${raw(radios)}</div>
+              </fieldset>
+              <p class="field-error hidden" role="alert">Pick the category that best explains the miss.</p>
+              <div class="actions"><button type="button" class="submit-diagnosis">Submit diagnosis</button></div>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">Nothing to diagnose. Items you mark wrong in Practice show up here.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = truncate(item ? (item.prompt || item.stem || '') : a.itemId, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="badge">${label}</span><span>${excerpt}</span><time class="muted" datetime="${a.timestamp || ''}">${when}</time></li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p class="back-link"><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis <span class="tally">${pending.length}</span></h3>
+        ${raw(pendingHtml)}
+        <h3>History <span class="tally">${history.length}</span></h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      var error = el.querySelector('.field-error');
+      el.addEventListener('change', function () { error.classList.add('hidden'); });
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) { error.classList.remove('hidden'); return; }
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+  // Page-level: the sibling file covers every slice, so this is NOT reset in
+  // activateSlice the way the two per-slice vars above are. One value, the
+  // status discriminating which fields exist:
+  //   {status:'idle'} | {status:'loading'}
+  //   {status:'locked', envelope, notice: null | 'wrong-password' | 'forgotten-key'}
+  //   {status:'unlocking', envelope, via: 'cache' | 'password'}
+  //   {status:'ready', bySlice, lock: null | {envelope, expiresAt: number | null}}   lock is null on a clear page
+  //   {status:'unavailable', reason: 'no-sources' | 'load-failed' | 'bad-envelope'}
+  var SOURCES = { status: 'idle' };
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`
+      <details class="issues-panel">
+        <summary>Issues <span class="tally">${issues.length}</span></summary>
+        <ul class="issues">${raw(issues.map(function (i) {
+          return safe`<li><p class="issue-head"><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span><strong>${i.type || 'issue'}</strong></p><p>${i.description || ''}</p></li>`;
+        }).join(''))}</ul>
+      </details>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+        return safe`<li class="${isCorrect ? 'correct-choice' : ''}"><span class="choice-letter">${c.letter}.</span> ${c.text}${raw(isCorrect ? ' <span class="badge tone-ok">correct</span>' : '')}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul class="citations">${raw(citing.map(claimListItemHtml).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="5">
+            <div class="source-detail">
+              <p>${q.stem}</p>
+              <ul>${raw(choiceItems)}</ul>
+              <h4>Explanation</h4>
+              <p>${q.explanation || ''}</p>
+              <p class="muted source-meta">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+              <h4>Cited by <span class="tally">${citing.length}</span></h4>
+              ${raw(citedList)}
+            </div>
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge tone-warn">disputed</span>' : '';
+    return safe`
+      <tr class="source-row${raw(isOpen ? ' is-open' : '')}" data-id="${q.id}">
+        <td class="cell-id"><button type="button" class="row-toggle" aria-expanded="${isOpen ? 'true' : 'false'}">${q.id}</button></td>
+        <td class="cell-status">${q.status || ''}${raw(disputedBadge)}</td>
+        <td class="cell-stem">${truncate(q.stem, 90)}</td>
+        <td class="cell-answer">${(q.correct_answer || []).join(', ')}</td>
+        <td class="cell-mark">${raw(markControlHtml('question:' + q.id))}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  // BUNDLE.sources names the one sibling this page may load. A locked page's
+  // bundle has no field that could name the clear file.
+  var SOURCE_GLOBAL = { clear: '__EKD_SOURCES_CLEAR__', locked: '__EKD_SOURCES_ENC__' };
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.onload = function () { el.remove(); resolve(); };
+      el.onerror = function () { el.remove(); reject(new Error('failed to load ' + src)); };
+      document.body.appendChild(el);
+    });
+  }
+
+  function urlSourcesBaseUrl() {
+    try { return new URLSearchParams(location.search).get('sourcesBaseUrl'); } catch (e) { return null; }
+  }
+
+  function sourcesScriptUrl(name) {
+    var base = urlSourcesBaseUrl();
+    return base ? new URL(name, base).toString() : name;
+  }
+
+  function base64UrlToBytes(text) {
+    var padded = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (padded.length % 4) padded += '=';
+    var bin = atob(padded);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function bytesToBase64Url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  // Envelope v2 (scripts/ekd/sources_crypto.py), checked once here so the
+  // crypto calls below can trust its fields.
+  function parseEnvelope(raw) {
+    try {
+      var ok = raw && raw.v === 2 && raw.kdf && raw.kdf.name === 'PBKDF2' && raw.kdf.hash === 'SHA-256'
+        && Number.isInteger(raw.kdf.iterations) && raw.kdf.iterations > 0
+        && raw.cipher && raw.cipher.name === 'AES-GCM' && typeof raw.ciphertext === 'string';
+      if (!ok) return null;
+      return {
+        salt: raw.kdf.salt,
+        saltBytes: base64UrlToBytes(raw.kdf.salt),
+        iterations: raw.kdf.iterations,
+        iv: base64UrlToBytes(raw.cipher.iv),
+        ciphertext: base64UrlToBytes(raw.ciphertext),
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The raw AES key bits, never the password, are what a page can remember.
+  function deriveKey(envelope, password) {
+    var secret = new TextEncoder().encode(password.normalize('NFC'));
+    return crypto.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', hash: 'SHA-256', salt: envelope.saltBytes, iterations: envelope.iterations }, base, 256);
+    }).then(function (bits) { return new Uint8Array(bits); });
+  }
+
+  function decryptSources(envelope, rawKey) {
+    return crypto.subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['decrypt']).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: envelope.iv }, key, envelope.ciphertext);
+    }).then(function (plainBuf) {
+      var data = JSON.parse(new TextDecoder().decode(plainBuf));
+      if (!data || typeof data !== 'object') throw new Error('decrypted sources are not an object');
+      return data;
+    });
+  }
+
+  // Remembered keys, one localStorage entry per sealing, keyed by its salt.
+  // Chrome shares one localStorage across every file:// page, and each
+  // reseal draws a fresh salt, so two Workspaces never share an entry and a
+  // resealed file never matches a key remembered for its old sealing.
+  // Entry: {"v":1, "key":"<b64url 32-byte AES key>", "expiresAt":<ms>}, 7
+  // days from when the password was entered, never extended.
+  var KEY_PREFIX = 'ekd:sources-key:';
+  var KEY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function parseKeyRecord(text, now) {
+    try {
+      var rec = JSON.parse(text);
+      if (!rec || rec.v !== 1 || typeof rec.key !== 'string' || !Number.isFinite(rec.expiresAt)) return null;
+      if (now >= rec.expiresAt) return null;
+      var key = base64UrlToBytes(rec.key);
+      return key.length === 32 ? { key: key, expiresAt: rec.expiresAt } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var KeyCache = {
+    get: function (salt, now) {
+      try {
+        var text = localStorage.getItem(KEY_PREFIX + salt);
+        if (text === null) return null;
+        var rec = parseKeyRecord(text, now);
+        if (!rec) localStorage.removeItem(KEY_PREFIX + salt);
+        return rec;
+      } catch (e) {
+        return null;
+      }
+    },
+    // The expiry, or null when storage refuses the write (the page still unlocks).
+    put: function (salt, rawKey, now) {
+      var expiresAt = now + KEY_TTL_MS;
+      try {
+        localStorage.setItem(KEY_PREFIX + salt, JSON.stringify({ v: 1, key: bytesToBase64Url(rawKey), expiresAt: expiresAt }));
+        return expiresAt;
+      } catch (e) {
+        return null;
+      }
+    },
+    forget: function (salt) {
+      try { localStorage.removeItem(KEY_PREFIX + salt); } catch (e) {}
+    },
+    // Removes expired or malformed entries, including those of sealings no
+    // page will ask for again because their file was resealed.
+    sweep: function (now) {
+      try {
+        var stale = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var name = localStorage.key(i);
+          if (name && name.indexOf(KEY_PREFIX) === 0 && !parseKeyRecord(localStorage.getItem(name), now)) stale.push(name);
+        }
+        stale.forEach(function (name) { localStorage.removeItem(name); });
+      } catch (e) {}
+    },
+  };
+
+  // Pure. A (state, event) pair not listed leaves the state unchanged, which
+  // is also what drops a late async result that no longer applies.
+  function transition(s, e) {
+    switch (s.status + ' ' + e.type) {
+      case 'idle open':
+        return BUNDLE.sources ? { status: 'loading' } : { status: 'unavailable', reason: 'no-sources' };
+      case 'loading loaded-clear':
+        return { status: 'ready', bySlice: e.bySlice, lock: null };
+      case 'loading loaded-envelope':
+        return e.cached
+          ? { status: 'unlocking', envelope: e.envelope, via: 'cache' }
+          : { status: 'locked', envelope: e.envelope, notice: null };
+      case 'loading load-failed':
+        return { status: 'unavailable', reason: e.reason };
+      case 'locked submit':
+        return { status: 'unlocking', envelope: s.envelope, via: 'password' };
+      case 'unlocking decrypted':
+        return { status: 'ready', bySlice: e.bySlice, lock: { envelope: s.envelope, expiresAt: e.expiresAt } };
+      case 'unlocking decrypt-failed':
+        return { status: 'locked', envelope: s.envelope, notice: s.via === 'cache' ? 'forgotten-key' : 'wrong-password' };
+      case 'ready lock':
+        return s.lock ? { status: 'locked', envelope: s.lock.envelope, notice: null } : s;
+      default:
+        return s;
+    }
+  }
+
+  function dispatch(e) {
+    var next = transition(SOURCES, e);
+    if (next === SOURCES) return;
+    SOURCES = next;
+    startEffect(next, e);
+    var body = document.getElementById('sources-body');
+    if (body) paintSources(body);
+  }
+
+  function startEffect(s, e) {
+    if (s.status === 'loading') {
+      var kind = BUNDLE.sources.kind;
+      var globalName = SOURCE_GLOBAL[kind];
+      window[globalName] = undefined;
+      loadScript(sourcesScriptUrl(BUNDLE.sources.file)).then(function () {
+        var loaded = window[globalName];
+        window[globalName] = undefined;
+        if (kind === 'clear') {
+          if (loaded && typeof loaded === 'object') dispatch({ type: 'loaded-clear', bySlice: loaded });
+          else dispatch({ type: 'load-failed', reason: 'load-failed' });
+          return;
+        }
+        var envelope = parseEnvelope(loaded);
+        if (!envelope) { dispatch({ type: 'load-failed', reason: 'bad-envelope' }); return; }
+        dispatch({ type: 'loaded-envelope', envelope: envelope, cached: KeyCache.get(envelope.salt, Date.now()) });
+      }, function () {
+        dispatch({ type: 'load-failed', reason: 'load-failed' });
+      });
+      return;
+    }
+    if (s.status === 'unlocking') {
+      var envelope = s.envelope;
+      var fromCache = s.via === 'cache';
+      var keyReady = fromCache ? Promise.resolve(e.cached.key) : deriveKey(envelope, e.password);
+      keyReady.then(function (rawKey) {
+        return decryptSources(envelope, rawKey).then(function (bySlice) { return { rawKey: rawKey, bySlice: bySlice }; });
+      }).then(function (opened) {
+        var expiresAt = fromCache ? e.cached.expiresAt : KeyCache.put(envelope.salt, opened.rawKey, Date.now());
+        dispatch({ type: 'decrypted', bySlice: opened.bySlice, expiresAt: expiresAt });
+      }, function () {
+        if (fromCache) KeyCache.forget(envelope.salt);
+        dispatch({ type: 'decrypt-failed' });
+      });
+    }
+  }
+
+  var UNAVAILABLE_TEXT = {
+    'no-sources': 'No source data is bundled with this Workspace.',
+    'load-failed': 'The sources file could not be loaded.',
+    'bad-envelope': 'The encrypted sources file is not in a format this page can read.',
+  };
+  var LOCKED_NOTICE_TEXT = {
+    'wrong-password': 'Incorrect password',
+    'forgotten-key': 'The key remembered on this browser no longer opens this file. Enter the current password.',
+  };
+
+  function renderSources() {
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        ${raw(issuesHtml())}
+        <div id="sources-body"></div>
+      </section>`;
+    var fragment = fromHTML(html);
+    if (SOURCES.status === 'idle') dispatch({ type: 'open' });
+    paintSources(fragment.querySelector('#sources-body'));
+    return fragment;
+  }
+
+  function passwordFormHtml(notice, busy) {
+    var noticeBlock = notice ? safe`<p><span class="badge severity-high">${LOCKED_NOTICE_TEXT[notice]}</span></p>` : '';
+    return safe`
+      ${raw(noticeBlock)}
+      <p class="muted">These source questions are encrypted. Enter this Workspace's password to unlock them.</p>
+      <label class="field-label" for="sources-password">Password</label>
+      <input type="password" id="sources-password" autocomplete="off" spellcheck="false"${raw(busy ? ' disabled' : '')}>
+      <p><button type="button" id="sources-unlock"${raw(busy ? ' disabled' : '')}>${busy ? 'Unlocking…' : 'Unlock sources'}</button></p>`;
+  }
+
+  function paintSources(body) {
+    var s = SOURCES;
+    if (s.status === 'idle' || s.status === 'loading') {
+      body.innerHTML = '<p class="muted">Loading sources&hellip;</p>';
+    } else if (s.status === 'unavailable') {
+      body.innerHTML = safe`<p class="empty">${UNAVAILABLE_TEXT[s.reason]}</p>`;
+    } else if (s.status === 'unlocking') {
+      body.innerHTML = s.via === 'cache' ? '<p class="muted">Unlocking sources&hellip;</p>' : passwordFormHtml(null, true);
+    } else if (s.status === 'locked') {
+      body.innerHTML = passwordFormHtml(s.notice, false);
+      var input = body.querySelector('#sources-password');
+      var submit = function () {
+        if (input.value) dispatch({ type: 'submit', password: input.value });
+      };
+      body.querySelector('#sources-unlock').addEventListener('click', submit);
+      input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') submit(); });
+      if (s.notice === 'wrong-password') input.focus();
+    } else if (s.status === 'ready') {
+      renderSourcesTable(body);
+      if (s.lock) {
+        body.insertAdjacentHTML('afterbegin', lockBarHtml(s.lock));
+        body.querySelector('#sources-lock').addEventListener('click', function () {
+          KeyCache.forget(s.lock.envelope.salt);
+          dispatch({ type: 'lock' });
+        });
+      }
+    }
+  }
+
+  function lockBarHtml(lock) {
+    var remembered = lock.expiresAt === null
+      ? 'Not remembered (storage unavailable)'
+      : 'Remembered on this browser until '
+        + new Date(lock.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return safe`<p class="sources-lock"><span class="muted" id="sources-remembered">${remembered}</span><button type="button" class="secondary" id="sources-lock">Lock</button></p>`;
+  }
+
+  function renderSourcesTable(body) {
+    var questions = SOURCES.bySlice[CURRENT.contentSet.id] || [];
+    body.innerHTML = safe`
+      <div class="search-field">
+        <label class="field-label" for="sources-search">Search questions</label>
+        <input type="search" id="sources-search" placeholder="Stem, choices, or explanation">
+        <p class="muted" id="sources-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Source questions">
+        <table class="sources-table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Status</th><th scope="col">Stem</th><th scope="col">Correct</th><th scope="col">Mark</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </div>`;
+    var input = body.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      body.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = body.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.length
+        ? filtered.map(sourceRowHtml).join('')
+        : safe`<tr><td colspan="5" class="empty-cell">No questions match "${sourcesSearchTerm}".</td></tr>`;
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function (event) {
+          if (event.target.closest('.mark-control')) return;
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+          var toggle = tbody.querySelector('.source-row[data-id="' + CSS.escape(id) + '"] .row-toggle');
+          if (toggle) toggle.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      var cs = CURRENT.contentSet;
+      document.getElementById('app-title').innerHTML = safe`<span class="title-exam">${cs.exam}</span><span class="title-sep" aria-hidden="true">/</span><span class="title-facet"><span class="visually-hidden">${cs.facet.key}: </span>${cs.facet.value}</span>`;
+      document.title = cs.facet.value + ' · ' + cs.exam;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+        if (mode === target.mode) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('export-revision-btn').addEventListener('click', exportRevisionNotes);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  document.getElementById('app').addEventListener('click', handleMarkClick);
+  window.addEventListener('hashchange', navigate);
+  KeyCache.sweep(Date.now());
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>
