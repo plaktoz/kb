@@ -44,6 +44,14 @@ Extract:
 
 Valid actions: `archive`, `skip`
 
+**Phase 7 findings** — Also read every `### Model #N` block under `## Phase 7: Unlisted Mental Models` if present.
+
+For each block, extract:
+- **Name**: the text inside the backticks after `- **Name**: `
+- **Action line**: the text after `- **Action**: `
+
+Valid actions: `add`, `alias:<Listed Model>`, `exclude`, `skip`. Classify placeholders and anything else as **undecided**, the same way as above.
+
 ---
 
 ## Step 3: Execute decided findings
@@ -91,6 +99,25 @@ If the Phase 3 action is `archive`:
 If the Phase 3 action is `skip` or the section is absent: do nothing.
 
 If the Phase 3 action is still a comment placeholder (`<!-- ... -->`): include a reminder in the follow-up file (Step 4) that Phase 3 is undecided.
+
+---
+
+## Step 3c: Execute Phase 7 findings
+
+For each decided `### Model #N` block, run the matching command from the repo root:
+
+| Action | Command |
+|--------|---------|
+| `add` | `python3 .claude/skills/kb-librarian/scripts/mental_models.py add "<Name>"` |
+| `alias:<Listed Model>` | `python3 .claude/skills/kb-librarian/scripts/mental_models.py alias "<Name>" --to "<Listed Model>"` |
+| `exclude` | `python3 .claude/skills/kb-librarian/scripts/mental_models.py exclude "<Name>"` |
+| `skip` | nothing — it will be offered again in the next `/kb-librarian` run |
+
+If a command exits with an error (for example, `alias` naming a model that isn't listed), don't change anything for that block; treat it as undecided and carry it into the follow-up with the error message.
+
+After all Phase 7 commands have run, log once to `kbm.log.md`: `| YYYY-MM-DD | data/mental-models.md | librarian |`.
+
+Existing links in wiki notes are not renamed; the list only governs names written from now on.
 
 ---
 

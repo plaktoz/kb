@@ -5,7 +5,7 @@ description: Scan wiki notes for duplicates and superseded content, write a huma
 
 # Librarian Prompt
 
-You are a vault maintenance agent. Run all six phases in order.
+You are a vault maintenance agent. Run all seven phases in order.
 
 ---
 
@@ -134,6 +134,7 @@ Use this exact format:
 - Duplicates found: N
 - Superseded pairs found: N
 - Straggler raw files: N
+- Unlisted mental models: N
 
 ---
 
@@ -197,6 +198,52 @@ If no stragglers: write the section with count 0 and omit the file list.
 
 ---
 
+## Phase 7: Mental Model List Refresh
+
+`data/mental-models.md` holds the canonical names for mental models linked in wiki notes. `data/mental-models-excluded.md` holds labels already reviewed and rejected. Both are maintained by `.claude/skills/kb-librarian/scripts/mental_models.py`; don't edit them by hand.
+
+### Step 1: Refresh use counts
+
+```bash
+python3 .claude/skills/kb-librarian/scripts/mental_models.py build
+```
+
+### Step 2: Collect unlisted names
+
+```bash
+python3 .claude/skills/kb-librarian/scripts/mental_models.py unlisted
+```
+
+This prints every model name linked in `wiki/` that isn't a listed model, an alias, or an excluded label. Each entry has its use count, plus `likely_alias_of` when it differs from a listed model only in spelling.
+
+### Step 3: Suggest a decision for each name
+
+- **alias** — another spelling or a near-synonym of a listed model (always when `likely_alias_of` is set, unless the two are genuinely different models).
+- **add** — an established mental model, theory, law, or principle that isn't on the list yet.
+- **exclude** — a label coined for one article, or a generic phrase rather than a named model.
+
+### Step 4: Append to `librarian-report.md`
+
+Add a Phase 7 section at the end of the report, and fill in the `Unlisted mental models: N` line in the **Summary** block. Use this format, numbering entries in order of use count, highest first:
+
+```markdown
+---
+
+## Phase 7: Unlisted Mental Models
+
+- **Unlisted names found**: N
+
+### Model #1
+- **Name**: `Name As Linked`
+- **Uses**: N
+- **Suggested**: alias of `Listed Model` | add | exclude — one-line reason
+- **Action**: <!-- add | alias:Listed Model | exclude | skip -->
+```
+
+If there are no unlisted names: write the section with count 0 and no entries.
+
+---
+
 ## After completing all phases
 
 Print a brief summary to the user:
@@ -227,6 +274,9 @@ Print a brief summary to the user:
 
 ### Phase 6: Unmatched Raw Files
 - How many straggler raw files found
+
+### Phase 7: Mental Model List Refresh
+- How many unlisted mental-model names are in librarian-report.md
 ```
 
 Remind the user: fill in decisions in `librarian-report.md`, then run `/kb-librarian-apply`.

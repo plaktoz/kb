@@ -53,6 +53,7 @@ If no topic file exists, count vault-wide notes on this theme:
    - Update `last_updated:` to today's date
    - Read **all** source notes in the updated list in full
    - Rewrite the entire prose body (see **Prose Body Format** below) — synthesizing insights from all sources, not just the new ones
+   - Rebuild the `## 🧠 Core Principles` section from all sources (see **Core Principles Section** below), replacing the previous version
    - Append a new entry to `## Weekly Updates`:
      ```
      ### YYYY-WNN
@@ -63,7 +64,7 @@ If no topic file exists, count vault-wide notes on this theme:
 
 1. Collect all vault-wide notes on this theme (the 5+ identified in 4b, plus this week's notes)
 2. Read them all in full
-3. Create `topics/<theme-slug>.md` using the structure below
+3. Create `topics/<theme-slug>.md` using the structure below, including the `## 🧠 Core Principles` section (see **Core Principles Section** below)
 
 ### Prose Body Format
 
@@ -73,6 +74,18 @@ The body of a topic file is synthesized prose — not bullet lists. Each major c
 - Each `##` section should integrate at least 2 source perspectives where possible
 - Do not write bullet points in the body — prose only
 - Do NOT copy sentences verbatim from source notes; synthesize and connect
+
+### Core Principles Section
+
+After writing the prose body, read `.claude/skills/kb-trunk-branch-extractor/SKILL.md` and apply its method to the full text of all source notes together. Ask for the **trunk with evidence** output, embedded at level 2 with the title `🧠 Core Principles`, and place it after the last prose section and before `## Weekly Updates`.
+
+- **Keep at most 5 principles.** If more qualify, merge principles that rest on the same invariant first; then drop the ones the fewest source notes support.
+- **Only include a principle that at least 2 source notes argue, explain, or test.** A principle that only one note supports belongs in that note's own Core Principles section, not in the topic file. A principle the notes merely assume as background doesn't count.
+- After `→ explains:`, list the `[[source-slug]]` links of the notes the principle derives from, rather than individual claims.
+- Look up model names in `data/mental-models.md` with one distinctive word from the name (`grep -i '<word>' data/mental-models.md`). If a row's Model or Aliases column names the same model, link the name in the **Model** column; otherwise use the model's standard name. Don't edit the list.
+- If no principle clears the bar, omit the section. An absent section is better than a forced one.
+
+This section is the one structured exception to the prose-only body, like `## Weekly Updates`. Keep principles out of the prose sections, and keep prose out of this one.
 
 ### Topic file template
 
@@ -98,13 +111,18 @@ last_updated: YYYY-MM-DD
 
 [Additional ## sections as needed — one per meaningful concept cluster]
 
+## 🧠 Core Principles
+
+**T1. [Principle]** — [stated as an invariant, 1–2 sentences] · *model:* [[Model Name]]
+→ explains: [[slug-1]], [[slug-3]], [[slug-4]]
+
 ## Weekly Updates
 
 ### YYYY-WNN
 - Added: [[slug-1]], [[slug-2]]
 ```
 
-Every claim in the prose body must trace to a source note in the `sources:` list. Never add facts from training data.
+Every claim in the prose body and the Core Principles section must trace to a source note in the `sources:` list. Never add facts from training data.
 
 ## Step 5 — Report and log
 

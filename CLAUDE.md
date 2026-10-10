@@ -19,6 +19,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `data/` — supporting reference data
   - `investments.md` — investment holdings (do not modify unless explicitly asked)
   - `wiki-categories.md` — canonical list of wiki subdirectory categories
+  - `mental-models.md` — canonical mental-model names used by `/kb-ingest` for `[[links]]`; `mental-models-excluded.md` holds reviewed labels that aren't models. Both are maintained by `.claude/skills/kb-librarian/scripts/mental_models.py` via `/kb-librarian` and `/kb-librarian-apply`; don't edit them by hand
 
 ## Skills
 Invoke the matching slash command for each recurring task. Skills are self-contained in `.claude/skills/`.
@@ -32,9 +33,9 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
 | `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
-| `/kb-compound` | Deepens existing wiki notes and creates synthesis notes from recurring cross-category themes — run before `/kb-weekly-newsletter` |
+| `/kb-compound` | Maintains living topic files in `topics/` from this week's recurring themes — rewrites each file's prose body and Core Principles section from all its sources — run before `/kb-weekly-newsletter` |
 | `/kb-weekly-newsletter` | Compiles this week's ingested notes into a weekly newsletter digest |
-| `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, and checks raw/processed/ for unmatched stragglers |
+| `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, checks raw/processed/ for unmatched stragglers, and reviews unlisted mental-model names |
 | `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
 | `/kb-quizme` | Quizzes you on recently ingested wiki articles using spaced repetition |
 | `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
@@ -42,6 +43,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-investment-digest` | Summarizes recent vault notes about your holdings into a per-ticker weekly digest |
 | `/kb-canvas <topic>` | Builds an Obsidian canvas for the given topic — finds related wiki notes, reasons about relationships, and saves a versioned `.canvas` file to `canvases/<topic-slug>/` |
 | `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
+| `/kb-trunk-branch-extractor` | Deconstructs a given text (pasted or a file) into trunk knowledge (first principles, invariant rules) and branch knowledge (contextual tactics, frameworks, tools) |
 | `/kb-issue-dispatch` | Fetches open GitHub issues labelled "run skills", parses skill intent from each body with LLM, runs skills in parallel isolated worktrees, commits outputs, comments results, and closes the issue |
 
 ### Parallel skills (opt-in)
