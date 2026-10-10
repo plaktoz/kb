@@ -1,0 +1,1835 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<!-- script-src allows any https: origin because a sources sibling file can be hosted remotely, at an origin chosen at view-time via ?sourcesBaseUrl and unknown when this file is generated. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'self' https:; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>EKD Workspace</title>
+<style>
+  /* Theme follows prefers-color-scheme. One accent (--accent); ok/bad/warn
+     carry state only. Shape rule: --radius on every control and panel,
+     full pill on badges and tallies. z-index: header 10, nothing else. */
+  :root {
+    color-scheme: light dark;
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --radius: 8px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --measure: 68ch;
+
+    --bg: #f6f7f9;
+    --surface: #fdfdfe;
+    --sunk: #eceff3;
+    --ink: #15181c;
+    --ink-2: #39414b;
+    --muted: #5a6370;
+    --line: #dce0e6;
+    --line-strong: #c3c9d1;
+    --accent: #2a5caa;
+    --accent-hover: #1f4a8c;
+    --accent-ink: #fdfdfe;
+    --accent-soft: #e7edf7;
+    --ok: #1b7348;
+    --ok-soft: #e3f2ea;
+    --bad: #ae3328;
+    --bad-soft: #fbe9e7;
+    --warn: #845400;
+    --warn-soft: #fbf0db;
+    --shadow: 0 1px 2px rgb(21 24 28 / 0.05), 0 4px 16px rgb(21 24 28 / 0.04);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111316;
+      --surface: #181b1f;
+      --sunk: #20242a;
+      --ink: #e6e9ed;
+      --ink-2: #c1c7cf;
+      --muted: #939ba6;
+      --line: #282d33;
+      --line-strong: #3a4047;
+      --accent: #8db0ea;
+      --accent-hover: #a9c4f0;
+      --accent-ink: #0d1829;
+      --accent-soft: #1a2639;
+      --ok: #6ccb96;
+      --ok-soft: #13271c;
+      --bad: #ef8a7e;
+      --bad-soft: #301817;
+      --warn: #e2b25a;
+      --warn-soft: #2b2212;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px rgb(0 0 0 / 0.2);
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover { color: var(--accent-hover); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .hidden { display: none !important; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0.85rem 1.25rem 0;
+  }
+  .header-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem 1rem;
+  }
+  header h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .title-exam { color: var(--muted); font-weight: 500; }
+  .title-sep { color: var(--line-strong); }
+  .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #slice-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.84rem;
+    color: var(--muted);
+  }
+  nav#nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-top: 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav#nav::-webkit-scrollbar { display: none; }
+  nav#nav a {
+    flex: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: inset 0 -2px 0 transparent;
+    transition: color 0.15s, background-color 0.15s, box-shadow 0.15s;
+  }
+  nav#nav a:hover { color: var(--ink); background: var(--sunk); }
+  nav#nav a:focus-visible { outline-offset: -2px; }
+  nav#nav a.active { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+  #storage-warning {
+    margin: 0.6rem 0 0.75rem;
+    padding: 0.6rem 0.85rem;
+    border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--warn);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- controls ---------- */
+  button, .button-link, .file-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font: inherit;
+    font-size: 0.94rem;
+    font-weight: 550;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s, transform 0.1s var(--ease);
+  }
+  button:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); }
+  button:active:not(:disabled), .button-link:active, .file-label:active { transform: translateY(1px); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.secondary, .button-link, .file-label {
+    border-color: var(--line-strong);
+    background: var(--surface);
+    color: var(--ink);
+  }
+  button.secondary:hover:not(:disabled), .button-link:hover, .file-label:hover {
+    border-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .header-actions button, .header-actions .file-label { padding: 0.4rem 0.75rem; font-size: 0.84rem; }
+  .file-label { position: relative; }
+  .file-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .file-label:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+  }
+  .field-label {
+    display: block;
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  textarea, input[type="search"], input[type="password"], select {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    color: var(--ink);
+    font: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  textarea, input[type="search"], input[type="password"] {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  textarea { min-height: 5.5rem; resize: vertical; }
+  select { padding: 0.35rem 0.6rem; font-size: 0.84rem; }
+  textarea:focus, input[type="search"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+  }
+  textarea:disabled { background: var(--sunk); color: var(--ink-2); cursor: not-allowed; }
+  ::placeholder { color: var(--muted); opacity: 1; }
+  fieldset { min-width: 0; margin: 1.5rem 0 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.5rem; padding: 0; font-size: 0.94rem; font-weight: 600; }
+  input[type="checkbox"], input[type="radio"] {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.3rem 0 0;
+    accent-color: var(--accent);
+  }
+  .field-error { margin: 0.75rem 0 0; color: var(--bad); font-size: 0.9rem; font-weight: 500; }
+
+  /* ---------- page + type ---------- */
+  main#app {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 5rem;
+  }
+  h2 {
+    margin: 0 0 0.85rem;
+    font-size: clamp(1.45rem, 1.15rem + 1.1vw, 1.9rem);
+    font-weight: 650;
+    line-height: 1.2;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+  }
+  h3 {
+    margin: 2.25rem 0 0.6rem;
+    font-size: 1.06rem;
+    font-weight: 620;
+    line-height: 1.35;
+  }
+  p, li { max-width: var(--measure); text-wrap: pretty; }
+  p { margin: 0 0 1rem; }
+  ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+  li { margin: 0.45rem 0; padding-left: 0.2rem; }
+  li::marker { color: var(--muted); }
+  .muted { color: var(--muted); }
+  .lead { color: var(--ink-2); font-size: 1.125rem; }
+  .empty {
+    max-width: none;
+    padding: 1.5rem;
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius);
+    color: var(--muted);
+    text-align: center;
+  }
+  .panel {
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  .panel > :last-child { margin-bottom: 0; }
+  .panel textarea { background: var(--bg); }
+  .panel h3:first-child { margin-top: 0; }
+  .callout {
+    margin: 2rem 0 0;
+    padding: 1rem 1.2rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius: var(--radius);
+    background: var(--accent-soft);
+  }
+  .callout h3 { margin: 0 0 0.3rem; color: var(--accent); font-size: 0.98rem; }
+  .callout p:last-child { margin-bottom: 0; }
+  .step { color: var(--muted); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .tally {
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.6rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    vertical-align: 0.1em;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.74rem;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    vertical-align: 0.1em;
+  }
+  .badge.tone-accent { background: var(--accent-soft); color: var(--accent); }
+  .badge.tone-ok, .badge.status-supported { background: var(--ok-soft); color: var(--ok); }
+  .badge.tone-bad, .badge.status-conflicted,
+  .badge.severity-high, .badge.severity-critical { background: var(--bad-soft); color: var(--bad); }
+  .badge.tone-warn, .badge.status-needs-review, .badge.severity-medium { background: var(--warn-soft); color: var(--warn); }
+  .next-link { margin-top: 2.5rem; font-weight: 550; }
+  .back-link { margin: -0.25rem 0 1.25rem; font-size: 0.92rem; }
+
+  /* ---------- supporting claims ---------- */
+  details.claims, details.issues-panel {
+    margin: 2rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+  details > summary {
+    width: fit-content;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  details > summary::marker { color: var(--muted); }
+  details > summary:hover { color: var(--ink); }
+  ul.citations, ul.issues {
+    display: grid;
+    gap: 0.85rem;
+    margin: 1rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul.citations li {
+    display: grid;
+    grid-template-columns: 6.75rem 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.94rem;
+  }
+  ul.citations .badge { justify-self: start; }
+
+  /* ---------- confidence marks ---------- */
+  .mark-control { display: inline-flex; gap: 0.3rem; vertical-align: middle; }
+  .mark-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    opacity: 0.5;
+    transition: opacity 0.15s, border-color 0.15s;
+  }
+  .mark-dot:hover:not(:disabled) { opacity: 0.85; }
+  .mark-dot:active:not(:disabled) { transform: none; }
+  .mark-dot.mark-low { background: var(--ok); border-color: var(--ok); }
+  .mark-dot.mark-medium { background: var(--warn); border-color: var(--warn); }
+  .mark-dot.mark-high { background: var(--bad); border-color: var(--bad); }
+  .mark-dot.is-active { opacity: 1; border-color: var(--ink); }
+  .cell-mark { white-space: nowrap; }
+
+  /* ---------- tables ---------- */
+  .table-wrap {
+    margin: 1.25rem 0 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+  th, td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+  thead th {
+    border-bottom-color: var(--line-strong);
+    background: var(--sunk);
+    color: var(--ink-2);
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .contrast-table { min-width: 44rem; }
+  .contrast-table th + td, .contrast-table td + td,
+  .contrast-table thead th + th { border-left: 1px solid var(--line); }
+  .contrast-table tbody th { width: 11rem; font-weight: 600; }
+  .sources-table { min-width: 38rem; }
+  tr.source-row { cursor: pointer; transition: background-color 0.15s; }
+  tr.source-row:hover { background: var(--sunk); }
+  tr.source-row.is-open { background: var(--accent-soft); }
+  tr.source-row.is-open > td { border-bottom-color: transparent; }
+  tr.detail-row > td { background: var(--accent-soft); }
+  .cell-id { white-space: nowrap; }
+  .cell-answer { font-family: var(--font-mono); font-size: 0.86rem; }
+  .row-toggle {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  .row-toggle:hover:not(:disabled) { background: none; color: var(--accent-hover); text-decoration: underline; }
+  .row-toggle:active:not(:disabled) { transform: none; }
+  .empty-cell { padding: 1.5rem; color: var(--muted); text-align: center; }
+  .source-detail { max-width: var(--measure); padding: 0.25rem 0 0.5rem; }
+  .source-detail ul { list-style: none; padding: 0; }
+  .source-detail h4 { margin: 1.25rem 0 0.4rem; font-size: 0.94rem; }
+  .source-meta { font-size: 0.86rem; }
+  .choice-letter { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .correct-choice { color: var(--ok); font-weight: 550; }
+
+  /* ---------- learn ---------- */
+  .predict-block { margin: 1.75rem 0 0; }
+  .predict-block .prompt { margin: 0 0 0.9rem; color: var(--ink-2); }
+  .mechanism { margin-top: 2.25rem; }
+  .mechanism > h3:first-child { margin-top: 0; }
+
+  /* ---------- practice ---------- */
+  .item-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 1.5rem; }
+  .practice > .prompt { margin-top: 1.5rem; font-size: 1.0625rem; }
+  .practice > .callout + .prompt { margin-top: 1.5rem; }
+  .answer-field { margin-top: 1.5rem; }
+  .choices label, .diagnosis-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    margin: 0 0 0.5rem;
+    padding: 0.75rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.15s, background-color 0.15s;
+  }
+  .choices label:hover, .diagnosis-option:hover { border-color: var(--line-strong); }
+  .choices label:has(input:checked), .diagnosis-option:has(input:checked) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .choices label.is-expected { border-color: var(--ok); background: var(--ok-soft); }
+  .choices label.is-wrong { border-color: var(--bad); background: var(--bad-soft); }
+  .segmented {
+    display: inline-flex;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .segmented label {
+    position: relative;
+    padding: 0.45rem 1rem;
+    border-left: 1px solid var(--line-strong);
+    font-size: 0.92rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .segmented label:first-child { border-left: 0; }
+  .segmented label:hover { background: var(--sunk); }
+  .segmented input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .segmented label:has(input:checked) { background: var(--accent); color: var(--accent-ink); }
+  .segmented label:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .segmented label:has(input:disabled) { cursor: not-allowed; }
+  .reveal { margin-top: 2rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+  .answer p:last-child { margin-bottom: 0; }
+  .self-report {
+    margin-top: 2rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--sunk);
+  }
+  .self-report p { margin: 0; color: var(--ink-2); }
+  .self-report .actions { margin-top: 0.75rem; }
+  .result { margin: 2rem 0 0; font-weight: 550; }
+  .result.result-ok { color: var(--ok); }
+  .result.result-bad { color: var(--bad); }
+  .result a { color: inherit; }
+  .summary-label { margin: 0 0 0.25rem; color: var(--muted); font-size: 0.94rem; font-weight: 600; }
+  .score { margin: 0; color: var(--ink-2); font-size: 1.06rem; }
+  .score strong {
+    margin-right: 0.15rem;
+    color: var(--ink);
+    font-size: 2.25rem;
+    font-weight: 650;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- diagnose ---------- */
+  .pending-attempt { margin: 0 0 1.25rem; }
+  .pending-attempt .prompt { color: var(--ink); }
+  .your-answer { color: var(--ink-2); }
+  .your-answer .field-label { margin-bottom: 0.15rem; color: var(--muted); font-size: 0.84rem; }
+  .diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+    gap: 0.5rem;
+  }
+  .diagnosis-option { margin: 0; }
+  .diagnosis-option .hint {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .panel .diagnosis-option { background: var(--bg); }
+  ul.diagnosis-history { margin: 0; padding: 0; list-style: none; }
+  ul.diagnosis-history li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.75rem;
+    align-items: baseline;
+    max-width: none;
+    margin: 0;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.94rem;
+  }
+  ul.diagnosis-history li:last-child { border-bottom: 0; }
+  ul.diagnosis-history time { font-size: 0.84rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+  /* ---------- sources ---------- */
+  .issue-head { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 0.25rem; }
+  ul.issues li { max-width: none; margin: 0; padding: 0; font-size: 0.94rem; }
+  ul.issues li > p:last-child { margin-bottom: 0; }
+  .search-field { margin-top: 2rem; }
+  #sources-count { margin: 0.5rem 0 0; font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+  .sources-lock { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin: 1rem 0 0; font-size: 0.88rem; }
+  .sources-lock button { padding: 0.3rem 0.7rem; font-size: 0.84rem; }
+
+  /* ---------- motion: state transitions only ---------- */
+  @media (prefers-reduced-motion: no-preference) {
+    .mechanism:not(.hidden), .reveal:not(.hidden) { animation: rise 0.35s var(--ease) both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+
+  /* ---------- small screens ---------- */
+  @media (max-width: 640px) {
+    body { font-size: 1rem; }
+    header { position: static; }
+    .header-inner { padding: 0.75rem 1rem 0; }
+    main#app { padding: 1.5rem 1rem 4rem; }
+    .panel { padding: 1rem; }
+    .lead { font-size: 1.06rem; }
+    ul.citations li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history li { grid-template-columns: 1fr; gap: 0.3rem; }
+    ul.diagnosis-history .badge { justify-self: start; }
+    .segmented { display: flex; }
+    .segmented label { flex: 1; text-align: center; }
+    .sources-table { min-width: 0; }
+    .sources-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+    }
+    .sources-table tr.source-row {
+      display: grid;
+      grid-template-areas: "id answer" "stem stem" "status mark";
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 0.75rem;
+      padding: 0.85rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .sources-table tr.source-row > td { padding: 0; border: 0; }
+    .sources-table .cell-id { grid-area: id; }
+    .sources-table .cell-answer { grid-area: answer; }
+    .sources-table .cell-stem { grid-area: stem; }
+    .sources-table .cell-status { grid-area: status; color: var(--muted); font-size: 0.86rem; }
+    .sources-table .cell-mark { grid-area: mark; justify-self: end; }
+    .sources-table tr.detail-row, .sources-table tr.detail-row > td { display: block; }
+    .sources-table tbody tr:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-row">
+      <h1 id="app-title">EKD Workspace</h1>
+      <div class="header-actions">
+        <div id="slice-controls" class="hidden">
+          <label for="slice-select">Slice</label>
+          <select id="slice-select"></select>
+        </div>
+        <button id="export-btn" class="secondary" type="button">Export progress</button>
+        <button id="export-revision-btn" class="secondary" type="button">Export for revision</button>
+        <label class="file-label">Import progress
+          <input type="file" id="import-input" accept="application/json">
+        </label>
+      </div>
+    </div>
+    <nav id="nav" aria-label="Study modes">
+      <a href="#learn" data-route="learn">Learn</a>
+      <a href="#compare" data-route="compare">Compare</a>
+      <a href="#practice" data-route="practice">Practice</a>
+      <a href="#diagnose" data-route="diagnose">Diagnose</a>
+      <a href="#sources" data-route="sources">Explore Sources</a>
+    </nav>
+    <div id="storage-warning" class="hidden" role="alert"></div>
+  </div>
+</header>
+<main id="app"></main>
+<script type="application/json" id="ekd-data">{"bundleSchemaVersion": 2, "exam": "aws-sysops", "facetKeys": ["service"], "slices": [{"contentSet": {"id": "aws-sysops-service-rds", "exam": "aws-sysops", "facet": {"key": "service", "value": "rds"}, "schemaVersion": 1}, "sourceQuestions": [], "claims": [{"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b44c3d4ac551", "source_question_ids": ["awssysops-p1-q009", "awssysops-p1-q039"], "statement": "RDS provides built-in, user-configurable automated backups with a rotation/retention window out of the box, without needing an additional backup service.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-6e6ff94b5027", "source_question_ids": ["awssysops-p1-q009"], "statement": "Amazon Redshift provides built-in, user-configurable automated backups with a rotation/retention window out of the box.", "status": "supported"}, {"claim_type": "default", "conditions": ["retention period not explicitly customized by the user"], "confidence": "medium", "id": "cl-d62160b685b9", "source_question_ids": ["awssysops-p1-q009"], "statement": "RDS's default automated backup retention period is 1 day when not customized by the user.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-25ce2afed16f", "source_question_ids": ["awssysops-p1-q009"], "statement": "Amazon S3 does not provide an out-of-the-box automatic backup-as-a-service; achieving backup on S3 requires building your own replication- or versioning-based backup.", "status": "supported"}, {"claim_type": "exception", "conditions": ["prior to mid-2018 / before Data Lifecycle Manager existed"], "confidence": "medium", "id": "cl-f5149488c779", "source_question_ids": ["awssysops-p1-q009", "awssysops-p1-q039"], "statement": "EBS snapshot rotation only became automatable via AWS Data Lifecycle Manager starting mid-2018, so before DLM existed EBS did not offer an out-of-the-box automated backup rotation option.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-bb168dcb42b2", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Internet Gateway (IGW) is inherently redundant/highly available at the VPC level, so adding a second IGW does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-364df7c366b0", "source_question_ids": ["awssysops-p1-q010"], "statement": "An Elastic Load Balancer automatically spans multiple Availability Zones, so adding a second ELB does not remove a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5b3aa5da8e2c", "source_question_ids": ["awssysops-p1-q010"], "statement": "A multi-AZ RDS instance already fails over automatically to a standby in a second Availability Zone, so it is not itself a single point of failure.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1360dcf4efc7", "source_question_ids": ["awssysops-p1-q010"], "statement": "In an architecture that already uses an IGW, an ELB spanning multiple AZs, and a multi-AZ RDS instance, there is no remaining single point of failure that needs to be fixed.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-aa9aa216e4a2", "source_question_ids": ["awssysops-p1-q014"], "statement": "Amazon CloudFront caches content (static assets, images, software patches, articles) at globally distributed edge locations, so repeat requests are served from the cache instead of hitting the origin, reducing origin load and lowering latency for end users during traffic spikes.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-80be965cb35f", "source_question_ids": ["awssysops-p1-q014"], "statement": "Adding Amazon RDS read replicas offloads read-only query traffic from the primary database instance, helping the database tier handle read-heavy traffic spikes.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-e3d33f110338", "source_question_ids": ["awssysops-p1-q014"], "statement": "Amazon ElastiCache caches the most frequently accessed data in front of a relational database, reducing the number of queries that reach the database and thus its load.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-c27b6dee478e", "source_question_ids": ["awssysops-p1-q014"], "statement": "SQS-based request queuing is designed for asynchronous write/processing workloads, not for synchronous, read-heavy page-view traffic such as serving article content.", "status": "supported"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-0996a48d74fb", "source_question_ids": ["awssysops-p1-q014"], "statement": "Using Route 53 health checks to fail over to a static S3 error page addresses availability optics but does not solve the underlying capacity/scaling pressure on the infrastructure.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-1fa7a765b651", "source_question_ids": ["awssysops-p1-q016"], "statement": "Subnets cannot span multiple Availability Zones; achieving coverage across N Availability Zones for a resource requires provisioning one subnet per AZ.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-33fbf0096616", "source_question_ids": ["awssysops-p1-q016"], "statement": "An ELB that must be distributed across multiple Availability Zones needs a subnet registered in each of those AZs, so an ELB distributed over 2 AZs requires two public subnets (one per AZ).", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-6de4b10a3185", "source_question_ids": ["awssysops-p1-q016"], "statement": "RDS database instances should be placed in private subnets rather than public subnets so the database is not reachable from the internet.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-707b0eca29cb", "source_question_ids": ["awssysops-p1-q016"], "statement": "In a tiered VPC design with a public-facing ELB and a private database tier, the web/application servers should also be placed in private subnets rather than a public subnet.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-89952f0a9ba0", "source_question_ids": ["awssysops-p1-q016"], "statement": "Whether a single public subnet is sufficient for an ELB distributed over 2 Availability Zones (versus requiring one public subnet per AZ) is disputed among exam commenters, since some argue a single ELB can already span multiple AZs from one subnet.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-e36c863e72e9", "source_question_ids": ["awssysops-p1-q039"], "statement": "AWS Data Lifecycle Manager (DLM), launched in 2018, automates EBS snapshot creation and rotation without requiring custom scripting.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-d40c06dc8414", "source_question_ids": ["awssysops-p1-q039"], "statement": "There is no built-in AWS managed service that automatically detects and stops idle or underutilized EC2 instances; accomplishing this requires custom scripting.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9965bc4710ed", "source_question_ids": ["awssysops-p1-q039"], "statement": "Auto Scaling combined with an Elastic Load Balancer natively handles adding newly scaled EC2 instances to the load balancer, without needing custom scripts.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-a67d8153019a", "source_question_ids": ["awssysops-p1-q039"], "statement": "Whether scripting daily EBS snapshot creation with monthly rotation is still the best 'needs a script' admin task is disputed, since AWS Data Lifecycle Manager may have removed the need for scripting that specific task after the question was originally written.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-42831a96fc0d", "source_question_ids": ["awssysops-p1-q042"], "statement": "RDS automated backups enable point-in-time recovery by continuously backing up transaction logs in addition to the daily snapshot, allowing restoration to nearly any point within the retention window, often as recent as about 5 minutes before a mistake occurred.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-ae1b8ae9fb7e", "source_question_ids": ["awssysops-p1-q042"], "statement": "A manual RDS snapshot only captures the database state at the moment the snapshot was taken, not necessarily a point closer to a later mistake.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-7adea0f8aff0", "source_question_ids": ["awssysops-p1-q042"], "statement": "Multi-AZ RDS protects against infrastructure failure, not application-level mistakes like a dropped table, because the synchronous standby replica also receives and contains the mistake.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4f88c255be37", "source_question_ids": ["awssysops-p1-q042"], "statement": "RDS read replicas mirror the primary database, including any accidental data-modifying mistakes made on the primary.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-958bcecd774d", "source_question_ids": ["awssysops-p1-q081", "awssysops-p1-q142"], "statement": "RDS event notifications are delivered through Amazon SNS: RDS publishes to an SNS topic when a supported event occurs, and users subscribe endpoints such as email, SMS, HTTP, or an SQS queue to that topic.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-6764aa9c27d9", "source_question_ids": ["awssysops-p1-q081"], "statement": "Amazon CloudWatch monitors metrics and logs and can alarm on thresholds, but it is not RDS's native event-notification transport mechanism.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-d1e3f1c5aee9", "source_question_ids": ["awssysops-p1-q081"], "statement": "AWS CloudTrail records API calls and management events rather than RDS operational events, so it is not used for RDS event notifications.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-557ec82bd0f0", "source_question_ids": ["awssysops-p1-q081"], "statement": "AWS SES only sends email and is not RDS's event notification transport.", "status": "supported"}, {"claim_type": "fact", "conditions": ["event notification source type = db-snapshot"], "confidence": "high", "id": "cl-7f557708948c", "source_question_ids": ["awssysops-p1-q101"], "statement": "RDS event notifications for the db-snapshot source type cover the Creation, Deletion, and Restoration event categories.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-6cd9279f0f36", "source_question_ids": ["awssysops-p1-q101"], "statement": "'Backup' is an RDS event category that belongs to the db-instance source type, not the db-snapshot source type.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-cbb0150c4e7f", "source_question_ids": ["awssysops-p1-q104"], "statement": "Multi-AZ RDS failover works by updating the DB instance's DNS record to point at the standby replica in another Availability Zone, while the application keeps using the same endpoint hostname throughout.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-99b86df2d309", "source_question_ids": ["awssysops-p1-q104"], "statement": "After a Multi-AZ RDS failover, the application requires no reconfiguration beyond re-establishing any already-open database connections.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-e9e48b4ca231", "source_question_ids": ["awssysops-p1-q104"], "statement": "Multi-AZ RDS failover has no special internal-IP redirect mechanism; the switch to the standby is DNS-based, not IP-based.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-3314781a1a60", "source_question_ids": ["awssysops-p1-q104"], "statement": "Multi-AZ RDS failover is automatic and does not require the user to manually trigger the switch to the standby.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-be3e4343aa0d", "source_question_ids": ["awssysops-p1-q113"], "statement": "In a Multi-AZ RDS deployment, AWS runs a single actively-serving primary DB instance and copies data synchronously to a standby replica that cannot itself serve read traffic.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-67b2c94ab257", "source_question_ids": ["awssysops-p1-q113"], "statement": "Describing Multi-AZ RDS as running 'two DBs in parallel' with synchronous copying is a looser characterization that some read as implying both instances are equally active, though in practice only the primary serves the workload.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-055d0e002bd1", "source_question_ids": ["awssysops-p1-q113"], "statement": "Amazon RDS for SQL Server (MS SQL) does support the Multi-AZ feature.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6bc13202bbf9", "source_question_ids": ["awssysops-p1-q142"], "statement": "RDS event notification subscriptions can be scoped to a source category such as 'DB security group,' and subscribing to its Configuration Change category delivers a notification whenever that security group is modified.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-c0a1c4cac06a", "source_question_ids": ["awssysops-p1-q142"], "statement": "Manually configuring SNS to monitor DB security group changes works but is less direct than using RDS's built-in event notification subscription for the DB security group source category.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-1aaea230f356", "source_question_ids": ["awssysops-p1-q142"], "statement": "A CloudWatch alarm on an RDS DB instance does not observe DB security group configuration changes.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-b17544cc3a16", "source_question_ids": ["awssysops-p1-q155"], "statement": "IAM policies are attached to IAM identities (users, groups, or roles) to grant permissions on AWS services; they cannot be attached directly to an RDS instance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0294b798e14c", "source_question_ids": ["awssysops-p1-q155"], "statement": "RDS database-level access (authenticating to the database engine itself) is a separate concern from IAM permissions to manage RDS through the AWS API.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-833e36233d41", "source_question_ids": ["awssysops-p1-q155"], "statement": "To grant a user access to RDS, the root account owner should create an IAM user and attach a policy granting that IAM user access to RDS management actions.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-422bbae16846", "source_question_ids": ["awssysops-p1-q156"], "statement": "Synchronous replication to the standby in a Multi-AZ RDS deployment can be an underlying cause of elevated latency.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-cd89953a9ada", "source_question_ids": ["awssysops-p1-q156"], "statement": "Using Provisioned IOPS (PIOPS) can help mitigate latency issues in a Multi-AZ RDS deployment by providing consistent, low-latency I/O under synchronous replication.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-9072ab971620", "source_question_ids": ["awssysops-p1-q156"], "statement": "Using a larger DB instance class can help mitigate latency issues in a Multi-AZ RDS deployment.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-92cab3cccf50", "source_question_ids": ["awssysops-p1-q156"], "statement": "Scheduling automated backups outside peak/non-working hours can help mitigate latency in a Multi-AZ RDS deployment, since backups on a Multi-AZ instance are taken from the standby and can otherwise coincide with other load.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-765c5e6f5f51", "source_question_ids": ["awssysops-p1-q156"], "statement": "Whether taking a snapshot from the standby replica helps with Multi-AZ write-latency issues is disputed: the source's boxed answer treats it as not helping since it is a read-only operation against the replica rather than a write-path change, but the community vote was split three ways with no majority.", "status": "conflicted"}, {"claim_type": "default", "conditions": ["user has not explicitly configured a maintenance window"], "confidence": "high", "id": "cl-eeaea36526dc", "source_question_ids": ["awssysops-p1-q169"], "statement": "Every RDS instance always has a maintenance window; if the user never explicitly sets one, AWS randomly assigns a 30-minute window from an 8-hour regional block on a random day of the week.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c5e716df1e42", "source_question_ids": ["awssysops-p1-q169"], "statement": "An unset/default RDS maintenance window does not block or prevent a requested DB instance-class change.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-d7bc41964095", "source_question_ids": ["awssysops-p1-q169"], "statement": "AWS does not prompt the user to specify a maintenance window at update time; it simply uses whatever window (default or custom) is already in effect.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c0bd9d7fa8ed", "source_question_ids": ["awssysops-p1-q175"], "statement": "RDS Multi-AZ provides automatic failover for an Availability Zone outage, a primary DB instance failure, a DB instance server-type/class change, software patching, and a manual reboot-with-failover.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-3138383b806a", "source_question_ids": ["awssysops-p1-q175"], "statement": "The Multi-AZ standby is provisioned in a different Availability Zone within the same region, not in a different region, so Multi-AZ RDS provides no protection against a region-wide outage.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-91709d8d0c5e", "source_question_ids": ["awssysops-p1-q199"], "statement": "A CloudWatch alarm enters the 'Insufficient Data' state when its underlying metric stops reporting data altogether.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-37d3230901f8", "source_question_ids": ["awssysops-p1-q199"], "statement": "Alerting on the CloudWatch alarm 'Insufficient Data' state is the way to detect that an RDS instance has become unavailable/inactive, as distinct from CPU-utilization-threshold alarms.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-fbd4b04d16f2", "source_question_ids": ["awssysops-p1-q199"], "statement": "High or low CPU-utilization threshold alarms on RDS reflect utilization levels, not whether the instance itself is unavailable or inactive.", "status": "supported"}, {"claim_type": "rule", "conditions": ["Multi-AZ RDS deployment"], "confidence": "high", "id": "cl-599b8aa5bcad", "source_question_ids": ["awssysops-p1-q215"], "statement": "During a Multi-AZ RDS maintenance window, AWS performs maintenance on the standby first, then promotes the now-patched standby to primary, then performs maintenance on the original primary.", "status": "supported"}, {"claim_type": "exception", "conditions": ["Multi-AZ RDS deployment"], "confidence": "high", "id": "cl-1b27fe268497", "source_question_ids": ["awssysops-p1-q215"], "statement": "After a Multi-AZ RDS maintenance-window failover sequence, the original primary is not promoted back to primary; it settles into the standby role instead.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-2f5ddc9a997d", "source_question_ids": ["awssysops-p1-q222"], "statement": "RDS event notification source categories include DB instance, DB security group, DB snapshot, and DB parameter group.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-ef9ba20eb3a2", "source_question_ids": ["awssysops-p1-q222"], "statement": "'DB options group' is not a documented RDS event notification source category.", "status": "supported"}, {"claim_type": "fact", "conditions": ["RDS engine = MySQL"], "confidence": "high", "id": "cl-a162f96c50b6", "source_question_ids": ["awssysops-p1-q228", "awssysops-p1-q272"], "statement": "For RDS MySQL, the error log, slow query log, and general log can be viewed via the console, CLI, or API.", "status": "supported"}, {"claim_type": "fact", "conditions": ["RDS engine = MySQL"], "confidence": "medium", "id": "cl-6a8efac52531", "source_question_ids": ["awssysops-p1-q228"], "statement": "Directing RDS MySQL logs to a database table and then querying that table with SQL is a technique for searching logs by date or other criteria.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-f3e7e581b415", "source_question_ids": ["awssysops-p1-q228"], "statement": "Searching RDS 'transaction logs' is not the mechanism used for RDS MySQL error-log searching by date.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-45d415dd19ca", "source_question_ids": ["awssysops-p1-q228"], "statement": "Downloading RDS log files to DynamoDB is not a real RDS log export or querying mechanism.", "status": "supported"}, {"claim_type": "fact", "conditions": ["RDS engine = Oracle, PostgreSQL, or MySQL"], "confidence": "high", "id": "cl-33ff22a46b4b", "source_question_ids": ["awssysops-p1-q233"], "statement": "Multi-AZ deployments for Oracle, PostgreSQL, and MySQL RDS DB instances use Amazon's own synchronous-replica technology.", "status": "supported"}, {"claim_type": "exception", "conditions": ["RDS engine = SQL Server (MS SQL)"], "confidence": "high", "id": "cl-3f99f3f464fc", "source_question_ids": ["awssysops-p1-q233"], "statement": "Multi-AZ deployments for SQL Server (MS SQL) RDS DB instances use SQL Server's native Mirroring feature for high availability instead of AWS's own replica technology.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-e77c926066a5", "source_question_ids": ["awssysops-p1-q234"], "statement": "RDS event notifications can be temporarily turned off without deleting the underlying subscription by setting the 'Enabled' toggle to No in the console, or the Enabled parameter to false via CLI/API.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-e708da264a12", "source_question_ids": ["awssysops-p1-q234"], "statement": "The RDS console does not have a 'Disable' button set to 'Yes' for notifications; the actual control is an 'Enabled' toggle that is set to No to disable.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-c81f2a55d27e", "source_question_ids": ["awssysops-p1-q234"], "statement": "There is no 'send mail flag' parameter for RDS DB event notifications.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-48f46ffef047", "source_question_ids": ["awssysops-p1-q234"], "statement": "Deleting the notification subscription is not the only way to stop receiving RDS event notifications, since disabling the subscription is also supported.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "medium", "id": "cl-e866b36d4eb3", "source_question_ids": ["awssysops-p1-q263"], "statement": "Only scaling-compute operations and required security/durability software patching can force an RDS instance offline during its maintenance window.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-4249ba89716c", "source_question_ids": ["awssysops-p1-q263"], "statement": "RDS security patching during the maintenance window occurs infrequently and uses only a fraction of the maintenance window.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-71685b7d022e", "source_question_ids": ["awssysops-p1-q263"], "statement": "Enabling a Read Replica, converting an RDS instance to Multi-AZ, and changing a DB password are routine RDS configuration actions that do not require taking the primary instance offline.", "status": "supported"}, {"claim_type": "exception", "conditions": ["RDS engine = MySQL"], "confidence": "high", "id": "cl-7f06b74e3130", "source_question_ids": ["awssysops-p1-q272"], "statement": "RDS does not surface the raw transaction log for viewing via console, CLI, or API for MySQL.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-798336de128b", "source_question_ids": ["awssysops-p2-q305"], "statement": "AWS Elastic Beanstalk provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-49a2a4f2a510", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon EMR provisions underlying EC2 instances that the customer can still directly administer, including SSH access, installing software, and root access.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-21cd90768c4c", "source_question_ids": ["awssysops-p2-q305"], "statement": "Amazon ElastiCache, Amazon RDS, and Elastic Load Balancing are fully managed services that give customers no direct access to the underlying compute instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-68490be234e9", "source_question_ids": ["awssysops-p2-q305"], "statement": "A claim that RDS lets customers 'retain administrative privileges' on its underlying EC2 instances is technically unsupported, since RDS is fully managed and customers get only a database endpoint rather than OS-level or root access to the host; this claim appeared in a dissenting minority vote.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-2b7c7db63a43", "source_question_ids": ["awssysops-p2-q311"], "statement": "The CloudWatch RDS metric for the number of outstanding IOs waiting to access disk is a direct load/performance metric on the primary instance useful for detecting a database bottleneck.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-7aec0be4944a", "source_question_ids": ["awssysops-p2-q311"], "statement": "The CloudWatch RDS write-latency metric is a direct load/performance metric on the primary instance useful for detecting a database bottleneck.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-bb7f0c6c8a95", "source_question_ids": ["awssysops-p2-q311"], "statement": "The CloudWatch RDS metric for the amount of time a Read Replica lags behind the source DB instance measures replication freshness rather than primary-instance load, and its usefulness for detecting the bottleneck causing increased application response time is disputed among exam commenters.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "low", "id": "cl-0b56db7e0a5e", "source_question_ids": ["awssysops-p2-q311"], "statement": "Several independent exam commenters argue that the average disk I/O operations per second (IOPS) metric is a more directly relevant load/performance metric for RDS bottleneck detection than read-replica lag, making the combination of outstanding-IOs, write-latency, and IOPS a community-favored alternative to the source's boxed answer.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-454dd96586cd", "source_question_ids": ["awssysops-p2-q311"], "statement": "The CloudWatch RDS metric for disk space occupied by binary logs on the master is a storage-usage metric unrelated to performance-bottleneck detection.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-1b6f76a42065", "source_question_ids": ["awssysops-p2-q314"], "statement": "Directing analytics/reporting queries to an RDS Read Replica isolates that workload from the primary instance so heavy analytical queries no longer contend with transactional queries hitting the primary.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-86c20012b2da", "source_question_ids": ["awssysops-p2-q314"], "statement": "Enabling Multi-AZ on an RDS instance addresses failover/availability rather than workload separation, since the standby is not query-accessible for offloading read traffic.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-5b89b007dc29", "source_question_ids": ["awssysops-p2-q314"], "statement": "Using ElastiCache is suited for caching frequently-read data, not for large ad-hoc analytics jobs that need to scan and aggregate across the full dataset.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-1d6e1158823f", "source_question_ids": ["awssysops-p2-q314"], "statement": "Running an RDS instance at the largest possible size only delays a workload-contention problem rather than solving it structurally, and does not scale as data volume and job durations grow.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a3ed621071d0", "source_question_ids": ["awssysops-p2-q315"], "statement": "RDS Multi-AZ failover works by updating the DNS CNAME record of the DB instance's endpoint to point at the standby, rather than by reassigning an IP address.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b68b0709215a", "source_question_ids": ["awssysops-p2-q315"], "statement": "In RDS Multi-AZ, the standby DB instance already exists and is running before failover occurs, rather than being created at the moment of failover.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f0a4fbf68189", "source_question_ids": ["awssysops-p2-q315"], "statement": "RDS Multi-AZ failover does not switch or reassign the primary DB instance's IP address to the standby.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f8d9e23f9ae8", "source_question_ids": ["awssysops-p2-q315"], "statement": "RDS Multi-AZ failover fails over to a distinct standby instance rather than rebooting the original primary DB instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["using AWS OpsWorks stacks"], "confidence": "medium", "id": "cl-30ac478fa761", "source_question_ids": ["awssysops-p2-q325"], "statement": "To add a backend database server to an OpsWorks stack, you add a new database layer and add recipes to the deploy actions of both the database layer and the App Server layer.", "status": "supported"}, {"claim_type": "fact", "conditions": ["using AWS OpsWorks stacks"], "confidence": "medium", "id": "cl-d84ee787387c", "source_question_ids": ["awssysops-p2-q325"], "statement": "In OpsWorks, database connection variables such as host and user are set from the deploy JSON's [:deploy][:app_name][:database] attributes.", "status": "supported"}, {"claim_type": "fact", "conditions": ["using AWS OpsWorks stacks"], "confidence": "medium", "id": "cl-09d4ce7c3321", "source_question_ids": ["awssysops-p2-q325"], "statement": "In OpsWorks, an app server can be connected to an RDS layer via a custom recipe that reads connection data such as host and database name from stack configuration and deployment JSON attributes that OpsWorks installs on every instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-263074c7bf39", "source_question_ids": ["awssysops-p2-q325"], "statement": "OpsWorks' 'Clone Stack' feature duplicates an entire stack, such as for creating a staging environment, and is not a mechanism for RDS failover.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-8dd202d8f797", "source_question_ids": ["awssysops-p2-q325"], "statement": "RDS Multi-AZ already handles Availability-Zone-level failover natively, so cloning an OpsWorks stack is not needed to achieve RDS failover redundancy.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-b53084777cca", "source_question_ids": ["awssysops-p2-q325"], "statement": "OpsWorks does not enforce a mandatory requirement that the RDS 'password' cookbook attribute be encrypted using at least a 256-bit key; encrypting cookbook attributes is a general good practice rather than an OpsWorks-enforced constraint.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-dbbe35cba981", "source_question_ids": ["awssysops-p2-q353"], "statement": "Amazon RDS manages the operational work of setting up a relational database, including provisioning infrastructure and installing the database engine software.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-7c08999dcc3f", "source_question_ids": ["awssysops-p2-q353"], "statement": "Amazon RDS is not a tool for testing website functionality, blocking users from creating DB instances, or providing sensory feedback.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-169105611eca", "source_question_ids": ["awssysops-p2-q363"], "statement": "RDS Multi-AZ deployment provides enhanced availability and durability for DB instances, making it a natural fit for production database workloads.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4ea0f361efa9", "source_question_ids": ["awssysops-p2-q381"], "statement": "Amazon RDS stands for Amazon Relational Database Service.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8332d168d006", "source_question_ids": ["awssysops-p2-q438"], "statement": "Amazon RDS provides Amazon CloudWatch metrics for DB instance deployments at no additional charge.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-8bad7881b6bb", "source_question_ids": ["awssysops-p2-q438"], "statement": "Key RDS CloudWatch metrics viewable in the AWS Management Console include compute/memory/storage capacity utilization, I/O activity, and DB instance connections.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-5fa3fd205b77", "source_question_ids": ["awssysops-p2-q438"], "statement": "RDS CloudWatch console metrics do not include user counts or database engine version management, since those are not monitoring metrics.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5352c9d24aa5", "source_question_ids": ["awssysops-p2-q476"], "statement": "AWS IAM can be used to assign permissions determining who can manage or modify RDS resources, such as creating, describing, modifying, deleting, or tagging RDS DB instances and security groups.", "status": "supported"}, {"claim_type": "fact", "conditions": ["MySQL DB instances"], "confidence": "high", "id": "cl-fb144c59c5e8", "source_question_ids": ["awssysops-p2-q478"], "statement": "RDS generates an SSL certificate for each DB instance, allowing SSL encryption of connections between application servers and MySQL RDS instances.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["MySQL DB instances"], "confidence": "high", "id": "cl-dfa716be3f9f", "source_question_ids": ["awssysops-p2-q478"], "statement": "SSL encryption for connections to RDS MySQL instances is not limited to specific regions or to VPC deployments only.", "status": "supported"}, {"claim_type": "fact", "conditions": ["SQL Server DB instances"], "confidence": "high", "id": "cl-12e80d8db6a1", "source_question_ids": ["awssysops-p2-q491"], "statement": "RDS supports SSL encryption for connections to SQL Server DB instances across all supported SQL Server editions and in all AWS regions.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["SQL Server DB instances"], "confidence": "high", "id": "cl-f28c314d7af8", "source_question_ids": ["awssysops-p2-q491"], "statement": "SSL encryption support for RDS SQL Server instances is not restricted to a single region or to GovCloud only.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d670b4994713", "source_question_ids": ["awssysops-p2-q501"], "statement": "For compliance-driven encryption or data-integrity authentication of data at rest beyond the infrastructure security RDS inherits from EC2, protection can be added at the application layer using SQL cryptographic functions.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-21a70f021e6d", "source_question_ids": ["awssysops-p2-q512"], "statement": "Amazon RDS integrates with AWS IAM, a service that lets an organization create users and groups and assign unique security credentials to each user.", "status": "supported"}, {"claim_type": "fact", "conditions": ["read-heavy workload"], "confidence": "high", "id": "cl-14abe5b82c2f", "source_question_ids": ["awssysops-p2-q529"], "statement": "Creating a read replica of an RDS instance horizontally scales read capacity by offloading read traffic from the primary instance.", "status": "supported"}, {"claim_type": "fact", "conditions": ["read-heavy workload"], "confidence": "high", "id": "cl-79ce82099389", "source_question_ids": ["awssysops-p2-q529"], "statement": "Using Amazon ElastiCache to cache read queries removes repeat read load from an RDS instance for cacheable queries.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-79f4620f1978", "source_question_ids": ["awssysops-p2-q529"], "statement": "RDS Multi-AZ is a high-availability and failover feature with a synchronously-replicated standby, and the standby is not used to serve read traffic.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-68fa0b18ec39", "source_question_ids": ["awssysops-p2-q529"], "statement": "Scaling an RDS instance up to a larger instance size does not scale read throughput beyond a single instance's ceiling, unlike adding read replicas or a cache.", "status": "supported"}, {"claim_type": "rule", "conditions": ["using AWS CloudFormation"], "confidence": "high", "id": "cl-1f61228b9df4", "source_question_ids": ["awssysops-p2-q537"], "statement": "Setting the DeletionPolicy attribute to Snapshot on an RDS resource in a CloudFormation template makes CloudFormation automatically snapshot the DB instance as part of stack deletion.", "status": "supported"}, {"claim_type": "fact", "conditions": ["using AWS CloudFormation"], "confidence": "medium", "id": "cl-406ca2c0b5c0", "source_question_ids": ["awssysops-p2-q537"], "statement": "Using the CloudFormation Snapshot DeletionPolicy on an RDS resource requires no manual script, Lambda invocation, or separate backup template to retain the database's data after the stack is deleted.", "status": "supported"}, {"claim_type": "exception", "conditions": ["using AWS CloudFormation"], "confidence": "medium", "id": "cl-4b492e4ed0fd", "source_question_ids": ["awssysops-p2-q537"], "statement": "For retaining RDS data reliably and efficiently after a CloudFormation stack deletion, the documented and community-favored approach is the Snapshot DeletionPolicy, which conflicts with a source's boxed answer that instead recommends running a separate backup CloudFormation template before deleting the stack.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["AWS shared responsibility model"], "confidence": "high", "id": "cl-31615cfa6e51", "source_question_ids": ["awssysops-p2-q538"], "statement": "Under the AWS shared responsibility model, the customer is responsible for patching the guest OS on Amazon EC2 instances.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AWS shared responsibility model"], "confidence": "high", "id": "cl-a30e923fbef7", "source_question_ids": ["awssysops-p2-q538"], "statement": "Under the AWS shared responsibility model, the customer is responsible for configuring resource-level protections such as S3 server-side encryption with S3-managed keys (SSE-S3).", "status": "supported"}, {"claim_type": "rule", "conditions": ["AWS shared responsibility model"], "confidence": "high", "id": "cl-2cc3b8bbc80b", "source_question_ids": ["awssysops-p2-q538"], "statement": "Under the AWS shared responsibility model, patching the underlying OS and database engine on Amazon RDS instances is typically framed as AWS/platform-managed, not the customer's responsibility.", "status": "supported"}, {"claim_type": "rule", "conditions": ["AWS shared responsibility model", "AWS Elastic Beanstalk managed platform"], "confidence": "medium", "id": "cl-1254d5fe9dca", "source_question_ids": ["awssysops-p2-q538"], "statement": "The runtime environment inside an AWS Elastic Beanstalk-managed EC2 application, such as the PHP runtime, is framed as AWS/platform-managed under the shared responsibility model, not customer-managed.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fd3b01839cdc", "source_question_ids": ["awssysops-p2-q539", "awssysops-p2-q543"], "statement": "Amazon Inspector's agent-based assessments only run against EC2 instances and have no ability to scan a managed RDS fleet.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-fdafe4a46755", "source_question_ids": ["awssysops-p2-q539"], "statement": "Reviewing a security group's inbound access rules for least privilege is a recommended, directly actionable RDS security-hardening step.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-87426a8980df", "source_question_ids": ["awssysops-p2-q539"], "statement": "Reviewing RDS Parameter Group settings to ensure encrypted connections are enforced is a recommended, directly actionable RDS security-hardening step.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-549335f435b5", "source_question_ids": ["awssysops-p2-q539"], "statement": "There is no SSH access to enumerate on a managed RDS instance, since RDS does not provide OS-level or shell access.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-a62cca529149", "source_question_ids": ["awssysops-p2-q539"], "statement": "A source's boxed answer for RDS hardening recommended using Amazon Inspector to report on RDS database security vulnerabilities, which conflicts with Amazon Inspector's actual EC2-only scope and with the source's own unanimous community vote favoring a different option instead.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-adecea7d7067", "source_question_ids": ["awssysops-p2-q543"], "statement": "Amazon CloudWatch metrics let an administrator directly compare resource usage, such as CPUUtilization, across application components like EC2 and RDS, to isolate which component is causing a performance bottleneck.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-e2c0b1710a20", "source_question_ids": ["awssysops-p2-q543"], "statement": "AWS CloudTrail records API activity rather than resource usage, so it cannot be used to find which component is causing a high-CPU performance bottleneck.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-faa03b1b5b7f", "source_question_ids": ["awssysops-p2-q543"], "statement": "Amazon CloudWatch Events reports on triggered events rather than ongoing resource usage trends, so it is not suited to diagnosing an ongoing CPU performance bottleneck.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-a52c8e591c6a", "source_question_ids": ["awssysops-p2-q548"], "statement": "Encryption at rest for EBS General Purpose SSD volumes can only be enabled at volume-creation time and cannot be turned on in place on an already-running volume.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-f87645bb51c4", "source_question_ids": ["awssysops-p2-q548", "awssysops-p3-1-q654"], "statement": "Encryption at rest for RDS databases can only be enabled at DB-instance-creation time and cannot be turned on in place on an already-running instance.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-805ca19ff617", "source_question_ids": ["awssysops-p2-q548"], "statement": "Encryption at rest for Amazon EFS file systems can only be enabled at file-system-creation time and cannot be turned on in place on an already-existing file system.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-817f30509d29", "source_question_ids": ["awssysops-p2-q548"], "statement": "Amazon S3 default bucket encryption can be enabled immediately for new objects without creating a new bucket, and existing S3 objects can be re-encrypted in place with zero downtime via an S3 Batch Operations copy job.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-d5c0d736f964", "source_question_ids": ["awssysops-p2-q548"], "statement": "Among EBS, RDS, EFS, and S3, S3 is the exception where existing data can gain at-rest encryption without creating a new resource and without downtime; a source's boxed answer instead named EBS, which conflicts with this documented behavior and the source's own unanimous community vote favoring S3.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b25f6d83421f", "source_question_ids": ["awssysops-p2-q560"], "statement": "RDS Multi-AZ automatically fails over to the synchronously-replicated standby, including switching the DNS endpoint, without manual intervention if the primary DB instance becomes unresponsive.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-dc0236c1db20", "source_question_ids": ["awssysops-p2-q560"], "statement": "RDS read replicas are asynchronous and are not designed to provide automatic failover if the primary database becomes unresponsive.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-0e30b32d12fa", "source_question_ids": ["awssysops-p2-q560"], "statement": "Restoring a new RDS instance from a snapshot after a failure requires manual steps and incurs downtime, unlike RDS Multi-AZ's automatic failover.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-83b5fe4a5e24", "source_question_ids": ["awssysops-p2-q560"], "statement": "Manually running a separate standby RDS database and switching the application's endpoint on failure requires manual steps and incurs downtime, unlike RDS Multi-AZ's automatic failover.", "status": "supported"}, {"claim_type": "fact", "conditions": ["Amazon Aurora"], "confidence": "high", "id": "cl-ba4ce90dde61", "source_question_ids": ["awssysops-p2-q571"], "statement": "Aurora Replicas offload read traffic from the primary Aurora instance.", "status": "supported"}, {"claim_type": "fact", "conditions": ["Amazon Aurora"], "confidence": "high", "id": "cl-30a7bc0355b9", "source_question_ids": ["awssysops-p2-q571"], "statement": "The Aurora Reader Endpoint automatically load-balances read queries across all available Aurora Replicas.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-d7b1f440df4b", "source_question_ids": ["awssysops-p2-q571"], "statement": "Amazon Redshift is a data-warehouse migration target, not a scaling fix for an OLTP table experiencing high read CPU utilization.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-63d70daaf4a6", "source_question_ids": ["awssysops-p2-q571"], "statement": "Amazon CloudFront caches static HTTP content rather than database query results, so it cannot relieve database CPU load from read queries.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["Amazon Aurora"], "confidence": "medium", "id": "cl-5907b7a95499", "source_question_ids": ["awssysops-p2-q571"], "statement": "Amazon Aurora does not have a CPU-utilization-triggered Auto Scaling mechanism for automatically adding extra Aurora database nodes.", "status": "supported"}, {"claim_type": "rule", "conditions": [], "confidence": "high", "id": "cl-bc0833d25c84", "source_question_ids": ["awssysops-p2-q582"], "statement": "Security groups are stateful, so a missing egress rule on a resource's own security group rarely blocks a client-initiated connection, because return traffic for an already-allowed inbound request is automatically permitted.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-65dc2abdd3e0", "source_question_ids": ["awssysops-p2-q582"], "statement": "A missing ingress rule from the web server to the database's security group is a plausible cause of 'Error Establishing a Database Connection' failures.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-aa68a511c1b3", "source_question_ids": ["awssysops-p2-q582"], "statement": "If a database is reachable from a bastion host, that rules out the database still being in the process of creation as the cause of connectivity failures reported by the web application.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "low", "id": "cl-462e79ba6c40", "source_question_ids": ["awssysops-p2-q582"], "statement": "An untrusted SSL/TLS certificate used by the web server, in the context of the 2020 RDS CA certificate rotation, is a contested alternative cause of 'Error Establishing a Database Connection' failures, with a highly-upvoted community argument favoring it over a missing security-group egress rule that a source's boxed answer includes instead.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-d03357538127", "source_question_ids": ["awssysops-p2-q592"], "statement": "RDS automated backups with point-in-time recovery can have a retention period configured up to 35 days.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-f0be531e0622", "source_question_ids": ["awssysops-p2-q592"], "statement": "RDS automated backups cost only the underlying S3 backup storage, making them a low-cost data-protection option.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "high", "id": "cl-e8c14270e271", "source_question_ids": ["awssysops-p2-q592"], "statement": "RDS Multi-AZ and read replicas replicate data, including table corruption, to the standby or replica in near real time, so neither protects against corruption discovered days later.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-fdebb5df1248", "source_question_ids": ["awssysops-p2-q592"], "statement": "'Versioning' is not a real feature of Amazon RDS.", "status": "supported"}, {"claim_type": "rule", "conditions": ["existing RDS instance not currently Multi-AZ"], "confidence": "high", "id": "cl-6da208c05063", "source_question_ids": ["awssysops-p3-1-q605"], "statement": "Multi-AZ can be enabled on an already-running RDS instance by modifying the instance, via console, CLI, or API, to include the Multi-AZ option, without creating a new instance or migrating data.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-c342db651e9e", "source_question_ids": ["awssysops-p3-1-q605"], "statement": "When Multi-AZ is enabled on an existing RDS instance, RDS provisions a synchronous standby in a second Availability Zone and handles failover automatically.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f78cd916c0de", "source_question_ids": ["awssysops-p3-1-q605"], "statement": "An RDS read replica is an asynchronous, separate database intended for read scaling, not a high-availability failover pair for the primary instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-7d59d197fef6", "source_question_ids": ["awssysops-p3-1-q605"], "statement": "Specifying high availability only at RDS instance creation time does not apply to an already-existing instance and would require a disruptive data migration to achieve.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["AWS CLI"], "confidence": "high", "id": "cl-2e2c77e80448", "source_question_ids": ["awssysops-p3-1-q605"], "statement": "The AWS CLI modify-db-instance command does not have an --ha flag; the correct flag for enabling Multi-AZ on an RDS instance is --multi-az.", "status": "supported"}, {"claim_type": "rule", "conditions": ["RDS Oracle DB instance"], "confidence": "high", "id": "cl-2ec7abe03b82", "source_question_ids": ["awssysops-p3-1-q635"], "statement": "Taking a manual DB snapshot is the AWS-native way to perform on-demand backups of an Amazon RDS Oracle instance.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-f7083d3c8ad1", "source_question_ids": ["awssysops-p3-1-q635"], "statement": "RDS administrators have no OS-level or filesystem access to the underlying host of a managed RDS instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["RDS Oracle DB instance"], "confidence": "high", "id": "cl-94be3c8ec534", "source_question_ids": ["awssysops-p3-1-q635"], "statement": "Attaching an EBS volume with Oracle RMAN installed to an RDS instance is not possible, since it assumes OS/shell access that RDS does not expose.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["RDS Oracle DB instance"], "confidence": "high", "id": "cl-c8f5c9fec549", "source_question_ids": ["awssysops-p3-1-q635"], "statement": "Installing Oracle Secure Backup directly on an RDS instance is not possible, since it assumes OS/shell access that RDS does not expose.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["RDS Oracle DB instance"], "confidence": "medium", "id": "cl-55b28ae490ad", "source_question_ids": ["awssysops-p3-1-q635"], "statement": "Snapshotting an EBS volume directly attached to an RDS DB instance is not a valid manual-backup approach, since RDS does not expose its storage as a directly-manageable attached EBS volume for this purpose.", "status": "supported"}, {"claim_type": "rule", "conditions": ["existing unencrypted RDS instance"], "confidence": "high", "id": "cl-c905f9112db5", "source_question_ids": ["awssysops-p3-1-q654"], "statement": "To encrypt an existing unencrypted RDS instance, the documented approach is to take a snapshot of it, create an encrypted copy of that snapshot, and restore a new encrypted DB instance from the encrypted copy.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-684db49d5ae8", "source_question_ids": ["awssysops-p3-1-q654"], "statement": "RDS does not expose its underlying storage as attachable EBS volumes, so attaching a new encrypted EBS volume to an RDS instance is not a valid way to encrypt that instance.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["RDS Multi-AZ deployment"], "confidence": "medium", "id": "cl-6f26c20dd5bc", "source_question_ids": ["awssysops-p3-1-q654"], "statement": "A Multi-AZ standby replica inherits the primary RDS instance's encryption setting and cannot be independently encrypted and then promoted to primary as a way to encrypt the deployment.", "status": "supported"}, {"claim_type": "exception", "conditions": [], "confidence": "medium", "id": "cl-e8cde3e27165", "source_question_ids": ["awssysops-p3-1-q654"], "statement": "There is no console checkbox to enable at-rest encryption on an already-running RDS instance; a source's boxed answer claiming such a checkbox exists conflicts with actual RDS behavior and with the source's own unanimous community vote favoring the snapshot-copy-restore approach instead.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["AWS shared responsibility model", "fully-managed RDS engine"], "confidence": "high", "id": "cl-570fee310120", "source_question_ids": ["awssysops-p3-1-q734"], "statement": "Under the AWS shared responsibility model, AWS is responsible for applying engine-level security patches, such as for a MySQL vulnerability, to a fully-managed RDS instance, not the customer.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-89f311a2034c", "source_question_ids": ["awssysops-p3-1-q734"], "statement": "AWS actively monitors for security vulnerabilities in managed database engines, works with database vendors to obtain patches, and applies those patches to the managed RDS infrastructure.", "status": "supported"}, {"claim_type": "exception", "conditions": ["AWS shared responsibility model"], "confidence": "medium", "id": "cl-6912cbdbb449", "source_question_ids": ["awssysops-p3-1-q734"], "statement": "A database vendor produces the patch for a security vulnerability in its database engine but is not who applies that patch to a customer's managed RDS cluster; a source's boxed answer names the vendor as responsible for applying the patch, which conflicts with the shared-responsibility-model documentation and the source's own unanimous community vote favoring AWS instead.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-4d612d8478c3", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "Amazon RDS instances expose a configurable maintenance window during which AWS performs patching and upkeep on the customer's behalf.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-86318ec3562a", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "Amazon ElastiCache clusters expose a configurable maintenance window during which AWS performs patching and upkeep on the customer's behalf.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-0b07bb7e9c22", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "\"Maintenance window\" is not an AWS-configurable property of a plain EC2 instance.", "status": "supported"}, {"claim_type": "rule", "conditions": ["patching the operating system on an EC2 instance"], "confidence": "high", "id": "cl-8b38aa356b2d", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "OS-level patching on EC2 instances is scheduled through AWS Systems Manager Patch Manager's maintenance window construct rather than through the EC2 instance resource itself.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-82b7d2cdf98c", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "An Elastic Load Balancer is an AWS-managed construct with no OS to patch and no maintenance-window setting of its own.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a5ff5efe29ac", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "An EC2 Auto Scaling group is an AWS-managed construct with no OS to patch and no maintenance-window setting of its own.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-92cfac6c1cf1", "source_question_ids": ["awssysops-p3-1-q735"], "statement": "Because an EC2 instance's underlying OS still requires patching, some argue a maintenance window should be scheduled for the EC2 instance rather than for the ElastiCache cluster, even though EC2 has no such configurable maintenance-window resource property.", "status": "conflicted"}, {"claim_type": "rule", "conditions": ["sharing an encrypted RDS snapshot across AWS accounts"], "confidence": "high", "id": "cl-3c515463e7fe", "source_question_ids": ["awssysops-p3-1-q744"], "statement": "Sharing an encrypted Amazon RDS snapshot across AWS accounts requires updating the AWS KMS key policy to grant the target accounts permission to use the key that encrypted the snapshot.", "status": "supported"}, {"claim_type": "rule", "conditions": ["target accounts have been granted permission on the KMS key used to encrypt the snapshot"], "confidence": "high", "id": "cl-2dc480b0b898", "source_question_ids": ["awssysops-p3-1-q744"], "statement": "After granting target accounts permission on the KMS key, the encrypted RDS snapshot itself must be shared with those accounts, keeping the data encrypted at rest throughout the process.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-f170304c8b2f", "source_question_ids": ["awssysops-p3-1-q744"], "statement": "Downloading an encrypted RDS snapshot, decrypting it with its AWS KMS key, and creating a new volume in each account breaks the encrypted-at-rest requirement during that process.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ba3af9a282f3", "source_question_ids": ["awssysops-p3-1-q744"], "statement": "Creating an EC2 instance from an RDS snapshot, saving its EBS volume as an unencrypted snapshot, and requiring each account owner to encrypt their own copy produces unencrypted data at rest before the encryption step.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-89262b3cc3f5", "source_question_ids": ["awssysops-p3-1-q744"], "statement": "Creating an unencrypted RDS instance from an encrypted snapshot and exporting the database contents to a file produces unencrypted data at rest.", "status": "supported"}, {"claim_type": "fact", "conditions": ["RDS CPU utilization is at or near 100%"], "confidence": "high", "id": "cl-c6fb6ec00f36", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "When an Amazon RDS instance's CPU utilization reaches 100%, the instance's compute capacity itself is the bottleneck causing query latency.", "status": "supported"}, {"claim_type": "rule", "conditions": ["RDS CPU utilization is at or near 100%"], "confidence": "high", "id": "cl-8cdcf9f2e8e0", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "Modifying an RDS instance to a larger instance type increases available CPU capacity and resolves a CPU-utilization bottleneck regardless of whether the workload is read-heavy or write-heavy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-5d9b80b44cc4", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "Amazon RDS for MySQL has no true horizontal write-scaling mechanism.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-539dbad1d1cc", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "\"Scaling horizontally\" in the RDS context refers to adding read replicas, which offload only read traffic and do not help a write-heavy or general CPU-bound workload.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-9cc9fe4ecfce", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "AWS Database Migration Service (AWS DMS) is a data-migration and replication service and has no role in scaling an existing RDS instance's compute capacity.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-a9a4687a7bc9", "source_question_ids": ["awssysops-p3-1-q748"], "statement": "Enabling Multi-AZ on an RDS instance provides failover and availability, not additional compute headroom, so it does not resolve a CPU-utilization bottleneck.", "status": "supported"}, {"claim_type": "fact", "conditions": ["applying the Multi-AZ conversion outside of business hours"], "confidence": "high", "id": "cl-402cbf27afbd", "source_question_ids": ["awssysops-p3-1-q762"], "statement": "Amazon RDS supports converting an existing DB instance to a Multi-AZ deployment in place via a modify action, which can be scheduled to apply outside business hours.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b29dd958b89b", "source_question_ids": ["awssysops-p3-1-q762"], "statement": "Converting an existing RDS instance to Multi-AZ in place provides automatic-failover high availability without creating a separate instance or migrating any data.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-158a50840442", "source_question_ids": ["awssysops-p3-1-q762"], "statement": "Creating an entirely new Multi-AZ RDS instance, migrating data to it, and deleting the old instance is a heavier and riskier approach to achieving high availability than simply modifying the existing instance to Multi-AZ.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-fb4fecbfe056", "source_question_ids": ["awssysops-p3-1-q762"], "statement": "An RDS read replica does not provide the same synchronous, automatic-failover high availability that a Multi-AZ deployment provides.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-ea57fb2f178a", "source_question_ids": ["awssysops-p3-1-q762"], "statement": "Contacting AWS Support to \"pre-warm\" a database is not a real, documented Amazon RDS high-availability mechanism.", "status": "supported"}, {"claim_type": "rule", "conditions": ["a resource-intensive reporting job is causing contention on the primary RDS instance"], "confidence": "high", "id": "cl-6280ce70cdbf", "source_question_ids": ["awssysops-p3-1-q775"], "statement": "Offloading a resource-intensive reporting job to an Amazon RDS read replica moves that read workload off the primary instance, freeing the primary to serve other applications at normal speed.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-00e6aac8c274", "source_question_ids": ["awssysops-p3-1-q775"], "statement": "Amazon RDS backups do not run queries and have no effect on live read load.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-234453d5bad4", "source_question_ids": ["awssysops-p3-1-q775"], "statement": "Multi-AZ mode's standby instance is not used to serve read traffic, so Multi-AZ addresses failover and availability rather than distributing query load.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-4a3483b099fc", "source_question_ids": ["awssysops-p3-1-q775"], "statement": "Amazon RDS automatic host replacement addresses hardware failure recovery, not workload contention.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-10b83747fe90", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "Amazon Aurora's MySQL-compatible edition is wire-compatible with MySQL, so migrating an existing MySQL database to Aurora requires little more than repointing the application's connection endpoint.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-b8998638a207", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "Amazon Aurora provides built-in multi-AZ durability and read-replica-based availability.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "medium", "id": "cl-30fa62e4695e", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "Migrating a MySQL database to an Amazon RDS Microsoft SQL Server instance moves to a different database engine with a different SQL dialect, drivers, and feature set, representing a larger application change than migrating to a MySQL-compatible service.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9f6cc10938ab", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "Amazon RDS for Microsoft SQL Server does not support the Aurora engine.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-7b7666db7e34", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "Self-managing multi-AZ replication inside a single EC2 instance is not a real supported configuration.", "status": "supported"}, {"claim_type": "distractor", "conditions": ["backups are copied on a fixed interval such as every 30 minutes"], "confidence": "high", "id": "cl-3055bfca6b54", "source_question_ids": ["awssysops-p3-1-q776"], "statement": "A manual cron-based backup-and-copy scheme between EC2 instances can lose up to 30 minutes of data and requires manual failover steps, providing neither true high availability nor durability.", "status": "supported"}, {"claim_type": "rule", "conditions": ["the snapshot is an automated RDS snapshot"], "confidence": "high", "id": "cl-ce9dd33f363b", "source_question_ids": ["awssysops-p3-1-q781"], "statement": "Automated Amazon RDS snapshots cannot be shared or copied directly to another AWS account.", "status": "supported"}, {"claim_type": "rule", "conditions": ["sharing an automated RDS snapshot with another AWS account"], "confidence": "high", "id": "cl-62493b61b7a9", "source_question_ids": ["awssysops-p3-1-q781"], "statement": "An automated RDS snapshot must first be converted into a manual snapshot, using the create-db-snapshot command, before it can be shared with another account and copied there.", "status": "supported"}, {"claim_type": "exception", "conditions": ["the source snapshot is still an automated snapshot that has not been converted to a manual snapshot"], "confidence": "medium", "id": "cl-feb81ca4dc23", "source_question_ids": ["awssysops-p3-1-q781"], "statement": "The copy-db-snapshot command's cross-account copy capability applies to manual (or already-shared) snapshots, not to automated snapshots directly.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-4a984252a3e5", "source_question_ids": ["awssysops-p3-1-q781"], "statement": "Creating a cross-account RDS read replica with automated backups enabled requires running and paying for an additional continuously-on database instance, making it less cost-effective than a periodic snapshot copy.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-5518f22ec54e", "source_question_ids": ["awssysops-p3-1-q781"], "statement": "Using AWS DMS to replicate data to a second live RDS instance in another account requires running and paying for an additional continuously-on database instance, making it less cost-effective than a periodic snapshot copy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-a11479b3b188", "source_question_ids": ["awssysops-p3-1-q816"], "statement": "A storage failure on the primary Amazon RDS database instance is a documented trigger for automatic Multi-AZ failover.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "medium", "id": "cl-7942b4e12654", "source_question_ids": ["awssysops-p3-1-q816"], "statement": "A change to the DB instance's server or instance type is a documented trigger for automatic Multi-AZ failover, per the AWS RDS FAQ.", "status": "conflicted"}, {"claim_type": "exception", "conditions": ["long-running queries", "deadlocks", "database corruption errors"], "confidence": "medium", "id": "cl-5fbfc8f16102", "source_question_ids": ["awssysops-p3-1-q816"], "statement": "AWS RDS Multi-AZ deployments do not fail over automatically in response to database operations such as long-running queries, deadlocks, or database corruption errors, per the AWS RDS FAQ.", "status": "conflicted"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-528b288839e7", "source_question_ids": ["awssysops-p3-1-q816"], "statement": "Read contention on a database is a performance/locking condition, not a documented Multi-AZ automatic-failover trigger.", "status": "supported"}, {"claim_type": "distractor", "conditions": [], "confidence": "high", "id": "cl-1a5ca635ddbd", "source_question_ids": ["awssysops-p3-1-q816"], "statement": "Write contention on a database is a performance/locking condition, not a documented Multi-AZ automatic-failover trigger.", "status": "supported"}, {"claim_type": "fact", "confidence": "high", "id": "cl-036c4f066762", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "Amazon SQS is reached over its public API endpoint, so a Lambda function running in a VPC with no internet access needs an SQS VPC interface endpoint to reach a queue at all.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-eabfc6c47e91", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "An RDS instance's security group must explicitly allow inbound connections from the Lambda function's security group or elastic network interface, or writes from Lambda to RDS will silently fail.", "status": "conflicted"}, {"claim_type": "fact", "confidence": "high", "id": "cl-59ac86f401fe", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "When a Lambda function and an RDS instance are located in the same VPC, no VPC endpoint is needed for the RDS traffic between them.", "status": "supported"}, {"claim_type": "distractor", "confidence": "high", "id": "cl-f34aafa5d9c0", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A NAT gateway's presence or absence has no bearing on intra-VPC connectivity between a Lambda function and an RDS instance in the same VPC.", "status": "conflicted"}, {"claim_type": "distractor", "confidence": "medium", "id": "cl-b273a9a19c4b", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "A missing internet gateway on a Lambda function's subnet has no bearing on data reaching RDS when the Lambda-to-RDS workflow occurs entirely within the VPC and requires no outbound internet access.", "status": "conflicted"}, {"claim_type": "rule", "confidence": "high", "id": "cl-0c850204c75d", "source_question_ids": ["awssysops-p3-1-q840"], "statement": "When a question's community vote credibly and substantially contradicts or splits from the given boxed answer, the question is flagged as disputed for triage while the boxed answer is nonetheless retained per the ingestion policy.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-6431bf9553cd", "source_question_ids": ["awssysops-p3-1-q903"], "statement": "Amazon RDS abstracts away direct volume management, so there is no user-facing operation to copy the data volumes of an RDS instance the way one would copy raw EBS volumes.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-9f7e281823fd", "source_question_ids": ["awssysops-p3-1-q903"], "statement": "An existing unencrypted Amazon RDS instance cannot be encrypted in place.", "status": "supported"}, {"claim_type": "rule", "conditions": ["encrypting an existing unencrypted RDS instance"], "confidence": "medium", "id": "cl-25bcd09edee2", "source_question_ids": ["awssysops-p3-1-q903"], "statement": "The documented method to encrypt an existing unencrypted RDS instance is to take a snapshot of it, create an encrypted copy of that snapshot using a KMS key, and restore a new instance from the encrypted snapshot copy.", "status": "conflicted"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-60619375fc51", "source_question_ids": ["awssysops-p3-1-q903"], "statement": "An RDS read replica inherits the encryption status of its source instance and cannot itself be selectively encrypted.", "status": "supported"}, {"claim_type": "fact", "conditions": [], "confidence": "high", "id": "cl-12900d9c0cb0", "source_question_ids": ["awssysops-p3-1-q903"], "statement": "The modify-db-instance command cannot add encryption to an already-existing, unencrypted RDS instance, because encryption can only be set at creation or restore time, not toggled on afterward.", "status": "supported"}], "mentalModel": {"id": "aws-sysops-service-rds--m-1", "title": "RDS keeps three kinds of copies of your data, and each one fixes a different problem", "purpose": "Most RDS questions come down to one choice: which RDS feature makes the right copy of the data for the problem in front of you? The options are surviving an outage, handling more reads, or undoing a mistake. Getting this mapping right answers most of the high-availability, scaling, and recovery questions in this slice.", "mechanism": "RDS is a managed service. You get a database endpoint, not a server: there is no SSH, no OS access, and no EBS volume you can attach or snapshot. AWS patches the engine during the instance's maintenance window. Because you can't touch the host, everything you do to protect or scale the database goes through one of three copy mechanisms that RDS builds for you.\n\n(1) Multi-AZ keeps a synchronous standby in a second AZ in the same region. The standby already exists and is running before anything goes wrong, and it serves no traffic. If the primary or its AZ fails (instance failure, storage failure, AZ outage, patching, instance-class change, or reboot-with-failover), RDS repoints the endpoint's DNS CNAME to the standby. This happens automatically. The app keeps the same hostname and only has to reconnect. Because the copy is synchronous, it can add write latency, and it copies every mistake immediately.\n\n(2) A read replica is a separate database that copies the primary asynchronously and serves read-only queries. It takes reads off the primary, such as reporting or analytics jobs and read-heavy traffic spikes. It does not fail over automatically, and it also copies every mistake.\n\n(3) Automated backups take a daily snapshot and also back up transaction logs continuously. That lets you do point-in-time recovery to almost any moment inside the retention window (1 day by default, up to 35 days), often to within about 5 minutes of the mistake. Manual snapshots only capture the moment they were taken.\n\nSo: live copies (Multi-AZ, replicas) carry every change forward, including a dropped table or corruption. Only a copy fixed at an earlier point in time (point-in-time recovery or a snapshot) can undo a logical mistake.", "predict_prompt": "Someone drops a production table by accident. The RDS instance is Multi-AZ, has two read replicas, and keeps automated backups for 7 days. Which copy lets you get the table back, and why are the other two useless here?", "invariants": ["A Multi-AZ standby never serves reads. For read scaling, use read replicas or a cache.", "Multi-AZ failover is automatic and works through DNS. The endpoint hostname stays the same, and no IP address is moved.", "Synchronous and asynchronous copies both carry logical mistakes and corruption forward. Only point-in-time recovery or a snapshot taken before the mistake can recover from them.", "The Multi-AZ standby is in the same region, so it gives no protection against a region-wide outage.", "You get no OS, SSH, or EBS-volume access to RDS. Backup, encryption, and patching all go through RDS features."], "limits": ["RDS for MySQL can't scale writes horizontally. Read replicas only help with reads. A CPU-bound or write-heavy instance needs a larger instance class.", "You can't turn on encryption at rest for an existing instance. Take a snapshot, make an encrypted copy of it, and restore from that copy. Replicas and standbys inherit the source's encryption setting.", "You can't share automated snapshots across accounts. Copy one to a manual snapshot first. For an encrypted snapshot, the target account also needs access in the KMS key policy.", "Multi-AZ does not fail over for database-level problems such as long-running queries, deadlocks, or read/write contention."], "cues": ["'automatic failover', 'AZ outage', or 'primary unresponsive' points to Multi-AZ.", "'offload reporting or analytics', 'read-heavy', or 'reads hurting the primary' points to a read replica (or ElastiCache for repeat reads).", "'dropped table', 'corruption found days later', or 'restore to 5 minutes before' points to automated backups with point-in-time recovery.", "'DNS record' or 'CNAME' in a failover question points to how Multi-AZ fails over. IP-reassignment answers are distractors."], "claim_ids": ["cl-5b3aa5da8e2c", "cl-cbb0150c4e7f", "cl-99b86df2d309", "cl-a3ed621071d0", "cl-b68b0709215a", "cl-b25f6d83421f", "cl-c0bd9d7fa8ed", "cl-a11479b3b188", "cl-3138383b806a", "cl-422bbae16846", "cl-79f4620f1978", "cl-234453d5bad4", "cl-14abe5b82c2f", "cl-1b6f76a42065", "cl-6280ce70cdbf", "cl-dc0236c1db20", "cl-f78cd916c0de", "cl-42831a96fc0d", "cl-ae1b8ae9fb7e", "cl-d62160b685b9", "cl-d03357538127", "cl-7adea0f8aff0", "cl-4f88c255be37", "cl-e8c14270e271", "cl-5d9b80b44cc4", "cl-539dbad1d1cc", "cl-8cdcf9f2e8e0", "cl-9f7e281823fd", "cl-c905f9112db5", "cl-60619375fc51", "cl-ce9dd33f363b", "cl-62493b61b7a9", "cl-3c515463e7fe", "cl-f7083d3c8ad1", "cl-549335f435b5", "cl-570fee310120", "cl-4d612d8478c3", "cl-528b288839e7", "cl-1a5ca635ddbd"]}, "contrastSet": {"id": "aws-sysops-service-rds--cs-1", "subjects": ["Multi-AZ", "Read replica", "Automated backups (point-in-time recovery)"], "dimensions": ["Problem it solves", "Replication timing", "Serves read traffic", "Failover", "Protects against logical mistakes or corruption"], "shared_traits": ["All three are built-in RDS features. None needs OS access or scripts.", "Each one keeps a copy of the primary's data somewhere other than the primary instance."], "matrix": {"Problem it solves": {"Multi-AZ": "Infrastructure or AZ failure (availability)", "Read replica": "Read load on the primary (read scaling)", "Automated backups (point-in-time recovery)": "Data loss or logical mistakes (recovery)"}, "Replication timing": {"Multi-AZ": "Synchronous, to a standby in another AZ", "Read replica": "Asynchronous", "Automated backups (point-in-time recovery)": "Daily snapshot plus continuous transaction-log backup, kept up to 35 days"}, "Serves read traffic": {"Multi-AZ": "No. The standby is idle", "Read replica": "Yes, read-only queries", "Automated backups (point-in-time recovery)": "No. Backups run no queries"}, "Failover": {"Multi-AZ": "Automatic DNS CNAME flip, same endpoint", "Read replica": "No automatic failover", "Automated backups (point-in-time recovery)": "None. Restoring a new instance is manual and means downtime"}, "Protects against logical mistakes or corruption": {"Multi-AZ": "No. The mistake is copied to the standby right away", "Read replica": "No. The mistake is copied to the replica", "Automated backups (point-in-time recovery)": "Yes. Restore to a point before the mistake"}}, "decision_rule": "Ask what the problem is. If the primary or its AZ is failing, pick Multi-AZ. If read load on a healthy primary is the issue, pick a read replica. If the data itself is wrong because of a mistake or corruption, pick point-in-time recovery from automated backups. The problem type decides the answer. Wording like 'second copy' or 'replica' doesn't.", "boundary_flip": "Take a scenario where 'the primary must keep running with no manual steps if its AZ fails.' The answer is Multi-AZ. Change it to 'a developer dropped a table 20 minutes ago.' Now the answer is point-in-time recovery, because the Multi-AZ standby already holds the drop. Change it again to 'a nightly reporting job slows the primary.' Now the answer is a read replica, because the Multi-AZ standby can't serve reads.", "strongest_distractor_failure": "Multi-AZ is the strongest distractor in read-scaling and recovery questions because it sounds like 'an extra copy of the database.' But its standby serves no reads and copies every mistake synchronously, so it can't take load off the primary or undo a dropped table. In the other direction, read replicas look like a failover target, but they are asynchronous and don't fail over automatically.", "exceptions": ["If the instance's CPU is at 100% from a write-heavy or general workload, neither a read replica nor Multi-AZ helps. Scale up to a larger instance class.", "Multi-AZ doesn't protect against a region-wide outage, because the standby is in the same region.", "For Aurora, Aurora Replicas behind the Reader Endpoint offload and load-balance reads, and Aurora has multi-AZ durability built in."], "claim_ids": ["cl-5b3aa5da8e2c", "cl-cbb0150c4e7f", "cl-a3ed621071d0", "cl-b25f6d83421f", "cl-c0bd9d7fa8ed", "cl-3138383b806a", "cl-79f4620f1978", "cl-234453d5bad4", "cl-86c20012b2da", "cl-14abe5b82c2f", "cl-1b6f76a42065", "cl-6280ce70cdbf", "cl-dc0236c1db20", "cl-f78cd916c0de", "cl-fb4fecbfe056", "cl-42831a96fc0d", "cl-d03357538127", "cl-0e30b32d12fa", "cl-00e6aac8c274", "cl-7adea0f8aff0", "cl-4f88c255be37", "cl-e8c14270e271", "cl-a9a4687a7bc9", "cl-8cdcf9f2e8e0", "cl-539dbad1d1cc", "cl-ba4ce90dde61", "cl-30a7bc0355b9", "cl-b8998638a207"]}, "scenarioFamily": {"id": "aws-sysops-service-rds--sf-1", "canonical": {"prompt": "An e-commerce company runs its orders database on Amazon RDS for MySQL. The instance is Multi-AZ and has two read replicas for reporting. Automated backups are enabled with a 7-day retention period. At 2:15pm a developer accidentally runs `DROP TABLE orders` against the primary instance. It is now 2:35pm, 20 minutes later. How do you recover the orders table, and why don't the Multi-AZ standby or the read replicas already give you a way back?", "expected_answer": ["Restore the database to a point-in-time just before 2:15pm using RDS automated backups' point-in-time recovery (which replays the continuously backed-up transaction logs), then recover the orders table data from that restored instance."], "reasoning": "RDS keeps three kinds of copies, each solving a different problem. The Multi-AZ standby is a synchronous replica built for infrastructure failure: it received and applied the DROP TABLE statement at essentially the same instant as the primary, so it now has the exact same missing table. The two read replicas are asynchronous copies built for read scaling, but they too mirror every data-modifying statement from the primary, including the drop. Neither live copy can be rolled back to before the mistake. Automated backups are the one mechanism built for exactly this: they back up transaction logs continuously in addition to the daily snapshot, so you can restore to a point in time within the retention window, often within about 5 minutes of the mistake. Since the retention is 7 days and the mistake happened 20 minutes ago, restoring to 2:14pm recovers the table as it existed right before the drop.", "distractor_analysis": "Multi-AZ is the strongest-looking distractor because it sounds like an 'extra copy of the database you could fail over to,' but failing over just swaps in a standby that already executed the same DROP TABLE synchronously. Read replicas look similarly promising since they are a separate database, but their asynchronous replication still carries the mistake forward within moments, so they're no better than the primary itself for this kind of logical error.", "claim_ids": ["cl-42831a96fc0d", "cl-7adea0f8aff0", "cl-4f88c255be37"], "difficulty": "medium", "importance": "high"}, "variants": [{"variant_type": "boundary", "changed_condition": "The retention period was never explicitly customized (so it defaults to 1 day), and the DROP TABLE is only discovered 3 days later instead of 20 minutes later.", "prompt": "Same company, same RDS MySQL instance with Multi-AZ and two read replicas, but automated backup retention was never explicitly configured. A developer runs `DROP TABLE orders` on the primary. The team doesn't notice until 3 days later. Can you still recover the table using RDS automated backups' point-in-time recovery, and why or why not?", "expected_answer": ["No. With retention left at its default of 1 day, the transaction-log backups needed to restore to a point before the drop have already aged out by the time the mistake is discovered 3 days later, so point-in-time recovery can no longer reach back to before the DROP TABLE."], "reasoning": "This flips the canonical answer because the boundary condition itself changed: automated backups and point-in-time recovery only work within the configured retention window, and here that window defaults to just 1 day. A mistake discovered after 3 days falls outside any retention window up to 1 day, so the continuously backed-up transaction logs covering the moment of the drop no longer exist. The underlying mechanism (PITR via automated backups) is unchanged, but the specific retention boundary it depends on has been crossed, so the previously-correct answer is no longer available.", "distractor_analysis": "It's tempting to answer 'restore to just before the drop' exactly as in the canonical scenario, since nothing about Multi-AZ or the read replicas changed. The boundary that actually matters here is the retention window, not the recovery mechanism itself.", "claim_ids": ["cl-d62160b685b9", "cl-42831a96fc0d"], "difficulty": "medium", "importance": "high"}, {"variant_type": "irrelevant-detail", "changed_condition": "CloudWatch alarms on CPU utilization are configured on the primary instance, and the on-call team is notified of the incident via an SNS topic subscribed to email and SMS endpoints — neither of which affects how the table is actually recovered.", "prompt": "Same scenario as the canonical case: RDS MySQL, Multi-AZ, two read replicas, 7-day automated backup retention, and a `DROP TABLE orders` at 2:15pm discovered at 2:35pm. The instance also has CloudWatch alarms on CPUUtilization, and the on-call team gets paged through an SNS topic with email and SMS subscribers as soon as the alarm fires. How do you recover the orders table?", "expected_answer": ["Restore the database to a point-in-time just before 2:15pm using RDS automated backups' point-in-time recovery (which replays the continuously backed-up transaction logs), then recover the orders table data from that restored instance."], "reasoning": "The CloudWatch alarm and SNS paging only affect how the team learns about the problem, not how the data is recovered. Nothing about the CPU-utilization monitoring or the notification transport changes which copy of the data can roll back the mistake. The same three-copy reasoning applies: Multi-AZ and the read replicas already mirrored the drop, so only point-in-time recovery from automated backups can restore the table to its state just before 2:15pm.", "distractor_analysis": "The CloudWatch/SNS detail can tempt a learner into reasoning about alarms or notification routing as part of the fix, but monitoring and alerting are orthogonal to the actual recovery mechanism.", "claim_ids": ["cl-42831a96fc0d", "cl-7adea0f8aff0", "cl-4f88c255be37"], "difficulty": "easy", "importance": "medium"}, {"variant_type": "adversarial-distractor", "changed_condition": "An engineer on the call proposes manually triggering a Multi-AZ failover to the standby, believing the standby still holds the orders table because it is a 'separate copy of the database.'", "prompt": "Same scenario as the canonical case: RDS MySQL, Multi-AZ, two read replicas, 7-day automated backup retention, `DROP TABLE orders` at 2:15pm, discovered at 2:35pm. An engineer suggests manually triggering a Multi-AZ failover to the standby instance, arguing that since it's a separate copy of the database, it should still have the orders table. Is this a valid way to recover the table? What should be done instead?", "expected_answer": ["Restore the database to a point-in-time just before 2:15pm using RDS automated backups' point-in-time recovery (which replays the continuously backed-up transaction logs), then recover the orders table data from that restored instance."], "reasoning": "Triggering a Multi-AZ failover is not a valid fix here: the standby replicates synchronously, so it received and applied the exact same DROP TABLE statement as the primary at essentially the same moment. Failing over just makes the already-dropped-table standby the new primary — it does nothing to bring the table back. The engineer's instinct that 'it's a separate copy' is true for infrastructure failures but false for logical mistakes, because Multi-AZ protects against hardware/AZ failure, not application-level errors; the standby also receives the mistake. The correct recovery path is still point-in-time recovery from automated backups.", "distractor_analysis": "The 'just fail over to the standby' suggestion is the canonical adversarial trap: it sounds reasonable because Multi-AZ genuinely does give you another running copy of the database, but that copy is kept in lockstep with every write, including destructive ones, so it offers no protection against a dropped table.", "claim_ids": ["cl-7adea0f8aff0", "cl-5b3aa5da8e2c", "cl-42831a96fc0d"], "difficulty": "medium", "importance": "high"}, {"variant_type": "transfer", "changed_condition": "The engine is RDS for PostgreSQL instead of RDS for MySQL, and the mistake is a bad UPDATE statement that overwrote prices across the orders table (not a DROP TABLE), discovered 20 minutes later.", "prompt": "A different team runs their orders database on Amazon RDS for PostgreSQL instead of MySQL, also Multi-AZ with read replicas and 7-day automated backup retention. Instead of a dropped table, a bad `UPDATE orders SET price = 0` statement overwrites prices across the whole table at 2:15pm, and it's caught at 2:35pm. Does the same recovery approach apply, and why?", "expected_answer": ["Restore the database to a point-in-time just before 2:15pm using RDS automated backups' point-in-time recovery (which replays the continuously backed-up transaction logs), then recover the orders table data from that restored instance."], "reasoning": "The same mental model transfers directly: RDS Multi-AZ for Oracle, PostgreSQL, and MySQL instances all use the same AWS synchronous-replica technology, so the mechanism and its blind spot for application-level mistakes is identical regardless of engine. A bad UPDATE is still a logical, application-level mistake rather than an infrastructure failure, so the Multi-AZ standby and any read replicas still mirror it immediately and can't help. Only point-in-time recovery from automated backups, which is engine-agnostic within RDS, can roll the data back to before 2:15pm. The specific SQL statement (DROP TABLE vs. UPDATE) and the engine (MySQL vs. PostgreSQL) don't change which RDS feature is the right tool.", "distractor_analysis": "A learner might assume PostgreSQL's Multi-AZ setup behaves differently or that an UPDATE (versus a DROP) is somehow recoverable from a live replica because 'the data still exists, just wrong' — but a live, continuously-replicating copy reflects whatever the primary's data is, right or wrong, so it offers no rollback either way.", "claim_ids": ["cl-33ff22a46b4b", "cl-7adea0f8aff0", "cl-4f88c255be37", "cl-42831a96fc0d"], "difficulty": "medium", "importance": "medium"}]}, "issues": [{"type": "contradiction", "severity": "medium", "description": "Source questions disagree on whether a DB instance-class/server-type change triggers Multi-AZ failover. cl-c0bd9d7fa8ed (q175) lists it as supported, but cl-7942b4e12654 (q816) makes the same claim and is marked conflicted. The mental model mechanism lists 'instance-class change' as a failover trigger and cites only the supported claim, so the dispute is hidden.", "related_entity_ids": ["cl-c0bd9d7fa8ed", "cl-7942b4e12654", "aws-sysops-service-rds--m-1", "aws-sysops-service-rds--cs-1"]}, {"type": "unsupported-generation", "severity": "medium", "description": "The mental model limit 'Multi-AZ does not fail over for database-level problems such as long-running queries, deadlocks, or read/write contention' states long-running queries and deadlocks as settled. The only claim behind those two triggers, cl-5fbfc8f16102 (q816), is marked conflicted and is not cited by m-1. The cited claims (cl-528b288839e7, cl-1a5ca635ddbd) only cover read and write contention.", "related_entity_ids": ["aws-sysops-service-rds--m-1", "cl-5fbfc8f16102", "cl-528b288839e7", "cl-1a5ca635ddbd"]}, {"type": "contradiction", "severity": "medium", "description": "Source questions disagree on whether a Multi-AZ standby can serve reads. cl-be3e4343aa0d (q113: a single active primary with a standby that cannot serve reads) and cl-67b2c94ab257 are marked conflicted. cl-79f4620f1978, cl-234453d5bad4 and cl-86c20012b2da state the same thing as supported. The mental model invariant ('A Multi-AZ standby never serves reads') and the contrast-set cell ('No. The standby is idle') present it as absolute without noting the dispute. There is also a stale risk: newer Multi-AZ DB cluster deployments have readable standby instances, so 'never' only holds for the classic Multi-AZ DB instance deployment.", "related_entity_ids": ["cl-be3e4343aa0d", "cl-67b2c94ab257", "cl-79f4620f1978", "cl-234453d5bad4", "cl-86c20012b2da", "aws-sysops-service-rds--m-1", "aws-sysops-service-rds--cs-1"]}, {"type": "contradiction", "severity": "medium", "description": "Source questions give conflicting remedies for a read-heavy, CPU-bound RDS instance. cl-8cdcf9f2e8e0 (q748) says moving to a larger instance class fixes a CPU bottleneck 'regardless of whether the workload is read-heavy or write-heavy', and cl-539dbad1d1cc dismisses read replicas. cl-68fa0b18ec39 (q529) and cl-1d6e1158823f (q314) say scaling up does not raise read throughput past one instance's ceiling and only delays contention, and they favor read replicas instead. The synthesis exception assigns scale-up only to 'write-heavy or general' workloads, which quietly settles a conflict the claims leave open.", "related_entity_ids": ["cl-8cdcf9f2e8e0", "cl-539dbad1d1cc", "cl-68fa0b18ec39", "cl-1d6e1158823f", "cl-14abe5b82c2f", "aws-sysops-service-rds--cs-1", "aws-sysops-service-rds--m-1"]}, {"type": "contradiction", "severity": "low", "description": "The snapshot -> encrypted copy -> restore method for encrypting an existing RDS instance is marked supported in cl-c905f9112db5 (q654) but conflicted in cl-25bcd09edee2 (q903). The mental model limit presents it as settled and cites only the supported claim.", "related_entity_ids": ["cl-c905f9112db5", "cl-25bcd09edee2", "aws-sysops-service-rds--m-1"]}, {"type": "ambiguity", "severity": "medium", "description": "cl-d62160b685b9 rests on one source (medium confidence) and says the default automated-backup retention is 1 day. The mental model repeats this as the general default ('1 day by default'). The default actually depends on how the instance is created: 1 day through the CLI/API, but 7 days through the console. Stating it without that condition can mislead.", "related_entity_ids": ["cl-d62160b685b9", "aws-sysops-service-rds--m-1"]}, {"type": "stale-risk", "severity": "medium", "description": "cl-5907b7a95499 says Aurora has no CPU-utilization-triggered Auto Scaling for adding nodes. Aurora Auto Scaling has been able to add or remove Aurora Replicas based on average CPU utilization or connections for years, so this distractor claim is likely outdated or wrong for current exams.", "related_entity_ids": ["cl-5907b7a95499"]}, {"type": "stale-risk", "severity": "low", "description": "cl-d40c06dc8414 says no built-in AWS mechanism detects and stops idle or underutilized EC2 instances without custom scripting. CloudWatch alarm EC2 stop actions on low CPU utilization exist, so this claim is stale or overstated. A related DLM-timing stale risk is already flagged as conflicted in cl-a67d8153019a and cl-f5149488c779.", "related_entity_ids": ["cl-d40c06dc8414", "cl-a67d8153019a", "cl-f5149488c779"]}, {"type": "stale-risk", "severity": "low", "description": "cl-3f99f3f464fc says RDS SQL Server Multi-AZ uses native SQL Server Mirroring. Current RDS SQL Server Multi-AZ also uses Always On Availability Groups, depending on version and edition, so stating Mirroring alone is dated.", "related_entity_ids": ["cl-3f99f3f464fc"]}, {"type": "quality", "severity": "low", "description": "cl-0c850204c75d is a statement about the ingestion pipeline's dispute-flagging policy, not an AWS/RDS domain claim. It does not belong in the slice's claim set.", "related_entity_ids": ["cl-0c850204c75d"]}], "sourceQuestionCount": 61}], "sources": {"kind": "locked", "file": "aws-sysops-service-rds-vov3.sources.enc.js"}}</script>
+<script>
+(function () {
+  'use strict';
+
+  const BUNDLE = JSON.parse(document.getElementById('ekd-data').textContent);
+  var CURRENT = null;
+  var STORAGE_KEY = null;
+
+  // ---------- data-source seam. The slice bodies (mental model, claims,
+  // etc.) ride inline in BUNDLE; only sourceQuestions live in sibling files,
+  // loaded on demand via injected <script> tags (fetch/XHR can't read a
+  // sibling under file:// -- each file:// resource is its own origin). ----------
+  function getManifest() {
+    return Promise.resolve(BUNDLE.slices.map(function (s) {
+      return { id: s.contentSet.id, facet: s.contentSet.facet, questionCount: s.sourceQuestionCount || 0 };
+    }));
+  }
+  function loadSlice(sliceId) {
+    var found = BUNDLE.slices.filter(function (s) { return s.contentSet.id === sliceId; })[0];
+    return found ? Promise.resolve(found) : Promise.reject(new Error('unknown slice: ' + sliceId));
+  }
+
+  const DIAGNOSIS_CATEGORIES = [
+    { key: 'recall_gap', label: 'Recall gap', hint: 'Could not retrieve the relevant fact or rule.' },
+    { key: 'model_gap', label: 'Model gap', hint: 'Did not understand the underlying mechanism.' },
+    { key: 'boundary_confusion', label: 'Boundary confusion', hint: 'Knew both alternatives but chose on the wrong dimension.' },
+    { key: 'exception_default_confusion', label: 'Exception/default confusion', hint: 'Applied a general rule where an exception controlled.' },
+    { key: 'cue_miss', label: 'Cue miss', hint: 'Overlooked a decisive phrase or condition.' },
+    { key: 'distractor_attraction', label: 'Distractor attraction', hint: 'Used an appealing but irrelevant or false rule.' },
+    { key: 'question_interpretation', label: 'Question interpretation', hint: 'Misread the task, qualifier, or number of required answers.' },
+    { key: 'careless_execution', label: 'Careless execution', hint: 'Knew the answer but selected or recorded it incorrectly.' },
+    { key: 'source_content_issue', label: 'Source/content issue', hint: 'The item appears ambiguous, contradictory, or unsupported.' },
+  ];
+
+  // ---------- safe HTML templating: `safe` escapes every interpolated
+  // value by default; wrap an already-built HTML string in raw(...) to
+  // splice it in verbatim. Never interpolate untrusted text without this. ----------
+  function escapeHtml(value) {
+    return String(value === undefined || value === null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function raw(html) { return { __raw: String(html === undefined || html === null ? '' : html) }; }
+  function safe(strings) {
+    var values = Array.prototype.slice.call(arguments, 1);
+    return strings.reduce(function (acc, str, i) {
+      var v = values[i];
+      var piece = i < values.length ? (v && typeof v === 'object' && '__raw' in v ? v.__raw : escapeHtml(v)) : '';
+      return acc + str + piece;
+    }, '');
+  }
+  function fromHTML(htmlString) {
+    var tpl = document.createElement('template');
+    tpl.innerHTML = htmlString;
+    return tpl.content;
+  }
+  function listBlock(title, items) {
+    if (!items || !items.length) return '';
+    return safe`<h3>${title}</h3><ul>${raw(items.map(function (i) { return safe`<li>${i}</li>`; }).join(''))}</ul>`;
+  }
+  function claimListItemHtml(c) {
+    var status = c.status || 'status unknown';
+    return safe`<li><span class="badge status-${status.replace(/\s+/g, '-')}">${status.replace(/-/g, ' ')}</span><span>${c.statement}</span>${raw(markControlHtml('claim:' + c.id))}</li>`;
+  }
+  function citationsHtml(claimIds) {
+    var claims = (claimIds || []).map(function (id) {
+      return (CURRENT.claims || []).find(function (c) { return c.id === id; });
+    }).filter(Boolean);
+    if (!claims.length) return safe`<p class="muted">No supporting claims linked.</p>`;
+    return safe`
+      <details class="claims">
+        <summary>Supporting claims <span class="tally">${claims.length}</span></summary>
+        <ul class="citations">${raw(claims.map(claimListItemHtml).join(''))}</ul>
+      </details>`;
+  }
+  function truncate(text, max) {
+    text = text || '';
+    return text.length > max ? text.slice(0, max).trimEnd() + '…' : text;
+  }
+
+  // ---------- learner-state persistence ----------
+  var storageAvailable = true;
+
+  function emptyState() {
+    return { schemaVersion: 1, attempts: [], learnProgress: {}, marks: {}, updatedAt: null };
+  }
+
+  function loadState() {
+    try {
+      var rawText = localStorage.getItem(STORAGE_KEY);
+      if (!rawText) return emptyState();
+      var parsed = JSON.parse(rawText);
+      return {
+        schemaVersion: 1,
+        attempts: Array.isArray(parsed.attempts) ? parsed.attempts : [],
+        learnProgress: parsed.learnProgress && typeof parsed.learnProgress === 'object' ? parsed.learnProgress : {},
+        marks: parsed.marks && typeof parsed.marks === 'object' ? parsed.marks : {},
+        updatedAt: parsed.updatedAt || null,
+      };
+    } catch (err) {
+      storageAvailable = false;
+      return emptyState();
+    }
+  }
+
+  var STATE = emptyState();
+
+  // ---------- confidence marks: the learner's own "flag this for review"
+  // priority on a claim or source question -- distinct from a claim's
+  // generated `confidence` field and Practice's self-reported `confidence`
+  // radio, so this one is named `marks` to avoid colliding with either. ----------
+  var MARK_LEVELS = ['low', 'medium', 'high'];
+
+  function markControlHtml(key) {
+    var active = STATE.marks[key];
+    return safe`<span class="mark-control" data-mark-key="${key}">${raw(MARK_LEVELS.map(function (level) {
+      var isActive = active === level;
+      return safe`<button type="button" class="mark-dot mark-${level}${raw(isActive ? ' is-active' : '')}" data-mark-value="${level}" aria-pressed="${isActive ? 'true' : 'false'}" aria-label="Mark ${level} priority"></button>`;
+    }).join(''))}</span>`;
+  }
+
+  function handleMarkClick(event) {
+    var dot = event.target.closest('.mark-dot');
+    if (!dot) return;
+    var key = dot.closest('.mark-control').getAttribute('data-mark-key');
+    var value = dot.getAttribute('data-mark-value');
+    if (STATE.marks[key] === value) delete STATE.marks[key];
+    else STATE.marks[key] = value;
+    saveState();
+    navigate();
+  }
+
+  function saveState() {
+    STATE.updatedAt = new Date().toISOString();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(STATE));
+      storageAvailable = true;
+    } catch (err) {
+      storageAvailable = false;
+    }
+    renderStorageWarning();
+  }
+
+  function renderStorageWarning() {
+    var el = document.getElementById('storage-warning');
+    if (storageAvailable) {
+      el.classList.add('hidden');
+      el.textContent = '';
+    } else {
+      el.classList.remove('hidden');
+      el.textContent = 'Local storage is unavailable in this browser session (private or incognito mode?). '
+        + 'Progress will not be saved after this tab closes, so export it before leaving.';
+    }
+  }
+
+  // ---------- export / import ----------
+  function exportProgress() {
+    var payload = {
+      format: 'ekd-learner-state',
+      contentSetId: CURRENT.contentSet.id,
+      schemaVersion: CURRENT.contentSet.schemaVersion,
+      exportedAt: new Date().toISOString(),
+      integrity: { attemptCount: STATE.attempts.length },
+      learnerState: STATE,
+    };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-progress-' + Date.now() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  // ---------- one-way revision export: groups everything currently marked
+  // by level (low, then medium, then high) into a Markdown file. Never
+  // re-imported, unlike exportProgress's JSON. ----------
+  function exportRevisionNotes() {
+    var questions = (SOURCES.status === 'ready' ? SOURCES.bySlice : {})[CURRENT.contentSet.id] || [];
+    var claimsById = {};
+    (CURRENT.claims || []).forEach(function (c) { claimsById[c.id] = c; });
+
+    var byLevel = { low: [], medium: [], high: [] };
+    Object.keys(STATE.marks).forEach(function (key) {
+      var level = STATE.marks[key];
+      if (byLevel[level]) byLevel[level].push(key);
+    });
+
+    var lines = ['# Revision notes: ' + CURRENT.contentSet.facet.value, ''];
+    MARK_LEVELS.forEach(function (level) {
+      var keys = byLevel[level];
+      if (!keys.length) return;
+      lines.push('## ' + level.charAt(0).toUpperCase() + level.slice(1) + ' priority', '');
+      keys.forEach(function (key) {
+        var sepIndex = key.indexOf(':');
+        var kind = key.slice(0, sepIndex);
+        var id = key.slice(sepIndex + 1);
+        if (kind === 'claim') {
+          var claim = claimsById[id];
+          lines.push('- ' + (claim ? claim.statement : '(claim ' + id + ' no longer available)'), '');
+        } else if (kind === 'question') {
+          var q = questions.find(function (item) { return item.id === id; });
+          if (!q) {
+            lines.push('### ' + id, '', '(question details unavailable -- open Explore Sources to load question data)', '');
+            return;
+          }
+          lines.push('### ' + q.id, '', q.stem || '', '');
+          (q.choices || []).forEach(function (c) {
+            var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+            lines.push('- ' + c.letter + '. ' + c.text + (isCorrect ? ' (correct)' : ''));
+          });
+          lines.push('', '**Correct answer:** ' + (q.correct_answer || []).join(', '), '', '**Explanation:** ' + (q.explanation || ''), '');
+        }
+      });
+    });
+
+    var blob = new Blob([lines.join('\n')], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = CURRENT.contentSet.id + '-revision-' + Date.now() + '.md';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function isPlainObject(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+
+  function validateImportPayload(payload) {
+    var errors = [];
+    if (!isPlainObject(payload)) { errors.push('not a JSON object'); return { ok: false, errors: errors }; }
+    if (payload.format !== 'ekd-learner-state') errors.push('unrecognized export format');
+    if (payload.contentSetId !== CURRENT.contentSet.id) errors.push('content set mismatch (file is for ' + payload.contentSetId + ')');
+    if (payload.schemaVersion !== CURRENT.contentSet.schemaVersion) errors.push('incompatible schema version');
+    if (!isPlainObject(payload.learnerState)) {
+      errors.push('missing learnerState');
+    } else {
+      if (!Array.isArray(payload.learnerState.attempts)) {
+        errors.push('learnerState.attempts is not an array');
+      } else {
+        for (var i = 0; i < payload.learnerState.attempts.length; i++) {
+          var a = payload.learnerState.attempts[i];
+          if (!isPlainObject(a) || typeof a.id !== 'string' || typeof a.itemId !== 'string') {
+            errors.push('malformed attempt record');
+            break;
+          }
+        }
+      }
+      if (payload.learnerState.learnProgress !== undefined && !isPlainObject(payload.learnerState.learnProgress)) {
+        errors.push('learnerState.learnProgress is not an object');
+      }
+      if (payload.learnerState.marks !== undefined && !isPlainObject(payload.learnerState.marks)) {
+        errors.push('learnerState.marks is not an object');
+      }
+    }
+    return { ok: errors.length === 0, errors: errors };
+  }
+
+  function sanitizeLearnerState(rawState) {
+    var attempts = Array.isArray(rawState.attempts)
+      ? rawState.attempts.filter(function (a) { return isPlainObject(a) && typeof a.id === 'string' && typeof a.itemId === 'string'; })
+      : [];
+    var learnProgress = {};
+    if (isPlainObject(rawState.learnProgress)) {
+      Object.keys(rawState.learnProgress).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.learnProgress[key];
+        if (isPlainObject(v)) {
+          learnProgress[key] = {
+            predicted: !!v.predicted,
+            revealed: !!v.revealed,
+            predictedAnswer: typeof v.predictedAnswer === 'string' ? v.predictedAnswer : '',
+          };
+        }
+      });
+    }
+    var marks = {};
+    if (isPlainObject(rawState.marks)) {
+      Object.keys(rawState.marks).forEach(function (key) {
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
+        var v = rawState.marks[key];
+        if (MARK_LEVELS.indexOf(v) !== -1) marks[key] = v;
+      });
+    }
+    return {
+      schemaVersion: 1,
+      attempts: attempts,
+      learnProgress: learnProgress,
+      marks: marks,
+      updatedAt: typeof rawState.updatedAt === 'string' ? rawState.updatedAt : null,
+    };
+  }
+
+  function importProgress(event) {
+    var file = event.target.files[0];
+    event.target.value = '';
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var parsed;
+      try {
+        parsed = JSON.parse(String(reader.result));
+      } catch (err) {
+        window.alert('Import failed: the file is not valid JSON.');
+        return;
+      }
+      var validation = validateImportPayload(parsed);
+      if (!validation.ok) {
+        window.alert('Import rejected:\n' + validation.errors.join('\n'));
+        return;
+      }
+      var incoming = sanitizeLearnerState(parsed.learnerState);
+      var hasExisting = STATE.attempts.length > 0 || Object.keys(STATE.learnProgress).length > 0;
+      var mode = 'replace';
+      if (hasExisting) {
+        mode = window.confirm(
+          'You have existing local progress (' + STATE.attempts.length + ' attempts).\n\n'
+          + 'Click OK to MERGE with the imported file, or Cancel to REPLACE local progress with the imported file.'
+        ) ? 'merge' : 'replace';
+      }
+      if (mode === 'merge') {
+        var seen = {};
+        STATE.attempts.forEach(function (a) { seen[a.id] = true; });
+        incoming.attempts.forEach(function (a) { if (!seen[a.id]) { STATE.attempts.push(a); seen[a.id] = true; } });
+        Object.keys(incoming.learnProgress).forEach(function (key) { STATE.learnProgress[key] = incoming.learnProgress[key]; });
+        Object.keys(incoming.marks).forEach(function (key) { STATE.marks[key] = incoming.marks[key]; });
+      } else {
+        STATE = incoming;
+      }
+      saveState();
+      navigate();
+      window.alert('Import complete (' + mode + '). ' + incoming.attempts.length + ' attempts read from file.');
+    };
+    reader.readAsText(file);
+  }
+
+  // ---------- Learn ----------
+  function renderLearn() {
+    var model = CURRENT.mentalModel;
+    if (!model) {
+      return fromHTML(safe`<section><h2>Learn</h2><p class="empty">No mental model was generated for this slice yet.</p></section>`);
+    }
+    var progress = STATE.learnProgress[model.id] || {};
+    var predictPrompt = model.predict_prompt || ('Before reading on: in one sentence, what problem does "' + model.title + '" solve?');
+    var html = safe`
+      <section class="learn">
+        <h2>${model.title}</h2>
+        <p class="purpose lead">${model.purpose || ''}</p>
+        <div class="predict-block panel">
+          <label class="field-label" for="predict-input">${progress.revealed ? 'Your prediction' : 'Predict first'}</label>
+          <p class="prompt" id="predict-prompt">${predictPrompt}</p>
+          <textarea id="predict-input" rows="3" aria-describedby="predict-prompt" ${raw(progress.revealed ? 'disabled' : '')}>${progress.predictedAnswer || ''}</textarea>
+          ${raw(progress.revealed ? '' : '<div class="actions"><button id="reveal-model-btn" type="button">Reveal mechanism</button></div>')}
+        </div>
+        <div class="mechanism ${raw(progress.revealed ? '' : 'hidden')}">
+          <h3>Mechanism</h3>
+          <p>${model.mechanism || ''}</p>
+          ${raw(listBlock('Invariants', model.invariants))}
+          ${raw(listBlock('Limits and failure modes', model.limits))}
+          ${raw(listBlock('Observable cues', model.cues))}
+          ${raw(citationsHtml(model.claim_ids))}
+        </div>
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this model &rarr;</a></p>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var revealBtn = section.querySelector('#reveal-model-btn');
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () {
+        var val = section.querySelector('#predict-input').value;
+        STATE.learnProgress[model.id] = { predicted: true, revealed: true, predictedAnswer: val };
+        saveState();
+        navigate();
+      });
+    }
+    return node;
+  }
+
+  // ---------- Compare ----------
+  function renderCompare() {
+    var cs = CURRENT.contrastSet;
+    if (!cs) {
+      return fromHTML(safe`<section><h2>Compare</h2><p class="empty">No contrast set was generated for this slice yet.</p></section>`);
+    }
+    var subjects = cs.subjects || [];
+    var dims = cs.dimensions || [];
+    var matrix = cs.matrix || {};
+    var rows = dims.map(function (d) {
+      var cells = subjects.map(function (s) { return safe`<td>${(matrix[d] || {})[s] || ''}</td>`; }).join('');
+      return safe`<tr><th scope="row">${d}</th>${raw(cells)}</tr>`;
+    }).join('');
+    var headCells = subjects.map(function (s) { return safe`<th scope="col">${s}</th>`; }).join('');
+    var html = safe`
+      <section class="compare">
+        <h2>Compare: ${subjects.join(' vs. ')}</h2>
+        ${raw(listBlock('Shared traits', cs.shared_traits))}
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Comparison table">
+          <table class="contrast-table">
+            <thead><tr><th scope="col">Dimension</th>${raw(headCells)}</tr></thead>
+            <tbody>${raw(rows)}</tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <h3>Decision rule</h3>
+          <p>${cs.decision_rule || ''}</p>
+        </div>
+        <h3>Boundary flip</h3>
+        <p>${cs.boundary_flip || ''}</p>
+        <h3>Why the strongest distractor fails</h3>
+        <p>${cs.strongest_distractor_failure || ''}</p>
+        ${raw(listBlock('Exceptions', cs.exceptions))}
+        ${raw(citationsHtml(cs.claim_ids))}
+        <p class="next-link"><a href="${sliceHref('practice')}">Practice this contrast &rarr;</a></p>
+      </section>`;
+    return fromHTML(html);
+  }
+
+  // ---------- Practice ----------
+  function practiceItems() {
+    var fam = CURRENT.scenarioFamily;
+    if (!fam) return [];
+    var items = [];
+    if (fam.canonical) items.push(Object.assign({}, fam.canonical, { variant_type: fam.canonical.variant_type || 'canonical' }));
+    (fam.variants || []).forEach(function (v) { items.push(v); });
+    return items.map(function (item, i) {
+      return Object.assign({}, item, { id: item.id || (fam.id + '-item-' + i) });
+    });
+  }
+
+  var practiceIndex = 0;
+
+  function renderPractice() {
+    var items = practiceItems();
+    if (!items.length) {
+      return fromHTML(safe`<section><h2>Practice</h2><p class="empty">No scenario family was generated for this slice yet.</p></section>`);
+    }
+    if (practiceIndex >= items.length) {
+      var itemIds = items.map(function (it) { return it.id; });
+      var attempted = STATE.attempts.filter(function (a) { return itemIds.indexOf(a.itemId) !== -1; });
+      var correctCount = attempted.filter(function (a) { return a.correct; }).length;
+      var pendingCount = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; }).length;
+      var diagnoseLink = pendingCount
+        ? safe`<a class="button-link" href="${sliceHref('diagnose')}">Diagnose ${pendingCount} ${pendingCount === 1 ? 'miss' : 'misses'}</a>`
+        : '';
+      var html = safe`
+        <section class="practice">
+          <h2>Practice</h2>
+          <div class="panel summary">
+            <p class="summary-label">Queue complete</p>
+            <p class="score"><strong>${correctCount}</strong> of ${attempted.length} attempts correct</p>
+            <div class="actions">
+              <button id="practice-restart" type="button">Restart queue</button>
+              ${raw(diagnoseLink)}
+            </div>
+          </div>
+        </section>`;
+      var node = fromHTML(html);
+      var section = node.firstElementChild;
+      section.querySelector('#practice-restart').addEventListener('click', function () { practiceIndex = 0; navigate(); });
+      return node;
+    }
+    var item = items[practiceIndex];
+    var isMulti = Array.isArray(item.choices) && item.choices.length > 0;
+    var choicesHtml = isMulti
+      ? safe`<fieldset class="choices"><legend>Your answer</legend>${raw(item.choices.map(function (c) {
+          return safe`<label><input type="checkbox" name="predict-choice" value="${c.letter}"><span><span class="choice-letter">${c.letter}.</span> ${c.text}</span></label>`;
+        }).join(''))}</fieldset>`
+      : safe`<div class="answer-field"><label class="field-label" for="predict-freeform">Your answer</label><textarea id="predict-freeform" rows="4" placeholder="The setting or action you would choose, and why"></textarea></div>`;
+    var metaBadges = [safe`<span class="badge tone-accent">${String(item.variant_type || 'item').replace(/-/g, ' ')}</span>`];
+    if (item.difficulty) metaBadges.push(safe`<span class="badge">Difficulty ${item.difficulty}</span>`);
+    if (item.importance) metaBadges.push(safe`<span class="badge">Importance ${item.importance}</span>`);
+    var changedCondition = item.changed_condition
+      ? safe`<div class="callout changed-condition"><h3>Changed condition</h3><p>${item.changed_condition}</p></div>`
+      : '';
+    var html = safe`
+      <section class="practice">
+        <h2>Practice <span class="step">${practiceIndex + 1} of ${items.length}</span></h2>
+        <div class="item-meta">${raw(metaBadges.join(''))}</div>
+        ${raw(changedCondition)}
+        <p class="prompt">${item.prompt || item.stem || ''}</p>
+        ${raw(choicesHtml)}
+        <fieldset class="confidence">
+          <legend>Confidence <span class="muted">(optional)</span></legend>
+          <div class="segmented">${raw(['low', 'medium', 'high'].map(function (c) { return safe`<label><input type="radio" name="confidence" value="${c}"><span>${c}</span></label>`; }).join(''))}</div>
+        </fieldset>
+        <div class="actions"><button id="reveal-practice-btn" type="button">Reveal answer</button></div>
+        <div class="reveal hidden" id="practice-reveal"></div>
+      </section>`;
+    var node = fromHTML(html);
+    var section = node.firstElementChild;
+    var isLast = practiceIndex + 1 === items.length;
+    section.querySelector('#reveal-practice-btn').addEventListener('click', function () {
+      onPracticeReveal(section, item, isMulti, isLast);
+    });
+    return node;
+  }
+
+  function onPracticeReveal(section, item, isMulti, isLast) {
+    var confidenceInput = section.querySelector('input[name="confidence"]:checked');
+    var confidence = confidenceInput ? confidenceInput.value : null;
+    var predicted, correct;
+    var expected = Array.isArray(item.expected_answer)
+      ? item.expected_answer.slice().sort()
+      : [item.expected_answer].filter(Boolean).sort();
+
+    if (isMulti) {
+      var picked = Array.prototype.slice.call(section.querySelectorAll('input[name="predict-choice"]:checked')).map(function (i) { return i.value; }).sort();
+      predicted = picked;
+      correct = JSON.stringify(picked) === JSON.stringify(expected);
+    } else {
+      predicted = section.querySelector('#predict-freeform').value;
+      correct = null; // resolved via self-report below
+    }
+
+    var attempt = {
+      id: item.id + '-' + STATE.attempts.length + '-' + Date.now(),
+      itemId: item.id,
+      itemType: 'practiceItem',
+      variantType: item.variant_type || null,
+      timestamp: new Date().toISOString(),
+      predicted: predicted,
+      confidence: confidence,
+      correct: correct,
+      diagnosis: null,
+    };
+
+    section.querySelector('#reveal-practice-btn').setAttribute('disabled', 'disabled');
+    section.querySelectorAll('textarea, input').forEach(function (el) { el.disabled = true; });
+    var revealBox = section.querySelector('#practice-reveal');
+    revealBox.classList.remove('hidden');
+    var expectedList = Array.isArray(item.expected_answer) ? item.expected_answer : [item.expected_answer].filter(Boolean);
+    var expectedAnswerHtml = expectedList.length > 1
+      ? safe`<ul>${raw(expectedList.map(function (e) { return safe`<li>${e}</li>`; }).join(''))}</ul>`
+      : safe`<p>${expectedList[0] || ''}</p>`;
+    var reasoning = item.reasoning ? safe`<h3>Reasoning</h3><p>${item.reasoning}</p>` : '';
+    var distractors = item.distractor_analysis
+      ? safe`<h3>Why other options fail</h3><p class="distractors">${item.distractor_analysis}</p>`
+      : '';
+
+    revealBox.innerHTML = safe`
+      <div class="panel answer">
+        <h3>Expected answer</h3>
+        ${raw(expectedAnswerHtml)}
+      </div>
+      ${raw(reasoning)}
+      ${raw(distractors)}
+      ${raw(citationsHtml(item.claim_ids))}
+      <div id="self-report" class="self-report ${raw(isMulti ? 'hidden' : '')}">
+        <p>Compare your answer with the expected answer, then mark it.</p>
+        <div class="actions">
+          <button type="button" class="secondary" id="self-correct">I got it right</button>
+          <button type="button" class="secondary" id="self-incorrect">I got it wrong</button>
+        </div>
+      </div>
+      <p id="practice-result" class="result hidden" role="status"></p>
+      <div class="actions"><button id="practice-next-btn" type="button" disabled>${isLast ? 'Finish queue' : 'Next item'}</button></div>`;
+
+    if (isMulti) {
+      section.querySelectorAll('.choices label').forEach(function (label) {
+        var value = label.querySelector('input').value;
+        if (expected.indexOf(value) !== -1) label.classList.add('is-expected');
+        else if (predicted.indexOf(value) !== -1) label.classList.add('is-wrong');
+      });
+    }
+
+    function showResult(isCorrect) {
+      var el = revealBox.querySelector('#practice-result');
+      var lead = isMulti ? (isCorrect ? 'Correct.' : 'Not quite.') : (isCorrect ? 'Marked correct.' : 'Marked wrong.');
+      el.innerHTML = isCorrect
+        ? safe`${lead}`
+        : safe`${lead} Logged for <a href="${sliceHref('diagnose')}">Diagnose</a>.`;
+      el.classList.remove('hidden');
+      el.classList.add(isCorrect ? 'result-ok' : 'result-bad');
+    }
+
+    function finalizeAttempt(isCorrect) {
+      attempt.correct = isCorrect;
+      attempt.diagnosis = isCorrect ? null : 'pending';
+      STATE.attempts.push(attempt);
+      saveState();
+      showResult(isCorrect);
+      var nextBtn = revealBox.querySelector('#practice-next-btn');
+      nextBtn.removeAttribute('disabled');
+      if (!isMulti) nextBtn.focus({ preventScroll: true });
+    }
+
+    if (isMulti) {
+      finalizeAttempt(correct);
+    } else {
+      revealBox.querySelector('#self-correct').addEventListener('click', function () {
+        finalizeAttempt(true);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+      revealBox.querySelector('#self-incorrect').addEventListener('click', function () {
+        finalizeAttempt(false);
+        revealBox.querySelector('#self-report').classList.add('hidden');
+      });
+    }
+
+    revealBox.querySelector('#practice-next-btn').addEventListener('click', function () {
+      practiceIndex += 1;
+      navigate();
+    });
+  }
+
+  // ---------- Diagnose ----------
+  function itemLookup(itemId) {
+    return practiceItems().find(function (i) { return i.id === itemId; });
+  }
+
+  function renderDiagnose() {
+    var pending = STATE.attempts.filter(function (a) { return a.diagnosis === 'pending'; });
+    var history = STATE.attempts.filter(function (a) { return a.diagnosis && a.diagnosis !== 'pending'; });
+
+    var pendingHtml = pending.length
+      ? pending.map(function (a) {
+          var item = itemLookup(a.itemId);
+          var prompt = item ? (item.prompt || item.stem || '') : '(item no longer in scenario family)';
+          var predictedText = Array.isArray(a.predicted) ? a.predicted.join(', ') : (a.predicted || '(no answer recorded)');
+          var radios = DIAGNOSIS_CATEGORIES.map(function (c) {
+            return safe`<label class="diagnosis-option"><input type="radio" name="diagnosis-${a.id}" value="${c.key}"><span><strong>${c.label}</strong><span class="hint">${c.hint}</span></span></label>`;
+          }).join('');
+          return safe`
+            <div class="pending-attempt panel" data-attempt-id="${a.id}">
+              <p class="prompt">${prompt}</p>
+              <p class="your-answer"><span class="field-label">Your answer</span>${predictedText}</p>
+              <fieldset>
+                <legend>What went wrong?</legend>
+                <div class="diagnosis-grid">${raw(radios)}</div>
+              </fieldset>
+              <p class="field-error hidden" role="alert">Pick the category that best explains the miss.</p>
+              <div class="actions"><button type="button" class="submit-diagnosis">Submit diagnosis</button></div>
+            </div>`;
+        }).join('')
+      : safe`<p class="empty">Nothing to diagnose. Items you mark wrong in Practice show up here.</p>`;
+
+    var historyHtml = history.length
+      ? safe`<ul class="diagnosis-history">${raw(history.map(function (a) {
+          var cat = DIAGNOSIS_CATEGORIES.find(function (c) { return c.key === a.diagnosis; });
+          var label = cat ? cat.label : a.diagnosis;
+          var item = itemLookup(a.itemId);
+          var excerpt = truncate(item ? (item.prompt || item.stem || '') : a.itemId, 80);
+          var when = a.timestamp ? new Date(a.timestamp).toLocaleString() : '';
+          return safe`<li><span class="badge">${label}</span><span>${excerpt}</span><time class="muted" datetime="${a.timestamp || ''}">${when}</time></li>`;
+        }).join(''))}</ul>`
+      : safe`<p class="empty">No diagnosed mistakes yet.</p>`;
+
+    var html = safe`
+      <section class="diagnose">
+        <h2>Diagnose</h2>
+        <p class="back-link"><a href="${sliceHref('learn')}">&larr; Revisit Learn</a></p>
+        <h3>Needs diagnosis <span class="tally">${pending.length}</span></h3>
+        ${raw(pendingHtml)}
+        <h3>History <span class="tally">${history.length}</span></h3>
+        ${raw(historyHtml)}
+      </section>`;
+    var node = fromHTML(html);
+    node.querySelectorAll('.pending-attempt').forEach(function (el) {
+      var error = el.querySelector('.field-error');
+      el.addEventListener('change', function () { error.classList.add('hidden'); });
+      el.querySelector('.submit-diagnosis').addEventListener('click', function () {
+        var checked = el.querySelector('input[type="radio"]:checked');
+        if (!checked) { error.classList.remove('hidden'); return; }
+        var attemptId = el.getAttribute('data-attempt-id');
+        var attempt = STATE.attempts.find(function (a) { return a.id === attemptId; });
+        if (attempt) {
+          attempt.diagnosis = checked.value;
+          saveState();
+          navigate();
+        }
+      });
+    });
+    return node;
+  }
+
+  // ---------- Explore Sources ----------
+  var sourcesSearchTerm = '';
+  var expandedSourceId = null;
+  // Page-level: the sibling file covers every slice, so this is NOT reset in
+  // activateSlice the way the two per-slice vars above are. One value, the
+  // status discriminating which fields exist:
+  //   {status:'idle'} | {status:'loading'}
+  //   {status:'locked', envelope, notice: null | 'wrong-password' | 'forgotten-key'}
+  //   {status:'unlocking', envelope, via: 'cache' | 'password'}
+  //   {status:'ready', bySlice, lock: null | {envelope, expiresAt: number | null}}   lock is null on a clear page
+  //   {status:'unavailable', reason: 'no-sources' | 'load-failed' | 'bad-envelope'}
+  var SOURCES = { status: 'idle' };
+
+  function questionMatches(q, term) {
+    if (!term) return true;
+    var choiceText = (q.choices || []).map(function (c) { return c.text; }).join(' ');
+    var haystack = [q.id, q.stem, q.explanation, choiceText].join(' ').toLowerCase();
+    return haystack.indexOf(term.toLowerCase()) !== -1;
+  }
+
+  function citingClaims(questionId) {
+    return (CURRENT.claims || []).filter(function (c) { return (c.source_question_ids || []).indexOf(questionId) !== -1; });
+  }
+
+  function issuesHtml() {
+    var issues = CURRENT.issues || [];
+    if (!issues.length) return safe`<p class="muted">No open issues.</p>`;
+    return safe`
+      <details class="issues-panel">
+        <summary>Issues <span class="tally">${issues.length}</span></summary>
+        <ul class="issues">${raw(issues.map(function (i) {
+          return safe`<li><p class="issue-head"><span class="badge severity-${i.severity || 'unknown'}">${i.severity || 'unknown'}</span><strong>${i.type || 'issue'}</strong></p><p>${i.description || ''}</p></li>`;
+        }).join(''))}</ul>
+      </details>`;
+  }
+
+  function sourceRowHtml(q) {
+    var isOpen = q.id === expandedSourceId;
+    var detail = '';
+    if (isOpen) {
+      var citing = citingClaims(q.id);
+      var choiceItems = (q.choices || []).map(function (c) {
+        var isCorrect = (q.correct_answer || []).indexOf(c.letter) !== -1;
+        return safe`<li class="${isCorrect ? 'correct-choice' : ''}"><span class="choice-letter">${c.letter}.</span> ${c.text}${raw(isCorrect ? ' <span class="badge tone-ok">correct</span>' : '')}</li>`;
+      }).join('');
+      var citedList = citing.length
+        ? safe`<ul class="citations">${raw(citing.map(claimListItemHtml).join(''))}</ul>`
+        : safe`<p class="muted">No claims cite this question yet.</p>`;
+      var src = q.source || {};
+      detail = safe`
+        <tr class="detail-row">
+          <td colspan="5">
+            <div class="source-detail">
+              <p>${q.stem}</p>
+              <ul>${raw(choiceItems)}</ul>
+              <h4>Explanation</h4>
+              <p>${q.explanation || ''}</p>
+              <p class="muted source-meta">Source: ${src.file || ''} (p. ${src.page !== undefined ? src.page : '?'}, Q${src.question_number !== undefined ? src.question_number : '?'})</p>
+              <h4>Cited by <span class="tally">${citing.length}</span></h4>
+              ${raw(citedList)}
+            </div>
+          </td>
+        </tr>`;
+    }
+    var disputedBadge = q.disputed ? ' <span class="badge tone-warn">disputed</span>' : '';
+    return safe`
+      <tr class="source-row${raw(isOpen ? ' is-open' : '')}" data-id="${q.id}">
+        <td class="cell-id"><button type="button" class="row-toggle" aria-expanded="${isOpen ? 'true' : 'false'}">${q.id}</button></td>
+        <td class="cell-status">${q.status || ''}${raw(disputedBadge)}</td>
+        <td class="cell-stem">${truncate(q.stem, 90)}</td>
+        <td class="cell-answer">${(q.correct_answer || []).join(', ')}</td>
+        <td class="cell-mark">${raw(markControlHtml('question:' + q.id))}</td>
+      </tr>${raw(detail)}`;
+  }
+
+  // BUNDLE.sources names the one sibling this page may load. A locked page's
+  // bundle has no field that could name the clear file.
+  var SOURCE_GLOBAL = { clear: '__EKD_SOURCES_CLEAR__', locked: '__EKD_SOURCES_ENC__' };
+
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
+      var el = document.createElement('script');
+      el.src = src;
+      el.onload = function () { el.remove(); resolve(); };
+      el.onerror = function () { el.remove(); reject(new Error('failed to load ' + src)); };
+      document.body.appendChild(el);
+    });
+  }
+
+  function urlSourcesBaseUrl() {
+    try { return new URLSearchParams(location.search).get('sourcesBaseUrl'); } catch (e) { return null; }
+  }
+
+  function sourcesScriptUrl(name) {
+    var base = urlSourcesBaseUrl();
+    return base ? new URL(name, base).toString() : name;
+  }
+
+  function base64UrlToBytes(text) {
+    var padded = text.replace(/-/g, '+').replace(/_/g, '/');
+    while (padded.length % 4) padded += '=';
+    var bin = atob(padded);
+    var bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return bytes;
+  }
+
+  function bytesToBase64Url(bytes) {
+    var bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+
+  // Envelope v2 (scripts/ekd/sources_crypto.py), checked once here so the
+  // crypto calls below can trust its fields.
+  function parseEnvelope(raw) {
+    try {
+      var ok = raw && raw.v === 2 && raw.kdf && raw.kdf.name === 'PBKDF2' && raw.kdf.hash === 'SHA-256'
+        && Number.isInteger(raw.kdf.iterations) && raw.kdf.iterations > 0
+        && raw.cipher && raw.cipher.name === 'AES-GCM' && typeof raw.ciphertext === 'string';
+      if (!ok) return null;
+      return {
+        salt: raw.kdf.salt,
+        saltBytes: base64UrlToBytes(raw.kdf.salt),
+        iterations: raw.kdf.iterations,
+        iv: base64UrlToBytes(raw.cipher.iv),
+        ciphertext: base64UrlToBytes(raw.ciphertext),
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // The raw AES key bits, never the password, are what a page can remember.
+  function deriveKey(envelope, password) {
+    var secret = new TextEncoder().encode(password.normalize('NFC'));
+    return crypto.subtle.importKey('raw', secret, 'PBKDF2', false, ['deriveBits']).then(function (base) {
+      return crypto.subtle.deriveBits(
+        { name: 'PBKDF2', hash: 'SHA-256', salt: envelope.saltBytes, iterations: envelope.iterations }, base, 256);
+    }).then(function (bits) { return new Uint8Array(bits); });
+  }
+
+  function decryptSources(envelope, rawKey) {
+    return crypto.subtle.importKey('raw', rawKey, { name: 'AES-GCM' }, false, ['decrypt']).then(function (key) {
+      return crypto.subtle.decrypt({ name: 'AES-GCM', iv: envelope.iv }, key, envelope.ciphertext);
+    }).then(function (plainBuf) {
+      var data = JSON.parse(new TextDecoder().decode(plainBuf));
+      if (!data || typeof data !== 'object') throw new Error('decrypted sources are not an object');
+      return data;
+    });
+  }
+
+  // Remembered keys, one localStorage entry per sealing, keyed by its salt.
+  // Chrome shares one localStorage across every file:// page, and each
+  // reseal draws a fresh salt, so two Workspaces never share an entry and a
+  // resealed file never matches a key remembered for its old sealing.
+  // Entry: {"v":1, "key":"<b64url 32-byte AES key>", "expiresAt":<ms>}, 7
+  // days from when the password was entered, never extended.
+  var KEY_PREFIX = 'ekd:sources-key:';
+  var KEY_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+  function parseKeyRecord(text, now) {
+    try {
+      var rec = JSON.parse(text);
+      if (!rec || rec.v !== 1 || typeof rec.key !== 'string' || !Number.isFinite(rec.expiresAt)) return null;
+      if (now >= rec.expiresAt) return null;
+      var key = base64UrlToBytes(rec.key);
+      return key.length === 32 ? { key: key, expiresAt: rec.expiresAt } : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  var KeyCache = {
+    get: function (salt, now) {
+      try {
+        var text = localStorage.getItem(KEY_PREFIX + salt);
+        if (text === null) return null;
+        var rec = parseKeyRecord(text, now);
+        if (!rec) localStorage.removeItem(KEY_PREFIX + salt);
+        return rec;
+      } catch (e) {
+        return null;
+      }
+    },
+    // The expiry, or null when storage refuses the write (the page still unlocks).
+    put: function (salt, rawKey, now) {
+      var expiresAt = now + KEY_TTL_MS;
+      try {
+        localStorage.setItem(KEY_PREFIX + salt, JSON.stringify({ v: 1, key: bytesToBase64Url(rawKey), expiresAt: expiresAt }));
+        return expiresAt;
+      } catch (e) {
+        return null;
+      }
+    },
+    forget: function (salt) {
+      try { localStorage.removeItem(KEY_PREFIX + salt); } catch (e) {}
+    },
+    // Removes expired or malformed entries, including those of sealings no
+    // page will ask for again because their file was resealed.
+    sweep: function (now) {
+      try {
+        var stale = [];
+        for (var i = 0; i < localStorage.length; i++) {
+          var name = localStorage.key(i);
+          if (name && name.indexOf(KEY_PREFIX) === 0 && !parseKeyRecord(localStorage.getItem(name), now)) stale.push(name);
+        }
+        stale.forEach(function (name) { localStorage.removeItem(name); });
+      } catch (e) {}
+    },
+  };
+
+  // Pure. A (state, event) pair not listed leaves the state unchanged, which
+  // is also what drops a late async result that no longer applies.
+  function transition(s, e) {
+    switch (s.status + ' ' + e.type) {
+      case 'idle open':
+        return BUNDLE.sources ? { status: 'loading' } : { status: 'unavailable', reason: 'no-sources' };
+      case 'loading loaded-clear':
+        return { status: 'ready', bySlice: e.bySlice, lock: null };
+      case 'loading loaded-envelope':
+        return e.cached
+          ? { status: 'unlocking', envelope: e.envelope, via: 'cache' }
+          : { status: 'locked', envelope: e.envelope, notice: null };
+      case 'loading load-failed':
+        return { status: 'unavailable', reason: e.reason };
+      case 'locked submit':
+        return { status: 'unlocking', envelope: s.envelope, via: 'password' };
+      case 'unlocking decrypted':
+        return { status: 'ready', bySlice: e.bySlice, lock: { envelope: s.envelope, expiresAt: e.expiresAt } };
+      case 'unlocking decrypt-failed':
+        return { status: 'locked', envelope: s.envelope, notice: s.via === 'cache' ? 'forgotten-key' : 'wrong-password' };
+      case 'ready lock':
+        return s.lock ? { status: 'locked', envelope: s.lock.envelope, notice: null } : s;
+      default:
+        return s;
+    }
+  }
+
+  function dispatch(e) {
+    var next = transition(SOURCES, e);
+    if (next === SOURCES) return;
+    SOURCES = next;
+    startEffect(next, e);
+    var body = document.getElementById('sources-body');
+    if (body) paintSources(body);
+  }
+
+  function startEffect(s, e) {
+    if (s.status === 'loading') {
+      var kind = BUNDLE.sources.kind;
+      var globalName = SOURCE_GLOBAL[kind];
+      window[globalName] = undefined;
+      loadScript(sourcesScriptUrl(BUNDLE.sources.file)).then(function () {
+        var loaded = window[globalName];
+        window[globalName] = undefined;
+        if (kind === 'clear') {
+          if (loaded && typeof loaded === 'object') dispatch({ type: 'loaded-clear', bySlice: loaded });
+          else dispatch({ type: 'load-failed', reason: 'load-failed' });
+          return;
+        }
+        var envelope = parseEnvelope(loaded);
+        if (!envelope) { dispatch({ type: 'load-failed', reason: 'bad-envelope' }); return; }
+        dispatch({ type: 'loaded-envelope', envelope: envelope, cached: KeyCache.get(envelope.salt, Date.now()) });
+      }, function () {
+        dispatch({ type: 'load-failed', reason: 'load-failed' });
+      });
+      return;
+    }
+    if (s.status === 'unlocking') {
+      var envelope = s.envelope;
+      var fromCache = s.via === 'cache';
+      var keyReady = fromCache ? Promise.resolve(e.cached.key) : deriveKey(envelope, e.password);
+      keyReady.then(function (rawKey) {
+        return decryptSources(envelope, rawKey).then(function (bySlice) { return { rawKey: rawKey, bySlice: bySlice }; });
+      }).then(function (opened) {
+        var expiresAt = fromCache ? e.cached.expiresAt : KeyCache.put(envelope.salt, opened.rawKey, Date.now());
+        dispatch({ type: 'decrypted', bySlice: opened.bySlice, expiresAt: expiresAt });
+      }, function () {
+        if (fromCache) KeyCache.forget(envelope.salt);
+        dispatch({ type: 'decrypt-failed' });
+      });
+    }
+  }
+
+  var UNAVAILABLE_TEXT = {
+    'no-sources': 'No source data is bundled with this Workspace.',
+    'load-failed': 'The sources file could not be loaded.',
+    'bad-envelope': 'The encrypted sources file is not in a format this page can read.',
+  };
+  var LOCKED_NOTICE_TEXT = {
+    'wrong-password': 'Incorrect password',
+    'forgotten-key': 'The key remembered on this browser no longer opens this file. Enter the current password.',
+  };
+
+  function renderSources() {
+    var html = safe`
+      <section class="sources">
+        <h2>Explore Sources</h2>
+        ${raw(issuesHtml())}
+        <div id="sources-body"></div>
+      </section>`;
+    var fragment = fromHTML(html);
+    if (SOURCES.status === 'idle') dispatch({ type: 'open' });
+    paintSources(fragment.querySelector('#sources-body'));
+    return fragment;
+  }
+
+  function passwordFormHtml(notice, busy) {
+    var noticeBlock = notice ? safe`<p><span class="badge severity-high">${LOCKED_NOTICE_TEXT[notice]}</span></p>` : '';
+    return safe`
+      ${raw(noticeBlock)}
+      <p class="muted">These source questions are encrypted. Enter this Workspace's password to unlock them.</p>
+      <label class="field-label" for="sources-password">Password</label>
+      <input type="password" id="sources-password" autocomplete="off" spellcheck="false"${raw(busy ? ' disabled' : '')}>
+      <p><button type="button" id="sources-unlock"${raw(busy ? ' disabled' : '')}>${busy ? 'Unlocking…' : 'Unlock sources'}</button></p>`;
+  }
+
+  function paintSources(body) {
+    var s = SOURCES;
+    if (s.status === 'idle' || s.status === 'loading') {
+      body.innerHTML = '<p class="muted">Loading sources&hellip;</p>';
+    } else if (s.status === 'unavailable') {
+      body.innerHTML = safe`<p class="empty">${UNAVAILABLE_TEXT[s.reason]}</p>`;
+    } else if (s.status === 'unlocking') {
+      body.innerHTML = s.via === 'cache' ? '<p class="muted">Unlocking sources&hellip;</p>' : passwordFormHtml(null, true);
+    } else if (s.status === 'locked') {
+      body.innerHTML = passwordFormHtml(s.notice, false);
+      var input = body.querySelector('#sources-password');
+      var submit = function () {
+        if (input.value) dispatch({ type: 'submit', password: input.value });
+      };
+      body.querySelector('#sources-unlock').addEventListener('click', submit);
+      input.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') submit(); });
+      if (s.notice === 'wrong-password') input.focus();
+    } else if (s.status === 'ready') {
+      renderSourcesTable(body);
+      if (s.lock) {
+        body.insertAdjacentHTML('afterbegin', lockBarHtml(s.lock));
+        body.querySelector('#sources-lock').addEventListener('click', function () {
+          KeyCache.forget(s.lock.envelope.salt);
+          dispatch({ type: 'lock' });
+        });
+      }
+    }
+  }
+
+  function lockBarHtml(lock) {
+    var remembered = lock.expiresAt === null
+      ? 'Not remembered (storage unavailable)'
+      : 'Remembered on this browser until '
+        + new Date(lock.expiresAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    return safe`<p class="sources-lock"><span class="muted" id="sources-remembered">${remembered}</span><button type="button" class="secondary" id="sources-lock">Lock</button></p>`;
+  }
+
+  function renderSourcesTable(body) {
+    var questions = SOURCES.bySlice[CURRENT.contentSet.id] || [];
+    body.innerHTML = safe`
+      <div class="search-field">
+        <label class="field-label" for="sources-search">Search questions</label>
+        <input type="search" id="sources-search" placeholder="Stem, choices, or explanation">
+        <p class="muted" id="sources-count" aria-live="polite"></p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Source questions">
+        <table class="sources-table">
+          <thead><tr><th scope="col">ID</th><th scope="col">Status</th><th scope="col">Stem</th><th scope="col">Correct</th><th scope="col">Mark</th></tr></thead>
+          <tbody id="sources-tbody"></tbody>
+        </table>
+      </div>`;
+    var input = body.querySelector('#sources-search');
+    input.value = sourcesSearchTerm;
+
+    function renderRows() {
+      var filtered = questions.filter(function (q) { return questionMatches(q, sourcesSearchTerm); });
+      body.querySelector('#sources-count').textContent = filtered.length + ' / ' + questions.length + ' questions';
+      var tbody = body.querySelector('#sources-tbody');
+      tbody.innerHTML = filtered.length
+        ? filtered.map(sourceRowHtml).join('')
+        : safe`<tr><td colspan="5" class="empty-cell">No questions match "${sourcesSearchTerm}".</td></tr>`;
+      tbody.querySelectorAll('.source-row').forEach(function (row) {
+        row.addEventListener('click', function (event) {
+          if (event.target.closest('.mark-control')) return;
+          var id = row.getAttribute('data-id');
+          expandedSourceId = expandedSourceId === id ? null : id;
+          renderRows();
+          var toggle = tbody.querySelector('.source-row[data-id="' + CSS.escape(id) + '"] .row-toggle');
+          if (toggle) toggle.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    input.addEventListener('input', function () {
+      sourcesSearchTerm = input.value;
+      renderRows();
+    });
+    renderRows();
+  }
+
+  // ---------- slice selection ----------
+  var DEFAULT_SLICE_ID = null;
+
+  function populateSliceSelect(manifest) {
+    DEFAULT_SLICE_ID = manifest.length ? manifest[0].id : null;
+    var select = document.getElementById('slice-select');
+    select.innerHTML = manifest.map(function (s) {
+      return safe`<option value="${s.id}">${s.facet.key}: ${s.facet.value} (${s.questionCount} q)</option>`;
+    }).join('');
+    document.getElementById('slice-controls').classList.toggle('hidden', manifest.length <= 1);
+    select.addEventListener('change', function () {
+      location.hash = '#' + encodeURIComponent(select.value) + '/' + parseHash().mode;
+    });
+  }
+
+  function activateSlice(sliceId) {
+    return loadSlice(sliceId).then(function (slice) {
+      CURRENT = slice;
+      STORAGE_KEY = 'ekd:' + slice.contentSet.id + ':' + slice.contentSet.schemaVersion;
+      STATE = loadState();
+      practiceIndex = 0;
+      sourcesSearchTerm = '';
+      expandedSourceId = null;
+      var cs = CURRENT.contentSet;
+      document.getElementById('app-title').innerHTML = safe`<span class="title-exam">${cs.exam}</span><span class="title-sep" aria-hidden="true">/</span><span class="title-facet"><span class="visually-hidden">${cs.facet.key}: </span>${cs.facet.value}</span>`;
+      document.title = cs.facet.value + ' · ' + cs.exam;
+      var select = document.getElementById('slice-select');
+      if (select.value !== slice.contentSet.id) select.value = slice.contentSet.id;
+      renderStorageWarning();
+    });
+  }
+
+  // ---------- routing: "#<sliceId>/<mode>", falling back to the active (or
+  // first) slice when the hash omits one -- e.g. on first load. ----------
+  var ROUTES = { learn: renderLearn, compare: renderCompare, practice: renderPractice, diagnose: renderDiagnose, sources: renderSources };
+  var DEFAULT_MODE = 'learn';
+
+  function sliceHref(mode) {
+    return '#' + encodeURIComponent(CURRENT.contentSet.id) + '/' + mode;
+  }
+
+  function parseHash() {
+    var rawHash = (location.hash || '').slice(1);
+    var slashIndex = rawHash.indexOf('/');
+    var fallbackSliceId = CURRENT ? CURRENT.contentSet.id : DEFAULT_SLICE_ID;
+    if (slashIndex === -1) {
+      return { sliceId: fallbackSliceId, mode: ROUTES.hasOwnProperty(rawHash) ? rawHash : DEFAULT_MODE };
+    }
+    var sliceId = decodeURIComponent(rawHash.slice(0, slashIndex)) || fallbackSliceId;
+    var mode = rawHash.slice(slashIndex + 1);
+    return { sliceId: sliceId, mode: ROUTES.hasOwnProperty(mode) ? mode : DEFAULT_MODE };
+  }
+
+  function navigate() {
+    var target = parseHash();
+    var proceed = (!CURRENT || CURRENT.contentSet.id !== target.sliceId)
+      ? activateSlice(target.sliceId)
+      : Promise.resolve();
+    return proceed.then(function () {
+      document.querySelectorAll('#nav a').forEach(function (a) {
+        var mode = a.getAttribute('data-route');
+        a.setAttribute('href', sliceHref(mode));
+        a.classList.toggle('active', mode === target.mode);
+        if (mode === target.mode) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      var app = document.getElementById('app');
+      app.innerHTML = '';
+      app.appendChild(ROUTES[target.mode]());
+    });
+  }
+
+  // ---------- init ----------
+  document.getElementById('export-btn').addEventListener('click', exportProgress);
+  document.getElementById('export-revision-btn').addEventListener('click', exportRevisionNotes);
+  document.getElementById('import-input').addEventListener('change', importProgress);
+  document.getElementById('app').addEventListener('click', handleMarkClick);
+  window.addEventListener('hashchange', navigate);
+  KeyCache.sweep(Date.now());
+  getManifest().then(function (manifest) {
+    populateSliceSelect(manifest);
+    return navigate();
+  });
+})();
+</script>
+</body>
+</html>
