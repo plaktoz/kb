@@ -15,7 +15,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `topics/` — cross-cutting synthesis notes maintained by `/kb-compound`; one file per recurring theme (e.g. `topics/ai-agents.md`)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
-- `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`)
+- `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`), or by ticker for company analyses (`<TICKER>/report.md`)
 - `data/` — supporting reference data
   - `investments.md` — investment holdings (do not modify unless explicitly asked)
   - `wiki-categories.md` — canonical list of wiki subdirectory categories
@@ -33,6 +33,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-ingest` | Transforms `raw/` files into structured wiki notes |
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
 | `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
+| `/kb-research-company <TICKER>` | Deep 6-part investment analysis of a company (business model, market, MOAT, financials, management, valuation) with a Bull vs. Bear synthesis — saves report to `research/<TICKER>/` |
 | `/kb-compound` | Maintains living topic files in `topics/` from this week's recurring themes — rewrites each file's prose body and Core Principles section from all its sources — run before `/kb-weekly-newsletter` |
 | `/kb-weekly-newsletter` | Compiles this week's ingested notes into a weekly newsletter digest |
 | `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, checks raw/processed/ for unmatched stragglers, and reviews unlisted mental-model names |
@@ -54,8 +55,9 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out one agent per URL (8 at a time); discovery, blocker detection and logging run in `scrape_queue.py`, not agents |
 | `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
 | `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
+| `.claude/workflows/kb-research-company.js` | `/kb-research-company` | Fans out 7 research agents (Parts 1–6, Financials split in two); a final agent writes the Bull vs. Bear synthesis, assembles the report and logs |
 
-> In sessions without the Workflow tool (e.g. Cowork, which cannot run `.claude/workflows/*.js`), `kb-newsagent-parallel`, `kb-scrapecontent-parallel` and `kb-ingest-parallel` automatically fall back to batched general-purpose Agent/Task calls instead — see each skill's `SKILL.md` for the exact fallback procedure. `/kb-daily` and `/kb-daily-autocommit` work unattended in either environment.
+> In sessions without the Workflow tool (e.g. Cowork, which cannot run `.claude/workflows/*.js`), `kb-newsagent-parallel`, `kb-scrapecontent-parallel`, `kb-ingest-parallel` and `kb-research-company` automatically fall back to batched general-purpose Agent/Task calls instead — see each skill's `SKILL.md` for the exact fallback procedure. `/kb-daily` and `/kb-daily-autocommit` work unattended in either environment.
 
 ## Core workflow
 1. Capture raw content into the vault with minimal friction.
