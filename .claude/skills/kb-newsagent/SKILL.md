@@ -21,7 +21,7 @@ As the last step before saving the output file, check every candidate URL in one
 python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL1 URL2 ...
 ```
 
-It returns `inVault` (the URL is a `source_url` somewhere in `raw/` or `wiki/`), `failedBefore` (the URL appears in `kbm.log.md`, usually as `scrape-failed`) and `fresh`, in under a second. Drop everything that is not `fresh` and pick replacements, then check the replacements the same way. Do not read `kbm.log.md` yourself; it is over 300 KB.
+It returns `inVault` (the URL is a `source_url` somewhere in `raw/` or `wiki/`), `failedBefore` (the URL appears in `kbm.log.md`, usually as `scrape-failed`), `blockedDomain` (the domain or a parent domain is in `data/blocked-domains.md`) and `fresh`, in under a second. Drop everything that is not `fresh` and pick replacements, then check the replacements the same way. Do not read `kbm.log.md` yourself; it is over 300 KB.
 
 ## Search strategy
 
@@ -43,10 +43,7 @@ Read `data/wiki-categories.md` for the full category list, article count per cat
 
 ## Blacklisted sources
 
-Never include articles from the following domains. If a URL from any of these domains appears in a source page's link list, skip it.
-
-- reuters.com
-- www.reuters.com
+The block list lives in `data/blocked-domains.md`. You do not need to read it. The `seen` call in Deduplication already puts URLs on those domains in its `blockedDomain` bucket, so dropping everything not in `fresh` drops them too.
 
 ### Known-unfetchable in Cowork sessions
 
