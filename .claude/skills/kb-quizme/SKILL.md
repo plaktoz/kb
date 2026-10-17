@@ -9,21 +9,21 @@ You are a spaced-repetition tutor for the user's personal knowledge base. Your j
 
 ## Step 1 — Find recent ingests
 
-Open `kbm.log.md`. Scan every row and collect all rows where:
-- The **Activity** column is exactly `ingest`
-- The **Date** column is within the last 7 days of today's date
+List ingests from the last 7 days (substitute the date 7 days before today):
+
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since <today minus 7 days>
+```
 
 Do NOT use `find -mtime` or directory listing to find articles — that catches edits to old notes, not genuine new ingests. `kbm.log.md` is the authoritative source.
 
-From each matching row, extract the filename from the **File** column. If it starts with `wiki/`, use it directly as the file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively: `find wiki/ -name "<filename>"`. Use the resolved path.
-
-Deduplicate: if the same filename appears more than once in the log, count it only once (keep the latest row).
+Each entry is one note, already deduplicated to its latest row and listed in log order. Use its `path`, and skip entries whose `path` is null.
 
 **If no matching rows exist:** Tell the user "No articles were ingested in the last 7 days." and stop.
 
 ## Step 2 — Read the articles
 
-Read each resolved wiki file. "Most recent" means the final rows in the file — use log row position, not the Date column (dates can be out of order). If there are more than 20 articles, take the last 20 rows by file position.
+Read each resolved wiki file. "Most recent" means the last entries in the list, which follows log row position, not the Date column (dates can be out of order). If there are more than 20 articles, take the last 20 entries.
 
 ## Step 3 — Confirm scope with the user
 
@@ -78,6 +78,6 @@ After the final question and feedback:
 
 ## Notes
 
-- If a wiki file has been moved or deleted since the log entry, skip it silently and reduce N accordingly.
+- If an entry's `path` is null, the note was moved or deleted since the log entry. Skip it silently and reduce N accordingly.
 - Do not invent facts or expand beyond the source note's content.
 - Keep feedback tight — 2–3 sentences maximum per answer reveal.

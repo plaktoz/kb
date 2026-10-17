@@ -11,15 +11,19 @@ This skill writes back to the vault. It does not produce a newsletter or digest 
 
 ## Step 1 — Determine the week
 
-Calculate the current ISO week number and the date range (Monday–Sunday) for the week that just ended.
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py week
+```
+
+This prints the current ISO `year`, `week`, `monday` and `sunday`. Use them for every lookup below. On a Sunday this is the week that just ended. Run on another day, pass a date in the intended week, e.g. `week 2026-10-18`.
 
 ## Step 2 — Gather this week's ingested notes
 
-Open `kbm.log.md`. Collect all rows where:
-- Activity = `ingest`
-- Date falls within this week's Monday–Sunday range
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since <monday> --until <sunday>
+```
 
-For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file. Read it fully. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
+Read the note at each entry's `path` fully. Skip entries whose `path` is null. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
 
 ## Step 3 — Identify recurring themes
 
@@ -34,12 +38,23 @@ For each theme identified in Step 3:
 
 ### 4a — Check for an existing topic file
 
-Search `topics/<theme-slug>.md`. If the file exists, proceed to **4c (Update)**.
+Pick 2–4 search terms for the theme (its name plus close synonyms) and search the topic files:
+
+```bash
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synonym --topics --limit 5
+```
+
+If `topics/<theme-slug>.md` is listed, or a listed topic file already covers this theme under another slug, proceed to **4c (Update)** with that file.
 
 ### 4b — Decide whether to create a new topic file
 
-If no topic file exists, count vault-wide notes on this theme:
-- Search `wiki/` recursively for notes whose filename or content meaningfully covers the theme
+If no topic file exists, count vault-wide notes on this theme with the same terms:
+
+```bash
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synonym
+```
+
+- Count the `notes` whose filename, tags or content meaningfully cover the theme. Notes with `filename` or `tags` in `matched` almost always qualify; check body-only matches before counting them
 - If **5 or more** vault notes exist: proceed to **4d (Create)**
 - If fewer than 5: record "threshold not met (N notes)" in the report and skip this theme
 
@@ -141,10 +156,12 @@ After all changes, print a compact summary:
 - [theme]: [reason — e.g. threshold not met (3 notes), or no new sources this week]
 ```
 
-Append a row to `kbm.log.md` for each topic file modified or created:
+Log one `compound` row for each topic file modified or created, in a single call:
 
-```
-| YYYY-MM-DD | topics/filename.md | compound |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append --rows - <<'EOF'
+[{"file": "topics/ai-agents.md", "activity": "compound"}]
+EOF
 ```
 
-Use today's date and the full relative path of the actual topic file (e.g. `topics/ai-agents.md`).
+Use the full relative path of each actual topic file. The date defaults to today.

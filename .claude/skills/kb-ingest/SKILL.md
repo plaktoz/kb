@@ -139,13 +139,13 @@ Each answer should be 1–2 sentences, drawn only from the article.
 (Applies only to files that resulted in a brand-new note. Duplicate/near-duplicate files already moved their raw file and logged their row in step 2a — do not repeat this section for them.)
 
 1. Move the source file from `/raw/` to `/raw/processed/`
-2. Append a row to `kbm.log.md`:
+2. Log it, using today's date:
 
-```
-| YYYY-MM-DD | wiki/<category>/note-slug.md | ingest |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD wiki/<category>/note-slug.md ingest
 ```
 
-Use the full relative path of the wiki note created (e.g. `wiki/science/entropy.md`), not the raw source filename.
+Use the full relative path of the wiki note created (e.g. `wiki/science/entropy.md`), not the raw source filename. Log step 2a's `ingest-dupe` and `ingest` rows the same way, with the reason in the FILE argument.
 
 ## Expected outcome
 

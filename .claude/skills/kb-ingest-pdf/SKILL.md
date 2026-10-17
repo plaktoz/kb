@@ -59,15 +59,15 @@ After successfully saving the markdown file, move the original PDF to `raw/pdf/p
 
 ### 5. Log each extracted file
 
-Append a row to `kbm.log.md` for each successfully saved file:
+Log each successfully saved file:
 
-```
-| YYYY-MM-DD | YYYY-MM-DD-slug.md | scrape |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD YYYY-MM-DD-slug.md scrape
 ```
 
 ### 6. Handle failures
 
-If a PDF fails to read (corrupt file, unreadable, etc.), log the failure to `kbm.log.md` with activity `scrape-failed` and continue to the next file. Do not create a markdown file for failures.
+If a PDF fails to read (corrupt file, unreadable, etc.), log it with `python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD "<pdf filename> (<reason>)" scrape-failed` and continue to the next file. Do not create a markdown file for failures.
 
 ## Expected outcome
 

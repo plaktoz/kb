@@ -9,14 +9,15 @@ You are an elite research assistant and technical copywriter. Your task is to co
 
 ## Input
 
-Open `kbm.log.md` and collect every row where:
+List today's ingests (substitute today's date):
 
-- Activity column = `ingest`
-- Date column = today's date (YYYY-MM-DD)
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since YYYY-MM-DD --until YYYY-MM-DD
+```
 
-For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file (e.g. `find wiki/ -name "filename.md"`). Read its frontmatter and content.
+Each entry's `path` is the wiki note it resolved to. Read the frontmatter and content of every entry with a non-null `path`, and skip entries whose `path` is null (the note was moved or deleted).
 
-If no `ingest` rows exist for today, create the output file with this content and stop:
+If the list is empty, create the output file with this content and stop:
 
 ```
 # 🗞️ THE VAULT DAILY // [Today's Date]
@@ -78,10 +79,10 @@ Generate the output using exactly this structure:
 
 ## After saving the file
 
-Append a row to `kbm.log.md`:
+Log it, using today's date:
 
-```
-| YYYY-MM-DD | daily-update/YYYY-MM/YYYY-MM-DD.md | newsletter |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD daily-update/YYYY-MM/YYYY-MM-DD.md newsletter
 ```
 
 Use the full relative path of the actual output file (e.g. `daily-update/2026-07/2026-07-26-2.md` if that was the numbered variant created).

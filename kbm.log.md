@@ -6,7 +6,6 @@
 | 2026-10-11 | wiki/learning/retrieval-practice-beats-mind-mapping.md | ingest |
 | 2026-10-11 | wiki/productivity/why-hasnt-ai-made-work-easier.md | ingest |
 | 2026-10-11 | wiki/finance/ibm-consulting-profit-growth-flat-sales.md | ingest |
-
 | 2026-09-27 | wiki/finance/sp500-dow-nasdaq-week-higher-chipmaker-oil-sep26-2026.md | ingest |
 | 2026-09-27 | wiki/finance/ibm-z17-marist-university-ai-classroom.md | ingest |
 | 2026-09-27 | wiki/finance/nvidia-anthropic-ipo-10-billion-circular-demand.md | ingest |
@@ -2480,7 +2479,6 @@
 | 2026-08-20 | wiki/technology/owasp-genai-llm-top10-2026.md | ingest |
 | 2026-08-20 | wiki/technology/owasp-llm06-sensitive-information-disclosure.md | ingest |
 | 2026-08-20 | wiki/technology/owasp-llm09-overreliance.md | ingest |
-
 | 2026-08-20 | 2026-08-20-news-aggregation.md | news-fetch |
 | 2026-08-20 | investopedia.com stock-market-today-dow-jones-s-and-p-500-08192026 (Markets News Aug 19) | scrape-failed |
 | 2026-08-20 | 2026-08-19-cognition-ceo-denies-report-that-spacex-tried-to-acquire-the-startup.md | scrape |
@@ -2519,9 +2517,7 @@
 | 2026-08-20 | wiki/finance/ibm-together-ai-nvidia-cloud-deal.md | ingest |
 | 2026-08-20 | wiki/finance/sti-record-run-bank-concentration-risk.md | ingest |
 | 2026-08-20 | daily-update/2026-08/2026-08-20.md | newsletter |
-
 | 2026-08-21 | 2026-08-21-news-aggregation.md | news-fetch |
-
 | 2026-08-21 | 2026-08-20-california-ai-dominance-vc-bonanza.md | scrape |
 | 2026-08-21 | 2026-08-20-anything-ai-skydive-ai-employees.md | scrape |
 | 2026-08-21 | 2026-07-29-hbr-ai-agents-broaden-knowledge-work.md | scrape |
@@ -2544,7 +2540,6 @@
 | 2026-08-21 | 2026-08-20-singapore-stocks-fall-sti-down.md | scrape |
 | 2026-08-21 | frontiersin.org exercise-multimodal-intervention-adolescent-depression (PDF too large to extract cleanly) | scrape-failed |
 | 2026-08-21 | 2026-08-21-news-aggregation.processed.md | archive |
-
 | 2026-08-21 | wiki/technology/california-ai-dominance-vc-funding-2026.md | ingest |
 | 2026-08-21 | wiki/technology/anything-ai-skydive-ai-employees.md | ingest |
 | 2026-08-21 | wiki/technology/ai-agents-broaden-scope-knowledge-work-hbr.md | ingest |
@@ -2566,7 +2561,6 @@
 | 2026-08-21 | wiki/strategy/agents-over-bubbles-stratechery.md | ingest |
 | 2026-08-21 | wiki/strategy/cognitive-delegation-ai-investment-judgment.md | ingest |
 | 2026-08-21 | daily-update/2026-08/2026-08-21.md | newsletter |
-
 | 2026-08-22 | 2026-08-22-news-aggregation.md | news-fetch |
 | 2026-08-22 | 2026-08-21-michael-polansky-outer-biosciences-ai-skin.md | scrape |
 | 2026-08-22 | 2026-08-21-rillet-ai-accounting-startup-100m-raise.md | scrape |
