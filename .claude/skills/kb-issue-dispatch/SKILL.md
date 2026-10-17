@@ -26,6 +26,5 @@ Wait for the workflow to complete, then report: how many issues were processed, 
    c. Run each identified skill in order using the Skill tool. Continue on failure — collect all errors.
    d. After all skills finish, run `git status --porcelain`. If dirty: commit all changes and open a PR to `main` on branch `issue/<number>-<date>`.
    e. Post a results comment (markdown table: skill / result) to the issue.
-   f. Close the issue: `gh issue close <number> --repo plaktoz/kb`
-   g. If any skill failed, reopen: `gh issue reopen <number> --repo plaktoz/kb`
+   f. If every skill succeeded, close the issue: `gh issue close <number> --repo plaktoz/kb`. If any failed, leave it open.
 4. Print a summary: issues processed, skills run, failures, any PR URLs.

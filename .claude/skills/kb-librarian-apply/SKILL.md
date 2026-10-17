@@ -20,7 +20,7 @@ Check in this order:
 
 ## Step 2: Parse findings
 
-**Phase 1 & 2 findings** — Read every finding block that starts with `## Duplicate #N` or `## Superseded #N`.
+**Phase 4 findings** — Read every finding block that starts with `## Duplicate #N` or `## Superseded #N`.
 
 For each block, extract:
 - **Type**: Duplicate or Superseded
@@ -35,7 +35,7 @@ For each block, extract:
 Valid actions for Duplicate findings: `merge-into-A`, `merge-into-B`, `keep-both`, `skip`
 Valid actions for Superseded findings: `archive-old`, `merge-into-Keep`, `keep-both`, `skip`
 
-**Phase 3 findings** — Also read the `## Phase 3: Unmatched Raw Files` section if present.
+**Phase 6 findings** — Also read the `## Phase 6: Unmatched Raw Files` section if present.
 
 Extract:
 - **Straggler count**: the number after `Straggler files found:`
@@ -89,16 +89,16 @@ No file changes. Do not add to follow-up — this is a conscious decision.
 
 ---
 
-## Step 3b: Execute Phase 3 findings
+## Step 3b: Execute Phase 6 findings
 
-If the Phase 3 action is `archive`:
+If the Phase 6 action is `archive`:
 1. Create `raw/archived/` if it does not exist.
 2. Move each file in the list from `raw/processed/` to `raw/archived/` (bare filename, flat — no subdirectory).
 3. Log each move to `kbm.log.md`: `| YYYY-MM-DD | filename.md | librarian |`
 
-If the Phase 3 action is `skip` or the section is absent: do nothing.
+If the Phase 6 action is `skip` or the section is absent: do nothing.
 
-If the Phase 3 action is still a comment placeholder (`<!-- ... -->`): include a reminder in the follow-up file (Step 4) that Phase 3 is undecided.
+If the Phase 6 action is still a comment placeholder (`<!-- ... -->`): include a reminder in the follow-up file (Step 4) that Phase 6 is undecided.
 
 ---
 

@@ -15,7 +15,7 @@ Convert a research report into a self-contained interactive HTML lesson course c
 
 Example: `/kb-research-to-lessons research/effective-learning-with-ai/report.md`
 
-Pass `--force` to overwrite an existing MISSION.md or LESSONS.md.
+Pass `--force` to overwrite an existing MISSION.md or lessons.md.
 
 ---
 
@@ -248,11 +248,6 @@ After all lesson agents complete:
 **Log to `kbm.log.md`:**
 ```
 | YYYY-MM-DD | <research-dir>/lessons/ | lessons |
-```
-
-**Update CLAUDE.md skills table** — append a row to the main skills table:
-```
-| `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
 ```
 
 ---

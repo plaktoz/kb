@@ -1,11 +1,13 @@
 ---
 name: kb-log-rebuild
-description: Use when kbm.log.md is out of sync with the filesystem and a full librarian audit is not needed — rebuilds the log from wiki/ and daily-update/ without running vault maintenance phases.
+description: Manual only, run when the user asks. Use when kbm.log.md is out of sync with the filesystem — rebuilds the log from wiki/ and daily-update/ without running vault maintenance phases. Drops every row that is not ingest or newsletter.
 ---
 
 # KB Log Rebuild
 
 Rebuild `kbm.log.md` from scratch by walking the filesystem. Covers `ingest` and `newsletter` entries only.
+
+Run this only when the user asks for it. No other skill calls it. The rebuild drops every other activity type, including the `scrape-failed` rows that `scrape_queue.py seen` relies on.
 
 ---
 
@@ -24,7 +26,7 @@ Collect entries from two sources:
 
 **Newsletter entries** — walk `daily-update/` recursively. For each `.md` file:
 - Date: extract from filename prefix `YYYY-MM-DD`.
-- Filename: full relative path from repo root (e.g. `daily-update/2026-08/2026-08-02-1.md`).
+- Filename: full relative path from repo root (e.g. `daily-update/2026-08/2026-08-02.md`).
 - Activity: `newsletter`
 
 ## Step 3: Write the new `kbm.log.md`
@@ -37,7 +39,7 @@ Sort all entries by date ascending; put `unknown` dates last. Write:
 | Date | File | Activity |
 |------|------|----------|
 | YYYY-MM-DD | wiki/<category>/note-slug.md | ingest |
-| YYYY-MM-DD | daily-update/YYYY-MM/YYYY-MM-DD-N.md | newsletter |
+| YYYY-MM-DD | daily-update/YYYY-MM/YYYY-MM-DD.md | newsletter |
 ```
 
 Do not include any other activity types.
