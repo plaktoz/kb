@@ -38,14 +38,10 @@ immediately rather than retrying Tavily repeatedly.
 
 Check all your candidate URLs in one call:
 python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL1 URL2 ...
-Drop every URL listed under inVault (already in the vault) or failedBefore (a past scrape failed) and
-pick replacements; only "fresh" URLs may go in your section. Check replacements the same way.
+Drop every URL listed under inVault (already in the vault), failedBefore (a past scrape failed) or
+blockedDomain (its site is in data/blocked-domains.md) and pick replacements; only "fresh" URLs may
+go in your section. Check replacements the same way.
 Do not try to read kbm.log.md in full (it can be ~300KB) — this check is the authoritative signal.
-
-## Blacklisted domains — never include
-
-- reuters.com
-- www.reuters.com
 
 ## Avoid live-blog / JS-rendered pages
 

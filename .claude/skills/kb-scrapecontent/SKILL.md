@@ -60,7 +60,7 @@ Write the rows as a JSON list to `rows.json` next to the queue file, then run:
 python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py finalize <queue> <dir of queue>/rows.json
 ```
 
-This appends the `scrape` / `scrape-failed` rows to `kbm.log.md`, renames each source file in `raw/url/` to `*.processed.md`, and logs one `archive` row per file. It is safe to rerun. Do not edit `kbm.log.md` or rename files in `raw/url/` by hand.
+This appends the `scrape` / `scrape-failed` rows to `kbm.log.md`, renames each source file in `raw/url/` to `*.processed.md`, and logs one `archive` row per file. It also regenerates `data/blocked-domains.md` from the log and lists any newly blocked domains under `blockedDomains` in its output. It is safe to rerun. Do not edit `kbm.log.md` or rename files in `raw/url/` by hand.
 
 ## Expected outcome
 

@@ -19,6 +19,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
 - `data/` — supporting reference data
   - `investments.md` — investment holdings (do not modify unless explicitly asked)
   - `wiki-categories.md` — canonical list of wiki subdirectory categories
+  - `blocked-domains.md` — domains the news agent skips. `auto` rows are regenerated from `kbm.log.md` by `.claude/skills/kb-scrapecontent/scripts/scrape_queue.py`. `manual` rows are hand-edited
   - `mental-models.md` — canonical mental-model names used by `/kb-ingest` for `[[links]]`; `mental-models-excluded.md` holds reviewed labels that aren't models. Both are maintained by `.claude/skills/kb-librarian/scripts/mental_models.py` via `/kb-librarian` and `/kb-librarian-apply`; don't edit them by hand
 
 ## Skills
