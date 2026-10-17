@@ -128,20 +128,6 @@ Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `scra
 - Keep the knowledge graph coherent by linking related notes thoughtfully.
 - When asked to create a new artifact, use the matching slash command and save output in the expected location.
 
-## Notifications
-When you need the user's attention and they may not be watching the session, send a Telegram notification:
-
-```
-~/.claude/channels/telegram/notify.sh "<message>"
-```
-
-- Use this when the user must act (a decision/choice is required to continue, or a process/pipeline has hung, stalled, or stopped unexpectedly and needs manual intervention), **or** when a long-running skill finishes that run for minutes unattended. Report success or failure either way.
-- Do not use it for routine progress updates, step completions of quick skills, or anything that doesn't need immediate attention — one unnecessary notification is worse than none. When in doubt, don't send it.
-- At most one notification per incident — don't send a follow-up unless the situation materially changes.
-- Keep the message under Telegram's 4,096 UTF-8 character limit; summarize rather than paste full logs.
-
-The bullets above govern *your own judgment call* mid-conversation — they only apply while a turn is actually running. A stalled/failed API stream (`API Error: Response stalled mid-stream`) happens *outside* any turn, so there's no agent alive to notice and call the script. That case is covered separately by a `StopFailure` hook in `~/.claude/settings.json` (global, not part of this repo) that calls `notify.sh` unconditionally whenever a turn ends in failure — deterministic, not model-judgment-based, and applies across all projects, not just this one.
-
 ## Do not
 - Modify `skills-lock.json` or anything in `.obsidian/`.
 - Modify `data/investments.md` unless explicitly asked.
