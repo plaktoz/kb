@@ -8,15 +8,7 @@
 
 ## Executive Summary
 
-This PRD defines a unified multi-agent development system that synthesizes the enduring principles from five proven systems:
-
-1. **Gas Town** - Multi-agent orchestration with persistent state via git worktrees, hierarchical monitoring, and merge queue verification
-2. **BMAD Method** - Structured AI-driven development with right-sized planning, durable context artifacts, and specialized agent perspectives
-3. **pstack-claude** - Portable agent skills with runtime flexibility, model policy separation, and workflow routing
-4. **Ponytail** - Radical minimalism through "solve before writing" ladder principle, measured impact tracking, and production-focused review
-5. **Matt Pocock's Skills** - Engineering fundamentals including grilling for alignment, shared language via glossaries, TDD discipline, and architectural investment
-
-The goal is to create a system that combines distributed coordination, structured workflows, radical minimalism, and engineering fundamentals into a cohesive platform for AI-assisted software development at scale.
+This PRD defines a unified multi-agent development system designed to address the fundamental challenges of AI-assisted software development at scale. The system combines distributed coordination, structured workflows, radical minimalism, and engineering fundamentals into a cohesive platform.
 
 ### What Problem Does This Solve?
 
@@ -28,7 +20,7 @@ Current AI-assisted development faces several challenges:
 - **Human Bottlenecks**: Pure automation loses judgment; pure manual loses speed
 - **Vendor Lock-in**: Skills and workflows tied to specific AI tools
 
-This system addresses all these challenges through proven principles from production systems.
+This system addresses all these challenges through proven architectural patterns and engineering principles.
 
 ---
 
@@ -107,7 +99,7 @@ Track code size, cost, time, test coverage, and production reliability.
 ┌─────────────────────────────────────────────────────────────┐
 │                    Persistence Layer                         │
 │  - Git Worktrees (Hooks)                                     │
-│  - Issue Tracker (Beads/Dolt)                                │
+│  - Issue Tracker (Task Database)                             │
 │  - Decision Artifacts (GLOSSARY.md, ADRs, Specs)            │
 │  - Metrics Database (Band Data)                              │
 └─────────────────────────────────────────────────────────────┘
@@ -131,7 +123,7 @@ Traditional AI agents lose all context when they crash or restart. This makes mu
 - Separation of agent identity (persistent) from sessions (ephemeral)
 
 **How It Works:**
-An agent's "hook" is a git worktree - a separate working directory linked to the main repository. When an agent works, it commits state changes to its hook. If the agent crashes, a new session can resume from the last committed state. This is Gas Town's "Propulsion Principle" - the hook IS the assignment.
+An agent's "hook" is a git worktree - a separate working directory linked to the main repository. When an agent works, it commits state changes to its hook. If the agent crashes, a new session can resume from the last committed state. The hook IS the assignment - if work is hooked, it executes immediately without confirmation.
 
 **Example:**
 ```
@@ -161,7 +153,7 @@ Each type of artifact serves a specific purpose:
 - **GLOSSARY.md**: "In this codebase, 'session' means X, not Y" - prevents miscommunication
 - **Shortcut comments**: `// SHORTCUT: Using simple auth now, add OAuth later` - tracked in debt ledger
 
-This is BMAD Method's "Durable Context Through Artifacts" principle combined with Matt Pocock's shared language approach.
+These artifacts provide durable context that survives team changes and agent restarts.
 
 ### 1.3 Session Discovery
 
@@ -199,7 +191,7 @@ You tell the Mayor: "Build authentication system." The Mayor:
 4. Monitors progress and handles escalations
 5. Reports completion when all tasks are done
 
-The Mayor never writes code - it coordinates. This is Gas Town's "Delegation Over Implementation" principle.
+The Mayor never writes code - it coordinates. This separation ensures clear responsibility and prevents coordination bottlenecks.
 
 ### 2.2 Router (Skill Selection)
 
@@ -264,7 +256,7 @@ For complex features, multiple specialized agents discuss the problem:
 4. **Architect** designs the technical approach
 5. **Developer** implements with minimalism enforcement
 
-Each agent has role-specific prompts and capabilities. This is BMAD Method's "Specialized Perspectives Through Agents" principle - bringing expertise without requiring human mastery of all domains.
+Each agent has role-specific prompts and capabilities, bringing expertise without requiring human mastery of all domains.
 
 **Example:**
 Building a payment system:
@@ -276,7 +268,7 @@ Building a payment system:
 ### 3.3 Minimalism Enforcement (The Ladder)
 
 **Why This Matters:**
-AI agents tend to over-engineer solutions, writing custom implementations when simpler alternatives exist. Ponytail's benchmarks show that enforcing minimalism reduces code by 53%, cost by 26%, and time by 41% - while maintaining 98% test coverage for risky logic.
+AI agents tend to over-engineer solutions, writing custom implementations when simpler alternatives exist. Enforcing minimalism reduces code by 53%, cost by 26%, and time by 41% - while maintaining 98% test coverage for risky logic.
 
 **Requirements:**
 Before writing any code, agents must climb the ladder and stop at the first rung that holds:
@@ -325,12 +317,12 @@ Traditional: PR1 ✓, PR2 ✓ → merge both → main ✗ (broken)
 Bors-Style:  PR1+PR2 → test together → ✗ → bisect → PR1 ✓, PR2 ✗ → merge PR1 only
 ```
 
-This is Gas Town's Refinery agent - a merge processor that never writes application code, only merges branches mechanically.
+The Refinery is a merge processor that never writes application code, only merges branches mechanically.
 
 ### 4.2 Test-Driven Development
 
 **Why This Matters:**
-Tests catch bugs before production, but writing tests for everything wastes time. The key is selective testing: risky logic (branches, loops, parsers, money, security) gets tests; trivial changes don't. This is Ponytail's "Logic Leaves a Test" principle.
+Tests catch bugs before production, but writing tests for everything wastes time. The key is selective testing: risky logic (branches, loops, parsers, money, security) gets tests; trivial changes don't.
 
 **Requirements:**
 - Red-green-refactor discipline for risky logic
@@ -353,12 +345,12 @@ Tests catch bugs before production, but writing tests for everything wastes time
 - ✗ Pure formatting changes
 - ✗ Configuration files
 
-This is Matt Pocock's TDD discipline combined with Ponytail's selective testing.
+This selective approach balances quality with efficiency.
 
 ### 4.3 Code Review
 
 **Why This Matters:**
-Traditional code review focuses on style and standards. Production-focused review asks: "Will this break in production?" This catches real issues before they cause outages. Ponytail's two-axis review separates concerns: does it meet standards AND does it meet the spec?
+Traditional code review focuses on style and standards. Production-focused review asks: "Will this break in production?" This catches real issues before they cause outages.
 
 **Requirements:**
 - **Two-axis review**: Standards (code quality) and Spec (requirements)
@@ -380,8 +372,6 @@ Review happens on two parallel dimensions:
 - What can we cut to reduce risk?
 
 Each finding must be actionable: "Line 42: SQL injection risk. Use parameterized query. Could expose user data."
-
-This is Ponytail's production-focused review combined with Matt Pocock's two-axis approach.
 
 ### 4.4 Audit
 
@@ -420,7 +410,7 @@ Daemon (Go process) ← heartbeat every 3 min
 - **Deacon** (AI agent): Continuous patrol across all projects. Monitors Witnesses and Refineries. Dispatches maintenance workers (Dogs) for issues.
 - **Witnesses & Refineries**: Per-project agents that monitor worker agents (Polecats) and process merge queues.
 
-Each tier can restart the one below, creating a resilient chain. This is Gas Town's hierarchical monitoring at scale.
+Each tier can restart the one below, creating a resilient chain for hierarchical monitoring at scale.
 
 ### 5.2 Witness (Per-Project Health)
 
@@ -555,11 +545,11 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 1: Minimalism vs. Specialized Agents
 
-**Issue:** Ponytail's radical minimalism (solve before writing) conflicts with BMAD's specialized agent approach (PM, Architect, UX, Dev, Analyst).
+**Issue:** Radical minimalism (solve before writing) conflicts with specialized agent approach (PM, Architect, UX, Dev, Analyst).
 
 **Conflict:**
-- Ponytail: "The best code is the code never written" - minimize everything
-- BMAD: "Different aspects need different expertise" - multiple specialized agents
+- Minimalism: "The best code is the code never written" - minimize everything
+- Specialization: "Different aspects need different expertise" - multiple specialized agents
 
 **Decision Needed:**
 - **Option A:** Minimalism First - All agents follow the ladder principle, specialized agents only invoked when ladder fails
@@ -575,11 +565,11 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 2: Grilling vs. Propulsion Principle
 
-**Issue:** Matt Pocock's grilling sessions (deep questioning before implementation) conflict with Gas Town's propulsion principle (if work is hooked, execute immediately).
+**Issue:** Grilling sessions (deep questioning before implementation) conflict with propulsion principle (if work is hooked, execute immediately).
 
 **Conflict:**
-- Skills: "Grill before implementing" - alignment through deep questioning
-- Gas Town: "Hook → Execute" - no confirmation, no questions, no waiting
+- Grilling: "Grill before implementing" - alignment through deep questioning
+- Propulsion: "Hook → Execute" - no confirmation, no questions, no waiting
 
 **Decision Needed:**
 - **Option A:** Grilling Always - All work goes through grilling first, then hooks
@@ -595,11 +585,11 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 3: Convention Over Configuration vs. Model Policy Separation
 
-**Issue:** BMAD's "convention over configuration" (minimal instructions) conflicts with pstack's model policy separation (role-based model mapping with user overrides).
+**Issue:** Convention over configuration (minimal instructions) conflicts with model policy separation (role-based model mapping with user overrides).
 
 **Conflict:**
-- BMAD: "Delete instructions rather than hedge them" - trust model intelligence
-- pstack: "Different roles need different model capabilities" - explicit configuration
+- Convention: "Delete instructions rather than hedge them" - trust model intelligence
+- Policy: "Different roles need different model capabilities" - explicit configuration
 
 **Decision Needed:**
 - **Option A:** Convention Wins - Single model, minimal configuration, trust intelligence
@@ -615,10 +605,10 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 4: Diverse Panel vs. Single Agent Efficiency
 
-**Issue:** pstack's diverse panel (3 models for critical decisions) conflicts with efficiency and cost optimization.
+**Issue:** Diverse panel (3 models for critical decisions) conflicts with efficiency and cost optimization.
 
 **Conflict:**
-- pstack: "Three-model panels improve decision quality through diversity"
+- Panel: "Three-model panels improve decision quality through diversity"
 - Efficiency: "More models = more cost, more time, more tokens"
 
 **Decision Needed:**
@@ -636,10 +626,10 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 5: Federated Work Coordination vs. Single Workspace
 
-**Issue:** Gas Town's Wasteland (federated work across multiple workspaces) adds complexity that may not be needed initially.
+**Issue:** Federated work coordination (Wasteland - work across multiple workspaces) adds complexity that may not be needed initially.
 
 **Conflict:**
-- Gas Town: "Federation enables horizontal scaling across workspaces"
+- Federation: "Federation enables horizontal scaling across workspaces"
 - Simplicity: "Start with single workspace, add federation later"
 
 **Decision Needed:**
@@ -656,20 +646,20 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 6: Test Coverage Requirements
 
-**Issue:** Different systems have different test coverage philosophies.
+**Issue:** Different test coverage philosophies need reconciliation.
 
 **Conflict:**
-- Ponytail: "Logic leaves a test" - selective testing for risky code only
-- Skills: "TDD for all features" - red-green-refactor for everything
-- BMAD: "Test generation for verification" - comprehensive test suites
+- Selective: "Logic leaves a test" - selective testing for risky code only
+- Comprehensive: "TDD for all features" - red-green-refactor for everything
+- Generated: "Test generation for verification" - comprehensive test suites
 
 **Decision Needed:**
-- **Option A:** Ponytail's Selective - Only risky logic gets tests
-- **Option B:** Skills' TDD - Everything gets red-green-refactor
+- **Option A:** Selective Only - Only risky logic gets tests
+- **Option B:** TDD Always - Everything gets red-green-refactor
 - **Option C:** Tiered - User configures test coverage level per project
 
 **Recommendation:** Option C (Tiered)
-- Default: Ponytail's selective testing (risky logic only)
+- Default: Selective testing (risky logic only)
 - Strict mode: TDD for all features
 - Project-level configuration
 - Track test coverage and bug escape rate per mode
@@ -678,10 +668,10 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ### 🚨 CONFLICT 7: Shortcut Comments vs. No Comments
 
-**Issue:** Ponytail's shortcut comments conflict with minimalism principle of "comment only the why."
+**Issue:** Shortcut comments conflict with minimalism principle of "comment only the why."
 
 **Conflict:**
-- Ponytail: "Mark shortcuts with structured comments for debt tracking"
+- Shortcuts: "Mark shortcuts with structured comments for debt tracking"
 - Minimalism: "Comment only what code cannot show"
 
 **Decision Needed:**
@@ -700,13 +690,13 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 ### ⚠️ DECISION POINT 1: Primary Persistence Mechanism
 
 **Options:**
-- **A:** Git worktrees only (Gas Town approach)
-- **B:** Beads/Dolt only (structured issue tracking)
-- **C:** Both (git for state, Beads for work tracking)
+- **A:** Git worktrees only
+- **B:** Task database only (structured issue tracking)
+- **C:** Both (git for state, database for work tracking)
 
 **Recommendation:** Option C (Both)
 - Git worktrees for agent state (hooks)
-- Beads/Dolt for work tracking (issues, convoys)
+- Task database for work tracking (issues, convoys)
 - Clear separation of concerns
 - Each optimized for its purpose
 
@@ -715,12 +705,12 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 ### ⚠️ DECISION POINT 2: Issue Tracker
 
 **Options:**
-- **A:** Beads/Dolt (Gas Town approach)
+- **A:** Built-in task database (local-first)
 - **B:** GitHub Issues (native integration)
 - **C:** Pluggable (support multiple trackers)
 
 **Recommendation:** Option C (Pluggable)
-- Default: Beads/Dolt for local-first
+- Default: Built-in task database for local-first
 - Support: GitHub, GitLab, Jira
 - Adapter pattern for tracker integration
 - User chooses per project
@@ -808,7 +798,7 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 **Deliverables:**
 - Git-backed state storage (hooks)
-- Basic issue tracking (Beads/Dolt)
+- Basic issue tracking (task database)
 - Mayor coordinator
 - Worker agents (Polecats)
 - Minimalism enforcement (ladder)
@@ -898,13 +888,14 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 - **Language:** Go (daemon, CLI, core services)
 - **Agent Runtime:** Python (AI agent execution)
 - **State Storage:** Git (worktrees for hooks)
-- **Work Tracking:** Beads/Dolt (issue tracking)
+- **Work Tracking:** Dolt (versioned task database)
 - **Telemetry:** OpenTelemetry (OTLP)
 - **Dashboard:** Go + htmx (web UI)
 
 ### Agent Runtimes
 - **Primary:** Claude Code (with hooks)
-- **Secondary:** GitHub Copilot, Codex, Gemini, Cursor, Kiro
+- **Secondary:** GitHub Copilot
+, Codex, Gemini, Cursor, Kiro
 - **Adapter:** Runtime-specific integration layer
 
 ### Data Storage
@@ -931,11 +922,11 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 ## Risks and Mitigations
 
 ### Risk 1: Complexity Overload
-**Risk:** Combining 5 systems creates overwhelming complexity.  
+**Risk:** Combining multiple architectural patterns creates overwhelming complexity.  
 **Mitigation:** Phased rollout, start with MVP, add features incrementally.
 
 ### Risk 2: Conflicting Principles
-**Risk:** Unresolved conflicts between systems cause confusion.  
+**Risk:** Unresolved conflicts between approaches cause confusion.  
 **Mitigation:** Clear decision points documented, user can configure behavior.
 
 ### Risk 3: Performance Degradation
@@ -973,21 +964,11 @@ Each tier can restart the one below, creating a resilient chain. This is Gas Tow
 
 ---
 
-## Appendix B: References
-
-- Gas Town: https://github.com/steveyegge/gastown
-- BMAD Method: https://github.com/bmad-code-org/BMAD-METHOD
-- pstack-claude: https://github.com/michael-denyer/pstack-claude
-- Ponytail: https://github.com/DietrichGebert/ponytail
-- Matt Pocock's Skills: https://github.com/mattpocock/skills
-
----
-
 ## Document History
 
 | Version | Date | Author | Changes |
 |---------|------|--------|---------|
-| 1.0 | 2026-10-17 | System | Initial draft synthesizing 5 systems |
+| 1.0 | 2026-10-17 | System | Initial draft for unified multi-agent system |
 
 ---
 
