@@ -26,21 +26,13 @@ Read the resolved note fully. Extract:
 
 ## Step 2 — Find related vault notes
 
-Identify 3–5 keywords from the target note's topic. Then run:
+Identify 3–5 keywords from the target note's topic. Then run, with the target note's `date_consumed` as `--since`:
 
-**Pass 1 — Filename search:**
 ```bash
-find wiki/ -name "*.md" | grep -iE "keyword1|keyword2|keyword3"
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py keyword1 "multi word keyword" keyword3 --since <date_consumed>
 ```
 
-**Pass 2 — Content search:**
-```bash
-grep -ril "keyword1\|keyword2\|keyword3" wiki/
-```
-
-Merge, deduplicate, and remove the target note itself. Also remove any notes already `[[linked]]` in the target note — those are already incorporated.
-
-From the remaining candidates, prioritize notes with a `date_consumed` newer than the target note's `date_consumed`. Read up to 10 of these.
+From the ranked `notes`, remove the target note itself and any note already `[[linked]]` in the target note, since those are already incorporated. Read the first 10 that remain.
 
 **If no candidates remain:** Tell the user "No newer vault notes found on this topic since [date_consumed]. The note appears up to date." Offer to run `/kb-research-topic` for internet sources instead.
 

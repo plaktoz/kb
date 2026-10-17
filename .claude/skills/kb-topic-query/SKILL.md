@@ -13,25 +13,13 @@ Extract the core topic or question from the user's message. Identify 3–5 keywo
 
 ## Step 2 — Search the vault
 
-Run two passes:
-
-**Pass 1 — Filename search:**
 ```bash
-find wiki/ -name "*.md" | grep -iE "keyword1|keyword2|keyword3"
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py keyword1 "multi word keyword" keyword3 --limit 10
 ```
 
-**Pass 2 — Content search:**
-```bash
-grep -ril "keyword1\|keyword2\|keyword3" wiki/
-```
+Quote a multi-word keyword so it matches as a phrase. The script prints `notes` already ranked, filename and tag hits above body-only hits, so read them in order. `total` counts every match before the limit.
 
-Merge both result lists and deduplicate. Rank results by:
-1. Filename match (higher signal) over content-only match
-2. More keyword hits over fewer
-
-Take the top 10. If more than 10 match on filename alone, read all filename matches and drop to content-only matches as needed.
-
-If no files match after both passes, try broader single-word queries. If still nothing, tell the user: "I couldn't find any notes on [topic] in your vault." and offer to run `/kb-research-topic` to build coverage from the internet.
+If `notes` is empty, try broader single-word keywords. If still nothing, tell the user: "I couldn't find any notes on [topic] in your vault." and offer to run `/kb-research-topic` to build coverage from the internet.
 
 ## Step 3 — Read the notes
 

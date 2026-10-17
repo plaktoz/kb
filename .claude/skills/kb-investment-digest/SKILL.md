@@ -11,11 +11,12 @@ You are a portfolio-aware knowledge assistant. Your job is to surface what the u
 
 Read `data/investments.md`. Extract every row from the table: ticker, name, category (Stock or ETF).
 
-Build a search-term map for each holding:
+Search each holding with the terms below. They add themes a ticker and name can't supply, such as an ETF's market.
 
 | Holding | Search terms to use |
 |---------|-------------------|
 | MSFT | microsoft, msft |
+| GOOGL | google, googl, alphabet |
 | IBM | ibm |
 | CSPX | s&p 500, sp500, cspx, s&p500 |
 | ES3 | straits times, sti, singapore, es3 |
@@ -23,7 +24,7 @@ Build a search-term map for each holding:
 | SPMO | momentum, spmo, s&p momentum |
 | IWMO | iwmo, msci momentum, world momentum |
 
-If `data/investments.md` changes, derive search terms from ticker and name — don't hardcode the above.
+For a holding in `data/investments.md` that has no row here, use its ticker and the distinctive words of its name, and tell the user to add a row. Skip rows for holdings no longer in `data/investments.md`.
 
 ## Step 2 — Determine the time window
 
@@ -33,19 +34,18 @@ If the user specifies a different window (e.g. "last 2 weeks", "since Monday"), 
 
 ## Step 3 — Find relevant notes
 
-For each holding, search `wiki/finance/` for notes whose `date_consumed` falls within the time window AND whose filename or content matches the holding's search terms:
+For each holding, search `wiki/finance/` within the time window, passing each of its search terms as one argument:
 
 ```bash
-grep -ril "search_term" wiki/finance/
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py "s&p 500" sp500 cspx s&p500 --category finance --since <start> --until <end>
 ```
-
-Then filter by date: read each candidate's frontmatter `date_consumed` and keep only those within the window.
 
 Also run a broad market search to find macro notes relevant to all ETFs:
 ```bash
-grep -ril "dow\|s&p\|nasdaq\|market\|fed\|interest rate\|inflation" wiki/finance/
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py dow "s&p" nasdaq market fed "federal reserve" "interest rate" inflation --category finance --since <start> --until <end>
 ```
-Filter those by the same time window.
+
+Each prints `notes` ranked with filename and tag hits first.
 
 ## Step 4 — Read and extract
 

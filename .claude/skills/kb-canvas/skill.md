@@ -13,35 +13,23 @@ Extract the topic from the user's argument (the text after `/kb-canvas`). Derive
 
 Example: `mental models` → keywords: `mental-model`, `mental model`, `first-principles`, `heuristic`, `cognitive-bias`, `decision`
 
-## Step 2 — Build candidate list from kbm.log.md
+## Step 2 — Find matching notes
 
 ```bash
-python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py keyword1 "multi word keyword" keyword3
 ```
 
-Each entry is one note at its latest row, with `date` and the resolved wiki `path`. Sort the list by `date` descending.
+Quote a multi-word keyword so it matches as a phrase. The script prints `notes` ranked with filename and tag hits above body-only hits. Keep a note whose `matched` includes `filename` or `tags`. Keep a body-only note only if one of its `[[wikilinks]]` contains a keyword. Use each kept note's `path` as its file path.
 
-## Step 3 — Resolve wiki paths
-
-Keep entries whose `path` is non-null and use `path` as the note's file path. Drop the rest; their notes were moved or deleted.
-
-## Step 4 — Filter by topic relevance
-
-For each resolved note:
-1. Check if the **filename** contains any of the topic keywords (case-insensitive)
-2. If not, read the file and check if any `[[wikilink]]` in the note contains a topic keyword
-
-Keep the note if either check passes.
-
-**Cap:** If more than 20 notes match, keep the 20 most recent (by kbm.log.md date) and print:
+**Cap:** If more than 20 notes are kept, keep the first 20 and print:
 
 ```
-⚠️  <N> notes matched — showing the 20 most recent. Older notes were excluded.
+⚠️  <N> notes matched — showing the 20 most relevant. The rest were excluded.
 ```
 
 If fewer than 2 notes match, tell the user: "Not enough notes found on '[topic]' to build a canvas. Try `/kb-research-topic` to build coverage first."
 
-## Step 5 — Read all matched notes
+## Step 3 — Read all matched notes
 
 Read the full content of every note in the filtered set. For each note, record:
 - **id** — short unique string (e.g. `n1`, `n2`, …)
@@ -49,7 +37,7 @@ Read the full content of every note in the filtered set. For each note, record:
 - **title** — filename without extension, converted from kebab-case to Title Case
 - **wikilinks** — all `[[...]]` targets extracted from the note body
 
-## Step 6 — Reason about relationships
+## Step 4 — Reason about relationships
 
 For every pair of notes, decide:
 1. Is there a meaningful relationship between the two concepts?
@@ -64,13 +52,13 @@ Build an edge list:
 
 Edges are directional — choose the direction that makes the label read naturally left-to-right (e.g. "first-principles-thinking → enables → second-order-thinking").
 
-## Step 7 — Identify the hub node
+## Step 5 — Identify the hub node
 
-Count the total edges (in + out) per node. The node with the highest count is the **hub**. If there is a tie, pick the node with the most recent ingest date.
+Count the total edges (in + out) per node. The node with the highest count is the **hub**. If there is a tie, pick the node with the latest `date_consumed`.
 
 Print: `Hub node: <title> (<N> connections)`
 
-## Step 8 — Compute layout
+## Step 6 — Compute layout
 
 Node dimensions: 250 wide × 60 tall. Column spacing: 320px. Row spacing: 160px.
 
@@ -90,7 +78,7 @@ x = (col - center_col) * 320
 y = (row - center_row) * 160
 ```
 
-## Step 9 — Build the canvas JSON
+## Step 7 — Build the canvas JSON
 
 Construct the Obsidian canvas object:
 
@@ -120,7 +108,7 @@ Construct the Obsidian canvas object:
 
 File paths must be relative to the vault root (e.g. `wiki/strategy/ooda-loop-decision-cycle.md`), not absolute.
 
-## Step 10 — Determine output path
+## Step 8 — Determine output path
 
 ```
 topic-slug = topic text converted to kebab-case, lowercased
@@ -138,13 +126,13 @@ mkdir -p canvases/<topic-slug>/
 
 Write the canvas JSON to the resolved path.
 
-## Step 11 — Log the activity
+## Step 9 — Log the activity
 
 ```bash
 python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append <today> canvases/<topic-slug>/<filename> canvas
 ```
 
-## Step 12 — Report to the user
+## Step 10 — Report to the user
 
 Print a one-paragraph summary:
 
