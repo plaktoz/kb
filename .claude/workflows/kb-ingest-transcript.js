@@ -178,23 +178,6 @@ log(`Staged ${stagedFiles.length} transcript(s) to raw/.`)
 // ── Phase 3: Ingest ────────────────────────────────────────────────────────
 phase('Ingest')
 
-const [skillLoad, catLoad] = await parallel([
-  () => agent(
-    'Read skills/Karpathy-Ingest-prompt.md and return its complete text content.',
-    {
-      label: 'load-skill',
-      schema: { type: 'object', properties: { content: { type: 'string' } }, required: ['content'] },
-    }
-  ),
-  () => agent(
-    'Read data/wiki-categories.md and return its complete text content.',
-    {
-      label: 'load-categories',
-      schema: { type: 'object', properties: { content: { type: 'string' } }, required: ['content'] },
-    }
-  ),
-])
-
 const rawFileNames = stagedFiles.map(s => s.rawFile)
 const agentCount = Math.min(8, rawFileNames.length)
 const batchSize = Math.ceil(rawFileNames.length / agentCount)
@@ -203,13 +186,10 @@ for (let i = 0; i < rawFileNames.length; i += batchSize) {
   batches.push(rawFileNames.slice(i, i + batchSize))
 }
 
-const skillContent = skillLoad ? skillLoad.content : ''
-const catContent = catLoad ? catLoad.content : ''
-
 const ingestResults = await parallel(
   batches.map((batch, i) => () =>
     agent(
-      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the raw/ directory:\n${batch.join('\n')}\n\nFollow these per-file instructions exactly:\n${skillContent}\n\nWiki categories reference:\n${catContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n- Still move each source file from raw/ to raw/processed/ after processing it.\n- Return one log_row per processed file: date (today's date YYYY-MM-DD), filename (raw source filename only), activity "ingest".`,
+      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the raw/ directory:\n${batch.join('\n')}\n\nRead .claude/skills/kb-ingest/SKILL.md and follow its Per-File Instructions and "After processing each file" section exactly for each file above.\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n- Still move each source file from raw/ to raw/processed/ after processing it.\n- Return one log_row per processed file: date (today's date YYYY-MM-DD), filename (the File column kb-ingest would log: the wiki note path, e.g. "wiki/<category>/note-slug.md"), activity ("ingest", or "ingest-dupe" per step 2a).`,
       { label: `ingest-batch-${i + 1}`, schema: LOG_SCHEMA, phase: 'Ingest' }
     )
   )
@@ -243,20 +223,10 @@ log(`Done. ${ingested} transcript(s) ingested into wiki.`)
 if (ingested > 0) {
   phase('Newsletter')
 
-  const newsletterPromptLoad = await agent(
-    'Read Skills/Daily-newsletter-prompt.md and return its complete text content.',
-    {
-      label: 'load-newsletter-prompt',
-      schema: { type: 'object', properties: { content: { type: 'string' } }, required: ['content'] },
-    }
+  await agent(
+    'Read .claude/skills/kb-newsletter/SKILL.md and follow it exactly.',
+    { label: 'newsletter', phase: 'Newsletter' }
   )
-
-  if (newsletterPromptLoad && newsletterPromptLoad.content) {
-    await agent(
-      newsletterPromptLoad.content,
-      { label: 'newsletter', phase: 'Newsletter' }
-    )
-  }
 }
 
 return { ingested }

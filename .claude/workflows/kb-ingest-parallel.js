@@ -42,7 +42,7 @@ You are an expert Personal Knowledge Management (PKM) assistant specializing in 
 
 ## Input
 
-Read all \`.md\` files in \`/raw/\` that contain a \`source_url:\` header. Skip everything else (subdirectories, news-aggregation files, files without \`source_url:\`) silently. Process all eligible files in one run.
+Read all \`.md\` files in \`/raw/\` that contain a \`source_url:\` or \`source_file:\` header (\`/kb-ingest-pdf\` writes \`source_file:\`). Skip everything else (subdirectories, news-aggregation files, files with neither header) silently. Process all eligible files in one run.
 
 ## Per-File Instructions
 
@@ -52,7 +52,7 @@ Place the file into exactly one category. Read \`data/wiki-categories.md\` for t
 
 ### 2. Check for existing notes
 
-First, run an exact-duplicate check on the raw file's \`source_url\`: \`grep -rl "source_url: {URL}" wiki/\`. If this returns a match, the article has already been ingested — go to step 2a and do not write any new content.
+First, run an exact-duplicate check on the raw file's source header, whichever it has: \`grep -rl "source_url: {URL}" wiki/\` or \`grep -rl "source_file: {PATH}" wiki/\`. If this returns a match, the article has already been ingested — go to step 2a and do not write any new content.
 
 If no exact match is found, do a topical scan: search \`wiki/<category>/\` (and skim adjacent categories if the topic could straddle two) for an existing note covering the same underlying story or concept from a different source. If one exists, treat it as a near-duplicate and also go to step 2a.
 
@@ -91,6 +91,8 @@ tags: [3-4 specific lowercase tags]
 date_consumed: [today's date in YYYY-MM-DD format]
 ---
 \`\`\`
+
+If the raw file has \`source_file:\` instead of \`source_url:\`, write \`source_file: [its value]\` in place of the \`source_url\` line.
 
 ### 6. Summary section
 
@@ -260,7 +262,7 @@ const sourceDir = stragglerMode ? 'raw/processed/' : 'raw/'
 const discovery = stragglerMode
   ? { files: args.map(p => p.replace(/^raw\/processed\//, '')) }
   : await agent(
-      'List all .md files directly in raw/ (not in subdirectories) that contain a "source_url:" header. Return their filenames only (e.g. "2026-07-28-article-slug.md"), not full paths.',
+      'List all .md files directly in raw/ (not in subdirectories) that contain a "source_url:" or "source_file:" header. Return their filenames only (e.g. "2026-07-28-article-slug.md"), not full paths.',
       {
         label: 'discover-files',
         schema: {

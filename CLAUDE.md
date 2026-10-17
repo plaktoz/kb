@@ -4,17 +4,25 @@
 This repository is a local-first personal knowledge management (PKM) system built around Obsidian-style markdown notes. The core goal is to capture raw information, turn it into structured notes, and connect those notes into a durable knowledge graph.
 
 ## Repository map
-- `glossary.md` — canonical vocabulary (personal reference only, do not read or rely on during tasks)
+- `glossary.md` — canonical vocabulary (personal reference; only /kb-librarian reads or writes it)
 - `kbm.log.md` — activity log; append a row after every pipeline action
+- `kbm.log.archive-YYYY-MM-DD.md` — snapshots of the log taken by `/kb-log-rebuild` before it rewrites the log
+- `librarian-report.md` — findings from `/kb-librarian` awaiting human decisions; `librarian-followup.md` holds the ones still undecided after `/kb-librarian-apply`
 - `raw/` — source material at different pipeline stages
   - `url/` — URL lists waiting to be scraped (consumed and renamed to `.processed.md` by the scrape step, not deleted — tracked in git alongside the other pipeline outputs)
   - `*.md` — scraped articles awaiting ingest
   - `processed/` — post-ingest archive; articles moved here after wiki notes are created
+  - `archived/` — stragglers from `raw/processed/` that no wiki note cites, moved here by `/kb-librarian-apply`
+  - `pdf/` — PDFs waiting for `/kb-ingest-pdf`; `pdf/processed/` holds the ones already extracted
+  - `youtube/` — YouTube URL lists waiting for `/kb-ingest-transcript` (renamed to `.processed.md` once consumed)
 - `wiki/` — canonical notes; categories defined in `data/wiki-categories.md`
   - `others/` — staging area for notes whose category is unclear; revisit with /kb-librarian
+  - `archived/` — duplicate or superseded notes retired by `/kb-librarian-apply`; skills that scan the wiki skip it
 - `topics/` — cross-cutting synthesis notes maintained by `/kb-compound`; one file per recurring theme (e.g. `topics/ai-agents.md`)
 - `daily-update/` — daily newsletter digests
 - `weekly-update/` — weekly synthesis digests
+- `youtube-transcript/` — downloaded YouTube transcripts by channel; `processed/` holds the ones already ingested
+- `canvases/` — Obsidian canvases from `/kb-canvas`, one folder per topic slug
 - `research/` — sourced research reports organized by topic slug (`<context-slug>/report.md`), or by ticker for company analyses (`<TICKER>/report.md`)
 - `data/` — supporting reference data
   - `investments.md` — investment holdings (do not modify unless explicitly asked)
@@ -37,7 +45,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-research-company <TICKER>` | Deep 6-part investment analysis of a company (business model, market, MOAT, financials, management, valuation) with a Bull vs. Bear synthesis — saves report to `research/<TICKER>/` |
 | `/kb-compound` | Maintains living topic files in `topics/` from this week's recurring themes — rewrites each file's prose body and Core Principles section from all its sources — run before `/kb-weekly-newsletter` |
 | `/kb-weekly-newsletter` | Compiles this week's ingested notes into a weekly newsletter digest |
-| `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, rebuilds kbm.log.md, checks raw/processed/ for unmatched stragglers, and reviews unlisted mental-model names |
+| `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, checks raw/processed/ for unmatched stragglers, and reviews unlisted mental-model names |
 | `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
 | `/kb-quizme` | Quizzes you on recently ingested wiki articles using spaced repetition |
 | `/kb-topic-query` | Searches the local wiki vault and synthesizes what you already know about a topic — no internet |
@@ -46,6 +54,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-canvas <topic>` | Builds an Obsidian canvas for the given topic — finds related wiki notes, reasons about relationships, and saves a versioned `.canvas` file to `canvases/<topic-slug>/` |
 | `/kb-research-to-lessons` | Converts a research report into an interactive HTML lesson course with curriculum plan, shared assets, and parallel-generated lessons |
 | `/kb-trunk-branch-extractor` | Deconstructs a given text (pasted or a file) into trunk knowledge (first principles, invariant rules) and branch knowledge (contextual tactics, frameworks, tools) |
+| `/kb-log-rebuild` | Manual only: rebuilds kbm.log.md from wiki/ and daily-update/, dropping every row that is not `ingest` or `newsletter` |
 | `/kb-issue-dispatch` | Fetches open GitHub issues labelled "run skills", parses skill intent from each body with LLM, runs skills in parallel isolated worktrees, commits outputs, comments results, and closes the issue |
 
 ### Parallel skills (opt-in)
@@ -54,7 +63,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 |----------------|---------------|---------|
 | `.claude/workflows/kb-newsagent-parallel.js` | `/kb-newsagent-parallel` | Same as kb-newsagent but fans out one concurrent agent per category (~6); collector merges sections and writes the file + log |
 | `.claude/workflows/kb-scrapecontent-parallel.js` | `/kb-scrapecontent-parallel` | Same as kb-scrapecontent but fans out one agent per URL (8 at a time); discovery, blocker detection and logging run in `scrape_queue.py`, not agents |
-| `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 8 concurrent ingest agents; log written by coordinator |
+| `.claude/workflows/kb-ingest-parallel.js` | `/kb-ingest-parallel` | Same as kb-ingest but fans out up to 14 concurrent ingest agents, ~3 files each; log written by coordinator |
 | `.claude/workflows/kb-ingest-transcript.js` | `/kb-ingest-transcript` | Full YouTube pipeline: fetch URLs from `raw/youtube/`, download + speaker-ID transcripts, stage to `raw/`, parallel ingest into wiki, then archive |
 | `.claude/workflows/kb-research-company.js` | `/kb-research-company` | Fans out 7 research agents (Parts 1–6, Financials split in two); a final agent writes the Bull vs. Bear synthesis, assembles the report and logs |
 
@@ -73,7 +82,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 - `raw/processed/` files: date-prefixed — e.g. `2026-07-26-article-slug.md`
 
 ### Output file locations
-- Daily digests: `daily-update/YYYY-MM/YYYY-MM-DD-N.md` (N = sequence number for multiple digests per day)
+- Daily digests: `daily-update/YYYY-MM/YYYY-MM-DD.md`; a second or later digest the same day takes `-2`, `-3`, and so on (`YYYY-MM-DD-2.md`)
 - Weekly digests: `weekly-update/YYYY-MM/YYYY-WXX-weekly.md`
 
 ### Wiki categories
@@ -88,10 +97,13 @@ Append a row to `kbm.log.md` after every pipeline action using this table format
 | Date | File | Activity |
 ```
 
-Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`
+Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `scrape-dupe`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`, `archive`, `librarian`
 
 - `ingest`: a new wiki note was created, or an existing note was updated with genuinely new information. These rows are what `/kb-newsletter` picks up for the day's digest.
 - `ingest-dupe`: a raw file's `source_url` (or topic) already existed in `wiki/` with nothing new to add. Logged for audit trail only — File column should point to the *existing* note, not a new file — and intentionally excluded from the newsletter.
+- `scrape-dupe`: a URL was skipped at scrape time because its article is already in `raw/` or `wiki/`. No fetch happened.
+- `archive`: a consumed input was retired, such as a URL list renamed to `.processed.md` or a transcript folder moved to `processed/`.
+- `librarian`: `/kb-librarian-apply` merged or archived a note, archived a straggler raw file, or updated the mental-model list.
 
 ### General conventions
 - Prefer working inside the existing vault structure rather than creating ad hoc folders.

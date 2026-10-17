@@ -1,6 +1,6 @@
 ---
 name: kb-ingest-parallel
-description: Parallel ingest of raw articles into structured wiki notes — 1 dedicated agent per file, up to 14 concurrent. Faster and higher quality than kb-ingest for large batches. Use when the user wants a parallel ingest run.
+description: Parallel ingest of raw articles into structured wiki notes — ~3 files per agent, up to 14 agents concurrent. Faster and higher quality than kb-ingest for large batches. Use when the user wants a parallel ingest run.
 ---
 
 If the Workflow tool is available (Claude Code sessions), run it with `name: "kb-ingest-parallel"`. Wait for the workflow to complete, then report the result: how many files were ingested.

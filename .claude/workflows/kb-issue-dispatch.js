@@ -131,7 +131,7 @@ Rules:
     { label: `parse-#${issue.number}`, schema: PARSE_SCHEMA, phase: 'Fetch & Parse' }
   ),
 
-  // Stage 2: execute skills in an isolated worktree, commit output, comment, close/reopen
+  // Stage 2: execute skills in an isolated worktree, commit output, comment, close on success
   (parsed, issue) => {
     if (!parsed || parsed.skills.length === 0) {
       log(`#${issue.number}: no valid skills identified — skipping`)
@@ -165,7 +165,7 @@ If there are uncommitted changes:
   c. git checkout -b issue/${issue.number}-$DATE
   d. git commit -m "issue #${issue.number} dispatch — ${skillNames}
 
-Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
   e. git push -u origin issue/${issue.number}-$DATE
   f. gh pr create --repo plaktoz/kb --title "issue #${issue.number}: ${issue.title}" --body "Outputs from dispatching issue #${issue.number}.
 
@@ -181,11 +181,9 @@ Post a comment summarising what ran. Build a markdown table with one row per ski
 
 gh issue comment ${issue.number} --repo plaktoz/kb --body "<your markdown comment>"
 
-### Step 4 — Close the issue
-gh issue close ${issue.number} --repo plaktoz/kb
-
-### Step 5 — Reopen if any skill failed
-If any skill failed: gh issue reopen ${issue.number} --repo plaktoz/kb
+### Step 4 — Close the issue only if every skill succeeded
+If every skill succeeded: gh issue close ${issue.number} --repo plaktoz/kb
+If any skill failed, leave the issue open.
 
 ## Return
 Return: issue_number (${issue.number}), skills_run (name, args, success, error for each), pr_url (empty string if no PR was opened), all_succeeded (true only if every skill succeeded).`,
@@ -199,7 +197,7 @@ const succeeded = valid.filter(r => r.all_succeeded).length
 const failed = valid.filter(r => !r.all_succeeded).length
 const prs = valid.filter(r => r.pr_url).map(r => r.pr_url)
 
-log(`Done: ${valid.length} issue(s) processed — ${succeeded} fully succeeded, ${failed} had failures (reopened).`)
+log(`Done: ${valid.length} issue(s) processed — ${succeeded} fully succeeded, ${failed} had failures (left open).`)
 if (prs.length > 0) log(`PRs opened: ${prs.join(', ')}`)
 
 return { processed: valid.length, succeeded, failed, pr_urls: prs }

@@ -27,12 +27,12 @@ Do not proceed until the working tree is clean in those paths.
 ### Branch setup
 
 ```bash
-git checkout main
-git pull origin main
-git checkout -b daily/$(date +%Y-%m-%d-%H%M)
+START=$(git symbolic-ref --quiet --short HEAD || git rev-parse HEAD)
+git fetch origin main
+git checkout -b daily/$(date +%Y-%m-%d-%H%M) origin/main
 ```
 
-Note the branch name for use in later steps.
+Note the branch name and `START` for use in later steps. The branch starts from `origin/main` rather than a local `main` checkout, because git refuses to check out `main` when another worktree holds it (as in `/kb-issue-dispatch`).
 
 ## Step 2: Run the daily pipeline
 
@@ -52,10 +52,9 @@ git status --porcelain wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 If the output is empty (nothing changed), do the following and then stop:
-1. Append a row to `kbm.log.md`: `| YYYY-MM-DD | kb-daily-autocommit | ingest |` with a note `no output — branch skipped`
-2. Run `git checkout main` to return to main
-3. Delete the branch: `git branch -d <branch-name>`
-4. Print: `No pipeline output — branch and commit skipped.`
+1. Return to where the run started: `git checkout <START>`
+2. Delete the branch: `git branch -D <branch-name>`
+3. Print: `No pipeline output — branch and commit skipped.`
 
 ## Step 4: Commit pipeline outputs
 

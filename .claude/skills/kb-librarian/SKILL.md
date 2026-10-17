@@ -1,6 +1,6 @@
 ---
 name: kb-librarian
-description: Scan wiki notes for duplicates and superseded content, write a human-reviewable librarian-report.md, and rebuild kbm.log.md (ingest + newsletter only) reconciled against the filesystem. Use when the user wants to audit the vault for conflicting or redundant notes.
+description: Scan wiki notes for duplicates and superseded content and write a human-reviewable librarian-report.md. Use when the user wants to audit the vault for conflicting or redundant notes.
 ---
 
 # Librarian Prompt
@@ -157,22 +157,22 @@ If no findings: write the summary block only with zeroes and a note "No duplicat
 
 ---
 
-## Phase 5: Log Rebuild
+## Phase 5: Log Check
 
-Run `/kb-log-rebuild`. Follow that skill exactly.
+Do not run `/kb-log-rebuild`. It is a manual tool, and it drops every row except `ingest` and `newsletter`.
 
 ---
 
 ## Phase 6: Unmatched Raw Files
 
-Identify files in `raw/processed/` that have no corresponding wiki note.
+Identify files in `raw/processed/` whose source no wiki note cites. Wiki notes are renamed at ingest, so match on the source, not the filename.
 
 ### Step 1: Build the straggler list
 
 For every `.md` file in `raw/processed/`:
-1. Strip the leading `YYYY-MM-DD-` date prefix from the filename to get the slug.
-2. Check whether any `.md` file under `wiki/` (excluding `wiki/archived/`) has that exact basename.
-3. If no match is found, it is a **straggler**.
+1. Read its `source_url:` value, or its `source_file:` value if it has no `source_url:`.
+2. Check whether that value appears in any `.md` file under `wiki/` (excluding `wiki/archived/`).
+3. If it appears nowhere, the file is a **straggler**. A file with neither header is also a straggler.
 
 ### Step 2: Append to `librarian-report.md`
 
@@ -269,8 +269,8 @@ Print a brief summary to the user:
 ### Phase 4: Duplicate & Superseded Detection
 - How many findings in librarian-report.md
 
-### Phase 5: Log Rebuild
-- How many log entries in the rebuilt kbm.log.md vs the archived version
+### Phase 5: Log Check
+- Skipped (log rebuild is manual)
 
 ### Phase 6: Unmatched Raw Files
 - How many straggler raw files found

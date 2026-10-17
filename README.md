@@ -10,7 +10,7 @@ A personal knowledge management (PKM) system that captures raw information, tran
 
 ## Outputs
 
-- **[daily-update/](daily-update/)** — daily newsletter digests, organized by month (`YYYY-MM/YYYY-MM-DD-N.md`)
+- **[daily-update/](daily-update/)** — daily newsletter digests, organized by month (`YYYY-MM/YYYY-MM-DD.md`, then `-2`, `-3` for later digests that day)
 - **[weekly-update/](weekly-update/)** — weekly synthesis digests, organized by month (`YYYY-MM/YYYY-WXX-weekly.md`)
 - **[research/](research/)** — sourced research reports and interactive lesson courses, organized by topic slug
 - **[Published site](https://plaktoz.github.io/kb)** — GitHub Pages view of this knowledge base
@@ -27,15 +27,15 @@ A personal knowledge management (PKM) system that captures raw information, tran
 | `.claude/skills/` | Self-contained skill files that power the automated workflows |
 | `daily-update/` | Daily newsletter digests |
 | `weekly-update/` | Weekly synthesis digests |
-| `data/` | Supporting reference data (investment holdings, wiki categories) |
+| `data/` | Supporting reference data (investment holdings, wiki categories, mental models, blocked domains) |
 
 ## Automated workflows
 
 Each recurring task is a self-contained slash command in `.claude/skills/`:
 
 - **`/kb-daily`** — news fetch → scrape → ingest → newsletter
-- **`/kb-weekly`** — compounds the week's daily digests into a high-signal weekly summary
+- **`/kb-weekly-newsletter`** — compounds the week's daily digests and ingested notes into a high-signal weekly summary
 - **`/kb-research-topic`** — grills user to refine a topic, searches 10–20 sources, saves report to `research/`
-- **`/kb-librarian`** — audits vault for duplicates, reclassifies stale notes, rebuilds the activity log
+- **`/kb-librarian`** — audits vault for duplicates, reclassifies stale notes, flags raw files no note cites
 
 See `CLAUDE.md` for full workflow conventions and slash command reference.
