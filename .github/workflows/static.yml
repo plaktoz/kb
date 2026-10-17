@@ -33,11 +33,16 @@ jobs:
         uses: actions/checkout@v4.2.2 # Or actions/checkout@v4 if you want to stick to v4, but ensures latest minor patches
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      # The repo is public, but holdings, raw scrapes and the activity log aren't meant for the site.
+      - name: Stage site
+        run: |
+          mkdir _site
+          cp index.html _site/
+          cp -R research _site/
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3.0.1 
+        uses: actions/upload-pages-artifact@v3.0.1
         with:
-          # Upload entire repository
-          path: '.'
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
