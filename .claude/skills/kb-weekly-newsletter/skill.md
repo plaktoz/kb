@@ -9,7 +9,11 @@ You are a synthesis-focused research assistant. Your task is to compile this wee
 
 ## Step 1 — Determine the week
 
-Calculate the current ISO week number and the date range (Monday–Sunday) for the week that just ended. Use these to scope all lookups below.
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py week
+```
+
+This prints the current ISO `year`, `week` (the `WNN` in the output name), `monday` and `sunday`. Use them to scope all lookups below. On a Sunday this is the week that just ended. Run on another day, pass a date in the intended week, e.g. `week 2026-10-18`.
 
 ## Step 2 — Gather this week's daily digests
 
@@ -26,11 +30,13 @@ If no daily digests exist for this week, create the output file with:
 
 ## Step 3 — Gather vault candidates (spaced repetition)
 
-Open `kbm.log.md`. Collect all rows where:
-- Activity = `ingest`
-- Date is **more than 7 days ago** and **within the last 90 days**
+List ingests from 90 days ago through 8 days ago (substitute both dates):
 
-For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file. Read its frontmatter and content. This is your vault pool.
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since <today minus 90 days> --until <today minus 8 days>
+```
+
+Read the frontmatter and content of the note at each entry's `path`, skipping null paths. This is your vault pool.
 
 ## Step 3.5 — Portfolio Pulse (investment digest)
 
@@ -43,7 +49,7 @@ If no finance notes are found for this week, skip the Portfolio Pulse section en
 
 ## Step 3.6 — Gather this week's core principles
 
-From `kbm.log.md`, take this week's `ingest` rows (the Monday–Sunday range) and the `compound` rows for topic files. Read the `## 🧠 Core Principles` section of each of those notes and topic files, if it has one. Older notes may only have the earlier `## 🧠 First Principles & Mental Models` section; skip those.
+Run `python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest,compound --since <monday> --until <sunday>`. Each `ingest` entry's `path` is a wiki note, and each `compound` entry's `file` is a topic file. Read the `## 🧠 Core Principles` section of each of those notes and topic files, if it has one. Older notes may only have the earlier `## 🧠 First Principles & Mental Models` section; skip those.
 
 Group principles that state the same invariant, even if they're worded differently or named with different models. A principle that appears in several notes this week, or in a topic file `/kb-compound` updated this week, is the strongest candidate for **One Lesson to Keep**.
 
@@ -102,10 +108,8 @@ Use relative Markdown paths from the output file location:
 
 ## After saving the file
 
-Append a row to `kbm.log.md`:
+Log it, using today's date and the full relative path of the actual output file:
 
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD weekly-update/YYYY-MM/YYYY-WNN-weekly.md newsletter
 ```
-| YYYY-MM-DD | weekly-update/YYYY-MM/YYYY-WNN-weekly.md | newsletter |
-```
-
-Use today's date and the full relative path of the actual output file.

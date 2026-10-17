@@ -56,7 +56,7 @@ Valid actions: `add`, `alias:<Listed Model>`, `exclude`, `skip`. Classify placeh
 
 ## Step 3: Execute decided findings
 
-Process each decided finding in order.
+Process each decided finding in order. Log each `librarian` row below with `python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD "<file>" librarian`, quoting the file text.
 
 ### merge-into-A (Duplicate)
 1. Read note B in full.
@@ -64,7 +64,7 @@ Process each decided finding in order.
 3. Merge B's Key Takeaways, Core Concepts WikiLinks, and any unique facts into note A without duplicating existing content.
 4. Update note A's `source_url` frontmatter: if it is currently a single string, replace it with a YAML array `[url-A, url-B]`. If it is already an array, append url-B if not already present.
 5. Move note B to `wiki/archived/`.
-6. Log to `kbm.log.md`: `| YYYY-MM-DD | merged B into A; archived B | librarian |`
+6. Log `merged B into A; archived B` as a `librarian` row.
 
 ### merge-into-B (Duplicate)
 Same as merge-into-A with A and B swapped.
@@ -75,11 +75,11 @@ Same as merge-into-A with A and B swapped.
 3. Merge any unique content from Old into Keep.
 4. Update Keep's `source_url` frontmatter: if it is currently a single string, replace it with a YAML array `[url-Keep, url-Old]`. If it is already an array, append url-Old if not already present.
 5. Move Old to `wiki/archived/`.
-6. Log to `kbm.log.md`: `| YYYY-MM-DD | merged Old into Keep; archived Old | librarian |`
+6. Log `merged Old into Keep; archived Old` as a `librarian` row.
 
 ### archive-old (Superseded)
 1. Move Old to `wiki/archived/`.
-2. Log to `kbm.log.md`: `| YYYY-MM-DD | archived Old (superseded by Keep) | librarian |`
+2. Log `archived Old (superseded by Keep)` as a `librarian` row.
 
 ### keep-both
 No file changes. Do not add to follow-up — this is a conscious decision.
@@ -94,7 +94,7 @@ No file changes. Do not add to follow-up — this is a conscious decision.
 If the Phase 6 action is `archive`:
 1. Create `raw/archived/` if it does not exist.
 2. Move each file in the list from `raw/processed/` to `raw/archived/` (bare filename, flat — no subdirectory).
-3. Log each move to `kbm.log.md`: `| YYYY-MM-DD | filename.md | librarian |`
+3. Log each move: `filename.md` as a `librarian` row.
 
 If the Phase 6 action is `skip` or the section is absent: do nothing.
 
@@ -115,7 +115,7 @@ For each decided `### Model #N` block, run the matching command from the repo ro
 
 If a command exits with an error (for example, `alias` naming a model that isn't listed), don't change anything for that block; treat it as undecided and carry it into the follow-up with the error message.
 
-After all Phase 7 commands have run, log once to `kbm.log.md`: `| YYYY-MM-DD | data/mental-models.md | librarian |`.
+After all Phase 7 commands have run, log `data/mental-models.md` once as a `librarian` row.
 
 Existing links in wiki notes are not renamed; the list only governs names written from now on.
 

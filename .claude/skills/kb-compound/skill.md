@@ -11,15 +11,19 @@ This skill writes back to the vault. It does not produce a newsletter or digest 
 
 ## Step 1 — Determine the week
 
-Calculate the current ISO week number and the date range (Monday–Sunday) for the week that just ended.
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py week
+```
+
+This prints the current ISO `year`, `week`, `monday` and `sunday`. Use them for every lookup below. On a Sunday this is the week that just ended. Run on another day, pass a date in the intended week, e.g. `week 2026-10-18`.
 
 ## Step 2 — Gather this week's ingested notes
 
-Open `kbm.log.md`. Collect all rows where:
-- Activity = `ingest`
-- Date falls within this week's Monday–Sunday range
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since <monday> --until <sunday>
+```
 
-For each matched filename: if it starts with `wiki/`, read it directly as a file path. Otherwise (older log entries with raw filenames), search `wiki/` recursively to locate the file. Read it fully. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
+Read the note at each entry's `path` fully. Skip entries whose `path` is null. If fewer than 2 notes were ingested this week, print "Fewer than 2 notes ingested this week — nothing to compound." and stop.
 
 ## Step 3 — Identify recurring themes
 
@@ -141,10 +145,12 @@ After all changes, print a compact summary:
 - [theme]: [reason — e.g. threshold not met (3 notes), or no new sources this week]
 ```
 
-Append a row to `kbm.log.md` for each topic file modified or created:
+Log one `compound` row for each topic file modified or created, in a single call:
 
-```
-| YYYY-MM-DD | topics/filename.md | compound |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append --rows - <<'EOF'
+[{"file": "topics/ai-agents.md", "activity": "compound"}]
+EOF
 ```
 
-Use today's date and the full relative path of the actual topic file (e.g. `topics/ai-agents.md`).
+Use the full relative path of each actual topic file. The date defaults to today.

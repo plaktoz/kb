@@ -51,10 +51,10 @@ After all notes are processed, delete any orphaned directory that is now empty.
 
 ### 3. Log each move
 
-After every file move, append a row to `kbm.log.md`:
+After every file move, log it:
 
-```
-| YYYY-MM-DD | filename.md | reorg |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD filename.md reorg
 ```
 
 ---
@@ -157,9 +157,13 @@ If no findings: write the summary block only with zeroes and a note "No duplicat
 
 ---
 
-## Phase 5: Log Check
+## Phase 5: Log Reconcile
 
-Do not run `/kb-log-rebuild`. It is a manual tool, and it drops every row except `ingest` and `newsletter`.
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py reconcile
+```
+
+This never deletes or rewrites a data row. It removes blank lines inside the log table and appends an `ingest` row for each wiki note that no `ingest` or `ingest-dupe` row points to. It also reports `missing`, the `ingest` rows whose note no longer exists. Do not run `/kb-log-rebuild`. It is a manual tool, and it drops every row except `ingest` and `newsletter`.
 
 ---
 
@@ -269,8 +273,8 @@ Print a brief summary to the user:
 ### Phase 4: Duplicate & Superseded Detection
 - How many findings in librarian-report.md
 
-### Phase 5: Log Check
-- Skipped (log rebuild is manual)
+### Phase 5: Log Reconcile
+- Blank lines removed, ingest rows appended, and the `missing_count` from `kb_log.py reconcile`
 
 ### Phase 6: Unmatched Raw Files
 - How many straggler raw files found

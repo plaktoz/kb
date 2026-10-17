@@ -184,7 +184,7 @@ log('Parts staged. Assembling report and adding Bull vs. Bear synthesis...')
 
 // Step 2: Assembly agent reads from disk — no large content in prompt
 await agent(
-  `Do the following in order:\n\n1. Read files research/${ticker}/parts/part-1.md through research/${ticker}/parts/part-6.md (read whichever exist).\n\n2. Write a concise "## Bull vs. Bear" synthesis section distilling the key investment thesis tension: 3–5 bull points and 3–5 bear points in bullet form. Be objective — no recommendations.\n\n3. Assemble the full report in this order and save to research/${ticker}/report.md:\n   - "# ${ticker} — Investment Analysis"\n   - "Analysed: <today's date YYYY-MM-DD>"\n   - The Bull vs. Bear synthesis section\n   - The content of part-1.md through part-6.md in order\n\n4. Append this row to kbm.log.md (add to the existing table — do not overwrite):\n   | <today's date YYYY-MM-DD> | research/${ticker}/report.md | research |`,
+  `Do the following in order:\n\n1. Read files research/${ticker}/parts/part-1.md through research/${ticker}/parts/part-6.md (read whichever exist).\n\n2. Write a concise "## Bull vs. Bear" synthesis section distilling the key investment thesis tension: 3–5 bull points and 3–5 bear points in bullet form. Be objective — no recommendations.\n\n3. Assemble the full report in this order and save to research/${ticker}/report.md:\n   - "# ${ticker} — Investment Analysis"\n   - "Analysed: <today's date YYYY-MM-DD>"\n   - The Bull vs. Bear synthesis section\n   - The content of part-1.md through part-6.md in order\n\n4. Log it by running: python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append <today's date YYYY-MM-DD> research/${ticker}/report.md research`,
   { label: 'assemble-and-log' }
 )
 
