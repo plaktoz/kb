@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://simplywall.st/stocks/us/software/nasdaq-msft/microsoft/news/did-azure-growth-just-shift-microsoft-msft-investment-narrat
 author: Simply Wall St
 tags: [microsoft, azure, copilot, investment-narrative]
-date_consumed: 2026-10-12
+date_consumed: 2026-10-17
 ---
 
 ## Summary
@@ -30,6 +30,18 @@ date_consumed: 2026-10-12
 - **Compliance Drag**: Sanctions, forced-labor and data-residency rules could slow adoption.
 - **Narrative Range**: 2029 earnings forecasts span US$204.6b to US$213.1b.
 - **Valuation Spread**: Fair value ranges from 8% upside to 26% downside.
+
+## Update (Trellis Copilot for Legal, 2026-10-16)
+
+A follow-up Simply Wall St piece by Sasha Jovanovic, syndicated on Yahoo Finance (source: https://finance.yahoo.com/markets/stocks/articles/earnings-beat-impact-microsoft-msft-042905289.html), adds a second vertical-partner example and new figures:
+
+- **[[Trellis]] in [[Microsoft 365 Copilot]] for Legal**: Brings specialized datasets such as state trial court records directly into Word and wider Microsoft 365, which makes Copilot a workflow hub rather than a chat box.
+- **Commercial cloud RPO**: Commercial cloud [[Remaining Performance Obligations]] reached US$678b, which ties the business more closely to long-term AI and cloud usage commitments.
+- **New offerings**: The results were backed by Copilot, E7 and first-party [[Maia]] chips.
+- **Monetization path**: If more vertical partners follow Trellis, Microsoft gets more ways to charge seat-plus-usage pricing without relying only on broad productivity scenarios.
+- **Execution risk**: If adoption lags the infrastructure build, Microsoft carries very large AI assets while gross margin pressure, AI tax-incentive scrutiny and insider-selling noise stay in focus.
+- **Bear case rationale**: The cautious analysts (US$508.6b revenue / US$204.6b earnings by 2029) worry that tying Copilot-style deals to short-lived GPUs could cap profitability. Both forecasts predate the Trellis news.
+- **Earnings gap**: The consensus path implies about US$79.4b of extra earnings beyond current profit levels, offset by slightly lower margins.
 
 ## 🧠 Core Principles
 
