@@ -10,7 +10,7 @@ Canonical subdirectories for notes in `wiki/`. Claude reads this before filing a
 | `productivity/` | Workflows, management, personal effectiveness | ⚡ Productivity | 3 |
 | `health/` | Health, wellness, exercise | ❤️ Health | 3 |
 | `strategy/` | Decision frameworks, mental models, competitive strategy, first-principles thinking | 🎯 Strategy | 2 |
-| `others/` | Staging area for uncategorized notes — revisit with /kb-reorg | 🗂️ Other | — |
+| `others/` | Staging area for uncategorized notes — revisit with /kb-librarian | 🗂️ Other | — |
 
 ## Fallback sources
 
@@ -61,6 +61,3 @@ Used by the news agent when Tavily is unavailable. Find exactly the number of ar
 - https://stratechery.com/
 - https://hbr.org/topic/strategy
 - https://www.sahilbloom.com/newsletter
-
-### 👪 Parenting
-- https://www.parents.com/lifestyle-5282764
