@@ -45,7 +45,13 @@ For each section in the confirmed outline:
 1. Generate 2–3 targeted search queries specific to that section.
 2. Use the Tavily MCP tool (`mcp_tavily_tavily-search` or `tavily-search`) if available; otherwise use WebSearch.
 3. Collect 3–5 high-quality, relevant articles per section.
-4. Open `kbm.log.md` and skip any article whose URL source already appears there.
+4. Drop URLs the vault already has or failed to scrape before. Pass every collected URL in one call:
+
+   ```bash
+   python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL...
+   ```
+
+   Keep only the URLs it lists under `fresh`.
 
 Target total: 10–20 articles across all sections. Prioritize depth and quality over freshness.
 
@@ -99,8 +105,8 @@ Rules:
 
 ## Phase 5: Log
 
-Append a row to `kbm.log.md` using today's date and the actual output path:
+Log it, using today's date and the actual output path:
 
-```text
-| YYYY-MM-DD | research/<context-slug>/report.md | research |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD research/<context-slug>/report.md research
 ```

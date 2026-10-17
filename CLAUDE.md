@@ -5,7 +5,7 @@ This repository is a local-first personal knowledge management (PKM) system buil
 
 ## Repository map
 - `glossary.md` — canonical vocabulary (personal reference; only /kb-librarian reads or writes it)
-- `kbm.log.md` — activity log; append a row after every pipeline action
+- `kbm.log.md` — activity log; append a row after every pipeline action with `kb_log.py append`
 - `kbm.log.archive-YYYY-MM-DD.md` — snapshots of the log taken by `/kb-log-rebuild` before it rewrites the log
 - `librarian-report.md` — findings from `/kb-librarian` awaiting human decisions; `librarian-followup.md` holds the ones still undecided after `/kb-librarian-apply`
 - `raw/` — source material at different pipeline stages
@@ -91,11 +91,16 @@ Read `data/wiki-categories.md` for the current list of categories. When filing a
 - If no category fits, place the note under `wiki/others/` and propose a new category to the user. Do not create a new category directory without confirmation.
 
 ### Activity log
-Append a row to `kbm.log.md` after every pipeline action using this table format:
+Append a row to `kbm.log.md` after every pipeline action with `.claude/skills/kb-log-rebuild/scripts/kb_log.py`, and read rows through it instead of parsing the log:
 
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD <file> <activity>
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append --rows ROWS.json
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest --since YYYY-MM-DD
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py week
 ```
-| Date | File | Activity |
-```
+
+The table format is `| Date | File | Activity |`. The registry of valid activities is `ACTIVITIES` in `kb_log.py`, and `append` rejects anything else. A test keeps the list below equal to it.
 
 Valid activity values: `ingest`, `ingest-dupe`, `scrape`, `scrape-failed`, `scrape-dupe`, `news-fetch`, `newsletter`, `compound`, `delete`, `reorg`, `research`, `lessons`, `canvas`, `archive`, `librarian`
 

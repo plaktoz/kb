@@ -172,13 +172,13 @@ Each answer should be 1–2 sentences, drawn only from the article.
 (Applies only to files that resulted in a brand-new note. Duplicate/near-duplicate files already moved their raw file and logged their row in step 2a — do not repeat this section for them.)
 
 1. Move the source file from \`/raw/\` to \`/raw/processed/\`
-2. Append a row to \`kbm.log.md\`:
+2. Log it, using today's date:
 
-\`\`\`
-| YYYY-MM-DD | wiki/<category>/note-slug.md | ingest |
+\`\`\`bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD wiki/<category>/note-slug.md ingest
 \`\`\`
 
-Use the full relative path of the wiki note created (e.g. \`wiki/science/entropy.md\`), not the raw source filename.
+Use the full relative path of the wiki note created (e.g. \`wiki/science/entropy.md\`), not the raw source filename. Log step 2a's \`ingest-dupe\` and \`ingest\` rows the same way, with the reason in the FILE argument.
 
 ## Expected outcome
 
@@ -304,7 +304,7 @@ phase('Ingest')
 const results = await parallel(
   batches.map((batch, i) => () =>
     agent(
-      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the ${sourceDir} directory:\n${batch.join('\n')}\n\nFollow these per-file instructions exactly:\n${skillContent}\n\nWiki categories reference:\n${catContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n${moveInstruction}\n- Return one log_row per processed file: date (YYYY-MM-DD, today's date), filename (the full relative path of the wiki note created, e.g. "wiki/<category>/note-slug.md"), activity ("ingest").`,
+      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the ${sourceDir} directory:\n${batch.join('\n')}\n\nFollow these per-file instructions exactly:\n${skillContent}\n\nWiki categories reference:\n${catContent}\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md or run kb_log.py — return log rows as structured output instead.\n${moveInstruction}\n- Return one log_row per processed file: date (YYYY-MM-DD, today's date), filename (the full relative path of the wiki note created, e.g. "wiki/<category>/note-slug.md"), activity ("ingest").`,
       { label: `ingest-batch-${i + 1}`, schema: WORKER_SCHEMA }
     )
   )
@@ -318,10 +318,10 @@ const ingested = allLogRows.filter(r => r.activity === 'ingest').length
 
 log(`${ingested} file(s) ingested. Writing log.`)
 
-const logLines = allLogRows.map(r => `| ${r.date} | ${r.filename} | ${r.activity} |`).join('\n')
+const logRows = JSON.stringify(allLogRows.map(r => ({ date: r.date, file: r.filename, activity: r.activity })))
 
 await agent(
-  `Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}\n\nUse today's date for any rows missing a date.`,
+  `Append these rows to kbm.log.md by running this command from the vault root exactly as written:\n\npython3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append --rows - <<'EOF'\n${logRows}\nEOF\n\nIf it exits non-zero, report its error.`,
   { label: 'finalize-log' }
 )
 

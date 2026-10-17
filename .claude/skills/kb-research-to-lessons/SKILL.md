@@ -246,8 +246,8 @@ Spawn one agent per lesson, all in parallel. Each agent receives:
 After all lesson agents complete:
 
 **Log to `kbm.log.md`:**
-```
-| YYYY-MM-DD | <research-dir>/lessons/ | lessons |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append YYYY-MM-DD <research-dir>/lessons/ lessons
 ```
 
 ---

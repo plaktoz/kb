@@ -166,7 +166,7 @@ if (stagedFiles.length === 0) {
   log('No transcripts found to stage — pipeline complete.')
   if (sourceFiles.length > 0) {
     await agent(
-      `Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\nThen append an archive row to kbm.log.md for each: | YYYY-MM-DD | <new-filename only, no path> | archive | (use today's date)`,
+      `Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\nThen log an archive row for each: python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append <today YYYY-MM-DD> <new-filename only, no path> archive`,
       { label: 'cleanup-source-files', phase: 'Archive' }
     )
   }
@@ -189,7 +189,7 @@ for (let i = 0; i < rawFileNames.length; i += batchSize) {
 const ingestResults = await parallel(
   batches.map((batch, i) => () =>
     agent(
-      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the raw/ directory:\n${batch.join('\n')}\n\nRead .claude/skills/kb-ingest/SKILL.md and follow its Per-File Instructions and "After processing each file" section exactly for each file above.\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md — return log rows as structured output instead.\n- Still move each source file from raw/ to raw/processed/ after processing it.\n- Return one log_row per processed file: date (today's date YYYY-MM-DD), filename (the File column kb-ingest would log: the wiki note path, e.g. "wiki/<category>/note-slug.md"), activity ("ingest", or "ingest-dupe" per step 2a).`,
+      `You are a PKM ingest agent. Process these ${batch.length} raw file(s) from the raw/ directory:\n${batch.join('\n')}\n\nRead .claude/skills/kb-ingest/SKILL.md and follow its Per-File Instructions and "After processing each file" section exactly for each file above.\n\nIMPORTANT overrides for parallel mode:\n- Do NOT write to kbm.log.md or run kb_log.py — return log rows as structured output instead.\n- Still move each source file from raw/ to raw/processed/ after processing it.\n- Return one log_row per processed file: date (today's date YYYY-MM-DD), filename (the File column kb-ingest would log: the wiki note path, e.g. "wiki/<category>/note-slug.md"), activity ("ingest", or "ingest-dupe" per step 2a).`,
       { label: `ingest-batch-${i + 1}`, schema: LOG_SCHEMA, phase: 'Ingest' }
     )
   )
@@ -201,17 +201,18 @@ phase('Archive')
 const allLogRows = ingestResults.filter(Boolean).flatMap(r => r.log_rows)
 const ingested = allLogRows.filter(r => r.activity === 'ingest').length
 const folderPaths = stagedFiles.map(s => s.folderPath)
-const logLines = allLogRows.map(r => `| ${r.date} | ${r.filename} | ${r.activity} |`).join('\n')
+const logRows = JSON.stringify(allLogRows.map(r => ({ date: r.date, file: r.filename, activity: r.activity })))
+const appendLog = "python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append"
 
 const tasks = [
-  logLines.length > 0
-    ? `1. Append these rows to kbm.log.md (add to the existing table, do not overwrite):\n${logLines}`
+  allLogRows.length > 0
+    ? `1. Append the ingest rows to kbm.log.md by running this command from the vault root exactly as written:\n${appendLog} --rows - <<'EOF'\n${logRows}\nEOF`
     : '1. No ingest log rows to write.',
   folderPaths.length > 0
-    ? `2. Move each of these video folders into youtube-transcript/processed/, preserving the channel subfolder (e.g. youtube-transcript/ai-engineer/video-title/ → youtube-transcript/processed/ai-engineer/video-title/). Create the channel subdirectory under youtube-transcript/processed/ if it does not exist. Then append an archive row to kbm.log.md for each moved folder: | YYYY-MM-DD | <video-folder-name> | archive | (use today's date, folder name only e.g. video-title). Folders to move:\n${folderPaths.join('\n')}`
+    ? `2. Move each of these video folders into youtube-transcript/processed/, preserving the channel subfolder (e.g. youtube-transcript/ai-engineer/video-title/ → youtube-transcript/processed/ai-engineer/video-title/). Create the channel subdirectory under youtube-transcript/processed/ if it does not exist. Then log an archive row for each moved folder: ${appendLog} <today YYYY-MM-DD> <video-folder-name> archive (folder name only, e.g. video-title). Folders to move:\n${folderPaths.join('\n')}`
     : '2. No transcript folders to move.',
   sourceFiles.length > 0
-    ? `3. Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\n   Then append an archive row for each to kbm.log.md: | YYYY-MM-DD | <new-filename only> | archive | (use today's date)`
+    ? `3. Rename each of these source YouTube URL files by inserting .processed before .md (e.g. queue.md → queue.processed.md): ${sourceFiles.join(', ')}\n   Then log an archive row for each: ${appendLog} <today YYYY-MM-DD> <new-filename only> archive`
     : '3. No source URL files to rename.',
 ].join('\n\n')
 

@@ -15,19 +15,15 @@ Example: `mental models` → keywords: `mental-model`, `mental model`, `first-pr
 
 ## Step 2 — Build candidate list from kbm.log.md
 
-Read `kbm.log.md`. Extract every row where the activity column is `ingest`. For each row, parse:
-- `date` — the YYYY-MM-DD value in column 1
-- `filename` — the value in column 2
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py rows --activity ingest
+```
 
-Deduplicate by filename (keep the most recent date if a file appears multiple times). Sort the full list by date descending.
+Each entry is one note at its latest row, with `date` and the resolved wiki `path`. Sort the list by `date` descending.
 
 ## Step 3 — Resolve wiki paths
 
-For each candidate filename: if it starts with `wiki/`, use it directly as the file path. Otherwise (older log entries with raw filenames), run:
-```bash
-find wiki/ -name "<filename>"
-```
-Keep only files that are found. Drop any that resolve outside `wiki/`.
+Keep entries whose `path` is non-null and use `path` as the note's file path. Drop the rest; their notes were moved or deleted.
 
 ## Step 4 — Filter by topic relevance
 
@@ -144,9 +140,8 @@ Write the canvas JSON to the resolved path.
 
 ## Step 11 — Log the activity
 
-Append to `kbm.log.md`:
-```
-| <today> | canvases/<topic-slug>/<filename> | canvas |
+```bash
+python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append <today> canvases/<topic-slug>/<filename> canvas
 ```
 
 ## Step 12 — Report to the user
