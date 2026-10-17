@@ -163,6 +163,7 @@ class VaultTest(unittest.TestCase):
         self.assertEqual(json.loads(out.stdout), {
             "inVault": ["https://example.com/old"],
             "failedBefore": ["https://example.com/paywalled"],
+            "blockedDomain": [],
             "fresh": ["https://example.com/brand-new"],
         })
 
@@ -181,6 +182,99 @@ class VaultTest(unittest.TestCase):
         ])
         self.assertTrue((self.root / "raw" / "url" / "2026-10-01-news-aggregation.processed.md").exists())
         self.assertFalse((self.root / "raw" / "url" / "2026-10-01-news-aggregation.md").exists())
+
+
+class BlocklistTest(unittest.TestCase):
+    MANUAL = "| Reuters.com | manual | blocks scraping, by hand |  -  |"
+
+    def setUp(self):
+        self.root = Path(tempfile.mkdtemp())
+        (self.root / "raw" / "processed").mkdir(parents=True)
+        (self.root / "wiki").mkdir()
+        (self.root / "data").mkdir()
+        (self.root / "kbm.log.md").write_text("# KBM Activity Log\n\n| Date | File | Activity |\n")
+        (self.root / "data" / "blocked-domains.md").write_text(sq.BLOCKLIST_HEADER + self.MANUAL + "\n")
+
+    def log(self, *rows):
+        with (self.root / "kbm.log.md").open("a") as f:
+            for day, file, activity in rows:
+                f.write(f"| {day} | {file} | {activity} |\n")
+
+    def failed(self, day, url, reason="blocked: http 403"):
+        return day, f"{url} ({reason})", "scrape-failed"
+
+    def ok(self, day, url, sub="raw/processed"):
+        name = f"{day}-{abs(hash(url))}.md"
+        (self.root / sub / name).write_text(f"---\nsource_url: {url}\n---\n# Body\n")
+        return day, name, "scrape"
+
+    def auto(self):
+        return {r["domain"]: (r["reason"], r["since"])
+                for r in sq.regenerate_blocklist(self.root)[0] if r["source"] == "auto"}
+
+    def test_two_trailing_failures_block_the_domain_and_one_does_not(self):
+        self.log(self.failed("2026-10-01", "https://www.paywalled.com/a"),
+                 self.failed("2026-10-03", "https://paywalled.com/b"),
+                 self.failed("2026-10-03", "https://once.com/a"))
+        self.assertEqual(self.auto(), {
+            "paywalled.com": ("2 consecutive failed scrapes, last 2026-10-03", "2026-10-01")})
+
+    def test_success_after_failures_clears_the_block(self):
+        self.log(self.failed("2026-10-01", "https://site.com/a"), self.failed("2026-10-02", "https://site.com/b"))
+        self.assertIn("site.com", self.auto())
+        self.log(self.ok("2026-10-04", "https://www.site.com/c", sub="raw"))
+        self.assertEqual(self.auto(), {})
+
+    def test_interleaved_failures_do_not_block(self):
+        self.log(self.failed("2026-10-01", "https://medicalxpress.com/a"),
+                 self.ok("2026-10-02", "https://medicalxpress.com/b"),
+                 self.failed("2026-10-03", "https://medicalxpress.com/c"))
+        self.assertEqual(self.auto(), {})
+
+    def test_dead_links_and_unmapped_successes_are_ignored(self):
+        self.log(self.failed("2026-10-01", "https://site.com/a", "dead: http 404"),
+                 self.failed("2026-10-02", "https://site.com/b", "page not found"),
+                 self.failed("2026-10-03", "https://site.com/c"),
+                 ("2026-10-04", "2026-10-04-no-such-file.md", "scrape"),
+                 self.failed("2026-10-05", "https://site.com/d", "http 410"))
+        self.assertEqual(self.auto(), {})
+        self.log(self.failed("2026-10-06", "https://site.com/e"))
+        self.assertEqual(self.auto(), {"site.com": ("2 consecutive failed scrapes, last 2026-10-06", "2026-10-03")})
+
+    def test_regeneration_keeps_manual_rows_verbatim_and_is_idempotent(self):
+        self.log(self.failed("2026-10-01", "https://zeta.com/a"), self.failed("2026-10-02", "https://zeta.com/b"),
+                 self.failed("2026-10-01", "https://alpha.com/a"), self.failed("2026-10-02", "https://alpha.com/b"),
+                 self.failed("2026-10-01", "https://reuters.com/a"), self.failed("2026-10-02", "https://reuters.com/b"))
+        path = self.root / "data" / "blocked-domains.md"
+        _, added = sq.regenerate_blocklist(self.root)
+        first = path.read_text()
+        _, added_again = sq.regenerate_blocklist(self.root)
+        self.assertEqual(path.read_text(), first)
+        self.assertEqual((added, added_again), (["alpha.com", "zeta.com"], []))
+        self.assertEqual(first.splitlines()[-3:], [
+            "| alpha.com | auto | 2 consecutive failed scrapes, last 2026-10-02 | 2026-10-01 |",
+            self.MANUAL,
+            "| zeta.com | auto | 2 consecutive failed scrapes, last 2026-10-02 | 2026-10-01 |",
+        ])
+
+    def test_seen_routes_blocked_domains_and_subdomains(self):
+        out = subprocess.run([sys.executable, str(SCRIPT), "seen", "https://www.reuters.com/x",
+                              "https://uk.reuters.com/y", "https://notreuters.com/z"],
+                             capture_output=True, text=True, cwd=self.root, check=True)
+        self.assertEqual(json.loads(out.stdout), {
+            "inVault": [], "failedBefore": [],
+            "blockedDomain": ["https://www.reuters.com/x", "https://uk.reuters.com/y"],
+            "fresh": ["https://notreuters.com/z"],
+        })
+
+    def test_finalize_reports_newly_blocked_domains_once(self):
+        (self.root / "raw" / "url").mkdir()
+        queue = {"sourceFiles": []}
+        rows = [{"filename": "https://bad.com/a (paywall)", "activity": "scrape-failed"},
+                {"filename": "https://bad.com/b (paywall)", "activity": "scrape-failed"}]
+        self.assertEqual(sq.finalize(self.root, queue, rows)["blockedDomains"], ["bad.com"])
+        self.assertEqual(sq.finalize(self.root, queue, rows)["blockedDomains"], [])
+        self.assertIn("| bad.com | auto |", (self.root / "data" / "blocked-domains.md").read_text())
 
 
 if __name__ == "__main__":

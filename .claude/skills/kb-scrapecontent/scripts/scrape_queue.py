@@ -6,13 +6,20 @@
                                          writes the queue to FILE (default: a fresh temp dir) and
                                          prints a summary naming it
   scrape_queue.py seen URL...            split URLs into inVault (a source_url in raw/ or wiki/),
-                                         failedBefore (named in kbm.log.md, e.g. scrape-failed) and fresh
+                                         failedBefore (named in kbm.log.md, e.g. scrape-failed),
+                                         blockedDomain (domain listed in data/blocked-domains.md) and fresh
   scrape_queue.py finalize QUEUE ROWS    append ROWS (JSON list of {filename, activity}) to
-                                         kbm.log.md and archive the source files named in QUEUE
+                                         kbm.log.md, archive the source files named in QUEUE and
+                                         regenerate data/blocked-domains.md; blockedDomains lists
+                                         domains auto-blocked by this run
+  scrape_queue.py blocklist              regenerate data/blocked-domains.md and print it as JSON
 
 Probe verdicts: ok (article text saved to text_path), thin, paywall, blocked, unreachable,
 dead (HTTP 404/410). Every URL resolves within TIMEOUT_S, and a whole batch within DEADLINE_S
 per 32 URLs, so a stalling site can never hang a run.
+
+A domain is auto-blocked when its last BLOCK_STREAK or more scrapes in kbm.log.md all failed for a
+reason other than a dead link. Manual rows in data/blocked-domains.md are never rewritten.
 
 Run from the vault root. Standard library only.
 """
@@ -30,6 +37,7 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
+from urllib.parse import urlsplit
 
 TIMEOUT_S = 10
 DEADLINE_S = 20
@@ -55,6 +63,19 @@ PAYWALL_RE = re.compile(
 )
 LIVE_BLOG_RE = re.compile(r"live-updates|/live/|liveblog", re.I)
 DEAD_STATUSES = {404, 410}
+DEAD_REASON_RE = re.compile(r"\b(404|410|dead|not found)\b", re.I)
+BLOCK_STREAK = 2
+BLOCKLIST = Path("data") / "blocked-domains.md"
+BLOCKLIST_HEADER = f"""# Blocked domains
+
+The news agent skips these domains. `manual` rows are hand-edited and never touched by code.
+`auto` rows are regenerated from `kbm.log.md` by `scrape_queue.py` on every `finalize` or
+`blocklist` run. A domain is listed while its last {BLOCK_STREAK} or more scrapes all failed (dead links
+excluded) and drops off after its next success. A domain also covers its subdomains.
+
+| Domain | Source | Reason | Since |
+|--------|--------|--------|-------|
+"""
 
 
 @dataclass
@@ -290,14 +311,77 @@ def pending_urls(root):
     return [str(f.relative_to(root)) for f in files], find_urls("\n".join(f.read_text(errors="replace") for f in files))
 
 
+def domain(url):
+    return (urlsplit(url).hostname or "").lower().removeprefix("www.")
+
+
+def is_blocked(url, blocked):
+    parts = domain(url).split(".")
+    return any(".".join(parts[i:]) in blocked for i in range(len(parts) - 1))
+
+
+def _table_rows(text):
+    for line in text.splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if line.startswith("|") and not set(cells[0]) <= set("-: "):
+            yield line, cells
+
+
+def auto_blocked(root):
+    index = {}
+    for sub in ("raw", "raw/processed"):
+        for f in (root / sub).glob("*.md"):
+            m = re.search(r"source_url:\s*(\S+)", f.read_text(errors="replace"))
+            if m:
+                index[f.name] = m.group(1)
+    fail_days = {}
+    for _, cells in _table_rows((root / "kbm.log.md").read_text(errors="replace")):
+        day, file, activity = cells[0], "|".join(cells[1:-1]), cells[-1]
+        if activity == "scrape" and Path(file).name in index:
+            fail_days.pop(domain(index[Path(file).name]), None)
+        elif activity == "scrape-failed" and (m := URL_RE.search(file)):
+            # A dead link says nothing about the site, only about that one URL.
+            if not DEAD_REASON_RE.search(file[m.end():]):
+                fail_days.setdefault(domain(m.group(0)), []).append(day)
+    return {d: {"reason": f"{len(days)} consecutive failed scrapes, last {days[-1]}", "since": days[0]}
+            for d, days in fail_days.items() if len(days) >= BLOCK_STREAK}
+
+
+def read_blocklist(root):
+    path = root / BLOCKLIST
+    rows = []
+    for line, cells in _table_rows(path.read_text() if path.exists() else ""):
+        if cells[0] != "Domain":
+            d, source, reason, since = (cells + ["", "", ""])[:4]
+            rows.append({"domain": d.lower().removeprefix("www."), "source": source,
+                         "reason": reason, "since": since, "line": line})
+    return rows
+
+
+def regenerate_blocklist(root):
+    old = read_blocklist(root)
+    manual = [r for r in old if r["source"] != "auto"]
+    taken = {r["domain"] for r in manual}
+    auto = [{"domain": d, "source": "auto", **v} for d, v in auto_blocked(root).items() if d not in taken]
+    rows = sorted(manual + auto, key=lambda r: r["domain"])
+    lines = [r.get("line") or f"| {r['domain']} | auto | {r['reason']} | {r['since']} |" for r in rows]
+    (root / BLOCKLIST).parent.mkdir(exist_ok=True)
+    (root / BLOCKLIST).write_text(BLOCKLIST_HEADER + "".join(line + "\n" for line in lines))
+    added = sorted({r["domain"] for r in auto} - {r["domain"] for r in old if r["source"] == "auto"})
+    return [{k: r[k] for k in ("domain", "source", "reason", "since")} for r in rows], added
+
+
 def seen(root, urls):
     in_vault = scraped_urls(root)
     logged = set(find_urls((root / "kbm.log.md").read_text(errors="replace")))
+    blocked = {r["domain"] for r in read_blocklist(root)}
     urls = find_urls(" ".join(urls))
+    rest = [u for u in urls if u not in in_vault and u not in logged]
     return {
         "inVault": [u for u in urls if u in in_vault],
         "failedBefore": [u for u in urls if u not in in_vault and u in logged],
-        "fresh": [u for u in urls if u not in in_vault and u not in logged],
+        "blockedDomain": [u for u in rest if is_blocked(u, blocked)],
+        "fresh": [u for u in rest if not is_blocked(u, blocked)],
     }
 
 
@@ -329,7 +413,8 @@ def finalize(root, queue, rows):
     if new:
         text = log.read_text()
         log.write_text(text + ("" if text.endswith("\n") else "\n") + "\n".join(new) + "\n")
-    return {"appended": len(new), "skipped_existing": len(lines) - len(new)}
+    _, added = regenerate_blocklist(root)
+    return {"appended": len(new), "skipped_existing": len(lines) - len(new), "blockedDomains": added}
 
 
 def main(argv):
@@ -349,6 +434,8 @@ def main(argv):
         out = seen(root, args)
     elif cmd == "finalize" and len(args) == 2:
         out = finalize(root, json.loads(Path(args[0]).read_text()), json.loads(Path(args[1]).read_text()))
+    elif cmd == "blocklist":
+        out = regenerate_blocklist(root)[0]
     else:
         sys.exit(__doc__)
     print(json.dumps(out, indent=1))
