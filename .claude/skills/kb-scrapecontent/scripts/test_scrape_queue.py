@@ -5,6 +5,7 @@ import tempfile
 import threading
 import time
 import unittest
+from datetime import timedelta
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -186,6 +187,7 @@ class VaultTest(unittest.TestCase):
 
 class BlocklistTest(unittest.TestCase):
     MANUAL = "| Reuters.com | manual | blocks scraping, by hand |  -  |"
+    TODAY = sq.date(2026, 10, 17)
 
     def setUp(self):
         self.root = Path(tempfile.mkdtemp())
@@ -210,7 +212,7 @@ class BlocklistTest(unittest.TestCase):
 
     def auto(self):
         return {r["domain"]: (r["reason"], r["since"])
-                for r in sq.regenerate_blocklist(self.root)[0] if r["source"] == "auto"}
+                for r in sq.regenerate_blocklist(self.root, self.TODAY)[0] if r["source"] == "auto"}
 
     def test_two_trailing_failures_block_the_domain_and_one_does_not(self):
         self.log(self.failed("2026-10-01", "https://www.paywalled.com/a"),
@@ -231,6 +233,15 @@ class BlocklistTest(unittest.TestCase):
                  self.failed("2026-10-03", "https://medicalxpress.com/c"))
         self.assertEqual(self.auto(), {})
 
+    def test_block_expires_block_days_after_the_last_failure(self):
+        def streak_ending(days_ago):
+            last = self.TODAY - timedelta(days=days_ago)
+            self.log(self.failed(str(last - timedelta(days=1)), f"https://stale{days_ago}.com/a"),
+                     self.failed(str(last), f"https://stale{days_ago}.com/b"))
+        streak_ending(61)
+        streak_ending(59)
+        self.assertEqual(list(self.auto()), ["stale59.com"])
+
     def test_dead_links_and_unmapped_successes_are_ignored(self):
         self.log(self.failed("2026-10-01", "https://site.com/a", "dead: http 404"),
                  self.failed("2026-10-02", "https://site.com/b", "page not found"),
@@ -246,9 +257,9 @@ class BlocklistTest(unittest.TestCase):
                  self.failed("2026-10-01", "https://alpha.com/a"), self.failed("2026-10-02", "https://alpha.com/b"),
                  self.failed("2026-10-01", "https://reuters.com/a"), self.failed("2026-10-02", "https://reuters.com/b"))
         path = self.root / "data" / "blocked-domains.md"
-        _, added = sq.regenerate_blocklist(self.root)
+        _, added = sq.regenerate_blocklist(self.root, self.TODAY)
         first = path.read_text()
-        _, added_again = sq.regenerate_blocklist(self.root)
+        _, added_again = sq.regenerate_blocklist(self.root, self.TODAY)
         self.assertEqual(path.read_text(), first)
         self.assertEqual((added, added_again), (["alpha.com", "zeta.com"], []))
         self.assertEqual(first.splitlines()[-3:], [

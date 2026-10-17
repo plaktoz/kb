@@ -19,7 +19,9 @@ dead (HTTP 404/410). Every URL resolves within TIMEOUT_S, and a whole batch with
 per 32 URLs, so a stalling site can never hang a run.
 
 A domain is auto-blocked when its last BLOCK_STREAK or more scrapes in kbm.log.md all failed for a
-reason other than a dead link. Manual rows in data/blocked-domains.md are never rewritten.
+reason other than a dead link. The block expires BLOCK_DAYS after the last failure, because a blocked
+domain is never scraped again and so can never log the success that would clear it. Manual rows in
+data/blocked-domains.md are never rewritten.
 
 Run from the vault root. Standard library only.
 """
@@ -65,13 +67,15 @@ LIVE_BLOG_RE = re.compile(r"live-updates|/live/|liveblog", re.I)
 DEAD_STATUSES = {404, 410}
 DEAD_REASON_RE = re.compile(r"\b(404|410|dead|not found)\b", re.I)
 BLOCK_STREAK = 2
+BLOCK_DAYS = 60
 BLOCKLIST = Path("data") / "blocked-domains.md"
 BLOCKLIST_HEADER = f"""# Blocked domains
 
 The news agent skips these domains. `manual` rows are hand-edited and never touched by code.
 `auto` rows are regenerated from `kbm.log.md` by `scrape_queue.py` on every `finalize` or
 `blocklist` run. A domain is listed while its last {BLOCK_STREAK} or more scrapes all failed (dead links
-excluded) and drops off after its next success. A domain also covers its subdomains.
+excluded) and drops off after its next success or {BLOCK_DAYS} days after its last failure. A domain
+also covers its subdomains.
 
 | Domain | Source | Reason | Since |
 |--------|--------|--------|-------|
@@ -327,7 +331,15 @@ def _table_rows(text):
             yield line, cells
 
 
-def auto_blocked(root):
+def _iso_day(text):
+    try:
+        return date.fromisoformat(text)
+    except ValueError:
+        return None
+
+
+def auto_blocked(root, today=None):
+    today = today or date.today()
     index = {}
     for sub in ("raw", "raw/processed"):
         for f in (root / sub).glob("*.md"):
@@ -336,15 +348,18 @@ def auto_blocked(root):
                 index[f.name] = m.group(1)
     fail_days = {}
     for _, cells in _table_rows((root / "kbm.log.md").read_text(errors="replace")):
-        day, file, activity = cells[0], "|".join(cells[1:-1]), cells[-1]
+        day, file, activity = _iso_day(cells[0]), "|".join(cells[1:-1]), cells[-1]
+        if day is None:
+            continue
         if activity == "scrape" and Path(file).name in index:
             fail_days.pop(domain(index[Path(file).name]), None)
         elif activity == "scrape-failed" and (m := URL_RE.search(file)):
             # A dead link says nothing about the site, only about that one URL.
             if not DEAD_REASON_RE.search(file[m.end():]):
                 fail_days.setdefault(domain(m.group(0)), []).append(day)
-    return {d: {"reason": f"{len(days)} consecutive failed scrapes, last {days[-1]}", "since": days[0]}
-            for d, days in fail_days.items() if len(days) >= BLOCK_STREAK}
+    return {d: {"reason": f"{len(days)} consecutive failed scrapes, last {days[-1]}", "since": str(days[0])}
+            for d, days in fail_days.items()
+            if len(days) >= BLOCK_STREAK and (today - days[-1]).days <= BLOCK_DAYS}
 
 
 def read_blocklist(root):
@@ -358,11 +373,11 @@ def read_blocklist(root):
     return rows
 
 
-def regenerate_blocklist(root):
+def regenerate_blocklist(root, today=None):
     old = read_blocklist(root)
     manual = [r for r in old if r["source"] != "auto"]
     taken = {r["domain"] for r in manual}
-    auto = [{"domain": d, "source": "auto", **v} for d, v in auto_blocked(root).items() if d not in taken]
+    auto = [{"domain": d, "source": "auto", **v} for d, v in auto_blocked(root, today).items() if d not in taken]
     rows = sorted(manual + auto, key=lambda r: r["domain"])
     lines = [r.get("line") or f"| {r['domain']} | auto | {r['reason']} | {r['since']} |" for r in rows]
     (root / BLOCKLIST).parent.mkdir(exist_ok=True)
