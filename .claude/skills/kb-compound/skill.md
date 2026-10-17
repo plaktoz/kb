@@ -38,12 +38,23 @@ For each theme identified in Step 3:
 
 ### 4a — Check for an existing topic file
 
-Search `topics/<theme-slug>.md`. If the file exists, proceed to **4c (Update)**.
+Pick 2–4 search terms for the theme (its name plus close synonyms) and search the topic files:
+
+```bash
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synonym --topics --limit 5
+```
+
+If `topics/<theme-slug>.md` is listed, or a listed topic file already covers this theme under another slug, proceed to **4c (Update)** with that file.
 
 ### 4b — Decide whether to create a new topic file
 
-If no topic file exists, count vault-wide notes on this theme:
-- Search `wiki/` recursively for notes whose filename or content meaningfully covers the theme
+If no topic file exists, count vault-wide notes on this theme with the same terms:
+
+```bash
+python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synonym
+```
+
+- Count the `notes` whose filename, tags or content meaningfully cover the theme. Notes with `filename` or `tags` in `matched` almost always qualify; check body-only matches before counting them
 - If **5 or more** vault notes exist: proceed to **4d (Create)**
 - If fewer than 5: record "threshold not met (N notes)" in the report and skip this theme
 
