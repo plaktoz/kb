@@ -2,76 +2,24 @@ export const meta = {
   name: 'kb-newsagent-parallel',
   description: 'Parallel news search: fans out one agent per category, collector merges + writes file and log',
   phases: [
-    { title: 'Discover', detail: 'Read holdings and determine output filename' },
-    { title: 'Search', detail: 'Parallel search + viability-check — one agent per category, up to 6 concurrent' },
+    { title: 'Discover', detail: 'Read holdings, news categories and the output filename' },
+    { title: 'Search', detail: 'Parallel search + viability-check — one agent per category' },
     { title: 'Finalize', detail: 'Merge category sections into one file, write log row' },
   ],
 }
 
-// Keep in sync with data/wiki-categories.md's article-count column if it changes.
-const CATEGORIES = [
-  { key: 'technology', heading: '## 🚀 Technology', count: 3, hint: 'AI OR software OR startup news today (tech industry, tools)' },
-  { key: 'finance', heading: '## 📊 Finance', count: 3, hint: 'stock market OR investing OR economy news today' },
-  { key: 'productivity', heading: '## ⚡ Productivity', count: 3, hint: 'productivity tips OR time management OR deep work' },
-  { key: 'learning', heading: '## 🧠 Learning', count: 3, hint: 'learning strategies OR skill development OR online education' },
-  { key: 'health', heading: '## 🩺 Health', count: 3, hint: 'health research OR wellness OR nutrition OR mental health news today' },
-  { key: 'holdings', heading: '## 📈 My Holdings', count: 3, hint: null },
-]
+const RULES_PATH = '.claude/skills/kb-newsagent/references/rules.md'
 
-// Inlined rules shared by every category worker — keep in sync with .claude/skills/kb-newsagent/SKILL.md
-// if that file changes. Tightened vs. the sequential skill: viability-checking now prefers Tavily's
-// own include_raw_content over a separate WebFetch round-trip, and caps replacement attempts at 1
-// (not 2) — a slow run showed a single dead page being retried twice as the biggest tail-latency cost.
-const SHARED_RULES = `
-## Search
+const HINTS = {
+  technology: 'AI OR software OR startup news today (tech industry, tools)',
+  finance: 'stock market OR investing OR economy news today',
+  productivity: 'productivity tips OR time management OR deep work',
+  learning: 'learning strategies OR skill development OR online education',
+  health: 'health research OR wellness OR nutrition OR mental health news today',
+  strategy: 'competitive strategy OR decision frameworks OR mental models',
+}
 
-Use the Tavily MCP tool (mcp__tavily__tavily_search) as the primary search method, called with
-include_raw_content: true so results already carry extractable article text. Keep max_results small
-(5 is plenty) — you're running alongside 5 other search agents concurrently, and large
-include_raw_content payloads (many full articles in one response) are the likely cause of stalls
-seen in earlier runs. Make at most 2-3 search calls total for your category before picking your
-final candidates; don't keep issuing broader queries hoping for better results. If Tavily errors,
-hangs, or returns no MCP connection, fall back to the Serper MCP tool (mcp__serper-search__google_search)
-immediately rather than retrying Tavily repeatedly.
-
-## Dedup — required before finalizing your candidate list
-
-Check all your candidate URLs in one call:
-python3 .claude/skills/kb-scrapecontent/scripts/scrape_queue.py seen URL1 URL2 ...
-Drop every URL listed under inVault (already in the vault), failedBefore (a past scrape failed) or
-blockedDomain (its site is in data/blocked-domains.md) and pick replacements; only "fresh" URLs may
-go in your section. Check replacements the same way.
-Do not try to read kbm.log.md in full (it can be ~300KB) — this check is the authoritative signal.
-
-## Avoid live-blog / JS-rendered pages
-
-Skip URLs with "live-updates", "/live/", or "liveblog" in the path — these are typically client-side
-rendered and return empty content even when the domain isn't blocked. Prefer a static recap or
-analysis article covering the same story instead.
-
-## Viability check — tightened for speed
-
-Tavily's include_raw_content already gives you the article text in the search result itself — treat
-a non-trivial raw_content (a few hundred+ chars of real prose, not nav/boilerplate) as passing,
-with no separate fetch needed. Only do one WebFetch check if raw_content is missing, empty, or
-suspiciously short/menu-like. If a candidate fails viability, search for exactly ONE replacement in
-the same category and re-check it the same way. If that replacement also fails, drop the slot and
-note the shortfall in your section_body, e.g.:
-
-(2 of 3 — one candidate was unscrapable and no working replacement was found)
-
-Do not include a URL you have not verified has real extractable content.
-
-## Output format for section_body
-
-Bullet list only (no heading — the coordinator adds that), full raw URLs, no masked anchor text:
-
-- **[Article title]**: [1-sentence description of why this is relevant]
-  URL: https://...
-
-- **[Article title]**: [1-sentence description]
-  URL: https://...
-`
+const HOLDINGS = { key: 'holdings', heading: '## 📈 My Holdings', count: 3 }
 
 const CATEGORY_SCHEMA = {
   type: 'object',
@@ -84,14 +32,14 @@ const CATEGORY_SCHEMA = {
   required: ['heading', 'section_body', 'found', 'requested'],
 }
 
-// Phase 1: Discover — holdings + output filename
 phase('Discover')
 
 const discovery = await agent(
-  `Do two things and return structured output:
+  `Do three things and return structured output:
 1. Read data/investments.md and return its holdings table rows as {ticker, name, category} — category is "Stock" or "ETF".
-2. Determine today's date (YYYY-MM-DD) from your own current-date context, then list raw/url/ and find the right output filename: raw/url/{today}-news-aggregation.md if no file matching {today}-news-aggregation*.md exists yet (checking .md and .processed.md variants), otherwise the next available numbered variant (-2, -3, ...).
-Return {date, holdings, output_filename} where output_filename is the relative path e.g. "raw/url/2026-09-29-news-aggregation-3.md".`,
+2. Read the table in data/wiki-categories.md and return one {key, heading, count} per row, in table order, skipping rows whose "News articles/day" is "—". key is the Category column without backticks or the trailing slash (e.g. "strategy"), heading is the "Newsletter section" column verbatim (e.g. "🎯 Strategy"), count is the "News articles/day" number.
+3. Determine today's date (YYYY-MM-DD) from your own current-date context, then list raw/url/ and find the right output filename: raw/url/{today}-news-aggregation.md if no file matching {today}-news-aggregation*.md exists yet (checking .md and .processed.md variants), otherwise the next available numbered variant (-2, -3, ...).
+Return {date, holdings, categories, output_filename} where output_filename is the relative path e.g. "raw/url/2026-09-29-news-aggregation-3.md".`,
   {
     label: 'discover',
     schema: {
@@ -110,14 +58,32 @@ Return {date, holdings, output_filename} where output_filename is the relative p
             required: ['ticker', 'name', 'category'],
           },
         },
+        categories: {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              key: { type: 'string' },
+              heading: { type: 'string' },
+              count: { type: 'number' },
+            },
+            required: ['key', 'heading', 'count'],
+          },
+        },
         output_filename: { type: 'string' },
       },
-      required: ['date', 'holdings', 'output_filename'],
+      required: ['date', 'holdings', 'categories', 'output_filename'],
     },
   }
 )
 
-// Phase 2: Search — one agent per category, fully concurrent
+if (!discovery.categories.length) throw new Error('No news categories parsed from data/wiki-categories.md')
+
+const CATEGORIES = [
+  ...discovery.categories.map(c => ({ ...c, heading: `## ${c.heading}` })),
+  HOLDINGS,
+]
+
 phase('Search')
 
 const holdingsList = discovery.holdings.map(h => `${h.ticker} (${h.name}, ${h.category})`).join(', ')
@@ -127,21 +93,17 @@ const results = await parallel(
     const task =
       cat.key === 'holdings'
         ? `Category: My Holdings. Find exactly ${cat.count} distinct, high-quality, breaking/trending articles from the last 24–48 hours across these holdings: ${holdingsList}. For each Stock ticker, search "{TICKER} news today". For each ETF, infer a theme from the fund name and search by theme (e.g. an S&P 500 ETF -> "S&P 500 market news today"). Pick the ${cat.count} best/most distinct results across all holding queries.`
-        : `Category: ${cat.key}. Find exactly ${cat.count} distinct, high-quality, breaking/trending articles from the last 24–48 hours using queries like: "${cat.hint}".`
+        : `Category: ${cat.key}. Find exactly ${cat.count} distinct, high-quality, breaking/trending articles from the last 24–48 hours using queries like: "${HINTS[cat.key] ?? `${cat.key} news today`}".`
 
     return agent(
-      `You are a news search agent working on ONE category of a larger news-aggregation run.\n\n${task}\n${SHARED_RULES}\n\nReturn {heading, section_body, found, requested} — heading is exactly "${cat.heading}", requested is ${cat.count}, found is how many articles you actually included.`,
+      `You are a news search agent working on ONE category of a larger news-aggregation run.\n\n${task}\n\nRead ${RULES_PATH} and follow it for search, URL filters, dedup, the viability check and the section format. Put only the bullets in section_body; the coordinator adds the heading.\n\nReturn {heading, section_body, found, requested} — heading is exactly "${cat.heading}", requested is ${cat.count}, found is how many articles you actually included.`,
       { label: `search-${cat.key}`, phase: 'Search', schema: CATEGORY_SCHEMA }
     )
   })
 )
 
-// Phase 3: Finalize — assemble sections, write file + single log row
 phase('Finalize')
 
-// Preserve full category coverage even when an agent errored/stalled — a dropped category must
-// show up as an explicit shortfall, never vanish silently (that reads as "no news that day" when
-// it actually means "the search agent failed").
 const sections = CATEGORIES.map((cat, i) => {
   const r = results[i]
   if (r) return r
