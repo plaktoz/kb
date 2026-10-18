@@ -1,0 +1,91 @@
+---
+source_url: https://www.cnbc.com/2026/10/17/bending-spoons-wants-to-revive-software-castoffs-berkshire-investing.html
+author: CJ Haddad
+date: 2026-10-17
+---
+
+# Software’s new consolidator gets big vote of confidence from Berkshire
+
+Italy's Bending Spoons has emerged as a major player in tech M&A, and is now moving aggressively to snap up out-of-favor software names.
+
+The holding company's stock price shot up this week after Berkshire Hathaway bolstered its investment, putting in more than $300 million.
+
+"This is what private equity firms were planning to do but they got their nose bloodied," said Nick Mehta, former CEO of cloud software vendor Gainsight.
+
+At the time of its Nasdaq debut in July, Bending Spoons was a little-known holding company out of Italy that owned older internet names like AOL, Vimeo, Eventbrite and Evernote.
+
+Less than four months later, the Milan-based firm has emerged as a surprising home for former high-flying software startups that have been thrust aside by the artificial intelligence boom. Its M&A plan got a major boost this week from the most famous holding company on the planet: Berkshire Hathaway.
+
+Berkshire, which Bending Spoons describes as a "longstanding inspiration" for its strategy, has now invested over $900 million in the company, including a $330 million stake disclosed on Wednesday. Wall Street loved the deal, sending Bending Spoons' stock up 41%, though some of those gains were lost later in the week, leaving the company with a market cap of about $30 billion.
+
+"Berkshire's decision to add to its position just a few months after the IPO and at these levels provides another vote of confidence in the Bending Spoons model from one of the world's most respected long-term investors," wrote analysts at Mizuho, in a report after the announcement.
+
+The other big news out of Bending Spoons this week underscores the flipside of the business: job cuts. In August, Bending Spoons announced it was buying workflow software provider Airtable for about $1.3 billion, or almost 90% below the company's peak valuation from late 2021. Bending Spoons said Monday that a "large portion of the pre-acquisition team" from Airtable would be leaving with "substantial separation packages." Layoffs were previously implemented at Evernote, Vimeo, WeTransfer and others in the portfolio.
+
+For the technology industry, Bending Spoons' moves represent the latest example of how quickly fortunes are turning in the AI era, as new agents powered by large language models displace software developers and the products they built. With Anthropic and OpenAI marching toward trillion-dollar valuations, businesses are putting more valuable work in their hands at the expense of a host of software-as-a-service names, creating a phenomenon that's become known as the "SaaSpocalypse."
+
+Shares of Intuit, HubSpot and Adobe are all down at least 30% this year, and a long list of private SaaS companies that were once venture darlings are now struggling to find capital, with the public market showing no appetite for IPOs. Last month, Bending Spoons agreed to buy collaboration software vendor Miro, once valued at $17.5 billion, for $1.36 billion.
+
+"You're either like a hot thing or you're nothing," said Ethan Kurzweil, founder and managing partner at Chemistry VC and a veteran software investor. Kurzweil said he uses Airtable, and said there are plenty of good SaaS products on the market led by solid teams, "but they're not on the frontier anymore."
+
+## An app turned acquirer
+
+Bending Spoons was launched in 2013 by friends Luca Ferrari, the CEO, Matteo Danieli and Francesco Patarnello. A mobile app they'd created called Evertale failed to take off, and they used the $40,000 they had left to build an operating company instead of "products nobody wanted," according to the IPO prospectus.
+
+Bending Spoons has announced all of its biggest deals in the last few years, beginning with Evernote in 2022, followed by Brightcove in 2024, and Vimeo, AOL and Eventbrite in 2025.
+
+The company held its IPO on June 30, raising about $1.7 billion at $29 a share, and hit the Nasdaq the next day. The stock closed Friday at $47.07.
+
+Prior to Bending Spoons' recent jump into enterprise software, some of the leading acquirers in the space over the past decade were private equity behemoths Thoma Bravo and Vista Equity Partners. Those firms were aiming to buy what they viewed as undervalued SaaS companies and, through a combination of cost cuts, efficiency improvements and rollups, turn them into assets that could be sold or taken public at a higher price.
+
+Bending Spoons is using a different playbook. The company isn't looking for eventual exits but rather wants to generate profits from the businesses it buys, similar to the Warren Buffett model. But unlike Berkshire, Bending Spoons' focus is technology, and it's taking a hands-on approach with its own software, operations and personnel decisions.
+
+Nick Mehta, former CEO of cloud software vendor Gainsight, said private equity firms are limited now because "they got their nose bloodied."
+
+"They paid much higher prices and have so many troubled companies that it's difficult for them to take swings now," said Mehta, who sold Gainsight to Vista in 2020.
+
+Thoma Bravo and Vista didn't respond to requests for interviews. Bending Spoons told CNBC in a statement that it hadn't been outbid for a target in "several years."
+
+As the company started jumping into SaaS, Mehta said "Bending Spooned" became a verb in Silicon Valley, referring to companies getting scooped up for pennies on the dollar.
+
+"Unfortunately, a lot of my friends in that game are stuck," Mehta said. "Investors want out but there are no buyers. Anything pre-ChatGPT is legacy now."
+
+Lloyd Walmsley, an analyst at Mizuho, said Bending Spoons' model is distinct from the older buyout approach.
+
+"I think there aren't a lot of people that do what these guys do in terms of the depth of operations and the willingness to make substantial product changes," Walmsley said in an interview. "It's not typical of traditional private equity firms to make anywhere near this level of change."
+
+For customers of the companies that Bending Spoons buys, sudden price hikes can follow.
+
+In April 2023, months after the Evernote acquisition, Bending Spoons lifted the annual personal subscription price to $130 from $70. Later, the company changed its offerings, charging $100 for its so-called starter plan and $250 for "Evernote Advanced," compared to the $170 it had been charging for the pro plan.
+
+"My first reaction was like, Oh man, I guess I have to switch to OneNote," said Walmsley, referring to Microsoft's notetaking app. But he said he stuck with Evernote.
+
+"They're really savvy at finding these things that they provide a lot of value, and the switching costs are really high," Walmsley said. "The price isn't that high relative to the switching cost."
+
+Bending Spoons uses the profits from its portfolio companies for future growth, the "overwhelming majority" of which comes from doing more deals, Ferrari told CNBC in an interview on Thursday.
+
+"There are certain opportunities for improvement we can unlock over the first few years, and then the business will have whatever organic growth is intrinsic in that market," Ferrari said.
+
+## Read more CNBC tech news
+
+Apple's $1,999 iPhone Duo puts the company's status-symbol power to the test
+
+Trump says White House didn't order Starlink restrictions in Ukraine
+
+Blue Origin plans $330 million Florida expansion to ramp New Glenn launches
+
+SpaceX AI policy leader grilled by NYC Council on Grok safety, sexualized images
+
+For Berkshire and its fellow Bending Spoons investors, the bet is still unproven.
+
+The products have to remain desirable enough that customers are willing to pay up at a time when AI is squeezing margins across much of the software sector. In its first earnings report as a public company in August, Bending Spoons said revenue more than doubled from a year earlier to over $700 million, with growth almost entirely driven by acquisitions, while net income climbed 171% to $177 million.
+
+That was before the Airtable deal had closed and Miro had yet to be announced. In the coming quarters and years, Wall Street will get a clear picture of whether the firm's structure can revive software.
+
+On the earnings call in August, an analyst asked whether Airtable represents a long-term shift in the M&A strategy towards enterprise.
+
+Ferrari said that about half of Bending Spoons' revenue already comes from professional businesses, largely through Brightcove and Vimeo, which has an enterprise component. The focus on software of late, he said, has more to do with where he's finding value after a hefty selloff.
+
+"Most enterprise SaaS businesses were valued at irrationally high levels until somewhat recently," Ferrari said. "We never saw those prices making any sense."
+
+— CNBC's Ari Levy contributed to this report.

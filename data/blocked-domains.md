@@ -8,6 +8,7 @@ also covers its subdomains.
 
 | Domain | Source | Reason | Since |
 |--------|--------|--------|-------|
+| fastcompany.com | auto | 4 consecutive failed scrapes, last 2026-10-18 | 2026-10-18 |
 | investors.com | auto | 3 consecutive failed scrapes, last 2026-10-12 | 2026-08-15 |
 | reuters.com | manual | blocks scraping | - |
 | usatoday.com | auto | 2 consecutive failed scrapes, last 2026-10-05 | 2026-10-05 |

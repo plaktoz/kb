@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://techcrunch.com/2026/10/16/replit-is-no-longer-working-with-anthropic-ceo-says/
 author: Lucas Ropek
 tags: [replit, anthropic, openai, ai-coding-platforms]
-date_consumed: 2026-10-17
+date_consumed: 2026-10-18
 ---
 
 ## Summary
@@ -17,6 +17,7 @@ Replit CEO Amjad Masad announced at TechCrunch Disrupt that Replit is no longer 
 - **[[OpenAI]] partnership** — Announced August 2026; Masad cited Sol and Astra as benchmarking better for vibe-coded apps
 - **Masad's reasoning** — Cost, partnership terms, and performance (internal benchmark); "ChatGPT is better now" for building applications from scratch
 - **Disputed timeline** — Insiders familiar with the partnership said it was "still in place"; Replit's blog cited Claude Fable 5 and Opus 5.5 in late September 2026
+- **Clarified position (updated article)** — After Disrupt, Masad said customers can still access Anthropic models but OpenAI's ChatGPT is now the default, and "Replit remains model agnostic"; OpenAI is the "preferred partner for powering Replit Agent" on performance and economics. Most customers keep the default, so Replit's spend with [[Anthropic]] could fall sharply (TechCrunch, updated Oct 17).
 - **Enterprise revenue shift** — Enterprise grew from 2% to 15% of Replit revenue in one year; 50%+ now B2B
 - **AI safety habitat** — Masad described safe AI deployment as requiring orchestration, error recovery, sandboxing, networking, and identity/authorization
 
@@ -24,6 +25,7 @@ Replit CEO Amjad Masad announced at TechCrunch Disrupt that Replit is no longer 
 
 - **Contradiction at announcement**: Masad's claim conflicted with internal sources and recent Replit content citing Anthropic models.
 - **OpenAI partnership framing**: New partnership cited cost and benchmark performance (Sol, Astra) for vibe-coding use case.
+- **Default, not exclusive**: The update reframes the change as OpenAI becoming the default; Claude stays selectable, but defaults drive most spend.
 - **Enterprise growth**: Replit's B2B pivot is accelerating — 50%+ revenue is now enterprise contracts.
 - **Benchmark-driven switching**: AI platform partnerships increasingly decided by head-to-head application benchmarks, not just capability.
 - **Competitive signal for Anthropic**: Losing a major developer-platform customer, even partially, signals pricing and partnership pressure.

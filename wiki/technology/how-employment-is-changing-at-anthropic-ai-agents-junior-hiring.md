@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.anthropic.com/research/employment-at-anthropic
 author: Nathan Wilmers, Regina Catipon, Maxim Massenkoff, Peter McCrory (Anthropic)
 tags: [ai-agents, labor-market, junior-hiring, future-of-work]
-date_consumed: 2026-10-17
+date_consumed: 2026-10-18
 ---
 
 ## Summary
@@ -19,6 +19,7 @@ An Anthropic Institute report uses internal data on employment, agent telemetry,
 - **Human attention bottleneck**: Interactive [[Claude Code]] sessions spend about 80% of their time idle, waiting for human input. Reading all agent output would take more than half the work week even for non-technical staff ([[Theory of Constraints]]).
 - **Meta-work**: Agent management, such as writing specs for multi-agent runs, having agents review each other and monitoring pipelines, grew from 10% to 22% of interactive sessions. Standing instructions for agents grew from a few hundred to 8,500 in a year.
 - **Harder tasks after releases**: After each model release, the share of tasks above the old model's 90th-percentile difficulty rises about 30% (10% to 13%). The easy end changes little.
+- **Employee survey (TechCrunch coverage)**: In an April 2026 survey, 27% of employees said Claude made them more productive and 20% said their job shifted from doing work to "managing Claudes"; one engineer likened it to babysitting, where every Claude brings concerns demanding equal attention. One employee described "eternal pressure" to move fast and use Claude for everything. Anthropic says more code doesn't necessarily mean better code and has found no sign of declining quality.
 - **Observability of human work**: Agents need context, so decisions made in unlogged meetings or DMs are invisible to them. This pushes work into open, agent-visible channels. Meeting time rose 20% overall and 16% for technical individual contributors.
 - **Agents layered onto human networks**: Agents appeared in nearly half of active public Slack channels, mostly in dedicated Claude-human channels. Human-to-human response counts stayed the same, so agents work as a team for one employee rather than as highly connected nodes.
 - **Shifting hiring criteria**: Mentions of creative AI-tool use in scorecards tripled for technical roles and quadrupled for non-technical roles. Autonomy and judgment rose while domain expertise and execution fell.
@@ -35,6 +36,7 @@ An Anthropic Institute report uses internal data on employment, agent telemetry,
 - **Idle Agents**: Interactive sessions sit roughly 80% idle, waiting for humans.
 - **Reading Load**: Reading all agent output would fill half the work week.
 - **Meta-Work Rise**: Agent-management work rose from 10% to 22% of sessions.
+- **Meeting Rationale**: Anthropic attributes longer meetings to "human trust and accountability" and the indispensability of face-to-face coordination.
 - **More Meetings**: Median meeting time is up 20%; technical ICs up 16%.
 - **Open Work**: Unlogged decisions starve agents of context, so work moves into the open.
 - **Judgment Over Expertise**: Hiring now favors autonomy and judgment over domain skills.

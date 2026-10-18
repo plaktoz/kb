@@ -4397,3 +4397,24 @@
 | 2026-10-17 | wiki/health/ultra-processed-foods-brain-injury-mri-middle-age.md | ingest |
 | 2026-10-17 | wiki/technology/sandcastle-typescript-afk-agent-orchestration.md | ingest |
 | 2026-10-17 | daily-update/2026-10/2026-10-17-2.md | newsletter |
+| 2026-10-18 | 2026-10-18-news-aggregation.md | news-fetch |
+| 2026-10-18 | 2026-10-17-anthropic-says-its-workforce-has-become-less-junior-and-is-spending-more-time-in.md | scrape |
+| 2026-10-18 | 2026-10-17-replit-makes-openai-its-default-over-anthropic-ceo-says.md | scrape |
+| 2026-10-18 | 2026-10-17-websites-are-closing-their-doors-to-ai-agents.md | scrape |
+| 2026-10-18 | 2026-10-15-microsoft-and-cmu-team-up-to-train-early-career-software-engineers.md | scrape |
+| 2026-10-18 | 2026-10-17-software-s-new-consolidator-gets-big-vote-of-confidence-from-berkshire.md | scrape |
+| 2026-10-18 | 2026-10-17-dead-money-for-a-decade-why-this-hedge-fund-approach-may-deliver-an-advantage-ov.md | scrape |
+| 2026-10-18 | 2026-10-15-harvard-s-endowment-jumps-27-in-fiscal-2026-lifted-by-spacex-as-top-holding.md | scrape |
+| 2026-10-18 | 2026-10-15-colorectal-cancer-do-ultra-processed-foods-affect-risk.md | scrape |
+| 2026-10-18 | 2026-10-17-what-type-of-exercise-can-help-manage-menopause-mood-changes.md | scrape |
+| 2026-10-18 | 2026-10-16-autoimmune-disease-women-less-likely-to-receive-accurate-diagnosis.md | scrape |
+| 2026-10-18 | https://stratechery.com/2026/apple-homeview-the-new-apple-tv-the-app-story/ (paywall: only subscription teaser available) | scrape-failed |
+| 2026-10-18 | 2026-09-10-tobi-l-tke-ai-agents-better-decisions-and-the-future-of-work.md | scrape |
+| 2026-10-18 | 2026-10-17-ibm-ibm-stock-may-be-15-undervalued-as-quantum-progress-draws-focus.md | scrape |
+| 2026-10-18 | 2026-10-17-greg-abel-made-major-additions-to-alphabet-and-delta-last-quarter-while-berkshir.md | scrape |
+| 2026-10-18 | 2026-10-13-what-s-behind-microsoft-s-surging-share-price.md | scrape |
+| 2026-10-18 | https://www.fastcompany.com/91616878/learning-faster-ai-worse-at-remembering (bot challenge page) | scrape-failed |
+| 2026-10-18 | https://www.fastcompany.com/91622548/30-minute-sunday-routine (bot challenge page) | scrape-failed |
+| 2026-10-18 | https://www.fastcompany.com/91622212/can-you-be-good-stuff-you-dont-like-doing (bot challenge page) | scrape-failed |
+| 2026-10-18 | https://www.fastcompany.com/91622552/5-tips-resiliently-optimistic (bot challenge page) | scrape-failed |
+| 2026-10-18 | 2026-10-18-news-aggregation.processed.md | archive |
