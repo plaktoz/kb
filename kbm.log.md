@@ -4418,3 +4418,40 @@
 | 2026-10-18 | https://www.fastcompany.com/91622212/can-you-be-good-stuff-you-dont-like-doing (bot challenge page) | scrape-failed |
 | 2026-10-18 | https://www.fastcompany.com/91622552/5-tips-resiliently-optimistic (bot challenge page) | scrape-failed |
 | 2026-10-18 | 2026-10-18-news-aggregation.processed.md | archive |
+| 2026-10-18 | wiki/technology/tobi-lutke-ai-agents-river-judgment-future-of-work.md | ingest |
+| 2026-10-18 | wiki/technology/websites-blocking-ai-agents-amazon-yelp-delta-oct2026.md | ingest |
+| 2026-10-18 | wiki/learning/microsoft-cmu-praise-ai-accelerated-software-engineering-early-career.md | ingest |
+| 2026-10-18 | wiki/finance/bending-spoons-berkshire-software-consolidator-saaspocalypse.md | ingest |
+| 2026-10-18 | wiki/finance/managed-futures-etf-dbmf-bond-alternative-60-40.md | ingest |
+| 2026-10-18 | wiki/finance/harvard-endowment-27-percent-spacex-fy2026.md | ingest |
+| 2026-10-18 | wiki/finance/berkshire-q2-2026-alphabet-delta-record-buybacks-abel.md | ingest |
+| 2026-10-18 | wiki/finance/ibm-dcf-15-percent-undervalued-quantum-oct2026.md | ingest |
+| 2026-10-18 | wiki/finance/microsoft-record-close-4-trillion-maia-300-seattle-times-oct2026.md | ingest |
+| 2026-10-18 | wiki/health/ultra-processed-foods-colorectal-cancer-nci-plos-medicine.md | ingest |
+| 2026-10-18 | wiki/health/aerobic-vs-mind-body-exercise-menopause-mood-review.md | ingest |
+| 2026-10-18 | wiki/health/women-autoimmune-disease-diagnosis-delay-misdiagnosis-study.md | ingest |
+| 2026-10-18 | wiki/technology/replit-drops-anthropic-openai-partnership.md (merged update) | ingest |
+| 2026-10-18 | wiki/technology/how-employment-is-changing-at-anthropic-ai-agents-junior-hiring.md (merged update) | ingest |
+| 2026-10-18 | daily-update/2026-10/2026-10-18.md | newsletter |
+| 2026-10-18 | topics/ai-agents.md | compound |
+| 2026-10-18 | topics/ai-in-education.md | compound |
+| 2026-10-18 | topics/ai-infrastructure.md | compound |
+| 2026-10-18 | topics/ai-literacy.md | compound |
+| 2026-10-18 | topics/ai-regulation.md | compound |
+| 2026-10-18 | topics/ai-safety.md | compound |
+| 2026-10-18 | topics/anthropic.md | compound |
+| 2026-10-18 | topics/deep-work.md | compound |
+| 2026-10-18 | topics/earnings-season.md | compound |
+| 2026-10-18 | topics/federal-reserve-monetary-policy.md | compound |
+| 2026-10-18 | topics/ibm.md | compound |
+| 2026-10-18 | topics/meetings.md | compound |
+| 2026-10-18 | topics/mental-health.md | compound |
+| 2026-10-18 | topics/microsoft.md | compound |
+| 2026-10-18 | topics/open-weight-models.md | compound |
+| 2026-10-18 | topics/openai.md | compound |
+| 2026-10-18 | topics/sp500.md | compound |
+| 2026-10-18 | topics/time-management.md | compound |
+| 2026-10-18 | topics/treasury-yields.md | compound |
+| 2026-10-18 | topics/ultra-processed-foods.md | compound |
+| 2026-10-18 | topics/berkshire-hathaway.md | compound |
+| 2026-10-18 | weekly-update/2026-10/2026-W42-weekly.md | newsletter |
