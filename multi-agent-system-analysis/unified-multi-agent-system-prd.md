@@ -2098,6 +2098,244 @@ communication_modes:
 
 **For Writers:**
 - ✓ Write content first, anti-slop second
+
+
+### 8.4 Systematic Debugging Process
+
+**Why This Matters:**
+Debugging without root cause investigation leads to symptom-based fixes that create more problems. A disciplined, scientific approach treats debugging as investigation first, fixing second. This is faster than guess-and-check, even under time pressure.
+
+#### Iron Law
+**NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST**
+
+This is non-negotiable. Every debugging session must start with investigation, not fixing.
+
+#### Phase 1: Root Cause Investigation (REQUIRED)
+
+Before attempting ANY fix, agents must:
+
+1. **Read Error Messages Completely**
+   ```bash
+   # Get full error output, not just first line
+   system-cli logs --agent <agent-id> --full
+   system-cli debug context --session <session-id>
+   ```
+   - Read full stack traces (not just first line)
+   - Note line numbers and file paths
+   - Read error codes and messages
+   - Check context around error
+   - Review recent changes in git history
+
+2. **Reproduce Consistently**
+   ```bash
+   # Verify issue reproduces reliably
+   system-cli debug replay --session <session-id>
+   ```
+   - Can you make it happen again?
+   - What are the exact steps?
+   - Does it happen every time?
+
+3. **Check Recent Changes**
+   ```bash
+   # What changed recently?
+   git log --since="24 hours ago" --oneline
+   system-cli audit log --last-24h
+   ```
+   - Git history
+   - Dependency updates
+   - Configuration changes
+   - Environment changes
+
+4. **Gather Diagnostic Evidence**
+   ```bash
+   # Add instrumentation at component boundaries
+   system-cli debug trace --agent <agent-id> --verbose
+   ```
+   - Add logging at each component boundary
+   - Trace data flow through system
+   - Capture state at each step
+   - Identify where behavior diverges from expected
+
+5. **Trace Data Flow Backward**
+   - Where did the bad value originate?
+   - What was the last good state?
+   - Which component introduced the problem?
+   - What assumptions were violated?
+
+#### Phase 2: Pattern Analysis
+
+Before proposing any fix:
+
+1. **Find Working Examples**
+   ```bash
+   # Find similar working code
+   system-cli search --pattern "working-pattern"
+   ```
+   - Search codebase for similar working code
+   - Find reference implementations
+   - Identify what's different
+
+2. **Compare Working vs Broken**
+   - Read reference implementations completely
+   - Identify ALL differences (not just obvious ones)
+   - Understand dependencies and assumptions
+   - Document findings before proceeding
+
+#### Phase 3: Hypothesis Testing
+
+1. **Form Single Hypothesis**
+   - Be specific about what you think is wrong
+   - State expected vs actual behavior
+   - Document your reasoning
+   - One hypothesis at a time
+
+2. **Test One Variable**
+   ```bash
+   # Make smallest possible change
+   # Test ONLY that change
+   ```
+   - Change ONE thing
+   - Make smallest possible change
+   - Test immediately
+   - Document result
+
+3. **If It Fails**
+   - Form NEW hypothesis (don't stack fixes)
+   - Return to Phase 1 if needed
+   - Don't try "just one more thing"
+
+#### Phase 4: Implementation
+
+1. **Create Failing Test First**
+   ```bash
+   # Write test that reproduces issue
+   system-cli test create --reproduces <issue-id>
+   ```
+   - Test must fail before fix
+   - Test must pass after fix
+   - Test prevents regression
+
+2. **Implement Single Fix**
+   - Address root cause only
+   - No "while we're here" changes
+   - No stacking multiple fixes
+   - Keep it minimal
+
+3. **Verify Fix**
+   ```bash
+   # Test passes now
+   system-cli test run --test <test-id>
+   # No regressions
+   system-cli test run --all
+   ```
+   - Original test passes
+   - No new failures
+   - No regressions elsewhere
+
+#### Critical Rules
+
+**3 Strikes Rule:**
+
+If 3+ fixes have failed:
+- **STOP** attempting more fixes
+- This indicates architectural problem, not just a bug
+- Escalate to architect for design review
+- Question fundamental approach
+- Don't try "just one more fix"
+
+**Red Flags (Return to Phase 1):**
+
+These phrases indicate you're not following the process:
+- "Quick fix for now"
+- "Just try changing X"
+- "I don't fully understand but..."
+- Proposing solutions before investigation
+- Each fix reveals new problems elsewhere
+- "Let me try one more thing"
+- "This should work"
+
+If you catch yourself saying these, STOP and return to Phase 1.
+
+#### When to Use This Process
+
+**Always use for:**
+- Test failures
+- Production bugs
+- Unexpected behavior
+- Performance issues
+- Build failures
+- Agent stuck or crashed
+- Merge queue blocked
+- Integration failures
+
+**Especially when:**
+- Under time pressure (when guessing is most tempting)
+- Fix seems "obvious"
+- Already tried multiple fixes
+- Issue seems simple
+- Deadline approaching
+
+**Remember:** Systematic debugging is FASTER than guess-and-check, even in emergencies.
+
+#### Integration with Troubleshooting
+
+The troubleshooting section provides quick commands, but systematic debugging provides the process:
+
+**Before using any troubleshooting command:**
+1. Complete Phase 1 (Root Cause Investigation)
+2. Form hypothesis about what's wrong
+3. Use troubleshooting command to test hypothesis
+4. If it doesn't work, return to Phase 1 (don't try next command)
+
+**Example:**
+
+```bash
+# ❌ WRONG: Jump to solution
+# Issue: Agent Stuck
+system-cli agents nudge worker-alice  # Symptom-based fix
+
+# ✅ RIGHT: Investigate first
+# Phase 1: Root Cause Investigation
+system-cli logs --agent worker-alice --full
+system-cli debug context --session session-123
+system-cli debug replay --session session-123
+
+# Hypothesis: Agent waiting for external API response that timed out
+# Test: Check API logs
+system-cli logs --filter "api_call" --agent worker-alice
+
+# Confirmed: API timeout
+# Fix: Increase timeout OR implement retry logic
+# Test: Verify fix prevents recurrence
+```
+
+#### Debugging Checklist
+
+Before attempting any fix, verify:
+
+- [ ] Read complete error message (not just first line)
+- [ ] Reproduced issue consistently
+- [ ] Checked recent changes (git, config, dependencies)
+- [ ] Gathered diagnostic evidence at boundaries
+- [ ] Traced data flow backward to origin
+- [ ] Found and compared working examples
+- [ ] Formed single, specific hypothesis
+- [ ] Created failing test case
+- [ ] Attempted fix addresses root cause (not symptom)
+- [ ] Verified fix works without regressions
+
+If any checkbox is unchecked, you're not ready to fix yet.
+
+#### Supporting Techniques
+
+For complex debugging scenarios, use:
+
+- **Root Cause Tracing:** Backward tracing through call stacks to find where bad values originate
+- **Defense in Depth:** Multi-layer validation to catch errors at boundaries
+- **Condition-Based Waiting:** Replace timeouts with condition polling to avoid race conditions
+
+---
+
 - ✓ Start with useful point, no generic intros
 - ✓ Use concrete metrics and examples
 - ✓ Keep paragraphs short (one idea each)
