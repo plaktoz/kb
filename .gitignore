@@ -19,3 +19,4 @@ __pycache__/
 
 # Scratch output from skill test runs
 .scratch/
+.bob
