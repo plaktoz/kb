@@ -469,6 +469,409 @@ agents:
 
 ---
 
+## Installation and Deployment Requirements
+
+### Overview
+
+**Requirement:** The system installation must be easy, idempotent, updateable, and non-intrusive. It must be possible to easily remove the system from repositories without leaving artifacts or breaking existing workflows.
+
+**Rationale:**
+- Teams need to try the system without committing to permanent changes
+- Installation should not disrupt existing development workflows
+- Updates should be seamless and safe
+- Removal should be clean and complete
+- System should work alongside existing tools
+
+### Installation Requirements
+
+**Easy Installation:**
+- **MUST:** Provide single-command installation
+- **MUST:** Complete installation in under 5 minutes
+- **MUST:** Require minimal user input (API keys only)
+- **MUST:** Provide clear progress indicators
+- **MUST:** Validate prerequisites before installation
+
+**Installation Methods:**
+```bash
+# Method 1: Package manager (preferred)
+npm install -g unified-multi-agent-system
+# or
+pip install unified-multi-agent-system
+
+# Method 2: Installer script
+curl -fsSL https://install.umas.dev | bash
+
+# Method 3: Container
+docker run -v $(pwd):/workspace umas/system:latest init
+```
+
+**Prerequisites Check:**
+```bash
+$ umas check-prerequisites
+
+Checking prerequisites...
+✓ Git 2.30+ installed (found: 2.42.0)
+✓ Python 3.10+ OR Node.js 18+ (found: Python 3.11.5)
+✓ 10GB free disk space (found: 45GB)
+✓ Internet connection available
+✗ LLM API key not configured
+
+Action required:
+Set API key: export ANTHROPIC_API_KEY=your-key-here
+
+Run 'umas init' to complete installation.
+```
+
+### Idempotent Installation
+
+**Requirements:**
+- **MUST:** Running installation multiple times produces same result
+- **MUST:** Detect existing installation and skip redundant steps
+- **MUST:** Preserve user configuration across reinstalls
+- **MUST:** Update only changed components
+
+**Idempotency Guarantees:**
+```bash
+# First install
+$ umas init
+Installing Unified Multi-Agent System...
+✓ Created configuration directory: ~/.umas/
+✓ Initialized database
+✓ Created default project
+Installation complete!
+
+# Second install (idempotent)
+$ umas init
+Unified Multi-Agent System already installed.
+✓ Configuration exists: ~/.umas/
+✓ Database exists (no changes)
+✓ Default project exists (no changes)
+No action needed. System ready.
+
+# Force reinstall (preserves config)
+$ umas init --force
+Reinstalling Unified Multi-Agent System...
+✓ Backed up existing configuration
+✓ Reinstalled system components
+✓ Restored user configuration
+Reinstallation complete!
+```
+
+### Non-Intrusive Installation
+
+**Requirements:**
+- **MUST:** Not modify existing project files without explicit permission
+- **MUST:** Store system files in dedicated directory (`.umas/` or `~/.umas/`)
+- **MUST:** Use Git hooks only if user approves
+- **MUST:** Not interfere with existing Git workflows
+- **MUST:** Work alongside existing CI/CD pipelines
+
+**File System Layout:**
+```
+# Global installation (user-level)
+~/.umas/
+├── config.yaml           # User configuration
+├── database.db           # System database
+├── logs/                 # System logs
+└── cache/                # Temporary cache
+
+# Project-level (optional, user must approve)
+project/
+├── .umas/                # Project-specific config (gitignored)
+│   ├── config.yaml
+│   ├── hooks/            # Git hooks (optional)
+│   └── worktrees/        # Agent worktrees
+├── .gitignore            # Updated to ignore .umas/ (if approved)
+└── (existing project files unchanged)
+```
+
+**Permission-Based Installation:**
+```bash
+$ umas init --project
+
+Unified Multi-Agent System - Project Setup
+
+This will create the following in your project:
+  - .umas/ directory (for system files)
+  - Git hooks (for context persistence)
+  - .gitignore entry (to ignore .umas/)
+
+Your existing files will NOT be modified.
+
+Proceed? [y/N]: y
+
+✓ Created .umas/ directory
+✓ Installed Git hooks
+✓ Updated .gitignore
+Project setup complete!
+```
+
+### Updateable Installation
+
+**Requirements:**
+- **MUST:** Support in-place updates without data loss
+- **MUST:** Provide rollback mechanism if update fails
+- **MUST:** Preserve user configuration during updates
+- **MUST:** Notify users of breaking changes
+- **MUST:** Support automatic and manual update modes
+
+**Update Process:**
+```bash
+# Check for updates
+$ umas update --check
+Current version: 1.0.1
+Latest version: 1.2.0
+Update available!
+
+Changes in 1.2.0:
+  - New: Multi-platform agent support
+  - Improved: Error handling and recovery
+  - Fixed: Token budget calculation bug
+
+Run 'umas update' to install.
+
+# Automatic update
+$ umas update
+Updating Unified Multi-Agent System...
+✓ Backed up current installation
+✓ Downloaded version 1.2.0
+✓ Migrated database schema
+✓ Preserved user configuration
+✓ Verified installation
+Update complete! (1.0.1 → 1.2.0)
+
+Rollback available: umas rollback --to 1.0.1
+
+# Manual update with review
+$ umas update --manual
+Updating Unified Multi-Agent System...
+✓ Downloaded version 1.2.0
+
+Review changes before applying:
+  - Database migration required (automatic)
+  - Configuration format changed (automatic migration)
+  - New CLI commands available
+
+Apply update? [y/N]: y
+```
+
+**Rollback Support:**
+```bash
+# Rollback to previous version
+$ umas rollback
+Rolling back to version 1.0.1...
+✓ Restored previous installation
+✓ Reverted database schema
+✓ Restored configuration
+Rollback complete!
+
+# Rollback to specific version
+$ umas rollback --to 1.0.0
+```
+
+### Easy Removal
+
+**Requirements:**
+- **MUST:** Provide single-command uninstallation
+- **MUST:** Remove all system files cleanly
+- **MUST:** Optionally preserve user data (configuration, database)
+- **MUST:** Restore project to pre-installation state
+- **MUST:** Not leave orphaned files or configurations
+
+**Uninstallation Process:**
+```bash
+# Uninstall with data preservation
+$ umas uninstall
+Uninstalling Unified Multi-Agent System...
+
+What would you like to do with your data?
+  1. Remove everything (clean uninstall)
+  2. Keep configuration and database (for reinstall)
+  3. Export data before removal
+
+Choice [1-3]: 2
+
+✓ Removed system binaries
+✓ Removed Git hooks
+✓ Removed .umas/ directories from projects
+✓ Preserved configuration: ~/.umas/config.yaml
+✓ Preserved database: ~/.umas/database.db
+
+Uninstallation complete!
+To reinstall: umas init (will restore your configuration)
+
+# Complete removal
+$ umas uninstall --purge
+This will remove ALL system files and data.
+This action cannot be undone.
+
+Proceed? [y/N]: y
+
+✓ Removed system binaries
+✓ Removed configuration
+✓ Removed database
+✓ Removed all project files
+✓ Removed Git hooks
+
+Complete removal finished.
+```
+
+**Project Cleanup:**
+```bash
+# Remove system from specific project
+$ umas remove --project
+Removing Unified Multi-Agent System from project...
+
+This will remove:
+  - .umas/ directory
+  - Git hooks
+  - .gitignore entry
+
+Your code and git history will NOT be affected.
+
+Proceed? [y/N]: y
+
+✓ Removed .umas/ directory
+✓ Removed Git hooks
+✓ Cleaned .gitignore
+Project cleanup complete!
+```
+
+### Configuration Management
+
+**Requirements:**
+- **MUST:** Store configuration in version-controllable format (YAML/JSON)
+- **MUST:** Support environment variable overrides
+- **MUST:** Provide configuration validation
+- **MUST:** Support configuration migration across versions
+
+**Configuration Locations:**
+```yaml
+# Priority order (highest to lowest)
+1. Environment variables (UMAS_*)
+2. Project config (.umas/config.yaml)
+3. User config (~/.umas/config.yaml)
+4. System defaults
+```
+
+**Configuration Validation:**
+```bash
+$ umas config validate
+Validating configuration...
+✓ Syntax valid (YAML)
+✓ Schema valid (all required fields present)
+✓ API keys configured
+✓ Database accessible
+✗ Token budget exceeds recommended limit
+
+Warning: Daily token budget (1M) is very high.
+Recommended: 100K tokens/day for typical usage.
+
+Configuration valid with 1 warning.
+```
+
+### Compatibility Requirements
+
+**Requirements:**
+- **MUST:** Not conflict with existing development tools
+- **MUST:** Work alongside other AI coding assistants
+- **MUST:** Respect existing Git hooks (chain, don't replace)
+- **MUST:** Not interfere with CI/CD pipelines
+- **MUST:** Support custom project structures
+
+**Git Hook Chaining:**
+```bash
+# Existing pre-commit hook
+#!/bin/bash
+npm run lint
+npm run test
+
+# After UMAS installation (chained)
+#!/bin/bash
+# UMAS: Context persistence
+~/.umas/hooks/pre-commit
+
+# User hooks (preserved)
+npm run lint
+npm run test
+```
+
+### Installation Verification
+
+**Requirements:**
+- **MUST:** Provide post-installation verification
+- **MUST:** Test all critical components
+- **MUST:** Verify API connectivity
+- **MUST:** Provide troubleshooting guidance
+
+**Verification Process:**
+```bash
+$ umas verify
+Verifying Unified Multi-Agent System installation...
+
+System Components:
+✓ CLI installed and accessible
+✓ Database initialized and accessible
+✓ Configuration valid
+
+Connectivity:
+✓ LLM provider reachable (Anthropic Claude)
+✓ Internet connection stable
+
+Project Setup:
+✓ Git repository detected
+✓ Hooks installed correctly
+✓ Worktree support available
+
+All checks passed! System ready to use.
+
+Quick start:
+  1. Create project: umas project create my-project
+  2. Submit request: umas request "Add login feature"
+  3. Monitor progress: umas watch
+```
+
+### Migration Support
+
+**Requirements:**
+- **MUST:** Support migration from other AI coding tools
+- **MUST:** Import existing project configuration
+- **MUST:** Preserve existing workflows
+- **SHOULD:** Provide migration guides for common tools
+
+**Migration Examples:**
+```bash
+# Migrate from Cursor
+$ umas migrate --from cursor
+Migrating from Cursor...
+✓ Imported project configuration
+✓ Converted .cursorrules to UMAS format
+✓ Preserved existing workflows
+Migration complete!
+
+# Migrate from GitHub Copilot
+$ umas migrate --from copilot
+Migrating from GitHub Copilot...
+✓ Detected Copilot configuration
+✓ Created compatible UMAS configuration
+✓ Copilot can continue working alongside UMAS
+Migration complete!
+```
+
+### Rationale
+
+**Why This Matters:**
+- **Adoption:** Easy installation lowers barrier to entry
+- **Trust:** Non-intrusive installation builds user confidence
+- **Flexibility:** Easy removal enables risk-free trial
+- **Maintenance:** Idempotent updates reduce operational burden
+- **Compatibility:** Works alongside existing tools without conflicts
+
+
+
+
+---
+
 ## Multi-Agent Platform Support
 
 ### Overview
