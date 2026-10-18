@@ -465,6 +465,308 @@ agents:
 **Rationale:**
 - Metrics enable data-driven optimization
 - Alerts enable proactive issue resolution
+
+
+---
+
+## Error Handling and Recovery Requirements
+
+### Error Classification
+
+**Requirement:** All errors must be classified by severity and recoverability.
+
+**Error Severity Levels:**
+- **P0 (Critical):** System cannot function, requires immediate human intervention
+- **P1 (High):** Agent cannot proceed, requires coordinator intervention
+- **P2 (Medium):** Agent can retry or work around, system patrol monitors
+- **P3 (Low):** Informational, logged for analysis
+
+**Recoverability Types:**
+- **Transient:** Temporary failure, retry likely to succeed (network timeout, rate limit)
+- **Permanent:** Persistent failure, retry will not help (invalid API key, missing file)
+- **Ambiguous:** Unknown if retry will help, requires investigation
+
+### Error Message Structure
+
+**Requirement:** All error messages must follow a structured format for both agent and human consumption.
+
+**Required Error Fields:**
+```yaml
+error:
+  code: string              # Machine-readable error code (e.g., "AGENT_TOKEN_EXHAUSTED")
+  severity: string          # P0, P1, P2, P3
+  recoverability: string    # transient, permanent, ambiguous
+  message: string           # Human-readable description
+  context:                  # Relevant context for debugging
+    agent_id: string
+    session_id: string
+    task_id: string
+    timestamp: string
+    operation: string       # What was being attempted
+  cause:                    # Root cause if known
+    type: string
+    message: string
+    stack_trace: string     # For development environments only
+  recovery:                 # Suggested recovery actions
+    automatic: array        # Actions system will attempt automatically
+    manual: array           # Actions requiring human intervention
+  documentation: string     # Link to relevant documentation
+```
+
+**Example Error Message:**
+```json
+{
+  "error": {
+    "code": "MERGE_QUEUE_CONFLICT",
+    "severity": "P1",
+    "recoverability": "permanent",
+    "message": "Merge conflict detected in src/auth.py. Manual resolution required.",
+    "context": {
+      "agent_id": "worker-alice",
+      "session_id": "session-789",
+      "task_id": "auth-feature",
+      "timestamp": "2026-10-18T06:45:00Z",
+      "operation": "merge_to_main"
+    },
+    "cause": {
+      "type": "MergeConflict",
+      "message": "Conflicting changes in src/auth.py lines 42-58",
+      "files": ["src/auth.py"]
+    },
+    "recovery": {
+      "automatic": [
+        "Escalated to coordinator",
+        "Notified human via Slack"
+      ],
+      "manual": [
+        "Review conflicting changes in src/auth.py",
+        "Resolve conflicts manually",
+        "Run: system-cli merge-queue retry --task auth-feature"
+      ]
+    },
+    "documentation": "https://docs.system.com/errors/merge-conflict"
+  }
+}
+```
+
+### Agent-Facing Error Handling
+
+**Requirements for Agent Troubleshooting:**
+
+1. **Structured Error Context:**
+   - **MUST:** Include full context (agent ID, session ID, task ID, operation)
+   - **MUST:** Include relevant state (token usage, file paths, command executed)
+   - **MUST:** Include timestamp for correlation with logs
+
+2. **Recovery Guidance:**
+   - **MUST:** Provide specific recovery steps for known errors
+   - **MUST:** Indicate if retry is appropriate
+   - **MUST:** Suggest alternative approaches if available
+
+3. **Error Correlation:**
+   - **MUST:** Link related errors (e.g., cascade failures)
+   - **MUST:** Provide trace ID for distributed tracing
+   - **MUST:** Reference previous similar errors if pattern exists
+
+**Example Agent Error Response:**
+```
+Error: AGENT_TOKEN_EXHAUSTED (P1, transient)
+Context: worker-alice, session-789, task: auth-feature
+Token Usage: 145,000 / 150,000 (97%)
+Operation: Implementing login endpoint
+
+Recovery Actions:
+1. [AUTOMATIC] Committing current state to hook: auth-feature/
+2. [AUTOMATIC] Spawning fresh agent (worker-bob) with same hook
+3. [AUTOMATIC] Transferring context to worker-bob
+
+Expected Resolution: 30 seconds
+No human intervention required.
+
+Documentation: https://docs.system.com/errors/token-exhausted
+```
+
+### Human-Facing Error Handling
+
+**Requirements for Human Understanding:**
+
+1. **Clear, Non-Technical Language:**
+   - **MUST:** Explain error in plain language
+   - **MUST:** Avoid technical jargon unless necessary
+   - **MUST:** Explain impact on work progress
+
+2. **Actionable Guidance:**
+   - **MUST:** Provide specific next steps
+   - **MUST:** Include exact commands to run
+   - **MUST:** Estimate time to resolution
+
+3. **Context Preservation:**
+   - **MUST:** Show what was being attempted
+   - **MUST:** Show current state of work
+   - **MUST:** Indicate if work is blocked or can continue
+
+**Example Human Error Message:**
+```
+⚠️  Merge Conflict Detected
+
+What happened:
+Your authentication feature cannot be merged because another change 
+modified the same code (src/auth.py, lines 42-58).
+
+Impact:
+- Work is paused, waiting for your input
+- Other features can continue normally
+- No code has been lost
+
+What to do:
+1. Review the conflicting changes:
+   $ system-cli diff show auth-feature
+
+2. Choose resolution approach:
+   a) Keep your changes:    $ system-cli merge resolve --keep-mine
+   b) Keep other changes:   $ system-cli merge resolve --keep-theirs
+   c) Merge manually:       $ system-cli merge resolve --manual
+
+3. Resume work:
+   $ system-cli resume auth-feature
+
+Estimated time: 5-10 minutes
+
+Need help? https://docs.system.com/guides/resolving-conflicts
+```
+
+### Error Recovery Strategies
+
+**Automatic Recovery (No Human Intervention):**
+
+1. **Transient Failures:**
+   - **Network Timeouts:** Retry with exponential backoff (3 attempts)
+   - **Rate Limits:** Queue work, retry after cooldown period
+   - **Token Exhaustion:** Automatic agent handoff
+   - **Temporary File Locks:** Wait and retry (max 30 seconds)
+
+2. **Recoverable Failures:**
+   - **Test Failures:** Re-run tests, bisect if batch fails
+   - **Linter Errors:** Auto-fix if possible, otherwise escalate
+   - **Missing Dependencies:** Install if in package manifest
+
+**Manual Recovery (Human Intervention Required):**
+
+1. **Permanent Failures:**
+   - **Invalid API Keys:** Prompt for new credentials
+   - **Merge Conflicts:** Guide through resolution
+   - **Architecture Violations:** Escalate to architect agent
+   - **Security Issues:** Escalate to human immediately
+
+2. **Ambiguous Failures:**
+   - **Unknown Errors:** Provide full context, request guidance
+   - **Unexpected Behavior:** Offer debug session replay
+   - **Performance Issues:** Suggest profiling, await decision
+
+### Error Logging and Monitoring
+
+**Requirements:**
+
+1. **Structured Error Logs:**
+   - **MUST:** Log all errors with full context
+   - **MUST:** Use consistent schema across all components
+   - **MUST:** Include correlation IDs for tracing
+
+2. **Error Aggregation:**
+   - **MUST:** Group similar errors together
+   - **MUST:** Track error frequency and trends
+   - **MUST:** Identify error patterns (e.g., same error recurring)
+
+3. **Error Alerting:**
+   - **MUST:** Alert on P0 errors immediately
+   - **MUST:** Alert on P1 error patterns (>3 in 10 minutes)
+   - **MUST:** Daily digest of P2/P3 errors
+
+**Error Metrics:**
+```yaml
+error_metrics:
+  by_severity:
+    p0_count: 0          # Target: 0
+    p1_count: 3          # Target: <5 per day
+    p2_count: 12         # Target: <20 per day
+    p3_count: 45         # Informational
+    
+  by_recoverability:
+    transient: 38        # Automatically recovered
+    permanent: 15        # Required human intervention
+    ambiguous: 7         # Required investigation
+    
+  recovery_metrics:
+    automatic_success_rate: 92%    # Target: >90%
+    manual_resolution_time: 8min   # Target: <15min
+    escalation_rate: 5%            # Target: <10%
+```
+
+### Error Documentation
+
+**Requirements:**
+
+1. **Error Catalog:**
+   - **MUST:** Maintain catalog of all error codes
+   - **MUST:** Document common causes and solutions
+   - **MUST:** Include examples for each error type
+
+2. **Troubleshooting Guides:**
+   - **MUST:** Provide step-by-step troubleshooting for common errors
+   - **MUST:** Include diagnostic commands
+   - **MUST:** Link to related documentation
+
+3. **Error History:**
+   - **MUST:** Track error resolution history
+   - **MUST:** Document successful recovery strategies
+   - **MUST:** Share learnings across team
+
+**Example Error Catalog Entry:**
+```markdown
+## Error: MERGE_QUEUE_CONFLICT
+
+**Code:** MERGE_QUEUE_CONFLICT
+**Severity:** P1 (High)
+**Recoverability:** Permanent
+
+**Description:**
+Occurs when two or more changes modify the same lines of code, 
+creating a merge conflict that cannot be automatically resolved.
+
+**Common Causes:**
+1. Multiple agents working on same file simultaneously
+2. Manual changes made outside system
+3. Stale branch merged after main updated
+
+**Resolution Steps:**
+1. View conflict: `system-cli diff show <task-id>`
+2. Choose resolution strategy:
+   - Keep your changes: `--keep-mine`
+   - Keep other changes: `--keep-theirs`
+   - Manual merge: `--manual`
+3. Resume work: `system-cli resume <task-id>`
+
+**Prevention:**
+- Use work bundles to coordinate related changes
+- Keep branches short-lived (<24 hours)
+- Merge frequently to avoid drift
+
+**Related Errors:**
+- MERGE_QUEUE_BLOCKED
+- GIT_CONFLICT
+
+**Documentation:** https://docs.system.com/errors/merge-conflict
+```
+
+### Rationale
+
+**Why This Matters:**
+- **Agent Efficiency:** Structured errors enable agents to self-recover without human intervention
+- **Human Productivity:** Clear error messages reduce troubleshooting time from hours to minutes
+- **System Reliability:** Automatic recovery handles 90%+ of errors without human involvement
+- **Learning:** Error patterns inform system improvements and prevent future issues
+
+
 - Observability is critical for production systems
 
 

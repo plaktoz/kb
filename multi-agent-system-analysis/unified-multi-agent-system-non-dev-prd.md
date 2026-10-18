@@ -465,6 +465,366 @@ project/
 **Why This Matters:**
 Agents often recreate content that already exists. A searchable knowledge base enables reuse and prevents duplication.
 
+
+
+---
+
+## Error Handling and Recovery Requirements
+
+### Error Classification
+
+**Requirement:** All errors must be classified by severity and recoverability for content work.
+
+**Error Severity Levels:**
+- **P0 (Critical):** Content system cannot function, requires immediate human intervention
+- **P1 (High):** Agent cannot proceed with content creation, requires editor intervention
+- **P2 (Medium):** Agent can retry or work around, system patrol monitors
+- **P3 (Low):** Informational, logged for quality analysis
+
+**Recoverability Types:**
+- **Transient:** Temporary failure, retry likely to succeed (API timeout, rate limit)
+- **Permanent:** Persistent failure, retry will not help (invalid source, plagiarism detected)
+- **Ambiguous:** Unknown if retry will help, requires review
+
+### Error Message Structure
+
+**Requirement:** All error messages must follow a structured format for both agent and human consumption.
+
+**Required Error Fields:**
+```yaml
+error:
+  code: string              # Machine-readable error code (e.g., "QUALITY_SCORE_BELOW_THRESHOLD")
+  severity: string          # P0, P1, P2, P3
+  recoverability: string    # transient, permanent, ambiguous
+  message: string           # Human-readable description
+  context:                  # Relevant context for debugging
+    agent_id: string
+    session_id: string
+    content_id: string
+    timestamp: string
+    operation: string       # What was being attempted
+  cause:                    # Root cause if known
+    type: string
+    message: string
+    details: object         # Content-specific details
+  recovery:                 # Suggested recovery actions
+    automatic: array        # Actions system will attempt automatically
+    manual: array           # Actions requiring human intervention
+  documentation: string     # Link to relevant documentation
+```
+
+**Example Error Message:**
+```json
+{
+  "error": {
+    "code": "FACT_CHECK_FAILED",
+    "severity": "P1",
+    "recoverability": "permanent",
+    "message": "3 factual claims could not be verified. Manual review required.",
+    "context": {
+      "agent_id": "writer-alice",
+      "session_id": "session-456",
+      "content_id": "blog-ai-trends",
+      "timestamp": "2026-10-18T06:45:00Z",
+      "operation": "fact_verification"
+    },
+    "cause": {
+      "type": "UnverifiedClaims",
+      "message": "Claims lack credible sources",
+      "details": {
+        "unverified_claims": [
+          "AI market will reach $500B by 2027",
+          "90% of companies use AI",
+          "AI reduces costs by 40%"
+        ],
+        "confidence_scores": [0.3, 0.4, 0.2]
+      }
+    },
+    "recovery": {
+      "automatic": [
+        "Flagged claims in draft",
+        "Escalated to editor",
+        "Saved draft with annotations"
+      ],
+      "manual": [
+        "Review flagged claims in draft",
+        "Find credible sources or remove claims",
+        "Run: system-cli content verify --id blog-ai-trends"
+      ]
+    },
+    "documentation": "https://docs.system.com/errors/fact-check-failed"
+  }
+}
+```
+
+### Agent-Facing Error Handling
+
+**Requirements for Agent Troubleshooting:**
+
+1. **Structured Error Context:**
+   - **MUST:** Include full context (agent ID, session ID, content ID, operation)
+   - **MUST:** Include relevant state (token usage, sources checked, quality score)
+   - **MUST:** Include timestamp for correlation with logs
+
+2. **Recovery Guidance:**
+   - **MUST:** Provide specific recovery steps for known errors
+   - **MUST:** Indicate if retry is appropriate
+   - **MUST:** Suggest alternative approaches if available
+
+3. **Error Correlation:**
+   - **MUST:** Link related errors (e.g., multiple quality issues)
+   - **MUST:** Provide trace ID for distributed tracing
+   - **MUST:** Reference previous similar errors if pattern exists
+
+**Example Agent Error Response:**
+```
+Error: QUALITY_SCORE_BELOW_THRESHOLD (P1, permanent)
+Context: writer-alice, session-456, content: blog-ai-trends
+Quality Score: 6.2 / 10.0 (threshold: 8.0)
+Operation: Quality review
+
+Issues Found:
+- Clarity: 6.5/10 (jargon without explanation)
+- Engagement: 5.8/10 (weak opening hook)
+- Completeness: 7.0/10 (missing examples)
+
+Recovery Actions:
+1. [AUTOMATIC] Saved draft with quality annotations
+2. [AUTOMATIC] Generated improvement suggestions
+3. [MANUAL] Review suggestions and revise draft
+
+Suggestions:
+- Add concrete examples for each tip
+- Simplify technical terms or add explanations
+- Strengthen opening with compelling hook
+
+Expected Resolution: 15-20 minutes
+Editor review recommended.
+
+Documentation: https://docs.system.com/errors/quality-below-threshold
+```
+
+### Human-Facing Error Handling
+
+**Requirements for Human Understanding:**
+
+1. **Clear, Non-Technical Language:**
+   - **MUST:** Explain error in plain language
+   - **MUST:** Avoid technical jargon
+   - **MUST:** Explain impact on content delivery
+
+2. **Actionable Guidance:**
+   - **MUST:** Provide specific next steps
+   - **MUST:** Include exact commands to run
+   - **MUST:** Estimate time to resolution
+
+3. **Context Preservation:**
+   - **MUST:** Show what was being created
+   - **MUST:** Show current state of content
+   - **MUST:** Indicate if work is blocked or can continue
+
+**Example Human Error Message:**
+```
+⚠️  Content Quality Below Standard
+
+What happened:
+Your blog post "AI Trends 2027" scored 6.2/10, below the required 
+8.0 threshold. The content needs improvement before publishing.
+
+Issues:
+✗ Clarity (6.5/10): Technical terms need explanation
+✗ Engagement (5.8/10): Opening needs stronger hook
+✓ Accuracy (9.0/10): All facts verified
+✓ Completeness (7.0/10): Covers main points
+
+Impact:
+- Draft saved, not published
+- Other content can continue normally
+- No work has been lost
+
+What to do:
+1. Review the draft with annotations:
+   $ system-cli content show blog-ai-trends
+
+2. Apply suggested improvements:
+   - Add concrete examples for each tip
+   - Simplify or explain technical terms
+   - Strengthen opening paragraph
+
+3. Re-submit for review:
+   $ system-cli content submit blog-ai-trends
+
+Estimated time: 15-20 minutes
+
+Need help? https://docs.system.com/guides/improving-quality
+```
+
+### Error Recovery Strategies
+
+**Automatic Recovery (No Human Intervention):**
+
+1. **Transient Failures:**
+   - **API Timeouts:** Retry with exponential backoff (3 attempts)
+   - **Rate Limits:** Queue work, retry after cooldown period
+   - **Token Exhaustion:** Automatic agent handoff
+   - **Source Unavailable:** Try alternative sources
+
+2. **Recoverable Failures:**
+   - **Minor Quality Issues:** Auto-suggest improvements
+   - **Formatting Errors:** Auto-fix if possible
+   - **Missing Citations:** Flag for manual addition
+
+**Manual Recovery (Human Intervention Required):**
+
+1. **Permanent Failures:**
+   - **Plagiarism Detected:** Escalate immediately, require rewrite
+   - **Fact Check Failed:** Require source verification or removal
+   - **Quality Below Threshold:** Require revision with guidance
+   - **Brand Voice Mismatch:** Require style adjustment
+
+2. **Ambiguous Failures:**
+   - **Low Confidence Claims:** Request source verification
+   - **Unclear Requirements:** Request clarification
+   - **Subjective Quality Issues:** Request editor review
+
+### Error Logging and Monitoring
+
+**Requirements:**
+
+1. **Structured Error Logs:**
+   - **MUST:** Log all errors with full context
+   - **MUST:** Use consistent schema across all components
+   - **MUST:** Include correlation IDs for tracing
+
+2. **Error Aggregation:**
+   - **MUST:** Group similar errors together
+   - **MUST:** Track error frequency and trends
+   - **MUST:** Identify error patterns (e.g., recurring quality issues)
+
+3. **Error Alerting:**
+   - **SHOULD:** Alert on P0 errors immediately
+   - **SHOULD:** Alert on P1 error patterns (>5 in 1 hour)
+   - **SHOULD:** Daily digest of P2/P3 errors
+
+**Error Metrics:**
+```yaml
+error_metrics:
+  by_severity:
+    p0_count: 0          # Target: 0
+    p1_count: 4          # Target: <10 per day
+    p2_count: 15         # Target: <30 per day
+    p3_count: 52         # Informational
+    
+  by_recoverability:
+    transient: 45        # Automatically recovered
+    permanent: 18        # Required human intervention
+    ambiguous: 8         # Required investigation
+    
+  recovery_metrics:
+    automatic_success_rate: 88%    # Target: >85%
+    manual_resolution_time: 12min  # Target: <20min
+    escalation_rate: 8%            # Target: <15%
+    
+  content_quality_metrics:
+    quality_failures: 12           # Below threshold
+    fact_check_failures: 3         # Unverified claims
+    plagiarism_detections: 0       # Target: 0
+    style_violations: 8            # Brand voice issues
+```
+
+### Error Documentation
+
+**Requirements:**
+
+1. **Error Catalog:**
+   - **MUST:** Maintain catalog of all error codes
+   - **MUST:** Document common causes and solutions
+   - **MUST:** Include examples for each error type
+
+2. **Troubleshooting Guides:**
+   - **MUST:** Provide step-by-step troubleshooting for common errors
+   - **MUST:** Include diagnostic commands
+   - **MUST:** Link to related documentation
+
+3. **Error History:**
+   - **MUST:** Track error resolution history
+   - **MUST:** Document successful recovery strategies
+   - **MUST:** Share learnings across team
+
+**Example Error Catalog Entry:**
+```markdown
+## Error: QUALITY_SCORE_BELOW_THRESHOLD
+
+**Code:** QUALITY_SCORE_BELOW_THRESHOLD
+**Severity:** P1 (High)
+**Recoverability:** Permanent
+
+**Description:**
+Occurs when content quality score falls below the configured 
+threshold (default: 8.0/10). Content cannot be published until 
+quality improves.
+
+**Common Causes:**
+1. Weak opening hook (low engagement score)
+2. Technical jargon without explanation (low clarity score)
+3. Missing examples or evidence (low completeness score)
+4. Inconsistent tone (low consistency score)
+
+**Resolution Steps:**
+1. View quality report: `system-cli content quality <content-id>`
+2. Review specific issues and suggestions
+3. Revise content addressing flagged issues
+4. Re-submit: `system-cli content submit <content-id>`
+
+**Prevention:**
+- Use content templates for consistent structure
+- Follow style guide for brand voice
+- Include concrete examples for each point
+- Have peer review before submission
+
+**Related Errors:**
+- FACT_CHECK_FAILED
+- STYLE_VIOLATION
+- PLAGIARISM_DETECTED
+
+**Documentation:** https://docs.system.com/errors/quality-below-threshold
+```
+
+### Content-Specific Error Types
+
+**Quality Errors:**
+- `QUALITY_SCORE_BELOW_THRESHOLD`: Overall quality too low
+- `CLARITY_SCORE_LOW`: Content difficult to understand
+- `ENGAGEMENT_SCORE_LOW`: Content not compelling
+- `COMPLETENESS_SCORE_LOW`: Missing required elements
+
+**Verification Errors:**
+- `FACT_CHECK_FAILED`: Unverified factual claims
+- `SOURCE_UNAVAILABLE`: Cannot access cited source
+- `CITATION_MISSING`: Claim lacks proper citation
+- `CONFIDENCE_TOO_LOW`: Verification confidence below threshold
+
+**Governance Errors:**
+- `PLAGIARISM_DETECTED`: Content matches existing work
+- `STYLE_VIOLATION`: Doesn't match brand voice
+- `SENSITIVE_DATA_DETECTED`: Contains PII or confidential info
+- `LEGAL_REVIEW_REQUIRED`: Content needs legal approval
+
+**System Errors:**
+- `TOKEN_BUDGET_EXHAUSTED`: Daily token limit reached
+- `AGENT_HANDOFF_FAILED`: Cannot transfer to new agent
+- `KNOWLEDGE_BASE_UNAVAILABLE`: Cannot access reusable content
+- `API_RATE_LIMIT`: LLM provider rate limit hit
+
+### Rationale
+
+**Why This Matters:**
+- **Agent Efficiency:** Structured errors enable agents to self-recover and improve content quality
+- **Human Productivity:** Clear error messages reduce revision time and improve content quality
+- **Content Quality:** Systematic error handling ensures consistent quality standards
+- **Learning:** Error patterns inform content strategy and prevent future issues
+
+
 **Requirements:**
 - Searchable repository of reusable content
 - Templates for common content types
