@@ -8,26 +8,26 @@
 
 ## Executive Summary
 
-This PRD defines a unified multi-agent development system designed to address the fundamental challenges of AI-assisted software development at scale. The system combines distributed coordination, structured workflows, radical minimalism, and engineering fundamentals into a cohesive platform.
+This PRD defines a unified multi-agent development system for AI-assisted software development. The system combines distributed coordination, structured workflows, radical minimalism, and engineering fundamentals.
 
 ### What Problem Does This Solve?
 
-Current AI-assisted development faces several challenges:
-- **Context Loss**: Agents lose state on restart, making multi-agent workflows fragile
-- **Over-Engineering**: Agents write more code than necessary, increasing maintenance burden
+Current AI-assisted development challenges:
+- **Context Loss**: Agents lose state on restart, breaking multi-agent workflows
+- **Over-Engineering**: Agents write more code than necessary, increasing maintenance cost
 - **Quality Issues**: Without systematic verification, bugs reach production
-- **Coordination Chaos**: Multiple agents working without structure create conflicts
+- **Coordination Chaos**: Multiple agents without structure create conflicts
 - **Human Bottlenecks**: Pure automation loses judgment; pure manual loses speed
 - **Vendor Lock-in**: Skills and workflows tied to specific AI tools
 
-This system addresses all these challenges through proven architectural patterns and engineering principles.
+This system addresses these challenges through proven architectural patterns and engineering principles.
 
 ---
 
 ## Vision
 
 **Build a multi-agent development system that:**
-- Scales reliably to 20-30+ concurrent agents
+- Supports 20-30+ concurrent agents
 - Persists context across crashes and restarts
 - Produces minimal, high-quality code through systematic verification
 - Keeps humans in control at critical decision points
@@ -435,7 +435,7 @@ sequenceDiagram
 ### 1.1 Version-Controlled State Storage
 
 **Why This Matters:**
-Traditional AI agents lose all context when they crash or restart. This makes multi-agent workflows fragile - a single crash can lose hours of work. Version control worktrees solve this by treating agent state as version-controlled data.
+AI agents lose all context when they crash or restart. A single crash can lose hours of work. Version control worktrees solve this by treating agent state as version-controlled data.
 
 **Requirements:**
 - Each agent gets a version control worktree (hook) for persistent state
@@ -1648,6 +1648,492 @@ Handoff Process:
 
 Result: Seamless continuation, zero human intervention
 ```
+
+
+---
+
+## 11. Anti-Slop Principles
+
+**Why This Matters:**
+AI-generated content often contains repetitive patterns ("slop") that make writing feel generic and inauthentic. Anti-slop principles ensure PRDs, documentation, and code remain clear, concrete, and authentic.
+
+**What is Slop?**
+
+Slop = repetitive AI-generated patterns that reduce quality:
+- **AI vocabulary**: "delve," "pivotal," "tapestry," "underscore," "landscape"
+- **Vague claims**: Statements without sources or concrete details
+- **Filler language**: Long-winded expressions for simple ideas
+- **Generic openings**: "In today's rapidly evolving landscape..."
+- **Forced structures**: Artificial groups of three, unnecessary comparisons
+- **Synonym overuse**: Constantly changing terms for same concept
+- **Excessive formatting**: Overuse of bold text and section headings
+
+### 11.1 Writing Anti-Slop Rules
+
+**Requirements:**
+- **Start with useful point**: Delete generic introductions
+- **Be direct**: Replace "serves as" with "is"
+- **Use concrete details**: Replace broad claims with facts and examples
+- **Avoid repetition**: Remove sections that repeat earlier points
+- **Question universality**: If sentence could appear in any project's docs, cut it
+- **Limit adverbs**: Remove unnecessary modifiers
+- **Preserve authenticity**: Keep first-person opinions and deliberate style
+
+**Bad vs Good Examples:**
+
+```markdown
+# Bad (Slop)
+"In today's rapidly evolving AI landscape, multi-agent systems are 
+becoming increasingly pivotal for organizations seeking to leverage 
+the transformative power of artificial intelligence to delve into 
+complex problem-solving scenarios."
+
+# Good (Anti-Slop)
+"Multi-agent systems coordinate 20-30+ AI agents to complete complex 
+tasks faster and cheaper than single-agent approaches."
+```
+
+```markdown
+# Bad (Slop)
+"This comprehensive solution serves as a robust framework that 
+empowers teams to seamlessly integrate cutting-edge AI capabilities."
+
+# Good (Anti-Slop)
+"This system integrates with Anthropic, OpenAI, and Google APIs. 
+Setup takes 15 minutes."
+```
+
+### 11.2 Code Anti-Slop Rules
+
+**Requirements:**
+- **Avoid premature abstraction**: Remove protocols/interfaces with one implementation
+- **Eliminate redundant comments**: Delete comments that repeat code
+- **Don't hide errors**: Avoid converting errors to empty results
+- **Remove unnecessary structure**: Cut fallbacks not required by task
+- **Keep minimal**: Resist "extensible" layers without current need
+
+**Bad vs Good Examples:**
+
+```python
+# Bad (Slop)
+class AbstractAgentFactory:
+    """Factory for creating agents"""
+    def create_agent(self) -> Agent:
+        """Creates an agent instance"""
+        pass
+
+class ConcreteAgentFactory(AbstractAgentFactory):
+    """Concrete implementation of agent factory"""
+    def create_agent(self) -> Agent:
+        """Creates a concrete agent instance"""
+        return Agent()
+
+# Good (Anti-Slop)
+def create_agent() -> Agent:
+    return Agent()
+```
+
+```python
+# Bad (Slop)
+try:
+    result = process_data(data)
+    if result is None:
+        return []
+except Exception:
+    return []
+
+# Good (Anti-Slop)
+return process_data(data)  # Let errors propagate
+```
+
+### 11.3 Two-Pass Review Process
+
+**Requirements:**
+- **First Pass**: Focus on completing work with facts, sources, goals
+- **Second Pass**: Run separate anti-slop review with narrow focus
+
+**How It Works:**
+
+**Pass 1: Content Creation**
+- Write complete content with all facts
+- Include sources and examples
+- Establish structure and flow
+- Don't worry about slop yet
+
+**Pass 2: Anti-Slop Review**
+- Keep facts, examples, structure
+- Fix only slop patterns
+- Inspect changes as proposals
+- Preserve deliberate style choices
+
+**Example Workflow:**
+
+```bash
+# Pass 1: Create content
+system-cli request "Write architecture document for auth system"
+# Agent produces complete document with facts, diagrams, examples
+
+# Pass 2: Anti-slop review
+system-cli anti-slop review --document arch-auth-system.md
+# Agent removes slop patterns, keeps substance
+
+# Human review
+system-cli preview arch-auth-system.md
+# Verify facts preserved, slop removed
+```
+
+### 11.4 PRD-Specific Anti-Slop Rules
+
+**For Product Requirements Documents:**
+
+**Remove:**
+- ❌ "In today's rapidly evolving..."
+- ❌ "This comprehensive solution..."
+- ❌ "Leveraging cutting-edge..."
+- ❌ "Seamlessly integrate..."
+- ❌ "Robust framework..."
+- ❌ "Empower teams to..."
+
+**Replace with:**
+- ✅ Specific metrics: "Reduces cost by 40%"
+- ✅ Concrete examples: "Supports 30 concurrent agents"
+- ✅ Direct statements: "Works with Anthropic, OpenAI, Google"
+- ✅ Real constraints: "Requires 16GB RAM"
+- ✅ Actual timelines: "Setup takes 15 minutes"
+
+**Example PRD Transformation:**
+
+```markdown
+# Before (Slop)
+## Executive Summary
+In today's rapidly evolving landscape of artificial intelligence, 
+organizations are increasingly seeking to leverage the transformative 
+power of multi-agent systems. This comprehensive solution serves as 
+a robust framework that empowers teams to seamlessly integrate 
+cutting-edge AI capabilities, enabling them to delve into complex 
+problem-solving scenarios with unprecedented efficiency.
+
+# After (Anti-Slop)
+## Executive Summary
+This multi-agent system coordinates 20-30+ AI agents to complete 
+software development tasks. Reduces cost by 40%, time by 35%, and 
+code size by 53% compared to single-agent approaches. Works with 
+Anthropic Claude, OpenAI GPT-4, and Google Gemini.
+```
+
+### 11.5 Documentation Anti-Slop Rules
+
+**For Technical Documentation:**
+
+**Custom Rules:**
+- Open with useful point immediately
+- Replace broad claims with commands or examples
+- Introduce code snippets with context
+- Keep paragraphs focused on single concepts
+- Remove generic statements applicable to any product
+
+**Example Transformation:**
+
+```markdown
+# Before (Slop)
+## Getting Started
+Welcome to our comprehensive guide! In this section, we'll delve 
+into the various aspects of getting started with our powerful 
+multi-agent system. This guide will walk you through the essential 
+steps needed to leverage the full potential of our framework.
+
+# After (Anti-Slop)
+## Getting Started
+Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+Start the system:
+```bash
+system-cli start-all
+```
+
+Verify installation:
+```bash
+system-cli health-check
+```
+```
+
+### 11.6 Agent Configuration for Anti-Slop
+
+**Requirements:**
+- Configure agents to avoid slop patterns
+- Two-pass workflow: content then anti-slop
+- Preserve facts and structure
+- Human review final output
+
+**Agent Prompt Configuration:**
+
+```yaml
+# config/anti-slop.yaml
+anti_slop:
+  enabled: true
+  mode: two_pass  # content_first, then anti_slop_review
+  
+  forbidden_phrases:
+    - "in today's rapidly evolving"
+    - "leverage the power of"
+    - "seamlessly integrate"
+    - "robust framework"
+    - "comprehensive solution"
+    - "delve into"
+    - "pivotal"
+    - "tapestry"
+    - "underscore"
+    
+  writing_rules:
+    - "Start with useful point"
+    - "Be direct: replace 'serves as' with 'is'"
+    - "Use concrete details and metrics"
+    - "Avoid repetition"
+    - "Limit adverbs"
+    - "Short paragraphs (one idea each)"
+    
+  code_rules:
+    - "No premature abstraction"
+    - "No redundant comments"
+    - "Let errors propagate"
+    - "Remove unnecessary structure"
+    - "Keep minimal"
+```
+
+**Agent Workflow:**
+
+```python
+def create_document(request):
+    # Pass 1: Content creation
+    content = agent.create_content(
+        request=request,
+        focus="facts, sources, examples, structure"
+    )
+    
+    # Pass 2: Anti-slop review
+    if config.anti_slop.enabled:
+        content = agent.anti_slop_review(
+            content=content,
+            rules=config.anti_slop.rules,
+            preserve=["facts", "examples", "structure"]
+        )
+    
+    return content
+```
+
+### 11.7 What Anti-Slop Cannot Do
+
+**Important Limitations:**
+
+Anti-slop skills **cannot**:
+- ❌ Supply missing facts
+- ❌ Choose correct architecture
+- ❌ Make unverified content correct
+- ❌ Replace testing or judgment
+- ❌ Fix fundamental design flaws
+
+Anti-slop **can**:
+- ✅ Remove generic AI patterns
+- ✅ Make writing more direct
+- ✅ Eliminate unnecessary abstraction
+- ✅ Improve clarity and conciseness
+- ✅ Catch repetitive habits
+
+**Key Distinction:**
+- **Product/architecture rules**: Belong in project instructions (safety, flows)
+- **Anti-slop rules**: Catch generic habits that slipped into output
+
+### 11.8 Monitoring Anti-Slop Effectiveness
+
+**Metrics to Track:**
+
+```yaml
+anti_slop_metrics:
+  # Writing metrics
+  avg_paragraph_length: 3.2 sentences  # Target: <4
+  forbidden_phrase_count: 0  # Target: 0
+  concrete_examples_per_section: 2.1  # Target: >2
+  
+  # Code metrics
+  single_implementation_abstractions: 0  # Target: 0
+  comment_to_code_ratio: 0.08  # Target: <0.1
+  unnecessary_try_catch: 0  # Target: 0
+  
+  # Quality metrics
+  human_revision_rate: 12%  # Target: <15%
+  slop_detection_accuracy: 94%  # Target: >90%
+```
+
+**Dashboard View:**
+
+```bash
+$ system-cli metrics anti-slop --last-7-days
+
+Anti-Slop Effectiveness Report
+==============================
+Documents Reviewed: 47
+Slop Patterns Removed: 312
+
+Top Removed Patterns:
+1. "In today's rapidly evolving": 23 instances
+2. "Leverage the power of": 18 instances
+3. "Seamlessly integrate": 15 instances
+4. Generic introductions: 31 instances
+5. Unnecessary abstractions: 12 instances
+
+Quality Improvement:
+- Avg paragraph length: 3.8 → 3.1 sentences
+- Concrete examples: +47%
+- Human revisions: 18% → 12%
+
+Preserved Elements:
+✓ All facts and sources intact
+✓ Structure maintained
+✓ Deliberate style choices kept
+```
+
+### 11.9 Communication Mode Requirements
+
+**Agent-to-Agent Communication (Caveman Mode Allowed):**
+
+When agents communicate with each other (not with humans), they MAY use caveman mode for token efficiency:
+
+**Allowed in Agent-to-Agent:**
+- Abbreviated syntax: `Agent → worktree (hook) for state`
+- Symbols: `→`, `≠`, `✓`, `✗`
+- Shortened phrases: "Crash = lost work"
+- Minimal context: Assume shared understanding
+- Token-optimized format
+
+**Example Agent-to-Agent Message:**
+```
+Task: auth-system
+Status: login ✓, signup 50%, reset pending
+Blocker: JWT dependency
+Next: complete signup validation → email verify → tests
+Token: 85% (handoff soon)
+```
+
+**Human-Facing Documents (Unslop Required):**
+
+When creating documents for humans (PRDs, documentation, reports), agents MUST use unslop mode:
+
+**Required for Human Documents:**
+- Clear, complete sentences
+- Proper grammar and structure
+- Concrete examples and metrics
+- Educational explanations
+- No AI slop patterns
+- Readable by non-technical stakeholders
+
+**Example Human-Facing Document:**
+```markdown
+## Authentication System Progress
+
+**Completed:**
+- Login endpoint implemented and tested
+
+**In Progress:**
+- Signup endpoint (50% complete)
+- Current focus: validation logic
+
+**Pending:**
+- Password reset functionality
+- Session management
+
+**Blocker:**
+- Waiting for JWT token management completion
+
+**Next Steps:**
+1. Complete signup endpoint validation
+2. Add email verification
+3. Write comprehensive tests
+```
+
+**Configuration:**
+
+```yaml
+# config/communication-modes.yaml
+communication_modes:
+  agent_to_agent:
+    mode: caveman
+    allow_abbreviations: true
+    allow_symbols: true
+    optimize_for: tokens
+    
+  human_facing:
+    mode: unslop
+    require_complete_sentences: true
+    require_examples: true
+    optimize_for: clarity
+    
+  documents:
+    - type: "PRD"
+      mode: unslop
+      anti_slop: true
+      
+    - type: "Technical Documentation"
+      mode: unslop
+      anti_slop: true
+      
+    - type: "Agent Logs"
+      mode: caveman
+      anti_slop: false
+      
+    - type: "Status Updates"
+      mode: caveman
+      anti_slop: false
+```
+
+**Rationale:**
+
+- **Token Efficiency**: Agent-to-agent communication happens frequently. Caveman mode reduces token usage by 40-60% without losing meaning between agents.
+- **Human Readability**: Documents for humans must be clear, educational, and professional. Unslop mode ensures quality.
+- **Context Awareness**: Agents share context and can interpret abbreviated communication. Humans need full explanations.
+
+### 11.10 Best Practices
+
+**For Writers:**
+- ✓ Write content first, anti-slop second
+- ✓ Start with useful point, no generic intros
+- ✓ Use concrete metrics and examples
+- ✓ Keep paragraphs short (one idea each)
+- ✓ Preserve deliberate style choices
+
+**For Developers:**
+- ✓ Avoid premature abstraction
+- ✓ Remove redundant comments
+- ✓ Let errors propagate naturally
+- ✓ Keep code minimal
+- ✓ Question every new interface/protocol
+
+**For Reviewers:**
+- ✓ Verify facts preserved after anti-slop
+- ✓ Check structure maintained
+- ✓ Ensure clarity improved
+- ✓ Confirm no over-correction
+- ✓ Validate deliberate choices kept
+
+**Example Integration:**
+
+```bash
+# Enable anti-slop for project
+system-cli config set anti_slop.enabled true
+
+# Configure forbidden phrases
+system-cli anti-slop add-phrase "in today's rapidly evolving"
+
+# Run anti-slop review on document
+system-cli anti-slop review --document prd.md
+
+# View anti-slop report
+system-cli anti-slop report --document prd.md
+```
+
+
 
 ### 9.2 Hook-Based Work Assignment
 

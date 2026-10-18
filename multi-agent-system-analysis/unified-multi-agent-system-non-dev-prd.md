@@ -9,11 +9,11 @@
 
 ## Executive Summary
 
-This PRD defines a unified multi-agent system for **non-development work** - content creation, research, data analysis, operations, and other knowledge work. While the companion development PRD focuses on code, this system addresses the broader challenge of coordinating AI agents for general knowledge work at scale.
+This PRD defines a unified multi-agent system for **non-development work** - content creation, research, data analysis, operations, and other knowledge work. While the companion development PRD focuses on code, this system coordinates AI agents for general knowledge work.
 
 ### What Problem Does This Solve?
 
-Current AI-assisted knowledge work faces challenges:
+Current AI-assisted knowledge work challenges:
 - **Context Loss**: Agents lose research context on restart
 - **Coordination Chaos**: Multiple agents working on related content without alignment
 - **Quality Issues**: No systematic verification for non-code outputs
@@ -28,7 +28,7 @@ This system addresses these challenges through structured workflows, persistent 
 ## Vision
 
 **Build a multi-agent system for knowledge work that:**
-- Scales reliably to 20-30+ concurrent agents
+- Supports 20-30+ concurrent agents
 - Persists research and context across crashes
 - Produces high-quality content through systematic review
 - Maintains consistent voice and style across agents
@@ -743,7 +743,114 @@ quality_metrics:
 
 ---
 
-## Appendix B: Glossary
+## Appendix B: Communication Mode Requirements
+
+**Agent-to-Agent Communication (Caveman Mode Allowed):**
+
+When agents communicate with each other (not with humans), they MAY use caveman mode for token efficiency:
+
+**Allowed in Agent-to-Agent:**
+- Abbreviated syntax: `Research → 20 sources → synthesis`
+- Symbols: `→`, `≠`, `✓`, `✗`
+- Shortened phrases: "Draft = 1200 words"
+- Minimal context: Assume shared understanding
+- Token-optimized format
+
+**Example Agent-to-Agent Message:**
+```
+Task: blog-post-ai-tips
+Status: research ✓, draft 80%, seo pending
+Sources: 8 articles, 3 studies
+Next: complete draft → seo optimize → editor review
+Quality: 8.5/10 target
+```
+
+**Human-Facing Documents (Unslop Required):**
+
+When creating documents for humans (articles, reports, documentation), agents MUST use unslop mode:
+
+**Required for Human Documents:**
+- Clear, complete sentences
+- Proper grammar and structure
+- Concrete examples and data
+- Educational explanations
+- No AI slop patterns
+- Readable by target audience
+
+**Example Human-Facing Document:**
+```markdown
+## Blog Post Progress: AI Productivity Tips
+
+**Research Complete:**
+- Analyzed 8 articles on AI productivity tools
+- Reviewed 3 academic studies on AI adoption
+- Identified 10 actionable tips with evidence
+
+**Draft Status:**
+- 1,200 words written (target: 1,500)
+- 8 tips completed with examples
+- 2 tips remaining
+
+**Quality Metrics:**
+- Readability: Grade 8 level (target audience)
+- SEO: Primary keyword density 1.2%
+- Engagement: 3 concrete examples per tip
+
+**Next Steps:**
+1. Complete final 2 tips
+2. Add meta description
+3. Optimize headings for SEO
+4. Submit for editorial review
+```
+
+**Configuration:**
+
+```yaml
+# config/communication-modes.yaml
+communication_modes:
+  agent_to_agent:
+    mode: caveman
+    allow_abbreviations: true
+    allow_symbols: true
+    optimize_for: tokens
+    
+  human_facing:
+    mode: unslop
+    require_complete_sentences: true
+    require_examples: true
+    optimize_for: clarity
+    
+  documents:
+    - type: "Research Report"
+      mode: unslop
+      anti_slop: true
+      
+    - type: "Blog Post"
+      mode: unslop
+      anti_slop: true
+      
+    - type: "Technical Documentation"
+      mode: unslop
+      anti_slop: true
+      
+    - type: "Agent Logs"
+      mode: caveman
+      anti_slop: false
+      
+    - type: "Status Updates"
+      mode: caveman
+      anti_slop: false
+```
+
+**Rationale:**
+
+- **Token Efficiency**: Agent-to-agent communication happens frequently. Caveman mode reduces token usage by 40-60% without losing meaning between agents.
+- **Human Readability**: Documents for humans must be clear, educational, and professional. Unslop mode ensures quality.
+- **Context Awareness**: Agents share context and can interpret abbreviated communication. Humans need full explanations.
+
+---
+
+## Appendix C: Glossary
 
 - **Knowledge Base:** Searchable repository of reusable content, templates, and guidelines
 - **Research Ladder:** Framework for avoiding content duplication (similar to code minimalism ladder)
