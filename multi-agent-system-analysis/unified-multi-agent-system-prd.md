@@ -65,6 +65,410 @@ Track code size, cost, time, test coverage, and production reliability.
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                     Human Interface Layer                    │
+
+---
+
+## System Requirements
+
+### Cross-Platform Compatibility
+
+**Requirement:** The system must work on both Windows and Linux/macOS operating systems.
+
+**Rationale:**
+- Development teams use diverse operating systems
+- System should not force OS choice on users
+- Cross-platform support enables broader adoption
+
+**Platform-Specific Considerations:**
+
+**Windows:**
+- Must support Windows 10+ or Windows 11
+- WSL2 (Windows Subsystem for Linux) acceptable for Git worktree operations
+- PowerShell and Command Prompt compatibility for CLI
+- Path handling must account for Windows path separators (`\` vs `/`)
+- Line ending handling (CRLF vs LF) must be transparent
+
+**Linux/macOS:**
+- Must support major Linux distributions (Ubuntu 20.04+, Debian, Fedora, Arch)
+- Must support macOS 11+ (Big Sur and later)
+- Native Unix shell compatibility (bash, zsh)
+- Standard Unix path conventions
+
+**Cross-Platform Requirements:**
+- File system operations must be OS-agnostic
+- Process management must work across platforms
+- Environment variable handling must be consistent
+- CLI commands must have identical behavior across platforms
+- Configuration files must use platform-independent formats (YAML, JSON)
+
+**Implementation Constraints:**
+- Use cross-platform libraries for file operations
+- Abstract OS-specific operations behind common interfaces
+- Test on all supported platforms before release
+- Document platform-specific limitations if any exist
+
+
+
+### Hardware Requirements
+
+**Minimum Requirements:**
+- **Memory:** 8GB RAM
+- **Storage:** 10GB free disk space
+- **Network:** Stable internet connection for LLM API calls
+
+**Recommended Requirements (for 20+ agents):**
+- **Memory:** 16GB RAM
+- **Storage:** 50GB free disk space (for session history, logs, metrics)
+- **Network:** High-bandwidth connection (1 Mbps+ sustained)
+
+**Rationale:**
+- Agent sessions consume memory proportional to context size
+- Version control worktrees require disk space
+- LLM API calls require reliable network connectivity
+
+### Software Requirements
+
+**Version Control:**
+- **Git:** 2.30+ (required for worktree support)
+- **Rationale:** Hooks system depends on Git worktrees for context persistence
+
+**Runtime Environment:**
+- **Python:** 3.10+ OR **Node.js:** 18+
+- **Rationale:** Implementation language choice, both must be supported
+
+**Database:**
+- **Development:** SQLite 3.35+ (embedded, zero-config)
+- **Production:** PostgreSQL 14+ (for 20+ agents)
+- **Rationale:** SQLite sufficient for small scale, PostgreSQL required for production scale
+
+**Optional:**
+- **Container Runtime:** Docker 20+ (for agent isolation)
+- **Rationale:** Optional isolation layer for security-sensitive deployments
+
+### LLM Provider Requirements
+
+**Minimum:** At least one supported provider configured
+
+**Supported Providers:**
+- **Anthropic Claude:** API key with Claude 3.5 Sonnet access
+- **OpenAI:** API key with GPT-4 access  
+- **Google Gemini:** API key with Gemini 1.5 Pro access
+- **Local LLM:** Ollama with llama3 or similar (development only)
+
+**Rationale:**
+- Multi-provider support prevents vendor lock-in
+- Local LLM support enables offline development
+- Provider diversity enables cost optimization
+
+---
+
+## Security Requirements
+
+### Authentication & Authorization
+
+**API Key Management:**
+- **MUST:** Store API keys in environment variables or secure vault
+- **MUST NOT:** Hardcode API keys in configuration files or code
+- **MUST:** Support integration with HashiCorp Vault or equivalent secret management
+
+**Access Control:**
+- **MUST:** Implement role-based access control (RBAC)
+- **Required Roles:**
+  - **Admin:** Manage agents, view all projects, modify system configuration
+  - **Developer:** Spawn agents, view own projects, submit work requests
+  - **Viewer:** View metrics, view own projects (read-only)
+
+**Audit Logging:**
+- **MUST:** Log all agent operations with timestamp, user, action
+- **MUST:** Audit log must be immutable (append-only)
+- **MUST:** Retain audit logs for minimum 90 days
+
+### Data Protection
+
+**Secrets Management:**
+- **MUST:** Never commit secrets to version control
+- **MUST:** Provide integration with external secret management systems
+- **MUST:** Rotate API keys on schedule or on-demand
+
+**Least Privilege:**
+- **MUST:** Agents operate with minimum required permissions
+- **MUST:** File system access limited to project directories
+- **MUST:** Network access limited to required LLM providers
+
+**Rationale:**
+- Security breaches can expose API keys and sensitive code
+- Audit trails enable incident investigation
+- Least privilege limits blast radius of compromised agents
+
+---
+
+## Scalability Requirements
+
+### Agent Capacity Tiers
+
+**Tier 1 (MVP):**
+- **Capacity:** 5 concurrent agents
+- **Database:** SQLite
+- **Use Case:** Individual developers, proof of concept
+
+**Tier 2 (Production):**
+- **Capacity:** 20 concurrent agents
+- **Database:** PostgreSQL
+- **Use Case:** Small teams (5-10 developers)
+
+**Tier 3 (Scale):**
+- **Capacity:** 30+ concurrent agents
+- **Database:** PostgreSQL with connection pooling
+- **Use Case:** Large teams (10+ developers), multiple projects
+
+**Rationale:**
+- Different team sizes have different scaling needs
+- Database choice impacts maximum agent capacity
+- Clear tiers enable incremental scaling
+
+### Token Budget Management
+
+**Requirements:**
+- **MUST:** Support configurable daily token budget per project
+- **MUST:** Support configurable per-task token budget
+- **MUST:** Gracefully handle budget exhaustion (queue work, don't fail)
+- **MUST:** Alert when approaching budget limits (80%, 90%, 95%)
+
+**Rationale:**
+- Prevents runaway costs from agent loops
+- Enables cost predictability and control
+- Alerts enable proactive intervention
+
+### Database Scaling
+
+**Requirements:**
+- **MUST:** Support migration from SQLite to PostgreSQL without data loss
+- **MUST:** Handle concurrent database access from multiple agents
+- **MUST:** Implement connection pooling for PostgreSQL
+- **SHOULD:** Support optional federation for 30+ agents across workspaces
+
+**Rationale:**
+- Teams grow over time, database must scale with them
+- Concurrent access requires proper transaction handling
+- Federation enables horizontal scaling beyond single database
+
+---
+
+## Configuration Requirements
+
+### Project-Level Configuration
+
+**Required Configuration Options:**
+- **Minimalism Level:** `lite`, `full`, `ultra`
+- **Testing Requirements:** Coverage target (%), TDD enforcement (boolean)
+- **Review Policy:** Required reviewers (number), auto-merge rules (boolean)
+- **Token Efficiency:** Compression level, budget limits
+- **LLM Provider:** Default provider, fallback provider
+
+**Configuration Format:**
+- **MUST:** Use YAML or JSON (human-readable, version-controllable)
+- **MUST:** Support environment variable substitution
+- **MUST:** Validate configuration on load with clear error messages
+
+**Example Schema:**
+```yaml
+project:
+  name: string
+  type: "development" | "non-development"
+  minimalism:
+    level: "lite" | "full" | "ultra"
+    enforce: boolean
+  testing:
+    coverage_target: number (0-100)
+    tdd_required: boolean
+  review:
+    required: boolean
+    auto_merge: boolean
+  token_efficiency:
+    compression: "lite" | "full" | "ultra"
+    budget_per_task: number
+  llm_provider:
+    default: string
+    fallback: string
+```
+
+### Agent-Level Configuration
+
+**Required Configuration Options:**
+- **Model Selection:** Per-role model mapping (coordinator, worker, reviewer, etc.)
+- **Token Limits:** Per-agent token budgets
+- **Compression:** Context compression strategy
+- **Handoff Threshold:** When to trigger agent handoff (e.g., 90% token usage)
+
+**Configuration Format:**
+```yaml
+agents:
+  coordinator:
+    model: string
+    token_limit: number
+    compression: "lite" | "full" | "ultra"
+  worker:
+    model: string
+    token_limit: number
+    compression: "lite" | "full" | "ultra"
+    handoff_threshold: number (0.0-1.0)
+  specialized:
+    architect:
+      model: string
+      token_limit: number
+    reviewer:
+      model: string
+      token_limit: number
+```
+
+**Rationale:**
+- Different projects have different quality/cost trade-offs
+- Configuration must be version-controlled alongside code
+- Clear schema prevents configuration errors
+
+---
+
+## User Interface Requirements
+
+### CLI Interface (Primary)
+
+**Required Commands:**
+
+**System Management:**
+- `init` - Initialize system database and configuration
+- `start-all` - Start all system services
+- `stop-all` - Stop all system services
+- `status` - Show system status
+- `health-check` - Run comprehensive health check
+
+**Project Management:**
+- `project create` - Create new project
+- `project list` - List all projects
+- `project switch` - Switch active project
+
+**Agent Management:**
+- `agents list` - List all agents
+- `agents spawn` - Spawn new agent
+- `agents status` - Check agent status
+- `agents handoff` - Handoff work between agents
+
+**Work Management:**
+- `request` - Submit work request
+- `work-bundle show` - Show work bundle details
+- `watch` - Watch task progress in real-time
+
+**Monitoring:**
+- `metrics tokens` - Token usage metrics
+- `metrics cost` - Cost metrics
+- `metrics quality` - Quality metrics
+- `metrics agents` - Agent performance metrics
+
+**Debugging:**
+- `debug replay` - Replay agent session
+- `debug context` - Inspect agent context
+- `logs` - View system logs
+
+**CLI Requirements:**
+- **MUST:** Provide help text for all commands
+- **MUST:** Support shell completion (bash, zsh, fish)
+- **MUST:** Return appropriate exit codes (0 = success, non-zero = error)
+- **MUST:** Output structured data (JSON) when `--json` flag provided
+
+### Dashboard Interface (Secondary)
+
+**Required Features:**
+- Real-time agent activity monitoring
+- Work bundle status visualization
+- Merge queue state display
+- Escalation tracking and management
+- Metrics and trends (charts/graphs)
+
+**Dashboard Requirements:**
+- **MUST:** Auto-refresh without page reload
+- **MUST:** Support filtering and search
+- **SHOULD:** Support command palette for quick actions
+- **SHOULD:** Export data to CSV/JSON
+
+**Rationale:**
+- CLI is primary interface for automation and scripting
+- Dashboard provides visual overview for monitoring
+- Both interfaces must provide same functionality
+
+---
+
+## Observability Requirements
+
+### Metrics Collection
+
+**Required Metrics:**
+
+**Token Usage:**
+- Per-agent token consumption
+- Per-task token consumption
+- Per-project daily/weekly/monthly totals
+- Token efficiency (tokens per line of code)
+
+**Cost Tracking:**
+- Per-agent cost (based on LLM provider pricing)
+- Per-task cost
+- Per-project daily/weekly/monthly costs
+- Cost per feature delivered
+
+**Quality Metrics:**
+- Test coverage percentage
+- Bug escape rate (bugs found in production)
+- Code review findings (per severity)
+- Merge queue success rate
+
+**Agent Performance:**
+- Task completion time (median, p95, p99)
+- Token efficiency per agent
+- Handoff rate (frequency of agent handoffs)
+- Escalation rate (frequency of escalations)
+
+**Metrics Requirements:**
+- **MUST:** Store metrics in time-series database
+- **MUST:** Support metric aggregation (sum, avg, min, max, percentiles)
+- **MUST:** Retain metrics for minimum 90 days
+- **SHOULD:** Support metric export to external systems (Prometheus, Grafana)
+
+### Alerting
+
+**Required Alerts:**
+
+**Budget Alerts:**
+- Token budget at 80% (warning)
+- Token budget at 90% (critical)
+- Token budget at 95% (emergency)
+
+**Agent Failure Alerts:**
+- Agent stuck (no progress for 10 minutes)
+- Agent crashed (unexpected termination)
+- Agent escalated (P0/P1 escalation)
+
+**Quality Alerts:**
+- Test failure in merge queue
+- Merge queue blocked (no merges for 30 minutes)
+- Code coverage below threshold
+
+**System Health Alerts:**
+- Daemon down (watchdog failure)
+- Database unavailable
+- LLM provider error rate > 5%
+
+**Alerting Requirements:**
+- **MUST:** Support multiple notification channels (email, Slack, PagerDuty)
+- **MUST:** Support alert severity levels (info, warning, critical, emergency)
+- **MUST:** Support alert deduplication (don't spam same alert)
+- **SHOULD:** Support alert escalation policies
+
+**Rationale:**
+- Metrics enable data-driven optimization
+- Alerts enable proactive issue resolution
+- Observability is critical for production systems
+
+
+
 │  (CLI, Dashboard, Metrics Display, Escalation Channels)     │
 └─────────────────────────────────────────────────────────────┘
                               ↓
