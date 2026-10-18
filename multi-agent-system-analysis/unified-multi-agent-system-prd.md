@@ -469,6 +469,406 @@ agents:
 
 ---
 
+## Multi-Agent Platform Support
+
+### Overview
+
+**Requirement:** The system must support multiple coding agent platforms (Claude Code, GitHub Copilot, IBM Bob, etc.) working together within the same project.
+
+**Rationale:**
+- Different coding agents have different strengths (e.g., Claude Code for architecture, Copilot for autocomplete, Bob for enterprise workflows)
+- Teams may have licenses for multiple platforms
+- Avoid vendor lock-in to a single coding agent platform
+- Enable best-of-breed approach (use the right agent for the right task)
+
+### Supported Coding Agent Platforms
+
+**Tier 1 (Full Integration):**
+- **Claude Code:** Full integration with context persistence, hooks, and workflows
+- **IBM Bob:** Enterprise-grade integration with security and compliance features
+- **GitHub Copilot:** Code completion and suggestion integration
+
+**Tier 2 (Basic Integration):**
+- **Cursor:** IDE-based agent with API integration
+- **Cody (Sourcegraph):** Code intelligence and search integration
+- **Tabnine:** Code completion integration
+
+**Tier 3 (Experimental):**
+- **Codex (OpenAI):** Direct API integration
+- **Custom Agents:** User-defined agents via plugin system
+
+### Agent Interoperability Requirements
+
+**Common Protocol:**
+- **MUST:** Define standard agent communication protocol
+- **MUST:** Support agent-to-agent handoff across platforms
+- **MUST:** Maintain context across platform boundaries
+- **MUST:** Provide unified work tracking regardless of agent platform
+
+**Protocol Specification:**
+```yaml
+agent_protocol:
+  version: "1.0"
+  
+  agent_identity:
+    platform: string          # "claude-code", "ibm-bob", "copilot"
+    agent_id: string          # Unique agent identifier
+    capabilities: array       # ["code-generation", "review", "refactor"]
+    
+  context_format:
+    type: "json" | "markdown"
+    schema_version: string
+    
+  handoff_protocol:
+    state_transfer: "hooks" | "api" | "file-based"
+    context_compression: boolean
+    
+  work_tracking:
+    task_format: "standard"   # Common task format
+    status_updates: "real-time" | "polling"
+```
+
+### Platform-Specific Adapters
+
+**Requirements:**
+- **MUST:** Implement adapter for each supported platform
+- **MUST:** Abstract platform differences behind common interface
+- **MUST:** Handle platform-specific authentication
+- **MUST:** Map platform capabilities to system roles
+
+**Adapter Interface:**
+```python
+class CodingAgentAdapter:
+    """Base adapter interface for coding agent platforms"""
+    
+    def authenticate(self, credentials: dict) -> bool:
+        """Authenticate with platform"""
+        pass
+    
+    def spawn_agent(self, task: Task, config: dict) -> Agent:
+        """Spawn agent for task"""
+        pass
+    
+    def transfer_context(self, from_agent: Agent, to_agent: Agent) -> bool:
+        """Transfer context between agents"""
+        pass
+    
+    def get_capabilities(self) -> list[str]:
+        """Get platform capabilities"""
+        pass
+    
+    def supports_hooks(self) -> bool:
+        """Check if platform supports hooks"""
+        pass
+```
+
+**Platform-Specific Implementations:**
+
+**Claude Code Adapter:**
+```python
+class ClaudeCodeAdapter(CodingAgentAdapter):
+    """Adapter for Claude Code platform"""
+    
+    capabilities = [
+        "code-generation",
+        "architecture-design",
+        "code-review",
+        "refactoring",
+        "documentation"
+    ]
+    
+    supports_hooks = True
+    context_format = "markdown"
+```
+
+**IBM Bob Adapter:**
+```python
+class IBMBobAdapter(CodingAgentAdapter):
+    """Adapter for IBM Bob platform"""
+    
+    capabilities = [
+        "code-generation",
+        "security-review",
+        "compliance-check",
+        "enterprise-integration"
+    ]
+    
+    supports_hooks = True
+    context_format = "json"
+    enterprise_features = ["audit-logging", "rbac", "secret-management"]
+```
+
+**GitHub Copilot Adapter:**
+```python
+class CopilotAdapter(CodingAgentAdapter):
+    """Adapter for GitHub Copilot"""
+    
+    capabilities = [
+        "code-completion",
+        "code-generation",
+        "inline-suggestions"
+    ]
+    
+    supports_hooks = False  # IDE-based, no direct hook support
+    context_format = "file-based"
+```
+
+### Agent Selection Strategy
+
+**Requirements:**
+- **MUST:** Select appropriate agent platform based on task type
+- **MUST:** Support user override of agent selection
+- **MUST:** Fall back to alternative platform if primary unavailable
+- **SHOULD:** Learn from agent performance to optimize selection
+
+**Selection Rules:**
+```yaml
+agent_selection:
+  by_task_type:
+    architecture_design:
+      primary: "claude-code"
+      fallback: "ibm-bob"
+      reason: "Long context, design thinking"
+      
+    code_generation:
+      primary: "ibm-bob"
+      fallback: "claude-code"
+      reason: "Enterprise compliance, security"
+      
+    code_completion:
+      primary: "copilot"
+      fallback: "tabnine"
+      reason: "Real-time suggestions, IDE integration"
+      
+    security_review:
+      primary: "ibm-bob"
+      fallback: "claude-code"
+      reason: "Enterprise security standards"
+      
+    refactoring:
+      primary: "claude-code"
+      fallback: "ibm-bob"
+      reason: "Code understanding, minimalism"
+  
+  by_project_type:
+    enterprise:
+      preferred_platforms: ["ibm-bob", "claude-code"]
+      required_features: ["audit-logging", "compliance"]
+      
+    open_source:
+      preferred_platforms: ["claude-code", "copilot"]
+      required_features: ["code-generation", "review"]
+      
+    startup:
+      preferred_platforms: ["claude-code", "copilot"]
+      required_features: ["speed", "cost-efficiency"]
+```
+
+### Cross-Platform Context Transfer
+
+**Requirements:**
+- **MUST:** Transfer context when handing off between platforms
+- **MUST:** Preserve work state across platform boundaries
+- **MUST:** Handle platform-specific context formats
+- **MUST:** Minimize context loss during transfer
+
+**Context Transfer Protocol:**
+```yaml
+context_transfer:
+  source_platform: string
+  target_platform: string
+  
+  context_payload:
+    task_id: string
+    work_state: object
+    code_changes: array
+    decision_history: array
+    session_metadata: object
+    
+  transfer_method:
+    hooks: "git-worktree"      # For hook-supporting platforms
+    api: "rest-api"             # For API-based platforms
+    file: "shared-filesystem"   # For file-based platforms
+    
+  compression:
+    enabled: boolean
+    algorithm: "gzip" | "brotli"
+    
+  validation:
+    checksum: string
+    verify_integrity: boolean
+```
+
+**Example Cross-Platform Handoff:**
+```
+Task: Implement authentication system
+
+1. Claude Code (Architecture):
+   - Designs system architecture
+   - Creates ADR for tech stack
+   - Defines API contracts
+   - Commits to hook: auth-system/
+   
+2. IBM Bob (Implementation):
+   - Reads architecture from hook
+   - Implements with security best practices
+   - Adds compliance checks
+   - Commits to hook: auth-system/
+   
+3. Copilot (Refinement):
+   - Provides inline suggestions
+   - Optimizes code patterns
+   - IDE-based improvements
+   
+4. Claude Code (Review):
+   - Reviews implementation
+   - Checks against architecture
+   - Approves for merge
+```
+
+### Configuration Requirements
+
+**Project-Level Configuration:**
+```yaml
+multi_agent_config:
+  enabled: boolean
+  
+  platforms:
+    claude_code:
+      enabled: boolean
+      api_key: env:CLAUDE_API_KEY
+      model: "claude-3-5-sonnet-20241022"
+      roles: ["architect", "reviewer", "developer"]
+      
+    ibm_bob:
+      enabled: boolean
+      api_key: env:IBM_BOB_API_KEY
+      endpoint: "https://bob.ibm.com/api"
+      roles: ["developer", "security-reviewer"]
+      enterprise_features:
+        audit_logging: true
+        compliance_mode: "strict"
+        
+    copilot:
+      enabled: boolean
+      api_key: env:GITHUB_TOKEN
+      roles: ["code-completion"]
+      ide_integration: true
+  
+  selection_strategy:
+    mode: "automatic" | "manual" | "hybrid"
+    prefer_platform: string  # Optional: prefer specific platform
+    
+  handoff_policy:
+    automatic: boolean
+    require_approval: boolean
+    preserve_context: true
+```
+
+### Monitoring and Metrics
+
+**Requirements:**
+- **MUST:** Track agent performance by platform
+- **MUST:** Monitor cross-platform handoffs
+- **MUST:** Measure context transfer success rate
+- **MUST:** Compare cost and quality across platforms
+
+**Platform Metrics:**
+```yaml
+platform_metrics:
+  by_platform:
+    claude_code:
+      tasks_completed: 145
+      avg_quality_score: 9.2
+      avg_cost_per_task: $0.45
+      handoff_success_rate: 98%
+      
+    ibm_bob:
+      tasks_completed: 89
+      avg_quality_score: 9.5
+      avg_cost_per_task: $0.52
+      handoff_success_rate: 99%
+      compliance_pass_rate: 100%
+      
+    copilot:
+      suggestions_accepted: 1247
+      avg_quality_score: 8.1
+      cost_per_suggestion: $0.001
+      
+  cross_platform:
+    handoffs_total: 67
+    handoff_success_rate: 97%
+    context_loss_rate: 3%
+    avg_handoff_time: 12s
+```
+
+### Error Handling for Multi-Platform
+
+**Platform-Specific Errors:**
+```yaml
+platform_errors:
+  PLATFORM_UNAVAILABLE:
+    severity: P1
+    recovery: "Fallback to alternative platform"
+    
+  CONTEXT_TRANSFER_FAILED:
+    severity: P1
+    recovery: "Retry with compression disabled"
+    
+  AUTHENTICATION_FAILED:
+    severity: P0
+    recovery: "Prompt for new credentials"
+    
+  CAPABILITY_NOT_SUPPORTED:
+    severity: P2
+    recovery: "Route to platform with capability"
+    
+  HANDOFF_TIMEOUT:
+    severity: P1
+    recovery: "Cancel handoff, continue with current platform"
+```
+
+### Security Considerations
+
+**Requirements:**
+- **MUST:** Isolate credentials per platform
+- **MUST:** Audit all cross-platform transfers
+- **MUST:** Encrypt context during transfer
+- **MUST:** Validate agent identity across platforms
+
+**Security Controls:**
+```yaml
+security:
+  credential_isolation:
+    per_platform: true
+    vault_integration: true
+    rotation_policy: "30-days"
+    
+  context_transfer:
+    encryption: "AES-256"
+    integrity_check: "SHA-256"
+    audit_logging: true
+    
+  agent_verification:
+    verify_identity: true
+    certificate_pinning: true
+    mutual_tls: true
+```
+
+### Rationale
+
+**Why This Matters:**
+- **Flexibility:** Use best agent for each task type
+- **Resilience:** Fallback options if primary platform unavailable
+- **Cost Optimization:** Choose cost-effective platform per task
+- **Vendor Independence:** Avoid lock-in to single platform
+- **Enterprise Readiness:** Support enterprise platforms like IBM Bob with compliance features
+
+
+
+
+---
+
 ## Error Handling and Recovery Requirements
 
 ### Error Classification
