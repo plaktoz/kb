@@ -1,0 +1,75 @@
+---
+source_url: https://www.sciencedaily.com/releases/2026/10/261016070646.htm
+author: Unknown
+date: 2026-10-16
+---
+
+# Scientists find a youth protein that helps aging brain cells act young again
+
+A protein associated with youth may help aging brain cells regain some of their lost abilities. Scientists at the Icahn School of Medicine at Mount Sinai have discovered that TIMP2 plays an important role in keeping the brain's immune cells healthy, offering new clues about how the brain changes with age.
+
+In a study published in Nature Communications, researchers found that removing TIMP2 caused brain immune cells, known as microglia, to develop characteristics linked to aging and neurodegenerative disease. When the scientists restored TIMP2 in the bloodstream of older mice, these cells became better at removing cellular debris and showed fewer molecular signs of inflammation and other potentially harmful changes.
+
+The discovery suggests that proteins associated with youth may help preserve the brain's natural defenses as it ages. It also identifies TIMP2 as a potentially important factor in maintaining healthy immune activity in the brain.
+
+## Why the Brain's Immune Cells Become Less Effective With Age
+
+Getting older is the greatest known risk factor for Alzheimer's disease and other neurodegenerative disorders. However, scientists still do not fully understand the biological processes that make the aging brain increasingly vulnerable to these conditions.
+
+One important piece of the puzzle involves microglia, specialized immune cells that serve as the brain's maintenance and defense system. They remove cellular waste, help maintain the networks through which neurons communicate, and respond when brain tissue is injured.
+
+As the brain ages, these cells can lose some of their ability to perform these essential tasks. They may also shift into states that promote inflammation and interfere with normal brain function.
+
+"TIMP2 facilitates healthy function for the brain's immune cells," said Joseph M. Castellano, PhD, Associate Professor of Neuroscience at the Ronald M. Loeb Center for Alzheimer's Disease and The Friedman Brain Institute at The Icahn School of Medicine at Mount Sinai, and corresponding author of the study. "By supporting the ability of microglia to clear debris and limit maladaptive responses, TIMP2 may help restore aspects of microglial function that become compromised with age. Since our previous work identified TIMP2 as a regulator of synaptic plasticity through the extracellular matrix, these findings suggest that this factor sits at the intersection of several processes that are critical for normal brain function."
+
+Synaptic plasticity refers to the brain's ability to strengthen or weaken connections between neurons, a process essential for learning and memory. The extracellular matrix is a network of molecules surrounding cells that helps support and regulate their activity.
+
+## What Happens When the Brain Loses TIMP2?
+
+To investigate how TIMP2 affects brain immune cells, the research team studied several groups of mice representing different biological conditions.
+
+The study included Brittany Hemmer, PhD, the first author, who was a graduate student in Castellano's laboratory during the research.
+
+Some of the mice were genetically modified to lack TIMP2 throughout their bodies. In others, the researchers removed the protein specifically from either microglia or neurons. Comparing these models allowed the team to examine how TIMP2 influences immune cell behavior in both healthy and aging brains.
+
+The scientists used several advanced techniques to study the changes. Single-nucleus RNA sequencing allowed them to examine patterns of gene activity in individual cell nuclei. They also used detailed imaging, functional tests, and a technique called in vivo microdialysis, which collects and measures substances from the fluid surrounding cells in living brain tissue.
+
+The results revealed striking changes when TIMP2 was absent.
+
+Microglia developed several features typically associated with aging and brain injury. Their cellular activation markers changed, their ability to remove debris declined, and they showed molecular signatures linked to cellular senescence, a biological state associated with aging and cellular stress.
+
+The effects extended beyond the immune cells themselves. Using in vivo microdialysis, the researchers also detected higher levels of proteins associated with inflammation and stress in the extracellular environment surrounding brain cells.
+
+Together, these findings indicated that TIMP2 helps prevent microglia from shifting toward potentially damaging states.
+
+## Restoring a Youth-Associated Protein Improves Aging Brain Cells
+
+The researchers next explored whether supplying TIMP2 could counteract some of the changes observed with age.
+
+They administered TIMP2 through injections to older mice, allowing the protein to circulate throughout the body. The treatment produced encouraging results.
+
+Microglia became more effective at clearing cellular debris and showed a reduction in molecular markers associated with inflammatory states. In other words, restoring the youth-associated protein helped the aging immune cells recover some of the functions that normally deteriorate over time.
+
+These improvements suggest that TIMP2 influences how microglia respond to conditions within the brain. By supporting their protective activities and limiting potentially harmful responses, the protein may help maintain a healthier environment for neurons.
+
+The results also point to a possible biological connection between factors circulating in the body that are associated with youth and the activity of the brain's innate immune system. This system provides a first line of defense against injury and other threats.
+
+## A Potential New Direction for Brain Aging and Alzheimer's Research
+
+The discovery adds to growing scientific interest in whether biological factors associated with youth can influence the aging process.
+
+Because microglia help maintain brain health and can contribute to harmful inflammation when their behavior changes, finding ways to preserve their normal function could have important implications for understanding age-related neurological disorders.
+
+"While additional studies are needed, this work provides new insight into how youth-associated factors influence pathways involved in brain aging and age-related neurological disorders that may ultimately inform therapeutic strategies," Dr. Castellano added.
+
+However, the researchers caution that these findings come from experiments in mice. It remains unknown whether TIMP2 produces similar effects in humans or whether manipulating the protein could eventually become an effective treatment.
+
+Additional studies will be necessary to determine whether TIMP2 itself, or the biological pathways it controls, can be targeted to reduce harmful changes associated with brain aging.
+
+For now, the findings provide a promising new explanation for how a protein linked to youth helps maintain the brain's immune defenses, and how restoring it may recover some functions that weaken with age.
+
+This work was supported by the National Institute on Aging (R01AG061382 (JMC), RF1AG072300 (JMC), 1F31AG079604-01A1 (BMH), T32AG049688 (BMH, SMP), R01AG061382-02S1 (JMC, SMP), and Cure Alzheimer's Fund (JMC).
+
+Story Source: Materials provided by The Mount Sinai Hospital / Mount Sinai School of Medicine.
+
+Journal Reference: Brittany M. Hemmer, Sarah M. Philippi, Ana Catarina Ferreira, Samuele F. Petridis, Annie Phan, Joseph M. Castellano. Youth-associated protein TIMP2 regulates microglial state and function in healthy and aged mice. Nature Communications, 2026; 17 (1) DOI: 10.1038/s41467-026-74906-z
