@@ -3,12 +3,14 @@ type: literature-note
 source_url: https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/
 author: Lucas Ropek
 tags: [anthropic, compute-infrastructure, ai-cloud, nvidia]
-date_consumed: 2026-08-27
+date_consumed: 2026-10-21
 ---
 
 ## Summary
 
 [[Anthropic]] has agreed to rent roughly $45 billion in AI compute from [[Nscale]], a British AI infrastructure firm founded in 2024, using [[Nvidia]] Vera Rubin chips from a West Virginia data center over a six-year term starting late 2027. The deal is the latest in a series of aggressive compute-expansion moves Anthropic has made over the past eight months, totaling tens of billions of dollars across multiple partners.
+
+**Update (2026-10-20, per Bloomberg via Quartz):** Nscale is now in talks with Anthropic for a second ~$45 billion deal covering another building at its Monarch campus in West Virginia, with 460 MW of capacity built around [[Nvidia Vera Rubin]] chips. A signing could come within days, but nothing is settled.
 
 ## Core Concepts
 
@@ -24,6 +26,19 @@ date_consumed: 2026-08-27
 - **Timeline**: Service starts late 2027; six-year term.
 - **Recent compute spree**: Anthropic has signed deals with Volta ($10B, August 2026), AMD ($5B, July 2026), SpaceX (~$1.25B/month, May 2026), and expanded Amazon/Google/Broadcom ties (April 2026).
 - **Industry context**: Google, OpenAI, and Meta are pursuing the same strategy, normalizing mega-scale compute lock-in.
+
+## Update: Second $45B Deal in Talks (Oct 2026)
+
+Source: https://qz.com/nscale-anthropic-second-45-billion-computing-deal-102026 (Cris Tolomia, citing Bloomberg)
+
+- **Second deal**: Covers a second Monarch building with 460 MW; Anthropic also holds first-refusal rights on a third planned building.
+- **Status**: May be signed within days; details could shift; Anthropic and Nscale declined to comment.
+- **First contract**: Signed in August; Nscale's IPO filing puts it at $44.6 billion, with the facility expected online at end of 2027.
+- **Financing gap**: Nscale has not secured financing for the first Anthropic contract and must also fund chips for the new one.
+- **Milestone risk**: Nscale must hit defined milestones and sustain reliable computing performance, or Anthropic can walk away.
+- **Concentration**: [[Microsoft]] and Anthropic together account for 85% of Nscale's $103 billion total contract value; Microsoft pulled out of Monarch over the summer, opening the way for Anthropic.
+- **IPO**: Nscale seeks a $30 billion valuation, but investors have pushed for $16-19 billion; it filed in September and is addressing SEC feedback.
+- **Other Anthropic deals**: $50 billion with Fluidstack, $10 billion with Volta Infrastructure Holdings, and $45 billion with SpaceX; Anthropic's own IPO is expected in coming months.
 
 ## 🧠 First Principles & Mental Models
 
