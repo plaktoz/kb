@@ -1,0 +1,99 @@
+---
+source_url: https://www.cnbc.com/2026/10/21/goldman-sachs-jpmorgan-morgan-stanley-ai-trading.html
+author: Hugh Son
+date: 2026-10-21
+---
+
+# Goldman Sachs, JPMorgan and Morgan Stanley are dominating the AI stock boom. Here's their edge
+
+Goldman Sachs, Morgan Stanley and JPMorgan captured nearly 80% of top five bank equity trading revenues so far this year, generating a combined $52 billion.
+
+Growth was driven by "insatiable" hedge fund borrowing for leveraged bets on AI hardware and Asian semiconductor supply chains.
+
+The Big Three’s massive balance sheets allow them to absorb possible losses and handle risks that force smaller rivals to cede share.
+
+Relaxed rules around leverage helped to unlock bank balance sheets to meet record demand, though bodies including the International Monetary Fund cautioned against rising leverage.
+
+In this article
+
+GS
+
+JPM
+
+MS
+
+Fueled by the global boom in artificial intelligence stocks, relaxed capital rules and greater lending to hedge funds, big Wall Street banks have already had a banner year for equities trading — even with one quarter left to go.
+
+The five biggest investment banks have generated about $67 billion in equities revenue through Sept. 30, according to company filings. That is $7 billion more than what the group made during all of 2025, which itself was a record haul.
+
+But it's Wall Street's Big Three that have captured the largest slice of what is shaping up to be the industry's most lucrative arena: Goldman Sachs, JPMorgan Chase and Morgan Stanley have made a combined $52 billion in stock trading revenue so far this year, nearly 80% of the total.
+
+"When it comes to the AI mega trade, the Big Three consider each other their main competitors, and that's pretty much it," Mike Mayo, Wells Fargo banking analyst, told CNBC. "They've been best positioned to take advantage of this market."
+
+Wall Street banks are experiencing an epic run of blockbuster profits as the total value of the stock market balloons and trading activity from institutional and retail investors rises across stocks, exchange-traded funds and derivatives. Helping drive this activity are the loans that the banks, through their prime brokerages, are extending to hedge funds so that they can amplify their bets.
+
+Prime brokerage — the business of providing hedge funds with margin loans, securities lending and other trading services — has become a key battleground and source of growth. The Big Three's prime brokers are central to the larger equities story because they serve the largest funds across markets and products.
+
+Demand for leverage to make bets on AI hardware, hyperscalers and chip suppliers has reached new heights, bank executives said last week.
+
+At Goldman Sachs, equities financing activities jumped 96% in the third quarter to a record $3.37 billion. JPMorgan and Morgan Stanley don't break out that figure, but said they saw a similar dynamic.
+
+"I like your 'insatiable demand for capital' point. That feels about right," JPMorgan CFO Jeremy Barnum said on the bank's third-quarter conference call, responding to analyst questions about financing demands.
+
+"In this moment where AI is such an overwhelming theme ... there is capital being tapped through all kinds of different mechanisms," Barnum said.
+
+That demand has helped transform equity desks at the Big Three from cyclical, transactional businesses into more durable, high-margin lending engines, Wall Street executives say.
+
+The performance gap between Wall Street's giants and rivals including Bank of America and Citigroup highlights a widening divide in capital markets.
+
+"For clients, the value isn't just a price on one trade, it's coverage and continuity," Rachid Alaoui, JPMorgan global head of equities, told CNBC in an interview. "You want a dealer that can give you the full suite across products, and you want that service to travel with you across regions. That matters in stressed markets and periods of volatility."
+
+Executing multibillion-dollar bets, like leveraged swaps on volatile AI stocks or sector ETFs, can require an enormous balance sheet. The biggest banks can absorb potential $100 million losses without threatening their quarters, according to trading executives. Smaller or more niche banks can't underwrite single-trade risks of that magnitude, forcing them to decline the business or cede share.
+
+U.S. prime brokers have also benefited from the retreat of European banks including Credit Suisse from the equities business, said Bloomberg Intelligence analyst Herman Chan.
+
+"Prime is one of the ultimate scale businesses," Chan said. "If you have a strong equities franchise, the hedge funds will want to transact with you because you have a bigger pool of trading opportunities with counterparties."
+
+## Picks and shovels
+
+While U.S. markets were swept up in software and cloud computing giants this year, trading executives say the fastest-growing frontier for equities was in Asia.
+
+Institutional investors poured into South Korea and Taiwan, targeting the "picks and shovels" of the AI supply chain: the memory chipmakers and semiconductor manufacturers supporting data center construction, Alaoui said.
+
+For the Big Three, with their footprints across Tokyo; Hong Kong; Seoul, South Korea; and Mumbai, India; the Asia trade was a goldmine. However, trading executives point out that transaction taxes and stamp duties are included in top-line revenue, artificially inflating Asia prime totals.
+
+There is also no agreed-upon definition of what equities trading revenue should include, so some banks include business lines like clearing services that others exclude from their stock trading totals, making apples-to-apples comparisons difficult.
+
+But that doesn't change the overall momentum of the business, boosted by a stock rally that began in October 2022, weeks before OpenAI released ChatGPT.
+
+"We're still in a stock-based world," Morgan Stanley CEO Ted Pick said on the firm's earnings call. "Equities are still, all things being equal, the attractive asset class."
+
+While the CEOs of Goldman Sachs and Morgan Stanley have said the AI build-out is still in its early years, if AI turns out to be not as transformative as hoped, a downturn could impact those banks more than others, analysts said.
+
+The boom has also drawn some concern over the possible risks posed by hedge funds.
+
+The International Monetary Fund warned this month that growing leverage, crowded positions and correlated selling from hedge funds could create potential stability risks. The IMF estimated that global hedge fund assets had reached $13 trillion.
+
+In August, JPMorgan CEO Jamie Dimon said industrywide leverage was "the highest it's ever been," though he stopped short of calling the risk big enough to pose a threat to the financial markets.
+
+Wall Street executives and analysts pointed out that the industry wasn't fazed by the meltdown of several hedge funds this summer. While the hedge fund run by former OpenAI researcher Leopold Aschenbrenner, Situational Awareness, garnered the most headlines, several smaller firms also experienced a forced unwinding.
+
+Prime brokers have learned to leap on margin calls and quickly take down risk when markets move against clients, JPMorgan's Alaoui said.
+
+"In the summer, some investors had positions they were forced to unwind," he told CNBC. "They deleveraged, risk came down, and the market moved on."
+
+## 'Known unknowns'
+
+Another factor driving the equities boom: Trump administration regulators have eased some leverage rules for the largest U.S. banks, giving them more room to expand balance sheet-heavy businesses including prime brokerage. The revised rules were finalized in 2025, and banks were allowed to adopt them as early as January.
+
+By easing the stringent balance sheet caps that previously treated Treasurys and prime brokerage loans, which are collateralized, the same as riskier assets, regulators gave dealers greater flexibility to deploy balance sheet capital.
+
+"Capital did go down, so you have to say the system is somewhat more levered because of the relaxation in regulations," said Darrell Duffie, a finance professor at Stanford University and a leading expert on financial stability. "It's not a good idea, but it hasn't gotten dramatically out of whack."
+
+The larger size of the market and higher volatility can create more trading, derivatives activity and leverage, he said, but that's not inherently alarming.
+
+Wall Street executives also downplayed concerns over leverage, pointing out that they use collateral and frequent stress testing to get ahead of problems.
+
+"Hedge fund leverage as a contributor of risk to the system is very much in the category of known unknowns," JPMorgan's Barnum said last week. "It doesn't mean it's riskless, but we kind of know what it is."
+
+— CNBC's Leslie Picker and Ritika Shah contributed to this report.
