@@ -1,13 +1,13 @@
 ---
 type: topic-file
 topic: remote-work
-sources: [remote-work-loneliness-leadership-deficit-connection-design, solcomms-work-from-anywhere-august-remote-month, four-day-work-week-statistics-2026-trials-surveys, visibility-rewarded-over-results-myperfectresume-survey, remote-work-hidden-cost-tacit-learning-young-workers, work-life-balance-remote-work-guide, return-to-office-evidence-engineering-teams-2026, remote-work-energy-variability-and-productivity, remote-work-time-management-frameworks, return-to-office-debate-2026-evidence-distributed-engineering, hybrid-work-and-productivity-what-data-show, remote-work-vs-return-to-office-research-review, ai-four-day-workweek-productivity-case]
-last_updated: 2026-10-10
+sources: [remote-work-loneliness-leadership-deficit-connection-design, solcomms-work-from-anywhere-august-remote-month, four-day-work-week-statistics-2026-trials-surveys, visibility-rewarded-over-results-myperfectresume-survey, remote-work-hidden-cost-tacit-learning-young-workers, work-life-balance-remote-work-guide, return-to-office-evidence-engineering-teams-2026, remote-work-energy-variability-and-productivity, remote-work-time-management-frameworks, return-to-office-debate-2026-evidence-distributed-engineering, hybrid-work-and-productivity-what-data-show, remote-work-vs-return-to-office-research-review, ai-four-day-workweek-productivity-case, focus-hours-policy-compresses-meetings-remote-work]
+last_updated: 2026-10-25
 ---
 
 # Remote Work
 
-This note covers what the vault knows about remote, hybrid and flexible work: where work actually happens, what return-to-office mandates gain and cost, how location affects focus, learning and loneliness, and why four-day-week trials and visibility culture keep returning to the same question of measuring output instead of presence.
+This note covers what the vault knows about remote, hybrid and flexible work: where work actually happens, what return-to-office mandates gain and cost, how location affects focus, learning and loneliness, and why four-day-week trials, protected focus time and visibility culture keep returning to the same question of measuring output instead of presence.
 
 ## Hybrid as the Settled Equilibrium
 
@@ -31,7 +31,7 @@ Remote work does cost some connection, as 53% of remote workers say it's harder 
 
 ## Structure Makes Flexibility Work
 
-Flexibility without coordination backfires: Gallup finds full schedule autonomy raises burnout risk 76% compared with schedules set by managers or teams, while teams with a formal hybrid plan are 66% more engaged and 29% less burned out, yet only 11% of employees are on a team that set its own policy [[hybrid-work-and-productivity-what-data-show]]. Manager skill is the common thread, because distributed managers lose the casual awareness an office gives them and must replace it with deliberate one-on-ones, and Cisco's hybrid manager training raised engagement 34% [[remote-work-loneliness-leadership-deficit-connection-design]]. SolComms shows the same thing at small scale, pairing its month of full remote work for 53 employees with six months of preparation, advance notice to clients and fixed rules on hours, cameras and Slack status, and limiting it to one month so it wouldn't weaken the firm's four-day office norm [[solcomms-work-from-anywhere-august-remote-month]].
+Flexibility without coordination backfires: Gallup finds full schedule autonomy raises burnout risk 76% compared with schedules set by managers or teams, while teams with a formal hybrid plan are 66% more engaged and 29% less burned out, yet only 11% of employees are on a team that set its own policy [[hybrid-work-and-productivity-what-data-show]]. Manager skill is the common thread, because distributed managers lose the casual awareness an office gives them and must replace it with deliberate one-on-ones, and Cisco's hybrid manager training raised engagement 34% [[remote-work-loneliness-leadership-deficit-connection-design]]. SolComms shows the same thing at small scale, pairing its month of full remote work for 53 employees with six months of preparation, advance notice to clients and fixed rules on hours, cameras and Slack status, and limiting it to one month so it wouldn't weaken the firm's four-day office norm [[solcomms-work-from-anywhere-august-remote-month]]. A protected focus block fails the same way when it is added on top of an unchanged calendar: one remote worker's company set a daily 10am-12pm focus block but kept every standing meeting, so meetings moved into the afternoon and the day ran past 5pm, and a department-only no-meeting rule collapsed when other teams kept scheduling ([[focus-hours-policy-compresses-meetings-remote-work]]). The commenters' fix was to let people choose flexible focus slots and to cut meetings in phases, not to move them.
 
 ## Boundaries and the Always-On Trap
 
@@ -55,7 +55,7 @@ Much of this debate rests on weak measurement. The famous Microsoft Japan 40% fi
 → explains: [[visibility-rewarded-over-results-myperfectresume-survey]], [[return-to-office-debate-2026-evidence-distributed-engineering]], [[hybrid-work-and-productivity-what-data-show]], [[remote-work-vs-return-to-office-research-review]], [[four-day-work-week-statistics-2026-trials-surveys]], [[remote-work-time-management-frameworks]], [[solcomms-work-from-anywhere-august-remote-month]], [[remote-work-loneliness-leadership-deficit-connection-design]]
 
 **T2. How work is designed matters more than where or when it happens** — The same location or schedule produces opposite results depending on management, coordination and deliberate structure, so changing location or days alone neither causes nor fixes the underlying problem.
-→ explains: [[remote-work-loneliness-leadership-deficit-connection-design]], [[hybrid-work-and-productivity-what-data-show]], [[remote-work-hidden-cost-tacit-learning-young-workers]], [[four-day-work-week-statistics-2026-trials-surveys]], [[ai-four-day-workweek-productivity-case]], [[work-life-balance-remote-work-guide]], [[solcomms-work-from-anywhere-august-remote-month]]
+→ explains: [[remote-work-loneliness-leadership-deficit-connection-design]], [[hybrid-work-and-productivity-what-data-show]], [[remote-work-hidden-cost-tacit-learning-young-workers]], [[four-day-work-week-statistics-2026-trials-surveys]], [[ai-four-day-workweek-productivity-case]], [[work-life-balance-remote-work-guide]], [[solcomms-work-from-anywhere-august-remote-month]], [[focus-hours-policy-compresses-meetings-remote-work]]
 
 **T3. Work fills any time and space without a boundary** — Removing office cues, or cutting days without cutting work, lets the same load spill into evenings and longer days, so strain follows workload and boundaries rather than the name of the schedule. · *model:* [[Parkinson's Law]]
 → explains: [[four-day-work-week-statistics-2026-trials-surveys]], [[ai-four-day-workweek-productivity-case]], [[work-life-balance-remote-work-guide]], [[remote-work-time-management-frameworks]], [[solcomms-work-from-anywhere-august-remote-month]]
@@ -70,3 +70,6 @@ Much of this debate rests on weak measurement. The famous Microsoft Japan 40% fi
 
 ### 2026-W41
 - Added: [[remote-work-loneliness-leadership-deficit-connection-design]], [[solcomms-work-from-anywhere-august-remote-month]], [[four-day-work-week-statistics-2026-trials-surveys]], [[visibility-rewarded-over-results-myperfectresume-survey]], [[remote-work-hidden-cost-tacit-learning-young-workers]], [[work-life-balance-remote-work-guide]], [[return-to-office-evidence-engineering-teams-2026]], [[remote-work-energy-variability-and-productivity]], [[remote-work-time-management-frameworks]], [[return-to-office-debate-2026-evidence-distributed-engineering]], [[hybrid-work-and-productivity-what-data-show]], [[remote-work-vs-return-to-office-research-review]], [[ai-four-day-workweek-productivity-case]]
+
+### 2026-W43
+- Added: [[focus-hours-policy-compresses-meetings-remote-work]]
