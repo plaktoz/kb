@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://newsroom.ibm.com/2026-08-24-ibm-and-the-usta-introduce-new-ai-powered-fan-experiences-for-2026-us-open
 author: Unknown
 tags: [ai, sports-tech, ibm, generative-ai]
-date_consumed: 2026-08-29
+date_consumed: 2026-10-29
 ---
 
 # IBM and the USTA Introduce New AI-Powered Fan Experiences for 2026 US Open
@@ -28,6 +28,14 @@ IBM and the USTA unveiled three new AI-powered features for USOpen.org and the U
 - **Data granularity**: 21 data points tracked per serve, 50 times per second, covering wrist flex through leg-to-torso energy transfer.
 - **Match Chat upgrade**: Now returns photos and video, not just text, drawing on live and historical match data.
 - **Tournament context**: The 2026 US Open runs August 23 – September 13, with features available via USOpen.org and the mobile app.
+- **Five-year renewal**: IBM stays Official AI and Cloud Partner through 2031.
+- **Digital reach**: IBM-powered platforms logged over 270 million engagements in 2026.
+- **Record tournament**: 1.2 million attendees and 374 million global broadcast viewer hours.
+- **Partnership history**: USOpen.org launched in 1995, the mobile app in 2009.
+
+## Update: Five-Year Renewal (2026-10-28)
+
+[[IBM]] and the [[United States Tennis Association]] announced a five-year renewal making IBM the Official AI and Cloud Partner of the US Open through 2031, following a 2026 US Open with record engagement on IBM-powered digital platforms. Source: https://newsroom.ibm.com/2026-10-28-usta-and-ibm-announce-five-year-renewal-of-longstanding-partnership
 
 ## 🃏 Review Questions
 
