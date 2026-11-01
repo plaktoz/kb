@@ -3,12 +3,16 @@ type: literature-note
 source_url: https://techcrunch.com/2026/10/22/openai-working-on-new-30b-raise-at-1-25t-valuation-ahead-of-ipo/
 author: Julie Bort
 tags: [openai, fundraising, valuation, ipo]
-date_consumed: 2026-10-23
+date_consumed: 2026-11-01
 ---
 
 ## Summary
 
 OpenAI is reportedly working to raise up to $30 billion at a $1.25 trillion pre-money valuation in a round led by Coatue and UAE investors, potentially breaking the record for the most valued private company ever. The raise follows a March round that valued OpenAI at $852 billion post-money, and precedes a planned IPO for which OpenAI filed confidential paperwork in June 2026. A competing high-profile IPO from Anthropic — seeking a $1.5–$2 trillion valuation — appears imminent.
+
+## Update (2026-10-31)
+
+Per TechCrunch (citing the Financial Times and Wall Street Journal), OpenAI has lowered its funding target from $30 billion to $20 billion, with a first close expected to be even lower. The round is led by UAE investors, and a subsequent retail offering for wealthy individuals could bring the total to $20 billion. The WSJ reported $11 billion secured so far and a "tepid" response from some large investors. Earlier reports had cited a $1.4 trillion valuation, then $1.25 trillion. The shortfall is partly attributed to bad timing, as Wall Street's wariness of heavy AI infrastructure spending drove a major tech selloff, and Anthropic's planned IPO could face challenges too. Source: https://techcrunch.com/2026/10/31/openai-reportedly-lowers-funding-target-for-new-round/
 
 ## Core Concepts
 
@@ -30,6 +34,10 @@ OpenAI is reportedly working to raise up to $30 billion at a $1.25 trillion pre-
 - **IPO signal**: Raising privately delays IPO but raises the public-market pricing bar even higher.
 - **Anthropic race**: Seeking $1.5–$2T IPO valuation; S-1 reportedly dropping imminently.
 - **Competing narrative**: Bloomberg had reported $1.4T valuation a month prior; final terms not set.
+
+- **Target cut (Oct 31)**: Funding target lowered from $30B to $20B; first close expected lower.
+- **Progress**: $11B secured so far; "tepid" response from some large investors (WSJ).
+- **Headwind**: Tech selloff over AI infrastructure spending hurt timing.
 
 ## 🧠 Core Principles
 
