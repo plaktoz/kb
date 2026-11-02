@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.prnewswire.com/news-releases/activtrak-productivity-lab-ai-users-have-workdays-up-to-90-minutes-longer-than-non-users-302923731.html
 author: ActivTrak
 tags: [ai-adoption, workday-length, context-switching, focus]
-date_consumed: 2026-10-30
+date_consumed: 2026-11-01
 ---
 
 ## Summary
@@ -30,6 +30,12 @@ ActivTrak's analysis of 9,140 knowledge workers across 467 enterprises found AI 
 - **Embedded Advantage**: Embedded AI users average just 0.6 switches per hour.
 - **Role Split**: Software engineers favor embedded AI; operations managers rely on browser-based tools.
 - **Meetings**: Heavy users spend 3% of work time in meetings versus 5% for non-users.
+- **Role Numbers**: Operations managers hit 4.1 switches per hour in heavy coordination; engineers 0.64.
+- **Evening Work**: Operations managers do 30.5% of work in evenings versus 16.8% for engineers.
+- **After-Hours Share**: Heavy users' 32.3% after-hours share is nearly identical to non-users' 31.9%.
+- **Core Apps**: Light users spend 81.4% of active time in core apps versus 78% for heavy users.
+- **Maturity Gap**: Only 2% of workers reach deep AI-workflow integration (AI Adoption Maturity 1H 2026).
+- **Guardrails**: Track workday spans and set expectations for reinvesting efficiency gains.
 - **Leadership Goal**: Treat AI usage as a means to measurable productivity gains.
 
 ## 🧠 Core Principles
