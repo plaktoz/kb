@@ -1,0 +1,47 @@
+---
+source_url: https://kaplan.com/about/trends-insights/study-what-students-ask-ai-tutor-signals-how-they-are-learning
+author: James Mansbridge
+date: 2026-11-04
+---
+
+# Study: What AI Tutor Queries Reveal About How Students Learn
+
+Kaplan analyzed AI tutor use across 6,060 learner-course combinations. The type and volume of questions learners asked were associated with exam performance, offering a possible early signal of who is learning and who may need support.
+
+Ever since my early career as a physics and math teacher, I’ve been fascinated by how students learn. I saw in my own classroom that educational theory doesn’t always translate neatly into real-world practice. Even when I diligently broke down a complex concept into clear steps that students could practice and then apply to future problem-solving, some just wanted to find the quickest shortcut to a passing mark.
+
+Today, the spread of AI has given new urgency to the task of fostering real learning. With students tempted to offload their core thinking to bots, how can tech-assisted teaching truly empower learners over the long term?
+
+At Kaplan Professional Education, where I lead data and AI, we have a particular interest in how to answer these questions for the professional learners we serve. And with a large-scale analysis of 6,060 learner-course records showing how tax and accountancy professionals used an AI tutor to prepare for qualification exams, we now have a trove of new data to shape our efforts. The results offer key early lessons about who may be engaged in productive struggle—a valuable form of learning that AI can nurture—and who may be adrift and need a different form of academic assistance.
+
+## Heavy AI tutor use can be a warning sign, not just a sign of engagement
+
+We introduced TutorBot to give learners access to support whenever they needed it, day or night. Grounded in Kaplan course materials and available within the learning management system, it also opened up an unexpected source of insight. The conversations revealed how learners approached difficulties, recognized gaps in their understanding, and sought help to move forward.
+
+Our analysis covered one term of TutorBot use. Each of the 6,060 records represents one learner taking one course, so a learner taking two courses counts twice. Usage peaked on self-directed study days and just before exams. We also found that TutorBot adoption was nearly twice as high in math-heavy subjects as in more text-heavy ones. And most illuminating, we observed that the people using TutorBot most heavily, a small group using it about 12 times as much as other learners, tended to score lower than others.
+
+"We observed that the people using TutorBot most heavily, a small group using it about 12 times as much as other learners, tended to score lower than others." -James Mansbridge
+
+A careful look at usage of the AI tutor surfaced a more nuanced set of findings. For one thing, we also saw a set of learners who used TutorBot extensively and performed very well. Correlation isn’t causation, and in this kind of observational analysis self-selection is an important factor. Learners who are struggling have more reason to seek help. So when the heaviest AI-tutor users scored lower in five of six subjects in our analysis, we read it as a signal to probe further for what’s behind unmet learning needs. This is one of the most useful things the data showed us: heavy use can be a sign that a learner needs help. That gives academic support teams a chance to reach out before a learner asks them, so support becomes proactive rather than reactive.
+
+## What students ask an AI tutor may matter more than how often they use it
+
+Usage levels alone did not explain what kind of help learners needed. For a richer picture, we examined patterns across learners’ conversations with TutorBot, including how their questions developed and how they explored gaps in their understanding. We looked at these wider patterns rather than judging any learner by a single question. The examples below illustrate the two broad forms of help-seeking described by educational psychologist Sharon Nelson-Le Gall. The first is instrumental; the student has already done some thinking and asks for enough help to continue. That might be seeking a definition, checking the exact conditions in a scenario, or verifying their own reasoning. For example, a learner might ask “I’ve worked out the increase. Why do I divide it by the original price?” The question identifies the precise point of uncertainty.
+
+By contrast, the second kind of help-seeking is executive; the learner wants assistance completing the entire task. They might ask TutorBot to explain the topic again, make it simpler, or even give the exact answer. The learner hasn’t identified a specific gap in their understanding: they’re simply asking the system to carry more of the cognitive load. This can lead to the fluency trap, where an explanation feels clear, so the learner thinks they have mastered the material.
+
+The difference between question types, and what they tell us about learners, was especially pronounced around the pass/fail boundary. The tax and accounting learners we studied who scored just below the pass mark asked fewer conceptual questions. They relied more heavily on direct answer-seeking and general explanations. Those just above the pass mark asked a lot more substantive questions that indicated a decent grasp of the material.
+
+Our working conclusion? High use of conceptual questions, which made up just over half of prompts from learners in the group just above the pass mark, may indicate exactly the sort of productive struggle we associate with useful and effective learning. Learners who use AI tools to fine-tune their understanding, and to get as much practice as they want tackling problems, may be just where we want them to be.
+
+But when we saw that questions like these made up about 20% of prompts in the below-passing band, while chat-style follow-up requests made up nearly 60%, we realized this was a concrete sign that learners in that band were struggling. These students seem to be precisely the kind we worry about in the AI era; they showed signs of offloading their thinking to this technology instead of using its remarkable potential to sharpen their abilities.
+
+That pattern of use translates into the experience so many instructors have had: a learner submits an excellent assignment. Every step went through AI. Nothing was copied in the way a traditional plagiarism policy might detect. Yet a week later, the student cannot explain her own reasoning. The danger is that following a clear explanation feels like mastering the reasoning. That false sense of mastery encourages continued cognitive offloading. Learners keep relying on AI without checking whether they can explain or apply the ideas independently, and the thinking that builds durable knowledge does not happen.
+
+Our analysis suggests conversation patterns in AI interaction data could help identify learners who need support early. TutorBot interactions provide a rich, detailed view of the learning process, one that complements the formative assessment and LMS activity data we also drew on. Summative assessment only tells us what happens toward the end of the process: an exam score or a graded assignment. An AI conversation with an always-on tutor exposes more of the process. We can see when someone keeps returning to the same concept, whether they have a pattern of copying a question and then blindly accepting the solution, or whether they attempt a problem before asking for targeted help.
+
+These behaviors matter, because not all struggle is created equal. A group of learners seeking frequent help may look similar at first, but instructors need to be aware of the difference between “desirable difficulty,” psychologist Robert Bjork’s term for struggle that strengthens long-term learning, and students who are simply stuck. Then course designers must turn those valuable signals into timely and effective support. For example, a learner’s repeated difficulty with a concept, considered alongside assessment and engagement data, could prompt targeted practice, feedback on their reasoning, or human support.
+
+Consider how this might work for a professional learner in accounting who shows recognizable patterns in his AI inquiries from week two of the course: chat-style prompts, less precise follow-up questions, revisiting the same questions through repeated attempts to understand the same concepts. He might submit an assignment that looks fine, but this student would be flagged early on, not when he fails the exam. That leaves time to provide support that protects and improves his thinking. With predictive analytics, signals of struggle like these can lead to meaningful, timely interventions, perhaps with a tailored set of AI coaching options asking him to explain his reasoning and offering targeted feedback.
+
+Our instructors and curriculum designers know the choice is not AI or no AI. The challenge is to avoid simply accepting whatever learning patterns result from current AI models. We must ensure that AI is governed by a model of learning that protects and fosters thinking. With adaptive scaffolding, an AI tutor gives learners structured help with unfamiliar ideas, then gradually reduces that help as they learn, so learning stays appropriately hard. Our students’ future success depends on it.
