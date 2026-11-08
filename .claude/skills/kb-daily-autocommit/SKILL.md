@@ -12,7 +12,7 @@ Run the following steps in order. Stop only if a git operation fails — pipelin
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
+git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 Filter the output for lines beginning with `??`. If any exist, **stop immediately** and print:
@@ -36,19 +36,20 @@ Note the branch name and `START` for use in later steps. The branch starts from 
 
 ## Step 2: Run the daily pipeline
 
-Invoke the `/kb-daily` skill and execute it.
+Invoke the `/kb-daily` skill and execute it. On Sundays it also runs `/kb-compound` and `/kb-weekly-newsletter` as its Step 5.
 
 Collect the end-of-run summary produced by that pipeline. You will need these counts:
 - Number of wiki notes ingested
 - Number of articles scraped
 - Newsletter filename (if saved)
+- On Sundays: number of topic files updated and the weekly newsletter filename (if saved)
 
 ## Step 3: Check for output
 
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
+git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 If the output is empty (nothing changed), do the following and then stop:
@@ -61,13 +62,19 @@ If the output is empty (nothing changed), do the following and then stop:
 Stage only the pipeline output paths:
 
 ```bash
-git add wiki/ daily-update/ raw/processed/ raw/url/ kbm.log.md
+git add wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
 ```
 
 Build the commit message using the counts from Step 2 in this format:
 
 ```
 daily run YYYY-MM-DD HH:MM — N notes ingested, M articles scraped, newsletter: <filename or none>
+```
+
+On Sundays, append the weekly results:
+
+```
+daily run YYYY-MM-DD HH:MM — N notes ingested, M articles scraped, newsletter: <filename or none>, T topics compounded, weekly: <filename or none>
 ```
 
 Commit:
