@@ -1,0 +1,24 @@
+# 🔁 THE VAULT WEEKLY // 2026-W45
+*Week of 2026-11-02 – 2026-11-08*
+
+## 📡 The Week's Signal
+**AI's growth story was tested against outside measures this week, and the measures came back softer than the narrative.** In Technology, [Ramp's data](../../wiki/technology/ramp-data-ai-spending-stalls-anthropic-ipo.md) showed token spend growing just 1.5% across August and September versus 42% in July, with Anthropic's reported IPO valuation falling from $2T to $1.2-1.3T. In Finance, Microsoft [pulled back from neocloud capacity deals](../../wiki/finance/microsoft-msft-pulls-back-neocloud-deals-oracle-nscale-iren-simply-wall-st.md), and the [S&P 500 had its worst week since April 2025](../../wiki/finance/sp500-worst-week-since-april-2025-ai-chip-selloff-nvidia-cpi.md) as the semiconductor index fell 12.15%. A hot [October jobs report](../../wiki/finance/yahoo-october-jobs-165000-fed-december-hike-wages-inflation.md) kept a December Fed hike in play, and the midterm rally [reversed within a day](../../wiki/finance/right-result-wrong-trade-election-ai-selloff-consolidated-wealth-nov6-2026.md). Productivity and Learning notes asked the same question from the worker's side: whether AI frees time and builds skill, or just raises the load.
+
+## 🔗 Cross-Category Connections
+- **Spend, capacity and price tell one story**: Customers getting thriftier in [Ramp's data](../../wiki/technology/ramp-data-ai-spending-stalls-anthropic-ipo.md), a major buyer trimming committed capacity in [Microsoft's neocloud exits](../../wiki/finance/microsoft-msft-pulls-back-neocloud-deals-oracle-nscale-iren-simply-wall-st.md), and a [12% semiconductor drop](../../wiki/finance/sp500-worst-week-since-april-2025-ai-chip-selloff-nvidia-cpi.md) look like demand, supply and price moving together, with hardware repriced first.
+- **Freed time is absorbed unless someone decides its use**: [AI users' workdays ran 8.4-9.1 hours versus 7.6 for non-users](../../wiki/productivity/gizmodo-ai-users-work-90-minutes-longer-berkeley-haas-work-intensification.md), while [SP Jain deliberately moved content delivery to AI](../../wiki/learning/sp-jain-ai-tutor-mentor-capability-over-content-delivery.md) so class time goes to judgment under ambiguity, which is the explicit decision about reclaimed time that the [AI workplace adoption topic](../../topics/ai-workplace-adoption.md) says is missing by default.
+
+## 🗄️ From the Vault
+- **[How to improve employee productivity (Crewhu)](../../wiki/productivity/how-to-improve-employee-productivity-crewhu.md)**: Its warning that hours beyond 40-45 lower output and that single metrics like time per ticket or utilization sacrifice quality is the sober reading of this week's 90-minute-longer-days data.
+- **[IBM dropped its cumulative AI total at Q2 2026](../../wiki/finance/ibm-ai-total-metric-dropped-q2-2026.md)**: A headline AI total was swapped for proportional metrics when a quarter fell short, a reminder to ask which AI figure a company stops reporting just as Ramp's spend data shows growth cooling.
+
+## 💼 Portfolio Pulse
+- **S&P 500 (CSPX)**: The index closed at 7,376.86, down 2.68% on the week and a fourth straight weekly loss, with the semiconductor index down 12.15% while the Dow fell under 1%. `[[sp500-worst-week-since-april-2025-ai-chip-selloff-nvidia-cpi]]`
+- **MSFT — Microsoft**: Shares fell 2.8% to about $507 despite a fiscal Q1 beat (revenue up 18.8% to $92.28B, adjusted EPS $4.89), with the note flagging falling free cash flow and a planned $25B bond offering. `[[microsoft-msft-down-2-8-percent-marketbeat-nov2026]]`
+- **MSFT — Microsoft**: It is not renewing its Oracle arrangement and is exiting operators such as Nscale and IREN for flexible in-house capacity. `[[microsoft-msft-pulls-back-neocloud-deals-oracle-nscale-iren-simply-wall-st]]`
+- **GOOGL — Alphabet**: Anthropic's amended IPO filing lifts its minimum Google commitment to about $121.3B, roughly 22% of the $560.8B Cloud backlog, tying a large share of it to one customer. `[[alphabet-anthropic-121-billion-google-commitment-cloud-backlog-nov2026]]`
+- **STI (ES3)**: The Straits Times Index fell 2.2% to 5,179.17 on Nov 6 as global tech slid on fears of tighter AI regulation, while Julius Baer argued the market may be misplacing that risk. `[[sti-falls-2-2-percent-global-tech-slide-ai-regulation-fears-nov6-2026]]`
+> **Watch**: CPI and NVIDIA earnings, which the week-ending notes flag as the next tests with December hike odds at 78%.
+
+## 🧱 One Lesson to Keep
+When a count of hours, usage, completions or bookings is rewarded or targeted, people and companies optimize the count instead of the outcome, so pair every headline metric with an independent check on the result (see [AI workplace adoption](../../topics/ai-workplace-adoption.md), [deep work](../../topics/deep-work.md), [AI in education](../../topics/ai-in-education.md) and [the Crewhu note](../../wiki/productivity/how-to-improve-employee-productivity-crewhu.md)).
