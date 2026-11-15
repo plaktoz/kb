@@ -66,20 +66,37 @@ python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synon
 4. If new sources exist:
    - Add the new slugs to the `sources:` frontmatter list
    - Update `last_updated:` to today's date
-   - Read **all** source notes in the updated list in full
-   - Rewrite the entire prose body (see **Prose Body Format** below) — synthesizing insights from all sources, not just the new ones
-   - Rebuild the `## 🧠 Core Principles` section from all sources (see **Core Principles Section** below), replacing the previous version
+   - Choose the mode (see **Update modes** below), then update the prose body and the `## 🧠 Core Principles` section accordingly
    - Append a new entry to `## Weekly Updates`:
      ```
      ### YYYY-WNN
      - Added: [[slug-1]], [[slug-2]]
      ```
 
+#### Update modes
+
+A topic file can hold 100 or more sources, and the cost of reading them all grows every week. So the default is an **incremental update**, and a full re-synthesis runs only when the file is due for one.
+
+Read `last_rewritten:` in the frontmatter.
+- **Missing:** add `last_rewritten: <today>` as the baseline and do an incremental update. Do not rewrite on first sight, or every existing file would be due at once.
+- **Less than 8 weeks ago:** incremental update.
+- **8 weeks ago or more:** full re-synthesis, then set `last_rewritten:` to today.
+
+**Incremental update.** The existing body already synthesizes the older sources, so don't re-read them.
+1. Read the whole topic file, then read every new source note in full.
+2. Weave the new sources into the existing prose. Extend a `##` section where a new source fits one, and add a new `##` section for a concept the file doesn't cover yet. Keep existing prose that still holds. Change a sentence only when a new source corrects or contradicts it, and when two sources disagree, say so and attribute each.
+3. Re-test each existing principle against the new sources. Add the new slugs to its `→ explains:` list when they support it, and replace or add a principle only when the new sources together with the existing ones give it 2 or more supporting notes. Keep the cap of 5.
+4. Open an older source in full only to check a specific claim before you change or extend it.
+
+**Full re-synthesis.** Rewrite the entire prose body and rebuild `## 🧠 Core Principles` from all sources, as **Prose Body Format** and **Core Principles Section** describe. Read each source's `## Summary` and `## Key Takeaways`, and open the full note only when those don't settle a claim. Principles drawn from the rebuild still need 2 or more supporting notes.
+
+Either way, the prose-only rule, the traceability rule and the Core Principles rules below apply.
+
 ### 4d — Create a new topic file
 
 1. Collect all vault-wide notes on this theme (the 5+ identified in 4b, plus this week's notes)
 2. Read them all in full
-3. Create `topics/<theme-slug>.md` using the structure below, including the `## 🧠 Core Principles` section (see **Core Principles Section** below)
+3. Create `topics/<theme-slug>.md` using the structure below, including the `## 🧠 Core Principles` section (see **Core Principles Section** below) and `last_rewritten:` set to today's date
 
 ### Prose Body Format
 
@@ -110,6 +127,7 @@ type: topic-file
 topic: <theme-slug>
 sources: [slug-1, slug-2, ...]
 last_updated: YYYY-MM-DD
+last_rewritten: YYYY-MM-DD
 ---
 
 # <Theme Name>
@@ -139,6 +157,14 @@ last_updated: YYYY-MM-DD
 
 Every claim in the prose body and the Core Principles section must trace to a source note in the `sources:` list. Never add facts from training data.
 
+### Running topics in parallel (optional)
+
+Topic files are independent, so a run with many topics can fan out Agent/Task calls. Each agent reads this skill and updates only its assigned `topics/<slug>.md` files. The coordinator does the Step 5 logging and all git work, so agents never touch `kbm.log.md`.
+
+- Give each agent **at most 2 topics**, and give a topic with 50 or more sources an agent of its own. The run takes as long as the slowest agent, so an agent with 7 topics sets the pace for the whole batch.
+- Dispatch the agents in a single message.
+- Tell each agent that incremental update is the default and which topics, if any, are due for a full re-synthesis.
+
 ## Step 5 — Report and log
 
 After all changes, print a compact summary:
@@ -147,7 +173,7 @@ After all changes, print a compact summary:
 ## Compound run: YYYY-WNN
 
 **Topic files updated** (N):
-- [[topic-slug]] — added X sources, rewrote prose body
+- [[topic-slug]] — added X sources, incremental update (or full re-synthesis)
 
 **Topic files created** (N):
 - [[topic-slug]] — drew from N source notes

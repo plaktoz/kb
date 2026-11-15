@@ -12,7 +12,7 @@ Run the following steps in order. Stop only if a git operation fails — pipelin
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
+git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ data/blocked-domains.md kbm.log.md
 ```
 
 Filter the output for lines beginning with `??`. If any exist, **stop immediately** and print:
@@ -49,7 +49,7 @@ Collect the end-of-run summary produced by that pipeline. You will need these co
 Run:
 
 ```bash
-git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
+git status --porcelain wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ data/blocked-domains.md kbm.log.md
 ```
 
 If the output is empty (nothing changed), do the following and then stop:
@@ -59,10 +59,10 @@ If the output is empty (nothing changed), do the following and then stop:
 
 ## Step 4: Commit pipeline outputs
 
-Stage only the pipeline output paths:
+Stage only the pipeline output paths. `data/blocked-domains.md` is one of them: the scrape step rewrites its `auto` rows, and leaving it out strands the change in the working tree after every run.
 
 ```bash
-git add wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ kbm.log.md
+git add wiki/ daily-update/ topics/ weekly-update/ raw/processed/ raw/url/ data/blocked-domains.md kbm.log.md
 ```
 
 Build the commit message using the counts from Step 2 in this format:
