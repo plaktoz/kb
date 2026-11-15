@@ -43,7 +43,7 @@ Invoke the matching slash command for each recurring task. Skills are self-conta
 | `/kb-newsletter` | Compiles today's ingested notes into a daily newsletter digest |
 | `/kb-research-topic` | Grills user to refine a topic, builds a research outline, searches 10–20 articles, saves report to `research/<context-slug>/` |
 | `/kb-research-company <TICKER>` | Deep 6-part investment analysis of a company (business model, market, MOAT, financials, management, valuation) with a Bull vs. Bear synthesis — saves report to `research/<TICKER>/` |
-| `/kb-compound` | Maintains living topic files in `topics/` from this week's recurring themes — rewrites each file's prose body and Core Principles section from all its sources — run before `/kb-weekly-newsletter`. `/kb-daily` runs it automatically on Sundays |
+| `/kb-compound` | Maintains living topic files in `topics/` from this week's recurring themes — weaves new sources into each file's prose and Core Principles incrementally, with a full re-synthesis every 8 weeks — run before `/kb-weekly-newsletter`. `/kb-daily` runs it automatically on Sundays |
 | `/kb-weekly-newsletter` | Compiles this week's ingested notes into a weekly newsletter digest. `/kb-daily` runs it automatically on Sundays, after `/kb-compound` |
 | `/kb-librarian` | Full vault maintenance: reconciles wiki/ structure, reclassifies notes, refreshes glossary, detects duplicates/superseded notes, checks raw/processed/ for unmatched stragglers, and reviews unlisted mental-model names |
 | `/kb-librarian-apply` | Executes human-filled decisions from librarian-report.md |
