@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://www.fxleaders.com/news/2026/11/13/goog-stock-reverses-300-recovery-as-google-gemini-launch-and-anthropic-deal-raise-spending-questions
 author: Skerdian Meta
 tags: [alphabet, capex, anthropic, gemini]
-date_consumed: 2026-11-15
+date_consumed: 2026-11-17
 ---
 
 ## Summary
@@ -27,6 +27,9 @@ Alphabet shares gave up their recovery above $300 and headed toward $290 despite
 - **Q3 Results**: Revenue rose 25% to $127.6 billion, but EPS was $2.12 versus $3.02 expected.
 - **Cloud Surge**: Google Cloud revenue rose 103% to $30.7 billion.
 - **Anthropic Stake**: Google's roughly $10 billion allocation is non-voting, with ownership capped at 14.99%.
+- **Offering Terms** (Nov 16 update): Anthropic plans 825 million shares at $70-$78, proposed Nasdaq ticker ANT; Google's allocation could reach about 135 million shares at the $74 midpoint, exercising an option under its March 2026 financing agreement; Class N shares generally carry no voting rights.
+- **Regulatory Overhang** (Nov 16 update): Antitrust pressure on search, advertising and default-search distribution deals adds valuation uncertainty, even as tech sentiment improved after the midterms.
+- **Technical Levels** (Nov 16 update): Price slipped below $290 again after a rebound to $305; 100 SMA held as support last week; $285-$290 now in focus.
 - **Capex Burden**: Q3 capex hit $51.4 billion; year-to-date spending is about $132 billion.
 - **Guidance Gap**: Company guidance is $175-185 billion for 2026; external estimates near $200 billion are unconfirmed.
 - **Political Risk**: Opposition to data centers could delay projects or raise infrastructure obligations.
