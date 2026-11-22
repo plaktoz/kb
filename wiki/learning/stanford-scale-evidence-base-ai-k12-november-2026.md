@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://scale.stanford.edu/ai/evidence-base-review/evidence-base-ai-k12-november-review
 author: Seth Walker, Lily Fesler, JP Martinez Claeys, Chris Agnew, Susanna Loeb
 tags: [ai-in-education, k-12, causal-evidence, generative-ai]
-date_consumed: 2026-11-17
+date_consumed: 2026-11-22
 ---
 
 ## Summary
@@ -16,6 +16,7 @@ Stanford SCALE's November 2026 update grows the causal evidence base on generati
 - [[Cognitive Offloading]]: students who outsource tasks perform worse later without AI.
 - [[AI Tutoring]]: interactive formats, adaptive sequencing, and guidance versus general-purpose chatbots.
 - [[Educator-Facing AI]]: feedback drafts, progress summaries, and teaching-support tools.
+- [[Adaptive Sequencing]] and timing of AI support: when and how help is delivered.
 - [[Student Motivation and Trust]] and [[AI Well-Being Tools]].
 - [[SCALE Initiative]] and the [[AI Hub for Education]] Research Repository.
 
@@ -28,6 +29,11 @@ Stanford SCALE's November 2026 update grows the causal evidence base on generati
 - **Not Inherently Better**: Educational AI tools do not consistently outperform general-purpose chatbots.
 - **Teacher Use Risk**: One Turkish study found teacher AI use reduced student motivation and confidence.
 - **Feedback Gains**: AI drafts roughly doubled TA feedback volume without extra grading time.
+- **Timing Mixed**: Delayed or proactive AI support produced inconsistent results across studies on when to help.
+- **Mastery Gating**: A U.S. middle school AI tutor helped practiced items only when mastery progression was required.
+- **Guided Gemini**: Sierra Leone grade 7-8 math scores rose 0.258 SD with teacher-structured Gemini Guided Learning.
+- **Verification Skill**: Students with stronger prompting and verification skills learned more from AI tools.
+- **Screening Funnel**: 868 repository papers screened, 201 RCT/QED, 97 human-reviewed, 32 included.
 - **Remaining Gaps**: Little evidence on equity, long-term gains, or K-12 settings; much evidence is postsecondary preprints.
 
 ## 🧠 Core Principles

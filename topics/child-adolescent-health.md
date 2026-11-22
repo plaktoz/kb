@@ -1,13 +1,14 @@
 ---
 type: topic-file
 topic: child-adolescent-health
-sources: [glp1-use-children-8-11-pediatrics-study, early-onset-colorectal-cancer-adolescents-late-diagnosis, twin-study-screen-time-mental-health-family-factors, gun-violence-exposure-accelerates-biological-aging, childhood-abuse-brain-structure-enigma-mega-analysis, childhood-unpredictability-screening-mental-health, adolescent-sleep-academic-social-outcomes, breakfast-boosts-diet-quality-teens, sugar-restriction-infancy-dementia-alzheimers-risk, fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]
-last_updated: 2026-10-25
+sources: [glp1-use-children-8-11-pediatrics-study, early-onset-colorectal-cancer-adolescents-late-diagnosis, twin-study-screen-time-mental-health-family-factors, gun-violence-exposure-accelerates-biological-aging, childhood-abuse-brain-structure-enigma-mega-analysis, childhood-unpredictability-screening-mental-health, adolescent-sleep-academic-social-outcomes, breakfast-boosts-diet-quality-teens, sugar-restriction-infancy-dementia-alzheimers-risk, fruit-sugary-drinks-adolescent-anxiety-depression-australia-study, junk-food-childhood-cognition-mental-health-flinders-review, weekly-park-visits-childrens-mental-health-exeter-alspac]
+last_updated: 2026-11-22
+last_rewritten: 2026-11-22
 ---
 
 # Child and Adolescent Health
 
-This topic follows what the vault knows about the physical and mental health of children and teenagers, from how adversity and early-life exposures shape lifelong biology, to which everyday habits matter most, to why diseases once reserved for adults now need pediatric attention, and this week's Australian cohort extends the habits thread to what teenagers eat and drink.
+This topic follows what the vault knows about the physical and mental health of children and teenagers, from how adversity and early-life exposures shape lifelong biology, to which everyday habits matter most, to why diseases once reserved for adults now need pediatric attention, and Australian diet research and a UK park-visit cohort extend the habits thread to what children eat, drink and where they play.
 
 ## Adversity Leaves Measurable Biological Marks
 
@@ -31,7 +32,15 @@ The most actionable findings in the vault involve ordinary daily structure. Slee
 
 ## Fruit, Sugary Drinks and Teenage Mood
 
-A three-year Australian study of 6,537 adolescents, one of this week's additions, linked each extra daily serving of fruit (150 g) to 13% lower depression and 7% lower anxiety risk on screening scales, while higher sugar-sweetened beverage intake tracked with greater risk in both sexes [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]]. Vegetables showed no significant association in adjusted models, and the sugary-drink links were more consistent than the fruit links, which partly dropped out in complete-case analyses. The pathways proposed to explain the sugary-drink link, inflammation and cortisol, were never tested. Because diet was self-reported and the design observational, the study can support school and policy efforts that target eating habits but cannot show that dietary change prevents depression or anxiety.
+A three-year Australian study of 6,537 adolescents linked each extra daily serving of fruit (150 g) to 13% lower depression and 7% lower anxiety risk on screening scales, while higher sugar-sweetened beverage intake tracked with greater risk in both sexes [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]]. Vegetables showed no significant association in adjusted models, and the sugary-drink links were more consistent than the fruit links, which partly dropped out in complete-case analyses. The pathways proposed to explain the sugary-drink link, inflammation and cortisol, were never tested. Because diet was self-reported and the design observational, the study can support school and policy efforts that target eating habits but cannot show that dietary change prevents depression or anxiety.
+
+## Diet Patterns and Academic Outcomes
+
+A Flinders University systematic review of 17 Australian studies widens the Australian cohort's finding from single foods to whole diets: energy-dense, nutrient-poor eating and sugary drinks in childhood and adolescence went with worse mental health, wellbeing and academic results, while patterns rich in fruit, vegetables, whole grains and fish went with better cognition [[junk-food-childhood-cognition-mental-health-flinders-review]]. The review found cardiometabolic outcomes inconsistent and called for standardized dietary measures, and its authors argue that nutrition education has to be paired with changes in the affordability and access of healthy food [[junk-food-childhood-cognition-mental-health-flinders-review]]. That agrees with the adolescent cohort, whose authors also see school and policy efforts as the fitting response while stopping short of causal claims [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]].
+
+## Parks and Play as a Wellbeing Habit
+
+Time outdoors appears as another ordinary routine with a measurable link to mood. In 4,219 children from the ALSPAC cohort, weekly park visits from birth to age 11 went with 16.5% better mental-health scores, and children also showed better social-emotional development in the periods when they visited more often, after controlling for socioeconomic status and family adversity [[weekly-park-visits-childrens-mental-health-exeter-alspac]]. Advantaged families visited more when children were young, so the benefit depends on parks being good quality, safe and welcoming, and the finding comes from one UK cohort [[weekly-park-visits-childrens-mental-health-exeter-alspac]].
 
 ## Pediatric Obesity and the GLP-1 Shift
 
@@ -47,7 +56,7 @@ Conditions once thought of as adult problems now appear in pediatric clinics. A 
 → explains: [[twin-study-screen-time-mental-health-family-factors]], [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]], [[breakfast-boosts-diet-quality-teens]], [[glp1-use-children-8-11-pediatrics-study]], [[adolescent-sleep-academic-social-outcomes]]
 
 **T2. Shared causes inflate raw associations** — When family, genetic or social factors drive both an exposure and an outcome, the observed link overstates the exposure's own effect until those factors are held constant. · *model:* [[Correlation vs Causation]]
-→ explains: [[twin-study-screen-time-mental-health-family-factors]], [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]], [[sugar-restriction-infancy-dementia-alzheimers-risk]], [[gun-violence-exposure-accelerates-biological-aging]]
+→ explains: [[twin-study-screen-time-mental-health-family-factors]], [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]], [[sugar-restriction-infancy-dementia-alzheimers-risk]], [[gun-violence-exposure-accelerates-biological-aging]], [[weekly-park-visits-childrens-mental-health-exeter-alspac]]
 
 **T3. Adversity leaves measurable, type-specific costs** — Chronic adversity imposes biological or mental cost even without direct injury, and different kinds of adversity leave different marks. · *model:* [[Allostatic Load]]
 → explains: [[gun-violence-exposure-accelerates-biological-aging]], [[childhood-abuse-brain-structure-enigma-mega-analysis]], [[childhood-unpredictability-screening-mental-health]]
@@ -65,3 +74,6 @@ Conditions once thought of as adult problems now appear in pediatric clinics. A 
 
 ### 2026-W43
 - Added: [[fruit-sugary-drinks-adolescent-anxiety-depression-australia-study]]
+
+### 2026-W47
+- Added: [[junk-food-childhood-cognition-mental-health-flinders-review]], [[weekly-park-visits-childrens-mental-health-exeter-alspac]]
