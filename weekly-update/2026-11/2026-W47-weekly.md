@@ -1,0 +1,24 @@
+# 🔁 THE VAULT WEEKLY // 2026-W47
+*Week of Monday 2026-11-16 – Sunday 2026-11-22*
+
+## 📡 The Week's Signal
+The AI trade broke this week. Nvidia's leadership shock, a December Fed hike that markets now treat as near-certain, and bubble fears pushed the S&P 500 and Dow into correction, and Anthropic's record IPO did not stop the slide. The daily digests from [Nov 16](../../daily-update/2026-11/2026-11-16.md) through [Nov 22](../../daily-update/2026-11/2026-11-22.md) keep returning to a second thread: AI output is cheap to produce, so the scarce resource is **a human who verifies it and owns the result**. That idea shows up in software verification, workforce productivity, and tutoring, and it is the lens the market is now applying to AI capex.
+
+## 🔗 Cross-Category Connections
+- **Accountability is the missing layer in both education and work**: The [tutoring equity note](../../wiki/learning/ai-tutoring-equity-gap-human-accountability.md) argues AI tutoring helps the students who already have an adult holding them accountable. The [Lever Talent survey](../../wiki/productivity/ai-workforce-accountability-gap-lever-study-2026.md) finds 45% of firms have no single owner for how people and AI work together, and firms with one were far more likely to call AI extremely valuable. The [Kentz note on Khanmigo](../../wiki/learning/ai-tutors-optional-fail-conversation-as-assessment-kentz.md), ingested Nov 4, makes the same point from the classroom side: optional AI tutors go unused unless someone assesses the thinking.
+- **Circular demand is the financial version of the productivity gap**: Nvidia's [up-to-$10 billion anchor stake in Anthropic's IPO](../../wiki/finance/nvidia-anthropic-ipo-10-billion-circular-demand.md) was flagged in September as a company buying its own demand. This week's [financing-chain coverage](../../wiki/finance/anthropic-ipo-circular-financing-supplier-investors-techcrunch-nov19-2026.md) shows that exposure becoming a market question, which mirrors the [stranded-value gap](../../wiki/productivity/ai-productivity-stranded-value-decisions-curzon.md) between saved time and reported profit.
+
+## 🗄️ From the Vault
+- **[Podcast debate: AI executives' slowdown pledges lack an accountability mechanism](../../wiki/technology/ai-slowdown-commitment-accountability-gap.md)**: Written in September, but it argues that enterprise clients, regulators and markets will not enforce restraint on their own. This week's selloff, where the market repriced AI spending without any formal enforcement, is a live test of that argument.
+- **[Craig Moffett on SpaceX and dot-com bubble lessons](../../wiki/finance/craig-moffett-spacex-dot-com-bubble-lessons.md)**: Written in October, and only the premise is public. It is the historical frame for this week's question of whether the AI correction is a reset or a bubble breaking.
+
+## 💼 Portfolio Pulse
+- **MSFT — Microsoft**: Rose 3.16% to $524.36 on Nov 19 after Anthropic's prospectus confirmed an Azure commitment of at least $47.2 billion through June 2033, though the floor averages only about $7.2–7.5 billion a year `[[microsoft-msft-rises-3-16-percent-anthropic-47-billion-azure-commitment-nov19-2026]]`
+- **GOOGL — Alphabet**: Fell 16.7% between Oct 16 and Nov 16. The next six months hinge on the February 2027 Q4 report, which covers the 2027 capex plan, TPU system sales and Search growth `[[alphabet-down-17-percent-2027-capex-tpu-search-events-trefis-nov17-2026]]`
+- **IBM — International Business Machines**: Fell 1.22% to $244.12 on Nov 16, below its 200-day average near $246.38, despite a quantum collaboration with NVIDIA and Fermilab `[[ibm-falls-below-200-day-average-despite-nvidia-fermilab-quantum-nov2026]]`
+- **CSPX — S&P 500**: Fell 3.70% to 6,910.42 on Nov 20, its seventh straight loss and its longest losing run since February 2020, which confirmed a correction `[[wall-st-ends-sharply-lower-ai-selloff-correction-straits-times-nov20-2026]]`
+- **ES3 — Straits Times Index**: Closed 2.1% lower at 4,975.17 on Nov 20, its lowest close in five months, with forced selling and margin calls reported at private banks and brokerages `[[sti-below-5000-forced-selling-margin-calls-ai-selldown-businesstimes-nov20-2026]]`
+> **Watch**: The Fed's Dec 8–9 meeting and the Dec 10 inflation data, which the [Straits Times Anthropic note](../../wiki/finance/anthropic-record-ipo-gold-slump-ai-selloff-straits-times-nov21-2026.md) names as the next dates that matter for rates and the AI trade.
+
+## 🧱 One Lesson to Keep
+Speeding up one stage of work moves the bottleneck to the next stage, so **AI gains show up only where review, verification and decision-making are staffed to keep pace** (strongest supported principle: *"Speeding one stage moves the constraint to the next,"* in the [AI workplace adoption topic](../../topics/ai-workplace-adoption.md), which this week's notes on verification, productivity measurement and workforce accountability all support).
