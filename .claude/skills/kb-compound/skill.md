@@ -46,6 +46,8 @@ python3 .claude/skills/kb-topic-query/scripts/vault_search.py "theme name" synon
 
 If `topics/<theme-slug>.md` is listed, or a listed topic file already covers this theme under another slug, proceed to **4c (Update)** with that file.
 
+Hub files (`type: topic-hub` in frontmatter, currently `topics/ai.md` and `topics/markets.md`) never count as a match here. They are refreshed in **Step 4e**, after the child topics.
+
 ### 4b — Decide whether to create a new topic file
 
 If no topic file exists, count vault-wide notes on this theme with the same terms:
@@ -164,6 +166,23 @@ Topic files are independent, so a run with many topics can fan out Agent/Task ca
 - Give each agent **at most 2 topics**, and give a topic with 50 or more sources an agent of its own. The run takes as long as the slowest agent, so an agent with 7 topics sets the pace for the whole batch.
 - Dispatch the agents in a single message.
 - Tell each agent that incremental update is the default and which topics, if any, are due for a full re-synthesis.
+- Never assign a hub file to an agent. The coordinator runs Step 4e after every agent has returned.
+
+### 4e — Refresh hub files
+
+A hub is a short entry point that groups related topic files. Its frontmatter has `type: topic-hub` and a `children:` list of topic slugs, and it has no `sources:` list. Every claim in a hub must come from its child topic files, not from wiki notes or training data.
+
+Run this step once, after all of Step 4 is done:
+
+1. For each hub in `topics/` with `type: topic-hub`, check which of its `children:` were updated or created this run.
+2. If none of them changed, skip the hub. Do not rewrite it and do not log it.
+3. If any changed, read the hub and those child files, then:
+   - Edit only the cluster paragraph that each changed child belongs to. Keep each paragraph to 2–4 sentences.
+   - Re-check the "Principles that recur across the cluster" section. A cross-topic principle must appear in the Core Principles of at least 2 children, and must name those children.
+   - Update `last_updated:` and add a `### YYYY-WNN` entry to `## Weekly Updates`, listing the changed children as `- Refreshed from: [[child-1]], [[child-2]]`.
+4. When Step 4d creates a new topic file that fits a hub's cluster, add its slug to that hub's `children:` list and mention it in the matching paragraph.
+
+Hubs carry no `## 🧠 Core Principles` section and no `last_rewritten:`, and the 5-principle cap does not apply to them.
 
 ## Step 5 — Report and log
 
@@ -178,11 +197,14 @@ After all changes, print a compact summary:
 **Topic files created** (N):
 - [[topic-slug]] — drew from N source notes
 
+**Hub files refreshed** (N):
+- [[hub-slug]] — refreshed from [[child-1]], [[child-2]]
+
 **Themes identified but no action taken** (explain why):
 - [theme]: [reason — e.g. threshold not met (3 notes), or no new sources this week]
 ```
 
-Log one `compound` row for each topic file modified or created, in a single call:
+Log one `compound` row for each topic file or hub file modified or created, in a single call:
 
 ```bash
 python3 .claude/skills/kb-log-rebuild/scripts/kb_log.py append --rows - <<'EOF'
