@@ -3,12 +3,16 @@ type: literature-note
 source_url: https://startupfortune.com/amazon-is-reportedly-circling-decart-after-nvidia-and-anthropic-both-walked-away/
 author: Judith Murphy
 tags: [decart, ai-acquisitions, world-models, ai-inference]
-date_consumed: 2026-10-12
+date_consumed: 2026-11-23
 ---
 
 ## Summary
 
 [[Amazon]] is reportedly in talks to acquire [[Decart]], a Tel Aviv real-time video and world-model AI startup, at around a $7 billion valuation, after both [[Nvidia]] and [[Anthropic]] pursued and then abandoned deals for the company. Anthropic outbid Nvidia and negotiated a mostly-stock deal at roughly $7 billion, but walked away in early September after due diligence. The author argues that Decart's scarce, working real-time generative video infrastructure keeps drawing bidders, and that the biggest balance sheets tend to win this cycle's AI acquisition spree.
+
+## Update (2026-11-18 report)
+
+A later report from itsbaba.com says [[Amazon]] is in advanced talks to buy [[Decart]] for $7 billion to $7.5 billion, with the deal expected to be finalized before Thanksgiving and announced at [[AWS]] re:Invent in Las Vegas. Terms reported: Decart's three founders (Unit 8200 graduates) must commit to five years at Amazon, not start competing businesses, and defer a significant part of their payments. Nafaa Bishara, head of Amazon's Annapurna Labs chip division, is leading the negotiations. Decart has over 100 employees, was valued at about $4 billion in May 2026, and counts Sequoia Capital and Nvidia among its investors. That report describes Decart's software as optimizing AI model training and running across chips from different manufacturers, strategic for Amazon in competing with Nvidia, and says the earlier Anthropic talks (put at $6 billion) fell through in September 2026.
 
 ## Core Concepts
 
@@ -32,6 +36,8 @@ date_consumed: 2026-10-12
 - **Inference Buyers**: Interested parties all need faster AI inference, not flashier video.
 - **Diligence Red Flag**: Walking away after opening the books usually signals pitch-reality mismatch.
 - **Scarce Asset**: Working real-time generative video infrastructure keeps attracting bidders despite setbacks.
+- **Deal Timing**: Amazon deal reportedly targeted before Thanksgiving, for announcement at re:Invent, at $7B-$7.5B.
+- **Founder Lock-In**: Founders must stay five years, avoid competing ventures and defer payments.
 - **IPO Constraint**: Anthropic's pending IPO may have made the deal less attractive.
 - **Balance Sheets Win**: The biggest balance sheets tend to win this cycle's AI acquisitions.
 
