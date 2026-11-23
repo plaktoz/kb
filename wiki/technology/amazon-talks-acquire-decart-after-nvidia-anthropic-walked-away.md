@@ -3,7 +3,7 @@ type: literature-note
 source_url: https://startupfortune.com/amazon-is-reportedly-circling-decart-after-nvidia-and-anthropic-both-walked-away/
 author: Judith Murphy
 tags: [decart, ai-acquisitions, world-models, ai-inference]
-date_consumed: 2026-11-23
+date_consumed: 2026-11-24
 ---
 
 ## Summary
@@ -13,6 +13,10 @@ date_consumed: 2026-11-23
 ## Update (2026-11-18 report)
 
 A later report from itsbaba.com says [[Amazon]] is in advanced talks to buy [[Decart]] for $7 billion to $7.5 billion, with the deal expected to be finalized before Thanksgiving and announced at [[AWS]] re:Invent in Las Vegas. Terms reported: Decart's three founders (Unit 8200 graduates) must commit to five years at Amazon, not start competing businesses, and defer a significant part of their payments. Nafaa Bishara, head of Amazon's Annapurna Labs chip division, is leading the negotiations. Decart has over 100 employees, was valued at about $4 billion in May 2026, and counts Sequoia Capital and Nvidia among its investors. That report describes Decart's software as optimizing AI model training and running across chips from different manufacturers, strategic for Amazon in competing with Nvidia, and says the earlier Anthropic talks (put at $6 billion) fell through in September 2026.
+
+## Update (2026-11-23 announcement)
+
+CNBC reports that [[Amazon]] announced in a Monday blog post that it agreed to purchase [[Decart]]'s "proprietary technology" and hire its three founders plus its AI researchers and engineers, structured as a reverse acquihire rather than a purchase of the company itself. Several outlets reported the price at $7.5 billion, citing people familiar with the matter; Amazon declined to comment on terms, and the deal is subject to regulatory approval. Peter DeSantis, the Amazon senior vice president overseeing foundation models, custom silicon and quantum computing, said more efficient compute means better training, reinforcement learning and inference at lower cost. Amazon plans to make its [[Trainium]] chips externally available "late in 2027," and Decart's [[Decart Optimization Stack]] lets developers sync AI models across different chips. Bloomberg reported that [[Anthropic]] had conducted due diligence and walked away. Similar reverse acquihires include Amazon's 2024 deals for Adept and Covariant, plus deals by Microsoft, Meta and Google, some of which have drawn regulatory scrutiny.
 
 ## Core Concepts
 
@@ -40,6 +44,9 @@ A later report from itsbaba.com says [[Amazon]] is in advanced talks to buy [[De
 - **Founder Lock-In**: Founders must stay five years, avoid competing ventures and defer payments.
 - **IPO Constraint**: Anthropic's pending IPO may have made the deal less attractive.
 - **Balance Sheets Win**: The biggest balance sheets tend to win this cycle's AI acquisitions.
+- **Deal Announced**: Amazon agreed to buy Decart's technology and hire founders, reportedly $7.5B.
+- **Reverse Acquihire**: Structure buys technology and talent without acquiring the company outright.
+- **Regulatory Gate**: Deal remains subject to regulatory approval amid scrutiny of acquihires.
 
 ## 🧠 Core Principles
 
