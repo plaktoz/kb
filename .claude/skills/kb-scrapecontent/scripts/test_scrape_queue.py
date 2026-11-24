@@ -155,6 +155,18 @@ class VaultTest(unittest.TestCase):
         self.assertEqual(urls, ["https://example.com/old", "https://example.com/new"])
         self.assertEqual(sq.scraped_urls(self.root), {"https://example.com/old"})
 
+    def test_url_spelling_does_not_defeat_the_duplicate_check(self):
+        (self.root / "wiki" / "finance" / "a.md").write_text(
+            "---\nsource_url: https://www.edutopia.org/article/does-ai-help/\n---\n")
+        with (self.root / "kbm.log.md").open("a") as log:
+            log.write("| 2026-09-30 | http://Example.com/gone/?utm_source=x#top (dead) | scrape-failed |\n")
+        out = sq.seen(self.root, ["https://edutopia.org/article/does-ai-help",
+                                  "https://example.com/gone", "https://example.com/new?id=2"])
+        self.assertEqual(out["inVault"], ["https://edutopia.org/article/does-ai-help"])
+        self.assertEqual(out["failedBefore"], ["https://example.com/gone"])
+        self.assertEqual(out["fresh"], ["https://example.com/new?id=2"])
+        self.assertNotEqual(sq.canon("https://example.com/p?id=1"), sq.canon("https://example.com/p?id=2"))
+
     def test_seen_splits_vault_failed_and_fresh(self):
         with (self.root / "kbm.log.md").open("a") as log:
             log.write("| 2026-09-30 | https://example.com/paywalled (blocked: http 403) | scrape-failed |\n")

@@ -39,7 +39,7 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from html.parser import HTMLParser
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit
 
 TIMEOUT_S = 10
 DEADLINE_S = 20
@@ -50,6 +50,7 @@ THIN_CHARS = 600
 TEASER_CHARS = 2_500
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36")
+TRACKING_PREFIXES = ("utm_", "fbclid", "gclid", "mc_", "ref")
 URL_RE = re.compile(r"https?://[^\s<>\"'`)\]]+")
 CHALLENGE_RE = re.compile(
     r"cf-chl-|challenge-platform|<title>\s*(just a moment|attention required|access denied|"
@@ -298,11 +299,18 @@ def probe_all(urls, outdir=None):
     return [results.get(u) or Probe(u, "unreachable", f"probe exceeded {DEADLINE_S}s") for u in urls]
 
 
+def canon(url):
+    """Comparison key: the same article spelled two ways (www., http, trailing slash, #frag, utm_*) matches."""
+    p = urlsplit(url)
+    query = urlencode([(k, v) for k, v in parse_qsl(p.query) if not k.lower().startswith(TRACKING_PREFIXES)])
+    return f"https://{(p.hostname or '').lower().removeprefix('www.')}{p.path.rstrip('/')}" + (f"?{query}" if query else "")
+
+
 def scraped_urls(root):
     seen = set()
     for sub in ("raw", "wiki"):
         for f in (root / sub).rglob("*.md"):
-            seen.update(re.findall(r"source_url:\s*(\S+)", f.read_text(errors="replace")))
+            seen.update(canon(u) for u in re.findall(r"source_url:\s*(\S+)", f.read_text(errors="replace")))
     return seen
 
 
@@ -388,13 +396,13 @@ def regenerate_blocklist(root, today=None):
 
 def seen(root, urls):
     in_vault = scraped_urls(root)
-    logged = set(find_urls((root / "kbm.log.md").read_text(errors="replace")))
+    logged = {canon(u) for u in find_urls((root / "kbm.log.md").read_text(errors="replace"))}
     blocked = {r["domain"] for r in read_blocklist(root)}
     urls = find_urls(" ".join(urls))
-    rest = [u for u in urls if u not in in_vault and u not in logged]
+    rest = [u for u in urls if canon(u) not in in_vault and canon(u) not in logged]
     return {
-        "inVault": [u for u in urls if u in in_vault],
-        "failedBefore": [u for u in urls if u not in in_vault and u in logged],
+        "inVault": [u for u in urls if canon(u) in in_vault],
+        "failedBefore": [u for u in urls if canon(u) not in in_vault and canon(u) in logged],
         "blockedDomain": [u for u in rest if is_blocked(u, blocked)],
         "fresh": [u for u in rest if not is_blocked(u, blocked)],
     }
@@ -403,12 +411,12 @@ def seen(root, urls):
 def discover(root, outdir):
     source_files, urls = pending_urls(root)
     seen = scraped_urls(root)
-    fresh = [u for u in urls if u not in seen]
+    fresh = [u for u in urls if canon(u) not in seen]
     probes = probe_all(fresh, outdir)
     return {
         "date": date.today().isoformat(),
         "sourceFiles": source_files,
-        "alreadyScraped": [u for u in urls if u in seen],
+        "alreadyScraped": [u for u in urls if canon(u) in seen],
         "items": [asdict(p) for p in probes],
     }
 
