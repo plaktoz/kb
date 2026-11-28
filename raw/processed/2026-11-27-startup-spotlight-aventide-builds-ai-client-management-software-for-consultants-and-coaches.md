@@ -1,0 +1,55 @@
+---
+source_url: https://www.geekwire.com/2026/startup-spotlight-aventide-builds-ai-client-management-software-for-consultants-and-coaches/
+author: Kurt Schlosser
+date: 2026-11-27
+---
+
+# Startup Spotlight: Aventide builds AI client management software for consultants and coaches
+
+Christian Quiver and Eric Baxter met in a grocery store parking lot, introduced by their wives. Quiver needed a designer for a project, so the two swapped numbers and agreed to try working together for 90 days. Four years later, they’re building a startup together in the Columbia River Gorge.
+
+Their startup, Aventide, opened to the public on Oct. 29. It’s AI-powered software for consultants, coaches and others who sell their expertise one client at a time. Aventide drafts proposals, invoices and follow-ups, but nothing goes to a client until the owner approves it.
+
+The name blends “abhainn,” the Irish Gaelic word for river, with “tide,” for the spot where a river meets the sea and where towns and ports have long grown up.
+
+Quiver, the CEO, lives in White Salmon, Wash., and spent more than five years at Amazon. He led go-to-market for the in-store experience as Amazon’s device stores grew from two locations to 50. Baxter is chief design officer and lives in nearby Trout Lake. He spent 25 years in product design, including nearly seven years leading user experience at Welocalize, whose clients included Amazon, Google and Apple.
+
+The idea started in 2025 with a question from Baxter’s wife: Which part of his decades of designing products for other people actually brought him joy? His answer was helping people, especially those pushed out by AI-era layoffs who were trying to start something of their own. Quiver bought in that October.
+
+The pair spent more than six months testing with three groups of business owners in the Gorge, including at a demo day in June with the Mid-Columbia Innovation Hub. They kept meeting people who live in small towns and sell their expertise to companies in Seattle or Portland. “A consultant in a small town can land a corporate client,” Quiver said in an email.
+
+The two-person company is bootstrapped and says 81 people are using Aventide so far. After a 14-day free trial, plans cost $39 or $99 a month. Aventide also publishes estimates of the electricity and water behind everyday tasks in the app. Quiver says the figures could be off by a factor of two either way. “If you ask what it costs in electricity and water to use our product, you get a straight answer,” he said.
+
+We caught up with Quiver for this edition of GeekWire’s Startup Spotlight.
+
+## In 50 words or less, give us your startup’s elevator pitch?
+
+Aventide is an AI-native client management platform for people paid by the session, project or event. It replaces separate booking, proposal, contract, portal and invoice apps, and runs more than one business from one login.
+
+## What problem are you obsessed with solving?
+
+Tool fragmentation in small client businesses, and the fact that the owner ends up being the human glue holding all of it together.
+
+## What surprised you after talking to customers?
+
+That the barrier isn’t price or features. People don’t have time to switch systems, and many aren’t comfortable with their own software stack. So we onboard anyone who wants it one-on-one.
+
+## How has AI changed the way you build your company?
+
+Everything. It has fundamentally changed what a small team can build and run. We have always worked as experience builders first, and AI lets a team of two think bigger, test faster, and deliver a world-class product that would have taken what seems like 100-200 people just a year or two ago. It cuts our time from idea to execution by at least 50x.
+
+## What’s one thing people misunderstand about your startup?
+
+People hear “AI for small business” and picture a chat box taped onto legacy software. Instead of making you click through old CRM menus with a writing bot on the side, Aventide wires AI directly into your bookings, contracts, portals, and payments so you just say it, review it and approve.
+
+## What’s the toughest decision you’ve made in the past year?
+
+Choosing which problem we wanted to solve. Our original mission was far too vague to build. We set out to help people through the AI era, but the interviews and prototypes kept landing on client services. Following that meant narrowing a big mission into one product for one kind of owner.
+
+## What’s the one piece of advice you give to other entrepreneurs?
+
+Think bigger, and focus on the whole experience you want to create. Outside of a few rare cases, narrow single-purpose tools are old hat now because nobody wants another tab to manage. The future belongs to software where someone can say, “This is my one tool for this category of my life.
+
+## We’ll know our company has made it when…
+
+50,000 human-scale businesses use Aventide to own their client relationships directly, keeping more money in small businesses and giving more time back to the people running them.
